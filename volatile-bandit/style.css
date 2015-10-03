@@ -1,0 +1,89 @@
+#blue_stim {
+	width: 15vw;
+	height: 20vw;
+	background: blue;
+}
+
+#green_stim {
+	width: 15vw;
+	height: 20vw;
+	background: green;
+}
+
+.stim_left {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-200%,-50%);
+}
+
+.stim_right {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(100%,-50%);
+}
+
+.selected {
+	border-style: solid;
+	border-width: 6px;
+	border-color: red;
+}
+
+.stim_center {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+#fb_holder {
+	width: 12vw;
+	height: 12vw;
+	background: gray;
+	-moz-border-radius: 8vw;
+	-webkit-border-radius: 8vw;
+	border-radius: 8vw;
+}
+
+.feedback_bar {
+    background: #eee;
+    color: red;
+    border: 0;
+    height: 2vw;
+    border-radius: 9px;
+    width: 60vw;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(-50%,700%);
+}
+
+.goal_1 {
+	width: .5vw;
+	height: 2vw;
+	background: grey;
+	position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(3000%,700%);
+}
+
+.goal_2 {
+	width: .5vw;
+	height: 2vw;
+	background: gold;
+	position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(4800%,700%);
+}
+
+progress::-webkit-progress-bar {background: #eee;   }
+progress::-webkit-progress-value { background: red; }
+progress::-moz-progress-bar { background: red; }

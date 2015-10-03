@@ -1,0 +1,142 @@
+.titlebox {
+  width:25vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-425%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+
+.buttonbox {
+  width:25vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,300%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+button {width:50%;
+      height: 100%;
+}
+
+.select-button {
+	width:50%;
+	height: 100%;
+	float: left;
+   margin: 0;
+}
+.infocontainer {
+  width: 45vw;
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,55%);
+}
+
+.subinfocontainer {
+  width:33%;
+  height: 100%;
+    float:left;
+}
+
+.subimgcontainer {
+  width:34%;
+  height: 100%;
+  float:left;
+}
+
+.infobox {
+  width:100%;
+  height: 40%;
+  margin-bottom: 10px;
+  float:left;
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.infotext {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.imgbox {
+  width:100%;
+  height: 100%;
+  float:left;
+  background:url('images/fish_icon.png') no-repeat;
+  background-size: contain;
+  margin-left: 10%;
+}
+
+
+
+.pond {
+  width:65vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-80%);
+  border-style: solid;
+  border-color: CadetBlue;
+  background-color: LightBlue
+}
+
+.cooler {
+  width:13vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(250%,-80%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.weatherbox {
+  width:13vw;
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(250%,-155%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+
+
+.redfish {
+	 background: url('images/red_fish.png');
+	 background-size: contain;
+	 width: 2vw;
+	 height:1.4vw;
+}
+
+
+.bluefish{
+	 background: url('images/blue_fish.png');
+	 background-size: contain;
+	 width: 2vw;
+	 height:1.4vw;
+}
+
+.greyfish{
+	 content:url('images/grey_fish.png');
+	 width: 2vw;
+	 height:1.4vw;
+}
+

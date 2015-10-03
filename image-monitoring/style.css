@@ -1,0 +1,26 @@
+#stim1 {
+	width: 15vw;
+	height: 15vw;
+	background: red;
+}
+
+#stim2 {
+	width: 15vw;
+	height: 15vw;
+	background: forestgreen;
+}
+
+#stim3 {
+	width: 15vw;
+	height: 15vw;
+	background: blue;
+}
+
+
+.shape {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Testing the efficiency and independence of attentional networks.",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "jspsych-ANT-practice.js"
+              ],
+        "tag": "ant",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Fisher",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "doi": "10.1162/089892902317361886",
+        "reference": "",
+        "notes": ""
+    
+   }
+]

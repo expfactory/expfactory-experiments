@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Cognitive Control Predicts Use of Model-based Reinforcement learning",
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": "dpx",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Fisher",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "doi": "",
+        "reference": "http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf",
+        "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY"
+    
+   }
+]

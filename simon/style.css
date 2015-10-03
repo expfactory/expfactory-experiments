@@ -1,0 +1,26 @@
+#stim1 {
+	width: 15vw;
+	height: 20vw;
+	background: red;
+}
+
+#stim2 {
+	width: 15vw;
+	height: 20vw;
+	background: blue;
+}
+
+.simon_left {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-200%,-50%);
+}
+
+.simon_right {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(100%,-50%);
+}

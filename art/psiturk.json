@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Decision Making and Learning While Taking Sequential Risks",
+        "run": [
+                "experiment.js",
+                "style.css",
+                "static/js/jspsych/plugins/jspsych-call-function.js"
+               ],
+        "tag": "art",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Fisher",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "doi": "",
+        "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
+        "notes": ""
+    
+   }
+]

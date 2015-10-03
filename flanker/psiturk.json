@@ -1,0 +1,25 @@
+[
+    {
+        "name": "",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "flanker",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Fisher",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "doi": "",
+        "reference": "",
+        "notes": ""
+    
+   }
+]

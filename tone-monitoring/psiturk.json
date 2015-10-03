@@ -1,0 +1,28 @@
+[
+    {
+        "name": "",
+        "run": [ 
+                 "experiment.js",
+                 "static/js/jspsych/custom_plugins/jspsych-categorize-audio.js",
+                 "static/js/jspsych/plugins/jspsych-single-audio.js",
+		 "static/js/jspsych/plugins/jspsych-call-function.js",
+               ],
+        "tag": "tone-monitoring",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Fisher",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "condition indicates practice/test, trial_id indicates stimulus heard on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)"
+    
+   }
+]
+

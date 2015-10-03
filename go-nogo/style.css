@@ -1,0 +1,22 @@
+#stim1 {
+	width: 15vw;
+	height: 15vw;
+	background: orange;
+	position: absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(-50%,-50%);
+}
+
+#stim2 {
+	width: 15vw;
+	height: 15vw;
+	background: blue;
+	position: absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(-50%,-50%);
+}
+

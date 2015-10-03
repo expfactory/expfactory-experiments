@@ -1,0 +1,57 @@
+.numlet-topleft {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-300%,-200%);
+}
+
+.numlet-topright {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(200%,-200%);
+}
+
+.numlet-bottomleft {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-300%,100%);
+}
+
+.numlet-bottomright {
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(200%,100%);
+}
+
+.numlet-text {
+    font-size: 60px;
+    text-align: center;
+}
+
+.vertical-line {
+    height: 80%;
+    width:0px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(-50%,-50%);
+    float: center; 
+    border: 1px inset; /* This is default border style for <hr> tag */ 
+}
+
+.horizontal-line {
+    height: 0px;
+    width:60%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(-50%,-50%);
+    float: center; 
+    border: 1px inset; /* This is default border style for <hr> tag */ 
+}

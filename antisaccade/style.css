@@ -1,0 +1,67 @@
+.text {
+	text-align: center;
+	font-size: 60px;
+}
+
+
+.centered-shape {
+	position:absolute;
+	top:50%;
+    left:50%;
+	transform: translate(-50%,-50%);
+}
+
+
+img {
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+}
+
+
+#cue {
+    max-height: 25%;
+    content:url('images/square.png');
+}
+
+#mask {
+    max-height: 75%;
+    content:url('images/mask.png');
+}
+
+#target_left {
+    max-height: 75%;
+    content:url('images/left_arrow.png');
+}
+
+#target_right  {
+    max-height: 75%;
+    content:url('images/right_arrow.png');
+}
+
+#target_up  {
+    max-height: 75%;
+    content:url('images/up_arrow.png');
+}
+
+.stim_left {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-300%,-50%);
+    
+}
+
+.stim_right {
+    max-height: 75%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-right:-50%;
+    transform: translate(200%,-50%);
+}
