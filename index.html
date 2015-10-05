@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <title>Psiturk Experiment Database</title>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css' rel='stylesheet' type='text/css'>
+    <style>
+ 
+      body {
+          font-family: 'Roboto', sans-serif;
+      }
+      rect.bordered {
+        stroke: #E6E6E6;
+        stroke-width:2px;   
+      }
+
+      .container {
+          padding: 20px;
+          width: 1400px
+      }
+
+      text.mono {
+        font-size: 9pt;
+        font-family: 'Roboto', sans-serif lower-case;
+        fill: #aaa;
+      }
+
+      text.yaxis {
+        fill: #000;
+      }
+
+      text.xaxis {
+        fill: #000;
+      }
+
+      footer {
+          padding-left:20px;
+          padding-bottom:10px;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Psiturk-Experiments</h1>
+    <div class="row">
+            <table border="1"  id="chart" class="dataframe table table-striped table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th>doi</th>
+      <th>run</th>
+      <th>name</th>
+      <th>contributors</th>
+      <th>notes</th>
+      <th>reference</th>
+      <th>lab</th>
+      <th>cognitive_atlas_concept_id</th>
+      <th>cognitive_atlas_concept</th>
+      <th>tag</th>
+      <th>cognitive_atlas_task_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition indicates cue/target trial type: AX,...</td>
+      <td>http://www.pnas.org/content/suppl/2009/04/20/0...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>ax-cpt</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>flanker</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td>Go-Nogo Task</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>go-nogo</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css,static/js/jspsych/plug...</td>
+      <td>Impaired extra-dimensional shift performance i...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition indicates stage in the IDED task</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>10.1016/j.neuron.2011.02.027</td>
+      <td>experiment.js,style.css,static/js/jspsych/plug...</td>
+      <td>Model-Based Influences on Humans' Choices and ...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition = ordered stims in stage 1 and stage...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>2-stage-decision</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,jspsych-stop-signal.js,static/js...</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition refers to whether the trial is pract...</td>
+      <td>http://www.pnas.org/content/suppl/2009/04/20/0...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>stop-signal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,static/js/jspsych/custom_plugins...</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>condition indicates practice/test, trial_id in...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>tone-monitoring</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Conditions refers to congruency on each trial</td>
+      <td>http://journals.plos.org/plosone/article?id=10...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>stroop</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,static/js/jspsych/plugins/jspsyc...</td>
+      <td>Cognitive control and brain resources in major...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>This task differs in that the subject only has...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>adaptive-n-back</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td>Cognitive Control Predicts Use of Model-based ...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition indicates cue/target trial type: AX,...</td>
+      <td>http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>dpx</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition records difficulty as quantified by ...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>letter-memory</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>local-global</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css,static/js/jspsych/plug...</td>
+      <td>Decision Making and Learning While Taking Sequ...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td>http://www.ncbi.nlm.nih.gov/pubmed/18194061</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>art</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css,static/js/jspsych/plug...</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>condition indicates practice/test, trial_id in...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>image-monitoring</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>simple-rt</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>10.1162/089892902317361886</td>
+      <td>experiment.js,style.css,jspsych-ANT-practice.js</td>
+      <td>Testing the efficiency and independence of att...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>ant</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition indicates difficulty as quantified b...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>keep-track</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>simon</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>choice-rt</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td>http://www.nature.com/neuro/journal/v10/n9/pdf...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>volatile-bandit</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js</td>
+      <td>Cognitive control and brain resources in major...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>This task differs in that the subject only has...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>n-back</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css,static/js/jspsych/cust...</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td></td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>rng</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>condition indicates block (which task, or rota...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>number-letter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js,style.css</td>
+      <td>The Multi-Source Interference Task: validation...</td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition records current block (practice/test...</td>
+      <td></td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>multi-source</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>experiment.js</td>
+      <td></td>
+      <td>Ian Eisenberg,Zeynep Enkavi,Patrick Bissett,Va...</td>
+      <td>Condition indicates block task (add, subtract,...</td>
+      <td>http://www.sciencedirect.com/science/article/p...</td>
+      <td>Poldracklab</td>
+      <td>trm_4aae62e4ad209</td>
+      <td>cognitive control</td>
+      <td>plus-minus</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div class="row">
+        <a href="../.data/psiturk-experiments.tsv" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (tsv)</a>
+        <a href="../.data/psiturk-experiments.pkl" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (pkl)</a>
+        <a href="../.data/psiturk-experiments.json" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (json)</a>
+<a href="http://www.cognitiveatlas.org" class="btn btn-sm btn-default" style="width:150px;" target="_blank"><span class="fa fa-home"></span> Cognitive Atlas</a>
+    </div>
+</div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#chart').dataTable();
+    });
+    </script>
+
+  </body>
+<footer>
+<a href="https://github.com/psiturk/psiturk-experiments">Back</a>
+</footer>
+</html>
