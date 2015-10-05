@@ -1,6 +1,6 @@
 #Psiturk Experiments
 
-Each folder contains a javascript experiment that can be deployed into a [psiturk experiment battery instance](http://www.github.com/psiturk/psiturk-battery). The folder should contain the following:
+Each folder contains a javascript experiment that can be deployed into a [psiturk experiment battery instance](http://www.github.com/psiturk/psiturk-battery). You can browse the currently valid experiments [here](http://psiturk.github.io/psiturk-experiments/), and download meta data at the bottom of that page. The folder should contain the following:
 
 ### Folder Contents
 
