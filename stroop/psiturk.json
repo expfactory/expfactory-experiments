@@ -3,7 +3,7 @@
         "name": "",
         "run": [
                 "experiment.js",
-                "style.css",
+                "style.css"
                ],
         "tag": "stroop",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
