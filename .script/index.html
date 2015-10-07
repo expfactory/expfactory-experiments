@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <title>Psiturk Experiment Database</title>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href='//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css' rel='stylesheet' type='text/css'>
+    <style>
+ 
+      body {
+          font-family: 'Roboto', sans-serif;
+      }
+      rect.bordered {
+        stroke: #E6E6E6;
+        stroke-width:2px;   
+      }
+
+      .container {
+          padding: 20px;
+          width: 1400px
+      }
+
+      text.mono {
+        font-size: 9pt;
+        font-family: 'Roboto', sans-serif lower-case;
+        fill: #aaa;
+      }
+
+      text.yaxis {
+        fill: #000;
+      }
+
+      text.xaxis {
+        fill: #000;
+      }
+
+      footer {
+          padding-left:20px;
+          padding-bottom:10px;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Psiturk-Experiments</h1>
+    <div class="row">
+            [[SUB_TABLE_SUB]]
+    </div>
+    <div class="row">
+        <a href="https://raw.githubusercontent.com/psiturk/psiturk-experiments/gh-pages/.data/psiturk-experiments.tsv" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (tsv)</a>
+        <a href="https://raw.githubusercontent.com/psiturk/psiturk-experiments/gh-pages/.data/psiturk-experiments.pkl" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (pkl)</a>
+        <a href="https://raw.githubusercontent.com/psiturk/psiturk-experiments/gh-pages/data/psiturk-experiments.json" class="btn btn-sm btn-default" style="width:150px;"><span class="glyphicon glyphicon-arrow-down"></span> Download Data (json)</a>
+<a href="http://www.cognitiveatlas.org" class="btn btn-sm btn-default" style="width:150px;" target="_blank"><span class="fa fa-home"></span> Cognitive Atlas</a>
+    </div>
+</div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#chart').dataTable();
+    });
+    </script>
+
+  </body>
+<footer>
+<a href="https://github.com/psiturk/psiturk-experiments">Back</a>
+</footer>
+</html>
