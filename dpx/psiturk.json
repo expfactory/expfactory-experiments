@@ -17,6 +17,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":15,
         "doi": "",
         "reference": "http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY"

@@ -18,6 +18,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":10,
         "doi": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
         "notes": "Condition indicates stage in the IDED task"

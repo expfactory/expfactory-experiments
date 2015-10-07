@@ -17,6 +17,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":20,
         "doi": "",
         "reference": "http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY"

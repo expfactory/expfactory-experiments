@@ -16,6 +16,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":16,
         "doi": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is  a match or not"

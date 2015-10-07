@@ -17,6 +17,7 @@
                 "experiment.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js"
                 ],
+        "time":16,
         "doi":"",
         "reference": [
                       "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
