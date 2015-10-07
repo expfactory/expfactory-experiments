@@ -1,11 +1,12 @@
-from psiturk.experiment import validate, load_experiment, get_validation_fields
-from psiturk.utils import find_directories
+from psiturkpy.experiment import validate, load_experiment, get_validation_fields
+from psiturkpy.utils import find_directories
+import os
 import pandas
 import json
 
-myexperiments = find_directories("../")
-output_file = os.path.abspath("../index.html")
-data_folder = os.path.abspath("../.data")
+myexperiments = find_directories("../psiturk-experiments")
+output_file = os.path.abspath("../psiturk-experiments/index.html")
+data_folder = os.path.abspath("../psiturk-experiments/.data")
 
 # Let's make a dataframe of valid experiments
 fields = [f[0] for f in get_validation_fields()]
@@ -27,7 +28,7 @@ table = valid.to_html(index=None,classes="table table-striped table-bordered")
 table = table.replace('class="dataframe',' id="chart" class="dataframe')  
 
 # Read in template
-template = "".join(open("index.html","rb").readlines())
+template = "".join(open("../psiturk-experiments/.script/index.html","rb").readlines())
 template = template.replace("[[SUB_TABLE_SUB]]",table)
 filey = open(output_file,"wb")
 filey.writelines(template)
