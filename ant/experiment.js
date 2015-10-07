@@ -143,9 +143,9 @@ var double_cue = {
 
 
 /* set up ANT experiment */
-var ANT_experiment = [];
-ANT_experiment.push(welcome_block);
-ANT_experiment.push(instructions_block);
+var ant_experiment = [];
+ant_experiment.push(welcome_block);
+ant_experiment.push(instructions_block);
 
 /* set up ANT practice */
 var trial_num = 0
@@ -163,14 +163,14 @@ for (i = 0; i < block.data.length; i++) {
 	  timing_stim: first_fixation_gap,
 	  timing_response: first_fixation_gap
 	}
-	ANT_experiment.push(first_fixation)
+	ant_experiment.push(first_fixation)
 		
 	if (block.data[i].cue == 'nocue') {
-		ANT_experiment.push(no_cue)
+		ant_experiment.push(no_cue)
 	} else if (block.data[i].cue == 'center') {
-		ANT_experiment.push(center_cue)
+		ant_experiment.push(center_cue)
 	} else if (block.data[i].cue == 'double') {
-		ANT_experiment.push(double_cue)
+		ant_experiment.push(double_cue)
 	} else {
 		var spatial_cue = {
 		  type: 'single-stim',
@@ -182,9 +182,9 @@ for (i = 0; i < block.data.length; i++) {
 		  timing_stim: 100,
 		  timing_response: 100
 		}
-		ANT_experiment.push(spatial_cue)
+		ant_experiment.push(spatial_cue)
 	}
-	ANT_experiment.push(fixation)
+	ant_experiment.push(fixation)
 	
 	block.data[i]['trial_num'] = trial_num
 	block.data[i]['exp_id'] = 'ANT_practice'
@@ -204,7 +204,7 @@ for (i = 0; i < block.data.length; i++) {
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 0
 	}
-	ANT_experiment.push(ANT_practice_trial)
+	ant_experiment.push(ANT_practice_trial)
 
 	var last_fixation = {
 	  type: 'single-stim',
@@ -216,9 +216,9 @@ for (i = 0; i < block.data.length; i++) {
 	  timing_stim: post_trial_gap,
 	  timing_response: post_trial_gap
 	}
-	ANT_experiment.push(last_fixation)
+	ant_experiment.push(last_fixation)
 }
-ANT_experiment.push(rest_block)
+ant_experiment.push(rest_block)
 
 
 /* Set up ANT main task */
@@ -238,14 +238,14 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: first_fixation_gap,
 		  timing_response: first_fixation_gap
 		}
-		ANT_experiment.push(first_fixation)
+		ant_experiment.push(first_fixation)
 			
 		if (block.data[i].cue == 'nocue') {
-			ANT_experiment.push(no_cue)
+			ant_experiment.push(no_cue)
 		} else if (block.data[i].cue == 'center') {
-			ANT_experiment.push(center_cue)
+			ant_experiment.push(center_cue)
 		} else if (block.data[i].cue == 'double') {
-			ANT_experiment.push(double_cue)
+			ant_experiment.push(double_cue)
 		} else {
 			var spatial_cue = {
 			  type: 'single-stim',
@@ -257,9 +257,9 @@ for (b = 0; b < blocks.length; b ++) {
 			  timing_stim: 100,
 			  timing_response: 100
 			}
-			ANT_experiment.push(spatial_cue)
+			ant_experiment.push(spatial_cue)
 		}
-		ANT_experiment.push(fixation)
+		ant_experiment.push(fixation)
 		
 		block.data[i]['trial_num'] = trial_num
 		var ANT_trial = {
@@ -272,7 +272,7 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: 1700,
 		  timing_post_trial: 0
 		}
-		ANT_experiment.push(ANT_trial)
+		ant_experiment.push(ANT_trial)
 	
 		var last_fixation = {
 		  type: 'single-stim',
@@ -284,11 +284,11 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: post_trial_gap,
 		  timing_response: post_trial_gap
 		}
-		ANT_experiment.push(last_fixation)
+		ant_experiment.push(last_fixation)
 	}
-	ANT_experiment.push(rest_block)
+	ant_experiment.push(rest_block)
 }
 
-ANT_experiment.push(end_block)
+ant_experiment.push(end_block)
 
 

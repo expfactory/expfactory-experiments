@@ -169,9 +169,9 @@ var other_probe = {
 /* Set up experiment */
 /* ************************************ */
 
-var DPX_experiment = []
-DPX_experiment.push(welcome_block);
-DPX_experiment.push(instructions_block);
+var dpx_experiment = []
+dpx_experiment.push(welcome_block);
+dpx_experiment.push(instructions_block);
 
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
@@ -202,14 +202,14 @@ for (b = 0; b< blocks.length; b++) {
 				probe.data["condition"]="BY"
 				break;
 		}
-		DPX_experiment.push(cue)
-		DPX_experiment.push(fixation_block)
-		DPX_experiment.push(probe)
-		DPX_experiment.push(feedback_block)
+		dpx_experiment.push(cue)
+		dpx_experiment.push(fixation_block)
+		dpx_experiment.push(probe)
+		dpx_experiment.push(feedback_block)
 	}
-	DPX_experiment.push(rest_block)
+	dpx_experiment.push(rest_block)
 }
-DPX_experiment.push(end_block)
+dpx_experiment.push(end_block)
 
 
 

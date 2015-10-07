@@ -423,9 +423,9 @@ var game_chunk = {
     }
 }
 
-ART_experiment = []
-ART_experiment.push(welcome_block)
-ART_experiment.push(instructions_block)
+art_experiment = []
+art_experiment.push(welcome_block)
+art_experiment.push(instructions_block)
 for (b = 0; b<blocks.length; b++) {
 	block = blocks[b]
 	weather = block.weather
@@ -445,11 +445,11 @@ for (b = 0; b<blocks.length; b++) {
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is ' + weather + ' which means ' + weather_rule + '. The release rule is "' + release + '", which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: 13
 	}
-	ART_experiment.push(tournament_intro_block)
-	ART_experiment.push(ask_fish_block)
-	ART_experiment.push(set_fish_block)
+	art_experiment.push(tournament_intro_block)
+	art_experiment.push(ask_fish_block)
+	art_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
-		ART_experiment.push(practice_chunk)
+		art_experiment.push(practice_chunk)
 	}
 }
 
@@ -474,11 +474,11 @@ for (b = 0; b<blocks.length; b++) {
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is ' + weather + ' which means ' + weather_rule + '. The release rule is "' + release + '", which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: 13
 	}
-	ART_experiment.push(tournament_intro_block)
+	art_experiment.push(tournament_intro_block)
 	for (i=0; i <num_rounds; i++) {
-		ART_experiment.push(game_chunk)
+		art_experiment.push(game_chunk)
 	}
 }
-ART_experiment.push(end_block)
+art_experiment.push(end_block)
 
 

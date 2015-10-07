@@ -199,22 +199,22 @@ var reverse_stims = {
 }
 
 /* create experiment definition array */
-IDED_experiment = []
-IDED_experiment.push(welcome_block)
-IDED_experiment.push(instructions_block)
+ided_experiment = []
+ided_experiment.push(welcome_block)
+ided_experiment.push(instructions_block)
 /* define test trials */
 for (b=0; b<blocks.length; b++) {
 	block = blocks[b]
 	if (block == 'simple') {
-		IDED_experiment.push(define_simple_stims)
+		ided_experiment.push(define_simple_stims)
 	} else if (block == 'separate') {
-		IDED_experiment.push(define_separate_stims)
+		ided_experiment.push(define_separate_stims)
 	} else if (block == 'compound') {
-		IDED_experiment.push(define_compound_stims)
+		ided_experiment.push(define_compound_stims)
 	} else if (block == 'ID') {
-		IDED_experiment.push(define_ID_stims)
+		ided_experiment.push(define_ID_stims)
 	} else if (block == 'ED') {
-		IDED_experiment.push(define_ED_stims)
+		ided_experiment.push(define_ED_stims)
 	}
 	
 	var stage_block = {
@@ -258,13 +258,13 @@ for (b=0; b<blocks.length; b++) {
 			}
 		}
 	}
-	IDED_experiment.push(stage_chunk)
+	ided_experiment.push(stage_chunk)
 
 	if (block != 'separate') {
-		IDED_experiment.push(reverse_stims)
-		IDED_experiment.push(stage_chunk)
+		ided_experiment.push(reverse_stims)
+		ided_experiment.push(stage_chunk)
 	}
 }
 
 
-IDED_experiment.push(end_block)
+ided_experiment.push(end_block)

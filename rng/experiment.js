@@ -99,10 +99,10 @@ var  wait_block = {
 };
 
 //Set up experiment
-var RNG_experiment = []
-RNG_experiment.push(welcome_block);
-RNG_experiment.push(instructions_block);
-RNG_experiment.push(start_practice_block);
+var rng_experiment = []
+rng_experiment.push(welcome_block);
+rng_experiment.push(instructions_block);
+rng_experiment.push(start_practice_block);
 for (var i = 0; i <practice_stims.length; i++) {
 	var  practice_block = {
 	  type: 'multi-button',
@@ -113,10 +113,10 @@ for (var i = 0; i <practice_stims.length; i++) {
 	  response_ends_trial: false,
 	  timing_post_trial: 0
 	};
-	RNG_experiment.push(practice_block)
-	RNG_experiment.push(wait_block)
+	rng_experiment.push(practice_block)
+	rng_experiment.push(wait_block)
 }
-RNG_experiment.push(start_test_block);
+rng_experiment.push(start_test_block);
 for (var i = 0; i <practice_stims.length; i++) {
 	var  test_block = {
 	  type: 'multi-button',
@@ -127,9 +127,9 @@ for (var i = 0; i <practice_stims.length; i++) {
 	  response_ends_trial: false,
 	  timing_post_trial: 0
 	};
-	RNG_experiment.push(test_block)
-	RNG_experiment.push(wait_block)
+	rng_experiment.push(test_block)
+	rng_experiment.push(wait_block)
 }
-RNG_experiment.push(end_block)
+rng_experiment.push(end_block)
 
 
