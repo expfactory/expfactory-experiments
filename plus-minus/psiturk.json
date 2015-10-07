@@ -16,6 +16,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":5,
         "doi": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates block task (add, subtract, alternate)"

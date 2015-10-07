@@ -19,6 +19,7 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
+        "time":6,
         "doi": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "condition indicates practice/test, trial_id indicates stimulus heard on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)"
