@@ -4,9 +4,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -35,33 +32,39 @@ test_stims = jsPsych.randomization.repeat(stims,exp_len/12,true)
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Stroop experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var response_keys = '<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
 
 var instructions_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>In this experiment you will see "color" words (RED, BLUE, GREEN) appear one at a time. The "ink" of the words also will be colored. For example, you may see: <span class = "large" style = "color:blue">RED</span>, <span class = "large" style = "color:blue">BLUE</span> or <span class = "large" style = "color:red">BLUE</span>.</p><p class = block-text>Your task is to press the button corresponding to the <strong> ink color </strong> of the word. It is important that you respond as quickly and accurately as possible. The response keys are as follows:</p>' + response_keys + '<p class = block-text>Press <strong>enter</strong> to continue.</p></div>', 
-  cont_key: 13
+  type: 'instructions',
+  pages: ['<div class = centerbox><p class = block-text>In this experiment you will see "color" words (RED, BLUE, GREEN) appear one at a time. The "ink" of the words also will be colored. For example, you may see: <span class = "large" style = "color:blue">RED</span>, <span class = "large" style = "color:blue">BLUE</span> or <span class = "large" style = "color:red">BLUE</span>.</p><p class = block-text>Your task is to press the button corresponding to the <strong> ink color </strong> of the word. It is important that you respond as quickly and accurately as possible. The response keys are as follows:</p>' + response_keys + '</div>'],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with a few practice trials. Remember, press the key corresponding to the <strong>ink</strong> color of the word: "r" for words colored red, "b" for words colored blue, and "g" for words colored green.</p><p class = block-text>Press <strong>enter</strong> to begin practice.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var fixation_block = {

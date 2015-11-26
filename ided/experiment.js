@@ -8,10 +8,6 @@ Condition indicates stage in the IDED task
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
-
 function get_stim() {
 	/* This function takes the stim (either 2 in one dimension, or 4, 2 from each of the 2 dimensions), pairs them together
 	(if necessary, as in the 2 dimension conditions) and displays them in random boxes
@@ -47,9 +43,10 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'IDED', trial_id: 'test', condition: stages[stage_counter]}
+	return {exp_id: 'ided', trial_id: 'test', condition: stages[stage_counter]}
 }
 	
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -60,7 +57,7 @@ var blocks = ['simple', 'separate', 'compound', 'ID', 'ED'] //Simple: 1 dimensio
 var stages = ['simple', 'simple_rev', 'separate', 'compound', 'compound_rev', 'ID', 'ID_rev', 'ED', 'ED_rev']
 
 // Set up variables for stimuli
-var path = 'static/images/IDED/'
+var path = 'static/experiments/ided/images/'
 var center_prefix = '<div class = centerimg><img style="height: 80%; width: auto; '
 var left_prefix = '<div class = leftimg><img style="height: 80%; width: auto; '
 var right_prefix = '<div class = rightimg><img style="height: 80%; width: auto; '
@@ -102,22 +99,33 @@ var version2_repeat = 0
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the IDED experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  on_finish: function() {
+  	$('body').css('background','black')
+  },
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p><p class = block-text>Press the <strong>right</strong> arrow key to move forward through the instructions.</p></div>', 
-	instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p><p style = "font-size: 18px;" class = center-text>Press the <strong>left</strong> arrow key to read the instructions on the last page or press the <strong>right</strong> arrow key to go to the next page.</p></div>',
- '<div class = centerbox><p class = block-text>Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p><p class = block-text>Press the <strong>left</strong> arrow key to go back through the instructions or <strong>right</strong> arrow key to start the test.</p></div>'
-	]
+    '<div class = centerbox><p class = IDED-block-text>In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = IDED-block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
+	    instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p></div>',
+ '<div class = centerbox><p class = IDED-block-text>Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  text: '<div class = centerbox><p class = IDED-center-block-text>Finished with this task.</p><p class = IDED-center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13,
+  on_finish: function() {
+  	$('body').css('background','white')
+  },
+  timing_post_trial: 0
 };
 
 
@@ -126,7 +134,7 @@ var fixation_block = {
   stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "IDED", "trial_id": "fixation"},
+  data: {exp_id: "ided", "trial_id": "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
   timing_response: 500

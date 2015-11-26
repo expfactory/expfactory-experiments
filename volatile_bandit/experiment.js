@@ -3,9 +3,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
 
 var text_insert = function(text, index, insert_value) {
 	text = text.slice(0, index) + insert_value + text.slice(index);
@@ -25,8 +22,6 @@ var getRespondStim = function() {
 		insert_in = stim.search('stim_right')
 		stim = text_insert(stim, insert_in, 'selected ')
 	}
-	
-
 	return stim
 }
 
@@ -103,29 +98,35 @@ for (var b = 0; b < volatile_blocks.length; b++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the volatile bandit experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
 	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
-	'<div class = centerbox><p class = block-text>As you could see, each shape is associated with a certain value (between 0-100). The value of both shapes will always equal 100. So if the blue shape has a value of 30, the green shape will have a value of 70.</p><p class = block-text>When you select a shape, if you chose correctly (explained on the next slide), you will get the number of points listed on the shape.</p><p class = block-text>At the bottom of the screen is a red bar that tracks how many points you have earned. If the bar passes the grey line you will get a bonus. If it passes the yellow line you will get an even larger bonus.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p><p class = block-text>Use the <strong>right arrow key</strong> to start the test. You can go back using the <strong>left arrow key</strong>.</p></div>'	
-	]
+	'<div class = centerbox><p class = block-text>As you could see, each shape is associated with a certain value (between 0-100). The value of both shapes will always equal 100. So if the blue shape has a value of 30, the green shape will have a value of 70.</p><p class = block-text>When you select a shape, if you chose correctly (explained on the next slide), you will get the number of points listed on the shape.</p><p class = block-text>At the bottom of the screen is a red bar that tracks how many points you have earned. If the bar passes the grey line you will get a bonus. If it passes the yellow line you will get an even larger bonus.</p></div>',
+	'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p></div>'	
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 //Set up experiment
@@ -255,6 +256,3 @@ for (var i = 0; i < stage2_trials; i++) {
 	volatile_bandit_experiment.push(feedback_block)
 }
 volatile_bandit_experiment.push(end_block)
-
-
-

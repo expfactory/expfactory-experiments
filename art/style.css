@@ -23,16 +23,14 @@
   border-color: CadetBlue;
 }
 
-button {width:50%;
-      height: 100%;
-}
-
 .select-button {
 	width:50%;
+  min-width:0vw;
 	height: 100%;
 	float: left;
    margin: 0;
 }
+
 .infocontainer {
   width: 45vw;
   height: 10vw;
@@ -80,7 +78,7 @@ button {width:50%;
 
 
 
-.pond {
+.lake {
   width:65vw;
   height: 20vw;
   position:absolute;
@@ -139,4 +137,3 @@ button {width:50%;
 	 width: 2vw;
 	 height:1.4vw;
 }
-

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Impaired extra-dimensional shift performance in medicated and unmedicated Parkinson's disease: evidence for a specific attentional dysfunction",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "static/js/jspsych/plugins/jspsych-call-function.js"
+               ], 
+        "tag": "ided",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":10,
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
+        "notes": "Condition indicates stage in the IDED task",
+        "publish":"True"
+    
+   }
+]
+

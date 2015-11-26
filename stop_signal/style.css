@@ -32,7 +32,8 @@
   transform: translate(-50%,-50%);
 }
 
-img {
+
+img.square {
     height: auto;
     width: auto\9; /* ie8 */
     position: absolute;  
@@ -41,25 +42,46 @@ img {
     left: 0;  
     right: 0;  
     margin: auto;  
-}
-
-img.square {
-    max-height: 75%;
+    max-height: 65%;
     content:url('images/square.png')
 }
 
 img.circle {
-    max-height: 80%;
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+    max-height: 75%;
     content:url('images/circle.png')
 }
 
 img.triangle {
-    max-height: 80%;
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+    max-height: 65%;
     content:url('images/triangle.png')
 }
 
 img.diamond {
-    max-height: 90%;
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+    max-height: 80%;
     content:url('images/diamond.png')
 }
 

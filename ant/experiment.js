@@ -21,7 +21,8 @@ var get_RT = function() {
 /* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
 var locations = ['up', 'down']
 var cues = ['nocue', 'center', 'double', 'spatial']
-test_stimuli = []
+var current_trial = 0
+var test_stimuli = []
 for (l = 0; l < locations.length; l++) {
 	var loc = locations[l]
 	for (ci = 0; ci < cues.length; ci++) {
@@ -29,27 +30,27 @@ for (l = 0; l < locations.length; l++) {
 		stims = [
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</p></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'neutral', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 37, direction: 'left', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &larr; &larr; &larr; &larr; &larr; </p></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'congruent', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 37, direction: 'left', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </p></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 37, direction: 'left', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </p></div></div>',
-			data: {correct_response: 39,direction: 'right', flanker: 'neutral', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 39,direction: 'right', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </p></div></div>',
-			data: {correct_response: 39, direction: 'right', flanker: 'congruent', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 39, direction: 'right', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
 			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </p></div></div>',
-			data: {correct_response: 39, direction: 'right', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ANT'}
+			data: {correct_response: 39, direction: 'right', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
 		  }
 	  ]
 	  for (i= 0; i < stims.length; i++) {
@@ -75,34 +76,40 @@ var blocks = [block1_trials, block2_trials, block3_trials]
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the ANT experiment. Press any key to begin.</p></div>'
+  text: '<div class = centerbox><p class = block-text>Welcome to the ANT experiment. Press any key to begin.</p></div>',
+  timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>It is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p><p class = block-text>Use the <strong>right arrow key</strong> to start practice (You will not be able to go back). You can go back using the <strong>left arrow key</strong>.</p></div>'	
-	]
+	'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p></div>',
+	'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>It is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p></div>'	
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var rest_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
+  text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
+  timing_post_trial: 1000
 };
 
 var fixation = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ANT', trial_type: 'fixation', duration: 400},
+  data: {exp_id: 'ant', trial_type: 'fixation', duration: 400},
   timing_post_trial: 0,
   timing_stim: 400,
   timing_response: 400
@@ -113,7 +120,7 @@ var no_cue = {
   stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ANT', trial_type: 'nocue', duration: 100},
+  data: {exp_id: 'ant', trial_type: 'nocue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -121,10 +128,10 @@ var no_cue = {
 
 var center_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_text>*</p></div>',
+  stimuli: '<div class = centerbox><p class = ANT_centercue_text>*</p></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ANT', trial_type: 'centercue', duration: 100},
+  data: {exp_id: 'ant', trial_type: 'centercue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -135,7 +142,7 @@ var double_cue = {
   stimuli: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_down><p class = ANT_text>*</p></div><div class = ANT_up><p class = ANT_text>*</p></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ANT', trial_type: 'doublecue', duration: 100},
+  data: {exp_id: 'ant', trial_type: 'doublecue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -158,7 +165,7 @@ for (i = 0; i < block.data.length; i++) {
 	  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
 	  is_html: true,
 	  choices: 'none',
-	  data: {exp_id: 'ANT', trial_type: 'fixation', duration: 100},
+	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
 	  timing_post_trial: 0,
 	  timing_stim: first_fixation_gap,
 	  timing_response: first_fixation_gap
@@ -177,7 +184,7 @@ for (i = 0; i < block.data.length; i++) {
 		  stimuli: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><p class = ANT_text>*</p></div></div>',
 		  is_html: true,
 		  choices: 'none',
-		  data: {exp_id: 'ANT', trial_type: 'spatialcue', duration: 100},
+		  data: {exp_id: 'ant', trial_type: 'spatialcue', duration: 100},
 		  timing_post_trial: 0,
 		  timing_stim: 100,
 		  timing_response: 100
@@ -187,15 +194,15 @@ for (i = 0; i < block.data.length; i++) {
 	ant_experiment.push(fixation)
 	
 	block.data[i]['trial_num'] = trial_num
-	block.data[i]['exp_id'] = 'ANT_practice'
+	block.data[i]['exp_id'] = 'ant_practice'
 	var ANT_practice_trial = {
 	  type: 'ANT-practice',
 	  stimuli: block.image[i],
 	  is_html: true,
 	  key_answer: block.data[i].correct_response,
-	  correct_text: '<div class = centerbox><div class = center-text>Correct.</div></div>',
-	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect.</div></div>',
-	  noresponse_text: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
+	  correct_text: '<div class = centerbox><div class = center-text>Correct. <br></br>Reaction time: RT ms.</div></div>',
+	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect. <br></br>Reaction time: RT ms.</div></div>',
+	  timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
 	  choices: [37,39],
 	  data: block.data[i],
 	  timing_response: 1700, 
@@ -211,7 +218,7 @@ for (i = 0; i < block.data.length; i++) {
 	  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
 	  is_html: true,
 	  choices: 'none',
-	  data: {exp_id: 'ANT', trial_type: 'fixation', duration: 100},
+	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
 	  timing_post_trial: 0,
 	  timing_stim: post_trial_gap,
 	  timing_response: post_trial_gap
@@ -290,5 +297,3 @@ for (b = 0; b < blocks.length; b ++) {
 }
 
 ant_experiment.push(end_block)
-
-

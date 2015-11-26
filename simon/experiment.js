@@ -3,13 +3,21 @@
 /* Define helper functions */
 /* ************************************ */
 var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
+  return gap;
+}
+
+/* Append gap and current trial to data and then recalculate for next trial*/
+var appendData = function() {
+	gap = Math.floor( Math.random() * 2000 ) + 1000
+	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
+	current_trial = current_trial + 1
 }
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
+var current_trial = 0
 var test_stimuli = [
   {
 	image: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
@@ -17,11 +25,11 @@ var test_stimuli = [
   },
   {
 	image:  '<div class = centerbox><div class = simon_right id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], condition:  'left', exp_id: 'simon'}
+	data: { correct_response: correct_responses[0][1], condition:  'right', exp_id: 'simon'}
   },
   {
 	image: '<div class = simon_leftbox><div class = simon_left id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], condition: 'right', exp_id: 'simon'}
+	data: { correct_response: correct_responses[1][1], condition: 'left', exp_id: 'simon'}
   },
   {
 	image:  '<div class = simon_rightbox><div class = simon_right id = "stim2"></div></div>',
@@ -44,28 +52,42 @@ for (i = 0; i < practice_trials.data.length; i++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the simon experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
-	]
+	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '.</p></div>',
+	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '.</p></div>'
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
+
+var reset_block = {
+	type: 'call-function',
+	func: function() {
+		current_trial = 0
+	},
+	timing_post_trial: 0
+}
 
 /* define practice block */
 var practice_block = {
@@ -83,6 +105,7 @@ var practice_block = {
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_post_trial: post_trial_gap,
+  on_finish: appendData
 }
 
 /* define test block */
@@ -93,7 +116,8 @@ var test_block = {
   choices: [37,39],
   data: test_trials.data,
   timing_response: 1500,
-  timing_post_trial: post_trial_gap
+  timing_post_trial: post_trial_gap,
+  on_finish: appendData
 };
 
 /* create experiment definition array */
@@ -101,7 +125,7 @@ var simon_experiment = [];
 simon_experiment.push(welcome_block);
 simon_experiment.push(instructions_block);
 simon_experiment.push(practice_block);
+simon_experiment.push(reset_block)
 simon_experiment.push(start_test_block);
 simon_experiment.push(test_block);
 simon_experiment.push(end_block)
-

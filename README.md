@@ -1,10 +1,10 @@
-#Psiturk Experiments
+# The Experiment Factory Experiments
 
-Each folder contains a javascript experiment that can be deployed into a [psiturk experiment battery instance](http://www.github.com/psiturk/psiturk-battery). You can browse the currently valid experiments [here](http://psiturk.github.io/psiturk-experiments/), and download meta data at the bottom of that page. The folder should contain the following:
+Each folder contains a javascript experiment that can be deployed into an [experiment battery instance](http://www.github.com/expfactory/psiturk-battery), currently only available as a psiturk battery experiment. You can browse the currently valid experiments [here](http://expfactory.github.io/efactory-experiments/), and download meta data at the bottom of that page. The folder should contain the following:
 
 ### Folder Contents
 
-#### psiturk.json
+#### config.json
 A data structure that specifies the following:
  - name: the full name of the experiment, best is to use the name of the publication it is associated with.
  - tag: the tag for the experiment, typically the folder name, all lowercase with no special characters.
@@ -34,8 +34,9 @@ will produce the following code in `load_experiment.js`:
  - doi: the doi of associated papers.
  - reference: url(s) to referenced papers to develop the task
  - notes: any notes about the implementation, etc.
+ - publish: either "True" or "False" to determine if the experiment should be revealed to the user of the efactory-python application.
 
-An example of a psiturk.json data structure is follows:
+An example of a config.json data structure is follows:
 
       [
           {
@@ -58,7 +59,8 @@ An example of a psiturk.json data structure is follows:
                      ],
               "doi":"10.1016/j.neuron.2011.02.027",
               "reference": "http://www.sciencedirect.com/science/article/pii/S0896627311001255",
-              "notes": "Condition = ordered stims in stage 1 and stage 2 (so [0, 1] or [1, 0] for stage 1 and [2, 3], [4, 5] etc. for stage 2 and FB for the FB condition (1 for reward, 0 for no reward)"
+              "notes": "Condition = ordered stims in stage 1 and stage 2 (so [0, 1] or [1, 0] for stage 1 and [2, 3], [4, 5] etc. for stage 2 and FB for the FB condition (1 for reward, 0 for no reward)",
+              "publish": "True"
     
          }
       ]
@@ -93,7 +95,7 @@ These files would be in the tone-monitoring experiment folder as:
                  440Hz_-6dBFS_.5s.mp3
                  220Hz_-6dBFS_.5s.mp3
 
-as the entire thing will be included in the experiment's folder (under `static/experiments/[folder-name]`), with the same structure. As specified above, any static files that are included with the psiturk-battery should be linked with those paths, and do not need to be included in the individual experiment folder. However, when linked to via the `run` variable in `psiturk.json`, they will be checked for existence, and an error will occur if they are not found.
+as the entire thing will be included in the experiment's folder (under `static/experiments/[folder-name]`), with the same structure. As specified above, any static files that are included with the psiturk-battery should be linked with those paths, and do not need to be included in the individual experiment folder. However, when linked to via the `run` variable in `config.json`, they will be checked for existence, and an error will occur if they are not found.
 
 
 #### experiment.js
@@ -105,27 +107,4 @@ This is a folder of images that are necessary for the experiment. The images sho
 #### style.css
 Is the main style file for the experiment, which will be copied into the battery style folder and linked appropriately. Images that are defined in this file should have paths relative to the images folder. `(required)`.
 
-The following should be included in psiturk-doc, linked here for now.
-
-### Instructions to make a new experiment
-TODO:
-
-- Functions should exist in psiturk-python for:
-   - generating empty templates
-   - validating experiments
-
-
-### Instructions to add to a battery
-TODO:
-
-- Functions should exist in psiturk-python for:
-   - getting list of available experiments
-   - generating battery output for them to run on psiturk
-
-
-### Instructions to deploy in a virtual machine
-TODO:
-
-- Functions should exist in psiturk-python for:
-   - doing the above and deploying to vagrant-aws (or other places)
-
+We will be added interactive functions and documentation to generate a new experiment shortly.

@@ -1,0 +1,22 @@
+#container { 
+	width: 500px;
+	font-size: 20px; 
+}
+
+.table { 
+	display: table; 
+	width: 100%; 
+	padding-top: 30px; 
+}
+
+.row { 
+	display: table-row; 
+}
+
+#option { 
+	display: table-cell; 
+	width: 50%; 
+	padding: 20px; 
+	border: 1px solid #ccc; 
+}
+			

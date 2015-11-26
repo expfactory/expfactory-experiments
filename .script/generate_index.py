@@ -1,5 +1,6 @@
-from psiturk.experiment import validate, load_experiment, get_validation_fields
-from psiturk.utils import find_directories
+from psiturkpy.experiment import validate, load_experiment, get_validation_fields
+from psiturkpy.utils import find_directories
+import os
 import pandas
 import json
 
@@ -40,6 +41,6 @@ def save_pretty_json(outfile,myjson):
     filey.close()
 
 # Finally, save other versions of updated metadata for people to use
-save_pretty_json("%s/psiturk-experiments.json" %(data_folder),json.loads(valid.to_json(orient="records")))
-valid.to_csv("%s/psiturk-experiments.tsv" %(data_folder),sep="\t",index=None)
-valid.to_pickle("%s/psiturk-experiments.pkl" %(data_folder))
+save_pretty_json("%s/efactory-experiments.json" %(data_folder),json.loads(valid.to_json(orient="records")))
+valid.to_csv("%s/efactory-experiments.tsv" %(data_folder),sep="\t",index=None)
+valid.to_pickle("%s/efactory-experiments.pkl" %(data_folder))

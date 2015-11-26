@@ -1,11 +1,11 @@
 @-webkit-keyframes movetop {
     80% {opacity:1;}
-	100% {opacity:.4; transform: translate(-50%, -130%);}
+	100% {opacity:.4; transform: translate(-50%, -115%);}
 }
 
 @keyframes movetop {
     80% {opacity:1;}
-	100% {opacity:.4; transform: translate(-50%, -130%);}
+	100% {opacity:.4; transform: translate(-50%, -115%);}
 }
 
 .selected{
@@ -37,7 +37,7 @@
 
 .decision-stim {
     display: block;
-    height: 200px;
+    height: 10vw;
 	position:absolute;
 	top:50%;
 	left:50%;
@@ -46,30 +46,33 @@
 
 
 .decision-left {
-    width:330px;
+	width: 18vw;
+	height: 18vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-125%,-25%);
+  transform: translate(-125%,-5%);
 }
 
 .decision-right {
-    width:330px;
+	width: 18vw;
+	height: 18vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(25%,-25%);
+  transform: translate(25%,-5%);
 }
 
-.decision-top-background {
-  width:330px;
+.decision-top {
+  width: 18vw;
+  height: 18vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-130%);
+  transform: translate(-50%,-115%);
   border-style: solid;
   border-color: white;
 }
@@ -80,5 +83,5 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-25%);
+  transform: translate(-50%,-5%);
 }

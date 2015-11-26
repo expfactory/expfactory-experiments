@@ -60,22 +60,27 @@ var place = randomDraw([0,1,2,3])
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the number-letter experiment. Press any key to begin.</p></div>'
+  text: '<div class = centerbox><p class = block-text>Welcome to the number-letter experiment. Press any key to begin.</p></div>',
+  timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
-	]
+	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p></div>'
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 /* create experiment definition array */
@@ -92,7 +97,7 @@ for (i=0; i<half_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'top_oddeven'},
+        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'top_oddeven'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(top_block)
@@ -104,7 +109,7 @@ for (i=0; i<half_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'bottom_consonantvowel'},
+        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'bottom_consonantvowel'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(bottom_block)
@@ -116,12 +121,9 @@ for (i=0; i<rotate_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'rotate_switch'},
+        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'rotate_switch'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(rotate_block)
 }
 number_letter_experiment.push(end_block)
-
-
-

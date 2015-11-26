@@ -1,4 +1,3 @@
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
@@ -53,8 +52,8 @@ var makeTrialList = function(len, stim, data) {
 /* ************************************ */
 var task_colors = jsPsych.randomization.shuffle(['blue','black'])
 var task_shapes = ['circle','X','triangle','square']
-var path = 'static/experiment/local-global/images/'
-prefix = '<div class = centerbox><img src = "'
+var path = 'static/images/local-global/'
+prefix = '<div class = centerbox><img src = "images/'
 postfix = '"</img></div>'
 stim = []
 data = []
@@ -63,7 +62,7 @@ for (c=0; c<task_colors.length; c++) {
 	for (g=0; g<task_shapes.length; g++) {
 		for (l=0; l<task_shapes.length; l++) {
 			stim.push(prefix + path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +'s.png' + postfix)
-			data.push({exp_id: 'local-global', condition: condition, global_shape: task_shapes[g], local_shape: task_shapes[l]})
+			data.push({exp_id: 'local_global', condition: condition, global_shape: task_shapes[g], local_shape: task_shapes[l]})
 		}
 	}
 }
@@ -85,34 +84,41 @@ var test_trials = makeTrialList(96,stim,data)
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the local-global experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><img src = "static/experiments/local-global/images/blue_squareofcircles.png" height = 200 width = 200></img><br><br><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' + task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' + task_colors[1] + ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for a circle, 2 for an X, 3 for a triangle and 4 for a square.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>For instance, for the shape below you would press 3 because it is ' + task_colors[1] + ' which means you should respond based on the smaller shapes. If the shape was instead ' + task_colors[0] + ' you would press 2.</p><img src = "static/experiments/local-global/images/' + task_colors[1] + '_Xoftriangles.png" height = 200 width = 200></img><br><br><p class = "block-text">Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
-	]
+	'<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><img src = "images/blue_squareofcircles.png" height = 200 width = 200></img></div>',
+	'<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' + task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' + task_colors[1] + ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for a circle, 2 for an X, 3 for a triangle and 4 for a square.</p></div>',
+	'<div class = centerbox><p class = block-text>For instance, for the shape below you would press 3 because it is ' + task_colors[1] + ' which means you should respond based on the smaller shapes. If the shape was instead ' + task_colors[0] + ' you would press 2.</p><img src = "images/' + task_colors[1] + '_Xoftriangles.png" height = 200 width = 200></img></div>'
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 /* define practice block */
@@ -150,5 +156,3 @@ local_global_experiment.push(practice_block);
 local_global_experiment.push(start_test_block);
 local_global_experiment.push(test_block);
 local_global_experiment.push(end_block);
-
-

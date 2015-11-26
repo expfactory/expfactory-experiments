@@ -1,0 +1,29 @@
+[
+    {
+        "name": "",
+        "run": [
+                "experiment.js",
+                "style.css",
+                "static/js/jspsych/custom_plugins/jspsych-multi-button.js"
+               ],
+        "tag": "rng",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":3,
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
+
