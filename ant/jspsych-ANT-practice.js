@@ -6,7 +6,7 @@
  **/
  
 (function($) {
-	jsPsych["ANT-practice"] = (function() {
+	jsPsych["ant-practice"] = (function() {
 
 		var plugin = {};
 

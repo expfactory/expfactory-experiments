@@ -124,9 +124,9 @@ var other_probe = {
 /* Set up experiment */
 /* ************************************ */
 
-var AX_experiment = []
-AX_experiment.push(welcome_block);
-AX_experiment.push(instructions_block);
+var ax_cpt_experiment = []
+ax_cpt_experiment.push(welcome_block);
+ax_cpt_experiment.push(instructions_block);
 
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
@@ -157,10 +157,10 @@ for (b = 0; b< blocks.length; b++) {
 				target.data["condition"]="BY"
 				break;
 		}
-		AX_experiment.push(cue)
-		AX_experiment.push(target)
-		AX_experiment.push(wait_block)
+		ax_cpt_experiment.push(cue)
+		ax_cpt_experiment.push(target)
+		ax_cpt_experiment.push(wait_block)
 	}
-	AX_experiment.push(rest_block)
+	ax_cpt_experiment.push(rest_block)
 }
-AX_experiment.push(end_block)
+ax_cpt_experiment.push(end_block)
