@@ -52,8 +52,8 @@ var makeTrialList = function(len, stim, data) {
 /* ************************************ */
 var task_colors = jsPsych.randomization.shuffle(['blue','black'])
 var task_shapes = ['circle','X','triangle','square']
-var path = 'static/images/local-global/'
-prefix = '<div class = centerbox><img src = "images/'
+var path = 'static/experiments/local_global/images/'
+prefix = '<div class = centerbox><img src = "'
 postfix = '"</img></div>'
 stim = []
 data = []
