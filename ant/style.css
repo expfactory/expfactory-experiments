@@ -30,3 +30,11 @@
 	text-align: center;
 	font-size: 60px;
 }
+
+.ANT_centercue_text {
+	text-align: center;
+	font-size: 60px;
+	position: relative;
+    transform: translateY(14%);
+    -webkit-transform: translateY(14%);
+}

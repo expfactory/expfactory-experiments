@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Dospert: Domain Specific Risk Taking",
+        "run": [
+                 "experiment.js"
+                 "style.js"
+               ],
+        "tag": "dospert_eb",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":999,
+        "doi": "",
+        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

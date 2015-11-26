@@ -4,9 +4,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -16,113 +13,113 @@ var small_font = 20
 var practice_control_stimuli = [
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>1</span>xx</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "practice_control"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "practice_control"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >x<span class = big>2</span>x</div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "practice_control"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "practice_control"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >xx<span class = big>3</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "practice_control"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "practice_control"}
   }
 ]
-var interference_stimuli = [
+var practice_interference_stimuli = [
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = big>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >22<span class = big>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = small>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >22<span class = small>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >3<span class = big>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = big>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >3<span class = small>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = small>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>2</span>11</div></div>',
-	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >11<span class = big>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>2</span>11</div></div>',
-	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >11<span class = small>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>2</span>33</div></div>',
-	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = big>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>2</span>33</div></div>',
-	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = small>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>3</span>11</div></div>',
-	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >1<span class = big>3</span>1</div></div>',
-	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>3</span>11</div></div>',
-	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >1<span class = small>3</span>1</div></div>',
-	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>3</span>22</div></div>',
-	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = big>3</span>2</div></div>',
-	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>3</span>22</div></div>',
-	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multisource', condition: "practice_interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = small>3</span>2</div></div>',
-	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multi-source', condition: "practice_interference"}
+	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multisource', condition: "practice_interference"}
   },
  
 ];
@@ -130,113 +127,113 @@ var interference_stimuli = [
 var control_stimuli = [
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>1</span>xx</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "control"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "control"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >x<span class = big>2</span>x</div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "control"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "control"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >xx<span class = big>3</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "control"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "control"}
   }
 ]
 var interference_stimuli = [
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = big>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >22<span class = big>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = small>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >22<span class = small>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >3<span class = big>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "large_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = big>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "large_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >3<span class = small>1</span>2</div></div>',
-	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "small_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = small>1</span></div></div>',
-	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 49, trial_id: "small_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>2</span>11</div></div>',
-	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >11<span class = big>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>2</span>11</div></div>',
-	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >11<span class = small>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>2</span>33</div></div>',
-	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "large_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = big>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "large_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>2</span>33</div></div>',
-	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "small_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >33<span class = small>2</span></div></div>',
-	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 50, trial_id: "small_right", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>3</span>11</div></div>',
-	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >1<span class = big>3</span>1</div></div>',
-	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>3</span>11</div></div>',
-	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >1<span class = small>3</span>1</div></div>',
-	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = big>3</span>22</div></div>',
-	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "large_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = big>3</span>2</div></div>',
-	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "large_middle", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text ><span class = small>3</span>22</div></div>',
-	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "small_left", exp_id: 'multisource', condition: "interference"}
   },
   {
 	image: '<div class = centerbox><div class = center-ms-text >2<span class = small>3</span>2</div></div>',
-	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multi-source', condition: "interference"}
+	data: { correct_response: 51, trial_id: "small_middle", exp_id: 'multisource', condition: "interference"}
   },
  
 ];
@@ -266,27 +263,33 @@ var practice_blocks = [practice_control, practice_interference]
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the multi-source experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task you will see stimuli consisting of three numbers or "x" letters. For instance, you may see "<span class = big_instructions>1</span>xx" or "<span class = small_instructions>3</span>22"</p><p class = block-text>Two of the characters will always be the same. Your job is to indicate the identity of the character that is different(the target character) using the three number keys. So in the last two examples you would press "1" for the first and "3" for the second.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>There are two trial types: either the non-target numbers are also numbers, or they are "x`s". When the non-target characters are "x", the target number will always be big. When all three characters are numbers, the target character can either be larger or smaller than the other characters.</p><p class = block-text>You will complete 8 blocks of trials. Each block will either have only the "x" type trials (e.g. "xx3" type trials) or the number trials (e.g. "131" type trials). It is important that you respond as quickly as possible, but be sure to respond correctly! Respond by reporting <strong>what</strong> the target number was regardless of its position!</p><p class = block-text>Use the <strong>right arrow key</strong> to start practice (you will not be able to go back to read the instructions again). You can go back using the <strong>left arrow key</strong>.</p></div>',
-	]
+	'<div class = centerbox><p class = block-text>In this task you will see stimuli consisting of three numbers or "x" letters. For instance, you may see "<span class = big_instructions>1</span>xx" or "<span class = small_instructions>3</span>22"</p><p class = block-text>Two of the characters will always be the same. Your job is to indicate the identity of the character that is different(the target character) using the three number keys. So in the last two examples you would press "1" for the first and "3" for the second.</p></div>',
+	'<div class = centerbox><p class = block-text>There are two trial types: either the non-target numbers are also numbers, or they are "x`s". When the non-target characters are "x", the target number will always be big. When all three characters are numbers, the target character can either be larger or smaller than the other characters.</p><p class = block-text>You will complete 8 blocks of trials. Each block will either have only the "x" type trials (e.g. "xx3" type trials) or the number trials (e.g. "131" type trials). It is important that you respond as quickly as possible, but be sure to respond correctly! Respond by reporting <strong>what</strong> the target number was regardless of its position!</p></div>',
+	],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 /* create experiment definition array */
@@ -329,4 +332,3 @@ for (var b = 0; b < num_blocks; b++) {
 }
 
 multisource_experiment.push(end_block)
-

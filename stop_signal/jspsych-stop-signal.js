@@ -1,6 +1,6 @@
 /**
- * jspsych-single-stim
- * Josh de Leeuw
+ * jspsych-stop-signal
+ * Ian Eisenberg
  *
  * plugin for displaying a stimulus and getting a keyboard response
  *
@@ -15,7 +15,7 @@
 
 		plugin.create = function(params) {
 
-			params = jsPsych.pluginAPI.enforceArray(params, ['stimuli', 'choices', 'SS_stimulus']);
+			params = jsPsych.pluginAPI.enforceArray(params, ['stimuli', 'choices', 'SS_stimulus', 'SS_trial_type']);
 
 			var trials = new Array(params.stimuli.length);
 			for (var i = 0; i < trials.length; i++) {
@@ -23,7 +23,8 @@
 				trials[i].a_path = params.stimuli[i];
 				trials[i].choices = params.choices || [];
 				trials[i].response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
-				trials[i].SS_stimulus = params.SS_stimulus;
+				trials[i].SS_stimulus = params.SS_stimulus[i];
+				trials[i].SS_trial_type = params.SS_trial_type[i] // 'stop' or 'go'
 				// timing parameters
 				trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
 				trials[i].timing_SS = params.timing_SS || -1; // if -1, then show indefinitely
@@ -87,7 +88,10 @@
 				var trial_data = {
 					"rt": response.rt,
 					"stimulus": trial.a_path,
-					"key_press": response.key
+					"SSD_stimulus": trial.SS_stimulus,
+					"key_press": response.key,
+					"SSD": trial.SSD,
+					"SS_trial_type": trial.SS_trial_type
 				};
 
 				jsPsych.data.write(trial_data);
@@ -143,23 +147,25 @@
 				setTimeoutHandlers.push(t2);
 			}
 			
-			// end trial if time limit is set
-			if (trial.SSD >= 0) {
-				var t3 = setTimeout(function() {
-					display_element.append($('<div>', {
-						html: trial.SS_stimulus,
-						id: 'jspsych-stop-signal-SS'
-					}));
-				}, trial.SSD);
-				setTimeoutHandlers.push(t3);
-			}
+			if (trial.SS_trial_type.toLowerCase() == 'stop') {
+				// end trial if time limit is set
+				if (trial.SSD >= 0) {
+					var t3 = setTimeout(function() {
+						display_element.append($('<div>', {
+							html: trial.SS_stimulus,
+							id: 'jspsych-stop-signal-SS'
+						}));
+					}, trial.SSD);
+					setTimeoutHandlers.push(t3);
+				}
 			
-			// hide SS after a fixed interval (or when stimulus ends)
-			if (trial.timing_SS > 0) {
-				var t4 = setTimeout(function() {
-					$('#jspsych-stop-signal-SS').css('visibility', 'hidden');
-				}, trial.timing_SS+trial.SSD);
-				setTimeoutHandlers.push(t4);
+				// hide SS after a fixed interval (or when stimulus ends)
+				if (trial.timing_SS > 0) {
+					var t4 = setTimeout(function() {
+						$('#jspsych-stop-signal-SS').css('visibility', 'hidden');
+					}, trial.timing_SS+trial.SSD);
+					setTimeoutHandlers.push(t4);
+				}
 			}
 
 		};

@@ -67,29 +67,36 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the antisaccade experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
+  timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var instructions_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>'
+  type: 'instructions',
+  pages: ['<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p></div>'],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var begin_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var begin_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
+  timing_post_trial: 1000
 };
 
 
@@ -229,18 +236,3 @@ for (i=0; i<exp_len; i++) {
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

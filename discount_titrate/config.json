@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Discount Titrate: Intertemporal Choice",
+        "run": [
+                 "experiment.js"
+                 "style.js"
+               ],
+        "tag": "discount_titrate",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":10,
+        "doi": "",
+        "reference": "http://www.nature.com/neuro/journal/v13/n5/extref/nn.2516-S1.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

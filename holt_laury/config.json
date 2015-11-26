@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Holt Laury Task: Risk aversion and incentives",
+        "run": [
+                 "experiment.js"
+                 "style.js"
+               ],
+        "tag": "holt_laury",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":999,
+        "doi": "",
+        "reference": "http://users.nber.org/~rosenbla/econ311-04/syllabus/holtlaury.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

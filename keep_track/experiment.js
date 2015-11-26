@@ -4,10 +4,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
-
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -22,11 +18,11 @@ var exemplars = {
 	'colors': ['red', 'yellow','green','blue', 'brown'],
 	'countries': ['China', 'US', 'England', 'India', 'Brazil'],
 	'distances': ['mile', 'kilometer', 'meter', 'foot', 'inch'],
-	'metals': ['iron', 'copper', 'aluminum', 'gold', 'silver'],
+	'metals': ['iron', 'copper', 'aluminum', 'lead', 'brass'],
 	'relatives': ['mother', 'father', 'brother', 'sister', 'aunt']
 }
 
-var difficulty_order = jsPsych.randomization.repeat([3,4,5],1,false)
+var difficulty_order = jsPsych.randomization.shuffle([3,4,5])
 var num_blocks = 3 //per difficulty level
 var trial_length = 15 //variable never used, just for reference
 var blocks = []
@@ -79,7 +75,8 @@ var welcome_block = {
 	
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the letter memory experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var category_instructions = '<ul class = list-text>' +
@@ -94,35 +91,41 @@ var category_instructions = '<ul class = list-text>' +
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented on at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.<p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p><p class = block-text>You do not have to memorize all the words; just make sure you know which category each word belongs to.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p><p class = block-text>We will start with a practice trial. Press <strong>enter</strong> to continue.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented on at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
+	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p></div>',
+	'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
   ],
-  key_forward: 13
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var end_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: 13,
+  timing_post_trial: 1000
 };
 
 
@@ -238,5 +241,3 @@ for (b=0; b<blocks.length; b++) {
 
 
 keep_track_experiment.push(end_block)
-
-

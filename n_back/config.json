@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Cognitive control and brain resources in major depression: An fMRI study using the n-back task",
+        "run": [
+                 "experiment.js"
+               ],
+        "tag": "n_back",
+        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
+        "cognitive_atlas_concept":"cognitive control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":16,
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
+        "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is  a match or not",
+        "publish":"True"
+    
+   }
+]
