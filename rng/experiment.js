@@ -115,8 +115,8 @@ for (var i = 0; i <practice_stims.length; i++) {
 	  response_ends_trial: false,
 	  timing_post_trial: 0
 	};
-	RNG_experiment.push(practice_block)
-	RNG_experiment.push(wait_block)
+	rng_experiment.push(practice_block)
+	rng_experiment.push(wait_block)
 }
 rng_experiment.push(start_test_block);
 //Loop should be changed to go until test_stims.length later
