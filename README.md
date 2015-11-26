@@ -1,6 +1,6 @@
 # The Experiment Factory Experiments
 
-Each folder contains a javascript experiment that can be deployed into an [experiment battery instance](http://www.github.com/expfactory/psiturk-battery), currently only available as a psiturk battery experiment. You can browse the currently valid experiments [here](http://expfactory.github.io/efactory-experiments/), and download meta data at the bottom of that page. The folder should contain the following:
+Each folder contains a javascript experiment that can be deployed into an [experiment battery instance](http://www.github.com/expfactory/expfactory-battery), which is a psiturk battery experiment. You can browse the currently valid experiments [here](http://expfactory.github.io/expfactory-experiments/), and download meta data at the bottom of that page. The folder should contain the following:
 
 ### Folder Contents
 
@@ -34,7 +34,7 @@ will produce the following code in `load_experiment.js`:
  - doi: the doi of associated papers.
  - reference: url(s) to referenced papers to develop the task
  - notes: any notes about the implementation, etc.
- - publish: either "True" or "False" to determine if the experiment should be revealed to the user of the efactory-python application.
+ - publish: either "True" or "False" to determine if the experiment should be revealed to the user of the expfactory-python application.
 
 An example of a config.json data structure is follows:
 
@@ -66,11 +66,11 @@ An example of a config.json data structure is follows:
       ]
 
 #### run
-A list of javascript and css files that are essential for the experiment to run, specified in `load_experiments.js` (see details above). Typically, an experiment will have an `experiment.js` file and a `style.css`. For jspsych files that are included with the psiturk-battery/js folder, specify the complete path to the file relative to the static folder. For example:
+A list of javascript and css files that are essential for the experiment to run, specified in `load_experiments.js` (see details above). Typically, an experiment will have an `experiment.js` file and a `style.css`. For jspsych files that are included with the expfactory-battery/js folder, specify the complete path to the file relative to the static folder. For example:
 
       static/js/jspsych/plugins/jspsych-call-function.js
 
-Any files with full paths specified as the above will be checked for existance within the psiturk-battery folder. If found, the file will be linked successfully. If not found, the file will be looked for in the experiment folder. If the file does not exist in either place, an error will trigger upon generation of the battery.
+Any files with full paths specified as the above will be checked for existance within the expfactory-battery folder. If found, the file will be linked successfully. If not found, the file will be looked for in the experiment folder. If the file does not exist in either place, an error will trigger upon generation of the battery.
 
 ### experiment-specific static files
 Files hard coded into the experiment.js should have a path with the following format:
@@ -95,11 +95,11 @@ These files would be in the tone-monitoring experiment folder as:
                  440Hz_-6dBFS_.5s.mp3
                  220Hz_-6dBFS_.5s.mp3
 
-as the entire thing will be included in the experiment's folder (under `static/experiments/[folder-name]`), with the same structure. As specified above, any static files that are included with the psiturk-battery should be linked with those paths, and do not need to be included in the individual experiment folder. However, when linked to via the `run` variable in `config.json`, they will be checked for existence, and an error will occur if they are not found.
+as the entire thing will be included in the experiment's folder (under `static/experiments/[folder-name]`), with the same structure. As specified above, any static files that are included with the expfactory-battery should be linked with those paths, and do not need to be included in the individual experiment folder. However, when linked to via the `run` variable in `config.json`, they will be checked for existence, and an error will occur if they are not found.
 
 
 #### experiment.js
-This is the main javascript file to run the experiment, typically named experiment.js. The name can change, but must be specified in the psiturk.json as one of the "run" variables. Paths to images, sounds, and other files referenced in this file will be expected to follow the same pattern as above, e.g.: `static/experiment/[folder-name]/images/filename.png` `(required)`.
+This is the main javascript file to run the experiment, typically named experiment.js. The name can change, but must be specified in the config.json as one of the "run" variables. Paths to images, sounds, and other files referenced in this file will be expected to follow the same pattern as above, e.g.: `static/experiment/[folder-name]/images/filename.png` `(required)`.
 
 #### images
 This is a folder of images that are necessary for the experiment. The images should be specified in the style.css, and linked relative to the experiment folder. When setting up the battery, they will be copied with the experiment folder in the same structure as defined in the folder, and so they are expected to be under `static/experiment/[folder-name]/images/`. `(optional)`
