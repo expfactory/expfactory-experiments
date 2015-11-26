@@ -2,8 +2,8 @@
     {
         "name": "Directed Forgetting Experiment",
         "run": [
-                 "experiment.js"
-                 "style.js"
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "directed_forgetting",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",

@@ -2,8 +2,8 @@
     {
         "name": "Dospert: Domain Specific Risk Taking",
         "run": [
-                 "experiment.js"
-                 "style.js"
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "dospert_eb",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",

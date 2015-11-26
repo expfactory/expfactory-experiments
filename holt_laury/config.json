@@ -2,8 +2,8 @@
     {
         "name": "Holt Laury Task: Risk aversion and incentives",
         "run": [
-                 "experiment.js"
-                 "style.js"
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "holt_laury",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",

@@ -2,8 +2,8 @@
     {
         "name": "Discount Titrate: Intertemporal Choice",
         "run": [
-                 "experiment.js"
-                 "style.js"
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "discount_titrate",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",

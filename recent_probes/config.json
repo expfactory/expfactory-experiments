@@ -2,8 +2,8 @@
     {
         "name": "Recent Probes",
         "run": [
-                 "experiment.js"
-                 "style.js"
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "recent_probes",
         "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
