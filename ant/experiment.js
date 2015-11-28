@@ -195,8 +195,8 @@ for (i = 0; i < block.data.length; i++) {
 	
 	block.data[i]['trial_num'] = trial_num
 	block.data[i]['exp_id'] = 'ant_practice'
-	var ANT_practice_trial = {
-	  type: 'ANT-practice',
+	var ant_practice_trial = {
+	  type: 'ant_practice',
 	  stimuli: block.image[i],
 	  is_html: true,
 	  key_answer: block.data[i].correct_response,
@@ -211,7 +211,7 @@ for (i = 0; i < block.data.length; i++) {
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 0
 	}
-	ant_experiment.push(ANT_practice_trial)
+	ant_experiment.push(ant_practice_trial)
 
 	var last_fixation = {
 	  type: 'single-stim',
