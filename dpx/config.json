@@ -1,6 +1,6 @@
 [
     {
-        "name": "Dot Pattern Expectancy,
+        "name": "Dot Pattern Expectancy",
         "run": [
                  "experiment.js",
                  "style.css"
