@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Image Monitoring Task",
         "run": [
                 "experiment.js",
                 "style.css",

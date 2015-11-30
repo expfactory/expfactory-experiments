@@ -1,8 +1,3 @@
-/*
-reference: http://www.nature.com/neuro/journal/v13/n5/extref/nn.2516-S1.pdf
-Figner, B., Knoch, D., Johnson, E. J., Krosch, A. R., Lisanby, S. H., Fehr, E., & Weber, E. U. (2010). Lateral prefrontal cortex and self-control in intertemporal choice. Nature neuroscience, 13(5), 538-539.
-*/
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

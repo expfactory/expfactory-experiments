@@ -1,6 +1,3 @@
-/* Main reference: http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT */
-//Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

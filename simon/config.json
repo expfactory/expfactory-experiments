@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Simon",
         "run": [
                 "experiment.js",
                 "style.css"
@@ -19,7 +19,7 @@
         "lab": "Poldracklab",
         "time":5,
         "doi": "",
-        "reference": "",
+        "reference": "http://link.springer.com/article/10.3758%2FBF03210959",
         "notes": "",
         "publish":"True"
     

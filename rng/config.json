@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Random Number Generation",
         "run": [
                 "experiment.js",
                 "style.css",

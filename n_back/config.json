@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cognitive control and brain resources in major depression: An fMRI study using the n-back task",
+        "name": "N-Back",
         "run": [
                  "experiment.js"
                ],

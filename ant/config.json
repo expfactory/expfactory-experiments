@@ -1,6 +1,6 @@
 [
     {
-        "name": "Testing the efficiency and independence of attentional networks.",
+        "name": "Attention Network Task",
         "run": [
                  "experiment.js",
                  "style.css",
@@ -20,7 +20,7 @@
         "time":20,
         "lab": "Poldracklab",
         "doi": "10.1162/089892902317361886",
-        "reference": "",
+        "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
         "notes": "",
         "publish":"True"
     

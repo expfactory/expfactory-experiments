@@ -1,6 +1,6 @@
 [
     {
-        "name": "Decision Making and Learning While Taking Sequential Risks",
+        "name": "Angling Risk Task",
         "run": [
                 "experiment.js",
                 "style.css",

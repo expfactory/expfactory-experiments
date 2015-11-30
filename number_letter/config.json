@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Number-Letter",
         "run": [
                  "experiment.js",
                  "style.css"

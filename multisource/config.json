@@ -1,6 +1,6 @@
 [
     {
-        "name": "The Multi-Source Interference Task: validation study with fMRI in individual subjects",
+        "name": "Multi-Source Interference Task",
         "run": [
                "experiment.js",
                "style.css"
