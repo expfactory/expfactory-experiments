@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cognitive Control Predicts Use of Model-based Reinforcement learning",
+        "name": "Dot Pattern Expectancy,
         "run": [
                  "experiment.js",
                  "style.css"
@@ -19,7 +19,7 @@
         "lab": "Poldracklab",
         "time":15,
         "doi": "",
-        "reference": "http://www.cns.nyu.edu/~rotto/jocn_in_press.pdf",
+        "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
         "publish":"True"
     

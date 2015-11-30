@@ -1,7 +1,3 @@
-/* Main reference: Miyake, A., Friedman, N. P., Emerson, M. J., Witzki, a H., Howerter, A., & Wager, T. D. (2000). The unity and diversity of executive functions and their contributions to complex “Frontal Lobe” tasks: a latent variable analysis. Cognitive Psychology, 41(1), 49–100. doi:10.1006/cogp.1999.0734 */
-/*
-Condition indicates the location of the target stimulus
-*/
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

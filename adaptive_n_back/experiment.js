@@ -1,16 +1,3 @@
-/*
-reference: http://www.sciencedirect.com/science/article/pii/S1053811905001424
-Cognitive control and brain resources in major depression: An fMRI study using the n-back task Harvey at al. 2005
-This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is 
-a match or not
-
-refernce for adaptive n-back, though not explictely used: http://www.pnas.org/content/105/19/6829.full
-*/
-
-/* 
-Condition records the n for that block of trials
-/*
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

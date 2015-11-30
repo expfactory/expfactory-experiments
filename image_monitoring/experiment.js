@@ -1,7 +1,3 @@
-// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
-// condition indicates practice/test, trial_id indicates stimulus shown on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)
-
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

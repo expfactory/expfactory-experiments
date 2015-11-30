@@ -1,5 +1,3 @@
-// Reference http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410
-//Conditions refers to congruency on each trial
 
 /* ************************************ */
 /* Define helper functions */

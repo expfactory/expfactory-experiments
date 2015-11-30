@@ -1,6 +1,3 @@
-// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
-// Condition indicates difficulty as quantified by the "target length": the number of categories the subject had to remember
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

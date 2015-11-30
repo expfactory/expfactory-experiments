@@ -10,6 +10,7 @@
         "cognitive_atlas_concept":"cognitive control",
         "cognitive_atlas_task_id": "",
         "contributors": [
+                         "Jamie Li",
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",
@@ -19,7 +20,7 @@
         "lab": "Poldracklab",
         "time":999,
         "doi": "",
-        "reference": "",
+        "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2206737/",
         "notes": "",
         "publish":"True"
     

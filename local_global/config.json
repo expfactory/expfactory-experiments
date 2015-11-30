@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Local-Global",
         "run": [
                 "experiment.js",
                 "style.css"
@@ -19,7 +19,7 @@
         "lab": "Poldracklab",
         "time":5,
         "doi": "",
-        "reference": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "",
         "publish":"True"
     

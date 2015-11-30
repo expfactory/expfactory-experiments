@@ -1,8 +1,3 @@
-/*
-reference: http://link.springer.com/article/10.3758/BF03210748
-Kirby, K. N., & Maraković, N. N. (1996). Delay-discounting probabilistic rewards: Rates decrease as amounts increase. Psychonomic bulletin & review, 3(1), 100-104.
-*/
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

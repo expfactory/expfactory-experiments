@@ -1,6 +1,6 @@
 [
     {
-        "name": "Probabilistic Selection Experiment",
+        "name": "Probabilistic Selection Task",
         "run": [
                  "experiment.js",
                  "style.css"
@@ -10,6 +10,7 @@
         "cognitive_atlas_concept":"cognitive control",
         "cognitive_atlas_task_id": "",
         "contributors": [
+                         "Jamie Li",
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",
@@ -19,7 +20,7 @@
         "lab": "Poldracklab",
         "time":999,
         "doi": "",
-        "reference": "",
+        "reference": "http://www.nature.com/neuro/journal/v14/n2/fig_tab/nn.2723_F3.html",
         "notes": "",
         "publish":"True"
     

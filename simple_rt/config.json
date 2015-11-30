@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Simple Reaction Time",
         "run": [
                 "experiment.js",
                 "style.css"
@@ -19,7 +19,7 @@
         "lab": "Poldracklab",
         "time":3.5,
         "doi": "",
-        "reference": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "notes": "",
         "publish":"True"
     

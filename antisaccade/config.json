@@ -1,6 +1,6 @@
 [
     {
-        "name": "The unity and diversity of executive functions and their contributions to complex “Frontal Lobe” tasks: a latent variable analysis",
+        "name": "Antisaccade",
         "run": [
                 "experiment.js",
                 "style.css"
@@ -19,8 +19,8 @@
         "lab": "Poldracklab",
         "time":8,
         "doi": "10.1006/cogp.1999.0734",
-        "reference": "",
-        "notes": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "Condition indicates the location of the target stimulus",
         "publish":"True"
     
    }

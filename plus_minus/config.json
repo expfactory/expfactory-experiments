@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Plus-Minus",
         "run": [
                 "experiment.js"
                ],

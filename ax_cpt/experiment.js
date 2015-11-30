@@ -1,10 +1,3 @@
-
-/* Main reference: http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT */
-
-/*
-Condition indicates cue/target trial type: AX, BX, AY, BY
-*/
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
