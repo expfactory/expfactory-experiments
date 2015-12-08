@@ -2,8 +2,6 @@
     {
         "name": "Adaptive N-Back",
         "tag": "adaptive_n_back",
-        "cognitive_atlas_concept_id":"trm_4aae62e4ad209",
-        "cognitive_atlas_concept":"cognitive control",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
