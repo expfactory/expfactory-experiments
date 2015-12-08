@@ -2,7 +2,7 @@
     {
         "name": "Adaptive N-Back",
         "tag": "adaptive_n_back",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "tsk_4a57abb949b1c",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
