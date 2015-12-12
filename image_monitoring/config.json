@@ -7,7 +7,7 @@
                 "static/js/jspsych/plugins/jspsych-call-function.js"
                ],
         "tag": "image_monitoring",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_5667436296862",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
