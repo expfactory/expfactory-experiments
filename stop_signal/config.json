@@ -8,7 +8,7 @@
                 "static/js/jspsych/plugins/jspsych-call-function.js"
                ],
         "tag": "stop_signal",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
