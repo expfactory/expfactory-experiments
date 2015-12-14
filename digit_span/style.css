@@ -1,0 +1,9 @@
+.digit-span-text {
+	text-align:center;
+	font-size: 80px;
+	position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

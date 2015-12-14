@@ -20,7 +20,6 @@ var getStim = function() {
 }
 var submit = function() {
   response = $('input:text').val()
-  console.log(response)
   $("#SubmitButton").attr('disabled', true);
   var e = jQuery.Event("keydown");
     e.which = 32; // # Some key code value
