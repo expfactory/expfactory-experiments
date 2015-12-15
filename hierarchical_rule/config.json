@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Hierarchical Rule",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "hierarchical_rule",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":5,
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960 ",
+        "notes": ,
+        "publish":"True"
+    
+   }
+]
+
