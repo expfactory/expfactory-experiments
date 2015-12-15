@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Test Task",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "test_task",
+        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":1,
+        "doi": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
