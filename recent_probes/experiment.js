@@ -275,7 +275,7 @@ var training_block = {
 var recent_probes_experiment = [];
 recent_probes_experiment.push(welcome_block);
 recent_probes_experiment.push(instructions_block);
-for (r = 0; i < num_runs; r ++ ) {
+for (r = 0; r < num_runs; r ++ ) {
 	recent_probes_experiment.push(start_test_block);
 	for(i=0; i<num_trials; i++){
 	recent_probes_experiment.push(start_fixation_block);

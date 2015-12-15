@@ -1,0 +1,39 @@
+.shift_left {
+width: 25vw;
+height: 25vw;
+position:absolute;
+top:50%;
+left:50%; 
+margin-right:0%;
+transform: translate(-125%,-50%);
+}
+
+.shift_right {
+width: 25vw;
+height: 25vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(25%,-50%);
+}
+
+.shift_middle {
+width: 25vw;
+height: 25vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+}
+
+.shift_feedback_box {
+  width:35vw;
+  height: 15vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-200%);
+}
