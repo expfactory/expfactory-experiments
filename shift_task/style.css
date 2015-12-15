@@ -37,3 +37,13 @@ transform: translate(-50%,-50%);
   margin-right:-50%;
   transform: translate(-50%,-200%);
 }
+
+.instructionbox {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-175%);
+}

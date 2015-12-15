@@ -80,13 +80,17 @@ var stim_att = {
   patterns: ['dots','lines','waves']
 }
 var stims = []
+var dims = ['colors', 'shapes', 'patterns']
 var features = stim_att.colors.concat(stim_att.shapes).concat(stim_att.patterns)
 var path_source = 'static/experiments/shift_task/images/'
-var rewarded_feature = randomDraw(features)
+var rewarded_dim = randomDraw(dims)
+var rewarded_feature = randomDraw(stim_att[rewarded_dim])
 
 // variables to track feature switch
 var switch_count = 0 //when switch_count equals switch_bound the feature switches
 var switch_bound = Math.floor(Math.random()*11)+15
+/* controls how often the shift is extra-dimensional (across dims) vs intra (across features within a dim) */
+var extra_shift_prob = .5
 
 
 /* ************************************ */
@@ -109,15 +113,29 @@ var end_block = {
 
 var instructions_block = {
   type: 'instructions',
-  pages: ['<div class = shift_feedback_block><p class = block-text>On each trial of this experiment three patterned shapes will be presented.  </p></div>'],
+  pages: ['<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the obects may look something like this:</o></div>' + getStim(), '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>Also, one feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>', '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant dimension and feature are. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. This task is fairly long (should take ~ 30 minutes) so there will be a number of breaks throughout. We will start with a practice session.'],
   allow_keys: false,
   show_clickable_nav: true,
+  timing_post_trial: 1000
+};
+
+var start_practice_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>We will now start practice. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13,
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13,
+  timing_post_trial: 1000
+};
+
+var start_rest_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 1000
 };
@@ -139,8 +157,8 @@ var practice_stim_block = {
   is_html: true,
   data: {exp_id: "shift", trial_id: "practice_stim", trial_num: current_trial},
   choices: choices,
-  timing_stim: 2000,
-  timing_response: 2000,
+  timing_stim: 1000,
+  timing_response: 1000,
   timing_post_trial: 0
 };
 
@@ -158,7 +176,14 @@ var practice_feedback_block = {
     if (switch_count == switch_bound) {
       switch_count = 0
       switch_bound = Math.floor(Math.random()*11)+15
-      rewarded_feature = randomDraw(features.filter(function(x){return x!=rewarded_feature}))
+      if (Math.random() < extra_shift_prob) {
+        rewarded_dim = randomDraw(dims.filter(function(x){return x!=rewarded_dim}))
+        rewarded_feature = randomDraw(stim_att[rewarded_dim])
+      } else {
+        var dim_features = stim_att[rewarded_dim]
+        rewarded_feature = randomDraw(dim_features.filter(function(x) 
+          { return x!= rewarded_feature}))
+      }
     }
   }
 };
@@ -170,8 +195,8 @@ var stim_block = {
   is_html: true,
   data: {exp_id: "shift", trial_id: "stim", trial_num: current_trial},
   choices: choices,
-  timing_stim: 2000,
-  timing_response: 2000,
+  timing_stim: 1000,
+  timing_response: 1000,
   timing_post_trial: 0
 };
 
@@ -189,7 +214,14 @@ var feedback_block = {
     if (switch_count == switch_bound) {
       switch_count = 0
       switch_bound = Math.floor(Math.random()*11)+15
-      rewarded_feature = randomDraw(features.filter(function(x){return x!=rewarded_feature}))
+      if (Math.random() < extra_shift_prob) {
+        rewarded_dim = randomDraw(dims.filter(function(x){return x!=rewarded_dim}))
+        rewarded_feature = randomDraw(stim_att[rewarded_dim])
+      } else {
+        var dim_features = stim_att[rewarded_dim]
+        rewarded_feature = randomDraw(dim_features.filter(function(x) 
+          { return x!= rewarded_feature}))
+      }
     }
   }
 };
@@ -208,5 +240,8 @@ shift_task_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
   shift_task_experiment.push(stim_block);
   shift_task_experiment.push(feedback_block);
+  if (i%(exp_len/4) == 0) {
+    shift_task_experiment.push(rest_block)
+  }
 }
 shift_task_experiment.push(end_block);
