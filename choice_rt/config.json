@@ -15,8 +15,8 @@
                          "Russell Poldrack"
                         ], 
         "time":4,
-        "lab": "Poldracklab",
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "notes": "",
         "publish":"True"

@@ -15,9 +15,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":6,
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "condition indicates practice/test, trial_id indicates stimulus shown on each trial. Correct response is determined by repetitions since last response and is not calculated in experiment.js (calculate in post)",
         "publish":"True"
