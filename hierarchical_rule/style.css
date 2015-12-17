@@ -58,33 +58,35 @@
     color: white;
 }
 
-.bottomLeft {
-	width: 20vw;
-	height: 20vw;
+.gridImage {
 	position:absolute;
+	width: 7vw;
 	top:50%;
 	left:50%;
-	margin-right:0%;
-	transform: translate(-125%,15%);
+	transform: translate(-50%,-50%); 
 }
 
-.bottomRight {
-	width: 20vw;
-	height: 20vw;
+.gridBorder {
 	position:absolute;
+	width: 8.5vw;
 	top:50%;
 	left:50%;
-	margin-right:0%;
-	transform: translate(25%,15%);
+	transform: translate(-50%,-50%); 
 }
 
+.imgGridBox {
+	position: relative;
+	width: 10vw;
+	height: 10vw;
+	float: left;
+}
 
-.bottomMiddle {
-	width: 20vw;
-	height: 20vw;
-	position:absolute;
-	top:50%;
-	left:50%;
-	margin-right:0%;
-	transform: translate(-50%,15%);
+.gridBox {
+  width:60vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-30%,-50%);
 }
