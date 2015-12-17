@@ -161,14 +161,6 @@ function goFish() {
 		 }
 
 		lake_state = $('.lake').html()
-		var e = jQuery.Event("keydown");
-		e.which = 32; // # Some key code value
-		e.keyCode = 32
-		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
-		e.which = 32; // # Some key code value
-		e.keyCode = 32
-		$(document).trigger(e)
 	}	
 }
 
@@ -187,14 +179,6 @@ function collect() {
 	total_fish_num = 0
 	lake_state = $('.lake').html()
 	cooler_state = $('.lake').html()
-	var e = jQuery.Event("keydown");
-	e.which = 40; // # Some key code value
-	e.keyCode = 40
-	$(document).trigger(e);
-	var e = jQuery.Event("keyup");
-	e.which = 40; // # Some key code value
-	e.keyCode = 40
-	$(document).trigger(e)
 }
 
 
@@ -330,7 +314,7 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
         "<div class = infobox><p class = info-text id = tournament_bank>&nbsp&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
 "</div>" +
     "</div>" +
-"<div class = buttonbox><button type='button' class = select-button onclick = goFish()>Go Fish</button><button type='button' class = select-button onclick = collect()>Collect</button></div>" 
+"<div class = buttonbox><button id = 'goFish' class = select-button onclick = goFish()>Go Fish</button><button id = 'Collect' class = select-button onclick = collect()>Collect</button></div>" 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -390,13 +374,13 @@ var set_fish_block = {
 }
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'multi-button',
   stimuli: getGame,
-  choices: [32,40],
-  is_html: true,
+  button_class: 'select-button',
   data: get_practice_data,
   timing_post_trial: 0
 };
+
 
 var practice_chunk = {
     chunk_type: 'while',
@@ -411,10 +395,9 @@ var practice_chunk = {
 }
 
 var game_block = {
-  type: 'single-stim',
+  type: 'multi-button',
   stimuli: getGame,
-  choices: [32,40],
-  is_html: true,
+  button_class: 'select-button',
   data: get_data,
   timing_post_trial: 0
 };

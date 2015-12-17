@@ -4,7 +4,8 @@
         "run": [
                 "experiment.js",
                 "style.css",
-                "static/js/jspsych/plugins/jspsych-call-function.js"
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/custom_plugins/jspsych-multi-button.js"
                ],
         "tag": "art",
         "cognitive_atlas_task_id": "trm_5667488d52ccc",
