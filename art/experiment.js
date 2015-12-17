@@ -1,4 +1,4 @@
-// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18194061
+// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18193561
 // Decision Making and Learning While Taking Sequential Risks. Pleskac 2008
 
 /* ************************************ */
@@ -136,7 +136,7 @@ function makeFish(fish_num) {
 function goFish() {
 	/* If the subject chooses to goFish, one fish is randomly selected from the lake. If it is red, the trip bank
 		is increased by "pay". If it is blue the round ends. If the release rule is "Keep", the fish is also removed
-		from the lake. Coded as keycode 32 for jspsych
+		from the lake. Coded as keycode 36 for jspsych
 	*/
 	if (total_fish_num > 0) {
 		if (Math.random() < 1/(total_fish_num)) {
@@ -167,7 +167,7 @@ function goFish() {
 function collect() {
 	round_over = 1
 	round_over_text = "You collected the money from the trip bank ($" + trip_bank + ") and moved it to your tournament bank."
-	// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 40 for jspsych
+	// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
  	tournament_bank += trip_bank
 	tournment_bank = Math.round(tournament_bank * 100) / 100
     trip_bank = 0

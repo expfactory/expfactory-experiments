@@ -1,6 +1,3 @@
-// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
-// Condition records difficulty as quantified by the sequence length
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
