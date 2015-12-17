@@ -14,9 +14,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":999,
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://users.nber.org/~rosenbla/econ311-04/syllabus/holtlaury.pdf",
         "notes": "",
         "publish":"True"

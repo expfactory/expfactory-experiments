@@ -15,9 +15,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":3,
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "",
         "publish":"True"

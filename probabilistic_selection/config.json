@@ -15,9 +15,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":999,
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.nature.com/neuro/journal/v14/n2/fig_tab/nn.2723_F3.html",
         "notes": "",
         "publish":"True"

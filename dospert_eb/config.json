@@ -14,9 +14,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":999,
-        "doi": "",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
         "notes": "",
         "publish":"True"

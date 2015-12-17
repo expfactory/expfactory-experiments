@@ -14,9 +14,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":8,
-        "doi": "10.1006/cogp.1999.0734",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates the location of the target stimulus",
         "publish":"True"

@@ -10,13 +10,13 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "run": [
                 "experiment.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js"
                 ],
         "time":16,
-        "doi":"",
+        "performance_variable": "",
+        "rejection_variable": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is a match or not. Condition records the n for that block of trials. The second reference is not explicitly used.",
         "publish":"True"
