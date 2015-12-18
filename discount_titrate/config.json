@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":10,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.nature.com/neuro/journal/v13/n5/extref/nn.2516-S1.pdf",
         "notes": "",
         "publish":"True"

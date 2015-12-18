@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":6.5,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "",
         "notes": "",
         "publish":"True"

@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":6,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates difficulty as quantified by the 'target length': the number of categories the subject had to remember",
         "publish":"True"

@@ -16,8 +16,7 @@
                          "Russell Poldrack"
                         ], 
         "time":10,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
         "notes": "Condition indicates stage in the IDED task",
         "publish":"True"

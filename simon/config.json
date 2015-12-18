@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://link.springer.com/article/10.3758%2FBF03210959",
         "notes": "",
         "publish":"True"
