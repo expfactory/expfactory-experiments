@@ -7,3 +7,56 @@
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+
+/* css for numpad */
+.square {
+    float:left;
+    position: relative;
+    width: 30%;
+    height: 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-color:#1E1E1E;
+    overflow:hidden;
+    color: #fff;
+    border-radius:15px;
+}
+
+.submit_button {
+    float:left;
+    position: relative;
+    width: 100%;
+    height: 15%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-color:#1E1E1E;
+    overflow:hidden;
+    color: #fff;
+    border-radius:15px;
+    font-size: 20px;
+}
+
+.square:hover, .submit_button:hover {
+	color: red;
+}
+
+.square:active, .submit_button:active {
+	background-color: #505050;
+}
+
+.numbers{
+    font-weight:900;
+    text-align: center;
+    font-size: 50px;
+    position: relative;
+    top: 50%; 
+}
+
+.numbox {
+  width:30vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
