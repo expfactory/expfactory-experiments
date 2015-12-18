@@ -14,9 +14,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":5,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://link.springer.com/article/10.3758/BF03210748",
         "notes": "",
         "publish":"True"

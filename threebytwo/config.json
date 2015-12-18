@@ -14,9 +14,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":24,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/21299334",
         "notes": "",
         "publish":"True"

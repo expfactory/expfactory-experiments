@@ -14,9 +14,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":6,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates difficulty as quantified by the 'target length': the number of categories the subject had to remember",
         "publish":"True"

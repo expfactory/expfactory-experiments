@@ -17,9 +17,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":5,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://ajp.psychiatryonline.org/doi/pdf/10.1176/appi.ajp.157.2.275",
         "notes": "",
         "publish":"True"

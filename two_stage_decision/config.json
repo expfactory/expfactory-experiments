@@ -10,14 +10,13 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "run": [
                 "experiment.js",
                 "style.css",
                 "static/js/jspsych/plugins/jspsych-call-function.js"
                ],
         "time":26,
-        "doi":"10.1016/j.neuron.2011.02.027",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627311001255",
         "notes": "Condition = ordered stims in stage 1 and stage 2 (so [0, 1] or [1, 0] for stage 1 and [2, 3], [4, 5] etc. for stage 2 and FB for the FB condition (1 for reward, 0 for no reward)",
         "publish":"True"
