@@ -15,16 +15,11 @@ var getStim = function() {
   var num1 = Math.floor(Math.random()*99)+1
   var num2 = Math.floor(Math.random()*99)+1
   answer = num1*num2
-  var text = '<div class = centerbox><form style="font-size: 24px">' + num1 + ' * ' + num2 + ' =  <input type ="text" name ="mathtext" style="font-size: 24px"></form><br></br><button type="button" id = "SubmitButton" onclick = submit()>Submit Answer</button></div>'
+  var text = '<div class = centerbox><form style="font-size: 24px">' + num1 + ' * ' + num2 + ' =  <input type ="text" id ="mathtext" style="font-size: 24px"></form><br></br><button class = "default_button submitButton" id = submit_button onclick = submit()>Submit Answer</button></div>'
   return text
 }
 var submit = function() {
   response = $('input:text').val()
-  $("#SubmitButton").attr('disabled', true);
-  var e = jQuery.Event("keydown");
-    e.which = 32; // # Some key code value
-    e.keyCode = 32
-    $(document).trigger(e);
 }
 
 /* ************************************ */
@@ -54,7 +49,13 @@ var instructions_block = {
   pages: ['<div class = centerbox><p class = block-text>In this experiment we are interested in how people multiply numbers. Every trial in this experiment will require you to multiply two 2-digit numbers (e.g. 37 * 86) together and enter the answer.</p><p class = block-text>While doing the multiplication you are free to use paper and pencil or do them in your head, but be consistent and do not use a calculator or your computer. That means if you decide to use paper and pencil, please use paper and pencil for the entire experiment.</p><p class = block-text>Finally, this experiment is long! To figure out how people multiple we need you to multiply many numbers and it is important that you stay engaged! The whole experiment will take about an hour.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    setTimeout(function() {
+        console.log('hey')
+        $("#mathtext").focus()
+      },1010)
+  }
 };
 
 var end_block = {
@@ -66,10 +67,9 @@ var end_block = {
 
 //Define staircase blocks
 var largeStep_block = {
-    type: 'single-stim',
+    type: 'single-stim-button',
     stimuli: getStim,
-    is_html: true,
-    choices: 32, 
+    button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
@@ -82,14 +82,17 @@ var largeStep_block = {
       } else {
         response_time += lstep*p
       }
+      setTimeout(function() {
+        console.log('hey')
+        $("#mathtext").focus()
+      },1010)
     }
 }
 
 var smallStep_block = {
-    type: 'single-stim',
+    type: 'single-stim-button',
     stimuli: getStim,
-    is_html: true,
-    choices: 32, 
+    button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
@@ -102,21 +105,28 @@ var smallStep_block = {
       } else {
         response_time += sstep*p
       }
+      setTimeout(function() {
+        console.log('hey')
+        $("#mathtext").focus()
+      },1010)
     }
 }
 
 //45 minutes of math
 var fatigue_block = {
-    type: 'single-stim',
+    type: 'single-stim-button',
     stimuli: getStim,
-    is_html: true,
-    choices: 32, 
+    button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
     repetitions: Math.floor(60000*fatigue_time/response_time),
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({"response": response, "answer": answer, "response_time": response_time})
+      setTimeout(function() {
+        console.log('hey')
+        $("#mathtext").focus()
+      },1010)
     }
 }
 
@@ -129,3 +139,4 @@ multiplication_experiment.push(welcome_block)
 multiplication_experiment.push(instructions_block)
 multiplication_experiment.push(largeStep_block)
 multiplication_experiment.push(smallStep_block)
+multiplication_experiment.push(fatigue_block)

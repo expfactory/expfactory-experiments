@@ -374,7 +374,7 @@ var set_fish_block = {
 }
 
 var practice_block = {
-  type: 'multi-button',
+  type: 'single-stim-button',
   stimuli: getGame,
   button_class: 'select-button',
   data: get_practice_data,
@@ -395,7 +395,7 @@ var practice_chunk = {
 }
 
 var game_block = {
-  type: 'multi-button',
+  type: 'single-stim-button',
   stimuli: getGame,
   button_class: 'select-button',
   data: get_data,

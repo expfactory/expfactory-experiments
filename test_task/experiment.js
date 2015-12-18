@@ -7,12 +7,13 @@
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var experiment_len = 1
+var experiment_len = 3
 var gap = 0
 var current_trial = 0
-stim = '<div class = shapebox><div id = cross></div></div>'
-
-
+var stim = '<div class = shapebox><div id = cross></div></div>'
+var rts = []
+var avg_rt = 0
+var reject = false
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -34,7 +35,20 @@ var test_block = {
   data: {exp_id: "test_task", trial_id: "test"},
   choices: [32],
   timing_post_trial: 100,
-  repetitions: experiment_len
+  repetitions: experiment_len,
+  on_finish: function(data) {
+    rts.push(data.rt)
+    var total = 0;
+    for(var i = 0; i < rts.length; i++) {
+        total += rts[i];
+    }
+    avg_rt = total / rts.length
+    if avg_rt < 100 {
+      reject = true
+    } else {
+      reject = false
+    }
+  }
 };
 
 /* create experiment definition array */

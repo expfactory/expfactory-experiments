@@ -19,7 +19,18 @@
         "doi": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "performance_variable":{
+                       "name":"avg_rt",
+                       "type":"numeric",
+                       "range": [0,inf]
+                       "description":"Avergae RT."
+                        },
+        "rejection_variable":{
+                       "name":"reject",
+                       "type":"boolean",
+                       "description":"True if avg_rt < 100"
+                        },
     
    }
 ]

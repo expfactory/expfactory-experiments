@@ -6,7 +6,7 @@
                 "style.css",
                 "static/js/jspsych/custom_plugins/jspsych-multi-stim-multi-response.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js"
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
         "tag": "digit_span",
         "cognitive_atlas_task_id": "",
