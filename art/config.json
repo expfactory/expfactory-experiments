@@ -4,7 +4,8 @@
         "run": [
                 "experiment.js",
                 "style.css",
-                "static/js/jspsych/plugins/jspsych-call-function.js"
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
         "tag": "art",
         "cognitive_atlas_task_id": "trm_5667488d52ccc",
@@ -16,8 +17,7 @@
                          "Russell Poldrack"
                         ], 
         "time":45,
-        "lab": "Poldracklab",
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
         "notes": "",
         "publish":"True"

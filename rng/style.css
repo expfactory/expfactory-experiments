@@ -2,30 +2,32 @@
     float:left;
     position: relative;
     width: 30%;
+    height: 30%; /* = width for a 1:1 aspect ratio */
+    margin:1.66%;
+    background-color:#1E1E1E;
+    overflow:hidden;
+    color: #fff;
+    border-radius:15px;
+}
+
+.blank-square {
+    float:left;
+    position: relative;
+    width: 30%;
     padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
     margin:1.66%;
     background-color:#1E1E1E;
     overflow:hidden;
-	color: #fff;
-}
-
-.content {
-    position:absolute;
-    height:90%; /* = 100% - 2*5% padding */
-    width:90%; /* = 100% - 2*5% padding */
-    padding: 5%;
-    text-align:center;
-    
+    color: #fff;
+    border-radius:15px;
 }
 
 .numbers{
     font-weight:900;
     text-align: center;
-	font-size: 50px;
-	position: relative;
+    font-size: 50px;
+    position: relative;
     top: 50%; 
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
 }
 
 .numbox {

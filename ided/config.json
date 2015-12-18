@@ -15,9 +15,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":10,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
         "notes": "Condition indicates stage in the IDED task",
         "publish":"True"

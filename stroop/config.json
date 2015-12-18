@@ -14,9 +14,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":5,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410",
         "notes": "Conditions refers to congruency on each trial",
         "publish":"True"

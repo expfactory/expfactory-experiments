@@ -14,9 +14,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":6.5,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "",
         "notes": "",
         "publish":"True"

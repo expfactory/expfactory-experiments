@@ -38,17 +38,8 @@ var getFeedback = function() {
   return '<div class = centerbox><div class = center-text>' + feedback + '</div></div>'
 }
 
-var submit = function() {
-  response = $('input:text').val()
-  $("#SubmitButton").attr('disabled', true);
-  var e = jQuery.Event("keydown");
-    e.which = 36; // # Some key code value
-    e.keyCode = 36
-    $(document).trigger(e);
-  var e = jQuery.Event("keyup");
-    e.which = 36; // # Some key code value
-    e.keyCode = 36
-    $(document).trigger(e);
+var recordClick = function(elm) {
+  response += $(elm).text()
 }
 
 /* ************************************ */
@@ -63,8 +54,22 @@ var time_array = []
 var total_time = 0
 var errors = 0
 var error_lim = 3
+var response = ''
 setStims()
 var stim_array = getStims()
+
+var response_grid = 
+    '<div class = numbox>' +
+    '<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>1</div></div></button>' +
+    '<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>2</div></div></button>' +
+    '<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>3</div></div></button>' +
+    '<button id = button_4 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>4</div></div></button>' +
+    '<button id = button_5 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>5</div></div></button>' +
+    '<button id = button_6 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>6</div></div></button>' +
+    '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>7</div></div></button>' +
+    '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>8</div></div></button>' +
+    '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>9</div></div></button>' +
+     '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -116,22 +121,15 @@ var test_block = {
   timing_post_trial: 0,
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({"sequence": curr_seq, "num_digits": num_digits})
-    setTimeout(function() {
-        $("#input").focus()
-    },10)
   }
 }
 
+
 var response_block = {
-    type: 'single-stim',
-    stimuli: '<div class = centerbox><form style="font-size: 24px">Enter Sequence: <br></br><input type ="text" id ="input" style="font-size: 24px"></form><br></br><button type="button" id = "SubmitButton" onclick = submit()>Submit Answer</button></div>',
-    is_html: true,
-    choices: 36, 
-    response_ends_trial: true,
-    data: {exp_id: "digit_span", trial_id: "response"},
-    on_finish: function() {
-      response = response.split(',').join('')
-      response = response.split(' ').join('')
+  type: 'single-stim-button',
+  stimuli: response_grid,
+  button_class: 'submit_button',
+  on_finish: function() {
       var fb = 0
       // staircase
       if (response == curr_seq) {
@@ -145,8 +143,9 @@ var response_block = {
         feedback = 'Incorrect!'
         stims = setStims()
       }
-      jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, feedback: fb})
-    }
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, feedback: fb})
+    response = ''
+  }
 }
 
 var feedback_block = {

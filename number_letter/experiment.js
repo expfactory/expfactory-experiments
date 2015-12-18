@@ -1,5 +1,3 @@
-// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
-//condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

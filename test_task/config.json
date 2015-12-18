@@ -14,12 +14,23 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":1,
-        "doi": "",
+        "experiment_variables": [{
+                                 "name":"avg_rt",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "range": [0,Infinity],
+                                 "description":"Avergae RT."
+                                  },
+                                  {
+                                 "name":"reject",
+                                 "type":"credit",
+                                 "datatype": "numeric",
+                                 "range": "boolean",
+                                 "description":"True if avg_rt < 100"
+                                  }],
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "notes": "",
         "publish":"True"
-    
    }
 ]

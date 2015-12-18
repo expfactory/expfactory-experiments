@@ -4,7 +4,7 @@
         "run": [
                 "experiment.js",
                 "style.css",
-                "static/js/jspsych/custom_plugins/jspsych-multi-button.js"
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
         "tag": "rng",
         "cognitive_atlas_task_id": "",
@@ -15,9 +15,8 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "lab": "Poldracklab",
         "time":3,
-        "doi": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "",
         "publish":"True"

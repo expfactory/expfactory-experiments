@@ -16,8 +16,7 @@
                          "Russell Poldrack"
                         ], 
         "time":20,
-        "lab": "Poldracklab",
-        "doi": "10.1162/089892902317361886",
+        "experiment_variables": "",
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
         "notes": "",
         "publish":"True"

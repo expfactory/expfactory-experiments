@@ -1,4 +1,4 @@
-// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18194061
+// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18193561
 // Decision Making and Learning While Taking Sequential Risks. Pleskac 2008
 
 /* ************************************ */
@@ -136,7 +136,7 @@ function makeFish(fish_num) {
 function goFish() {
 	/* If the subject chooses to goFish, one fish is randomly selected from the lake. If it is red, the trip bank
 		is increased by "pay". If it is blue the round ends. If the release rule is "Keep", the fish is also removed
-		from the lake. Coded as keycode 32 for jspsych
+		from the lake. Coded as keycode 36 for jspsych
 	*/
 	if (total_fish_num > 0) {
 		if (Math.random() < 1/(total_fish_num)) {
@@ -161,21 +161,13 @@ function goFish() {
 		 }
 
 		lake_state = $('.lake').html()
-		var e = jQuery.Event("keydown");
-		e.which = 32; // # Some key code value
-		e.keyCode = 32
-		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
-		e.which = 32; // # Some key code value
-		e.keyCode = 32
-		$(document).trigger(e)
 	}	
 }
 
 function collect() {
 	round_over = 1
 	round_over_text = "You collected the money from the trip bank ($" + trip_bank + ") and moved it to your tournament bank."
-	// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 40 for jspsych
+	// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
  	tournament_bank += trip_bank
 	tournment_bank = Math.round(tournament_bank * 100) / 100
     trip_bank = 0
@@ -187,14 +179,6 @@ function collect() {
 	total_fish_num = 0
 	lake_state = $('.lake').html()
 	cooler_state = $('.lake').html()
-	var e = jQuery.Event("keydown");
-	e.which = 40; // # Some key code value
-	e.keyCode = 40
-	$(document).trigger(e);
-	var e = jQuery.Event("keyup");
-	e.which = 40; // # Some key code value
-	e.keyCode = 40
-	$(document).trigger(e)
 }
 
 
@@ -330,7 +314,7 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
         "<div class = infobox><p class = info-text id = tournament_bank>&nbsp&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
 "</div>" +
     "</div>" +
-"<div class = buttonbox><button type='button' class = select-button onclick = goFish()>Go Fish</button><button type='button' class = select-button onclick = collect()>Collect</button></div>" 
+"<div class = buttonbox><button id = 'goFish' class = select-button onclick = goFish()>Go Fish</button><button id = 'Collect' class = select-button onclick = collect()>Collect</button></div>" 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -390,13 +374,13 @@ var set_fish_block = {
 }
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'single-stim-button',
   stimuli: getGame,
-  choices: [32,40],
-  is_html: true,
+  button_class: 'select-button',
   data: get_practice_data,
   timing_post_trial: 0
 };
+
 
 var practice_chunk = {
     chunk_type: 'while',
@@ -411,10 +395,9 @@ var practice_chunk = {
 }
 
 var game_block = {
-  type: 'single-stim',
+  type: 'single-stim-button',
   stimuli: getGame,
-  choices: [32,40],
-  is_html: true,
+  button_class: 'select-button',
   data: get_data,
   timing_post_trial: 0
 };

@@ -10,31 +10,41 @@ var randomDraw = function(lst) {
     return lst[index]
 }
 
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
 var grid = 
-		'<div class = numbox><div class = "square num-button"><div class = content><div class = numbers >1</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >2</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >3</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >4</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >5</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >6</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >7</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >8</div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers >9</div></div></div></div>'
+    '<div class = numbox>' +
+    '<button id = button_1 class = "square num-button"><div class = numbers>1</div></button>' +
+    '<button id = button_2 class = "square num-button"><div class = numbers>2</div></button>' +
+    '<button id = button_3 class = "square num-button"><div class = numbers>3</div></button>' +
+    '<button id = button_4 class = "square num-button"><div class = numbers>4</div></button>' +
+    '<button id = button_5 class = "square num-button"><div class = numbers>5</div></button>' +
+    '<button id = button_6 class = "square num-button"><div class = numbers>6</div></button>' +
+    '<button id = button_7 class = "square num-button"><div class = numbers>7</div></button>' +
+    '<button id = button_8 class = "square num-button"><div class = numbers>8</div></button>' +
+    '<button id = button_9 class = "square num-button"><div class = numbers>9</div></button>' +
+    '</div>'
 
 var empty_grid = 
-		'<div class = numbox><div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div></div>'
-		
+		'<div class = numbox><div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div></div>'
+
+
+
+
+
+
+
+
 var num_trials = 162 
 practice_stims = []
 test_stims = []
@@ -93,7 +103,7 @@ var  wait_block = {
   stimuli: [empty_grid],
   choices: 'none',
   is_html: true,
-  data: {exp_id: "rng", trial_id: "practice"},
+  data: {exp_id: "rng", trial_id: "wait"},
   timing_stim: 200,
   timing_response: 200,
   response_ends_trial: false,
@@ -107,8 +117,8 @@ rng_experiment.push(instructions_block);
 rng_experiment.push(start_practice_block);
 for (var i = 0; i <practice_stims.length; i++) {
 	var  practice_block = {
-	  type: 'multi-button',
-	  buttons: [practice_stims[i]],
+	  type: 'single-stim-button',
+	  stimuli: [practice_stims[i]],
 	  button_class: 'num-button',
 	  data: {exp_id: "rng", trial_id: "practice"},
 	  timing_response: 800,
@@ -122,8 +132,8 @@ rng_experiment.push(start_test_block);
 //Loop should be changed to go until test_stims.length later
 for (var i = 0; i <practice_stims.length; i++) {
 	var  test_block = {
-	  type: 'multi-button',
-	  buttons: [test_stims[i]],
+	  type: 'single-stim-button',
+	  stimuli: [test_stims[i]],
 	  button_class: 'num-button',
 	  data: {exp_id: "rng", trial_id: "test"},
 	  timing_response: 800,
