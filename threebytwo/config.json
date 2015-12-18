@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":24,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/21299334",
         "notes": "",
         "publish":"True"

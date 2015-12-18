@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":15,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
         "publish":"True"

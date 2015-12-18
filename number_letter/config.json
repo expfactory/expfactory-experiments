@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position",
         "publish":"True"

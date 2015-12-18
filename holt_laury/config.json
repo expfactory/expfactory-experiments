@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "http://users.nber.org/~rosenbla/econ311-04/syllabus/holtlaury.pdf",
         "notes": "",
         "publish":"True"

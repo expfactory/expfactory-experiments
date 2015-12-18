@@ -15,8 +15,7 @@
                          "Russell Poldrack"
                         ], 
         "time":7,
-        "performance_variable": "",
-        "rejection_variable": "",
+        "experiment_variables": "",
         "reference": "",
         "notes": "Condition records current block (practice/test control/interference), trial_id records stimulus ID (where the target is: left, middle or right) and whether the target is large or small",
         "publish":"True"
