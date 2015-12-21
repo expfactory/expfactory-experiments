@@ -43,7 +43,7 @@ var test_block = {
         total += rts[i];
     }
     avg_rt = total / rts.length
-    if avg_rt < 100 {
+    if (avg_rt < 100) {
       reject = true
     } else {
       reject = false
