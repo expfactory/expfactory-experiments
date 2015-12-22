@@ -18,6 +18,7 @@ var appendData = function() {
 /* ************************************ */
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 var current_trial = 0
+var gap = Math.floor( Math.random() * 2000 ) + 1000
 var test_stimuli = [
   {
 	image: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
@@ -59,8 +60,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '.</p></div>',
-	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '.</p></div>'
+	'<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a red box, press the ' + correct_responses[0][0] + '. If you see a blue box, press the ' + correct_responses[1][0] + '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -69,14 +69,14 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 1000
 };

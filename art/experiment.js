@@ -343,7 +343,7 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 0
 };

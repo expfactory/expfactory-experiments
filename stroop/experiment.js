@@ -46,7 +46,7 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 0
 };
@@ -111,8 +111,8 @@ for (i=0; i<exp_len; i++) {
 	  stimuli: test_stims.image[i],
 	  is_html: true,
 	  key_answer: test_stims.data[i].correct_response,
-	  correct_text: '<br></br><div class = center-text><font size = 20>Correct</font></div>',
-	  incorrect_text: '<br></br><div class = center-text><font size = 20>Incorrect</font></div>',
+	  correct_text: '<br></br><br></br><div class = center-text><font size = 20>Correct</font></div>',
+	  incorrect_text: '<br></br><br></br><div class = center-text><font size = 20>Incorrect</font></div>',
 	  choices: [66,71,82],
 	  data: $.extend({},test_stims.data[i],{trial_id: 'test'}),
 	  timing_response: -1, 
