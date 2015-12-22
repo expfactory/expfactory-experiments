@@ -66,7 +66,7 @@ var clearResponse = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var num_spaces = 4
+var num_spaces = 3
 var num_trials = 10
 var curr_seq = []
 var stim_time = 1000
@@ -129,6 +129,11 @@ var start_test_block = {
   timing_post_trial: 1000
 };
 
+var start_reverse_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13
+}
 
 /* define test block */
 var test_block = {
@@ -146,10 +151,11 @@ var test_block = {
 }
 
 
-var response_block = {
+var forward_response_block = {
   type: 'single-stim-button',
   stimuli: response_grid,
   button_class: 'submit_button',
+  data: {exp_id: "spatial_span", trial_id: "response"},
   on_finish: function() {
       var fb = 0
       // staircase
@@ -159,12 +165,41 @@ var response_block = {
         stims = setStims()
         fb = 1
       } else {
-        num_spaces -= 1
+        if (num_spaces > 1) {
+          num_spaces -= 1
+        }
         errors += 1
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, feedback: fb})
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "forward", feedback: fb})
+    response = []
+  },
+  timing_post_trial: 500
+}
+
+var reverse_response_block = {
+  type: 'single-stim-button',
+  stimuli: response_grid,
+  button_class: 'submit_button',
+  data: {exp_id: "spatial_span", trial_id: "response"},
+  on_finish: function() {
+      var fb = 0
+      // staircase
+      if (arraysEqual(response.reverse(),curr_seq)) {
+        num_spaces += 1
+        feedback = 'Correct!'
+        stims = setStims()
+        fb = 1
+      } else {
+        if (num_spaces > 1) {
+          num_spaces -= 1
+        }
+        errors += 1
+        feedback = 'Incorrect!'
+        stims = setStims()
+      }
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "reverse", feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -181,18 +216,35 @@ var feedback_block = {
     response_ends_trial: true
 }
 
-var test_chunk = {
+var forward_chunk = {
   chunk_type: 'while',
-  timeline: [start_test_block, test_block, response_block, feedback_block],
+  timeline: [start_test_block, test_block, forward_response_block, feedback_block],
+  continue_function: function(data) {
+    if (errors < error_lim) {
+      return true
+    } else {
+      errors = 0
+      num_spaces = 3
+      stims = setStims()
+      return false
+    }
+  }
+}
+
+var reverse_chunk = {
+  chunk_type: 'while',
+  timeline: [start_test_block, test_block, reverse_response_block, feedback_block],
   continue_function: function(data) {
     if (errors < error_lim) {return true}
     else {return false}
   }
-
 }
+
 /* create experiment definition array */
 var spatial_span_experiment = [];
 spatial_span_experiment.push(welcome_block);
 spatial_span_experiment.push(instructions_block);
-spatial_span_experiment.push(test_chunk)
+spatial_span_experiment.push(forward_chunk)
+spatial_span_experiment.push(start_reverse_block)
+spatial_span_experiment.push(reverse_chunk)
 spatial_span_experiment.push(end_block)
