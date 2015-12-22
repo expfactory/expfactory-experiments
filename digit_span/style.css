@@ -16,7 +16,7 @@
     width: 30%;
     height: 30%; /* = width for a 1:1 aspect ratio */
     margin:1.66%;
-    background-color:#1E1E1E;
+    background-color:#505050;
     overflow:hidden;
     color: #fff;
     border-radius:15px;
@@ -25,10 +25,10 @@
 .submit_button, .clear_button {
     float:left;
     position: relative;
-    width: 100%;
+    width: 47%;
     height: 15%; /* = width for a 1:1 aspect ratio */
-    margin:1.66%;
-    background-color:#1E1E1E;
+    margin:1.5%;
+    background-color:#505050;
     overflow:hidden;
     color: #fff;
     border-radius:15px;
@@ -40,7 +40,7 @@
 }
 
 .square:active, .submit_button:active, .clear_button:active {
-	background-color: #505050;
+	background-color: black;
 }
 
 .numbers{

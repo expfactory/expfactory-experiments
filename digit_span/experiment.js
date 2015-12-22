@@ -22,6 +22,10 @@ var setStims = function() {
   total_time = num_digits * (stim_time + gap_time)
 }
 
+var getTestText = function() {
+ return  '<div class = centerbox><div class = center-text>' + num_digits + ' Squares</p></div>'
+}
+
 var getStims = function() {
   return stim_array
 }
@@ -49,7 +53,7 @@ var clearResponse = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var num_digits = 6
+var num_digits = 5
 var num_trials = 10
 var curr_seq = ''
 var stim_time = 800
@@ -106,11 +110,16 @@ var end_block = {
 
 
 var start_test_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a trial. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
-  timing_post_trial: 1000,
+  type: 'single-stim',
+  is_html: true,
+  stimuli: getTestText,
+  choices: 'none',
+  timing_stim: 1000,
+  timing_response: 1000,
+  response_ends_trial: false,
+  timing_post_trial: 1000
 };
+
 
 
 /* define test block */

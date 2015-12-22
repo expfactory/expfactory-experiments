@@ -14,13 +14,13 @@ var setStims = function() {
   stim_array = [first_grid]
   time_array = [500]
   for (var i=0; i< num_spaces; i++) {
-    var num = randomDraw([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    var num = randomDraw([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25])
     stim_grid = '<div class = numbox>'
-    for (var j = 1; j<10; j++) {
+    for (var j = 1; j<26; j++) {
       if (j == num) {
-        stim_grid += '<button id = button_' + num + ' class = "square red" onclick = "recordClick(this)"><div class = content></div></button>'
+        stim_grid += '<button id = button_' + j + ' class = "square red" onclick = "recordClick(this)"><div class = content></div></button>'
       } else {
-        stim_grid += '<button id = button_' + num + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+        stim_grid += '<button id = button_' + j + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
       }
     }
     stim_grid += '</div>'
@@ -29,6 +29,10 @@ var setStims = function() {
     time_array.push(stim_time)
   }
   total_time = num_spaces * (stim_time)
+}
+
+var getTestText = function() {
+ return  '<div class = centerbox><div class = center-text>' + num_spaces + ' Squares</p></div>'
 }
 
 var getStims = function() {
@@ -58,7 +62,7 @@ var clearResponse = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var num_spaces = 6
+var num_spaces = 5
 var num_trials = 10
 var curr_seq = ''
 var stim_time = 1000
@@ -68,29 +72,16 @@ var errors = 0
 var error_lim = 3
 var response = ''
 var enter_grid = ''
-var first_grid = '<div class = numbox>' +
-    '<button id = button_1 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_2 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_3 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_4 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_5 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_6 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_7 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_8 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_9 class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
-var response_grid = 
-    '<div class = numbox>' +
-    '<button id = button_1 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_2 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_3 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_4 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_5 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_6 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_7 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_8 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button id = button_9 class = "square" onclick = "recordClick(this)"><div class = content></div></button>' +
-    '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
-    '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
+var first_grid = '<div class = numbox>'
+for (var i = 1; i < 26; i++) {
+  first_grid += '<button id = button_' + i + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+}
+var response_grid = '<div class = numbox>'
+for (var i = 1; i < 26; i++) {
+  response_grid += '<button id = button_' + i + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+}
+response_grid += '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
+                '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 setStims()
 var stim_array = getStims()
 
@@ -108,7 +99,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-  '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red.</p><p class = block-text>At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer.</p><p class = block-text>If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end.</p></div>'
+  '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -124,10 +115,14 @@ var end_block = {
 
 
 var start_test_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a trial. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
-  timing_post_trial: 1000,
+  type: 'single-stim',
+  is_html: true,
+  stimuli: getTestText,
+  choices: 'none',
+  timing_stim: 1000,
+  timing_response: 1000,
+  response_ends_trial: false,
+  timing_post_trial: 1000
 };
 
 
