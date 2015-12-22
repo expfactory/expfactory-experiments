@@ -21,14 +21,14 @@ var getFeedback = function() {
 	var condition = curr_data.condition
 	var response = curr_data.key_press
 	if (response == -1) {
-		return '<div class = centerbox><div class = center-text>TOO SLOW</p></div>'
+		return '<div class = centerbox><div class = center-text>Respond Faster!</p></div>'
 	}
 	if (condition == "AX" && response == 37) {
-		return '<div class = centerbox><div class = center-text>CORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Correct</p></div>'
 	} else if (condition != "AX" && response == 40) {
-		return '<div class = centerbox><div class = center-text>CORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Correct</p></div>'
 	} else {
-		return '<div class = centerbox><div class = center-text>INCORRECT</p></div>'
+		return '<div class = centerbox><div class = center-text>Incorrect</p></div>'
 	}
 }
 /* ************************************ */
@@ -72,7 +72,7 @@ var instructions_block = {
   type: 'instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "static/experiments/dpx/images/cue2.png" ></img>	...followed by...		<img src = "static/experiments/dpx/images/probe2.png" ></img><br><br></p></div>',
-	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '.png" ></img><br><br></p></div>',
+	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '" ></img><br></br></p></div>',
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key only after seeing the target pair. The target pair is shown below (for the last time). Memorize it!</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '" ></img><br></br></p></div>'
 	],
   allow_keys: false,
