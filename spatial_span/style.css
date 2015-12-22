@@ -13,9 +13,9 @@
 .square {
     float:left;
     position: relative;
-    width: 30%;
-    height: 30%; /* = width for a 1:1 aspect ratio */
-    margin:1.66%;
+    width: 18%;
+    height: 18%; /* = width for a 1:1 aspect ratio */
+    margin:1%;
     background-color:#505050;
     overflow:hidden;
     color: #fff;
@@ -35,12 +35,18 @@
     font-size: 20px;
 }
 
+.red {
+    background-color: red;
+    -webkit-animation: color-change 1s forwards;
+    animation: color-change 1s forwards;
+}
+
 .square:hover, .submit_button:hover, .clear_button:hover {
-	color: red;
+    background-color: black;
 }
 
 .square:active, .submit_button:active, .clear_button:active {
-	background-color: black;
+    background-color: red;
 }
 
 .numbers{
@@ -52,11 +58,16 @@
 }
 
 .numbox {
-  width:30vw;
-  height: 30vw;
+  width:35vw;
+  height: 35vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-55%);
+}
+
+@-webkit-keyframes color-change {
+    0% {background-color: #505050;}
+    35% {background-color: red;}
 }

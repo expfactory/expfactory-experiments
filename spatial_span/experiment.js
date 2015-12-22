@@ -15,19 +15,28 @@ var arraysEqual = function(arr1, arr2) {
 
 var setStims = function() {
   curr_seq = []
-  stim_array = []
-  time_array = []
-  for (var i=0; i< num_digits; i++) {
-    var num = Math.floor(Math.random()*9)+1
+  stim_array = [first_grid]
+  time_array = [500]
+  for (var i=0; i< num_spaces; i++) {
+    var num = Math.floor(Math.random()*25)+1
+    stim_grid = '<div class = numbox>'
+    for (var j = 1; j<26; j++) {
+      if (j == num) {
+        stim_grid += '<button id = button_' + j + ' class = "square red" onclick = "recordClick(this)"><div class = content></div></button>'
+      } else {
+        stim_grid += '<button id = button_' + j + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+      }
+    }
+    stim_grid += '</div>'
     curr_seq.push(num)
-    stim_array.push('<div class = centerbox><div class = digit-span-text>' + num.toString() + '</div></div>')
+    stim_array.push(stim_grid)
     time_array.push(stim_time)
   }
-  total_time = num_digits * (stim_time + gap_time)
+  total_time = num_spaces * (stim_time)
 }
 
 var getTestText = function() {
- return  '<div class = centerbox><div class = center-text>' + num_digits + ' Digits</p></div>'
+ return  '<div class = centerbox><div class = center-text>' + num_spaces + ' Squares</p></div>'
 }
 
 var getStims = function() {
@@ -47,7 +56,7 @@ var getFeedback = function() {
 }
 
 var recordClick = function(elm) {
-  response.push(Number($(elm).text()))
+  response.push(Number($(elm).attr('id').slice(7)))
 }
 
 var clearResponse = function() {
@@ -57,32 +66,28 @@ var clearResponse = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var num_digits = 4
+var num_spaces = 3
 var num_trials = 10
 var curr_seq = []
-var stim_time = 800
-var gap_time = 200
+var stim_time = 1000
 var time_array = []
 var total_time = 0
 var errors = 0
 var error_lim = 3
 var response = []
+var enter_grid = ''
+var first_grid = '<div class = numbox>'
+for (var i = 1; i < 26; i++) {
+  first_grid += '<button id = button_' + i + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+}
+var response_grid = '<div class = numbox>'
+for (var i = 1; i < 26; i++) {
+  response_grid += '<button id = button_' + i + ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+}
+response_grid += '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
+                '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 setStims()
 var stim_array = getStims()
-
-var response_grid = 
-    '<div class = numbox>' +
-    '<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>1</div></div></button>' +
-    '<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>2</div></div></button>' +
-    '<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>3</div></div></button>' +
-    '<button id = button_4 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>4</div></div></button>' +
-    '<button id = button_5 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>5</div></div></button>' +
-    '<button id = button_6 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>6</div></div></button>' +
-    '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>7</div></div></button>' +
-    '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>8</div></div></button>' +
-    '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>9</div></div></button>' +
-    '<button class = clear_button id = "ClearButton" onclick = "clearResponse">Clear</button>' +
-    '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -90,7 +95,7 @@ var response_grid =
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the digit span experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the spatial span experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 0
 };
@@ -98,7 +103,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-  '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer. If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions.</p></div>'
+  '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -136,13 +141,12 @@ var test_block = {
   stimuli: getStims,
   is_html: true,
   timing_stim: getTimeArray,
-  timing_gap: gap_time,
   choices: [['none']],
-  data: {exp_id: "digit_span", trial_id: "test"},
+  data: {exp_id: "spatial_span", trial_id: "test"},
   timing_response: getTotalTime,
   timing_post_trial: 0,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({"sequence": curr_seq, "num_digits": num_digits})
+    jsPsych.data.addDataToLastTrial({"sequence": curr_seq, "num_spaces": num_spaces})
   }
 }
 
@@ -151,24 +155,24 @@ var forward_response_block = {
   type: 'single-stim-button',
   stimuli: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "digit_span", trial_id: "response"},
+  data: {exp_id: "spatial_span", trial_id: "response"},
   on_finish: function() {
       var fb = 0
       // staircase
       if (arraysEqual(response,curr_seq)) {
-        num_digits += 1
+        num_spaces += 1
         feedback = 'Correct!'
         stims = setStims()
         fb = 1
       } else {
-        if (num_digits > 1) {
-          num_digits -= 1
+        if (num_spaces > 1) {
+          num_spaces -= 1
         }
         errors += 1
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward", feedback: fb})
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "forward", feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -178,24 +182,24 @@ var reverse_response_block = {
   type: 'single-stim-button',
   stimuli: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "digit_span", trial_id: "response"},
+  data: {exp_id: "spatial_span", trial_id: "response"},
   on_finish: function() {
       var fb = 0
       // staircase
       if (arraysEqual(response.reverse(),curr_seq)) {
-        num_digits += 1
+        num_spaces += 1
         feedback = 'Correct!'
         stims = setStims()
         fb = 1
       } else {
-        if (num_digits > 1) {
-          num_digits -= 1
+        if (num_spaces > 1) {
+          num_spaces -= 1
         }
         errors += 1
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "reverse", feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -204,7 +208,7 @@ var reverse_response_block = {
 var feedback_block = {
     type: 'single-stim',
     stimuli: getFeedback,
-    data: {exp_id: "digit_span", trial_id: "feedback"},
+    data: {exp_id: "spatial_span", trial_id: "feedback"},
     is_html: true,
     choices: 'none', 
     timing_stim: 1000,
@@ -220,7 +224,7 @@ var forward_chunk = {
       return true
     } else {
       errors = 0
-      num_digits = 4
+      num_spaces = 3
       stims = setStims()
       return false
     }
@@ -237,10 +241,10 @@ var reverse_chunk = {
 }
 
 /* create experiment definition array */
-var digit_span_experiment = [];
-digit_span_experiment.push(welcome_block);
-digit_span_experiment.push(instructions_block);
-digit_span_experiment.push(forward_chunk)
-digit_span_experiment.push(start_reverse_block)
-digit_span_experiment.push(reverse_chunk)
-digit_span_experiment.push(end_block)
+var spatial_span_experiment = [];
+spatial_span_experiment.push(welcome_block);
+spatial_span_experiment.push(instructions_block);
+spatial_span_experiment.push(forward_chunk)
+spatial_span_experiment.push(start_reverse_block)
+spatial_span_experiment.push(reverse_chunk)
+spatial_span_experiment.push(end_block)

@@ -1,13 +1,13 @@
 [
     {
-        "name": "Digit Span",
+        "name": "Spatial Span",
         "run": [
                 "experiment.js",
                 "style.css",
                 "static/js/jspsych/custom_plugins/jspsych-multi-stim-multi-response.js",
                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
-        "tag": "digit_span",
+        "tag": "spatial_span",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
@@ -18,7 +18,7 @@
                         ], 
         "time":5,
         "experiment_variables": "",
-        "reference": "http://ajp.psychiatryonline.org/doi/pdf/10.1176/appi.ajp.157.2.275",
+        "reference": "http://www.cambridgebrainsciences.com/assets/default/files/pdf/Bor2003.pdf",
         "notes": "",
         "publish":"True"
     
