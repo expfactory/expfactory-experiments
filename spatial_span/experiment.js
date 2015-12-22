@@ -3,18 +3,22 @@
 /* Define helper functions */
 /* ************************************ */
 
-var randomDraw = function(lst) {
-    var index = Math.floor(Math.random()*(lst.length))
-    return lst[index]
+var arraysEqual = function(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+    return true;
 }
 
-
 var setStims = function() {
-  curr_seq = ''
+  curr_seq = []
   stim_array = [first_grid]
   time_array = [500]
   for (var i=0; i< num_spaces; i++) {
-    var num = randomDraw([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25])
+    var num = Math.floor(Math.random()*25)+1
     stim_grid = '<div class = numbox>'
     for (var j = 1; j<26; j++) {
       if (j == num) {
@@ -24,7 +28,7 @@ var setStims = function() {
       }
     }
     stim_grid += '</div>'
-    curr_seq += num.toString()
+    curr_seq.push(num)
     stim_array.push(stim_grid)
     time_array.push(stim_time)
   }
@@ -52,25 +56,25 @@ var getFeedback = function() {
 }
 
 var recordClick = function(elm) {
-  response += $(elm).attr('id')[7]
+  response.push(Number($(elm).attr('id').slice(7)))
 }
 
 var clearResponse = function() {
-  response = ''
+  response = []
 }
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var num_spaces = 5
+var num_spaces = 4
 var num_trials = 10
-var curr_seq = ''
+var curr_seq = []
 var stim_time = 1000
 var time_array = []
 var total_time = 0
 var errors = 0
 var error_lim = 3
-var response = ''
+var response = []
 var enter_grid = ''
 var first_grid = '<div class = numbox>'
 for (var i = 1; i < 26; i++) {
@@ -149,7 +153,7 @@ var response_block = {
   on_finish: function() {
       var fb = 0
       // staircase
-      if (response == curr_seq) {
+      if (arraysEqual(response,curr_seq)) {
         num_spaces += 1
         feedback = 'Correct!'
         stims = setStims()
@@ -161,7 +165,7 @@ var response_block = {
         stims = setStims()
       }
     jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, feedback: fb})
-    response = ''
+    response = []
   },
   timing_post_trial: 500
 }

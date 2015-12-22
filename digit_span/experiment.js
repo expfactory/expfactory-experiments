@@ -3,19 +3,23 @@
 /* Define helper functions */
 /* ************************************ */
 
-var randomDraw = function(lst) {
-    var index = Math.floor(Math.random()*(lst.length))
-    return lst[index]
+var arraysEqual = function(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+    return true;
 }
 
-
 var setStims = function() {
-  curr_seq = ''
+  curr_seq = []
   stim_array = []
   time_array = []
   for (var i=0; i< num_digits; i++) {
-    var num = randomDraw([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    curr_seq += num.toString()
+    var num = Math.floor(Math.random()*9)+1
+    curr_seq.push(num)
     stim_array.push('<div class = centerbox><div class = digit-span-text>' + num.toString() + '</div></div>')
     time_array.push(stim_time)
   }
@@ -23,7 +27,7 @@ var setStims = function() {
 }
 
 var getTestText = function() {
- return  '<div class = centerbox><div class = center-text>' + num_digits + ' Squares</p></div>'
+ return  '<div class = centerbox><div class = center-text>' + num_digits + ' Digits</p></div>'
 }
 
 var getStims = function() {
@@ -43,11 +47,11 @@ var getFeedback = function() {
 }
 
 var recordClick = function(elm) {
-  response += $(elm).text()
+  response.push(Number($(elm).text()))
 }
 
 var clearResponse = function() {
-  response = ''
+  response = []
 }
 
 /* ************************************ */
@@ -55,14 +59,14 @@ var clearResponse = function() {
 /* ************************************ */
 var num_digits = 5
 var num_trials = 10
-var curr_seq = ''
+var curr_seq = []
 var stim_time = 800
 var gap_time = 200
 var time_array = []
 var total_time = 0
 var errors = 0
 var error_lim = 3
-var response = ''
+var response = []
 setStims()
 var stim_array = getStims()
 
@@ -94,7 +98,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-  '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other.</p><p class = block-text>At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer.</p><p class = block-text>If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end.</p></div>'
+  '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer. If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -146,7 +150,7 @@ var response_block = {
   on_finish: function() {
       var fb = 0
       // staircase
-      if (response == curr_seq) {
+      if (arraysEqual(response,curr_seq)) {
         num_digits += 1
         feedback = 'Correct!'
         stims = setStims()
@@ -158,7 +162,7 @@ var response_block = {
         stims = setStims()
       }
     jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, feedback: fb})
-    response = ''
+    response = []
   }
 }
 
