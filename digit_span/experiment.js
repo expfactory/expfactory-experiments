@@ -42,6 +42,10 @@ var recordClick = function(elm) {
   response += $(elm).text()
 }
 
+var clearResponse = function() {
+  response = ''
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -69,7 +73,8 @@ var response_grid =
     '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>7</div></div></button>' +
     '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>8</div></div></button>' +
     '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>9</div></div></button>' +
-     '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
+    '<button class = clear_button id = "ClearButton" onclick = "clearResponse">Clear</button>' +
+    '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -85,7 +90,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-  '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other.</p><p class = block-text>At the end of each trial, type all of the numbers into the keyboard in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer.</p><p class = block-text>If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end.</p></div>'
+  '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other.</p><p class = block-text>At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer.</p><p class = block-text>If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

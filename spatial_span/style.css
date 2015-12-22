@@ -25,9 +25,9 @@
 .submit_button, .clear_button {
     float:left;
     position: relative;
-    width: 100%;
+    width: 47%;
     height: 15%; /* = width for a 1:1 aspect ratio */
-    margin:1.66%;
+    margin:1.5%;
     background-color:#1E1E1E;
     overflow:hidden;
     color: #fff;
@@ -35,12 +35,18 @@
     font-size: 20px;
 }
 
+.red {
+    background-color: red;
+    -webkit-animation: color-change 1s forwards;
+    animation: color-change 1s forwards;
+}
+
 .square:hover, .submit_button:hover, .clear_button:hover {
-	color: red;
+    background-color: #505050;
 }
 
 .square:active, .submit_button:active, .clear_button:active {
-	background-color: #505050;
+    background-color: red;
 }
 
 .numbers{
@@ -59,4 +65,9 @@
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
+}
+
+@-webkit-keyframes color-change {
+    0% {background-color: #1E1E1E;}
+    25% {background-color: red;}
 }
