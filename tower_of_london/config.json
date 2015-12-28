@@ -3,7 +3,8 @@
         "name": "Tower of London",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
         "tag": "tol",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",

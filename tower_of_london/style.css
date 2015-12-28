@@ -1,6 +1,6 @@
 .tol_canvas {
   width: 70vw;
-  height: 40vw;
+  height: 80vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -10,6 +10,7 @@
   border-radius: 25px;
   border: 2px solid #606060;
 }
+
 
 .tol_peg_board {
   width: 25vw;
@@ -43,13 +44,15 @@
   width: 50%;
   height: 2vw;
   position:relative;
-  top:-20%;
+  top: 102.5%;
   left: 50%;
   transform: translate(-50%,0%);
   font-size: 25px;
+  color: white;
+  text-align:center;  
 }
 
-.tol_peg_1 {
+#tol_peg_1 {
   width:20%;
   height: 100%;
   position:absolute;
@@ -63,7 +66,7 @@
   
 }
 
-.tol_peg_2 {
+#tol_peg_2 {
   width:20%;
   height: 67%;
   position:absolute;
@@ -76,7 +79,7 @@
   -ms-transform:rotate(180deg);
 }
 
-.tol_peg_3 {
+#tol_peg_3 {
   width:20%;
   height: 34%;
   position:absolute;
@@ -147,16 +150,16 @@
 }
 
 .tol_hand_box {
-  width: 15vw;
-  height: 10vw;
+  width: 10vw;
+  height: 9vw;
   position:absolute;
-  top:25%;
-  left:5%;
+  top:15%;
+  left:30%;
   margin-right:-50%;
   background-color: gray;
   border-radius: 25px;
   border: 2px solid #606060;
-  -moz-transform:rotate(180deg);
+  -moz-transform:rotate80deg);
   -webkit-transform:rotate(180deg);
   -o-transform:rotate(180deg);
   -ms-transform:rotate(180deg);
@@ -166,8 +169,8 @@
   width: 15vw;
   height: 10vw;
   position:absolute;
-  top:20%;
-  left:7%;
+  top:12.5%;
+  left:31.5%;
   margin-right:-50%;
   font-size: 25px;
 }
@@ -189,5 +192,15 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,40%);
+  transform: translate(-50%,45%);
+}
+
+.tol_feedbackbox {
+  width:42vw;
+  height: 10vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-400%);
 }
