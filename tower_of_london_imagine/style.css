@@ -1,0 +1,171 @@
+.tol_peg_board {
+  width: 25vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(10%,-60%);
+}
+
+.tol_reference_board {
+  width: 25vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-110%, -60%);
+}
+
+.tol_base {
+  width: 100%;
+  height: 2vw;
+  background-color: brown;
+  position:absolute;
+  top:100%
+}
+
+.tol_peg_label {
+  width: 50%;
+  height: 2vw;
+  position:relative;
+  top:-20%;
+  left: 50%;
+  transform: translate(-50%,0%);
+  font-size: 25px;
+}
+
+.tol_peg_1 {
+  width:20%;
+  height: 100%;
+  position:absolute;
+  top:0%;
+  left:0%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  
+}
+
+.tol_peg_2 {
+  width:20%;
+  height: 67%;
+  position:absolute;
+  top:33%;
+  left:35%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_peg_3 {
+  width:20%;
+  height: 34%;
+  position:absolute;
+  top:67%;
+  left:70%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_ball {
+  width: 5vw;
+  height: 5vw;
+  background: red;
+  -moz-border-radius: 2.5vw;
+  -webkit-border-radius: 2.5vw;
+  border-radius: 2.5vw;
+  margin-top: 1vw;
+  position: relative;
+}
+
+.tol_ball_label {
+  text-align:center;
+  font-size: 40px;
+  position: relative;
+  top: 50%;
+-moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_peg {
+  width: 25%;
+  height: 101%;
+  background-color: brown;
+  margin-left: 37%;
+  margin-right: 37%;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.tol_Red {
+  background: red;
+}
+
+.tol_Green {
+  background: #00CC33;
+}
+
+.tol_Blue {
+  background: #0099FF;
+}
+
+.tol_response_div {
+  width: 64w;
+  height: 6vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,200%);
+}
+
+
+.tol_response_button {
+  width: 5vw;
+  height: 5vw;
+  background: #505050;
+  margin: .5vw;
+  position: relative;
+  color: #fff;
+  border-radius:15px;
+  font-size: 25px;
+}
+
+.tol_response_button:hover {
+  color: red;
+}
+
+.tol_response_button:active {
+  background-color: black;
+}
+
+.tol_topbox {
+  width:42vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-75%);
+}
+
+.tol_bottombox {
+  width:42vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,40%);
+}

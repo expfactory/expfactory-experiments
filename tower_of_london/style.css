@@ -1,0 +1,206 @@
+.tol_canvas {
+  width: 70vw;
+  height: 80vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: #C8C8C8;
+  border-radius: 25px;
+  border: 2px solid #606060;
+}
+
+
+.tol_peg_board {
+  width: 25vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(10%,-60%);
+}
+
+.tol_your_board {
+  width: 25vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-110%, -60%);
+}
+
+.tol_base {
+  width: 100%;
+  height: 2vw;
+  background-color: brown;
+  position:absolute;
+  top:100%
+}
+
+.tol_board_label {
+  width: 50%;
+  height: 2vw;
+  position:relative;
+  top: 102.5%;
+  left: 50%;
+  transform: translate(-50%,0%);
+  font-size: 25px;
+  color: white;
+  text-align:center;  
+}
+
+#tol_peg_1 {
+  width:20%;
+  height: 100%;
+  position:absolute;
+  top:0%;
+  left:0%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  
+}
+
+#tol_peg_2 {
+  width:20%;
+  height: 67%;
+  position:absolute;
+  top:33%;
+  left:35%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+#tol_peg_3 {
+  width:20%;
+  height: 34%;
+  position:absolute;
+  top:67%;
+  left:70%;
+  margin-right:-50%;
+    -moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_ball {
+  width: 5vw;
+  height: 5vw;
+  background: red;
+  -moz-border-radius: 2.5vw;
+  -webkit-border-radius: 2.5vw;
+  border-radius: 2.5vw;
+  margin-top: 1vw;
+  position: relative;
+}
+
+.tol_hand_ball {
+  width: 5vw;
+  height: 5vw;
+  background: red;
+  -moz-border-radius: 2.5vw;
+  -webkit-border-radius: 2.5vw;
+  border-radius: 2.5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.tol_ball_label {
+  text-align:center;
+  font-size: 40px;
+  position: relative;
+  top: 50%;
+-moz-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_peg {
+  width: 25%;
+  height: 101%;
+  background-color: brown;
+  margin-left: 37%;
+  margin-right: 37%;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.tol_Red {
+  background: red;
+}
+
+.tol_Green {
+  background: #00CC33;
+}
+
+.tol_Blue {
+  background: #0099FF;
+}
+
+.tol_hand_box {
+  width: 10vw;
+  height: 9vw;
+  position:absolute;
+  top:15%;
+  left:30%;
+  margin-right:-50%;
+  background-color: gray;
+  border-radius: 25px;
+  border: 2px solid #606060;
+  -moz-transform:rotate80deg);
+  -webkit-transform:rotate(180deg);
+  -o-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+}
+
+.tol_hand_label {
+  width: 15vw;
+  height: 10vw;
+  position:absolute;
+  top:12.5%;
+  left:31.5%;
+  margin-right:-50%;
+  font-size: 25px;
+}
+
+.tol_topbox {
+  width:42vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-75%);
+}
+
+.tol_bottombox {
+  width:42vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,45%);
+}
+
+.tol_feedbackbox {
+  width:42vw;
+  height: 10vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-400%);
+}
