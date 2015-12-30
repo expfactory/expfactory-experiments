@@ -6,7 +6,7 @@
                 "style.css"
                ],
         "tag": "shift_task",
-        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+        "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -15,7 +15,8 @@
                          "Russell Poldrack"
                         ], 
         "lab": "Poldracklab",
-        "time":3.5,
+        "time":20,
+        "experiment_variables": "",
         "doi": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
         "notes": "",

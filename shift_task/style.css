@@ -35,7 +35,17 @@ transform: translate(-50%,-50%);
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-200%);
+  transform: translate(-50%,-150%);
+}
+
+.shift-center-text {
+  width:100%;
+  height 100vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 25px;
+  line-height: 120%;
 }
 
 .instructionbox {
@@ -47,3 +57,13 @@ transform: translate(-50%,-50%);
   margin-right:-50%;
   transform: translate(-50%,-175%);
 }
+
+.shift_stim {
+    display: block;
+    height: 15vw;
+    width: auto;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}   
