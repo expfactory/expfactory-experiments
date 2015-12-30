@@ -5,7 +5,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,50%);
+  transform: translate(-50%,0%);
 }
 
 .decision-left {
@@ -14,7 +14,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-125%,-25%);
+  transform: translate(-125%,-50%);
 }
 
 
@@ -24,7 +24,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(25%,-25%);
+  transform: translate(25%,-50%);
 }
 .centerbox {
   width:35vw;

@@ -20,13 +20,12 @@
                                  "type":"bonus",
                                  "datatype": "numeric",
                                  "range": [0,Infinity],
-                                 "description":"Avergae RT."
+                                 "description":"Average RT."
                                   },
                                   {
                                  "name":"reject",
                                  "type":"credit",
-                                 "datatype": "numeric",
-                                 "range": "boolean",
+                                 "datatype": "boolean",
                                  "description":"True if avg_rt < 100"
                                   }],
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",

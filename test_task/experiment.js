@@ -22,7 +22,7 @@ var reject = false
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 0
 };
@@ -43,7 +43,7 @@ var test_block = {
         total += rts[i];
     }
     avg_rt = total / rts.length
-    if avg_rt < 100 {
+    if (avg_rt < 100) {
       reject = true
     } else {
       reject = false
