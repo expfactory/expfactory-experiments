@@ -22,7 +22,7 @@ var getTestFeedback = function() {
 	var successful_stops = 0;
 	for(var i=0; i < data.length; i++){
 		if (data[i].trial_id == "stim") {
-			if (data[i].condition.slice(0,2) == "go") {
+			if (data[i].condition.slice(0,2) != "stop") {
 				go_length += 1
 				if (data[i].rt != -1) {
 					num_responses += 1
@@ -51,9 +51,9 @@ var getTestFeedback = function() {
     if (average_correct < accuracy_thresh) {
         test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
     }
-	if (stop_percent >= .75) {
+	if (stop_percent >= accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
-	} else if (stop_percent <= .25) {
+	} else if (stop_percent <= (1-accuracy_thresh)) {
 		test_feedback_text += '</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
 	}
 	test_feedback_text += '</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -100,6 +100,7 @@ var getSSPracticeStim = function() {
 }
 
 var getSSPracticeData = function() {
+	console.log('called')
 	return practice_trial_data
 }
 
@@ -153,8 +154,8 @@ var stimuli = [
 
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var practice_stop_trial = '' //global variable to track randomized practice trial data
-var noSS_practice_list = jsPsych.randomization.repeat(stimuli,3,true)
-var practice_list = jsPsych.randomization.repeat(stimuli,5,true)
+var noSS_practice_list = jsPsych.randomization.repeat(stimuli,1,true) //3
+var practice_list = jsPsych.randomization.repeat(stimuli,1,true) //5
 var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','ignore','ignore','go','go','go','go','go','go'],practice_list.data.length/10,false)
 
 //number of blocks per condition
@@ -164,7 +165,7 @@ condition_blocks = []
 for (j = 0; j<numconditions; j++) {
     blocks = []
 	for (i = 0; i< numblocks; i++) {
-		blocks.push(jsPsych.randomization.repeat(stimuli,15, true))
+		blocks.push(jsPsych.randomization.repeat(stimuli,1, true)) //15
 	}
 	condition_blocks.push(blocks)
 }
@@ -191,9 +192,7 @@ var end_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -313,7 +312,7 @@ var noSS_practice_chunk = {
         var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > .75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
             // end the loop
 			practice_feedback_text += '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. It is equally important that you both respond quickly and accurately to the shapes when there is no blue stop signal <strong>and</strong> successfully stop your response on trials where there is a blue stop signal.'
             return false;
@@ -328,7 +327,7 @@ var noSS_practice_chunk = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;
@@ -342,7 +341,6 @@ var practice_trials = []
 practice_trials.push(practice_feedback_block)
 for (i = 0; i < practice_list.data.length; i++) {
 	practice_trials.push(prompt_fixation_block)
-	var stim_data = $.extend({},practice_list.data[i])
     var stop_signal_block = {
 	  type: 'stop-signal',
 	  stimuli: getSSPracticeStim,
@@ -370,6 +368,7 @@ var practice_chunk = {
     timeline: practice_trials,
 	/* This function defines stopping criteria */
     continue_function: function(data){
+    	a = data
         var sum_rt = 0;
         var sum_correct = 0;
         var go_length = 0;
@@ -377,7 +376,7 @@ var practice_chunk = {
 		var stop_length = 0
 		var successful_stops = 0
         for(var i=0; i < data.length; i++){
-            if (data[i].condition != "practice_stop") {
+            if (data[i].condition == "practice_go" || data[i].condition == "practice_ignore") {
 				if (data[i].rt != -1) {
 					num_responses += 1
 					sum_rt += data[i].rt;
@@ -395,12 +394,13 @@ var practice_chunk = {
 				}
 			}
         }
+        console.log(num_responses, stop_length)
         var average_rt = sum_rt / num_responses;
         var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
 		var stop_percent = successful_stops/stop_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > .75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
             // end the loop
             if (stop_percent == 0) {
 		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
@@ -410,7 +410,7 @@ var practice_chunk = {
         } else {
         	//rerandomize stim and stop_trial order
         	practice_list = jsPsych.randomization.repeat(stimuli,5,true)
-        	practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
+        	practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','ignore','ignore','go','go','go','go','go','go'],practice_list.data.length/10,false)
             // keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
             if (average_rt > RT_thresh) {
@@ -419,7 +419,7 @@ var practice_chunk = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;

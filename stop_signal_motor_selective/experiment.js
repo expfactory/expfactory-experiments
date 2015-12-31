@@ -22,7 +22,7 @@ var getTestFeedback = function() {
 	var successful_stops = 0;
 	for(var i=0; i < data.length; i++){
 		if (data[i].trial_id == "stim") {
-			if (data[i].condition.slice(0,2) == "go") {
+			if (data[i].SS_trial_type == "go" || data[i].correct_response != stop_response[1]) {
 				go_length += 1
 				if (data[i].rt != -1) {
 					num_responses += 1
@@ -301,7 +301,7 @@ var noSS_practice_chunk = {
         var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > .75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
             // end the loop
 			practice_feedback_text += '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials, if you would have responded by pressing the ' + stop_response[0] + ' you should instead <strong>not respond</strong>. Again, respond normally unless you were going to have pressed the ' + stop_response[0] + ' and see the red stop signal.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
             return false;
@@ -316,7 +316,7 @@ var noSS_practice_chunk = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;
@@ -388,7 +388,7 @@ var practice_chunk = {
 		var missed_responses = (go_length - num_responses) / go_length
 		var stop_percent = successful_stops/stop_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > .75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
             // end the loop
             if (stop_percent == 0) {
 		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
@@ -407,7 +407,7 @@ var practice_chunk = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;
