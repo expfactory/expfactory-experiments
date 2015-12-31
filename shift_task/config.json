@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Shift Task",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "shift_task",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "lab": "Poldracklab",
+        "time":20,
+        "experiment_variables": "",
+        "doi": "",
+        "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
