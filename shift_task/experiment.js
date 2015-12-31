@@ -13,27 +13,30 @@ var getData = function() {
 }
 
 var getAlert = function() {
-  return '<div class = centerbox><p class = shift-center-text>The important feature is <strong>' + rewarded_feature + '</strong>!</p></div>'
+  return '<div class = centerbox><div class = center-text>The important feature is <strong>' + rewarded_feature + '</strong>!</div></div>'
 }
 var getStim = function() {
   var colors = jsPsych.randomization.shuffle(stim_att.colors)
   var shapes = jsPsych.randomization.shuffle(stim_att.shapes)
   var patterns = jsPsych.randomization.shuffle(stim_att.patterns)
+  stim_htmls = []
   stims = []
   for (var i = 0; i < 3; i++) {
-    stims.push(path_source + colors[i] + '_' + shapes[i] + '_' + patterns[i] + '.png')
+    stim_htmls.push(path_source + colors[i] + '_' + shapes[i] + '_' + patterns[i] + '.png')
+    stims.push({color: colors[i], shape: shapes[i], pattern: patterns[i]})
   }
-  return '<div class = shift_left><img class = shift_stim src = ' + stims[0] + ' width = "50%" </img></div>' + 
-        '<div class = shift_middle><img class = shift_stim src = ' + stims[1] + ' width = "50%"  </img></div>' + 
-        '<div class = shift_right><img class = shift_stim src = ' + stims[2] + ' width = "50%"  </img></div>'
+  return '<div class = shift_left><img class = shift_stim src = ' + stim_htmls[0] + ' width = "50%" </img></div>' + 
+        '<div class = shift_middle><img class = shift_stim src = ' + stim_htmls[1] + ' width = "50%"  </img></div>' + 
+        '<div class = shift_right><img class = shift_stim src = ' + stim_htmls[2] + ' width = "50%"  </img></div>'
 }
 
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   var position_array = ['shift_left', 'shift_middle', 'shift_right']
   var choice = choices.indexOf(last_trial.key_press)
+  jsPsych.data.addDataToLastTrial({stims: JSON.stringify(stims), choice: JSON.stringify(stims[choice])})
   if (choice != -1) {
-    var image = '<div class = ' + position_array[choice] + '><img class = shift_stim src = ' + stims[choice] + ' width = "50%" </img></div>'
+    var image = '<div class = ' + position_array[choice] + '><img class = shift_stim src = ' + stim_htmls[choice] + ' width = "50%" </img></div>'
     var feedback_text = 'You won 0 points.'
     if (image.indexOf(rewarded_feature) != -1 && Math.random() > .25) {
         feedback_text = 'You won 1 point!'
@@ -63,7 +66,8 @@ var stim_att = {
   shapes: ['circle','square','triangle'],
   patterns: ['dots','lines','waves']
 }
-var stims = []
+var stim_htmls = [] //array of stim html
+var stims = [] //array of stim objects
 var dims = ['colors', 'shapes', 'patterns']
 var features = stim_att.colors.concat(stim_att.shapes).concat(stim_att.patterns)
 var path_source = 'static/experiments/shift_task/images/'
@@ -113,8 +117,8 @@ var end_block = {
 var instructions_block = {
   type: 'instructions',
   pages: ['<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div>' + getStim(),
-  '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>Also, one feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>', 
-  '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant dimension and feature are. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. This task is fairly long (should take ~ 20 minutes) so there will be a number of breaks throughout. We will start with a practice session.'],
+  '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>One feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>', 
+  '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. This task is fairly long (should take ~ 20 minutes) so there will be a number of breaks throughout. We will start with a practice session.'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -211,11 +215,12 @@ var practice_feedback_block = {
   timing_response: 1000,
   timing_post_trial: 500,
   on_finish: function(data) {
-    jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "practice_feedback"})
+    var FB = 0
     if (data.stimulus.indexOf('won 1 point') != -1) {
       total_points += 1
+      var FB = 1
     }
-
+    jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "practice_feedback", FB: FB})
     switch_count += 1
     if (switch_count == switch_bound) {
       switch_count = 0
@@ -248,10 +253,13 @@ var feedback_block = {
   timing_stim: 1000,
   timing_response: 1000,
   timing_post_trial: 500,
-  on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "feedback"})
+  on_finish: function(data) {
+    var FB = 0
+    if (data.stimulus.indexOf('won 1 point') != -1) {
+      var FB = 1
+    }
+    jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "practice_feedback", FB: FB})
     switch_count += 1
-    console.log(switch_count,switch_bound)
     if (switch_count == switch_bound) {
       switch_count = 0
       switch_bound = switch_bounds.shift()
