@@ -63,7 +63,8 @@ var getTestFeedback = function() {
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
 	jsPsych.data.addDataToLastTrial({'SSD': SSD})
-	if (data.SS_trial_type == 'stop') {
+	if (data.SS_trial_type == 'stop' && data.correct_response == stop_response[1]) {
+		console.log('should stop')
 		if (data.rt == -1 && SSD<850) {
 			SSD = SSD + 50
 		} else if (data.rt != -1 && SSD > 0) { 
@@ -122,6 +123,7 @@ var RT_thresh = 1000
 var missed_response_thresh = .05
 var accuracy_thresh = .75
 var choice_keys = [77,90]
+var stop_response = randomDraw([["M key", 77],["Z key", 90]])
 
 var stimuli = [
 	{image: '<div class = shapebox><img class = square></img></div>',
@@ -144,7 +146,7 @@ var practice_list = jsPsych.randomization.repeat(stimuli,5,true)
 var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
 
 //number of blocks per condition
-numconditions = 2
+numconditions = 1
 numblocks = 5
 condition_blocks = []
 for (j = 0; j<numconditions; j++) {
@@ -248,9 +250,9 @@ var reset_block = {
 /* Set up experiment */
 /* ************************************ */
 
-var stop_signal_experiment = []
-stop_signal_experiment.push(welcome_block);
-stop_signal_experiment.push(instructions_block);
+var motor_selective_stop_signal_experiment = []
+motor_selective_stop_signal_experiment.push(welcome_block);
+motor_selective_stop_signal_experiment.push(instructions_block);
 
 /* Practice block w/o SS */
 noSS_practice_trials = []
@@ -301,7 +303,7 @@ var noSS_practice_chunk = {
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
         if(average_rt < RT_thresh && average_correct > .75 && missed_responses < 3){
             // end the loop
-			practice_feedback_text += '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
+			practice_feedback_text += '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials, if you would have responded by pressing the ' + stop_response[0] + ' you should instead <strong>not respond</strong>. Again, respond normally unless you were going to have pressed the ' + stop_response[0] + ' and see the red stop signal.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
             return false;
         } else {
         	//rerandomize stim order
@@ -413,29 +415,23 @@ var practice_chunk = {
     }
 }
 
-stop_signal_experiment.push(noSS_practice_chunk)
-stop_signal_experiment.push(practice_chunk)
-stop_signal_experiment.push(practice_feedback_block) 
+motor_selective_stop_signal_experiment.push(noSS_practice_chunk)
+motor_selective_stop_signal_experiment.push(practice_chunk)
+motor_selective_stop_signal_experiment.push(practice_feedback_block) 
 
 /* Test blocks */
-ss_freq = randomDraw(['high','low'])
-// Loop through the two conditions
 for (c = 0; c< numconditions; c++) {
 	var blocks = condition_blocks[c]
 	// Loop through the multiple blocks within each condition
 	for (b = 0; b< numblocks; b++) {
 		stop_signal_exp_block = []
 		var block = blocks[b]
-		if (ss_freq == "high") {
-			var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
-		} else {
-			var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.data.length/5,false)
-		}
+		var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
 		// Loop through each trial within the block
 		for (i = 0; i < block.data.length; i++) {
 			stop_signal_exp_block.push(fixation_block)
 			var stim_data = $.extend({},block.data[i])
-			stim_data["condition"] = ss_freq
+			stim_data["condition"] = 'test'
 			var stop_trial = stop_trials[i]
 			var stop_signal_block = {
 			  type: 'stop-signal',
@@ -461,10 +457,9 @@ for (c = 0; c< numconditions; c++) {
 			chunk_type: 'linear',
 			timeline: stop_signal_exp_block
 		}
-		stop_signal_experiment.push(stop_signal_chunk)
-		stop_signal_experiment.push(test_feedback_block)
+		motor_selective_stop_signal_experiment.push(stop_signal_chunk)
+		motor_selective_stop_signal_experiment.push(test_feedback_block)
 	}
-	stop_signal_experiment.push(reset_block)
-	if (ss_freq=="high") {ss_freq = "low"} else { ss_freq = "high"}
+	motor_selective_stop_signal_experiment.push(reset_block)
 }
-stop_signal_experiment.push(end_block)
+motor_selective_stop_signal_experiment.push(end_block)
