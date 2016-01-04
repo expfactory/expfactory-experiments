@@ -88,7 +88,6 @@ var welcome_block = {
   timing_post_trial: 0,
   on_finish: function() {
   	$('body').css('background','black')
-  	$('p').css('color','white')
   },
 };
 
