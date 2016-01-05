@@ -1,0 +1,101 @@
+.dd_centerbox {
+  width:40vw;
+  height: 35vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.dd_block-text {
+  width:100%;
+  height 100vw;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+  color: white;
+}
+
+.dd_center-text {
+  text-align:center;
+  font-size: 60px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: white;
+}
+
+.dd_center-block-text {
+  width:100%;
+  height 100vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 26px;
+  line-height: 120%;
+    color: white;
+}
+
+.dd_response_div {
+  width: 40w;
+  height: 8vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,140%);
+}
+
+.dd_response_button {
+  width: 7vw;
+  height: 7vw;
+  background: #505050;
+  margin: 1vw;
+  position: relative;
+  color: #fff;
+  border-radius:15px;
+  font-size: 22px;
+  vertical-align:top;
+}
+
+.dd_response_button:hover {
+  color: red;
+}
+
+.dd_response_button:active {
+  background-color: black;
+}
+
+.dd_stimBox {
+  width: 30vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%,-70%);
+}
+
+.dd_referenceBox {
+  width: 20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%, -20%);
+}
+
+.dd_Stim {
+  display: block;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
+}

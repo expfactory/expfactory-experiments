@@ -1,23 +1,23 @@
 [
     {
-        "name": "Dospert_rp: Domain Specific Risk Taking",
+        "name": "Dietary Decision Task",
         "run": [
-                 "experiment.js",
-                 "style.css",
-                 "static/js/jspsych/plugins/jspsych-survey-likert.js"
+                "experiment.js",
+                "style.css",
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
-        "tag": "dospert_rp",
+        "tag": "dietary_decision",
         "cognitive_atlas_task_id": "",
         "contributors": [
-                         "Zeynep Enkavi",
                          "Ian Eisenberg",
+                         "Zeynep Enkavi",
                          "Patrick Bissett",
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":999,
+        "time": 10,
         "experiment_variables": "",
-        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "reference": "http://www.rnl.caltech.edu/publications/pdf/hare2009.pdf",
         "notes": "",
         "publish":"True"
     
