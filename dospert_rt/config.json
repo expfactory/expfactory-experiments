@@ -3,7 +3,8 @@
         "name": "Dospert_rt: Domain specific risk taking",
         "run": [
                  "experiment.js",
-                 "style.css"
+                 "style.css",
+                 "static/js/jspsych/plugins/jspsych-survey-likert.js"
                ],
         "tag": "dospert_rt",
         "cognitive_atlas_task_id": "",
