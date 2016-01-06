@@ -1,0 +1,19 @@
+.bickel_leftBox {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-125%,-60%);
+}
+
+.bickel_rightBox {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(25%,-60%);
+}
