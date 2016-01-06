@@ -1,25 +1,3 @@
-.IDED-center-block-text {
-  width:100%;
-  height 100vw;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 1em;
-  font-size: 20px;
-  line-height: 120%;
-  color: white;
-}
-
-.IDED-block-text {
-  width:100%;
-  height 100vw;
-  text-align: justify;
-  margin: 0 auto;
-  margin-bottom: 1em;
-  font-size: 20px;
-  line-height: 120%;
-  color: white;
-}
-
 .topbox {
   width: 26vw;
   height: 12vw;

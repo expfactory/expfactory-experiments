@@ -27,7 +27,7 @@ var getDecisionStim = function() {
 }
 
 var getDecisionText = function() {
-  return '<div class = centerbox><p class = dd_block-text>In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p></div><div class = dd_referenceBox><img class = dd_Stim src = ' + base_path + reference_stim + ' </img></div>'
+  return '<div class = centerbox><p class = "white-text block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p></div><div class = dd_referenceBox><img class = dd_Stim src = ' + base_path + reference_stim + ' </img></div>'
 }
 
 var setUpTest = function() {
@@ -124,7 +124,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = dd_center-block-text>Thanks for completing this task!</p><p class = dd_center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 0,
   on_finish: function() {
@@ -134,7 +134,7 @@ var end_block = {
 
 var instructions_block = {
   type: 'instructions',
-  pages: ["<div class = centerbox><p class = dd_block-text>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
+  pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -142,14 +142,14 @@ var instructions_block = {
 
 var start_health_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = dd_center-block-text>In the next block of trials, rate the healthiness of each food item without regard for its taste. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the healthiness of each food item without regard for its taste. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 500
 };
 
 var start_taste_block = {
   type: 'text',
-  text: '<div class = centerbox><p class =dd_center-block-text>In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 500
 };
@@ -170,7 +170,7 @@ var start_decision_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = dd_center-text>+</div></div>',
+  stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
