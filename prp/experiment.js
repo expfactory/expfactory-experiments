@@ -12,7 +12,7 @@ var getStim = function() {
   var bi = randomDraw([0, 1, 2, 3]) // get border index
   var ii = randomDraw([0, 1]) // get inner index
   var stim = stim_prefix + path_source + borders[bi] + ' </img></div></div>'
-  var stim2 = stim_prefix + path_source + borders[bi] + ' </img></div></div><div class = prp_centerbox><div class = prp_center-text>' + inners[ii] + '</div></div>'
+  var stim2 = stim_prefix + path_source + borders[bi] + ' </img></div></div><div class = prp_centerbox><div class = "white-text center-text">' + inners[ii] + '</div></div>'
   // set correct choice for first
   if (bi < 2) {
     var gonogo_choice = 75
@@ -89,9 +89,9 @@ var getFB = function() {
       } 
   }
   if (tooShort) {
-    return '<div class = prp_centerbox><p class = prp_center-block-text>You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = prp_center-block-text>Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "white-text center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
   } else {
-    return '<div class = prp_centerbox><p class = prp_center-block-text>' + gonogoFB + '</p><p class = prp_center-block-text>' + choiceFB + '</p><p class = prp_center-block-text>Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "white-text center-block-text">' + gonogoFB + '</p><p class = "white-text center-block-text">' + choiceFB + '</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
   }
 }
 
@@ -122,8 +122,8 @@ var inners = jsPsych.randomization.shuffle([3,4])
 //instruction stim
 var box1 = '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[0] + ' </img></div></div>'
 var box2 = '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[1] + ' </img></div></div>'
-var box_number1 = '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[0] + ' </img></div></div>' + '<div class = prp_left-instruction><div class = prp_center-text>' + inners[0] + '</div></div>'
-var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[1] + ' </img></div></div>' + '<div class = prp_right-instruction><div class = prp_center-text>' + inners[1] + '</div></div>'
+var box_number1 = '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[0] + ' </img></div></div>' + '<div class = prp_left-instruction><div class = "white-text center-text">' + inners[0] + '</div></div>'
+var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' + path_source + borders[1] + ' </img></div></div>' + '<div class = prp_right-instruction><div class = "white-text center-text">' + inners[1] + '</div></div>'
 
 
 /* ************************************ */
@@ -142,7 +142,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = prp_centerbox><p class = prp_center-block-text>Thanks for completing this task!</p><p class = prp_center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = prp_centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13,
   timing_post_trial: 0,
   on_finish: function() {
@@ -152,8 +152,8 @@ var end_block = {
 
 var instructions_block = {
   type: 'instructions',
-  pages: ['<div class = prp_centerbox><p class =prp_block-text>In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class =prp_block-text>First, a colored square will appear on the screen. If the square is either of the two below, you should press "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' + box1 + box2,
-  '<div class = prp_centerbox><p class =prp_block-text>After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.</p><p class =prp_block-text>It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p><p class =prp_block-text>We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue.</p></div>' + box_number1 + box_number2],
+  pages: ['<div class = prp_centerbox><p class ="white-text block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="white-text block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' + box1 + box2,
+  '<div class = prp_centerbox><p class ="white-text block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.</p><p class ="white-text block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p><p class ="white-text block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue.</p></div>' + box_number1 + box_number2],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -161,14 +161,14 @@ var instructions_block = {
 
 var start_practice_block = {
   type: 'text',
-  text: '<div class = prp_centerbox><p class = prp_center-block-text>We will start ' + practice_len + ' practice trials. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = prp_centerbox><p class = "white-text center-block-text">We will start ' + practice_len + ' practice trials. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = prp_centerbox><p class =prp_center-block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = prp_centerbox><p class ="white-text center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13,
   timing_post_trial: 1000,
   on_finish: function() {
@@ -178,7 +178,7 @@ var start_test_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = prp_center-text>+</div></div>',
+  stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
