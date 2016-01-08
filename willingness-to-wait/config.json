@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Willingness-to-Wait",
+        "run": [
+                "experiment.js",
+                "style.css"
+               ],
+        "tag": "wtw",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":5,
+        "experiment_variables": "",
+        "reference": "http://www.nature.com/neuro/journal/v18/n5/full/nn.3994.html",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
