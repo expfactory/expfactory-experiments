@@ -1,11 +1,11 @@
 [
     {
-        "name": "Willingness-to-Wait",
+        "name": "Willingness to Wait",
         "run": [
                 "experiment.js",
                 "style.css"
                ],
-        "tag": "wtw",
+        "tag": "willingness_to_wait",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
