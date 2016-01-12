@@ -6,7 +6,7 @@
                 "style.css",
                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
-        "tag": "tol",
+        "tag": "tower_of_london",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
