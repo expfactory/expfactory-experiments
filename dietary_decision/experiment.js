@@ -3,6 +3,18 @@
 /* Define helper functions */
 /* ************************************ */
 
+var median = function(values) {
+
+    values.sort( function(a,b) {return a - b;} );
+
+    var half = Math.floor(values.length/2);
+
+    if(values.length % 2)
+        return values[half];
+    else
+        return (values[half-1] + values[half]) / 2.0;
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -32,29 +44,37 @@ var getDecisionText = function() {
 
 var setUpTest = function() {
   // Calculate avg scores
+  var health_scores = []
+  var taste_scores = []
+  for (var i = 0; i < stims.length; i++) {
+    key = stims[i]
+    health_scores.push(stim_ratings[key]['health'])
+    taste_scores.push(stim_ratings[key]['taste'])
+  }
+  var med_health = median(health_scores)
+  var med_taste = median(taste_scores)
   var random_stims = jsPsych.randomization.shuffle(stims)
-  var neutral_stim_chosen = false
-  var alternative_stim_chosen = false
+  var closest = ''
+  var closest_distance = 100
   for (var i = 0; i < stims.length; i++) {
     var key = random_stims[i]
-    if (stim_ratings[key]['health'] == 0 && stim_ratings[key]['taste'] == 0 && neutral_stim_chosen == false) {
-      reference_stim = key
-      neutral_stim_chosen = true
-    } else if (stim_ratings[key]['health'] == 1 && stim_ratings[key]['taste'] == 0 && alternative_stim_chosen == false ) {
-      var alternative_stim = key
-      alternative_stim_chosen = true
-    } else {
+    var health_distance = Math.pow(stim_ratings[key]['health'] - med_health,2)
+    var taste_distance = Math.pow(stim_ratings[key]['taste'] - med_taste,2)
+    var distance = health_distance + taste_distance
+    if (distance < closest_distance) {
+      closest_distance = distance
+      closest = key
+    }
+  }
+  for (var i = 0; i < stims.length; i++) {
+    var key = random_stims[i]
+    if (key != reference_stim) {
       decision_stims.push(key)
     }
   }
-  /* If no neural stim exists (the subject did not rate any item 0, 0), set the reference stim to the alternative stim
-  */
-  if (reference_stim == '') {
-    reference_stim = alternative_stim
-  } else {
-    decision_stims.push(alternative_stim)
-  }
+  reference_stim = closest
 }
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -86,18 +106,7 @@ var decision_response_area = '<div class = dd_response_div>' +
                 '<button class = dd_response_button id = 2>Strong Yes</button></div>'
 
 var base_path = 'static/experiments/dietary_decision/images/'
-var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincauliflower.bmp',
-            'butterfinger.bmp', 'carrots.bmp', 'cellery.bmp', 'cherryicecream.bmp',
-            'ChipsAhoy.bmp', 'cookiencream.bmp', 'cookies.bmp', 'cranberries.bmp',
-            'Doritosranch.bmp', 'FamousAmos.bmp', 'ffraspsorbet.bmp', 'FlamingCheetos.bmp',
-            'frozenyogart.bmp', 'Ghiradelli.bmp', 'grannysmith.bmp', 'HoHo.bmp',
-            'icecreamsandwich.bmp', 'keeblerfudgestripes.bmp', 'keeblerrainbow.bmp', 'KitKat.bmp',
-            'laysclassic.bmp', 'Lindt.bmp', 'mixedyogart.bmp', 'MrsFields.bmp', 'orange.bmp',
-            'orangejello.bmp', 'Oreos.bmp', 'raisins.bmp', 'reddelicious.bmp',
-            'redgrapes.bmp', 'Reeses.bmp', 'RiceKrispyTreat.bmp', 'ruffles.bmp',
-            'sbcrackers.bmp', 'sbdietbar.bmp', 'slimfastC.bmp', 'slimfastV.bmp', 'specialKbar.bmp',
-            'strawberries.bmp', 'strussel.bmp', 'uToberlorone.bmp', 'uTwix.bmp', 'wheatcrisps.bmp',
-            'whitegrapes.bmp', 'wwbrownie.bmp', 'wwmuffin.bmp']
+var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp']
 
 var health_stims = jsPsych.randomization.shuffle(stims)
 var taste_stims = jsPsych.randomization.shuffle(stims)
