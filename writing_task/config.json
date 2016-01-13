@@ -1,12 +1,13 @@
 [
     {
-        "name": "Hierarchical Rule",
+        "name": "Writing Task",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/custom_plugins/jspsych-writing.js"
                ],
-        "tag": "hierarchical_rule",
-        "cognitive_atlas_task_id": "trm_5696bb7166121",
+        "tag": "writing_task",
+        "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -14,12 +15,11 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":5,
+        "time":15,
         "experiment_variables": "",
-        "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
-        "notes":"",
+        "reference": "",
+        "notes": "",
         "publish":"True"
     
    }
 ]
-
