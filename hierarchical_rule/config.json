@@ -6,7 +6,7 @@
                 "style.css"
                ],
         "tag": "hierarchical_rule",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_5696bb7166121",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -17,6 +17,7 @@
         "time":5,
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
+        "notes":"",
         "publish":"True"
     
    }

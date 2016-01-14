@@ -2,11 +2,10 @@
     {
         "name": "Cognitive Reflection Task",
         "run": [
-                 "experiment.js",
-                 "style.css"
+                 "experiment.js"
                ],
         "tag": "cognitive_reflection",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_56675359b663a",
         "contributors": ["Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",

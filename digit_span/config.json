@@ -8,7 +8,7 @@
                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
         "tag": "digit_span",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "tsk_4a57abb949a0d",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
