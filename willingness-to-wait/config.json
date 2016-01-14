@@ -1,23 +1,22 @@
 [
     {
-        "name": "Dospert_rt: Domain specific risk taking",
+        "name": "Willingness-to-Wait",
         "run": [
-                 "experiment.js",
-                 "style.css",
-                 "static/js/jspsych/custom_plugins/jspsych-radio-buttonlist.js"
+                "experiment.js",
+                "style.css"
                ],
-        "tag": "dospert_rt",
+        "tag": "wtw",
         "cognitive_atlas_task_id": "",
         "contributors": [
-                         "Zeynep Enkavi",
                          "Ian Eisenberg",
+                         "Zeynep Enkavi",
                          "Patrick Bissett",
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":999,
+        "time":5,
         "experiment_variables": "",
-        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "reference": "http://www.nature.com/neuro/journal/v18/n5/full/nn.3994.html",
         "notes": "",
         "publish":"True"
     
