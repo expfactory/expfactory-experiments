@@ -71,7 +71,7 @@ for (var i = 0; i<difficulty_order.length; i++) {
 var welcome_block = {
 	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the letter memory experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -88,7 +88,7 @@ var category_instructions = '<ul class = list-text>' +
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented on at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p></div>',
 	'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
   ],

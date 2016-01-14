@@ -10,9 +10,9 @@ var makeTrialList = function(len, stim, data) {
 	//choice array: numeric key codes for the numbers 1-4
 	var choice_array = [49,50,51,52]
 	// 1 is a switch trial: ensure half the trials are switch trials
-	var switch_trials = jsPsych.randomization.repeat([0,1],len/2,false)
+	var switch_trials = jsPsych.randomization.repeat([0,1],len/2)
 	//create test array
-	output_list = {image:[],data:[]}
+	output_list = []
 	//randomize first trial
 	var trial_index = jsPsych.randomization.shuffle(['global','local'])[0]
 	if (trial_index == 'global') {
@@ -20,15 +20,17 @@ var makeTrialList = function(len, stim, data) {
 	} else {
 		tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 	}
-	output_list['image'].push(stim[tmpi])
+	var tmp_obj = {}
+	tmp_obj['stimulus'] = stim[tmpi]
 	var tmp_data = $.extend({},data[tmpi])
 	tmp_data["switch"] = 0 
 	tmp_data["correct_response"] = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
-	output_list['data'].push(tmp_data)
-
-	/* randomly sample from either the global or local stimuli lists (first and half part of the stim/data arrays)
+	tmp_obj['data'] = tmp_data
+	output_list.push(tmp_obj)
+	/* randomly sample from either the global or local stimulus lists (first and half part of the stim/data arrays)
 	On stay trials randomly select an additional stimulus from that array. On switch trials choose from the other list. */
 	for (i=1; i<switch_trials.length;i++) {
+		var tmp_obj = {}
 		if (switch_trials[i] == 1) {
 			if (trial_index == 'global') {trial_index = 'local'}
 			else {trial_index = 'global'}
@@ -38,11 +40,12 @@ var makeTrialList = function(len, stim, data) {
 		} else {
 			tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 		}
-		output_list['image'].push(stim[tmpi])
+		tmp_obj['stimulus'] = stim[tmpi] 
 		tmp_data = $.extend({},data[tmpi])
 		tmp_data["switch"] = switch_trials[i]
 		tmp_data["correct_response"] = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
-		output_list['data'].push(tmp_data)
+		tmp_obj['data'] = tmp_data
+		output_list.push(tmp_obj)
 	}	
 	return output_list
 }
@@ -69,9 +72,8 @@ for (c=0; c<task_colors.length; c++) {
 
 //Set up experiment stimulus order
 var practice_trials = makeTrialList(36,stim,data)
-var practice_response_array = []
-for (i=0; i<practice_trials.data.length; i++) {
-	practice_response_array.push(practice_trials['data'][i].correct_response)
+for (i=0; i<practice_trials.length; i++) {
+	practice_trials[i]['key_answer'] = practice_trials[i]['data'].correct_response
 }
 var test_trials = makeTrialList(96,stim,data)
 
@@ -84,14 +86,14 @@ var test_trials = makeTrialList(96,stim,data)
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the local-global experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -110,28 +112,26 @@ var instructions_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 /* define practice block */
 var practice_block = {
   type: 'categorize',
-  stimuli: practice_trials.image,
+  timeline: practice_trials,
   is_html: true,
-  key_answer: practice_response_array,
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: [49,50,51,52],
-  data: practice_trials.data,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_post_trial: 500
@@ -140,9 +140,8 @@ var practice_block = {
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimuli: test_trials.image,
+  timeline: test_trials,
   is_html: true,
-  data: test_trials.data,
   choices: [49,50,51,52],
   timing_post_trial: 500
 };

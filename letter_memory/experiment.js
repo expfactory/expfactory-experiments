@@ -18,12 +18,11 @@ var practice_seq_lengths = [5,7]
 
 for (var b = 0; b<practice_block_num; b++) {
 	var num_trials = practice_seq_lengths[b]
-	var block_trials = {image: [], data: []}
+	var block_trials = []
 	for (var i=0; i<num_trials; i++) {
-		var tmp_obj = {image: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
+		var tmp_obj = {stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
 		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: 'seq_len_' + num_trials}}
-		block_trials.image.push(tmp_obj.image)
-		block_trials.data.push(tmp_obj.data)
+		block_trials.push(tmp_obj)
 	}
 	practice_blocks.push(block_trials)
 }
@@ -32,12 +31,11 @@ var block_num = 12
 var blocks = []
 for (var b=0; b<block_num; b++){
 	var num_trials = randomDraw([5,7,9,11])
-	var block_trials = {image: [], data: []}
+	var block_trials = []
 	for (var i=0; i<num_trials; i++) {
-		var tmp_obj = {image: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
+		var tmp_obj = {stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
 		data: {exp_id: 'letter_memory', trial_id: 'test', condition: 'seq_len_' + num_trials}}
-		block_trials.image.push(tmp_obj.image)
-		block_trials.data.push(tmp_obj.data)
+		block_trials.push(tmp_obj)
 	}
 	blocks.push(block_trials)
 }
@@ -51,7 +49,7 @@ var welcome_block = {
 	
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the letter memory experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 
@@ -100,8 +98,7 @@ for (var b=0; b<practice_block_num; b++) {
 	var letter_seq_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimulus: practice_blocks[b].image,
-	  data: practice_blocks[b].data,
+	  timeline: practice_blocks[b],
 	  choices: 'none',
 	  timing_stim: 2000,
 	  timing_response: 2000,
@@ -112,7 +109,7 @@ for (var b=0; b<practice_block_num; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What were the last four letters in the last sequence?']],
-		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].image.length}
+		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].length}
 	}
 	letter_memory_experiment.push(response_block)
 }
@@ -125,8 +122,7 @@ for (var b=0; b<block_num; b++) {
 	var letter_seq_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimulus: blocks[b].image,
-	  data: blocks[b].data,
+	  timeline: blocks[b],
 	  choices: 'none',
 	  timing_stim: 2000,
 	  timing_response: 2000,
@@ -137,7 +133,7 @@ for (var b=0; b<block_num; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What were the last four letters in the last sequence?']],
-		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].image.length}
+		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].length}
 	}
 	letter_memory_experiment.push(response_block)
 }
