@@ -3,18 +3,6 @@
 /* Define helper functions */
 /* ************************************ */
 
-var median = function(values) {
-
-    values.sort( function(a,b) {return a - b;} );
-
-    var half = Math.floor(values.length/2);
-
-    if(values.length % 2)
-        return values[half];
-    else
-        return (values[half-1] + values[half]) / 2.0;
-}
-
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -44,37 +32,29 @@ var getDecisionText = function() {
 
 var setUpTest = function() {
   // Calculate avg scores
-  var health_scores = []
-  var taste_scores = []
-  for (var i = 0; i < stims.length; i++) {
-    key = stims[i]
-    health_scores.push(stim_ratings[key]['health'])
-    taste_scores.push(stim_ratings[key]['taste'])
-  }
-  var med_health = median(health_scores)
-  var med_taste = median(taste_scores)
   var random_stims = jsPsych.randomization.shuffle(stims)
-  var closest = ''
-  var closest_distance = 100
+  var neutral_stim_chosen = false
+  var alternative_stim_chosen = false
   for (var i = 0; i < stims.length; i++) {
     var key = random_stims[i]
-    var health_distance = Math.pow(stim_ratings[key]['health'] - med_health,2)
-    var taste_distance = Math.pow(stim_ratings[key]['taste'] - med_taste,2)
-    var distance = health_distance + taste_distance
-    if (distance < closest_distance) {
-      closest_distance = distance
-      closest = key
-    }
-  }
-  for (var i = 0; i < stims.length; i++) {
-    var key = random_stims[i]
-    if (key != reference_stim) {
+    if (stim_ratings[key]['health'] == 0 && stim_ratings[key]['taste'] == 0 && neutral_stim_chosen == false) {
+      reference_stim = key
+      neutral_stim_chosen = true
+    } else if (stim_ratings[key]['health'] == 1 && stim_ratings[key]['taste'] == 0 && alternative_stim_chosen == false ) {
+      var alternative_stim = key
+      alternative_stim_chosen = true
+    } else {
       decision_stims.push(key)
     }
   }
-  reference_stim = closest
+  /* If no neural stim exists (the subject did not rate any item 0, 0), set the reference stim to the alternative stim
+  */
+  if (reference_stim == '') {
+    reference_stim = alternative_stim
+  } else {
+    decision_stims.push(alternative_stim)
+  }
 }
-
 
 /* ************************************ */
 /* Define experimental variables */
@@ -106,7 +86,18 @@ var decision_response_area = '<div class = dd_response_div>' +
                 '<button class = dd_response_button id = 2>Strong Yes</button></div>'
 
 var base_path = 'static/experiments/dietary_decision/images/'
-var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp']
+var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincauliflower.bmp',
+            'butterfinger.bmp', 'carrots.bmp', 'cellery.bmp', 'cherryicecream.bmp',
+            'ChipsAhoy.bmp', 'cookiencream.bmp', 'cookies.bmp', 'cranberries.bmp',
+            'Doritosranch.bmp', 'FamousAmos.bmp', 'ffraspsorbet.bmp', 'FlamingCheetos.bmp',
+            'frozenyogart.bmp', 'Ghiradelli.bmp', 'grannysmith.bmp', 'HoHo.bmp',
+            'icecreamsandwich.bmp', 'keeblerfudgestripes.bmp', 'keeblerrainbow.bmp', 'KitKat.bmp',
+            'laysclassic.bmp', 'Lindt.bmp', 'mixedyogart.bmp', 'MrsFields.bmp', 'orange.bmp',
+            'orangejello.bmp', 'Oreos.bmp', 'raisins.bmp', 'reddelicious.bmp',
+            'redgrapes.bmp', 'Reeses.bmp', 'RiceKrispyTreat.bmp', 'ruffles.bmp',
+            'sbcrackers.bmp', 'sbdietbar.bmp', 'slimfastC.bmp', 'slimfastV.bmp', 'specialKbar.bmp',
+            'strawberries.bmp', 'strussel.bmp', 'uToberlorone.bmp', 'uTwix.bmp', 'wheatcrisps.bmp',
+            'whitegrapes.bmp', 'wwbrownie.bmp', 'wwmuffin.bmp']
 
 var health_stims = jsPsych.randomization.shuffle(stims)
 var taste_stims = jsPsych.randomization.shuffle(stims)
@@ -124,7 +115,7 @@ for (var s = 0; s < stims.length; s++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the dietary decision experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
     $('body').css('background','black')
@@ -134,7 +125,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
     $('body').css('background','white')
@@ -146,20 +137,20 @@ var instructions_block = {
   pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
-  timing_post_trial: 1000
+  //timing_post_trial: 1000
 };
 
 var start_health_block = {
   type: 'text',
   text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the healthiness of each food item without regard for its taste. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 500
 };
 
 var start_taste_block = {
   type: 'text',
   text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 500
 };
 
@@ -172,14 +163,15 @@ var setup_block = {
 var start_decision_block = {
   type: 'text',
   text: getDecisionText,
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 500
 };
 
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
+  // stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
+  stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
@@ -191,7 +183,8 @@ var fixation_block = {
 
 var health_block = {
   type: 'single-stim-button',
-  stimuli: getHealthStim,
+  // stimuli: getHealthStim,
+  stimulus: getHealthStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'health_rating'},
   timing_stim: 4000,
@@ -206,7 +199,8 @@ var health_block = {
 
 var taste_block = {
   type: 'single-stim-button',
-  stimuli: getTasteStim,
+  // stimuli: getTasteStim,
+  stimulus: getTasteStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'taste_rating'},
   timing_stim: 4000,
@@ -221,7 +215,8 @@ var taste_block = {
 
 var decision_block = {
   type: 'single-stim-button',
-  stimuli: getDecisionStim,
+  // stimuli: getDecisionStim,
+  stimulus: getDecisionStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'decision'},
   timing_stim: 4000,

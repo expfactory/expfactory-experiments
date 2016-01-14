@@ -1,0 +1,89 @@
+.wtw_token {
+	width: 10vw;
+	height: 10vw;
+	background: purple;
+	-moz-border-radius: 5vw;
+	-webkit-border-radius: 5vw;
+	border-radius: 5vw;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-right:0%;
+	transform: translate(-50%,-70%);
+	border-style: solid;
+    border-color: white;
+    border-width: 4px;
+}
+
+.token_text {
+	text-align: center;
+	font-size: 60px;
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    color: white;
+}
+
+.soldBox {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-100%);
+}
+
+.wtw_progressBox {
+  width:40vw;
+  height: 20px;
+  position:absolute;
+  top:60%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, 0%);
+}
+
+.meter { 
+	height: 20px;  /* Can be anything */
+	position: relative;
+	background: #555;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+
+@keyframes expandWidth {
+   0% { width: 0; }
+   100% { width: 100; }
+}
+
+@-webkit-keyframes mymove {
+   0% { width: 0; }
+   100% { width: 100; }
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: white;
+  background-image: linear-gradient(
+    center bottom,
+    rgb(43,194,83) 37%,
+    rgb(84,240,84) 69%
+  );
+  box-shadow: 
+    inset 0 2px 9px  rgba(255,255,255,0.3),
+    inset 0 -2px 6px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  animation: expandWidth 100s linear 0s;
+}
+

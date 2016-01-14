@@ -4,7 +4,7 @@
         "run": [
                  "experiment.js",
                  "style.css",
-                 "static/js/jspsych/plugins/jspsych-survey-likert.js"
+                 "static/js/jspsych/custom_plugins/jspsych-radio-buttonlist.js"
                ],
         "tag": "dospert_eb",
         "cognitive_atlas_task_id": "",
