@@ -23,19 +23,18 @@ var reject = false
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimuli: stim,
+  stimulus: stim,
   is_html: true,
   data: {exp_id: "test_task", trial_id: "test"},
   choices: [32],
   timing_post_trial: 100,
-  repetitions: experiment_len,
   on_finish: function(data) {
     rts.push(data.rt)
     var total = 0;
@@ -53,5 +52,7 @@ var test_block = {
 
 /* create experiment definition array */
 var test_task_experiment = [];
-test_task_experiment.push(test_block);
+for (var i = 0; i < experiment_len; i++) {
+  test_task_experiment.push(test_block);
+}
 test_task_experiment.push(end_block);
