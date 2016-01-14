@@ -32,7 +32,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -55,19 +55,19 @@ var rest_block = {
 
 var wait_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_feedback>Trial over, get ready for the next one.</p></div>',
+  stimulus: '<div class = centerbox><p class = AX_feedback>Trial over, get ready for the next one.</p></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "feedback"},
-  timing_post_trial: 0,
+  timing_post_trial: 500,
   timing_stim: 1000,
   timing_response: 1000
 }
 
-/* define test block cues and targets*/
+/* define test block cues and probes*/
 var A_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_text>A</p></div>',
+  stimulus: '<div class = centerbox><p class = AX_text>A</p></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "cue"},
@@ -79,7 +79,7 @@ var A_cue = {
 
 var other_cue = {
   type: 'single-stim',
-  stimuli: getChar,
+  stimulus: getChar,
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "cue"},
@@ -91,7 +91,7 @@ var other_cue = {
 
 var X_probe = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_text>X</p></div>',
+  stimulus: '<div class = centerbox><p class = AX_text>X</p></div>',
   is_html: true,
   choices: [37,40],
   data: {exp_id: "ax_cpt", trial_id: "probe"},
@@ -103,7 +103,7 @@ var X_probe = {
 
 var other_probe = {
   type: 'single-stim',
-  stimuli: getChar,
+  stimulus: getChar,
   is_html: true,
   choices: [37,40],
   data: {exp_id: "ax_cpt", trial_id: "probe"},
@@ -127,31 +127,31 @@ for (b = 0; b< blocks.length; b++) {
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)
-        probe = jQuery.extend(true, {}, X_probe)
+        		probe = jQuery.extend(true, {}, X_probe)
 				cue.data["condition"]="AX"
-				target.data["condition"]="AX"
+				probe.data["condition"]="AX"
 				break;
 			case "BX":
 				cue = jQuery.extend(true, {}, other_cue)
-        probe = jQuery.extend(true, {}, X_probe)
+        		probe = jQuery.extend(true, {}, X_probe)
 				cue.data["condition"]="BX"
-				target.data["condition"]="BX"
+				probe.data["condition"]="BX"
 				break;
 			case "AY":
 				cue = jQuery.extend(true, {}, A_cue)
-        probe = jQuery.extend(true, {}, other_probe)
+        		probe = jQuery.extend(true, {}, other_probe)
 				cue.data["condition"]="AY"
-				target.data["condition"]="AY"
+				probe.data["condition"]="AY"
 				break;
 			case "BY":
 				cue = jQuery.extend(true, {}, other_cue)
-        probe = jQuery.extend(true, {}, other_probe)
+        		probe = jQuery.extend(true, {}, other_probe)
 				cue.data["condition"]="BY"
-				target.data["condition"]="BY"
+				probe.data["condition"]="BY"
 				break;
 		}
 		ax_cpt_experiment.push(cue)
-		ax_cpt_experiment.push(target)
+		ax_cpt_experiment.push(probe)
 		ax_cpt_experiment.push(wait_block)
 	}
 	ax_cpt_experiment.push(rest_block)

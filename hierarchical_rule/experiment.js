@@ -21,6 +21,26 @@ var getFeedback = function() {
 	}
 }
 
+var getHierarchicalStim = function() {
+	return hierarchical_stims.stimulus.shift()
+}
+
+
+var getHierarchicalData = function() {
+	return hierarchical_stims.data.shift()
+}
+
+
+var getFlatStim = function() {
+	return flat_stims.stimulus.shift()
+}
+
+
+var getFlatData = function() {
+	return flat_stims.data.shift()
+}
+
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -62,8 +82,8 @@ for (var c=0; c < colors.length; c++) {
 // flat_stims = jsPsych.randomization.repeat(flat_stims,20,true)
 // hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20,true)
 // Change structure of object array to work with new structure
-flat_stims = jsPsych.randomization.repeat(flat_stims,20)
-hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20)
+flat_stims = jsPsych.randomization.repeat(flat_stims,20, true)
+hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20, true)
 
 instructions_grid = '<div class = gridBox>'
 for (var c =0; c < colors.length/2; c++) {
@@ -104,8 +124,7 @@ var instructions_block = {
     	'<div class = centerbox><p class = "white-text block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "white-text block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
   ],
   allow_keys: false,
-  show_clickable_nav: true,
-  // timing_post_trial: 1000
+  show_clickable_nav: true
 };
 
 var end_block = {
@@ -128,7 +147,6 @@ var start_test_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  // stimuli: prompt_prefix + path_source + 'FIX.png' + ' style:"z-index: -1"' + postfix,
   stimulus: prompt_prefix + path_source + 'FIX.png' + ' style:"z-index: -1"' + postfix,
   is_html: true,
   choices: 'none',
@@ -141,11 +159,9 @@ var fixation_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  // stimuli: getFeedback,
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  // aze: check if you need quotes around trial_id
   data: {exp_id: "hierarchical_rule", "trial_id": "feedback"},
   response_ends_trial: false,
   timing_post_trial: 0,
@@ -153,68 +169,13 @@ var feedback_block = {
   timing_response: 1000
 }
 
-//Set up experiment
-var hierarchical_rule_experiment = []
-hierarchical_rule_experiment.push(welcome_block);
-hierarchical_rule_experiment.push(instructions_block);
-hierarchical_rule_experiment.push(start_test_block);
-// flat_trials = []
-// for (var i = 0; i < exp_len; i++) {
-// 	var flat_stim_block = {
-// 	  type: 'single-stim',
-// 	  // stimuli: flat_stims.image[i],
-// 	  timeline: flat_stims.image,
-// 	  is_html: true,
-// 	  choices: choices,
-// 	  data: flat_stims.data[i],
-// 	  response_ends_trial: false,
-// 	  timing_stim: 1000,
-// 	  timing_response: 3000,
-// 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
-// 	  timing_post_trial: 0,
-// 	  on_finish: function() {
-// 	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "flat_stim"})
-// 	  }
-// 	}
-// 	flat_trials.push(fixation_block)
-// 	flat_trials.push(flat_stim_block)
-// 	flat_trials.push(feedback_block)
-// }
-
-// hierarchical_trials = []
-// for (var i = 0; i < exp_len; i++) {
-// 	var  hierarchical_stim_block = {
-// 	  type: 'single-stim',
-// 	  stimuli: hierarchical_stims.image[i],
-// 	  is_html: true,
-// 	  choices: choices,
-// 	  data: hierarchical_stims.data[i],
-// 	  response_ends_trial: false,
-// 	  timing_stim: 1000,
-// 	  timing_response: 3000,
-// 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
-// 	  timing_post_trial: 0,
-// 	  on_finish: function() {
-// 	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "hierarchical_stim"})
-// 	  }
-// 	}
-// 	hierarchical_trials.push(fixation_block)
-// 	hierarchical_trials.push(hierarchical_stim_block)
-// 	hierarchical_trials.push(feedback_block)
-// }
-
-// note this setup doesn't necessarily involve less code but is in line with the design of the package and is more efficient
-
-//create flat_stim_block and hierarchical_stim_block's w just stimuli w/out the loops
-var cur_len_flat = 0
 
 var flat_stim_block = {
 	  type: 'single-stim',
-	  // stimuli: flat_stims.image[i],
-	  timeline: flat_stims,
+	  stimulus: getFlatStim,
+	  data: getFlatData,
 	  is_html: true,
 	  choices: choices,
-	  //data: flat_stims.data[i],
 	  response_ends_trial: false,
 	  timing_stim: 1000,
 	  timing_response: 3000,
@@ -222,19 +183,15 @@ var flat_stim_block = {
 	  timing_post_trial: 0,
 	  on_finish: function() {
 	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "flat_stim"})
-	  	cur_len_flat++
 	  }
 }
 
-var cur_len_hierarchical = 0
-
 var hierarchical_stim_block = {
 	  type: 'single-stim',
-	  // stimuli: flat_stims.image[i],
-	  timeline: hierarchical_stims,
+	  stimulus: getHierarchicalStim,
+	  data: getHierarchicalData,
 	  is_html: true,
 	  choices: choices,
-	  //data: flat_stims.data[i],
 	  response_ends_trial: false,
 	  timing_stim: 1000,
 	  timing_response: 3000,
@@ -242,7 +199,6 @@ var hierarchical_stim_block = {
 	  timing_post_trial: 0,
 	  on_finish: function() {
 	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "hierarchical_stim"})
-	  	cur_len_hierarchical++
 	  }
 }
 
@@ -250,7 +206,7 @@ var hierarchical_stim_block = {
 var flat_loop_node = {
     timeline: [fixation_block, flat_stim_block, feedback_block],
     loop_function: function(data){
-        if(cur_len_flat < exp_len){
+        if(flat_stims.stimulus.length > 0){
             return true;
         } else {
             return false;
@@ -261,7 +217,7 @@ var flat_loop_node = {
 var hierarchical_loop_node = {
     timeline: [fixation_block, hierarchical_stim_block, feedback_block],
     loop_function: function(data){
-        if(cur_len_hierarchical < exp_len){
+        if(hierarchical_stims.stimulus.length > 0){
             return true;
         } else {
             return false;
@@ -269,6 +225,11 @@ var hierarchical_loop_node = {
     }
 }
 
+//Set up experiment
+var hierarchical_rule_experiment = []
+hierarchical_rule_experiment.push(welcome_block);
+hierarchical_rule_experiment.push(instructions_block);
+hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks
 if (flat_first == 1){
 	hierarchical_rule_experiment.push(flat_loop_node, start_test_block, hierarchical_loop_node);
@@ -276,15 +237,5 @@ if (flat_first == 1){
 else {
 	hierarchical_rule_experiment.push(hierarchical_loop_node, start_test_block, flat_loop_node);
 }
-
-// if (flat_first == 1) {
-// 	hierarchical_rule_experiment = hierarchical_rule_experiment.concat(flat_trials)
-// 	hierarchical_rule_experiment.push(start_test_block);
-// 	hierarchical_rule_experiment = hierarchical_rule_experiment.concat(hierarchical_trials)
-// } else {
-// 	hierarchical_rule_experiment = hierarchical_rule_experiment.concat(hierarchical_trials)
-// 	hierarchical_rule_experiment.push(start_test_block);
-// 	hierarchical_rule_experiment = hierarchical_rule_experiment.concat(flat_trials)
-// }
 
 hierarchical_rule_experiment.push(end_block)

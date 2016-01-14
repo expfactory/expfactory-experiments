@@ -15,7 +15,7 @@
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the experiment. In this experiment you will answer three questions. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 
@@ -32,7 +32,7 @@ var experiment_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 

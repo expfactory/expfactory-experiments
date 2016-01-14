@@ -30,6 +30,8 @@ var response = 0
 var response_time = 30000
 var lstep = 5000
 var sstep = 1000
+var n_large_steps = 50
+var n_small_steps = 50
 var p = .5 // The probability of a correct response for the staircase
 var fatigue_time = 45
 
@@ -40,7 +42,7 @@ var fatigue_time = 45
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the multiplication experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -52,7 +54,6 @@ var instructions_block = {
   timing_post_trial: 1000,
   on_finish: function() {
     setTimeout(function() {
-        console.log('hey')
         $("#mathtext").focus()
       },1010)
   }
@@ -61,19 +62,18 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 //Define staircase blocks
 var largeStep_block = {
     type: 'single-stim-button',
-    stimuli: getStim,
+    stimulus: getStim,
     button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
-    repetitions: 50,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({"response": response, "answer": answer, "response_time": response_time})
       // staircase
@@ -83,7 +83,6 @@ var largeStep_block = {
         response_time += lstep*p
       }
       setTimeout(function() {
-        console.log('hey')
         $("#mathtext").focus()
       },1010)
     }
@@ -91,12 +90,11 @@ var largeStep_block = {
 
 var smallStep_block = {
     type: 'single-stim-button',
-    stimuli: getStim,
+    stimulus: getStim,
     button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
-    repetitions: 50,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({"response": response, "answer": answer, "response_time": response_time})
       // staircase
@@ -106,7 +104,6 @@ var smallStep_block = {
         response_time += sstep*p
       }
       setTimeout(function() {
-        console.log('hey')
         $("#mathtext").focus()
       },1010)
     }
@@ -115,16 +112,14 @@ var smallStep_block = {
 //45 minutes of math
 var fatigue_block = {
     type: 'single-stim-button',
-    stimuli: getStim,
+    stimulus: getStim,
     button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
-    repetitions: Math.floor(60000*fatigue_time/response_time),
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({"response": response, "answer": answer, "response_time": response_time})
       setTimeout(function() {
-        console.log('hey')
         $("#mathtext").focus()
       },1010)
     }
@@ -137,6 +132,12 @@ var fatigue_block = {
 var multiplication_experiment = []
 multiplication_experiment.push(welcome_block)
 multiplication_experiment.push(instructions_block)
-multiplication_experiment.push(largeStep_block)
-multiplication_experiment.push(smallStep_block)
-multiplication_experiment.push(fatigue_block)
+for (var i = 0; i < n_large_steps; i++) {
+	multiplication_experiment.push(largeStep_block)
+}
+for (var i = 0; i < n_small_steps; i++) {
+	multiplication_experiment.push(smallStep_block)
+}
+for (var i = 0; i < Math.floor(60000*fatigue_time/response_time); i++) {
+	multiplication_experiment.push(fatigue_block)
+}

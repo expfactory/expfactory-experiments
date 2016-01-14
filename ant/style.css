@@ -1,16 +1,6 @@
-#stim1 {
-	width: 150px;
-	height: 200px;
-	background: red;
-}
-
-#stim2 {
-	width: 150px;
-	height: 200px;
-	background: blue;
-}
 
 .ANT_up {
+  height: 15vw;
   position:absolute;
   top:50%;
   left:50%;
@@ -19,6 +9,7 @@
 }
 
 .ANT_down {
+  height: 15vw;
   position:absolute;
   top:50%;
   left:50%;
@@ -29,12 +20,17 @@
 .ANT_text {
 	text-align: center;
 	font-size: 60px;
+  position: relative;
+  top: 50%; 
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
 }
 
 .ANT_centercue_text {
 	text-align: center;
 	font-size: 60px;
 	position: relative;
-    transform: translateY(14%);
-    -webkit-transform: translateY(14%);
+  top: 50%; 
+  transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
 }

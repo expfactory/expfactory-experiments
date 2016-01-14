@@ -63,27 +63,31 @@ var practice_len = 36
 var exp_len = 180
 var curr_trial = 0
 var choices = [74,75,76]
+var healthy_responses = ['Very_Unhealthy', 'Unhealthy', 'Neutral', 'Healthy', 'Very_Healthy']
+var tasty_responses = ['Very_Bad', 'Bad', 'Neutral', 'Good', 'Very_Good']
+var decision_responses = ['Strong_No', 'No', 'Neutral', 'Yes', 'Very_Yes']
+
 var health_response_area = '<div class = dd_response_div>' +
-                '<button class = dd_response_button id = -2>Very Unhealthy</button>' +
-                '<button class = dd_response_button id = -1>Unhealthy</button>' +
-                '<button class = dd_response_button id = 0>Neutral</button>' +
-                '<button class = dd_response_button id = 1>Healthy</button>' +
-                '<button class = dd_response_button id = 2>Very Healthy</button></div>'
+                '<button class = dd_response_button id = Very_Unhealthy>Very Unhealthy</button>' +
+                '<button class = dd_response_button id = Unhealthy>Unhealthy</button>' +
+                '<button class = dd_response_button id = Neutral>Neutral</button>' +
+                '<button class = dd_response_button id = Healthy>Healthy</button>' +
+                '<button class = dd_response_button id = Very_Healthy>Very Healthy</button></div>'
 
 var taste_response_area = '<div class = dd_response_div>' +
-                '<button class = dd_response_button id = -2>Very Bad</button>' +
-                '<button class = dd_response_button id = -1>Bad</button>' +
-                '<button class = dd_response_button id = 0>Neutral</button>' +
-                '<button class = dd_response_button id = 1>Good</button>' +
-                '<button class = dd_response_button id = 2>Very Good</button></div>'
+                '<button class = dd_response_button id = Very_Bad>Very Bad</button>' +
+                '<button class = dd_response_button id = Bad>Bad</button>' +
+                '<button class = dd_response_button id = Neutral>Neutral</button>' +
+                '<button class = dd_response_button id = Good>Good</button>' +
+                '<button class = dd_response_button id = Very_Good>Very Good</button></div>'
 
 // Higher value indicates choosing the food item over the neutral food item.
 var decision_response_area = '<div class = dd_response_div>' +
-                '<button class = dd_response_button id = -2>Strong No</button>' +
-                '<button class = dd_response_button id = -1>No</button>' +
-                '<button class = dd_response_button id = 0>Neutral</button>' +
-                '<button class = dd_response_button id = 1>Yes</button>' +
-                '<button class = dd_response_button id = 2>Strong Yes</button></div>'
+                '<button class = dd_response_button id = Strong_No>Strong No</button>' +
+                '<button class = dd_response_button id = No>No</button>' +
+                '<button class = dd_response_button id = Neutral>Neutral</button>' +
+                '<button class = dd_response_button id = Yes>Yes</button>' +
+                '<button class = dd_response_button id = Strong_Yes>Strong Yes</button></div>'
 
 var base_path = 'static/experiments/dietary_decision/images/'
 var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincauliflower.bmp',
@@ -170,7 +174,7 @@ var start_decision_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  // stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
+  // stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
@@ -183,7 +187,7 @@ var fixation_block = {
 
 var health_block = {
   type: 'single-stim-button',
-  // stimuli: getHealthStim,
+  // stimulus: getHealthStim,
   stimulus: getHealthStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'health_rating'},
@@ -192,14 +196,15 @@ var health_block = {
   response_ends_trial: true,
   timing_post_trial: 500,
   on_finish: function(data) {
-    jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4)})
+  	var numeric_rating = healthy_responses.indexOf(data.mouse_click)-2
+    jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4), 'coded_response': numeric_rating})
     stim_ratings[curr_stim]['health'] = Number(data.mouse_click)
   }
 }
 
 var taste_block = {
   type: 'single-stim-button',
-  // stimuli: getTasteStim,
+  // stimulus: getTasteStim,
   stimulus: getTasteStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'taste_rating'},
@@ -208,14 +213,15 @@ var taste_block = {
   response_ends_trial: true,
   timing_post_trial: 500,
   on_finish: function(data) {
-    jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4)})
+  	var numeric_rating = tasty_responses.indexOf(data.mouse_click)-2
+    jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4), 'coded_response': numeric_rating})
     stim_ratings[curr_stim]['taste'] = Number(data.mouse_click)
   }
 }
 
 var decision_block = {
   type: 'single-stim-button',
-  // stimuli: getDecisionStim,
+  // stimulus: getDecisionStim,
   stimulus: getDecisionStim,
   button_class: 'dd_response_button',
   data: {exp_id: 'dietary_decision', trial_id: 'decision'},
@@ -224,12 +230,14 @@ var decision_block = {
   response_ends_trial: true,
   timing_post_trial: 500,
   on_finish: function(data) {
+  	var decision_rating = decision_responses.indexOf(data.mouse_click)-2
     var reference_rating = JSON.stringify(stim_ratings[reference_stim])
     var stim_rating = JSON.stringify(stim_ratings[curr_stim])
     jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4), 
                       'reference': reference_stim.slice(0,-4),
                       'stim_rating': stim_rating,
-                      'reference_rating': reference_rating})
+                      'reference_rating': reference_rating,
+                      'coded_response': numeric_rating})
   }
 }
 
