@@ -25,27 +25,27 @@ img {
 
 
 #cue {
-    max-height: 25%;
+    max-height: 15vw;
     content:url('images/square.png');
 }
 
 #mask {
-    max-height: 75%;
+    max-height: 20vw;
     content:url('images/mask.png');
 }
 
 #target_left {
-    max-height: 75%;
+    max-height: 2ovw;
     content:url('images/left_arrow.png');
 }
 
 #target_right  {
-    max-height: 75%;
+    max-height: 20vw;
     content:url('images/right_arrow.png');
 }
 
 #target_up  {
-    max-height: 75%;
+    max-height: 20vw;
     content:url('images/up_arrow.png');
 }
 
@@ -53,15 +53,14 @@ img {
     position:absolute;
     top:50%;
     left:50%;
-    transform: translate(-300%,-50%);
+    transform: translate(-250%,-50%);
     
 }
 
 .stim_right {
-    max-height: 75%;
     position:absolute;
     top:50%;
     left:50%;
     margin-right:-50%;
-    transform: translate(200%,-50%);
+    transform: translate(150%,-50%);
 }

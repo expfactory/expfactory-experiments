@@ -27,8 +27,8 @@ var cues = [
 	{image: '<div class = centerbox><div class = stim_right id = cue></div></div>',
 	data: {exp_id: "antisaccade", trial_id: "cue", condition: "right"}
 	}
-]
 
+]
 var targets = [
 	{image: '<div class = centerbox><div class = stim_left id = target></div></div>',
 	data: {exp_id: "antisaccade", trial_id: "target", condition: "left"}
@@ -62,14 +62,14 @@ test_cue_sides = jsPsych.randomization.repeat([0,1],exp_len/2,false)
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the antisaccade experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -84,21 +84,21 @@ var instructions_block = {
 var begin_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var begin_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "antisaccade", "trial_id": "fixation"},
@@ -137,7 +137,7 @@ for (i=0; i<practice_len; i++) {
     }
     var cue_block = {
       type: 'single-stim',
-      stimuli: cue.image,
+      stimulus: cue.image,
       is_html: true,
       choices: [37, 38, 39],
       data: cue.data,
@@ -149,7 +149,7 @@ for (i=0; i<practice_len; i++) {
     
     var target_block = {
       type: 'single-stim',
-      stimuli: target.image,
+      stimulus: target.image,
       is_html: true,
       choices: [37, 38, 39],
       data: target.data,
@@ -161,7 +161,7 @@ for (i=0; i<practice_len; i++) {
     
     var mask_block = {
       type: 'single-stim',
-      stimuli: mask.image,
+      stimulus: mask.image,
       is_html: true,
       choices: [37, 38, 39],
       data: mask.data,
@@ -195,7 +195,7 @@ for (i=0; i<exp_len; i++) {
     }
     var cue_block = {
       type: 'single-stim',
-      stimuli: cue.image,
+      stimulus: cue.image,
       is_html: true,
       choices: [37, 38, 39],
       data: cue.data,
@@ -207,7 +207,7 @@ for (i=0; i<exp_len; i++) {
     
     var target_block = {
       type: 'single-stim',
-      stimuli: target.image,
+      stimulus: target.image,
       is_html: true,
       choices: [37, 38, 39],
       data: target.data,
@@ -219,7 +219,7 @@ for (i=0; i<exp_len; i++) {
     
     var mask_block = {
       type: 'single-stim',
-      stimuli: mask.image,
+      stimulus: mask.image,
       is_html: true,
       choices: [37, 38, 39],
       data: mask.data,

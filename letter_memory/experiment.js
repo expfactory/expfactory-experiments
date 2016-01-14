@@ -69,21 +69,21 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -100,7 +100,7 @@ for (var b=0; b<practice_block_num; b++) {
 	var letter_seq_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimuli: practice_blocks[b].image,
+	  stimulus: practice_blocks[b].image,
 	  data: practice_blocks[b].data,
 	  choices: 'none',
 	  timing_stim: 2000,
@@ -125,7 +125,7 @@ for (var b=0; b<block_num; b++) {
 	var letter_seq_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimuli: blocks[b].image,
+	  stimulus: blocks[b].image,
 	  data: blocks[b].data,
 	  choices: 'none',
 	  timing_stim: 2000,

@@ -25,27 +25,27 @@ for (l = 0; l < locations.length; l++) {
 		var c = cues[ci]
 		stims = [
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</div></div></div>',
 			data: {correct_response: 37, direction: 'left', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &larr; &larr; &larr; &larr; &larr; </p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &larr; &larr; &larr; &larr; &larr; </div></div></div>',
 			data: {correct_response: 37, direction: 'left', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </div></div></div>',
 			data: {correct_response: 37, direction: 'left', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </div></div></div>',
 			data: {correct_response: 39,direction: 'right', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </div></div></div>',
 			data: {correct_response: 39, direction: 'right', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
 		  }, 
 		  {
-			image: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_' + loc + '><p class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </p></div></div>',
+			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </div></div></div>',
 			data: {correct_response: 39, direction: 'right', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
 		  }
 	  ]
@@ -79,7 +79,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -102,7 +102,7 @@ var rest_block = {
 
 var fixation = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'ant', trial_type: 'fixation', duration: 400},
@@ -113,7 +113,7 @@ var fixation = {
 
 var no_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'ant', trial_type: 'nocue', duration: 100},
@@ -124,7 +124,7 @@ var no_cue = {
 
 var center_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_centercue_text>*</p></div>',
+  stimulus: '<div class = centerbox><div class = ANT_centercue_text>*</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'ant', trial_type: 'centercue', duration: 100},
@@ -135,7 +135,7 @@ var center_cue = {
 
 var double_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div><div class = ANT_down><p class = ANT_text>*</p></div><div class = ANT_up><p class = ANT_text>*</p></div></div>',
+  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_down><div class = ANT_text>*</div></div><div class = ANT_up><div class = ANT_text>*</div><div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'ant', trial_type: 'doublecue', duration: 100},
@@ -158,7 +158,7 @@ for (i = 0; i < block.data.length; i++) {
 	var first_fixation_gap = Math.floor( Math.random() * 1200 ) + 400;
 	var first_fixation = {
 	  type: 'single-stim',
-	  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+	  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
@@ -177,7 +177,7 @@ for (i = 0; i < block.data.length; i++) {
 	} else {
 		var spatial_cue = {
 		  type: 'single-stim',
-		  stimuli: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><p class = ANT_text>*</p></div></div>',
+		  stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><div class = ANT_text>*</p></div></div>',
 		  is_html: true,
 		  choices: 'none',
 		  data: {exp_id: 'ant', trial_type: 'spatialcue', duration: 100},
@@ -193,7 +193,7 @@ for (i = 0; i < block.data.length; i++) {
 	block.data[i]['exp_id'] = 'ant_practice'
 	var ant_practice_trial = {
 	  type: 'ant_practice',
-	  stimuli: block.image[i],
+	  stimulus: block.image[i],
 	  is_html: true,
 	  key_answer: block.data[i].correct_response,
 	  correct_text: '<div class = centerbox><div class = center-text>Correct. <br></br>Reaction time: RT ms.</div></div>',
@@ -211,7 +211,7 @@ for (i = 0; i < block.data.length; i++) {
 
 	var last_fixation = {
 	  type: 'single-stim',
-	  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+	  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
@@ -233,7 +233,7 @@ for (b = 0; b < blocks.length; b ++) {
 		var first_fixation_gap = Math.floor( Math.random() * 1200 ) + 400;
 		var first_fixation = {
 		  type: 'single-stim',
-		  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+		  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 		  is_html: true,
 		  choices: 'none',
 		  data: {exp_id: 'fixation', duration: first_fixation_gap},
@@ -252,7 +252,7 @@ for (b = 0; b < blocks.length; b ++) {
 		} else {
 			var spatial_cue = {
 			  type: 'single-stim',
-			  stimuli: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><p class = ANT_text>*</p></div></div>',
+			  stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><div class = ANT_text>*</p></div></div>',
 			  is_html: true,
 			  choices: 'none',
 			  data: {exp_id: 'spatialcue', duration: 100},
@@ -267,7 +267,7 @@ for (b = 0; b < blocks.length; b ++) {
 		block.data[i]['trial_num'] = trial_num
 		var ANT_trial = {
 		  type: 'single-stim',
-		  stimuli: block.image[i],
+		  stimulus: block.image[i],
 		  is_html: true,
 		  choices: [37,39],
 		  data: block.data[i],
@@ -279,7 +279,7 @@ for (b = 0; b < blocks.length; b ++) {
 	
 		var last_fixation = {
 		  type: 'single-stim',
-		  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+		  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 		  is_html: true,
 		  choices: 'none',
 		  data: {exp_id: 'fixation'},

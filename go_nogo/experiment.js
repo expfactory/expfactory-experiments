@@ -3,19 +3,19 @@
 /* Define helper functions */
 /* ************************************ */
 var post_trial_gap = function() {
+  gap = Math.floor( Math.random() * 500 ) + 500
   return gap;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	gap = Math.floor( Math.random() * 500 ) + 500
 	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
 var practice_index = 0
 var getFeedback = function() {
-	if (response_array[practice_index] == -1) {
+	if (practice_trials[practice_index].key_answer == -1) {
 		practice_index += 1
 		return  '<div class = centerbox><div class = center-text><font size = 20>Correct</font></p></div>'
 	} else {
@@ -30,14 +30,16 @@ var getFeedback = function() {
 var correct_responses = jsPsych.randomization.repeat([['go',32, 'respond'],['nogo',-1, 'not respond']],1)
 var gap = 0
 var current_trial = 0
-var train_stimuli = [
+var practice_stimuli = [
   {
-	image: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], condition: correct_responses[0][0], trial_id: 'practice', exp_id: 'go_nogo'}
+	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
+	data: { correct_response: correct_responses[0][1], condition: correct_responses[0][0], trial_id: 'practice', exp_id: 'go_nogo'},
+	key_answer: correct_responses[0][1]
   },
   {
-	image:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], condition:  correct_responses[1][0], trial_id: 'practice', exp_id: 'go_nogo'}
+	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
+	data: { correct_response: correct_responses[1][1], condition:  correct_responses[1][0], trial_id: 'practice', exp_id: 'go_nogo'},
+	key_answer: correct_responses[1][1]
   }
 ];
 
@@ -46,24 +48,20 @@ test_stim_responses = jsPsych.randomization.repeat([[['go',32, 'respond'],['nogo
 //set up block stim. test_stim_responses indexed by [block][stim][type]
 var test_stimuli_block = [
   {
-	image: '<div class = centerbox><div  id = "stim1"></div></div>',
+	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
 	data: { correct_response: test_stim_responses[0][0][1], condition: test_stim_responses[0][0][0], trial_id: 'test_block', exp_id: 'go_nogo'}
   },
   {
-	image:  '<div class = centerbox><div id = "stim2"></div></div>',
+	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
 	data: { correct_response: test_stim_responses[0][1][1], condition:  test_stim_responses[0][1][0], trial_id: 'test_block', exp_id: 'go_nogo'}
   }
 ];
 
 
 
-var practice_trials = jsPsych.randomization.repeat(train_stimuli, 10, true);
-var test_trials_block = jsPsych.randomization.repeat(test_stimuli_block, 50, true);
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 10);
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);
 
-var response_array = [];
-for (i = 0; i < practice_trials.data.length; i++) {
-	response_array.push(practice_trials.data[i]['correct_response'])
-}
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -72,7 +70,7 @@ for (i = 0; i < practice_trials.data.length; i++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Go-NoGo experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -87,7 +85,7 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -100,7 +98,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer get feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should <strong>' + test_stim_responses[0][0][2] + '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' + test_stim_responses[0][1][2] + '</strong>. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -116,14 +114,12 @@ var reset_block = {
 /* define practice block */
 var practice_block = {
   type: 'categorize',
-  stimuli: practice_trials.image,
+  timeline: practice_trials,
   is_html: true,
-  key_answer: response_array,
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
   timeout_message: getFeedback,
   choices: [32],
-  data: practice_trials.data,
   timing_response: 2000, 
   timing_stim: 2000,
   timing_feedback_duration: 1000,
@@ -135,10 +131,9 @@ var practice_block = {
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimuli: test_trials_block.image,
+  timeline: test_trials,
   is_html: true,
   choices: [32],
-  data: test_trials_block.data,
   timing_response: 2000,
   timing_post_trial: post_trial_gap,
   on_finish: appendData

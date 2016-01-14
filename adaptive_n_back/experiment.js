@@ -84,7 +84,7 @@ var welcome_block = {
 	
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the n-back task experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -113,28 +113,28 @@ var update_target_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_control_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -145,7 +145,7 @@ for (var i=0; i<num_trials; i++) {
 	var control_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimuli: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 	  data: {exp_id: "adaptive_n_back", condition: "n: 0", stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
@@ -173,7 +173,7 @@ for (var b = 0; b < num_blocks; b++) {
 	var start_delay_block = {
 	  type: 'text',
 	  text: getText,
-	  cont_key: 13
+	  cont_key: [13]
 	};
 	adaptive_n_back_experiment.push(start_delay_block)
 	adaptive_n_back_experiment.push(start_test_block)
@@ -184,7 +184,7 @@ for (var b = 0; b < num_blocks; b++) {
 		var test_block = {
 		  type: 'single-stim',
 		  is_html: true,
-		  stimuli: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+		  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 		  data: getData,
 		  choices: [32],
 		  timing_stim: 500,
