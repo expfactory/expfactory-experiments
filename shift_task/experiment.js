@@ -103,14 +103,14 @@ var switch_bound = switch_bounds.shift() //set first switch_bound
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the shift experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -127,21 +127,21 @@ var instructions_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = shift-center-text>We will now start practice. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = shift-center-text>We will now start the test. You will no longer be told what the important feature is or when it switches. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var rest_block = {
   type: 'text',
   text: '<div class = centerbox><p class = shift-center-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -159,7 +159,7 @@ var reset_block = {
 //Create chunk to alert subject that shift happens during practice
 var alert_block = {
   type: 'single-stim',
-  stimuli: getAlert,
+  stimulus: getAlert,
   is_html: true,
   choices: 'none',
   timing_stim: 2000,
@@ -179,7 +179,7 @@ var alert_chunk = {
 /* define test block */
 var practice_stim_block = {
   type: 'single-stim',
-  stimuli: getStim,
+  stimulus: getStim,
   is_html: true,
   data: getData,
   choices: choices,
@@ -193,7 +193,7 @@ var practice_stim_block = {
 
 var stim_block = {
   type: 'single-stim',
-  stimuli: getStim,
+  stimulus: getStim,
   is_html: true,
   data: getData,
   choices: choices,
@@ -207,7 +207,7 @@ var stim_block = {
 
 var practice_feedback_block = {
   type: 'single-stim',
-  stimuli: getFeedback,
+  stimulus: getFeedback,
   is_html: true,
   data: getData,
   choices: 'none',
@@ -246,7 +246,7 @@ var practice_feedback_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFeedback,
+  stimulus: getFeedback,
   is_html: true,
   data: getData,
   choices: 'none',

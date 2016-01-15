@@ -10,7 +10,7 @@ var getChar = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var correct_responses = [["left arrow",37],["down arrow",40]]
+var possible_responses = [["M key",77],["Z key",90]]
 var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
 var trial_proportions = ["AX", "AX", "AX", "AX", "AX", "AX", "AX", "BX", "AY", "BY"]
 var block1_list = jsPsych.randomization.repeat(trial_proportions,4)
@@ -32,14 +32,14 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a letter presented for a short time, followed by the presentation of another letter. For instance you may see "A", which would then disappear to be replaced by "F".</p><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> letter. If the first letter was an "A" <strong>AND</strong> the second letter was an "X", press the left arrow key (using your right index finger). Otherwise press the down arrow key (using your right middle finger).</p></div>',
+	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a letter presented for a short time, followed by the presentation of another letter. For instance you may see "A", which would then disappear to be replaced by "F".</p><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> letter. If the first letter was an "A" <strong>AND</strong> the second letter was an "X", press the ' + possible_responses[0][0] + '. Otherwise press the ' + possible_responses[1][0] + '.</p></div>',
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key after you see "A" followed by an "X", and the down arrow key for all other combinations.</p></div>'
 	],
   allow_keys: false,
@@ -55,19 +55,19 @@ var rest_block = {
 
 var wait_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_feedback>Trial over, get ready for the next one.</p></div>',
+  stimulus: '<div class = centerbox><div class = AX_feedback>Trial over, get ready for the next one.</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "feedback"},
-  timing_post_trial: 0,
+  timing_post_trial: 500,
   timing_stim: 1000,
   timing_response: 1000
 }
 
-/* define test block cues and targets*/
+/* define test block cues and probes*/
 var A_cue = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_text>A</p></div>',
+  stimulus: '<div class = centerbox><div class = AX_text>A</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "cue"},
@@ -79,7 +79,7 @@ var A_cue = {
 
 var other_cue = {
   type: 'single-stim',
-  stimuli: getChar,
+  stimulus: getChar,
   is_html: true,
   choices: 'none',
   data: {exp_id: "ax_cpt", trial_id: "cue"},
@@ -91,9 +91,9 @@ var other_cue = {
 
 var X_probe = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_text>X</p></div>',
+  stimulus: '<div class = centerbox><div class = AX_text>X</div></div>',
   is_html: true,
-  choices: [37,40],
+  choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {exp_id: "ax_cpt", trial_id: "probe"},
   timing_stim: 300,
   timing_response: 1300,
@@ -103,9 +103,9 @@ var X_probe = {
 
 var other_probe = {
   type: 'single-stim',
-  stimuli: getChar,
+  stimulus: getChar,
   is_html: true,
-  choices: [37,40],
+  choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {exp_id: "ax_cpt", trial_id: "probe"},
   timing_stim: 300,
   timing_response: 1300,
@@ -127,31 +127,31 @@ for (b = 0; b< blocks.length; b++) {
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)
-        probe = jQuery.extend(true, {}, X_probe)
+        		probe = jQuery.extend(true, {}, X_probe)
 				cue.data["condition"]="AX"
-				target.data["condition"]="AX"
+				probe.data["condition"]="AX"
 				break;
 			case "BX":
 				cue = jQuery.extend(true, {}, other_cue)
-        probe = jQuery.extend(true, {}, X_probe)
+        		probe = jQuery.extend(true, {}, X_probe)
 				cue.data["condition"]="BX"
-				target.data["condition"]="BX"
+				probe.data["condition"]="BX"
 				break;
 			case "AY":
 				cue = jQuery.extend(true, {}, A_cue)
-        probe = jQuery.extend(true, {}, other_probe)
+        		probe = jQuery.extend(true, {}, other_probe)
 				cue.data["condition"]="AY"
-				target.data["condition"]="AY"
+				probe.data["condition"]="AY"
 				break;
 			case "BY":
 				cue = jQuery.extend(true, {}, other_cue)
-        probe = jQuery.extend(true, {}, other_probe)
+        		probe = jQuery.extend(true, {}, other_probe)
 				cue.data["condition"]="BY"
-				target.data["condition"]="BY"
+				probe.data["condition"]="BY"
 				break;
 		}
 		ax_cpt_experiment.push(cue)
-		ax_cpt_experiment.push(target)
+		ax_cpt_experiment.push(probe)
 		ax_cpt_experiment.push(wait_block)
 	}
 	ax_cpt_experiment.push(rest_block)

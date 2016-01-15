@@ -30,7 +30,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -56,13 +56,13 @@ var start_minus_block = {
 
 var start_alternate_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Alternate between adding and subtracting 3</strong> to the numbers and enter the value in the box below the number.</p><p class = block-text>For instance, if the numbers were 27, 13, 40, your responses should be 30 (27+3), 10 (13-3), 43 (40+3). Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Alternate between adding and subtracting 3</strong> to the numbers and enter the value in the box below the number.</p><p class = block-text>For instance, if the numbers were 27, [13], 40, your responses should be 30 (27+3), 10 ([13]-3), 43 (40+3). Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
   timing_post_trial: 1000
 };
 
 var practice_block = {
     type: 'survey-text',
-    questions: [["57","20","17","87","11","43","16","26","66","14","19","75"]]
+    questions: ["57","20","17","87","11","43","16","26","66","14","19","75"]
 };
 
 var add_block = {
@@ -85,7 +85,7 @@ var alternate_block = {
 
 var posttask_questionnaire = {
     type: 'survey-text',
-    questions: [['Did you use a numpad?']],
+    questions: ['Did you use a numpad?'],
     data: {'exp_id': 'plus_minus', 'trial_id': 'post-task questionnaire'}
 };
 

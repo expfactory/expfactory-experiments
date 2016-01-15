@@ -71,8 +71,8 @@ for (var i = 0; i<difficulty_order.length; i++) {
 var welcome_block = {
 	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the letter memory experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -88,7 +88,7 @@ var category_instructions = '<ul class = list-text>' +
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented on at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p></div>',
 	'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
   ],
@@ -100,28 +100,28 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var end_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -139,7 +139,7 @@ prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.jo
 data = {exp_id: 'keep_track', trial_id: 'practice_prompt', condition: 'target_length_' + target.length, targets: target}
 var prompt_block = {
 	type: 'single-stim',
-	stimuli: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
+	stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 	is_html: true,
 	choices: [13],
 	data: data,
@@ -148,7 +148,7 @@ var prompt_block = {
 }
 var wait_block = {
 	type: 'single-stim',
-	stimuli: ' ',
+	stimulus: ' ',
 	is_html: true,
 	choices: 'none',
 	prompt: prompt,
@@ -163,7 +163,7 @@ for (i = 0; i < block.length; i++ ) {
 	data = {exp_id: 'keep_track', trial_id: 'practice_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
 	var track_block = {
 		type: 'single-stim',
-		stimuli: stim,
+		stimulus: stim,
 		is_html: true,
 		choices: 'none',
 		data: data,
@@ -192,7 +192,7 @@ for (b=0; b<blocks.length; b++) {
 	data = {exp_id: 'keep_track', trial_id: 'test_prompt', condition: 'target_length_' + target.length, targets: target}
 	var prompt_block = {
 		type: 'single-stim',
-		stimuli: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
+		stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 		is_html: true,
 		choices: [13],
 		data: data,
@@ -201,7 +201,7 @@ for (b=0; b<blocks.length; b++) {
 	}
 	var wait_block = {
 		type: 'single-stim',
-		stimuli: ' ',
+		stimulus: ' ',
 		is_html: true,
 		choices: 'none',
 		prompt: prompt,
@@ -216,7 +216,7 @@ for (b=0; b<blocks.length; b++) {
 		data = {exp_id: 'keep_track', trial_id: 'test_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
 		var track_block = {
 			type: 'single-stim',
-			stimuli: stim,
+			stimulus: stim,
 			is_html: true,
 			choices: 'none',
 			data: data,

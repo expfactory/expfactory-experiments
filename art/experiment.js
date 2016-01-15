@@ -323,7 +323,7 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the ART experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -344,14 +344,14 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var round_over_block = {
   type: 'text',
   text: getRoundOverText,
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -375,17 +375,16 @@ var set_fish_block = {
 
 var practice_block = {
   type: 'single-stim-button',
-  stimuli: getGame,
+  stimulus: getGame,
   button_class: 'select-button',
   data: get_practice_data,
   timing_post_trial: 0
 };
 
 
-var practice_chunk = {
-    chunk_type: 'while',
+var practice_node = {
     timeline: [practice_block],
-    continue_function: function(data){ 
+    loop_function: function(data){ 
        if (round_over == 1) {
 			return false
 		} else {
@@ -396,16 +395,15 @@ var practice_chunk = {
 
 var game_block = {
   type: 'single-stim-button',
-  stimuli: getGame,
+  stimulus: getGame,
   button_class: 'select-button',
   data: get_data,
   timing_post_trial: 0
 };
 
-var game_chunk = {
-    chunk_type: 'while',
+var game_node = {
     timeline: [game_block],
-    continue_function: function(data){
+    loop_function: function(data){
         if (round_over == 1) {
 			return false
 		} else {
@@ -434,18 +432,19 @@ for (b = 0; b<practiceblocks.length; b++) {
 	var tournament_intro_block = {
 		type: 'text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-		cont_key: 13,
+		cont_key: [13],
 		data: {weather: weather, release: release},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
+			tournament_bank = 0
 		}
 	}
 	art_experiment.push(tournament_intro_block)
 	art_experiment.push(ask_fish_block)
 	art_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
-		art_experiment.push(practice_chunk)
+		art_experiment.push(practice_node)
 		art_experiment.push(round_over_block)
 	}
 }
@@ -469,16 +468,17 @@ for (b = 0; b<blocks.length; b++) {
 	var tournament_intro_block = {
 		type: 'text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-		cont_key: 13,
+		cont_key: [13],
 		data: {weather: weather, release: release},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
+			tournament_bank = 0
 		}
 	}
 	art_experiment.push(tournament_intro_block)
 	for (i=0; i <num_rounds; i++) {
-		art_experiment.push(game_chunk)
+		art_experiment.push(game_node)
 		art_experiment.push(round_over_block)
 	}
 }

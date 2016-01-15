@@ -48,7 +48,7 @@ for (i = 0; i < test_trials.data.length; i++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the flanker experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -64,20 +64,20 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Done with practice. Starting test.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   timing_stim: 500,
@@ -94,7 +94,7 @@ for (i=0; i<practice_len; i++) {
 	flanker_experiment.push(fixation_block)
 	var practice_block = {
 	  type: 'categorize',
-	  stimuli: practice_trials.image[i],
+	  stimulus: practice_trials.image[i],
 	  is_html: true,
 	  key_answer: practice_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
@@ -116,7 +116,7 @@ for (i=0; i<exp_len; i++) {
 	flanker_experiment.push(fixation_block)
 	var test_block = {
 	  type: 'categorize',
-	  stimuli: test_trials.image[i],
+	  stimulus: test_trials.image[i],
 	  is_html: true,
 	  key_answer: test_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',

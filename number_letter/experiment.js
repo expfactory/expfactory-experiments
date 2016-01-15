@@ -65,7 +65,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -73,7 +73,7 @@ var instructions_block = {
   type: 'instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left for odd, right for even.</p></div>',
 	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p></div>'
 	],
   allow_keys: false,
@@ -92,7 +92,7 @@ for (i=0; i<half_block_len; i++) {
     stim = getTopStim()
     var top_block = {
         type: 'single-stim',
-        stimuli: stim[1],
+        stimulus: stim[1],
         is_html: true,
         choices: [37,39],
         data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'top_oddeven'},
@@ -104,7 +104,7 @@ for (i=0; i<half_block_len; i++) {
     stim = getBottomStim()
     var bottom_block = {
         type: 'single-stim',
-        stimuli: stim[1],
+        stimulus: stim[1],
         is_html: true,
         choices: [37,39],
         data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'bottom_consonantvowel'},
@@ -116,7 +116,7 @@ for (i=0; i<rotate_block_len; i++) {
     stim = getRotateStim()
     var rotate_block = {
         type: 'single-stim',
-        stimuli: stim[1],
+        stimulus: stim[1],
         is_html: true,
         choices: [37,39],
         data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'rotate_switch'},

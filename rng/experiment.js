@@ -1,6 +1,3 @@
-// reference: http://www.sciencedirect.com/science/article/pii/S1053811905001424
-
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
@@ -28,15 +25,15 @@ var grid =
     '</div>'
 
 var empty_grid = 
-		'<div class = numbox><div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
-		'<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div></div>'
+    '<div class = numbox><div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div>' +
+    '<div class = "blank-square num-button"><div class = content><div class = numbers ></div></div></div></div>'
 
 
 
@@ -49,10 +46,10 @@ var num_trials = 162
 practice_stims = []
 test_stims = []
 for (var i = 0; i < 10; i++) {
-	practice_stims.push(grid)
+  practice_stims.push(grid)
 }
 for (var i = 0; i < num_trials; i++) {
-	test_stims.push(grid)
+  test_stims.push(grid)
 }
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -60,10 +57,10 @@ for (var i = 0; i < num_trials; i++) {
 /* define static blocks */
 
 var welcome_block = {
-	
+  
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the random number generation task experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -74,27 +71,27 @@ var instructions_block = {
   ],
   allow_keys: false,
   show_clickable_nav: true,
-  timing_post_trial: 1000
+  //timing_post_trial: 1000
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -116,31 +113,31 @@ rng_experiment.push(welcome_block);
 rng_experiment.push(instructions_block);
 rng_experiment.push(start_practice_block);
 for (var i = 0; i <practice_stims.length; i++) {
-	var  practice_block = {
-	  type: 'single-stim-button',
-	  stimuli: [practice_stims[i]],
-	  button_class: 'num-button',
-	  data: {exp_id: "rng", trial_id: "practice"},
-	  timing_response: 800,
-	  response_ends_trial: false,
-	  timing_post_trial: 0
-	};
-	rng_experiment.push(practice_block)
-	rng_experiment.push(wait_block)
+  var  practice_block = {
+    type: 'single-stim-button',
+    stimuli: [practice_stims[i]],
+    button_class: 'num-button',
+    data: {exp_id: "rng", trial_id: "practice"},
+    timing_response: 800,
+    response_ends_trial: false,
+    timing_post_trial: 0
+  };
+  rng_experiment.push(practice_block)
+  rng_experiment.push(wait_block)
 }
 rng_experiment.push(start_test_block);
 //Loop should be changed to go until test_stims.length later
 for (var i = 0; i <practice_stims.length; i++) {
-	var  test_block = {
-	  type: 'single-stim-button',
-	  stimuli: [test_stims[i]],
-	  button_class: 'num-button',
-	  data: {exp_id: "rng", trial_id: "test"},
-	  timing_response: 800,
-	  response_ends_trial: false,
-	  timing_post_trial: 0
-	};
-	rng_experiment.push(test_block)
-	rng_experiment.push(wait_block)
+  var  test_block = {
+    type: 'single-stim-button',
+    stimuli: [test_stims[i]],
+    button_class: 'num-button',
+    data: {exp_id: "rng", trial_id: "test"},
+    timing_response: 800,
+    response_ends_trial: false,
+    timing_post_trial: 0
+  };
+  rng_experiment.push(test_block)
+  rng_experiment.push(wait_block)
 }
 rng_experiment.push(end_block)

@@ -154,7 +154,7 @@ var cueArray = ['TOP','BOT']
 var probes = ['pos','pos','neg','con']
 var probeTypeArray=jsPsych.randomization.repeat(probes,experimentLength/4)
 var stimFix = ['fixation']
-var pathSource = 'static/images/sternbergImages/'
+var pathSource = 'static/experiments/directed_forgetting/images/'
 var fileType = '.png'
 
 
@@ -166,7 +166,7 @@ var fileType = '.png'
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Directed Forgetting task. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -174,7 +174,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -195,13 +195,13 @@ var instructions_block = {
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
@@ -213,7 +213,7 @@ var start_fixation_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
@@ -225,7 +225,7 @@ var fixation_block = {
 
 var ITI_fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
   data: {exp_id: "directed_forgetting", "trial_id": "ITI_fixation"},
@@ -238,7 +238,7 @@ var ITI_fixation_block = {
 
 var training_block = {
   type: 'single-stim',
-  stimuli: getTrainingSet,
+  stimulus: getTrainingSet,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "test"},
   choices: 'none',
@@ -252,7 +252,7 @@ var training_block = {
 
 var cue_block = {
   type: 'single-stim',
-  stimuli: getCue,
+  stimulus: getCue,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "cue"},
   choices: false,
@@ -264,7 +264,7 @@ var cue_block = {
 
 var probe_block = {
   type: 'single-stim',
-  stimuli: getProbe,
+  stimulus: getProbe,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "probe"},
   choices: [37,39],
@@ -280,7 +280,7 @@ var probe_block = {
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(welcome_block);
 directed_forgetting_experiment.push(instructions_block);
-for (r = 0; i < num_runs; r ++ ) {
+for (r = 0; r < num_runs; r ++ ) {
 directed_forgetting_experiment.push(start_test_block);
 	for(i=0; i<num_trials; i++){
 		directed_forgetting_experiment.push(start_fixation_block);

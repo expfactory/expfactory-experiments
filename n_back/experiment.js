@@ -47,7 +47,7 @@ var control_before = Math.round(Math.random()) //0 control comes before test, 1,
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the n-back task experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -64,28 +64,28 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_control_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -96,8 +96,8 @@ for (var i=0; i<num_trials; i++) {
 	var control_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimuli: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-	  data: {exp_id: "n_back", condition: "n: 0", stim: stim, target: 't'},
+	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+	  data: {exp_id: "n_back", load:  0, stim: stim, target: 't'},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,
@@ -122,7 +122,7 @@ for (var d = 0; d<delays.length; d++) {
 	var start_delay_block = {
 	  type: 'text',
 	  text: '<div class = centerbox><p class = block-text>In these next blocks, you should respond when the current letter matches the letter that appeared ' + delay + ' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-	  cont_key: 13
+	  cont_key: [13]
 	};
 	n_back_experiment.push(start_delay_block)
 	for (var b = 0; b < num_blocks; b++) {
@@ -138,8 +138,8 @@ for (var d = 0; d<delays.length; d++) {
 			var test_block = {
 			  type: 'single-stim',
 			  is_html: true,
-			  stimuli: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-			  data: {exp_id: "n_back", condition: "n: " + delay, stim: stim, target: target},
+			  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+			  data: {exp_id: "n_back", load:  delay, stim: stim, target: target},
 			  choices: [32],
 			  timing_stim: 500,
 			  timing_response: 2000,

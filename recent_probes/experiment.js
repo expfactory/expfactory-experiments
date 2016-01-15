@@ -116,7 +116,6 @@ var getProbe = function() {
 	global_trial = jsPsych.progress().current_trial_global
 	trainingArray=jsPsych.randomization.repeat(stimArray,1);
 	currSet=jsPsych.data.getData()[global_trial-2].stim
-	lastSet=jsPsych.data.getData()[global_trial-7].stim
 	if(currTrial==0){
 		temp=Math.floor(Math.random()*2)
 		if(temp==1){
@@ -133,6 +132,7 @@ var getProbe = function() {
 			return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
 		}
 	}else if(currTrial>0){
+		lastSet=jsPsych.data.getData()[global_trial-7].stim
 		probeType=probeTypeArray.pop()
 		if(probeType=='rec_pos'){
 			recProbes=lastSet.filter(function(y){return (jQuery.inArray(y,currSet) > -1)})
@@ -178,7 +178,7 @@ var fileType = '.png'
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Recent Probes task. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -186,7 +186,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -203,14 +203,14 @@ var instructions_block = {
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>We will now start a test run. Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "recent_probes", "trial_id": "fixation"},
@@ -222,7 +222,7 @@ var start_fixation_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "recent_probes", "trial_id": "fixation"},
@@ -234,7 +234,7 @@ var fixation_block = {
 
 var ITI_fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+  stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
   data: {exp_id: "recent_probes", "trial_id": "ITI_fixation"},
@@ -247,7 +247,7 @@ var ITI_fixation_block = {
 
 var training_block = {
   type: 'single-stim',
-  stimuli: getTrainingSet,
+  stimulus: getTrainingSet,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "test"},
   choices: 'none',
@@ -260,7 +260,7 @@ var training_block = {
 
  var probe_block = {
   type: 'single-stim',
-  stimuli: getProbe,
+  stimulus: getProbe,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "probe"},
   choices: [37,39],

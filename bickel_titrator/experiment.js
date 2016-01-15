@@ -27,6 +27,33 @@ var updateDelay = function() {
   step = 250
   immediate_amount = 500
   curr_delay = delays.shift()
+  curr_delay_in_minutes = convertToMins(curr_delay)
+}
+
+var convertToMins = function(time) {
+  switch(time) {
+    case '1 day':
+      return 1
+      break;
+    case '1 week':
+      return 7
+      break;
+    case '1 month':
+      return 30
+      break;
+    case '60 months':
+      return 180
+      break;
+    case '1 year':
+      return 365
+      break;
+    case '5 years':
+      return 1825
+      break;
+    case '25 years':
+      return 9125
+      break;
+  }
 }
 
 /* ************************************ */
@@ -36,6 +63,7 @@ var updateDelay = function() {
 var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year', '5 years', '25 years'])
 var choices = [37, 39]
 var curr_delay = delays.shift()
+var curr_delay_in_minutes = convertToMins(curr_delay)
 var immediate_amount = 500
 var delayed_amount = 1000
 var displayed_amounts = []
@@ -49,7 +77,7 @@ var step = 250
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -73,7 +101,7 @@ var update_delay_block = {
 
 var test_block = {
 	type: 'single-stim',
-	stimuli: getStim,
+	stimulus: getStim,
   data: {'exp_id': 'bickel_titrator'},
 	is_html: true,
 	choices: choices,
@@ -84,7 +112,7 @@ var test_block = {
     } else {
       var choice = 'immediate'
     }
-    jsPsych.data.addDataToLastTrial({'immediate_amout': immediate_amount, 'delay': curr_delay, 'choice': choice})
+    jsPsych.data.addDataToLastTrial({'sooner_amount': immediate_amount, 'later_amount': delayed_amount, 'sooner_time_days': 0, 'later_time_days': curr_delay_in_minutes, 'choice': choice})
     updateAmount(choice)
   },
   timing_post_trial: 1000
@@ -93,7 +121,7 @@ var test_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 

@@ -6,22 +6,22 @@
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var congruent_stim = [{image: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 82}},
-						   {image: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 66}},
-						   {image: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 71}}];
+var congruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 82}, key_answer: 82},
+						   {stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 66}, key_answer: 66},
+						   {stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 71}, key_answer: 71}];
 							
-var incongruent_stim = [{image: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82}},
-						{image: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82}},
-						{image: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66}},
-						{image: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66}},
-						{image: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71}},
-						{image: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71}}];
+var incongruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82}, key_answer: 82},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82, key_answer: 82}},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66, key_answer: 66}},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66, key_answer: 66}},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71, key_answer: 71}},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71}, key_answer: 71}];
 var stims = [].concat(congruent_stim,congruent_stim,incongruent_stim)
 practice_len = 24
-practice_stims = jsPsych.randomization.repeat(stims,practice_len/12,true)
+practice_stims = jsPsych.randomization.repeat(stims,practice_len/12)
 
 exp_len = 96
-test_stims = jsPsych.randomization.repeat(stims,exp_len/12,true)
+test_stims = jsPsych.randomization.repeat(stims,exp_len/12)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -30,7 +30,7 @@ test_stims = jsPsych.randomization.repeat(stims,exp_len/12,true)
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Stroop experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -47,27 +47,27 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with a few practice trials. Remember, press the key corresponding to the <strong>ink</strong> color of the word: "r" for words colored red, "b" for words colored blue, and "g" for words colored green.</p><p class = block-text>Press <strong>enter</strong> to begin practice.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "stop_signal", "trial_id": "fixation"},
@@ -86,18 +86,19 @@ for (i=0; i<practice_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var practice_block = {
 	  type: 'categorize',
-	  stimuli: practice_stims.image[i],
+	  timeline: practice_stims,
 	  is_html: true,
-	  key_answer: practice_stims.data[i].correct_response,
-	  correct_text: '<br></br><div class = center-text><font size = 20>Correct</font></div>',
-	  incorrect_text: '<br></br><div class = center-text><font size = 20>Incorrect</font></div>',
+	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+	  incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
 	  choices: [66,71,82],
-	  data: $.extend({},practice_stims.data[i],{trial_id: 'practice'}),
 	  timing_response: -1, 
 	  timing_stim: -1,
 	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: true,
-	  timing_post_trial: 250
+	  timing_post_trial: 250,
+	  on_finish: function() {
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'practice'})
+	  }
 	}
 	stroop_experiment.push(practice_block)
 }
@@ -108,18 +109,19 @@ for (i=0; i<exp_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var test_block = {
 	  type: 'categorize',
-	  stimuli: test_stims.image[i],
+	  timeline: test_stims,
 	  is_html: true,
-	  key_answer: test_stims.data[i].correct_response,
-	  correct_text: '<br></br><br></br><div class = center-text><font size = 20>Correct</font></div>',
-	  incorrect_text: '<br></br><br></br><div class = center-text><font size = 20>Incorrect</font></div>',
+	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+	  incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
 	  choices: [66,71,82],
-	  data: $.extend({},test_stims.data[i],{trial_id: 'test'}),
 	  timing_response: -1, 
 	  timing_stim: -1,
 	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: true,
-	  timing_post_trial: 250
+	  timing_post_trial: 250,
+	  on_finish: function() {
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'practice'})
+	  }
 	}
 	stroop_experiment.push(test_block)
 }
