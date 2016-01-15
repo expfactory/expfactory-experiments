@@ -5,7 +5,7 @@ general:
 test:
   override:
     - source $HOME/.bashrc    
-    - $HOME/miniconda2/bin/python -c "from expfactory.views import generate_experiment_web; generate_experiment_web("web")"
+    - $HOME/miniconda2/bin/python -c "from expfactory.views import generate_experiment_web; generate_experiment_web('web')"
 
 dependencies:
   pre:
