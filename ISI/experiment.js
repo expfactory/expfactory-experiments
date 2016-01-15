@@ -10,7 +10,7 @@ function appendTextAfter(input,search_term, new_text) {
 
 function appendTextAfter2(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
-	return input.slice(0,index) + new_text + input.slice(index+'/static/experiments/ISI/images/grey_small_square.png'.length+6+1)
+	return input.slice(0,index) + new_text + input.slice(index+'/static/experiments/isi/images/grey_small_square.png'.length+6+1)
 }
 
 
@@ -51,20 +51,20 @@ var appendRewardDataFW= function(){
 var getRound = function(){
   if(roundOver == 0){ // start of the round
 		gameState=gameSetup
-			gameState=appendTextAfter2(gameState, "id = '26'", " src='/static/experiments/ISI/images/"+whichLargeColor1+".png'")		
-			gameState=appendTextAfter2(gameState, "id = '27'", " src='/static/experiments/ISI/images/"+whichLargeColor2+".png'")		
+			gameState=appendTextAfter2(gameState, "id = '26'", " src='/static/experiments/isi/images/"+whichLargeColor1+".png'")		
+			gameState=appendTextAfter2(gameState, "id = '27'", " src='/static/experiments/isi/images/"+whichLargeColor2+".png'")		
 
 		return gameState
   }else if(roundOver == 1){
   			gameState=gameSetup
-  			gameState=appendTextAfter2(gameState, "id = '26'", " src='/static/experiments/ISI/images/"+whichLargeColor1+".png'")		
-			gameState=appendTextAfter2(gameState, "id = '27'", " src='/static/experiments/ISI/images/"+whichLargeColor2+".png'")		
+  			gameState=appendTextAfter2(gameState, "id = '26'", " src='/static/experiments/isi/images/"+whichLargeColor1+".png'")		
+			gameState=appendTextAfter2(gameState, "id = '27'", " src='/static/experiments/isi/images/"+whichLargeColor2+".png'")		
 		clickedCards.sort(function(a, b){return a-b})
 		for(i=0;i<clickedCards.length; i++){
 			if(color1.indexOf(clickedCards[i],0)!=-1){
-				gameState=appendTextAfter2(gameState, "id = '"+""+clickedCards[i]+"'", " src='/static/experiments/ISI/images/"+whichSmallColor1+".png'")		
+				gameState=appendTextAfter2(gameState, "id = '"+""+clickedCards[i]+"'", " src='/static/experiments/isi/images/"+whichSmallColor1+".png'")		
 			} else if(color2.indexOf(clickedCards[i],0)!=-1){
-				gameState=appendTextAfter2(gameState, "id = '"+""+clickedCards[i]+"'", " src='/static/experiments/ISI/images/"+whichSmallColor2+".png'")		
+				gameState=appendTextAfter2(gameState, "id = '"+""+clickedCards[i]+"'", " src='/static/experiments/isi/images/"+whichSmallColor2+".png'")		
 			}
 		}
 		return gameState
@@ -123,9 +123,9 @@ var makeChoice = function(clicked_id){
 	if(clicked_id == 26){
 	for(i=1;i<26;i++){
 			if(color1.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/static/experiments/ISI/images/'+whichSmallColor1+'.png';
+			document.getElementById(''+i+'').src='/static/experiments/isi/images/'+whichSmallColor1+'.png';
 			} else if(color2.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/static/experiments/ISI/images/'+whichSmallColor2+'.png';
+			document.getElementById(''+i+'').src='/static/experiments/isi/images/'+whichSmallColor2+'.png';
 			}
 		}
 	bigBoxChoices.push([clicked_id, whichLargeColor1])
@@ -135,9 +135,9 @@ var makeChoice = function(clicked_id){
 	}else if(clicked_id == 27){
 	for(i=1;i<26;i++){
 			if(color1.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/static/experiments/ISI/images/'+whichSmallColor1+'.png';
+			document.getElementById(''+i+'').src='/static/experiments/isi/images/'+whichSmallColor1+'.png';
 			} else if(color2.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/static/experiments/ISI/images/'+whichSmallColor2+'.png';
+			document.getElementById(''+i+'').src='/static/experiments/isi/images/'+whichSmallColor2+'.png';
 			}
 		}
 	
@@ -319,79 +319,79 @@ whichSmallColor2 = colors[2]+'_'+shapes[0]
 
  
  gameSetup= "<div class = bigbox><div class = numbox>"+
- 			"<div class = square><input type='image' id = '1' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '2' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
-            "<div class = square><input type='image' id = '3' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
-  		    "<div class = square><input type='image' id = '4' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '5' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 			"<div class = square><input type='image' id = '1' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '2' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+            "<div class = square><input type='image' id = '3' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+  		    "<div class = square><input type='image' id = '4' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '5' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
  		    
- 		    "<div class = square><input type='image' id = '6' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '7' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
-  			"<div class = square><input type='image' id = '8' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
-			"<div class = square><input type='image' id = '9' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '10' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '6' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '7' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+  			"<div class = square><input type='image' id = '8' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+			"<div class = square><input type='image' id = '9' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '10' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
  		    
- 		    "<div class = square><input type='image' id = '11' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '12' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '13' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '14' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '15' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '11' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '12' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '13' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '14' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '15' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
  		   	
- 		   	"<div class = square><input type='image' id = '16' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '17' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '18' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '19' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '20' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		   	"<div class = square><input type='image' id = '16' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '17' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '18' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '19' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '20' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
  		  
- 		    "<div class = square><input type='image' id = '21' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '22' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '23' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '24' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '25' src='/static/experiments/ISI/images/grey_small_square.png' onclick = chooseCard(this.id)></div></div>"+
+ 		    "<div class = square><input type='image' id = '21' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '22' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '23' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '24' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '25' src='/static/experiments/isi/images/grey_small_square.png' onclick = chooseCard(this.id)></div></div>"+
  		    
  		    
  		    
- 		    "<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/ISI/images/"+whichLargeColor1+".png' onclick = makeChoice(this.id)></div>"+
- 		    "<div class = bottomRight><input type='image' id = '27' src='/static/experiments/ISI/images/"+whichLargeColor2+".png' onclick = makeChoice(this.id)></div></div></div>"
+ 		    "<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/isi/images/"+whichLargeColor1+".png' onclick = makeChoice(this.id)></div>"+
+ 		    "<div class = bottomRight><input type='image' id = '27' src='/static/experiments/isi/images/"+whichLargeColor2+".png' onclick = makeChoice(this.id)></div></div></div>"
  		    
 
 
 
 instructionsSetup =  "<div class = bigbox><div class = numbox>"+
- 			"<div class = square><input type='image' id = '1' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '2' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
-            "<div class = square><input type='image' id = '3' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
-  		    "<div class = square><input type='image' id = '4' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '5' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 			"<div class = square><input type='image' id = '1' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '2' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+            "<div class = square><input type='image' id = '3' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+  		    "<div class = square><input type='image' id = '4' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '5' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
  		    
- 		    "<div class = square><input type='image' id = '6' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '7' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
-  			"<div class = square><input type='image' id = '8' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
-			"<div class = square><input type='image' id = '9' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '10' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '6' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '7' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+  			"<div class = square><input type='image' id = '8' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+			"<div class = square><input type='image' id = '9' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '10' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
  		    
- 		    "<div class = square><input type='image' id = '11' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '12' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '13' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '14' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '15' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '11' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '12' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '13' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '14' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '15' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
  		   	
- 		   	"<div class = square><input type='image' id = '16' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '17' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '18' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '19' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '20' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		   	"<div class = square><input type='image' id = '16' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '17' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '18' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '19' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '20' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
  		  
- 		    "<div class = square><input type='image' id = '21' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '22' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '23' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '24' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
- 		    "<div class = square><input type='image' id = '25' src='/static/experiments/ISI/images/grey_small_square.png' onclick = instructionFunction(this.id)></div></div>"+
+ 		    "<div class = square><input type='image' id = '21' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '22' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '23' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '24' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>"+
+ 		    "<div class = square><input type='image' id = '25' src='/static/experiments/isi/images/grey_small_square.png' onclick = instructionFunction(this.id)></div></div>"+
  		    
  		    
  		    
- 		    "<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/ISI/images/"+whichLargeColor1+".png' onclick = makeInstructChoice(this.id)></div>"+
- 		    "<div class = bottomRight><input type='image' id = '27' src='/static/experiments/ISI/images/"+whichLargeColor2+".png' onclick = makeInstructChoice(this.id)></div></div></div>"
+ 		    "<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/isi/images/"+whichLargeColor1+".png' onclick = makeInstructChoice(this.id)></div>"+
+ 		    "<div class = bottomRight><input type='image' id = '27' src='/static/experiments/isi/images/"+whichLargeColor2+".png' onclick = makeInstructChoice(this.id)></div></div></div>"
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -436,7 +436,7 @@ var subjectPracticeBlock ={
   type: 'single-stim',
   stimuli: instructionsSetup,
   is_html: true,
-  data: {exp_id: "ISI", trial_id: "test"},
+  data: {exp_id: "isi", trial_id: "test"},
   choices: [37],
   timing_post_trial: 500,
 };
@@ -455,7 +455,7 @@ var practice_block = {
   type: 'single-stim',
   stimuli: getRound,
   is_html: true,
-  data: {exp_id: "ISI", trial_id: "test"},
+  data: {exp_id: "isi", trial_id: "test"},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
@@ -466,7 +466,7 @@ var rewardFW_block = {
   type: 'single-stim',
   stimuli:getRewardFW,
   is_html: true,
-  data: {exp_id: "ISI", trial_id: "reward"},
+  data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],
   timing_post_trial: 1000,
   on_finish: appendRewardDataFW,
@@ -476,7 +476,7 @@ var rewardDW_block = {
   type: 'single-stim',
   stimuli:getRewardDW,
   is_html: true,
-  data: {exp_id: "ISI", trial_id: "reward"},
+  data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],
   timing_post_trial: 1000,
   on_finish: appendRewardDataDW,  
@@ -488,7 +488,7 @@ var subjectRewardBlock ={
   type: 'single-stim',
   stimuli:getReward,
   is_html: true,
-  data: {exp_id: "ISI", trial_id: "reward"},
+  data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],
   timing_post_trial: 1000,
 };
