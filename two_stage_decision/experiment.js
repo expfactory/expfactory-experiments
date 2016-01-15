@@ -113,7 +113,7 @@ var get_ss_stim = function(images, colors, condition) {
 
 
 /*
-The following methods all support the user-dependent presentation of stimuli including animations, multiple stages
+The following methods all support the user-dependent presentation of stimulus including animations, multiple stages
 and FB. The "get_selected" functions also append data to the preceeding trials
 */
 
@@ -124,7 +124,7 @@ var choose_first_stage = function() {
 }
 
 /*
-After a stimuli is selected, an animation proceeds whereby the selected stimulus moves to the top of the screen while
+After a stimulus is selected, an animation proceeds whereby the selected stimulus moves to the top of the screen while
 the other stimulus fades. This function accomplishes this by creating a new html object to display composed of the old stim
 with appropriate handles to start the relevant animations.
 
@@ -150,12 +150,12 @@ var get_first_selected = function() {
 }
 
 /*
-The second stage is probabilistically chosen based on the first stage choice. Each of the first stage stimuli is primarily associated
+The second stage is probabilistically chosen based on the first stage choice. Each of the first stage stimulus is primarily associated
 with one of two second stages, but the transition is ultimately probabilistic.
 
 This function checks to see if there was any first stage response. If not, set the global variable FB_on to off and display a reminder
 If an action was taken, display the chosen stimulus at the top of the screen and select a second stage (choosing the one associated with the
-action 70% of the time). Randomly select a presentation order for the two stimuli associated with the second stage
+action 70% of the time). Randomly select a presentation order for the two stimulus associated with the second stage
 */
 var choose_second_stage = function() {
 	var global_trial = jsPsych.progress().current_trial_global
@@ -215,7 +215,7 @@ var update_FB = function() {
 
 /*
 If no action was taken during the second stage display a reminder.
-Otherwise, check the FB_matrix which determines the reward probabilities for each stimulus (there are 4 final stimuli associated with rewards:
+Otherwise, check the FB_matrix which determines the reward probabilities for each stimulus (there are 4 final stimulus associated with rewards:
 2 for each of the 2 second stages). Flip a coin using the relevant probability and give FB.
 
 After FB, the FB_atrix is updated.
@@ -252,15 +252,15 @@ var update_FB_data = function () {
 var practice_trials_num = 10
 var test_trials_num = 200
 var current_trial = -1 
-var first_selected = -1 //Tracks the ID of the selected fs stimuli
-var first_notselected = -1 //The fs stimuli not selected
-var second_selected = -1 //Tracks the ID of the selected fs stimuli
-var second_notselected = -1 //The fs stimuli not selected
+var first_selected = -1 //Tracks the ID of the selected fs stimulus
+var first_notselected = -1 //The fs stimulus not selected
+var second_selected = -1 //Tracks the ID of the selected fs stimulus
+var second_notselected = -1 //The fs stimulus not selected
 var action = -1 //tracks which action was last taken
 var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
-var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the four final stimuli
+var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the four final stimulus
 var phase = 'practice'
 
 // Actions for left and right
@@ -278,7 +278,7 @@ var curr_colors = practice_colors
 var test_images = jsPsych.randomization.repeat(
 	["static/experiments/two_stage_decision/images/11.png",
 	 "static/experiments/two_stage_decision/images/12.png",
-	 "static/experiments/two_stage_decision/images/13.png",
+	 "static/experiments/two_stage_decision/images/[13].png",
 	 "static/experiments/two_stage_decision/images/14.png",
 	 "static/experiments/two_stage_decision/images/15.png",
 	 "static/experiments/two_stage_decision/images/16.png",],1)
@@ -314,7 +314,7 @@ var curr_ss_stim = practice_ss_stim
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the two-stage decision task experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -337,34 +337,34 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var wait_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Take a break!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting practice. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var intertrial_wait_update_FB = {
 	type: "single-stim",
-	stimuli: update_FB_data, //dummy stimuli. Returns "" but updates previous trial
+	stimulus: update_FB_data, //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
 	timing_post_trial: 0,
@@ -374,7 +374,7 @@ var intertrial_wait_update_FB = {
 
 var intertrial_wait = {
 	type: "single-stim",
-	stimuli: "", //dummy stimuli. Returns "" but updates previous trial
+	stimulus: "", //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
 	timing_post_trial: 0,
@@ -391,7 +391,7 @@ var change_phase_block = {
 //experiment blocks
 var first_stage = {
 		type: "single-stim",
-		stimuli: choose_first_stage,
+		stimulus: choose_first_stage,
 		is_html: true,
 		choices: actions,
 		timing_stim: 2000,
@@ -403,7 +403,7 @@ var first_stage = {
 
 var first_stage_selected = {
 	type: "single-stim",
-	stimuli: get_first_selected,
+	stimulus: get_first_selected,
 	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
@@ -413,7 +413,7 @@ var first_stage_selected = {
 
 var second_stage = {
 		type: "single-stim",
-		stimuli: choose_second_stage,
+		stimulus: choose_second_stage,
 		is_html: true,
 		choices: actions,
 		timing_stim: 2000,
@@ -424,7 +424,7 @@ var second_stage = {
 
 var second_stage_selected = {
 	type: "single-stim",
-	stimuli: get_second_selected,
+	stimulus: get_second_selected,
 	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
@@ -434,7 +434,7 @@ var second_stage_selected = {
 
 var FB_stage = {
 		type: "single-stim",
-		stimuli: get_feedback,
+		stimulus: get_feedback,
 		is_html: true,
 		choices: 'none',
 		timing_stim: 500,
@@ -444,16 +444,14 @@ var FB_stage = {
 		data: {exp_id: "two_stage_decision", trial_id: 'FB_stage'}
 }	
 
-var FB_chunk = {
-	chunk_type: 'if',
+var FB_node = {
 	timeline: [second_stage_selected, FB_stage, intertrial_wait_update_FB],
 	conditional_function: function() {
 		return FB_on == 1
 	}
 }
 
-var noFB_chunk = {
-	chunk_type: 'if',
+var noFB_node = {
 	timeline: [intertrial_wait],
 	conditional_function: function() {
 		return FB_on == 0
@@ -468,8 +466,8 @@ for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
-	two_stage_decision_experiment.push(FB_chunk)
-	two_stage_decision_experiment.push(noFB_chunk)
+	two_stage_decision_experiment.push(FB_node)
+	two_stage_decision_experiment.push(noFB_node)
 }
 two_stage_decision_experiment.push(change_phase_block)
 two_stage_decision_experiment.push(start_test_block)
@@ -477,15 +475,15 @@ for (var i = 0; i < test_trials_num/2; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
-	two_stage_decision_experiment.push(FB_chunk)
-	two_stage_decision_experiment.push(noFB_chunk)
+	two_stage_decision_experiment.push(FB_node)
+	two_stage_decision_experiment.push(noFB_node)
 }
 two_stage_decision_experiment.push(wait_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
-	two_stage_decision_experiment.push(FB_chunk)
-	two_stage_decision_experiment.push(noFB_chunk)
+	two_stage_decision_experiment.push(FB_node)
+	two_stage_decision_experiment.push(noFB_node)
 }
 two_stage_decision_experiment.push(end_block)

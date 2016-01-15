@@ -153,6 +153,7 @@ var forward_response_block = {
   button_class: 'submit_button',
   data: {exp_id: "digit_span", trial_id: "response"},
   on_finish: function() {
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward"})
       var fb = 0
       // staircase
       if (arraysEqual(response,curr_seq)) {
@@ -168,7 +169,7 @@ var forward_response_block = {
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward", feedback: fb})
+    jsPsych.data.addDataToLastTrial({feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -180,6 +181,7 @@ var reverse_response_block = {
   button_class: 'submit_button',
   data: {exp_id: "digit_span", trial_id: "response"},
   on_finish: function() {
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
       var fb = 0
       // staircase
       if (arraysEqual(response.reverse(),curr_seq)) {
@@ -195,7 +197,7 @@ var reverse_response_block = {
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
+    jsPsych.data.addDataToLastTrial({feedback: fb})
     response = []
   },
   timing_post_trial: 500

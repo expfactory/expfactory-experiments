@@ -124,7 +124,7 @@ var appendData = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var response_keys = jsPsych.randomization.repeat([{key:191,key_name:'/'},{key:90, key_name: 'Z'}], 1, true)
+var response_keys = jsPsych.randomization.repeat([{key:77,key_name:'M'},{key:90, key_name: 'Z'}], 1, true)
 var practice_length = 100
 var test_length = 340
 
@@ -171,7 +171,7 @@ var prompt_task_list = '<ul><li><strong>Color</strong> or <strong>Orange-Blue</s
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the threebytwo experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -188,7 +188,7 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 var start_test_block = {
@@ -211,7 +211,7 @@ var setStims_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "threebytwo", "trial_id": "fixation"},
@@ -223,7 +223,7 @@ var fixation_block = {
 
 var cue_block = {
   type: 'single-stim',
-  stimuli: getCue,
+  stimulus: getCue,
   is_html: true,
   choices: 'none',
   data: {exp_id: 'threebytwo', trial_id: 'cue'},
@@ -236,12 +236,12 @@ var cue_block = {
 
 var practice_block = {
   type: 'categorize',
-  stimuli: getStim,
+  stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
+  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
-  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Respond faster!</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
+  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
   choices: response_keys.key,
   data: {exp_id: 'threebytwo', trial_id: 'practice_target'},
   timing_feedback_duration: 1000,
@@ -253,7 +253,7 @@ var practice_block = {
 
 var test_block = {
   type: 'single-stim',
-  stimuli: getStim,
+  stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
   choices: response_keys.key,
@@ -265,7 +265,7 @@ var test_block = {
 
 var gap_block = {
   type: 'single-stim',
-  stimuli: '',
+  stimulus: '',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'threebytwo', trial_id: 'gap'},

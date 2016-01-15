@@ -51,7 +51,7 @@ var update_target = function() {
 };
 
 var getData = function() {
-	return {exp_id: "adaptive_n_back", condition: "n: " + delay, stim: stims[current_trial], target: target, trial_num: current_trial}
+	return {exp_id: "adaptive_n_back", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
 }
 
 var getText = function() {
@@ -146,7 +146,7 @@ for (var i=0; i<num_trials; i++) {
 	  type: 'single-stim',
 	  is_html: true,
 	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-	  data: {exp_id: "adaptive_n_back", condition: "n: 0", stim: stim, target: 't', trial_num: current_trial},
+	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,

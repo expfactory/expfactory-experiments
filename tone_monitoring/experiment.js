@@ -14,7 +14,7 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	var stim = practice_trials.data[practice_count].trial_id
+	var stim = practice_trials[practice_count]['data'].trial_id
 	if (stim == 'high') {
 		high_count += 1
 	} else if (stim == 'medium') {
@@ -62,46 +62,44 @@ var low_count = 0
 var correct_key = 'none'
 var practice_count = 0
 
-practice_stims = [{sound: 'static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
+practice_stims = [{stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 		  data: {exp_id: 'tone_monitoring', trial_id: 'high', condition: 'practice'}},
-		 {sound: 'static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
+		 {stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 		  data: {exp_id: 'tone_monitoring', trial_id: 'medium', condition: 'practice'}},
-		 {sound: 'static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
+		 {stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 		 data: {exp_id: 'tone_monitoring', trial_id: 'low', condition: 'practice'}}
 ]
 
-stims = [{sound: 'static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
+stims = [{stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 		  data: {exp_id: 'tone_monitoring', trial_id: 'high', condition: 'test'}},
-		 {sound: 'static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
+		 {stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 		  data: {exp_id: 'tone_monitoring', trial_id: 'medium', condition: 'test'}},
-		 {sound: 'static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
+		 {stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 		 data: {exp_id: 'tone_monitoring', trial_id: 'low', condition: 'test'}}
 ]
 
 last_tone = randomDraw(practice_stims)
-practice_trials = jsPsych.randomization.repeat(practice_stims,8, true);
-practice_trials.sound.push(last_tone.sound)
-practice_trials.data.push(last_tone.data)
+practice_trials = jsPsych.randomization.repeat(practice_stims,8);
+practice_trials.push(last_tone)
 
 block_num = 4
 blocks = []
 for (b=0; b<block_num; b++){
-	block_trials = jsPsych.randomization.repeat(stims,8,true);
+	block_trials = jsPsych.randomization.repeat(stims,8);
 	last_tone = randomDraw(stims)
-	block_trials.sound.push(last_tone.sound)
-	block_trials.data.push(last_tone.data)
+	block_trials.push(last_tone)
 	blocks.push(block_trials)
 }
 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-/* define static blocks */
+/* define /static blocks */
 var welcome_block = {
 	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the tone monitoring experiment. This experiment has sound. At this time, make sure you can hear sounds using headphones or speakers. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>Welcome to the tone monitoring experiment. This experiment has stimulus. At this time, make sure you can hear sounds using headphones or speakers. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -122,21 +120,21 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 }; 
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a tone repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 01000
 };
 
@@ -148,9 +146,9 @@ var update_function = {
 
 var tone_introduction_block = {
   type: 'single-audio',
-  stimuli: ['static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
-	    'static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
-	    'static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3'],
+  stimuli: ['/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
+	    '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
+	    '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3'],
   choices: 'none',
   timing_stim: 2500,
   timing_response: 2500,
@@ -166,13 +164,12 @@ tone_monitoring_experiment.push(tone_introduction_block);
 tone_monitoring_experiment.push(start_practice_block);
 
 // set up practice
-for (i = 0; i< practice_trials.sound.length; i++) {	
+for (i = 0; i< practice_trials.length; i++) {	
 	var practice_tone_block = {
 	  type: 'categorize-audio',
-	  stimuli: [practice_trials.sound[i]],
-	  data: [practice_trials.data[i]],
+	  timeline: practice_trials,
 	  key_answer: get_correct_key,
-	  correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
+	  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 	  timeout_message: ' ',
 	  choices: [32],
@@ -193,8 +190,7 @@ for (b=0; b<block_num; b++) {
 	tone_monitoring_experiment.push(start_test_block)
 	var test_tone_block = {
 	  type: 'single-audio',
-	  stimuli: block.sound,
-	  data: block.data,
+	  timeline: block,
 	  choices: [32],
 	  timing_stim: 2500,
 	  timing_response: 2500,
