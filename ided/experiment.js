@@ -99,7 +99,7 @@ var version2_repeat = 0
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the IDED experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   on_finish: function() {
   	$('body').css('background','black')
   },
@@ -109,9 +109,9 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = IDED-block-text>In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = IDED-block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
+    '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
 	    instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p></div>',
- '<div class = centerbox><p class = IDED-block-text>Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
+ '<div class = centerbox><p class = "white-text block-text">Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -120,18 +120,17 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = IDED-center-block-text>Thanks for completing this task!</p><p class = IDED-center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
   on_finish: function() {
   	$('body').css('background','white')
   },
   timing_post_trial: 0
 };
 
-
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "ided", "trial_id": "fixation"},
@@ -227,11 +226,11 @@ for (b=0; b<blocks.length; b++) {
 	
 	var stage_block = {
 	  type: 'categorize',
-	  stimuli: get_stim,
+	  stimulus: get_stim,
 	  is_html: true,
 	  key_answer: get_correct_response,
-	  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
-	  incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
+	  correct_text: '<div class = centerbox><div class = "white-text center-text"><font size = 20>Correct</font></div></div>',
+	  incorrect_text: '<div class = centerbox><div class = "white-text center-text"><font size = 20>Incorrect</font></div></div>',
 	  choices: responses,
 	  timing_response: -1, 
 	  timing_stim: -1,
@@ -251,10 +250,9 @@ for (b=0; b<blocks.length; b++) {
 		  }
 	  }
 	}
-	var stage_chunk = {
-		chunk_type: 'while',
+	var stage_node = {
 		timeline: [fixation_block, stage_block],
-		continue_function: function(data){
+		loop_function: function(data){
 			if (stage_over == 1) {
 				stage_over = 0
 				correct_counter = 0
@@ -266,11 +264,11 @@ for (b=0; b<blocks.length; b++) {
 			}
 		}
 	}
-	ided_experiment.push(stage_chunk)
+	ided_experiment.push(stage_node)
 
 	if (block != 'separate') {
 		ided_experiment.push(reverse_stims)
-		ided_experiment.push(stage_chunk)
+		ided_experiment.push(stage_node)
 	}
 }
 

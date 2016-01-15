@@ -1,190 +1,182 @@
 /**
- * jspsych plugin for categorization trials with feedback (as well as rt feedback)
+ * jspsych plugin for categorization trials with feedback (including rt feedback)
  * Ian Eisenberg
  *
  * documentation: docs.jspsych.org
  **/
- 
-(function($) {
-	jsPsych["ant_practice"] = (function() {
 
-		var plugin = {};
 
-		plugin.create = function(params) {
+jsPsych.plugins['ant_practice'] = (function() {
 
-			params = jsPsych.pluginAPI.enforceArray(params, ['choices', 'stimuli', 'key_answer', 'text_answer']);
+  var plugin = {};
 
-			var trials = [];
-			for (var i = 0; i < params.stimuli.length; i++) {
-				trials.push({});
-				trials[i].a_path = params.stimuli[i];
-				trials[i].key_answer = params.key_answer[i];
-				trials[i].text_answer = (typeof params.text_answer === 'undefined') ? "" : params.text_answer[i];
-				trials[i].choices = params.choices;
-				trials[i].correct_text = (typeof params.correct_text === 'undefined') ? "<p class='feedback'>Correct</p>" : params.correct_text;
-				trials[i].incorrect_text = (typeof params.incorrect_text === 'undefined') ? "<p class='feedback'>Incorrect</p>" : params.incorrect_text;
-				trials[i].show_stim_with_feedback = (typeof params.show_stim_with_feedback === 'undefined') ? true : params.show_stim_with_feedback;
-				trials[i].is_html = (typeof params.is_html === 'undefined') ? false : params.is_html;
-				trials[i].force_correct_button_press = (typeof params.force_correct_button_press === 'undefined') ? false : params.force_correct_button_press;
-				trials[i].prompt = (typeof params.prompt === 'undefined') ? '' : params.prompt;
-				trials[i].show_feedback_on_timeout = (typeof params.show_feedback_on_timeout === 'undefined') ? false : params.show_feedback_on_timeout;
-				trials[i].timeout_message = params.timeout_message || "<p>Please respond faster.</p>";
-				// timing params
-				trials[i].timing_stim = params.timing_stim || -1; // default is to show image until response
-				trials[i].timing_response = params.timing_response || -1; // default is no max response time
-				trials[i].timing_feedback_duration = params.timing_feedback_duration || 2000;
-			}
-			return trials;
-		};
+  jsPsych.pluginAPI.registerPreload('animation', 'stimulus', 'image');
 
-		plugin.trial = function(display_element, trial) {
+  plugin.trial = function(display_element, trial) {
 
-			// if any trial variables are functions
-			// this evaluates the function and replaces
-			// it with the output of the function
-			trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+    // default parameters
+    trial.text_answer = (typeof trial.text_answer === 'undefined') ? "" : trial.text_answer;
+    trial.correct_text = (typeof trial.correct_text === 'undefined') ? "<p class='feedback'>Correct</p>" : trial.correct_text;
+    trial.incorrect_text = (typeof trial.incorrect_text === 'undefined') ? "<p class='feedback'>Incorrect</p>" : trial.incorrect_text;
+    trial.show_stim_with_feedback = (typeof trial.show_stim_with_feedback === 'undefined') ? true : trial.show_stim_with_feedback;
+    trial.is_html = (typeof trial.is_html === 'undefined') ? false : trial.is_html;
+    trial.force_correct_button_press = (typeof trial.force_correct_button_press === 'undefined') ? false : trial.force_correct_button_press;
+    trial.prompt = (typeof trial.prompt === 'undefined') ? '' : trial.prompt;
+    trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
+    trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
+    // timing params
+    trial.timing_stim = trial.timing_stim || -1; // default is to show image until response
+    trial.timing_response = trial.timing_response || -1; // default is no max response time
+    trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
 
-			// this array holds handlers from setTimeout calls
-			// that need to be cleared if the trial ends early
-			var setTimeoutHandlers = [];
+    // if any trial variables are functions
+    // this evaluates the function and replaces
+    // it with the output of the function
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-			if (!trial.is_html) {
-				// add image to display
-				display_element.append($('<img>', {
-					"src": trial.a_path,
-					"class": 'jspsych-categorize-stimulus',
-					"id": 'jspsych-categorize-stimulus'
-				}));
-			} else {
-				display_element.append($('<div>', {
-					"id": 'jspsych-categorize-stimulus',
-					"class": 'jspsych-categorize-stimulus',
-					"html": trial.a_path
-				}));
-			}
+    // this array holds handlers from setTimeout calls
+    // that need to be cleared if the trial ends early
+    var setTimeoutHandlers = [];
 
-			// hide image after time if the timing parameter is set
-			if (trial.timing_stim > 0) {
-				setTimeoutHandlers.push(setTimeout(function() {
-					$('#jspsych-categorize-stimulus').css('visibility', 'hidden');
-				}, trial.timing_stim));
-			}
+    if (!trial.is_html) {
+      // add image to display
+      display_element.append($('<img>', {
+        "src": trial.stimulus,
+        "class": 'jspsych-ant-stimulus',
+        "id": 'jspsych-ant-stimulus'
+      }));
+    } else {
+      display_element.append($('<div>', {
+        "id": 'jspsych-ant-stimulus',
+        "class": 'jspsych-ant-stimulus',
+        "html": trial.stimulus
+      }));
+    }
 
-			// if prompt is set, show prompt
-			if (trial.prompt !== "") {
-				display_element.append(trial.prompt);
-			}
+    // hide image after time if the timing parameter is set
+    if (trial.timing_stim > 0) {
+      setTimeoutHandlers.push(setTimeout(function() {
+        $('#jspsych-ant-stimulus').css('visibility', 'hidden');
+      }, trial.timing_stim));
+    }
 
-			// create response function
-			var after_response = function(info) {
+    // if prompt is set, show prompt
+    if (trial.prompt !== "") {
+      display_element.append(trial.prompt);
+    }
 
-				// kill any remaining setTimeout handlers
-				for (var i = 0; i < setTimeoutHandlers.length; i++) {
-					clearTimeout(setTimeoutHandlers[i]);
-				}
+    var trial_data = {};
 
-				// clear keyboard listener
-				jsPsych.pluginAPI.cancelAllKeyboardResponses();
+    // create response function
+    var after_response = function(info) {
 
-				var correct = false;
-				if (trial.key_answer == info.key) {
-					correct = true;
-				}
+      // kill any remaining setTimeout handlers
+      for (var i = 0; i < setTimeoutHandlers.length; i++) {
+        clearTimeout(setTimeoutHandlers[i]);
+      }
 
-				// save data
-				var trial_data = {
-					"rt": info.rt,
-					"correct": correct,
-					"stimulus": trial.a_path,
-					"key_press": info.key
-				};
+      // clear keyboard listener
+      jsPsych.pluginAPI.cancelAllKeyboardResponses();
 
-				jsPsych.data.write(trial_data);
+      var correct = false;
+      if (trial.key_answer == info.key) {
+        correct = true;
+      }
 
-				display_element.html('');
+      // save data
+      trial_data = {
+        "rt": info.rt,
+        "correct": correct,
+        "stimulus": trial.stimulus,
+        "key_press": info.key
+      };
 
-				var timeout = info.rt == -1;
-				doFeedback(correct, trial_data.rt, timeout);
-			}
+      display_element.html('');
 
-			jsPsych.pluginAPI.getKeyboardResponse({
-        callback_function: after_response,
-        valid_responses: trial.choices,
-        rt_method: 'date',
-        persist: false,
-				allow_held_key: false
-      });
+      var timeout = info.rt == -1;
+      doFeedback(correct, timeout, info.rt);
+    }
 
-			if(trial.timing_response > 0) {
-				setTimeoutHandlers.push(setTimeout(function(){
-					after_response({key: -1, rt: -1});
-				}, trial.timing_response));
-			}
+    jsPsych.pluginAPI.getKeyboardResponse({
+      callback_function: after_response,
+      valid_responses: trial.choices,
+      rt_method: 'date',
+      persist: false,
+      allow_held_key: false
+    });
 
-			function doFeedback(correct, rt, timeout) {
+    if (trial.timing_response > 0) {
+      setTimeoutHandlers.push(setTimeout(function() {
+        after_response({
+          key: -1,
+          rt: -1
+        });
+      }, trial.timing_response));
+    }
 
-				if(timeout && !trial.show_feedback_on_timeout){
-					display_element.append(trial.timeout_message);
-				} else {
-					// show image during feedback if flag is set
-					if (trial.show_stim_with_feedback) {
-						if (!trial.is_html) {
-							// add image to display
-							display_element.append($('<img>', {
-								"src": trial.a_path,
-								"class": 'jspsych-categorize-stimulus',
-								"id": 'jspsych-categorize-stimulus'
-							}));
-						} else {
-							display_element.append($('<div>', {
-								"id": 'jspsych-categorize-stimulus',
-								"class": 'jspsych-categorize-stimulus',
-								"html": trial.a_path
-							}));
-						}
-					}
+    function doFeedback(correct, timeout, rt) {
 
-					// substitute answer in feedback string.
-					var atext = "";
-					if (correct) {
-						atext = trial.correct_text.replace("RT", rt);
-					} else {
-						atext = trial.incorrect_text.replace("RT", rt);
-					}
+      if (timeout && !trial.show_feedback_on_timeout) {
+        display_element.append(trial.timeout_message);
+      } else {
+        // show image during feedback if flag is set
+        if (trial.show_stim_with_feedback) {
+          if (!trial.is_html) {
+            // add image to display
+            display_element.append($('<img>', {
+              "src": trial.stimulus,
+              "class": 'jspsych-ant-stimulus',
+              "id": 'jspsych-ant-stimulus'
+            }));
+          } else {
+            display_element.append($('<div>', {
+              "id": 'jspsych-ant-stimulus',
+              "class": 'jspsych-ant-stimulus',
+              "html": trial.stimulus
+            }));
+          }
+        }
 
-					// show the feedback
-					display_element.append(atext);
-				}
-				// check if force correct button press is set
-				if (trial.force_correct_button_press && correct === false && ((timeout && trial.show_feedback_on_timeout) || !timeout)) {
+        // substitute answer in feedback string.
+        var atext = "";
+        if (correct) {
+          atext = trial.correct_text.replace("RT", rt);
+        } else {
+          atext = trial.incorrect_text.replace("RT", rt);
+        }
 
-					var after_forced_response = function(info) {
-						endTrial();
-					}
+        // show the feedback
+        display_element.append(atext);
+      }
+      // check if force correct button press is set
+      if (trial.force_correct_button_press && correct === false && ((timeout && trial.show_feedback_on_timeout) || !timeout)) {
 
-					jsPsych.pluginAPI.getKeyboardResponse({
-		        callback_function: after_forced_response,
-		        valid_responses: [trial.key_answer],
-		        rt_method: 'date',
-		        persist: false,
-	          allow_held_key: false
-		      });
+        var after_forced_response = function(info) {
+          endTrial();
+        }
 
-				} else {
-					setTimeout(function() {
-						endTrial();
-					}, trial.timing_feedback_duration);
-				}
+        jsPsych.pluginAPI.getKeyboardResponse({
+          callback_function: after_forced_response,
+          valid_responses: [trial.key_answer],
+          rt_method: 'date',
+          persist: false,
+          allow_held_key: false
+        });
 
-			}
+      } else {
+        setTimeout(function() {
+          endTrial();
+        }, trial.timing_feedback_duration);
+      }
 
-			function endTrial() {
-				display_element.html("");
-				jsPsych.finishTrial();
-			}
+    }
 
-		};
+    function endTrial() {
+      display_element.html("");
+      jsPsych.finishTrial(trial_data);
+    }
 
-		return plugin;
-	})();
-})(jQuery);
+  };
+
+  return plugin;
+})();

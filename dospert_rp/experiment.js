@@ -22,7 +22,63 @@ var page_5_questions = ["Piloting a small plane.", "Walking home alone at night 
 var scale = ["Not at all risky", "Slightly risky", "Somewhat risky", "Moderately risky", "Risky", "Very Risky", "Extremely Risky"];
 
 //defining preamble text for each page.
-var pretext =['<p><strong>Please indicate how risky you perceive each situation.</strong></p>']
+var pretext ='<p><strong>Please indicate how risky you perceive each situation.</strong></p>'
+
+var header = []
+
+for (var i = 0; i < scale.length; i++){
+  header += '<th>'+scale[i]+'</th>'
+}
+
+var page_1_buttonlist = ['<table><tr><th></th>']
+
+page_1_buttonlist += header + '</tr>'
+
+for (var i = 0; i < page_1_questions.length; i++){
+  page_1_buttonlist += '<tr><td>'+ page_1_questions[i] +'</td><td><center><input type="radio" name="response_' + i + '" value = "1"></center></td><td><center><input type="radio" name="response_' + i + '" value = "2"></center></td><td><center><input type="radio" name="response_' + i + '" value = "3"></center></td><td><center><input type="radio" name="response_' + i + '" value = "4"></center></td><td><center><input type="radio" name="response_' + i + '" value = "5"></center></td><td><center><input type="radio" name="response_' + i + '" value = "6"></center></td><td><center><input type="radio" name="response_' + i + '" value = "7"></center></td></tr>'
+}
+
+page_1_buttonlist += '</table>'
+
+var page_2_buttonlist = ['<table><tr><th></th>']
+
+page_2_buttonlist += header + '</tr>'
+
+for (var i = 0; i < page_2_questions.length; i++){
+  page_2_buttonlist += '<tr><td>'+ page_2_questions[i] +'</td><td><center><input type="radio" name="response_' + i + '" value = "1"></center></td><td><center><input type="radio" name="response_' + i + '" value = "2"></center></td><td><center><input type="radio" name="response_' + i + '" value = "3"></center></td><td><center><input type="radio" name="response_' + i + '" value = "4"></center></td><td><center><input type="radio" name="response_' + i + '" value = "5"></center></td><td><center><input type="radio" name="response_' + i + '" value = "6"></center></td><td><center><input type="radio" name="response_' + i + '" value = "7"></center></td></tr>'
+}
+
+page_2_buttonlist += '</table>'
+
+var page_3_buttonlist = ['<table><tr><th></th>']
+
+page_3_buttonlist += header + '</tr>'
+
+for (var i = 0; i < page_3_questions.length; i++){
+  page_3_buttonlist += '<tr><td>'+ page_3_questions[i] +'</td><td><center><input type="radio" name="response_' + i + '" value = "1"></center></td><td><center><input type="radio" name="response_' + i + '" value = "2"></center></td><td><center><input type="radio" name="response_' + i + '" value = "3"></center></td><td><center><input type="radio" name="response_' + i + '" value = "4"></center></td><td><center><input type="radio" name="response_' + i + '" value = "5"></center></td><td><center><input type="radio" name="response_' + i + '" value = "6"></center></td><td><center><input type="radio" name="response_' + i + '" value = "7"></center></td></tr>'
+}
+
+page_3_buttonlist += '</table>'
+
+var page_4_buttonlist = ['<table><tr><th></th>']
+
+page_4_buttonlist += header + '</tr>'
+
+for (var i = 0; i < page_4_questions.length; i++){
+  page_4_buttonlist += '<tr><td>'+ page_4_questions[i] +'</td><td><center><input type="radio" name="response_' + i + '" value = "1"></center></td><td><center><input type="radio" name="response_' + i + '" value = "2"></center></td><td><center><input type="radio" name="response_' + i + '" value = "3"></center></td><td><center><input type="radio" name="response_' + i + '" value = "4"></center></td><td><center><input type="radio" name="response_' + i + '" value = "5"></center></td><td><center><input type="radio" name="response_' + i + '" value = "6"></center></td><td><center><input type="radio" name="response_' + i + '" value = "7"></center></td></tr>'
+}
+
+page_4_buttonlist += '</table>'
+
+var page_5_buttonlist = ['<table><tr><th></th>']
+
+page_5_buttonlist += header + '</tr>'
+
+for (var i = 0; i < page_5_questions.length; i++){
+  page_5_buttonlist += '<tr><td>'+ page_5_questions[i] +'</td><td><center><input type="radio" name="response_' + i + '" value = "1"></center></td><td><center><input type="radio" name="response_' + i + '" value = "2"></center></td><td><center><input type="radio" name="response_' + i + '" value = "3"></center></td><td><center><input type="radio" name="response_' + i + '" value = "4"></center></td><td><center><input type="radio" name="response_' + i + '" value = "5"></center></td><td><center><input type="radio" name="response_' + i + '" value = "6"></center></td><td><center><input type="radio" name="response_' + i + '" value = "7"></center></td></tr>'
+}
+
+page_5_buttonlist += '</table>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -33,7 +89,7 @@ var pretext =['<p><strong>Please indicate how risky you perceive each situation.
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 var instructions_block = {
@@ -45,20 +101,18 @@ var instructions_block = {
   allow_backwards: false
 };
 
-//Note: this could be made nicer if the radio-buttonlist custom plugin is improved. For now just going with built-in functionality
-
 var likert_block = {
-    type: 'survey-likert',
-    preamble: [pretext, pretext, pretext, pretext, pretext],
-    questions: [page_1_questions, page_2_questions, page_3_questions, page_4_questions, page_5_questions],
-    labels: [[scale, scale, scale, scale, scale, scale], [scale, scale, scale, scale, scale, scale], [scale, scale, scale, scale, scale, scale], [scale, scale, scale, scale, scale, scale], [scale, scale, scale, scale, scale, scale]], // need one scale for every question on a page
-    intervals: [[7,7,7,7,7,7], [7,7,7,7,7,7], [7,7,7,7,7,7], [7,7,7,7,7,7], [7,7,7,7,7,7]] // note the the intervals and labels don't necessarily need to match.
+    type: 'radio-buttonlist',
+    timeline: [{buttonlist: page_1_buttonlist},{buttonlist: page_2_buttonlist},{buttonlist: page_3_buttonlist},{buttonlist: page_4_buttonlist},{buttonlist: page_5_buttonlist}],
+    preamble: pretext,
+    checkAll: true,
+    numq: 6
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 

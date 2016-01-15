@@ -11,7 +11,7 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	var stim = practice_trials.data[practice_count].trial_id
+	var stim = practice_trials[practice_count].data.trial_id
 	if (stim == 'red') {
 		red_count += 1
 	} else if (stim == 'green') {
@@ -58,34 +58,32 @@ var blue_count = 0
 var correct_key = 'none'
 var practice_count = 0
 
-practice_stims = [{image: '<div class = centerbox><div class = shape id = stim1></div></div>',
+practice_stims = [{stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 		  data: {exp_id: 'image_monitoring', trial_id: 'red', condition: 'practice'}},
-		 {image: '<div class = centerbox><div class = shape id = stim2></div></div>',
+		 {stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 		  data: {exp_id: 'image_monitoring', trial_id: 'green', condition: 'practice'}},
-		 {image: '<div class = centerbox><div class = shape id = stim3></div></div>',
+		 {stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 		 data: {exp_id: 'image_monitoring', trial_id: 'blue', condition: 'practice'}}
 ]
 
-stims = [{image: '<div class = centerbox><div class = shape id = stim1></div></div>',
+stims = [{stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 		  data: {exp_id: 'image_monitoring', trial_id: 'red', condition: 'test'}},
-		 {image: '<div class = centerbox><div class = shape id = stim2></div></div>',
+		 {stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 		  data: {exp_id: 'image_monitoring', trial_id: 'green', condition: 'test'}},
-		 {image: '<div class = centerbox><div class = shape id = stim3></div></div>',
+		 {stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 		 data: {exp_id: 'image_monitoring', trial_id: 'blue', condition: 'test'}}
 ]
 
-last_tone = randomDraw(practice_stims)
-practice_trials = jsPsych.randomization.repeat(practice_stims,8, true);
-practice_trials.image.push(last_tone.sound)
-practice_trials.data.push(last_tone.data)
+last_shape = randomDraw(practice_stims)
+practice_trials = jsPsych.randomization.repeat(practice_stims,8);
+practice_trials.push(last_shape)
 
 block_num = 4
 blocks = []
 for (b=0; b<block_num; b++){
-	block_trials = jsPsych.randomization.repeat(stims,8,true);
+	block_trials = jsPsych.randomization.repeat(stims,8);
 	last_shape = randomDraw(stims)
-	block_trials.image.push(last_shape.sound)
-	block_trials.data.push(last_shape.data)
+	block_trials.push(last_shape)
 	blocks.push(block_trials)
 }
 
@@ -97,7 +95,7 @@ var welcome_block = {
 	
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the shape monitoring experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -119,21 +117,21 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a shape repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -150,12 +148,11 @@ image_monitoring_experiment.push(instructions_block);
 image_monitoring_experiment.push(start_practice_block);
 
 // set up practice
-for (i = 0; i< practice_trials.image.length; i++) {	
+for (i = 0; i< practice_trials.length; i++) {	
 	var practice_shape_block = {
 	  type: 'categorize',
 	  is_html: true,
-	  stimuli: [practice_trials.image[i]],
-	  data: [practice_trials.data[i]],
+	  timeline: practice_trials,
 	  key_answer: get_correct_key,
 	  correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
@@ -169,8 +166,8 @@ for (i = 0; i< practice_trials.image.length; i++) {
 	  on_trial_start: update_count,
 	  on_finish: reset_count
 	};
-	//image_monitoring_experiment.push(update_function)
-	//image_monitoring_experiment.push(practice_shape_block)
+	image_monitoring_experiment.push(update_function)
+	image_monitoring_experiment.push(practice_shape_block)
 }
 
 // set up test
@@ -180,8 +177,7 @@ for (b=0; b<block_num; b++) {
 	var test_shape_block = {
 	  type: 'single-stim',
 	  is_html: true,
-	  stimuli: block.image,
-	  data: block.data,
+	  timeline: block,
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2500,

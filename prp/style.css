@@ -1,0 +1,49 @@
+.prp_stimBox {
+  width: 20vw;
+  height: 20vw;
+  position:relative;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%,-50%);
+}
+
+.prpStim {
+  display: block;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
+}
+
+
+.prp_left-instruction {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-150%,-10%);
+}
+
+.prp_right-instruction {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(50%,-10%);
+}
+
+.prp_centerbox {
+  width:40vw;
+  height: 35vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}

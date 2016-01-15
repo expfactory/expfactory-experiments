@@ -8,7 +8,7 @@
 		 "static/js/jspsych/plugins/jspsych-call-function.js"
                ],
         "tag": "tone_monitoring",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_4c8a84825c4e4",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",

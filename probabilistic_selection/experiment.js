@@ -156,7 +156,7 @@ var training_count=0;
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the probabilistic selection task. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -177,7 +177,7 @@ var instructions_block = {
 var FP_block = {
 	type: 'text',
 	text: '<div class = centerbox><p class = center-block-text> We will now begin Phase 1.  Press <strong>enter</strong> to begin. </p></div>',
-	cont_key: 13,
+	cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -186,7 +186,7 @@ training_trials = []
 for (i=0; i<6; i++) {
 	var training_block = {
 		type: 'categorize',
-		stimuli:  getStim,
+		stimulus:  getStim,
 		key_answer: getResponse,
 		choices: [37, 39],
 		correct_text: '<div class = bottombox><p style="color:blue"; class = center-text>Correct!</p></div>',
@@ -205,9 +205,8 @@ for (i=0; i<6; i++) {
 
 
  var performance_criteria = {
-    chunk_type: 'while',
     timeline: training_trials,
-	continue_function: function(data){
+	loop_function: function(data){
 		var ab_total_correct = 0;
 		var cd_total_correct = 0;
 		var ef_total_correct = 0;
@@ -258,13 +257,13 @@ for (i=0; i<6; i++) {
 var SP_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 
 var second_phase_trials = {
 	type: 'single-stim',
-	stimuli: secondPhaseStimsComplete,
+	stimulus: secondPhaseStimsComplete,
 	is_html: true,
 	data: {exp_id: "probabilistic_selection", trial_id: "second-phase"},
 	choices: [37,39],
@@ -276,7 +275,7 @@ var second_phase_trials = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 

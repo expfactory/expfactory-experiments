@@ -1,0 +1,19 @@
+.writing_class {
+  width: 48em;
+  height: 100em;
+  top:10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid #cccccc;
+  padding: 5px;
+  font-family: Tahoma, sans-serif;
+  font-size: 16px;
+}
+
+.writing_class:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}

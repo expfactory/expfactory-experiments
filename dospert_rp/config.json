@@ -3,10 +3,11 @@
         "name": "Dospert_rp: Domain Specific Risk Taking",
         "run": [
                  "experiment.js",
-                 "style.css"
+                 "style.css",
+                 "static/js/jspsych/custom_plugins/jspsych-radio-buttonlist.js"
                ],
         "tag": "dospert_rp",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_5696abecf2569",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",

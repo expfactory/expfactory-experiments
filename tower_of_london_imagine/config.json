@@ -6,8 +6,10 @@
                 "style.css",
                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
                ],
-        "tag": "tol",
-        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
+
+        "tag": "tower_of_london_imagine",
+        "cognitive_atlas_task_id": "trm_5696bcf1b5c64",
+
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -15,7 +17,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":3.5,
+        "time":8,
         "experiment_variables": "",
         "reference": ["http://rstb.royalsocietypublishing.org/content/royptb/298/1089/199.full.pdf",
                         "https://www.researchgate.net/publication/11201010_The_Tower_of_London_Spatial_Problem-Solving_Task_Enhancing_Clinical_and_Research_Implementation"],

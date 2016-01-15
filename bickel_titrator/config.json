@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Adaptive Bickel Titrator",
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": "bickel_titrator",
+        "cognitive_atlas_task_id": "trm_5696a599bfcb6",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":2,
+        "experiment_variables": "",
+        "reference": "http://psycnet.apa.org/journals/pha/22/3/222.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

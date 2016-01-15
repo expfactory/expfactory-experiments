@@ -64,7 +64,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -88,7 +88,7 @@ var rest_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFeedback,
+  stimulus: getFeedback,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "feedback"},
@@ -99,7 +99,7 @@ var feedback_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
+  stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", "trial_id": "fixation"},
@@ -112,7 +112,7 @@ var fixation_block = {
 /* define test block cues and probes*/
 var A_cue = {
   type: 'single-stim',
-  stimuli: prefix + path + valid_cue + postfix,
+  stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "cue"},
@@ -123,7 +123,7 @@ var A_cue = {
 
 var other_cue = {
   type: 'single-stim',
-  stimuli: getInvalidCue,
+  stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
   data: {exp_id: "dpx", trial_id: "cue"},
@@ -134,7 +134,7 @@ var other_cue = {
 
 var X_probe = {
   type: 'single-stim',
-  stimuli: prefix + path + valid_probe + postfix,
+  stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", trial_id: "probe"},
@@ -146,7 +146,7 @@ var X_probe = {
 
 var other_probe = {
   type: 'single-stim',
-  stimuli: getInvalidProbe,
+  stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],
   data: {exp_id: "dpx", trial_id: "probe"},

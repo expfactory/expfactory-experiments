@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Dietary Decision Task",
+        "run": [
+                "experiment.js",
+                "style.css",
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
+               ],
+        "tag": "dietary_decision",
+        "cognitive_atlas_task_id": "trm_56674d6aa9faf",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time": 10,
+        "experiment_variables": "",
+        "reference": "http://www.rnl.caltech.edu/publications/pdf/hare2009.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

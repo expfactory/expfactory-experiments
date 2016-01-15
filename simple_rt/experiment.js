@@ -3,13 +3,13 @@
 /* Define helper functions */
 /* ************************************ */
 var post_trial_gap = function() {
+  gap = Math.floor( Math.random() * 2000 ) + 1000
   return gap;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	gap = Math.floor( Math.random() * 2000 ) + 1000
-	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({ITI: gap, trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
@@ -31,14 +31,14 @@ stim = '<div class = shapebox><div id = cross></div></div>'
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the simple RT experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -53,14 +53,14 @@ var instructions_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will start 5 practice trials. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -75,25 +75,23 @@ var reset_block = {
 /* define practice block */
 var practice_block = {
   type: 'single-stim',
-  stimuli: stim,
+  stimulus: stim,
   is_html: true,
   data: {exp_id: "simple_rt", trial_id: "practice"},
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData,
-  repetitions: practice_len
+  on_finish: appendData
 };
 
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimuli: stim,
+  stimulus: stim,
   is_html: true,
   data: {exp_id: "simple_rt", trial_id: "test"},
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData,
-  repetitions: experiment_len
+  on_finish: appendData
 };
 
 /* create experiment definition array */
@@ -101,8 +99,12 @@ var simple_rt_experiment = [];
 simple_rt_experiment.push(welcome_block);
 simple_rt_experiment.push(instructions_block);
 simple_rt_experiment.push(start_practice_block);
-simple_rt_experiment.push(practice_block);
+for (var i = 0; i < practice_len; i++) {
+	simple_rt_experiment.push(practice_block);
+}
 simple_rt_experiment.push(reset_block)
 simple_rt_experiment.push(start_test_block);
-simple_rt_experiment.push(test_block);
+for (var i = 0; i < experiment_len; i++) {
+	simple_rt_experiment.push(test_block);
+}
 simple_rt_experiment.push(end_block);

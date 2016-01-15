@@ -91,7 +91,7 @@ var response_grid =
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the digit span experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -108,7 +108,7 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -116,7 +116,7 @@ var end_block = {
 var start_test_block = {
   type: 'single-stim',
   is_html: true,
-  stimuli: getTestText,
+  stimulus: getTestText,
   choices: 'none',
   timing_stim: 1000,
   timing_response: 1000,
@@ -127,7 +127,7 @@ var start_test_block = {
 var start_reverse_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 }
 
 /* define test block */
@@ -149,10 +149,11 @@ var test_block = {
 
 var forward_response_block = {
   type: 'single-stim-button',
-  stimuli: response_grid,
+  stimulus: response_grid,
   button_class: 'submit_button',
   data: {exp_id: "digit_span", trial_id: "response"},
   on_finish: function() {
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward"})
       var fb = 0
       // staircase
       if (arraysEqual(response,curr_seq)) {
@@ -168,7 +169,7 @@ var forward_response_block = {
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward", feedback: fb})
+    jsPsych.data.addDataToLastTrial({feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -176,10 +177,11 @@ var forward_response_block = {
 
 var reverse_response_block = {
   type: 'single-stim-button',
-  stimuli: response_grid,
+  stimulus: response_grid,
   button_class: 'submit_button',
   data: {exp_id: "digit_span", trial_id: "response"},
   on_finish: function() {
+    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
       var fb = 0
       // staircase
       if (arraysEqual(response.reverse(),curr_seq)) {
@@ -195,7 +197,7 @@ var reverse_response_block = {
         feedback = 'Incorrect!'
         stims = setStims()
       }
-    jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
+    jsPsych.data.addDataToLastTrial({feedback: fb})
     response = []
   },
   timing_post_trial: 500
@@ -203,7 +205,7 @@ var reverse_response_block = {
 
 var feedback_block = {
     type: 'single-stim',
-    stimuli: getFeedback,
+    stimulus: getFeedback,
     data: {exp_id: "digit_span", trial_id: "feedback"},
     is_html: true,
     choices: 'none', 
@@ -212,10 +214,9 @@ var feedback_block = {
     response_ends_trial: true
 }
 
-var forward_chunk = {
-  chunk_type: 'while',
+var forward_node = {
   timeline: [start_test_block, test_block, forward_response_block, feedback_block],
-  continue_function: function(data) {
+  looping_node: function(data) {
     if (errors < error_lim) {
       return true
     } else {
@@ -227,10 +228,9 @@ var forward_chunk = {
   }
 }
 
-var reverse_chunk = {
-  chunk_type: 'while',
+var reverse_node = {
   timeline: [start_test_block, test_block, reverse_response_block, feedback_block],
-  continue_function: function(data) {
+  looping_function: function(data) {
     if (errors < error_lim) {return true}
     else {return false}
   }
@@ -240,7 +240,7 @@ var reverse_chunk = {
 var digit_span_experiment = [];
 digit_span_experiment.push(welcome_block);
 digit_span_experiment.push(instructions_block);
-digit_span_experiment.push(forward_chunk)
+digit_span_experiment.push(forward_node)
 digit_span_experiment.push(start_reverse_block)
-digit_span_experiment.push(reverse_chunk)
+digit_span_experiment.push(reverse_node)
 digit_span_experiment.push(end_block)
