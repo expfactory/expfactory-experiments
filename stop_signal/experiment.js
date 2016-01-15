@@ -262,7 +262,7 @@ for (i = 0; i < noSS_practice_list.data.length; i++) {
 	  stimulus: getNoSSPracticeStim,
 	  data: getNoSSPracticeData,
 	  is_html: true,
-	  choices: choice_keys,
+	  choices: [possible_responses[0][1], possible_responses[1][1]],
 	  timing_post_trial: 0,
 	  timing_stim: 850,
 	  timing_response: 850,
@@ -335,7 +335,7 @@ for (i = 0; i < practice_list.data.length; i++) {
 	  SS_trial_type: getSSPractice_trial_type,
 	  data: getSSPracticeData,
 	  is_html: true,
-	  choices: choice_keys,
+	  choices: [possible_responses[0][1], possible_responses[1][1]],
 	  timing_stim: 850,
 	  timing_response: 1850,
 	  response_ends_trial: false,
@@ -411,7 +411,6 @@ var practice_node = {
     }
 }
 
-stop_signal_experiment.push(noSS_practice_node)
 stop_signal_experiment.push(practice_node)
 stop_signal_experiment.push(practice_feedback_block) 
 
@@ -439,7 +438,7 @@ for (c = 0; c< numconditions; c++) {
 			  SS_trial_type: stop_trial,
 			  data: stim_data,
 			  is_html: true,
-			  choices: choice_keys,
+			  choices: [possible_responses[0][1], possible_responses[1][1]],
 			  timing_stim: 850,
 			  timing_response: 1850,
 			  response_ends_trial: false,
@@ -454,7 +453,7 @@ for (c = 0; c< numconditions; c++) {
 			stop_signal_exp_block.push(stop_signal_block)
 		}
 
-		stop_signal_experiment = stop_signal_experiment.concat(stop-signal_exp_block)
+		stop_signal_experiment = stop_signal_experiment.concat(stop_signal_exp_block)
 		stop_signal_experiment.push(test_feedback_block)
 	}
 	stop_signal_experiment.push(reset_block)
