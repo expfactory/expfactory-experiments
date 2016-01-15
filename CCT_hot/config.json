@@ -1,11 +1,11 @@
 [
     {
-        "name": “Columbia Card Task Hot Version“,
+        "name": "Columbia Card Task Hot Version",
         "run": [
                  "experiment.js",
                  "style.css"
                ],
-        "tag": “Columbia_card_task_hot”,
+        "tag": "columbia_card_task_hot",
         "cognitive_atlas_task_id": "trm_5667492c555b7",
         "contributors": [
                          "Jamie Li",

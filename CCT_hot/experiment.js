@@ -15,58 +15,58 @@ return '<div class = centerbox><p class = center-block-text>The round points sel
 
 var instructButton = function(clicked_id){
 	currID = parseInt(clicked_id)
-	document.getElementById(clicked_id).src='/images/chosen.png';
+	document.getElementById(clicked_id).src='/static/experiments/CCT_hot/images/chosen.png';
 }
 
 var instructFunction = function(){
-	document.getElementById("1").src='/images/chosen.png';
-	document.getElementById("17").src='/images/chosen.png';
-	document.getElementById("18").src='/images/chosen.png';
-	document.getElementById("15").src='/images/chosen.png';
-	document.getElementById("27").src='/images/chosen.png';
-	document.getElementById("31").src='/images/chosen.png';
-	document.getElementById("8").src='/images/chosen.png';
+	document.getElementById("1").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("17").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("18").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("15").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("27").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("31").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("8").src='/static/experiments/CCT_hot/images/chosen.png';
 	document.getElementById("instruct1").innerHTML = '<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
 }
 
 var instructFunction2 = function(){
-	document.getElementById("1").src='/images/chosen.png';
-	document.getElementById("4").src='/images/chosen.png';
-	document.getElementById("30").src='/images/chosen.png';
-	document.getElementById("13").src='/images/loss.png';
+	document.getElementById("1").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("4").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("30").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("13").src='/static/experiments/CCT_hot/images/loss.png';
 	document.getElementById("instruct2").innerHTML = '<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
 
 	
-	document.getElementById("8").src='/images/loss.png';
-	document.getElementById("2").src='/images/loss.png';
+	document.getElementById("8").src='/static/experiments/CCT_hot/images/loss.png';
+	document.getElementById("2").src='/static/experiments/CCT_hot/images/loss.png';
 	
 	
-	document.getElementById("3").src='/images/chosen.png';
-	document.getElementById("5").src='/images/chosen.png';
-	document.getElementById("6").src='/images/chosen.png';
-	document.getElementById("7").src='/images/chosen.png';
-	document.getElementById("9").src='/images/chosen.png';
-	document.getElementById("10").src='/images/chosen.png';
-	document.getElementById("11").src='/images/chosen.png';
-	document.getElementById("12").src='/images/chosen.png';
-	document.getElementById("19").src='/images/chosen.png';
-	document.getElementById("14").src='/images/chosen.png';
-	document.getElementById("15").src='/images/chosen.png';
-	document.getElementById("16").src='/images/chosen.png';
-	document.getElementById("17").src='/images/chosen.png';
-	document.getElementById("18").src='/images/chosen.png';
-	document.getElementById("20").src='/images/chosen.png';
-	document.getElementById("21").src='/images/chosen.png';
-	document.getElementById("22").src='/images/chosen.png';
-	document.getElementById("23").src='/images/chosen.png';
-	document.getElementById("24").src='/images/chosen.png';
-	document.getElementById("25").src='/images/chosen.png';
-	document.getElementById("26").src='/images/chosen.png';
-	document.getElementById("27").src='/images/chosen.png';
-	document.getElementById("28").src='/images/chosen.png';
-	document.getElementById("29").src='/images/chosen.png';
-	document.getElementById("31").src='/images/chosen.png';
-	document.getElementById("32").src='/images/chosen.png';
+	document.getElementById("3").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("5").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("6").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("7").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("9").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("10").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("11").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("12").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("19").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("14").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("15").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("16").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("17").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("18").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("20").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("21").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("22").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("23").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("24").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("25").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("26").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("27").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("28").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("29").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("31").src='/static/experiments/CCT_hot/images/chosen.png';
+	document.getElementById("32").src='/static/experiments/CCT_hot/images/chosen.png';
 }
 
 var getPractice1 = function(){
@@ -118,12 +118,12 @@ var instructCard = function(clicked_id){
 		document.getElementById('current_round').innerHTML='Current Round: '+instructPoints;
 		document.getElementById(clicked_id).disabled = true;
 
-		document.getElementById(clicked_id).src='/images/chosen.png';
+		document.getElementById(clicked_id).src='/static/experiments/CCT_hot/images/chosen.png';
 	} else if(whichLossCards.indexOf(currID)!=-1){
 		instructPoints = instructPoints-lossAmt
 		document.getElementById(clicked_id).disabled = true;
 		document.getElementById('current_round').innerHTML='Current Round: '+instructPoints;
-		document.getElementById(clicked_id).src='/images/loss.png';
+		document.getElementById(clicked_id).src='/static/experiments/CCT_hot/images/loss.png';
 		setTimeout(pressKey, 2000)
 
 	
@@ -144,7 +144,7 @@ function appendTextAfter(input,search_term, new_text) {
 
 function appendTextAfter2(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
-	return input.slice(0,index) + new_text + input.slice(index+'/images/beforeChosen.png'.length+6+31)
+	return input.slice(0,index) + new_text + input.slice(index+'/static/experiments/CCT_hot/images/beforeChosen.png'.length+6+31)
 }
 
 var pressKey = function(){
@@ -180,7 +180,7 @@ console.log(clicked_id)
 		lossClicked= true
 		roundOver=0
 		document.getElementById('current_round').innerHTML='Current Round: '+roundPoints;
-		document.getElementById(clicked_id).src='/images/loss.png';
+		document.getElementById(clicked_id).src='/static/experiments/CCT_hot/images/loss.png';
 		
 		document.getElementById("button1").disabled = true;
 		document.getElementById("button2").disabled = true;
@@ -222,7 +222,7 @@ var chooseCard = function (clicked_id){
 		roundPoints=roundPoints-lossAmt
 		lossClicked= true
 		roundOver=0
-		document.getElementById(clicked_id).src='/images/loss.png';
+		document.getElementById(clicked_id).src='/static/experiments/CCT_hot/images/loss.png';
 		
 		document.getElementById("button1").disabled = true;
 		document.getElementById("button2").disabled = true;
@@ -291,7 +291,7 @@ var getRound = function(){
 
 		clickedGainCards.sort(function(a, b){return a-b})
 		for(i=0;i<clickedGainCards.length; i++){
-		gameState=appendTextAfter2(gameState, "id = '"+""+clickedGainCards[i]+"'", " src='/images/chosen.png'")		
+		gameState=appendTextAfter2(gameState, "id = '"+""+clickedGainCards[i]+"'", " src='/static/experiments/CCT_hot/images/chosen.png'")		
 		}
 	return gameState
 	}
@@ -305,9 +305,9 @@ currID='noCardButton'
 whichClickInRound=whichClickInRound+1
 		for(i=0;i<33;i++){
 			if(whichGainCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/chosen.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/chosen.png';
 			} else if(whichLossCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/loss.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/loss.png';
 			}
 		}			
 gameState = appendTextAfter(gameState, 'button3 ', 'onclick = collect()')
@@ -322,9 +322,9 @@ points.push(roundPoints)
 whichClickInRound=whichClickInRound+1
 	for(i=0;i<33;i++){
 			if(whichGainCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/chosen.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/chosen.png';
 			} else if(whichLossCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/loss.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/loss.png';
 			}
 		}	
 gameState = appendTextAfter(gameState, 'button3 ', 'onclick = collect()')
@@ -337,16 +337,15 @@ currID='collectButton'
 whichClickInRound=whichClickInRound+1
 	for(i=0;i<33;i++){
 			if(whichGainCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/chosen.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/chosen.png';
 			} else if(whichLossCards.indexOf(i)!= -1){
-			document.getElementById(''+i+'').src='/images/loss.png';
+			document.getElementById(''+i+'').src='/static/experiments/CCT_hot/images/loss.png';
 			}
 		}
 		
 	roundOver =0
 	setTimeout(pressKey, 2000)
 	}
-
 
 
 
@@ -393,41 +392,41 @@ var gameSetup = "<div class = instruct1><strong>Practice 1: </strong> As you cli
   "<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
   
   
-  "<div class = numbox><div class = square><input type='image' id = '1' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '2' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '3' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '4' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '5' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '6' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '7' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '8' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '2' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '3' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '4' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '5' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '6' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '7' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '8' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '9' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '10' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '11' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '12' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '13' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '14' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '15' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '16' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '9' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '10' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '11' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '12' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '13' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '14' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '15' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '16' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '17' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '18' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '19' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '20' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '21' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '22' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '23' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '24' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '17' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '18' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '19' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '20' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '21' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '22' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '23' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '24' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '25' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '26' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '27' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '28' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '29' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '30' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '31' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '32' src='/images/beforeChosen.png' onclick = chooseCard(this.id)></div></div>"
+  "<div class = square><input type='image' id = '25' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '26' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '27' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '28' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '29' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '30' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '31' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '32' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div></div>"
 
 var practiceSetup = "<div class = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can clicked the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div> "+ 
   "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
@@ -439,41 +438,41 @@ var practiceSetup = "<div class = instruct1><strong>Practice 1: </strong> As you
   "<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
   
   
-  "<div class = numbox><div class = square><input type='image' id = '1' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '2' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '3' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '4' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '5' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '6' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '7' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '8' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '2' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '3' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '4' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '5' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '6' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '7' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '8' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '9' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '10' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '11' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '12' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '13' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '14' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '15' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '16' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '9' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '10' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '11' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '12' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '13' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '14' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '15' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '16' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '17' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '18' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '19' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '20' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '21' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '22' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '23' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '24' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '17' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '18' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '19' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '20' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '21' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '22' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '23' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '24' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '25' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '26' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '27' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '28' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '29' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '30' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '31' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '32' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
+  "<div class = square><input type='image' id = '25' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '26' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '27' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '28' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '29' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '30' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '31' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '32' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
   	
 var practiceSetup2 = "<div class = instruct1><strong>Practice 1: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div> "+ 
   "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
@@ -485,41 +484,41 @@ var practiceSetup2 = "<div class = instruct1><strong>Practice 1: </strong> The c
   "<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
   
   
-  "<div class = numbox><div class = square><input type='image' id = '1' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '2' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '3' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '4' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '5' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '6' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '7' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '8' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '2' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '3' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '4' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '5' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '6' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '7' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '8' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '9' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '10' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '11' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '12' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '13' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '14' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '15' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '16' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '9' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '10' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '11' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '12' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '13' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '14' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '15' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '16' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '17' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '18' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '19' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '20' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '21' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '22' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '23' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '24' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '17' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '18' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '19' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '20' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '21' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '22' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '23' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '24' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   
-  "<div class = square><input type='image' id = '25' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '26' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '27' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '28' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '29' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '30' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '31' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
-  "<div class = square><input type='image' id = '32' src='/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
+  "<div class = square><input type='image' id = '25' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '26' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '27' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '28' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '29' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '30' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '31' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
+  "<div class = square><input type='image' id = '32' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
 
 
 
@@ -546,16 +545,16 @@ var instructions_block = {
     
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
-    "<p><input type='image' id = '133' src='/images/beforeChosen.png' onclick = instructButton(this.id)>"+
+    "<p><input type='image' id = '133' src='/static/experiments/CCT_hot/images/beforeChosen.png' onclick = instructButton(this.id)>"+
 	'<p> An unknown card.  Click on it to turn it over!</p>'+
 	'</p></div>',
 	
 	'<div class = centerbox><p class = block-text>'+
 	'<p><strong>The Gain Card:</strong></p>'+
 	'<p>For every gain card you turn over, your score increases by either 10, 20, or 30 points in different rounds.</p>'+
-	"<p><input type='image' src='/images/chosen.png'>"+
+	"<p><input type='image' src='/static/experiments/CCT_hot/images/chosen.png'>"+
 	'<p><strong>The Loss Card:</strong></p>'+
-	"<p><input type='image' src='/images/loss.png'></p>"+
+	"<p><input type='image' src='/static/experiments/CCT_hot/images/loss.png'></p>"+
 	'<p>For every loss card you turn over, your score decreases by either 250,500, or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1,2, or 3 loss cards in any given round.</p>'+
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
@@ -570,41 +569,41 @@ var instructions_block = {
   	"<div class = instructBoxMiddle1><div>Gain Amount: 10</div></div>" +
 
   
-    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c5' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c9' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c13' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c17' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c21' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c25' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c29' src='/images/beforeChosen.png'></div>"+
+    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c2' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c6' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c10' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c14' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c18' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c22' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c26' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c30' src='/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c3' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c7' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c11' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c15' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c19' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c23' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c27' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c31' src='/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c4' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c8' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c12' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c16' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c20' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c24' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c28' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c32' src='/images/beforeChosen.png'></div></div>"+
+    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div></div>"+
     '</p></div>',
   
   	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+
@@ -617,41 +616,41 @@ var instructions_block = {
   	"<div class = instructBoxMiddle1><div>Gain Amount: 30</div></div>" +
 
   
-    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c5' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c9' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c13' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c17' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c21' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c25' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c29' src='/images/beforeChosen.png'></div>"+
+    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c2' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c6' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c10' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c14' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c18' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c22' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c26' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c30' src='/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c3' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c7' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c11' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c15' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c19' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c23' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c27' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c31' src='/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
   
-    "<div class = square2><input type='image' id = 'c4' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c8' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c12' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c16' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c20' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c24' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c28' src='/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c32' src='/images/beforeChosen.png'></div></div>"+
+    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/CCT_hot/images/beforeChosen.png'></div></div>"+
     '</p></div>',
   
   ],
@@ -780,40 +779,40 @@ var start_test_block = {
 
 
 /* create experiment definition array */
-var CCT_experiment = [];
-CCT_experiment.push(instructions_block);
-CCT_experiment.push(practice_chunk1);
-CCT_experiment.push(practice_chunk2);
+var columbia_card_task_hot_experiment = [];
+columbia_card_task_hot_experiment.push(instructions_block);
+columbia_card_task_hot_experiment.push(practice_chunk1);
+columbia_card_task_hot_experiment.push(practice_chunk2);
 
-CCT_experiment.push(start_test_block);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(practice_chunk);
-CCT_experiment.push(give_total);
-CCT_experiment.push(end_block);
+columbia_card_task_hot_experiment.push(start_test_block);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(practice_chunk);
+columbia_card_task_hot_experiment.push(give_total);
+columbia_card_task_hot_experiment.push(end_block);
 
 

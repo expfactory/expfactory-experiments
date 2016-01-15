@@ -1,11 +1,11 @@
 [
     {
-        "name": “Information Sampling Task,
+        "name": "Information Sampling Task",
         "run": [
                  "experiment.js",
                  "style.css"
                ],
-        "tag": “ISI”,
+        "tag": "isi",
         "cognitive_atlas_task_id": "trm_50f73d557c967",
         "contributors": [
                          "Jamie Li",
