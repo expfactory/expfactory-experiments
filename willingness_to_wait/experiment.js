@@ -48,14 +48,14 @@ var total_money = 0 //in dollars
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -71,13 +71,13 @@ var instructions_block = {
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>We will now start the main experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var practice_block = {
   type: 'single-stim',
-  stimuli: token_0,
+  stimulus: token_0,
   is_html: true,
   choices: [32],
   timing_stim: getPracticeDelay,
@@ -94,7 +94,7 @@ var practice_block = {
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimuli: token_0,
+  stimulus: token_0,
   is_html: true,
   choices: [32],
   timing_stim: getDelay,
@@ -110,7 +110,7 @@ var test_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFB,
+  stimulus: getFB,
   is_html: true,
   choices: 'none',
   timing_stim: 1000,
@@ -138,13 +138,13 @@ var test_chunk = {
 
 
 /* create experiment definition array */
-var wtw_experiment = [];
-wtw_experiment.push(welcome_block);
-wtw_experiment.push(instructions_block);
+var willingness_to_wait_experiment = [];
+willingness_to_wait_experiment.push(welcome_block);
+willingness_to_wait_experiment.push(instructions_block);
 for (var i = 0; i < practice_delays.length; i++) {
-  wtw_experiment.push(practice_block)
-  wtw_experiment.push(feedback_block)
+  willingness_to_wait_experiment.push(practice_block)
+  willingness_to_wait_experiment.push(feedback_block)
 }
-wtw_experiment.push(start_test_block);
-wtw_experiment.push(test_chunk)
-wtw_experiment.push(end_block);
+willingness_to_wait_experiment.push(start_test_block);
+willingness_to_wait_experiment.push(test_chunk)
+willingness_to_wait_experiment.push(end_block);

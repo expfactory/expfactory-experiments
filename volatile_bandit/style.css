@@ -1,7 +1,7 @@
 #blue_stim {
 	width: 15vw;
 	height: 20vw;
-	background: blue;
+	background: #0066CC;
 }
 
 #green_stim {
@@ -15,6 +15,9 @@
   top:50%;
   left:50%;
   transform: translate(-200%,-50%);
+  border-style: solid;
+  border-width: 6px;
+  border-color: transparent;
 }
 
 .stim_right {
@@ -23,11 +26,12 @@
   left:50%;
   margin-right:-50%;
   transform: translate(100%,-50%);
+  border-style: solid;
+  border-width: 6px;
+  border-color: transparent;
 }
 
 .selected {
-	border-style: solid;
-	border-width: 6px;
 	border-color: red;
 }
 

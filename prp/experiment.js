@@ -43,7 +43,7 @@ var getFB = function() {
   var tooShort = false
   // If the person responded to the colored square
   if (keys[0] == choices[1]) {
-    if (rts[1] < data.ISI + 100) {
+    if (rts[1] < data.ISI + 50 && rts[1]>0) {
       var tooShort = true
     } else {
       if (data.gonogo_correct_response != -1) {
@@ -133,7 +133,7 @@ var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><
 var welcome_block = {
   type: 'text',
   text: '<div class = prp_centerbox><p class = center-block-text>Welcome to the PRP experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
     $('body').css('background','black')
@@ -143,7 +143,7 @@ var welcome_block = {
 var end_block = {
   type: 'text',
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
     $('body').css('background','white')
@@ -162,14 +162,14 @@ var instructions_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">We will start ' + practice_len + ' practice trials. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = prp_centerbox><p class ="white-text center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
     curr_trial = 0
@@ -178,7 +178,7 @@ var start_test_block = {
 
 var fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
+  stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
@@ -206,7 +206,7 @@ var practice_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFB,
+  stimulus: getFB,
   is_html: true,
   data: {exp_id: 'prp', trial_id: 'practice_feedback'},
   timing_stim: -1,

@@ -1,10 +1,20 @@
 .AX_text {
-	text-align: center;
-	font-size: 60px;
+	text-align:center;
+  font-size: 60px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .AX_feedback {
-	text-align: center;
-	font-size: 24px;
+	text-align:center;
+  font-size: 24px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 

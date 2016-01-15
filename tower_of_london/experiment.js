@@ -157,14 +157,14 @@ var held_ball = 0
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Tower of London experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
-};x
+};
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -182,7 +182,7 @@ var instructions_block = {
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start Problem 1. There will be ' + problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
     held_ball = 0
@@ -195,7 +195,7 @@ var start_test_block = {
 var advance_problem_block = {
   type: 'text',
   text: getText,
-  cont_key: 13,
+  cont_key: [13],
   on_finish: function() {
     held_ball = 0
     time_elapsed = 0
@@ -207,7 +207,7 @@ var advance_problem_block = {
 
 var practice_block = {
   type: 'single-stim-button',
-  stimuli: getPractice,
+  stimulus: getPractice,
   button_class: 'special',
   is_html: true,
   data: {exp_id: "tol", trial_id: "practice"},
@@ -226,7 +226,7 @@ var practice_block = {
 
 var test_block = {
   type: 'single-stim-button',
-  stimuli: getStim,
+  stimulus: getStim,
   button_class: 'special',
   is_html: true,
   data: {exp_id: "tol", trial_id: "test"},
@@ -245,7 +245,7 @@ var test_block = {
 
 var feedback_block = {
   type: 'single-stim',
-  stimuli: getFB,
+  stimulus: getFB,
   choices: 'none',
   is_html: true,
   data: {exp_id: 'tol', trial_id: 'feedback'},
@@ -254,10 +254,9 @@ var feedback_block = {
   timing_post_trial: 500
 }
 
-var practice_chunk = {
-  chunk_type: 'while',
+var practice_node = {
   timeline: [practice_block],
-  continue_function: function(data) {
+  loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
@@ -275,10 +274,9 @@ var practice_chunk = {
   timing_post_trial: 1000
 }
 
-var problem_chunk = {
-  chunk_type: 'while',
+var problem_node = {
   timeline: [test_block],
-  continue_function: function(data) {
+  loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
@@ -297,15 +295,15 @@ var problem_chunk = {
 }
 
 /* create experiment definition array */
-var tol_experiment = [];
-tol_experiment.push(welcome_block);
-tol_experiment.push(instructions_block);
-tol_experiment.push(practice_chunk);
-tol_experiment.push(feedback_block)
-tol_experiment.push(start_test_block);
+var tower_of_london_experiment = [];
+tower_of_london_experiment.push(welcome_block);
+tower_of_london_experiment.push(instructions_block);
+tower_of_london_experiment.push(practice_node);
+tower_of_london_experiment.push(feedback_block)
+tower_of_london_experiment.push(start_test_block);
 for (var i = 0; i < problems.length; i++) {
-  tol_experiment.push(problem_chunk);
-  tol_experiment.push(feedback_block)
-  tol_experiment.push(advance_problem_block)
+  tower_of_london_experiment.push(problem_node);
+  tower_of_london_experiment.push(feedback_block)
+  tower_of_london_experiment.push(advance_problem_block)
 }
-tol_experiment.push(end_block);
+tower_of_london_experiment.push(end_block);

@@ -106,7 +106,7 @@ var practice_block = {
   is_html: true,
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
-  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Respond faster!</font></div></div>',
+  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div>',
   choices: [correct_responses[0][1], correct_responses[1][1]],
   timing_response: 2000, 
   timing_stim: 2000,

@@ -80,14 +80,14 @@ var answers = [2,2,3,3,4,4,4,4,5,5,5,5]
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the Tower of London experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -105,7 +105,7 @@ var instructions_block = {
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the test. There will be ' + problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -113,7 +113,7 @@ var start_test_block = {
 /* define test block */
 var test_block = {
   type: 'single-stim-button',
-  stimuli: getStim,
+  stimulus: getStim,
   button_class: 'tol_response_button',
   data: {exp_id: "tol", trial_id: "test"},
   timing_stim: 20000,
@@ -127,9 +127,9 @@ var test_block = {
 };
 
 /* create experiment definition array */
-var tol_experiment = [];
-tol_experiment.push(welcome_block);
-tol_experiment.push(instructions_block);
-tol_experiment.push(start_test_block);
-tol_experiment.push(test_block);
-tol_experiment.push(end_block);
+var tower_of_london_imagine_experiment = [];
+tower_of_london_imagine_experiment.push(welcome_block);
+tower_of_london_imagine_experiment.push(instructions_block);
+tower_of_london_imagine_experiment.push(start_test_block);
+tower_of_london_imagine_experiment.push(test_block);
+tower_of_london_imagine_experiment.push(end_block);

@@ -65,10 +65,10 @@ var stage2_trials = 170
 var progress_value = 0 //set starting value
 var ordered_stims = jsPsych.randomization.shuffle(['blue_stim','green_stim'])
 //value of 0 means stim1 wins (0 indexed)
-var static_winners = jsPsych.randomization.repeat([0,0,0,1],stage1_trials/4,false)
+var static_winners = jsPsych.randomization.repeat([0,0,0,1],stage1_trials/4)
 /* set up the volatile winners. Trials from each 'block' of winners add up to 170 trials.
 */
-var volatile_blocks = jsPsych.randomization.repeat([30,30,30,40,40],1,false)
+var volatile_blocks = jsPsych.randomization.repeat([30,30,30,40,40],1)
 var volatile_winners = []
 var block_index = [] //used to keep track of switches. Index indicates which stim wins more
 if (Math.random() < .5) {
@@ -98,7 +98,7 @@ for (var b = 0; b < volatile_blocks.length; b++) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the volatile bandit experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -108,7 +108,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
 	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
 	'<div class = centerbox><p class = block-text>As you could see, each shape is associated with a certain value (between 0-100). The value of both shapes will always equal 100. So if the blue shape has a value of 30, the green shape will have a value of 70.</p><p class = block-text>When you select a shape, if you chose correctly (explained on the next slide), you will get the number of points listed on the shape.</p><p class = block-text>At the bottom of the screen is a red bar that tracks how many points you have earned. If the bar passes the grey line you will get a bonus. If it passes the yellow line you will get an even larger bonus.</p></div>',
-	'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p></div>'	
+	'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. So if green has been correct most often for the last few trials, it is likely to be correct in the future.</p><p class = block-text>Regardless of which color you choose, the correct color for that trial will be shown after you make your response. If you selected that color, you will get the associated points. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p></div>'	
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -118,14 +118,14 @@ var instructions_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -158,7 +158,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	
 	var test_block = {
 	  type: 'single-stim',
-	  stimuli: stim,
+	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'stable', exp_id: 'volatile_bandit'},
@@ -170,7 +170,7 @@ for (var i = 0; i < stage1_trials; i++) {
 
 	var responded_block = {
 	  type: 'single-stim',
-	  stimuli: getRespondStim,
+	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'stable', exp_id: 'volatile_bandit'},
@@ -182,7 +182,7 @@ for (var i = 0; i < stage1_trials; i++) {
 
 	var feedback_block = {
 	  type: 'single-stim',
-	  stimuli: getFBStim,
+	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'stable', exp_id: 'volatile_bandit'},
@@ -218,7 +218,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	
 	var test_block = {
 	  type: 'single-stim',
-	  stimuli: stim,
+	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
@@ -230,7 +230,7 @@ for (var i = 0; i < stage2_trials; i++) {
 
 	var responded_block = {
 	  type: 'single-stim',
-	  stimuli: getRespondStim,
+	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
@@ -242,7 +242,7 @@ for (var i = 0; i < stage2_trials; i++) {
 
 	var feedback_block = {
 	  type: 'single-stim',
-	  stimuli: getFBStim,
+	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
 	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
