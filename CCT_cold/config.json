@@ -1,0 +1,25 @@
+[
+    {
+        "name": “Columbia Card Task Cold Version“,
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": “Columbia_card_task_cold”,
+        "cognitive_atlas_task_id": "trm_5667492c555b7",
+        "contributors": [
+                         "Jamie Li",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://psycnet.apa.org/journals/xlm/35/3/709.pdf",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
