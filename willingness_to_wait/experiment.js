@@ -7,7 +7,7 @@ var randomDraw = function(lst) {
 }
 
 var getDelay = function() {
-  if (Math.random() < .5) {
+  if (Math.random() < 0.5) {
     delay = 90000
   } else {
     delay = randomDraw([5000, 10000, 15000, 20000])
@@ -22,11 +22,12 @@ var getPracticeDelay = function() {
 
 var getFB = function() {
   var data = jsPsych.data.getLastTrialData() 
+  var token;
   if (data.rt < delay) {
-    var token = token_0
+    token = token_zero
   } else {
-    var token = token_30
-    total_money += .30
+    token = token_thirty
+    total_money += 0.30
   }
   return token + '<div class = soldBox><div class = center-text><font color="red">SOLD!</font></div></div>'
 }
@@ -34,8 +35,8 @@ var getFB = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var token_0 = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
-var token_30 = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
+var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
+var token_thirty = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
 var progress_bar = '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'
 var delay = 0
 var practice_delays = [10000, 50000, 5000]
@@ -77,7 +78,7 @@ var start_test_block = {
 
 var practice_block = {
   type: 'single-stim',
-  stimulus: token_0,
+  stimulus: token_zero,
   is_html: true,
   choices: [32],
   timing_stim: getPracticeDelay,
@@ -85,7 +86,7 @@ var practice_block = {
   response_ends_trial: true,
   data: {'exp_id': 'wtw', 'trial_id': 'practice'},
   timing_post_trial: 0,
-  prompt: token_30 + progress_bar, 
+  prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({'delay': delay})
   }
@@ -94,7 +95,7 @@ var practice_block = {
 /* define test block */
 var test_block = {
   type: 'single-stim',
-  stimulus: token_0,
+  stimulus: token_zero,
   is_html: true,
   choices: [32],
   timing_stim: getDelay,
@@ -102,7 +103,7 @@ var test_block = {
   response_ends_trial: true,
   data: {'exp_id': 'wtw', 'trial_id': 'test'},
   timing_post_trial: 0,
-  prompt: token_30 + progress_bar, 
+  prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({'delay': delay})
   }
