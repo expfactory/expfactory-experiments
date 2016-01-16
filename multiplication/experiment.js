@@ -32,7 +32,7 @@ var lstep = 5000
 var sstep = 1000
 var n_large_steps = 50
 var n_small_steps = 50
-var p = .5 // The probability of a correct response for the staircase
+var p = 0.5 // The probability of a correct response for the staircase
 var fatigue_time = 45
 
 /* ************************************ */

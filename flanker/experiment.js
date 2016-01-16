@@ -33,12 +33,12 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli, exp_len/4, true);
 
 var practice_response_array = [];
 for (i = 0; i < practice_trials.data.length; i++) {
-	practice_response_array.push(practice_trials.data[i]['correct_response'])
+	practice_response_array.push(practice_trials.data[i].correct_response)
 }
 
 var test_response_array = [];
 for (i = 0; i < test_trials.data.length; i++) {
-	test_response_array.push(test_trials.data[i]['correct_response'])
+	test_response_array.push(test_trials.data[i].correct_response)
 }
 
 /* ************************************ */

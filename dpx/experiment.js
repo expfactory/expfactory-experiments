@@ -171,26 +171,26 @@ for (b = 0; b< 1; b++) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)
 				probe = jQuery.extend(true, {}, X_probe)
-				cue.data["condition"]="AX"
-				probe.data["condition"]="AX"
+				cue.data.condition="AX"
+				probe.data.condition="AX"
 				break;
 			case "BX":
 				cue = jQuery.extend(true, {}, other_cue)
 				probe = jQuery.extend(true, {}, X_probe)
-				cue.data["condition"]="BX"
-				probe.data["condition"]="BX"
+				cue.data.condition="BX"
+				probe.data.condition="BX"
 				break;
 			case "AY":
 				cue = jQuery.extend(true, {}, A_cue)
 				probe = jQuery.extend(true, {}, other_probe)
-				cue.data["condition"]="AY"
-				probe.data["condition"]="AY"
+				cue.data.condition="AY"
+				probe.data.condition="AY"
 				break;
 			case "BY":
 				cue = jQuery.extend(true, {}, other_cue)
 				probe = jQuery.extend(true, {}, other_probe)
-				cue.data["condition"]="BY"
-				probe.data["condition"]="BY"
+				cue.data.condition="BY"
+				probe.data.condition="BY"
 				break;
 		}
 		dpx_experiment.push(cue)

@@ -122,7 +122,7 @@ antisaccade_experiment.push(begin_practice_block)
 for (i=0; i<practice_len; i++) {
     antisaccade_experiment.push(fixation_block)
     target_direction = randomDraw([['left',37],['right',39],['up',38]])
-    if (practice_cue_sides[i]==0) {
+    if (practice_cue_sides[i]===0) {
         cue = cues[0]
         target = {image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] + '></div></div>',
                 data: {exp_id: "antisaccade", trial_id: "target", correct_response: target_direction[1], condition: 'right'}
@@ -180,7 +180,7 @@ antisaccade_experiment.push(begin_test_block)
 for (i=0; i<exp_len; i++) {
     antisaccade_experiment.push(fixation_block)
     target_direction = randomDraw([['left',37],['right',39],['up',38]])
-    if (test_cue_sides[i]==0) {
+    if (test_cue_sides[i]===0) {
         cue = cues[0]
         target = {image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] + '></div></div>',
                 data: {exp_id: "antisaccade", trial_id: "target", correct_response: target_direction[1], condition: 'right'}

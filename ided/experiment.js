@@ -16,7 +16,7 @@ function get_stim() {
 		stim1 = stims[0]
 		stim2 = stims[1]
 	} else if (stims.length == 4) {
-		if (Math.random()<.5 || version2_repeat >= 3 && version1_repeat<3) {
+		if (Math.random()<0.5 || version2_repeat >= 3 && version1_repeat<3) {
 			stim1 = stims[0] + stims[2]
 			stim2 = stims[1] + stims[3]
 			version2_repeat = 0
@@ -28,7 +28,7 @@ function get_stim() {
 			version1_repeat = 0
 		}
 	}
-	if (reversal == false) {
+	if (reversal === false) {
 		target = stim1
 	} else {
 		target = stim2
@@ -64,7 +64,7 @@ var right_prefix = '<div class = rightimg><img style="height: 80%; width: auto; 
 var postfix = '"</img></div>'
 var shape_stim = jsPsych.randomization.shuffle(['Shape_1.png','Shape_2.png','Shape_3.png','Shape_4.png','Shape_5.png','Shape_6.png', 'Shape_7.png', 'Shape_8.png'])
 var line_stim = jsPsych.randomization.shuffle(['Line_1.png','Line_2.png','Line_3.png','Line_4.png','Line_5.png','Line_6.png', 'Line_7.png', 'Line_8.png'])
-if (Math.random() < .5) {
+if (Math.random() < 0.5) {
 	var Dim1_stim = shape_stim
 	var Dim2_stim = line_stim
 	var Dim1_z = 'z-index: 1;" src = "'
@@ -240,7 +240,7 @@ for (b=0; b<blocks.length; b++) {
 	  timing_post_trial: 100,
 	  on_finish: function(data) {
 		  trial_counter += 1
-		  if (data.correct == true) {
+		  if (data.correct === true) {
 			  correct_counter += 1
 		  } else {
 			  correct_counter = 0

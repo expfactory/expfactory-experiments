@@ -6,7 +6,7 @@
  **/
 
 
-jsPsych.plugins['ant_practice'] = (function() {
+jsPsych.plugins.ant_practice = (function() {
 
   var plugin = {};
 

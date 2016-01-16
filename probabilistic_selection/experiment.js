@@ -37,27 +37,27 @@ var genResponses = function(stimuli){
 	 
 		if (stimuli.data[i].condition==='80_20') {
 			answers.push(answers_80_20[count1]);
-			var count1=count1+1;
+			count1=count1+1;
 		}
 		else if(stimuli.data[i].condition==='20_80'){
 			answers.push(answers_20_80[count2]);
-			var count2=count2+1;
+			count2=count2+1;
 		}
 		else if(stimuli.data[i].condition==='70_30'){
 			answers.push(answers_70_30[count3]);
-			var count3=count3+1;
+			count3=count3+1;
 		}
 		else if(stimuli.data[i].condition==='30_70'){
 			answers.push(answers_30_70[count4]);
-			var count4=count4+1;
+			count4=count4+1;
 		}
 		else if(stimuli.data[i].condition==='60_40'){
 			answers.push(answers_60_40[count5]);
-			var count5=count5+1;
+			count5=count5+1;
 		}
 		else {
 			answers.push(answers_40_60[count6]);
-			var count6=count6+1;
+			count6=count6+1;
 		}
 	 }
 	return answers; 
@@ -216,19 +216,19 @@ for (i=0; i<6; i++) {
 		for(var i=0; i < data.length; i++){
 			if (data[i].condition == "80_20"|| data[i].condition == "20_80" ) {
 				ab_cum_trials=ab_cum_trials+1;
-				if (data[i].correct == true){
+				if (data[i].correct === true){
 					ab_total_correct = ab_total_correct + 1;
 				}
 			}	
 			else if (data[i].condition == "70_30" || data[i].condition == "30_70"){
 				cd_cum_trials=cd_cum_trials+1;
-				if (data[i].correct == true){
+				if (data[i].correct === true){
 					cd_total_correct = cd_total_correct +1;
 				}
 			}
 			else if (data[i].condition == "60_40" || data[i].condition == "40_60") {
 				ef_cum_trials=ef_cum_trials+1;
-				if (data[i].correct == true){
+				if (data[i].correct === true){
 					ef_total_correct=ef_total_correct+1;
 				}
 			}
@@ -239,7 +239,7 @@ for (i=0; i<6; i++) {
 		
 		training_count=training_count+1;
 
-		if ((ab_percent>.7 && cd_percent>.65 && ef_percent>.5 && training_count>3) || (training_count==6)) {
+		if ((ab_percent>0.7 && cd_percent>0.65 && ef_percent>0.5 && training_count>3) || (training_count==6)) {
 			return false
 		} else {
 			firstPhaseStimsComplete=jsPsych.randomization.repeat(firstPhaseStims,eachComboNum,true);

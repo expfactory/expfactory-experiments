@@ -2,13 +2,15 @@
 /* Define helper functions */
 /* *********************************center*** */
 var getStim = function() {
-  if (Math.random() < .5) {
-    var immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
-    var delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</p></div>'  
+  var immediate_stim;
+  var delayed_stim;
+  if (Math.random() < 0.5) {
+    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
+    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</p></div>'  
     displayed_amounts = [immediate_amount,delayed_amount] // in order from left to right
   } else {
-    var immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
-    var delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</div></div>'  
+    immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
+    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</div></div>'  
     displayed_amounts = [delayed_amount, immediate_amount] // in order from left to right
   }
   return immediate_stim + delayed_stim
@@ -106,11 +108,12 @@ var test_block = {
 	is_html: true,
 	choices: choices,
   on_finish: function(data) {
+    var choice;
     var choice_i = choices.indexOf(data.key_press)
     if (displayed_amounts[choice_i] == 1000) {
-      var choice = 'delayed' 
+      choice = 'delayed' 
     } else {
-      var choice = 'immediate'
+      choice = 'immediate'
     }
     jsPsych.data.addDataToLastTrial({'sooner_amount': immediate_amount, 'later_amount': delayed_amount, 'sooner_time_days': 0, 'later_time_days': curr_delay_in_minutes, 'choice': choice})
     updateAmount(choice)

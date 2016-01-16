@@ -113,7 +113,7 @@ var n_back_experiment = []
 n_back_experiment.push(welcome_block);
 n_back_experiment.push(instructions_block);
 
-if (control_before == 0) {
+if (control_before === 0) {
 	n_back_experiment.push(start_control_block)
 	n_back_experiment = n_back_experiment.concat(control_trials)
 }
