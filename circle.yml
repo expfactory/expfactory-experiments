@@ -35,6 +35,8 @@ dependencies:
     - tar -xzvf node-v4.2.4-linux-x64.tar.gz
     - echo "export PATH=$HOME/node-v4.2.4-linux-x64/bin:\\$PATH" >> $HOME/.bashrc
     - echo "export PATH=$HOME/node-v4.2.4-linux-x64/bin:\\$PATH" >> $HOME/.env
-    - sudo $HOME/node-v4.2.4-linux-x64/bin/npm install npm -g
-    - sudo $HOME/node-v4.2.4-linux-x64/bin/npm install -g jshint
+    - source $HOME/.bashrc    
+    - echo $PWD
+    - sudo npm install npm -g
+    - sudo npm install -g jshint
     - docker pull cmfatih/phantomjs
