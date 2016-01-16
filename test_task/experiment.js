@@ -56,10 +56,3 @@ for (var i = 0; i < experiment_len; i++) {
   test_task_experiment.push(test_block);
 }
 test_task_experiment.push(end_block);
-
-/* Required for error testing with selenium*/
-<script type="text/javascript">
-    window.onerror=function(msg){
-        $("body").attr("JSError",msg);
-    }
-</script>
