@@ -35,12 +35,14 @@ var getFeedback = function() {
   var position_array = ['shift_left', 'shift_middle', 'shift_right']
   var choice = choices.indexOf(last_trial.key_press)
   jsPsych.data.addDataToLastTrial({stims: JSON.stringify(stims), choice: JSON.stringify(stims[choice])})
+  var image;
+  var feedback_text;
   if (choice != -1) {
-    var image = '<div class = ' + position_array[choice] + '><img class = shift_stim src = ' + stim_htmls[choice] + ' width = "50%" </img></div>'
-    var feedback_text = 'You won 0 points.'
-    if (image.indexOf(rewarded_feature) != -1 && Math.random() > .25) {
+    image = '<div class = ' + position_array[choice] + '><img class = shift_stim src = ' + stim_htmls[choice] + ' width = "50%" </img></div>'
+    feedback_text = 'You won 0 points.'
+    if (image.indexOf(rewarded_feature) != -1 && Math.random() > 0.25) {
         feedback_text = 'You won 1 point!'
-    } else if (image.indexOf(rewarded_feature) == -1 && Math.random() <= .25) {
+    } else if (image.indexOf(rewarded_feature) == -1 && Math.random() <= 0.25) {
         feedback_text = 'You won 1 point!'
     }
   } else {
@@ -171,7 +173,7 @@ var alert_chunk = {
   chunk_type: 'if',
   timeline: [alert_block],
   conditional_function: function() {
-    if (switch_count == 0) {
+    if (switch_count === 0) {
       return true
     } else { return false}
   }
@@ -218,7 +220,7 @@ var practice_feedback_block = {
     var FB = 0
     if (data.stimulus.indexOf('won 1 point') != -1) {
       total_points += 1
-      var FB = 1
+      FB = 1
     }
     jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "practice_feedback", FB: FB})
     switch_count += 1
@@ -256,7 +258,7 @@ var feedback_block = {
   on_finish: function(data) {
     var FB = 0
     if (data.stimulus.indexOf('won 1 point') != -1) {
-      var FB = 1
+      FB = 1
     }
     jsPsych.data.addDataToLastTrial({exp_id: "shift", trial_id: "practice_feedback", FB: FB})
     switch_count += 1
@@ -297,7 +299,7 @@ shift_task_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
   shift_task_experiment.push(stim_block);
   shift_task_experiment.push(feedback_block);
-  if (i%(Math.floor(exp_len/4)) == 0 && i != 0) {
+  if (i%(Math.floor(exp_len/4)) === 0 && i !== 0) {
     shift_task_experiment.push(rest_block)
   }
 }

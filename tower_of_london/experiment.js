@@ -6,11 +6,12 @@ var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', problems[problem_i])
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
-  if (held_ball != 0 ) {
+  var hold_box;
+  if (held_ball !== 0 ) {
     ball = colors[held_ball-1]
-    var hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   } else {
-    var hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   }
   return canvas + ref_board + target_board + hold_box
 }
@@ -19,11 +20,12 @@ var getPractice = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', example_problem3)
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
-  if (held_ball != 0 ) {
+  var hold_box;
+  if (held_ball !== 0 ) {
     ball = colors[held_ball-1]
-    var hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   } else {
-    var hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   }
   return canvas + ref_board + target_board + hold_box
 }
@@ -34,14 +36,15 @@ var getFB = function() {
   var isequal = true
   for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }
-  if (isequal == true) {
-    var feedback = "You got it!"
+  var feedback;
+  if (isequal === true) {
+    feedback = "You got it!"
   } else {
-    var feedback = "Didn't get that one."
+    feedback = "Didn't get that one."
   }
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', target)
@@ -63,9 +66,9 @@ var pegClick = function(peg_id) {
   choice = Number(peg_id.slice(-1))-1
   console.log(choice)
   peg = curr_placement[choice]
-  if (held_ball == 0) {
+  if (held_ball === 0) {
     for (var i = peg.length-1; i>=0; i--) {
-      if (peg[i] != 0) {
+      if (peg[i] !== 0) {
         held_ball = peg[i]
         peg[i] = 0
         num_moves += 1
@@ -94,7 +97,7 @@ var makeBoard = function(container, ball_placement) {
     board += '<div class = special id = tol_peg_' + (p+1) + ' onclick = "pegClick(this.id)">' 
     var peg = ball_placement[p]
     for (var b = 0; b < peg.length; b++) {
-      if (peg[b] != 0) {
+      if (peg[b] !== 0) {
         ball = colors[peg[b]-1]
         board += '<div class = "tol_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div>'
       }
@@ -260,12 +263,12 @@ var practice_node = {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    var data = data[0]
+    data = data[0]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }
@@ -280,12 +283,12 @@ var problem_node = {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    var data = data[0]
+    data = data[0]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }
