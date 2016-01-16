@@ -31,7 +31,10 @@ dependencies:
     - $HOME/miniconda2/bin/conda install --yes pip numpy nose pandas cython numexpr scipy matplotlib scikit-learn scikit-image
     - $HOME/miniconda2/bin/pip install cognitiveatlas
     - $HOME/miniconda2/bin/pip install expfactory
-    - sudo apt-get --yes install nodejs
+    - wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz
+    - tar -xzvf node-v4.2.4-linux-x64.tar.gz
+    - echo "export PATH=$HOME/node-v4.2.4-linux-x64/bin:\\$PATH" >> $HOME/.bashrc
+    - echo "export PATH=$HOME/node-v4.2.4-linux-x64/bin:\\$PATH" >> $HOME/.env
     - sudo npm install npm -g
     - sudo npm install -g jshint
     - docker pull cmfatih/phantomjs
