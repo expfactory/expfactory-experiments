@@ -2,14 +2,15 @@
     {
         "name": "Attention Network Task",
         "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "jspsych-ANT-practice.js",
                  "experiment.js",
-                 "style.css",
-                "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                 "jspsych-ANT-practice.js"
+                 "style.css"
               ],
-        "tag": "ant",
+        "tag": "attention_network_task",
         "cognitive_atlas_task_id": "trm_551f0857e1db8",
         "contributors": [
                          "Ian Eisenberg",

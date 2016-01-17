@@ -1,18 +1,17 @@
 [
     {
-        "name": "Angling Risk Task",
+        "name": "Random Number Generation",
         "run": [
-                "experiment.js",
-                "style.css",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js"
+                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js",
+                "experiment.js",
+                "style.css"
                ],
-        "tag": "art",
-        "cognitive_atlas_task_id": "trm_5667488d52ccc",
+        "tag": "random_number_generation",
+        "cognitive_atlas_task_id": "trm_4f2417d4a63ae",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -20,11 +19,12 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":45,
+        "time":3,
         "experiment_variables": "",
-        "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "",
         "publish":"True"
     
    }
 ]
+

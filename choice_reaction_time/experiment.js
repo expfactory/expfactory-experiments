@@ -24,23 +24,23 @@ var correct_responses = jsPsych.randomization.shuffle([['"M"',77],['"Z"',90]])
 var practice_stimuli = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_rt'},
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_reaction_time'},
 	key_answer: correct_responses[0][1]
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_rt'},
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_reaction_time'},
 	key_answer: correct_responses[1][1]
   }
 ];
 var test_stimuli_block = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_rt'}
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_reaction_time'}
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_rt'}
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_reaction_time'}
   }
 ];
 
@@ -55,7 +55,7 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the choice_rt experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the choice reaction time experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -128,12 +128,12 @@ var test_block = {
 
 
 /* create experiment definition array */
-var choice_rt_experiment = [];
-choice_rt_experiment.push(welcome_block);
-choice_rt_experiment.push(instructions_block);
-choice_rt_experiment.push(start_practice_block)
-choice_rt_experiment.push(practice_block);
-choice_rt_experiment.push(reset_block)
-choice_rt_experiment.push(start_test_block);
-choice_rt_experiment.push(test_block);
-choice_rt_experiment.push(end_block)
+var choice_reaction_time_experiment = [];
+choice_reaction_time_experiment.push(welcome_block);
+choice_reaction_time_experiment.push(instructions_block);
+choice_reaction_time_experiment.push(start_practice_block)
+choice_reaction_time_experiment.push(practice_block);
+choice_reaction_time_experiment.push(reset_block)
+choice_reaction_time_experiment.push(start_test_block);
+choice_reaction_time_experiment.push(test_block);
+choice_reaction_time_experiment.push(end_block)

@@ -2,12 +2,13 @@
     {
         "name": "The three by two task",
         "run": [
-                 "experiment.js",
-                 "style.css",
+                 "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js"
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                 "experiment.js",
+                 "style.css"
                ],
         "tag": "threebytwo",
         "cognitive_atlas_task_id": "trm_566745bbf272a",

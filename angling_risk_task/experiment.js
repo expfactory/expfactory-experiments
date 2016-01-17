@@ -69,7 +69,7 @@ function get_data() {
 	} else {
 		FB = 0
 	}
-	return {exp_id: "art",
+	return {exp_id: "angling_risk_task",
 			trial_id: "test",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
@@ -89,7 +89,7 @@ function get_practice_data() {
 	} else {
 		FB = 0
 	}
-	return {exp_id: "art",
+	return {exp_id: "angling_risk_task",
 			trial_id: "practice",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
@@ -412,9 +412,9 @@ var game_node = {
     }
 }
 
-art_experiment = []
-art_experiment.push(welcome_block)
-art_experiment.push(instructions_block)
+angling_risk_task_experiment = []
+angling_risk_task_experiment.push(welcome_block)
+angling_risk_task_experiment.push(instructions_block)
 for (b = 0; b<practiceblocks.length; b++) {
 	block = practiceblocks[b]
 	weather = block.weather
@@ -440,12 +440,12 @@ for (b = 0; b<practiceblocks.length; b++) {
 			tournament_bank = 0
 		}
 	}
-	art_experiment.push(tournament_intro_block)
-	art_experiment.push(ask_fish_block)
-	art_experiment.push(set_fish_block)
+	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(ask_fish_block)
+	angling_risk_task_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
-		art_experiment.push(practice_node)
-		art_experiment.push(round_over_block)
+		angling_risk_task_experiment.push(practice_node)
+		angling_risk_task_experiment.push(round_over_block)
 	}
 }
 
@@ -476,10 +476,10 @@ for (b = 0; b<blocks.length; b++) {
 			tournament_bank = 0
 		}
 	}
-	art_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(tournament_intro_block)
 	for (i=0; i <num_rounds; i++) {
-		art_experiment.push(game_node)
-		art_experiment.push(round_over_block)
+		angling_risk_task_experiment.push(game_node)
+		angling_risk_task_experiment.push(round_over_block)
 	}
 }
-art_experiment.push(end_block)
+angling_risk_task_experiment.push(end_block)

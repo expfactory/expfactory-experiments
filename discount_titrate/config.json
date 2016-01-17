@@ -2,11 +2,11 @@
     {
         "name": "Discount Titrate: Intertemporal Choice",
         "run": [
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "experiment.js",
-                 "style.css",
-                "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
+                 "style.css"
                ],
         "tag": "discount_titrate",
         "cognitive_atlas_task_id": "trm_566748c929afc",

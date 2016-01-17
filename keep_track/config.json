@@ -2,12 +2,13 @@
     {
         "name": "Keep Track Experiment",
         "run": [ 
-                "experiment.js",
-                "style.css",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js"
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "experiment.js",
+                "style.css"
                 ],
         "tag": "keep_track",
         "cognitive_atlas_task_id": "trm_4c40d4054f38b",

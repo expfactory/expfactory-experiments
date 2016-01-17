@@ -3,6 +3,15 @@
         "name": "Two-stage-decision-task",
         "tag": "two_stage_decision",
         "cognitive_atlas_task_id": "trm_5667451917a34",
+        "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "experiment.js",
+                "style.css"
+               ],
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -10,14 +19,6 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "run": [
-                "experiment.js",
-                "style.css",
-                "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
-               ],
         "time":26,
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627311001255",

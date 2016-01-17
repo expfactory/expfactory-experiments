@@ -2,9 +2,10 @@
     {
         "name": "Cognitive Reflection Task",
         "run": [
-                 "experiment.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js"
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                 "experiment.js"
                ],
         "tag": "cognitive_reflection",
         "cognitive_atlas_task_id": "trm_56675359b663a",

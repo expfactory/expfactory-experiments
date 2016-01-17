@@ -2,10 +2,11 @@
     {
         "name": "Plus-Minus",
         "run": [
-                "experiment.js",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js"
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "experiment.js"
                ],
         "tag": "plus_minus",
         "cognitive_atlas_task_id": "trm_5696b316c220a",
