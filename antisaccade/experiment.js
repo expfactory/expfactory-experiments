@@ -74,7 +74,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -97,7 +97,7 @@ var begin_test_block = {
 
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -136,7 +136,7 @@ for (i=0; i<practice_len; i++) {
         mask = masks[0]
     }
     var cue_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: cue.image,
       is_html: true,
       choices: [37, 38, 39],
@@ -148,7 +148,7 @@ for (i=0; i<practice_len; i++) {
     }
     
     var target_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: target.image,
       is_html: true,
       choices: [37, 38, 39],
@@ -160,7 +160,7 @@ for (i=0; i<practice_len; i++) {
     }
     
     var mask_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: mask.image,
       is_html: true,
       choices: [37, 38, 39],
@@ -194,7 +194,7 @@ for (i=0; i<exp_len; i++) {
         mask = masks[0]
     }
     var cue_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: cue.image,
       is_html: true,
       choices: [37, 38, 39],
@@ -206,7 +206,7 @@ for (i=0; i<exp_len; i++) {
     }
     
     var target_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: target.image,
       is_html: true,
       choices: [37, 38, 39],
@@ -218,7 +218,7 @@ for (i=0; i<exp_len; i++) {
     }
     
     var mask_block = {
-      type: 'single-stim',
+      type: 'poldrack-single-stim',
       stimulus: mask.image,
       is_html: true,
       choices: [37, 38, 39],

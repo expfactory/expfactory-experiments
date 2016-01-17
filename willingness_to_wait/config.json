@@ -3,7 +3,10 @@
         "name": "Willingness to Wait",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "willingness_to_wait",
         "cognitive_atlas_task_id": "",

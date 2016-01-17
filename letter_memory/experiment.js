@@ -54,7 +54,7 @@ var welcome_block = {
 
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to remember the last four letters presented and report them at the end of the sequence.</p><p class = block-text>For instance, if the sequence F...J...K...N...F...L is presented, you would report KNFL.</p><p class = block-text>The sequences vary in length so it is important that you keep track of each letter. To ensure this, while doing the task repeat the last four letters (or less if less than four letters had been shown) out loud or to yourself while the letters are being presented.</p></div>',
 	'<div class = centerbox><p class = block-text>We will start with two practice sequences. Following will be 12 test blocks.</p></div>'
@@ -96,7 +96,7 @@ for (var b=0; b<practice_block_num; b++) {
 	block = practice_blocks[b]
 	letter_memory_experiment.push(start_practice_block)
 	var letter_seq_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  timeline: practice_blocks[b],
 	  choices: 'none',
@@ -120,7 +120,7 @@ for (var b=0; b<block_num; b++) {
 	block = blocks[b]
 	letter_memory_experiment.push(start_test_block)
 	var letter_seq_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  timeline: blocks[b],
 	  choices: 'none',

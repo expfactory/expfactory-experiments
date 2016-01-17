@@ -96,7 +96,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
   '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer. If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions.</p></div>'
   ],
@@ -114,7 +114,7 @@ var end_block = {
 
 
 var start_test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   is_html: true,
   stimulus: getTestText,
   choices: 'none',
@@ -132,7 +132,7 @@ var start_reverse_block = {
 
 /* define test block */
 var test_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStims,
   is_html: true,
   timing_stim: getTimeArray,
@@ -204,7 +204,7 @@ var reverse_response_block = {
 }
 
 var feedback_block = {
-    type: 'single-stim',
+    type: 'poldrack-single-stim',
     stimulus: getFeedback,
     data: {exp_id: "digit_span", trial_id: "feedback"},
     is_html: true,
@@ -216,7 +216,7 @@ var feedback_block = {
 
 var forward_node = {
   timeline: [start_test_block, test_block, forward_response_block, feedback_block],
-  looping_node: function(data) {
+  loop_function: function(data) {
     if (errors < error_lim) {
       return true
     } else {
@@ -230,7 +230,7 @@ var forward_node = {
 
 var reverse_node = {
   timeline: [start_test_block, test_block, reverse_response_block, feedback_block],
-  looping_function: function(data) {
+  loop_function: function(data) {
     if (errors < error_lim) {return true}
     else {return false}
   }

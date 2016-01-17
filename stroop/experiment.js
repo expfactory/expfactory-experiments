@@ -37,7 +37,7 @@ var welcome_block = {
 var response_keys = '<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment you will see "color" words (RED, BLUE, GREEN) appear one at a time. The "ink" of the words also will be colored. For example, you may see: <span class = "large" style = "color:blue">RED</span>, <span class = "large" style = "color:blue">BLUE</span> or <span class = "large" style = "color:red">BLUE</span>.</p><p class = block-text>Your task is to press the button corresponding to the <strong> ink color </strong> of the word. It is important that you respond as quickly and accurately as possible. The response keys are as follows:</p>' + response_keys + '</div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -66,7 +66,7 @@ var start_test_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -85,7 +85,7 @@ stroop_experiment.push(start_practice_block)
 for (i=0; i<practice_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var practice_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  timeline: practice_stims,
 	  is_html: true,
 	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
@@ -108,7 +108,7 @@ stroop_experiment.push(start_test_block)
 for (i=0; i<exp_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var test_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  timeline: test_stims,
 	  is_html: true,
 	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',

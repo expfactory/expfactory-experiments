@@ -3,7 +3,10 @@
         "name": "Kirby Task",
         "run": [
                  "experiment.js",
-                 "style.css"
+                 "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "kirby",
         "cognitive_atlas_task_id": "tsk_4a57abb949e98",

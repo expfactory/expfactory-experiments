@@ -191,7 +191,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay and then you will be presented with a  single letter. Respond with the <strong> Left</strong> arrow key if it was in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
   ],
@@ -209,7 +209,7 @@ var start_test_block = {
 };
 
 var start_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -221,7 +221,7 @@ var start_fixation_block = {
 }
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -233,7 +233,7 @@ var fixation_block = {
 }
 
 var ITI_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
@@ -246,7 +246,7 @@ var ITI_fixation_block = {
 }
 
 var training_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "test"},
@@ -259,7 +259,7 @@ var training_block = {
 
 
  var probe_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "probe"},

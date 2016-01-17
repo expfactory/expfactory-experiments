@@ -3,7 +3,11 @@
         "name": "Dot Pattern Expectancy",
         "run": [
                  "experiment.js",
-                 "style.css"
+                 "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js"
                ],
         "tag": "dpx",
         "cognitive_atlas_task_id": "trm_515495b718cd6",

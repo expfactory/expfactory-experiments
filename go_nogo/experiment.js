@@ -75,7 +75,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -113,7 +113,7 @@ var reset_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'categorize',
+  type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
@@ -130,7 +130,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
   choices: [32],

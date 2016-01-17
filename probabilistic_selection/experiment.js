@@ -162,7 +162,7 @@ var welcome_block = {
 
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
     '<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
@@ -185,7 +185,7 @@ var FP_block = {
 training_trials = []
 for (i=0; i<6; i++) {
 	var training_block = {
-		type: 'categorize',
+		type: 'poldrack-categorize',
 		stimulus:  getStim,
 		key_answer: getResponse,
 		choices: [37, 39],
@@ -262,7 +262,7 @@ var SP_block = {
 
 
 var second_phase_trials = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: secondPhaseStimsComplete,
 	is_html: true,
 	data: {exp_id: "probabilistic_selection", trial_id: "second-phase"},

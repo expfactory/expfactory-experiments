@@ -103,7 +103,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
 	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
@@ -157,7 +157,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	var correct_stim = 'stim' + (static_winners[i]+1)
 	
 	var test_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
@@ -169,7 +169,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	};
 
 	var responded_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
@@ -181,7 +181,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	};
 
 	var feedback_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
@@ -217,7 +217,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	var correct_stim = 'stim' + (volatile_winners[i]+1)
 	
 	var test_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
@@ -229,7 +229,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	};
 
 	var responded_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
@@ -241,7 +241,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	};
 
 	var feedback_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',

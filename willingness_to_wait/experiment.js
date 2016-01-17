@@ -60,7 +60,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -76,7 +76,7 @@ var start_test_block = {
 };
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: token_0,
   is_html: true,
   choices: [32],
@@ -93,7 +93,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: token_0,
   is_html: true,
   choices: [32],
@@ -109,7 +109,7 @@ var test_block = {
 };
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFB,
   is_html: true,
   choices: 'none',
@@ -123,11 +123,9 @@ var feedback_block = {
 };
 
 var test_chunk = {
-  chunk_type: 'while',
   timeline: [test_block, feedback_block],
-  continue_function: function() {
+  loop_function: function() {
     var elapsed = (new Date() - block_start_time)/60000
-    console.log(elapsed)
     if (elapsed > 10) {
       return false
     } else {

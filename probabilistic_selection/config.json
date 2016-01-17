@@ -3,7 +3,10 @@
         "name": "Probabilistic Selection Task",
         "run": [
                  "experiment.js",
-                 "style.css"
+                 "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "probabilistic_selection",
         "cognitive_atlas_task_id": "trm_5667483dcc371",

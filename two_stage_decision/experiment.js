@@ -319,7 +319,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>On the next screen you will see an example "stage" with two shapes on colored backgrounds.</p></div>',
 	"<div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div>",
@@ -363,7 +363,7 @@ var start_test_block = {
 };
 
 var intertrial_wait_update_FB = {
-	type: "single-stim",
+	type: "poldrack-single-stim",
 	stimulus: update_FB_data, //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
@@ -373,7 +373,7 @@ var intertrial_wait_update_FB = {
 }
 
 var intertrial_wait = {
-	type: "single-stim",
+	type: "poldrack-single-stim",
 	stimulus: "", //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
@@ -390,7 +390,7 @@ var change_phase_block = {
 
 //experiment blocks
 var first_stage = {
-		type: "single-stim",
+		type: "poldrack-single-stim",
 		stimulus: choose_first_stage,
 		is_html: true,
 		choices: actions,
@@ -402,7 +402,7 @@ var first_stage = {
 }
 
 var first_stage_selected = {
-	type: "single-stim",
+	type: "poldrack-single-stim",
 	stimulus: get_first_selected,
 	choices: 'none',
 	is_html: true,
@@ -412,7 +412,7 @@ var first_stage_selected = {
 }
 
 var second_stage = {
-		type: "single-stim",
+		type: "poldrack-single-stim",
 		stimulus: choose_second_stage,
 		is_html: true,
 		choices: actions,
@@ -423,7 +423,7 @@ var second_stage = {
 }	
 
 var second_stage_selected = {
-	type: "single-stim",
+	type: "poldrack-single-stim",
 	stimulus: get_second_selected,
 	choices: 'none',
 	is_html: true,
@@ -433,7 +433,7 @@ var second_stage_selected = {
 }
 
 var FB_stage = {
-		type: "single-stim",
+		type: "poldrack-single-stim",
 		stimulus: get_feedback,
 		is_html: true,
 		choices: 'none',

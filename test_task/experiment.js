@@ -29,7 +29,7 @@ var end_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
   data: {exp_id: "test_task", trial_id: "test"},

@@ -65,7 +65,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this task, your job is to generate a random sequence of digits. You will do this by clicking on a virtual numpad using your mouse. Once you click, the number will temporarily turn red. You have less than a second to respond on each trial so it is important to respond quickly!</p><p class = block-text>.After the trial ends the numbers will dissapear for a moment. When they appear again the next trial has begun and you should respond as quickly as possible.</p><p class = block-text>Your goal is to choose each number completely randomly, as if you were picking a number from a hat with 9 slips of paper, reading it, and placing it back before picking another number.</p></div>',
   ],
@@ -96,7 +96,7 @@ var start_test_block = {
 };
 
 var  wait_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: [empty_grid],
   choices: 'none',
   is_html: true,

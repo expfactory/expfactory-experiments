@@ -107,7 +107,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
 	    instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p></div>',
@@ -129,7 +129,7 @@ var end_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -225,7 +225,7 @@ for (b=0; b<blocks.length; b++) {
 	}
 	
 	var stage_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  stimulus: get_stim,
 	  is_html: true,
 	  key_answer: get_correct_response,

@@ -3,7 +3,9 @@
         "name": "Test Task",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "test_task",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
