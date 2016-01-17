@@ -4,10 +4,10 @@
         "run": [ 
                  "experiment.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-categorize-audio.js",
                  "static/js/jspsych/plugins/jspsych-single-audio.js",
-		          "static/js/jspsych/plugins/jspsych-call-function.js"
+		         "static/js/jspsych/plugins/jspsych-call-function.js"
                ],
         "tag": "tone_monitoring",
         "cognitive_atlas_task_id": "trm_4c8a84825c4e4",
