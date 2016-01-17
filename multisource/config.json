@@ -2,11 +2,12 @@
     {
         "name": "Multi-Source Interference Task",
         "run": [
-               "experiment.js",
-               "style.css",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "experiment.js",
+                "style.css"
               ],
         "tag": "multisource",
         "cognitive_atlas_task_id": "trm_5696b61ff253e",

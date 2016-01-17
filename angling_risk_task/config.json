@@ -1,16 +1,19 @@
 [
     {
-        "name": "Dot Pattern Expectancy",
+        "name": "Angling Risk Task",
         "run": [
-                 "experiment.js",
-                 "style.css",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js"
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
+                "experiment.js",
+                "style.css"
                ],
-        "tag": "dpx",
-        "cognitive_atlas_task_id": "trm_515495b718cd6",
+        "tag": "angling_risk_task",
+        "cognitive_atlas_task_id": "trm_5667488d52ccc",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -18,10 +21,10 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":15,
+        "time":45,
         "experiment_variables": "",
-        "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
-        "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
+        "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
+        "notes": "",
         "publish":"True"
     
    }

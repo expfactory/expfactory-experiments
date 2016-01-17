@@ -100,7 +100,7 @@ var  wait_block = {
   stimuli: [empty_grid],
   choices: 'none',
   is_html: true,
-  data: {exp_id: "rng", trial_id: "wait"},
+  data: {exp_id: "random_number_generation", trial_id: "wait"},
   timing_stim: 200,
   timing_response: 200,
   response_ends_trial: false,
@@ -108,24 +108,24 @@ var  wait_block = {
 };
 
 //Set up experiment
-var rng_experiment = []
-rng_experiment.push(welcome_block);
-rng_experiment.push(instructions_block);
-rng_experiment.push(start_practice_block);
+var random_number_generation_experiment = []
+random_number_generation_experiment.push(welcome_block);
+random_number_generation_experiment.push(instructions_block);
+random_number_generation_experiment.push(start_practice_block);
 for (var i = 0; i <practice_stims.length; i++) {
   var  practice_block = {
     type: 'single-stim-button',
     stimuli: [practice_stims[i]],
     button_class: 'num-button',
-    data: {exp_id: "rng", trial_id: "practice"},
+    data: {exp_id: "random_number_generation", trial_id: "practice"},
     timing_response: 800,
     response_ends_trial: false,
     timing_post_trial: 0
   };
-  rng_experiment.push(practice_block)
-  rng_experiment.push(wait_block)
+  random_number_generation_experiment.push(practice_block)
+  random_number_generation_experiment.push(wait_block)
 }
-rng_experiment.push(start_test_block);
+random_number_generation_experiment.push(start_test_block);
 //Loop should be changed to go until test_stims.length later
 for (var i = 0; i <practice_stims.length; i++) {
   var  test_block = {
@@ -137,7 +137,7 @@ for (var i = 0; i <practice_stims.length; i++) {
     response_ends_trial: false,
     timing_post_trial: 0
   };
-  rng_experiment.push(test_block)
-  rng_experiment.push(wait_block)
+  random_number_generation_experiment.push(test_block)
+  random_number_generation_experiment.push(wait_block)
 }
-rng_experiment.push(end_block)
+random_number_generation_experiment.push(end_block)

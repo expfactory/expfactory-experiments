@@ -26,27 +26,27 @@ for (l = 0; l < locations.length; l++) {
 		stims = [
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</div></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 37, direction: 'left', flanker: 'neutral', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }, 
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &larr; &larr; &larr; &larr; &larr; </div></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 37, direction: 'left', flanker: 'congruent', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }, 
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </div></div></div>',
-			data: {correct_response: 37, direction: 'left', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 37, direction: 'left', flanker: 'incongruent', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }, 
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </div></div></div>',
-			data: {correct_response: 39,direction: 'right', flanker: 'neutral', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 39,direction: 'right', flanker: 'neutral', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }, 
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </div></div></div>',
-			data: {correct_response: 39, direction: 'right', flanker: 'congruent', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 39, direction: 'right', flanker: 'congruent', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }, 
 		  {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc + '><div class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </div></div></div>',
-			data: {correct_response: 39, direction: 'right', flanker: 'incongruent', location: loc, cue: c, exp_id: 'ant'}
+			data: {correct_response: 39, direction: 'right', flanker: 'incongruent', location: loc, cue: c, exp_id: 'attention_network_task'}
 		  }
 	  ]
 	  for (i= 0; i < stims.length; i++) {
@@ -72,7 +72,7 @@ var blocks = [block1_trials, block2_trials, block3_trials]
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the ANT experiment. Press any key to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the Attention Network Task experiment. Press any key to begin.</p></div>',
   timing_post_trial: 0
 };
 
@@ -105,7 +105,7 @@ var fixation = {
   stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ant', trial_type: 'fixation', duration: 400},
+  data: {exp_id: 'attention_network_task', trial_type: 'fixation', duration: 400},
   timing_post_trial: 0,
   timing_stim: 400,
   timing_response: 400
@@ -116,7 +116,7 @@ var no_cue = {
   stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ant', trial_type: 'nocue', duration: 100},
+  data: {exp_id: 'attention_network_task', trial_type: 'nocue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -127,7 +127,7 @@ var center_cue = {
   stimulus: '<div class = centerbox><div class = ANT_centercue_text>*</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ant', trial_type: 'centercue', duration: 100},
+  data: {exp_id: 'attention_network_task', trial_type: 'centercue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -138,7 +138,7 @@ var double_cue = {
   stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_down><div class = ANT_text>*</div></div><div class = ANT_up><div class = ANT_text>*</div><div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'ant', trial_type: 'doublecue', duration: 100},
+  data: {exp_id: 'attention_network_task', trial_type: 'doublecue', duration: 100},
   timing_post_trial: 0,
   timing_stim: 100,
   timing_response: 100
@@ -146,9 +146,9 @@ var double_cue = {
 
 
 /* set up ANT experiment */
-var ant_experiment = [];
-ant_experiment.push(welcome_block);
-ant_experiment.push(instructions_block);
+var attention_network_task_experiment = [];
+attention_network_task_experiment.push(welcome_block);
+attention_network_task_experiment.push(instructions_block);
 
 /* set up ANT practice */
 var trial_num = 0
@@ -161,38 +161,38 @@ for (i = 0; i < block.data.length; i++) {
 	  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
-	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
+	  data: {exp_id: 'attention_network_task', trial_type: 'fixation', duration: 100},
 	  timing_post_trial: 0,
 	  timing_stim: first_fixation_gap,
 	  timing_response: first_fixation_gap
 	}
-	ant_experiment.push(first_fixation)
+	attention_network_task_experiment.push(first_fixation)
 		
 	if (block.data[i].cue == 'nocue') {
-		ant_experiment.push(no_cue)
+		attention_network_task_experiment.push(no_cue)
 	} else if (block.data[i].cue == 'center') {
-		ant_experiment.push(center_cue)
+		attention_network_task_experiment.push(center_cue)
 	} else if (block.data[i].cue == 'double') {
-		ant_experiment.push(double_cue)
+		attention_network_task_experiment.push(double_cue)
 	} else {
 		var spatial_cue = {
 		  type: 'poldrack-single-stim',
 		  stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><div class = ANT_text>*</p></div></div>',
 		  is_html: true,
 		  choices: 'none',
-		  data: {exp_id: 'ant', trial_type: 'spatialcue', duration: 100},
+		  data: {exp_id: 'attention_network_task', trial_type: 'spatialcue', duration: 100},
 		  timing_post_trial: 0,
 		  timing_stim: 100,
 		  timing_response: 100
 		}
-		ant_experiment.push(spatial_cue)
+		attention_network_task_experiment.push(spatial_cue)
 	}
-	ant_experiment.push(fixation)
+	attention_network_task_experiment.push(fixation)
 	
 	block.data[i].trial_num = trial_num
-	block.data[i].exp_id = 'ant_practice'
-	var ant_practice_trial = {
-	  type: 'ant_practice',
+	block.data[i].exp_id = 'attention_network_task_practice'
+	var attention_network_task_practice_trial = {
+	  type: 'attention_network_task_practice',
 	  stimulus: block.image[i],
 	  is_html: true,
 	  key_answer: block.data[i].correct_response,
@@ -207,21 +207,21 @@ for (i = 0; i < block.data.length; i++) {
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 0
 	}
-	ant_experiment.push(ant_practice_trial)
+	attention_network_task_experiment.push(attention_network_task_practice_trial)
 
 	var last_fixation = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = centerbox><div class = ANT_text>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
-	  data: {exp_id: 'ant', trial_type: 'fixation', duration: 100},
+	  data: {exp_id: 'attention_network_task', trial_type: 'fixation', duration: 100},
 	  timing_post_trial: 0,
 	  timing_stim: post_trial_gap,
 	  timing_response: post_trial_gap
 	}
-	ant_experiment.push(last_fixation)
+	attention_network_task_experiment.push(last_fixation)
 }
-ant_experiment.push(rest_block)
+attention_network_task_experiment.push(rest_block)
 
 
 /* Set up ANT main task */
@@ -241,14 +241,14 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: first_fixation_gap,
 		  timing_response: first_fixation_gap
 		}
-		ant_experiment.push(first_fixation)
+		attention_network_task_experiment.push(first_fixation)
 			
 		if (block.data[i].cue == 'nocue') {
-			ant_experiment.push(no_cue)
+			attention_network_task_experiment.push(no_cue)
 		} else if (block.data[i].cue == 'center') {
-			ant_experiment.push(center_cue)
+			attention_network_task_experiment.push(center_cue)
 		} else if (block.data[i].cue == 'double') {
-			ant_experiment.push(double_cue)
+			attention_network_task_experiment.push(double_cue)
 		} else {
 			var spatial_cue = {
 			  type: 'poldrack-single-stim',
@@ -260,9 +260,9 @@ for (b = 0; b < blocks.length; b ++) {
 			  timing_stim: 100,
 			  timing_response: 100
 			}
-			ant_experiment.push(spatial_cue)
+			attention_network_task_experiment.push(spatial_cue)
 		}
-		ant_experiment.push(fixation)
+		attention_network_task_experiment.push(fixation)
 		
 		block.data[i].trial_num = trial_num
 		var ANT_trial = {
@@ -275,7 +275,7 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: 1700,
 		  timing_post_trial: 0
 		}
-		ant_experiment.push(ANT_trial)
+		attention_network_task_experiment.push(ANT_trial)
 	
 		var last_fixation = {
 		  type: 'poldrack-single-stim',
@@ -287,9 +287,9 @@ for (b = 0; b < blocks.length; b ++) {
 		  timing_stim: post_trial_gap,
 		  timing_response: post_trial_gap
 		}
-		ant_experiment.push(last_fixation)
+		attention_network_task_experiment.push(last_fixation)
 	}
-	ant_experiment.push(rest_block)
+	attention_network_task_experiment.push(rest_block)
 }
 
-ant_experiment.push(end_block)
+attention_network_task_experiment.push(end_block)

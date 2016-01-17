@@ -113,9 +113,9 @@ var curr_trial = 0
 var choices = [74,75,76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9)
 var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9))
-var curr_data = {exp_id: 'prp', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
+var curr_data = {exp_id: 'psychological_refractory_period', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
 //stim variables
-var path_source = 'static/experiments/prp/images/'
+var path_source = 'static/experiments/psychological_refractory_period/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
 // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
 var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png','3_border.png', '4_border.png'])
@@ -185,7 +185,7 @@ var fixation_block = {
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
-  data: {exp_id: 'prp', trial_id: 'fixation'},
+  data: {exp_id: 'psychological_refractory_period', trial_id: 'fixation'},
   choices: 'none',
   response_ends_trial: true,
   timing_post_trial: 1000
@@ -211,7 +211,7 @@ var feedback_block = {
   type: 'poldrack-single-stim',
   stimulus: getFB,
   is_html: true,
-  data: {exp_id: 'prp', trial_id: 'practice_feedback'},
+  data: {exp_id: 'psychological_refractory_period', trial_id: 'practice_feedback'},
   timing_stim: -1,
   timing_response: -1,
   response_ends_trial: true,
@@ -237,18 +237,18 @@ var test_block = {
 
 
 /* create experiment definition array */
-var prp_experiment = [];
-prp_experiment.push(welcome_block);
-prp_experiment.push(instructions_block);
-prp_experiment.push(start_practice_block);
+var psychological_refractory_period_experiment = [];
+psychological_refractory_period_experiment.push(welcome_block);
+psychological_refractory_period_experiment.push(instructions_block);
+psychological_refractory_period_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
-  prp_experiment.push(fixation_block);
-  prp_experiment.push(practice_block);
-  prp_experiment.push(feedback_block);
+  psychological_refractory_period_experiment.push(fixation_block);
+  psychological_refractory_period_experiment.push(practice_block);
+  psychological_refractory_period_experiment.push(feedback_block);
 }
-prp_experiment.push(start_test_block);
+psychological_refractory_period_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
-  prp_experiment.push(fixation_block);
-  prp_experiment.push(test_block)
+  psychological_refractory_period_experiment.push(fixation_block);
+  psychological_refractory_period_experiment.push(test_block)
 }
-prp_experiment.push(end_block);
+psychological_refractory_period_experiment.push(end_block);

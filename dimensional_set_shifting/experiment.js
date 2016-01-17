@@ -43,7 +43,7 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'ided', trial_id: 'test', condition: stages[stage_counter]}
+	return {exp_id: 'dimensional_set_shifting', trial_id: 'test', condition: stages[stage_counter]}
 }
 	
 
@@ -57,7 +57,7 @@ var blocks = ['simple', 'separate', 'compound', 'ID', 'ED'] //Simple: 1 dimensio
 var stages = ['simple', 'simple_rev', 'separate', 'compound', 'compound_rev', 'ID', 'ID_rev', 'ED', 'ED_rev']
 
 // Set up variables for stimuli
-var path = 'static/experiments/ided/images/'
+var path = 'static/experiments/dimensional_set_shifting/images/'
 var center_prefix = '<div class = centerimg><img style="height: 80%; width: auto; '
 var left_prefix = '<div class = leftimg><img style="height: 80%; width: auto; '
 var right_prefix = '<div class = rightimg><img style="height: 80%; width: auto; '
@@ -98,7 +98,7 @@ var version2_repeat = 0
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the IDED experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the Intra-dimensional set shifting experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   on_finish: function() {
   	$('body').css('background','black')
@@ -133,7 +133,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "ided", "trial_id": "fixation"},
+  data: {exp_id: "dimensional_set_shifting", "trial_id": "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
   timing_response: 500
@@ -206,22 +206,22 @@ var reverse_stims = {
 }
 
 /* create experiment definition array */
-ided_experiment = []
-ided_experiment.push(welcome_block)
-ided_experiment.push(instructions_block)
+dimensional_set_shifting_experiment = []
+dimensional_set_shifting_experiment.push(welcome_block)
+dimensional_set_shifting_experiment.push(instructions_block)
 /* define test trials */
 for (b=0; b<blocks.length; b++) {
 	block = blocks[b]
 	if (block == 'simple') {
-		ided_experiment.push(define_simple_stims)
+		dimensional_set_shifting_experiment.push(define_simple_stims)
 	} else if (block == 'separate') {
-		ided_experiment.push(define_separate_stims)
+		dimensional_set_shifting_experiment.push(define_separate_stims)
 	} else if (block == 'compound') {
-		ided_experiment.push(define_compound_stims)
+		dimensional_set_shifting_experiment.push(define_compound_stims)
 	} else if (block == 'ID') {
-		ided_experiment.push(define_ID_stims)
+		dimensional_set_shifting_experiment.push(define_ID_stims)
 	} else if (block == 'ED') {
-		ided_experiment.push(define_ED_stims)
+		dimensional_set_shifting_experiment.push(define_ED_stims)
 	}
 	
 	var stage_block = {
@@ -264,13 +264,13 @@ for (b=0; b<blocks.length; b++) {
 			}
 		}
 	}
-	ided_experiment.push(stage_node)
+	dimensional_set_shifting_experiment.push(stage_node)
 
 	if (block != 'separate') {
-		ided_experiment.push(reverse_stims)
-		ided_experiment.push(stage_node)
+		dimensional_set_shifting_experiment.push(reverse_stims)
+		dimensional_set_shifting_experiment.push(stage_node)
 	}
 }
 
 
-ided_experiment.push(end_block)
+dimensional_set_shifting_experiment.push(end_block)

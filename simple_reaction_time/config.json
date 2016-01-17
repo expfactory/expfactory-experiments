@@ -1,16 +1,17 @@
 [
     {
-        "name": "Random Number Generation",
+        "name": "Simple Reaction Time",
         "run": [
-                "experiment.js",
-                "style.css",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "experiment.js",
+                "style.css"
                ],
-        "tag": "rng",
-        "cognitive_atlas_task_id": "trm_4f2417d4a63ae",
+        "tag": "simple_reaction_time",
+        "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -18,12 +19,11 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":3,
+        "time":3.5,
         "experiment_variables": "",
-        "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
+        "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "notes": "",
         "publish":"True"
     
    }
 ]
-
