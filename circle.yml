@@ -31,6 +31,7 @@ dependencies:
     - $HOME/miniconda2/bin/pip install setuptools
     - $HOME/miniconda2/bin/conda install --yes pip numpy nose pandas cython numexpr scipy matplotlib scikit-learn scikit-image
     - $HOME/miniconda2/bin/pip install expfactory
+    - $HOME/miniconda2/bin/pip install cognitiveatlas
     - docker pull hyzual/jshint
   post:
       - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
