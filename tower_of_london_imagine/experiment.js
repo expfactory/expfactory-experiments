@@ -30,7 +30,7 @@ var makeBoard = function(container, ball_placement) {
     board += '<div class = tol_peg_' + (p+1) + '>' 
     var peg = ball_placement[p]
     for (var b = 0; b < peg.length; b++) {
-      if (peg[b] != 0) {
+      if (peg[b] !== 0) {
         ball = colors[peg[b]-1]
         board += '<div class = "tol_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div>'
       }

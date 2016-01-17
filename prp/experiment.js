@@ -14,22 +14,23 @@ var getStim = function() {
   var stim = stim_prefix + path_source + borders[bi] + ' </img></div></div>'
   var stim2 = stim_prefix + path_source + borders[bi] + ' </img></div></div><div class = prp_centerbox><div class = "white-text center-text">' + inners[ii] + '</div></div>'
   // set correct choice for first
+  var gonogo_choice;
   if (bi < 2) {
-    var gonogo_choice = 75
+    gonogo_choice = 75
   } else {
-    var gonogo_choice = -1
+    gonogo_choice = -1
   }
   //update data
-  curr_data['gonogo_stim'] = bi
-  curr_data['choice_stim'] = ii
-  curr_data['gonogo_correct_response'] = gonogo_choice
-  curr_data['choice_correct_response'] = [74, 76][ii]
+  curr_data.gonogo_stim = bi
+  curr_data.choice_stim = ii
+  curr_dat.gonogo_correct_response = gonogo_choice
+  curr_data.choice_correct_response = [74, 76][ii]
   return [stim,stim2]
 }
 
 var getISI = function() {
   var ISI = ISIs.shift()
-  curr_data['ISI'] = ISI
+  curr_data.ISI = ISI
   return [ISI, 2000-ISI]
 }
 /*
@@ -41,51 +42,53 @@ var getFB = function() {
   var keys = JSON.parse(data.key_press)
   var rts = JSON.parse(data.rt)
   var tooShort = false
+  var gonogoFB;
+  var choiceFB;
   // If the person responded to the colored square
   if (keys[0] == choices[1]) {
     if (rts[1] < data.ISI + 50 && rts[1]>0) {
-      var tooShort = true
+      tooShort = true
     } else {
       if (data.gonogo_correct_response != -1) {
-        var gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded to the colored square correctly!'
       } else {
-        var gonogoFB = 'You should not respond to that colored square.'
+        gonogoFB = 'You should not respond to that colored square.'
       }
       if (keys[1] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[1] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
    }
   }
   // If the person didn't respond to the colored square
   else if (keys[1] == -1 && keys[0] != choices[1]) {
     if (rts[0] > 0 && rts[0] < data.ISI + 50) {
-      var tooShort = true
+      tooShort = true
     } else {
       if (data.gonogo_correct_response == -1) {
-        var gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded to the colored square correctly!'
       } else {
-        var gonogoFB = 'You should respond to that colored square by pressing the "K" key with your middle finger.'
+        gonogoFB = 'You should respond to that colored square by pressing the "K" key with your middle finger.'
       }
       if (keys[0] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[0] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
     }
   } else if (keys[0] != choices[1] && keys[1] == choices[1]) {
-      var gonogoFB = 'You must respond to the colored square BEFORE the number.'
+      gonogoFB = 'You must respond to the colored square BEFORE the number.'
       if (keys[0] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[0] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
   }
   if (tooShort) {
@@ -96,8 +99,8 @@ var getFB = function() {
 }
 
 var appendData = function(data, trial_id) {
-  curr_data['trial_id'] = trial_id
-  curr_data['trial_num'] = curr_trial
+  curr_data.trial_id = trial_id
+  curr_data.trial_num = curr_trial
   jsPsych.data.addDataToLastTrial(curr_data)
 }
 

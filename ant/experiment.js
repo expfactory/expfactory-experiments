@@ -189,8 +189,8 @@ for (i = 0; i < block.data.length; i++) {
 	}
 	ant_experiment.push(fixation)
 	
-	block.data[i]['trial_num'] = trial_num
-	block.data[i]['exp_id'] = 'ant_practice'
+	block.data[i].trial_num = trial_num
+	block.data[i].exp_id = 'ant_practice'
 	var ant_practice_trial = {
 	  type: 'ant_practice',
 	  stimulus: block.image[i],
@@ -264,7 +264,7 @@ for (b = 0; b < blocks.length; b ++) {
 		}
 		ant_experiment.push(fixation)
 		
-		block.data[i]['trial_num'] = trial_num
+		block.data[i].trial_num = trial_num
 		var ANT_trial = {
 		  type: 'poldrack-single-stim',
 		  stimulus: block.image[i],

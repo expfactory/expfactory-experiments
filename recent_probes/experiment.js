@@ -48,7 +48,7 @@ var appendFixData = function(){
 //composed of three letters from the previous set, and three new letters.
 var getTrainingSet = function(){
 	trainingArray=jsPsych.randomization.repeat(stimArray,1);
-	if(currTrial==0){
+	if(currTrial===0){
 		stim1 = trainingArray[0];
 		stim2 = trainingArray[1];
 		stim3 = trainingArray[2];     
@@ -116,7 +116,7 @@ var getProbe = function() {
 	global_trial = jsPsych.progress().current_trial_global
 	trainingArray=jsPsych.randomization.repeat(stimArray,1);
 	currSet=jsPsych.data.getData()[global_trial-2].stim
-	if(currTrial==0){
+	if(currTrial===0){
 		temp=Math.floor(Math.random()*2)
 		if(temp==1){
 			probeType='xrec_pos'
@@ -124,7 +124,7 @@ var getProbe = function() {
 			temp2=jsPsych.randomization.repeat(currSet,1)
 			probe=temp2.pop()
 			return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
-		}else if(temp==0){
+		}else if(temp===0){
 			probeType='xrec_neg'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_neg'),1)
 			temp2=trainingArray.filter(function(y){return (jQuery.inArray(y,currSet) == -1)})
@@ -146,7 +146,7 @@ var getProbe = function() {
 			recProbes=currSet.filter(function(y){return (jQuery.inArray(y,lastSet) == -1)})
 			probe=randomDraw(recProbes)
 			return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
-		}else if(probeType='xrec_neg'){
+		}else if(probeType=='xrec_neg'){
 			recProbes=trainingArray.filter(function(y){return (jQuery.inArray(y,currSet.concat(lastSet)) == -1)})
 			probe=randomDraw(recProbes)
 		return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'

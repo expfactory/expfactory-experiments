@@ -14,7 +14,7 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	var stim = practice_trials[practice_count]['data'].trial_id
+	var stim = practice_trials[practice_count].data.trial_id
 	if (stim == 'high') {
 		high_count += 1
 	} else if (stim == 'medium') {

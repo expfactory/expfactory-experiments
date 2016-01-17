@@ -9,7 +9,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-writing.js"
                ],
         "tag": "writing_task",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",

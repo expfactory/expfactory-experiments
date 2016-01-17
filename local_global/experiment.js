@@ -21,16 +21,16 @@ var makeTrialList = function(len, stim, data) {
 		tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 	}
 	var tmp_obj = {}
-	tmp_obj['stimulus'] = stim[tmpi]
+	tmp_obj.stimulus = stim[tmpi]
 	var tmp_data = $.extend({},data[tmpi])
-	tmp_data["switch"] = 0 
-	tmp_data["correct_response"] = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
-	tmp_obj['data'] = tmp_data
+	tmp_data.switch = 0 
+	tmp_data.correct_response = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
+	tmp_obj.data = tmp_data
 	output_list.push(tmp_obj)
 	/* randomly sample from either the global or local stimulus lists (first and half part of the stim/data arrays)
 	On stay trials randomly select an additional stimulus from that array. On switch trials choose from the other list. */
 	for (i=1; i<switch_trials.length;i++) {
-		var tmp_obj = {}
+		tmp_obj = {}
 		if (switch_trials[i] == 1) {
 			if (trial_index == 'global') {trial_index = 'local'}
 			else {trial_index = 'global'}
@@ -40,11 +40,11 @@ var makeTrialList = function(len, stim, data) {
 		} else {
 			tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 		}
-		tmp_obj['stimulus'] = stim[tmpi] 
+		tmp_obj.stimulus = stim[tmpi] 
 		tmp_data = $.extend({},data[tmpi])
-		tmp_data["switch"] = switch_trials[i]
-		tmp_data["correct_response"] = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
-		tmp_obj['data'] = tmp_data
+		tmp_data.switch = switch_trials[i]
+		tmp_data.correct_response = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
+		tmp_obj.data = tmp_data
 		output_list.push(tmp_obj)
 	}	
 	return output_list
@@ -61,7 +61,7 @@ postfix = '"</img></div>'
 stim = []
 data = []
 for (c=0; c<task_colors.length; c++) {
-	if (c==0) {condition = 'global'} else { condition = 'local'}
+	if (c===0) {condition = 'global'} else { condition = 'local'}
 	for (g=0; g<task_shapes.length; g++) {
 		for (l=0; l<task_shapes.length; l++) {
 			stim.push(prefix + path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +'s.png' + postfix)
@@ -73,7 +73,7 @@ for (c=0; c<task_colors.length; c++) {
 //Set up experiment stimulus order
 var practice_trials = makeTrialList(36,stim,data)
 for (i=0; i<practice_trials.length; i++) {
-	practice_trials[i]['key_answer'] = practice_trials[i]['data'].correct_response
+	practice_trials[i].key_answer = practice_trials[i].data.correct_response
 }
 var test_trials = makeTrialList(96,stim,data)
 

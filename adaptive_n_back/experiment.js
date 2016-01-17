@@ -69,7 +69,7 @@ var num_trials = 25 // per block
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
-var acc_thresh = .8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
+var acc_thresh = 0.8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
 var current_trial = 0
 var target = ""
 var stims = []
@@ -163,7 +163,7 @@ var adaptive_n_back_experiment = []
 adaptive_n_back_experiment.push(welcome_block);
 adaptive_n_back_experiment.push(instructions_block);
 
-if (control_before == 0) {
+if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
@@ -196,7 +196,7 @@ for (var b = 0; b < num_blocks; b++) {
 		adaptive_n_back_experiment.push(test_block)
 	}
 	adaptive_n_back_experiment.push(update_delay_block)
-};
+}
 
 
 

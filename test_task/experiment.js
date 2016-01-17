@@ -48,7 +48,7 @@ var test_block = {
       reject = false
     }
   }
-};
+}
 
 /* create experiment definition array */
 var test_task_experiment = [];

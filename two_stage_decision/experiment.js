@@ -4,9 +4,9 @@
 //Polar method for generating random samples from a norma distribution.
 //Source: http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
 function normal_random(mean, variance) {
-  if (mean == undefined)
+  if (mean === undefined)
     mean = 0.0;
-  if (variance == undefined)
+  if (variance === undefined)
     variance = 1.0;
   var V1, V2, S;
   do {
@@ -33,7 +33,7 @@ var get_current_trial = function() {
 }
 
 var initialize_FB_matrix = function() {
-	return [Math.random()*.5+.25,Math.random()*.5+.25,Math.random()*.5+.25,Math.random()*.5+.25]
+	return [Math.random()*0.5+0.25,Math.random()*0.5+0.25,Math.random()*0.5+0.025,Math.random()*0.5+0.25]
 }
 
 //Change phase from practice to test
@@ -168,7 +168,7 @@ var choose_second_stage = function() {
 	 }
 	else {FB_on = 1;
 		stage = stim_ids[action]
-		if (Math.random() < .3) {stage = 1-stage}
+		if (Math.random() < 0.3) {stage = 1-stage}
 		stage_tmp = stage * 2
 		return "<div class = 'decision-top faded' style='background:" + curr_colors[0] +"; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[first_selected] + "'></div>" + 
@@ -207,8 +207,8 @@ parametrized a Gaussian. Reward probabilities are bound by 25% and 75%
 var update_FB = function() {
 	for (i = 0; i < FB_matrix.length; i++) {
 		var curr_value = FB_matrix[i]
-		var step = normal_random(0,.025*.025)
-		if (curr_value+step < .75 && curr_value+step > .25) {FB_matrix[i] = curr_value+step}
+		var step = normal_random(0,0.025*0.025)
+		if (curr_value+step < 0.75 && curr_value+step > 0.25) {FB_matrix[i] = curr_value+step}
 		else {FB_matrix[i] = curr_value - step}
 	}
 }
@@ -454,7 +454,7 @@ var FB_node = {
 var noFB_node = {
 	timeline: [intertrial_wait],
 	conditional_function: function() {
-		return FB_on == 0
+		return FB_on === 0
 	}
 }
 

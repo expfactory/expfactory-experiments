@@ -46,18 +46,20 @@ var getResponse = function() {
             } else {
                 return response_keys.key[1]
             }
+            break;
         case 'magnitude':
             if (curr_stim.number > 5) {
                 return response_keys.key[0]
             } else {
                 return response_keys.key[1]
             }
+            break;
         case 'parity':
-            if (curr_stim.number%2 == 0) {
+            if (curr_stim.number%2 === 0) {
                 return response_keys.key[0]
             } else {
                 return response_keys.key[1]
-            }   
+            }  
     }
 }
 
@@ -71,10 +73,11 @@ If "switch new", switch to the task that wasn't the current or last task, choosi
 If "switch old", switch to the last task and randomly choose a cue.
 */
 var setStims = function() {
+        var tmp;
 	switch(task_switches[trial_i].task_switch) {
 		case "stay":
 			if (curr_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks))
 			}
 			if (task_switches[trial_i].cue_switch == "switch") {
@@ -84,11 +87,11 @@ var setStims = function() {
 		case "switch_new":
 			cue_i = randomDraw([0,1])
 			if (last_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks).filter(function(x){return (x!=curr_task)}))
 				last_task = tmp
 			} else {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = getKeys(tasks).filter(function(x){return (x!=curr_task & x!=last_task)})[0]
 				last_task = tmp
 			}
@@ -96,11 +99,11 @@ var setStims = function() {
 		case "switch_old":
 			cue_i = randomDraw([0,1])
 			if (last_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks).filter(function(x){return (x!=curr_task)}))
 				last_task = tmp
 			} else {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = last_task
 				last_task = tmp
 			}

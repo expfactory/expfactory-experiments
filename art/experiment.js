@@ -19,7 +19,7 @@ function getGame() {
 	by editing "game_setup" a string which determines the html to display, followed by calling the "makeFish"
 	function, which...makes fish.
 	*/
-	if (total_fish_num == 0) {
+	if (total_fish_num === 0) {
 		round_over = 0
 		game_state = game_setup
 		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
@@ -64,7 +64,7 @@ function get_data() {
 		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
 		To get this we need to subtract the changes due to this choice.
 	*/
-	if (last_pay == .05) {
+	if (last_pay == 0.05) {
 		FB = 1
 	} else {
 		FB = 0
@@ -84,7 +84,7 @@ function get_practice_data() {
 		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
 		To get this we need to subtract the changes due to this choice.
 	*/
-	if (last_pay == .05) {
+	if (last_pay == 0.05) {
 		FB = 1
 	} else {
 		FB = 0
@@ -111,11 +111,11 @@ function makeFish(fish_num) {
 	total_fish_num = 0
 	filled_areas = [];
     for (i=0;i<fish_num-1;i++) {
-        if (max_x == 0) {
-			min_x = $('.lake').width()*.05;
-			min_y = $('.lake').height()*.05;
-            max_x = $('.lake').width()*.9;
-            max_y = $('.lake').height()*.9;   
+        if (max_x === 0) {
+			min_x = $('.lake').width()*0.05;
+			min_y = $('.lake').height()*0.05;
+            max_x = $('.lake').width()*0.9;
+            max_y = $('.lake').height()*0.9;   
         }
 		red_fish_num+=1
 		if (weather == "Sunny") {
@@ -233,7 +233,7 @@ function place_fish() {
 			var smallest_overlap = '';
 			var best_choice;
 			var area;
-			for (var i = 0; i < maxSearchIterations; i++) {
+			for (i = 0; i < maxSearchIterations; i++) {
 				rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random() % 1)));
 				rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random() % 1)));
 				area = {
@@ -243,7 +243,7 @@ function place_fish() {
 					height: $(this).height()
 				};
 				var overlap = calc_overlap(area);
-				if (smallest_overlap == '') {
+				if (smallest_overlap === '') {
 					smallest_overlap = overlap
 					best_choice = area
 				} else if (overlap < smallest_overlap) {
@@ -283,7 +283,7 @@ var tournament_bank = 0
 var blocks = [{weather: "Sunny", release: "Release"}, {weather: "Sunny", release: "Keep"}, {weather: "Cloudy", release: "Release"}, {weather: "Cloudy", release: "Keep"}]
 var practiceblocks = jsPsych.randomization.shuffle(blocks)
 var blocks = jsPsych.randomization.shuffle(blocks)
-var pay = .05 //payment for one red fish
+var pay = 0.05 //payment for one red fish
 var last_pay = 0 //variable to hold the last amount of money received
 var lake_state = '' //variable for redrawing the board from trial to trial
 var round_over = 0  //equals 1 if a blue fish is caught or the participant 'collects'

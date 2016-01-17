@@ -9,7 +9,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "willingness_to_wait",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_569989ef8cff4",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
