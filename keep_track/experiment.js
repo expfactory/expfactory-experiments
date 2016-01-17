@@ -86,7 +86,7 @@ var category_instructions = '<ul class = list-text>' +
 
 	
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p></div>',
@@ -138,7 +138,7 @@ target = practice_targets[0]
 prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.join(', ') +'</div></div>'
 data = {exp_id: 'keep_track', trial_id: 'practice_prompt', condition: 'target_length_' + target.length, targets: target}
 var prompt_block = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 	is_html: true,
 	choices: [13],
@@ -147,7 +147,7 @@ var prompt_block = {
 	timing_post_trial: 0,
 }
 var wait_block = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: ' ',
 	is_html: true,
 	choices: 'none',
@@ -162,7 +162,7 @@ for (i = 0; i < block.length; i++ ) {
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
 	data = {exp_id: 'keep_track', trial_id: 'practice_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
 	var track_block = {
-		type: 'single-stim',
+		type: 'poldrack-single-stim',
 		stimulus: stim,
 		is_html: true,
 		choices: 'none',
@@ -191,7 +191,7 @@ for (b=0; b<blocks.length; b++) {
 	prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.join(', ') +'</div></div>'
 	data = {exp_id: 'keep_track', trial_id: 'test_prompt', condition: 'target_length_' + target.length, targets: target}
 	var prompt_block = {
-		type: 'single-stim',
+		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 		is_html: true,
 		choices: [13],
@@ -200,7 +200,7 @@ for (b=0; b<blocks.length; b++) {
 		timing_post_trial: 0,
 	}
 	var wait_block = {
-		type: 'single-stim',
+		type: 'poldrack-single-stim',
 		stimulus: ' ',
 		is_html: true,
 		choices: 'none',
@@ -215,7 +215,7 @@ for (b=0; b<blocks.length; b++) {
 		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
 		data = {exp_id: 'keep_track', trial_id: 'test_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
 		var track_block = {
-			type: 'single-stim',
+			type: 'poldrack-single-stim',
 			stimulus: stim,
 			is_html: true,
 			choices: 'none',

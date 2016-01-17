@@ -101,7 +101,7 @@ var welcome_block = {
 
   
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see shapes in a sequence, one after the other. You will see one of three shapes on each trial: a red square, a green square, or a blue square.</p></div>',
     '<div class = centerbox><p class = block-text>Your job is to keep each track of the number of times each shape repeats and respond when you see any shape repeat four times by pressing the spacebar. For instance, if you see "red, red, blue, green, red, blue, green, <strong>red</strong>" you should respond on the last (fourth) red shape.</p><p class = block-text>If the sequence of shapes continued with "red, green, blue, <strong>green</strong>" you would respond again, as the green shape had repeated four times, and so on.</p></div>',
@@ -150,7 +150,7 @@ image_monitoring_experiment.push(start_practice_block);
 // set up practice
 for (i = 0; i< practice_trials.length; i++) {	
 	var practice_shape_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  is_html: true,
 	  timeline: practice_trials,
 	  key_answer: get_correct_key,
@@ -175,7 +175,7 @@ for (b=0; b<block_num; b++) {
 	block = blocks[b]
 	image_monitoring_experiment.push(start_test_block)
 	var test_shape_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  timeline: block,
 	  choices: [32],

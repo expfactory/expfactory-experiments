@@ -105,7 +105,7 @@ var welcome_block = {
 
   
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will hear tones in a sequence, one after the other. You will hear one of three tones on each trial: a high tone, a medium tone, or a low tone.</p></div>',
     '<div class = centerbox><p class = block-text>Your job is to keep each track of the number of times each tone repeats and respond when you hear any tone repeat four times by pressing the spacebar. For instance, if you hear "high, high, low, medium, high, low, medium, <strong>high</strong>" you should respond on the last (fourth) high tone.</p><p class = block-text>If the sequence of tones continued with "high, medium, low, <strong>medium</strong>" you would respond again, as the medium tone had repeated four times, and so on.</p></div>',

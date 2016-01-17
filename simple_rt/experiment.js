@@ -43,7 +43,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment, we are testing how fast you can respond. On each trial press the spacebar as quickly as possible <strong>after</strong> you see the large "X".</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -74,7 +74,7 @@ var reset_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
   data: {exp_id: "simple_rt", trial_id: "practice"},
@@ -85,7 +85,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
   data: {exp_id: "simple_rt", trial_id: "test"},

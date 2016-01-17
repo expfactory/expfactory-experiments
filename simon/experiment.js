@@ -58,7 +58,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a red box, press the ' + correct_responses[0][0] + '. If you see a blue box, press the ' + correct_responses[1][0] + '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
 	],
@@ -91,7 +91,7 @@ var reset_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'categorize',
+  type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
@@ -108,7 +108,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
   choices: [37,39],

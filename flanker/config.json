@@ -3,7 +3,11 @@
         "name": "Flanker Task",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js"
                ],
         "tag": "flanker",
         "cognitive_atlas_task_id": "tsk_4a57abb949a4f",
@@ -16,7 +20,7 @@
                         ], 
         "time":6.5,
         "experiment_variables": "",
-        "reference": "",
+        "reference": "link.springer.com/article/10.3758%2FBF03203267",
         "notes": "",
         "publish":"True"
     

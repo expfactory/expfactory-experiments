@@ -3,13 +3,12 @@
 /* ************************************ */
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 500 ) + 500
-  console.log(gap)
   return gap;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
@@ -25,29 +24,29 @@ var correct_responses = jsPsych.randomization.shuffle([['"M"',77],['"Z"',90]])
 var practice_stimuli = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_rt'},
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_rt'},
 	key_answer: correct_responses[0][1]
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_rt'},
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_rt'},
 	key_answer: correct_responses[1][1]
   }
 ];
 var test_stimuli_block = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_rt'}
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_rt'}
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_rt'}
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_rt'}
   }
 ];
 
 
 var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
 
 
 /* ************************************ */
@@ -62,7 +61,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -101,7 +100,7 @@ var start_test_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'categorize',
+  type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
@@ -118,7 +117,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
   choices: [correct_responses[0][1], correct_responses[1][1]],

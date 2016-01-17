@@ -54,7 +54,7 @@ var welcome_block = {
 
   
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ["<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of f's and h's. For instance, you might see 'fffff' or 'hhfhh'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'ffhff' you would press the 'h' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
@@ -76,7 +76,7 @@ var start_test_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -93,7 +93,7 @@ flanker_experiment.push(instructions_block);
 for (i=0; i<practice_len; i++) {
 	flanker_experiment.push(fixation_block)
 	var practice_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  stimulus: practice_trials.image[i],
 	  is_html: true,
 	  key_answer: practice_response_array[i],
@@ -115,7 +115,7 @@ flanker_experiment.push(start_test_block)
 for (i=0; i<exp_len; i++) {
 	flanker_experiment.push(fixation_block)
 	var test_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  stimulus: test_trials.image[i],
 	  is_html: true,
 	  key_answer: test_response_array[i],

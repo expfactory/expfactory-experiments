@@ -5,7 +5,11 @@
                 "experiment.js",
                 "jspsych-stop-signal.js",
                 "style.css",
-                "static/js/jspsych/plugins/jspsych-call-function.js"
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js"
                ],
         "tag": "stop_signal",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",

@@ -174,7 +174,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p></div>',
 	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
@@ -186,7 +186,7 @@ var instructions_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -198,7 +198,7 @@ var fixation_block = {
 
 /* prompt blocks are used during practice to show the instructions */
 var prompt_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_text,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   is_html: true,
@@ -209,7 +209,7 @@ var prompt_block = {
 }
 
 var prompt_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = shapebox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -257,7 +257,7 @@ noSS_practice_trials.push(practice_feedback_block)
 for (i = 0; i < noSS_practice_list.data.length; i++) {
 	noSS_practice_trials.push(prompt_fixation_block)
 	var stim_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getNoSSPracticeStim,
 	  data: getNoSSPracticeData,
 	  is_html: true,

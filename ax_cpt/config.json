@@ -3,7 +3,10 @@
         "name": "AX-CPT",
         "run": [
                 "experiment.js",
-                "style.css"
+                "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js"
                ],
         "tag": "ax_cpt",
         "cognitive_atlas_task_id": "trm_4c40d2a93ea15",

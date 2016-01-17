@@ -4,6 +4,9 @@
         "run": [
                  "experiment.js",
                  "style.css",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "jspsych-ANT-practice.js"
               ],
         "tag": "ant",

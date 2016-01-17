@@ -96,7 +96,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>For each of the following statements, please indicate the <strong>likelihood</strong> that you would engage in the described activity or behavior if you were to find yourself in that situation.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
@@ -104,16 +104,8 @@ var instructions_block = {
   allow_backwards: false
 };
 
-// var likert_block = {
-//     type: 'radio-buttonlist',
-//     preamble: [pretext, pretext, pretext, pretext, pretext],
-//     buttonlist: [page_1_buttonlist, page_2_buttonlist, page_3_buttonlist, page_4_buttonlist, page_5_buttonlist],
-//     checkAll: [true, true, true, true, true],
-//     numq: [6,6,6,6,6]
-// };
-
 var likert_block = {
-    type: 'radio-buttonlist',
+    type: 'poldrack-radio-buttonlist',
     timeline: [{buttonlist: page_1_buttonlist},{buttonlist: page_2_buttonlist},{buttonlist: page_3_buttonlist},{buttonlist: page_4_buttonlist},{buttonlist: page_5_buttonlist}],
     preamble: pretext,
     checkAll: true,

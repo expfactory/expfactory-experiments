@@ -139,7 +139,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
@@ -175,7 +175,7 @@ var start_decision_block = {
 
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   // stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,

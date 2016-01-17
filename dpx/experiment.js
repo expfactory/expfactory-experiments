@@ -69,7 +69,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "static/experiments/dpx/images/cue2.png" ></img>	...followed by...		<img src = "static/experiments/dpx/images/probe2.png" ></img><br><br></p></div>',
 	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dpx/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dpx/images/' + valid_probe + '" ></img><br></br></p></div>',
@@ -87,7 +87,7 @@ var rest_block = {
 };
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
@@ -98,7 +98,7 @@ var feedback_block = {
 }
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
@@ -111,7 +111,7 @@ var fixation_block = {
 
 /* define test block cues and probes*/
 var A_cue = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
@@ -122,7 +122,7 @@ var A_cue = {
 };
 
 var other_cue = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
@@ -133,7 +133,7 @@ var other_cue = {
 };
 
 var X_probe = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
@@ -145,7 +145,7 @@ var X_probe = {
 };
 
 var other_probe = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],

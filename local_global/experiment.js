@@ -98,7 +98,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><img src = "static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div>',
 	'<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' + task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' + task_colors[1] + ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for a circle, 2 for an X, 3 for a triangle and 4 for a square.</p></div>',
@@ -125,7 +125,7 @@ var start_test_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'categorize',
+  type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
@@ -139,7 +139,7 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
   choices: [49,50,51,52],
