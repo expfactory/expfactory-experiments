@@ -1,9 +1,15 @@
 [
     {
         "name": "Columbia Card Task Cold Version",
-        "run": [
-                 "experiment.js",
-                 "style.css"
+        "run": ["static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "experiment.js",
+             	"static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
                ],
         "tag": "columbia_card_task_cold",
         "cognitive_atlas_task_id": "trm_5667492c555b7",

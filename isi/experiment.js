@@ -412,7 +412,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares squares, you will see two larger colored squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out which color holds the majority in the smaller squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want to make your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
@@ -433,7 +433,7 @@ var start_practice_block = {
 };
 
 var subjectPracticeBlock ={
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: instructionsSetup,
   is_html: true,
   data: {exp_id: "isi", trial_id: "test"},
@@ -452,7 +452,7 @@ var start_test_block = {
 
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: getRound,
   is_html: true,
   data: {exp_id: "isi", trial_id: "test"},
@@ -463,7 +463,7 @@ var practice_block = {
 
 
 var rewardFW_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli:getRewardFW,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},
@@ -473,7 +473,7 @@ var rewardFW_block = {
 };
 
 var rewardDW_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli:getRewardDW,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},
@@ -485,7 +485,7 @@ var rewardDW_block = {
 
 
 var subjectRewardBlock ={
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli:getReward,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},

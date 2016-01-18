@@ -534,7 +534,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -662,7 +662,7 @@ var instructions_block = {
 
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: getRound,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},
@@ -691,7 +691,7 @@ var practice_chunk = {
     }
 }
 var practice_instruct_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: getPractice1,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},
@@ -720,7 +720,7 @@ var practice_chunk1 = {
 }
 
 var practice_instruct_block2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: getPractice2,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},

@@ -422,7 +422,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  in this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -549,7 +549,7 @@ var instructions_block = {
 
 
 var practice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: practiceSetup,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
@@ -558,7 +558,7 @@ var practice_block = {
 };
 
 var practice_block2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: practiceSetup2,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
@@ -580,7 +580,7 @@ var practice_chunk = {
 }
 
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: getRound,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
@@ -590,7 +590,7 @@ var test_block = {
 };
 
 var end_instructions = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
