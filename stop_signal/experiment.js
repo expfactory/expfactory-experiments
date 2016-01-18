@@ -141,7 +141,7 @@ var stimulus = [
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var noSS_practice_list = jsPsych.randomization.repeat(stimulus,3,true)
 var practice_list = jsPsych.randomization.repeat(stimulus,5,true)
-var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
+var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10)
 
 //number of blocks per condition
 numconditions = 2
@@ -423,9 +423,9 @@ for (c = 0; c< numconditions; c++) {
 		stop_signal_exp_block = []
 		var block = blocks[b]
 		if (ss_freq == "high") {
-			var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.length/5,false)
+			var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.length/5)
 		} else {
-			var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.length/5,false)
+			var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.length/5)
 		}
 		// Loop through each trial within the block
 		for (i = 0; i < block.length; i++) {

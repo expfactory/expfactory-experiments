@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "selective_stim_stop_signal",
+        "tag": "stim_selective_stop_signal",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
