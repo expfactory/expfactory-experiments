@@ -1,19 +1,18 @@
 [
     {
-        "name": "Guitart-Masip Paradigm",
+        "name": "Information Sampling Task",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/custom_plugins/jspsych-stop-signal.js",
-                "experiment.js",
-             	"static/css/jspsych.css",
+		"experiment.js",
+   		"static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "gm_paradigm",
-        "cognitive_atlas_task_id": "trm_569d6eef27433",
+        "tag": "isi",
+        "cognitive_atlas_task_id": "trm_50f73d557c967",
         "contributors": [
                          "Jamie Li",
                          "Ian Eisenberg",
@@ -24,7 +23,7 @@
                         ], 
         "time":999,
         "experiment_variables": "",
-        "reference": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0006322305013971",
         "notes": "",
         "publish":"True"
     

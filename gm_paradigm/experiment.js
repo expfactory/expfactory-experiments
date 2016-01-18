@@ -706,7 +706,7 @@ var testImagesBlock = {
 
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>This experiment is composed of 3 phases.</p></div>',
 	'<div class =centerbox><p class = block-text>Your goal for the first phase is to try to maximize your earnings by choosing to press the space bar or not based upon the presentation of 8 different colored squares.  Each of the eight colors will be rewarded according to one of the following four reward schedules:</p><p class =block-text>'+ 
@@ -719,7 +719,7 @@ var instructions_block = {
 };
 
 var start_practice = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getPracticePrompt,
   is_html: true,
   choices: [13],
@@ -732,7 +732,7 @@ var start_practice = {
 
 
 var start_test = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start phase 1 of the experiment.  For these trials, the rules associated with each color are as follows: </p><p class = block-text>'+startTestPrompt+'</p><p class = block-text> Make sure that you remember these rules before you move on to the test. <br><br>Press <strong>Enter</strong> to begin.'+'</p></div>',
   is_html: true,
   choices: [13],
@@ -743,7 +743,7 @@ var start_test = {
 };
 
 var stop_intro = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start the practice for phase 2 of the experiment.<br><br>For these trials, you must press the <strong> Z key </strong> or the <strong> M key </strong> depending on the shape of the stimulus.  Make sure to respond as quickly and accurately as possible to the shape. <br><br> The responses for each shape are as follows: ' + zmprompt_text+  '</p><p class = block-text>Remember these rules before you proceed, as they will not be presented during the trial. <br><br>Press <strong>enter</strong> to begin. </p></div>',
   is_html: true,
   choices: [13],
@@ -754,7 +754,7 @@ var stop_intro = {
 };
 
 var stop_intro2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>These trials will be similar to the trials you have just completed.  Again, please respond to the shape of the stimulus. <br><br> On a subset of trials, a star will appear around the shape, when this happens please try your best to stop your response and press nothing. Do not slow your responses to the shape to achieve this. <br><br>The responses for each shape are as follows: ' + zmprompt_text+  '</p><p class =block-text>Remember these rules before you proceed, as they will not be presented during the trial. </p><p class =block-text>Press <strong>enter</strong> to begin. </p></div>',
   is_html: true,
   choices: [13],
@@ -766,7 +766,7 @@ var stop_intro2 = {
 
 
 var main_stop_intro1 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start Phase 2 of the experiment.<br><br>These trials are similar to the trials that you have just completed.  Like last time, on a subset of trials a star will appear around the shape, when this happens please try your best to stop your response and press nothing. Do not slow your responses to the shape to achieve this.<br><br>The rules for each shape are as follows:  <br>'+zmprompt_text+'</p><p class = block-text>Remember these rules before you proceed.</p><p class = block-text>Press <strong> enter</strong> to begin.</p></div>',
   is_html: true,
   choices: [13],
@@ -779,7 +779,7 @@ var main_stop_intro1 = {
 
 
 var forced_choice_intro = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start phase 3 of the experiment.<br><br>In this part of the experiment, you will see two color patches presented on each trial, one on the left side of the screen and the other on the right. You will choose the color which you find more rewarding by pressing either the left or right arrow key to correspond with the left or right color patch, respectively. <br><br>Press <strong>enter</strong> to continue.</p></div>',
   is_html: true,
   choices: [13],
@@ -790,7 +790,7 @@ var forced_choice_intro = {
 };
 
 var forced_choice_intro_break = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now take a short break.  <br><br>Press <strong>enter</strong> to continue.</p></div>',
   is_html: true,
   choices: [13],
@@ -802,7 +802,7 @@ var forced_choice_intro_break = {
 
 
 var forced_choice_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getCombo,
   is_html: true,
   choices: [37,39],
@@ -815,7 +815,7 @@ var forced_choice_block = {
 };
 
 var forced_choice_block2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getCombo2,
   is_html: true,
   choices: [37,39],
@@ -829,7 +829,7 @@ var forced_choice_block2 = {
 
 
 var fixationBlock = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -840,7 +840,7 @@ var fixationBlock = {
 };
 
 var fixationBlock2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -853,7 +853,7 @@ var fixationBlock2 = {
 
 
 var rewardBlock2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getReward2,
   is_html: true,
   choices: 'none',
@@ -866,7 +866,7 @@ var rewardBlock2 = {
 };
 
 var rewardBlock = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getReward,
   is_html: true,
   choices: 'none',
@@ -903,7 +903,7 @@ var stop_feedback_block = {
 };
 
 var prompt_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_text,
   choices: 'none',
   data: {exp_id: "gmParadigm", "trial_id": "prompt"},
@@ -929,7 +929,7 @@ var reset_Gap = {
 }
 
 var pre_practice_learning_block1 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText1  + practiceLearningStims1.image,
   is_html: true,
   choices: [13],
@@ -940,7 +940,7 @@ var pre_practice_learning_block1 = {
 };
 
 var pre_practice_learning_block2 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText2  + practiceLearningStims2.image,
   is_html: true,
   choices: [13],
@@ -951,7 +951,7 @@ var pre_practice_learning_block2 = {
 };
 
 var pre_practice_learning_block3 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText3  + practiceLearningStims3.image,
   is_html: true,
   choices: [13],
@@ -962,7 +962,7 @@ var pre_practice_learning_block3 = {
 };
 
 var pre_practice_learning_block4 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText4  + practiceLearningStims4.image,
   is_html: true,
   choices: [13],
@@ -973,7 +973,7 @@ var pre_practice_learning_block4 = {
 };
 
 var pre_practice_learning_block5 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText5  + practiceLearningStims5.image,
   is_html: true,
   choices: [13],
@@ -984,7 +984,7 @@ var pre_practice_learning_block5 = {
 };
 
 var pre_practice_learning_block6 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText6  + practiceLearningStims6.image,
   is_html: true,
   choices: [13],
@@ -995,7 +995,7 @@ var pre_practice_learning_block6 = {
 };
 
 var pre_practice_learning_block7 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText7  + practiceLearningStims7.image,
   is_html: true,
   choices: [13],
@@ -1006,7 +1006,7 @@ var pre_practice_learning_block7 = {
 };
 
 var pre_practice_learning_block8 = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText8  + practiceLearningStims8.image,
   is_html: true,
   choices: [13],
@@ -1028,7 +1028,7 @@ subjectTrialsStim1 = []
 for(i=0;i<1;i++){
 subjectTrialsStim1.push(fixationBlock)
 	var subjectPracticeTrials1 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim1,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1074,7 +1074,7 @@ subjectTrialsStim2 = []
 for(i=0;i<1;i++){
 subjectTrialsStim2.push(fixationBlock)
 	var subjectPracticeTrials2 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim2,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1119,7 +1119,7 @@ subjectTrialsStim3 = []
 for(i=0;i<1;i++){
 subjectTrialsStim3.push(fixationBlock)
 	var subjectPracticeTrials3 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim3,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1166,7 +1166,7 @@ subjectTrialsStim4 = []
 for(i=0;i< 1;i++){
 subjectTrialsStim4.push(fixationBlock)
 	var subjectPracticeTrials4 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim4,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1213,7 +1213,7 @@ subjectTrialsStim5 = []
 for(i=0;i< 1;i++){
 subjectTrialsStim5.push(fixationBlock)
 	var subjectPracticeTrials5 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim5,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1261,7 +1261,7 @@ subjectTrialsStim6 = []
 for(i=0;i< 1;i++){
 subjectTrialsStim6.push(fixationBlock)
 	var subjectPracticeTrials6 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim6,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1307,7 +1307,7 @@ subjectTrialsStim7 = []
 for(i=0;i<1;i++){
 subjectTrialsStim7.push(fixationBlock)
 	var subjectPracticeTrials7 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim7,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1353,7 +1353,7 @@ subjectTrialsStim8 = []
 for(i=0;i<1;i++){
 subjectTrialsStim8.push(fixationBlock)
 	var subjectPracticeTrials8 = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim8,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1401,7 +1401,7 @@ practiceTrials.push(learning_feedback_block)
 for(h=0;h<24;h++){
 practiceTrials.push(fixationBlock)
 var practiceBlock = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
@@ -1469,7 +1469,7 @@ var practiceStopTrials = []
 for(i=0;i<12;i++){
 	practiceStopTrials.push(fixationBlock)
 var practiceStop = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getPracticeStopStim,
 	is_html: true,
 	data: {exp_id: "gmParadigm", "trial_id": "learning"},
