@@ -8,6 +8,8 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "jspsych-ANT-practice.js",
                  "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
                  "style.css"
               ],
         "tag": "attention_network_task",

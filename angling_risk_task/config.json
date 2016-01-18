@@ -10,6 +10,8 @@
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
         "tag": "angling_risk_task",

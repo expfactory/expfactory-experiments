@@ -6,6 +6,8 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
                  "style.css"
                ],
         "tag": "discount_titrate",

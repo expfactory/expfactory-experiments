@@ -5,7 +5,9 @@
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
                  "static/js/jspsych/plugins/jspsych-survey-text.js",
-                 "experiment.js"
+                 "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
                ],
         "tag": "cognitive_reflection",
         "cognitive_atlas_task_id": "trm_56675359b663a",
