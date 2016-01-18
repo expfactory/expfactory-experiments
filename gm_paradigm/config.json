@@ -1,0 +1,32 @@
+[
+    {
+        "name": “Guitart-Masip Paradigm”,
+        "run": ["static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-stop-signal.js",
+                "experiment.js",
+             	"static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
+               ],
+        "tag": “gm_paradigm”,
+        "cognitive_atlas_task_id": "trm_569d6eef27433",
+        "contributors": [
+                         "Jamie Li",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]

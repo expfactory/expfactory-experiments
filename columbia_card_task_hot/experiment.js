@@ -382,8 +382,7 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray,1)
 var numRounds=24
 var roundOver =0
 
-var gameSetup = "<div class = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can clicked the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div> "+ 
-  "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
+var gameSetup =  "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
   "<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
   "<div class = titleboxLeft><div id = game_round class = center-text>Game Round: </div></div>" +
   "<div class = titleboxLeft1><div id= loss_amount class = center-text>Loss Amount: </div></div>" +
@@ -474,7 +473,7 @@ var practiceSetup = "<div class = instruct1><strong>Practice 1: </strong> As you
   "<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"+
   "<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
   	
-var practiceSetup2 = "<div class = instruct1><strong>Practice 1: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div> "+ 
+var practiceSetup2 = "<div class = instruct1><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div> "+ 
   "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
   "<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
   "<div class = titleboxLeft><div id = game_round class = center-text>Game Round: 2</div></div>" +
@@ -738,7 +737,7 @@ var practice_chunk2 = {
 			roundPoints = 0
 			whichClickInRound= 0
 			currTrial = 0
-			whichRound = 1
+			whichRound = 0
 			lossClicked = false
 			return false
 		} else if(roundOver ==1){
