@@ -2,7 +2,14 @@
     {
         "name": "Letter Memory",
         "run": [
-                "experiment.js"
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css"
                ],
         "tag": "letter_memory",
         "cognitive_atlas_task_id": "trm_5696a9cfe45b1",

@@ -2,9 +2,14 @@
     {
         "name": "Tower of London",
         "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                 "experiment.js",
-                "style.css",
-                "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
                ],
 
         "tag": "tower_of_london_imagine",

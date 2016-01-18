@@ -117,7 +117,7 @@ var welcome_block = {
 
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "white-text block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     	instructions_grid,
@@ -146,7 +146,7 @@ var start_test_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: prompt_prefix + path_source + 'FIX.png' + ' style:"z-index: -1"' + postfix,
   is_html: true,
   choices: 'none',
@@ -158,7 +158,7 @@ var fixation_block = {
 }
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
@@ -171,7 +171,7 @@ var feedback_block = {
 
 
 var flat_stim_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getFlatStim,
 	  data: getFlatData,
 	  is_html: true,
@@ -187,7 +187,7 @@ var flat_stim_block = {
 }
 
 var hierarchical_stim_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getHierarchicalStim,
 	  data: getHierarchicalData,
 	  is_html: true,

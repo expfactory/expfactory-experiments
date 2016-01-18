@@ -48,7 +48,7 @@ var appendFixData = function(){
 //composed of three letters from the previous set, and three new letters.
 var getTrainingSet = function(){
 	trainingArray=jsPsych.randomization.repeat(stimArray,1);
-	if(currTrial==0){
+	if(currTrial===0){
 		stim1 = trainingArray[0];
 		stim2 = trainingArray[1];
 		stim3 = trainingArray[2];     
@@ -116,7 +116,7 @@ var getProbe = function() {
 	global_trial = jsPsych.progress().current_trial_global
 	trainingArray=jsPsych.randomization.repeat(stimArray,1);
 	currSet=jsPsych.data.getData()[global_trial-2].stim
-	if(currTrial==0){
+	if(currTrial===0){
 		temp=Math.floor(Math.random()*2)
 		if(temp==1){
 			probeType='xrec_pos'
@@ -124,7 +124,7 @@ var getProbe = function() {
 			temp2=jsPsych.randomization.repeat(currSet,1)
 			probe=temp2.pop()
 			return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
-		}else if(temp==0){
+		}else if(temp===0){
 			probeType='xrec_neg'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_neg'),1)
 			temp2=trainingArray.filter(function(y){return (jQuery.inArray(y,currSet) == -1)})
@@ -146,7 +146,7 @@ var getProbe = function() {
 			recProbes=currSet.filter(function(y){return (jQuery.inArray(y,lastSet) == -1)})
 			probe=randomDraw(recProbes)
 			return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
-		}else if(probeType='xrec_neg'){
+		}else if(probeType=='xrec_neg'){
 			recProbes=trainingArray.filter(function(y){return (jQuery.inArray(y,currSet.concat(lastSet)) == -1)})
 			probe=randomDraw(recProbes)
 		return '<div class = centerBox><img class = recentStim src="'+pathSource+probe+fileType+'"></img></div>'
@@ -191,7 +191,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay and then you will be presented with a  single letter. Respond with the <strong> Left</strong> arrow key if it was in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
   ],
@@ -209,7 +209,7 @@ var start_test_block = {
 };
 
 var start_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -221,7 +221,7 @@ var start_fixation_block = {
 }
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -233,7 +233,7 @@ var fixation_block = {
 }
 
 var ITI_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
@@ -246,7 +246,7 @@ var ITI_fixation_block = {
 }
 
 var training_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "test"},
@@ -259,7 +259,7 @@ var training_block = {
 
 
  var probe_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
   data: {exp_id: "recent_probes", trial_id: "probe"},

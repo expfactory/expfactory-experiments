@@ -55,11 +55,11 @@ for (i=0; i<36; i++) {
 
       if(small_amts[i]<5){
         small_amts[i] = 5;
-      };
+      }
       if(small_amts[i]>40){
         small_amts[i] =40;
       }
-    };
+    }
 
 //Based on smaller amounts generate larger amounts (1, 5, 10, 15, 20, 25, 30, 50, 75% higher)
 var rel_dif = fillArray([1.01, 1.05, 1.10, 1.15, 1.20, 1.25, 1.30, 1.50, 1.75], 4)
@@ -67,7 +67,7 @@ var rel_dif = fillArray([1.01, 1.05, 1.10, 1.15, 1.20, 1.25, 1.30, 1.50, 1.75], 
 var large_amts = [];
 for (i=0; i<36; i++){
     large_amts[i] = Math.round(small_amts[i]*rel_dif[i]*100)/100;
-  };
+  }
 
 //Generate sooner delays (today or in 2 weeks - 18 each)
 var sooner_dels = fillArray(["today"], 18).concat(fillArray(["2 weeks"], 18));
@@ -105,7 +105,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
   ],
@@ -122,7 +122,7 @@ var start_practice_block = {
 };
 
 var practice_block = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimuli: ["<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"],
 	is_html: true,
 	choices: ['q', 'p']
@@ -136,7 +136,7 @@ var start_test_block = {
 };
 
 var test_block = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimuli: trials,
 	is_html: true,
 	choices: ['q', 'p'],

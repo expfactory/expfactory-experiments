@@ -2,10 +2,17 @@
     {
         "name": "Simple Reaction Time",
         "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "simple_rt",
+        "tag": "simple_reaction_time",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
         "contributors": [
                          "Ian Eisenberg",

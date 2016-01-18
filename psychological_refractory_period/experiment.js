@@ -14,22 +14,23 @@ var getStim = function() {
   var stim = stim_prefix + path_source + borders[bi] + ' </img></div></div>'
   var stim2 = stim_prefix + path_source + borders[bi] + ' </img></div></div><div class = prp_centerbox><div class = "white-text center-text">' + inners[ii] + '</div></div>'
   // set correct choice for first
+  var gonogo_choice;
   if (bi < 2) {
-    var gonogo_choice = 75
+    gonogo_choice = 75
   } else {
-    var gonogo_choice = -1
+    gonogo_choice = -1
   }
   //update data
-  curr_data['gonogo_stim'] = bi
-  curr_data['choice_stim'] = ii
-  curr_data['gonogo_correct_response'] = gonogo_choice
-  curr_data['choice_correct_response'] = [74, 76][ii]
+  curr_data.gonogo_stim = bi
+  curr_data.choice_stim = ii
+  curr_dat.gonogo_correct_response = gonogo_choice
+  curr_data.choice_correct_response = [74, 76][ii]
   return [stim,stim2]
 }
 
 var getISI = function() {
   var ISI = ISIs.shift()
-  curr_data['ISI'] = ISI
+  curr_data.ISI = ISI
   return [ISI, 2000-ISI]
 }
 /*
@@ -41,51 +42,53 @@ var getFB = function() {
   var keys = JSON.parse(data.key_press)
   var rts = JSON.parse(data.rt)
   var tooShort = false
+  var gonogoFB;
+  var choiceFB;
   // If the person responded to the colored square
   if (keys[0] == choices[1]) {
     if (rts[1] < data.ISI + 50 && rts[1]>0) {
-      var tooShort = true
+      tooShort = true
     } else {
       if (data.gonogo_correct_response != -1) {
-        var gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded to the colored square correctly!'
       } else {
-        var gonogoFB = 'You should not respond to that colored square.'
+        gonogoFB = 'You should not respond to that colored square.'
       }
       if (keys[1] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[1] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
    }
   }
   // If the person didn't respond to the colored square
   else if (keys[1] == -1 && keys[0] != choices[1]) {
     if (rts[0] > 0 && rts[0] < data.ISI + 50) {
-      var tooShort = true
+      tooShort = true
     } else {
       if (data.gonogo_correct_response == -1) {
-        var gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded to the colored square correctly!'
       } else {
-        var gonogoFB = 'You should respond to that colored square by pressing the "K" key with your middle finger.'
+        gonogoFB = 'You should respond to that colored square by pressing the "K" key with your middle finger.'
       }
       if (keys[0] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[0] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
     }
   } else if (keys[0] != choices[1] && keys[1] == choices[1]) {
-      var gonogoFB = 'You must respond to the colored square BEFORE the number.'
+      gonogoFB = 'You must respond to the colored square BEFORE the number.'
       if (keys[0] == data.choice_correct_response) {
-        var choiceFB = 'You responded correctly to the number!'
+        choiceFB = 'You responded correctly to the number!'
       } else if (keys[0] == -1) {
-        var choiceFB = 'Remember to respond to the number.'
+        choiceFB = 'Remember to respond to the number.'
       } else {
-        var choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
+        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.'
       } 
   }
   if (tooShort) {
@@ -96,8 +99,8 @@ var getFB = function() {
 }
 
 var appendData = function(data, trial_id) {
-  curr_data['trial_id'] = trial_id
-  curr_data['trial_num'] = curr_trial
+  curr_data.trial_id = trial_id
+  curr_data.trial_num = curr_trial
   jsPsych.data.addDataToLastTrial(curr_data)
 }
 
@@ -110,9 +113,9 @@ var curr_trial = 0
 var choices = [74,75,76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9)
 var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9))
-var curr_data = {exp_id: 'prp', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
+var curr_data = {exp_id: 'psychological_refractory_period', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
 //stim variables
-var path_source = 'static/experiments/prp/images/'
+var path_source = 'static/experiments/psychological_refractory_period/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
 // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
 var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png','3_border.png', '4_border.png'])
@@ -151,7 +154,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = prp_centerbox><p class ="white-text block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="white-text block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' + box1 + box2,
   '<div class = prp_centerbox><p class ="white-text block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' + inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] + ' press the "L" key with your ring finger.</p><p class ="white-text block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p><p class ="white-text block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue.</p></div>' + box_number1 + box_number2],
   allow_keys: false,
@@ -177,12 +180,12 @@ var start_test_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
-  data: {exp_id: 'prp', trial_id: 'fixation'},
+  data: {exp_id: 'psychological_refractory_period', trial_id: 'fixation'},
   choices: 'none',
   response_ends_trial: true,
   timing_post_trial: 1000
@@ -205,10 +208,10 @@ var practice_block = {
 }
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFB,
   is_html: true,
-  data: {exp_id: 'prp', trial_id: 'practice_feedback'},
+  data: {exp_id: 'psychological_refractory_period', trial_id: 'practice_feedback'},
   timing_stim: -1,
   timing_response: -1,
   response_ends_trial: true,
@@ -234,18 +237,18 @@ var test_block = {
 
 
 /* create experiment definition array */
-var prp_experiment = [];
-prp_experiment.push(welcome_block);
-prp_experiment.push(instructions_block);
-prp_experiment.push(start_practice_block);
+var psychological_refractory_period_experiment = [];
+psychological_refractory_period_experiment.push(welcome_block);
+psychological_refractory_period_experiment.push(instructions_block);
+psychological_refractory_period_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
-  prp_experiment.push(fixation_block);
-  prp_experiment.push(practice_block);
-  prp_experiment.push(feedback_block);
+  psychological_refractory_period_experiment.push(fixation_block);
+  psychological_refractory_period_experiment.push(practice_block);
+  psychological_refractory_period_experiment.push(feedback_block);
 }
-prp_experiment.push(start_test_block);
+psychological_refractory_period_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
-  prp_experiment.push(fixation_block);
-  prp_experiment.push(test_block)
+  psychological_refractory_period_experiment.push(fixation_block);
+  psychological_refractory_period_experiment.push(test_block)
 }
-prp_experiment.push(end_block);
+psychological_refractory_period_experiment.push(end_block);

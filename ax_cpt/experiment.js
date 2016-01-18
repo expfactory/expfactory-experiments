@@ -37,7 +37,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a letter presented for a short time, followed by the presentation of another letter. For instance you may see "A", which would then disappear to be replaced by "F".</p><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> letter. If the first letter was an "A" <strong>AND</strong> the second letter was an "X", press the ' + possible_responses[0][0] + '. Otherwise press the ' + possible_responses[1][0] + '.</p></div>',
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key after you see "A" followed by an "X", and the down arrow key for all other combinations.</p></div>'
@@ -54,7 +54,7 @@ var rest_block = {
 };
 
 var wait_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = AX_feedback>Trial over, get ready for the next one.</div></div>',
   is_html: true,
   choices: 'none',
@@ -66,7 +66,7 @@ var wait_block = {
 
 /* define test block cues and probes*/
 var A_cue = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = AX_text>A</div></div>',
   is_html: true,
   choices: 'none',
@@ -78,7 +78,7 @@ var A_cue = {
 };
 
 var other_cue = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getChar,
   is_html: true,
   choices: 'none',
@@ -90,7 +90,7 @@ var other_cue = {
 };
 
 var X_probe = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = AX_text>X</div></div>',
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
@@ -102,7 +102,7 @@ var X_probe = {
 };
 
 var other_probe = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getChar,
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
@@ -128,26 +128,26 @@ for (b = 0; b< blocks.length; b++) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)
         		probe = jQuery.extend(true, {}, X_probe)
-				cue.data["condition"]="AX"
-				probe.data["condition"]="AX"
+				cue.data.condition="AX"
+				probe.data.condition="AX"
 				break;
 			case "BX":
 				cue = jQuery.extend(true, {}, other_cue)
         		probe = jQuery.extend(true, {}, X_probe)
-				cue.data["condition"]="BX"
-				probe.data["condition"]="BX"
+				cue.data.condition="BX"
+				probe.data.condition="BX"
 				break;
 			case "AY":
 				cue = jQuery.extend(true, {}, A_cue)
         		probe = jQuery.extend(true, {}, other_probe)
-				cue.data["condition"]="AY"
-				probe.data["condition"]="AY"
+				cue.data.condition="AY"
+				probe.data.condition="AY"
 				break;
 			case "BY":
 				cue = jQuery.extend(true, {}, other_cue)
         		probe = jQuery.extend(true, {}, other_probe)
-				cue.data["condition"]="BY"
-				probe.data["condition"]="BY"
+				cue.data.condition="BY"
+				probe.data.condition="BY"
 				break;
 		}
 		ax_cpt_experiment.push(cue)

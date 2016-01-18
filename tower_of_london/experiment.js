@@ -6,11 +6,12 @@ var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', problems[problem_i])
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
-  if (held_ball != 0 ) {
+  var hold_box;
+  if (held_ball !== 0 ) {
     ball = colors[held_ball-1]
-    var hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   } else {
-    var hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   }
   return canvas + ref_board + target_board + hold_box
 }
@@ -19,11 +20,12 @@ var getPractice = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', example_problem3)
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
-  if (held_ball != 0 ) {
+  var hold_box;
+  if (held_ball !== 0 ) {
     ball = colors[held_ball-1]
-    var hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box><div class = "tol_hand_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   } else {
-    var hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
+    hold_box = '<div class = tol_hand_box></div><div class = tol_hand_label><strong>Ball in Hand</strong></div>'
   }
   return canvas + ref_board + target_board + hold_box
 }
@@ -34,14 +36,15 @@ var getFB = function() {
   var isequal = true
   for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }
-  if (isequal == true) {
-    var feedback = "You got it!"
+  var feedback;
+  if (isequal === true) {
+    feedback = "You got it!"
   } else {
-    var feedback = "Didn't get that one."
+    feedback = "Didn't get that one."
   }
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', target)
@@ -63,9 +66,9 @@ var pegClick = function(peg_id) {
   choice = Number(peg_id.slice(-1))-1
   console.log(choice)
   peg = curr_placement[choice]
-  if (held_ball == 0) {
+  if (held_ball === 0) {
     for (var i = peg.length-1; i>=0; i--) {
-      if (peg[i] != 0) {
+      if (peg[i] !== 0) {
         held_ball = peg[i]
         peg[i] = 0
         num_moves += 1
@@ -94,7 +97,7 @@ var makeBoard = function(container, ball_placement) {
     board += '<div class = special id = tol_peg_' + (p+1) + ' onclick = "pegClick(this.id)">' 
     var peg = ball_placement[p]
     for (var b = 0; b < peg.length; b++) {
-      if (peg[b] != 0) {
+      if (peg[b] !== 0) {
         ball = colors[peg[b]-1]
         board += '<div class = "tol_ball tol_' + ball + '"><div class = tol_ball_label>' + ball[0] + '</div></div>'
       }
@@ -169,7 +172,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = tol_topbox><p class = block-text>During this task, two boards will be presented at a time. The boards will be of colored balls arranged on pegs like this:</p></div>' + ref_board + makeBoard('peg_board', example_problem1) + '<div class = tol_bottombox><p class = block-text>Imagine that these balls have holes through them and the pegs are going through the holes. Notice that the first peg can hold three balls, the second peg can hold two balls, and the third peg can hold one ball.</p></div>',
   '<div class = tol_topbox><p class = block-text>Your task will be to figure out how many moves would have to be made to make the arrangements of balls in your board look like the arrangements of balls in the target board.</p></div>' + ref_board + makeBoard('peg_board', example_problem1) + '<div class = tol_bottombox><p class = block-text>The balls in the target board are fixed in place, but the balls in your board are movable. You have to move them to make your board look like the target board. It is considered one move when you take a ball from one peg and place it on another. You can only move one ball at a time. Sometime you will have to move a ball to a different peg in order to get to the ball below it. During this task it is important that you remember, you want the <strong>fewest possible moves</strong> that are required to make your board look like the target board. You will have 20 seconds to make your decision.</p></div>',
   '<div class = tol_topbox><p class = block-text>Here is an example. Notice that the balls in your board are in a different arrangement than in the target board. If we move the red ball from the first peg in your board to the third peg then it would look like the target board.</p></div>' + ref_board + makeBoard('peg_board', example_problem2) + '<div class = tol_bottombox><p class = block-text>We would only move one ball one time, so the answer is one move.</p></div>', "<div class = centerbox><p class = block-text>During the test you will move the balls on your board by clicking on the pegs. When you click on a peg, the top ball will move into a box called 'your hand'. When you click on another peg, the ball in 'your hand' will move to the top of that peg.</p><p class = block-text>If you try to select a peg with no balls or try to place a ball on a full peg, nothing will happen. If you successfully make your board look like the target board, the trial will end and you will move to the next problem.</p><p class = block-text>We will start with an easy example so that you can learn the controls.</p></div>"],
@@ -260,12 +263,12 @@ var practice_node = {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    var data = data[0]
+    data = data[0]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }
@@ -280,12 +283,12 @@ var problem_node = {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    var data = data[0]
+    data = data[0]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
       isequal = arraysEqual(target[i], data.current_position[i])
-      if (isequal == false) { 
+      if (isequal === false) { 
         break;
       }
     }

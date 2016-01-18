@@ -7,7 +7,7 @@ var randomDraw = function(lst) {
 }
 
 var getDelay = function() {
-  if (Math.random() < .5) {
+  if (Math.random() < 0.5) {
     delay = 90000
   } else {
     delay = randomDraw([5000, 10000, 15000, 20000])
@@ -22,11 +22,12 @@ var getPracticeDelay = function() {
 
 var getFB = function() {
   var data = jsPsych.data.getLastTrialData() 
+  var token;
   if (data.rt < delay) {
-    var token = token_0
+    token = token_zero
   } else {
-    var token = token_30
-    total_money += .30
+    token = token_thirty
+    total_money += 0.30
   }
   return token + '<div class = soldBox><div class = center-text><font color="red">SOLD!</font></div></div>'
 }
@@ -34,8 +35,8 @@ var getFB = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-var token_0 = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
-var token_30 = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
+var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
+var token_thirty = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
 var progress_bar = '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'
 var delay = 0
 var practice_delays = [10000, 50000, 5000]
@@ -60,7 +61,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -76,8 +77,8 @@ var start_test_block = {
 };
 
 var practice_block = {
-  type: 'single-stim',
-  stimulus: token_0,
+  type: 'poldrack-single-stim',
+  stimulus: token_zero,
   is_html: true,
   choices: [32],
   timing_stim: getPracticeDelay,
@@ -85,7 +86,7 @@ var practice_block = {
   response_ends_trial: true,
   data: {'exp_id': 'wtw', 'trial_id': 'practice'},
   timing_post_trial: 0,
-  prompt: token_30 + progress_bar, 
+  prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({'delay': delay})
   }
@@ -93,8 +94,8 @@ var practice_block = {
 
 /* define test block */
 var test_block = {
-  type: 'single-stim',
-  stimulus: token_0,
+  type: 'poldrack-single-stim',
+  stimulus: token_zero,
   is_html: true,
   choices: [32],
   timing_stim: getDelay,
@@ -102,14 +103,14 @@ var test_block = {
   response_ends_trial: true,
   data: {'exp_id': 'wtw', 'trial_id': 'test'},
   timing_post_trial: 0,
-  prompt: token_30 + progress_bar, 
+  prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({'delay': delay})
   }
 };
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFB,
   is_html: true,
   choices: 'none',
@@ -123,11 +124,9 @@ var feedback_block = {
 };
 
 var test_chunk = {
-  chunk_type: 'while',
   timeline: [test_block, feedback_block],
-  continue_function: function() {
+  loop_function: function() {
     var elapsed = (new Date() - block_start_time)/60000
-    console.log(elapsed)
     if (elapsed > 10) {
       return false
     } else {

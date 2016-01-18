@@ -52,7 +52,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured either 1, 2 or 3 trials before. The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>',
   ],
@@ -94,7 +94,7 @@ var control_trials = []
 for (var i=0; i<num_trials; i++) {
 	var stim = randomDraw(letters)
 	var control_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 	  data: {exp_id: "n_back", load:  0, stim: stim, target: 't'},
@@ -113,7 +113,7 @@ var n_back_experiment = []
 n_back_experiment.push(welcome_block);
 n_back_experiment.push(instructions_block);
 
-if (control_before == 0) {
+if (control_before === 0) {
 	n_back_experiment.push(start_control_block)
 	n_back_experiment = n_back_experiment.concat(control_trials)
 }
@@ -136,7 +136,7 @@ for (var d = 0; d<delays.length; d++) {
 				target = stims[i-delay]
 			}
 			var test_block = {
-			  type: 'single-stim',
+			  type: 'poldrack-single-stim',
 			  is_html: true,
 			  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 			  data: {exp_id: "n_back", load:  delay, stim: stim, target: target},

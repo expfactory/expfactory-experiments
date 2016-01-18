@@ -3,6 +3,16 @@
         "name": "Adaptive N-Back",
         "tag": "adaptive_n_back",
         "cognitive_atlas_task_id": "trm_56674133b666c",
+        "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css"
+                ],
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -10,10 +20,6 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "run": [
-                "experiment.js",
-                "static/js/jspsych/plugins/jspsych-call-function.js"
-                ],
         "time":16,
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",

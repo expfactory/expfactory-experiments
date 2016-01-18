@@ -6,7 +6,7 @@
  **/
 
 
-jsPsych.plugins['ant_practice'] = (function() {
+jsPsych.plugins.attention_network_task_practice = (function() {
 
   var plugin = {};
 

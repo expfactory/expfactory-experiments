@@ -70,7 +70,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
 	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left for odd, right for even.</p></div>',
@@ -91,7 +91,7 @@ rotate_block_len = 128
 for (i=0; i<half_block_len; i++) {
     stim = getTopStim()
     var top_block = {
-        type: 'single-stim',
+        type: 'poldrack-single-stim',
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],
@@ -103,7 +103,7 @@ for (i=0; i<half_block_len; i++) {
 for (i=0; i<half_block_len; i++) {
     stim = getBottomStim()
     var bottom_block = {
-        type: 'single-stim',
+        type: 'poldrack-single-stim',
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],
@@ -115,7 +115,7 @@ for (i=0; i<half_block_len; i++) {
 for (i=0; i<rotate_block_len; i++) {
     stim = getRotateStim()
     var rotate_block = {
-        type: 'single-stim',
+        type: 'poldrack-single-stim',
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],

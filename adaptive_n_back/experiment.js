@@ -69,7 +69,7 @@ var num_trials = 25 // per block
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
-var acc_thresh = .8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
+var acc_thresh = 0.8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
 var current_trial = 0
 var target = ""
 var stims = []
@@ -89,7 +89,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>',
   ],
@@ -143,7 +143,7 @@ var control_trials = []
 for (var i=0; i<num_trials; i++) {
 	var stim = randomDraw(letters)
 	var control_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
@@ -163,7 +163,7 @@ var adaptive_n_back_experiment = []
 adaptive_n_back_experiment.push(welcome_block);
 adaptive_n_back_experiment.push(instructions_block);
 
-if (control_before == 0) {
+if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
@@ -182,7 +182,7 @@ for (var b = 0; b < num_blocks; b++) {
 		stims.push(stim)
 		adaptive_n_back_experiment.push(update_target_block)
 		var test_block = {
-		  type: 'single-stim',
+		  type: 'poldrack-single-stim',
 		  is_html: true,
 		  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 		  data: getData,
@@ -196,7 +196,7 @@ for (var b = 0; b < num_blocks; b++) {
 		adaptive_n_back_experiment.push(test_block)
 	}
 	adaptive_n_back_experiment.push(update_delay_block)
-};
+}
 
 
 

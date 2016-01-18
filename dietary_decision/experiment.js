@@ -34,14 +34,16 @@ var setUpTest = function() {
   // Calculate avg scores
   var random_stims = jsPsych.randomization.shuffle(stims)
   var neutral_stim_chosen = false
+  var reference_stim;
+  var alternative_stim;
   var alternative_stim_chosen = false
   for (var i = 0; i < stims.length; i++) {
     var key = random_stims[i]
-    if (stim_ratings[key]['health'] == 0 && stim_ratings[key]['taste'] == 0 && neutral_stim_chosen == false) {
+    if (stim_ratings[key].health === 0 && stim_ratings[key].taste === 0 && neutral_stim_chosen === false) {
       reference_stim = key
       neutral_stim_chosen = true
-    } else if (stim_ratings[key]['health'] == 1 && stim_ratings[key]['taste'] == 0 && alternative_stim_chosen == false ) {
-      var alternative_stim = key
+    } else if (stim_ratings[key].health === 1 && stim_ratings[key].taste === 0 && alternative_stim_chosen === false ) {
+      alternative_stim = key
       alternative_stim_chosen = true
     } else {
       decision_stims.push(key)
@@ -49,7 +51,7 @@ var setUpTest = function() {
   }
   /* If no neural stim exists (the subject did not rate any item 0, 0), set the reference stim to the alternative stim
   */
-  if (reference_stim == '') {
+  if (reference_stim === '') {
     reference_stim = alternative_stim
   } else {
     decision_stims.push(alternative_stim)
@@ -137,7 +139,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
@@ -173,7 +175,7 @@ var start_decision_block = {
 
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   // stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
   is_html: true,
@@ -198,7 +200,7 @@ var health_block = {
   on_finish: function(data) {
   	var numeric_rating = healthy_responses.indexOf(data.mouse_click)-2
     jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4), 'coded_response': numeric_rating})
-    stim_ratings[curr_stim]['health'] = Number(data.mouse_click)
+    stim_ratings[curr_stim].health = Number(data.mouse_click)
   }
 }
 
@@ -215,7 +217,7 @@ var taste_block = {
   on_finish: function(data) {
   	var numeric_rating = tasty_responses.indexOf(data.mouse_click)-2
     jsPsych.data.addDataToLastTrial({'stim': curr_stim.slice(0,-4), 'coded_response': numeric_rating})
-    stim_ratings[curr_stim]['taste'] = Number(data.mouse_click)
+    stim_ratings[curr_stim].taste = Number(data.mouse_click)
   }
 }
 
@@ -246,7 +248,7 @@ var decision_block = {
 var dietary_decision_experiment = [];
 dietary_decision_experiment.push(welcome_block);
 dietary_decision_experiment.push(instructions_block);
-if (Math.random() < .5) {
+if (Math.random() < 0.5) {
   dietary_decision_experiment.push(start_health_block);
   for (var i = 0; i < stims.length; i++) {
     dietary_decision_experiment.push(health_block);
