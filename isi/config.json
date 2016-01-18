@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Information Sampling Task",
+        "run": [
+                 "experiment.js",
+                 "style.css"
+               ],
+        "tag": "isi",
+        "cognitive_atlas_task_id": "trm_50f73d557c967",
+        "contributors": [
+                         "Jamie Li",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0006322305013971",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
