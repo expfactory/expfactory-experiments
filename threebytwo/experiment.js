@@ -46,18 +46,20 @@ var getResponse = function() {
             } else {
                 return response_keys.key[1]
             }
+            break;
         case 'magnitude':
             if (curr_stim.number > 5) {
                 return response_keys.key[0]
             } else {
                 return response_keys.key[1]
             }
+            break;
         case 'parity':
-            if (curr_stim.number%2 == 0) {
+            if (curr_stim.number%2 === 0) {
                 return response_keys.key[0]
             } else {
                 return response_keys.key[1]
-            }   
+            }  
     }
 }
 
@@ -71,10 +73,11 @@ If "switch new", switch to the task that wasn't the current or last task, choosi
 If "switch old", switch to the last task and randomly choose a cue.
 */
 var setStims = function() {
+        var tmp;
 	switch(task_switches[trial_i].task_switch) {
 		case "stay":
 			if (curr_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks))
 			}
 			if (task_switches[trial_i].cue_switch == "switch") {
@@ -84,11 +87,11 @@ var setStims = function() {
 		case "switch_new":
 			cue_i = randomDraw([0,1])
 			if (last_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks).filter(function(x){return (x!=curr_task)}))
 				last_task = tmp
 			} else {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = getKeys(tasks).filter(function(x){return (x!=curr_task & x!=last_task)})[0]
 				last_task = tmp
 			}
@@ -96,11 +99,11 @@ var setStims = function() {
 		case "switch_old":
 			cue_i = randomDraw([0,1])
 			if (last_task == "na") {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = randomDraw(getKeys(tasks).filter(function(x){return (x!=curr_task)}))
 				last_task = tmp
 			} else {
-				var tmp = curr_task
+				tmp = curr_task
 				curr_task = last_task
 				last_task = tmp
 			}
@@ -176,7 +179,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the left or right arrow keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
 		  '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be six different cues indicating three different tasks. Thee cues and tasks are described below:</p>'+ task_list + '</div>',
 		  '<div class = centerbox><p class = block-text>After you press "Next" we will start with some practice. </p></div>'],
@@ -210,7 +213,7 @@ var setStims_block = {
 }
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
@@ -222,7 +225,7 @@ var fixation_block = {
 }
 
 var cue_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getCue,
   is_html: true,
   choices: 'none',
@@ -235,7 +238,7 @@ var cue_block = {
 };
 
 var practice_block = {
-  type: 'categorize',
+  type: 'poldrack-categorize',
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
@@ -252,7 +255,7 @@ var practice_block = {
 }
 
 var test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
@@ -264,7 +267,7 @@ var test_block = {
 }
 
 var gap_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '',
   is_html: true,
   choices: 'none',

@@ -2,13 +2,15 @@
 /* Define helper functions */
 /* *********************************center*** */
 var getStim = function() {
-  if (Math.random() < .5) {
-    var immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
-    var delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</p></div>'  
+  var immediate_stim;
+  var delayed_stim;
+  if (Math.random() < 0.5) {
+    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
+    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</p></div>'  
     displayed_amounts = [immediate_amount,delayed_amount] // in order from left to right
   } else {
-    var immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
-    var delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</div></div>'  
+    immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' + immediate_amount + ' immediately</div></div>'
+    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_amount + ' in ' + curr_delay + '</div></div>'  
     displayed_amounts = [delayed_amount, immediate_amount] // in order from left to right
   }
   return immediate_stim + delayed_stim
@@ -82,7 +84,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
   ],
@@ -100,17 +102,18 @@ var update_delay_block = {
 }
 
 var test_block = {
-	type: 'single-stim',
+	type: 'poldrack-single-stim',
 	stimulus: getStim,
   data: {'exp_id': 'bickel_titrator'},
 	is_html: true,
 	choices: choices,
   on_finish: function(data) {
+    var choice;
     var choice_i = choices.indexOf(data.key_press)
     if (displayed_amounts[choice_i] == 1000) {
-      var choice = 'delayed' 
+      choice = 'delayed' 
     } else {
-      var choice = 'immediate'
+      choice = 'immediate'
     }
     jsPsych.data.addDataToLastTrial({'sooner_amount': immediate_amount, 'later_amount': delayed_amount, 'sooner_time_days': 0, 'later_time_days': curr_delay_in_minutes, 'choice': choice})
     updateAmount(choice)

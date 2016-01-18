@@ -65,7 +65,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this task, your job is to generate a random sequence of digits. You will do this by clicking on a virtual numpad using your mouse. Once you click, the number will temporarily turn red. You have less than a second to respond on each trial so it is important to respond quickly!</p><p class = block-text>.After the trial ends the numbers will dissapear for a moment. When they appear again the next trial has begun and you should respond as quickly as possible.</p><p class = block-text>Your goal is to choose each number completely randomly, as if you were picking a number from a hat with 9 slips of paper, reading it, and placing it back before picking another number.</p></div>',
   ],
@@ -96,11 +96,11 @@ var start_test_block = {
 };
 
 var  wait_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimuli: [empty_grid],
   choices: 'none',
   is_html: true,
-  data: {exp_id: "rng", trial_id: "wait"},
+  data: {exp_id: "random_number_generation", trial_id: "wait"},
   timing_stim: 200,
   timing_response: 200,
   response_ends_trial: false,
@@ -108,24 +108,24 @@ var  wait_block = {
 };
 
 //Set up experiment
-var rng_experiment = []
-rng_experiment.push(welcome_block);
-rng_experiment.push(instructions_block);
-rng_experiment.push(start_practice_block);
+var random_number_generation_experiment = []
+random_number_generation_experiment.push(welcome_block);
+random_number_generation_experiment.push(instructions_block);
+random_number_generation_experiment.push(start_practice_block);
 for (var i = 0; i <practice_stims.length; i++) {
   var  practice_block = {
     type: 'single-stim-button',
     stimuli: [practice_stims[i]],
     button_class: 'num-button',
-    data: {exp_id: "rng", trial_id: "practice"},
+    data: {exp_id: "random_number_generation", trial_id: "practice"},
     timing_response: 800,
     response_ends_trial: false,
     timing_post_trial: 0
   };
-  rng_experiment.push(practice_block)
-  rng_experiment.push(wait_block)
+  random_number_generation_experiment.push(practice_block)
+  random_number_generation_experiment.push(wait_block)
 }
-rng_experiment.push(start_test_block);
+random_number_generation_experiment.push(start_test_block);
 //Loop should be changed to go until test_stims.length later
 for (var i = 0; i <practice_stims.length; i++) {
   var  test_block = {
@@ -137,7 +137,7 @@ for (var i = 0; i <practice_stims.length; i++) {
     response_ends_trial: false,
     timing_post_trial: 0
   };
-  rng_experiment.push(test_block)
-  rng_experiment.push(wait_block)
+  random_number_generation_experiment.push(test_block)
+  random_number_generation_experiment.push(wait_block)
 }
-rng_experiment.push(end_block)
+random_number_generation_experiment.push(end_block)

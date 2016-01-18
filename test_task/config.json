@@ -2,7 +2,12 @@
     {
         "name": "Test Task",
         "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
         "tag": "test_task",

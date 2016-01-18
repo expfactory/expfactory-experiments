@@ -19,7 +19,7 @@ function getGame() {
 	by editing "game_setup" a string which determines the html to display, followed by calling the "makeFish"
 	function, which...makes fish.
 	*/
-	if (total_fish_num == 0) {
+	if (total_fish_num === 0) {
 		round_over = 0
 		game_state = game_setup
 		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
@@ -64,12 +64,12 @@ function get_data() {
 		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
 		To get this we need to subtract the changes due to this choice.
 	*/
-	if (last_pay == .05) {
+	if (last_pay == 0.05) {
 		FB = 1
 	} else {
 		FB = 0
 	}
-	return {exp_id: "art",
+	return {exp_id: "angling_risk_task",
 			trial_id: "test",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
@@ -84,12 +84,12 @@ function get_practice_data() {
 		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
 		To get this we need to subtract the changes due to this choice.
 	*/
-	if (last_pay == .05) {
+	if (last_pay == 0.05) {
 		FB = 1
 	} else {
 		FB = 0
 	}
-	return {exp_id: "art",
+	return {exp_id: "angling_risk_task",
 			trial_id: "practice",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
@@ -111,11 +111,11 @@ function makeFish(fish_num) {
 	total_fish_num = 0
 	filled_areas = [];
     for (i=0;i<fish_num-1;i++) {
-        if (max_x == 0) {
-			min_x = $('.lake').width()*.05;
-			min_y = $('.lake').height()*.05;
-            max_x = $('.lake').width()*.9;
-            max_y = $('.lake').height()*.9;   
+        if (max_x === 0) {
+			min_x = $('.lake').width()*0.05;
+			min_y = $('.lake').height()*0.05;
+            max_x = $('.lake').width()*0.9;
+            max_y = $('.lake').height()*0.9;   
         }
 		red_fish_num+=1
 		if (weather == "Sunny") {
@@ -233,7 +233,7 @@ function place_fish() {
 			var smallest_overlap = '';
 			var best_choice;
 			var area;
-			for (var i = 0; i < maxSearchIterations; i++) {
+			for (i = 0; i < maxSearchIterations; i++) {
 				rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random() % 1)));
 				rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random() % 1)));
 				area = {
@@ -243,7 +243,7 @@ function place_fish() {
 					height: $(this).height()
 				};
 				var overlap = calc_overlap(area);
-				if (smallest_overlap == '') {
+				if (smallest_overlap === '') {
 					smallest_overlap = overlap
 					best_choice = area
 				} else if (overlap < smallest_overlap) {
@@ -283,7 +283,7 @@ var tournament_bank = 0
 var blocks = [{weather: "Sunny", release: "Release"}, {weather: "Sunny", release: "Keep"}, {weather: "Cloudy", release: "Release"}, {weather: "Cloudy", release: "Keep"}]
 var practiceblocks = jsPsych.randomization.shuffle(blocks)
 var blocks = jsPsych.randomization.shuffle(blocks)
-var pay = .05 //payment for one red fish
+var pay = 0.05 //payment for one red fish
 var last_pay = 0 //variable to hold the last amount of money received
 var lake_state = '' //variable for redrawing the board from trial to trial
 var round_over = 0  //equals 1 if a blue fish is caught or the participant 'collects'
@@ -328,7 +328,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Each round, you will see a lake which has many fish in it, and your goal is to catch as many fish as possible.</p><p class = block-text>On the screen you will see a lake and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 5 cents towards that round\'s "Trip Bank", which you can then "Collect" to move the money to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the money you earned that round.</p></div>',
     '<div class = centerbox><p class = block-text>To keep your money from round to round you must  stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>You will participate in four tournaments, each with different rules. One way the tournaments differ is whether you keep or release the fish you catch. In the "Catch N Release" condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the tournament.</p><p class = block-text>In the "Catch N Keep" condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
@@ -412,9 +412,9 @@ var game_node = {
     }
 }
 
-art_experiment = []
-art_experiment.push(welcome_block)
-art_experiment.push(instructions_block)
+angling_risk_task_experiment = []
+angling_risk_task_experiment.push(welcome_block)
+angling_risk_task_experiment.push(instructions_block)
 for (b = 0; b<practiceblocks.length; b++) {
 	block = practiceblocks[b]
 	weather = block.weather
@@ -440,12 +440,12 @@ for (b = 0; b<practiceblocks.length; b++) {
 			tournament_bank = 0
 		}
 	}
-	art_experiment.push(tournament_intro_block)
-	art_experiment.push(ask_fish_block)
-	art_experiment.push(set_fish_block)
+	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(ask_fish_block)
+	angling_risk_task_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
-		art_experiment.push(practice_node)
-		art_experiment.push(round_over_block)
+		angling_risk_task_experiment.push(practice_node)
+		angling_risk_task_experiment.push(round_over_block)
 	}
 }
 
@@ -476,10 +476,10 @@ for (b = 0; b<blocks.length; b++) {
 			tournament_bank = 0
 		}
 	}
-	art_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(tournament_intro_block)
 	for (i=0; i <num_rounds; i++) {
-		art_experiment.push(game_node)
-		art_experiment.push(round_over_block)
+		angling_risk_task_experiment.push(game_node)
+		angling_risk_task_experiment.push(round_over_block)
 	}
 }
-art_experiment.push(end_block)
+angling_risk_task_experiment.push(end_block)

@@ -93,7 +93,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>For each of the following statements, please indicate <strong>the benefits</strong> you would obtain from each situation. Provide a rating from <strong>1 to 7</strong>.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
@@ -102,7 +102,7 @@ var instructions_block = {
 };
 
 var likert_block = {
-    type: 'radio-buttonlist',
+    type: 'poldrack-radio-buttonlist',
     timeline: [{buttonlist: page_1_buttonlist},{buttonlist: page_2_buttonlist},{buttonlist: page_3_buttonlist},{buttonlist: page_4_buttonlist},{buttonlist: page_5_buttonlist}],
     preamble: pretext,
     checkAll: true,

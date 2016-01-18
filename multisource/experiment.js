@@ -267,7 +267,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see stimulus consisting of three numbers or "x" letters. For instance, you may see "<span class = big_instructions>1</span>xx" or "<span class = small_instructions>3</span>22"</p><p class = block-text>Two of the characters will always be the same. Your job is to indicate the identity of the character that is different(the target character) using the three number keys. So in the last two examples you would press "1" for the first and "3" for the second.</p></div>',
 	'<div class = centerbox><p class = block-text>There are two trial types: either the non-target numbers are also numbers, or they are "x`s". When the non-target characters are "x", the target number will always be big. When all three characters are numbers, the target character can either be larger or smaller than the other characters.</p><p class = block-text>You will complete 8 blocks of trials. Each block will either have only the "x" type trials (e.g. "xx3" type trials) or the number trials (e.g. "[13]1" type trials). It is important that you respond as quickly as possible, but be sure to respond correctly! Respond by reporting <strong>what</strong> the target number was regardless of its position!</p></div>',
@@ -299,7 +299,7 @@ multisource_experiment.push(instructions_block);
 for (var b = 0; b < practice_blocks.length; b++) {
 	block = practice_blocks[b]
 	var practice_block = {
-		type: 'single-stim',
+		type: 'poldrack-single-stim',
 		timeline: block,
 		is_html: true,
 		choices: [49,50,51],
@@ -316,7 +316,7 @@ multisource_experiment.push(start_test_block)
 for (var b = 0; b < num_blocks; b++) {
 	block = blocks[b]
 	var test_block = {
-		type: 'single-stim',
+		type: 'poldrack-single-stim',
 		timeline: block,
 		is_html: true,
 		choices: [49,50,51],

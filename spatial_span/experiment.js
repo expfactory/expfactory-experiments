@@ -101,7 +101,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
   '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
   ],
@@ -119,7 +119,7 @@ var end_block = {
 
 
 var start_test_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   is_html: true,
   stimulus: getTestText,
   choices: 'none',
@@ -137,7 +137,7 @@ var start_reverse_block = {
 
 /* define test block */
 var test_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStims,
   is_html: true,
   timing_stim: getTimeArray,
@@ -152,7 +152,7 @@ var test_block = {
 
 
 var forward_response_block = {
-  type: 'single-stim-button',
+  type: 'poldrack-single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {exp_id: "spatial_span", trial_id: "response"},
@@ -180,7 +180,7 @@ var forward_response_block = {
 }
 
 var reverse_response_block = {
-  type: 'single-stim-button',
+  type: 'poldrack-single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {exp_id: "spatial_span", trial_id: "response"},
@@ -208,7 +208,7 @@ var reverse_response_block = {
 }
 
 var feedback_block = {
-    type: 'single-stim',
+    type: 'poldrack-single-stim',
     stimulus: getFeedback,
     data: {exp_id: "spatial_span", trial_id: "feedback"},
     is_html: true,

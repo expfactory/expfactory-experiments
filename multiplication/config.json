@@ -2,8 +2,13 @@
     {
         "name": "Multiplication",
         "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js",
                  "experiment.js",
-                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js"
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
                ],
         "tag": "multiplication",
         "cognitive_atlas_task_id": "trm_5696c2c063222",

@@ -16,7 +16,7 @@ function get_stim() {
 		stim1 = stims[0]
 		stim2 = stims[1]
 	} else if (stims.length == 4) {
-		if (Math.random()<.5 || version2_repeat >= 3 && version1_repeat<3) {
+		if (Math.random()<0.5 || version2_repeat >= 3 && version1_repeat<3) {
 			stim1 = stims[0] + stims[2]
 			stim2 = stims[1] + stims[3]
 			version2_repeat = 0
@@ -28,7 +28,7 @@ function get_stim() {
 			version1_repeat = 0
 		}
 	}
-	if (reversal == false) {
+	if (reversal === false) {
 		target = stim1
 	} else {
 		target = stim2
@@ -43,7 +43,7 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'ided', trial_id: 'test', condition: stages[stage_counter]}
+	return {exp_id: 'dimensional_set_shifting', trial_id: 'test', condition: stages[stage_counter]}
 }
 	
 
@@ -57,14 +57,14 @@ var blocks = ['simple', 'separate', 'compound', 'ID', 'ED'] //Simple: 1 dimensio
 var stages = ['simple', 'simple_rev', 'separate', 'compound', 'compound_rev', 'ID', 'ID_rev', 'ED', 'ED_rev']
 
 // Set up variables for stimuli
-var path = 'static/experiments/ided/images/'
+var path = 'static/experiments/dimensional_set_shifting/images/'
 var center_prefix = '<div class = centerimg><img style="height: 80%; width: auto; '
 var left_prefix = '<div class = leftimg><img style="height: 80%; width: auto; '
 var right_prefix = '<div class = rightimg><img style="height: 80%; width: auto; '
 var postfix = '"</img></div>'
 var shape_stim = jsPsych.randomization.shuffle(['Shape_1.png','Shape_2.png','Shape_3.png','Shape_4.png','Shape_5.png','Shape_6.png', 'Shape_7.png', 'Shape_8.png'])
 var line_stim = jsPsych.randomization.shuffle(['Line_1.png','Line_2.png','Line_3.png','Line_4.png','Line_5.png','Line_6.png', 'Line_7.png', 'Line_8.png'])
-if (Math.random() < .5) {
+if (Math.random() < 0.5) {
 	var Dim1_stim = shape_stim
 	var Dim2_stim = line_stim
 	var Dim1_z = 'z-index: 1;" src = "'
@@ -98,7 +98,7 @@ var version2_repeat = 0
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the IDED experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the Intra-dimensional set shifting experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   on_finish: function() {
   	$('body').css('background','black')
@@ -107,7 +107,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text>There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
 	    instruction_stim + '<div class = centerbox><p style = "font-size: 18px;" class = center-text>An example trial.</p></div>',
@@ -129,11 +129,11 @@ var end_block = {
 };
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "ided", "trial_id": "fixation"},
+  data: {exp_id: "dimensional_set_shifting", "trial_id": "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
   timing_response: 500
@@ -206,26 +206,26 @@ var reverse_stims = {
 }
 
 /* create experiment definition array */
-ided_experiment = []
-ided_experiment.push(welcome_block)
-ided_experiment.push(instructions_block)
+dimensional_set_shifting_experiment = []
+dimensional_set_shifting_experiment.push(welcome_block)
+dimensional_set_shifting_experiment.push(instructions_block)
 /* define test trials */
 for (b=0; b<blocks.length; b++) {
 	block = blocks[b]
 	if (block == 'simple') {
-		ided_experiment.push(define_simple_stims)
+		dimensional_set_shifting_experiment.push(define_simple_stims)
 	} else if (block == 'separate') {
-		ided_experiment.push(define_separate_stims)
+		dimensional_set_shifting_experiment.push(define_separate_stims)
 	} else if (block == 'compound') {
-		ided_experiment.push(define_compound_stims)
+		dimensional_set_shifting_experiment.push(define_compound_stims)
 	} else if (block == 'ID') {
-		ided_experiment.push(define_ID_stims)
+		dimensional_set_shifting_experiment.push(define_ID_stims)
 	} else if (block == 'ED') {
-		ided_experiment.push(define_ED_stims)
+		dimensional_set_shifting_experiment.push(define_ED_stims)
 	}
 	
 	var stage_block = {
-	  type: 'categorize',
+	  type: 'poldrack-categorize',
 	  stimulus: get_stim,
 	  is_html: true,
 	  key_answer: get_correct_response,
@@ -240,7 +240,7 @@ for (b=0; b<blocks.length; b++) {
 	  timing_post_trial: 100,
 	  on_finish: function(data) {
 		  trial_counter += 1
-		  if (data.correct == true) {
+		  if (data.correct === true) {
 			  correct_counter += 1
 		  } else {
 			  correct_counter = 0
@@ -264,13 +264,13 @@ for (b=0; b<blocks.length; b++) {
 			}
 		}
 	}
-	ided_experiment.push(stage_node)
+	dimensional_set_shifting_experiment.push(stage_node)
 
 	if (block != 'separate') {
-		ided_experiment.push(reverse_stims)
-		ided_experiment.push(stage_node)
+		dimensional_set_shifting_experiment.push(reverse_stims)
+		dimensional_set_shifting_experiment.push(stage_node)
 	}
 }
 
 
-ided_experiment.push(end_block)
+dimensional_set_shifting_experiment.push(end_block)

@@ -36,9 +36,9 @@ var getFBStim = function() {
 	// update response bar if they responded correctly
 	if (response == correct_response) {
 		if (correct_stim == 'stim1') {
-			progress_value += curr_data.stim1_value*.022
+			progress_value += curr_data.stim1_value*0.022
 		} else {
-			progress_value += curr_data.stim2_value*.022
+			progress_value += curr_data.stim2_value*0.022
 		}
 	}
 	
@@ -71,7 +71,7 @@ var static_winners = jsPsych.randomization.repeat([0,0,0,1],stage1_trials/4)
 var volatile_blocks = jsPsych.randomization.repeat([30,30,30,40,40],1)
 var volatile_winners = []
 var block_index = [] //used to keep track of switches. Index indicates which stim wins more
-if (Math.random() < .5) {
+if (Math.random() < 0.5) {
 	volatile_proportions = [0,0,0,1,1]
 } else {
 	volatile_proportions = [0,0,1,1,1]
@@ -103,7 +103,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
 	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
@@ -144,7 +144,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	var stim1_value = Math.floor(Math.random()*101)
 	var stim1_reward = '<div class = center-text>' + stim1_value + '</div>'
 	var stim2_reward = '<div class = center-text>' + (100 - stim1_value) + '</div>'
-	if (Math.random() < .5) {
+	if (Math.random() < 0.5) {
 		stim1= '<div class = "stim_left" id = "' + ordered_stims[0] + '">' + stim1_reward + '</div>'
 		stim2 = '<div class = "stim_right" id = "' + ordered_stims[1] + '">' + stim2_reward + '</div>'
 		correct_response = [37,39][static_winners[i]]
@@ -157,7 +157,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	var correct_stim = 'stim' + (static_winners[i]+1)
 	
 	var test_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
@@ -169,7 +169,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	};
 
 	var responded_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
@@ -181,7 +181,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	};
 
 	var feedback_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
@@ -204,7 +204,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	var stim1_value = Math.floor(Math.random()*101)
 	var stim1_reward = '<div class = center-text>' + stim1_value + '</div>'
 	var stim2_reward = '<div class = center-text>' + (100 - stim1_value) + '</div>'
-	if (Math.random() < .5) {
+	if (Math.random() < 0.5) {
 		stim1= '<div class = "stim_left" id = "' + ordered_stims[0] + '">' + stim1_reward + '</div>'
 		stim2 = '<div class = "stim_right" id = "' + ordered_stims[1] + '">' + stim2_reward + '</div>'
 		correct_response = [37,39][volatile_winners[i]]
@@ -217,7 +217,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	var correct_stim = 'stim' + (volatile_winners[i]+1)
 	
 	var test_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
@@ -229,7 +229,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	};
 
 	var responded_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
@@ -241,7 +241,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	};
 
 	var feedback_block = {
-	  type: 'single-stim',
+	  type: 'poldrack-single-stim',
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',

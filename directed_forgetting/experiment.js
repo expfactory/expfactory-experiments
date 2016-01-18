@@ -179,7 +179,7 @@ var end_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p></div>',
     '<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
@@ -200,7 +200,7 @@ var start_test_block = {
 };
 
 var start_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -212,7 +212,7 @@ var start_fixation_block = {
 }
 
 var fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -224,7 +224,7 @@ var fixation_block = {
 }
 
 var ITI_fixation_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
@@ -237,7 +237,7 @@ var ITI_fixation_block = {
 }
 
 var training_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "test"},
@@ -251,7 +251,7 @@ var training_block = {
 
 
 var cue_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getCue,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "cue"},
@@ -263,7 +263,7 @@ var cue_block = {
 };
 
 var probe_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
   data: {exp_id: "directed_forgetting", trial_id: "probe"},

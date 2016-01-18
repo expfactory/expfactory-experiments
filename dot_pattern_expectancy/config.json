@@ -2,10 +2,16 @@
     {
         "name": "Dot Pattern Expectancy",
         "run": [
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                  "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
                  "style.css"
                ],
-        "tag": "dpx",
+        "tag": "dot_pattern_expectancy",
         "cognitive_atlas_task_id": "trm_515495b718cd6",
         "contributors": [
                          "Ian Eisenberg",

@@ -2,10 +2,16 @@
     {
         "name": "Choice Reaction Time",
         "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/custom_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/custom_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/custom_plugins/jspsych-poldrack-categorize.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "choice_rt",
+        "tag": "choice_reaction_time",
         "cognitive_atlas_task_id": "tsk_4a57abb949934",
         "contributors": [
                          "Ian Eisenberg",

@@ -2,8 +2,14 @@
     {
         "name": "Recent Probes",
         "run": [
-                 "experiment.js",
-                 "style.css"
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
                ],
         "tag": "recent_probes",
         "cognitive_atlas_task_id": "trm_56674987c8f0c",

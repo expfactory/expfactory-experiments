@@ -32,7 +32,7 @@ var lstep = 5000
 var sstep = 1000
 var n_large_steps = 50
 var n_small_steps = 50
-var p = .5 // The probability of a correct response for the staircase
+var p = 0.5 // The probability of a correct response for the staircase
 var fatigue_time = 45
 
 /* ************************************ */
@@ -47,7 +47,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment we are interested in how people multiply numbers. Every trial in this experiment will require you to multiply two 2-digit numbers (e.g. 37 * 86) together and enter the answer.</p><p class = block-text>While doing the multiplication you are free to use paper and pencil or do them in your head, but be consistent and do not use a calculator or your computer. That means if you decide to use paper and pencil, please use paper and pencil for the entire experiment.</p><p class = block-text>Finally, this experiment is long! To figure out how people multiple we need you to multiply many numbers and it is important that you stay engaged! The whole experiment will take about an hour.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
