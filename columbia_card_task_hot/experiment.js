@@ -663,7 +663,7 @@ var instructions_block = {
 
 var practice_block = {
   type: 'poldrack-single-stim',
-  stimuli: getRound,
+  stimulus: getRound,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},
   choices: [37],
@@ -692,7 +692,7 @@ var practice_chunk = {
 }
 var practice_instruct_block = {
   type: 'poldrack-single-stim',
-  stimuli: getPractice1,
+  stimulus: getPractice1,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},
   choices: [37],
@@ -721,7 +721,7 @@ var practice_chunk1 = {
 
 var practice_instruct_block2 = {
   type: 'poldrack-single-stim',
-  stimuli: getPractice2,
+  stimulus: getPractice2,
   is_html: true,
   data: {exp_id: "columbia_card_task_hot", trial: 'test'},
   choices: [37],
@@ -750,13 +750,13 @@ var practice_chunk2 = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 var give_total = {
   type: 'text',
   text: getReward,
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -764,14 +764,14 @@ var give_total = {
 var start_practice_block = {
   type: 'text',
   text: "<div class = centerbox><p class = center-block-text>Hello <strong>enter</strong> to begin.</p></div>",
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 

@@ -400,14 +400,14 @@ instructionsSetup =  "<div class = bigbox><div class = numbox>"+
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the ISI task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -428,13 +428,13 @@ var instructions_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will show you a practice trial.  Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var subjectPracticeBlock ={
   type: 'poldrack-single-stim',
-  stimuli: instructionsSetup,
+  stimulus: instructionsSetup,
   is_html: true,
   data: {exp_id: "isi", trial_id: "test"},
   choices: [37],
@@ -445,7 +445,7 @@ var subjectPracticeBlock ={
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.  In one condition </p><p class = block-text> </p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
@@ -453,7 +453,7 @@ var start_test_block = {
 
 var practice_block = {
   type: 'poldrack-single-stim',
-  stimuli: getRound,
+  stimulus: getRound,
   is_html: true,
   data: {exp_id: "isi", trial_id: "test"},
   choices: [37],
@@ -464,7 +464,7 @@ var practice_block = {
 
 var rewardFW_block = {
   type: 'poldrack-single-stim',
-  stimuli:getRewardFW,
+  stimulus:getRewardFW,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],
@@ -474,7 +474,7 @@ var rewardFW_block = {
 
 var rewardDW_block = {
   type: 'poldrack-single-stim',
-  stimuli:getRewardDW,
+  stimulus:getRewardDW,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],
@@ -486,7 +486,7 @@ var rewardDW_block = {
 
 var subjectRewardBlock ={
   type: 'poldrack-single-stim',
-  stimuli:getReward,
+  stimulus:getReward,
   is_html: true,
   data: {exp_id: "isi", trial_id: "reward"},
   choices: [13],

@@ -417,7 +417,7 @@ var gameSetup = "<div class = titlebox><div class = center-text><strong>How many
 var welcome_block = {
   type: 'text',
   text:  "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task--Cold Version</strong></div></div>",
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -550,7 +550,7 @@ var instructions_block = {
 
 var practice_block = {
   type: 'poldrack-single-stim',
-  stimuli: practiceSetup,
+  stimulus: practiceSetup,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
   choices: [37],
@@ -559,7 +559,7 @@ var practice_block = {
 
 var practice_block2 = {
   type: 'poldrack-single-stim',
-  stimuli: practiceSetup2,
+  stimulus: practiceSetup2,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
   choices: [37],
@@ -581,7 +581,7 @@ var practice_chunk = {
 
 var test_block = {
   type: 'poldrack-single-stim',
-  stimuli: getRound,
+  stimulus: getRound,
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
   choices: [37],
@@ -591,7 +591,7 @@ var test_block = {
 
 var end_instructions = {
   type: 'poldrack-single-stim',
-  stimuli: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
   is_html: true,
   data: {exp_id: "columbia_card_task_cold"},
   choices: [13],
@@ -601,7 +601,7 @@ var end_instructions = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -610,21 +610,21 @@ var end_block = {
 var start_practice_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Hello<strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var payout_text = {
   type: 'text',
   text: getText,
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
