@@ -8,6 +8,8 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
         "tag": "stroop",

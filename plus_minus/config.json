@@ -6,7 +6,9 @@
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
-                "experiment.js"
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css"
                ],
         "tag": "plus_minus",
         "cognitive_atlas_task_id": "trm_5696b316c220a",

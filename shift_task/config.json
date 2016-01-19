@@ -9,6 +9,8 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
         "tag": "shift_task",

@@ -10,6 +10,8 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "experiment.js",
                 "jspsych-stop-signal.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
                 "style.css"
                ],
         "tag": "stop_signal",
