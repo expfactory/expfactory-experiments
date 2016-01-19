@@ -31,7 +31,7 @@ var getTestFeedback = function() {
 				}
 			} else {
 				stop_length +=1
-				if (data[i].rt != -1) {
+				if (data[i].rt == -1) {
 					successful_stops +=1
 				}
 			}
@@ -121,21 +121,22 @@ var prompt_text = '<ul class =  list-text><li>Square:  ' + correct_responses[0][
 var RT_thresh = 1000
 var missed_response_thresh = .05
 var accuracy_thresh = .75
+var stop_thresh = 1
 var possible_responses = [["M key",77],["Z key",90]]
 var stop_response = randomDraw(possible_responses)
 
 var stimulus = [
 	{stimulus: '<div class = shapebox><img class = square></img></div>',
-	data: {correct_response: correct_responses[0][1], exp_id: "motor_selective_stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[0][1], exp_id: "motor_selective_stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = circle></img></div>',
-	data: {correct_response: correct_responses[1][1], exp_id: "motor_selective_stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[1][1], exp_id: "motor_selective_stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = triangle></img></div>',
-	data: {correct_response: correct_responses[2][1], exp_id: "motor_selective_stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[2][1], exp_id: "motor_selective_stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = diamond></img></div>',
-	data: {correct_response: correct_responses[3][1], exp_id: "motor_selective_stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[3][1], exp_id: "motor_selective_stop_signal"}
 	}
 ]
 
@@ -195,16 +196,6 @@ var fixation_block = {
 }
 
 /* prompt blocks are used during practice to show the instructions */
-var prompt_block = {
-  type: 'poldrack-single-stim',
-  stimulus: prompt_text,
-  choices: [possible_responses[0][1], possible_responses[1][1]],
-  is_html: true,
-  timing_post_trial: 0,
-  timing_stim: RT_thresh,
-  timing_response: RT_thresh,
-  response_ends_trial: false
-}
 
 var prompt_fixation_block = {
   type: 'poldrack-single-stim',
@@ -262,12 +253,14 @@ for (i = 0; i < noSS_practice_list.data.length; i++) {
 	  choices: [possible_responses[0][1], possible_responses[1][1]],
 	  timing_post_trial: 0,
 	  timing_stim: 850,
-	  timing_response: 850,
+	  timing_response: 1850,
 	  response_ends_trial: false,
-	  prompt: prompt_text
+	  prompt: prompt_text,
+	  on_finish: function() {
+	  	jsPsych.data.addDataToLastTrial({'trial_id': 'noSS_practice_stim'})
+	  }
 	}
 	noSS_practice_trials.push(stim_block)
-	noSS_practice_trials.push(prompt_block)
 }
 
 var noSS_practice_node = {
@@ -283,11 +276,7 @@ var noSS_practice_node = {
 					num_responses += 1
 					sum_rt += data[i].rt;
 					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
-				} else if (data[i+1].rt != -1) {
-					num_responses += 1
-					sum_rt += (850 + data[i+1].rt);
-					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
-				}
+				} 
 				go_length += 1
 			}
         }
@@ -337,11 +326,13 @@ for (i = 0; i < practice_list.data.length; i++) {
 	  response_ends_trial: false,
 	  prompt: prompt_text,
 	  SSD: SSD,
-	  timing_SS: 500,
-	  timing_post_trial: 0   
+	  timing_SS: 250,
+	  timing_post_trial: 0,
+	  on_finish: function(data) {
+	  	jsPsych.data.addDataToLastTrial({'trial_id': 'practice_stim'})
+	  }   
     }
 	practice_trials.push(stop_signal_block)
-	practice_trials.push(prompt_block)
 } 
 
 
@@ -367,11 +358,7 @@ var practice_node = {
 					num_responses += 1
 					sum_rt += data[i].rt;
 					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
-				} else if (data[i+1].rt != -1) {
-					num_responses += 1
-					sum_rt += (850 + data[i+1].rt);
-					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
-				}
+				} 
 				go_length += 1
 			}
         }
@@ -380,11 +367,8 @@ var practice_node = {
 		var missed_responses = (go_length - num_responses) / go_length
 		var stop_percent = successful_stops/stop_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh && successful_stops < stop_thresh){
             // end the loop
-            if (stop_percent === 0) {
-		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
-		    }
 			practice_feedback_text += '</p><p class = block-text>Done with practice. We will now begin the ' + numconditions*numblocks + ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
             return false;
         } else {
@@ -402,11 +386,15 @@ var practice_node = {
 			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
+            if (succesful_stops < stop_thresh) {
+		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
+		    }
             return true;
         }
     }
 }
 
+motor_selective_stop_signal_experiment.push(noSS_practice_node)
 motor_selective_stop_signal_experiment.push(practice_node)
 motor_selective_stop_signal_experiment.push(practice_feedback_block) 
 
@@ -435,6 +423,7 @@ for (b = 0; b< numblocks; b++) {
 		  timing_post_trial: 0,
 		  on_finish: function(data) {
 		  	updateSSD(data)
+		  	jsPsych.data.addDataToLastTrial({'trial_id': 'test_stim'})
 		  }
 		}
 		stop_signal_exp_block.push(stop_signal_block)
