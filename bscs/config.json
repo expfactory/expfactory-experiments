@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Brief Self Control Scale",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js"
+               ],
+        "tag": "bscs",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://onlinelibrary.wiley.com/store/10.1111/j.0022-3506.2004.00263.x/asset/j.0022-3506.2004.00263.x.pdf?v=1&t=if8jvr1r&s=74fff21a9b298525f1d085ee85c78cb34c9a02fb",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
