@@ -96,9 +96,8 @@ for (b=0; b<block_num; b++){
 /* ************************************ */
 /* define /static blocks */
 var welcome_block = {
-	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the tone monitoring experiment. This experiment has stimulus. At this time, make sure you can hear sounds using headphones or speakers. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };

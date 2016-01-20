@@ -98,12 +98,13 @@ var version2_repeat = 0
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the Intra-dimensional set shifting experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 0,
   cont_key: [13],
   on_finish: function() {
   	$('body').css('background','black')
-  },
-  timing_post_trial: 0
+  }
 };
 
 var instructions_block = {

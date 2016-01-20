@@ -135,7 +135,7 @@ var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = prp_centerbox><p class = center-block-text>Welcome to the PRP experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
