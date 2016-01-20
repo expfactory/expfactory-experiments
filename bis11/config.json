@@ -1,0 +1,25 @@
+[
+    {
+        "name": "BIS-11: Barratt Impulsiveness Scale",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js"
+               ],
+        "tag": "bis11",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.impulsivity.org/measurement/bis11",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
