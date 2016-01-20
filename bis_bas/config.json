@@ -1,0 +1,25 @@
+[
+    {
+        "name": "BIS/BAS (Behavioral Approach/Inhibition Systems)",
+        "run": [
+                 "experiment.js",
+                 "style.css",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js"
+               ],
+        "tag": "bis_bas",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.psy.miami.edu/faculty/ccarver/sclBISBAS.html",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
