@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Test Survey",
+        "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                "experiment.js",
+		"static/css/jspsych.css",
+                "static/css/default_style.css",
+               ],
+        "tag": "survey",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":5,
+        "experiment_variables": "",
+        "reference": "",
+        "notes": "",
+        "publish":"True"
+    
+   }
+]
