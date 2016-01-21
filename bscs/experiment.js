@@ -57,12 +57,6 @@ var survey_block = {
   reverse_score: [[false, true, true, true, true, false, true, false, true, true, false, true, true]],
 };
 
-var survey_block = {
-  type: "survey-multi-choice",
-  timeline: all_questions,
-  horizontal: true,
-};
-
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',

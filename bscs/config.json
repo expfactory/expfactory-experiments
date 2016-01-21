@@ -2,9 +2,14 @@
     {
         "name": "Brief Self Control Scale",
         "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
                  "style.css",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js"
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
                ],
         "tag": "bscs",
         "cognitive_atlas_task_id": "",
