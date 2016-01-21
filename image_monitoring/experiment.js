@@ -92,13 +92,11 @@ for (b=0; b<block_num; b++){
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the shape monitoring experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
-
   
 var instructions_block = {
   type: 'poldrack-instructions',

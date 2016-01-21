@@ -45,13 +45,11 @@ for (var i = 0; i < stim_html.length; i++){
 /* ************************************ */
 
 /* define static blocks */
-
 var welcome_block = {
-  
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the Kirby delay discounting experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  //timing_post_trial: 0
+  timing_post_trial: 0
 };
 
 var instructions_block = {
