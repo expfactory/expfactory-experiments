@@ -33,5 +33,3 @@ dependencies:
     - $HOME/miniconda2/bin/pip install expfactory
     - $HOME/miniconda2/bin/pip install cognitiveatlas
     - docker pull hyzual/jshint
-  post:
-      - $HOME/miniconda2/bin/python -c "from expfactory.views import generate_experiment_web; generate_experiment_web('web');"
