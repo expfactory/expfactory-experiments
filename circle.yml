@@ -34,6 +34,4 @@ dependencies:
     - $HOME/miniconda2/bin/pip install cognitiveatlas
     - docker pull hyzual/jshint
   post:
-      - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
-      - java -jar selenium-server-standalone-2.44.0.jar:
-            background: true
+      - $HOME/miniconda2/bin/python -c "from expfactory.views import generate_experiment_web; generate_experiment_web('web');"
