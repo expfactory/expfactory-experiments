@@ -1,6 +1,6 @@
 [
     {
-        "name": "Test Survey",
+        "name": "Ten Item Personality Inventory",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -8,10 +8,10 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                 "experiment.js",
-		"static/css/jspsych.css",
-                "static/css/default_style.css",
+				"static/css/jspsych.css",
+                "static/css/default_style.css"
                ],
-        "tag": "survey",
+        "tag": "ten_item_personality_inventory",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
