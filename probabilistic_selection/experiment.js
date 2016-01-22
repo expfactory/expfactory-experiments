@@ -150,16 +150,12 @@ var training_count=0;
 /*         Set up jsPsych blocks        */
 /* ************************************ */
 /* define static blocks */
-
-
-
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the probabilistic selection task. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
-
 
 var instructions_block = {
   type: 'poldrack-instructions',
@@ -172,7 +168,6 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-
 
 var FP_block = {
 	type: 'text',

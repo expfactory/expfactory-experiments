@@ -55,7 +55,7 @@ var getData = function() {
 }
 
 var getText = function() {
-  	return '<div class = centerbox><p class = block-text>In these next blocks, you should respond when the current letter matches the letter that appeared ' + delay + ' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>'
+    return '<div class = "centerbox"><p class = "block-text">In these next blocks, you should respond when the current letter matches the letter that appeared ' + delay + ' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>'
 }
 
 
@@ -79,20 +79,16 @@ var gap = 0
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-
 var welcome_block = {
-	
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the n-back task experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = "centerbox"><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'poldrack-instructions',
-  pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>',
-  ],
+  pages: ['<div class = "centerbox"><p class = "block-text">In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -112,28 +108,28 @@ var update_target_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var start_practice_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = "centerbox"><p class = "center-block-text">Starting a practice block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = "centerbox"><p class = "center-block-text">Starting a test block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_control_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = "centerbox"><p class = "block-text">In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -145,7 +141,7 @@ for (var i=0; i<num_trials; i++) {
 	var control_block = {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
-	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+	  stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
 	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
@@ -172,7 +168,7 @@ for (var b = 0; b < num_blocks; b++) {
 	current_trial = 0
 	var start_delay_block = {
 	  type: 'text',
-	  text: getText,
+	  text: getText(),
 	  cont_key: [13]
 	};
 	adaptive_n_back_experiment.push(start_delay_block)
@@ -184,8 +180,8 @@ for (var b = 0; b < num_blocks; b++) {
 		var test_block = {
 		  type: 'poldrack-single-stim',
 		  is_html: true,
-		  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-		  data: getData,
+		  stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
+		  data: getData(),
 		  choices: [32],
 		  timing_stim: 500,
 		  timing_response: 2000,
@@ -205,5 +201,4 @@ if (control_before == 1) {
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
 //Set up control
-
 adaptive_n_back_experiment.push(end_block)

@@ -55,7 +55,7 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the choice reaction time experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
