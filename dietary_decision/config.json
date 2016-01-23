@@ -1,6 +1,7 @@
 [
     {
         "name": "Dietary Decision Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,10 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time": 10,
-        "experiment_variables": "",
         "reference": "http://www.rnl.caltech.edu/publications/pdf/hare2009.pdf",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

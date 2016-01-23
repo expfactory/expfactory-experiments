@@ -1,6 +1,7 @@
 [
     {
         "name": "Dospert: Domain Specific Risk Taking",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -21,10 +22,7 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "experiment_variables": "",
         "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

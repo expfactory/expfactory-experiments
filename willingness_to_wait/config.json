@@ -1,6 +1,9 @@
 [
     {
         "name": "Willingness to Wait",
+        "tag": "willingness_to_wait",
+        "cognitive_atlas_task_id": "trm_569989ef8cff4",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -11,8 +14,6 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "willingness_to_wait",
-        "cognitive_atlas_task_id": "trm_569989ef8cff4",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -21,10 +22,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "experiment_variables": "",
         "reference": "http://www.nature.com/neuro/journal/v18/n5/full/nn.3994.html",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

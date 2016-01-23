@@ -1,6 +1,7 @@
 [
     {
         "name": "Antisaccade",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -21,7 +22,6 @@
                          "Russell Poldrack"
                         ], 
         "time":8,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates the location of the target stimulus",
         "publish":"True"

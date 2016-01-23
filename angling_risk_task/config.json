@@ -1,6 +1,7 @@
 [
     {
         "name": "Angling Risk Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -24,9 +25,7 @@
                          "Russell Poldrack"
                         ], 
         "time":45,
-        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
-        "notes": "",
         "publish":"True"
     
    }

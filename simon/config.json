@@ -1,6 +1,7 @@
 [
     {
         "name": "Simon",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,9 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "experiment_variables": "",
         "reference": "http://link.springer.com/article/10.3758%2FBF03210959",
-        "notes": "",
         "publish":"True"
     
    }

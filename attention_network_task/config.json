@@ -1,6 +1,7 @@
 [
     {
         "name": "Attention Network Task",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,10 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":20,
-        "experiment_variables": "",
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
-        "notes": "",
         "publish":"True"
-    
    }
 ]
