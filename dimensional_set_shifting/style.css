@@ -1,3 +1,9 @@
+.jspsych-instructions-nav {
+  transform: translate(-100%, 0%);
+  width: 300px;
+  height: 14vw;
+}
+
 .topbox {
   width: 26vw;
   height: 12vw;

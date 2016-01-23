@@ -6,6 +6,7 @@
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
