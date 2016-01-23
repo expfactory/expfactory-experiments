@@ -1,6 +1,7 @@
 [
     {
         "name": "The three by two task",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,9 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":24,
-        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/21299334",
-        "notes": "",
         "publish":"True"
     
    }

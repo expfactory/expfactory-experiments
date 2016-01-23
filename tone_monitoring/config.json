@@ -1,6 +1,7 @@
 [
     {
         "name": "Tone Monitoring",
+        "template":"jspsych",
         "run": [ 
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,7 +23,6 @@
                          "Russell Poldrack"
                         ], 
         "time":6,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "condition indicates practice/test, trial_id indicates stimulus heard on each trial. Correct response is determined by repetitions since last response and is not calculated in this script (calculate in post)",
         "publish":"True"

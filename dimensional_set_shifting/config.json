@@ -1,6 +1,7 @@
 [
     {
         "name": "Intra-Dimensional/Extra-Dimensional Set Shifting",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -23,11 +24,9 @@
                          "Russell Poldrack"
                         ], 
         "time":10,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0028393289901280",
         "notes": "Condition indicates stage in the IDED task",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]
 

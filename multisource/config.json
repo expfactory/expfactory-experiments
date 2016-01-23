@@ -1,6 +1,7 @@
 [
     {
         "name": "Multi-Source Interference Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -21,10 +22,8 @@
                          "Russell Poldrack"
                         ], 
         "time":7,
-        "experiment_variables": "",
         "reference": "",
         "notes": "Condition records current block (practice/test control/interference), trial_id records stimulus ID (where the target is: left, middle or right) and whether the target is large or small",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

@@ -1,6 +1,7 @@
 [
     {
         "name": "Simple Reaction Time",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,9 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":3.5,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
-        "notes": "",
         "publish":"True"
     
    }

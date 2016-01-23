@@ -1,6 +1,7 @@
 [
     {
         "name": "Random Number Generation",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,9 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":3,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
-        "notes": "",
         "publish":"True"
     
    }

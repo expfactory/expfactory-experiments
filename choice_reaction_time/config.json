@@ -1,6 +1,7 @@
 [
     {
         "name": "Choice Reaction Time",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/custom_plugins/jspsych-poldrack-instructions.js",
@@ -21,10 +22,8 @@
                          "Russell Poldrack"
                         ], 
         "time":4,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
-        "notes": "",
-        "publish":"True"
+        "publish":"True",
     
    }
 ]
