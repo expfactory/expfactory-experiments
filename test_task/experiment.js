@@ -10,7 +10,7 @@
 var experiment_len = 3
 var gap = 0
 var current_trial = 0
-var stim = '<div class = shapebox><div id = cross></div></div>'
+var stim = '<div class = "shapebox"><div id = cross></div></div>'
 var rts = []
 var avg_rt = 0
 var reject = false
