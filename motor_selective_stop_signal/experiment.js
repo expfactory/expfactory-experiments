@@ -51,9 +51,9 @@ var getTestFeedback = function() {
     if (average_correct < accuracy_thresh) {
         test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
     }
-	if (stop_percent >= .75) {
+	if (stop_percent >= accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
-	} else if (stop_percent <= .25) {
+	} else if (stop_percent <= (1-accuracy_thresh)) {
 		test_feedback_text += '</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
 	}
 	test_feedback_text += '</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
