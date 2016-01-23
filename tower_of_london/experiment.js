@@ -247,7 +247,7 @@ var test_block = {
 }
 
 var feedback_block = {
-  type: 'single-stim',
+  type: 'poldrack-single-stim',
   stimulus: getFB,
   choices: 'none',
   is_html: true,
