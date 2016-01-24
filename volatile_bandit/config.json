@@ -23,7 +23,11 @@
                         ], 
         "time":18,
         "reference": "http://www.nature.com/neuro/journal/v10/n9/pdf/nn1954.pdf",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }    
    }
 ]
 

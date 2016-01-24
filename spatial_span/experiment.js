@@ -2,6 +2,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var arraysEqual = function(arr1, arr2) {
     if(arr1.length !== arr2.length)

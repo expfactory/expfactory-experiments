@@ -24,7 +24,11 @@
                         ], 
         "time":24,
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/21299334",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

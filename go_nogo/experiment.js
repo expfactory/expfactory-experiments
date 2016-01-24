@@ -2,6 +2,11 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 500 ) + 500
   return gap;

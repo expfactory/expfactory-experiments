@@ -24,6 +24,10 @@
                         ], 
         "time":20,
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

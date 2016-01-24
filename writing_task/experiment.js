@@ -2,9 +2,9 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
-var test = function() {
-	console.log('I am called')
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
 }
 
 var qualityCheck = function(data) {

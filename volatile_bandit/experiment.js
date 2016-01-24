@@ -3,6 +3,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var text_insert = function(text, index, insert_value) {
 	text = text.slice(0, index) + insert_value + text.slice(index);

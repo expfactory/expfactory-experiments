@@ -28,7 +28,11 @@
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/xge/143/1/455/",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

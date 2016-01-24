@@ -26,7 +26,11 @@
         "lab": "Poldracklab",
         "time":20,
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

@@ -24,6 +24,10 @@
                         ], 
         "time": 10,
         "reference": "http://www.rnl.caltech.edu/publications/pdf/hare2009.pdf",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

@@ -4,6 +4,11 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 function appendTextAfter(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
 	return input.slice(0,index) + new_text + input.slice(index)

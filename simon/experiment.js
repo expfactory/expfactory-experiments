@@ -2,13 +2,18 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var post_trial_gap = function() {
+  gap = Math.floor( Math.random() * 2000 ) + 1000
   return gap;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	gap = Math.floor( Math.random() * 2000 ) + 1000
 	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
 	current_trial = current_trial + 1
 }

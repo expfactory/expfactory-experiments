@@ -1,6 +1,11 @@
 /* ************************************ */
 /* Define helper functions */
-/* *********************************center*** */
+/* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var getStim = function() {
   var immediate_stim;
   var delayed_stim;

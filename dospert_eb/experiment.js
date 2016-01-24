@@ -6,7 +6,10 @@ Blais, A-R. and E. U. Weber. 2006. “A Domain-specific Risk-taking (DOSPERT) Sc
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */

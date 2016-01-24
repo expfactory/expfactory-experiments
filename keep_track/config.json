@@ -25,7 +25,11 @@
         "time":6,
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "notes": "Condition indicates difficulty as quantified by the 'target length': the number of categories the subject had to remember",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }    
    }
 ]
 

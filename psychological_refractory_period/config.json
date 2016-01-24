@@ -24,6 +24,10 @@
                         ], 
         "time": 15,
         "reference": "http://psycnet.apa.org/journals/xge/79/1p1/122.pdf",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

@@ -25,6 +25,10 @@
         "time":2,
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/pha/22/3/222.pdf",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

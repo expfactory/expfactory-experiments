@@ -6,7 +6,10 @@ Holt, C. A., & Laury, S. K. (2002). Risk aversion and incentive effects. America
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */

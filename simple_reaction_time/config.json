@@ -24,7 +24,10 @@
                         ], 
         "time":3.5,
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

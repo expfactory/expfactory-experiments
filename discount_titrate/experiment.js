@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 // Function to generate random numbers from normal distribution
 // Adapted from https://github.com/robbrit/randgen/blob/master/lib/randgen.js

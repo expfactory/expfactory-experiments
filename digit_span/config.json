@@ -25,6 +25,10 @@
                         ], 
         "time":5,
         "reference": "http://ajp.psychiatryonline.org/doi/pdf/10.1176/appi.ajp.157.2.275",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]
