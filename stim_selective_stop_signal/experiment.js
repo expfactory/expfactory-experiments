@@ -95,7 +95,7 @@ var getNoSSPracticeData = function() {
 var getSSPracticeStim = function() {
 	practice_stop_trial = practice_stop_trials.pop()
 	practice_trial_data = practice_list.data.pop()
-	practice_trial_data["condition"] = "practice_" + practice_stop_trial
+	practice_trial_data.condition = "practice_" + practice_stop_trial
 	return practice_list.stimulus.pop()
 }
 
@@ -422,7 +422,7 @@ for (b = 0; b< numblocks; b++) {
 		stop_signal_exp_block.push(fixation_block)
 		//Label each trial as an ignore, stop or go trial
 		var stim_data = $.extend({},block.data[i])
-		stim_data["condition"] = 'test_' + stop_trials[i]
+		stim_data.condition = 'test_' + stop_trials[i]
 		if (stop_trials[i] == 'ignore') {
 			var stop_trial = 'stop'
 			var stop_stim = ignore_signal

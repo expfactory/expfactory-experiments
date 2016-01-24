@@ -119,8 +119,8 @@ var stop_signal = '<div class = stopbox><div class = centered-shape id = stop-si
 var correct_responses = jsPsych.randomization.shuffle([["M key",77],["M key",77],["Z key",90],["Z key",90]])
 var prompt_text = '<ul class =  list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 var RT_thresh = 1000
-var missed_response_thresh = .05
-var accuracy_thresh = .75
+var missed_response_thresh = 0.05
+var accuracy_thresh = 0.75
 var stop_thresh = 1
 var possible_responses = [["M key",77],["Z key",90]]
 var stop_response = randomDraw(possible_responses)
