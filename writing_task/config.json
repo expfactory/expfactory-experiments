@@ -6,7 +6,7 @@
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-writing.js",
                 "experiment.js",
@@ -23,6 +23,6 @@
                         ], 
         "time":15,
         "reference": "",
-        "publish":"True"    
+        "publish":"True"
    }
 ]
