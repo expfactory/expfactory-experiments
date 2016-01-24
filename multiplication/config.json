@@ -1,6 +1,7 @@
 [
     {
         "name": "Multiplication",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -20,10 +21,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "experiment_variables": "",
         "reference": "",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

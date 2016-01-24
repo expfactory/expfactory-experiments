@@ -1,6 +1,6 @@
 [
     {
-        "name": "",
+        "name": "Volatile Bandit",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -13,6 +13,7 @@
                ],
         "tag": "volatile_bandit",
         "cognitive_atlas_task_id": "trm_5696b180169bd",
+        "template":"jspsych",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -21,11 +22,8 @@
                          "Russell Poldrack"
                         ], 
         "time":18,
-        "experiment_variables": "",
         "reference": "http://www.nature.com/neuro/journal/v10/n9/pdf/nn1954.pdf",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]
 

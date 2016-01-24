@@ -11,7 +11,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-
+        "template":"jspsych",
         "tag": "tower_of_london_imagine",
         "cognitive_atlas_task_id": "trm_5696bcf1b5c64",
 
@@ -23,10 +23,8 @@
                          "Russell Poldrack"
                         ], 
         "time":8,
-        "experiment_variables": "",
         "reference": ["http://rstb.royalsocietypublishing.org/content/royptb/298/1089/199.full.pdf",
                         "https://www.researchgate.net/publication/11201010_The_Tower_of_London_Spatial_Problem-Solving_Task_Enhancing_Clinical_and_Research_Implementation"],
-        "notes": "",
         "publish":"True"
     
    }

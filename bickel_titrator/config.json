@@ -1,6 +1,7 @@
 [
     {
         "name": "Adaptive Bickel Titrator",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -24,8 +25,6 @@
         "time":2,
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/pha/22/3/222.pdf",
-        "notes": "",
         "publish":"True"
-    
    }
 ]

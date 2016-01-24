@@ -1,6 +1,7 @@
 [
     {
         "name": "Probabilistic Selection Task",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,10 +23,7 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "experiment_variables": "",
         "reference": "http://www.nature.com/neuro/journal/v14/n2/fig_tab/nn.2723_F3.html",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

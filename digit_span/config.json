@@ -1,6 +1,7 @@
 [
     {
         "name": "Digit Span",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -23,10 +24,7 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "experiment_variables": "",
         "reference": "http://ajp.psychiatryonline.org/doi/pdf/10.1176/appi.ajp.157.2.275",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

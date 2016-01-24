@@ -1,6 +1,7 @@
 [
     {
         "name": "Test Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -34,7 +35,6 @@
                                  "description":"True if avg_rt < 100"
                                   }],
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
-        "notes": "",
         "publish":"True"
    }
 ]

@@ -1,6 +1,7 @@
 [
     {
         "name": "Dot Pattern Expectancy",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -22,10 +23,8 @@
                          "Russell Poldrack"
                         ], 
         "time":15,
-        "experiment_variables": "",
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

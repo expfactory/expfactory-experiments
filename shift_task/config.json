@@ -1,6 +1,7 @@
 [
     {
         "name": "Shift Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -24,10 +25,7 @@
                         ], 
         "lab": "Poldracklab",
         "time":20,
-        "experiment_variables": "",
-        "doi": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
-        "notes": "",
         "publish":"True"
     
    }
