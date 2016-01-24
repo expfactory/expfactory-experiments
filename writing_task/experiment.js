@@ -18,8 +18,8 @@ var qualityCheck = function(data) {
 	}
 
 	var rt_thresh = 200 // avg rt has to be above this thresh
-	var response_thresh = .8 // percent response needs to be above this thresh
-	var attention_thresh = .8 // successful attention checks needs to be above this thresh
+	var response_thresh = 0.8 // percent response needs to be above this thresh
+	var attention_thresh = 0.8 // successful attention checks needs to be above this thresh
 
 	var track_rts = []
 	var track_responses = []
