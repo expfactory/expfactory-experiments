@@ -1,6 +1,7 @@
 [
     {
         "name": "Motor-Selective-Stop-Signal",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
@@ -25,8 +26,8 @@
                         ], 
         "time":30,
         "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/xlm/37/2/392/",
-        "notes": "Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial",
+        "reference": "http://psycnet.apa.org/journals/xge/143/1/455/",
+        "notes": "",
         "publish":"True"
     
    }
