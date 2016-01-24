@@ -46,7 +46,7 @@ var getFlatData = function() {
 /* ************************************ */
 var exp_len = 200 //number of trials per rule-set
 var flat_first = 0//  Math.floor(Math.random())
-var path_source = 'static/experiments/hierarchical_rule/images/'
+var path_source = '/static/experiments/hierarchical_rule/images/'
 var stim_prefix = '<div class = centerbox><div class = stimBox><img class = hierarchicalStim src ='
 var border_prefix = '<img class = hierarchicalBorder src ='
 var prompt_prefix = '<img class = hierarchicalPrompt src ='
@@ -103,18 +103,15 @@ instructions_grid += '</div>'
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
   	$('body').css('background','black')
-  },
-};
-
-
+  }
+}
 
 var instructions_block = {
   type: 'poldrack-instructions',
@@ -129,7 +126,7 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-"white-text block-text">Thanks for completing this task!</p><p class = center-"white-text block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
@@ -140,7 +137,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = "white-text block-text">We will now start the test.</p><p class = center-"white-text block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">We will now start the test.</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };

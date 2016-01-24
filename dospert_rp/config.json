@@ -2,6 +2,7 @@
     {
         "name": "Dospert_rp: Domain Specific Risk Taking",
         "run": [
+                 "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js",

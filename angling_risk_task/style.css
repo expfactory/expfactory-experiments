@@ -5,7 +5,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-425%);
+  transform: translate(-50%,-450%);
   border-style: solid;
   border-color: CadetBlue;
 }
@@ -23,13 +23,41 @@
   border-color: CadetBlue;
 }
 
+.buttonbox select-button:last-child{
+  margin-right: 0%;
+/*so the last one dont push the div thas giving the space only between the inputs*/
+}
+
 .select-button {
 	width:50%;
   min-width:0vw;
 	height: 100%;
 	float: left;
-   margin: 0;
+  background: #ECECEC;
+  padding: 10px 20px;
+  font-weight: bold;
+  color:#7f7f7f;
+  text-decoration: none;
+  text-shadow:0px 1px 0px #fff;
+  border:2px solid CadetBlue;
+  margin:0px auto;
+  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+  -webkit-transition:box-shadow 0.5s;
+  font-size:24px;
+  font-family: 'Helvetica Neue',Arial,sans-serif;
 }
+
+.select-button:hover {
+  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 50%);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 3px solid #FFA07A; 
+}
+
+.select-button:active {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+    background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
+}
+
 
 .infocontainer {
   width: 45vw;
@@ -79,8 +107,8 @@
 
 
 .lake {
-  width:65vw;
-  height: 20vw;
+  width:60vw;
+  height: 22vw;
   position:absolute;
   top:50%;
   left:50%;
@@ -98,7 +126,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(250%,-80%);
+  transform: translate(235%,-80%);
   border-style: solid;
   border-color: CadetBlue;
 }
@@ -110,7 +138,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(250%,-155%);
+  transform: translate(235%,-155%);
   border-style: solid;
   border-color: CadetBlue;
 }
