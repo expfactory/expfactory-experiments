@@ -28,7 +28,7 @@ var chooseButton = function(clicked_id){
 		roundPoints=roundPoints+gainAmt
 		}	
 		else if(index!=-1){
-			if(firstLoss==0){
+			if(firstLoss===0){
 		 		roundPoints=roundPoints-lossAmt
 		 		firstLoss=1
 		 	}else if(firstLoss==1){
@@ -39,11 +39,11 @@ var chooseButton = function(clicked_id){
 	}
 	roundPointsArray.push(roundPoints)
 	alert('You chose '+currID+' cards. When you click on ok, the next round starts. Please note that the loss amount, the gain amount, and the number of loss cards might have changed.')		
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
@@ -156,6 +156,7 @@ var instructTurnCard = function(){
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var e = ""
 var numRounds = 27
 var whichRound = 0
 var roundPoints=0

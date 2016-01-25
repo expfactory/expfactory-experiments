@@ -1,17 +1,17 @@
 [
     {
-        "name": "Guitart-Masip Learning Paradigm",
-        "run": ["static/js/jspsych/jspsych.js",
+        "name": "Urgency Premeditation Perseverance and Sensation Seeking (UPPS+P)",
+        "run": [
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                 "experiment.js",
-                "static/css/jspsych.css",
-                "static/css/default_style.css",
-                "style.css"
+				"static/css/jspsych.css",
+                "static/css/default_style.css"
                ],
-        "tag": "gm_paradigm",
+        "tag": "urgency_premeditation_perseverance_sensation_seeking",
         "cognitive_atlas_task_id": "",
         "contributors": [
                          "Ian Eisenberg",
@@ -20,9 +20,9 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":45,
+        "time":5,
         "experiment_variables": "",
-        "reference": "http://www.sciencedirect.com/science/article/pii/S105381191200420X",
+        "reference": "",
         "notes": "",
         "publish":"True"
     

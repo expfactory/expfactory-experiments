@@ -99,11 +99,11 @@ function appendTextAfter2(input,search_term, new_text) {
 }
 
 var pressKey = function(){
-	var e = jQuery.Event("keydown");
+	    e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
@@ -205,7 +205,7 @@ var chooseCard = function (clicked_id){
 
 
 var getRound = function(){
-	if(roundOver == 0){  //this is for the start of a round
+	if(roundOver === 0){  //this is for the start of a round
 	whichClickInRound = 0
 	unclickedCards=cardArray
 	cardArray=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
@@ -366,6 +366,7 @@ var instructTurnCards = function (){
 /* ************************************ */
 /* Experimental Variables               */
 /* ************************************ */
+var e = ""
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -678,7 +679,7 @@ var practice_chunk = {
     chunk_type: 'while',
     timeline: [practice_block],
     continue_function: function(data){ 
-       if (roundOver == 0) {
+       if (roundOver === 0) {
        		roundOver =0
 			roundPoints = 0
 			whichClickInRound= 0
@@ -705,7 +706,7 @@ var practice_chunk1 = {
     chunk_type: 'while',
     timeline: [practice_instruct_block],
     continue_function: function(data){ 
-       if (roundOver == 0) {
+       if (roundOver === 0) {
        		instructPoints=0
        		roundOver =0
 			roundPoints = 0
@@ -734,7 +735,7 @@ var practice_chunk2 = {
     chunk_type: 'while',
     timeline: [practice_instruct_block2],
     continue_function: function(data){ 
-       if (roundOver == 0) {
+       if (roundOver === 0) {
        		roundOver =0
 			roundPoints = 0
 			whichClickInRound= 0

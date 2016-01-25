@@ -59,9 +59,9 @@ var getStim8 = function(){
 	return image + startTestPrompt7 
 }
 
-practiceCount = 0
+var practiceCount = 0
 var getPracticePrompt = function (){
-	if(practiceCount == 0){
+	if(practiceCount === 0){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
 	practiceCount=practiceCount+1
 	return temp
@@ -220,7 +220,6 @@ var getPracticeFeedback2 = function() {
 
 var getSSPracticeStim = function() {
 	practice_trial_data = secondPhaseStimsComplete.data.pop()
-	practice_trial_data["trial_id"] = "practice-stop"
 	return secondPhaseStimsComplete.image.pop()
 }
 
@@ -233,7 +232,7 @@ var getSSPracticeData = function() {
 }
 
 var appendPracticeStopData = function(){
-	jsPsych.data.addDataToLastTrial({subject_ID: subjectID, stim: practice_trial_data.stimulus, condition: practice_trial_data.condition, stop_stim: stop_signal, stop_condition: "neutral", current_trial: currTrial})
+	jsPsych.data.addDataToLastTrial({trial_id: "practice-stop", subject_ID: subjectID, stim: practice_trial_data.stimulus, condition: practice_trial_data.condition, stop_stim: stop_signal, stop_condition: "neutral", current_trial: currTrial})
 	currTrial = currTrial+1
 
 }
@@ -261,7 +260,7 @@ var getPracticeStopStim = function(){
 }
 
 var appendPracticeGoData = function(){
-	jsPsych.data.addDataToLastTrial({subject_ID: subjectID, current_trial:currTrial, stim: goStim.image, condition: currData.condition, correct_response : currData.correct_response})
+	jsPsych.data.addDataToLastTrial({trial_id: "practice-stop", subject_ID: subjectID, current_trial:currTrial, stim: goStim.image, condition: currData.condition, correct_response : currData.correct_response})
 	currTrial = currTrial +1 
 }
 
@@ -275,32 +274,31 @@ var getSSPracticeStim3 = function() {
 	tempColor = a.color.pop()
 	shape1 = tempShape.pop()
 	if(shape1==1 || shape1==2){
-		if(tempColor ==0){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[0], go_color: colors[tempColor]}}
+		if(tempColor ===0){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[0], go_color: colors[tempColor]}}
 		} else if(tempColor==1){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[1], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[1], go_color: colors[tempColor]}}
 		} else if(tempColor==2){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[2], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[2], go_color: colors[tempColor]}}
 		} else if(tempColor==3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[3], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[3], go_color: colors[tempColor]}}
 		} else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
 		}
 	} else if (shape1==3||shape1==4){
-		if(tempColor ==0){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[0], go_color: colors[tempColor]}}
+		if(tempColor ===0){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[0], go_color: colors[tempColor]}}
 		} else if(tempColor==1){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[1], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[1], go_color: colors[tempColor]}}
 		} else if(tempColor==2){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[2], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[2], go_color: colors[tempColor]}}
 		} else if(tempColor==3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[3], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[3], go_color: colors[tempColor]}}
 		} else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
 		}
 	}
 	practice_trial_data = goStim.data
-	practice_trial_data["trial_id"] = "test-stop"
 	return goStim.image
 }
 
@@ -360,7 +358,7 @@ var resetTrial = function() {
 
 
 var updateSSDandData = function() {
-	jsPsych.data.addDataToLastTrial({subject_ID: subjectID, SSD: SSD, stop_stim: currData.stop_stim, stop_condition: currData.stop_color_condition, current_trial: currTrial})
+	jsPsych.data.addDataToLastTrial({trial_id: "test-stop", subject_ID: subjectID, SSD: SSD, stop_stim: currData.stop_stim, stop_condition: currData.stop_color_condition, current_trial: currTrial})
 	currTrial = currTrial+1
 	curr_trial = jsPsych.progress().current_trial_global
 	if ((jsPsych.data.getData()[curr_trial].rt == -1) && (SSD<850) && (jsPsych.data.getData()[curr_trial].SS_trial_type=='stop')) {
@@ -457,16 +455,17 @@ sumReward=0
 for(i=0;i<data.length; i++){
 whichReward = jsPsych.data.getData()[i].reward
 if(whichReward == 'plus_25'){
-	sumReward=sumReward+.25
+	sumReward=sumReward+0.25
 } else if(whichReward=='minus_25'){
-	sumReward=sumReward-.25
+	sumReward=sumReward-0.25
 } else if(whichReward=='plus_0' || whichReward=='minus_0'){
 	sumReward=sumReward
 }
 }
-jsPsych.data.addDataToLastTrial({total_reward: sumReward})
+jsPsych.data.addDataToLastTrial({subject_ID: subjectID, total_reward: sumReward})
 return '<div class = centerbox><p class = center-block-text>Your bonus is:  <strong>'+sumReward+'</strong></div>'
 }
+
 
 
 /* ************************************ */
@@ -477,7 +476,7 @@ return '<div class = centerbox><p class = center-block-text>Your bonus is:  <str
 var subjectID=115
 var RT_thresh = 800
 var SSD = 250
-var accuracy_thresh = .85
+var accuracy_thresh = 0.85
 var gap = 0
 var learningNumTrials = 24
 var practiceStopNumTrials = 24
@@ -485,7 +484,7 @@ var numLearningBlocks = 0
 var numLearningBlocksTotal = 3
 var numTrials = 80
 var currTrial = 0
-var pathSource = '/static/experiments/gm_paradigm/'
+var pathSource = '/static/experiments/gm_paradigm/images/'
 var fileType = '.png'
 var preFileType = "<img class = center src='"
 var preFileTypeReward = "<img class = center src='"
@@ -506,7 +505,7 @@ var practice_responses = [["space bar",37],["no" , -1]]
 var practiceStop_responses = [["Z Key", 90 ],["M Key", 77]]
 var conditions = ['go_win','go_avoid','nogo_win','nogo_avoid','neutral']
 var practice_trial_data = '' //global variable to track randomized practice trial data
-var missed_response_thresh = .05
+var missed_response_thresh = 0.05
 
 var practiceConditions = ['Press space bar to earn 25 cents','Press space bar to avoid losing 25 cents','Press nothing to earn 25 cents','Press nothing to avoid losing 25 cents']
 
@@ -752,24 +751,22 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the GM task. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with the experiment.</div>',
   cont_key: [13],
-  timing_post_trial: 0
-  data: {subject_ID: subjectID},
-
+  timing_post_trial: 0,
 };
+
 
 var bonus_block = {
   type: 'text',
   text: getBonus,
   cont_key: [13],
-  timing_post_trial: 0
-  data: {subject_ID: subjectID},
+  timing_post_trial: 0,
 };
 
 
@@ -777,7 +774,7 @@ var testImagesBlock = {
   type: 'text',
   text: preFileType+pathSource+'green_circle'+fileType+postFileType+preFileTypeReward+pathSource+'minus_25'+fileType+postFileType+'<div class = fixation-gmParadigm><span style="color:red">+</span></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
 };
 
 

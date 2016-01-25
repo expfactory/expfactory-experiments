@@ -25,7 +25,7 @@ var appendTestData = function(){
 		} else if (tempID==27){
 			jsPsych.data.addDataToLastTrial({clicked_on: whichLargeColor2, box_id: tempID, which_click_in_round: numClicks, correct_response: whichLargeColor1})
 		}
-	} else if(whichColor==0){
+	} else if(whichColor===0){
 		if(color1.indexOf(tempID,0)!=-1){
 			jsPsych.data.addDataToLastTrial({clicked_on: whichSmallColor1, box_id: tempID, which_click_in_round: numClicks, correct_response: whichLargeColor2})
 		} else if (color2.indexOf(tempID, 0) != -1){
@@ -49,7 +49,7 @@ var appendRewardDataFW= function(){
 
 
 var getRound = function(){
-  if(roundOver == 0){ // start of the round
+  if(roundOver === 0){ // start of the round
 		gameState=gameSetup
 			gameState=appendTextAfter2(gameState, "id = '26'", " src='/static/experiments/information_sampling_task/images/"+whichLargeColor1+".png'")		
 			gameState=appendTextAfter2(gameState, "id = '27'", " src='/static/experiments/information_sampling_task/images/"+whichLargeColor2+".png'")		
@@ -83,21 +83,21 @@ var chooseCard = function(clicked_id){
 	temp = color1.indexOf(currID,0)
 	if(temp!=-1){
 		clickedCardsColor1.push(currID)
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
 	} else if (temp ==-1){
 		clickedCardsColor2.push(currID)
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)	
@@ -105,11 +105,11 @@ var chooseCard = function(clicked_id){
 }
 
 var pressKey = function(){
-	var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
@@ -175,7 +175,7 @@ var resetRound = function(){
 
 	whichSmallColor1 = colors[1]+'_'+shapes[0]
 	whichSmallColor2 = colors[2]+'_'+shapes[0]
-	} else if(whichColor == 0){
+	} else if(whichColor === 0){
 	color1=[]
 	for(i=0;i<12;i++){
 		temp=numbersArray.pop()
@@ -250,21 +250,21 @@ var instructionFunction = function(clicked_id){
 var makeInstructChoice = function(clicked_id){
 	if(clicked_id == 26){
 		reward = '<div class = centerbox><p class = center-block-text>Correct! You have won 100 points!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>'
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
 	} else if(clicked_id == 27){
 		reward = '<div class = centerbox><p class = center-block-text>Incorrect! You have lost 100 points! </p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>'
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
@@ -278,6 +278,7 @@ var getReward = function(){
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var e = ""
 var totFWPoints = 0
 var totDWPoints = 0
 var DWPoints = 250
@@ -516,7 +517,7 @@ var practice_chunk = {
     continue_function: function(data){ 
        if (roundOver == 2) {
 			return false
-		} else if(roundOver ==1 || roundOver==0){
+		} else if(roundOver ==1 || roundOver===0){
 			return true
 		}
     }
@@ -537,7 +538,7 @@ information_sampling_task_experiment.push(subjectPracticeBlock);
 information_sampling_task_experiment.push(subjectRewardBlock);
 information_sampling_task_experiment.push(start_test_block);
 
-if(whichCond==0){// do the FW first, then DW
+if(whichCond===0){// do the FW first, then DW
 information_sampling_task_experiment.push(FW_intro_block);
 
 information_sampling_task_experiment.push(practice_chunk);
