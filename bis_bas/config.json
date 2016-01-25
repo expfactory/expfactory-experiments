@@ -1,6 +1,7 @@
 [
     {
         "name": "BIS/BAS (Behavioral Approach/Inhibition Systems)",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -24,7 +25,11 @@
         "experiment_variables": "",
         "reference": "http://www.psy.miami.edu/faculty/ccarver/sclBISBAS.html",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

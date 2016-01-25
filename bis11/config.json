@@ -1,6 +1,7 @@
 [
     {
         "name": "BIS-11: Barratt Impulsiveness Scale",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
@@ -24,7 +25,11 @@
         "experiment_variables": "",
         "reference": "http://www.impulsivity.org/measurement/bis11",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]
