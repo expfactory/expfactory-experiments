@@ -444,7 +444,7 @@ var subjectPracticeBlock ={
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. </p></div>',
+  text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -463,15 +463,15 @@ var practice_block = {
 
 var DW_intro_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision losses 100 points regardless of number of boxes opened.</div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var FW_intro_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision losses 100 points regardless of number of boxes opened.</div>',
-  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+  cont_key: [13],
   timing_post_trial: 0
 };
 

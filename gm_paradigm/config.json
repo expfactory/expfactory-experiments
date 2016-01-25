@@ -3,9 +3,9 @@
         "name": "Guitart-Masip Learning Paradigm",
         "run": [
                 "static/js/jspsych/plugins/jspsych-text.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-stop-signal.js",
+                "/Users/jamieli/Documents/expfactory-battery/static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "/Users/jamieli/Documents/expfactory-battery/static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "/Users/jamieli/Documents/expfactory-battery/static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -20,7 +20,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time”:45,
+        "time":45,
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S105381191200420X",
         "notes": "",

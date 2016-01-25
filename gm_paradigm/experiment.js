@@ -716,21 +716,21 @@ for(i=0;i<45; i++){
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the GM task. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with the experiment.</div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
 var bonus_block = {
   type: 'text',
   text: getBonus,
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -738,7 +738,7 @@ var bonus_block = {
 var testImagesBlock = {
   type: 'text',
   text: preFileType+pathSource+'green_circle'+fileType+postFileType+preFileTypeReward+pathSource+'minus_25'+fileType+postFileType+'<div class = fixation-gmParadigm><span style="color:red">+</span></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
@@ -760,7 +760,7 @@ var start_practice = {
   type: 'poldrack-single-stim',
   stimulus: getPracticePrompt,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "pre-learning"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -773,7 +773,7 @@ var start_test = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start phase 1 of the experiment.  For these trials, the rules associated with each color are as follows: </p><p class = block-text>'+startTestPrompt+'</p><p class = block-text> Make sure that you remember these rules before you move on to the test. <br><br>Press <strong>Enter</strong> to begin.'+'</p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "learning_intro (phase 1)"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -784,7 +784,7 @@ var stop_intro = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start the practice for phase 2 of the experiment.<br><br>For these trials, you must press the <strong> Z key </strong> or the <strong> M key </strong> depending on the shape of the stimulus.  Make sure to respond as quickly and accurately as possible to the shape. <br><br> The responses for each shape are as follows: ' + zmprompt_text+  '</p><p class = block-text>Remember these rules before you proceed, as they will not be presented during the trial. <br><br>Press <strong>enter</strong> to begin. </p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "stop_intro (phase 2)"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -795,7 +795,7 @@ var stop_intro2 = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>These trials will be similar to the trials you have just completed.  Again, please respond to the shape of the stimulus. <br><br> On a subset of trials, a star will appear around the shape, when this happens please try your best to stop your response and press nothing. Do not slow your responses to the shape to achieve this. <br><br>The responses for each shape are as follows: ' + zmprompt_text+  '</p><p class =block-text>Remember these rules before you proceed, as they will not be presented during the trial. </p><p class =block-text>Press <strong>enter</strong> to begin. </p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "stop_intro (phase 2)"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -807,7 +807,7 @@ var main_stop_intro1 = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start Phase 2 of the experiment.<br><br>These trials are similar to the trials that you have just completed.  Like last time, on a subset of trials a star will appear around the shape, when this happens please try your best to stop your response and press nothing. Do not slow your responses to the shape to achieve this.<br><br>The rules for each shape are as follows:  <br>'+zmprompt_text+'</p><p class = block-text>Remember these rules before you proceed.</p><p class = block-text>Press <strong> enter</strong> to begin.</p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "main_stop_intro (phase 3)"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -820,7 +820,7 @@ var forced_choice_intro = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now start phase 3 of the experiment.<br><br>In this part of the experiment, you will see two color patches presented on each trial, one on the left side of the screen and the other on the right. You will choose the color which you find more rewarding by pressing either the left or right arrow key to correspond with the left or right color patch, respectively. <br><br>Press <strong>enter</strong> to continue.</p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "forced_choice_intro"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -831,7 +831,7 @@ var forced_choice_intro_break = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = block-text>We will now take a short break.  <br><br>Press <strong>enter</strong> to continue.</p></div>',
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "forced_choice_intro"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -921,14 +921,14 @@ var rewardBlock2 = {
 var practice_feedback_text = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each stimuli. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
   type: 'text',
-  cont_key: 13,
+  cont_key: [13],
   text: getPracticeFeedback
 };
 
 var practice_feedback_text2 = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each stimuli. Press <strong>enter</strong> to continue.'
 var practice_feedback_block2 = {
   type: 'text',
-  cont_key: 13,
+  cont_key: [13],
   text: getPracticeFeedback2
 };
 
@@ -936,14 +936,14 @@ var practice_feedback_block2 = {
 var learning_feedback_text = 'We will now start a round. Press <strong>enter</strong> to continue.'
 var learning_feedback_block = {
   type: 'text',
-  cont_key: 13,
+  cont_key: [13],
   text: getLearningFeedback
 };
 
 var stop_feedback_text = 'We will now start a round. Press <strong>enter</strong> to continue.'
 var stop_feedback_block = {
   type: 'text',
-  cont_key: 13,
+  cont_key: [13],
   text: getStopFeedback
 };
 
@@ -977,7 +977,7 @@ var pre_practice_learning_block1 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText1  + practiceLearningStims1.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -988,7 +988,7 @@ var pre_practice_learning_block2 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText2  + practiceLearningStims2.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -999,7 +999,7 @@ var pre_practice_learning_block3 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText3  + practiceLearningStims3.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1010,7 +1010,7 @@ var pre_practice_learning_block4 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText4  + practiceLearningStims4.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1021,7 +1021,7 @@ var pre_practice_learning_block5 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText5  + practiceLearningStims5.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1030,9 +1030,9 @@ var pre_practice_learning_block5 = {
 
 var pre_practice_learning_block6 = {
   type: 'poldrack-single-stim',
-  stimuli: prompt_practice_text_heading1 + tempText6  + practiceLearningStims6.image,
+  stimulus: prompt_practice_text_heading1 + tempText6  + practiceLearningStims6.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1043,7 +1043,7 @@ var pre_practice_learning_block7 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText7  + practiceLearningStims7.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1054,7 +1054,7 @@ var pre_practice_learning_block8 = {
   type: 'poldrack-single-stim',
   stimulus: prompt_practice_text_heading1 + tempText8  + practiceLearningStims8.image,
   is_html: true,
-  choices: 13,
+  choices: [13],
   data: {exp_id: "gmParadigm", "trial_id": "Learning Phase Instructions"},
   timing_post_trial: 0,
   timing_stim: -1,
@@ -1565,7 +1565,7 @@ for (i = 0; i < 12; i++) {
 	phase2_trials.push(fixationBlock)
 	var stim_data = $.extend({},secondPhaseStimsComplete.data[i])
     var stop_signal_block = {
-	  type: 'poldrack-stop-signal',
+	  type: 'stop-signal',
 	  stimulus: getSSPracticeStim,
 	  SS_stimulus: stop_signal,
 	  SS_trial_type: getSSPractice_trial_type,
@@ -1643,7 +1643,7 @@ for (i = 0; i < 5; i++) {
 	phase3_trials.push(fixationBlock)
 	var stim_data = $.extend({},practice_trial_data)
     var stop_signal_block = {
-	  type: 'poldrack-stop-signal',
+	  type: 'stop-signal',
 	  stimulus: getSSPracticeStim3,
 	  SS_stimulus: getStopSignal,
 	  SS_trial_type: getSSPractice_trial_type3,
