@@ -5,7 +5,7 @@
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -28,7 +28,11 @@
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/xge/143/1/455/",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

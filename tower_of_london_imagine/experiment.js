@@ -2,6 +2,11 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var getStim = function() {
   var response_area = '<div class = tol_response_div>' +
                   '<button class = tol_response_button id = 1>1</button>' +
@@ -78,14 +83,16 @@ var answers = [2,2,3,3,4,4,4,4,5,5,5,5]
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -103,7 +110,8 @@ var instructions_block = {
 
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>We will now start the test. There will be ' + problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000

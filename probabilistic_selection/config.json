@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "experiment.js",
@@ -24,6 +24,10 @@
                         ], 
         "time":999,
         "reference": "http://www.nature.com/neuro/journal/v14/n2/fig_tab/nn.2723_F3.html",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }  
    }
 ]

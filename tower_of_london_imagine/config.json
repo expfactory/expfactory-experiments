@@ -3,7 +3,7 @@
         "name": "Tower of London",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                 "experiment.js",
@@ -25,7 +25,11 @@
         "time":8,
         "reference": ["http://rstb.royalsocietypublishing.org/content/royptb/298/1089/199.full.pdf",
                         "https://www.researchgate.net/publication/11201010_The_Tower_of_London_Spatial_Problem-Solving_Task_Enhancing_Clinical_and_Research_Implementation"],
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

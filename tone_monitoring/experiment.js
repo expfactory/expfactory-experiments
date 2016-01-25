@@ -4,6 +4,11 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -96,7 +101,8 @@ for (b=0; b<block_num; b++){
 /* ************************************ */
 /* define /static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -117,21 +123,21 @@ var instructions_block = {
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 }; 
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a tone repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 01000

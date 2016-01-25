@@ -5,7 +5,7 @@
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -27,7 +27,11 @@
         "time":30,
         "reference": "http://psycnet.apa.org/journals/xlm/37/2/392/",
         "notes": "Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

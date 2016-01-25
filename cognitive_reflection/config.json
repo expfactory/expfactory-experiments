@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/plugins/jspsych-survey-text.js",
                  "experiment.js",
                  "static/css/jspsych.css",
@@ -20,6 +20,10 @@
                         ], 
         "time":999,
         "reference": "http://www.jstor.org/stable/4134953?seq=1#page_scan_tab_contents",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

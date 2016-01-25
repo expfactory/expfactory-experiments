@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js",
                  "experiment.js",
@@ -22,6 +22,10 @@
                         ], 
         "time":5,
         "reference": "",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

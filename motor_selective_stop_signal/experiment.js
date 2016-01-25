@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
@@ -159,14 +163,16 @@ for (i = 0; i< numblocks; i++) {
 
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -212,13 +218,15 @@ var prompt_fixation_block = {
 /* Initialize 'feedback text' and set up feedback blocks */
 var practice_feedback_text = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   cont_key: [13],
   text: getPracticeFeedback
 };
 
 var test_feedback_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 120000,
   cont_key: [13],
   text: getTestFeedback
 };
@@ -369,7 +377,7 @@ var practice_node = {
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
         if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh && successful_stops < stop_thresh){
             // end the loop
-			practice_feedback_text += '</p><p class = block-text>Done with practice. We will now begin the ' + numconditions*numblocks + ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
+			practice_feedback_text += '</p><p class = block-text>Done with practice. We will now begin the ' + numblocks + ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
             return false;
         } else {
         	//rerandomize stim and stop_trial order

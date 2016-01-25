@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
@@ -26,7 +26,11 @@
                         ], 
         "time":45,
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": false,
+                                        "display_element": "getDisplayElement"}
+                       }  
     
    }
 ]

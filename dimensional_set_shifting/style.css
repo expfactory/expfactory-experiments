@@ -1,12 +1,41 @@
-.jspsych-instructions-nav {
-  transform: translate(-100%, 0%);
-  width: 300px;
-  height: 14vw;
+.display_stage {
+    position: fixed;
+    background: #900;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    background-color: black;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
 }
+
+.betweenStimBox {
+  width: 50vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.center-text {
+  height: 10vh;
+  text-align:center;
+  font-size: 40px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 
 .topbox {
   width: 26vw;
-  height: 12vw;
+  height: 20vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -20,7 +49,7 @@
 
 .bottombox {
   width: 26vw;
-  height: 12vw;
+  height: 20vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -35,7 +64,7 @@
 
 .leftbox {
   width: 26vw;
-  height: 12vw;
+  height: 20vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -50,7 +79,7 @@
 
 .rightbox {
   width: 26vw;
-  height: 12vw;
+  height: 20vh;
   position:absolute;
   top:50%;
   left:50%;

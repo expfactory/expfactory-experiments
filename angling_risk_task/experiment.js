@@ -4,6 +4,11 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 function appendTextAfter(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
 	return input.slice(0,index) + new_text + input.slice(index)
@@ -320,9 +325,10 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
@@ -341,16 +347,18 @@ var instructions_block = {
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
 var round_over_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: getRoundOverText,
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
@@ -429,9 +437,10 @@ for (b = 0; b<practiceblocks.length; b++) {
 		release_rule = "the number of fish in the lake stays the same"
 	}
 	var tournament_intro_block = {
-		type: 'text',
+		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
+		timing_response: 60000,
 		data: {weather: weather, release: release},
 		on_finish: function(data) {
 			weather = data.weather
@@ -465,9 +474,10 @@ for (b = 0; b<blocks.length; b++) {
 		release_rule = "the number of fish in the lake stays the same"
 	}
 	var tournament_intro_block = {
-		type: 'text',
+		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
+		timing_response: 120000,
 		data: {weather: weather, release: release},
 		on_finish: function(data) {
 			weather = data.weather

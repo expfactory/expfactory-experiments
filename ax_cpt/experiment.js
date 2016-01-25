@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var getChar = function() {
  return '<div class = centerbox><p class = AX_text>' + chars[Math.floor(Math.random()*22)] + '</p></div>'
@@ -23,14 +27,16 @@ var blocks = [block1_list,block2_list, block3_list]
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -48,7 +54,8 @@ var instructions_block = {
 };
 
 var rest_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
   timing_post_trial: 1000
 };

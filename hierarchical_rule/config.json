@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
@@ -23,7 +23,11 @@
                         ], 
         "time":5,
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": false,
+                                        "display_element": "getDisplayElement"}
+                       }      
    }
 ]
 

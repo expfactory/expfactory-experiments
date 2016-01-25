@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "jspsych-ANT-practice.js",
@@ -24,6 +24,10 @@
                         ], 
         "time":20,
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/089892902317361886",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]
