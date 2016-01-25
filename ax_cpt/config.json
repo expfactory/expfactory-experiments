@@ -1,9 +1,10 @@
 [
     {
         "name": "AX-CPT",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
@@ -21,11 +22,13 @@
                          "Russell Poldrack"
                         ], 
         "time":20,
-        "experiment_variables": "",
         "reference": "http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]
 

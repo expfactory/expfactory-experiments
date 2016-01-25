@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
@@ -80,9 +84,10 @@ var gap = 0
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
@@ -107,30 +112,34 @@ var update_target_block = {
 }
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 0
 };
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Starting a practice block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Starting a test block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
 var start_control_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "block-text">In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  timing_response: 60000,
   timing_post_trial: 1000
 };
 
@@ -167,7 +176,7 @@ stims = []
 for (var b = 0; b < num_blocks; b++) {
 	current_trial = 0
 	var start_delay_block = {
-	  type: 'text',
+	  type: 'poldrack-text',
 	  text: getText(),
 	  cont_key: [13]
 	};

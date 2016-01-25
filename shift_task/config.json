@@ -1,9 +1,10 @@
 [
     {
         "name": "Shift Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -24,11 +25,12 @@
                         ], 
         "lab": "Poldracklab",
         "time":20,
-        "experiment_variables": "",
-        "doi": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3264902/",
-        "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

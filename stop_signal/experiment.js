@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
@@ -22,7 +26,7 @@ var getTestFeedback = function() {
 	var successful_stops = 0;
 	for(var i=0; i < data.length; i++){
 		if (data[i].trial_id == "stim") {
-			if (data[i].condition.slice(0,2) == "go") {
+			if (data[i].SS_trial_type == "go") {
 				go_length += 1
 				if (data[i].rt != -1) {
 					num_responses += 1
@@ -31,7 +35,7 @@ var getTestFeedback = function() {
 				}
 			} else {
 				stop_length +=1
-				if (data[i].rt != -1) {
+				if (data[i].rt == -1) {
 					successful_stops +=1
 				}
 			}
@@ -51,9 +55,9 @@ var getTestFeedback = function() {
     if (average_correct < accuracy_thresh) {
         test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
     }
-	if (stop_percent >= 0.75) {
+	if (stop_percent >= accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
-	} else if (stop_percent <= 0.25) {
+	} else if (stop_percent <= (1-accuracy_thresh)) {
 		test_feedback_text += '</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
 	}
 	test_feedback_text += '</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -61,13 +65,14 @@ var getTestFeedback = function() {
 }
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
-var updateSSD = function() {
+var updateSSD = function(data) {
 	jsPsych.data.addDataToLastTrial({'SSD': SSD})
-	var curr_trial = jsPsych.progress().current_trial_global
-	if (jsPsych.data.getData()[curr_trial].rt == -1 && SSD<850) {
-		SSD = SSD + 50
-	} else if (jsPsych.data.getData()[curr_trial].rt != -1 && SSD > 0) { 
-		SSD = SSD - 50
+	if (data.SS_trial_type == 'stop') {
+		if (data.rt == -1 && SSD<850) {
+			SSD = SSD + 50
+		} else if (data.rt != -1 && SSD > 0) { 
+			SSD = SSD - 50
+		}
 	}
 }
 
@@ -121,26 +126,27 @@ var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</l
 var RT_thresh = 1000
 var missed_response_thresh = 0.05
 var accuracy_thresh = 0.75
+var stop_thresh = 1
 
 var stimulus = [
 	{stimulus: '<div class = shapebox><img class = square></img></div>',
-	data: {correct_response: correct_responses[0][1], exp_id: "stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[0][1], exp_id: "stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = circle></img></div>',
-	data: {correct_response: correct_responses[1][1], exp_id: "stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[1][1], exp_id: "stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = triangle></img></div>',
-	data: {correct_response: correct_responses[2][1], exp_id: "stop_signal", trial_id: "stim"}
+	data: {correct_response: correct_responses[2][1], exp_id: "stop_signal"}
 	},
 	{stimulus: '<div class = shapebox><img class = diamond></img></div>',
-	data: {correct_response: correct_responses[3][1], exp_id: "stop_signal", trial_id: "stim"}
-	},
+	data: {correct_response: correct_responses[3][1], exp_id: "stop_signal"}
+	}
 ]
 
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var noSS_practice_list = jsPsych.randomization.repeat(stimulus,3,true)
 var practice_list = jsPsych.randomization.repeat(stimulus,5,true)
-var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
+var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10)
 
 //number of blocks per condition
 numconditions = 2
@@ -160,14 +166,16 @@ for (j = 0; j<numconditions; j++) {
 
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -176,7 +184,7 @@ var end_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p></div>',
+	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
 	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
 	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
@@ -196,18 +204,6 @@ var fixation_block = {
   timing_response: 500
 }
 
-/* prompt blocks are used during practice to show the instructions */
-var prompt_block = {
-  type: 'poldrack-single-stim',
-  stimulus: prompt_text,
-  choices: [possible_responses[0][1], possible_responses[1][1]],
-  is_html: true,
-  timing_post_trial: 0,
-  timing_stim: RT_thresh,
-  timing_response: RT_thresh,
-  response_ends_trial: false
-}
-
 var prompt_fixation_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = shapebox><div class = fixation>+</div></div>',
@@ -223,13 +219,15 @@ var prompt_fixation_block = {
 /* Initialize 'feedback text' and set up feedback blocks */
 var practice_feedback_text = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   cont_key: [13],
   text: getPracticeFeedback
 };
 
 var test_feedback_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 120000,
   cont_key: [13],
   text: getTestFeedback
 };
@@ -261,15 +259,17 @@ for (i = 0; i < noSS_practice_list.data.length; i++) {
 	  stimulus: getNoSSPracticeStim,
 	  data: getNoSSPracticeData,
 	  is_html: true,
-	  choices: [37,39],
+	  choices: [possible_responses[0][1], possible_responses[1][1]],
 	  timing_post_trial: 0,
 	  timing_stim: 850,
-	  timing_response: 850,
+	  timing_response: 1850,
 	  response_ends_trial: false,
-	  prompt: prompt_text
+	  prompt: prompt_text,
+	  on_finish: function() {
+	  	jsPsych.data.addDataToLastTrial({'trial_id': 'noSS_practice_stim'})
+	  }
 	}
 	noSS_practice_trials.push(stim_block)
-	noSS_practice_trials.push(prompt_block)
 }
 
 var noSS_practice_node = {
@@ -285,11 +285,7 @@ var noSS_practice_node = {
 					num_responses += 1
 					sum_rt += data[i].rt;
 					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
-				} else if (data[i+1].rt != -1) {
-					num_responses += 1
-					sum_rt += (850 + data[i+1].rt);
-					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
-				}
+				} 
 				go_length += 1
 			}
         }
@@ -297,7 +293,7 @@ var noSS_practice_node = {
         var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > 0.75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh){
             // end the loop
 			practice_feedback_text += '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
             return false;
@@ -312,7 +308,7 @@ var noSS_practice_node = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;
@@ -321,11 +317,11 @@ var noSS_practice_node = {
 }
 
 /* Practice block with SS */
+
 var practice_trials = []
 practice_trials.push(practice_feedback_block)
 for (i = 0; i < practice_list.data.length; i++) {
 	practice_trials.push(prompt_fixation_block)
-	var stim_data = $.extend({},practice_list.data[i])
     var stop_signal_block = {
 	  type: 'stop-signal',
 	  stimulus: getSSPracticeStim,
@@ -333,17 +329,19 @@ for (i = 0; i < practice_list.data.length; i++) {
 	  SS_trial_type: getSSPractice_trial_type,
 	  data: getSSPracticeData,
 	  is_html: true,
-	  choices: [37,39],
+	  choices: [possible_responses[0][1], possible_responses[1][1]],
 	  timing_stim: 850,
 	  timing_response: 1850,
 	  response_ends_trial: false,
 	  prompt: prompt_text,
 	  SSD: SSD,
-	  timing_SS: 500,
-	  timing_post_trial: 0   
+	  timing_SS: 250,
+	  timing_post_trial: 0,
+	  on_finish: function(data) {
+	  	jsPsych.data.addDataToLastTrial({'trial_id': 'practice_stim'})
+	  } 
     }
 	practice_trials.push(stop_signal_block)
-	practice_trials.push(prompt_block)
 } 
 
 
@@ -364,11 +362,7 @@ var practice_node = {
 					num_responses += 1
 					sum_rt += data[i].rt;
 					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
-				} else if (data[i+1].rt != -1) {
-					num_responses += 1
-					sum_rt += (850 + data[i+1].rt);
-					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
-				}
+				} 
 				go_length += 1
             } else if (data[i].SS_trial_type == "stop"){
 				stop_length +=1
@@ -380,13 +374,9 @@ var practice_node = {
         var average_rt = sum_rt / num_responses;
         var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		var stop_percent = successful_stops/stop_length
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
-        if(average_rt < RT_thresh && average_correct > 0.75 && missed_responses < 3){
+        if(average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses < missed_response_thresh && successful_stops < stop_thresh){
             // end the loop
-            if (stop_percent === 0) {
-		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
-		    }
 			practice_feedback_text += '</p><p class = block-text>Done with practice. We will now begin the ' + numconditions*numblocks + ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
             return false;
         } else {
@@ -401,9 +391,12 @@ var practice_node = {
 			if (missed_responses >= missed_response_thresh) {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
 			}
-			if (average_correct < accuracy_thresh) {
+			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
+            if (succesful_stops < stop_thresh) {
+		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
+		    }
             return true;
         }
     }
@@ -423,9 +416,9 @@ for (c = 0; c< numconditions; c++) {
 		stop_signal_exp_block = []
 		var block = blocks[b]
 		if (ss_freq == "high") {
-			var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.length/5,false)
+			var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.length/5)
 		} else {
-			var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.length/5,false)
+			var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.length/5)
 		}
 		// Loop through each trial within the block
 		for (i = 0; i < block.length; i++) {
@@ -434,25 +427,25 @@ for (c = 0; c< numconditions; c++) {
 			  type: 'stop-signal',
 			  stimulus: block.stimulus[i],
 			  SS_stimulus: stop_signal,
-			  SS_trial_type: stop_trials[i],
-			  data: stim_data,
+			  SS_trial_type: stop_trial,
+			  data: block.data[i],
 			  is_html: true,
-			  choices: [37,39],
+			  choices: [possible_responses[0][1], possible_responses[1][1]],
 			  timing_stim: 850,
 			  timing_response: 1850,
 			  response_ends_trial: false,
 			  SSD: getSSD,
 			  timing_SS: 500,
 			  timing_post_trial: 0,
-			  on_finish: function() {
-			  	updateSSD()
-			  	data.addDataToLastTrial({'condition': ss_freq}) 
+			  on_finish: function(data) {
+			  	updateSSD(data)
+			  	data.addDataToLastTrial({'condition': ss_freq, 'trial_id': 'test_stim'}) 
 			  }
 			}
 			stop_signal_exp_block.push(stop_signal_block)
 		}
 
-		stop_signal_experiment = stop_signal_experiment.concat(stop-signal_exp_block)
+		stop_signal_experiment = stop_signal_experiment.concat(stop_signal_exp_block)
 		stop_signal_experiment.push(test_feedback_block)
 	}
 	stop_signal_experiment.push(reset_block)

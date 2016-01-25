@@ -1,9 +1,12 @@
 [
     {
         "name": "Writing Task",
+        "tag": "writing_task",
+        "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-writing.js",
                 "experiment.js",
@@ -11,8 +14,6 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "writing_task",
-        "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -21,10 +22,11 @@
                          "Russell Poldrack"
                         ], 
         "time":15,
-        "experiment_variables": "",
         "reference": "",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
    }
 ]

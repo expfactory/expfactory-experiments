@@ -1,9 +1,10 @@
 [
     {
         "name": "Discount Titrate: Intertemporal Choice",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "experiment.js",
@@ -21,10 +22,11 @@
                          "Russell Poldrack"
                         ], 
         "time":10,
-        "experiment_variables": "",
         "reference": "http://www.nature.com/neuro/journal/v13/n5/extref/nn.2516-S1.pdf",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }    
    }
 ]

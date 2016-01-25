@@ -2,7 +2,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -10,7 +13,7 @@
 var experiment_len = 3
 var gap = 0
 var current_trial = 0
-var stim = '<div class = shapebox><div id = cross></div></div>'
+var stim = '<div class = "shapebox"><div id = "cross"></div></div>'
 var rts = []
 var avg_rt = 0
 var reject = false
@@ -21,7 +24,8 @@ var reject = false
 /* define static blocks */
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0

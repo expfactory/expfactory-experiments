@@ -1,11 +1,11 @@
 .titlebox {
   width:25vw;
-  height: 5vw;
+  height: 8vh;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-450%);
+  transform: translate(-50%,-500%);
   border-style: solid;
   border-color: CadetBlue;
 }
@@ -108,7 +108,7 @@
 
 .lake {
   width:60vw;
-  height: 22vw;
+  height: 40vh;
   position:absolute;
   top:50%;
   left:50%;
