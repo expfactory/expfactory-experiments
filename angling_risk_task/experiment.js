@@ -32,7 +32,7 @@ function getGame() {
 		game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', 0)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
-		$(document.body).html(game_state)
+		$('.jspsych-display-element').html(game_state)
 		if (weather == "Sunny") {
 			$('.lake').css("background-color", "LightBlue")
 		} else {
@@ -54,7 +54,7 @@ function getGame() {
 		if (release == "Keep") {
 			game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', Math.round(trip_bank/pay*100)/100)
 		}
-		$(document.body).html(game_state)
+		$('.jspsych-display-element').html(game_state)
 		if (weather == "Sunny") {
 			$('.lake').css("background-color", "LightBlue")
 		} else {
@@ -304,7 +304,7 @@ var filled_areas = [];
 
 var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div></div>" +
 "<div class = lake></div>" +
-"<div class = cooler><p class = info-text><strong>Red Fish in Cooler: </strong></p></div>" +
+"<div class = cooler><p class = info-text>&nbsp&nbsp<strong>Red Fish in Cooler: </strong></p></div>" +
 "<div class = weatherbox><div class = center-text id = weathertext></div></div>" +
 "<div class = infocontainer>" +
     "<div class = subinfocontainer>" +
