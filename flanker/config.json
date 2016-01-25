@@ -1,9 +1,10 @@
 [
     {
         "name": "Flanker Task",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -22,10 +23,11 @@
                          "Russell Poldrack"
                         ], 
         "time":6.5,
-        "experiment_variables": "",
         "reference": "link.springer.com/article/10.3758%2FBF03203267",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       } 
    }
 ]

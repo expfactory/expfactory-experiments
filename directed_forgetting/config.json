@@ -1,9 +1,10 @@
 [
     {
         "name": "Directed Forgetting Experiment",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "experiment.js",
@@ -22,10 +23,12 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "experiment_variables": "",
         "reference": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2206737/",
-        "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]

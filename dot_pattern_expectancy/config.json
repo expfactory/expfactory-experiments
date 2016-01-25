@@ -1,9 +1,10 @@
 [
     {
         "name": "Dot Pattern Expectancy",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -22,10 +23,12 @@
                          "Russell Poldrack"
                         ], 
         "time":15,
-        "experiment_variables": "",
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }   
    }
 ]

@@ -1,9 +1,10 @@
 [
     {
         "name": "Hierarchical Rule",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
@@ -21,11 +22,12 @@
                          "Russell Poldrack"
                         ], 
         "time":5,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
-        "notes":"",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": false,
+                                        "display_element": "getDisplayElement"}
+                       }      
    }
 ]
 

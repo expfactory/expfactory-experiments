@@ -1,0 +1,39 @@
+[
+    {
+        "name": "Motor-Selective-Stop-Signal",
+        "template":"jspsych",
+        "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                "experiment.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
+               ],
+        "tag": "motor_selective_stop_signal",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":30,
+        "experiment_variables": "",
+        "reference": "http://psycnet.apa.org/journals/xge/143/1/455/",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]
+

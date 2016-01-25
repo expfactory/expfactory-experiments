@@ -1,9 +1,10 @@
 [
     {
         "name": "N-Back",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
@@ -21,10 +22,8 @@
                          "Russell Poldrack"
                         ], 
         "time":16,
-        "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is  a match or not",
-        "publish":"True"
-    
+        "publish":"True"    
    }
 ]

@@ -1,9 +1,10 @@
 [
     {
         "name": "Holt Laury Task",
+        "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js",
                  "experiment.js",
@@ -21,10 +22,11 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "experiment_variables": "",
         "reference": "http://users.nber.org/~rosenbla/econ311-04/syllabus/holtlaury.pdf",
-        "notes": "",
-        "publish":"True"
-    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       } 
    }
 ]
