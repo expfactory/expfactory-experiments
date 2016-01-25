@@ -4,7 +4,7 @@
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsychs,
+                "static/js/jspsych.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
