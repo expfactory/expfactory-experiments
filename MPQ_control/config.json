@@ -1,0 +1,35 @@
+[
+    {
+        "name": "MPQ_control: Multidimensional Personality Questionnaire - Control (vs impulsiveness) Scale",
+        "template":"jspsych",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                 "experiment.js",
+                 "style.css",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
+               ],
+        "tag": "mpq_control",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0191886900000647",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]
