@@ -3,6 +3,11 @@
 /* ************************************ */
 //
 
+function getDisplayElement() {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
+
 var getStim1 = function(){
 	temp = practiceLearningStims1
 	image=temp.image
@@ -526,6 +531,7 @@ var prompt_text = '<ul list-text><li>'+shapes[1]+': '+ correct_responses[0][0] +
 var prompt_practice_text_heading1 = '<div><p><strong>This is one of the colors that you will see.</strong></p>'
 var prompt_practice_text_heading2 = '  We will take a look at all colors associated with the rules.</p><p>Press <strong>Enter</strong> to move to the next page.</div>'
 
+
 var tempText1= '  <br><br>Each time you see the <strong>'+colors[0]+' '+shapes[0]+'</strong>, you should <strong>press the space bar</strong> to earn 25 cents. You should not press nothing, as this will result in earning 0 cents.  <br><br> Press <strong>enter</strong> to continue'
 var tempText2= '  <br><br>Each time you see the <strong>'+colors[1]+' '+shapes[0]+'</strong>, you should <strong>press the space bar</strong> to lose 0 cents.  You should not press the space bar, as this will result in losing 25 cents.  <br><br> Press <strong>enter</strong> to continue'
 var tempText3= '  <br><br>Each time you see the <strong>'+colors[2]+' '+shapes[0]+'</strong>, you should <strong>do nothing</strong> to gain 25 cents.  You should  not press the space bar, as this will result in gaining 0 cents.  <br><br> Press <strong>enter</strong> to continue'
@@ -781,8 +787,8 @@ var testImagesBlock = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>This experiment is composed of 3 phases.</p></div>',
-	'<div class =centerbox><p class = block-text>Your goal for the first phase is to try to maximize your earnings by choosing to press the space bar or not based upon the presentation of 8 different colored squares.  Each of the eight colors will be rewarded according to one of the following four reward schedules:</p><p class =block-text>'+ 
+	'<div class = centerbox><p class = center-block-text>This experiment is composed of 3 phases.</p></div>',
+	'<div class =centerbox><p class = center-block-text>Your goal for the first phase is to try to maximize your earnings by choosing to press the space bar or not based upon the presentation of 8 different colored squares.  Each of the eight colors will be rewarded according to one of the following four reward schedules:</p><p class =block-text>'+ 
 	'<ul list-text><li> 1) <strong> Press space bar to gain 25 cents:</strong> Press nothing to gain 0 cents. </li><li> 2) <strong> Press space bar to lose 0 cents: </strong>Press nothing to lose 25 cents.</li><li> 3)<strong> Press nothing to gain 25 cents: </strong>Press space bar to gain 0 cents. </li><li>4) <strong> Press nothing to lose 0 cents: </strong> Press space bar to lose 25 cents</li></ul></p>'+
 	'<p class = block-text>We will go over each of these rules.</div>',
   ],
@@ -1131,10 +1137,9 @@ subjectTrialsStim1.push(rewardBlock2)
 
 }
 
-var learning_chunk1 = {
-    chunk_type: 'while',
+var learning_node1 = {
     timeline: subjectTrialsStim1,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		 return false
@@ -1144,10 +1149,9 @@ var learning_chunk1 = {
 }
 }
 
-var learning_chunk1_2 = {
-	chunk_type: 'while',
+var learning_node1_2 = {
     timeline: subjectTrialsStim1,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1176,10 +1180,9 @@ subjectTrialsStim2.push(subjectPracticeTrials2)
 subjectTrialsStim2.push(rewardBlock2)
 }
 
-var learning_chunk2 = {
-    chunk_type: 'while',
+var learning_node2 = {
     timeline: subjectTrialsStim2,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1189,10 +1192,9 @@ var learning_chunk2 = {
 }
 }
 
-var learning_chunk2_2 = {
-	chunk_type: 'while',
+var learning_node2_2 = {
     timeline: subjectTrialsStim2,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0	
 		return false
@@ -1223,10 +1225,9 @@ subjectTrialsStim3.push(rewardBlock2)
 
 }
 
-var learning_chunk3 = {
-    chunk_type: 'while',
+var learning_node3 = {
     timeline: subjectTrialsStim3,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1236,10 +1237,9 @@ var learning_chunk3 = {
 }
 }
 
-var learning_chunk3_2 = {
-	chunk_type: 'while',
+var learning_node3_2 = {
     timeline: subjectTrialsStim3,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0		
 		return false
@@ -1270,10 +1270,9 @@ subjectTrialsStim4.push(rewardBlock2)
 
 }
 
-var learning_chunk4 = {
-    chunk_type: 'while',
+var learning_node4 = {
     timeline: subjectTrialsStim4,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1283,10 +1282,9 @@ var learning_chunk4 = {
 }
 }
 
-var learning_chunk4_2 = {
-	chunk_type: 'while',
+var learning_node4_2 = {
     timeline: subjectTrialsStim4,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1318,10 +1316,9 @@ subjectTrialsStim5.push(rewardBlock2)
 
 
 }
-var learning_chunk5 = {
-    chunk_type: 'while',
+var learning_node5 = {
     timeline: subjectTrialsStim5,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1331,10 +1328,9 @@ var learning_chunk5 = {
 }
 }
 
-var learning_chunk5_2 = {
-	chunk_type: 'while',
+var learning_node5_2 = {
     timeline: subjectTrialsStim5,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1364,10 +1360,9 @@ subjectTrialsStim6.push(subjectPracticeTrials6)
 subjectTrialsStim6.push(rewardBlock2)
 
 }
-var learning_chunk6 = {
-    chunk_type: 'while',
+var learning_node6 = {
     timeline: subjectTrialsStim6,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1377,10 +1372,9 @@ var learning_chunk6 = {
 }
 }
 
-var learning_chunk6_2 = {
-	chunk_type: 'while',
+var learning_node6_2 = {
     timeline: subjectTrialsStim6,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1409,10 +1403,9 @@ subjectTrialsStim7.push(subjectPracticeTrials7)
 subjectTrialsStim7.push(rewardBlock2)
 
 }
-var learning_chunk7 = {
-    chunk_type: 'while',
+var learning_node7 = {
     timeline: subjectTrialsStim7,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1422,10 +1415,9 @@ var learning_chunk7 = {
 }
 }
 
-var learning_chunk7_2 = {
-	chunk_type: 'while',
+var learning_node7_2 = {
     timeline: subjectTrialsStim7,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1455,10 +1447,9 @@ subjectTrialsStim8.push(subjectPracticeTrials8)
 subjectTrialsStim8.push(rewardBlock2)
 
 }
-var learning_chunk8 = {
-    chunk_type: 'while',
+var learning_node8 = {
     timeline: subjectTrialsStim8,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press==32 || data[1].key_press == -1){
 		whichKey1=data[1].key_press	
 		return false
@@ -1468,10 +1459,9 @@ var learning_chunk8 = {
 }
 }
 
-var learning_chunk8_2 = {
-	chunk_type: 'while',
+var learning_node8_2 = {
     timeline: subjectTrialsStim8,
-	continue_function: function(data){
+	loop_function: function(data){
 	if(data[1].key_press!=whichKey1){
 		currTrial = 0
 		return false
@@ -1504,10 +1494,9 @@ practiceTrials.push(practiceBlock);
 practiceTrials.push(rewardBlock);
 }
 
-var learning_chunk = {
-    chunk_type: 'while',
+var learning_node = {
     timeline: practiceTrials,
-	continue_function: function(data){
+	loop_function: function(data){
 	numLearningBlocks = numLearningBlocks +1
 	var totalTrials = 0
 	var totalCorrect = 0
@@ -1567,10 +1556,9 @@ var practiceStop = {
 	practiceStopTrials.push(practiceStop)
 }
 practiceStopCount = 0
-var practiceStopChunk = {
-	chunk_type: 'while',
+var practiceStopnode = {
 	timeline: practiceStopTrials,
-	continue_function: function(data){
+	loop_function: function(data){
 	practiceStopCount = practiceStopCount +1
 	var sum_rt = 0
     var sumGo_correct = 0
@@ -1641,12 +1629,11 @@ for (i = 0; i < 1; i++) {
 
 practiceStopCount2 = 0
 
-/* Practice chunk continues repeating until the subject reaches certain criteria */
-var practice_chunk = {
-    chunk_type: 'while',
+/* Practice node continues repeating until the subject reaches certain criteria */
+var practice_node = {
     timeline: phase2_trials,
 	/* This function defines stopping criteria */
-    continue_function: function(data){
+    loop_function: function(data){
         var sum_rt = 0;
         var sumGo_correct = 0;
         var sumStop_correct = 0;
@@ -1718,12 +1705,11 @@ for (i = 0; i < 75; i++) {
 
 
 
-/* Test chunk continues through 6 blocks */
-var test_chunk = {
-    chunk_type: 'while',
+/* Test node continues through 6 blocks */
+var test_node = {
     timeline: phase3_trials,
 	/* This function defines stopping criteria */
-    continue_function: function(data){
+    loop_function: function(data){
 		var sum_rt = 0;
         var sumGo_correct = 0;
         var go_length = 0;
@@ -1832,73 +1818,73 @@ gm_paradigm_experiment.push(instructions_block)
 //practice learning associations (pre-phase 1)
 gm_paradigm_experiment.push(pre_practice_learning_block1)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk1)
-gm_paradigm_experiment.push(learning_chunk1_2)
+gm_paradigm_experiment.push(learning_node1)
+gm_paradigm_experiment.push(learning_node1_2)
 
 gm_paradigm_experiment.push(pre_practice_learning_block2)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk2)
-gm_paradigm_experiment.push(learning_chunk2_2)
+gm_paradigm_experiment.push(learning_node2)
+gm_paradigm_experiment.push(learning_node2_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block3)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk3)
-gm_paradigm_experiment.push(learning_chunk3_2)
+gm_paradigm_experiment.push(learning_node3)
+gm_paradigm_experiment.push(learning_node3_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block4)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk4)
-gm_paradigm_experiment.push(learning_chunk4_2)
+gm_paradigm_experiment.push(learning_node4)
+gm_paradigm_experiment.push(learning_node4_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block5)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk5)
-gm_paradigm_experiment.push(learning_chunk5_2)
+gm_paradigm_experiment.push(learning_node5)
+gm_paradigm_experiment.push(learning_node5_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block6)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk6)
-gm_paradigm_experiment.push(learning_chunk6_2)
+gm_paradigm_experiment.push(learning_node6)
+gm_paradigm_experiment.push(learning_node6_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block7)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk7)
-gm_paradigm_experiment.push(learning_chunk7_2)
+gm_paradigm_experiment.push(learning_node7)
+gm_paradigm_experiment.push(learning_node7_2)
 
 
 gm_paradigm_experiment.push(pre_practice_learning_block8)
 gm_paradigm_experiment.push(start_practice)
-gm_paradigm_experiment.push(learning_chunk8)
-gm_paradigm_experiment.push(learning_chunk8_2)
+gm_paradigm_experiment.push(learning_node8)
+gm_paradigm_experiment.push(learning_node8_2)
 
 //learning phase (phase 1)
 gm_paradigm_experiment.push(start_test)
-gm_paradigm_experiment.push(learning_chunk)
+gm_paradigm_experiment.push(learning_node)
 gm_paradigm_experiment.push(reset_Trial)
 gm_paradigm_experiment.push(learning_feedback_block)
 gm_paradigm_experiment.push(bonus_block)
 
 //practice stop first session (pre-phase 2)
 gm_paradigm_experiment.push(stop_intro)
-gm_paradigm_experiment.push(practiceStopChunk)
+gm_paradigm_experiment.push(practiceStopnode)
 gm_paradigm_experiment.push(practice_feedback_block);
 gm_paradigm_experiment.push(reset_Trial)
 
 //practice stop second session (pre-phase 2)
 gm_paradigm_experiment.push(stop_intro2)
-gm_paradigm_experiment.push(practice_chunk)
+gm_paradigm_experiment.push(practice_node)
 gm_paradigm_experiment.push(practice_feedback_block);
 gm_paradigm_experiment.push(reset_SSD)
 gm_paradigm_experiment.push(reset_Trial)
 
 //stopping phase (phase 2)
 gm_paradigm_experiment.push(main_stop_intro1)
-gm_paradigm_experiment.push(test_chunk)
+gm_paradigm_experiment.push(test_node)
 
 //forced choice phase (phase 3)
 gm_paradigm_experiment.push(forced_choice_intro)

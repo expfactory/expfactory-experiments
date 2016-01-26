@@ -23,7 +23,7 @@ var survey_block = {
   show_clickable_nav: true,
   allow_backward: true,
   required: [fillArray(true,45)],
-  reverse_score: [[false, true, true, false, false, true, true, true, false, true, true, true, false, false, true, true, false, false, true, true, false, true, false ,false ,true, true, false, false, true, true, false, false, true, true, false, false, true, true, true, false, true, true, false, false, true, true]],
+  reverse_score: [[false, true, true, false, false, true, true, true, false, true, true, true, false, false, true, true, false],[false, true, true, false, true, false ,false ,true, true, false, false, true, true, false, false, true, true, false, false, true, true, true, false, true, true, false, false, true, true]],
 };
 
 var urgency_premeditation_perseverance_sensation_seeking_experiment = []

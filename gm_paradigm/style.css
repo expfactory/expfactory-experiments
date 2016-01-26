@@ -48,16 +48,6 @@
   transform: translate(-50%,-50%);
 }
 
-.centerbox {
-  width:35vw;
-  height: 20vw;
-  position:absolute;
-  top:48.5%;
-  left:50%;
-  margin-right:0%;
-  transform: translate(50%,50%);
-}
-
 .shapebox {
   width: 25vw;
   height: 25vw;

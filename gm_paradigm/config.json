@@ -1,6 +1,7 @@
 [
     {
         "name": "Guitart-Masip Learning Paradigm",
+        "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
@@ -24,7 +25,11 @@
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S105381191200420X",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": false,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]
