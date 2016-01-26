@@ -45,11 +45,18 @@ var qualityCheck = function(data) {
 	avg_rt = arraySum(track_rts)/track_rts.length
 	return avg_rt
 }
-
+var getFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_text + '</p></div>'
+}
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+
+
 var start_time = new Date();
 var timelimit = 10
 
@@ -73,6 +80,17 @@ var end_block = {
   timing_post_trial: 0
 };
 
+var feedback_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+
+
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this task we want you to write. On the next page write for ' + timelimit + 'minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start.</p></div>'],
@@ -80,6 +98,30 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		console.log(sumInstructTime)
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
+
 
 /* define test block */
 var test_block = {
@@ -105,6 +147,6 @@ var loop_node = {
 /* create experiment definition array */
 var writing_task_experiment = [];
 writing_task_experiment.push(welcome_block);
-writing_task_experiment.push(instructions_block);
+writing_task_experiment.push(instruction_node);
 writing_task_experiment.push(loop_node);
 writing_task_experiment.push(end_block);

@@ -813,16 +813,6 @@ var fixationBlock = {
   timing_response: 500,
 };
 
-var fixationBlock2 = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
-  is_html: true,
-  choices: 'none',
-  data: {exp_id: "gm_paradigm", "trial_id": "fixation"},
-  timing_post_trial: 0,
-  timing_stim: 500,
-  timing_response: 500,
-};
 
 var rewardBlock = {
   type: 'poldrack-single-stim',
@@ -1189,7 +1179,7 @@ var practice_node = {
 /********************* block with SS, and ALL colors *********************/
 var phase3_trials = []
 phase3_trials.push(stop_feedback_block)
-for (i = 0; i < 75; i++) {
+for (i = 0; i < 5; i++) {
 	phase3_trials.push(fixationBlock)
 	//var stim_data = $.extend({},practice_trial_data)
     var stop_signal_block = {
@@ -1319,7 +1309,7 @@ var test_node = {
    
 var gm_paradigm_experiment=[]
 
-
+/*
 ///welcome and instructions
 gm_paradigm_experiment.push(welcome_block)
 gm_paradigm_experiment.push(instructions_block)
@@ -1347,14 +1337,16 @@ gm_paradigm_experiment.push(reset_Trial)
 //practice stop second session (pre-phase 2)
 gm_paradigm_experiment.push(stop_intro2)
 gm_paradigm_experiment.push(practice_node)
-gm_paradigm_experiment.push(practice_feedback_block);
+gm_paradigm_experiment.push(practice_feedback_block2);
 gm_paradigm_experiment.push(reset_SSD)
 gm_paradigm_experiment.push(reset_Trial)
-
+*/
 //stopping phase (phase 2)
 gm_paradigm_experiment.push(main_stop_intro1)
 gm_paradigm_experiment.push(test_node)
+gm_paradigm_experiment.push(stop_feedback_block);
 
+/*
 //forced choice phase (phase 3)
 gm_paradigm_experiment.push(forced_choice_intro)
 for(forcedChoice=0;forcedChoice<45;forcedChoice++){
@@ -1370,3 +1362,4 @@ gm_paradigm_experiment.push(forced_choice_block2)
 }
 gm_paradigm_experiment.push(bonus_block)
 gm_paradigm_experiment.push(end_block)
+*/
