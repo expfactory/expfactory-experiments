@@ -35,19 +35,11 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>"Each item of this questionnaire is a statement that a person may either agree with or disagree with.  For each item, indicate how much you agree or disagree with what the item says.  Please respond to all the items; do not leave any blank.  Choose only one response to each statement.  Please be as accurate and honest as you can be.  Respond to each item as if it were the only item.  That is, do not worry about being "consistent" in your responses." <br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Each item of this questionnaire is a statement that a person may either agree with or disagree with.  For each item, indicate how much you agree or disagree with what the item says.  Please respond to all the items; do not leave any blank.  Choose only one response to each statement.  Please be as accurate and honest as you can be.  Respond to each item as if it were the only item.  That is, do not worry about being "consistent" in your responses.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
   key_forward: 13,
   allow_backwards: false
 };
-
-function fillArray(value, len) {
-  if (len == 0) return [];
-  var a = [value];
-  while (a.length * 2 <= len) a = a.concat(a);
-  if (a.length < len) a = a.concat(a.slice(0, len - a.length));
-  return a;
-}
 
 var opts = ["Very true for me", "Somewhat true for me", "Somewhat false for me", "Very false for me"]
 
