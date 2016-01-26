@@ -52,7 +52,7 @@ var score_scale = {"Rarely/Never": 1, "Occasionally": 2, "Often": 3, "Almost Alw
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   horizontal: true,
-  preamble: '<div class = center-content><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
+  preamble: '<div><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
