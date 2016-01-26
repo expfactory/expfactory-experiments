@@ -4,13 +4,13 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
+                 "style.css",
                  "static/css/jspsych.css",
-                 "static/css/default_style.css",
-                 "style.css"
+                 "static/css/default_style.css"
                ],
         "tag": "dospert_rp",
         "cognitive_atlas_task_id": "trm_5696abecf2569",
