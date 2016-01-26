@@ -35,7 +35,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>"For each of the following statements please indicate how much each of the following statements reflects how you typically are."<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>For each of the following statements please indicate how much each of the following statements reflects how you typically are.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
   key_forward: 13,
   allow_backwards: false
