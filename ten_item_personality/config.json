@@ -1,6 +1,6 @@
 [
     {
-        "name": "Emotion Regulation Questionnaire (ERQ)",
+        "name": "Ten-item Personality Inventory",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "erq",
-        "cognitive_atlas_task_id": "",
+        "tag": "ten_item_personality",
+        "cognitive_atlas_task_id": "trm_56a919a478935",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
@@ -23,7 +23,7 @@
                         ], 
         "time":999,
         "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/psp/85/2/348/",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0092656603000461",
         "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":

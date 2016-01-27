@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "I7",
-        "cognitive_atlas_task_id": "",
+        "tag": "impulsive_venture",
+        "cognitive_atlas_task_id": "trm_56a91e3e982f9",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",

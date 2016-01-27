@@ -7,7 +7,7 @@ function getDisplayElement () {
 }
 
 function fillArray(value, len) {
-  if (len == 0) return [];
+  if (len === 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
@@ -67,8 +67,8 @@ var end_block = {
 
 
 //Set up experiment
-var ftp_experiment = []
-ftp_experiment.push(welcome_block);
-ftp_experiment.push(instructions_block);
-ftp_experiment.push(survey_block);
-ftp_experiment.push(end_block);
+var future_time_perspective_experiment = []
+future_time_perspective_experiment.push(welcome_block);
+future_time_perspective_experiment.push(instructions_block);
+future_time_perspective_experiment.push(survey_block);
+future_time_perspective_experiment.push(end_block);

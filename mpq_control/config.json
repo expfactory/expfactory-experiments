@@ -1,6 +1,6 @@
 [
     {
-        "name": "ZTPI: Zimbardo Time Perspective Inventory",
+        "name": "MPQ_control: Multidimensional Personality Questionnaire - Control (vs impulsiveness) Scale",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "ztpi",
-        "cognitive_atlas_task_id": "",
+        "tag": "mpq_control",
+        "cognitive_atlas_task_id": "trm_55a6aa62c54f8",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
@@ -23,7 +23,7 @@
                         ], 
         "time":999,
         "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/psp/77/6/1271.pdf",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0191886900000647",
         "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":

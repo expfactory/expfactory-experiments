@@ -2,14 +2,13 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
 function getDisplayElement () {
     $('<div class = display_stage_background></div>').appendTo('body')
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function fillArray(value, len) {
-  if (len == 0) return [];
+  if (len === 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
@@ -35,31 +34,31 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>For each of the following statements please indicate how much each of the following statements reflects how you typically are.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Please indicate to what degree you agree with each of the following statements.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
   key_forward: 13,
   allow_backwards: false
 };
 
-var opts = ["Not at all - 1", "2", "3", "4", "Very much - 5"]
+var opts = ["Disagree strongly","Disagree moderately","Disagree a little","Neither agree nor disagree","Agree a little","Agree moderately","Agree strongly"]
 
-var all_pages = [["I am good at resisting temptation.","I have a hard time breaking bad habits.","I am lazy.","I say inappropriate things.","I do certain things that are bad for me, if they are fun.","I refuse things that are bad for me.","I wish I had more self-discipline.","People would say that I have iron self- discipline.","Pleasure and fun sometimes keep me from getting work done.","I have trouble concentrating.","I am able to work effectively toward long-term goals.","Sometimes I can't stop myself from doing something, even if I know it is wrong.","I often act without thinking through all the alternatives."]]
+var all_pages = [["Extraverted, enthusiastic.","Critical, quarrelsome.","Dependable, self-disciplined.","Anxious, easily upset.","Open to new experiences, complex.","Reserved, quiet.","Sympathetic, warm.","Disorganized, careless.","Calm, emotionally stable.","Conventional, uncreative."]]
 
-var all_options = [fillArray(opts, 13)]
+var all_options = [fillArray(opts, 10)]
 
-var score_scale = {"Not at all - 1": 1, "2": 2, "3": 3, "4": 4, "Very much - 5": 5}
+var score_scale = {"Disagree strongly":1,"Disagree moderately":2,"Disagree a little":3,"Neither agree nor disagree":4,"Agree a little":5,"Agree moderately":6,"Agree strongly":7}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   horizontal: true,
-  preamble: '',
+  preamble: '<p><strong>I see myself as:</strong></p>',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 13)],
-  reverse_score: [[false, true, true, true, true, false, true, false, true, true, false, true, true]],
+  required: [fillArray(true, 10)],
+  reverse_score: [[false, true, false, true, false, true, false, true, false, true]]
 };
 
 var end_block = {
@@ -68,10 +67,9 @@ var end_block = {
   cont_key: [13]
 };
 
-
 //Set up experiment
-var bscs_experiment = []
-bscs_experiment.push(welcome_block);
-bscs_experiment.push(instructions_block);
-bscs_experiment.push(survey_block);
-bscs_experiment.push(end_block);
+var ten_item_personality_experiment = []
+ten_item_personality_experiment.push(welcome_block);
+ten_item_personality_experiment.push(instructions_block);
+ten_item_personality_experiment.push(survey_block);
+ten_item_personality_experiment.push(end_block);

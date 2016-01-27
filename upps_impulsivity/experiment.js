@@ -8,7 +8,7 @@ function getDisplayElement () {
 }
 
 function fillArray(value, len) {
-  if (len == 0) return [];
+  if (len === 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
@@ -69,8 +69,8 @@ var end_block = {
 
 
 //Set up experiment
-var upps_p_experiment = []
-upps_p_experiment.push(welcome_block);
-upps_p_experiment.push(instructions_block);
-upps_p_experiment.push(survey_block);
-upps_p_experiment.push(end_block);
+var upps_impulsivity_experiment = []
+upps_impulsivity_experiment.push(welcome_block);
+upps_impulsivity_experiment.push(instructions_block);
+upps_impulsivity_experiment.push(survey_block);
+upps_impulsivity_experiment.push(end_block);

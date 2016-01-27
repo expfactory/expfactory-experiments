@@ -1,6 +1,6 @@
 [
     {
-        "name": "UPPS-P Impulsivity Scale",
+        "name": "GRIT-S: Duckworth's Short Grit Scale",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "upps_p",
-        "cognitive_atlas_task_id": "",
+        "tag": "grit_scale",
+        "cognitive_atlas_task_id": "trm_56a9166421494",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
@@ -23,7 +23,7 @@
                         ], 
         "time":999,
         "experiment_variables": "",
-        "reference": "http://www1.psych.purdue.edu/~dlynam/upps+p.doc",
+        "reference": "http://www.tandfonline.com/doi/full/10.1080/00223890802634290",
         "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":

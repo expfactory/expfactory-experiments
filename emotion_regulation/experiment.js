@@ -8,7 +8,7 @@ function getDisplayElement () {
 }
 
 function fillArray(value, len) {
-  if (len == 0) return [];
+  if (len === 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
@@ -40,25 +40,25 @@ var instructions_block = {
   allow_backwards: false
 };
 
-var opts = ["Disagree strongly","Disagree moderately","Disagree a little","Neither agree nor disagree","Agree a little","Agree moderately","Agree strongly"]
+var opts = ["Strongly disagree", "Mostly disagree", "Somewhat disagree", "Neither agree or disagree", "Somewhat agree", "Mostly agree", "Strongly agree"]
 
-var all_pages = [["Extraverted, enthusiastic.","Critical, quarrelsome.","Dependable, self-disciplined.","Anxious, easily upset.","Open to new experiences, complex.","Reserved, quiet.","Sympathetic, warm.","Disorganized, careless.","Calm, emotionally stable.","Conventional, uncreative."]]
+var all_pages = [["I control my emotions by changing the way I think about the situation I am in.","When I want to feel less negative emotion, I change the way I am thinking about the situation.","When I want to feel more positive emotion, I change the way I am thinking about the situation.","When I want to feel more positive emotion (such as joy or amusement), I change what I am thinking about.","When I want to feel less negative emotion (such as sadness or anger), I change what I am thinking about.","When I am faced with a stressful situation, I make myself think about it in a way that helps me stay calm.","I control my emotions by not expressing them.","When I am feeling negative emotions, I make sure not to express them.","I keep my emotions to myself.","When I am feeling positive emotions, I am careful not to express them."]]
 
 var all_options = [fillArray(opts, 10)]
 
-var score_scale = {"Disagree strongly":1,"Disagree moderately":2,"Disagree a little":3,"Neither agree nor disagree":4,"Agree a little":5,"Agree moderately":6,"Agree strongly":7}
+var score_scale = {"Strongly disagree": 1, "Mostly disagree":2, "Somewhat disagree":3, "Neither agree or disagree":4, "Somewhat agree":5, "Mostly agree":6, "Strongly agree":7}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   horizontal: true,
-  preamble: '<p><strong>I see myself as:</strong></p>',
+  preamble: '',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
   required: [fillArray(true, 10)],
-  reverse_score: [[false, true, false, true, false, true, false, true, false, true]]
+  reverse_score: [[false, false, false, false, false, false, false, false, false, false]],
 };
 
 var end_block = {
@@ -67,9 +67,10 @@ var end_block = {
   cont_key: [13]
 };
 
+
 //Set up experiment
-var tipi_experiment = []
-tipi_experiment.push(welcome_block);
-tipi_experiment.push(instructions_block);
-tipi_experiment.push(survey_block);
-tipi_experiment.push(end_block);
+var emotion_regulation_experiment = []
+emotion_regulation_experiment.push(welcome_block);
+emotion_regulation_experiment.push(instructions_block);
+emotion_regulation_experiment.push(survey_block);
+emotion_regulation_experiment.push(end_block);

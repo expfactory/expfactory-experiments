@@ -7,7 +7,7 @@ function getDisplayElement () {
 }
 
 function fillArray(value, len) {
-  if (len == 0) return [];
+  if (len === 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
   if (a.length < len) a = a.concat(a.slice(0, len - a.length));
@@ -67,8 +67,8 @@ var end_block = {
 
 
 //Set up experiment
-var ztpi_experiment = []
-ztpi_experiment.push(welcome_block);
-ztpi_experiment.push(instructions_block);
-ztpi_experiment.push(survey_block);
-ztpi_experiment.push(end_block);
+var time_perspective_experiment = []
+time_perspective_experiment.push(welcome_block);
+time_perspective_experiment.push(instructions_block);
+time_perspective_experiment.push(survey_block);
+time_perspective_experiment.push(end_block);
