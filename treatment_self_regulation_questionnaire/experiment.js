@@ -12,7 +12,7 @@ var all_pages = [["Because I feel that I want to take responsibility for my own 
 
 var all_options = [fillArray(opts, 15)]
 
-var score_scale = {"Not at all true": 1, " ": 2, " ": 3, "Somewhat true": 4, " ": 5, " ":6,"Very True":7}
+var score_scale = {"Not at all true": 1, '': 2, '': 3, "Somewhat true": 4, '': 5, '':6,"Very True":7}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",

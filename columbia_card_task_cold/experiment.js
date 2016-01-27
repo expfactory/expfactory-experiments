@@ -52,11 +52,11 @@ var chooseButton = function(clicked_id){
 var chooseButton1 = function(clicked_id){
 	currID = parseInt(clicked_id)
 	alert('You chose '+currID+' cards. When you click on ok, the next round starts. Please note that the loss amount, the gain amount, and the number of loss cards might have changed.')		
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
