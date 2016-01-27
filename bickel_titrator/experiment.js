@@ -6,6 +6,21 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 var getStim = function() {
   var immediate_stim;
   var delayed_stim;

@@ -6,6 +6,21 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 //Polar method for generating random samples from a norma distribution.
 //Source: http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
 function normal_random(mean, variance) {

@@ -6,7 +6,20 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
-/* Append gap and current trial to data and then recalculate for next trial*/
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
 
 //this adds the trial number and which stims are shown to the data set
 var appendTestData = function() {

@@ -14,7 +14,7 @@ var post_trial_gap = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	jsPsych.data.addDataToLastTrial({ITI: gap, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
