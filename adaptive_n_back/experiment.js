@@ -55,7 +55,7 @@ var update_target = function() {
 };
 
 var getData = function() {
-	return {exp_id: "adaptive_n_back", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
+	return {exp_id: "adaptive_n_back", trial_id: "test_stim", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
 }
 
 var getText = function() {
@@ -70,10 +70,10 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 var sumInstructTime = 0    //ms
-var instructTimeThresh = 5   ///in seconds
+var instructTimeThresh = 1   ///in seconds
 
 var letters = 'bBdDgGtTvV'
-var num_blocks = 20
+var num_blocks = 1 //20
 var num_trials = 25 // per block
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
@@ -188,7 +188,7 @@ for (var i=0; i<num_trials; i++) {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
-	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
+	  data: {exp_id: "adaptive_n_back", trial_id: "control_stim", load: 0, stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,
