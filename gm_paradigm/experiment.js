@@ -131,7 +131,7 @@ var getLearningFeedback = function() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-// second phase functions
+// practice second phase functions
 
 var getPracticeFeedback = function() {
 	return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
@@ -164,23 +164,15 @@ var appendPracticeStopData = function(){
 practiceShapeArray = jsPsych.randomization.repeat([1,2,3,4],3)
 var getPracticeStopStim = function(){
 	practiceShape=practiceShapeArray.pop()
-	if(practiceShape == 1){
+	if(practiceShape == 1 || practiceShape == 2){
 	goStim = {image: preFileType+pathSource+colors[8]+'_'+shapes[practiceShape] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stimulus: colors[8]+'_'+shapes[practiceShape], correct_response: practiceStop_responses[0], condition: conditions[4]}}
 	currData= goStim.data
 	return goStim.image
-	} else if(practiceShape == 2){
-	goStim = {image: preFileType+pathSource+colors[8]+'_'+shapes[practiceShape] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stimulus: colors[8]+'_'+shapes[practiceShape], correct_response: practiceStop_responses[0], condition: conditions[4]}}
-	currData= goStim.data
-	return goStim.image
-	} else if(practiceShape == 3){
+	} else if(practiceShape == 3 || practiceShape == 4){
 	goStim = {image: preFileType+pathSource+colors[8]+'_'+shapes[practiceShape] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stimulus: colors[8]+'_'+shapes[practiceShape], correct_response: practiceStop_responses[1], condition: conditions[4]}}
 	currData= goStim.data
 	return goStim.image
-	} else if(practiceShape == 4){
-	goStim = {image: preFileType+pathSource+colors[8]+'_'+shapes[practiceShape] +fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stimulus: colors[8]+'_'+shapes[practiceShape], correct_response: practiceStop_responses[1], condition: conditions[4]}}
-	currData= goStim.data
-	return goStim.image
-	}
+	} 
 }
 
 var appendPracticeGoData = function(){
@@ -189,34 +181,33 @@ var appendPracticeGoData = function(){
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-// third phase functions
+// second phase functions
+var getSSPracticeStim3 = function() {
+	goTemp = goStimsArray.pop()
+	practice_trial_data = goTemp.data
 
+	return goTemp.image
+}
 
+var getStopSignal = function(){
+	stopTemp = stopStimsArray.pop()
+	return stopTemp.image
+}
+
+/*
 var getSSPracticeStim3 = function() {
 	tempColor = a.color.pop()
 	shape1 = tempShape.pop()
 	if(shape1==1 || shape1==2){
-		if(tempColor ===0){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[0], go_color: colors[tempColor]}}
-		} else if(tempColor==1){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[1], go_color: colors[tempColor]}}
-		} else if(tempColor==2){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[2], go_color: colors[tempColor]}}
-		} else if(tempColor==3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[3], go_color: colors[tempColor]}}
+		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
 		} else if(tempColor==8){
 		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
 		}
 	} else if (shape1==3||shape1==4){
-		if(tempColor ===0){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[0], go_color: colors[tempColor]}}
-		} else if(tempColor==1){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[1], go_color: colors[tempColor]}}
-		} else if(tempColor==2){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[2], go_color: colors[tempColor]}}
-		} else if(tempColor==3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[3], go_color: colors[tempColor]}}
-		} else if(tempColor==8){
+		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
+		}  else if(tempColor==8){
 		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
 		}
 	}
@@ -225,26 +216,13 @@ var getSSPracticeStim3 = function() {
 }
 
 
-var getSSPracticeData3 = function() {
-	return practice_trial_data
-}
+
 
 var getStopSignal = function(){
 	temp=a.stop_color.pop()
-	if(temp==4){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[0]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp==5){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[1]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp==6){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[2]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp==7){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[3]}}
+	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
+	tempCond = temp-4
+	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
 	currData= stopStim.data
 	return stopStim.image
 	} else if(temp==9){
@@ -257,6 +235,11 @@ var getStopSignal = function(){
   }
 }
 
+*/
+
+var getSSPracticeData3 = function() {
+	return practice_trial_data
+}
 
 var getSSPractice_trial_type3 = function() {
 	temp=a.trial.pop()
@@ -291,7 +274,7 @@ var updateSSDandData = function() {
 	} else if ((jsPsych.data.getData()[curr_trial].rt != -1) && (SSD > 0) && (jsPsych.data.getData()[curr_trial].SS_trial_type=='stop')) { 
 		SSD = SSD - 50
 	}
-	
+	/*
 	if ((jsPsych.data.getData()[curr_trial].key_press == jsPsych.data.getData()[curr_trial].correct_response[1]) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'go')){
 		jsPsych.data.addDataToLastTrial({go_acc: 1})
 	} else if ((jsPsych.data.getData()[curr_trial].key_press != jsPsych.data.getData()[curr_trial].correct_response[1]) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'go')){
@@ -303,7 +286,7 @@ var updateSSDandData = function() {
 		jsPsych.data.addDataToLastTrial({stop_acc: 1})
 	} else if ((jsPsych.data.getData()[curr_trial].key_press != -1) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'stop')){
 		jsPsych.data.addDataToLastTrial({stop_acc: 0})
-	}
+	} */
 }
 
 
@@ -411,6 +394,9 @@ var prompt_text = '<ul list-text><li>'+shapes[1]+': '+ correct_responses[0][0] +
 var prompt_practice_text_heading1 = '<div><p><strong>This is one of the colors that you will see.</strong></p>'
 var prompt_practice_text_heading2 = '  We will take a look at all colors associated with the rules.</p><p>Press <strong>Enter</strong> to move to the next page.</div>'
 
+stopStim= {image: preFileType+pathSource+ colors[8]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[8]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
+currData= stopStim.data
+
 
 var count = 0
 var count1 = 0
@@ -481,7 +467,7 @@ secondPhaseStims = [{image: preFileType+pathSource+ p2stim1 +fileType+postFileTy
 					{image: preFileType+pathSource+ p2stim4 +fileType+postFileType, data: {exp_id: 'gmParadigm', stimulus: p2stim4, correct_response: practiceStop_responses[1], condition: conditions[4]}}]
 
 firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, learningNumTrials/8, true);   //learningNumTrials =24, so does practiceStopNumTrials
-secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, 3, true);
+secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, 19, true);
 
 
 
@@ -512,6 +498,50 @@ tempShape.push(Math.floor(Math.random()*4+1))
 tempShape.push(Math.floor(Math.random()*4+1))
 tempShape.push(Math.floor(Math.random()*4+1))
 	
+
+stopStimsArray=[]
+goStimsArray=[]
+for(i=0;i<a.stop_color.length;i++){
+	temp=a.stop_color.pop()
+	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
+	tempCond = temp-4
+	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
+	currData= stopStim.data
+	stopStimsArray.push(stopStim)
+	} else if(temp==9){
+	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
+	currData= stopStim.data
+	stopStimsArray.push(stopStim)
+	} else if(temp=="NA"){
+	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: "", correct_response: "", stop_color_condition: ""}}
+	currData= stopStim.data
+    stopStimsArray.push(stopStim)
+    }
+}	
+for(i=0;i<a.color.length;i++){	
+	tempColor = a.color.pop()
+	shape1 = tempShape.pop()
+	if(shape1==1 || shape1==2){
+		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
+		goStimsArray.push(goStim)
+		} else if(tempColor==8){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
+		goStimsArray.push(goStim)
+
+		}
+	} else if (shape1==3||shape1==4){
+		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
+		goStimsArray.push(goStim)
+
+		}  else if(tempColor==8){
+		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
+		goStimsArray.push(goStim)
+
+		}
+	}
+}
 	
 
 var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','stop','go','go','go','go','go','go','go','go'], 1,false)
@@ -1102,7 +1132,7 @@ var practiceStopnode = {
 var phase2_trials = []
 phase2_trials.push(practice_feedback_block2)
 
-for (i = 0; i < 1; i++) { 
+for (i = 0; i < 75; i++) { 
 	phase2_trials.push(fixationBlock)
 	//var stim_data = $.extend({},secondPhaseStimsComplete.data[i])
     var stop_signal_block = {
@@ -1179,13 +1209,13 @@ var practice_node = {
 /********************* block with SS, and ALL colors *********************/
 var phase3_trials = []
 phase3_trials.push(stop_feedback_block)
-for (i = 0; i < 5; i++) {
+for (i = 0; i < 30; i++) {
 	phase3_trials.push(fixationBlock)
 	//var stim_data = $.extend({},practice_trial_data)
     var stop_signal_block = {
 	  type: 'stop-signal',
 	  stimulus: getSSPracticeStim3,
-	  SS_stimulus: getStopSignal,
+	  SS_stimulus: stop_signal,
 	  SS_trial_type: getSSPractice_trial_type3,
 	  data: getSSPracticeData3,
 	  is_html: true,
@@ -1269,7 +1299,7 @@ var test_node = {
         		stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 			currTrial =0
-			return true;
+			return false;
 		} else if(stopCount>1 && stopCount<6){
 			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < .36 || averageStop_correct > .64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
@@ -1299,7 +1329,7 @@ var test_node = {
 						tempShape.push(Math.floor(Math.random()*4+1))
 						tempShape.push(Math.floor(Math.random()*4+1))
 						currTrial =0			
-			return true;	
+			return false;	
 		}
 	}
 }
@@ -1345,6 +1375,7 @@ gm_paradigm_experiment.push(reset_Trial)
 gm_paradigm_experiment.push(main_stop_intro1)
 gm_paradigm_experiment.push(test_node)
 gm_paradigm_experiment.push(stop_feedback_block);
+//gm_paradigm_experiment.push(test_node)
 
 /*
 //forced choice phase (phase 3)
