@@ -36,8 +36,8 @@ var getFB = function() {
   }
   return token + '<div class = soldBox><div class = center-text><font color="red">SOLD!</font></div></div>'
 }
-var getFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_text + '</p></div>'
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 
 /* ************************************ */
@@ -77,17 +77,15 @@ var end_block = {
 };
 
 
-var feedback_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
-var feedback_block = {
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
-  text: getFeedback,
+  text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
 };
-
-
-
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
@@ -96,7 +94,7 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_block)
+instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
 
 var instruction_node = {
@@ -109,12 +107,11 @@ var instruction_node = {
 				sumInstructTime=sumInstructTime+rt
 			}
 		}
-		console.log(sumInstructTime)
 		if(sumInstructTime<=instructTimeThresh*1000){
-			feedback_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
 			return true
 		} else if(sumInstructTime>instructTimeThresh*1000){
-			feedback_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
 			return false
 		}
     }
