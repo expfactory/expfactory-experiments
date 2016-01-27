@@ -238,8 +238,8 @@ var reset_block = {
     type: 'call-function',
     func: function() {
     	test_block_data = []
-    	resetSSD
-    }
+    	resetSSD()
+    },
     timing_post_trial: 0
 }
 

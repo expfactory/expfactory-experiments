@@ -238,7 +238,7 @@ var test_feedback_block = {
 var reset_block = {
     type: 'call-function',
     func: function() {
-    	resetSSD
+    	resetSSD()
     	test_block_data = []
     },
     timing_post_trial: 0
