@@ -1,6 +1,6 @@
 [
     {
-        "name": "Dospert_rp: Domain Specific Risk Taking",
+        "name": "FTP: Carsten-Lang Future Time Perspective Questionnaire",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "dospert_rp",
-        "cognitive_atlas_task_id": "trm_5696abecf2569",
+        "tag": "future_time_perspective",
+        "cognitive_atlas_task_id": "trm_56a915fe77945",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
@@ -22,11 +22,14 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "experiment_variables": "",
+        "reference": "http://psych.stanford.edu/~lifespan/doc/FTP_English.pdf",
+        "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"}
                        }
+    
    }
 ]

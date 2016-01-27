@@ -1,6 +1,6 @@
 [
     {
-        "name": "Dospert_rp: Domain Specific Risk Taking",
+        "name": "UPPS-P Impulsivity Scale",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
@@ -12,8 +12,8 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "dospert_rp",
-        "cognitive_atlas_task_id": "trm_5696abecf2569",
+        "tag": "upps_impulsivity",
+        "cognitive_atlas_task_id": "trm_56a91a92043bc",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
@@ -22,11 +22,14 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "reference": "https://sites.google.com/a/decisionsciences.columbia.edu/dospert",
+        "experiment_variables": "",
+        "reference": "http://www1.psych.purdue.edu/~dlynam/upps+p.doc",
+        "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"}
                        }
+    
    }
 ]

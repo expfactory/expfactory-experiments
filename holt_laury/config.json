@@ -5,7 +5,7 @@
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-radio-buttonlist.js",
                  "experiment.js",
                  "static/css/jspsych.css",

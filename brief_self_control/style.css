@@ -5,9 +5,9 @@
 }
 
 .display_stage{
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
     align-items: center;
     -webkit-align-items: center;
@@ -16,12 +16,12 @@
 
 
 .center-content{
-	-webkit-order: 0;
+    -webkit-order: 0;
     order: 0;
 }
 
 .jspsych-survey-multi-choice-nav{
-	-webkit-order: 1;
+    -webkit-order: 1;
     order: 1;
 }
 

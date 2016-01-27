@@ -26,7 +26,7 @@
                         ], 
         "time":30,
         "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/xge/143/1/455/",
+        "reference": "http://www.jneurosci.org/content/27/14/3743.short",
         "notes": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
