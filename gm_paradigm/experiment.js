@@ -13,31 +13,31 @@ var practiceCount = 0
 var getPracticePrompt = function (){
 	if(practiceCount === 0){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount=practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	} else if (practiceCount ==1){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==2){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==3){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==4){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==5){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==6){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount= practiceCount+1
+	practiceCount = practiceCount+1
 	return temp
 	}else if (practiceCount ==7){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
@@ -1301,7 +1301,7 @@ var test_node = {
 			currTrial =0
 			return false;
 		} else if(stopCount>1 && stopCount<6){
-			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < .36 || averageStop_correct > .64){
+			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
     	   	}if (averageGo_correct<accuracy_thresh) {
     			stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
