@@ -43,7 +43,7 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  type: 'poldrack-instructions',
+  type: 'instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with a series of lottery choices. Your job is to indicate which option you would prefer for each of the ten paired lottery choices. </p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
   ],
@@ -52,7 +52,7 @@ var instructions_block = {
 };
 
 var test_block = {
-    type: 'radio-buttonlist',
+    type: 'poldrack-radio-buttonlist',
     //if you're going to add more pages make sure to add same number of elements to preamble array
     preamble: ['<p><center>Please indicate your preference between the two options for each of the ten paired lottery choices below.</center></p>'],
     // placed in array so plug in can parse correctly. 
@@ -66,7 +66,7 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 
