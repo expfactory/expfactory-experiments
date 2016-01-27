@@ -13,7 +13,7 @@ function evalAttentionChecks() {
     var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
     var checks_passed = 0
     for (var i = 0; i < attention_check_trials.length; i++) {
-      if (attention_check_trials[i].correct == true) {
+      if (attention_check_trials[i].correct === true) {
         checks_passed += 1
       }
     }
