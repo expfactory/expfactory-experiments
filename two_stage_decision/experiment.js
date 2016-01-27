@@ -329,6 +329,7 @@ var welcome_block = {
   timing_post_trial: 0
 };
 
+<<<<<<< HEAD
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
@@ -339,11 +340,19 @@ var feedback_instruct_block = {
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
+=======
+var attention_check_block = {
+	type: 'attention-check',
+	timing_response: 30000,
+	response_ends_trial: true,
+	timing_post_trial: 200
+}
+
+>>>>>>> 31c9655c1fc7a2c174dd4a1899cc71a3f202fb7f
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>On the next screen you will see an example "stage" with two shapes on colored backgrounds.</p></div>',
-	"<div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div>",
+	"<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>Below is an example 'stage' with two shapes on colored backgrounds.</p><div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div></div>",
 	'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p></div>',
 	'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and only sometimes bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
 	'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or lost on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',

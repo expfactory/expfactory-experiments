@@ -1,0 +1,35 @@
+[
+    {
+        "name": "I7: I-7 impulsiveness and venturesomeness questionnaire",
+        "template":"jspsych",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                 "experiment.js",
+                 "style.css",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
+               ],
+        "tag": "impulsive_venture",
+        "cognitive_atlas_task_id": "trm_56a91e3e982f9",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://ac.els-cdn.com/019188698590011X/1-s2.0-019188698590011X-main.pdf?_tid=ee891a2e-58a5-11e5-a532-00000aab0f6b&acdnat=1441990720_959c611bec7aa4c79e3c0b6f4680da59",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]

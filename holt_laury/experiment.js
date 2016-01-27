@@ -59,7 +59,7 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	  
 var instructions_block = {
-  type: 'poldrack-instructions',
+  type: 'instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with a series of lottery choices. Your job is to indicate which option you would prefer for each of the ten paired lottery choices. </p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
   ],
@@ -104,7 +104,7 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  cont_key: [13]
 };
 
 
