@@ -329,7 +329,14 @@ var welcome_block = {
   timing_post_trial: 0
 };
 
-<<<<<<< HEAD
+var attention_check_block = {
+	type: 'attention-check',
+	timing_response: 30000,
+	response_ends_trial: true,
+	timing_post_trial: 200
+}
+
+
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
@@ -340,15 +347,6 @@ var feedback_instruct_block = {
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
-=======
-var attention_check_block = {
-	type: 'attention-check',
-	timing_response: 30000,
-	response_ends_trial: true,
-	timing_post_trial: 200
-}
-
->>>>>>> 31c9655c1fc7a2c174dd4a1899cc71a3f202fb7f
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [

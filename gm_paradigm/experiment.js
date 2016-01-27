@@ -1301,7 +1301,7 @@ var test_node = {
 			currTrial =0
 			return false;
 		} else if(stopCount>1 && stopCount<6){
-			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < .36 || averageStop_correct > .64){
+			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
     	   	}if (averageGo_correct<accuracy_thresh) {
     			stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
