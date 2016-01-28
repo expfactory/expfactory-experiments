@@ -27,7 +27,7 @@ function fillArray(value, len) {
 
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {exp_id: "MPQ_control"}
 };
@@ -36,7 +36,7 @@ var instructions_block = {
   // type: 'instructions',
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please answer each question by clicking "True" or "False" following the questions to indicate whether they are descriptive of you and your actions. There are no right or wrong answers, and no trick questions. Work quickly and do not think too long about the exact meaning of the question.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Please answer each question by clicking "True" or "False" following the questions to indicate whether they are descriptive of you and your actions. There are no right or wrong answers, and no trick questions. Work quickly and do not think too long about the exact meaning of the question.</p></div>',
   ],
   // key_forward: 13,
   // allow_backwards: false
@@ -57,7 +57,7 @@ var score_scale = {"True":2, "False":1}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
-  survey_name: "MPQ_control",
+  exp_id: "MPQ_control",
   horizontal: true,
   preamble: '',
   pages: all_pages,
