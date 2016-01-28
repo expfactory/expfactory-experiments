@@ -269,7 +269,7 @@ var update_FB_data = function () {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.62
 
 // task specific variables
 var practice_trials_num = 10
@@ -511,6 +511,7 @@ var two_stage_decision_experiment = []
 two_stage_decision_experiment.push(welcome_block);
 two_stage_decision_experiment.push(instructions_block);
 two_stage_decision_experiment.push(start_practice_block);
+two_stage_decision_experiment.push(attention_node)
 for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
@@ -518,6 +519,7 @@ for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(change_phase_block)
 two_stage_decision_experiment.push(start_test_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
@@ -527,12 +529,15 @@ for (var i = 0; i < test_trials_num/2; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(wait_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
+	two_stage_decision_experiment.push(attention_node)
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(end_block)

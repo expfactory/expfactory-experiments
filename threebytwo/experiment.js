@@ -149,7 +149,7 @@ var appendData = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var response_keys = jsPsych.randomization.repeat([{key:77,key_name:'M'},{key:90, key_name: 'Z'}], 1, true)
@@ -331,6 +331,7 @@ for (var i = 0; i<practiceStims.length; i++) {
     threebytwo_experiment.push(practice_block);
     threebytwo_experiment.push(gap_block);
 }
+threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(start_test_block)
 for (var i = 0; i<stims.length; i++) {
     threebytwo_experiment.push(setStims_block)
@@ -339,5 +340,5 @@ for (var i = 0; i<stims.length; i++) {
     threebytwo_experiment.push(test_block);
     threebytwo_experiment.push(gap_block);
 }
-
+threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(end_block)

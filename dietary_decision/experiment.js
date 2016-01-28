@@ -302,6 +302,7 @@ if (Math.random() < 0.5) {
   for (var i = 0; i < stims.length; i++) {
     dietary_decision_experiment.push(taste_block);
   }
+  dietary_decision_experiment.push(attention_node)
 } else {
   dietary_decision_experiment.push(start_taste_block);
   for (var i = 0; i < stims.length; i++) {

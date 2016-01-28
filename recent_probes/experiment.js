@@ -177,7 +177,7 @@ var getProbe = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var num_trials = 24 // num trials per run
@@ -315,10 +315,13 @@ recent_probes_experiment.push(instructions_block);
 for (r = 0; r < num_runs; r ++ ) {
 	recent_probes_experiment.push(start_test_block);
 	for(i=0; i<num_trials; i++){
-	recent_probes_experiment.push(start_fixation_block);
-	recent_probes_experiment.push(training_block);
-	recent_probes_experiment.push(fixation_block);
-	recent_probes_experiment.push(probe_block);
-	recent_probes_experiment.push(ITI_fixation_block)
+		recent_probes_experiment.push(start_fixation_block);
+		recent_probes_experiment.push(training_block);
+		recent_probes_experiment.push(fixation_block);
+		recent_probes_experiment.push(probe_block);
+		recent_probes_experiment.push(ITI_fixation_block)
+	}
+	if ($.inArray(r,[0,2]) != -1) {
+		recent_probes_experiment.push(attention_node);
 	}
 }

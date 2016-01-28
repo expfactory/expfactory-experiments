@@ -180,4 +180,5 @@ choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);
 choice_reaction_time_experiment.push(test_block);
+choice_reaction_time_experiment.push(attention_node)
 choice_reaction_time_experiment.push(end_block)

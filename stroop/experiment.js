@@ -27,7 +27,7 @@ function evalAttentionChecks() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var congruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 82}, key_answer: 82},
@@ -145,6 +145,8 @@ for (i=0; i<practice_len; i++) {
 	}
 	stroop_experiment.push(practice_block)
 }
+stroop_experiment.push(attention_node)
+
 
 stroop_experiment.push(start_test_block)
 /* define test trials */
@@ -168,4 +170,5 @@ for (i=0; i<exp_len; i++) {
 	}
 	stroop_experiment.push(test_block)
 }
+stroop_experiment.push(attention_node)
 stroop_experiment.push(end_block)

@@ -26,7 +26,7 @@ function evalAttentionChecks() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
@@ -148,7 +148,7 @@ for (i=0; i<practice_len; i++) {
 	}
 	flanker_experiment.push(practice_block)
 }
-
+flanker_experiment.push(attention_node)
 flanker_experiment.push(start_test_block)
 
 /* define test block */
@@ -170,4 +170,5 @@ for (i=0; i<exp_len; i++) {
 	}
 	flanker_experiment.push(test_block)
 }
+flanker_experiment.push(attention_node)
 flanker_experiment.push(end_block)

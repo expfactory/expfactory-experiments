@@ -343,6 +343,7 @@ for (var i = 0; i < exp_len; i++) {
   shift_task_experiment.push(stim_block);
   shift_task_experiment.push(feedback_block);
   if (i%(Math.floor(exp_len/4)) === 0 && i !== 0) {
+  	shift_task_experiment.push(attention_node)
     shift_task_experiment.push(rest_block)
   }
 }

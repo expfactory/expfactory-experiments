@@ -128,7 +128,7 @@ var appendData = function(data, trial_id) {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var practice_len = 36
@@ -286,9 +286,11 @@ for (var i = 0; i < practice_len; i++) {
   psychological_refractory_period_experiment.push(practice_block);
   psychological_refractory_period_experiment.push(feedback_block);
 }
+psychological_refractory_period_experiment.push(attention_node);
 psychological_refractory_period_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
   psychological_refractory_period_experiment.push(fixation_block);
   psychological_refractory_period_experiment.push(test_block)
 }
+psychological_refractory_period_experiment.push(attention_node);
 psychological_refractory_period_experiment.push(end_block);

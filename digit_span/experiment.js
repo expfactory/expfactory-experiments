@@ -283,6 +283,7 @@ var digit_span_experiment = [];
 digit_span_experiment.push(welcome_block);
 digit_span_experiment.push(instructions_block);
 digit_span_experiment.push(forward_node)
+digit_span_experiment.push(attention_node)
 digit_span_experiment.push(start_reverse_block)
 digit_span_experiment.push(reverse_node)
 digit_span_experiment.push(end_block)

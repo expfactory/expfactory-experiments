@@ -329,5 +329,6 @@ directed_forgetting_experiment.push(start_test_block);
 		directed_forgetting_experiment.push(probe_block);
 		directed_forgetting_experiment.push(ITI_fixation_block);
 	}
+	directed_forgetting_experiment.push(attention_node)
 }
 directed_forgetting_experiment.push(end_block);

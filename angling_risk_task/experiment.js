@@ -293,7 +293,7 @@ function place_fish() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var num_practice_rounds = 2
@@ -523,6 +523,9 @@ for (b = 0; b<blocks.length; b++) {
 	for (i=0; i <num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)
+	}
+	if ($.inArray(b,[0,2]) != -1) {
+		angling_risk_task_experiment.push(attention_node)
 	}
 }
 angling_risk_task_experiment.push(end_block)

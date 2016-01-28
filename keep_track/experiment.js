@@ -223,6 +223,7 @@ var response_block = {
 	data: {exp_id: 'keep_track', trial_id: 'response', condition: 'target_length_' + target.length, targets: target}
 }
 keep_track_experiment.push(response_block)
+keep_track_experiment.push(attention_node)
 keep_track_experiment.push(end_practice_block)
 
 	
@@ -276,6 +277,9 @@ for (b=0; b<blocks.length; b++) {
 		data: {exp_id: 'keep_track', trial_id: 'response', condition: 'target_length_' + target.length, targets: target}
 	}
 	keep_track_experiment.push(response_block)
+	if ($.inArray(b,[0,2]) != -1) {
+		keep_track_experiment.push(attention_node)
+	}
 }
 
 

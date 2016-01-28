@@ -80,7 +80,7 @@ getFBBar = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.4
 
 // task specific variables
 var stage1_trials = 120
@@ -164,7 +164,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
-  text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
   timing_post_trial: 1000
@@ -236,6 +236,8 @@ for (var i = 0; i < stage1_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+volatile_bandit_experiment.push(start_test_block)
 
 /*
 Following the static condition is a volatile condition where the higher probability stimulus changes
@@ -296,4 +298,6 @@ for (var i = 0; i < stage2_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+
 volatile_bandit_experiment.push(end_block)

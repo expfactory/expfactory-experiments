@@ -38,7 +38,7 @@ var appendData = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
@@ -165,7 +165,9 @@ var simon_experiment = [];
 simon_experiment.push(welcome_block);
 simon_experiment.push(instructions_block);
 simon_experiment.push(practice_block);
+simon_experiment.push(attention_node)
 simon_experiment.push(reset_block)
 simon_experiment.push(start_test_block);
 simon_experiment.push(test_block);
+simon_experiment.push(attention_node)
 simon_experiment.push(end_block)

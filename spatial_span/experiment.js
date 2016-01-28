@@ -287,6 +287,7 @@ var spatial_span_experiment = [];
 spatial_span_experiment.push(welcome_block);
 spatial_span_experiment.push(instructions_block);
 spatial_span_experiment.push(forward_node)
+spatial_span_experiment.push(attention_node)
 spatial_span_experiment.push(start_reverse_block)
 spatial_span_experiment.push(reverse_node)
 spatial_span_experiment.push(end_block)

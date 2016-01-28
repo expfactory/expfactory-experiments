@@ -11,21 +11,6 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
-function evalAttentionChecks() {
-  var check_percent = 1
-  if (run_attention_checks) {
-    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
-    var checks_passed = 0
-    for (var i = 0; i < attention_check_trials.length; i++) {
-      if (attention_check_trials[i].correct === true) {
-        checks_passed += 1
-      }
-    }
-    check_percent = checks_passed/attention_check_trials.length
-  } 
-  return check_percent
-}
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -51,21 +36,6 @@ for (var i = 0; i < highprobs.length; i++){
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-// Set up attention check node
-var attention_check_block = {
-  type: 'attention-check',
-  timing_response: 30000,
-  response_ends_trial: true,
-  timing_post_trial: 200
-}
-
-var attention_node = {
-  timeline: [attention_check_block],
-  conditional_function: function() {
-    return run_attention_checks
-  }
-}
-
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

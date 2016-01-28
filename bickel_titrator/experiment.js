@@ -177,6 +177,9 @@ for (var i = 0; i < delays.length; i++) {
     bickel_titrator_experiment.push(test_block);
   }
   bickel_titrator_experiment.push(update_delay_block);
+  if ($.inArray(i,[0,3,5]) != -1) {
+		bickel_titrator_experiment.push(attention_node)
+	}
 }
 
 bickel_titrator_experiment.push(end_block)

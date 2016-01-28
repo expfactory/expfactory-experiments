@@ -488,6 +488,9 @@ for (c = 0; c< numconditions; c++) {
 		}
 
 		stop_signal_experiment = stop_signal_experiment.concat(stop_signal_exp_block)
+		if ($.inArray(b+c,[0,4]) != -1) {
+			stop_selective_stop_signal.push(attention_node)
+		}
 		stop_signal_experiment.push(test_feedback_block)
 	}
 	stop_signal_experiment.push(reset_block)

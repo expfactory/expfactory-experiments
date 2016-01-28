@@ -332,6 +332,7 @@ for (b = 0; b < blocks.length; b ++) {
 		}
 		attention_network_task_experiment.push(last_fixation)
 	}
+	attention_network_task_experiment.push(attention_node)
 	attention_network_task_experiment.push(rest_block)
 }
 

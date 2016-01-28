@@ -26,7 +26,7 @@ function evalAttentionChecks() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 //hard coded options in the amounts and order specified in Kirby and Marakovic (1996)
@@ -157,6 +157,8 @@ kirby_experiment.push(welcome_block);
 kirby_experiment.push(instructions_block);
 kirby_experiment.push(start_practice_block);
 kirby_experiment.push(practice_block);
+kirby_experiment.push(attention_node)
 kirby_experiment.push(start_test_block);
 kirby_experiment.push(test_block);
+kirby_experiment.push(attention_node)
 kirby_experiment.push(end_block)

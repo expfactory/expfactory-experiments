@@ -239,6 +239,9 @@ for (b=0; b<block_num; b++) {
 	  response_ends_trial: false
 	};
 	tone_monitoring_experiment.push(test_tone_block)
+	if ($.inArray(b,[0,2,3]) != -1) {
+		tone_monitoring_experiment.push(attention_node)
+	}
 }
 
 tone_monitoring_experiment.push(end_block)

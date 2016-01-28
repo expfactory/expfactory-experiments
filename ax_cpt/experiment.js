@@ -196,6 +196,7 @@ for (b = 0; b< blocks.length; b++) {
 		ax_cpt_experiment.push(probe)
 		ax_cpt_experiment.push(wait_block)
 	}
+	ax_cpt_experiment.push(attention_node)
 	ax_cpt_experiment.push(rest_block)
 }
 ax_cpt_experiment.push(end_block)

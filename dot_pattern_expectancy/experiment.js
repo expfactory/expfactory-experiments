@@ -206,7 +206,7 @@ var dot_pattern_expectancy_experiment = []
 dot_pattern_expectancy_experiment.push(welcome_block);
 dot_pattern_expectancy_experiment.push(instructions_block);
 
-for (b = 0; b< 1; b++) {
+for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
 	for (i = 0; i < block.length; i++) {
 		switch (block[i]) {
@@ -239,6 +239,9 @@ for (b = 0; b< 1; b++) {
 		dot_pattern_expectancy_experiment.push(fixation_block)
 		dot_pattern_expectancy_experiment.push(probe)
 		dot_pattern_expectancy_experiment.push(feedback_block)
+	}
+	if ($.inArray(b,[0,1,3]) != -1) {
+		dot_pattern_expectancy_experiment.push(attention_node)
 	}
 	dot_pattern_expectancy_experiment.push(rest_block)
 }

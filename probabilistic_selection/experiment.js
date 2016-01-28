@@ -3,23 +3,23 @@
 /*          Define helper functions          */
 /* ***************************************** */
 function getDisplayElement () {
-    $('<div class = display_stage_background></div>').appendTo('body')
-    return $('<div class = display_stage></div>').appendTo('body')
+	$('<div class = display_stage_background></div>').appendTo('body')
+	return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function evalAttentionChecks() {
-  var check_percent = 1
-  if (run_attention_checks) {
-    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
-    var checks_passed = 0
-    for (var i = 0; i < attention_check_trials.length; i++) {
-      if (attention_check_trials[i].correct === true) {
-        checks_passed += 1
-      }
-    }
-    check_percent = checks_passed/attention_check_trials.length
-  } 
-  return check_percent
+	var check_percent = 1
+	if (run_attention_checks) {
+		var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+		var checks_passed = 0
+		for (var i = 0; i < attention_check_trials.length; i++) {
+			if (attention_check_trials[i].correct === true) {
+				checks_passed += 1
+			}
+		}
+		check_percent = checks_passed/attention_check_trials.length
+	} 
+	return check_percent
 }
 
 var getStim = function(){
@@ -52,7 +52,7 @@ var genResponses = function(stimuli){
 
 	var answers = [];
 	for (var i = 0; i < FP_trials; i++) {
-	 
+
 		if (stimuli.data[i].condition==='80_20') {
 			answers.push(answers_80_20[count1]);
 			count1=count1+1;
@@ -77,7 +77,7 @@ var genResponses = function(stimuli){
 			answers.push(answers_40_60[count6]);
 			count6=count6+1;
 		}
-	 }
+	}
 	return answers; 
 };
 
@@ -86,7 +86,7 @@ var genResponses = function(stimuli){
 /*************************************************************************/
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 
@@ -111,18 +111,18 @@ var prob40 = randomStimArray[5];
 
 /* THIS IS FOR FIRST PHASE STIMS,  randomized and counterbalanced*/
 firstPhaseStims = [{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '80_20'}},
-		{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '20_80'}},
-		{image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '70_30'}},
-		{image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '30_70'}},
-		{image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '60_40'}},
-		{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
-			data: {exp_id: 'probabilistic_selection', condition: '40_60'}}]
-			
+data: {exp_id: 'probabilistic_selection', condition: '80_20'}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
+data: {exp_id: 'probabilistic_selection', condition: '20_80'}},
+{image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
+data: {exp_id: 'probabilistic_selection', condition: '70_30'}},
+{image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
+data: {exp_id: 'probabilistic_selection', condition: '30_70'}},
+{image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
+data: {exp_id: 'probabilistic_selection', condition: '60_40'}},
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
+data: {exp_id: 'probabilistic_selection', condition: '40_60'}}]
+
 var firstPhaseStimsComplete=jsPsych.randomization.repeat(firstPhaseStims,eachComboNum,true);
 var answers = genResponses(firstPhaseStimsComplete)
 var curr_data = ''
@@ -173,38 +173,38 @@ var training_count=0;
 /* ************************************ */
 // Set up attention check node
 var attention_check_block = {
-  type: 'attention-check',
-  timing_response: 30000,
-  response_ends_trial: true,
-  timing_post_trial: 200
+	type: 'attention-check',
+	timing_response: 30000,
+	response_ends_trial: true,
+	timing_post_trial: 200
 }
 
 var attention_node = {
-  timeline: [attention_check_block],
-  conditional_function: function() {
-    return run_attention_checks
-  }
+	timeline: [attention_check_block],
+	conditional_function: function() {
+		return run_attention_checks
+	}
 }
 
 /* define static blocks */
 var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 60000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
+	type: 'poldrack-text',
+	timing_response: 60000,
+	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+	cont_key: [13],
+	timing_post_trial: 0
 };
 
 var instructions_block = {
-  type: 'poldrack-instructions',
-  pages: [
+	type: 'poldrack-instructions',
+	pages: [
 	'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
-    '<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
-    '<div class = centerbox><p class = block-text>You will get feedback during the first phase, but not during the second.</p></div>',
-  ],
-  allow_keys: false,
-  show_clickable_nav: true,
-  timing_post_trial: 1000
+	'<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
+	'<div class = centerbox><p class = block-text>You will get feedback during the first phase, but not during the second.</p></div>',
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 1000
 };
 
 var FP_block = {
@@ -212,7 +212,7 @@ var FP_block = {
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text> We will now begin Phase 1.  Press <strong>enter</strong> to begin. </p></div>',
 	cont_key: [13],
-  timing_post_trial: 1000
+	timing_post_trial: 1000
 };
 
 
@@ -238,8 +238,8 @@ for (i=0; i<6; i++) {
 
 
 
- var performance_criteria = {
-    timeline: training_trials,
+var performance_criteria = {
+	timeline: training_trials,
 	loop_function: function(data){
 		var ab_total_correct = 0;
 		var cd_total_correct = 0;
@@ -289,10 +289,10 @@ for (i=0; i<6; i++) {
 
 
 var SP_block = {
-  type: 'poldrack-text',
-  timing_response: 60000,
-  text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+	type: 'poldrack-text',
+	timing_response: 60000,
+	text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
+	cont_key: [13]
 };
 
 
@@ -305,13 +305,13 @@ var second_phase_trials = {
 	timing_stim: [1000,-1],
 	timing_response:[1000], 
 }; 
-	
+
 
 var end_block = {
-  type: 'poldrack-text',
-  timing_response: 60000,
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+	type: 'poldrack-text',
+	timing_response: 60000,
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	cont_key: [13]
 };
 
 
@@ -323,6 +323,8 @@ probabilistic_selection_experiment.push(welcome_block);
 probabilistic_selection_experiment.push(instructions_block);
 probabilistic_selection_experiment.push(FP_block);
 probabilistic_selection_experiment.push(performance_criteria);
+probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(SP_block);
 probabilistic_selection_experiment.push(second_phase_trials);
+probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(end_block);

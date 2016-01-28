@@ -234,6 +234,9 @@ for (var b = 0; b < num_blocks; b++) {
 		};
 		adaptive_n_back_experiment.push(test_block)
 	}
+	if ($.inArray(b,[4,7,15]) != -1) {
+		adaptive_n_back_experiment.push(attention_node)
+	}
 	adaptive_n_back_experiment.push(update_delay_block)
 }
 

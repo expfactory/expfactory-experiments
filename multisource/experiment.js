@@ -368,6 +368,9 @@ for (var b = 0; b < num_blocks; b++) {
 		timing_post_trial: 500
 	};
 	multisource_experiment.push(test_block)
+	if ($.inArray(b,[0,1,3]) != -1) {
+		multisource_experiment.push(attention_node)
+	}
 }
 
 multisource_experiment.push(end_block)

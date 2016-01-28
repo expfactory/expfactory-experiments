@@ -189,6 +189,7 @@ for (var d = 0; d<delays.length; d++) {
 			n_back_experiment.push(test_block)
 		}
 	}
+	n_back_experiment.push(attention_node)
 }
 if (control_before == 1) {
 	n_back_experiment.push(start_control_block)

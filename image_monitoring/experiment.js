@@ -227,6 +227,9 @@ for (b=0; b<block_num; b++) {
 	  timing_post_trial: 0
 	};
 	image_monitoring_experiment.push(test_shape_block)
+	if ($.inArray(b,[0,2,3]) != -1) {
+		image_monitoring_experiment.push(attention_node)
+	}
 }
 
 image_monitoring_experiment.push(end_block)

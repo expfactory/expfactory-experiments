@@ -72,7 +72,7 @@ var attention_node = {
 
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 1
 
 // task specific variables
 var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
@@ -166,7 +166,7 @@ var feedback_block = {
   }
 };
 
-var test_chunk = {
+var test_node = {
   timeline: [test_block, feedback_block],
   loop_function: function() {
     var elapsed = (new Date() - block_start_time)/60000
@@ -188,5 +188,6 @@ for (var i = 0; i < practice_delays.length; i++) {
   willingness_to_wait_experiment.push(feedback_block)
 }
 willingness_to_wait_experiment.push(start_test_block);
-willingness_to_wait_experiment.push(test_chunk)
+willingness_to_wait_experiment.push(test_node)
+willingness_to_wait_experiment.push(attention_node)
 willingness_to_wait_experiment.push(end_block);

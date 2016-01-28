@@ -36,7 +36,7 @@ var getFixationLength = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left arrow",37],["right arrow",39],["right arrow",39]],1)
@@ -214,6 +214,7 @@ for (i=0; i<practice_len; i++) {
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
 
 //Set up test
 antisaccade_experiment.push(begin_test_block)
@@ -272,3 +273,5 @@ for (i=0; i<exp_len; i++) {
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
+antisaccade_experiment.push(end_block)

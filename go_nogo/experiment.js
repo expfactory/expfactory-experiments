@@ -49,7 +49,7 @@ var getFeedback = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([['go',32, 'respond'],['nogo',-1, 'not respond']],1)
@@ -191,7 +191,9 @@ go_nogo_experiment.push(welcome_block);
 go_nogo_experiment.push(instructions_block);
 go_nogo_experiment.push(start_practice_block)
 go_nogo_experiment.push(practice_block);
+go_nogo_experiment.push(attention_node)
 go_nogo_experiment.push(reset_block)
 go_nogo_experiment.push(start_test_block);
 go_nogo_experiment.push(test_block);
+go_nogo_experiment.push(attention_node)
 go_nogo_experiment.push(end_block)

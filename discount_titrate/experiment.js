@@ -198,4 +198,5 @@ discount_titrate_experiment.push(start_practice_block);
 discount_titrate_experiment.push(practice_block);
 discount_titrate_experiment.push(start_test_block);
 discount_titrate_experiment.push(test_block);
+discount_titrate_experiment.push(attention_node)
 discount_titrate_experiment.push(end_block)

@@ -66,7 +66,7 @@ var getFlatData = function() {
 /* ************************************ */
 // generic task variables
 var run_attention_checks = true
-var attention_check_thresh = 0.65
+var attention_check_thresh = 0.45
 
 // task specific variables
 var exp_len = 200 //number of trials per rule-set
@@ -266,10 +266,10 @@ hierarchical_rule_experiment.push(instructions_block);
 hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks
 if (flat_first == 1){
-	hierarchical_rule_experiment.push(flat_loop_node, start_test_block, hierarchical_loop_node);
+	hierarchical_rule_experiment.push(flat_loop_node, attention_node, start_test_block, hierarchical_loop_node, attention_node);
 }
 else {
-	hierarchical_rule_experiment.push(hierarchical_loop_node, start_test_block, flat_loop_node);
+	hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, start_test_block, flat_loop_node, attention_node);
 }
 
 hierarchical_rule_experiment.push(end_block)

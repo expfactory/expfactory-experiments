@@ -198,4 +198,5 @@ local_global_experiment.push(start_practice_block);
 local_global_experiment.push(practice_block);
 local_global_experiment.push(start_test_block);
 local_global_experiment.push(test_block);
+local_global_experiment.push(attention_node)
 local_global_experiment.push(end_block);
