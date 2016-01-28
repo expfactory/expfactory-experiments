@@ -33,13 +33,10 @@ var welcome_block = {
 };
 
 var instructions_block = {
-  // type: 'instructions',
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>Please answer each question by clicking "True" or "False" following the questions to indicate whether they are descriptive of you and your actions. There are no right or wrong answers, and no trick questions. Work quickly and do not think too long about the exact meaning of the question.</p></div>',
   ],
-  // key_forward: 13,
-  // allow_backwards: false
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000,
