@@ -11,7 +11,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "volatile_bandit",
+        "exp_id": "volatile_bandit",
         "cognitive_atlas_task_id": "trm_5696b180169bd",
         "template":"jspsych",
         "contributors": [

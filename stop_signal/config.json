@@ -15,7 +15,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "stop_signal",
+        "exp_id": "stop_signal",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Ian Eisenberg",

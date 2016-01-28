@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "simon",
+        "exp_id": "simon",
         "cognitive_atlas_task_id": "tsk_4a57abb949dbb",
         "contributors": [
                          "Ian Eisenberg",

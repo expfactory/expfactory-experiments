@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "image_monitoring",
+        "exp_id": "image_monitoring",
         "cognitive_atlas_task_id": "trm_5667436296862",
         "contributors": [
                          "Ian Eisenberg",

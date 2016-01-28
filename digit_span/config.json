@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "digit_span",
+        "exp_id": "digit_span",
         "cognitive_atlas_task_id": "tsk_4a57abb949a0d",
         "contributors": [
                          "Ian Eisenberg",
