@@ -55,7 +55,7 @@ var update_target = function() {
 };
 
 var getData = function() {
-	return {exp_id: "adaptive_n_back", exp_stage: "test", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
+	return {exp_id: "adaptive_n_back", trial_id: "stim", exp_stage: "test", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
 }
 
 var getText = function() {
@@ -73,8 +73,8 @@ var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
 var letters = 'bBdDgGtTvV'
-var num_blocks = 2 //20
-var num_trials = 5 // per block  //25
+var num_blocks = 20 
+var num_trials = 25 // per block  
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
@@ -92,6 +92,7 @@ var welcome_block = {
   type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "welcome"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -100,6 +101,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {trial_id: "instructions"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -109,6 +111,7 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = "centerbox"><p class = "block-text">In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>'],
+  data: {trial_id: "instructions"},
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -139,12 +142,14 @@ var instruction_node = {
 var update_delay_block = {
 	type: 'call-function',
 	func: update_delay,
+	data: {trial_id: "update delay"},
     timing_post_trial: 0
 }
 
 var update_target_block = {
 	type: 'call-function',
 	func: update_target,
+	data: {trial_id: "update target"},
     timing_post_trial: 0
 }
 
@@ -152,6 +157,7 @@ var end_block = {
   type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "text"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -160,6 +166,7 @@ var start_practice_block = {
   type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Starting a practice block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "text"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -168,6 +175,7 @@ var start_test_block = {
   type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "center-block-text">Starting a test block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "text"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -176,6 +184,7 @@ var start_control_block = {
   type: 'poldrack-text',
   text: '<div class = "centerbox"><p class = "block-text">In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "text"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -188,7 +197,7 @@ for (var i=0; i<num_trials; i++) {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
-	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
+	  data: {exp_id: "adaptive_n_back", trial_id:"stim", exp_stage: "test", load: 0, stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,
@@ -214,6 +223,7 @@ for (var b = 0; b < num_blocks; b++) {
 	current_trial = 0
 	var start_delay_block = {
 	  type: 'poldrack-text',
+	  data: {trial_id: "text"},
 	  text: getText(),
 	  cont_key: [13]
 	};
