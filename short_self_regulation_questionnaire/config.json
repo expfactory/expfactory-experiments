@@ -13,6 +13,7 @@
                ],
         "tag": "short_self_regulation_questionnaire",
         "cognitive_atlas_task_id": "",
+        "template":"jspsych",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -24,7 +25,11 @@
         "experiment_variables": "",
         "reference": "",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       } 
     
    }
 ]

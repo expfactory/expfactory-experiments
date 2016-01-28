@@ -13,6 +13,7 @@
                ],
         "tag": "information_sampling_task",
         "cognitive_atlas_task_id": "trm_50f73d557c967",
+        "template":"jspsych",
         "contributors": [
                          "Jamie Li",
                          "Ian Eisenberg",
@@ -25,7 +26,11 @@
         "experiment_variables": "",
         "reference": "http://www.sciencedirect.com/science/article/pii/S0006322305013971",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       } 
     
    }
 ]

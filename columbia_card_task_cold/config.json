@@ -14,6 +14,7 @@
                ],
         "tag": "columbia_card_task_cold",
         "cognitive_atlas_task_id": "trm_5667492c555b7",
+        "template":"jspsych",
         "contributors": [
                          "Jamie Li",
                          "Ian Eisenberg",
@@ -26,7 +27,11 @@
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/xlm/35/3/709.pdf",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }  
     
    }
 ]

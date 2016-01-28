@@ -14,6 +14,7 @@
                ],
         "tag": "emotion_regulation",
         "cognitive_atlas_task_id": "trm_4da890594742a",
+        "template":"jspsych",
         "contributors": [
                          "Zeynep Enkavi",
                          "Ian Eisenberg",
