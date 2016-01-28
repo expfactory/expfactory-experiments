@@ -12,7 +12,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "tag": "discount_titrate",
+        "exp_id": "discount_titrate",
         "cognitive_atlas_task_id": "trm_566748c929afc",
         "contributors": [
                          "Zeynep Enkavi",

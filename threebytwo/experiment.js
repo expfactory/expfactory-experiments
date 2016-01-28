@@ -128,10 +128,15 @@ var appendData = function() {
   jsPsych.data.addDataToLastTrial({cue: curr_cue, stim: curr_stim, tasK: curr_task, task_switch: task_switch.task_switch, 
     cue_switch: task_switch.cue_switch, trial_num: trial_num})
 }
-
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 7   ///in seconds
+
 var response_keys = jsPsych.randomization.repeat([{key:77,key_name:'M'},{key:90, key_name: 'Z'}], 1, true)
 var practice_length = 100
 var test_length = 340
@@ -184,6 +189,17 @@ var welcome_block = {
   timing_post_trial: 0
 };
 
+
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the left or right arrow keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
@@ -193,7 +209,28 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
 
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 var end_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -288,7 +325,7 @@ var gap_block = {
 /* create experiment definition array */
 var threebytwo_experiment = [];
 threebytwo_experiment.push(welcome_block);
-threebytwo_experiment.push(instructions_block);
+threebytwo_experiment.push(instruction_node);
 for (var i = 0; i<practiceStims.length; i++) {
     threebytwo_experiment.push(setStims_block)
     threebytwo_experiment.push(fixation_block)

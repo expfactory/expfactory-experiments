@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "brief_self_control",
+        "exp_id": "brief_self_control",
         "cognitive_atlas_task_id": "trm_56a915461cd91",
         "contributors": [
                          "Zeynep Enkavi",

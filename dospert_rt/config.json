@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "dospert_rt",
+        "exp_id": "dospert_rt",
         "cognitive_atlas_task_id": "trm_5696abecf2569",
         "contributors": [
                          "Zeynep Enkavi",

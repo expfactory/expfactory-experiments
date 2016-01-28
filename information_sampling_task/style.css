@@ -1,0 +1,51 @@
+.square {
+   float:left;
+   position: relative;
+   width: 20%;
+   padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
+   margin: 0%;
+   overflow:none;
+    color: #fff;
+}
+
+.numbox {
+ width:35vw;
+ height: 35vw;
+ position:absolute;
+ top:2.5%;
+ left:32.5%;
+ margin-right:50%;
+ transform: translate(0%,0%);
+ background-color: black;
+}
+
+.bottomLeft {
+  width: 5vw;
+  height: 5vw;
+  position:absolute;
+  top:80%;
+  left:41.25%;
+  margin-right:-50%;
+  transform: translate(-125%,-25%);
+}
+
+.bottomRight {
+  width:5vw;
+  height: 5vw;
+  position:absolute;
+  top:80%;
+  left:61.25%;
+  margin-right:-50%;
+  transform: translate(-125%,-25%);
+}
+
+.bigbox {
+ width:100vw;
+ height: 100vh;
+ position:absolute;
+ top:0%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(0%,0%);
+ background-color: black;
+}

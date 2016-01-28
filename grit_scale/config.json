@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "grit_scale",
+        "exp_id": "grit_scale",
         "cognitive_atlas_task_id": "trm_56a9166421494",
         "contributors": [
                          "Zeynep Enkavi",

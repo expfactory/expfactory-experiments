@@ -1,0 +1,123 @@
+.bigbox1 {
+ width:100vw;
+ height: 100vh;
+ position: relative;
+ background-color: black;
+}
+
+.bigbox {
+ width:100vw;
+ height: 100vh;
+ position:absolute;
+ top:0%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(0%,0%);
+ background-color: black;
+}
+
+.goStim {
+  width:9.8vw;
+  height: 9.30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: black;
+}
+
+
+.triangleStim {
+  width:1vw;
+  height: 1vw;
+  position:absolute;
+  top:36.125%;
+  left:45%;
+  margin-right:0%;
+  transform: translate(0%,0%);
+}
+
+.stopStim {
+  width:5vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.shapebox {
+  width: 25vw;
+  height: 25vw;
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+
+.decision-left {
+  width:5vw;
+  position:absolute;
+  top:50%;
+  left:30%;
+  margin-right: 0%;
+  transform: translate(0%,-50%);
+}
+
+
+.decision-right {
+  width:5vw;
+  position:absolute;
+  top:50%;
+  left:60%;
+  margin-right: 0%;
+  transform: translate(0%,-50%);
+}
+
+
+
+
+
+.fixation-gmParadigm {
+  font-size: 150px;
+  width:3vw;
+  height: 3vw;
+  position:absolute;
+  top:51.25%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: white;
+}
+
+
+.block-text2 {
+  width:10%;
+  height 10vw;
+  top: 90%
+  left: 0%
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+	background-color: black;
+}
+
+
+img.center {
+   height: auto;
+   width: auto\9; /* ie8 */
+   position: absolute;  
+   top: 0;  
+   bottom: 0;  
+   left: 0;  
+   right: 0;  
+   margin: auto;  
+   max-height: 65%;
+}
+

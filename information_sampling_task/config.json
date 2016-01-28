@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Information Sampling Task",
+        "run": ["static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+		"experiment.js",
+   		"static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
+               ],
+        "exp_id": "information_sampling_task",
+        "cognitive_atlas_task_id": "trm_50f73d557c967",
+        "template":"jspsych",
+        "contributors": [
+                         "Jamie Li",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0006322305013971",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       } 
+    
+   }
+]

@@ -18,9 +18,17 @@ var appendData = function() {
 	current_trial = current_trial + 1
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+
 var practice_len = 5
 var experiment_len = 50
 var gap = 0
@@ -49,6 +57,16 @@ var end_block = {
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment, we are testing how fast you can respond. On each trial press the spacebar as quickly as possible <strong>after</strong> you see the large "X".</p></div>'],
@@ -56,7 +74,32 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
 
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
+
+
+
+    
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
@@ -106,7 +149,8 @@ var test_block = {
 /* create experiment definition array */
 var simple_reaction_time_experiment = [];
 simple_reaction_time_experiment.push(welcome_block);
-simple_reaction_time_experiment.push(instructions_block);
+simple_reaction_time_experiment.push(instruction_node);
+
 simple_reaction_time_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
 	simple_reaction_time_experiment.push(practice_block);

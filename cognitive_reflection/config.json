@@ -10,7 +10,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "cognitive_reflection",
+        "exp_id": "cognitive_reflection",
         "cognitive_atlas_task_id": "trm_56675359b663a",
         "contributors": ["Ian Eisenberg",
                          "Zeynep Enkavi",
