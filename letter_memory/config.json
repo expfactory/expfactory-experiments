@@ -13,7 +13,7 @@
                 "static/css/jspsych.css",
                 "static/css/default_style.css"
                ],
-        "tag": "letter_memory",
+        "exp_id": "letter_memory",
         "cognitive_atlas_task_id": "trm_5696a9cfe45b1",
         "contributors": [
                          "Ian Eisenberg",

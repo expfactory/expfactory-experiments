@@ -13,7 +13,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "tag": "directed_forgetting",
+        "exp_id": "directed_forgetting",
         "cognitive_atlas_task_id": "trm_56674c7c2fa4f",
         "contributors": [
                          "Jamie Li",

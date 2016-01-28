@@ -16,7 +16,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "angling_risk_task",
+        "exp_id": "angling_risk_task",
         "cognitive_atlas_task_id": "trm_5667488d52ccc",
         "contributors": [
                          "Ian Eisenberg",

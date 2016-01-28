@@ -14,7 +14,7 @@
                  "static/css/default_style.css",
                  "style.css"
               ],
-        "tag": "attention_network_task",
+        "exp_id": "attention_network_task",
         "cognitive_atlas_task_id": "trm_551f0857e1db8",
         "contributors": [
                          "Ian Eisenberg",

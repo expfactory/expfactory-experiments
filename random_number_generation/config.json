@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "random_number_generation",
+        "exp_id": "random_number_generation",
         "cognitive_atlas_task_id": "trm_4f2417d4a63ae",
         "contributors": [
                          "Ian Eisenberg",

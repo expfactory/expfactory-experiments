@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                 ],
-        "tag": "keep_track",
+        "exp_id": "keep_track",
         "cognitive_atlas_task_id": "trm_4c40d4054f38b",
         "contributors": [
                          "Ian Eisenberg",

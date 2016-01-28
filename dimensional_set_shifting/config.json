@@ -15,7 +15,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ], 
-        "tag": "dimensional_set_shifting",
+        "exp_id": "dimensional_set_shifting",
         "cognitive_atlas_task_id": "trm_5667476fc14dd",
         "contributors": [
                          "Ian Eisenberg",

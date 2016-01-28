@@ -21,6 +21,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -70,13 +74,12 @@ var update_target = function() {
 };
 
 var getData = function() {
-	return {exp_id: "adaptive_n_back", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
+	return {exp_id: "adaptive_n_back", trial_id: "test_stim", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
 }
 
 var getText = function() {
     return '<div class = "centerbox"><p class = "block-text">In these next blocks, you should respond when the current letter matches the letter that appeared ' + delay + ' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>'
 }
-
 
 /* ************************************ */
 /* Define experimental variables */
@@ -84,10 +87,12 @@ var getText = function() {
 // generic task variables
 var run_attention_checks = true
 var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 1   ///in seconds
 
 // task specific variables
 var letters = 'bBdDgGtTvV'
-var num_blocks = 20
+var num_blocks = 1 //20
 var num_trials = 25 // per block
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
@@ -125,6 +130,16 @@ var welcome_block = {
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = "centerbox"><p class = "block-text">In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>'],
@@ -132,6 +147,28 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var update_delay_block = {
 	type: 'call-function',
@@ -185,7 +222,7 @@ for (var i=0; i<num_trials; i++) {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
-	  data: {exp_id: "adaptive_n_back", load: 0, stim: stim, target: 't', trial_num: current_trial},
+	  data: {exp_id: "adaptive_n_back", trial_id: "control_stim", load: 0, stim: stim, target: 't', trial_num: current_trial},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,
@@ -200,7 +237,7 @@ for (var i=0; i<num_trials; i++) {
 //Set up experiment
 var adaptive_n_back_experiment = []
 adaptive_n_back_experiment.push(welcome_block);
-adaptive_n_back_experiment.push(instructions_block);
+adaptive_n_back_experiment.push(instruction_node);
 
 if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)

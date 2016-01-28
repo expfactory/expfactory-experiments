@@ -21,6 +21,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var post_trial_gap = function() {
   var curr_trial = jsPsych.progress().current_trial_global
   return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
@@ -37,6 +41,8 @@ var get_RT = function() {
 // generic task variables
 var run_attention_checks = true
 var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
 
 // task specific variables
 /* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
@@ -125,6 +131,16 @@ var end_block = {
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []	 
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -135,6 +151,28 @@ var instructions_block = {
 	show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var rest_block = {
   type: 'poldrack-text',
@@ -191,7 +229,7 @@ var double_cue = {
 /* set up ANT experiment */
 var attention_network_task_experiment = [];
 attention_network_task_experiment.push(welcome_block);
-attention_network_task_experiment.push(instructions_block);
+attention_network_task_experiment.push(instruction_node);
 
 /* set up ANT practice */
 var trial_num = 0

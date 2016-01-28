@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "spatial_span",
+        "exp_id": "spatial_span",
         "cognitive_atlas_task_id": "trm_4da86b539924c",
         "contributors": [
                          "Ian Eisenberg",

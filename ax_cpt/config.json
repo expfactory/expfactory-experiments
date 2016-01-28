@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "ax_cpt",
+        "exp_id": "ax_cpt",
         "cognitive_atlas_task_id": "trm_4c40d2a93ea15",
         "contributors": [
                          "Ian Eisenberg",

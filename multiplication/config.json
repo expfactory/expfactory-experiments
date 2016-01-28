@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "multiplication",
+        "exp_id": "multiplication",
         "cognitive_atlas_task_id": "trm_5696c2c063222",
         "contributors": [
                          "Ian Eisenberg",

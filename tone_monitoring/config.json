@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "experiment.js"
                ],
-        "tag": "tone_monitoring",
+        "exp_id": "tone_monitoring",
         "cognitive_atlas_task_id": "trm_4c8a84825c4e4",
         "contributors": [
                          "Ian Eisenberg",

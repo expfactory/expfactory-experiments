@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "dietary_decision",
+        "exp_id": "dietary_decision",
         "cognitive_atlas_task_id": "trm_56674d6aa9faf",
         "contributors": [
                          "Ian Eisenberg",

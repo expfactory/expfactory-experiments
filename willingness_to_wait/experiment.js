@@ -51,9 +51,30 @@ var getFB = function() {
   }
   return token + '<div class = soldBox><div class = center-text><font color="red">SOLD!</font></div></div>'
 }
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 /* ************************************ */
 /* Define experimental variables */
+/* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 1
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
+var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
+var token_thirty = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
+var progress_bar = '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'
+var delay = 0
+var practice_delays = [10000, 50000, 5000]
+var block_start_time = new Date();
+var total_money = 0 //in dollars
+
+/* ************************************ */
+/* Set up jsPsych blocks */
 /* ************************************ */
 // Set up attention check node
 var attention_check_block = {
@@ -70,21 +91,6 @@ var attention_node = {
   }
 }
 
-// generic task variables
-var run_attention_checks = true
-var attention_check_thresh = 1
-
-// task specific variables
-var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
-var token_thirty = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
-var progress_bar = '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'
-var delay = 0
-var practice_delays = [10000, 50000, 5000]
-var block_start_time = new Date();
-var total_money = 0 //in dollars
-/* ************************************ */
-/* Set up jsPsych blocks */
-/* ************************************ */
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -102,6 +108,17 @@ var end_block = {
   timing_post_trial: 0
 };
 
+
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'],
@@ -109,7 +126,28 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
 
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 var start_test_block = {
   type: 'poldrack-text',
@@ -182,7 +220,7 @@ var test_node = {
 /* create experiment definition array */
 var willingness_to_wait_experiment = [];
 willingness_to_wait_experiment.push(welcome_block);
-willingness_to_wait_experiment.push(instructions_block);
+willingness_to_wait_experiment.push(instruction_node);
 for (var i = 0; i < practice_delays.length; i++) {
   willingness_to_wait_experiment.push(practice_block)
   willingness_to_wait_experiment.push(feedback_block)

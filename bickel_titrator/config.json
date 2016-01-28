@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "bickel_titrator",
+        "exp_id": "bickel_titrator",
         "cognitive_atlas_task_id": "trm_5696a599bfcb6",
         "contributors": [
                          "Ian Eisenberg",

@@ -12,7 +12,7 @@
                 "static/css/jspsych.css",
                 "static/css/default_style.css"
                ],
-        "tag": "plus_minus",
+        "exp_id": "plus_minus",
         "cognitive_atlas_task_id": "trm_5696b316c220a",
         "contributors": [
                          "Ian Eisenberg",

@@ -13,7 +13,7 @@
                 "style.css"
                ],
         "template":"jspsych",
-        "tag": "tower_of_london_imagine",
+        "exp_id": "tower_of_london_imagine",
         "cognitive_atlas_task_id": "trm_5696bcf1b5c64",
 
         "contributors": [

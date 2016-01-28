@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "number_letter",
+        "exp_id": "number_letter",
         "cognitive_atlas_task_id": "trm_4c3e0a9576c3b",
         "contributors": [
                          "Ian Eisenberg",

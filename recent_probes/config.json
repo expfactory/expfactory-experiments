@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "recent_probes",
+        "exp_id": "recent_probes",
         "cognitive_atlas_task_id": "trm_56674987c8f0c",
         "contributors": [
                          "Jamie Li",

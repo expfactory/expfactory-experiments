@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "choice_reaction_time",
+        "exp_id": "choice_reaction_time",
         "cognitive_atlas_task_id": "tsk_4a57abb949934",
         "contributors": [
                          "Ian Eisenberg",

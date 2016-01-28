@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "stroop",
+        "exp_id": "stroop",
         "cognitive_atlas_task_id": "tsk_4a57abb949e27",
         "contributors": [
                          "Ian Eisenberg",

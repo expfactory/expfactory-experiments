@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "hierarchical_rule",
+        "exp_id": "hierarchical_rule",
         "cognitive_atlas_task_id": "trm_5696bb7166121",
         "contributors": [
                          "Ian Eisenberg",

@@ -1,7 +1,7 @@
 [
     {
         "name": "Writing Task",
-        "tag": "writing_task",
+        "exp_id": "writing_task",
         "cognitive_atlas_task_id": "trm_4c8a85c5c75eb",
         "template":"jspsych",
         "run": [
