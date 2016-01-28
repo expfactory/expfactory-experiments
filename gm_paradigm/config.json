@@ -14,7 +14,7 @@
                 "style.css"
                ],
         "exp_id": "gm_paradigm",
-        "cognitive_atlas_task_id": "",
+        "cognitive_atlas_task_id": "trm_569d6eef27433",
         "template":"jspsych",
         "contributors": [
                          "Ian Eisenberg",
