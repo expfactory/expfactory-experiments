@@ -347,21 +347,22 @@ return stop_length
 }
 
 var setupThirdStage = function() {
-	 exp_len = 75
-	 stop_percent = (1/3)
-	 stim_colors = [0,1,2,3,8]
-	 stims = []
+	 var exp_len = 75
+	 var stop_percent = (1/3)
+	 var stim_colors = [0,1,2,3,8]
+	 var stims = []
+	 var stim = {}
 	 var num_stims = exp_len/stim_colors.length
 		for (var c = 0; c < stim_colors.length; c++) {
 			var stop_trials = jsPsych.randomization.repeat(['stop','go','go'], num_stims/3)
 			var stop_colors = [4,5,6,7,9]
 				for (var s = 0; s< num_stims; s++) {
 					if (stop_trials[s] == 'stop') {
-						var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
+						stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
 					} else {
-						var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
+						stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
 					}
-				stims.push(stim)
+					stims.push(stim)
 				}
 		}
 
