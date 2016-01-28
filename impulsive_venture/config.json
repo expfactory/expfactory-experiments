@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "impulsive_venture",
+        "exp_id": "impulsive_venture",
         "cognitive_atlas_task_id": "trm_56a91e3e982f9",
         "contributors": [
                          "Zeynep Enkavi",

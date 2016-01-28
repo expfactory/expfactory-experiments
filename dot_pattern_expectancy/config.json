@@ -13,7 +13,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "tag": "dot_pattern_expectancy",
+        "exp_id": "dot_pattern_expectancy",
         "cognitive_atlas_task_id": "trm_515495b718cd6",
         "contributors": [
                          "Ian Eisenberg",

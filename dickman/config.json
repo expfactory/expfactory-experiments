@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "dickman",
+        "exp_id": "dickman",
         "cognitive_atlas_task_id": "trm_55a6a95f66508",
         "contributors": [
                          "Zeynep Enkavi",

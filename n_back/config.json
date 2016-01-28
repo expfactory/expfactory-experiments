@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "n_back",
+        "exp_id": "n_back",
         "cognitive_atlas_task_id": "tsk_4a57abb949bcd",
         "contributors": [
                          "Ian Eisenberg",

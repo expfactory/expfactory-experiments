@@ -14,7 +14,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "shift_task",
+        "exp_id": "shift_task",
         "cognitive_atlas_task_id": "trm_5696c3fa0061a",
         "contributors": [
                          "Ian Eisenberg",
