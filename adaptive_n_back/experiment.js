@@ -55,7 +55,7 @@ var update_target = function() {
 };
 
 var getData = function() {
-	return {exp_id: "adaptive_n_back", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
+	return {exp_id: "adaptive_n_back", exp_stage: "test", load: delay, stim: stims[current_trial], target: target, trial_num: current_trial}
 }
 
 var getText = function() {
