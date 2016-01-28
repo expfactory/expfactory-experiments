@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Ten-item Personality Inventory",
+        "template":"jspsych",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                 "experiment.js",
+                 "style.css",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
+               ],
+        "tag": "ten_item_personality",
+        "cognitive_atlas_task_id": "trm_56a919a478935",
+        "template":"jspsych",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://www.sciencedirect.com/science/article/pii/S0092656603000461",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]
