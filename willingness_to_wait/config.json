@@ -1,7 +1,7 @@
 [
     {
         "name": "Willingness to Wait",
-        "tag": "willingness_to_wait",
+        "exp_id": "willingness_to_wait",
         "cognitive_atlas_task_id": "trm_569989ef8cff4",
         "template":"jspsych",
         "run": [

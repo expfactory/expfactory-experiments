@@ -12,7 +12,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "theories_of_willpower",
+        "exp_id": "theories_of_willpower",
         "cognitive_atlas_task_id": "trm_56a91a3082c31",
         "contributors": [
                          "Zeynep Enkavi",

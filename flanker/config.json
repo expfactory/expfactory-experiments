@@ -13,7 +13,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "flanker",
+        "exp_id": "flanker",
         "cognitive_atlas_task_id": "tsk_4a57abb949a4f",
         "contributors": [
                          "Ian Eisenberg",
