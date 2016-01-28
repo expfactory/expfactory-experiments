@@ -109,9 +109,9 @@ var appendRewardData2 = function(){
 //first phase functions
 
 var getStim = function(){
-	stim = firstPhaseStimsComplete.image.pop()
-	curr_data = firstPhaseStimsComplete.data.pop()
-	curr_answer = curr_data.correct_response[1]
+	var stim = firstPhaseStimsComplete.image.pop()
+	var curr_data = firstPhaseStimsComplete.data.pop()
+	var curr_answer = curr_data.correct_response[1]
 	return stim
 }
 
