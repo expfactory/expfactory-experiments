@@ -55,6 +55,26 @@ var getFB = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+
+// task specific variables
 var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
 var token_thirty = '<div class = "wtw_token" style="background: blue; z-index: -1"><div class = token_text>30&cent;</div></div>'
 var progress_bar = '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'

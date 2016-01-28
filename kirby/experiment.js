@@ -24,7 +24,11 @@ function evalAttentionChecks() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 
+// task specific variables
 //hard coded options in the amounts and order specified in Kirby and Marakovic (1996)
 var options = {
   small_amt: [54, 55, 19, 31, 14, 47, 15, 25, 78, 40, 11, 67, 34, 27, 69, 49, 80, 24, 33, 28, 34, 25, 41, 54, 54, 22, 20],
@@ -62,6 +66,20 @@ for (var i = 0; i < stim_html.length; i++){
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 /* define static blocks */
 var welcome_block = {

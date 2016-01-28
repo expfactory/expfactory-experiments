@@ -81,7 +81,11 @@ var convertToMins = function(time) {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 
+// task specific variables
 var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year', '5 years', '25 years'])
 var choices = [37, 39]
 var curr_delay = delays.shift()
@@ -93,6 +97,21 @@ var step = 250
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

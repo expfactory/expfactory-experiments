@@ -29,8 +29,11 @@ function evalAttentionChecks() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 
-//define task variables
+// task specific variables
 var lowriskhigh = '100';
 var lowrisklow = '80';
 var highriskhigh = '190';
@@ -48,6 +51,20 @@ for (var i = 0; i < highprobs.length; i++){
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 /* define static blocks */
 var welcome_block = {

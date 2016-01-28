@@ -64,6 +64,11 @@ var getFlatData = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+
+// task specific variables
 var exp_len = 200 //number of trials per rule-set
 var flat_first = 0//  Math.floor(Math.random())
 var path_source = '/static/experiments/hierarchical_rule/images/'
@@ -122,6 +127,21 @@ instructions_grid += '</div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

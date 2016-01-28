@@ -25,6 +25,11 @@ function evalAttentionChecks() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+
+// task specific variables
 var congruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 82}, key_answer: 82},
 						   {stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 66}, key_answer: 66},
 						   {stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 71}, key_answer: 71}];
@@ -45,6 +50,21 @@ test_stims = jsPsych.randomization.repeat(stims,exp_len/12)
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
