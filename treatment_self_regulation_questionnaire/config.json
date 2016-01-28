@@ -11,8 +11,8 @@
 				"static/css/jspsych.css",
                 "static/css/default_style.css"
                ],
-        "tag": "treatment_self_regulation_questionnaire",
-        "cognitive_atlas_task_id": "",
+        "exp_id": "treatment_self_regulation_questionnaire",
+        "cognitive_atlas_task_id": "trm_56aa9833c4be2",
         "template":"jspsych",
         "contributors": [
                          "Ian Eisenberg",
