@@ -28,16 +28,22 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "MPQ_control"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  // type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>Please answer each question by clicking "True" or "False" following the questions to indicate whether they are descriptive of you and your actions. There are no right or wrong answers, and no trick questions. Work quickly and do not think too long about the exact meaning of the question.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  // key_forward: 13,
+  // allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "MPQ_control"}
 };
 
 var opts = ["True", "False"]
@@ -51,6 +57,7 @@ var score_scale = {"True":2, "False":1}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  survey_name: "MPQ_control",
   horizontal: true,
   preamble: '',
   pages: all_pages,
@@ -65,7 +72,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "MPQ_control"}
 };
 
 
