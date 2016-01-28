@@ -30,16 +30,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "dospert_rp"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>People often see some risk in situations that contain uncertainty about what the outcome or consequences will be and for which there is the possibility of negative consequences. However, riskiness is a very personal and intuitive notion, and we are interested in <strong>your gut level assessment of how risky</strong> each situation or behavior is.<br><br>For each of the following statements, please indicate <strong>how risky you perceive</strong> each situation.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>People often see some risk in situations that contain uncertainty about what the outcome or consequences will be and for which there is the possibility of negative consequences. However, riskiness is a very personal and intuitive notion, and we are interested in <strong>your gut level assessment of how risky</strong> each situation or behavior is.<br><br>For each of the following statements, please indicate <strong>how risky you perceive</strong> each situation.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "dospert_rp"}
 };
 
 var opts = ["Not at all risky", "Slightly risky", "Somewhat risky", "Moderately risky", "Risky", "Very Risky", "Extremely Risky"]
@@ -52,6 +55,7 @@ var score_scale = {"Not at all risky":1, "Slightly risky":2, "Somewhat risky":3,
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "dospert_rp",
   horizontal: true,
   preamble: '<p><strong>Please indicate how risky you perceive each situation.</strong></p>',
   pages: all_pages,
@@ -66,7 +70,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "dospert_rp"}
 };
 
 
