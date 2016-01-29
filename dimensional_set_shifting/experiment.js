@@ -41,7 +41,7 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'dimensional_set_shifting', trial_id: 'test', condition: stages[stage_counter]}
+	return {exp_id: 'dimensional_set_shifting', trial_id: 'stim', exp_stage: 'test', condition: stages[stage_counter]}
 }
 	
 var getInstructFeedback = function() {
@@ -102,6 +102,7 @@ var version2_repeat = 0
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "dimensional_set_shifting", trial_id: "welcome"},
   text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -110,6 +111,7 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "dimensional_set_shifting", trial_id: "instructions"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -119,6 +121,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "dimensional_set_shifting", trial_id: "instructions"},
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text">There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>', 
 	    instruction_stim + '<div class = betweenStimBox><div class = "white-text center-text">An example trial.</div></div>',
@@ -154,6 +157,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "dimensional_set_shifting", trial_id: "end"},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -164,7 +168,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dimensional_set_shifting", "trial_id": "fixation"},
+  data: {exp_id: "dimensional_set_shifting", trial_id: "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
   timing_response: 500
@@ -172,6 +176,7 @@ var fixation_block = {
 
 var define_simple_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_simple_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -182,6 +187,7 @@ var define_simple_stims = {
 
 var define_separate_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_separate_stims"},
 	func: function() {
 		var Dim1_stim1 = left_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = left_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -194,6 +200,7 @@ var define_separate_stims = {
 
 var define_compound_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_compound_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[0] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[1] + postfix
@@ -206,6 +213,7 @@ var define_compound_stims = {
 
 var define_ID_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_ID_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[2] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[3] + postfix
@@ -218,6 +226,7 @@ var define_ID_stims = {
 
 var define_ED_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "define_ED_stims"},
 	func: function() {
 		var Dim1_stim1 = center_prefix + Dim1_z + path + Dim1_stim[4] + postfix
 		var Dim1_stim2 = center_prefix + Dim1_z + path + Dim1_stim[5] + postfix
@@ -230,6 +239,7 @@ var define_ED_stims = {
 
 var reverse_stims = {
 	type: 'call-function',
+	data: {exp_id: "dimensional_set_shifting", trial_id: "reverse_stims"},
 	func: function() {
 		reversal = !reversal
 	},

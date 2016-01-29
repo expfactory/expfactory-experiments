@@ -154,8 +154,8 @@ var getInstructFeedback = function() {
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-var num_trials = 24 // num trials per run
-var num_runs = 3
+var num_trials = 5 // num trials per run //24
+var num_runs = 1 //6
 var experimentLength = num_trials * num_runs
 var currTrial = 0
 var stimArray = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
@@ -174,6 +174,7 @@ var fileType = '.png'
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "directed_forgetting", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -181,6 +182,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "directed_forgetting", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -190,6 +192,7 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "directed_forgetting", trial_id: "instructions"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -199,6 +202,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "directed_forgetting", trial_id: "instructions"},
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p></div>',
     '<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
@@ -236,6 +240,7 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "directed_forgetting", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -246,7 +251,7 @@ var start_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000,
@@ -258,7 +263,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "directed_forgetting", "trial_id": "fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 3000,
   timing_response: 3000,
@@ -270,7 +275,7 @@ var ITI_fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: [37,39],
-  data: {exp_id: "directed_forgetting", "trial_id": "ITI_fixation"},
+  data: {exp_id: "directed_forgetting", trial_id: "ITI_fixation", exp_stage: "test"},
   timing_post_trial: 0,
   response_ends_trial: false,
   timing_stim: 4000,
@@ -282,7 +287,7 @@ var training_block = {
   type: 'poldrack-single-stim',
   stimulus: getTrainingSet,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "test"},
+  data: {exp_id: "directed_forgetting", trial_id: "stim", exp_stage: "test"},
   choices: 'none',
   timing_post_trial: 0,
   timing_stim: 2000,
@@ -296,7 +301,7 @@ var cue_block = {
   type: 'poldrack-single-stim',
   stimulus: getCue,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "cue"},
+  data: {exp_id: "directed_forgetting", trial_id: "cue", exp_stage: "test"},
   choices: false,
   timing_post_trial: 0,
   timing_stim: 1000,
@@ -308,7 +313,7 @@ var probe_block = {
   type: 'poldrack-single-stim',
   stimulus: getProbe,
   is_html: true,
-  data: {exp_id: "directed_forgetting", trial_id: "probe"},
+  data: {exp_id: "directed_forgetting", trial_id: "probe", exp_stage: "test"},
   choices: [37,39],
   timing_post_trial: 0,
   timing_stim: 2000,

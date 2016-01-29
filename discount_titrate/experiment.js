@@ -107,6 +107,7 @@ for(var i = 0; i < options.small_amt.length; i++){
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "discount_titrate", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -116,6 +117,7 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "discount_titrate", trial_id: "instructions"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -125,6 +127,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "discount_titrate", trial_id: "instructions"},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
   ],
@@ -139,7 +142,7 @@ var instruction_node = {
     timeline: instruction_trials,
 	/* This function defines stopping criteria */
     loop_function: function(data){
-		for(i=0;i<data.length;i++){
+		for(var i=0;i<data.length;i++){
 			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
 				rt=data[i].rt
 				sumInstructTime=sumInstructTime+rt
@@ -158,13 +161,15 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "discount_titrate", trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = center-block-text>Here is a sample trial. Your choice for this trial will not be included in your bonus payment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var practice_block = {
 	type: 'poldrack-single-stim',
+	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "practice"},
 	stimuli: ["<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"],
 	is_html: true,
 	choices: ['q', 'p']
@@ -172,15 +177,17 @@ var practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "discount_titrate", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>You are now ready to begin the survey.</p><p class = center-block-text>Remember to indicate your <strong>true</strong> preferences.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 1000
 };
 
 var test_block = {
 	type: 'poldrack-single-stim',
 	stimuli: trials,
+	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "test"},
 	is_html: true,
 	choices: ['q', 'p'],
   randomize_order: true
@@ -189,8 +196,9 @@ var test_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "discount_titrate", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13,
+  cont_key: [13],
   timing_post_trial: 0
 };
 
