@@ -121,7 +121,7 @@ var instruction_node = {
     timeline: instruction_trials,
 	/* This function defines stopping criteria */
     loop_function: function(data){
-		for(i=0;i<data.length;i++){
+		for(var i = 0;i<data.length;i++){
 			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
 				rt=data[i].rt
 				sumInstructTime=sumInstructTime+rt
