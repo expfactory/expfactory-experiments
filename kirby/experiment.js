@@ -111,9 +111,9 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. One of the amounts will be available now and the other will be available in the future. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
   ],
   allow_keys: false,
-  show_clickable_nav: true,
-  //timing_post_trial: 1000
+  show_clickable_nav: true
 };
+
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
 
@@ -147,9 +147,9 @@ var start_practice_block = {
 
 var practice_block = {
   type: 'poldrack-single-stim',
-  // stimuli: ["<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20<br>today</font></center></div><div id = 'option'><center><font color='green'>$25<br>5 days</font></center></div></div></div></div>"],
   stimulus: "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20<br>today</font></center></div><div id = 'option'><center><font color='green'>$25<br>5 days</font></center></div></div></div></div>",
   is_html: true,
+  data: {'exp_id': 'kirby'},
   choices: ['q', 'p']
 };
 
@@ -166,6 +166,7 @@ var test_block = {
   //stimuli: trials,
   timeline: trials,
   is_html: true,
+  data: {'exp_id': 'kirby'},
   choices: ['q', 'p'],
   //used new feature to include choice info in recorded data
   on_finish: function(data){

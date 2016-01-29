@@ -215,6 +215,7 @@ var test_block = {
 	type: 'poldrack-single-stim',
 	stimuli: trials,
 	is_html: true,
+  data: {'exp_id': 'discount_titrate'},
 	choices: ['q', 'p'],
   randomize_order: true
 };

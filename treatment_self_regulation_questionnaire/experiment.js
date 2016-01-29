@@ -18,6 +18,7 @@ var survey_block = {
   type: "poldrack-survey-multi-choice",
   horizontal: true,
   preamble: "Answer the questions",
+  exp_id: "treatment_self_regulation_questionnaire",
   pages: all_pages,
   options: all_options,
   scale: score_scale,

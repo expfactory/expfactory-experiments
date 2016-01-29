@@ -98,6 +98,7 @@ var test_block = {
     // placed in array so plug in can parse correctly. 
     // each element of array should be the buttonlist for a page.
     buttonlist: [buttonlist],
+    data: {'exp_id': 'holt_laury'},
     checkAll: [true],
     numq: [10]
 };

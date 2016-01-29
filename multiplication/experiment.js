@@ -118,6 +118,7 @@ var end_block = {
 var largeStep_block = {
     type: 'single-stim-button',
     stimulus: getStim,
+    data: {'exp_id': 'multiplication'},
     button_class: 'submitButton',
     timing_stim: get_response_time,
     timing_response: get_response_time,
@@ -140,6 +141,7 @@ var smallStep_block = {
     type: 'single-stim-button',
     stimulus: getStim,
     button_class: 'submitButton',
+    data: {'exp_id': 'multiplication'},
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
@@ -162,6 +164,7 @@ var fatigue_block = {
     type: 'single-stim-button',
     stimulus: getStim,
     button_class: 'submitButton',
+    data: {'exp_id': 'multiplication'},
     timing_stim: get_response_time,
     timing_response: get_response_time,
     response_ends_trial: false,
