@@ -285,8 +285,8 @@ var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
 //Task variables
-var num_practice_rounds = 1 //2
-var num_rounds = 2 //30
+var num_practice_rounds = 2
+var num_rounds = 30
 var red_fish_num = 0
 var total_fish_num = 0
 var start_fish_num = 0

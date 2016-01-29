@@ -77,8 +77,8 @@ var masks = [
 ]
 
 
-practice_len = 3//22
-exp_len = 5//90
+practice_len = 22
+exp_len = 90
 //0 = right, 1 = left
 practice_cue_sides = jsPsych.randomization.repeat([0,1],practice_len/2,false)
 test_cue_sides = jsPsych.randomization.repeat([0,1],exp_len/2,false)
@@ -147,7 +147,7 @@ var begin_practice_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: "antisaccade", trial_id: "practice_intro", exp_stage: "practice"},
+  data: {exp_id: "antisaccade", trial_id: "practice_intro"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -156,7 +156,7 @@ var begin_test_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: "antisaccade", trial_id: "test_intro", exp_stage: "test"},
+  data: {exp_id: "antisaccade", trial_id: "test_intro"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
