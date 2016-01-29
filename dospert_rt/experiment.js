@@ -30,16 +30,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "dospert_rt"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>For each of the following statements, please indicate the <strong>likelihood</strong> that you would engage in the described activity or behavior if you were to find yourself in that situation.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "dospert_rt"}
 };
 
 var opts = ["Extremely Unlikely", "Moderately Unlikely", "Somewhat Unlikely", "Not Sure", "Somewhat Likely", "Moderately Likely", "Extremely Likely"]
@@ -52,6 +55,7 @@ var score_scale = {"Extremely Unlikely":1, "Moderately Unlikely":2, "Somewhat Un
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "dospert_rt",
   horizontal: true,
   preamble: '<p><strong>Please indicate the likelihood that you would engage in the described activity or behavior if you were to find yourself in that situation.</strong></p>',
   pages: all_pages,
@@ -67,7 +71,8 @@ var end_block = {
   type: 'text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "dospert_rt"}
 };
 
 
