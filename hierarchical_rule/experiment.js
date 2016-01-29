@@ -76,7 +76,7 @@ for (var c=0; c < colors.length; c++) {
 		for (var o = 0; o < orientations.length; o++) {
 			if (c < colors.length/2) {
 				flat_stims.push({stimulus: stim_prefix + path_source + stims[s] + orientations[o] + '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
-					data: {stim: stims[s], orientation: orientations[o], border: colors[c], correct_response: random_correct.pop()}})
+					data: {stim: stims[s], orientation: orientations[o], border: colors[c], exp_stage: "test", correct_response: random_correct.pop()}})
 			} else {
 				if (c ==2) {
 					correct_response = choices[s-1]
@@ -84,7 +84,7 @@ for (var c=0; c < colors.length; c++) {
 					correct_response = choices[o-1]
 				}
 				hierarchical_stims.push({stimulus: stim_prefix + path_source + stims[s + (stims.length/2)] + orientations[o] + '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
-					data: {stim: stims[s + (stims.length/2)], orientation: orientations[o], border: colors[c], correct_response: correct_response}})
+					data: {stim: stims[s + (stims.length/2)], orientation: orientations[o], exp_stage: "test", border: colors[c], correct_response: correct_response}})
 			}
 		}
 	}
@@ -116,6 +116,7 @@ instructions_grid += '</div>'
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "hierarchical_rule", trial_id: "welcome"},
   text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -125,6 +126,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "hierarchical_rule", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -133,6 +135,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	 
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "hierarchical_rule", trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = "white-text block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "white-text block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     	instructions_grid,
@@ -167,6 +170,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "hierarchical_rule", trial_id: "end"},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -175,6 +179,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "hierarchical_rule", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = "white-text center-block-text">We will now start the test.</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -186,7 +191,7 @@ var fixation_block = {
   stimulus: prompt_prefix + path_source + 'FIX.png' + ' style:"z-index: -1"' + postfix,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "hierarchical_rule", "trial_id": "feedback"},
+  data: {exp_id: "hierarchical_rule", trial_id: "fixation", exp_stage: "test"},
   response_ends_trial: false,
   timing_post_trial: 0,
   timing_stim: -1,
@@ -198,7 +203,7 @@ var feedback_block = {
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "hierarchical_rule", "trial_id": "feedback"},
+  data: {exp_id: "hierarchical_rule", trial_id: "feedback", exp_stage: "test"},
   response_ends_trial: false,
   timing_post_trial: 0,
   timing_stim: 1000,
@@ -218,7 +223,7 @@ var flat_stim_block = {
 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
 	  timing_post_trial: 0,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "flat_stim"})
+	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", trial_id: "flat_stim", exp_stage: "test"})
 	  }
 }
 
@@ -234,7 +239,7 @@ var hierarchical_stim_block = {
 	  prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
 	  timing_post_trial: 0,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", "trial_id": "hierarchical_stim"})
+	  	jsPsych.data.addDataToLastTrial({exp_id: "hierarchical_rule", trial_id: "hierarchical_stim", exp_stage: "test"})
 	  }
 }
 
