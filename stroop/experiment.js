@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'stroop'})
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */

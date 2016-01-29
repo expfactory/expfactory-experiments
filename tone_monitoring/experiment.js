@@ -9,6 +9,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tone_monitoring'})
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]

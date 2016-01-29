@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
+}
+
 var getStim = function(){
 	stim = firstPhaseStimsComplete.image.pop()
 	curr_data = firstPhaseStimsComplete.data.pop()

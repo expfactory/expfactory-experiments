@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'spatial_span'})
+}
+
 var arraysEqual = function(arr1, arr2) {
     if(arr1.length !== arr2.length)
         return false;

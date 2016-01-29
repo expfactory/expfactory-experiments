@@ -24,6 +24,10 @@
         "time":16,
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is  a match or not",
-        "publish":"True"    
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}    
    }
 ]

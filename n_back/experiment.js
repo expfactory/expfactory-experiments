@@ -8,6 +8,9 @@ a match or not
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tone_monitoring'})
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))

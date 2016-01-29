@@ -6,6 +6,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'recent_probes'})
+}
+
 /* Append gap and current trial to data and then recalculate for next trial*/
 
 //this adds the trial number and which stims are shown to the data set

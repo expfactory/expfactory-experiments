@@ -8,6 +8,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'volatile_bandit'})
+}
+
 var text_insert = function(text, index, insert_value) {
 	text = text.slice(0, index) + insert_value + text.slice(index);
 	return text

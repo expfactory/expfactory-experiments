@@ -6,6 +6,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'two_stage_decision'})
+}
+
 //Polar method for generating random samples from a norma distribution.
 //Source: http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
 function normal_random(mean, variance) {

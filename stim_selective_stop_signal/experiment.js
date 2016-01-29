@@ -6,6 +6,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'stim_selective_stop_signal'})
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]

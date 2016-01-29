@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tower_off_london'})
+}
+
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', problems[problem_i])
