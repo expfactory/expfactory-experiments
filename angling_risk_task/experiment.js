@@ -98,7 +98,8 @@ function get_data() {
 		FB = 0
 	}
 	return {exp_id: "angling_risk_task",
-			trial_id: "test",
+			exp_stage: "test",
+			trial_id: "stim",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
 			FB: FB,
@@ -118,7 +119,8 @@ function get_practice_data() {
 		FB = 0
 	}
 	return {exp_id: "angling_risk_task",
-			trial_id: "practice",
+			exp_stage: "practice",
+			trial_id: "stim",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
 			FB: FB,
@@ -371,6 +373,7 @@ var welcome_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "welcome"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -379,6 +382,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {trial_id: "instructions"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -395,6 +399,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>',
   ],
   allow_keys: false,
+  data: {trial_id: "instructions"},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
@@ -425,6 +430,7 @@ var end_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {trial_id: "end block"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -434,16 +440,19 @@ var round_over_block = {
   text: getRoundOverText,
   cont_key: [13],
   timing_response: 60000,
-  timing_post_trial: 0
+  data: {trial_id: "round over"},
+  timing_post_trial: 0,
 };
 
 var ask_fish_block = {
 		type: 'survey-text',
-		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]]
+		data: {trial_id: "ask fish"},
+		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]],
 }
 
 var set_fish_block = {
 	type: 'call-function',
+	data: {trial_id: "set fish"},
 	func: function() {
 		var last_data = jsPsych.data.getData().slice(-1)[0]
 		var last_response = parseInt(last_data.responses.slice(7,10))
@@ -452,7 +461,7 @@ var set_fish_block = {
 			start_fish_num = Math.floor(Math.random()*200)+1
 		}
 	},
-    timing_post_trial: 0
+    timing_post_trial: 0,
 }
 
 var practice_block = {
@@ -511,19 +520,19 @@ for (b = 0; b<practiceblocks.length; b++) {
 	} else {
 		release_rule = "the number of fish in the lake stays the same"
 	}
-	var tournament_intro_block = {
+	var tournament_intro_block_practice = {
 		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
 		timing_response: 60000,
-		data: {weather: weather, release: release},
+		data: {weather: weather, release: release, trial_id: "practice_intro"},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
 			tournament_bank = 0
 		}
 	}
-	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(tournament_intro_block_practice)
 	angling_risk_task_experiment.push(ask_fish_block)
 	angling_risk_task_experiment.push(set_fish_block)
 	for (i=0; i <num_practice_rounds; i++) {
@@ -553,7 +562,7 @@ for (b = 0; b<blocks.length; b++) {
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' + weather + '</span> which means ' + weather_rule + '. The release rule is <span style="color:red">"' + release + '"</span>, which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
 		timing_response: 120000,
-		data: {weather: weather, release: release},
+		data: {weather: weather, release: release, trial_id: "test_intro"},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release

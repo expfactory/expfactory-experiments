@@ -40,6 +40,27 @@ var getFixationLength = function() {
 
 
 
+
+
+var changeData = function(){
+data=jsPsych.data.getData()
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+	if(practiceDataCount == 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount == 1 && testDataCount == 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+  }
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -167,6 +188,7 @@ var begin_practice_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {exp_id: "antisaccade", trial_id: "practice_intro"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -175,6 +197,7 @@ var begin_test_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {exp_id: "antisaccade", trial_id: "test_intro"},
   timing_response: 60000,
   timing_post_trial: 1000
 };
@@ -188,7 +211,8 @@ var fixation_block = {
   data: {exp_id: "antisaccade", "trial_id": "fixation"},
   timing_post_trial: 0,
   timing_stim: getFixationLength(),
-  timing_response: 500
+  timing_response: 500,
+  on_finish: changeData,
 }
 
 
@@ -228,7 +252,8 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 225,
       timing_response: 225,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     
     var target_block = {
@@ -240,7 +265,9 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 150,
       timing_response: 150,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
+
     }
     
     var mask_block = {
@@ -252,7 +279,8 @@ for (i=0; i<practice_len; i++) {
       timing_post_trial: 0,
       timing_stim: 1000,
       timing_response: 1000,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     antisaccade_experiment.push(cue_block)
     antisaccade_experiment.push(target_block)
@@ -287,7 +315,9 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 225,
       timing_response: 225,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
+
     }
     
     var target_block = {
@@ -299,7 +329,8 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 150,
       timing_response: 150,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     
     var mask_block = {
@@ -311,7 +342,8 @@ for (i=0; i<exp_len; i++) {
       timing_post_trial: 0,
       timing_stim: 1000,
       timing_response: 1000,
-      response_ends_trial: false
+      response_ends_trial: false,
+      on_finish: changeData,
     }
     antisaccade_experiment.push(cue_block)
     antisaccade_experiment.push(target_block)

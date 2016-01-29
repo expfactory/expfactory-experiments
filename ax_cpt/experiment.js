@@ -75,6 +75,7 @@ var attention_check_thresh = 0.65
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "ax_cpt", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -83,6 +84,7 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "ax_cpt", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -93,6 +95,7 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   text: getInstructFeedback,
+  data: {exp_id: "ax_cpt", trial_id: "instructions"},
   timing_post_trial: 0,
   timing_response: 6000
 };
@@ -105,6 +108,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key after you see "A" followed by an "X", and the down arrow key for all other combinations.</p></div>'
 	],
   allow_keys: false,
+  data: {exp_id: "ax_cpt", trial_id: "instructions"},
   show_clickable_nav: true,
   timing_post_trial: 01000
 };
@@ -134,6 +138,7 @@ var instruction_node = {
 var rest_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "ax_cpt", trial_id: "rest"},
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
   timing_post_trial: 1000
 };
@@ -143,7 +148,7 @@ var wait_block = {
   stimulus: '<div class = centerbox><div class = AX_feedback>Trial over, get ready for the next one.</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "ax_cpt", trial_id: "feedback"},
+  data: {exp_id: "ax_cpt", trial_id: "wait"},
   timing_post_trial: 500,
   timing_stim: 1000,
   timing_response: 1000
@@ -155,7 +160,7 @@ var A_cue = {
   stimulus: '<div class = centerbox><div class = AX_text>A</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "ax_cpt", trial_id: "cue"},
+  data: {exp_id: "ax_cpt", trial_id: "cue", exp_stage: "test"},
   timing_stim: 300,
   timing_response: 5200,
   response_ends_trial: false,
@@ -167,7 +172,7 @@ var other_cue = {
   stimulus: getChar,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "ax_cpt", trial_id: "cue"},
+  data: {exp_id: "ax_cpt", trial_id: "cue", exp_stage: "test"},
   timing_stim: 300,
   timing_response: 5200,
   response_ends_trial: false,
@@ -179,7 +184,7 @@ var X_probe = {
   stimulus: '<div class = centerbox><div class = AX_text>X</div></div>',
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
-  data: {exp_id: "ax_cpt", trial_id: "probe"},
+  data: {exp_id: "ax_cpt", trial_id: "probe", exp_stage: "test"},
   timing_stim: 300,
   timing_response: 1300,
   response_ends_trial: false,
@@ -191,7 +196,7 @@ var other_probe = {
   stimulus: getChar,
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
-  data: {exp_id: "ax_cpt", trial_id: "probe"},
+  data: {exp_id: "ax_cpt", trial_id: "probe", exp_stage: "test"},
   timing_stim: 300,
   timing_response: 1300,
   response_ends_trial: false,
@@ -206,9 +211,9 @@ var ax_cpt_experiment = []
 ax_cpt_experiment.push(welcome_block);
 ax_cpt_experiment.push(instruction_node);
 
-for (b = 0; b< blocks.length; b++) {
+for (b = 0; b< blocks.length; b++) { 
 	var block = blocks[b]
-	for (i = 0; i < block.length; i++) {
+	for (i = 0; i < block.length; i++) { 
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)

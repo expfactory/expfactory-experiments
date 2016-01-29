@@ -1,6 +1,7 @@
 [
     {
         "name": "Columbia Card Task Cold Version",
+        "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
@@ -32,6 +33,5 @@
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"}
                        }  
-    
    }
 ]

@@ -427,6 +427,7 @@ var gameSetup = "<div class = titlebox><div class = center-text><strong>How many
 /* define static blocks */
 var welcome_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'welcome'},
   text:  "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task--Cold Version</strong></div></div>",
   cont_key: [13],
   timing_post_trial: 0
@@ -436,6 +437,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'instruction'},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -444,6 +446,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'instruction'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  in this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -595,7 +598,7 @@ var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: practiceSetup,
   is_html: true,
-  data: {exp_id: "columbia_card_task_cold"},
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'stim', exp_stage: 'practice'},
   choices: [37],
   timing_post_trial: 0
 };
@@ -603,8 +606,8 @@ var practice_block = {
 var practice_block2 = {
   type: 'poldrack-single-stim',
   stimulus: practiceSetup2,
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'stim', exp_stage: 'practice'},
   is_html: true,
-  data: {exp_id: "columbia_card_task_cold"},
   choices: [37],
   timing_post_trial: 0
 };
@@ -626,7 +629,7 @@ var test_block = {
   type: 'poldrack-single-stim',
   stimulus: getRound,
   is_html: true,
-  data: {exp_id: "columbia_card_task_cold"},
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'stim', exp_stage: 'test'},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
@@ -636,13 +639,14 @@ var end_instructions = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
   is_html: true,
-  data: {exp_id: "columbia_card_task_cold"},
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'end instructions'},
   choices: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -652,6 +656,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = center-block-text>Hello<strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -659,6 +664,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -667,6 +673,7 @@ var start_test_block = {
 var payout_text = {
   type: 'text',
   text: getText,
+  data: {exp_id: "columbia_card_task_cold", trial_id: 'reward'},
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -675,22 +682,15 @@ var payout_text = {
 
 var payoutTrial = {
 	type: 'call-function',
+	data: {exp_id: "columbia_card_task_cold", trial_id: 'calculate reward'},
 	func: function(){
 	randomRoundPointsArray=jsPsych.randomization.repeat(roundPointsArray,1)
-	console.log('array '+randomRoundPointsArray)
 	prize1=randomRoundPointsArray.pop()
 	prize2=randomRoundPointsArray.pop()
 	prize3=randomRoundPointsArray.pop()
-	console.log('prize1 '+prize1)
-	console.log('prize2 '+prize2)
-	console.log('prize3 '+prize3)
 	}
 };
 
-var ask_questions = {
-		type: 'survey-text',
-		questions: [["<p>Before the game starts, please answer the following questions.<br><br>We will now ask a few questions to be sure you understand the way the game works. Suppose you are playing a round with 32 cards, in which the gain cards are worth 10, the loss cards are worth -750 and there are 3 loss cards. Please consider each question carefully: <br><br>1. What is the maximum number of gain cards you could turn over (if you were very lucky)?</p>","<p>2. How many points would you make in that case? In other words, what is the maximum score you could earn in this round?</p>","<p>Let's assume you want to turn over 10 cards, but the 5th card is a loss card:<br><br> 3. How many cards would be turned over in this round?</p>","<p>4. What would your final score be in this round?</p>"]]
-}
 
 
 /* create experiment definition array */
@@ -698,7 +698,6 @@ var columbia_card_task_cold_experiment = [];
 columbia_card_task_cold_experiment.push(instruction_node);
 columbia_card_task_cold_experiment.push(practice_block);
 columbia_card_task_cold_experiment.push(practice_block2);
-columbia_card_task_cold_experiment.push(ask_questions);
 columbia_card_task_cold_experiment.push(end_instructions)
 for(b=0;b<numRounds;b++){
 columbia_card_task_cold_experiment.push(test_block);
