@@ -7,6 +7,21 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 2000 ) + 1000
   return gap;
@@ -14,7 +29,7 @@ var post_trial_gap = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	jsPsych.data.addDataToLastTrial({ITT: gap, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
@@ -24,9 +39,13 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 var current_trial = 0
 var gap = Math.floor( Math.random() * 2000 ) + 1000
@@ -60,6 +79,21 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli, 25);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -168,7 +202,9 @@ var simon_experiment = [];
 simon_experiment.push(welcome_block);
 simon_experiment.push(instruction_node);
 simon_experiment.push(practice_block);
+simon_experiment.push(attention_node)
 simon_experiment.push(reset_block)
 simon_experiment.push(start_test_block);
 simon_experiment.push(test_block);
+simon_experiment.push(attention_node)
 simon_experiment.push(end_block)
