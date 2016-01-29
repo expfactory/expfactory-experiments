@@ -54,7 +54,7 @@ var score_scale = {"True":2, "False":1}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
-  exp_id: "MPQ_control",
+  exp_id: "mpq_control",
   horizontal: true,
   preamble: '',
   pages: all_pages,
