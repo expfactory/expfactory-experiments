@@ -87,6 +87,7 @@ var step = 250
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'bickel_titrator', trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -97,6 +98,7 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   text: getInstructFeedback,
+  data: {exp_id: 'bickel_titrator', trial_id: 'instructions'},
   timing_post_trial: 0,
   timing_response: 6000
 };
@@ -108,6 +110,7 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
   ],
   allow_keys: false,
+  data: {exp_id: 'bickel_titrator', trial_id: 'instructions'},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
@@ -136,6 +139,7 @@ var instruction_node = {
 
 var update_delay_block = {
   type: 'call-function',
+  data: {exp_id: 'bickel_titrator', trial_id: 'update delay'},
   func: function() {
     updateDelay()
   },
@@ -145,7 +149,7 @@ var update_delay_block = {
 var test_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getStim,
-  data: {'exp_id': 'bickel_titrator'},
+    data: {exp_id: 'bickel_titrator', trial_id: 'stim', exp_stage: 'test'},
 	is_html: true,
 	choices: choices,
   on_finish: function(data) {
@@ -165,6 +169,7 @@ var test_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'bickel_titrator', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -175,8 +180,8 @@ var end_block = {
 var bickel_titrator_experiment = []
 bickel_titrator_experiment.push(welcome_block);
 bickel_titrator_experiment.push(instruction_node);
-for (var i = 0; i < delays.length; i++) {
-  for (var j = 0; j < 5; j++) {
+for (var i = 0; i < 1; i++) { //delays.length
+  for (var j = 0; j < 3; j++) { //5
     bickel_titrator_experiment.push(test_block);
   }
   bickel_titrator_experiment.push(update_delay_block);

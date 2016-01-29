@@ -36,29 +36,29 @@ var correct_responses = jsPsych.randomization.shuffle([['"M"',77],['"Z"',90]])
 var practice_stimuli = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_reaction_time'},
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'stim', exp_id: 'choice_reaction_time', exp_stage: 'practice'},
 	key_answer: correct_responses[0][1]
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_reaction_time'},
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'stim', exp_id: 'choice_reaction_time', exp_stage: 'practice'},
 	key_answer: correct_responses[1][1]
   }
 ];
 var test_stimuli_block = [
   {
 	stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_reaction_time'}
+	data: { stim_id: 1, correct_response: correct_responses[0][1], trial_id: 'stim', exp_id: 'choice_reaction_time', exp_stage: 'test'}
   },
   {
 	stimulus:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_reaction_time'}
+	data: { stim_id: 2, correct_response: correct_responses[1][1], trial_id: 'stim', exp_id: 'choice_reaction_time', exp_stage: 'test'}
   }
 ];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 1); //5
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 1); //25
 
 
 /* ************************************ */
@@ -67,6 +67,7 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'choice_reaction_time', trial_id: 'welcome'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -77,6 +78,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: 'choice_reaction_time', trial_id: 'instructions'},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -87,6 +89,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>'],
   allow_keys: false,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'instructions'},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
@@ -116,6 +119,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -123,6 +127,7 @@ var end_block = {
 
 var reset_block = {
 	type: 'call-function',
+	data: {exp_id: 'choice_reaction_time', trial_id: 'reset trial'},
 	func: function() {
 		current_trial = 0
 	},
@@ -132,6 +137,7 @@ var reset_block = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key.</p><p class = block-text>You will get feedback telling you if you were correct. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -140,6 +146,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer get feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -151,6 +158,7 @@ var practice_block = {
   type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'stim', exp_id: 'practice'},
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
   timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div>',
@@ -168,6 +176,7 @@ var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'stim', exp_id: 'test'},
   choices: [correct_responses[0][1], correct_responses[1][1]],
   timing_response: 2000,
   timing_post_trial: post_trial_gap,

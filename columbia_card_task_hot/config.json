@@ -1,6 +1,7 @@
 [
     {
         "name": "Columbia Card Task Hot Version",
+        "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
@@ -25,7 +26,11 @@
         "experiment_variables": "",
         "reference": "http://psycnet.apa.org/journals/xlm/35/3/709.pdf",
         "notes": "",
-        "publish":"True"
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
     
    }
 ]
