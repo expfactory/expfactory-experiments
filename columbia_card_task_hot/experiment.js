@@ -161,10 +161,6 @@ console.log(clicked_id)
 	}
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 
 var getRound = function(){
 	if(roundOver === 0){  //this is for the start of a round

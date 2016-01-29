@@ -96,13 +96,8 @@ var instructTimeThresh = 1   ///in seconds
 
 // task specific variables
 var letters = 'bBdDgGtTvV'
-<<<<<<< HEAD
 var num_blocks = 20 
 var num_trials = 25 // per block  
-=======
-var num_blocks = 1 //20
-var num_trials = 25 // per block
->>>>>>> master
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay

@@ -226,7 +226,6 @@ var test_block = {
 	stimuli: trials,
 	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "test"},
 	is_html: true,
-  data: {'exp_id': 'discount_titrate'},
 	choices: ['q', 'p'],
   randomize_order: true
 };

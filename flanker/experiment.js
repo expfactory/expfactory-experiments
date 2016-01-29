@@ -62,19 +62,19 @@ var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right 
 var test_stimuli = [
   {
 	image: '<div class = centerbox><div class = flanker-text>ffhff</div></div>',
-	data: { correct_response: 72, condition: 'incompatible', exp_id: 'flanker'}
+	data: { correct_response: 72, condition: 'incompatible', trial_id: 'stim'}
   },
   {
 	image:  '<div class = centerbox><div class = flanker-text>hhfhh</div></div>',
-	data: { correct_response: 70, condition:  'incompatible', exp_id: 'flanker'}
+	data: { correct_response: 70, condition:  'incompatible', trial_id: 'stim'}
   },
   {
 	image: '<div class = centerbox><div class = flanker-text>hhhhh</div></div>',
-	data: { correct_response: 72, condition: 'compatible', exp_id: 'flanker'}
+	data: { correct_response: 72, condition: 'compatible', trial_id: 'stim'}
   },
   {
 	image:  '<div class = centerbox><div class = flanker-text>fffff</div></div>',
-	data: { correct_response: 70, condition:  'compatible', exp_id: 'flanker'}
+	data: { correct_response: 70, condition:  'compatible', trial_id: 'stim'}
   }
 ];
 
@@ -204,7 +204,6 @@ for (i=0; i<practice_len; i++) {
 	  type: 'poldrack-categorize',
 	  stimulus: practice_trials.image[i],
 	  is_html: true,
-	  data: {exp_id: "flanker", trial_id: "stim", exp_stage: "practice"},
 	  key_answer: practice_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
@@ -214,6 +213,9 @@ for (i=0; i<practice_len; i++) {
 	  timing_feedback_duration: 1000,
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 500,
+	  on_finish: function() {
+	  	jsPsych.addDataToLastTrial({exp_stage: "practice"})
+	  }
 	}
 	flanker_experiment.push(practice_block)
 }
@@ -227,7 +229,6 @@ for (i=0; i<exp_len; i++) {
 	  type: 'poldrack-categorize',
 	  stimulus: test_trials.image[i],
 	  is_html: true,
-	  data: {exp_id: "flanker", trial_id: "stim", exp_stage: "test"},
 	  key_answer: test_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
@@ -237,6 +238,9 @@ for (i=0; i<exp_len; i++) {
 	  timing_feedback_duration: 1000,
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 500,
+	  on_finish: function() {
+	  	jsPsych.addDataToLastTrial({exp_stage: "test"})
+	  }
 	}
 	flanker_experiment.push(test_block)
 }
