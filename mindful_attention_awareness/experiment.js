@@ -35,7 +35,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please answer each question by clicking "True" or "False" following the questions to indicate whether they are descriptive of you and your actions. There are no right or wrong answers, and no trick questions. Work quickly and do not think too long about the exact meaning of the question.</p></div>',
+    '<div class = centerbox><p class = block-text>Please answer the following questions on your tendency to bring your complete attention to experiences occuring in the present moment.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
