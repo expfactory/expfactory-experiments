@@ -10,6 +10,10 @@ function addID() {
   jsPsych.data.addDataToLastTrial({'exp_id': 'number_letter'})
 }
 
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -48,9 +52,16 @@ var getRotateStim = function() {
     return [stim_place, '<div class = numlet-' + stim_place +'><p class = numlet-text>' + getStim() + '</p></div><div class = vertical-line></div><div class = horizontal-line></div>']
 }
 
+
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 var evens = [2,4,6,8]
 var odds = [3,5,7,9]
@@ -63,7 +74,6 @@ var place = randomDraw([0,1,2,3])
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -81,6 +91,16 @@ var end_block = {
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -92,11 +112,33 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
 
 /* create experiment definition array */
 var number_letter_experiment = []
 number_letter_experiment.push(welcome_block)
-number_letter_experiment.push(instructions_block)
+number_letter_experiment.push(instruction_node)
 
 half_block_len = 32
 rotate_block_len = 128

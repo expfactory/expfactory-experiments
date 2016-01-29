@@ -12,6 +12,21 @@ function addID() {
   jsPsych.data.addDataToLastTrial({'exp_id': 'volatile_bandit'})
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 var text_insert = function(text, index, insert_value) {
 	text = text.slice(0, index) + insert_value + text.slice(index);
 	return text
@@ -64,10 +79,20 @@ getFBBar = function() {
  return '<progress class = feedback_bar value = "' + progress_value + '" max = "100"></progress><div class = goal_1></div><div class = goal_2></div>'
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.4
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var stage1_trials = 120
 var stage2_trials = 170
 var progress_value = 0 //set starting value
@@ -102,6 +127,21 @@ for (var b = 0; b < volatile_blocks.length; b++) {
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -111,6 +151,16 @@ var welcome_block = {
   timing_post_trial: 0
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 6000
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -123,6 +173,29 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
+
+var instruction_node = {
+    timeline: instruction_trials,
+	/* This function defines stopping criteria */
+    loop_function: function(data){
+		for(i=0;i<data.length;i++){
+			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+				rt=data[i].rt
+				sumInstructTime=sumInstructTime+rt
+			}
+		}
+		if(sumInstructTime<=instructTimeThresh*1000){
+			feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if(sumInstructTime>instructTimeThresh*1000){
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+    }
+}
+
 
 var end_block = {
   type: 'poldrack-text',
@@ -134,7 +207,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
-  text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
   timing_post_trial: 1000
@@ -143,7 +216,7 @@ var start_test_block = {
 //Set up experiment
 volatile_bandit_experiment = []
 volatile_bandit_experiment.push(welcome_block)
-volatile_bandit_experiment.push(instructions_block)
+volatile_bandit_experiment.push(instruction_node)
 volatile_bandit_experiment.push(start_test_block)
 /*
 First set up the static condition. In this condition, one stim is correct 80% of the time.
@@ -206,6 +279,8 @@ for (var i = 0; i < stage1_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+volatile_bandit_experiment.push(start_test_block)
 
 /*
 Following the static condition is a volatile condition where the higher probability stimulus changes
@@ -266,4 +341,6 @@ for (var i = 0; i < stage2_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+
 volatile_bandit_experiment.push(end_block)

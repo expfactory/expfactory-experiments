@@ -50,7 +50,6 @@ var credit_var = true // If true, credit the participant
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-/* define static blocks */
 
 // Set up attention check node
 var attention_check_block = {
@@ -59,6 +58,7 @@ var attention_check_block = {
   response_ends_trial: true,
   timing_post_trial: 200
 }
+
 var attention_node = {
   timeline: [attention_check_block],
   conditional_function: function() {
@@ -66,6 +66,7 @@ var attention_node = {
   }
 }
 
+/* define static blocks */
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
