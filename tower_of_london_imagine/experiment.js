@@ -169,7 +169,7 @@ var test_block = {
   type: 'single-stim-button',
   stimulus: getStim,
   button_class: 'tol_response_button',
-  data: {exp_id: "tol", trial_id: "test"},
+  data: {trial_id: "test"},
   timing_stim: 20000,
   timing_response: 20000,
   timing_post_trial: 1000,
