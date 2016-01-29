@@ -142,6 +142,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "digit_span", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -151,6 +152,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "digit_span", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -159,6 +161,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "digit_span", trial_id: "instruction"},
   pages: [
   '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer. If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions.</p></div>'
   ],
@@ -192,6 +195,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "digit_span", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -202,6 +206,7 @@ var start_test_block = {
   type: 'poldrack-single-stim',
   is_html: true,
   stimulus: getTestText,
+  data: {exp_id: "digit_span", trial_id: "test_intro"},
   choices: 'none',
   timing_stim: 1000,
   timing_response: 1000,
@@ -212,6 +217,7 @@ var start_test_block = {
 var start_reverse_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "digit_span", trial_id: "start reverse"},
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13]
 }
@@ -224,7 +230,7 @@ var test_block = {
   timing_stim: getTimeArray,
   timing_gap: gap_time,
   choices: [['none']],
-  data: {exp_id: "digit_span", trial_id: "test"},
+  data: {exp_id: "digit_span", trial_id: "stim", exp_stage: 'test'},
   timing_response: getTotalTime,
   timing_post_trial: 0,
   on_finish: function() {
@@ -237,7 +243,7 @@ var forward_response_block = {
   type: 'single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "digit_span", trial_id: "response"},
+  data: {exp_id: "digit_span", trial_id: "response", exp_stage: 'test'},
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits,  "condition": "forward"})
       var fb = 0
@@ -265,7 +271,7 @@ var reverse_response_block = {
   type: 'single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "digit_span", trial_id: "response"},
+  data: {exp_id: "digit_span", trial_id: "response", exp_stage: 'test'},
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_digits": num_digits, "condition": "reverse", feedback: fb})
       var fb = 0

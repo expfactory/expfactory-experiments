@@ -105,6 +105,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -113,6 +114,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -122,6 +124,7 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -131,6 +134,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "static/experiments/dot_pattern_expectancy/images/cue2.png" ></img>	...followed by...		<img src = "static/experiments/dot_pattern_expectancy/images/probe2.png" ></img><br><br></p></div>',
 	'<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "static/experiments/dot_pattern_expectancy/images/' + valid_cue + '" ></img>	...followed by...		<img src = "static/experiments/dot_pattern_expectancy/images/' + valid_probe + '" ></img><br></br></p></div>',
@@ -165,6 +169,7 @@ var instruction_node = {
 
 var rest_block = {
   type: 'poldrack-text',
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "rest"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
   timing_post_trial: 1000
@@ -175,7 +180,7 @@ var feedback_block = {
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000
@@ -186,7 +191,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", "trial_id": "fixation"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 2000,
   timing_response: 2000,
@@ -199,7 +204,7 @@ var A_cue = {
   stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -210,7 +215,7 @@ var other_cue = {
   stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -221,7 +226,7 @@ var X_probe = {
   stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -233,7 +238,7 @@ var other_probe = {
   stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -250,7 +255,7 @@ dot_pattern_expectancy_experiment.push(instruction_node);
 
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
-	for (i = 0; i < block.length; i++) {
+	for (i = 0; i < block.length; i++) { 
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)

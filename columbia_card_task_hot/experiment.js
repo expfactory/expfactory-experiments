@@ -327,6 +327,7 @@ var instructTimeThresh = 5   ///in seconds
 
 // task specific variables
 var e = ""
+var numRounds=27
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -342,7 +343,6 @@ var paramsArray = [[1,10,250],[1,10,500],[1,10,750],[1,20,250],[1,20,500],[1,20,
 var cardArray=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
 var shuffledCardArray=jsPsych.randomization.repeat(cardArray,1)
 var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray,1)
-var numRounds=24
 var roundOver =0
 
 var gameSetup =  "<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" + 
@@ -492,6 +492,7 @@ var welcome_block = {
   type: 'text',
   text:  "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
   cont_key: 13,
+  data: {exp_id: "columbia_card_task_hot", trial: 'welcome'},
   timing_post_trial: 0
 };
 
@@ -499,6 +500,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "columbia_card_task_hot", trial: 'instructions'},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -507,6 +509,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "columbia_card_task_hot", trial: 'instructions'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -659,7 +662,7 @@ var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: getRound,
   is_html: true,
-  data: {exp_id: "columbia_card_task_hot", trial: 'test'},
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'stim', exp_stage: 'test'},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
@@ -688,7 +691,7 @@ var practice_instruct_block = {
   type: 'poldrack-single-stim',
   stimulus: getPractice1,
   is_html: true,
-  data: {exp_id: "columbia_card_task_hot", trial: 'test'},
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'stim', exp_stage: 'practice'},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
@@ -717,7 +720,7 @@ var practice_instruct_block2 = {
   type: 'poldrack-single-stim',
   stimulus: getPractice2,
   is_html: true,
-  data: {exp_id: "columbia_card_task_hot", trial: 'test'},
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'stim', exp_stage: 'practice'},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
@@ -743,6 +746,7 @@ var practice_chunk2 = {
 
 var end_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -750,6 +754,7 @@ var end_block = {
 var give_total = {
   type: 'text',
   text: getReward,
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'reward'},
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -757,6 +762,7 @@ var give_total = {
 
 var start_practice_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'practice_intro'},
   text: "<div class = centerbox><p class = center-block-text>Hello <strong>enter</strong> to begin.</p></div>",
   cont_key: [13],
   timing_post_trial: 1000
@@ -764,6 +770,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'text',
+  data: {exp_id: "columbia_card_task_hot", trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -779,33 +786,9 @@ columbia_card_task_hot_experiment.push(practice_chunk1);
 columbia_card_task_hot_experiment.push(practice_chunk2);
 
 columbia_card_task_hot_experiment.push(start_test_block);
+for(i=0; i<numRounds; i++){
 columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
-columbia_card_task_hot_experiment.push(practice_chunk);
+}
 columbia_card_task_hot_experiment.push(give_total);
 columbia_card_task_hot_experiment.push(end_block);
 

@@ -169,7 +169,7 @@ var stimulus = [
 	}
 ]
 
-var NoSSpractice_block_len = 12
+var NoSSpractice_block_len = 52//12
 var practice_block_len = 20
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus,NoSSpractice_block_len/4,true)
@@ -178,8 +178,8 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','g
 
 //number of blocks per condition
 var test_block_len = 60
-numconditions = 2
-numblocks = 5
+numconditions = 1 //2
+numblocks = 2 //5
 condition_blocks = []
 for (j = 0; j<numconditions; j++) {
     blocks = []
@@ -389,7 +389,7 @@ var NoSS_practice_node = {
 			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
-            return true;
+            return false;
         }
     }
 }
@@ -459,9 +459,6 @@ var practice_node = {
             return false;
         } else {
         	//rerandomize stim and stop_trial order
-        	console.log('missed_responses: ', missed_responses)
-        	console.log('average_rt: ', average_rt)
-        	console.log('successful_stops: ', successful_stops)
         	practice_list = jsPsych.randomization.repeat(stimulus,5,true)
         	practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
             // keep going until they are faster!
@@ -478,7 +475,7 @@ var practice_node = {
             if (successful_stops < stop_thresh) {
 		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
 		    }
-            return true;
+            return false;
         }
     }
 }
