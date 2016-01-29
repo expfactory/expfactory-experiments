@@ -25,16 +25,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "time_perspective"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please reach each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Please reach each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "time_perspective"}
 };
 
 var opts = ["Very uncharacteristic", "Uncharacteristic", "Neutral", "Characteristic", "Very characteristic"]
@@ -47,6 +50,7 @@ var score_scale = {"Very uncharacteristic": 1, "Uncharacteristic": 2, "Neutral":
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id:"time_perspective",
   horizontal: true,
   preamble: '<p><strong>How characteristic or true is this of you?</strong></p>',
   pages: all_pages,
@@ -62,7 +66,8 @@ var end_block = {
   type: 'text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "time_perspective"}
 };
 
 

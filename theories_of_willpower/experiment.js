@@ -26,16 +26,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "theories_of_willpower"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>This questionnaire has been designed to investigate your ideas about willpower. Willpower is what you use to resist temptations, to stick to your intentions, and to remain in strenuous mental activity. There are no right or wrong answers. We are interested in your ideas. Using the scale, please indicate how much you agree or disagree with each of the following statements by writing the number that corresponds to your opinion in the space next to each statement.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>This questionnaire has been designed to investigate your ideas about willpower. Willpower is what you use to resist temptations, to stick to your intentions, and to remain in strenuous mental activity. There are no right or wrong answers. We are interested in your ideas. Using the scale, please indicate how much you agree or disagree with each of the following statements by writing the number that corresponds to your opinion in the space next to each statement.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "theories_of_willpower"}
 };
 
 var opts = ["Strongly agree", "Moderately agree", "Slightly agree", "Slightly disagree", "Moderately disagree", "Strongly disagree"]
@@ -48,6 +51,7 @@ var score_scale = {"Strongly agree":1, "Moderately agree":2, "Slightly agree":3,
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "theories_of_willpower",
   horizontal: true,
   preamble: '',
   pages: all_pages,
@@ -63,7 +67,8 @@ var end_block = {
   type: 'text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "theories_of_willpower"}
 };
 
 

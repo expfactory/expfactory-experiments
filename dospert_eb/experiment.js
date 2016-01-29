@@ -31,15 +31,18 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
+  data: {exp_id: "dospert_eb"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate <strong>the benefits</strong> you would obtain from each situation. Provide a rating from <strong>1 to 7</strong>.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate <strong>the benefits</strong> you would obtain from each situation. Provide a rating from <strong>1 to 7</strong>.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "dospert_eb"}
 };
 
 var opts = ["No benefits at all - 1","2","3","Moderate benefits - 4","5" ,"6","Great benefits - 7"]
@@ -52,6 +55,7 @@ var score_scale = {"No benefits at all - 1":1,"2":2,"3":3,"Moderate benefits - 4
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "dospert_eb",
   horizontal: true,
   preamble: '<p><strong>Please indicate the benefits you would obtain from each situation. Provide a rating from 1 to 7 using the scale.</strong></p>',
   pages: all_pages,
@@ -66,7 +70,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "dospert_eb"}
 };
 
 
