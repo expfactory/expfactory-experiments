@@ -19,6 +19,7 @@ function evalAttentionChecks() {
     check_percent = checks_passed/attention_check_trials.length
   } 
   return check_percent
+}
 
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
@@ -195,8 +196,8 @@ kirby_experiment.push(welcome_block);
 kirby_experiment.push(instruction_node);
 kirby_experiment.push(start_practice_block);
 kirby_experiment.push(practice_block);
-kirby_experiment.push(attention_node)
+kirby_experiment.push(attention_node);
 kirby_experiment.push(start_test_block);
 kirby_experiment.push(test_block);
-kirby_experiment.push(attention_node)
-kirby_experiment.push(end_block)
+kirby_experiment.push(attention_node);
+kirby_experiment.push(end_block);
