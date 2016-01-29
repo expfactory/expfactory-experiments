@@ -7,6 +7,10 @@ function getDisplayElement() {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'simple_reaction_time'})
+}
+
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 2000 ) + 1000
   return gap;

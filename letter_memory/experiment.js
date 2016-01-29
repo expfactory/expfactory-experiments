@@ -21,6 +21,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'letter_memory'})
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]

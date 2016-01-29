@@ -6,6 +6,11 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'recent_probes'})
+}
+
+/* Append gap and current trial to data and then recalculate for next trial*/
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {

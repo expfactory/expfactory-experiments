@@ -26,6 +26,10 @@ var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
+}
+
 var getStim = function(){
 	stim = firstPhaseStimsComplete.image.pop()
 	curr_data = firstPhaseStimsComplete.data.pop()

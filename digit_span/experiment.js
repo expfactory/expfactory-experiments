@@ -22,6 +22,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'digit_span'})
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }

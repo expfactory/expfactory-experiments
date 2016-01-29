@@ -21,6 +21,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'ax_cpt'})
+}
+
 var getChar = function() {
  return '<div class = centerbox><p class = AX_text>' + chars[Math.floor(Math.random()*22)] + '</p></div>'
 }

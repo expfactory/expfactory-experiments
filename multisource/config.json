@@ -25,6 +25,11 @@
         "time":7,
         "reference": "",
         "notes": "Condition records current block (practice/test control/interference), trial_id records stimulus ID (where the target is: left, middle or right) and whether the target is large or small",
-        "publish":"True"    
-   }
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}    
+                              }
+      }
 ]

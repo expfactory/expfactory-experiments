@@ -9,6 +9,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'plus_minus'})
+}
+
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }

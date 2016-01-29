@@ -8,6 +8,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'volatile_bandit'})
+}
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {

@@ -22,6 +22,10 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'go_nogo'})
+}
+
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 500 ) + 500
   return gap;

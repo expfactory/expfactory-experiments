@@ -8,6 +8,10 @@ a match or not
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tone_monitoring'})
+}
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
