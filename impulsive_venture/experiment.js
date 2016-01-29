@@ -24,7 +24,6 @@ function fillArray(value, len) {
 /* ************************************ */
 
 /* define static blocks */
-
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',

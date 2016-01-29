@@ -1,7 +1,9 @@
 /* ************************************ */
 /* Helper Functions                     */
 /* ************************************ */
-
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 var getReward = function(){
 	temp=jsPsych.randomization.repeat(points,1)
@@ -159,50 +161,6 @@ console.log(clicked_id)
 	}
   }
 }
-/*
-
-var chooseCard = function (clicked_id){
-	currID = parseInt(clicked_id)
-	whichClickInRound = whichClickInRound +1
-	temp = whichLossCards.indexOf(currID,0)
-	if(clickedGainCards.indexOf(currID,0) == -1 && clickedLossCards.indexOf(currID, 0) == -1){
-	if (temp != -1){ // if you click on a loss card
-		clickedLossCards.push(clicked_id)
-		index=unclickedCards.indexOf(currID,0)
-		unclickedCards.splice(index,1)
-		roundPoints=roundPoints-lossAmt
-		lossClicked= true
-		roundOver=0
-		document.getElementById(clicked_id).src='/static/experiments/columbia_card_task_hot/images/loss.png';
-		
-		document.getElementById("button1").disabled = true;
-		document.getElementById("button2").disabled = true;
-		for(i=1;i<33;i++){
-			document.getElementById(''+i+'').disabled = true;
-			}
-		setTimeout(endRound, 2000)
-		
-		
- 	} else if (temp == -1){ // if you click on a gain card
-
-		clickedGainCards.push(clicked_id)  //as a string
-		index=unclickedCards.indexOf(currID,0)
-		unclickedCards.splice(index,1)
-		roundPoints=roundPoints+gainAmt	
-		
-		var e = jQuery.Event("keydown");
-		e.which = 37; // # Some key code value
-		e.keyCode = 37
-		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
-		e.which = 37; // # Some key code value
-		e.keyCode = 37
-		$(document).trigger(e)
-	}
-  }
-}*/
-
-
 
 var getRound = function(){
 	if(roundOver === 0){  //this is for the start of a round
@@ -359,18 +317,15 @@ var instructTurnCards = function (){
 
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
-
-
 
 /* ************************************ */
 /* Experimental Variables               */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var e = ""
 var lossClicked = false
 var whichClickInRound = 0

@@ -6,6 +6,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -44,17 +48,16 @@ var getRotateStim = function() {
     return [stim_place, '<div class = numlet-' + stim_place +'><p class = numlet-text>' + getStim() + '</p></div><div class = vertical-line></div><div class = horizontal-line></div>']
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
+
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-
+// task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 var evens = [2,4,6,8]
 var odds = [3,5,7,9]
@@ -67,7 +70,6 @@ var place = randomDraw([0,1,2,3])
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

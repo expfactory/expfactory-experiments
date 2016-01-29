@@ -7,6 +7,7 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+
 function fillArray(value, len) {
   if (len === 0) return [];
   var a = [value];

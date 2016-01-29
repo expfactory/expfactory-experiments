@@ -7,6 +7,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -56,16 +75,16 @@ var getFeedback = function() {
   return image + '<div class = shift_feedback_box><p class = center-text>' + feedback_text + '</p></div>'
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var choices = [37, 40, 39] 
 var current_trial = 0
 var exp_len = 410
@@ -111,6 +130,21 @@ var switch_bound = switch_bounds.shift() //set first switch_bound
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -346,6 +380,7 @@ for (var i = 0; i < exp_len; i++) {
   shift_task_experiment.push(stim_block);
   shift_task_experiment.push(feedback_block);
   if (i%(Math.floor(exp_len/4)) === 0 && i !== 0) {
+  	shift_task_experiment.push(attention_node)
     shift_task_experiment.push(rest_block)
   }
 }

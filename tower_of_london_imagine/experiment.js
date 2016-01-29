@@ -54,10 +54,11 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
-
+// task specific variables
 var colors = ['Green', 'Red', 'Blue']
 var problem_i = 0
 /*keeps track of peg board (where balls are). Lowest ball is the first value for each peg.
