@@ -13,8 +13,9 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "gm_paradigm",
-        "cognitive_atlas_task_id": "",
+        "exp_id": "gm_paradigm",
+        "cognitive_atlas_task_id": "trm_569d6eef27433",
+        "template":"jspsych",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",

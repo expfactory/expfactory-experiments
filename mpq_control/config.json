@@ -5,14 +5,14 @@
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
                  "style.css",
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "mpq_control",
+        "exp_id": "mpq_control",
         "cognitive_atlas_task_id": "trm_55a6aa62c54f8",
         "contributors": [
                          "Zeynep Enkavi",

@@ -12,37 +12,37 @@ function getDisplayElement() {
 var practiceCount = 0
 var getPracticePrompt = function (){
 	if(practiceCount === 0){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	} else if (practiceCount ==1){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==2){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==3){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==4){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==5){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==6){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = practiceCount+1
+		return temp
 	}else if (practiceCount ==7){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = 0
-	return temp
+		temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
+		practiceCount = 0
+		return temp
 	}
 }
 
@@ -109,9 +109,9 @@ var appendRewardData2 = function(){
 //first phase functions
 
 var getStim = function(){
-	stim = firstPhaseStimsComplete.image.pop()
-	curr_data = firstPhaseStimsComplete.data.pop()
-	curr_answer = curr_data.correct_response[1]
+	var stim = firstPhaseStimsComplete.image.pop()
+	var curr_data = firstPhaseStimsComplete.data.pop()
+	var curr_answer = curr_data.correct_response[1]
 	return stim
 }
 
@@ -185,57 +185,15 @@ var appendPracticeGoData = function(){
 var getSSPracticeStim3 = function() {
 	goTemp = goStimsArray.pop()
 	practice_trial_data = goTemp.data
-
 	return goTemp.image
 }
 
 var getStopSignal = function(){
 	stopTemp = stopStimsArray.pop()
+	currData = stopTemp.data
 	return stopTemp.image
 }
 
-/*
-var getSSPracticeStim3 = function() {
-	tempColor = a.color.pop()
-	shape1 = tempShape.pop()
-	if(shape1==1 || shape1==2){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		} else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
-		}
-	} else if (shape1==3||shape1==4){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		}  else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
-		}
-	}
-	practice_trial_data = goStim.data
-	return goStim.image
-}
-
-
-
-
-var getStopSignal = function(){
-	temp=a.stop_color.pop()
-	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
-	tempCond = temp-4
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp==9){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp=="NA"){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: "", correct_response: "", stop_color_condition: ""}}
-	currData= stopStim.data
-  }
-}
-
-*/
 
 var getSSPracticeData3 = function() {
 	return practice_trial_data
@@ -279,8 +237,7 @@ var updateSSDandData = function() {
 		jsPsych.data.addDataToLastTrial({go_acc: 1})
 	} else if ((jsPsych.data.getData()[curr_trial].key_press != jsPsych.data.getData()[curr_trial].correct_response[1]) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'go')){
 		jsPsych.data.addDataToLastTrial({go_acc: 0})
-	}
-	
+	}	
 	
 	if ((jsPsych.data.getData()[curr_trial].key_press == -1) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'stop')){
 		jsPsych.data.addDataToLastTrial({stop_acc: 1})
@@ -351,7 +308,116 @@ jsPsych.data.addDataToLastTrial({subject_ID: subjectID, total_reward: sumReward}
 return '<div class = centerbox><p class = center-block-text>Your bonus is:  <strong>'+sumReward+'</strong></div>'
 }
 
+var calculateResponses = function(){
+	var sum_rt = 0;
+        var sumGo_correct = 0;
+        var go_length = 0;
+		var num_responses = 0;
+		var sumStop_correct = 0;
+		var stop_length = 0
+        for(i=0; i < data.length; i++){
+            if (data[i].SS_trial_type == "go") {
+            	go_length += 1
+				if (data[i].rt != -1) {
+					num_responses += 1
+					sum_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response[1]) { sumGo_correct += 1 }
+				} 
+            } else if (data[i].SS_trial_type == "stop"){
+				stop_length +=1
+				if (data[i].rt == -1) {
+					sumStop_correct +=1
+				}
+			}
+        }
+        var average_rt = sum_rt / num_responses;
+        var averageGo_correct = sumGo_correct / go_length;
+		var missed_responses = (go_length - num_responses) / go_length
+		var averageStop_correct = sumStop_correct/stop_length
 
+return average_rt
+return averageGo_correct
+return missed_responses
+return averageStop_correct
+return sumGo_correct
+return go_length
+return num_responses
+return sumStop_correct
+return stop_length
+}
+
+var setupThirdStage = function() {
+	 var exp_len = 75
+	 var stop_percent = (1/3)
+	 var stim_colors = [0,1,2,3,8]
+	 var stims = []
+	 var stim = {}
+	 var num_stims = exp_len/stim_colors.length
+		for (var c = 0; c < stim_colors.length; c++) {
+			var stop_trials = jsPsych.randomization.repeat(['stop','go','go'], num_stims/3)
+			var stop_colors = [4,5,6,7,9]
+				for (var s = 0; s< num_stims; s++) {
+					if (stop_trials[s] == 'stop') {
+						stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
+					} else {
+						stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
+					}
+					stims.push(stim)
+				}
+		}
+
+	a=jsPsych.randomization.repeat(stims,1,true)	//a is a 300x3 matrix (300 = numStims, column 1= go colors, col2= stop trial type, and col3= stop color)
+	tempShape=jsPsych.randomization.repeat([1,2,3,4],18)
+	tempShape.push(Math.floor(Math.random()*4+1))
+	tempShape.push(Math.floor(Math.random()*4+1))
+	tempShape.push(Math.floor(Math.random()*4+1))
+	
+
+	stopStimsArray=[]
+	goStimsArray=[]
+	for(i=0;i<75;i++){
+		temp=a.stop_color.pop()
+		if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
+		tempCond = temp-4
+		stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
+		currData= stopStim.data
+		stopStimsArray.push(stopStim)
+		} else if(temp==9){
+		stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
+		currData= stopStim.data
+		stopStimsArray.push(stopStim)
+		} else if(temp=="NA"){
+		stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: "", correct_response: "", stop_color_condition: ""}}
+		currData= stopStim.data
+		stopStimsArray.push(stopStim)
+		}
+	}	
+	for(i=0;i<75;i++){	
+		tempColor = a.color.pop()
+		shape1 = tempShape.pop()
+		if(shape1==1 || shape1==2){
+			if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+			goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
+			goStimsArray.push(goStim)
+			} else if(tempColor==8){
+			goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
+			goStimsArray.push(goStim)
+
+			}
+		} else if (shape1==3||shape1==4){
+			if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
+			goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
+			goStimsArray.push(goStim)
+			}  else if(tempColor==8){
+			goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
+			goStimsArray.push(goStim)
+
+			}
+		}
+	}
+	return stopStimsArray
+	return goStimsArray
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -474,75 +540,7 @@ secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, 19, tr
 //this is for main stopping stims
 
 
-exp_len = 75
-		 stop_percent = (1/3)
-		 stim_colors = [0,1,2,3,8]
-		 stims = []
-		 var num_stims = exp_len/stim_colors.length
-			for (var c = 0; c < stim_colors.length; c++) {
-				var stop_trials = jsPsych.randomization.repeat(['stop','go','go'], num_stims/3)
-				var stop_colors = [4,5,6,7,9]
-					for (var s = 0; s< num_stims; s++) {
-						if (stop_trials[s] == 'stop') {
-							var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
-						} else {
-							var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
-						}
-					stims.push(stim)
-					}
-			}
 
-a=jsPsych.randomization.repeat(stims,1,true)	//a is a 300x3 matrix (300 = numStims, column 1= go colors, col2= stop trial type, and col3= stop color)
-tempShape=jsPsych.randomization.repeat([1,2,3,4],18)
-tempShape.push(Math.floor(Math.random()*4+1))
-tempShape.push(Math.floor(Math.random()*4+1))
-tempShape.push(Math.floor(Math.random()*4+1))
-	
-
-stopStimsArray=[]
-goStimsArray=[]
-for(i=0;i<a.stop_color.length;i++){
-	temp=a.stop_color.pop()
-	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
-	tempCond = temp-4
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
-	currData= stopStim.data
-	stopStimsArray.push(stopStim)
-	} else if(temp==9){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
-	currData= stopStim.data
-	stopStimsArray.push(stopStim)
-	} else if(temp=="NA"){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: "", correct_response: "", stop_color_condition: ""}}
-	currData= stopStim.data
-    stopStimsArray.push(stopStim)
-    }
-}	
-for(i=0;i<a.color.length;i++){	
-	tempColor = a.color.pop()
-	shape1 = tempShape.pop()
-	if(shape1==1 || shape1==2){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		goStimsArray.push(goStim)
-		} else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
-		goStimsArray.push(goStim)
-
-		}
-	} else if (shape1==3||shape1==4){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		goStimsArray.push(goStim)
-
-		}  else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
-		goStimsArray.push(goStim)
-
-		}
-	}
-}
-	
 
 var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','stop','go','go','go','go','go','go','go','go'], 1,false)
 
@@ -1029,7 +1027,7 @@ var learning_node = {
 	var totalTrials = 0
 	var totalCorrect = 0
 	for(learning = 0; learning<data.length; learning++){
-		if(data[learning].condition!= undefined){
+		if(data[learning].condition!== undefined){
 		totalTrials = totalTrials +1
 			if(data[learning].key_press == data[learning].correct_response){
 			totalCorrect = totalCorrect +1
@@ -1162,37 +1160,11 @@ var practice_node = {
     timeline: phase2_trials,
 	/* This function defines stopping criteria */
     loop_function: function(data){
-        var sum_rt = 0;
-        var sumGo_correct = 0;
-        var sumStop_correct = 0;
-        var go_length = 0;
-		var num_responses = 0;
-		var stop_length = 0
-        for(var i=0; i < data.length; i++){
-            if (data[i].SS_trial_type == "go") {
-            	go_length += 1
-				if (data[i].rt != -1) {
-					num_responses += 1
-					sum_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response[1]) { sumGo_correct += 1 }
-				} 
-            } else if (data[i].SS_trial_type == "stop"){
-				stop_length +=1
-				if (data[i].rt == -1) {
-					sumStop_correct +=1
-				}
-			}
-        }
-        var average_rt = sum_rt / num_responses;
-        var averageGo_correct = sumGo_correct / go_length;
-		var missed_responses = (go_length - num_responses) / go_length
-		var averageStop_correct = sumStop_correct/stop_length
- 
-       
+       	calculateResponses()
         practice_feedback_text2 = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(averageGo_correct*100) + "%"
         practiceStopCount2 = practiceStopCount2+1
         if(practiceStopCount2==1){
-			if(average_rt > RT_thresh  || missed_responses >= missed_response_thresh || averageStop_correct < .36 || averageStop_correct > .64){
+			if(average_rt > RT_thresh  || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				practice_feedback_text2 += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
             }if (averageGo_correct<accuracy_thresh) {
             	practice_feedback_text2 += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
@@ -1209,7 +1181,7 @@ var practice_node = {
 /********************* block with SS, and ALL colors *********************/
 var phase3_trials = []
 phase3_trials.push(stop_feedback_block)
-for (i = 0; i < 30; i++) {
+for (i = 0; i < 75; i++) {
 	phase3_trials.push(fixationBlock)
 	//var stim_data = $.extend({},practice_trial_data)
     var stop_signal_block = {
@@ -1238,97 +1210,36 @@ var test_node = {
     timeline: phase3_trials,
 	/* This function defines stopping criteria */
     loop_function: function(data){
-		var sum_rt = 0;
-        var sumGo_correct = 0;
-        var go_length = 0;
-		var num_responses = 0;
-		var sumStop_correct = 0;
-		var stop_length = 0
-        for(var i=0; i < data.length; i++){
-            if (data[i].SS_trial_type == "go") {
-            	go_length += 1
-				if (data[i].rt != -1) {
-					num_responses += 1
-					sum_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response[1]) { sumGo_correct += 1 }
-				} 
-            } else if (data[i].SS_trial_type == "stop"){
-				stop_length +=1
-				if (data[i].rt == -1) {
-					sumStop_correct +=1
-				}
-			}
-        }
-        var average_rt = sum_rt / num_responses;
-        var averageGo_correct = sumGo_correct / go_length;
-		var missed_responses = (go_length - num_responses) / go_length
-		var averageStop_correct = sumStop_correct/stop_length
+	setupThirdStage()	
+	calculateResponses()
+	
        	stop_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(averageGo_correct*100) + "%"
 		stopCount = stopCount + 1
-		
 	
 	    if(stopCount == 6){
 			stop_feedback_text += '</p><p class = block-text>Done with this phase.'       
 		 	return false
 		
 		 }else if(stopCount ==1){
-		 	exp_len = 75
-		 	stop_percent = (1/3)
-		 	stim_colors = [0,1,2,3,8]
-		    stims = []
-		    var num_stims = exp_len/stim_colors.length
-				for (var c = 0; c < stim_colors.length; c++) {
-					var stop_trials = jsPsych.randomization.repeat(['stop','go','go'], num_stims/3)
-					var stop_colors = [4,5,6,7,9]
-						for (var s = 0; s< num_stims; s++) {
-							if (stop_trials[s] == 'stop') {
-								var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
-							} else {
-								var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
-							}
-						stims.push(stim)
-						}
-				}
-			a=jsPsych.randomization.repeat(stims,1,true)
-			tempShape=jsPsych.randomization.repeat([1,2,3,4],18)
-			tempShape.push(Math.floor(Math.random()*4+1))
-			tempShape.push(Math.floor(Math.random()*4+1))
-			tempShape.push(Math.floor(Math.random()*4+1))
 			stop_feedback_text += '</p><p class = block-text><strong>Please Get the Experimenter.</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'       
 			if (averageGo_correct<accuracy_thresh) {
         		stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 			currTrial =0
-			return false;
-		} else if(stopCount>1 && stopCount<6){
+			return true;
+		}else if(stopCount ==2){
+			stop_feedback_text += '</p><p class = block-text><strong>Please Get the Experimenter.</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'       
+			if (averageGo_correct<accuracy_thresh) {
+        		stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
+			}
+			currTrial =0
+			return true;
+		} else if(stopCount>2 && stopCount<6){
 			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
     	   	}if (averageGo_correct<accuracy_thresh) {
     			stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
-			exp_len = 75
-	 		stop_percent = (1/3)
-	 		stim_colors = [0,1,2,3,8]
-		    stims = []
-	 		var num_stims = exp_len/stim_colors.length
-				for (var c = 0; c < stim_colors.length; c++) {
-					var stop_trials = jsPsych.randomization.repeat(['stop','go','go'], num_stims/3)
-					var stop_colors = [4,5,6,7,9]
-						for (var s = 0; s< num_stims; s++) {
-							if (stop_trials[s] == 'stop') {
-								var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': stop_colors.pop()}
-							} else {
-								var stim = {'color': stim_colors[c], 'trial': stop_trials[s], 'stop_color': 'NA'}
-							}	
-								stims.push(stim)
-							}
-						}
-						a=jsPsych.randomization.repeat(stims,1,true)
-						tempShape=jsPsych.randomization.repeat([1,2,3,4],18)
-						tempShape.push(Math.floor(Math.random()*4+1))
-						tempShape.push(Math.floor(Math.random()*4+1))
-						tempShape.push(Math.floor(Math.random()*4+1))
-						currTrial =0			
 			return false;	
 		}
 	}

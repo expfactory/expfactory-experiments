@@ -6,6 +6,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'two_stage_decision'})
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 //Polar method for generating random samples from a norma distribution.
 //Source: http://blog.yjl.im/2010/09/simulating-normal-random-variable-using.html
 function normal_random(mean, variance) {
@@ -254,11 +273,13 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.62
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
-
-//define global variables
+// task specific variables
 var practice_trials_num = 10
 var test_trials_num = 200
 var current_trial = -1 
@@ -320,6 +341,21 @@ var curr_ss_stim = practice_ss_stim
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -345,6 +381,7 @@ var feedback_instruct_block = {
   timing_post_trial: 0,
   timing_response: 6000
 };
+
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
@@ -517,6 +554,7 @@ var two_stage_decision_experiment = []
 two_stage_decision_experiment.push(welcome_block);
 two_stage_decision_experiment.push(instruction_node);
 two_stage_decision_experiment.push(start_practice_block);
+two_stage_decision_experiment.push(attention_node)
 for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
@@ -524,6 +562,7 @@ for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(change_phase_block)
 two_stage_decision_experiment.push(start_test_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
@@ -533,12 +572,15 @@ for (var i = 0; i < test_trials_num/2; i ++ ) {
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(wait_block)
 for (var i = 0; i < test_trials_num/2; i ++ ) {
+	two_stage_decision_experiment.push(attention_node)
 	two_stage_decision_experiment.push(first_stage)
 	two_stage_decision_experiment.push(first_stage_selected)
 	two_stage_decision_experiment.push(second_stage)
 	two_stage_decision_experiment.push(FB_node)
 	two_stage_decision_experiment.push(noFB_node)
 }
+two_stage_decision_experiment.push(attention_node)
 two_stage_decision_experiment.push(end_block)

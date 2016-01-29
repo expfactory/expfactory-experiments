@@ -12,7 +12,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "test_task",
+        "exp_id": "test_task",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
         "contributors": [
                          "Ian Eisenberg",
@@ -39,7 +39,8 @@
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement"}
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
                        }
    }
 ]

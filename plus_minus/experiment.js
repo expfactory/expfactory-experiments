@@ -9,15 +9,22 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'plus_minus'})
 }
+
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var numbers =  [];
 for (var i = 10; i <= 99; i++) {
     numbers.push(i.toString());
@@ -30,6 +37,7 @@ var alternate_list = numbers.slice(60,90)
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

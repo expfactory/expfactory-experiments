@@ -29,16 +29,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "bis11"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "bis11"}
 };
 
 var opts = ["Rarely/Never", "Occasionally", "Often", "Almost Always/Always"]
@@ -51,6 +54,7 @@ var score_scale = {"Rarely/Never": 1, "Occasionally": 2, "Often": 3, "Almost Alw
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "bis11",
   horizontal: true,
   preamble: '<div><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
   pages: all_pages,
@@ -65,7 +69,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "bis11"}
 };
 
 

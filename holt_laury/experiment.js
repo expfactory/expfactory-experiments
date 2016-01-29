@@ -11,16 +11,23 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'holt_laury'})
+}
+
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-//define task variables
+// task specific variables
 var lowriskhigh = '100';
 var lowrisklow = '80';
 var highriskhigh = '190';
@@ -38,7 +45,6 @@ for (var i = 0; i < highprobs.length; i++){
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -96,6 +102,7 @@ var test_block = {
     // placed in array so plug in can parse correctly. 
     // each element of array should be the buttonlist for a page.
     buttonlist: [buttonlist],
+    data: {'exp_id': 'holt_laury'},
     checkAll: [true],
     numq: [10]
 };

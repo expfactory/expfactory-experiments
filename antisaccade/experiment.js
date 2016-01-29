@@ -6,6 +6,29 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'antisaccade'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.round(Math.random()*(lst.length-1))
     return lst[index]
@@ -15,9 +38,7 @@ var getFixationLength = function() {
     return Math.floor(Math.random()*9)*250+1500
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
+
 
 
 
@@ -43,8 +64,13 @@ for(i=0;i<data.length;i++){
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
+
+// task specific variables
 
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left arrow",37],["right arrow",39],["right arrow",39]],1)
 var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
@@ -86,6 +112,21 @@ test_cue_sides = jsPsych.randomization.repeat([0,1],exp_len/2,false)
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -245,6 +286,7 @@ for (i=0; i<practice_len; i++) {
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
 
 //Set up test
 antisaccade_experiment.push(begin_test_block)
@@ -307,3 +349,5 @@ for (i=0; i<exp_len; i++) {
     antisaccade_experiment.push(target_block)
     antisaccade_experiment.push(mask_block)
 }
+antisaccade_experiment.push(attention_node)
+antisaccade_experiment.push(end_block)

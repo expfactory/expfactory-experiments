@@ -28,16 +28,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "upps_impulsivity"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In the following pages you will be presented with a number of statements that describe ways in which people act and think. For each statement, please indicate how much you agree or disagree with the statement.  Be sure to indicate your agreement or disagreement for every statement.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>In the following pages you will be presented with a number of statements that describe ways in which people act and think. For each statement, please indicate how much you agree or disagree with the statement.  Be sure to indicate your agreement or disagreement for every statement.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "upps_impulsivity"}
 };
 
 var opts = ["Agree Strongly", "Agree Some", "Disagree Some", "Disagree Strongly"]
@@ -50,6 +53,7 @@ var score_scale = {"Agree Strongly":1, "Agree Some":2, "Disagree Some":3, "Disag
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "upps_impulsivity",
   horizontal: true,
   preamble: '',
   pages: all_pages,
@@ -64,7 +68,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "upps_impulsivity"}
 };
 
 

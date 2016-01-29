@@ -7,6 +7,10 @@ function getDisplayElement() {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'simple_reaction_time'})
+}
+
 var post_trial_gap = function() {
   gap = Math.floor( Math.random() * 2000 ) + 1000
   return gap;
@@ -14,7 +18,7 @@ var post_trial_gap = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-	jsPsych.data.addDataToLastTrial({ITI: gap, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({trial_num: current_trial})
 	current_trial = current_trial + 1
 }
 
@@ -25,10 +29,11 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-
+// task specific variables
 var practice_len = 5
 var experiment_len = 50
 var gap = 0

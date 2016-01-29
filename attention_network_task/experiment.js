@@ -6,6 +6,29 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'attention_network_task'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var post_trial_gap = function() {
   var curr_trial = jsPsych.progress().current_trial_global
   return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
@@ -21,33 +44,37 @@ var getInstructFeedback = function() {
 }
 
 var changeData = function(){
-data=jsPsych.data.getData()
-practiceDataCount = 0
-testDataCount = 0
-for(i=0;i<data.length;i++){
-	if(data[i].trial_id == 'practice_intro'){
-	practiceDataCount = practiceDataCount + 1
-	} else if (data[i].trial_id == 'test_intro'){
-	testDataCount = testDataCount + 1
+	data=jsPsych.data.getData()
+	practiceDataCount = 0
+	testDataCount = 0
+	for(i=0;i<data.length;i++){
+		if(data[i].trial_id == 'practice_intro'){
+		practiceDataCount = practiceDataCount + 1
+		} else if (data[i].trial_id == 'test_intro'){
+		testDataCount = testDataCount + 1
+		}
 	}
-}
-	if(practiceDataCount >= 1 && testDataCount === 0){
-	//temp_id = data[i].trial_id
-	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
-	} else if( practiceDataCount >= 1 && testDataCount >= 1){
-	//temp_id = data[i].trial_id
-	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
-	}
+		if(practiceDataCount >= 1 && testDataCount === 0){
+		//temp_id = data[i].trial_id
+		jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+		} else if( practiceDataCount >= 1 && testDataCount >= 1){
+		//temp_id = data[i].trial_id
+		jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+		}
 }
 
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-/* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 1   ///in seconds
 
+// task specific variables
+/* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
 var locations = ['up', 'down']
 var cues = ['nocue', 'center', 'double', 'spatial']
 var current_trial = 0
@@ -101,6 +128,21 @@ var blocks = [block1_trials, block2_trials, block3_trials]
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -391,6 +433,7 @@ for (b = 0; b < blocks.length; b ++) {
 		}
 		attention_network_task_experiment.push(last_fixation)
 	}
+	attention_network_task_experiment.push(attention_node)
 	attention_network_task_experiment.push(rest_block)
 }
 attention_network_task_experiment.push(end_block)

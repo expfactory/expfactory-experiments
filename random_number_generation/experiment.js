@@ -6,20 +6,27 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'random_number_generation'})
+}
+
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
-}
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var grid = 
     '<div class = numbox>' +
     '<button id = button_1 class = "square num-button"><div class = numbers>1</div></button>' +

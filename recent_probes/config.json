@@ -6,13 +6,14 @@
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "recent_probes",
+        "exp_id": "recent_probes",
         "cognitive_atlas_task_id": "trm_56674987c8f0c",
         "contributors": [
                          "Jamie Li",
@@ -27,7 +28,8 @@
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement"}
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
                        }
     
    }

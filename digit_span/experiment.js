@@ -7,6 +7,29 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'digit_span'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var arraysEqual = function(arr1, arr2) {
     if(arr1.length !== arr2.length)
         return false;
@@ -58,16 +81,18 @@ var clearResponse = function() {
   response = []
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
+
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var num_digits = 4
 var num_trials = 10
 var curr_seq = []
@@ -98,6 +123,21 @@ var response_grid =
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -293,6 +333,7 @@ var digit_span_experiment = [];
 digit_span_experiment.push(welcome_block);
 digit_span_experiment.push(instruction_node);
 digit_span_experiment.push(forward_node)
+digit_span_experiment.push(attention_node)
 digit_span_experiment.push(start_reverse_block)
 digit_span_experiment.push(reverse_node)
 digit_span_experiment.push(end_block)

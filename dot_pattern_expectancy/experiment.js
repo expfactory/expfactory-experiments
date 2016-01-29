@@ -6,6 +6,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'dot_pattern_expectancy'})
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -42,9 +61,13 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var correct_responses = [["left arrow",37],["down arrow",40]]
 var path = 'static/experiments/dot_pattern_expectancy/images/'
 var prefix = '<div class = centerbox><div class = img-container><img src = "'
@@ -64,6 +87,21 @@ var blocks = [block1_list,block2_list, block3_list, block4_list]
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -215,7 +253,7 @@ var dot_pattern_expectancy_experiment = []
 dot_pattern_expectancy_experiment.push(welcome_block);
 dot_pattern_expectancy_experiment.push(instruction_node);
 
-for (b = 0; b< 1; b++) {
+for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
 	for (i = 0; i < block.length; i++) { 
 		switch (block[i]) {
@@ -248,6 +286,9 @@ for (b = 0; b< 1; b++) {
 		dot_pattern_expectancy_experiment.push(fixation_block)
 		dot_pattern_expectancy_experiment.push(probe)
 		dot_pattern_expectancy_experiment.push(feedback_block)
+	}
+	if ($.inArray(b,[0,1,3]) != -1) {
+		dot_pattern_expectancy_experiment.push(attention_node)
 	}
 	dot_pattern_expectancy_experiment.push(rest_block)
 }

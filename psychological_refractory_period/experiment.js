@@ -7,6 +7,29 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'psychological_refractory_period'})
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -108,15 +131,16 @@ var appendData = function(data, trial_id) {
   jsPsych.data.addDataToLastTrial(curr_data)
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var practice_len = 36
 var exp_len = 180
 var curr_trial = 0
@@ -142,6 +166,21 @@ var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -289,9 +328,11 @@ for (var i = 0; i < practice_len; i++) {
   psychological_refractory_period_experiment.push(practice_block);
   psychological_refractory_period_experiment.push(feedback_block);
 }
+psychological_refractory_period_experiment.push(attention_node);
 psychological_refractory_period_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
   psychological_refractory_period_experiment.push(fixation_block);
   psychological_refractory_period_experiment.push(test_block)
 }
+psychological_refractory_period_experiment.push(attention_node);
 psychological_refractory_period_experiment.push(end_block);

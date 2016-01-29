@@ -10,7 +10,7 @@
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "cognitive_reflection",
+        "exp_id": "cognitive_reflection",
         "cognitive_atlas_task_id": "trm_56675359b663a",
         "contributors": ["Ian Eisenberg",
                          "Zeynep Enkavi",
@@ -23,7 +23,8 @@
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement"}
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
                        }
    }
 ]

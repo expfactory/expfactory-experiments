@@ -13,8 +13,9 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "tag": "columbia_card_task_cold",
+        "exp_id": "columbia_card_task_cold",
         "cognitive_atlas_task_id": "trm_5667492c555b7",
+        "template":"jspsych",
         "contributors": [
                          "Jamie Li",
                          "Ian Eisenberg",
@@ -31,7 +32,6 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"}
-                       }
-    
+                       }  
    }
 ]

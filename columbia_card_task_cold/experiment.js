@@ -4,6 +4,10 @@
 
 /// BUGS TO FIX, make sure that it is only subtracting the FIRST time we hit a loss card.  add data to excel spreadsheet, and then add a last page telling the participants how much they've won
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var appendTestData = function (){
 	jsPsych.data.addDataToLastTrial({responses: currID, num_loss_cards: lossProb, gain_amount: gainAmt, loss_amount: lossAmt, round_points: roundPoints})
 
@@ -52,11 +56,11 @@ var chooseButton = function(clicked_id){
 var chooseButton1 = function(clicked_id){
 	currID = parseInt(clicked_id)
 	alert('You chose '+currID+' cards. When you click on ok, the next round starts. Please note that the loss amount, the gain amount, and the number of loss cards might have changed.')		
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
@@ -154,15 +158,14 @@ var instructTurnCard = function(){
 	document.getElementById("c32").src='/static/experiments/columbia_card_task_cold/images/chosen.png';
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var e = ""
 var numRounds = 27
 var whichRound = 0

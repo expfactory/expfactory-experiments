@@ -5,14 +5,14 @@
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldracK_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
                  "style.css",
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "theories_of_willpower",
+        "exp_id": "theories_of_willpower",
         "cognitive_atlas_task_id": "trm_56a91a3082c31",
         "contributors": [
                          "Zeynep Enkavi",

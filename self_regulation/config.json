@@ -5,14 +5,14 @@
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
                  "style.css",
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "self_regulation",
+        "exp_id": "self_regulation",
         "cognitive_atlas_task_id": "trm_56a91ed5f1ccc",
         "contributors": [
                          "Zeynep Enkavi",

@@ -6,6 +6,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'threebytwo'})
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
@@ -134,9 +153,13 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var response_keys = jsPsych.randomization.repeat([{key:77,key_name:'M'},{key:90, key_name: 'Z'}], 1, true)
 var practice_length = 100
 var test_length = 340
@@ -180,6 +203,21 @@ var prompt_task_list = '<ul><li><strong>Color</strong> or <strong>Orange-Blue</s
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -333,6 +371,7 @@ for (var i = 0; i<practiceStims.length; i++) {
     threebytwo_experiment.push(practice_block);
     threebytwo_experiment.push(gap_block);
 }
+threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(start_test_block)
 for (var i = 0; i<stims.length; i++) {
     threebytwo_experiment.push(setStims_block)
@@ -341,5 +380,5 @@ for (var i = 0; i<stims.length; i++) {
     threebytwo_experiment.push(test_block);
     threebytwo_experiment.push(gap_block);
 }
-
+threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(end_block)

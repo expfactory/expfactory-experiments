@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tower_of_london_imagine'})
+}
+
 var getStim = function() {
   var response_area = '<div class = tol_response_div>' +
                   '<button class = tol_response_button id = 1>1</button>' +
@@ -54,10 +58,11 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
-
+// task specific variables
 var colors = ['Green', 'Red', 'Blue']
 var problem_i = 0
 /*keeps track of peg board (where balls are). Lowest ball is the first value for each peg.
@@ -164,7 +169,7 @@ var test_block = {
   type: 'single-stim-button',
   stimulus: getStim,
   button_class: 'tol_response_button',
-  data: {exp_id: "tol", trial_id: "test"},
+  data: {trial_id: "test"},
   timing_stim: 20000,
   timing_response: 20000,
   timing_post_trial: 1000,

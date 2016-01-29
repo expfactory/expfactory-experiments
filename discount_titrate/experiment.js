@@ -6,6 +6,29 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'discount_titrate'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 // Function to generate random numbers from normal distribution
 // Adapted from https://github.com/robbrit/randgen/blob/master/lib/randgen.js
 function rnorm(mean, stdev) {
@@ -48,16 +71,16 @@ function fillArray(value, len) {
   return arr;
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 //First generate smaller amounts (mean = 20, sd = 10, clipped at 5 and 40)
 var small_amts = [];
 for (i=0; i<36; i++) {
@@ -103,6 +126,20 @@ for(var i = 0; i < options.small_amt.length; i++){
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 /* define static blocks */
 var welcome_block = {
@@ -189,6 +226,7 @@ var test_block = {
 	stimuli: trials,
 	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "test"},
 	is_html: true,
+  data: {'exp_id': 'discount_titrate'},
 	choices: ['q', 'p'],
   randomize_order: true
 };
@@ -211,4 +249,5 @@ discount_titrate_experiment.push(start_practice_block);
 discount_titrate_experiment.push(practice_block);
 discount_titrate_experiment.push(start_test_block);
 discount_titrate_experiment.push(test_block);
+discount_titrate_experiment.push(attention_node)
 discount_titrate_experiment.push(end_block)

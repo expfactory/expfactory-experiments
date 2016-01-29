@@ -1,7 +1,9 @@
 /* ************************************ */
 /* Helper Functions                     */
 /* ************************************ */
-
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 var getReward = function(){
 	temp=jsPsych.randomization.repeat(points,1)
@@ -148,18 +150,21 @@ console.log(clicked_id)
 		unclickedCards.splice(index,1)
 		roundPoints=roundPoints+gainAmt	
 		
-		var e = jQuery.Event("keydown");
+		e = jQuery.Event("keydown");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e);
-		var e = jQuery.Event("keyup");
+		e = jQuery.Event("keyup");
 		e.which = 37; // # Some key code value
 		e.keyCode = 37
 		$(document).trigger(e)
 	}
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 var getRound = function(){
 	if(roundOver === 0){  //this is for the start of a round
@@ -316,18 +321,15 @@ var instructTurnCards = function (){
 
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
-
-
 
 /* ************************************ */
 /* Experimental Variables               */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var e = ""
 var numRounds=27
 var lossClicked = false

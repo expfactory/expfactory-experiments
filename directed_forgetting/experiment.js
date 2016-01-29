@@ -6,6 +6,30 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'directed_forgetting'})
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
+
 /* Append gap and current trial to data and then recalculate for next trial*/
 
 //this adds the current trial and the stims shown to the data
@@ -143,19 +167,19 @@ var getProbe = function() {
 	}	
 };
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
-
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-var num_trials = 5 // num trials per run //24
-var num_runs = 1 //6
+// task specific variables
+var num_trials = 24 // num trials per run
+var num_runs = 3
 var experimentLength = num_trials * num_runs
 var currTrial = 0
 var stimArray = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
@@ -171,6 +195,21 @@ var fileType = '.png'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
@@ -337,5 +376,6 @@ directed_forgetting_experiment.push(start_test_block);
 		directed_forgetting_experiment.push(probe_block);
 		directed_forgetting_experiment.push(ITI_fixation_block);
 	}
+	directed_forgetting_experiment.push(attention_node)
 }
 directed_forgetting_experiment.push(end_block);

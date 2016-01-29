@@ -28,16 +28,19 @@ function fillArray(value, len) {
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id: "self_regulation"}
 };
 
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Each item of this questionnaire is a statement that a person may either agree with or disagree with.  For each item, indicate how much you agree or disagree with what the item says.  Please respond to all the items; do not leave any blank.  Choose only one response to each statement.  Please be as accurate and honest as you can be.  Respond to each item as if it were the only item.  That is, do not worry about being "consistent" in your responses.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Each item of this questionnaire is a statement that a person may either agree with or disagree with.  For each item, indicate how much you agree or disagree with what the item says.  Please respond to all the items; do not leave any blank.  Choose only one response to each statement.  Please be as accurate and honest as you can be.  Respond to each item as if it were the only item.  That is, do not worry about being "consistent" in your responses.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {exp_id : "self_regulation"}
 };
 
 var opts = ["Strongly disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Strongly agree"]
@@ -50,6 +53,7 @@ var score_scale = {"Strongly disagree":1, "Somewhat disagree":2, "Neutral":3, "S
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "self_regulation",
   horizontal: true,
   preamble: '',
   pages: all_pages,
@@ -65,7 +69,8 @@ var survey_block = {
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {exp_id : "self_regulation"}
 };
 
 

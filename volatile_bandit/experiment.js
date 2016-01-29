@@ -8,6 +8,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'volatile_bandit'})
+}
+
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
 var text_insert = function(text, index, insert_value) {
 	text = text.slice(0, index) + insert_value + text.slice(index);
 	return text
@@ -67,9 +86,13 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.4
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var stage1_trials = 120
 var stage2_trials = 170
 var progress_value = 0 //set starting value
@@ -104,6 +127,21 @@ for (var b = 0; b < volatile_blocks.length; b++) {
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -169,7 +207,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
-  text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
   timing_post_trial: 1000
@@ -241,6 +279,8 @@ for (var i = 0; i < stage1_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+volatile_bandit_experiment.push(start_test_block)
 
 /*
 Following the static condition is a volatile condition where the higher probability stimulus changes
@@ -301,4 +341,6 @@ for (var i = 0; i < stage2_trials; i++) {
 	volatile_bandit_experiment.push(responded_block)
 	volatile_bandit_experiment.push(feedback_block)
 }
+volatile_bandit_experiment.push(attention_node)
+
 volatile_bandit_experiment.push(end_block)

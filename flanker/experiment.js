@@ -6,6 +6,25 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'flanker'})
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
@@ -32,9 +51,13 @@ for(i=0;i<data.length;i++){
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.45
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 var test_stimuli = [
   {
@@ -74,6 +97,21 @@ for (i = 0; i < test_trials.data.length; i++) {
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -179,7 +217,7 @@ for (i=0; i<practice_len; i++) {
 	}
 	flanker_experiment.push(practice_block)
 }
-
+flanker_experiment.push(attention_node)
 flanker_experiment.push(start_test_block)
 
 /* define test block */
@@ -202,4 +240,5 @@ for (i=0; i<exp_len; i++) {
 	}
 	flanker_experiment.push(test_block)
 }
+flanker_experiment.push(attention_node)
 flanker_experiment.push(end_block)

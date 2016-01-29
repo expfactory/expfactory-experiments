@@ -5,14 +5,14 @@
         "run": [
                  "static/js/jspsych/jspsych.js",
                  "static/js/jspsych/plugins/jspsych-text.js",
-                 "static/js/jspsych/plugins/jspsych-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
                  "style.css",
                  "static/css/jspsych.css",
                  "static/css/default_style.css"
                ],
-        "tag": "grit_scale",
+        "exp_id": "grit_scale",
         "cognitive_atlas_task_id": "trm_56a9166421494",
         "contributors": [
                          "Zeynep Enkavi",

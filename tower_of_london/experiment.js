@@ -7,6 +7,10 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({'exp_id': 'tower_of_london'})
+}
+
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement)
   var target_board = makeBoard('peg_board', problems[problem_i])
@@ -130,9 +134,11 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var colors = ['Green', 'Red', 'Blue']
 var choices = [49, 50, 51]
 var problem_i = 0
@@ -168,6 +174,7 @@ var held_ball = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -261,7 +268,7 @@ var practice_block = {
   stimulus: getPractice,
   button_class: 'special',
   is_html: true,
-  data: {exp_id: "tol", trial_id: "practice"},
+  data: {trial_id: "practice"},
   timing_stim: getTime,
   timing_response: getTime,
   timing_post_trial: 0,
@@ -280,7 +287,7 @@ var test_block = {
   stimulus: getStim,
   button_class: 'special',
   is_html: true,
-  data: {exp_id: "tol", trial_id: "test"},
+  data: {trial_id: "test"},
   timing_stim: getTime,
   timing_response: getTime,
   timing_post_trial: 0,
@@ -299,7 +306,7 @@ var feedback_block = {
   stimulus: getFB,
   choices: 'none',
   is_html: true,
-  data: {exp_id: 'tol', trial_id: 'feedback'},
+  data: {trial_id: 'feedback'},
   timing_stim: 2000,
   timing_response: 2000,
   timing_post_trial: 500
