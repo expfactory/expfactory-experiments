@@ -142,7 +142,7 @@ var feedback_block = {
   stimulus: getFeedback,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "feedback", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000
@@ -153,7 +153,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", "trial_id": "fixation"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 2000,
   timing_response: 2000,
@@ -166,7 +166,7 @@ var A_cue = {
   stimulus: prefix + path + valid_cue + postfix,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -177,7 +177,7 @@ var other_cue = {
   stimulus: getInvalidCue,
   is_html: true,
   choices: 'none',
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "cue", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 500,
   timing_post_trial: 0
@@ -188,7 +188,7 @@ var X_probe = {
   stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -200,7 +200,7 @@ var other_probe = {
   stimulus: getInvalidProbe,
   is_html: true,
   choices: [37,40],
-  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe"},
+  data: {exp_id: "dot_pattern_expectancy", trial_id: "probe", exp_stage: "test"},
   timing_stim: 500,
   timing_response: 1500,
   response_ends_trial: false,
@@ -217,7 +217,7 @@ dot_pattern_expectancy_experiment.push(instruction_node);
 
 for (b = 0; b< 1; b++) {
 	var block = blocks[b]
-	for (i = 0; i < block.length; i++) {
+	for (i = 0; i < block.length; i++) { 
 		switch (block[i]) {
 			case "AX":
 				cue = jQuery.extend(true, {}, A_cue)

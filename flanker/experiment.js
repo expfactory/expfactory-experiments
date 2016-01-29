@@ -9,6 +9,26 @@ function getDisplayElement () {
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
+
+var changeData = function(){
+data=jsPsych.data.getTrialsOfType('text')
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -35,8 +55,8 @@ var test_stimuli = [
   }
 ];
 
-practice_len = 12
-exp_len = 100
+practice_len = 12 //5
+exp_len = 100 //5
 var practice_trials = jsPsych.randomization.repeat(test_stimuli, practice_len/4, true);
 var test_trials = jsPsych.randomization.repeat(test_stimuli, exp_len/4, true);
 
@@ -58,6 +78,7 @@ for (i = 0; i < test_trials.data.length; i++) {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "flanker", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -67,6 +88,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "flanker", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -77,6 +99,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: ["<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of f's and h's. For instance, you might see 'fffff' or 'hhfhh'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'ffhff' you would press the 'h' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"],
   allow_keys: false,
+  data: {exp_id: "flanker", trial_id: "instruction"},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
@@ -106,6 +129,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "flanker", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -113,6 +137,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "flanker", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Done with practice. Starting test.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -123,11 +148,12 @@ var fixation_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
+  data: {exp_id: "flanker", trial_id: "fixation"},
   choices: 'none',
   timing_stim: 500,
   timing_response: 500,
-  timing_post_trial: 0
-  
+  timing_post_trial: 0,
+  on_finish: changeData,  
 };
 
 //Set up experiment
@@ -140,6 +166,7 @@ for (i=0; i<practice_len; i++) {
 	  type: 'poldrack-categorize',
 	  stimulus: practice_trials.image[i],
 	  is_html: true,
+	  data: {exp_id: "flanker", trial_id: "stim", exp_stage: "practice"},
 	  key_answer: practice_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
@@ -162,6 +189,7 @@ for (i=0; i<exp_len; i++) {
 	  type: 'poldrack-categorize',
 	  stimulus: test_trials.image[i],
 	  is_html: true,
+	  data: {exp_id: "flanker", trial_id: "stim", exp_stage: "test"},
 	  key_answer: test_response_array[i],
 	  correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
