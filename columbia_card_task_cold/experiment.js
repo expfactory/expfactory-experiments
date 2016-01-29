@@ -4,6 +4,10 @@
 
 /// BUGS TO FIX, make sure that it is only subtracting the FIRST time we hit a loss card.  add data to excel spreadsheet, and then add a last page telling the participants how much they've won
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 var appendTestData = function (){
 	jsPsych.data.addDataToLastTrial({responses: currID, num_loss_cards: lossProb, gain_amount: gainAmt, loss_amount: lossAmt, round_points: roundPoints})
 
@@ -154,15 +158,14 @@ var instructTurnCard = function(){
 	document.getElementById("c32").src='/static/experiments/columbia_card_task_cold/images/chosen.png';
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var e = ""
 var numRounds = 27
 var whichRound = 0

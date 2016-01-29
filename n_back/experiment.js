@@ -8,6 +8,24 @@ a match or not
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function evalAttentionChecks() {
+  var check_percent = 1
+  if (run_attention_checks) {
+    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
+    var checks_passed = 0
+    for (var i = 0; i < attention_check_trials.length; i++) {
+      if (attention_check_trials[i].correct === true) {
+        checks_passed += 1
+      }
+    }
+    check_percent = checks_passed/attention_check_trials.length
+  } 
+  return check_percent
+}
+
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 
 var randomDraw = function(lst) {
     var index = Math.floor(Math.random()*(lst.length))
@@ -29,15 +47,17 @@ var record_acc = function() {
 	}
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
+var run_attention_checks = true
+var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
+// task specific variables
 var letters = 'bBdDgGtTvV'
 var num_blocks = 2 //of each delay
 var num_trials = 50
@@ -47,6 +67,21 @@ var control_before = Math.round(Math.random()) //0 control comes before test, 1,
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  timing_response: 30000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
@@ -192,6 +227,7 @@ for (var d = 0; d<delays.length; d++) {
 			n_back_experiment.push(test_block)
 		}
 	}
+	n_back_experiment.push(attention_node)
 }
 if (control_before == 1) {
 	n_back_experiment.push(start_control_block)

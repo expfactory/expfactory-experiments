@@ -130,9 +130,11 @@ var getInstructFeedback = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 7   ///in seconds
 
+// task specific variables
 var colors = ['Green', 'Red', 'Blue']
 var choices = [49, 50, 51]
 var problem_i = 0
@@ -168,6 +170,7 @@ var held_ball = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',

@@ -7,56 +7,15 @@ function getDisplayElement () {
     return $('<div class = display_stage></div>').appendTo('body')
 }
 
-var qualityCheck = function(data) {
-
-	var arraySum = function(lst) {
-	   var count=0;
-	   for (var i=lst.length; i--;) {
-	     count+=lst[i];
-	   }
-	   return count
-	}
-
-	var rt_thresh = 200 // avg rt has to be above this thresh
-	var response_thresh = 0.8 // percent response needs to be above this thresh
-	var attention_thresh = 0.8 // successful attention checks needs to be above this thresh
-
-	var track_rts = []
-	var track_responses = []
-
-	for (var i = 0; i < data.length; i++) {
-		var trial = data[i]
-		// Check if subject could have responded with a key
-		if (trial.possible_responses instanceof Array) {
-			track_responses.push(trial.key_press)
-			// if subject responded, record rt
-			if (trial.key_press != -1) {
-				track_rts.push(trial.rt)
-			}
-		}
-		else if (trial.trial_type == 'single-stim-button') {
-			track_responses.push(trial.mouse_click)
-			if (trial.mouse_click != -1) {
-				track_rts.push(trial.rt)
-			}
-		}
-
-	}
-	avg_rt = arraySum(track_rts)/track_rts.length
-	return avg_rt
-}
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
-}
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+// generic task variables
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
-
-
+// task specific variables
 var start_time = new Date();
 var timelimit = 10
 
