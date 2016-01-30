@@ -18,6 +18,14 @@ function addID() {
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
+
+function fillArray(value, len) {
+  if (len === 0) return [];
+  var a = [value];
+  while (a.length * 2 <= len) a = a.concat(a);
+  if (a.length < len) a = a.concat(a.slice(0, len - a.length));
+  return a;
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -25,22 +33,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
-var instructTimeThresh = 5   ///in seconds
-
-// task specific variables
-var lowriskhigh = '100';
-var lowrisklow = '80';
-var highriskhigh = '190';
-var highrisklow = '5';
-var highprobs = ['10', '20', '30', '40', '50', '60', '70', '80', '90' , '100'];
-var lowprobs = ['90', '80', '70', '60', '50', '40', '30', '20', '10' , '0'];
-
-//create array of html text that will be displayed
-var buttonlist = []
-//populate the array with the options
-for (var i = 0; i < highprobs.length; i++){
-  buttonlist += '<center>' + highprobs[i] +'% chance of $' + lowriskhigh + ', '+ lowprobs[i]+'% chance of $'+lowrisklow+'<input type="radio" name="response_'+i+'" value="A"><input type="radio" name="response_'+i+'" value="B">'+highprobs[i]+'% chance of $'+highriskhigh+', '+lowprobs[i]+'% chance of $'+highrisklow+'<br></center>'
-}
+var instructTimeThresh = 3   ///in seconds
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -51,7 +44,8 @@ var welcome_block = {
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  data: {'exp_id': 'holt_laury'},
 };
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
@@ -60,17 +54,20 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 6000,
+  data: {'exp_id': 'holt_laury'},
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	  
 var instructions_block = {
-  type: 'instructions',
+  type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will be presented with a series of lottery choices. Your job is to indicate which option you would prefer for each of the ten paired lottery choices. </p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will be presented with a series of lottery choices. Your job is to indicate which option you would prefer for each of the ten paired lottery choices. </p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected.</p></div>',
   ],
-  key_forward: 13,
-  allow_backwards: false
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000,
+  data: {'exp_id': 'holt_laury'},
 };
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
@@ -95,23 +92,33 @@ var instruction_node = {
     }
 }
 
-var test_block = {
-    type: 'poldrack-radio-buttonlist',
-    //if you're going to add more pages make sure to add same number of elements to preamble array
-    preamble: ['<p><center>Please indicate your preference between the two options for each of the ten paired lottery choices below.</center></p>'],
-    // placed in array so plug in can parse correctly. 
-    // each element of array should be the buttonlist for a page.
-    buttonlist: [buttonlist],
-    data: {'exp_id': 'holt_laury'},
-    checkAll: [true],
-    numq: [10]
+var all_pages = [fillArray('', 10)]
+
+var all_options = [[["10% chance of $100, 90% chance of $80","10% chance of $190, 90% chance of $5"],["20% chance of $100, 80% chance of $80","20% chance of $190, 80% chance of $5"],["30% chance of $100, 70% chance of $80","30% chance of $190, 70% chance of $5"],["40% chance of $100, 60% chance of $80","40% chance of $190, 60% chance of $5"],["50% chance of $100, 50% chance of $80","50% chance of $190, 50% chance of $5"],["60% chance of $100, 40% chance of $80","60% chance of $190, 40% chance of $5"],["70% chance of $100, 30% chance of $80","70% chance of $190, 30% chance of $5"],["80% chance of $100, 20% chance of $80","80% chance of $190, 20% chance of $5"],["90% chance of $100, 10% chance of $80","90% chance of $190, 10% chance of $5"],["100% chance of $100, 0% chance of $80","100% chance of $190, 0% chance of $5"]]]
+
+//higher - more impulsiveness: 1 is safe, 2 is risky
+var score_scale = {"10% chance of $100, 90% chance of $80":1,"10% chance of $190, 90% chance of $5":2,"20% chance of $100, 80% chance of $80":1,"20% chance of $190, 80% chance of $5":2,"30% chance of $100, 70% chance of $80":1,"30% chance of $190, 70% chance of $5":2,"40% chance of $100, 60% chance of $80":1,"40% chance of $190, 60% chance of $5":2,"50% chance of $100, 50% chance of $80":1,"50% chance of $190, 50% chance of $5":2,"60% chance of $100, 40% chance of $80":1,"60% chance of $190, 40% chance of $5":2,"70% chance of $100, 30% chance of $80":1,"70% chance of $190, 30% chance of $5":2,"80% chance of $100, 20% chance of $80":1,"80% chance of $190, 20% chance of $5":2,"90% chance of $100, 10% chance of $80":1,"90% chance of $190, 10% chance of $5":2,"100% chance of $100, 0% chance of $80":1,"100% chance of $190, 0% chance of $5":2}
+
+var survey_block = {
+  type: "poldrack-survey-multi-choice",
+  exp_id: "holt_laury",
+  horizontal: true,
+  preamble: '<p class = center-block-text>Please indicate your preference between the two gambles.</p>',
+  pages: all_pages,
+  options: all_options,
+  scale: score_scale,
+  show_clickable_nav: true,
+  allow_backward: true,
+  required: [fillArray(true, 10)],
+  reverse_score: [[false, false, false, false, false, false, false, false, false, false]],
 };
 
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  data: {'exp_id': 'holt_laury'},
 };
 
 
@@ -119,5 +126,5 @@ var end_block = {
 var holt_laury_experiment = []
 holt_laury_experiment.push(welcome_block);
 holt_laury_experiment.push(instruction_node);
-holt_laury_experiment.push(test_block);
+holt_laury_experiment.push(survey_block);
 holt_laury_experiment.push(end_block)
