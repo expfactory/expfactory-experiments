@@ -1,0 +1,35 @@
+#jspsych-poldrack-survey-multi-choice-form {
+    -webkit-order: -1;
+    order: -1;
+    margin: 3vh 3vw auto 3vw;
+}
+
+.display_stage{
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    -webkit-align-items: center;
+    overflow: auto;
+}
+
+
+.center-content{
+	-webkit-order: 0;
+    order: 0;
+}
+
+.jspsych-survey-multi-choice-nav{
+	-webkit-order: 1;
+    order: 1;
+}
+
+#bottom_img{
+    height:132px;
+    width: 351px
+}
+
+img {
+    align: middle;
+}
