@@ -1,0 +1,49 @@
+#jspsych-poldrack-survey-multi-choice-form {
+    -webkit-order: -1;
+    order: -1;
+    margin: 3vh 3vw auto 3vw;
+}
+
+.display_stage{
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    -webkit-align-items: center;
+    overflow: auto;
+}
+
+
+.center-content{
+	-webkit-order: 0;
+    order: 0;
+}
+
+.jspsych-survey-multi-choice-nav{
+	-webkit-order: 1;
+    order: 1;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts {
+  font-size: 20px !important;
+  padding:0 0 5px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts:before {
+  top:0px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-question {
+  font-size: 13px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-text {
+  -webkit-margin-before: 0px !important;
+  -webkit-margin-after: 0px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-question {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+ }
