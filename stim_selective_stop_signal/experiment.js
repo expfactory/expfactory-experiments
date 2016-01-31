@@ -561,7 +561,7 @@ for (b = 0; b< numblocks; b++) {
 
 	stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(stop_signal_exp_block)
 	if ($.inArray(b,[0,1,4]) != -1) {
-		motor_selective_stop_signal.push(attention_node)
+		stim_selective_stop_signal_experiment.push(attention_node)
 	}
 	stim_selective_stop_signal_experiment.push(test_feedback_block)
 }
