@@ -48,6 +48,7 @@ stim = '<div class = shapebox><div id = cross></div></div>'
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simple_reaction_time", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -56,6 +57,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simple_reaction_time", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -65,6 +67,7 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simple_reaction_time", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -74,6 +77,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "simple_reaction_time", trial_id: "instruction"},
   pages: ['<div class = centerbox><p class = block-text>In this experiment, we are testing how fast you can respond. On each trial press the spacebar as quickly as possible <strong>after</strong> you see the large "X".</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -107,6 +111,7 @@ var instruction_node = {
     
 var start_practice_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simple_reaction_time", trial_id: "practice_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>We will start 5 practice trials. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -115,6 +120,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simple_reaction_time", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -123,6 +129,7 @@ var start_test_block = {
 
 var reset_block = {
 	type: 'call-function',
+	data: {exp_id: "simple_reaction_time", trial_id: "reset_trial"},
 	func: function() {
 		current_trial = 0
 	},
@@ -134,7 +141,7 @@ var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
-  data: {exp_id: "simple_reaction_time", trial_id: "practice"},
+  data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "practice"},
   choices: [32],
   timing_post_trial: post_trial_gap,
   on_finish: appendData
@@ -145,7 +152,7 @@ var test_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
-  data: {exp_id: "simple_reaction_time", trial_id: "test"},
+  data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "test"},
   choices: [32],
   timing_post_trial: post_trial_gap,
   on_finish: appendData

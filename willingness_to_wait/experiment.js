@@ -1,6 +1,26 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+var changeData = function(){
+data=jsPsych.data.getTrialsOfType('poldrack-text')
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+}
+
 function getDisplayElement () {
     $('<div class = display_stage_background></div>').appendTo('body')
     return $('<div class = display_stage></div>').appendTo('body')
@@ -98,6 +118,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -106,6 +127,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -116,6 +138,7 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'introduction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -125,6 +148,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'introduction'},
   pages: ['<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -155,7 +179,17 @@ var instruction_node = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = center-block-text>We will now start the main experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
+  timing_response: 60000,
+  timing_post_trial: 1000
+};
+
+var start_practice_block = {
+  type: 'poldrack-text',
+  data: {exp_id: 'willingness_to_wait', trial_id: 'practice_intro'},
+  text: '<div class = centerbox><p class = center-block-text>We will begin with some practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
   timing_post_trial: 1000
@@ -169,7 +203,7 @@ var practice_block = {
   timing_stim: getPracticeDelay,
   timing_response: 100000,
   response_ends_trial: true,
-  data: {'exp_id': 'wtw', 'trial_id': 'practice'},
+  data: {exp_id: 'willingness_to_wait', trial_id: 'stim', exp_stage: 'practice'},
   timing_post_trial: 0,
   prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
@@ -186,7 +220,7 @@ var test_block = {
   timing_stim: getDelay,
   timing_response: 100000,
   response_ends_trial: true,
-  data: {'exp_id': 'wtw', 'trial_id': 'test'},
+  data: {exp_id: 'willingness_to_wait', trial_id: 'stim', exp_stage: 'test'},
   timing_post_trial: 0,
   prompt: token_thirty + progress_bar, 
   on_finish: function(data) {
@@ -201,10 +235,11 @@ var feedback_block = {
   choices: 'none',
   timing_stim: 1000,
   timing_response: 1000,
-  data: {'exp_id': 'wtw', 'trial_id': 'feedback'},
+  data: {exp_id: 'wtw', trial_id: 'feedback'},
   timing_post_trial: 1000,
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({'delay': delay})
+    changeData()
   }
 };
 
@@ -225,6 +260,8 @@ var test_node = {
 var willingness_to_wait_experiment = [];
 willingness_to_wait_experiment.push(welcome_block);
 willingness_to_wait_experiment.push(instruction_node);
+willingness_to_wait_experiment.push(start_practice_block);
+
 for (var i = 0; i < practice_delays.length; i++) {
   willingness_to_wait_experiment.push(practice_block)
   willingness_to_wait_experiment.push(feedback_block)

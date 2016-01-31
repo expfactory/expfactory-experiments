@@ -2,6 +2,27 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+
+var changeData = function(){
+data=jsPsych.data.getTrialsOfType('poldrack-text')
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+}
+
 function getDisplayElement () {
     $('<div class = display_stage_background></div>').appendTo('body')
     return $('<div class = display_stage></div>').appendTo('body')
@@ -78,6 +99,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stroop", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -90,6 +112,7 @@ var response_keys = '<ul list-text><li><span class = "large" style = "color:red"
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stroop", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -99,6 +122,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "stroop", trial_id: "instruction"},
   pages: ['<div class = centerbox><p class = block-text>In this experiment you will see "color" words (RED, BLUE, GREEN) appear one at a time. The "ink" of the words also will be colored. For example, you may see: <span class = "large" style = "color:blue">RED</span>, <span class = "large" style = "color:blue">BLUE</span> or <span class = "large" style = "color:red">BLUE</span>.</p><p class = block-text>Your task is to press the button corresponding to the <strong> ink color </strong> of the word. It is important that you respond as quickly and accurately as possible. The response keys are as follows:</p>' + response_keys + '</div>'],
   allow_keys: false,
   show_clickable_nav: true,
@@ -129,6 +153,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stroop", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -137,6 +162,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stroop", trial_id: "practice_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>We will start with a few practice trials. Remember, press the key corresponding to the <strong>ink</strong> color of the word: "r" for words colored red, "b" for words colored blue, and "g" for words colored green.</p><p class = block-text>Press <strong>enter</strong> to begin practice.</p></div>',
   cont_key: [13],
@@ -145,6 +171,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stroop", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
   cont_key: [13],
@@ -156,10 +183,11 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "stop_signal", "trial_id": "fixation"},
+  data: {exp_id: "stroop", trial_id: "fixation"},
   timing_post_trial: 500,
   timing_stim: 500,
-  timing_response: 500
+  timing_response: 500,
+  on_finish: changeData,
 }
 
 /* create experiment definition array */
@@ -183,7 +211,7 @@ for (i=0; i<practice_len; i++) {
 	  show_stim_with_feedback: true,
 	  timing_post_trial: 250,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({trial_id: 'practice'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'stim', exp_stage: 'practice'})
 	  }
 	}
 	stroop_experiment.push(practice_block)
@@ -208,7 +236,7 @@ for (i=0; i<exp_len; i++) {
 	  show_stim_with_feedback: true,
 	  timing_post_trial: 250,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({trial_id: 'practice'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'stim', exp_stage: 'test'})
 	  }
 	}
 	stroop_experiment.push(test_block)

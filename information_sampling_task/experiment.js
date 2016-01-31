@@ -2,6 +2,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 function appendTextAfter(input,search_term, new_text) {
 	var index = input.indexOf(search_term)+search_term.length
@@ -238,11 +242,11 @@ var instructionFunction = function(clicked_id){
 	temp = color1.indexOf(currID,0)
 	if(temp!=-1){
 		clickedCardsColor1.push(currID)
-		document.getElementById(clicked_id).src='images/'+whichSmallColor1+'.png';
+		document.getElementById(clicked_id).src='/static/experiments/information_sampling_task/images/'+whichSmallColor1+'.png';
 
 	} else if (temp ==-1){
 		clickedCardsColor2.push(currID)
-		document.getElementById(clicked_id).src='images/'+whichSmallColor2+'.png';
+		document.getElementById(clicked_id).src='/static/experiments/information_sampling_task/images/'+whichSmallColor2+'.png';
 
 	}
 }
@@ -407,14 +411,16 @@ instructionsSetup =  "<div class = bigbox><div class = numbox>"+
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the Information Sampling Task task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -424,6 +430,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "information_sampling_task", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 60000
@@ -432,6 +439,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "information_sampling_task", trial_id: "instruction"},
   pages: ['<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares squares, you will see two larger colored squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out which color holds the majority in the smaller squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want to make your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
@@ -467,7 +475,8 @@ var instruction_node = {
 
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = block-text>We will show you a practice trial.  Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -477,14 +486,15 @@ var subjectPracticeBlock ={
   type: 'poldrack-single-stim',
   stimulus: instructionsSetup,
   is_html: true,
-  data: {exp_id: "information_sampling_task", trial_id: "test"},
+  data: {exp_id: "information_sampling_task", trial_id: "stim", exp_stage: "practice"},
   choices: [37],
   timing_post_trial: 500,
 };
 
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -496,21 +506,23 @@ var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: getRound,
   is_html: true,
-  data: {exp_id: "information_sampling_task", trial_id: "test"},
+  data: {exp_id: "information_sampling_task", trial_id: "stim", exp_stage: "test"},
   choices: [37],
   timing_post_trial: 0,
   on_finish: appendTestData,
 };
 
 var DW_intro_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "DW_condition_intro"},
   text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var FW_intro_block = {
-  type: 'text',
+  type: 'poldrack-text',
+  data: {exp_id: "information_sampling_task", trial_id: "FW_condition_intro"},
   text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -522,7 +534,7 @@ var rewardFW_block = {
   type: 'poldrack-single-stim',
   stimulus:getRewardFW,
   is_html: true,
-  data: {exp_id: "information_sampling_task", trial_id: "reward"},
+  data: {exp_id: "information_sampling_task", trial_id: "reward", exp_stage: "test"},
   choices: [13],
   timing_post_trial: 1000,
   on_finish: appendRewardDataFW,
@@ -532,7 +544,7 @@ var rewardDW_block = {
   type: 'poldrack-single-stim',
   stimulus:getRewardDW,
   is_html: true,
-  data: {exp_id: "information_sampling_task", trial_id: "reward"},
+  data: {exp_id: "information_sampling_task", trial_id: "reward", exp_stage: "test"},
   choices: [13],
   timing_post_trial: 1000,
   on_finish: appendRewardDataDW,  
@@ -544,17 +556,19 @@ var subjectRewardBlock ={
   type: 'poldrack-single-stim',
   stimulus:getReward,
   is_html: true,
-  data: {exp_id: "information_sampling_task", trial_id: "reward"},
+  data: {exp_id: "information_sampling_task", trial_id: "reward", exp_stage: "practice"},
   choices: [13],
   timing_post_trial: 1000,
+  on_finish: function(){
+  clickedCards = []
+  }
 };
 
 
 
 var practice_chunk = {
-    chunk_type: 'while',
     timeline: [practice_block],
-    continue_function: function(data){ 
+    loop_function: function(data){ 
        if (roundOver == 2) {
 			return false
 		} else if(roundOver ==1 || roundOver===0){
@@ -563,8 +577,11 @@ var practice_chunk = {
     }
 }
 
+
+
 var reset_block = {
     type: 'call-function',
+    data: {exp_id: "information_sampling_task", trial_id: "reset_round"},
     func: resetRound,
     timing_post_trial: 0
 }
@@ -579,176 +596,31 @@ information_sampling_task_experiment.push(subjectRewardBlock);
 information_sampling_task_experiment.push(start_test_block);
 
 if(whichCond===0){// do the FW first, then DW
-information_sampling_task_experiment.push(FW_intro_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-///////switching cond
-information_sampling_task_experiment.push(DW_intro_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
+	information_sampling_task_experiment.push(FW_intro_block);
+		for(var i = 0; i<10; i++){
+			information_sampling_task_experiment.push(practice_chunk);
+			information_sampling_task_experiment.push(rewardFW_block);
+			information_sampling_task_experiment.push(reset_block);
+		}
+	information_sampling_task_experiment.push(DW_intro_block);
+		for(var i = 0; i<10; i++){
+			information_sampling_task_experiment.push(practice_chunk);
+			information_sampling_task_experiment.push(rewardDW_block);
+			information_sampling_task_experiment.push(reset_block);
+		}
 
 }else if(whichCond==1){  ////do DW first then FW
-information_sampling_task_experiment.push(DW_intro_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardDW_block);
-information_sampling_task_experiment.push(reset_block);
-
-///////switching cond
-information_sampling_task_experiment.push(FW_intro_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-
-information_sampling_task_experiment.push(practice_chunk);
-information_sampling_task_experiment.push(rewardFW_block);
-information_sampling_task_experiment.push(reset_block);
-} 
-
+	information_sampling_task_experiment.push(DW_intro_block);
+		for(var i = 0; i<10; i++){
+			information_sampling_task_experiment.push(practice_chunk);
+			information_sampling_task_experiment.push(rewardDW_block);
+			information_sampling_task_experiment.push(reset_block);
+		}
+	information_sampling_task_experiment.push(FW_intro_block);
+		for(var i = 0; i<10; i++){
+			information_sampling_task_experiment.push(practice_chunk);
+			information_sampling_task_experiment.push(rewardFW_block);
+			information_sampling_task_experiment.push(reset_block);
+		}
+}
 information_sampling_task_experiment.push(end_block);

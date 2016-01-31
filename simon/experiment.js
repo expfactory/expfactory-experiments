@@ -101,6 +101,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simon", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -110,6 +111,7 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simon", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -119,6 +121,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "simon", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a red box, press the ' + correct_responses[0][0] + '. If you see a blue box, press the ' + correct_responses[1][0] + '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
 	],
@@ -151,6 +154,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "simon", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -160,6 +164,7 @@ var end_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "simon", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -167,6 +172,7 @@ var start_test_block = {
 
 var reset_block = {
 	type: 'call-function',
+	data: {exp_id: "simon", trial_id: "reset_trial"},
 	func: function() {
 		current_trial = 0
 	},
@@ -178,6 +184,7 @@ var practice_block = {
   type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
+  data: {exp_id: "simon", trial_id: "stim", exp_stage: "practice"},
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
@@ -194,6 +201,7 @@ var practice_block = {
 var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
+  data: {exp_id: "simon", trial_id: "stim", exp_stage: "test"},
   is_html: true,
   choices: [37,39],
   timing_response: 1500,
