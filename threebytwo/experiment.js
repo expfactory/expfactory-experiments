@@ -353,7 +353,7 @@ var cue_block = {
   stimulus: getCue,
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'threebytwo', trial_id: 'cue'},
+  data: {trial_id: 'cue'},
   timing_response: getCTI,
   timing_stim: getCTI,
   timing_post_trial: 0,
@@ -370,7 +370,7 @@ var practice_block = {
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
   timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div><div class = promptbox>' + prompt_task_list + '</div>',
   choices: response_keys.key,
-  data: {exp_id: 'threebytwo', trial_id: 'stim', exp_stage: "practice"},
+  data: {trial_id: 'stim', exp_stage: "practice"},
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_post_trial: 0,
@@ -384,7 +384,7 @@ var test_block = {
   is_html: true,
   key_answer: getResponse,
   choices: response_keys.key,
-  data: {exp_id: 'threebytwo', trial_id: 'stim', exp_stage: 'test'},
+  data: {trial_id: 'stim', exp_stage: 'test'},
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: appendData
@@ -395,12 +395,12 @@ var gap_block = {
   stimulus: '',
   is_html: true,
   choices: 'none',
-  data: {exp_id: 'threebytwo', trial_id: 'gap'},
+  data: {trial_id: 'gap'},
   timing_response: 500,
   timing_stim: 0,
   timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>'
-  on_finish: changeData,
+  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+  on_finish: changeData
 };
 
 

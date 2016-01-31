@@ -189,7 +189,7 @@ data:   {condition: '70_30', trial_id: "stim", exp_stage: "test"}},
 data:  {condition: '30_70', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
 data:  {condition: '60_40', trial_id: "stim", exp_stage: "test"}},
-{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>"
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
 data:  {condition: '40_60', trial_id: "stim", exp_stage: "test"}}]
 
 

@@ -381,7 +381,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  data: {trial_id: 'welcome'}
+  data: {trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,

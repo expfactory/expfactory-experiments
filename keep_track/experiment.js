@@ -120,7 +120,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data = {exp_id: 'keep_track', trial_id: 'welcome'},
+  data: {trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -270,7 +270,7 @@ for (i = 0; i < block.length; i++ ) {
 var response_block = {
 	type: 'survey-text',
 	questions: [['What was the last word in each of the target categories? Please separate your words with a space']],
-	data: {exp_id: 'keep_track', trial_id: 'response', exp_stage: "practice", condition: 'target_length_' + target.length, targets: target}
+	data: {trial_id: 'response', exp_stage: "practice", condition: 'target_length_' + target.length, targets: target}
 }
 keep_track_experiment.push(response_block)
 keep_track_experiment.push(attention_node)
@@ -298,7 +298,7 @@ for (b=0; b<blocks.length; b++) {
 		stimulus: ' ',
 		is_html: true,
 		choices: 'none',
-		data: {exp_id: 'keep_track', trial_id: 'wait', exp_stage: 'test'},
+		data: {trial_id: 'wait', exp_stage: 'test'},
 		prompt: prompt,
 		timing_stim: 500,
 		timing_response: 500,
@@ -325,7 +325,7 @@ for (b=0; b<blocks.length; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What was the last word in each of the target categories? Please separate your words with a space']],
-		data: {exp_id: 'keep_track', trial_id: 'response', exp_stage: 'test', condition: 'target_length_' + target.length, targets: target}
+		data: {trial_id: 'response', exp_stage: 'test', condition: 'target_length_' + target.length, targets: target}
 	}
 	keep_track_experiment.push(response_block)
 	if ($.inArray(b,[0,2]) != -1) {
