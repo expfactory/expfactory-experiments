@@ -111,13 +111,13 @@ var get_fs_stim = function(images, colors, condition) {
 			"<img class = 'decision-stim' src= '" + images[0] + "'></img></div>" +
 			"<div class = decision-right style='background:" + colors[0] +"; '>" +
 			"<img class = 'decision-stim' src= '" + images[1] + "'></img></div>",
-		data: {exp_id: "two_stage_decision", trial_id: condition + '_first_stage', condition: [0,1]}},
+		data: {trial_id: condition + '_first_stage', condition: [0,1]}},
 		{stimulus: 
 			"<div class = decision-left style='background:" + colors[0] +"; '>" +
 			"<img class = 'decision-stim' src= '" + images[1] + "'></img></div>" +
 			"<div class = decision-right style='background:" + colors[0] +"; '>" +
 			"<img class = 'decision-stim' src= '" + images[0] + "'></img></div>",
-			data: {exp_id: "two_stage_decision", trial_id: condition +'_first_stage', condition: [1,0]}}						
+			data: {trial_id: condition +'_first_stage', condition: [1,0]}}						
 	]	
 	return fs_stim
 }
@@ -148,10 +148,10 @@ var get_ss_stim = function(images, colors, condition) {
 
 	var ss_stim = {
 		stimulus: [ss_stim_array[0][0], ss_stim_array[0][1], ss_stim_array[1][0], ss_stim_array[1][1]],
-		data: [{exp_id: "two_stage_decision", trial_id: condition +'_second_stage', condition: [2,3]},
-			{exp_id: "two_stage_decision", trial_id: condition +'_second_stage', condition: [3,2]},
-			{exp_id: "two_stage_decision", trial_id: condition +'_second_stage', condition: [4,5]},
-			{exp_id: "two_stage_decision", trial_id: condition +'_second_stage', condition: [5,4]}]
+		data: [{trial_id: condition +'_second_stage', condition: [2,3]},
+			{trial_id: condition +'_second_stage', condition: [3,2]},
+			{trial_id: condition +'_second_stage', condition: [4,5]},
+			{trial_id: condition +'_second_stage', condition: [5,4]}]
 	}	
 	return ss_stim
 }
@@ -365,7 +365,7 @@ var curr_ss_stim = practice_ss_stim
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
-  data: {exp_id: "two_stage_decision", trial_id: 'attention_check'}
+  data: {trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -381,7 +381,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'welcome'}
+  data: {trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -390,7 +390,7 @@ var welcome_block = {
 
 var attention_check_block = {
 	type: 'attention-check',
-	data: {exp_id: "two_stage_decision", trial_id: 'attention_check'}
+	data: {trial_id: 'attention_check'},
 	timing_response: 30000,
 	response_ends_trial: true,
 	timing_post_trial: 200
@@ -400,18 +400,18 @@ var attention_check_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'instruction'}
+  data: {trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {exp_id: "two_stage_decision", trial_id: 'instruction'}
+  data: {trial_id: 'instruction'},
   pages: [
 	"<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>Below is an example 'stage' with two shapes on colored backgrounds.</p><div class = decision-left style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div></div>",
 	'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p></div>',
@@ -450,7 +450,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'end'}
+  data: {trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -459,7 +459,7 @@ var end_block = {
 
 var wait_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'wait'}
+  data: {trial_id: 'wait'},
   text: '<div class = centerbox><p class = center-block-text>Take a break!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 120000,
@@ -468,7 +468,7 @@ var wait_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'practice_intro'}
+  data: {trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = center-block-text>Starting practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -477,7 +477,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
-  data: {exp_id: "two_stage_decision", trial_id: 'test_intro'}
+  data: {trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -486,7 +486,7 @@ var start_test_block = {
 
 var intertrial_wait_update_FB = {
 	type: "poldrack-single-stim",
-	data: {exp_id: "two_stage_decision", trial_id: 'wait_update_FB}
+	data: {trial_id: 'wait_update_FB'},
 	stimulus: update_FB_data, //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
@@ -497,7 +497,7 @@ var intertrial_wait_update_FB = {
 
 var intertrial_wait = {
 	type: "poldrack-single-stim",
-	data: {exp_id: "two_stage_decision", trial_id: 'wait'}
+	data: {trial_id: 'wait'},
 	stimulus: "", //dummy stimulus. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
@@ -508,7 +508,7 @@ var intertrial_wait = {
 
 var change_phase_block = {
 	type: 'call-function',
-	data: {exp_id: "two_stage_decision", trial_id: 'change_phase'}
+	data: {trial_id: 'change_phase'},
 	func: change_phase,
     timing_post_trial: 0
 }
@@ -523,49 +523,49 @@ var first_stage = {
 		timing_response: 2000,
 		show_response: true,
 		timing_post_trial: 0,
-		data: {exp_id: "two_stage_decision", trial_id: 'first_stage'},
-		on_finish: changeData,
+		data: {trial_id: 'first_stage'},
+		on_finish: changeData
 }
 
 var first_stage_selected = {
 	type: "poldrack-single-stim",
-	data: {exp_id: "two_stage_decision", trial_id: 'first_stage'}
+	data: {trial_id: 'first_stage'},
 	stimulus: get_first_selected,
 	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: changeData,
+	on_finish: changeData
 }
 
 var second_stage = {
 		type: "poldrack-single-stim",
-		data: {exp_id: "two_stage_decision", trial_id: 'first_stage'}
+		data: {trial_id: 'first_stage'},
 		stimulus: choose_second_stage,
 		is_html: true,
 		choices: actions,
 		timing_stim: 2000,
 		timing_response: 2000,
 		timing_post_trial: 0,
-		on_finish: changeData,
+		on_finish: changeData
 }	
 
 var second_stage_selected = {
 	type: "poldrack-single-stim",
-	data: {exp_id: "two_stage_decision", trial_id: 'first_stage'}
+	data: {trial_id: 'first_stage'},
 	stimulus: get_second_selected,
 	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: changeData,
+	on_finish: changeData
 }
 
 var FB_stage = {
 		type: "poldrack-single-stim",
-		data: {exp_id: "two_stage_decision", trial_id: 'first_stage'}
+		data: {trial_id: 'first_stage'},
 		stimulus: get_feedback,
 		is_html: true,
 		choices: 'none',
@@ -573,7 +573,7 @@ var FB_stage = {
 		timing_response: 500,
 		continue_after_response: false,
 		timing_post_trial: 0,
-		on_finish: changeData,
+		on_finish: changeData
 }	
 
 var FB_node = {

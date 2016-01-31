@@ -169,7 +169,7 @@ var stimulus = [
 	}
 ]
 
-var NoSSpractice_block_len = 52//12
+var NoSSpractice_block_len = 12
 var practice_block_len = 20
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus,NoSSpractice_block_len/4,true)
@@ -233,7 +233,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -487,8 +487,8 @@ var practice_node = {
     }
 }
 
-//stop_signal_experiment.push(NoSS_practice_node)
-//stop_signal_experiment.push(practice_node)
+stop_signal_experiment.push(NoSS_practice_node)
+stop_signal_experiment.push(practice_node)
 stop_signal_experiment.push(practice_feedback_block) 
 
 /* Test blocks */

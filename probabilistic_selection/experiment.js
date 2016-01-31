@@ -27,7 +27,7 @@ var getInstructFeedback = function() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
+	jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
 }
 
 var getStim = function(){
@@ -129,17 +129,17 @@ var prob40 = randomStimArray[5];
 
 /* THIS IS FOR FIRST PHASE STIMS,  randomized and counterbalanced*/
 firstPhaseStims = [{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '80_20', trial_id: "stim", exp_stage: "practice"}},
+data: {condition: '80_20', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '20_80', trial_id: "stim", exp_stage: "practice"}},
+data: {condition: '20_80', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '70_30', trial_id: "stim", exp_stage: "practice"}},
+data: {condition: '70_30', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '30_70', trial_id: "stim", exp_stage: "practice"}},
+data: {condition: '30_70', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '60_40', trial_id: "stim", exp_stage: "practice"}},
+data: {condition: '60_40', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '40_60', trial_id: "stim", exp_stage: "practice"}}]
+data: {condition: '40_60', trial_id: "stim", exp_stage: "practice"}}]
 
 var firstPhaseStimsComplete=jsPsych.randomization.repeat(firstPhaseStims,eachComboNum,true);
 var answers = genResponses(firstPhaseStimsComplete)
@@ -148,49 +148,49 @@ var curr_data = ''
 /*THIS IS FOR SECOND PHASE STIMS, randomized and counterbalanced*/
 
 secondPhaseStims = [{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '80_70', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '80_70', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
-data:  {exp_id: 'probabilistic_selection', condition: '70_80', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '70_80', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '80_30', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '80_30', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
-data:  {exp_id: 'probabilistic_selection', condition: '30_80', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '30_80', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '80_60', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '80_60', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
-data:   {exp_id: 'probabilistic_selection', condition: '60_80', trial_id: "stim", exp_stage: "test"}},
+data:   {condition: '60_80', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '80_40', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '80_40', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
-data:   {exp_id: 'probabilistic_selection', condition: '40_80', trial_id: "stim", exp_stage: "test"}},
+data:   {condition: '40_80', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '20_70', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '20_70', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '70_20', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '70_20', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-data:   {exp_id: 'probabilistic_selection', condition: '20_30', trial_id: "stim", exp_stage: "test"}},
+data:   {condition: '20_30', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '30_20', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '30_20', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '20_60', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '20_60', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '60_20', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '60_20', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-data:   {exp_id: 'probabilistic_selection', condition: '20_40', trial_id: "stim", exp_stage: "test"}},
+data:   {condition: '20_40', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '40_20', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '40_20', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '80_20', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '80_20', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '20_80', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '20_80', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-data:   {exp_id: 'probabilistic_selection', condition: '70_30', trial_id: "stim", exp_stage: "test"}},
+data:   {condition: '70_30', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '30_70', trial_id: "stim", exp_stage: "test"}},
+data:  {condition: '30_70', trial_id: "stim", exp_stage: "test"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-data:  {exp_id: 'probabilistic_selection', condition: '60_40', trial_id: "stim", exp_stage: "test"}},
-{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>"
-data:  {exp_id: 'probabilistic_selection', condition: '40_60', trial_id: "stim", exp_stage: "test"}}]
+data:  {condition: '60_40', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
+data:  {condition: '40_60', trial_id: "stim", exp_stage: "test"}}]
 
 
 var secondPhaseStimsComplete= jsPsych.randomization.repeat(secondPhaseStims,eachComboNumSP, true);
@@ -223,7 +223,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
 	type: 'poldrack-text',
-	data: {exp_id: "probabilistic_selection", trial_id: "welcome"},
+	data: {trial_id: "welcome"},
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
@@ -233,18 +233,18 @@ var welcome_block = {
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
-  type: 'poldrack-text',
-  data: {exp_id: "probabilistic_selection", trial_id: "instruction"},
-  cont_key: [13],
-  text: getInstructFeedback,
-  timing_post_trial: 0,
-  timing_response: 6000
+	type: 'poldrack-text',
+	data: {trial_id: "instruction"},
+	cont_key: [13],
+	text: getInstructFeedback,
+	timing_post_trial: 0,
+	timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
-	data: {exp_id: "probabilistic_selection", trial_id: "instruction"},
+	data: {trial_id: "instruction"},
 	pages: [
 	'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
@@ -258,9 +258,9 @@ instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
 
 var instruction_node = {
-    timeline: instruction_trials,
+	timeline: instruction_trials,
 	/* This function defines stopping criteria */
-    loop_function: function(data){
+	loop_function: function(data){
 		for(i=0;i<data.length;i++){
 			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
 				rt=data[i].rt
@@ -274,12 +274,12 @@ var instruction_node = {
 			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
 			return false
 		}
-    }
+	}
 }
 
 var FP_block = {
 	type: 'poldrack-text',
-	data: {exp_id: "probabilistic_selection", trial_id: "first_phase_intro"},
+	data: {trial_id: "first_phase_intro"},
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text> We will now begin Phase 1.  Press <strong>enter</strong> to begin. </p></div>',
 	cont_key: [13],
@@ -362,7 +362,7 @@ var performance_criteria = {
 var SP_block = {
 	type: 'poldrack-text',
 	timing_response: 60000,
-	data: {exp_id: "probabilistic_selection", trial_id: "second_phase_intro"},
+	data: {trial_id: "second_phase_intro"},
 	text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13]
 };
@@ -381,7 +381,7 @@ var second_phase_trials = {
 
 var end_block = {
 	type: 'poldrack-text',
-	data: {exp_id: "probabilistic_selection", trial_id: "end"},
+	data: {trial_id: "end"},
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13]
