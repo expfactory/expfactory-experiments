@@ -134,6 +134,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "local_global", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -142,6 +143,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "local_global", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -152,14 +154,16 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "local_global", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "local_global", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><img src = "static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div>',
 	'<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' + task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' + task_colors[1] + ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for a circle, 2 for an X, 3 for a triangle and 4 for a square.</p></div>',
@@ -195,6 +199,7 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "local_global", trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -203,6 +208,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "local_global", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -213,6 +219,7 @@ var practice_block = {
   type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
+  data: {exp_id: "local_global", trial_id: "stim", exp_stage: "practice"},
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
@@ -226,6 +233,7 @@ var practice_block = {
 var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
+  data: {exp_id: "local_global", trial_id: "stim", exp_stage: "test"},
   is_html: true,
   choices: [49,50,51,52],
   timing_post_trial: 500
