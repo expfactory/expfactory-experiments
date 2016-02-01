@@ -169,7 +169,7 @@ var stimulus = [
 	}
 ]
 
-var NoSSpractice_block_len = 52//12
+var NoSSpractice_block_len = 12
 var practice_block_len = 20
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus,NoSSpractice_block_len/4,true)
@@ -178,8 +178,8 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','g
 
 //number of blocks per condition
 var test_block_len = 60
-numconditions = 1 //2
-numblocks = 2 //5
+numconditions = 2
+numblocks = 5
 condition_blocks = []
 for (j = 0; j<numconditions; j++) {
     blocks = []
@@ -210,6 +210,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stop_signal", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -218,6 +219,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stop_signal", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -227,19 +229,20 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stop_signal", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "stop_signal", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -273,7 +276,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "stop_signal", "trial_id": "fixation"},
+  data: {exp_id: "stop_signal", trial_id: "fixation", exp_stage: "test"},
   timing_post_trial: 0,
   timing_stim: 500,
   timing_response: 500
@@ -284,7 +287,7 @@ var prompt_fixation_block = {
   stimulus: '<div class = shapebox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "stop_signal", "trial_id": "fixation"},
+  data: {exp_id: "stop_signal", trial_id: "fixation", exp_stage: "practice"},
   timing_post_trial: 0,
   timing_stim: 500,
   timing_response: 500,
@@ -295,6 +298,7 @@ var prompt_fixation_block = {
 var practice_feedback_text = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stop_signal", trial_id: "feedback"},
   timing_response: 60000,
   cont_key: [13],
   text: getPracticeFeedback
@@ -302,6 +306,7 @@ var practice_feedback_block = {
 
 var test_feedback_block = {
   type: 'poldrack-text',
+  data: {exp_id: "stop_signal", trial_id: "feedback", exp_stage: "test"},
   timing_response: 120000,
   cont_key: [13],
   text: getTestFeedback
@@ -310,6 +315,7 @@ var test_feedback_block = {
 /* reset SSD block */
 var reset_block = {
     type: 'call-function',
+    data: {exp_id: "stop_signal", trial_id: "fixation"},
     func: function() {
     	resetSSD()
     	test_block_data = []
@@ -344,7 +350,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 	  response_ends_trial: false,
 	  prompt: prompt_text,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({'trial_id': 'NoSS_practice_stim'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'NoSS_practice_stim', exp_stage: 'practice'})
 	  }
 	}
 	NoSS_practice_trials.push(stim_block)
@@ -389,7 +395,7 @@ var NoSS_practice_node = {
 			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
-            return false;
+            return true;
         }
     }
 }
@@ -416,7 +422,7 @@ for (i = 0; i < practice_block_len; i++) {
 	  timing_SS: 250,
 	  timing_post_trial: 0,
 	  on_finish: function(data) {
-	  	jsPsych.data.addDataToLastTrial({'trial_id': 'practice_stim'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'stim', exp_stage: 'practice'})
 	  } 
     }
 	practice_trials.push(stop_signal_block)
@@ -475,13 +481,13 @@ var practice_node = {
             if (successful_stops < stop_thresh) {
 		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
 		    }
-            return false;
+            return true;
         }
     }
 }
 
-//stop_signal_experiment.push(NoSS_practice_node)
-//stop_signal_experiment.push(practice_node)
+stop_signal_experiment.push(NoSS_practice_node)
+stop_signal_experiment.push(practice_node)
 stop_signal_experiment.push(practice_feedback_block) 
 
 /* Test blocks */
@@ -517,7 +523,7 @@ for (c = 0; c< numconditions; c++) {
 			  timing_post_trial: 0,
 			  on_finish: function(data) {
 			  	updateSSD(data)
-			  	jsPsych.data.addDataToLastTrial({'condition': ss_freq, 'trial_id': 'test_stim'}) 
+			  	jsPsych.data.addDataToLastTrial({condition: ss_freq, trial_id: 'stim', exp_stage: 'test'}) 
 			  	test_block_data.push(data)
 			  }
 			}
@@ -526,7 +532,7 @@ for (c = 0; c< numconditions; c++) {
 
 		stop_signal_experiment = stop_signal_experiment.concat(stop_signal_exp_block)
 		if ($.inArray(b+c,[0,4]) != -1) {
-			stop_selective_stop_signal.push(attention_node)
+			stop_signal_experiment.push(attention_node)
 		}
 		stop_signal_experiment.push(test_feedback_block)
 	}

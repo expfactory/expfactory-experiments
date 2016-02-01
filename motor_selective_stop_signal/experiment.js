@@ -208,6 +208,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "welcome"},
   text: '<div class = centerbox><p class = block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -216,6 +217,7 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -225,18 +227,19 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -270,7 +273,7 @@ var fixation_block = {
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "motor_selective_stop_signal", "trial_id": "fixation"},
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "fixation"},
   timing_post_trial: 0,
   timing_stim: 500,
   timing_response: 500
@@ -283,7 +286,7 @@ var prompt_fixation_block = {
   stimulus: '<div class = shapebox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
-  data: {exp_id: "motor_selective_stop_signal", "trial_id": "fixation"},
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "prompt_fixation"},
   timing_post_trial: 0,
   timing_stim: 500,
   timing_response: 500,
@@ -294,6 +297,7 @@ var prompt_fixation_block = {
 var practice_feedback_text = 'We will now start with a practice session. In this practice  concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
   type: 'poldrack-text',
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "feedback"},
   timing_response: 60000,
   cont_key: [13],
   text: getPracticeFeedback
@@ -302,6 +306,7 @@ var practice_feedback_block = {
 var test_feedback_block = {
   type: 'poldrack-text',
   timing_response: 120000,
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "feedback", exp_stage: "test"},
   cont_key: [13],
   text: getTestFeedback
 };
@@ -309,6 +314,7 @@ var test_feedback_block = {
 /* reset SSD block */
 var reset_block = {
     type: 'call-function',
+    data: {exp_id: "motor_selective_stop_signal", trial_id: "reset_SSD"},
     func: function() {
     	test_block_data = []
     	resetSSD()
@@ -343,7 +349,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 	  response_ends_trial: false,
 	  prompt: prompt_text,
 	  on_finish: function() {
-	  	jsPsych.data.addDataToLastTrial({'trial_id': 'NoSS_practice_stim'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: 'NoSS_practice_stim', exp_stage: "practice"})
 	  }
 	}
 	NoSS_practice_trials.push(stim_block)
@@ -415,7 +421,7 @@ for (i = 0; i < practice_block_len; i++) {
 	  timing_SS: 250,
 	  timing_post_trial: 0,
 	  on_finish: function(data) {
-	  	jsPsych.data.addDataToLastTrial({'trial_id': 'practice_stim'})
+	  	jsPsych.data.addDataToLastTrial({trial_id: "stim", exp_stage: "practice"})
 	  }   
     }
 	practice_trials.push(stop_signal_block)
@@ -509,7 +515,7 @@ for (b = 0; b< numblocks; b++) {
 		  timing_post_trial: 0,
 		  on_finish: function(data) {
 		  	updateSSD(data)
-		  	jsPsych.data.addDataToLastTrial({'trial_id': 'test_stim'})
+		  	jsPsych.data.addDataToLastTrial({trial_id: 'stim', exp_stage: "test"})
 		  	test_block_data.push(data)
 		  }
 		}
@@ -518,7 +524,7 @@ for (b = 0; b< numblocks; b++) {
 
 	motor_selective_stop_signal_experiment = motor_selective_stop_signal_experiment.concat(stop_signal_exp_block)
 	if ($.inArray(b,[0,2,3]) != -1) {
-		motor_selective_stop_signal.push(attention_node)
+		motor_selective_stop_signal_experiment.push(attention_node)
 	}
 	motor_selective_stop_signal_experiment.push(test_feedback_block)
 }

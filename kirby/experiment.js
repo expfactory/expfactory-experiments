@@ -95,6 +95,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'kirby', trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -104,14 +105,16 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: 'kirby', trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'kirby', trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. One of the amounts will be available now and the other will be available in the future. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
   ],
@@ -145,6 +148,7 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'kirby', trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = center-block-text>Here is a sample trial. Your choice for this trial will not be included in your bonus payment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   //timing_post_trial: 1000
@@ -152,14 +156,15 @@ var start_practice_block = {
 
 var practice_block = {
   type: 'poldrack-single-stim',
+  data: {exp_id: 'kirby', trial_id: "stim", exp_stage: "practice"},
   stimulus: "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20<br>today</font></center></div><div id = 'option'><center><font color='green'>$25<br>5 days</font></center></div></div></div></div>",
   is_html: true,
-  data: {'exp_id': 'kirby'},
   choices: ['q', 'p']
 };
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'kirby', trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>You are now ready to begin the survey.</p><p class = center-block-text>Remember to indicate your <strong>true</strong> preferences.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -168,10 +173,9 @@ var start_test_block = {
 
 var test_block = {
   type: 'poldrack-single-stim',
-  //stimuli: trials,
+  data: {trial_id: "stim", exp_stage: "test"},
   timeline: trials,
   is_html: true,
-  data: {'exp_id': 'kirby'},
   choices: ['q', 'p'],
   //used new feature to include choice info in recorded data
   on_finish: function(data){
@@ -187,6 +191,7 @@ var test_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],

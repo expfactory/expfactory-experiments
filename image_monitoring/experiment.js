@@ -144,6 +144,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "image_monitoring", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -153,14 +154,16 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "image_monitoring", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "image_monitoring", trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see shapes in a sequence, one after the other. You will see one of three shapes on each trial: a red square, a green square, or a blue square.</p></div>',
     '<div class = centerbox><p class = block-text>Your job is to keep each track of the number of times each shape repeats and respond when you see any shape repeat four times by pressing the spacebar. For instance, if you see "red, red, blue, green, red, blue, green, <strong>red</strong>" you should respond on the last (fourth) red shape.</p><p class = block-text>If the sequence of shapes continued with "red, green, blue, <strong>green</strong>" you would respond again, as the green shape had repeated four times, and so on.</p></div>',
@@ -197,6 +200,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "image_monitoring", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -205,6 +209,7 @@ var end_block = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "image_monitoring", trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -213,6 +218,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "image_monitoring", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a shape repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -220,6 +226,7 @@ var start_test_block = {
 
 var update_function = {
 	type: 'call-function',
+	data: {exp_id: "image_monitoring", trial_id: "reset_post_trial_gap"},
 	func: update_count,
     timing_post_trial: 0
 }
@@ -237,6 +244,7 @@ for (i = 0; i< practice_trials.length; i++) {
 	  is_html: true,
 	  timeline: practice_trials,
 	  key_answer: get_correct_key,
+	  data: {exp_id: "image_monitoring", trial_id: "stim", exp_stage: "practice"},
 	  correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 	  timeout_message: ' ',
@@ -260,6 +268,7 @@ for (b=0; b<block_num; b++) {
 	var test_shape_block = {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
+	  data: {exp_id: "image_monitoring", trial_id: "stim", exp_stage: "test"},
 	  timeline: block,
 	  choices: [32],
 	  timing_stim: 500,
