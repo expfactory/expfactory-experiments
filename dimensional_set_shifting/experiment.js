@@ -26,7 +26,7 @@ function addID() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+	return '<div class = centerbox><p class = "white-text center-block-text">' + feedback_instruct_text + '</p></div>'
 }
 
 function get_stim() {
