@@ -2,6 +2,26 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+var changeData = function(){
+data=jsPsych.data.getTrialsOfType('poldrack-text')
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+}
+
 function getDisplayElement () {
     $('<div class = display_stage_background></div>').appendTo('body')
     return $('<div class = display_stage></div>').appendTo('body')
@@ -178,6 +198,7 @@ var held_ball = 0
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id:'tower_of_london', trial_id: "practice"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -186,6 +207,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id:'tower_of_london', trial_id: "practice"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -195,15 +217,17 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id:'tower_of_london', trial_id: "practice"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id:'tower_of_london', trial_id: "practice"},
   pages: ['<div class = tol_topbox><p class = block-text>During this task, two boards will be presented at a time. The boards will be of colored balls arranged on pegs like this:</p></div>' + ref_board + makeBoard('peg_board', example_problem1) + '<div class = tol_bottombox><p class = block-text>Imagine that these balls have holes through them and the pegs are going through the holes. Notice that the first peg can hold three balls, the second peg can hold two balls, and the third peg can hold one ball.</p></div>',
   '<div class = tol_topbox><p class = block-text>Your task will be to figure out how many moves would have to be made to make the arrangements of balls in your board look like the arrangements of balls in the target board.</p></div>' + ref_board + makeBoard('peg_board', example_problem1) + '<div class = tol_bottombox><p class = block-text>The balls in the target board are fixed in place, but the balls in your board are movable. You have to move them to make your board look like the target board. It is considered one move when you take a ball from one peg and place it on another. You can only move one ball at a time. Sometime you will have to move a ball to a different peg in order to get to the ball below it. During this task it is important that you remember, you want the <strong>fewest possible moves</strong> that are required to make your board look like the target board. You will have 20 seconds to make your decision.</p></div>',
   '<div class = tol_topbox><p class = block-text>Here is an example. Notice that the balls in your board are in a different arrangement than in the target board. If we move the red ball from the first peg in your board to the third peg then it would look like the target board.</p></div>' + ref_board + makeBoard('peg_board', example_problem2) + '<div class = tol_bottombox><p class = block-text>We would only move one ball one time, so the answer is one move.</p></div>', "<div class = centerbox><p class = block-text>During the test you will move the balls on your board by clicking on the pegs. When you click on a peg, the top ball will move into a box called 'your hand'. When you click on another peg, the ball in 'your hand' will move to the top of that peg.</p><p class = block-text>If you try to select a peg with no balls or try to place a ball on a full peg, nothing will happen. If you successfully make your board look like the target board, the trial will end and you will move to the next problem.</p><p class = block-text>We will start with an easy example so that you can learn the controls.</p></div>"],
@@ -237,6 +261,7 @@ var instruction_node = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id:'tower_of_london', trial_id: "practice"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>We will now start Problem 1. There will be ' + problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -251,6 +276,7 @@ var start_test_block = {
 
 var advance_problem_block = {
   type: 'poldrack-text',
+  data: {exp_id:'tower_of_london', trial_id: "stim", exp_stage: 'test'},
   timing_response: 60000,
   text: getText,
   cont_key: [13],
@@ -268,7 +294,7 @@ var practice_block = {
   stimulus: getPractice,
   button_class: 'special',
   is_html: true,
-  data: {trial_id: "practice"},
+  data: {exp_id:'tower_of_london', trial_id: "stim", exp_stage: 'practice'},
   timing_stim: getTime,
   timing_response: getTime,
   timing_post_trial: 0,
@@ -287,7 +313,7 @@ var test_block = {
   stimulus: getStim,
   button_class: 'special',
   is_html: true,
-  data: {trial_id: "test"},
+  data: {exp_id:'tower_of_london', trial_id: "stim", exp_stage: 'test'},
   timing_stim: getTime,
   timing_response: getTime,
   timing_post_trial: 0,
@@ -306,10 +332,11 @@ var feedback_block = {
   stimulus: getFB,
   choices: 'none',
   is_html: true,
-  data: {trial_id: 'feedback'},
+  data: {exp_id:'tower_of_london', trial_id: 'feedback'},
   timing_stim: 2000,
   timing_response: 2000,
-  timing_post_trial: 500
+  timing_post_trial: 500,
+  on_finish: changeData,
 }
 
 var practice_node = {

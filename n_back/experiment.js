@@ -89,6 +89,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "n_back", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -98,15 +99,17 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "n_back", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "n_back", trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured either 1, 2 or 3 trials before. The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t, you would respond only on the last "t".</p></div>',
   ],
@@ -140,6 +143,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "n_back", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -147,6 +151,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
+  data: {exp_id: "n_back", trial_id: "practice_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -155,6 +160,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: "n_back", trial_id: "test_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -164,6 +170,7 @@ var start_test_block = {
 var start_control_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "n_back", trial_id: "control_intro"},
   text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -177,7 +184,7 @@ for (var i=0; i<num_trials; i++) {
 	  type: 'poldrack-single-stim',
 	  is_html: true,
 	  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-	  data: {exp_id: "n_back", load:  0, stim: stim, target: 't'},
+	  data: {exp_id: "n_back", trial_id: "stim", exp_stage: "test", load:  0, stim: stim, target: 't'},
 	  choices: [32],
 	  timing_stim: 500,
 	  timing_response: 2000,
@@ -201,6 +208,7 @@ for (var d = 0; d<delays.length; d++) {
 	var delay = delays[d]
 	var start_delay_block = {
 	  type: 'poldrack-text',
+	  data: {exp_id: "n_back", trial_id: "delay_text"},
 	  timing_response: 60000,
 	  text: '<div class = centerbox><p class = block-text>In these next blocks, you should respond when the current letter matches the letter that appeared ' + delay + ' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	  cont_key: [13]
@@ -220,7 +228,7 @@ for (var d = 0; d<delays.length; d++) {
 			  type: 'poldrack-single-stim',
 			  is_html: true,
 			  stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
-			  data: {exp_id: "n_back", load:  delay, stim: stim, target: target},
+			  data: {exp_id: "n_back", trial_id: "stim", exp_stage: "test", load:  delay, stim: stim, target: target},
 			  choices: [32],
 			  timing_stim: 500,
 			  timing_response: 2000,

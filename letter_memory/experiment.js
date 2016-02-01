@@ -56,7 +56,7 @@ for (var b = 0; b<practice_block_num; b++) {
 	var block_trials = []
 	for (var i=0; i<num_trials; i++) {
 		var tmp_obj = {stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
-		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: 'seq_len_' + num_trials}}
+		data: {exp_id: 'letter_memory', trial_id: 'stim', exp_stage: 'practice', condition: 'seq_len_' + num_trials}}
 		block_trials.push(tmp_obj)
 	}
 	practice_blocks.push(block_trials)
@@ -69,7 +69,7 @@ for (var b=0; b<block_num; b++){
 	var block_trials = []
 	for (var i=0; i<num_trials; i++) {
 		var tmp_obj = {stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) + '</div></div>',
-		data: {exp_id: 'letter_memory', trial_id: 'test', condition: 'seq_len_' + num_trials}}
+		data: {exp_id: 'letter_memory', trial_id: 'stim', exp_stage: 'test', condition: 'seq_len_' + num_trials}}
 		block_trials.push(tmp_obj)
 	}
 	blocks.push(block_trials)
@@ -96,6 +96,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'letter_memory', trial_id: 'welcome'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -105,15 +106,17 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'letter_memory', trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'letter_memory', trial_id: 'instruction'},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to remember the last four letters presented and report them at the end of the sequence.</p><p class = block-text>For instance, if the sequence F...J...K...N...F...L is presented, you would report KNFL.</p><p class = block-text>The sequences vary in length so it is important that you keep track of each letter. To ensure this, while doing the task repeat the last four letters (or less if less than four letters had been shown) out loud or to yourself while the letters are being presented.</p></div>',
 	'<div class = centerbox><p class = block-text>We will start with two practice sequences. Following will be 12 test blocks.</p></div>'
@@ -147,6 +150,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'letter_memory', trial_id: 'end'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -155,6 +159,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'letter_memory', trial_id: 'practice_intro'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -163,6 +168,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'letter_memory', trial_id: 'test_intro'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -193,7 +199,7 @@ for (var b=0; b<practice_block_num; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What were the last four letters in the last sequence?']],
-		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].length}
+		data: {exp_id: 'letter_memory', trial_id: 'response', exp_stage: 'practice', condition: blocks[b].length}
 	}
 	letter_memory_experiment.push(response_block)
 }
@@ -217,7 +223,7 @@ for (var b=0; b<block_num; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What were the last four letters in the last sequence?']],
-		data: {exp_id: 'letter_memory', trial_id: 'practice', condition: blocks[b].length}
+		data: {exp_id: 'letter_memory', trial_id: 'response', exp_stage: 'test', condition: blocks[b].length}
 	}
 	letter_memory_experiment.push(response_block)
 	if ($.inArray(b,[2,4,11]) != -1) {

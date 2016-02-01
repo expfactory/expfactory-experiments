@@ -148,6 +148,7 @@ var attention_node = {
 /* define /static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'tone_monitoring', trial_id: 'welcome'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -157,15 +158,17 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'tone_monitoring', trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'tone_monitoring', trial_id: 'instruction'},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will hear tones in a sequence, one after the other. You will hear one of three tones on each trial: a high tone, a medium tone, or a low tone.</p></div>',
     '<div class = centerbox><p class = block-text>Your job is to keep each track of the number of times each tone repeats and respond when you hear any tone repeat four times by pressing the spacebar. For instance, if you hear "high, high, low, medium, high, low, medium, <strong>high</strong>" you should respond on the last (fourth) high tone.</p><p class = block-text>If the sequence of tones continued with "high, medium, low, <strong>medium</strong>" you would respond again, as the medium tone had repeated four times, and so on.</p></div>',
@@ -201,6 +204,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'tone_monitoring', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -208,6 +212,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'tone_monitoring', trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -215,6 +220,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'tone_monitoring', trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a tone repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 01000
@@ -222,12 +228,14 @@ var start_test_block = {
 
 var update_function = {
 	type: 'call-function',
+	data: {exp_id: 'tone_monitoring', trial_id: 'update_count'},
 	func: update_count,
     timing_post_trial: 0
 }
 
 var tone_introduction_block = {
   type: 'single-audio',
+  data: {exp_id: 'tone_monitoring', trial_id: 'tone_intro'},
   stimuli: ['/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 	    '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 	    '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3'],
@@ -249,6 +257,7 @@ tone_monitoring_experiment.push(start_practice_block);
 for (i = 0; i< practice_trials.length; i++) {	
 	var practice_tone_block = {
 	  type: 'categorize-audio',
+	  data: {exp_id: 'tone_monitoring', trial_id: 'tone', exp_stage: 'practice'},
 	  timeline: practice_trials,
 	  key_answer: get_correct_key,
 	  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
@@ -272,6 +281,7 @@ for (b=0; b<block_num; b++) {
 	tone_monitoring_experiment.push(start_test_block)
 	var test_tone_block = {
 	  type: 'single-audio',
+	  data: {exp_id: 'tone_monitoring', trial_id: 'tone', exp_stage: 'test'},
 	  timeline: block,
 	  choices: [32],
 	  timing_stim: 2500,

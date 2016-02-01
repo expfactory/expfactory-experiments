@@ -145,6 +145,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'volatile_bandit', trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -154,15 +155,17 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'volatile_bandit', trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'volatile_bandit', trial_id: 'instruction'},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
 	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
@@ -199,6 +202,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'volatile_bandit', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -207,6 +211,7 @@ var end_block = {
 
 var start_test_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'volatile_bandit', trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = center-block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -245,7 +250,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'stable', exp_id: 'volatile_bandit'},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'stable', exp_id: 'volatile_bandit', exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
@@ -257,7 +262,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'stable', exp_id: 'volatile_bandit'},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'stable', exp_id: 'volatile_bandit', exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
@@ -269,7 +274,7 @@ for (var i = 0; i < stage1_trials; i++) {
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'stable', exp_id: 'volatile_bandit'},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'stable', exp_id: 'volatile_bandit', exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
@@ -307,7 +312,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	  stimulus: stim,
 	  is_html: true,
 	  choices: [37,39],
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'stim_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i], exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
@@ -319,7 +324,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	  stimulus: getRespondStim,
 	  is_html: true,
 	  choices: 'none',
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'show_response', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i], exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
@@ -331,7 +336,7 @@ for (var i = 0; i < stage2_trials; i++) {
 	  stimulus: getFBStim,
 	  is_html: true,
 	  choices: 'none',
-	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i]},
+	  data: {correct_response: correct_response, correct_stim: correct_stim, stim1_value: stim1_value, stim2_value: 100-stim1_value, trial_id: 'FB', condition: 'volatile', exp_id: 'volatile_bandit', block: 'block_' + block_index[i], exp_stage: 'test'},
 	  timing_stim: 1500,
 	  timing_response: 1500,
 	  timing_post_trial: 0,
