@@ -11,7 +11,7 @@ function getDisplayElement() {
 
 var practiceCount = 0
 var getPracticePrompt = function(){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please <strong>try both pressing the spacebar and pressing nothing</strong> to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
+	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please <strong>try both pressing the spacebar and pressing nothing</strong> to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
 	if(practiceCount != 7){
 	practiceCount = practiceCount +1
 	}else if(practiceCount == 7){
