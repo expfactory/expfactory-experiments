@@ -120,6 +120,7 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -138,14 +139,16 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {trial_id: 'instruction'},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {trial_id: 'instruction'},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 	'<div class = centerbox><p class = block-text>The words in each category are presented below: ' + category_instructions + '</p></div>',
@@ -181,6 +184,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -189,6 +193,7 @@ var end_block = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {trial_id: 'practice_intro'},
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -197,6 +202,7 @@ var start_practice_block = {
 var end_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {trial_id: 'practice_end'},
   text: '<div class = centerbox><p class = block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -205,6 +211,7 @@ var end_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -221,7 +228,7 @@ keep_track_experiment.push(start_practice_block)
 block = practice_block[0]
 target = practice_targets[0]
 prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.join(', ') +'</div></div>'
-data = {exp_id: 'keep_track', trial_id: 'practice_prompt', condition: 'target_length_' + target.length, targets: target}
+data = {trial_id: 'prompt', exp_stage: "practice", condition: 'target_length_' + target.length, targets: target}
 var prompt_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
@@ -235,6 +242,7 @@ var wait_block = {
 	type: 'poldrack-single-stim',
 	stimulus: ' ',
 	is_html: true,
+	data: {trial_id: 'wait', exp_stage: 'practice'},
 	choices: 'none',
 	prompt: prompt,
 	timing_stim: 500,
@@ -245,7 +253,7 @@ keep_track_experiment.push(prompt_block)
 keep_track_experiment.push(wait_block)
 for (i = 0; i < block.length; i++ ) {
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
-	data = {exp_id: 'keep_track', trial_id: 'practice_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
+	data = {trial_id: block[i][0], exp_stage: "practice", condition: 'target_length_' + target.length, targets: target}
 	var track_block = {
 		type: 'poldrack-single-stim',
 		stimulus: stim,
@@ -262,7 +270,7 @@ for (i = 0; i < block.length; i++ ) {
 var response_block = {
 	type: 'survey-text',
 	questions: [['What was the last word in each of the target categories? Please separate your words with a space']],
-	data: {exp_id: 'keep_track', trial_id: 'response', condition: 'target_length_' + target.length, targets: target}
+	data: {trial_id: 'response', exp_stage: "practice", condition: 'target_length_' + target.length, targets: target}
 }
 keep_track_experiment.push(response_block)
 keep_track_experiment.push(attention_node)
@@ -275,7 +283,7 @@ for (b=0; b<blocks.length; b++) {
 	block = blocks[b]
 	target = targets[b]
 	prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.join(', ') +'</div></div>'
-	data = {exp_id: 'keep_track', trial_id: 'test_prompt', condition: 'target_length_' + target.length, targets: target}
+	data = {trial_id: 'prompt', exp_stage: "test", condition: 'target_length_' + target.length, targets: target}
 	var prompt_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
@@ -290,6 +298,7 @@ for (b=0; b<blocks.length; b++) {
 		stimulus: ' ',
 		is_html: true,
 		choices: 'none',
+		data: {trial_id: 'wait', exp_stage: 'test'},
 		prompt: prompt,
 		timing_stim: 500,
 		timing_response: 500,
@@ -299,7 +308,7 @@ for (b=0; b<blocks.length; b++) {
 	keep_track_experiment.push(wait_block)
 	for (i = 0; i < block.length; i++ ) {
 		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
-		data = {exp_id: 'keep_track', trial_id: 'test_' + block[i][0], condition: 'target_length_' + target.length, targets: target}
+		data = {trial_id: block[i][0], exp_stage: "test", condition: 'target_length_' + target.length, targets: target}
 		var track_block = {
 			type: 'poldrack-single-stim',
 			stimulus: stim,
@@ -316,14 +325,12 @@ for (b=0; b<blocks.length; b++) {
 	var response_block = {
 		type: 'survey-text',
 		questions: [['What was the last word in each of the target categories? Please separate your words with a space']],
-		data: {exp_id: 'keep_track', trial_id: 'response', condition: 'target_length_' + target.length, targets: target}
+		data: {trial_id: 'response', exp_stage: 'test', condition: 'target_length_' + target.length, targets: target}
 	}
 	keep_track_experiment.push(response_block)
 	if ($.inArray(b,[0,2]) != -1) {
 		keep_track_experiment.push(attention_node)
 	}
 }
-
-
 
 keep_track_experiment.push(end_block)

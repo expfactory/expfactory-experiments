@@ -78,6 +78,7 @@ var place = randomDraw([0,1,2,3])
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'number_letter', trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -86,6 +87,7 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: 'number_letter', trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -94,15 +96,17 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: 'number_letter', trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: 'number_letter', trial_id: 'instruction'},
   pages: [
 	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
 	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left for odd, right for even.</p></div>',
@@ -149,7 +153,7 @@ for (i=0; i<half_block_len; i++) {
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'top_oddeven'},
+        data: {exp_id: 'number_letter', trial_id: 'stim', exp_stage: 'test', stim: stim[0], 'condition': 'top_oddeven'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(top_block)
@@ -161,7 +165,7 @@ for (i=0; i<half_block_len; i++) {
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'bottom_consonantvowel'},
+        data: {exp_id: 'number_letter', trial_id: 'stim', exp_stage: 'test', stim: stim[0], 'condition': 'bottom_consonantvowel'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(bottom_block)
@@ -173,7 +177,7 @@ for (i=0; i<rotate_block_len; i++) {
         stimulus: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number_letter', 'trial_id': stim[0], 'condition': 'rotate_switch'},
+        data: {exp_id: 'number_letter', trial_id: 'stim', exp_stage: 'test', stim: stim[0], 'condition': 'rotate_switch'},
         timing_post_trial: 150 
     }
     number_letter_experiment.push(rotate_block)

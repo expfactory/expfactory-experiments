@@ -2,7 +2,10 @@
 /* Define helper functions */
 /* ************************************ */
 
-/// BUGS TO FIX, make sure that it is only subtracting the FIRST time we hit a loss card.  add data to excel spreadsheet, and then add a last page telling the participants how much they've won
+function getDisplayElement () {
+    $('<div class = display_stage_background></div>').appendTo('body')
+    return $('<div class = display_stage></div>').appendTo('body')
+}
 
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
@@ -440,7 +443,7 @@ var feedback_instruct_block = {
   data: {exp_id: "columbia_card_task_cold", trial_id: 'instruction'},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []	  
