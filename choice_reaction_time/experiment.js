@@ -90,6 +90,7 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 1); //25
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: 'choice_reaction_time', trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -196,7 +197,7 @@ var practice_block = {
   type: 'poldrack-categorize',
   timeline: practice_trials,
   is_html: true,
-  data: {trial_id: 'stim', exp_stage: 'practice'},
+  data: {trial_id: 'stim', trial_id: "stim", exp_stage: 'practice'},
   correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
   timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div>',
@@ -214,7 +215,7 @@ var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
   is_html: true,
-  data: {trial_id: 'stim', exp_stage: 'test'},
+  data: {trial_id: 'stim', trial_id: "stim", exp_stage: 'test'},
   choices: [correct_responses[0][1], correct_responses[1][1]],
   timing_response: 2000,
   timing_post_trial: post_trial_gap,

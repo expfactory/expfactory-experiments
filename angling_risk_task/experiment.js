@@ -25,7 +25,7 @@ function evalAttentionChecks() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({'exp_id': 'angling_risk_task'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'angling_risk_task'})
 }
 
 var getInstructFeedback = function() {
@@ -297,6 +297,26 @@ function place_fish() {
 	}
 }
 
+var changeData = function(){
+data=jsPsych.data.getTrialsOfType('poldrack-text')
+practiceDataCount = 0
+testDataCount = 0
+for(i=0;i<data.length;i++){
+	if(data[i].trial_id == 'practice_intro'){
+	practiceDataCount = practiceDataCount + 1
+	} else if (data[i].trial_id == 'test_intro'){
+	testDataCount = testDataCount + 1
+	}
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
+	//temp_id = data[i].trial_id
+	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
+	}
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -373,7 +393,7 @@ var welcome_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {trial_id: "welcome"},
+  data: {exp_id: "angling_risk_task", trial_id: "welcome"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -382,7 +402,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
-  data: {trial_id: "instructions"},
+  data: {exp_id: "angling_risk_task", trial_id: "instructions"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 60000
@@ -399,7 +419,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>',
   ],
   allow_keys: false,
-  data: {trial_id: "instructions"},
+  data: {exp_id: "angling_risk_task", trial_id: "instructions"},
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
@@ -430,7 +450,7 @@ var end_block = {
   type: 'poldrack-text',
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {trial_id: "end block"},
+  data: {exp_id: "angling_risk_task", trial_id: "end_block"},
   timing_response: 60000,
   timing_post_trial: 0
 };
@@ -440,19 +460,22 @@ var round_over_block = {
   text: getRoundOverText,
   cont_key: [13],
   timing_response: 60000,
-  data: {trial_id: "round over"},
+  data: {exp_id: "angling_risk_task", trial_id: "round_over"},
   timing_post_trial: 0,
+  on_finish: changeData,
 };
 
 var ask_fish_block = {
 		type: 'survey-text',
-		data: {trial_id: "ask fish"},
+		on_finish: changeData,
+		data: {exp_id: "angling_risk_task", trial_id: "ask fish"},
 		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]],
 }
 
 var set_fish_block = {
 	type: 'call-function',
-	data: {trial_id: "set fish"},
+	on_finish: changeData,
+	data: {exp_id: "angling_risk_task", trial_id: "set_fish"},
 	func: function() {
 		var last_data = jsPsych.data.getData().slice(-1)[0]
 		var last_response = parseInt(last_data.responses.slice(7,10))
@@ -467,6 +490,7 @@ var set_fish_block = {
 var practice_block = {
   type: 'single-stim-button',
   stimulus: getGame,
+  data: {exp_id: "angling_risk_task", trial_id: "stim", exp_stage: "practice"},
   button_class: 'select-button',
   data: get_practice_data,
   timing_post_trial: 0
@@ -486,6 +510,7 @@ var practice_node = {
 
 var game_block = {
   type: 'single-stim-button',
+  data: {exp_id: "angling_risk_task", trial_id: "stim", exp_stage: "test"},
   stimulus: getGame,
   button_class: 'select-button',
   data: get_data,

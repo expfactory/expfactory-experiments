@@ -113,6 +113,7 @@ var gap = 0
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "adaptive_n_back", trial_id: "attention"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
