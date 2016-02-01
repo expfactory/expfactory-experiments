@@ -169,7 +169,7 @@ var stimulus = [
 	}
 ]
 
-var NoSSpractice_block_len = 52//12
+var NoSSpractice_block_len = 12
 var practice_block_len = 20
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus,NoSSpractice_block_len/4,true)
@@ -233,7 +233,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -242,8 +242,7 @@ var instructions_block = {
   data: {exp_id: "stop_signal", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -487,8 +486,8 @@ var practice_node = {
     }
 }
 
-//stop_signal_experiment.push(NoSS_practice_node)
-//stop_signal_experiment.push(practice_node)
+stop_signal_experiment.push(NoSS_practice_node)
+stop_signal_experiment.push(practice_node)
 stop_signal_experiment.push(practice_feedback_block) 
 
 /* Test blocks */
@@ -533,7 +532,7 @@ for (c = 0; c< numconditions; c++) {
 
 		stop_signal_experiment = stop_signal_experiment.concat(stop_signal_exp_block)
 		if ($.inArray(b+c,[0,4]) != -1) {
-			stop_selective_stop_signal.push(attention_node)
+			stop_signal_experiment.push(attention_node)
 		}
 		stop_signal_experiment.push(test_feedback_block)
 	}

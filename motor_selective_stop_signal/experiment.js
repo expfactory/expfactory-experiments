@@ -230,7 +230,7 @@ var feedback_instruct_block = {
   data: {exp_id: "motor_selective_stop_signal", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -239,8 +239,7 @@ var instructions_block = {
   data: {exp_id: "motor_selective_stop_signal", trial_id: "instruction"},
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
   allow_keys: false,
   show_clickable_nav: true,
@@ -525,7 +524,7 @@ for (b = 0; b< numblocks; b++) {
 
 	motor_selective_stop_signal_experiment = motor_selective_stop_signal_experiment.concat(stop_signal_exp_block)
 	if ($.inArray(b,[0,2,3]) != -1) {
-		motor_selective_stop_signal.push(attention_node)
+		motor_selective_stop_signal_experiment.push(attention_node)
 	}
 	motor_selective_stop_signal_experiment.push(test_feedback_block)
 }

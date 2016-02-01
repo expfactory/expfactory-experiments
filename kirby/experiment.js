@@ -108,7 +108,7 @@ var feedback_instruct_block = {
   data: {exp_id: 'kirby', trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -173,10 +173,9 @@ var start_test_block = {
 
 var test_block = {
   type: 'poldrack-single-stim',
-  data: {exp_id: 'kirby', trial_id: "stim", exp_stage: "test"},
+  data: {trial_id: "stim", exp_stage: "test"},
   timeline: trials,
   is_html: true,
-  data: {exp_id: 'kirby'},
   choices: ['q', 'p'],
   //used new feature to include choice info in recorded data
   on_finish: function(data){
@@ -192,7 +191,7 @@ var test_block = {
 
 var end_block = {
   type: 'poldrack-text',
-  data: {exp_id: 'kirby', trial_id: "end"},
+  data: {trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
