@@ -15,9 +15,16 @@ function fillArray(value, len) {
   return a;
 }
 
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+var run_attention_checks = true
+var attention_check_thresh = 0.65
+var sumInstructTime = 0    //ms
+var instructTimeThresh = 3   ///in seconds
 
 var path = 'static/experiments/ravens/images/'
 var prefix = '<div><img src = "'
@@ -47,6 +54,17 @@ var welcome_block = {
   data: {exp_id: "ravens"}
 };
 
+var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getInstructFeedback,
+  timing_post_trial: 0,
+  timing_response: 60000,
+  data: {exp_id: "ravens"}
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var instruction_trials = []   
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -57,10 +75,28 @@ var instructions_block = {
   timing_post_trial: 1000,
   data: {exp_id : "ravens"}
 };
+instruction_trials.push(feedback_instruct_block)
+instruction_trials.push(instructions_block)
 
-///////////////////////
-// ADD INSTRUCTION LOOP
-///////////////////////
+var instruction_node = {
+    timeline: instruction_trials,
+  /* This function defines stopping criteria */
+    loop_function: function(data){
+    for(i=0;i<data.length;i++){
+      if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
+        rt=data[i].rt
+        sumInstructTime=sumInstructTime+rt
+      }
+    }
+    if(sumInstructTime<=instructTimeThresh*1000){
+      feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+      return true
+    } else if(sumInstructTime>instructTimeThresh*1000){
+      feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+      return false
+    }
+    }
+}
 
 /////////////////////
 // ADD PRACTICE BLOCK
@@ -100,6 +136,7 @@ var end_block = {
 //Set up experiment
 var ravens_experiment = []
 ravens_experiment.push(welcome_block);
-ravens_experiment.push(instructions_block);
+ravens_experiment.push(instruction_node);
+// ravens_experiment.push(instructions_block);
 ravens_experiment.push(survey_block);
 ravens_experiment.push(end_block);
