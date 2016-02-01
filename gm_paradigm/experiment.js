@@ -20,42 +20,6 @@ var getPracticePrompt = function(){
 	return temp
 }
 
-/*var practiceCount = 0
-var getPracticePrompt = function (){
-	if(practiceCount === 0){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	} else if (practiceCount ==1){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==2){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==3){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==4){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==5){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==6){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = practiceCount+1
-	return temp
-	}else if (practiceCount ==7){
-	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>',
-	practiceCount = 0
-	return temp
-	}
-}*/
 
 var practiceCount2=0
 var getPracticeLearning = function(){
@@ -196,7 +160,6 @@ var appendPracticeGoData = function(){
 var getSSPracticeStim3 = function() {
 	goTemp = goStimsArray.pop()
 	practice_trial_data = goTemp.data
-
 	return goTemp.image
 }
 
@@ -204,49 +167,6 @@ var getStopSignal = function(){
 	stopTemp = stopStimsArray.pop()
 	return stopTemp.image
 }
-
-/*
-var getSSPracticeStim3 = function() {
-	tempColor = a.color.pop()
-	shape1 = tempShape.pop()
-	if(shape1==1 || shape1==2){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		} else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[0], condition: conditions[4], go_color: colors[tempColor]}}
-		}
-	} else if (shape1==3||shape1==4){
-		if(tempColor ===0 || tempColor == 1 || tempColor == 2 || tempColor == 3){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[tempColor], go_color: colors[tempColor]}}
-		}  else if(tempColor==8){
-		goStim = {image: preFileType+pathSource+colors[tempColor]+'_'+shapes[shape1] +fileType+postFileType, data: {trial_id: "test-stop", exp_id: 'gmParadigm', subject_ID: subjectID, stim: colors[tempColor]+'_'+shapes[shape1], correct_response: practiceStop_responses[1], condition: conditions[4], go_color: colors[tempColor]}}
-		}
-	}
-	practice_trial_data = goStim.data
-	return goStim.image
-}
-
-
-
-
-var getStopSignal = function(){
-	temp=a.stop_color.pop()
-	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
-	tempCond = temp-4
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[tempCond]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp==9){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: colors[temp]+'_stopSignal', correct_response: ["none", -1], stop_color_condition: conditions[4]}}
-	currData= stopStim.data
-	return stopStim.image
-	} else if(temp=="NA"){
-	stopStim= {image: preFileType+pathSource+ colors[temp]+'_stopSignal'+fileType+postFileType, data: {exp_id: 'gmParadigm', subject_ID: subjectID, stop_stim: "", correct_response: "", stop_color_condition: ""}}
-	currData= stopStim.data
-  }
-}
-
-*/
 
 var getSSPracticeData3 = function() {
 	return practice_trial_data
@@ -265,8 +185,6 @@ var getSSD = function() {
 var resetSSD = function() {
 	SSD = 250
 }
-
-
 
 var resetTrial = function() {
 	currTrial = 0
@@ -1143,7 +1061,7 @@ var practiceStopnode = {
 var phase2_trials = []
 phase2_trials.push(practice_feedback_block2)
 
-for (i = 0; i < 75; i++) { 
+for (i = 0; i < 12; i++) { 
 	phase2_trials.push(fixationBlock)
 	//var stim_data = $.extend({},secondPhaseStimsComplete.data[i])
     var stop_signal_block = {
@@ -1350,7 +1268,7 @@ var test_node = {
    
 var gm_paradigm_experiment=[]
 
-
+/*
 ///welcome and instructions
 gm_paradigm_experiment.push(welcome_block)
 gm_paradigm_experiment.push(instructions_block)
@@ -1374,7 +1292,7 @@ gm_paradigm_experiment.push(stop_intro)
 gm_paradigm_experiment.push(practiceStopnode)
 gm_paradigm_experiment.push(practice_feedback_block);
 gm_paradigm_experiment.push(reset_Trial)
-
+*/
 //practice stop second session (pre-phase 2)
 gm_paradigm_experiment.push(stop_intro2)
 gm_paradigm_experiment.push(practice_node)
