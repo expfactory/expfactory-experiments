@@ -73,6 +73,7 @@ for (var i = 0; i < num_trials; i++) {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "random_number_generation", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -82,15 +83,17 @@ var welcome_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "random_number_generation", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000
+  timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "random_number_generation", trial_id: "instruction"},
   pages: [
     '<div class = centerbox><p class = block-text>In this task, your job is to generate a random sequence of digits. You will do this by clicking on a virtual numpad using your mouse. Once you click, the number will temporarily turn red. You have less than a second to respond on each trial so it is important to respond quickly!</p><p class = block-text>.After the trial ends the numbers will dissapear for a moment. When they appear again the next trial has begun and you should respond as quickly as possible.</p><p class = block-text>Your goal is to choose each number completely randomly, as if you were picking a number from a hat with 9 slips of paper, reading it, and placing it back before picking another number.</p></div>',
   ],
@@ -125,6 +128,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "random_number_generation", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -133,6 +137,7 @@ var end_block = {
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "random_number_generation", trial_id: "practice_intro"},
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -141,6 +146,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
+  data: {exp_id: "random_number_generation", trial_id: "test_intro"},
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -168,7 +174,7 @@ for (var i = 0; i <practice_stims.length; i++) {
     type: 'single-stim-button',
     stimuli: [practice_stims[i]],
     button_class: 'num-button',
-    data: {exp_id: "random_number_generation", trial_id: "practice"},
+    data: {exp_id: "random_number_generation", trial_id: "stim", exp_stage: "practice"},
     timing_response: 800,
     response_ends_trial: false,
     timing_post_trial: 0
@@ -183,7 +189,7 @@ for (var i = 0; i <practice_stims.length; i++) {
     type: 'single-stim-button',
     stimuli: [test_stims[i]],
     button_class: 'num-button',
-    data: {exp_id: "rng", trial_id: "test"},
+    data: {exp_id: "random_number_generation", trial_id: "stim", exp_stage: "test"},
     timing_response: 800,
     response_ends_trial: false,
     timing_post_trial: 0

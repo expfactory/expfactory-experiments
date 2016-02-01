@@ -27,7 +27,7 @@ var getInstructFeedback = function() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
+	jsPsych.data.addDataToLastTrial({'exp_id': 'probabilistic_selection'})
 }
 
 var getStim = function(){
@@ -38,6 +38,12 @@ var getStim = function(){
 
 var getData = function(){
 	return curr_data
+}
+
+var getSecondPhaseStim = function(){
+	stim = secondPhaseStimsComplete.image.pop()
+	curr_data = secondPhaseStimsComplete.data.pop()
+	return stim;
 }
 
 var getResponse = function() {
@@ -123,17 +129,17 @@ var prob40 = randomStimArray[5];
 
 /* THIS IS FOR FIRST PHASE STIMS,  randomized and counterbalanced*/
 firstPhaseStims = [{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '80_20'}},
+data: {condition: '80_20', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '20_80'}},
+data: {condition: '20_80', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '70_30'}},
+data: {condition: '70_30', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '30_70'}},
+data: {condition: '30_70', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '60_40'}},
+data: {condition: '60_40', trial_id: "stim", exp_stage: "practice"}},
 {image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
-data: {exp_id: 'probabilistic_selection', condition: '40_60'}}]
+data: {condition: '40_60', trial_id: "stim", exp_stage: "practice"}}]
 
 var firstPhaseStimsComplete=jsPsych.randomization.repeat(firstPhaseStims,eachComboNum,true);
 var answers = genResponses(firstPhaseStimsComplete)
@@ -141,37 +147,53 @@ var curr_data = ''
 
 /*THIS IS FOR SECOND PHASE STIMS, randomized and counterbalanced*/
 
-var p2s1=["<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>","<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>"];
-var p2s2=["<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>","<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>"];
-var p2s3=["<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>","<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>"];
-var p2s4=["<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>","<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>"];
-var p2s5=["<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>","<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>"];
-var p2s6=["<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>","<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>"];
-var p2s7=["<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>","<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>"];
-var p2s8=["<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>","<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>"];
+secondPhaseStims = [{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
+data:  {condition: '80_70', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
+data:  {condition: '70_80', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
+data:  {condition: '80_30', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
+data:  {condition: '30_80', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
+data:  {condition: '80_60', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
+data:   {condition: '60_80', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
+data:  {condition: '80_40', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>", 
+data:   {condition: '40_80', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
+data:  {condition: '20_70', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
+data:  {condition: '70_20', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
+data:   {condition: '20_30', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
+data:  {condition: '30_20', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
+data:  {condition: '20_60', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
+data:  {condition: '60_20', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
+data:   {condition: '20_40', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
+data:  {condition: '40_20', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>",
+data:  {condition: '80_20', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>",
+data:  {condition: '20_80', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>",
+data:   {condition: '70_30', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>",
+data:  {condition: '30_70', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>",
+data:  {condition: '60_40', trial_id: "stim", exp_stage: "test"}},
+{image: "<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>",
+data:  {condition: '40_60', trial_id: "stim", exp_stage: "test"}}]
 
-var p2s9=["<div class = decision-left><img src='"+ prob80 +"'></img></div><div class = decision-right><img src='"+ prob20 +"'></img></div>","<div class = decision-left><img src='"+ prob20 +"'></img></div><div class = decision-right><img src='"+ prob80 +"'></img></div>"];
-var p2s10=["<div class = decision-left><img src='"+ prob70 +"'></img></div><div class = decision-right><img src='"+ prob30 +"'></img></div>","<div class = decision-left><img src='"+ prob30 +"'></img></div><div class = decision-right><img src='"+ prob70 +"'></img></div>"];
-var p2s11=["<div class = decision-left><img src='"+ prob60 +"'></img></div><div class = decision-right><img src='"+ prob40 +"'></img></div>","<div class = decision-left><img src='"+ prob40 +"'></img></div><div class = decision-right><img src='"+ prob60 +"'></img></div>"];
 
-
-var phase2_combo1_stims=jsPsych.randomization.repeat(p2s1,eachComboNumSP);
-var phase2_combo2_stims=jsPsych.randomization.repeat(p2s2,eachComboNumSP);
-var phase2_combo3_stims=jsPsych.randomization.repeat(p2s3,eachComboNumSP);
-var phase2_combo4_stims=jsPsych.randomization.repeat(p2s4,eachComboNumSP);
-
-var phase2_combo5_stims=jsPsych.randomization.repeat(p2s5,eachComboNumSP);
-var phase2_combo6_stims=jsPsych.randomization.repeat(p2s6,eachComboNumSP);
-var phase2_combo7_stims=jsPsych.randomization.repeat(p2s7,eachComboNumSP);
-var phase2_combo8_stims=jsPsych.randomization.repeat(p2s8,eachComboNumSP);
-
-var phase2_combo9_stims=jsPsych.randomization.repeat(p2s9,eachComboNumSP);
-var phase2_combo10_stims=jsPsych.randomization.repeat(p2s10,eachComboNumSP);
-var phase2_combo11_stims=jsPsych.randomization.repeat(p2s11,eachComboNumSP);
-
-
-var secondPhaseStims = phase2_combo1_stims.concat(phase2_combo2_stims, phase2_combo3_stims, phase2_combo4_stims, phase2_combo5_stims, phase2_combo6_stims, phase2_combo7_stims, phase2_combo8_stims,phase2_combo9_stims,phase2_combo10_stims,phase2_combo11_stims);
-var secondPhaseStimsComplete= jsPsych.randomization.repeat(secondPhaseStims,1);
+var secondPhaseStimsComplete= jsPsych.randomization.repeat(secondPhaseStims,eachComboNumSP, true);
 
 
 
@@ -201,6 +223,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
 	type: 'poldrack-text',
+	data: {trial_id: "welcome"},
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
@@ -210,16 +233,18 @@ var welcome_block = {
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
-  type: 'poldrack-text',
-  cont_key: [13],
-  text: getInstructFeedback,
-  timing_post_trial: 0,
-  timing_response: 6000
+	type: 'poldrack-text',
+	data: {trial_id: "instruction"},
+	cont_key: [13],
+	text: getInstructFeedback,
+	timing_post_trial: 0,
+	timing_response: 60000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
+	data: {trial_id: "instruction"},
 	pages: [
 	'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
@@ -233,9 +258,9 @@ instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
 
 var instruction_node = {
-    timeline: instruction_trials,
+	timeline: instruction_trials,
 	/* This function defines stopping criteria */
-    loop_function: function(data){
+	loop_function: function(data){
 		for(i=0;i<data.length;i++){
 			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
 				rt=data[i].rt
@@ -249,11 +274,12 @@ var instruction_node = {
 			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
 			return false
 		}
-    }
+	}
 }
 
 var FP_block = {
 	type: 'poldrack-text',
+	data: {trial_id: "first_phase_intro"},
 	timing_response: 60000,
 	text: '<div class = centerbox><p class = center-block-text> We will now begin Phase 1.  Press <strong>enter</strong> to begin. </p></div>',
 	cont_key: [13],
@@ -336,6 +362,7 @@ var performance_criteria = {
 var SP_block = {
 	type: 'poldrack-text',
 	timing_response: 60000,
+	data: {trial_id: "second_phase_intro"},
 	text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13]
 };
@@ -343,9 +370,9 @@ var SP_block = {
 
 var second_phase_trials = {
 	type: 'poldrack-single-stim',
-	stimulus: secondPhaseStimsComplete,
+	stimulus: getSecondPhaseStim,
 	is_html: true,
-	data: {exp_id: "probabilistic_selection", trial_id: "second-phase"},
+	data: getData,
 	choices: [37,39],
 	timing_stim: [1000,-1],
 	timing_response:[1000], 
@@ -354,8 +381,9 @@ var second_phase_trials = {
 
 var end_block = {
 	type: 'poldrack-text',
+	data: {trial_id: "end"},
 	timing_response: 60000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Finished with this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13]
 };
 
