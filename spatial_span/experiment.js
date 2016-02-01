@@ -144,6 +144,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "spatial_span", trial_id: "welcome"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -154,6 +155,7 @@ var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter 
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
+  data: {exp_id: "spatial_span", trial_id: "instruction"},
   text: getInstructFeedback,
   timing_post_trial: 0,
   timing_response: 6000
@@ -162,6 +164,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "spatial_span", trial_id: "instruction"},
   pages: [
   '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
   ],
@@ -194,6 +197,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "spatial_span", trial_id: "end"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -205,6 +209,7 @@ var start_test_block = {
   type: 'poldrack-single-stim',
   is_html: true,
   stimulus: getTestText,
+  data: {exp_id: "spatial_span", trial_id: "test_intro"},
   choices: 'none',
   timing_stim: 1000,
   timing_response: 1000,
@@ -214,6 +219,7 @@ var start_test_block = {
 
 var start_reverse_block = {
   type: 'poldrack-text',
+  data: {exp_id: "spatial_span", trial_id: "start_reverse_intro"},
   timing_response: 60000,
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13]
@@ -226,7 +232,7 @@ var test_block = {
   is_html: true,
   timing_stim: getTimeArray,
   choices: [['none']],
-  data: {exp_id: "spatial_span", trial_id: "test"},
+  data: {exp_id: "spatial_span", trial_id: "stim", exp_stage: "test"},
   timing_response: getTotalTime,
   timing_post_trial: 0,
   on_finish: function() {
@@ -239,7 +245,7 @@ var forward_response_block = {
   type: 'poldrack-single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "spatial_span", trial_id: "response"},
+  data: {exp_id: "spatial_span", trial_id: "response", exp_stage: "test"},
   on_finish: function() {
   	jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "forward", feedback: fb})
       var fb = 0
@@ -267,7 +273,7 @@ var reverse_response_block = {
   type: 'poldrack-single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
-  data: {exp_id: "spatial_span", trial_id: "response"},
+  data: {exp_id: "spatial_span", trial_id: "response", exp_stage: "test"},
   on_finish: function() {
   	jsPsych.data.addDataToLastTrial({"response": response, "sequence": curr_seq, "num_spaces": num_spaces, "condition": "reverse", feedback: fb})
       var fb = 0
@@ -294,7 +300,7 @@ var reverse_response_block = {
 var feedback_block = {
     type: 'poldrack-single-stim',
     stimulus: getFeedback,
-    data: {exp_id: "spatial_span", trial_id: "feedback"},
+    data: {exp_id: "spatial_span", trial_id: "feedback", exp_stage: "test"},
     is_html: true,
     choices: 'none', 
     timing_stim: 1000,
