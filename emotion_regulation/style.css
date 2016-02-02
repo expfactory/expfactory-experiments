@@ -1,28 +1,38 @@
-#jspsych-poldrack-survey-multi-choice-form {
-    -webkit-order: -1;
-    order: -1;
-    margin: 3vh 3vw auto 3vw;
+.leftBox {
+  width:30vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-100%,-60%);
 }
 
-.display_stage{
-	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-    flex-direction: column;
-    align-items: center;
-    -webkit-align-items: center;
-    overflow: auto;
+.rightBox {
+  width:30vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(0%,-60%);
 }
 
-
-.center-content{
-	-webkit-order: 0;
-    order: 0;
+.imageBox {
+  width: 30vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%,-70%);
 }
 
-.jspsych-survey-multi-choice-nav{
-	-webkit-order: 1;
-    order: 1;
+.image {
+  display: block;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
 }
-
-
