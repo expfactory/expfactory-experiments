@@ -308,7 +308,6 @@ for (b=0; b<blocks.length; b++) {
 	var stage_block = {
 	  type: 'poldrack-categorize',
 	  stimulus: get_stim,
-	  data: {exp_id: 'dimensional_set_shifting', trial_id: "reverse_stims", exp_stage: "test"},
 	  is_html: true,
 	  key_answer: get_correct_response,
 	  correct_text: '<div class = centerbox><div class = "white-text center-text"><font size = 20>Correct</font></div></div>',

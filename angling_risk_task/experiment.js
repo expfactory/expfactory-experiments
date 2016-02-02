@@ -490,7 +490,6 @@ var set_fish_block = {
 var practice_block = {
   type: 'single-stim-button',
   stimulus: getGame,
-  data: {exp_id: "angling_risk_task", trial_id: "stim", exp_stage: "practice"},
   button_class: 'select-button',
   data: get_practice_data,
   timing_post_trial: 0
@@ -510,7 +509,6 @@ var practice_node = {
 
 var game_block = {
   type: 'single-stim-button',
-  data: {exp_id: "angling_risk_task", trial_id: "stim", exp_stage: "test"},
   stimulus: getGame,
   button_class: 'select-button',
   data: get_data,
