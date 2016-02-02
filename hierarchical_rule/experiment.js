@@ -139,6 +139,7 @@ instructions_grid += '</div>'
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "hierarchical_rule", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200

@@ -110,6 +110,7 @@ var step = 250
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: 'bickel_titrator', trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -178,7 +179,7 @@ var instruction_node = {
 
 var update_delay_block = {
   type: 'call-function',
-  data: {exp_id: 'bickel_titrator', trial_id: 'update delay'},
+  data: {exp_id: 'bickel_titrator', trial_id: 'update_delay'},
   func: function() {
     updateDelay()
   },
