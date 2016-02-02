@@ -38,42 +38,46 @@ var getChoiceText = function() {
 
 var getTrainingInstruct = function() {
   var instructions = trainingVars.instruction.shift()
+  var instruct_text = ''
   if (instructions == 'distract') {
-    var instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, think about something that is emotionally neutral (distract).</div></div>'
+    instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, think about something that is emotionally neutral (distract).</div></div>'
   } else if (instructions == 'reappraise') {
-    var instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, thinking about the image in a way that reduces its negative meaning (reappraisal).</div></div>' 
+    instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, thinking about the image in a way that reduces its negative meaning (reappraisal).</div></div>' 
   }
   return instruct_text
 }
 
 var getTrainingImage = function() {
   var intensity = trainingVars.intense.shift()
+  var stim = ''
   if (intensity == 'high') {
-    var stim = base_path + 'high_intensity/' + high_intensity_stims.shift()
+    stim = base_path + 'high_intensity/' + high_intensity_stims.shift()
   } else {
-    var stim = base_path + 'low_intensity/' +  low_intensity_stims.shift()
+    stim = base_path + 'low_intensity/' +  low_intensity_stims.shift()
   }
   return '<div class = imageBox><img class = image src = ' + stim + ' </img></div>'
 }
 
 var getPracticeInstruct = function() {
   var instructions = practiceVars.instruction.shift()
-  if (instructions = 'choose') {
-    var instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, choose whether to think of something emotionally neutral (distract) or think about the image in a way that reduces its negative meaning (reppraisal).</div></div>'
+  var instruct_text = ''
+  if (instructions == 'choose') {
+    instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, choose whether to think of something emotionally neutral (distract) or think about the image in a way that reduces its negative meaning (reppraisal).</div></div>'
   } else if (instructions == 'distract') {
-    var instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, think about something that is emotionally neutral (distract).</div></div>'
+    instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, think about something that is emotionally neutral (distract).</div></div>'
   } else if (instructions == 'reappraise') {
-    var instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, thinking about the image in a way that reduces its negative meaning (reappraisal).</div></div>' 
+    instruct_text = '<div class = centerbox><div class = center-block-text>For this trial, thinking about the image in a way that reduces its negative meaning (reappraisal).</div></div>' 
   }
   return instruct_text
 }
 
 var getPracticeImage = function() {
   var intensity = practiceVars.intense.shift()
+  var stim = ''
   if (intensity == 'high') {
-    var stim = base_path + 'high_intensity/' + high_intensity_stims.shift()
+    stim = base_path + 'high_intensity/' + high_intensity_stims.shift()
   } else {
-    var stim = base_path + 'low_intensity/' +  low_intensity_stims.shift()
+    stim = base_path + 'low_intensity/' +  low_intensity_stims.shift()
   }
   return '<div class = imageBox><img class = image src = ' + stim + ' </img></div>'
 }
@@ -115,7 +119,7 @@ var high_intensity_stims = ['2053.JPG', '2800.JPG', '3000.JPG', '3068.JPG', '314
 var high_intensity_stims = jsPsych.randomization.shuffle(high_intensity_stims)
 var stim_intensities = jsPsych.randomization.repeat(['high', 'low'], exp_len/2)
 var trainingVars = {'instruction': [], 'intense': []}
-if (Math.random() < .5) {
+if (Math.random() < 0.5) {
   trainingVars.instruction.push('distract'); trainingVars.intense.push('low');
   trainingVars.instruction.push('distract'); trainingVars.intense.push('high');
   trainingVars.instruction.push('reappraise'); trainingVars.intense.push('low');
