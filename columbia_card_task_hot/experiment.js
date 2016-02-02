@@ -494,7 +494,7 @@ var practiceSetup2 = "<div class = instruct1><strong>Practice 2: </strong> The c
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
-  type: 'text',
+  type: 'poldrack-text',
   text:  "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
   cont_key: 13,
   data: {exp_id: "columbia_card_task_hot", trial: 'welcome'},
@@ -676,9 +676,8 @@ var practice_block = {
 
 
 var practice_chunk = {
-    chunk_type: 'while',
     timeline: [practice_block],
-    continue_function: function(data){ 
+    loop_function: function(data){ 
        if (roundOver === 0) {
        		roundOver =0
 			roundPoints = 0
@@ -703,9 +702,8 @@ var practice_instruct_block = {
 };
 
 var practice_chunk1 = {
-    chunk_type: 'while',
     timeline: [practice_instruct_block],
-    continue_function: function(data){ 
+    loop_function: function(data){ 
        if (roundOver === 0) {
        		instructPoints=0
        		roundOver =0
@@ -732,15 +730,14 @@ var practice_instruct_block2 = {
 };
 
 var practice_chunk2 = {
-    chunk_type: 'while',
     timeline: [practice_instruct_block2],
-    continue_function: function(data){ 
+    loop_function: function(data){ 
        if (roundOver === 0) {
        		roundOver =0
 			roundPoints = 0
 			whichClickInRound= 0
 			currTrial = 0
-			whichRound = 0
+			whichRound = 1
 			lossClicked = false
 			return false
 		} else if(roundOver ==1){
@@ -750,14 +747,14 @@ var practice_chunk2 = {
 }
 
 var end_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_hot", trial_id: 'end'},
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 var give_total = {
-  type: 'text',
+  type: 'poldrack-text',
   text: getReward,
   data: {exp_id: "columbia_card_task_hot", trial_id: 'reward'},
   cont_key: [13],
@@ -766,7 +763,7 @@ var give_total = {
 
 
 var start_practice_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_hot", trial_id: 'practice_intro'},
   text: "<div class = centerbox><p class = center-block-text>Hello <strong>enter</strong> to begin.</p></div>",
   cont_key: [13],
@@ -774,7 +771,7 @@ var start_practice_block = {
 };
 
 var start_test_block = {
-  type: 'text',
+  type: 'poldrack-text',
   data: {exp_id: "columbia_card_task_hot", trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],

@@ -82,7 +82,7 @@ var setUpTest = function() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+	return '<div class = centerbox><p class = "white-text center-block-text">' + feedback_instruct_text + '</p></div>'
 }
 /* ************************************ */
 /* Define experimental variables */
@@ -170,9 +170,9 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: 'dietary_decision', trial_id: 'welcome'},
+  data: {trial_id: 'welcome'},
   timing_post_trial: 0,
   on_finish: function() {
     $('body').css('background','black')
@@ -182,19 +182,16 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: 'dietary_decision', trial_id: 'end'},
+  data: {trial_id: 'end'},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background','white')
-  }
+  timing_post_trial: 0
 };
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
-  data: {exp_id: 'dietary_decision', trial_id: 'instruction'},
+  data: {trial_id: 'instruction'},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -204,7 +201,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	  
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {exp_id: 'dietary_decision', trial_id: 'instruction'},
+  data: {trial_id: 'instruction'},
   pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
@@ -236,7 +233,7 @@ var instruction_node = {
 var start_health_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: 'dietary_decision', trial_id: 'start health'},
+  data: {trial_id: 'start_health'},
   text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the healthiness of each food item without regard for its taste. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 500
@@ -244,7 +241,7 @@ var start_health_block = {
 
 var start_taste_block = {
   type: 'poldrack-text',
-  data: {exp_id: 'dietary_decision', trial_id: 'start taste'},
+  data: {trial_id: 'start_taste'},
   timing_response: 60000,
   text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -253,7 +250,7 @@ var start_taste_block = {
 
 var setup_block = {
   type: 'call-function',
-  data: {exp_id: 'dietary_decision', trial_id: 'setup test'},
+  data: {trial_id: 'setup test'},
   func: setUpTest,
   timing_post_trial: 0
 }
@@ -261,7 +258,7 @@ var setup_block = {
 var start_decision_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: 'dietary_decision', trial_id: 'decision text'},
+  data: {trial_id: 'decision_text'},
   text: getDecisionText,
   cont_key: [13],
   timing_post_trial: 500
@@ -275,7 +272,7 @@ var fixation_block = {
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
-  data: {exp_id: 'dietary_decision', trial_id: 'fixation'},
+  data: {trial_id: 'fixation'},
   choices: 'none',
   response_ends_trial: true,
   timing_post_trial: 1000
@@ -286,7 +283,7 @@ var health_block = {
   // stimulus: getHealthStim,
   stimulus: getHealthStim,
   button_class: 'dd_response_button',
-  data: {exp_id: 'dietary_decision', trial_id: 'stim-health_rating', exp_stage: 'test'},
+  data: {trial_id: 'stim-health_rating', exp_stage: 'test'},
   timing_stim: 4000,
   timing_response: 4000,
   response_ends_trial: true,
@@ -303,7 +300,7 @@ var taste_block = {
   // stimulus: getTasteStim,
   stimulus: getTasteStim,
   button_class: 'dd_response_button',
-  data: {exp_id: 'dietary_decision', trial_id: 'stim-taste_rating', exp_stage: 'test'},
+  data: {trial_id: 'stim-taste_rating', exp_stage: 'test'},
   timing_stim: 4000,
   timing_response: 4000,
   response_ends_trial: true,
@@ -320,7 +317,7 @@ var decision_block = {
   // stimulus: getDecisionStim,
   stimulus: getDecisionStim,
   button_class: 'dd_response_button',
-  data: {exp_id: 'dietary_decision', trial_id: 'stim-decision', exp_stage: 'test'},
+  data: {trial_id: 'stim-decision', exp_stage: 'test'},
   timing_stim: 4000,
   timing_response: 4000,
   response_ends_trial: true,
