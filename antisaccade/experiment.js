@@ -43,7 +43,7 @@ var getFixationLength = function() {
 
 
 var changeData = function(){
-data=jsPsych.data.getData()
+data=jsPsych.data.getTrialsOfType('poldrack-text')
 practiceDataCount = 0
 testDataCount = 0
 for(i=0;i<data.length;i++){
@@ -52,14 +52,14 @@ for(i=0;i<data.length;i++){
 	} else if (data[i].trial_id == 'test_intro'){
 	testDataCount = testDataCount + 1
 	}
-	if(practiceDataCount == 1 && testDataCount === 0){
+}
+	if(practiceDataCount >= 1 && testDataCount === 0){
 	//temp_id = data[i].trial_id
 	jsPsych.data.addDataToLastTrial({exp_stage: "practice"})
-	} else if( practiceDataCount == 1 && testDataCount == 1){
+	} else if( practiceDataCount >= 1 && testDataCount >= 1){
 	//temp_id = data[i].trial_id
 	jsPsych.data.addDataToLastTrial({exp_stage: "test"})
 	}
-  }
 }
 /* ************************************ */
 /* Define experimental variables */
@@ -115,6 +115,7 @@ test_cue_sides = jsPsych.randomization.repeat([0,1],exp_len/2,false)
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "antisaccade", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -130,6 +131,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
+  data: {exp_id: "antisaccade", trial_id: "welcome"},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -138,6 +140,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
+  data: {exp_id: "antisaccade", trial_id: "end"},
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 60000,
@@ -147,6 +150,7 @@ var end_block = {
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
+  data: {exp_id: "antisaccade", trial_id: "instruction"},
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
@@ -156,6 +160,7 @@ var feedback_instruct_block = {
 var instruction_trials = []	
 var instructions_block = {
   type: 'poldrack-instructions',
+  data: {exp_id: "antisaccade", trial_id: "instruction"},
   pages: ['<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,

@@ -81,6 +81,7 @@ for (var b=0; b<block_num; b++){
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: 'letter_memory', trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200

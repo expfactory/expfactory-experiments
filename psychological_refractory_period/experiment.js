@@ -188,6 +188,7 @@ var box_number2 = '<div class = prp_right-instruction><div class = prp_stimBox><
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: 'psychological_refractory_period', trial_id: 'attention_check'},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
