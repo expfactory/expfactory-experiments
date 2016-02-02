@@ -50,6 +50,8 @@ var sumInstructTime = 0    //ms
 var instructTimeThresh = 5   ///in seconds
 
 // task specific variables
+var exp_len = 100
+var practice_len = 20
 var gap = 0
 var current_trial = 0
 //set stim/response mapping
@@ -80,8 +82,8 @@ var test_stimuli_block = [
 ];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 1); //5
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 1); //25
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25); 
 
 
 /* ************************************ */
