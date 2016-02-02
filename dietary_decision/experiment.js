@@ -185,10 +185,7 @@ var end_block = {
   data: {trial_id: 'end'},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background','white')
-  }
+  timing_post_trial: 0
 };
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
