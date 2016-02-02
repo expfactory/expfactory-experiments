@@ -168,7 +168,7 @@ var practice_ISIs = jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 50
 var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9))
 var curr_data = {exp_id: 'psychological_refractory_period', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
 //stim variables
-var path_source = 'static/experiments/psychological_refractory_period/images/'
+var path_source = '/static/experiments/psychological_refractory_period/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
 // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
 var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png','3_border.png', '4_border.png'])
