@@ -143,7 +143,10 @@ var practice_block = {
   is_html: true,
   data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "practice"},
   choices: [32],
-  timing_post_trial: post_trial_gap,
+  timing_stim: 1000,
+  timing_response: 2000,
+  response_ends_trial: false,
+  timing_post_trial: 0,//post_trial_gap
   on_finish: appendData
 };
 
@@ -151,10 +154,13 @@ var practice_block = {
 var test_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
+  timing_stim: 1000,
+  timing_response: 1000,
+  response_ends_trial: false,
   is_html: true,
   data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "test"},
   choices: [32],
-  timing_post_trial: post_trial_gap,
+  timing_post_trial: 0, //post_trial_gap
   on_finish: appendData
 };
 
