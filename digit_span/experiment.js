@@ -126,6 +126,7 @@ var response_grid =
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "digit_span", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
@@ -217,7 +218,7 @@ var start_test_block = {
 var start_reverse_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: "digit_span", trial_id: "start reverse"},
+  data: {exp_id: "digit_span", trial_id: "start_reverse"},
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13]
 }

@@ -192,6 +192,7 @@ for (i = 0; i< numblocks; i++) {
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
+  data: {exp_id: "motor_selective_stop_signal", trial_id: "attention_check"},
   timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200

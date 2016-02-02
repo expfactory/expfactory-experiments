@@ -1,31 +1,8 @@
-input{
-	margin-bottom:15px; /*or whatever you want the spacing to be*/
-}
-
-#jspsych-radio-buttonlist-next{
-	background: #ECECEC;
-	border-radius: 15px;
-	padding: 10px 20px;
-	font-weight: bold;
-	color:#7f7f7f;
-	text-decoration: none;
-	text-shadow:0px 1px 0px #fff;
-	border:1px solid #a7a7a7;
-	margin:3vh 3vw 3vh 3vw;
-	-webkit-transition:box-shadow 0.5s;
-	font-size:24px;
-	font-family: 'Helvetica Neue',Arial,sans-serif;
-	height: 6vh;
-	width: 260px;
-	text-align: center;
-	-webkit-order: 1;
-    order: 1;
-}
-
-#jspsych-radio-buttonlist-preamble {
+#jspsych-poldrack-survey-multi-choice-form {
     -webkit-order: -1;
     order: -1;
-    margin: 3vh 3vw 3vh 3vw;
+    margin: 3vh 3vw auto 3vw;
+    width: 800px;
 }
 
 .display_stage{
@@ -38,7 +15,36 @@ input{
     overflow: auto;
 }
 
-#jspsych-radio-buttonlist{
+
+.center-content{
 	-webkit-order: 0;
     order: 0;
 }
+
+.jspsych-survey-multi-choice-nav{
+	-webkit-order: 1;
+    order: 1;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts {
+  font-size: 20px !important;
+  padding:0 0 5px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts:before {
+  top:0px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-question {
+  font-size: 13px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-text {
+  -webkit-margin-before: 0px !important;
+  -webkit-margin-after: 0px !important;
+}
+
+.jspsych-poldrack-survey-multi-choice-question {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+ }
