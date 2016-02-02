@@ -198,7 +198,7 @@ var stimArray=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','
 var probes= ['rec_pos','xrec_pos', 'rec_neg', 'xrec_neg']
 var probeTypeArray=jsPsych.randomization.repeat(probes,experimentLength/4)
 var stimFix = ['fixation']
-var pathSource = 'static/experiments/recent_probes/images/'
+var pathSource = '/static/experiments/recent_probes/images/'
 var fileType = '.png'
 
 

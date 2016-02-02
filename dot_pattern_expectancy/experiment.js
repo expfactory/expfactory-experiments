@@ -69,7 +69,7 @@ var instructTimeThresh = 5   ///in seconds
 
 // task specific variables
 var correct_responses = [["left arrow",37],["down arrow",40]]
-var path = 'static/experiments/dot_pattern_expectancy/images/'
+var path = '/static/experiments/dot_pattern_expectancy/images/'
 var prefix = '<div class = centerbox><div class = img-container><img src = "'
 var postfix = '"</img></div></div>'
 var cues = jsPsych.randomization.shuffle(['cue1.png','cue2.png','cue3.png','cue4.png','cue5.png','cue6.png'])

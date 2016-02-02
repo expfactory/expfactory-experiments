@@ -273,7 +273,7 @@ var get_feedback = function() {
 		FB = 1
 		return "<div class = 'decision-top faded' style='background:" + curr_colors[stage+1] +"; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[second_selected] + "'></div>" +
-			"<div><img  class = decision-fb src = 'static/experiments/two_stage_decision/images/gold_coin.png'></img></div>"
+			"<div><img  class = decision-fb src = '/static/experiments/two_stage_decision/images/gold_coin.png'></img></div>"
 	}
 	else {
 		update_FB(); 

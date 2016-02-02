@@ -188,7 +188,7 @@ var cueArray = ['TOP','BOT']
 var probes = ['pos','pos','neg','con']
 var probeTypeArray=jsPsych.randomization.repeat(probes,experimentLength/4)
 var stimFix = ['fixation']
-var pathSource = 'static/experiments/directed_forgetting/images/'
+var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
 
 

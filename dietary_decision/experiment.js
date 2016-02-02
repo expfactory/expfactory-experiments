@@ -124,7 +124,7 @@ var decision_response_area = '<div class = dd_response_div>' +
                 '<button class = dd_response_button id = Yes>Yes</button>' +
                 '<button class = dd_response_button id = Strong_Yes>Strong Yes</button></div>'
 
-var base_path = 'static/experiments/dietary_decision/images/'
+var base_path = '/static/experiments/dietary_decision/images/'
 var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincauliflower.bmp',
             'butterfinger.bmp', 'carrots.bmp', 'cellery.bmp', 'cherryicecream.bmp',
             'ChipsAhoy.bmp', 'cookiencream.bmp', 'cookies.bmp', 'cranberries.bmp',
