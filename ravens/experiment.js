@@ -41,6 +41,8 @@ for (var i = 0; i < top_img.length; i++) {
   all_pages.push(page)
 }
 
+
+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -68,7 +70,9 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>This is a test of observation and clear thinking with 18 problems. The top part of each problem is a pattern with one part cut out of it. Your task is to look at the pattern, think of what the missing part must look like to complete the pattern correctly, both along the rows and the columns, and then find the right piece out of the eight shown. Only one of the answer choices is perfectly correct.</p></div>',
+    '<div class = centerbox><p class = block-text>This is a test of observation and clear thinking with 18 problems. The top part of each problem is a pattern with one part cut out of it. Your task is to look at the pattern, think of what the missing part must look like to complete the pattern correctly, both along the rows and the columns, and then find the right piece out of the eight shown. Only one of the answer choices is perfectly correct.<br><br>The following page will have an example trial.</p></div>',
+    '<div class = centerbox><p class = block-text><strong>Look at the top part (the pattern) of this sample problem.</strong> Notice that going across the rows, the number of horizontal lines is equal. Going down the columns, the number of squares is equal.<div class="sample_img"><img src = "static/experiments/ravens/images/practice/sample_matrix_top.jpg"</img></div><p class= "block-text"><strong>Look at the solution of this sample problem.</strong> The best completion of the missing cell is the alternative "E)" which is selected below.</p><div class="sample_img"><img src = "static/experiments/ravens/images/practice/sample_matrix_bottom.jpg" id="bottom_img"</img></div><div class="sample_img"><img src = "static/experiments/ravens/images/practice/Opt_E_selected.png"</img></div></p></div>',
+    '<div class = centerbox>You will now complete two practice trials with feedback. The test trials will not include feedback.<p class = block-text></p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -101,6 +105,29 @@ var instruction_node = {
 /////////////////////
 // ADD PRACTICE BLOCK
 /////////////////////
+
+var practice_block = {
+  type: "poldrack-survey-multi-choice",
+  exp_id: "ravens",
+  horizontal: true,
+  preamble: '',
+  pages: ,
+  options: ,
+  scale: ,
+  show_clickable_nav: true,
+  allow_backward: true,
+  required: ,
+};
+
+var start_test_block = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.</p></div>',
+  timing_post_trial: 0,
+  timing_response: 60000,
+  data: {exp_id: "ravens"}
+};
+
 
 var opts = ["A", "B", "C", "D", "E", "F", "G", "H"]
 
@@ -137,6 +164,7 @@ var end_block = {
 var ravens_experiment = []
 ravens_experiment.push(welcome_block);
 ravens_experiment.push(instruction_node);
-// ravens_experiment.push(instructions_block);
+ravens_experiment.push(practice_block);
+ravens_experiment.push(start_test_block);
 ravens_experiment.push(survey_block);
 ravens_experiment.push(end_block);

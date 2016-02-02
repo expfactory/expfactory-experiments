@@ -1,3 +1,18 @@
+.centerbox{
+    -webkit-order: 0;
+    order: 0;
+}
+
+.jspsych-instructions-nav {
+    -webkit-order: 1;
+    order: 1;
+}
+
+.sample_img {
+    margin: auto;
+    text-align: center
+}
+
 #jspsych-poldrack-survey-multi-choice-form {
     -webkit-order: -1;
     order: -1;
