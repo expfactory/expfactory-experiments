@@ -1,36 +1,35 @@
 [
     {
-        "name": "Emotion Regulation Questionnaire (ERQ)",
+        "name": "Emotion Regulation Task",
         "template":"jspsych",
         "run": [
-                 "static/js/jspsych/jspsych.js",
-                 "static/js/jspsych/plugins/jspsych-text.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
-                 "experiment.js",
-                 "style.css",
-                 "static/css/jspsych.css",
-                 "static/css/default_style.css"
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
                ],
         "exp_id": "emotion_regulation",
         "cognitive_atlas_task_id": "trm_4da890594742a",
-        "template":"jspsych",
         "contributors": [
-                         "Zeynep Enkavi",
                          "Ian Eisenberg",
+                         "Zeynep Enkavi",
                          "Patrick Bissett",
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":999,
-        "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/psp/85/2/348/",
-        "notes": "",
+        "time": 10,
+        "reference": "http://pss.sagepub.com/content/early/2011/09/28/0956797611418350.abstract",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement"}
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
                        }
-    
    }
 ]
