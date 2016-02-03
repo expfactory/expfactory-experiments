@@ -178,8 +178,8 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','g
 
 //number of blocks per condition
 var test_block_len = 60
-numconditions = 2
-numblocks = 5
+numconditions = 1 //2
+numblocks = 2  //5
 condition_blocks = []
 for (j = 0; j<numconditions; j++) {
     blocks = []
@@ -395,7 +395,7 @@ var NoSS_practice_node = {
 			if (average_correct <= accuracy_thresh) {
                 practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
-            return true;
+            return false;
         }
     }
 }
@@ -481,7 +481,7 @@ var practice_node = {
             if (successful_stops < stop_thresh) {
 		        practice_feedback_text += '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
 		    }
-            return true;
+            return false;
         }
     }
 }
