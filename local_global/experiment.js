@@ -89,7 +89,7 @@ var instructTimeThresh = 5   ///in seconds
 // task specific variables
 var task_colors = jsPsych.randomization.shuffle(['blue','black'])
 var task_shapes = ['circle','X','triangle','square']
-var path = 'static/experiments/local_global/images/'
+var path = '/static/experiments/local_global/images/'
 prefix = '<div class = centerbox><img src = "'
 postfix = '"</img></div>'
 stim = []

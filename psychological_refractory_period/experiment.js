@@ -46,7 +46,7 @@ function evalAttentionChecks() {
 }
 
 var getInstructFeedback = function() {
-  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+  return '<div class = centerbox><p class = "white-text center-block-text">' + feedback_instruct_text + '</p></div>'
 }
 
 var randomDraw = function(lst) {
@@ -168,7 +168,7 @@ var practice_ISIs = jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 50
 var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50,100,150,200,300, 400, 500, 700], exp_len/9))
 var curr_data = {exp_id: 'psychological_refractory_period', trial_id: '', ISI: '', gonogo_stim: '', choice_stim: '', gonogo_correct_response: '', choice_correct_response: ''}
 //stim variables
-var path_source = 'static/experiments/psychological_refractory_period/images/'
+var path_source = '/static/experiments/psychological_refractory_period/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
 // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
 var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png','3_border.png', '4_border.png'])
@@ -207,10 +207,7 @@ var welcome_block = {
   data: {exp_id: 'psychological_refractory_period', trial_id: 'welcome'},
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background','black')
-  }
+  timing_post_trial: 0
 };
 
 var end_block = {
@@ -219,10 +216,7 @@ var end_block = {
   data: {exp_id: 'psychological_refractory_period', trial_id: 'end'},
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background','white')
-  }
+  timing_post_trial: 0
 };
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'

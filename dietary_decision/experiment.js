@@ -124,7 +124,7 @@ var decision_response_area = '<div class = dd_response_div>' +
                 '<button class = dd_response_button id = Yes>Yes</button>' +
                 '<button class = dd_response_button id = Strong_Yes>Strong Yes</button></div>'
 
-var base_path = 'static/experiments/dietary_decision/images/'
+var base_path = '/static/experiments/dietary_decision/images/'
 var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincauliflower.bmp',
             'butterfinger.bmp', 'carrots.bmp', 'cellery.bmp', 'cherryicecream.bmp',
             'ChipsAhoy.bmp', 'cookiencream.bmp', 'cookies.bmp', 'cranberries.bmp',
@@ -185,10 +185,7 @@ var end_block = {
   data: {trial_id: 'end'},
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background','white')
-  }
+  timing_post_trial: 0
 };
 
 var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'

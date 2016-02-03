@@ -85,7 +85,7 @@ var blocks = ['simple', 'separate', 'compound', 'ID', 'ED'] //Simple: 1 dimensio
 var stages = ['simple', 'simple_rev', 'separate', 'compound', 'compound_rev', 'ID', 'ID_rev', 'ED', 'ED_rev']
 
 // Set up variables for stimuli
-var path = 'static/experiments/dimensional_set_shifting/images/'
+var path = '/static/experiments/dimensional_set_shifting/images/'
 var center_prefix = '<div class = centerimg><img style="height: 80%; width: auto; '
 var left_prefix = '<div class = leftimg><img style="height: 80%; width: auto; '
 var right_prefix = '<div class = rightimg><img style="height: 80%; width: auto; '
