@@ -113,9 +113,9 @@ var curr_trial = 0
 var choices = [37, 39]
 
 var base_path = '/static/experiments/emotion_regulation/images/'
-var low_intensity_stims = ['1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '1301.JPG', '2278.JPG', '2312.JPG']
+var low_intensity_stims = ['1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '6010.JPG', '6190.JPG', '6836.JPG', '7300.JPG', '9102.JPG', '9120.JPG', '9160.JPG', '9440.JPG', '9470.JPG']
 var low_intensity_stims = jsPsych.randomization.shuffle(low_intensity_stims)
-var high_intensity_stims = ['2053.JPG', '2800.JPG', '3000.JPG', '3068.JPG', '3140.JPG', '3150.JPG','3180.JPG', '3230.JPG', '3261.JPG', '3530.JPG', '2053.JPG', '2800.JPG', '3000.JPG', '3068.JPG', '3140.JPG', '3150.JPG', '3180.JPG', '3230.JPG', '3261.JPG', '3530.JPG', '3530.JPG']
+var high_intensity_stims = ['2053.JPG', '2800.JPG', '3000.JPG', '3068.JPG', '3140.JPG', '3150.JPG','3180.JPG', '3230.JPG', '3261.JPG', '3530.JPG', '6831.JPG', '9181.JPG', '9252.JPG', '9410.JPG', '9420.JPG']
 var high_intensity_stims = jsPsych.randomization.shuffle(high_intensity_stims)
 var stim_intensities = jsPsych.randomization.repeat(['high', 'low'], exp_len/2)
 var trainingVars = {'instruction': [], 'intense': []}
