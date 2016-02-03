@@ -425,8 +425,7 @@ tempShape.push(Math.floor(Math.random()*4+1))
 tempShape.push(Math.floor(Math.random()*4+1))
 	
 stopStimsArray=[]
-goStimsArray=[]
-for(i=0;i<a.stop_color.length;i++){
+for(i=0;i<75;i++){
 	temp=a.stop_color.pop()
 	if(temp==4 || temp == 5 || temp == 6 || temp == 7 ){
 	tempCond = temp-4
@@ -443,7 +442,8 @@ for(i=0;i<a.stop_color.length;i++){
     stopStimsArray.push(stopStim)
     }
 }	
-for(i=0;i<a.color.length;i++){	
+goStimsArray=[]
+for(i=0;i<75;i++){	
 	tempColor = a.color.pop()
 	shape1 = tempShape.pop()
 	if(shape1==1 || shape1==2){
@@ -756,7 +756,7 @@ var forced_choice_block2 = {
 
 
 var fixationBlock = {
-  type: 'poldrack-single-stim',
+  type: 'single-stim',
   stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
   is_html: true,
   choices: 'none',
@@ -1137,7 +1137,7 @@ for (i = 0; i < 75; i++) {
     var stop_signal_block = {
 	  type: 'stop-signal',
 	  stimulus: getSSPracticeStim3,
-	  SS_stimulus: stop_signal,
+	  SS_stimulus: getStopSignal,
 	  SS_trial_type: getSSPractice_trial_type3,
 	  data: getSSPracticeData3,
 	  is_html: true,
@@ -1227,27 +1227,52 @@ stopStimsArray=[]
 		}
 	}
 
+		var sum_rt = 0;
+        var sumGo_correct = 0;
+        var sumStop_correct = 0;
+        var go_length = 0;
+		var num_responses = 0;
+		var stop_length = 0
+        for(var i=0; i < data.length; i++){
+            if (data[i].SS_trial_type == "go") {
+            	go_length += 1
+				if (data[i].rt != -1) {
+					num_responses += 1
+					sum_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response[1]) { sumGo_correct += 1 }
+				} 
+            } else if (data[i].SS_trial_type == "stop"){
+				stop_length +=1
+				if (data[i].rt == -1) {
+					sumStop_correct +=1
+				}
+			}
+        }
+        var average_rt = sum_rt / num_responses;
+        var averageGo_correct = sumGo_correct / go_length;
+		var missed_responses = (go_length - num_responses) / go_length
+		var averageStop_correct = sumStop_correct/stop_length
        	stop_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(averageGo_correct*100) + "%"
 		stopCount = stopCount + 1
-	    if(stopCount == 6){
+	    if(stopCount == 1 || stopCount == 2){
 			stop_feedback_text += '</p><p class = block-text>Done with this phase.'       
-		 	return false
+		 	return true
 		
-		 }else if(stopCount ==1){
+		 }else if(stopCount ==3){
 			stop_feedback_text += '</p><p class = block-text><strong>Please Get the Experimenter.</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'       
 			if (averageGo_correct<accuracy_thresh) {
         		stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 			currTrial =0
 			return false;
-		} else if(stopCount>1 && stopCount<6){
+		} else if(stopCount>3 && stopCount<6){
 			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
     	   	}if (averageGo_correct<accuracy_thresh) {
     			stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 						currTrial =0			
-			return false;	
+			return true;	
 		}
 	}
 }
@@ -1256,7 +1281,7 @@ stopStimsArray=[]
 	      
    
 var gm_paradigm_experiment=[]
-
+/*
 ///welcome and instructions
 gm_paradigm_experiment.push(welcome_block)
 gm_paradigm_experiment.push(instructions_block)
@@ -1287,14 +1312,14 @@ gm_paradigm_experiment.push(practice_node)
 gm_paradigm_experiment.push(practice_feedback_block2);
 gm_paradigm_experiment.push(reset_SSD)
 gm_paradigm_experiment.push(reset_Trial)
-
+*/
 //stopping phase (phase 2)
 gm_paradigm_experiment.push(main_stop_intro1)
 gm_paradigm_experiment.push(test_node)
 gm_paradigm_experiment.push(stop_feedback_block);
 //gm_paradigm_experiment.push(test_node)
 
-
+/*
 //forced choice phase (phase 3)
 gm_paradigm_experiment.push(forced_choice_intro)
 for(forcedChoice=0;forcedChoice<45;forcedChoice++){
@@ -1310,3 +1335,4 @@ gm_paradigm_experiment.push(forced_choice_block2)
 }
 gm_paradigm_experiment.push(bonus_block)
 gm_paradigm_experiment.push(end_block)
+*/
