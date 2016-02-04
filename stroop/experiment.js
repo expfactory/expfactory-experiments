@@ -66,17 +66,17 @@ var congruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-sti
 						   {stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'congruent', correct_response: 71}, key_answer: 71}];
 							
 var incongruent_stim = [{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82}, key_answer: 82},
-						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82, key_answer: 82}},
-						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66, key_answer: 66}},
-						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66, key_answer: 66}},
-						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71, key_answer: 71}},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 82}, key_answer: 82},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66}, key_answer: 66},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 66}, key_answer: 66},
+						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71}, key_answer: 71},
 						{stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>', data: {exp_id: 'stroop', condition: 'incongruent', correct_response: 71}, key_answer: 71}];
 var stims = [].concat(congruent_stim,congruent_stim,incongruent_stim)
 practice_len = 24
-practice_stims = jsPsych.randomization.repeat(stims,practice_len/12)
+practice_stims = jsPsych.randomization.repeat(stims,practice_len/12, true)
 
 exp_len = 96
-test_stims = jsPsych.randomization.repeat(stims,exp_len/12)
+test_stims = jsPsych.randomization.repeat(stims,exp_len/12, true)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -201,7 +201,9 @@ for (i=0; i<practice_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var practice_block = {
 	  type: 'poldrack-categorize',
-	  timeline: practice_stims,
+	  stimulus: practice_stims.stimulus[i],
+	  data: practice_stims.data[i],
+	  key_answer: practice_stims.key_answer[i],
 	  is_html: true,
 	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
 	  incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
@@ -226,7 +228,9 @@ for (i=0; i<exp_len; i++) {
 	stroop_experiment.push(fixation_block)
 	var test_block = {
 	  type: 'poldrack-categorize',
-	  timeline: test_stims,
+	  stimulus: test_stims.stimulus[i],
+	  data: test_stims.data[i],
+	  key_answer: test_stims.key_answer[i],
 	  is_html: true,
 	  correct_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
 	  incorrect_text: '<div stroop class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
