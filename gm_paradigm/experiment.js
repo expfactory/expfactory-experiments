@@ -13,7 +13,6 @@ function getDisplayElement() {
 var practiceCount = 0
 var getPracticePrompt = function (){
 	temp = '<div class = centerbox><p class = block-text>We will now practice some trials for the <strong>'+ colors[practiceCount]+' square.</strong> These trials will be identical to the main Phase 1 task except the action and outcome will only be presented to you in these practice trials so you must commit them to memory before the main Phase 1 task.</p><p class = block-text>Please try both pressing the spacebar and pressing nothing to see the different outcomes for each action.</p><p class = block-text>Press <strong>enter</strong> to continue</p></div>'
-	practiceCount = practiceCount+1
 	if (practiceCount != 7){
 	practiceCount = practiceCount +1
 	} else if (practiceCount ==7){
@@ -212,8 +211,6 @@ var updateSSDandData = function() {
 	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response[1]) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'go')){
 		jsPsych.data.addDataToLastTrial({go_acc: 0})
 	}
-	
-	
 	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'stop')){
 		jsPsych.data.addDataToLastTrial({stop_acc: 1})
 	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'stop')){
@@ -1093,9 +1090,6 @@ var practice_node = {
     timeline: phase2_trials,
 	/* This function defines stopping criteria */
     loop_function: function(data){
-		secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, 19, true);
-	    practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','stop','go','go','go','go','go','go','go','go'], 7,false)
-	
 		var sum_rt = 0;
         var sumGo_correct = 0;
         var go_length = 0;
