@@ -113,9 +113,9 @@ var curr_trial = 0
 var choices = [37, 39]
 
 var base_path = '/static/experiments/emotion_regulation/images/'
-var low_intensity_stims = ['1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '6010.JPG', '6190.JPG', '6836.JPG', '7300.JPG', '9102.JPG', '9120.JPG', '9160.JPG', '9440.JPG', '9470.JPG']
+var low_intensity_stims = ['1301.JPG', '2278.JPG', '2312.JPG', '2490.JPG', '2691.JPG', '2700.JPG', '6010.JPG', '6190.JPG', '6020.JPG', '6190.JPG', '6241.JPG', '6836.JPG', '7300.JPG', '9101.JPG','9102.JPG', '9120.JPG', '9140.JPG', '9160.JPG', '9171.JPG','9440.JPG', '9470.JPG']
 var low_intensity_stims = jsPsych.randomization.shuffle(low_intensity_stims)
-var high_intensity_stims = ['2053.JPG', '2800.JPG', '3000.JPG', '3068.JPG', '3140.JPG', '3150.JPG','3180.JPG', '3230.JPG', '3261.JPG', '3530.JPG', '6831.JPG', '9181.JPG', '9252.JPG', '9410.JPG', '9420.JPG']
+var high_intensity_stims = ['2053.JPG', '2800.JPG', '3000.JPG', '3010.JPG','3015.JPG', '3030.JPG', '3068.JPG', '3140.JPG', '3150.JPG','3180.JPG', '3230.JPG', '3261.JPG', '3530.JPG', '6831.JPG', '9181.JPG', '9252.JPG',  '9301.JPG', '9320.JPG', '9433.JPG', '9410.JPG', '9420.JPG']
 var high_intensity_stims = jsPsych.randomization.shuffle(high_intensity_stims)
 var stim_intensities = jsPsych.randomization.repeat(['high', 'low'], exp_len/2)
 var trainingVars = {'instruction': [], 'intense': []}
@@ -196,7 +196,7 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {trial_id: 'instruction'},
-  pages: ["<div class = centerbox><p class = 'block-text'>In this task you will view negative pictures. These pictures are designed to evoke negative emotions - they may upset you, anger you, or disgust you. This experiment is investigating different strategies you could use to deal with the negative emotions evoked by the images.</p><p class = block-text>We are interested in two types of strategies: distraction and reappraisal. In this task, distraction is when you think about something emotionally neutral while viewing the image. Reappraisal is when you reinterpret the image in such a way that reduces its negative meaning.</p><p class = block-text>During this experiment you will sometimes be instructed to use one of those two strategies, and sometimes you will be allowed to choose. It is important that you continue to look at the image while employing one of those strategies. When you end instructions we will start with some training so you can learn to use these two strategies.</p></div>"],
+  pages: ["<div class = centerbox><p class = 'block-text'>In this task you will view negative pictures. These pictures are designed to evoke negative emotions - they may upset you, anger you, or disturb you. This experiment is investigating different strategies you could use to deal with the negative emotions evoked by the images.</p><p class = block-text>We are interested in two types of strategies: distraction and reappraisal. In this task, distraction is when you think about something emotionally neutral while viewing the image. Reappraisal is when you reinterpret the image in such a way that reduces its negative meaning.</p><p class = block-text>During this experiment you will sometimes be instructed to use one of those two strategies, and sometimes you will be allowed to choose. It is important that you continue to look at the image while employing one of those strategies. When you end instructions we will start with some training so you can learn to use these two strategies.</p></div>"],
   allow_keys: false,
   show_clickable_nav: true,
   //timing_post_trial: 1000
