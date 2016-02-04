@@ -9,3 +9,13 @@ img {
     right: 0;
     bottom: 0;
 }
+
+.instructionImgBox {
+  width: 30vw;
+  height: 30vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%,-30%);
+}
