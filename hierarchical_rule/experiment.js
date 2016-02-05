@@ -78,7 +78,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var exp_len = 200 //number of trials per rule-set
@@ -97,7 +97,7 @@ hierarchical_stims = []
 colors = jsPsych.randomization.shuffle([1, 2, 3, 4]) //border colors
 stims = jsPsych.randomization.shuffle([1, 2, 3, 4, 5, 6])
 orientations = [1, 2, 3]
-random_correct = jsPsych.randomization.repeat(choices, 3) // correct responses for random stim
+random_correct = jsPsych.randomization.repeat(choices, 6) // correct responses for random stim
 for (var c = 0; c < colors.length; c++) {
   for (var s = 0; s < stims.length / 2; s++) {
     for (var o = 0; o < orientations.length; o++) {

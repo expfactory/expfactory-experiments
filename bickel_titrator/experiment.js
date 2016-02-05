@@ -100,7 +100,7 @@ var convertToMins = function(time) {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year',

@@ -68,7 +68,7 @@ var getRotateStim = function() {
 /* ************************************ */
 // generic task variables
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([

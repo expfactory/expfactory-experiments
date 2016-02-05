@@ -81,7 +81,7 @@ function fillArray(value, len) {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 //First generate smaller amounts (mean = 20, sd = 10, clipped at 5 and 40)
