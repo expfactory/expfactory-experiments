@@ -957,7 +957,7 @@ var learning_node = {
 	var totalTrials = 0
 	var totalCorrect = 0
 	for(learning = 0; learning<data.length; learning++){
-		if(data[learning].condition!= undefined){
+		if(data[learning].condition!== undefined){
 		totalTrials = totalTrials +1
 			if(data[learning].key_press == data[learning].correct_response){
 			totalCorrect = totalCorrect +1
@@ -1119,7 +1119,7 @@ var practice_node = {
         practice_feedback_text2 = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(averageGo_correct*100) + "%"
         practiceStopCount2 = practiceStopCount2+1
         if(practiceStopCount2==1){
-			if(average_rt > RT_thresh  || missed_responses >= missed_response_thresh || averageStop_correct < .36 || averageStop_correct > .64){
+			if(average_rt > RT_thresh  || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				practice_feedback_text2 += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
             }if (averageGo_correct<accuracy_thresh) {
             	practice_feedback_text2 += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
