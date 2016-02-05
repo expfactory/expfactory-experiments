@@ -11,6 +11,10 @@ function addID() {
   jsPsych.data.addDataToLastTrial({'exp_id': 'writing_task'})
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */

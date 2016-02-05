@@ -973,7 +973,7 @@ var learning_node = {
 		if(learning_acc < accuracy_thresh){
 		learning_feedback_text += '</p><p class = block-text>Remember the rules associated with each color are as follows: <br>'+startTestPrompt+'<br> .'
 		}
-	return true
+	return false
 	}		
 	else if(numLearningBlocks==2){
 		if(learning_acc < accuracy_thresh){
@@ -981,7 +981,7 @@ var learning_node = {
 		}
 	firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, learningNumTrials/8, true);
 	currTrial = 0
-	return true
+	return false
 	} else if (numLearningBlocks==numLearningBlocksTotal){
 	learning_feedback_text = '</p><p class = block-text> Done with Phase 1. </p><p class = block-text> Press <strong>enter</strong> to continue.'	
 	return false
@@ -1266,7 +1266,7 @@ var test_node = {
         		stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 			currTrial =0
-			return true;
+			return false;
 		} else if(stopCount>1 && stopCount<6){
 			if(average_rt > RT_thresh || missed_responses >= missed_response_thresh || averageStop_correct < 0.36 || averageStop_correct > 0.64){
 				stop_feedback_text += '</p><p class = block-text><strong>Please get the experimenter</strong> ('+sumGo_correct+','+Math.round(average_rt)+','+sumStop_correct+')'  
@@ -1275,7 +1275,7 @@ var test_node = {
     			stop_feedback_text += '</p><p class = block-text>Remember, the correct responses for each shape are as follows: <br><br>'+zmprompt_text
 			}
 			currTrial =0			
-			return true;	
+			return false;	
 		}
 	}
 }
@@ -1284,7 +1284,7 @@ var test_node = {
 	      
    
 var gm_paradigm_experiment=[]
-/*
+
 ///welcome and instructions
 gm_paradigm_experiment.push(welcome_block)
 gm_paradigm_experiment.push(instructions_block)
@@ -1315,7 +1315,7 @@ gm_paradigm_experiment.push(practice_node)
 gm_paradigm_experiment.push(practice_feedback_block2);
 gm_paradigm_experiment.push(reset_SSD)
 gm_paradigm_experiment.push(reset_Trial)
-*/
+
 //stopping phase (phase 2)
 gm_paradigm_experiment.push(main_stop_intro1)
 gm_paradigm_experiment.push(test_node)
