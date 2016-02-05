@@ -47,10 +47,7 @@ var welcome_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  data: {
-    'exp_id': 'holt_laury'
-  },
+  timing_post_trial: 0
 };
 
 var feedback_instruct_text =
@@ -60,10 +57,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 6000,
-  data: {
-    'exp_id': 'holt_laury'
-  },
+  timing_response: 6000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -74,10 +68,7 @@ var instructions_block = {
   ],
   allow_keys: false,
   show_clickable_nav: true,
-  timing_post_trial: 1000,
-  data: {
-    'exp_id': 'holt_laury'
-  },
+  timing_post_trial: 1000
 };
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
@@ -165,10 +156,7 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13],
-  data: {
-    'exp_id': 'holt_laury'
-  },
+  cont_key: [13]
 };
 
 

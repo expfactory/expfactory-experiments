@@ -99,8 +99,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'left',
 				flanker: 'neutral',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}, {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -110,8 +109,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'left',
 				flanker: 'congruent',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}, {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -121,8 +119,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'left',
 				flanker: 'incongruent',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}, {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -132,8 +129,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'right',
 				flanker: 'neutral',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}, {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -143,8 +139,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'right',
 				flanker: 'congruent',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}, {
 			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -154,8 +149,7 @@ for (l = 0; l < locations.length; l++) {
 				direction: 'right',
 				flanker: 'incongruent',
 				location: loc,
-				cue: c,
-				exp_id: 'attention_network_task'
+				cue: c
 			}
 		}]
 		for (i = 0; i < stims.length; i++) {
@@ -199,7 +193,6 @@ var welcome_block = {
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -211,7 +204,6 @@ var practice_intro_block = {
 	text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "practice_intro"
 	},
 	timing_response: 180000,
@@ -223,7 +215,6 @@ var test_intro_block = {
 	text: '<div class = centerbox><p class = center-block-text>We will now start the test.  Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
@@ -235,7 +226,6 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -249,7 +239,6 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	text: getInstructFeedback,
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "instructions"
 	},
 	timing_post_trial: 0,
@@ -265,7 +254,6 @@ var instructions_block = {
 	],
 	allow_keys: false,
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "instructions"
 	},
 	show_clickable_nav: true,
@@ -301,7 +289,6 @@ var rest_block = {
 	text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
 	timing_response: 180000,
 	data: {
-		exp_id: "attention_network_task",
 		trial_id: "rest block"
 	},
 	timing_post_trial: 1000
@@ -313,7 +300,6 @@ var fixation = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: 'attention_network_task',
 		trial_id: 'fixation',
 		duration: 400
 	},
@@ -329,7 +315,6 @@ var no_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: 'attention_network_task',
 		trial_id: 'nocue',
 		duration: 100
 	},
@@ -345,7 +330,6 @@ var center_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: 'attention_network_task',
 		trial_id: 'centercue',
 		duration: 100
 	},
@@ -362,7 +346,6 @@ var double_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: 'attention_network_task',
 		trial_id: 'doublecue',
 		duration: 100
 	},
@@ -390,7 +373,7 @@ for (i = 0; i < block.data.length; i++) {
 		is_html: true,
 		choices: 'none',
 		data: {
-			exp_id: 'attention_network_task',
+
 			trial_id: 'fixation',
 			exp_stage: 'practice',
 			duration: 100
@@ -416,7 +399,7 @@ for (i = 0; i < block.data.length; i++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-				exp_id: 'attention_network_task',
+	
 				trial_id: 'spatialcue',
 				exp_stage: 'practice',
 				duration: 100
@@ -431,7 +414,6 @@ for (i = 0; i < block.data.length; i++) {
 	attention_network_task_experiment.push(fixation)
 
 	block.data[i].trial_num = trial_num
-	block.data[i].exp_id = 'attention_network_task_practice'
 	var attention_network_task_practice_trial = {
 		type: 'attention_network_task_practice',
 		stimulus: block.image[i],
@@ -458,7 +440,7 @@ for (i = 0; i < block.data.length; i++) {
 		is_html: true,
 		choices: 'none',
 		data: {
-			exp_id: 'attention_network_task',
+
 			trial_id: 'fixation',
 			exp_stage: 'practice',
 			duration: 100
@@ -486,7 +468,7 @@ for (b = 0; b < blocks.length; b++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-				exp_id: 'attention_network_task',
+	
 				trial_id: "fixation",
 				exp_stage: 'test',
 				duration: first_fixation_gap
@@ -511,7 +493,7 @@ for (b = 0; b < blocks.length; b++) {
 				is_html: true,
 				choices: 'none',
 				data: {
-					exp_id: 'attention_network_task',
+		
 					trial_id: "spatialcue",
 					exp_stage: 'test',
 					duration: 100
@@ -544,7 +526,7 @@ for (b = 0; b < blocks.length; b++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-				exp_id: 'attention_network_task',
+	
 				trial_id: "fixation",
 				exp_stage: 'test'
 			},

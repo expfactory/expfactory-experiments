@@ -78,8 +78,7 @@ var practice_stimuli = [{
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
-    trial_id: 'practice',
-    exp_id: 'go_nogo'
+    trial_id: 'practice'
   },
   key_answer: correct_responses[0][1]
 }, {
@@ -87,8 +86,7 @@ var practice_stimuli = [{
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
-    trial_id: 'practice',
-    exp_id: 'go_nogo'
+    trial_id: 'practice'
   },
   key_answer: correct_responses[1][1]
 }];
@@ -110,16 +108,14 @@ var test_stimuli_block = [{
   data: {
     correct_response: test_stim_responses[0][0][1],
     condition: test_stim_responses[0][0][0],
-    trial_id: 'test_block',
-    exp_id: 'go_nogo'
+    trial_id: 'test_block'
   }
 }, {
   stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
   data: {
     correct_response: test_stim_responses[0][1][1],
     condition: test_stim_responses[0][1][0],
-    trial_id: 'test_block',
-    exp_id: 'go_nogo'
+    trial_id: 'test_block'
   }
 }];
 
@@ -136,7 +132,6 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "go_nogo",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -156,7 +151,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "go_nogo",
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -170,7 +164,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "go_nogo",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -182,7 +175,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "go_nogo",
     trial_id: "instruction"
   },
   pages: [
@@ -226,7 +218,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "go_nogo",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -238,7 +229,6 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "go_nogo",
     trial_id: "test_intro"
   },
   text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer get feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should <strong>' +
@@ -252,7 +242,6 @@ var start_test_block = {
 var reset_block = {
   type: 'call-function',
   data: {
-    exp_id: "go_nogo",
     trial_id: "reset_trial"
   },
   func: function() {
@@ -268,7 +257,6 @@ var practice_block = {
   timeline: practice_trials,
   is_html: true,
   data: {
-    exp_id: "go_nogo",
     trial_id: "stim",
     exp_stage: "practice"
   },
@@ -289,7 +277,6 @@ var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
   data: {
-    exp_id: "go_nogo",
     trial_id: "stim",
     exp_stage: "test"
   },

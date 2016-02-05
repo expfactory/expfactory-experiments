@@ -90,14 +90,12 @@ var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</l
 var cues = [{
     image: '<div class = centerbox><div class = stim_left id = cue></div></div>',
     data: {
-      exp_id: "antisaccade",
       trial_id: "cue",
       condition: "left"
     }
   }, {
     image: '<div class = centerbox><div class = stim_right id = cue></div></div>',
     data: {
-      exp_id: "antisaccade",
       trial_id: "cue",
       condition: "right"
     }
@@ -107,14 +105,12 @@ var cues = [{
 var targets = [{
   image: '<div class = centerbox><div class = stim_left id = target></div></div>',
   data: {
-    exp_id: "antisaccade",
     trial_id: "target",
     condition: "left"
   }
 }, {
   image: '<div class = centerbox><div class = stim_right id = target></div></div>',
   data: {
-    exp_id: "antisaccade",
     trial_id: "target",
     condition: "right"
   }
@@ -123,14 +119,12 @@ var targets = [{
 var masks = [{
   image: '<div class = centerbox><div class = stim_left id = mask></div></div>',
   data: {
-    exp_id: "antisaccade",
     trial_id: "mask",
     condition: "left"
   }
 }, {
   image: '<div class = centerbox><div class = stim_right id = mask></div></div>',
   data: {
-    exp_id: "antisaccade",
     trial_id: "mask",
     condition: "right"
   }
@@ -150,7 +144,6 @@ test_cue_sides = jsPsych.randomization.repeat([0, 1], exp_len / 2, false)
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "antisaccade",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -169,7 +162,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "antisaccade",
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -181,7 +173,6 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "antisaccade",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -195,7 +186,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "antisaccade",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -208,7 +198,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "antisaccade",
     trial_id: "instruction"
   },
   pages: [
@@ -248,7 +237,6 @@ var begin_practice_block = {
   text: '<div class = centerbox><p class = block-text>We will start with some practice. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
-    exp_id: "antisaccade",
     trial_id: "practice_intro"
   },
   timing_response: 180000,
@@ -260,7 +248,6 @@ var begin_test_block = {
   text: '<div class = centerbox><p class = block-text>We will now start the main experiment. Remember, use the arrow keys (left, right, and up) to indicate which direction the arrow is pointing.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
-    exp_id: "antisaccade",
     trial_id: "test_intro"
   },
   timing_response: 180000,
@@ -274,7 +261,6 @@ var fixation_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "antisaccade",
     "trial_id": "fixation"
   },
   timing_post_trial: 0,
@@ -308,7 +294,6 @@ for (i = 0; i < practice_len; i++) {
       image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] +
         '></div></div>',
       data: {
-        exp_id: "antisaccade",
         trial_id: "target",
         correct_response: target_direction[1],
         condition: 'right'
@@ -321,7 +306,6 @@ for (i = 0; i < practice_len; i++) {
       image: '<div class = centerbox><div class = stim_left id = target_' + target_direction[0] +
         '></div></div>',
       data: {
-        exp_id: "antisaccade",
         trial_id: "target",
         correct_response: target_direction[1],
         condition: 'left'
@@ -389,7 +373,6 @@ for (i = 0; i < exp_len; i++) {
       image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] +
         '></div></div>',
       data: {
-        exp_id: "antisaccade",
         trial_id: "target",
         correct_response: target_direction[1],
         condition: 'right'
@@ -402,7 +385,6 @@ for (i = 0; i < exp_len; i++) {
       image: '<div class = centerbox><div class = stim_left id = target_' + target_direction[0] +
         '></div></div>',
       data: {
-        exp_id: "antisaccade",
         trial_id: "target",
         correct_response: target_direction[1],
         condition: 'left'

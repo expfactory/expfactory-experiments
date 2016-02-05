@@ -130,7 +130,6 @@ var response_grid =
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "digit_span",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -150,7 +149,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "digit_span",
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -164,7 +162,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "digit_span",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -176,7 +173,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "digit_span",
     trial_id: "instruction"
   },
   pages: [
@@ -215,7 +211,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "digit_span",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -229,7 +224,6 @@ var start_test_block = {
   is_html: true,
   stimulus: getTestText,
   data: {
-    exp_id: "digit_span",
     trial_id: "test_intro"
   },
   choices: 'none',
@@ -243,7 +237,6 @@ var start_reverse_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "digit_span",
     trial_id: "start_reverse"
   },
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -261,7 +254,6 @@ var test_block = {
     ['none']
   ],
   data: {
-    exp_id: "digit_span",
     trial_id: "stim",
     exp_stage: 'test'
   },
@@ -281,7 +273,6 @@ var forward_response_block = {
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
-    exp_id: "digit_span",
     trial_id: "response",
     exp_stage: 'test'
   },
@@ -320,7 +311,6 @@ var reverse_response_block = {
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
-    exp_id: "digit_span",
     trial_id: "response",
     exp_stage: 'test'
   },
@@ -359,7 +349,6 @@ var feedback_block = {
   type: 'poldrack-single-stim',
   stimulus: getFeedback,
   data: {
-    exp_id: "digit_span",
     trial_id: "feedback"
   },
   is_html: true,
