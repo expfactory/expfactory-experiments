@@ -11,10 +11,6 @@ function addID() {
   jsPsych.data.addDataToLastTrial({'exp_id': 'simple_reaction_time'})
 }
 
-var post_trial_gap = function() {
-  gap = Math.floor( Math.random() * 2000 ) + 1000
-  return gap;
-}
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
@@ -38,6 +34,8 @@ var practice_len = 5
 var experiment_len = 50
 var gap = 0
 var current_trial = 0
+var post_trial_gap = 500
+
 stim = '<div class = shapebox><div id = cross></div></div>'
 
 
@@ -140,11 +138,14 @@ var reset_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
+  timing_stim: 1000,
+  timing_response: 1000,
+  response_ends_trial: false,
   is_html: true,
   data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "practice"},
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: appendData,
 };
 
 /* define test block */
@@ -158,7 +159,7 @@ var test_block = {
   data: {exp_id: "simple_reaction_time", trial_id: "stim", exp_stage: "test"},
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: appendData,
 };
 
 /* create experiment definition array */
