@@ -38,8 +38,7 @@ var getFixLength = function() {
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   if (last_trial.key_press == -1) {
-    return
-      '<div class = centerbox><div class = "white-text center-text">Respond faster!</div></div>'
+    return '<div class = centerbox><div class = "white-text center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
     return '<div class = centerbox><div class = "white-text center-text">Correct</div></div>'

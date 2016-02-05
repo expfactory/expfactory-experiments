@@ -153,8 +153,7 @@ var getFB = function() {
     }
   }
   if (tooShort) {
-    return
-      '<div class = prp_centerbox><p class = "white-text center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "white-text center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
   } else {
     return '<div class = prp_centerbox><p class = "white-text center-block-text">' + gonogoFB +
       '</p><p class = "white-text center-block-text">' + choiceFB +
