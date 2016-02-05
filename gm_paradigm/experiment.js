@@ -458,8 +458,7 @@ var zmprompt_text = '<ul list-text><li>' + shapes[1] + ': ' + practiceStop_respo
 	practiceStop_responses[1][0] + '</li><li>' + shapes[4] + ': ' + practiceStop_responses[1][0] +
 	'</li></ul>'
 var prompt_text = '<ul list-text><li>' + shapes[1] + ': ' + correct_responses[0][0] + '</li><li>' +
-	shapes[2] + ': ' + correct_responses[0][0] + '</li><li>' + shapes[3] + ': ' + correct_responses[1]
-	[0] + '</li><li>' + shapes[4] + ': ' + correct_responses[1][0] + '</li></ul>'
+	shapes[2] + ': ' + correct_responses[0][0] + '</li><li>' + shapes[3] + ': ' + correct_responses[1][0] + '</li><li>' + shapes[4] + ': ' + correct_responses[1][0] + '</li></ul>'
 var prompt_practice_text_heading1 =
 	'<div><p><strong>This is one of the colors that you will see.</strong></p>'
 var prompt_practice_text_heading2 =

@@ -103,8 +103,7 @@ var getTrainingSet = function() {
 		stim4 = trainingArray[3];
 		stim5 = trainingArray[4];
 		stim6 = trainingArray[5];
-		return
-			'<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
 			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
 			'"></img></div>' +
 			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +
@@ -130,8 +129,7 @@ var getTrainingSet = function() {
 		stim4 = newArray[3];
 		stim5 = newArray[4];
 		stim6 = newArray[5];
-		return
-			'<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
 			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
 			'"></img></div>' +
 			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +
@@ -158,8 +156,7 @@ var getTrainingSet = function() {
 		stim4 = newArray[3];
 		stim5 = newArray[4];
 		stim6 = newArray[5];
-		return
-			'<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
 			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
 			'"></img></div>' +
 			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +

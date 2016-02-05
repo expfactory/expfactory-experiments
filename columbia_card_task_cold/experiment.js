@@ -24,8 +24,7 @@ var appendTestData = function() {
 }
 
 var getText = function() {
-	return
-		'<div class = centerbox><p class = block-text>These are your prizes from three randomly picked trials:  ' +
+	return '<div class = centerbox><p class = block-text>These are your prizes from three randomly picked trials:  ' +
 		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
 		'</p></div>'
 }

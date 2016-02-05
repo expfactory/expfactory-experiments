@@ -99,8 +99,7 @@ var getData = function() {
 }
 
 var getText = function() {
-	return
-		'<div class = "centerbox"><p class = "block-text">In these next blocks, you should respond when the current letter matches the letter that appeared ' +
+	return '<div class = "centerbox"><p class = "block-text">In these next blocks, you should respond when the current letter matches the letter that appeared ' +
 		delay +
 		' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>'
 }

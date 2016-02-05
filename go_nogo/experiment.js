@@ -45,12 +45,10 @@ var practice_index = 0
 var getFeedback = function() {
   if (practice_trials[practice_index].key_answer == -1) {
     practice_index += 1
-    return
-      '<div class = centerbox><div class = center-text><font size = 20>Correct</font></p></div>'
+    return '<div class = centerbox><div class = center-text><font size = 20>Correct</font></p></div>'
   } else {
     practice_index += 1
-    return
-      '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></p></div>'
+    return '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></p></div>'
   }
 }
 
