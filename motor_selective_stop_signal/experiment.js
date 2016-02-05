@@ -425,8 +425,8 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				trial_id: 'NoSS_practice_stim',
-				exp_stage: "practice"
+				trial_id: 'stim',
+				exp_stage: "NoSS_practice"
 			})
 		}
 	}
@@ -441,7 +441,7 @@ var NoSS_practice_node = {
 		var go_length = 0;
 		var num_responses = 0;
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].condition == "NoSS_practice") {
+			if (data[i].trial_id == 'stim') {
 				if (data[i].rt != -1) {
 					num_responses += 1
 					sum_rt += data[i].rt;
@@ -462,9 +462,9 @@ var NoSS_practice_node = {
 			// end the loop
 			practice_feedback_text +=
 				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
-				possible_responses[0] +
+				possible_responses[0][0] +
 				' you should <strong>not respond</strong> in any way.</p><p class = block-text>If the ' +
-				possible_responses[0] +
+				possible_responses[0][0] +
 				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
@@ -534,20 +534,22 @@ var practice_node = {
 		var stop_length = 0
 		var successful_stops = 0
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].SS_trial_type == 'stop' && data[i].correct_response == stop_response[1]) {
-				stop_length += 1
-				if (data[i].rt == -1) {
-					successful_stops += 1
-				}
-			} else {
-				if (data[i].rt != -1) {
-					num_responses += 1
-					sum_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response) {
-						sum_correct += 1
+			if (data[i].trial_id == 'stim') {
+				if (data[i].SS_trial_type == 'stop' && data[i].correct_response == stop_response[1]) {
+					stop_length += 1
+					if (data[i].rt == -1) {
+						successful_stops += 1
 					}
+				} else {
+					if (data[i].rt != -1) {
+						num_responses += 1
+						sum_rt += data[i].rt;
+						if (data[i].key_press == data[i].correct_response) {
+							sum_correct += 1
+						}
+					}
+					go_length += 1
 				}
-				go_length += 1
 			}
 		}
 		var average_rt = sum_rt / num_responses;
@@ -578,7 +580,7 @@ var practice_node = {
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
 					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the red stop signal AND the correct key is the ' +
-					possible_responses[0] + '.'
+					possible_responses[0][0] + '.'
 			}
 			if (average_correct <= accuracy_thresh) {
 				practice_feedback_text +=
@@ -594,7 +596,7 @@ var practice_node = {
 	}
 }
 
-motor_selective_stop_signal_experiment.push(NoSS_practice_node)
+//motor_selective_stop_signal_experiment.push(NoSS_practice_node)
 motor_selective_stop_signal_experiment.push(practice_node)
 motor_selective_stop_signal_experiment.push(practice_feedback_block)
 

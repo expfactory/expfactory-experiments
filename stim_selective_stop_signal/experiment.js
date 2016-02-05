@@ -133,7 +133,6 @@ var resetSSD = function() {
 of the "while" loop */
 var getNoSSPracticeStim = function() {
   practice_trial_data = NoSS_practice_list.data.pop()
-  practice_trial_data.condition = "NoSS_practice"
   return NoSS_practice_list.stimulus.pop()
 }
 
@@ -144,7 +143,7 @@ var getNoSSPracticeData = function() {
 var getSSPracticeStim = function() {
   practice_stop_trial = practice_stop_trials.pop()
   practice_trial_data = practice_list.data.pop()
-  practice_trial_data.condition = "practice_" + practice_stop_trial
+  practice_trial_data.condition = practice_stop_trial
   return practice_list.stimulus.pop()
 }
 
@@ -451,8 +450,8 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
     prompt: prompt_text,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({
-        trial_id: 'NoSS_practice_stim',
-        exp_stage: "practice"
+        trial_id: 'stim',
+        exp_stage: "NoSS_practice"
       })
     }
   }
@@ -467,7 +466,7 @@ var NoSS_practice_node = {
     var go_length = 0;
     var num_responses = 0;
     for (var i = 0; i < data.length; i++) {
-      if (data[i].condition == "NoSS_practice") {
+      if (data[i].trial_id == 'stim') {
         if (data[i].rt != -1) {
           num_responses += 1
           sum_rt += data[i].rt;
@@ -557,19 +556,21 @@ var practice_node = {
     var stop_length = 0
     var successful_stops = 0
     for (var i = 0; i < data.length; i++) {
-      if (data[i].condition == "practice_go" || data[i].condition == "practice_ignore") {
-        if (data[i].rt != -1) {
-          num_responses += 1
-          sum_rt += data[i].rt;
-          if (data[i].key_press == data[i].correct_response) {
-            sum_correct += 1
+      if (data[i].trial_id == 'stim') {
+        if (data[i].condition == "go" || data[i].condition == "ignore") {
+          if (data[i].rt != -1) {
+            num_responses += 1
+            sum_rt += data[i].rt;
+            if (data[i].key_press == data[i].correct_response) {
+              sum_correct += 1
+            }
           }
-        }
-        go_length += 1
-      } else if (data[i].SS_trial_type == "practice_stop") {
-        stop_length += 1
-        if (data[i].rt == -1) {
-          successful_stops += 1
+          go_length += 1
+        } else if (data[i].SS_trial_type == "practice_stop") {
+          stop_length += 1
+          if (data[i].rt == -1) {
+            successful_stops += 1
+          }
         }
       }
     }
@@ -633,7 +634,7 @@ for (b = 0; b < numblocks; b++) {
     stop_signal_exp_block.push(fixation_block)
       //Label each trial as an ignore, stop or go trial
     var stim_data = $.extend({}, block.data[i])
-    stim_data.condition = 'test_' + stop_trials[i]
+    stim_data.condition = stop_trials[i]
     if (stop_trials[i] == 'ignore') {
       var stop_trial = 'stop'
       var stop_stim = ignore_signal

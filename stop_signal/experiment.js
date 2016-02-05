@@ -421,8 +421,8 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				trial_id: 'NoSS_practice_stim',
-				exp_stage: 'practice'
+				trial_id: 'stim',
+				exp_stage: 'NoSS_practice'
 			})
 		}
 	}
@@ -437,7 +437,7 @@ var NoSS_practice_node = {
 		var go_length = 0;
 		var num_responses = 0;
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].condition == "NoSS_practice") {
+			if (data[i].trial_id == 'stim') {
 				if (data[i].rt != -1) {
 					num_responses += 1
 					sum_rt += data[i].rt;
@@ -526,19 +526,21 @@ var practice_node = {
 		var stop_length = 0
 		var successful_stops = 0
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].SS_trial_type == "go") {
-				if (data[i].rt != -1) {
-					num_responses += 1
-					sum_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response) {
-						sum_correct += 1
+			if (data[i].trial_id == 'stim') {
+				if (data[i].SS_trial_type == "go") {
+					if (data[i].rt != -1) {
+						num_responses += 1
+						sum_rt += data[i].rt;
+						if (data[i].key_press == data[i].correct_response) {
+							sum_correct += 1
+						}
 					}
-				}
-				go_length += 1
-			} else if (data[i].SS_trial_type == "stop") {
-				stop_length += 1
-				if (data[i].rt == -1) {
-					successful_stops += 1
+					go_length += 1
+				} else if (data[i].SS_trial_type == "stop") {
+					stop_length += 1
+					if (data[i].rt == -1) {
+						successful_stops += 1
+					}
 				}
 			}
 		}
