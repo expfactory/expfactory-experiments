@@ -1,10 +1,9 @@
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement () {
-    $('<div class = display_stage_background></div>').appendTo('body')
-    return $('<div class = display_stage></div>').appendTo('body')
+function getDisplayElement() {
+  $('<div class = display_stage_background></div>').appendTo('body')
+  return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function fillArray(value, len) {
@@ -27,7 +26,9 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: "leisure_time_activity"}
+  data: {
+    exp_id: "leisure_time_activity"
+  }
 };
 
 var instructions_block = {
@@ -38,7 +39,9 @@ var instructions_block = {
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000,
-  data: {exp_id : "leisure_time_activity"}
+  data: {
+    exp_id: "leisure_time_activity"
+  }
 };
 
 var survey_block = {
@@ -46,13 +49,39 @@ var survey_block = {
   exp_id: "leisure_time_activity",
   horizontal: false,
   preamble: '',
-  pages: [["During the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent working at a job. Please read all six statements before selecting one."]],
-  options: [[["I did not do much physical activity. I mostly did things like watching television, reading, playing cards, or playing computer games. Only occasionally, no more than once or twice a month, did I do anything more active such as going for a walk or playing tennis.","Once or twice a week, I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week, I did chores around the house such as sweeping floors or vacuuming.","About three times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for about 15 - 20 minutes each time. Or about once a week, I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week, I played sports such as softball, basketball, or soccer for about 45 - 60 minutes.","Almost daily, that is five or more times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for 30 minutes or more each time. Or about once a week, I did moderately difficult chores or played sports for 2 hours or more.","About three times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.","Almost daily, that is, five or more times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time."]]],
-  scale: {"I did not do much physical activity. I mostly did things like watching television, reading, playing cards, or playing computer games. Only occasionally, no more than once or twice a month, did I do anything more active such as going for a walk or playing tennis.":1,"Once or twice a week, I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week, I did chores around the house such as sweeping floors or vacuuming.":2,"About three times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for about 15 - 20 minutes each time. Or about once a week, I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week, I played sports such as softball, basketball, or soccer for about 45 - 60 minutes.":3,"Almost daily, that is five or more times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for 30 minutes or more each time. Or about once a week, I did moderately difficult chores or played sports for 2 hours or more.":4,"About three times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.":5,"Almost daily, that is, five or more times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.":6},
+  pages: [
+    [
+      "During the past month, which statement best describes the kinds of physical activity you usually did? Do not include the time you spent working at a job. Please read all six statements before selecting one."
+    ]
+  ],
+  options: [
+    [
+      [
+        "I did not do much physical activity. I mostly did things like watching television, reading, playing cards, or playing computer games. Only occasionally, no more than once or twice a month, did I do anything more active such as going for a walk or playing tennis.",
+        "Once or twice a week, I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week, I did chores around the house such as sweeping floors or vacuuming.",
+        "About three times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for about 15 - 20 minutes each time. Or about once a week, I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week, I played sports such as softball, basketball, or soccer for about 45 - 60 minutes.",
+        "Almost daily, that is five or more times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for 30 minutes or more each time. Or about once a week, I did moderately difficult chores or played sports for 2 hours or more.",
+        "About three times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.",
+        "Almost daily, that is, five or more times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time."
+      ]
+    ]
+  ],
+  scale: {
+    "I did not do much physical activity. I mostly did things like watching television, reading, playing cards, or playing computer games. Only occasionally, no more than once or twice a month, did I do anything more active such as going for a walk or playing tennis.": 1,
+    "Once or twice a week, I did light activities such as getting outdoors on the weekends for an easy walk or stroll. Or once or twice a week, I did chores around the house such as sweeping floors or vacuuming.": 2,
+    "About three times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for about 15 - 20 minutes each time. Or about once a week, I did moderately difficult chores such as raking or mowing the lawn for about 45 - 60 minutes. Or about once a week, I played sports such as softball, basketball, or soccer for about 45 - 60 minutes.": 3,
+    "Almost daily, that is five or more times a week, I did moderate activities such as brisk walking, swimming, or riding a bike for 30 minutes or more each time. Or about once a week, I did moderately difficult chores or played sports for 2 hours or more.": 4,
+    "About three times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.": 5,
+    "Almost daily, that is, five or more times a week, I did vigorous activities such as running or riding hard on a bike for 30 minutes or more each time.": 6
+  },
   show_clickable_nav: true,
   allow_backward: true,
-  required: [[true]],
-  reverse_score: [[false]],
+  required: [
+    [true]
+  ],
+  reverse_score: [
+    [false]
+  ],
 };
 
 var end_block = {
@@ -60,7 +89,9 @@ var end_block = {
   timing_response: 60000,
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  data: {exp_id : "leisure_time_activity"}
+  data: {
+    exp_id: "leisure_time_activity"
+  }
 };
 
 
