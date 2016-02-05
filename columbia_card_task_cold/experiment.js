@@ -455,13 +455,11 @@ var instructions_block = {
 	'<p>-You are now going to participate in a card game.  in this game, you will turn over cards to win or lose points which are worth money.</p>'+
 	'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>'+
 	'<p>-You indicate the number of cards (from 0 to 32) you want to turn over by clicking on a small button. Then, cards are randomly chosen to be turned over, one at a time. For each gain card turned over, points are added to your round total and another card is turned over. This continues until a loss card is uncovered or until the number of cards you chose to turn over is reached. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over – even if you indicated that more cards should be turned over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>'+
-	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money. Each point is worth 1 cent.</p>'+
-	'<p>-This game is for real money and requires some concentration. Please minimize distractions in your environment and close any other programs running in the background. </p></p></div>',
+	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money. Each point is worth 1 cent.</p>',
     
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
     "<p><input type='image' id = '133' src='/static/experiments/columbia_card_task_cold/images/beforeChosen.png' onclick = instructButton(this.id)>"+
-	'<p> An unknown card.  Click on it to turn it over!</p>'+
 	'</p></div>',
 	
 	'<div class = centerbox><p class = block-text>'+
