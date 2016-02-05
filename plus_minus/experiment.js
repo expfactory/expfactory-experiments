@@ -44,7 +44,7 @@ var alternate_list = numbers.slice(60, 90)
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "plus_minus",
     trial_id: "welcome"
@@ -56,7 +56,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "plus_minus",
     trial_id: "end"
@@ -77,7 +77,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -125,7 +125,7 @@ var start_add_block = {
     exp_id: "plus_minus",
     trial_id: "start_add_block"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Add 3</strong> to them and enter the value in the box below the number. Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
   timing_post_trial: 1000
 };
@@ -136,14 +136,14 @@ var start_minus_block = {
     exp_id: "plus_minus",
     trial_id: "start_minus_block"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Subtract 3</strong> from them and enter the value in the box below the number. Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
   timing_post_trial: 1000
 };
 
 var start_alternate_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "plus_minus",
     trial_id: "start_alternative_block"

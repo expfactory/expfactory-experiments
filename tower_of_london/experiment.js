@@ -280,7 +280,7 @@ var welcome_block = {
   data: {
     trial_id: "practice"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -291,7 +291,7 @@ var end_block = {
   data: {
     trial_id: "practice"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -307,7 +307,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -363,7 +363,7 @@ var start_test_block = {
   data: {
     trial_id: "practice"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>We will now start Problem 1. There will be ' +
     problems.length + ' problems to complete. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
@@ -386,7 +386,7 @@ var advance_problem_block = {
     trial_id: "stim",
     exp_stage: 'test'
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: getText,
   cont_key: [13],
   on_finish: function() {

@@ -56,7 +56,7 @@ var welcome_block = {
     exp_id: "simple_reaction_time",
     trial_id: "welcome"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -68,7 +68,7 @@ var end_block = {
     exp_id: "simple_reaction_time",
     trial_id: "end"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
@@ -85,7 +85,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -135,7 +135,7 @@ var start_practice_block = {
     exp_id: "simple_reaction_time",
     trial_id: "practice_intro"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>We will start 5 practice trials. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -147,7 +147,7 @@ var start_test_block = {
     exp_id: "simple_reaction_time",
     trial_id: "test_intro"
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000

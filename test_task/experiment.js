@@ -55,7 +55,7 @@ var credit_var = true // If true, credit the participant
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
-  timing_response: 30000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -70,7 +70,7 @@ var attention_node = {
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,

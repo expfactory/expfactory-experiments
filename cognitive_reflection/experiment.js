@@ -23,7 +23,7 @@ function addID() {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0

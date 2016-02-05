@@ -43,7 +43,7 @@ var instructTimeThresh = 5 ///in seconds
 // task specific variables
 var answer = 0
 var response = 0
-var response_time = 30000
+var response_time = 180000
 var lstep = 5000
 var sstep = 1000
 var n_large_steps = 50
@@ -57,7 +57,7 @@ var fatigue_time = 45
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: 'multiplication',
     trial_id: "welcome"
@@ -127,7 +127,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: 'multiplication',
     trial_id: "end"
@@ -235,6 +235,6 @@ for (var i = 0; i < n_large_steps; i++) {
 for (var i = 0; i < n_small_steps; i++) {
   multiplication_experiment.push(smallStep_block)
 }
-for (var i = 0; i < Math.floor(60000 * fatigue_time / response_time); i++) {
+for (var i = 0; i < Math.floor(180000 * fatigue_time / response_time); i++) {
   multiplication_experiment.push(fatigue_block)
 }

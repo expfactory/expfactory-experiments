@@ -133,7 +133,7 @@ var attention_check_block = {
     exp_id: "digit_span",
     trial_id: "attention_check"
   },
-  timing_response: 30000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -148,7 +148,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "digit_span",
     trial_id: "welcome"
@@ -213,7 +213,7 @@ var instruction_node = {
 
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "digit_span",
     trial_id: "end"
@@ -241,7 +241,7 @@ var start_test_block = {
 
 var start_reverse_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: "digit_span",
     trial_id: "start_reverse"

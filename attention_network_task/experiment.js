@@ -181,7 +181,7 @@ var blocks = [block1_trials, block2_trials, block3_trials]
 // Set up attention check node
 var attention_check_block = {
 	type: 'attention-check',
-	timing_response: 30000,
+	timing_response: 180000,
 	response_ends_trial: true,
 	timing_post_trial: 200
 }
@@ -202,7 +202,7 @@ var welcome_block = {
 		exp_id: "attention_network_task",
 		trial_id: "welcome"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -214,7 +214,7 @@ var practice_intro_block = {
 		exp_id: "attention_network_task",
 		trial_id: "practice_intro"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -226,7 +226,7 @@ var test_intro_block = {
 		exp_id: "attention_network_task",
 		trial_id: "test_intro"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -238,7 +238,7 @@ var end_block = {
 		exp_id: "attention_network_task",
 		trial_id: "end"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -253,7 +253,7 @@ var feedback_instruct_block = {
 		trial_id: "instructions"
 	},
 	timing_post_trial: 0,
-	timing_response: 60000
+	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -298,7 +298,7 @@ var instruction_node = {
 var rest_block = {
 	type: 'poldrack-text',
 	text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
-	timing_response: 60000,
+	timing_response: 180000,
 	data: {
 		exp_id: "attention_network_task",
 		trial_id: "rest block"

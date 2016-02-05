@@ -171,7 +171,7 @@ var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</l
 	correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] +
 	' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 var RT_thresh = 1000
-var missed_response_thresh = 0.1
+var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
 var stop_thresh = 1
 var test_block_data = [] // records the data in the current block to calculate feedback
@@ -230,7 +230,7 @@ for (j = 0; j < numconditions; j++) {
 // Set up attention check node
 var attention_check_block = {
 	type: 'attention-check',
-	timing_response: 30000,
+	timing_response: 180000,
 	response_ends_trial: true,
 	timing_post_trial: 200
 }
@@ -249,7 +249,7 @@ var welcome_block = {
 		exp_id: "stop_signal",
 		trial_id: "welcome"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -261,7 +261,7 @@ var end_block = {
 		exp_id: "stop_signal",
 		trial_id: "end"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -278,7 +278,7 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 60000
+	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -362,7 +362,7 @@ var practice_feedback_block = {
 		exp_id: "stop_signal",
 		trial_id: "feedback"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	cont_key: [13],
 	text: getPracticeFeedback
 };
@@ -457,7 +457,7 @@ var NoSS_practice_node = {
 			missed_response_thresh) {
 			// end the loop
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -466,15 +466,17 @@ var NoSS_practice_node = {
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 			if (average_rt > RT_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember, try to response as quickly and accurately as possible.'
+					'</p><p class = block-text>Responded too slowly. Remember, try to response as quickly and accurately as possible.'
 			}
 			if (missed_responses >= missed_response_thresh) {
-				practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape.'
+				practice_feedback_text +=
+					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape.'
 			}
 			if (average_correct <= accuracy_thresh) {
 				practice_feedback_text +=
 					'</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
 			}
+			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
 		}
 	}
@@ -563,11 +565,11 @@ var practice_node = {
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 			if (average_rt > RT_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
+					'</p><p class = block-text>Responded too slowly. Remember, try to response as quickly and accurately as possible.'
 			}
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the stop signal.'
 			}
 			if (average_correct <= accuracy_thresh) {
 				practice_feedback_text +=
@@ -577,6 +579,7 @@ var practice_node = {
 				practice_feedback_text +=
 					'</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
 			}
+			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
 		}
 	}

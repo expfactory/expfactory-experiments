@@ -89,7 +89,7 @@ var place = randomDraw([0, 1, 2, 3])
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: 'number_letter',
     trial_id: 'welcome'
@@ -101,7 +101,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     exp_id: 'number_letter',
     trial_id: 'end'
@@ -122,7 +122,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []

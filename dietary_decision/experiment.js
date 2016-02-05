@@ -164,7 +164,7 @@ for (var s = 0; s < stims.length; s++) {
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
-  timing_response: 30000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -179,7 +179,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
@@ -193,7 +193,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     trial_id: 'end'
   },
@@ -212,7 +212,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -255,7 +255,7 @@ var instruction_node = {
 
 var start_health_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     trial_id: 'start_health'
   },
@@ -269,7 +269,7 @@ var start_taste_block = {
   data: {
     trial_id: 'start_taste'
   },
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = "white-text center-block-text">In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 500
@@ -286,7 +286,7 @@ var setup_block = {
 
 var start_decision_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   data: {
     trial_id: 'decision_text'
   },

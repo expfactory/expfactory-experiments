@@ -125,7 +125,7 @@ var attention_check_block = {
 		exp_id: "flanker",
 		trial_id: "attention_check"
 	},
-	timing_response: 30000,
+	timing_response: 180000,
 	response_ends_trial: true,
 	timing_post_trial: 200
 }
@@ -140,7 +140,7 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
 	type: 'poldrack-text',
-	timing_response: 60000,
+	timing_response: 180000,
 	data: {
 		exp_id: "flanker",
 		trial_id: "welcome"
@@ -161,7 +161,7 @@ var feedback_instruct_block = {
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 60000
+	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -204,7 +204,7 @@ var instruction_node = {
 
 var end_block = {
 	type: 'poldrack-text',
-	timing_response: 60000,
+	timing_response: 180000,
 	data: {
 		exp_id: "flanker",
 		trial_id: "end"
@@ -220,7 +220,7 @@ var start_test_block = {
 		exp_id: "flanker",
 		trial_id: "test_intro"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Done with practice. Starting test.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000

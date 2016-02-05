@@ -234,7 +234,7 @@ var attention_check_block = {
 		exp_id: "motor_selective_stop_signal",
 		trial_id: "attention_check"
 	},
-	timing_response: 30000,
+	timing_response: 180000,
 	response_ends_trial: true,
 	timing_post_trial: 200
 }
@@ -249,19 +249,19 @@ var attention_node = {
 /* define static blocks */
 var welcome_block = {
 	type: 'poldrack-text',
-	timing_response: 60000,
+	timing_response: 180000,
 	data: {
 		exp_id: "motor_selective_stop_signal",
 		trial_id: "welcome"
 	},
-	text: '<div class = centerbox><p class = block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
 
 var end_block = {
 	type: 'poldrack-text',
-	timing_response: 60000,
+	timing_response: 180000,
 	data: {
 		exp_id: "motor_selective_stop_signal",
 		trial_id: "end"
@@ -282,7 +282,7 @@ var feedback_instruct_block = {
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 60000
+	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -366,7 +366,7 @@ var practice_feedback_block = {
 		exp_id: "motor_selective_stop_signal",
 		trial_id: "feedback"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	cont_key: [13],
 	text: getPracticeFeedback
 };
@@ -465,7 +465,7 @@ var NoSS_practice_node = {
 				possible_responses[0] +
 				' you should <strong>not respond</strong> in any way.</p><p class = block-text>If the ' +
 				possible_responses[0] +
-				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.'
+				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -484,6 +484,7 @@ var NoSS_practice_node = {
 				practice_feedback_text +=
 					'</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
 			}
+			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
 		}
 	}
@@ -587,6 +588,7 @@ var practice_node = {
 				practice_feedback_text +=
 					'</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
 			}
+			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
 		}
 	}

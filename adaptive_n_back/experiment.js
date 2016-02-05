@@ -137,7 +137,7 @@ var attention_check_block = {
 		exp_id: "adaptive_n_back",
 		trial_id: "attention"
 	},
-	timing_response: 30000,
+	timing_response: 180000,
 	response_ends_trial: true,
 	timing_post_trial: 200
 }
@@ -158,7 +158,7 @@ var welcome_block = {
 		exp_id: "adaptive_n_back",
 		trial_id: "welcome"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -173,7 +173,7 @@ var feedback_instruct_block = {
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 60000
+	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
@@ -241,7 +241,7 @@ var end_block = {
 	data: {
 		trial_id: "text"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 0
 };
 
@@ -253,7 +253,7 @@ var start_practice_block = {
 		exp_id: "adaptive_n_back",
 		trial_id: "text"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 1000
 };
 
@@ -265,7 +265,7 @@ var start_test_block = {
 		exp_id: "adaptive_n_back",
 		trial_id: "text"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 1000
 };
 
@@ -277,7 +277,7 @@ var start_control_block = {
 		exp_id: "adaptive_n_back",
 		trial_id: "text"
 	},
-	timing_response: 60000,
+	timing_response: 180000,
 	timing_post_trial: 1000
 };
 
