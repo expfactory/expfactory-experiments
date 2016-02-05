@@ -346,7 +346,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.62
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 7 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var practice_trials_num = 10
@@ -602,6 +602,7 @@ var first_stage = {
 	timing_response: 2000,
 	show_response: true,
 	timing_post_trial: 0,
+	response_ends_trial: true,
 	data: {
 		trial_id: 'first_stage'
 	},
@@ -632,6 +633,7 @@ var second_stage = {
 	choices: actions,
 	timing_stim: 2000,
 	timing_response: 2000,
+	response_ends_trial: true,
 	timing_post_trial: 0,
 	on_finish: changeData
 }
