@@ -20,3 +20,8 @@
     transform: translate(-50%,-50%);
 }
 
+.responded #stim1, .responded #stim2{
+	-moz-box-shadow:    inset 0 0 15px #000000;
+   -webkit-box-shadow: inset 0 0 15px #000000;
+   box-shadow:         inset 0 0 15px #000000;
+}

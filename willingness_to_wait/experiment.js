@@ -94,7 +94,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 1
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'

@@ -44,7 +44,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var categories = ['animals', 'colors', 'countries', 'distances', 'metals', 'relatives']

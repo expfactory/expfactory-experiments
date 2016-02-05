@@ -52,7 +52,7 @@ var appendData = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var exp_len = 100
@@ -165,7 +165,12 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>',
+    '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should press the <strong>' +
+    correct_responses[0][0] +
+    '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' +
+    correct_responses[1][0] +
+    '</strong> key.</p><p class = block-text>You will get feedback telling you if you were correct. Press <strong>enter</strong> to begin.</p></div>'
   ],
   allow_keys: false,
   data: {
@@ -224,21 +229,7 @@ var reset_block = {
   timing_post_trial: 0
 }
 
-var start_practice_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    exp_id: 'choice_reaction_time',
-    trial_id: 'practice_intro'
-  },
-  text: '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should press the <strong>' +
-    correct_responses[0][0] +
-    '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' +
-    correct_responses[1][0] +
-    '</strong> key.</p><p class = block-text>You will get feedback telling you if you were correct. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 1000
-};
+
 
 var start_test_block = {
   type: 'poldrack-text',
@@ -297,7 +288,6 @@ var test_block = {
 var choice_reaction_time_experiment = [];
 choice_reaction_time_experiment.push(welcome_block);
 choice_reaction_time_experiment.push(instruction_node);
-choice_reaction_time_experiment.push(start_practice_block)
 choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);

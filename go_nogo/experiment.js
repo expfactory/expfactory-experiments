@@ -64,7 +64,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 5 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
@@ -186,7 +186,12 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p></div>',
+    '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should <strong>' +
+    correct_responses[0][2] +
+    '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
+    correct_responses[1][2] +
+    '</strong>.</p><p class = block-text>You will get feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -227,21 +232,6 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
-};
-
-var start_practice_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    exp_id: "go_nogo",
-    trial_id: "practice_intro"
-  },
-  text: '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should <strong>' +
-    correct_responses[0][2] +
-    '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
-    correct_responses[1][2] +
-    '</strong>.</p><p class = block-text>You will get feedback telling you if you were correct.</p></div>',
-  timing_post_trial: 1000
 };
 
 var start_test_block = {
@@ -316,7 +306,6 @@ var test_block = {
 var go_nogo_experiment = [];
 go_nogo_experiment.push(welcome_block);
 go_nogo_experiment.push(instruction_node);
-go_nogo_experiment.push(start_practice_block)
 go_nogo_experiment.push(practice_block);
 go_nogo_experiment.push(attention_node)
 go_nogo_experiment.push(reset_block)
