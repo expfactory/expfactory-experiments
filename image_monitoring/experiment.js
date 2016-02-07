@@ -99,21 +99,18 @@ var practice_count = 0
 practice_stims = [{
 	stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'red',
 		condition: 'practice'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'green',
 		condition: 'practice'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'blue',
 		condition: 'practice'
 	}
@@ -122,21 +119,18 @@ practice_stims = [{
 stims = [{
 	stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'red',
 		condition: 'test'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'green',
 		condition: 'test'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 	data: {
-		exp_id: 'image_monitoring',
 		trial_id: 'blue',
 		condition: 'test'
 	}

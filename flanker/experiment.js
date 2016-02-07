@@ -122,7 +122,6 @@ for (i = 0; i < test_trials.data.length; i++) {
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "flanker",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -142,7 +141,6 @@ var welcome_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "flanker",
 		trial_id: "welcome"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -156,7 +154,6 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		exp_id: "flanker",
 		trial_id: "instruction"
 	},
 	text: getInstructFeedback,
@@ -172,7 +169,6 @@ var instructions_block = {
 	],
 	allow_keys: false,
 	data: {
-		exp_id: "flanker",
 		trial_id: "instruction"
 	},
 	show_clickable_nav: true,
@@ -206,7 +202,6 @@ var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "flanker",
 		trial_id: "end"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -217,7 +212,6 @@ var end_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "flanker",
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
@@ -231,7 +225,6 @@ var fixation_block = {
 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
 	is_html: true,
 	data: {
-		exp_id: "flanker",
 		trial_id: "fixation"
 	},
 	choices: 'none',

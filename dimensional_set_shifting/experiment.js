@@ -70,7 +70,6 @@ function get_correct_response() {
 
 function get_data() {
 	return {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: 'stim',
 		exp_stage: 'test',
 		condition: stages[stage_counter]
@@ -161,7 +160,6 @@ var welcome_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "welcome"
 	},
 	text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -174,7 +172,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "instructions"
 	},
 	cont_key: [13],
@@ -187,7 +184,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "instructions"
 	},
 	pages: [
@@ -228,7 +224,6 @@ var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "end"
 	},
 	text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -242,7 +237,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "fixation"
 	},
 	timing_post_trial: 500,
@@ -253,7 +247,6 @@ var fixation_block = {
 var define_simple_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "define_simple_stims"
 	},
 	func: function() {
@@ -267,7 +260,6 @@ var define_simple_stims = {
 var define_separate_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "define_separate_stims"
 	},
 	func: function() {
@@ -283,7 +275,6 @@ var define_separate_stims = {
 var define_compound_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "define_compound_stims"
 	},
 	func: function() {
@@ -299,7 +290,6 @@ var define_compound_stims = {
 var define_ID_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "define_ID_stims"
 	},
 	func: function() {
@@ -315,7 +305,6 @@ var define_ID_stims = {
 var define_ED_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "define_ED_stims"
 	},
 	func: function() {
@@ -331,7 +320,6 @@ var define_ED_stims = {
 var reverse_stims = {
 	type: 'call-function',
 	data: {
-		exp_id: 'dimensional_set_shifting',
 		trial_id: "reverse_stims"
 	},
 	func: function() {

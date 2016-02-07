@@ -41,10 +41,7 @@ var experiment_block = {
     [
       'In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake?'
     ]
-  ],
-  data: {
-    'exp_id': 'cognitive reflection'
-  }
+  ]
 
 };
 

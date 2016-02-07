@@ -251,7 +251,6 @@ var fileType = '.png'
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -270,7 +269,6 @@ var welcome_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "welcome"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -281,7 +279,6 @@ var welcome_block = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -295,7 +292,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "instructions"
 	},
 	cont_key: [13],
@@ -308,7 +304,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "instructions"
 	},
 	pages: [
@@ -350,7 +345,6 @@ var start_test_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "test_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
@@ -364,7 +358,6 @@ var start_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "fixation",
 		exp_stage: "test"
 	},
@@ -380,7 +373,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "fixation",
 		exp_stage: "test"
 	},
@@ -396,7 +388,6 @@ var ITI_fixation_block = {
 	is_html: true,
 	choices: [37, 39],
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "ITI_fixation",
 		exp_stage: "test"
 	},
@@ -412,7 +403,6 @@ var training_block = {
 	stimulus: getTrainingSet,
 	is_html: true,
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "stim",
 		exp_stage: "test"
 	},
@@ -430,7 +420,6 @@ var cue_block = {
 	stimulus: getCue,
 	is_html: true,
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "cue",
 		exp_stage: "test"
 	},
@@ -446,7 +435,6 @@ var probe_block = {
 	stimulus: getProbe,
 	is_html: true,
 	data: {
-		exp_id: "directed_forgetting",
 		trial_id: "probe",
 		exp_stage: "test"
 	},

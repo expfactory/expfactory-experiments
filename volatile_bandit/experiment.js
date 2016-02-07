@@ -94,7 +94,7 @@ var getInstructFeedback = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.4
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 7 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var stage1_trials = 120

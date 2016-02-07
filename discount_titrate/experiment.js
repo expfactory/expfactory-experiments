@@ -139,7 +139,6 @@ for (var i = 0; i < options.small_amt.length; i++) {
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -158,7 +157,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -172,7 +170,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "instructions"
   },
   cont_key: [13],
@@ -185,7 +182,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "instructions"
   },
   pages: [
@@ -224,7 +220,6 @@ var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "discount_titrate",
     trial_id: "practice_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Here is a sample trial. Your choice for this trial will not be included in your bonus payment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -235,7 +230,6 @@ var start_practice_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "stim",
     exp_stage: "practice"
   },
@@ -249,7 +243,6 @@ var practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "discount_titrate",
     trial_id: "test_intro"
   },
   timing_response: 180000,
@@ -262,7 +255,6 @@ var test_block = {
   type: 'poldrack-single-stim',
   stimuli: trials,
   data: {
-    exp_id: "discount_titrate",
     trial_id: "stim",
     exp_stage: "test"
   },
@@ -275,7 +267,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "discount_titrate",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',

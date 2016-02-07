@@ -72,7 +72,6 @@ var practice_stimuli = [{
     stim_id: 1,
     correct_response: correct_responses[0][1],
     trial_id: 'stim',
-    exp_id: 'choice_reaction_time',
     exp_stage: 'practice'
   },
   key_answer: correct_responses[0][1]
@@ -82,7 +81,6 @@ var practice_stimuli = [{
     stim_id: 2,
     correct_response: correct_responses[1][1],
     trial_id: 'stim',
-    exp_id: 'choice_reaction_time',
     exp_stage: 'practice'
   },
   key_answer: correct_responses[1][1]
@@ -93,7 +91,6 @@ var test_stimuli_block = [{
     stim_id: 1,
     correct_response: correct_responses[0][1],
     trial_id: 'stim',
-    exp_id: 'choice_reaction_time',
     exp_stage: 'test'
   }
 }, {
@@ -102,7 +99,6 @@ var test_stimuli_block = [{
     stim_id: 2,
     correct_response: correct_responses[1][1],
     trial_id: 'stim',
-    exp_id: 'choice_reaction_time',
     exp_stage: 'test'
   }
 }];
@@ -119,7 +115,6 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'attention_check'
   },
   timing_response: 180000,
@@ -138,7 +133,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'welcome'
   },
   timing_response: 180000,
@@ -153,7 +147,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'instructions'
   },
   text: getInstructFeedback,
@@ -174,7 +167,6 @@ var instructions_block = {
   ],
   allow_keys: false,
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'instructions'
   },
   show_clickable_nav: true,
@@ -209,7 +201,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'end'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -220,7 +211,6 @@ var end_block = {
 var reset_block = {
   type: 'call-function',
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'reset trial'
   },
   func: function() {
@@ -235,7 +225,6 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'choice_reaction_time',
     trial_id: 'practice_intro'
   },
   text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer get feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' +

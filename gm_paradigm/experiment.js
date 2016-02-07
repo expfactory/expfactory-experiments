@@ -171,7 +171,7 @@ var getPracticeStopStim = function() {
 			image: preFileType + pathSource + colors[8] + '_' + shapes[practiceShape] + fileType +
 				postFileType,
 			data: {
-				exp_id: 'gmParadigm',
+				exp_id: 'gm_paradigm',
 				subject_ID: subjectID,
 				stimulus: colors[8] + '_' + shapes[practiceShape],
 				correct_response: practiceStop_responses[0],
@@ -185,7 +185,7 @@ var getPracticeStopStim = function() {
 			image: preFileType + pathSource + colors[8] + '_' + shapes[practiceShape] + fileType +
 				postFileType,
 			data: {
-				exp_id: 'gmParadigm',
+				exp_id: 'gm_paradigm',
 				subject_ID: subjectID,
 				stimulus: colors[8] + '_' + shapes[practiceShape],
 				correct_response: practiceStop_responses[1],
@@ -467,7 +467,7 @@ var prompt_practice_text_heading2 =
 stopStim = {
 	image: preFileType + pathSource + colors[8] + '_stopSignal' + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		subject_ID: subjectID,
 		stop_stim: colors[8] + '_stopSignal',
 		correct_response: ["none", -1],
@@ -523,7 +523,7 @@ var practiceLearningText = ['  <br><br>Each time you see the <strong>' + colors[
 var practiceLearningStims = [{
 	image: preFileType + pathSource + stim1 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim1,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -531,7 +531,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim2 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim2,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -539,7 +539,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim3 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim3,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -547,7 +547,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim4 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim4,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -555,7 +555,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim5 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim5,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -563,7 +563,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim6 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim6,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -571,7 +571,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim7 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim7,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -579,7 +579,7 @@ var practiceLearningStims = [{
 }, {
 	image: preFileType + pathSource + stim8 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim8,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -608,7 +608,7 @@ var practicePrompts = ['<ul list-text><li><strong>' + colors[0] + '</strong>: ' 
 firstPhaseStims = [{
 	image: preFileType + pathSource + stim1 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim1,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -616,7 +616,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim2 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim2,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -624,7 +624,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim3 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim3,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -632,7 +632,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim4 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim4,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -640,7 +640,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim5 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim5,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -648,7 +648,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim6 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim6,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -656,7 +656,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim7 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim7,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -664,7 +664,7 @@ firstPhaseStims = [{
 }, {
 	image: preFileType + pathSource + stim8 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim8,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -675,7 +675,7 @@ firstPhaseStims = [{
 secondPhaseStims = [{
 	image: preFileType + pathSource + p2stim1 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: p2stim1,
 		correct_response: practiceStop_responses[0],
 		condition: conditions[4]
@@ -683,7 +683,7 @@ secondPhaseStims = [{
 }, {
 	image: preFileType + pathSource + p2stim2 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: p2stim2,
 		correct_response: practiceStop_responses[0],
 		condition: conditions[4]
@@ -691,7 +691,7 @@ secondPhaseStims = [{
 }, {
 	image: preFileType + pathSource + p2stim3 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: p2stim3,
 		correct_response: practiceStop_responses[1],
 		condition: conditions[4]
@@ -699,7 +699,7 @@ secondPhaseStims = [{
 }, {
 	image: preFileType + pathSource + p2stim4 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: p2stim4,
 		correct_response: practiceStop_responses[1],
 		condition: conditions[4]
@@ -752,7 +752,7 @@ for (i = 0; i < 75; i++) {
 					postFileType,
 				data: {
 					trial_id: "test-stop",
-					exp_id: 'gmParadigm',
+					exp_id: 'gm_paradigm',
 					subject_ID: subjectID,
 					stim: colors[tempColor] + '_' + shapes[shape1],
 					correct_response: practiceStop_responses[0],
@@ -767,7 +767,7 @@ for (i = 0; i < 75; i++) {
 					postFileType,
 				data: {
 					trial_id: "test-stop",
-					exp_id: 'gmParadigm',
+					exp_id: 'gm_paradigm',
 					subject_ID: subjectID,
 					stim: colors[tempColor] + '_' + shapes[shape1],
 					correct_response: practiceStop_responses[0],
@@ -785,7 +785,7 @@ for (i = 0; i < 75; i++) {
 					postFileType,
 				data: {
 					trial_id: "test-stop",
-					exp_id: 'gmParadigm',
+					exp_id: 'gm_paradigm',
 					subject_ID: subjectID,
 					stim: colors[tempColor] + '_' + shapes[shape1],
 					correct_response: practiceStop_responses[1],
@@ -800,7 +800,7 @@ for (i = 0; i < 75; i++) {
 					postFileType,
 				data: {
 					trial_id: "test-stop",
-					exp_id: 'gmParadigm',
+					exp_id: 'gm_paradigm',
 					subject_ID: subjectID,
 					stim: colors[tempColor] + '_' + shapes[shape1],
 					correct_response: practiceStop_responses[1],
@@ -821,7 +821,7 @@ for (i = 0; i < 75; i++) {
 		stopStim = {
 			image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 			data: {
-				exp_id: 'gmParadigm',
+				exp_id: 'gm_paradigm',
 				subject_ID: subjectID,
 				stop_stim: colors[temp] + '_stopSignal',
 				correct_response: ["none", -1],
@@ -834,7 +834,7 @@ for (i = 0; i < 75; i++) {
 		stopStim = {
 			image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 			data: {
-				exp_id: 'gmParadigm',
+				exp_id: 'gm_paradigm',
 				subject_ID: subjectID,
 				stop_stim: colors[temp] + '_stopSignal',
 				correct_response: ["none", -1],
@@ -847,7 +847,7 @@ for (i = 0; i < 75; i++) {
 		stopStim = {
 			image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 			data: {
-				exp_id: 'gmParadigm',
+				exp_id: 'gm_paradigm',
 				subject_ID: subjectID,
 				stop_stim: "",
 				correct_response: "",
@@ -863,7 +863,7 @@ for (i = 0; i < 75; i++) {
 practiceLearningStims1 = {
 	image: preFileType + pathSource + stim1 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim1,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -872,7 +872,7 @@ practiceLearningStims1 = {
 practiceLearningStims2 = {
 	image: preFileType + pathSource + stim2 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim2,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -881,7 +881,7 @@ practiceLearningStims2 = {
 practiceLearningStims3 = {
 	image: preFileType + pathSource + stim3 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim3,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -890,7 +890,7 @@ practiceLearningStims3 = {
 practiceLearningStims4 = {
 	image: preFileType + pathSource + stim4 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim4,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -899,7 +899,7 @@ practiceLearningStims4 = {
 practiceLearningStims5 = {
 	image: preFileType + pathSource + stim5 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim5,
 		correct_response: correct_responses[3],
 		condition: conditions[0]
@@ -908,7 +908,7 @@ practiceLearningStims5 = {
 practiceLearningStims6 = {
 	image: preFileType + pathSource + stim6 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim6,
 		correct_response: correct_responses[3],
 		condition: conditions[1]
@@ -917,7 +917,7 @@ practiceLearningStims6 = {
 practiceLearningStims7 = {
 	image: preFileType + pathSource + stim7 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim7,
 		correct_response: correct_responses[2],
 		condition: conditions[2]
@@ -926,7 +926,7 @@ practiceLearningStims7 = {
 practiceLearningStims8 = {
 	image: preFileType + pathSource + stim8 + fileType + postFileType,
 	data: {
-		exp_id: 'gmParadigm',
+		exp_id: 'gm_paradigm',
 		stimulus: stim8,
 		correct_response: correct_responses[2],
 		condition: conditions[3]
@@ -1078,7 +1078,7 @@ var testImagesBlock = {
 	type: 'text',
 	text: preFileType + pathSource + 'green_circle' + fileType + postFileType + preFileType +
 		pathSource + 'minus_25' + fileType + postFileType +
-		'<div class = fixation-gmParadigm><span style="color:red">+</span></div>',
+		'<div class = fixation-gm_paradigm><span style="color:red">+</span></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 };
@@ -1244,7 +1244,7 @@ var forced_choice_block2 = {
 
 var fixationBlock = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
+	stimulus: '<div class = centerbox><div class = fixation-gm_paradigm><span style="color:red">+</span></div></div>',
 	is_html: true,
 	choices: 'none',
 	data: {
@@ -1430,7 +1430,7 @@ var learning_node1_2 = {
 	}
 }
 
-/******************** gmParadigm learning phase  ************************/
+/******************** gm_paradigm learning phase  ************************/
 practiceTrials = []
 practiceTrials.push(learning_feedback_block)
 for (h = 0; h < 24; h++) {
@@ -1736,7 +1736,7 @@ var test_node = {
 							postFileType,
 						data: {
 							trial_id: "test-stop",
-							exp_id: 'gmParadigm',
+							exp_id: 'gm_paradigm',
 							subject_ID: subjectID,
 							stim: colors[tempColor] + '_' + shapes[shape1],
 							correct_response: practiceStop_responses[0],
@@ -1751,7 +1751,7 @@ var test_node = {
 							postFileType,
 						data: {
 							trial_id: "test-stop",
-							exp_id: 'gmParadigm',
+							exp_id: 'gm_paradigm',
 							subject_ID: subjectID,
 							stim: colors[tempColor] + '_' + shapes[shape1],
 							correct_response: practiceStop_responses[0],
@@ -1769,7 +1769,7 @@ var test_node = {
 							postFileType,
 						data: {
 							trial_id: "test-stop",
-							exp_id: 'gmParadigm',
+							exp_id: 'gm_paradigm',
 							subject_ID: subjectID,
 							stim: colors[tempColor] + '_' + shapes[shape1],
 							correct_response: practiceStop_responses[1],
@@ -1784,7 +1784,7 @@ var test_node = {
 							postFileType,
 						data: {
 							trial_id: "test-stop",
-							exp_id: 'gmParadigm',
+							exp_id: 'gm_paradigm',
 							subject_ID: subjectID,
 							stim: colors[tempColor] + '_' + shapes[shape1],
 							correct_response: practiceStop_responses[1],
@@ -1805,7 +1805,7 @@ var test_node = {
 				stopStim = {
 					image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 					data: {
-						exp_id: 'gmParadigm',
+						exp_id: 'gm_paradigm',
 						subject_ID: subjectID,
 						stop_stim: colors[temp] + '_stopSignal',
 						correct_response: ["none", -1],
@@ -1818,7 +1818,7 @@ var test_node = {
 				stopStim = {
 					image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 					data: {
-						exp_id: 'gmParadigm',
+						exp_id: 'gm_paradigm',
 						subject_ID: subjectID,
 						stop_stim: colors[temp] + '_stopSignal',
 						correct_response: ["none", -1],
@@ -1831,7 +1831,7 @@ var test_node = {
 				stopStim = {
 					image: preFileType + pathSource + colors[temp] + '_stopSignal' + fileType + postFileType,
 					data: {
-						exp_id: 'gmParadigm',
+						exp_id: 'gm_paradigm',
 						subject_ID: subjectID,
 						stop_stim: "",
 						correct_response: "",

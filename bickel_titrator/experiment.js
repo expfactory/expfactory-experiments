@@ -120,7 +120,6 @@ var step = 250
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'attention_check'
   },
   timing_response: 180000,
@@ -140,7 +139,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'welcome'
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -155,7 +153,6 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'instructions'
   },
   timing_post_trial: 0,
@@ -170,7 +167,6 @@ var instructions_block = {
   ],
   allow_keys: false,
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'instructions'
   },
   show_clickable_nav: true,
@@ -204,7 +200,6 @@ var instruction_node = {
 var update_delay_block = {
   type: 'call-function',
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'update_delay'
   },
   func: function() {
@@ -217,7 +212,6 @@ var test_block = {
   type: 'poldrack-single-stim',
   stimulus: getStim,
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'stim',
     exp_stage: 'test'
   },
@@ -247,7 +241,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'bickel_titrator',
     trial_id: 'end'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',

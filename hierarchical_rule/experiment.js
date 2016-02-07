@@ -162,7 +162,6 @@ instructions_grid += '</div>'
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -182,7 +181,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -196,7 +194,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -208,7 +205,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "instruction"
   },
   pages: [
@@ -248,7 +244,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
@@ -260,7 +255,6 @@ var end_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "test_intro"
   },
   timing_response: 180000,
@@ -275,7 +269,6 @@ var fixation_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "fixation",
     exp_stage: "test"
   },
@@ -291,7 +284,6 @@ var feedback_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "hierarchical_rule",
     trial_id: "feedback",
     exp_stage: "test"
   },
@@ -315,7 +307,6 @@ var flat_stim_block = {
   timing_post_trial: 0,
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      exp_id: "hierarchical_rule",
       trial_id: "flat_stim",
       exp_stage: "test"
     })
@@ -335,7 +326,6 @@ var hierarchical_stim_block = {
   timing_post_trial: 0,
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      exp_id: "hierarchical_rule",
       trial_id: "hierarchical_stim",
       exp_stage: "test"
     })

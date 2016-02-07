@@ -103,7 +103,6 @@ var blocks = [block1_list, block2_list, block3_list, block4_list]
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -122,7 +121,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -134,7 +132,6 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "end"
   },
   timing_response: 180000,
@@ -148,7 +145,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -161,7 +157,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "instruction"
   },
   pages: [
@@ -207,7 +202,6 @@ var instruction_node = {
 var rest_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "rest"
   },
   timing_response: 180000,
@@ -221,7 +215,6 @@ var feedback_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "feedback",
     exp_stage: "test"
   },
@@ -236,7 +229,6 @@ var fixation_block = {
   is_html: true,
   choices: [37, 40],
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "fixation",
     exp_stage: "test"
   },
@@ -253,7 +245,6 @@ var A_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -268,7 +259,6 @@ var other_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -283,7 +273,6 @@ var X_probe = {
   is_html: true,
   choices: [37, 40],
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "probe",
     exp_stage: "test"
   },
@@ -299,7 +288,6 @@ var other_probe = {
   is_html: true,
   choices: [37, 40],
   data: {
-    exp_id: "dot_pattern_expectancy",
     trial_id: "probe",
     exp_stage: "test"
   },

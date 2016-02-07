@@ -104,7 +104,6 @@ function get_data() {
 		FB = 0
 	}
 	return {
-		exp_id: "angling_risk_task",
 		exp_stage: "test",
 		trial_id: "stim",
 		red_fish_num: red_fish_num + 1,
@@ -127,7 +126,6 @@ function get_practice_data() {
 		FB = 0
 	}
 	return {
-		exp_id: "angling_risk_task",
 		exp_stage: "practice",
 		trial_id: "stim",
 		red_fish_num: red_fish_num + 1,
@@ -424,7 +422,6 @@ var welcome_block = {
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -437,7 +434,6 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "instructions"
 	},
 	text: getInstructFeedback,
@@ -457,7 +453,6 @@ var instructions_block = {
 	],
 	allow_keys: false,
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "instructions"
 	},
 	show_clickable_nav: true,
@@ -492,7 +487,6 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "end_block"
 	},
 	timing_response: 180000,
@@ -505,7 +499,6 @@ var round_over_block = {
 	cont_key: [13],
 	timing_response: 180000,
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "round_over"
 	},
 	timing_post_trial: 0,
@@ -516,7 +509,6 @@ var ask_fish_block = {
 	type: 'survey-text',
 	on_finish: changeData,
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "ask fish"
 	},
 	questions: [
@@ -530,7 +522,6 @@ var set_fish_block = {
 	type: 'call-function',
 	on_finish: changeData,
 	data: {
-		exp_id: "angling_risk_task",
 		trial_id: "set_fish"
 	},
 	func: function() {
