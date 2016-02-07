@@ -179,26 +179,22 @@ var test_block_data = [] // records the data in the current block to calculate f
 var stimulus = [{
 	stimulus: '<div class = shapebox><img class = square></img></div>',
 	data: {
-		correct_response: correct_responses[0][1],
-		exp_id: "stop_signal"
+		correct_response: correct_responses[0][1]
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = circle></img></div>',
 	data: {
-		correct_response: correct_responses[1][1],
-		exp_id: "stop_signal"
+		correct_response: correct_responses[1][1]
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = triangle></img></div>',
 	data: {
-		correct_response: correct_responses[2][1],
-		exp_id: "stop_signal"
+		correct_response: correct_responses[2][1]
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = diamond></img></div>',
 	data: {
-		correct_response: correct_responses[3][1],
-		exp_id: "stop_signal"
+		correct_response: correct_responses[3][1]
 	}
 }]
 
@@ -246,7 +242,6 @@ var attention_node = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -258,7 +253,6 @@ var welcome_block = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -272,7 +266,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "instruction"
 	},
 	cont_key: [13],
@@ -285,7 +278,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "instruction"
 	},
 	pages: [
@@ -328,7 +320,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "fixation",
 		exp_stage: "test"
 	},
@@ -343,7 +334,6 @@ var prompt_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "fixation",
 		exp_stage: "practice"
 	},
@@ -359,7 +349,6 @@ var practice_feedback_text =
 var practice_feedback_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "feedback"
 	},
 	timing_response: 180000,
@@ -370,7 +359,6 @@ var practice_feedback_block = {
 var test_feedback_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "feedback",
 		exp_stage: "test"
 	},
@@ -383,7 +371,6 @@ var test_feedback_block = {
 var reset_block = {
 	type: 'call-function',
 	data: {
-		exp_id: "stop_signal",
 		trial_id: "fixation"
 	},
 	func: function() {

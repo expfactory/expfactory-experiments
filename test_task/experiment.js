@@ -97,7 +97,6 @@ var test_block = {
   stimulus: stim,
   is_html: true,
   data: {
-    exp_id: "test_task",
     trial_id: "test"
   },
   choices: [32],

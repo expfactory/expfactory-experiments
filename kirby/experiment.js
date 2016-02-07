@@ -93,7 +93,6 @@ for (var i = 0; i < stim_html.length; i++) {
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: 'kirby',
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -113,7 +112,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'kirby',
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -127,7 +125,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: 'kirby',
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -139,7 +136,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'kirby',
     trial_id: "instruction"
   },
   pages: [
@@ -178,7 +174,6 @@ var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'kirby',
     trial_id: "practice_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Here is a sample trial. Your choice for this trial will not be included in your bonus payment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -189,7 +184,6 @@ var start_practice_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   data: {
-    exp_id: 'kirby',
     trial_id: "stim",
     exp_stage: "practice"
   },
@@ -201,7 +195,6 @@ var practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'kirby',
     trial_id: "test_intro"
   },
   timing_response: 180000,

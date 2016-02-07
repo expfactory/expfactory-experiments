@@ -160,7 +160,6 @@ var switch_bound = switch_bounds.shift() //set first switch_bound
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "shift_task",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -180,7 +179,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "shift_task",
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -192,7 +190,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "shift_task",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -205,7 +202,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "shift_task",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -218,7 +214,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "shift_task",
     trial_id: "instruction"
   },
   pages: [
@@ -259,7 +254,6 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "shift_task",
     trial_id: "practice_intro"
   },
   timing_response: 180000,
@@ -271,7 +265,6 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "shift_task",
     trial_id: "test_intro"
   },
   timing_response: 180000,
@@ -283,7 +276,6 @@ var start_test_block = {
 var rest_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "shift_task",
     trial_id: "rest"
   },
   timing_response: 180000,
@@ -295,7 +287,6 @@ var rest_block = {
 var reset_block = {
   type: 'call-function',
   data: {
-    exp_id: "shift_task",
     trial_id: "reset_trial_count"
   },
   func: function() {
@@ -311,7 +302,6 @@ var reset_block = {
 var alert_block = {
   type: 'poldrack-single-stim',
   data: {
-    exp_id: "shift_task",
     trial_id: "alert"
   },
   stimulus: getAlert,

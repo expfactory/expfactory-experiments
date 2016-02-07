@@ -59,7 +59,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'multiplication',
     trial_id: "welcome"
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -73,7 +72,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: 'multiplication',
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -85,7 +83,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'multiplication',
     trial_id: "instruction"
   },
   pages: [
@@ -129,7 +126,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'multiplication',
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -142,7 +138,6 @@ var largeStep_block = {
   type: 'single-stim-button',
   stimulus: getStim,
   data: {
-    exp_id: 'multiplication',
     trial_id: "stim",
     exp_stage: "test"
   },
@@ -173,7 +168,6 @@ var smallStep_block = {
   stimulus: getStim,
   button_class: 'submitButton',
   data: {
-    exp_id: 'multiplication',
     trial_id: "stim",
     exp_stage: "test"
   },
@@ -204,7 +198,6 @@ var fatigue_block = {
   stimulus: getStim,
   button_class: 'submitButton',
   data: {
-    exp_id: 'multiplication',
     trial_id: "stim",
     exp_stage: "test"
   },

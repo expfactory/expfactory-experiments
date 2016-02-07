@@ -70,7 +70,6 @@ var instructTimeThresh = 0 ///in seconds
 var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 82
 	},
@@ -78,7 +77,6 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 66
 	},
@@ -86,7 +84,6 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 71
 	},
@@ -96,7 +93,6 @@ var congruent_stim = [{
 var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 82
 	},
@@ -104,7 +100,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 82
 	},
@@ -112,7 +107,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 66
 	},
@@ -120,7 +114,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 66
 	},
@@ -128,7 +121,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 71
 	},
@@ -136,7 +128,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 71
 	},
