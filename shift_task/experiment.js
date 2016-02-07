@@ -344,7 +344,7 @@ var practice_stim_block = {
   timing_post_trial: 0,
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
+      exp_id: "shift_task",
       trial_id: "stim",
       exp_stage: "practice"
     })
@@ -362,7 +362,7 @@ var stim_block = {
   timing_post_trial: 0,
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
+      exp_id: "shift_task",
       trial_id: "stim",
       exp_stage: "test"
     })
@@ -385,7 +385,7 @@ var practice_feedback_block = {
       FB = 1
     }
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
+      exp_id: "shift_task",
       trial_id: "feedback",
       exp_stage: "practice",
       FB: FB
@@ -432,7 +432,7 @@ var feedback_block = {
       FB = 1
     }
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
+      exp_id: "shift_task",
       trial_id: "feedback",
       exp_stage: "test",
       FB: FB
