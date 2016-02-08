@@ -1980,7 +1980,3 @@ gm_paradigm_experiment.push(forced_choice_block2)
 }
 gm_paradigm_experiment.push(bonus_block)
 gm_paradigm_experiment.push(end_block)
-<<<<<<< HEAD
-=======
-*/
->>>>>>> a45535ad95fe4e007f08d00b6e909302a1c214b6
