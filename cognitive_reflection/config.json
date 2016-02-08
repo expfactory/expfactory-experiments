@@ -4,6 +4,7 @@
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/plugins/jspsych-survey-text.js",
                  "experiment.js",
