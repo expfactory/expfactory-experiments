@@ -1,11 +1,10 @@
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
 
-function getDisplayElement () {
-    $('<div class = display_stage_background></div>').appendTo('body')
-    return $('<div class = display_stage></div>').appendTo('body')
+function getDisplayElement() {
+  $('<div class = display_stage_background></div>').appendTo('body')
+  return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function fillArray(value, len) {
@@ -30,7 +29,9 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: "bis11"}
+  data: {
+    exp_id: "bis11"
+  }
 };
 
 var instructions_block = {
@@ -41,16 +42,41 @@ var instructions_block = {
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000,
-  data: {exp_id : "bis11"}
+  data: {
+    exp_id: "bis11"
+  }
 };
 
 var opts = ["Rarely/Never", "Occasionally", "Often", "Almost Always/Always"]
 
-var all_pages = [["I plan tasks carefully.","I do things without thinking.","I make-up my mind quickly.","I am happy-go-lucky.","I don't 'pay attention.'","I have 'racing' thoughts.","I plan trips well ahead of time.","I am self controlled.","I concentrate easily.","I save regularly."],["I 'squirm' at plays or lectures.","I am a careful thinker.","I plan for job security.","I say things without thinking.","I like to think about complex problems.","I change jobs.","I act 'on impulse.'","I get easily bored when solving thought problems.","I act on the spur of the moment.","I am a steady thinker."],["I change residences.","I buy things on impulse.","I can only think about one thing at a time.","I change hobbies.","I spend or charge more than I earn.","I often have extraneous thoughts when thinking.","I am more interested in the present than the future.","I am restless at the theater or lectures.","I am restless at the theater or lectures.","I am future oriented."]]
+var all_pages = [
+  ["I plan tasks carefully.", "I do things without thinking.", "I make-up my mind quickly.",
+    "I am happy-go-lucky.", "I don't 'pay attention.'", "I have 'racing' thoughts.",
+    "I plan trips well ahead of time.", "I am self controlled.", "I concentrate easily.",
+    "I save regularly."
+  ],
+  ["I 'squirm' at plays or lectures.", "I am a careful thinker.", "I plan for job security.",
+    "I say things without thinking.", "I like to think about complex problems.", "I change jobs.",
+    "I act 'on impulse.'", "I get easily bored when solving thought problems.",
+    "I act on the spur of the moment.", "I am a steady thinker."
+  ],
+  ["I change residences.", "I buy things on impulse.",
+    "I can only think about one thing at a time.", "I change hobbies.",
+    "I spend or charge more than I earn.", "I often have extraneous thoughts when thinking.",
+    "I am more interested in the present than the future.",
+    "I am restless at the theater or lectures.", "I am restless at the theater or lectures.",
+    "I am future oriented."
+  ]
+]
 
-var all_options = [fillArray(opts, 10),fillArray(opts, 10), fillArray(opts, 10)]
+var all_options = [fillArray(opts, 10), fillArray(opts, 10), fillArray(opts, 10)]
 
-var score_scale = {"Rarely/Never": 1, "Occasionally": 2, "Often": 3, "Almost Always/Always": 4}
+var score_scale = {
+  "Rarely/Never": 1,
+  "Occasionally": 2,
+  "Often": 3,
+  "Almost Always/Always": 4
+}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -62,15 +88,21 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10),fillArray(true, 10), fillArray(true, 10)],
-  reverse_score: [[true, false, false, false, false, false, true, true, true, true],[false, true, true, false, true, false, false, false,false,true],[false, false, false, false, false, false, false, false, true, true]],
+  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10)],
+  reverse_score: [
+    [true, false, false, false, false, false, true, true, true, true],
+    [false, true, true, false, true, false, false, false, false, true],
+    [false, false, false, false, false, false, false, false, true, true]
+  ],
 };
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  data: {exp_id: "bis11"}
+  data: {
+    exp_id: "bis11"
+  }
 };
 
 
