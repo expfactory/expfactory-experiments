@@ -434,9 +434,8 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
-		'<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
-		'<div class = centerbox><p class = block-text>You will get feedback during the first phase, but not during the second.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During the first phase, you will be presented with one of three pairs of abstract shapes.  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong> to correspond with the left or right image respectively.</p></div>',
+		'<div class = centerbox><p class = block-text>Your job is to pick the shape that is more correct.  These shapes will not always be rewarded deterministically, so try to do your best to pick the shape that is correct given the feedback for the shape.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -552,7 +551,7 @@ var SP_block = {
 	data: {
 		trial_id: "second_phase_intro"
 	},
-	text: '<div class = centerbox><p class = center-block-text>We will now begin Phase 2. Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>These trials will not have feedback, so do your best to pick the shape that is correct given your experience with the shape.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
 	cont_key: [13]
 };
 
@@ -585,9 +584,11 @@ var probabilistic_selection_experiment = [];
 probabilistic_selection_experiment.push(welcome_block);
 probabilistic_selection_experiment.push(instruction_node);
 probabilistic_selection_experiment.push(FP_block);
-probabilistic_selection_experiment.push(performance_criteria);
+//probabilistic_selection_experiment.push(performance_criteria);
 probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(SP_block);
+for(var i = 0; i<SP_trials; i++){
 probabilistic_selection_experiment.push(second_phase_trials);
+}
 probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(end_block);

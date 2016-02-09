@@ -58,10 +58,10 @@ var appendProbeData = function() {
 		trial_num: currTrial
 	})
 	global_trial = jsPsych.progress().current_trial_global
-	trialCue = jsPsych.data.getData()[global_trial - 2].stim
-	trialProbe = jsPsych.data.getData()[global_trial].stim[0]
-	lastSet = jsPsych.data.getData()[global_trial - 3].stim
-	keypress = jsPsych.data.getData()[global_trial].key_press
+	trialCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	trialProbe = jsPsych.data.getDataByTrialIndex(global_trial).stim[0]
+	lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim
+	keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
 	if (trialCue == 'BOT') {
 		memorySet = lastSet.splice(0, 3)
 	} else if (trialCue == 'TOP') {
@@ -119,7 +119,7 @@ var getTrainingSet = function() {
 
 	} else if (currTrial == 1) {
 		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.data.getData()[global_trial - 5].stim
+		preceeding1stims = jsPsych.data.getDataByTrialIndex(global_trial - 5).stim
 		newArray = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
 		})
@@ -145,8 +145,8 @@ var getTrainingSet = function() {
 
 	} else {
 		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.data.getData()[global_trial - 5].stim
-		preceeding2stims = jsPsych.data.getData()[global_trial - 10].stim
+		preceeding1stims = jsPsych.data.getDataByTrialIndex(global_trial - 5).stim
+		preceeding2stims = jsPsych.data.getDataByTrialIndex(global_trial - 10).stim
 		newArray = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
 		})
@@ -185,8 +185,8 @@ var getProbe = function() {
 	probeType = probeTypeArray.pop()
 	global_trial = jsPsych.progress().current_trial_global
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	lastCue = jsPsych.data.getData()[global_trial - 2].stim
-	lastSet = jsPsych.data.getData()[global_trial - 3].stim
+	lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
 			probe = lastSet[Math.floor(Math.random() * 3)]
@@ -310,7 +310,6 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p></div>',
 		'<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
 		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
-		'<div class = centerbox><p class = block-text>There will be 6 runs of 24 trials each. You will get a break between each run.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

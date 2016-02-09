@@ -166,7 +166,7 @@ function makeFish(fish_num) {
 	place_fish()
 	if (weather == "Sunny") {
 		$('#red_count').html('<strong># Red Fish in lake:</strong>: ' + red_fish_num)
-		$('#blue_count').html('<strong># Red Fish in lake:</strong>: 1')
+		$('#blue_count').html('<strong># Blue Fish in lake:</strong>: 1')
 	}
 	total_fish_num = red_fish_num + 1
 }
@@ -657,6 +657,8 @@ for (b = 0; b < blocks.length; b++) {
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(ask_fish_block)
+	angling_risk_task_experiment.push(set_fish_block)
 	for (i = 0; i < num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)
