@@ -12,6 +12,7 @@ function addID() {
   })
 }
 
+
 var post_trial_gap = function() {
   gap = Math.floor(Math.random() * 2000) + 1000
   return gap;
@@ -42,6 +43,8 @@ var practice_len = 5
 var experiment_len = 50
 var gap = 0
 var current_trial = 0
+var post_trial_gap = 500
+
 stim = '<div class = shapebox><div id = cross></div></div>'
 
 
@@ -169,6 +172,9 @@ var reset_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
+  timing_stim: 1000,
+  timing_response: 1000,
+  response_ends_trial: false,
   is_html: true,
   data: {
     exp_id: "simple_reaction_time",
@@ -177,7 +183,7 @@ var practice_block = {
   },
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: appendData,
 };
 
 /* define test block */
@@ -195,7 +201,7 @@ var test_block = {
   },
   choices: [32],
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: appendData,
 };
 
 /* create experiment definition array */

@@ -8,6 +8,7 @@ function getDisplayElement() {
 	return $('<div class = display_stage></div>').appendTo('body')
 }
 
+
 var practiceCount = 0
 var getPracticePrompt = function() {
 	temp =
@@ -19,14 +20,16 @@ var getPracticePrompt = function() {
 	} else if (practiceCount == 7) {
 		practiceCount = 0
 	}
+	return temp
 }
 
-var practiceCount2 = 0
-var getPracticeLearning = function() {
-	tempRule = practiceLearningText[practiceCount2]
-	tempStims = practiceLearningStims[practiceCount2]
-	practiceCount2 = practiceCount2 + 1
-	return prompt_practice_text_heading1 + tempRule + tempStims.image
+
+var practiceCount2=0
+var getPracticeLearning = function(){
+	tempRule=practiceLearningText[practiceCount2]
+	tempStims=practiceLearningStims[practiceCount2]
+	practiceCount2=practiceCount2+1
+	return prompt_practice_text_heading1 + tempRule  + tempStims.image
 }
 
 var practiceCount3 = 0
@@ -212,25 +215,23 @@ var appendPracticeGoData = function() {
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // second phase functions
 var getSSPracticeStim3 = function() {
-	goTemp = goStimsArray.pop()
+	goTemp = goStimsArray.shift()
 	practice_trial_data = goTemp.data
 	return goTemp.image
 }
 
-var getStopSignal = function() {
-	stopTemp = stopStimsArray.pop()
+var getStopSignal = function(){
+	stopTemp = stopStimsArray.shift()
 	currData = stopTemp.data
 	return stopTemp.image
 }
-
 
 var getSSPracticeData3 = function() {
 	return practice_trial_data
 }
 
 var getSSPractice_trial_type3 = function() {
-	temp = a.trial.pop()
-	return temp
+	return a.trial.pop() 
 }
 
 
@@ -241,8 +242,6 @@ var getSSD = function() {
 var resetSSD = function() {
 	SSD = 250
 }
-
-
 
 var resetTrial = function() {
 	currTrial = 0
@@ -263,25 +262,22 @@ var updateSSDandData = function() {
 	})
 	currTrial = currTrial + 1
 	curr_trial = jsPsych.progress().current_trial_global
-	if ((jsPsych.data.getData()[curr_trial].rt == -1) && (SSD < 850) && (jsPsych.data.getData()[
-			curr_trial].SS_trial_type == 'stop')) {
+	if ((jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1) && (SSD<850) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type=='stop')) {
 		SSD = SSD + 50
-	} else if ((jsPsych.data.getData()[curr_trial].rt != -1) && (SSD > 0) && (jsPsych.data.getData()[
-			curr_trial].SS_trial_type == 'stop')) {
+	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1) && (SSD > 0) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type=='stop')) { 
 		SSD = SSD - 50
 	}
-	/*
-	if ((jsPsych.data.getData()[curr_trial].key_press == jsPsych.data.getData()[curr_trial].correct_response[1]) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'go')){
-		jsPsych.data.addDataToLastTrial({go_acc: 1})
-	} else if ((jsPsych.data.getData()[curr_trial].key_press != jsPsych.data.getData()[curr_trial].correct_response[1]) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'go')){
-		jsPsych.data.addDataToLastTrial({go_acc: 0})
-	}	
 	
-	if ((jsPsych.data.getData()[curr_trial].key_press == -1) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'stop')){
+	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response[1]) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'go')){
+		jsPsych.data.addDataToLastTrial({go_acc: 1})
+	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response[1]) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'go')){
+		jsPsych.data.addDataToLastTrial({go_acc: 0})
+	}
+	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'stop')){
 		jsPsych.data.addDataToLastTrial({stop_acc: 1})
-	} else if ((jsPsych.data.getData()[curr_trial].key_press != -1) && (jsPsych.data.getData()[curr_trial].SS_trial_type == 'stop')){
+	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).SS_trial_type == 'stop')){
 		jsPsych.data.addDataToLastTrial({stop_acc: 0})
-	} */
+	} 
 }
 
 
@@ -418,7 +414,6 @@ var postFileTypeForced = "'></img></div>"
 
 var shapes = jsPsych.randomization.repeat(['circle', 'rhombus', 'pentagon', 'triangle'], 1)
 shapes.splice(0, 0, 'square')
-var triangleNum = shapes.indexOf('triangle')
 var colors = jsPsych.randomization.repeat(['red', 'green', 'blue', 'yellow', 'orange', 'black',
 	'purple', 'grey', 'brown', 'pink'
 ], 1)
@@ -708,6 +703,7 @@ secondPhaseStims = [{
 
 firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, learningNumTrials / 8, true); //learningNumTrials =24, so does practiceStopNumTrials
 secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, 19, true);
+var practice_stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','stop','go','go','go','go','go','go','go','go'], 7,false)
 
 var exp_len = 75
 var stop_percent = (1 / 3)
@@ -858,6 +854,7 @@ for (i = 0; i < 75; i++) {
 		stopStimsArray.push(stopStim)
 	}
 }
+
 
 
 practiceLearningStims1 = {
@@ -1256,6 +1253,16 @@ var fixationBlock = {
 	timing_response: 500,
 };
 
+var fixationBlock2 = {
+  type: 'poldrack-single-stim',
+  stimulus: '<div class = centerbox><div class = fixation-gmParadigm><span style="color:red">+</span></div></div>',
+  is_html: true,
+  choices: 'none',
+  data: {exp_id: "gm_paradigm", "trial_id": "fixation"},
+  timing_post_trial: 0,
+  timing_stim: 500,
+  timing_response: 500,
+};
 
 var rewardBlock = {
 	type: 'poldrack-single-stim',
@@ -1666,25 +1673,25 @@ var phase3_trials = []
 phase3_trials.push(stop_feedback_block)
 for (i = 0; i < 75; i++) {
 	phase3_trials.push(fixationBlock)
-		//var stim_data = $.extend({},practice_trial_data)
-	var stop_signal_block = {
-		type: 'stop-signal',
-		stimulus: getSSPracticeStim3,
-		SS_stimulus: stop_signal,
-		SS_trial_type: getSSPractice_trial_type3,
-		data: getSSPracticeData3,
-		is_html: true,
-		choices: [77, 90],
-		timing_stim: 850,
-		timing_response: 1850,
-		response_ends_trial: false,
-		SSD: getSSD,
-		timing_SS: 500,
-		timing_post_trial: 0,
-		on_finish: updateSSDandData,
-	}
-	phase3_trials.push(stop_signal_block)
-}
+	var stim_data = $.extend({},practice_trial_data)
+    var stop_signal_block2 = {
+	  type: 'stop-signal',
+	  stimulus: getSSPracticeStim3,
+	  SS_stimulus: getStopSignal,
+	  SS_trial_type: getSSPractice_trial_type3,
+	  data: getSSPracticeData3,
+	  is_html: true,
+	  choices: [77,90],
+	  timing_stim: 850,
+	  timing_response: 1850,
+	  response_ends_trial: false,
+	  SSD: getSSD,
+	  timing_SS: 500,
+	  timing_post_trial: 0,  
+	  on_finish: updateSSDandData,
+    }
+	phase3_trials.push(stop_signal_block2)
+} 
 
 
 
@@ -1760,7 +1767,6 @@ var test_node = {
 						}
 					}
 					goStimsArray.push(goStim)
-
 				}
 			} else if (shape1 == 3 || shape1 == 4) {
 				if (tempColor === 0 || tempColor == 1 || tempColor == 2 || tempColor == 3) {
@@ -1922,7 +1928,6 @@ var test_node = {
 
 var gm_paradigm_experiment = []
 
-/*
 ///welcome and instructions
 gm_paradigm_experiment.push(welcome_block)
 gm_paradigm_experiment.push(instructions_block)
@@ -1953,27 +1958,25 @@ gm_paradigm_experiment.push(practice_node)
 gm_paradigm_experiment.push(practice_feedback_block2);
 gm_paradigm_experiment.push(reset_SSD)
 gm_paradigm_experiment.push(reset_Trial)
-*/
+
 //stopping phase (phase 2)
 gm_paradigm_experiment.push(main_stop_intro1)
 gm_paradigm_experiment.push(test_node)
 gm_paradigm_experiment.push(stop_feedback_block);
-//gm_paradigm_experiment.push(test_node)
 
-/*
+
 //forced choice phase (phase 3)
 gm_paradigm_experiment.push(forced_choice_intro)
 for(forcedChoice=0;forcedChoice<45;forcedChoice++){
-gm_paradigm_experiment.push(fixationBlock)
+gm_paradigm_experiment.push(fixationBlock2)
 gm_paradigm_experiment.push(forced_choice_block)
 } 
 gm_paradigm_experiment.push(reset_Trial)
 
 gm_paradigm_experiment.push(forced_choice_intro_break)
 for(forcedChoice=0;forcedChoice<45;forcedChoice++){
-gm_paradigm_experiment.push(fixationBlock)
+gm_paradigm_experiment.push(fixationBlock2)
 gm_paradigm_experiment.push(forced_choice_block2)
 }
 gm_paradigm_experiment.push(bonus_block)
 gm_paradigm_experiment.push(end_block)
-*/

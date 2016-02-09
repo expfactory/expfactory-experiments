@@ -618,133 +618,128 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
-	type: 'poldrack-instructions',
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial: 'instructions'
-	},
-	pages: [
-		'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>' +
-		'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>' +
-		'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>' +
-		'<p>-You indicate the number of cards (from 0 to 32) you want to turn over by clicking on a small button. Then, cards are randomly chosen to be turned over, one at a time. For each gain card turned over, points are added to your round total and another card is turned over. This continues until a loss card is uncovered or until the number of cards you chose to turn over is reached. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over – even if you indicated that more cards should be turned over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>' +
-		'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money. Each point is worth 1 cent.</p>' +
-		'<p>-This game is for real money and requires some concentration. Please minimize distractions in your environment and close any other programs running in the background. </p></p></div>',
+  type: 'poldrack-instructions',
+  data: {exp_id: "columbia_card_task_hot", trial: 'instructions'},
+  pages: [
+	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
+	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
+	'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>'+
+	'<p>-You indicate the number of cards (from 0 to 32) you want to turn over by clicking on a small button. Then, cards are randomly chosen to be turned over, one at a time. For each gain card turned over, points are added to your round total and another card is turned over. This continues until a loss card is uncovered or until the number of cards you chose to turn over is reached. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over – even if you indicated that more cards should be turned over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>'+
+	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money. Each point is worth 1 cent.</p>',
+	
+    '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
+    '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
+    "<p><input type='image' id = '133' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructButton(this.id)>"+
+	'</p></div>',
+	
+	'<div class = centerbox><p class = block-text>'+
+	'<p><strong>The Gain Card:</strong></p>'+
+	'<p>For every gain card you turn over, your score increases by either 10, 20, or 30 points in different rounds.</p>'+
+	"<p><input type='image' src='/static/experiments/columbia_card_task_hot/images/chosen.png'>"+
+	'<p><strong>The Loss Card:</strong></p>'+
+	"<p><input type='image' src='/static/experiments/columbia_card_task_hot/images/loss.png'></p>"+
+	'<p>For every loss card you turn over, your score decreases by either 250,500, or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1,2, or 3 loss cards in any given round.</p>'+
+	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
+	'</p></div>',
+	
+	"<button type='button' class = instructButton onclick= instructFunction()>See Result</button>"+
+	'<div class = centerbox-CCT><p class = block-text><div id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
+	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
+  	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
+  	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
+  	"<div class = instructBoxLeft1><div>Loss Amount: 750</div></div>" +
+  	"<div class = instructBoxRight1><div># of Loss Cards: 1</div></div>" +
+  	"<div class = instructBoxMiddle1><div>Gain Amount: 10</div></div>" +
 
-		'<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>' +
-		'<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>' +
-		"<p><input type='image' id = '133' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructButton(this.id)>" +
-		'<p> An unknown card.  Click on it to turn it over!</p>' +
-		'</p></div>',
+  
+    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
+    '</p></div>',
+  
+  	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+
+	'<div class = centerbox-CCT><p class = block-text><div id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
+	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
+  	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
+  	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
+  	"<div class = instructBoxLeft1><div>Loss Amount: 250</div></div>" +
+  	"<div class = instructBoxRight1><div># of Loss Cards: 3</div></div>" +
+  	"<div class = instructBoxMiddle1><div>Gain Amount: 30</div></div>" +
 
-		'<div class = centerbox><p class = block-text>' +
-		'<p><strong>The Gain Card:</strong></p>' +
-		'<p>For every gain card you turn over, your score increases by either 10, 20, or 30 points in different rounds.</p>' +
-		"<p><input type='image' src='/static/experiments/columbia_card_task_hot/images/chosen.png'>" +
-		'<p><strong>The Loss Card:</strong></p>' +
-		"<p><input type='image' src='/static/experiments/columbia_card_task_hot/images/loss.png'></p>" +
-		'<p>For every loss card you turn over, your score decreases by either 250,500, or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1,2, or 3 loss cards in any given round.</p>' +
-		'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>' +
-		'</p></div>',
-
-		"<button type='button' class = instructButton onclick= instructFunction()>See Result</button>" +
-		'<div class = centerbox-CCT><p class = block-text><div id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>' +
-		"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" +
-		"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
-		"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
-		"<div class = instructBoxLeft1><div>Loss Amount: 750</div></div>" +
-		"<div class = instructBoxRight1><div># of Loss Cards: 1</div></div>" +
-		"<div class = instructBoxMiddle1><div>Gain Amount: 10</div></div>" +
-
-
-		"<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>" +
-		'</p></div>',
-
-		"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>" +
-		'<div class = centerbox-CCT><p class = block-text><div id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>' +
-		"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" +
-		"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
-		"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
-		"<div class = instructBoxLeft1><div>Loss Amount: 250</div></div>" +
-		"<div class = instructBoxRight1><div># of Loss Cards: 3</div></div>" +
-		"<div class = instructBoxMiddle1><div>Gain Amount: 30</div></div>" +
-
-
-		"<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-
-		"<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>" +
-		"<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>" +
-		'</p></div>',
-
-	],
-	allow_keys: false,
-	show_clickable_nav: true,
-	timing_post_trial: 1000
+  
+    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+  
+    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
+    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
+    '</p></div>',
+  
+  ],
+  allow_keys: false,
+  show_clickable_nav: true,
+  timing_post_trial: 1000
 };
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
