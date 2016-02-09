@@ -624,8 +624,8 @@ for (b = 0; b < practiceblocks.length; b++) {
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
-			tournament_bank = 0,
-				round_num = 0
+			tournament_bank = 0
+			round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block_practice)
@@ -674,8 +674,8 @@ for (b = 0; b < blocks.length; b++) {
 			weather = data.weather
 			release = data.release
 			start_fish_num = data.start_fish_num
-			tournament_bank = 0,
-				round_num = 0
+			tournament_bank = 0
+			round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block)
