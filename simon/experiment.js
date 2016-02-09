@@ -64,32 +64,28 @@ var test_stimuli = [{
   stimulus: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
   data: {
     correct_response: correct_responses[0][1],
-    condition: 'left',
-    exp_id: 'simon'
+    condition: 'left'
   },
   key_answer: correct_responses[0][1]
 }, {
   stimulus: '<div class = centerbox><div class = simon_right id = "stim1"></div></div>',
   data: {
     correct_response: correct_responses[0][1],
-    condition: 'right',
-    exp_id: 'simon'
+    condition: 'right'
   },
   key_answer: correct_responses[0][1]
 }, {
   stimulus: '<div class = simon_leftbox><div class = simon_left id = "stim2"></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: 'left',
-    exp_id: 'simon'
+    condition: 'left'
   },
   key_answer: correct_responses[1][1]
 }, {
   stimulus: '<div class = simon_rightbox><div class = simon_right id = "stim2"></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: 'right',
-    exp_id: 'simon'
+    condition: 'right'
   },
   key_answer: correct_responses[1][1]
 }];

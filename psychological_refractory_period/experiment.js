@@ -187,7 +187,6 @@ var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 2
   700
 ], exp_len / 9))
 var curr_data = {
-    exp_id: 'psychological_refractory_period',
     trial_id: '',
     ISI: '',
     gonogo_stim: '',
@@ -230,7 +229,6 @@ var box_number2 =
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'attention_check'
   },
   timing_response: 180000,
@@ -249,7 +247,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'welcome'
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -261,7 +258,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'end'
   },
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
@@ -274,7 +270,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'instruction'
   },
   cont_key: [13],
@@ -287,7 +282,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'instruction'
   },
   pages: [
@@ -330,7 +324,6 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'practice_intro'
   },
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">We will start ' +
@@ -342,7 +335,6 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'test_intro'
   },
   text: '<div class = prp_centerbox><p class ="white-text center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
@@ -360,7 +352,6 @@ var fixation_block = {
   timing_stim: 300,
   timing_response: 300,
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'fixation'
   },
   choices: 'none',
@@ -375,7 +366,6 @@ var practice_block = {
   stimuli: getStim,
   is_html: true,
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'stim',
     exp_stage: 'practice'
   },
@@ -395,7 +385,6 @@ var feedback_block = {
   stimulus: getFB,
   is_html: true,
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'practice_feedback'
   },
   timing_stim: -1,
@@ -412,7 +401,6 @@ var test_block = {
   stimuli: getStim,
   is_html: true,
   data: {
-    exp_id: 'psychological_refractory_period',
     trial_id: 'stim',
     exp_stage: 'test'
   },

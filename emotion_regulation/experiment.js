@@ -212,10 +212,7 @@ var welcome_block = {
   data: {
     trial_id: 'welcome'
   },
-  timing_post_trial: 0,
-  on_finish: function() {
-    $('body').css('background', 'black')
-  }
+  timing_post_trial: 0
 };
 
 var end_block = {

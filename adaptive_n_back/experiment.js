@@ -300,7 +300,6 @@ for (var i = 0; i < num_trials; i++) {
 		choices: [32],
 		timing_stim: 500,
 		timing_response: 2000,
-		response_ends_trial: false,
 		timing_post_trial: 0,
 		on_finish: record_acc
 	};
@@ -343,7 +342,6 @@ for (var b = 0; b < num_blocks; b++) {
 			choices: [32],
 			timing_stim: 500,
 			timing_response: 2000,
-			response_ends_trial: false,
 			timing_post_trial: 0,
 			on_finish: record_acc
 		};

@@ -137,7 +137,6 @@ var stim_array = getStims()
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "spatial_span",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -156,7 +155,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "spatial_span",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -171,7 +169,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "spatial_span",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -183,7 +180,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "spatial_span",
     trial_id: "instruction"
   },
   pages: [
@@ -221,7 +217,6 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "spatial_span",
     trial_id: "end"
   },
   timing_response: 180000,
@@ -236,7 +231,6 @@ var start_test_block = {
   is_html: true,
   stimulus: getTestText,
   data: {
-    exp_id: "spatial_span",
     trial_id: "test_intro"
   },
   choices: 'none',
@@ -249,7 +243,6 @@ var start_test_block = {
 var start_reverse_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "spatial_span",
     trial_id: "start_reverse_intro"
   },
   timing_response: 180000,
@@ -267,7 +260,6 @@ var test_block = {
     ['none']
   ],
   data: {
-    exp_id: "spatial_span",
     trial_id: "stim",
     exp_stage: "test"
   },
@@ -287,7 +279,6 @@ var forward_response_block = {
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
-    exp_id: "spatial_span",
     trial_id: "response",
     exp_stage: "test"
   },
@@ -327,7 +318,6 @@ var reverse_response_block = {
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
-    exp_id: "spatial_span",
     trial_id: "response",
     exp_stage: "test"
   },
@@ -366,7 +356,6 @@ var feedback_block = {
   type: 'poldrack-single-stim',
   stimulus: getFeedback,
   data: {
-    exp_id: "spatial_span",
     trial_id: "feedback",
     exp_stage: "test"
   },

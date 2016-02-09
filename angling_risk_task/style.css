@@ -7,7 +7,9 @@
   margin-right:-50%;
   transform: translate(-50%,-500%);
   border-style: solid;
-  border-color: CadetBlue;
+  border-color: cornflowerblue;
+  padding: 0px 10px 0px 10px;
+  border-radius: 10px;
 }
 
 
@@ -18,9 +20,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,300%);
-  border-style: solid;
-  border-color: CadetBlue;
+  transform: translate(-50%,340%);
 }
 
 .buttonbox select-button:last-child{
@@ -29,28 +29,27 @@
 }
 
 .select-button {
-	width:50%;
-  min-width:0vw;
-	height: 100%;
-	float: left;
-  background: #ECECEC;
-  padding: 10px 20px;
-  font-weight: bold;
-  color:#7f7f7f;
-  text-decoration: none;
-  text-shadow:0px 1px 0px #fff;
-  border:2px solid CadetBlue;
-  margin:0px auto;
-  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
-  -webkit-transition:box-shadow 0.5s;
-  font-size:24px;
-  font-family: 'Helvetica Neue',Arial,sans-serif;
+  width: 46%;
+  height: 100%;
+  font-size:22px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 12px 20px 12px 20px;
+  color: white;
+  background-color:cornflowerblue;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-right: 4%;
 }
 
 .select-button:hover {
-  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 50%);
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  border: 3px solid #FFA07A; 
+  border-color:#999;
+  background-color: darkblue;
 }
 
 .select-button:active {
@@ -87,7 +86,9 @@
   margin-bottom: 10px;
   float:left;
   border-style: solid;
-  border-color: CadetBlue;
+  border-color: cornflowerblue;
+  padding: 0px 10px 0px 10px;
+  border-radius: 10px;
 }
 
 .infotext {
@@ -115,8 +116,9 @@
   margin-right:-50%;
   transform: translate(-50%,-80%);
   border-style: solid;
-  border-color: CadetBlue;
-  background-color: LightBlue
+  border-color: cornflowerblue;
+  background-color: LightBlue;
+  border-radius: 10px;
 }
 
 .cooler {
@@ -128,7 +130,8 @@
   margin-right:-50%;
   transform: translate(235%,-80%);
   border-style: solid;
-  border-color: CadetBlue;
+  border-color: cornflowerblue;
+  border-radius: 10px;
 }
 
 .weatherbox {
@@ -140,7 +143,8 @@
   margin-right:-50%;
   transform: translate(235%,-155%);
   border-style: solid;
-  border-color: CadetBlue;
+  border-color: cornflowerblue;
+  border-radius: 10px;
 }
 
 

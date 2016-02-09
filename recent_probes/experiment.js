@@ -280,7 +280,6 @@ var fileType = '.png'
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -299,7 +298,6 @@ var welcome_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "welcome"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -311,7 +309,6 @@ var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "end"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -324,7 +321,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "instruction"
 	},
 	cont_key: [13],
@@ -337,7 +333,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "instruction"
 	},
 	pages: [
@@ -376,7 +371,6 @@ var start_test_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "test_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>We will now start a test run. Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
@@ -391,7 +385,6 @@ var start_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "fixation",
 		exp_stage: "test"
 	},
@@ -407,7 +400,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "fixation",
 		exp_stage: "test"
 	},
@@ -423,7 +415,6 @@ var ITI_fixation_block = {
 	is_html: true,
 	choices: [37, 39],
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "ITI_fixation",
 		exp_stage: "test"
 	},
@@ -439,7 +430,6 @@ var training_block = {
 	stimulus: getTrainingSet,
 	is_html: true,
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "stim",
 		exp_stage: "test"
 	},
@@ -456,7 +446,6 @@ var probe_block = {
 	stimulus: getProbe,
 	is_html: true,
 	data: {
-		exp_id: "recent_probes",
 		trial_id: "probe",
 		exp_stage: "test"
 	},

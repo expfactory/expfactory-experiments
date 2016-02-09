@@ -91,7 +91,6 @@ var welcome_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'number_letter',
     trial_id: 'welcome'
   },
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
@@ -103,7 +102,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: 'number_letter',
     trial_id: 'end'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -116,7 +114,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'number_letter',
     trial_id: 'instruction'
   },
   cont_key: [13],
@@ -129,7 +126,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'number_letter',
     trial_id: 'instruction'
   },
   pages: [
@@ -181,7 +177,6 @@ for (i = 0; i < half_block_len; i++) {
     is_html: true,
     choices: [37, 39],
     data: {
-      exp_id: 'number_letter',
       trial_id: 'stim',
       exp_stage: 'test',
       stim: stim[0],
@@ -199,7 +194,6 @@ for (i = 0; i < half_block_len; i++) {
     is_html: true,
     choices: [37, 39],
     data: {
-      exp_id: 'number_letter',
       trial_id: 'stim',
       exp_stage: 'test',
       stim: stim[0],
@@ -217,7 +211,6 @@ for (i = 0; i < rotate_block_len; i++) {
     is_html: true,
     choices: [37, 39],
     data: {
-      exp_id: 'number_letter',
       trial_id: 'stim',
       exp_stage: 'test',
       stim: stim[0],

@@ -10,7 +10,7 @@ a match or not
 /* ************************************ */
 function addID() {
 	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'tone_monitoring'
+		'exp_id': 'n_back'
 	})
 }
 
@@ -84,7 +84,6 @@ var control_before = Math.round(Math.random()) //0 control comes before test, 1,
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "n_back",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -103,7 +102,6 @@ var attention_node = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "n_back",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -117,7 +115,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "n_back",
 		trial_id: "instruction"
 	},
 	cont_key: [13],
@@ -130,7 +127,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "n_back",
 		trial_id: "instruction"
 	},
 	pages: [
@@ -168,7 +164,6 @@ var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "n_back",
 		trial_id: "end"
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -179,7 +174,6 @@ var end_block = {
 var start_practice_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "n_back",
 		trial_id: "practice_intro"
 	},
 	timing_response: 180000,
@@ -191,7 +185,6 @@ var start_practice_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "n_back",
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
@@ -204,7 +197,6 @@ var start_control_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "n_back",
 		trial_id: "control_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -221,7 +213,6 @@ for (var i = 0; i < num_trials; i++) {
 		is_html: true,
 		stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 		data: {
-			exp_id: "n_back",
 			trial_id: "stim",
 			exp_stage: "test",
 			load: 0,
@@ -252,7 +243,6 @@ for (var d = 0; d < delays.length; d++) {
 	var start_delay_block = {
 		type: 'poldrack-text',
 		data: {
-			exp_id: "n_back",
 			trial_id: "delay_text"
 		},
 		timing_response: 180000,
@@ -277,7 +267,6 @@ for (var d = 0; d < delays.length; d++) {
 				is_html: true,
 				stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
 				data: {
-					exp_id: "n_back",
 					trial_id: "stim",
 					exp_stage: "test",
 					load: delay,
