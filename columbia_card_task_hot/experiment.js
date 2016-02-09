@@ -594,7 +594,7 @@ var practiceSetup2 =
 var welcome_block = {
 	type: 'poldrack-text',
 	text: "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
-	cont_key: 13,
+	cont_key: [13],
 	data: {
 		exp_id: "columbia_card_task_hot",
 		trial: 'welcome'
@@ -642,7 +642,6 @@ var instructions_block = {
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
 	
-	"<button type='button' class = instructButton onclick= instructFunction()>See Result</button>"+
 	'<div class = centerbox-CCT><p class = block-text><div id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
   	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
@@ -650,6 +649,7 @@ var instructions_block = {
   	"<div class = instructBoxLeft1><div>Loss Amount: 750</div></div>" +
   	"<div class = instructBoxRight1><div># of Loss Cards: 1</div></div>" +
   	"<div class = instructBoxMiddle1><div>Gain Amount: 10</div></div>" +
+	"<button type='button' class = instructButton onclick= instructFunction()>See Result</button>"+
 
   
     "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
@@ -689,7 +689,6 @@ var instructions_block = {
     "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
     '</p></div>',
   
-  	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+
 	'<div class = centerbox-CCT><p class = block-text><div id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
   	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
@@ -697,6 +696,7 @@ var instructions_block = {
   	"<div class = instructBoxLeft1><div>Loss Amount: 250</div></div>" +
   	"<div class = instructBoxRight1><div># of Loss Cards: 3</div></div>" +
   	"<div class = instructBoxMiddle1><div>Gain Amount: 30</div></div>" +
+  	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+
 
   
     "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
@@ -779,6 +779,7 @@ var practice_block = {
 	choices: [37],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
+	response_ends_trial: true,
 };
 
 
@@ -811,6 +812,7 @@ var practice_instruct_block = {
 	choices: [37],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
+	response_ends_trial: true,
 };
 
 var practice_chunk1 = {
@@ -843,6 +845,7 @@ var practice_instruct_block2 = {
 	choices: [37],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
+	response_ends_trial: true,
 };
 
 var practice_chunk2 = {
@@ -883,17 +886,6 @@ var give_total = {
 	timing_post_trial: 0
 };
 
-
-var start_practice_block = {
-	type: 'poldrack-text',
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial_id: 'practice_intro'
-	},
-	text: "<div class = centerbox><p class = center-block-text>Hello <strong>enter</strong> to begin.</p></div>",
-	cont_key: [13],
-	timing_post_trial: 1000
-};
 
 var start_test_block = {
 	type: 'poldrack-text',

@@ -10,7 +10,7 @@
   width:15vw;
   height: 2vw;
   position:absolute;
-  top:25%;
+  top:30%;
   left:20%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
@@ -22,7 +22,7 @@
   width:15vw;
   height: 2vw;
   position:absolute;
-  top:25%;
+  top:30%;
   left:80%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
@@ -35,7 +35,7 @@
   width:30vw;
   height: 5vw;
   position:absolute;
-  top:45%;
+  top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
@@ -46,7 +46,7 @@
   width:15vw;
   height: 2vw;
   position:absolute;
-  top:30%;
+  top:35%;
   left:20%;
   margin-right:-50%;
   transform: translate(-60%,-425%);
@@ -58,7 +58,7 @@
   width:15vw;
   height: 2vw;
   position:absolute;
-  top:30%;
+  top:35%;
   left:80%;
   margin-right:-50%;
   transform: translate(-40%,-425%);
@@ -70,7 +70,7 @@
   width:15vw;
   height: 2vw;
   position:absolute;
-  top:30%;
+  top:35%;
   left:48.75%;
   margin-right:-50%;
   transform: translate(-40%,-425%);
@@ -127,8 +127,8 @@
   width:30vw;
   height: 4.5vw;
   position:absolute;
-  top:17.5%;
-  left:38.75%;
+  top:22.5%;
+  left:36.75%;
   margin-right:-50%;
   transform: translate(0%,0%);
   border-style: solid;
@@ -151,8 +151,8 @@
 }
 
 .numbox {
- width:90vw;
- height: 40vw;
+ width:80.5vw;
+ height: 32.5vw;
  position:absolute;
  top:30%;
  left:8.5%;
@@ -181,18 +181,18 @@
  width:80vw;
  height: 30vw;
  position:absolute;
- top:30%;
- left:5%;
+ top:45%;
+ left:1.25%;
  margin-right:0%;
  transform: translate(-25%,0%);
  background-color: white;
 }
 
 .instructBoxLeft {
-  width:15%;
+  width:17.5%;
   height: 3%;
   position:absolute;
-  top:37.5%;
+  top:50%;
   left:20%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
@@ -201,34 +201,44 @@
 }
 
 .instructBoxRight {
-  width:15%;
+  width:17.5%;
   height: 3%;
   position:absolute;
-  top:37.5%;
+  top:50%;
   left:80%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
   border-style: solid;
   border-color: black;
 }
-
+.practiceBox {
+  width:90%;
+  height: 30%;
+  position:absolute;
+  top:10%;
+  left:2.5%;
+  margin-right:-50%;
+  transform: translate(-0%,-0%);
+  border-style: solid;
+  border-color: white;
+}
 
 .instructBox {
   width:80%;
   height: 8%;
   position:absolute;
-  top:60%;
-  left:75%;
+  top:72.5%;
+  left:73.5%;
   margin-right:-50%;
   transform: translate(-50%,-425%);
 }
 
 
 .instructBoxLeft1 {
-  width:15%;
+  width:17.5%;
   height: 3%;
   position:absolute;
-  top:42.5%;
+  top:55%;
   left:20%;
   margin-right:-50%;
   transform: translate(-60%,-425%);
@@ -237,10 +247,10 @@
 }
 
 .instructBoxRight1 {
-  width:15%;
+  width:17.5%;
   height: 3%;
   position:absolute;
-  top:42.5%;
+  top:55%;
   left:80%;
   margin-right:-50%;
   transform: translate(-40%,-425%);
@@ -249,10 +259,10 @@
 }
 
 .instructBoxMiddle1 {
-  width:15%;
+  width:17.5%;
   height: 3%;
   position:absolute;
-  top:37.5%;
+  top:50%;
   left:48.75%;
   margin-right:-50%;
   transform: translate(-40%,-425%);
@@ -261,13 +271,13 @@
 }
 
 .instructButton {
-  width:1%;
-  height: 2vw;
+  width:10%;
+  height: 3%;
   position:absolute;
-  top:42.5%;
-  left:76.125%;
+  top:47.5%;
+  left:95%;
   margin-right:-50%;
-  transform: translate(-40%,-425%);
+  transform: translate(0%,-425%);
   border-style: solid;
   border-color: black;
 }
@@ -277,7 +287,7 @@
   width:35vw;
   height: 30vw;
   position:absolute;
-  top:45%;
+  top:30%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
@@ -301,7 +311,7 @@
   width:50vw;
   height: 30vw;
   position:absolute;
-  top:35%;
+  top:3%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
@@ -312,7 +322,7 @@
  width:80vw;
  height: 30vw;
  position:absolute;
- top:37.5%;
+ top:60%;
  left:15%;
  margin-right:0%;
  transform: translate(-25%,0%);
@@ -323,10 +333,10 @@
   width:90vw;
   height: 3vw;
   position:absolute;
-  top:32%;
+  top:45%;
   left:0%;
   margin-right:0%;
-  transform: translate(-22.5%,0%);
+  transform: translate(-22.25%,0%);
   border-style: solid;
   border-color: White;
 } 
@@ -350,7 +360,7 @@
   width:70%;
   height: 3%;
   position:absolute;
-  top:22.5%;
+  top:2%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,0%);
