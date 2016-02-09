@@ -62,7 +62,6 @@ for (var b = 0; b < practice_block_num; b++) {
 			stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) +
 				'</div></div>',
 			data: {
-				exp_id: 'letter_memory',
 				trial_id: 'stim',
 				exp_stage: 'practice',
 				condition: 'seq_len_' + num_trials
@@ -83,7 +82,6 @@ for (var b = 0; b < block_num; b++) {
 			stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) +
 				'</div></div>',
 			data: {
-				exp_id: 'letter_memory',
 				trial_id: 'stim',
 				exp_stage: 'test',
 				condition: 'seq_len_' + num_trials
@@ -101,7 +99,6 @@ for (var b = 0; b < block_num; b++) {
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'attention_check'
 	},
 	timing_response: 180000,
@@ -120,7 +117,6 @@ var attention_node = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'welcome'
 	},
 	timing_response: 180000,
@@ -134,7 +130,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'instruction'
 	},
 	cont_key: [13],
@@ -147,7 +142,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'instruction'
 	},
 	pages: [
@@ -185,7 +179,6 @@ var instruction_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'end'
 	},
 	timing_response: 180000,
@@ -197,7 +190,6 @@ var end_block = {
 var start_practice_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'practice_intro'
 	},
 	timing_response: 180000,
@@ -209,7 +201,6 @@ var start_practice_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'letter_memory',
 		trial_id: 'test_intro'
 	},
 	timing_response: 180000,
@@ -245,7 +236,6 @@ for (var b = 0; b < practice_block_num; b++) {
 			['What were the last four letters in the last sequence?']
 		],
 		data: {
-			exp_id: 'letter_memory',
 			trial_id: 'response',
 			exp_stage: 'practice',
 			condition: blocks[b].length
@@ -276,7 +266,6 @@ for (var b = 0; b < block_num; b++) {
 			['What were the last four letters in the last sequence?']
 		],
 		data: {
-			exp_id: 'letter_memory',
 			trial_id: 'response',
 			exp_stage: 'test',
 			condition: blocks[b].length

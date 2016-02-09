@@ -8,7 +8,7 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
-                 "static/js/jspsych/custom_plugins/jspsych-single-stim-button.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                  "experiment.js",
                  "static/css/jspsych.css",
                  "static/css/default_style.css"

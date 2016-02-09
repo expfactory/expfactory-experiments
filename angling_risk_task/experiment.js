@@ -53,6 +53,7 @@ function getGame() {
 	*/
 	if (total_fish_num === 0) {
 		round_over = 0
+		trial_num = 0
 		game_state = game_setup
 		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
 		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
@@ -94,47 +95,39 @@ function getGame() {
 }
 
 function get_data() {
-	/* This records the data AFTER the choice has been made and so the values have all been updated. We are interested
-		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
-		To get this we need to subtract the changes due to this choice.
-	*/
-	if (last_pay == 0.05) {
-		FB = 1
-	} else {
-		FB = 0
-	}
-	return {
+	/* Records state of the world before the person made their choice
+	 */
+	var data = {
 		exp_stage: "test",
 		trial_id: "stim",
-		red_fish_num: red_fish_num + 1,
-		trip_bank: trip_bank - last_pay,
-		FB: FB,
+		red_fish_num: red_fish_num,
+		trip_bank: trip_bank,
 		tournament_bank: tournament_bank,
 		weather: weather,
-		release: release
+		release: release,
+		round_num: round_num,
+		trial_num: trial_num
 	}
+	trial_num += 1
+	return data
 }
 
 function get_practice_data() {
-	/* This records the data AFTER the choice has been made and so the values have all been updated. We are interested
-		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
-		To get this we need to subtract the changes due to this choice.
-	*/
-	if (last_pay == 0.05) {
-		FB = 1
-	} else {
-		FB = 0
-	}
-	return {
+	/* Records state of the world before the person made their choice
+	 */
+	var data = {
 		exp_stage: "practice",
 		trial_id: "stim",
-		red_fish_num: red_fish_num + 1,
-		trip_bank: trip_bank - last_pay,
-		FB: FB,
+		red_fish_num: red_fish_num,
+		trip_bank: trip_bank,
 		tournament_bank: tournament_bank,
 		weather: weather,
-		release: release
+		release: release,
+		round_num: round_num,
+		trial_num: trial_num
 	}
+	trial_num += 1
+	return data
 }
 
 function makeFish(fish_num) {
@@ -148,13 +141,13 @@ function makeFish(fish_num) {
 	red_fish_num = 0
 	total_fish_num = 0
 	filled_areas = [];
+	if (max_x === 0) {
+		min_x = $('.lake').width() * 0.05;
+		min_y = $('.lake').height() * 0.05;
+		max_x = $('.lake').width() * 0.9;
+		max_y = $('.lake').height() * 0.9;
+	}
 	for (i = 0; i < fish_num - 1; i++) {
-		if (max_x === 0) {
-			min_x = $('.lake').width() * 0.05;
-			min_y = $('.lake').height() * 0.05;
-			max_x = $('.lake').width() * 0.9;
-			max_y = $('.lake').height() * 0.9;
-		}
 		red_fish_num += 1
 		if (weather == "Sunny") {
 			$('.lake').append('<div class = redfish id = red_fish' + red_fish_num + '></div>')
@@ -185,6 +178,7 @@ function goFish() {
 			total_fish_num = 0
 			last_pay = 0
 			round_over = 1
+			round_num += 1
 			round_over_text = "You caught the blue fish! You have lost all money collected this round."
 		} else {
 			if (release == "Keep") {
@@ -204,6 +198,7 @@ function goFish() {
 
 function collect() {
 	round_over = 1
+	round_num += 1
 	round_over_text = "You collected the money from the trip bank ($" + trip_bank +
 		") and moved it to your tournament bank."
 		// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
@@ -259,22 +254,20 @@ function place_fish() {
 	/* Places fish in the lake and attempts to overlap them as little as possible. It does this by randomly placing the fish
 	   up to maxSearchIterations times. It stops if it places the fish with no overlap. Otherwise, the fish goes where there is the
 	   least overlap. 
-	
 	*/
 	var index = 0;
 	fish_types = ['redfish', 'bluefish', 'greyfish']
 	for (f = 0; f < fish_types.length; f++) {
 		fish = fish_types[f]
 		$('.' + fish).each(function(index) {
-			var rand_x = 0;
-			var rand_y = 0;
-			var i = 0;
+			var rand_x = 10;
+			var rand_y = 10;
 			var smallest_overlap = '';
 			var best_choice;
 			var area;
-			for (i = 0; i < maxSearchIterations; i++) {
-				rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random() % 1)));
-				rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random() % 1)));
+			for (var i = 0; i < maxSearchIterations; i++) {
+				rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random())));
+				rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random())));
 				area = {
 					x: rand_x,
 					y: rand_y,
@@ -304,7 +297,6 @@ function place_fish() {
 				left: rand_x,
 				top: rand_y
 			});
-
 		});
 	}
 }
@@ -369,6 +361,8 @@ var blocks = jsPsych.randomization.shuffle(blocks)
 var pay = 0.05 //payment for one red fish
 var last_pay = 0 //variable to hold the last amount of money received
 var lake_state = '' //variable for redrawing the board from trial to trial
+var trial_num = 0 // global variable to track the number of trials into a round
+var round_num = 0 // global variable to track the number of rounds into a tournament
 var round_over = 0 //equals 1 if a blue fish is caught or the participant 'collects'
 var round_over_text = '' //Either "You caught the blue fish and lost the money i." or "You collec."
 
@@ -382,19 +376,19 @@ var filled_areas = [];
 
 var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div></div>" +
 	"<div class = lake></div>" +
-	"<div class = cooler><p class = info-text>&nbsp&nbsp<strong>Red Fish in Cooler: </strong></p></div>" +
+	"<div class = cooler><p class = info-text>&nbsp<strong>Red Fish in Cooler: </strong></p></div>" +
 	"<div class = weatherbox><div class = center-text id = weathertext></div></div>" +
 	"<div class = infocontainer>" +
 	"<div class = subinfocontainer>" +
-	"<div class = infobox><p class = info-text id = red_count>&nbsp&nbsp<strong># Red Fish in lake: </strong></p></div>" +
-	"<div class = infobox><p class = info-text id = blue_count>&nbsp&nbsp<strong># Blue Fish in lake: </strong></p></div>" +
+	"<div class = infobox><p class = info-text id = red_count>&nbsp<strong># Red Fish in lake: </strong></p></div>" +
+	"<div class = infobox><p class = info-text id = blue_count>&nbsp<strong># Blue Fish in lake: </strong></p></div>" +
 	"</div>" +
 	"<div class = subimgcontainer>" +
 	"<div class = imgbox></div>" +
 	"</div>" +
 	"<div class = subinfocontainer>" +
-	"<div class = infobox><p class = info-text id = trip_bank>&nbsp&nbsp<strong>Trip Bank: </strong>$</p></div> " +
-	"<div class = infobox><p class = info-text id = tournament_bank>&nbsp&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
+	"<div class = infobox><p class = info-text id = trip_bank>&nbsp<strong>Trip Bank: </strong>$</p></div> " +
+	"<div class = infobox><p class = info-text id = tournament_bank>&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
 	"</div>" +
 	"</div>" +
 	"<div class = buttonbox><button id = 'goFish' class = select-button onclick = goFish()>Go Fish</button><button id = 'Collect' class = select-button onclick = collect()>Collect</button></div>"
@@ -513,7 +507,7 @@ var ask_fish_block = {
 	},
 	questions: [
 		[
-			"<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"
+			"<p>For this tournament, how many red fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of red fish will be randomly set between 1-200.</p>"
 		]
 	],
 }
@@ -527,7 +521,7 @@ var set_fish_block = {
 	func: function() {
 		var last_data = jsPsych.data.getData().slice(-1)[0]
 		var last_response = parseInt(last_data.responses.slice(7, 10))
-		start_fish_num = last_response
+		start_fish_num = last_response + 1
 		if (isNaN(start_fish_num) || start_fish_num > 200 || start_fish_num < 0) {
 			start_fish_num = Math.floor(Math.random() * 200) + 1
 		}
@@ -540,7 +534,12 @@ var practice_block = {
 	stimulus: getGame,
 	button_class: 'select-button',
 	data: get_practice_data,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			'pay_on_trial': last_pay
+		})
+	}
 };
 
 
@@ -560,7 +559,12 @@ var game_block = {
 	stimulus: getGame,
 	button_class: 'select-button',
 	data: get_data,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			'pay_on_trial': last_pay
+		})
+	}
 };
 
 var game_node = {
@@ -573,6 +577,17 @@ var game_node = {
 		}
 	}
 }
+
+var start_test_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "test_intro"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	cont_key: [13],
+	timing_post_trial: 1000
+};
 
 angling_risk_task_experiment = []
 angling_risk_task_experiment.push(welcome_block)
@@ -603,12 +618,14 @@ for (b = 0; b < practiceblocks.length; b++) {
 		data: {
 			weather: weather,
 			release: release,
-			trial_id: "practice_intro"
+			exp_stage: "practice",
+			trial_id: "intro"
 		},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
 			tournament_bank = 0
+			round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block_practice)
@@ -620,20 +637,21 @@ for (b = 0; b < practiceblocks.length; b++) {
 	}
 }
 
+angling_risk_task_experiment.push(start_test_block)
 for (b = 0; b < blocks.length; b++) {
 	block = blocks[b]
 	weather = block.weather
 	release = block.release
 	if (weather == "Sunny") {
-		start_fish_num = 128
 		weather_rule = "you can see how many fish are in the lake"
 	} else {
-		start_fish_num = 65
 		weather_rule = "you won't be able to see how many fish are in the lake"
 	}
 	if (release == "Keep") {
+		start_fish_num = 128
 		release_rule = "the fish you catch comes out of the lake"
 	} else {
+		start_fish_num = 65
 		release_rule = "the number of fish in the lake stays the same"
 	}
 	var tournament_intro_block = {
@@ -648,17 +666,19 @@ for (b = 0; b < blocks.length; b++) {
 		data: {
 			weather: weather,
 			release: release,
-			trial_id: "test_intro"
+			start_fish_num: start_fish_num,
+			trial_id: "intro",
+			exp_stage: "test"
 		},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
+			start_fish_num = data.start_fish_num
 			tournament_bank = 0
+			round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block)
-	angling_risk_task_experiment.push(ask_fish_block)
-	angling_risk_task_experiment.push(set_fish_block)
 	for (i = 0; i < num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)

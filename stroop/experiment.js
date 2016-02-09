@@ -70,7 +70,6 @@ var instructTimeThresh = 0 ///in seconds
 var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 82
 	},
@@ -78,7 +77,6 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 66
 	},
@@ -86,7 +84,6 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'congruent',
 		correct_response: 71
 	},
@@ -96,7 +93,6 @@ var congruent_stim = [{
 var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 82
 	},
@@ -104,7 +100,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 82
 	},
@@ -112,7 +107,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 66
 	},
@@ -120,7 +114,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 66
 	},
@@ -128,7 +121,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 71
 	},
@@ -136,7 +128,6 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>',
 	data: {
-		exp_id: 'stroop',
 		condition: 'incongruent',
 		correct_response: 71
 	},
@@ -156,7 +147,6 @@ test_stims = jsPsych.randomization.repeat(stims, exp_len / 12, true)
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "stroop",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -175,7 +165,6 @@ var attention_node = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -193,7 +182,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "instruction"
 	},
 	cont_key: [13],
@@ -206,7 +194,6 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "stroop",
 		trial_id: "instruction"
 	},
 	pages: [
@@ -244,7 +231,6 @@ var instruction_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -256,7 +242,6 @@ var end_block = {
 var start_practice_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "practice_intro"
 	},
 	timing_response: 180000,
@@ -268,7 +253,6 @@ var start_practice_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
@@ -283,7 +267,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stroop",
 		trial_id: "fixation"
 	},
 	timing_post_trial: 500,

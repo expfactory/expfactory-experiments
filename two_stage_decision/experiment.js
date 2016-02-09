@@ -376,21 +376,21 @@ var curr_colors = practice_colors
 //The first two stims are first-stage stims.
 //The next four are second-stage
 var test_images = jsPsych.randomization.repeat(
-	["static/experiments/two_stage_decision/images/11.png",
-		"static/experiments/two_stage_decision/images/12.png",
-		"static/experiments/two_stage_decision/images/13.png",
-		"static/experiments/two_stage_decision/images/14.png",
-		"static/experiments/two_stage_decision/images/15.png",
-		"static/experiments/two_stage_decision/images/16.png",
+	["/static/experiments/two_stage_decision/images/11.png",
+		"/static/experiments/two_stage_decision/images/12.png",
+		"/static/experiments/two_stage_decision/images/[13].png",
+		"/static/experiments/two_stage_decision/images/14.png",
+		"/static/experiments/two_stage_decision/images/15.png",
+		"/static/experiments/two_stage_decision/images/16.png",
 	], 1)
 
 var practice_images = jsPsych.randomization.repeat(
-	["static/experiments/two_stage_decision/images/80.png",
-		"static/experiments/two_stage_decision/images/81.png",
-		"static/experiments/two_stage_decision/images/82.png",
-		"static/experiments/two_stage_decision/images/83.png",
-		"static/experiments/two_stage_decision/images/84.png",
-		"static/experiments/two_stage_decision/images/85.png",
+	["/static/experiments/two_stage_decision/images/80.png",
+		"/static/experiments/two_stage_decision/images/81.png",
+		"/static/experiments/two_stage_decision/images/82.png",
+		"/static/experiments/two_stage_decision/images/83.png",
+		"/static/experiments/two_stage_decision/images/84.png",
+		"/static/experiments/two_stage_decision/images/85.png",
 	], 1)
 
 var curr_images = practice_images
@@ -479,7 +479,7 @@ var instructions_block = {
 		"'></img></div><div class = decision-right style='background:" + curr_colors[0] +
 		"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div></div>",
 		'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p></div>',
-		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom brings you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
+		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
 		'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or not on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
 		'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
 		'<div class = centerbox><p class = block-text>After you press "Next" we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'

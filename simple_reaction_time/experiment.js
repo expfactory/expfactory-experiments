@@ -56,7 +56,6 @@ stim = '<div class = shapebox><div id = cross></div></div>'
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -68,7 +67,6 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "end"
   },
   timing_response: 180000,
@@ -82,7 +80,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -95,7 +92,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "instruction"
   },
   pages: [
@@ -135,7 +131,6 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "practice_intro"
   },
   timing_response: 180000,
@@ -147,7 +142,6 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "test_intro"
   },
   timing_response: 180000,
@@ -159,7 +153,6 @@ var start_test_block = {
 var reset_block = {
   type: 'call-function',
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "reset_trial"
   },
   func: function() {
@@ -177,7 +170,6 @@ var practice_block = {
   response_ends_trial: false,
   is_html: true,
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "stim",
     exp_stage: "practice"
   },
@@ -195,7 +187,6 @@ var test_block = {
   response_ends_trial: false,
   is_html: true,
   data: {
-    exp_id: "simple_reaction_time",
     trial_id: "stim",
     exp_stage: "test"
   },

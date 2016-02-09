@@ -72,7 +72,6 @@ for (var i = 0; i < num_trials; i++) {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "random_number_generation",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -86,7 +85,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "random_number_generation",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -99,7 +97,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "random_number_generation",
     trial_id: "instruction"
   },
   pages: [
@@ -139,7 +136,6 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "random_number_generation",
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -151,7 +147,6 @@ var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "random_number_generation",
     trial_id: "practice_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -163,7 +158,6 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "random_number_generation",
     trial_id: "test_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -177,7 +171,6 @@ var wait_block = {
   choices: 'none',
   is_html: true,
   data: {
-    exp_id: "random_number_generation",
     trial_id: "wait"
   },
   timing_stim: 200,
@@ -194,10 +187,9 @@ random_number_generation_experiment.push(start_practice_block);
 for (var i = 0; i < practice_stims.length; i++) {
   var practice_block = {
     type: 'single-stim-button',
-    stimuli: [practice_stims[i]],
+    stimulus: practice_stims[i],
     button_class: 'num-button',
     data: {
-      exp_id: "random_number_generation",
       trial_id: "stim",
       exp_stage: "practice"
     },
@@ -213,10 +205,9 @@ random_number_generation_experiment.push(start_test_block);
 for (var i = 0; i < practice_stims.length; i++) {
   var test_block = {
     type: 'single-stim-button',
-    stimuli: [test_stims[i]],
+    stimulus: test_stims[i],
     button_class: 'num-button',
     data: {
-      exp_id: "random_number_generation",
       trial_id: "stim",
       exp_stage: "test"
     },

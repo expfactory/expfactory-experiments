@@ -113,7 +113,6 @@ for (c = 0; c < task_colors.length; c++) {
       stim.push(prefix + path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +
         's.png' + postfix)
       data.push({
-        exp_id: 'local_global',
         condition: condition,
         global_shape: task_shapes[g],
         local_shape: task_shapes[l]
@@ -138,7 +137,6 @@ var test_trials = makeTrialList(96, stim, data)
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "local_global",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -157,7 +155,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "local_global",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -169,7 +166,6 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "local_global",
     trial_id: "end"
   },
   timing_response: 180000,
@@ -184,7 +180,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "local_global",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -196,7 +191,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "local_global",
     trial_id: "instruction"
   },
   pages: [
@@ -245,7 +239,6 @@ var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "local_global",
     trial_id: "practice_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
@@ -257,7 +250,6 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "local_global",
     trial_id: "test_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
@@ -271,7 +263,6 @@ var practice_block = {
   timeline: practice_trials,
   is_html: true,
   data: {
-    exp_id: "local_global",
     trial_id: "stim",
     exp_stage: "practice"
   },
@@ -289,7 +280,6 @@ var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
   data: {
-    exp_id: "local_global",
     trial_id: "stim",
     exp_stage: "test"
   },

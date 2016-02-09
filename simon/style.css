@@ -24,3 +24,7 @@
   margin-right:-50%;
   transform: translate(100%,-50%);
 }
+
+.responded {
+  visibility: hidden;
+}
