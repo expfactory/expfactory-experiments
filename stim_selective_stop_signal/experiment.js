@@ -647,7 +647,7 @@ for (b = 0; b < numblocks; b++) {
       stimulus: block.stimulus[i],
       SS_stimulus: stop_signal,
       SS_trial_type: stop_trial,
-      data: stimdata,
+      data: stim_data,
       is_html: true,
       choices: [possible_responses[0][1], possible_responses[1][1]],
       timing_stim: 850,
@@ -668,8 +668,7 @@ for (b = 0; b < numblocks; b++) {
     stop_signal_exp_block.push(stop_signal_block)
   }
 
-  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(
-    stop_signal_exp_block)
+  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(stop_signal_exp_block)
   if ($.inArray(b, [0, 1, 4]) != -1) {
     stim_selective_stop_signal_experiment.push(attention_node)
   }
