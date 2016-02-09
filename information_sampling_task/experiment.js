@@ -312,6 +312,7 @@ var instructionFunction = function(clicked_id) {
 }
 
 var makeInstructChoice = function(clicked_id) {
+	console.log(clicked_id)
 	if (clicked_id == 26) {
 		reward =
 			'<div class = centerbox><p class = center-block-text>Correct! You have won 100 points!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>'
@@ -524,8 +525,8 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares squares, you will see two larger colored squares.</p></div>',
-		'<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out which color holds the majority in the smaller squares.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares, you will see two larger colored squares.</p></div>',
+		'<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out whether the majority of the smaller squares match the color of the large left square or the large right square.</p></div>',
 		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want to make your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
 	],
 
@@ -581,6 +582,7 @@ var subjectPracticeBlock = {
 	},
 	choices: [37],
 	timing_post_trial: 500,
+	response_ends_trial: true,
 };
 
 
@@ -592,7 +594,7 @@ var start_test_block = {
 	},
 	text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
 };
 
 
@@ -609,6 +611,7 @@ var practice_block = {
 	choices: [37],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
+	response_ends_trial: true,
 };
 
 var DW_intro_block = {
@@ -617,7 +620,7 @@ var DW_intro_block = {
 		exp_id: "information_sampling_task",
 		trial_id: "DW_condition_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
@@ -628,7 +631,7 @@ var FW_intro_block = {
 		exp_id: "information_sampling_task",
 		trial_id: "FW_condition_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision losses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
@@ -647,6 +650,7 @@ var rewardFW_block = {
 	choices: [13],
 	timing_post_trial: 1000,
 	on_finish: appendRewardDataFW,
+	response_ends_trial: true,
 };
 
 var rewardDW_block = {
@@ -661,6 +665,7 @@ var rewardDW_block = {
 	choices: [13],
 	timing_post_trial: 1000,
 	on_finish: appendRewardDataDW,
+	response_ends_trial: true,
 };
 
 
@@ -676,6 +681,7 @@ var subjectRewardBlock = {
 	},
 	choices: [13],
 	timing_post_trial: 1000,
+	response_ends_trial: true,
 	on_finish: function() {
 		clickedCards = []
 	}
