@@ -121,8 +121,9 @@ var test_stimuli_block = [{
 
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 10);
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);   
+
 
 
 /* ************************************ */

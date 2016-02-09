@@ -668,6 +668,8 @@ for (b = 0; b < blocks.length; b++) {
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_experiment.push(ask_fish_block)
+	angling_risk_task_experiment.push(set_fish_block)
 	for (i = 0; i < num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)

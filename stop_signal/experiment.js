@@ -209,8 +209,8 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 
 //number of blocks per condition
 var test_block_len = 60
-numconditions = 2
-numblocks = 5
+numconditions = 1 //2
+numblocks = 2  //5
 condition_blocks = []
 for (j = 0; j < numconditions; j++) {
 	blocks = []

@@ -275,7 +275,7 @@ var test_block = {
 
 
 var forward_response_block = {
-  type: 'poldrack-single-stim-button',
+  type: 'single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
@@ -314,7 +314,7 @@ var forward_response_block = {
 }
 
 var reverse_response_block = {
-  type: 'poldrack-single-stim-button',
+  type: 'single-stim-button',
   stimulus: response_grid,
   button_class: 'submit_button',
   data: {
