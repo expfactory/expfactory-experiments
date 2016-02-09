@@ -75,16 +75,11 @@ var getStim = function() {
 
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
-  var position_array = ['shift_left', 'shift_middle', 'shift_right']
   var choice = choices.indexOf(last_trial.key_press)
-  jsPsych.data.addDataToLastTrial({
-    stims: JSON.stringify(stims),
-    choice: JSON.stringify(stims[choice])
-  })
   var image;
   var feedback_text;
   if (choice != -1) {
-    image = '<div class = ' + position_array[choice] + '><img class = shift_stim src = ' +
+    image = '<div class = shift_' + position_array[choice] + '><img class = shift_stim src = ' +
       stim_htmls[choice] + ' width = "50%" </img></div>'
     feedback_text = 'You won 0 points.'
     if (image.indexOf(rewarded_feature) != -1 && Math.random() > 0.25) {
@@ -113,8 +108,9 @@ var instructTimeThresh = 0 ///in seconds
 var choices = [37, 40, 39]
 var current_trial = 0
 var exp_len = 410
-var practice_len = 90
+var practice_len = 65
 var total_points = 0 //tracks points earned during test
+var position_array = ['left', 'middle', 'right']
 
 // stim variables
 var stim_att = {
@@ -146,8 +142,8 @@ while (shift_types[0] == 'reversal') {
   shift_types[0] = tmp
 }
 // Add on practice switches/shifts
-switch_bounds.unshift(25, 24, 16, 25)
-shift_types.unshift('extra', 'intra', 'extra', 'intra')
+switch_bounds.unshift(25, 24, 16)
+shift_types.unshift('extra', 'intra', 'extra')
 
 // set first shift_type/switch_bound
 var shift_type = shift_types.shift()
@@ -217,10 +213,10 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div>' +
-    getStim(),
+    getStim() +
+    '<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div><div class = navBox></div>',
     '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>One feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>',
-    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. This task is fairly long (should take ~ 20 minutes) so there will be a number of breaks throughout. We will start with a practice session.'
+    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session.'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -332,11 +328,19 @@ var practice_stim_block = {
   timing_stim: 1000,
   timing_response: 1000,
   timing_post_trial: 0,
-  on_finish: function() {
+  response_ends_trial: true,
+  on_finish: function(data) {
+    var choice = choices.indexOf(data.key_press)
+    var choice_stim = -1
+    if (choice != -1) {
+      choice_stim = JSON.stringify(stims[choice])
+    }
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
       trial_id: "stim",
-      exp_stage: "practice"
+      exp_stage: "practice",
+      stims: JSON.stringify(stims),
+      choice_stim: choice_stim,
+      choice_position: position_array[choice]
     })
   }
 };
@@ -350,11 +354,15 @@ var stim_block = {
   timing_stim: 1000,
   timing_response: 1000,
   timing_post_trial: 0,
+  response_ends_trial: true,
   on_finish: function() {
+    var choice = choices.indexOf(data.key_press)
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
       trial_id: "stim",
-      exp_stage: "test"
+      exp_stage: "test",
+      stims: JSON.stringify(stims),
+      choice_stim: JSON.stringify(stims[choice]),
+      choice_position: position_array[choice]
     })
   }
 };
@@ -375,7 +383,6 @@ var practice_feedback_block = {
       FB = 1
     }
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
       trial_id: "feedback",
       exp_stage: "practice",
       FB: FB
@@ -422,7 +429,6 @@ var feedback_block = {
       FB = 1
     }
     jsPsych.data.addDataToLastTrial({
-      exp_id: "shift",
       trial_id: "feedback",
       exp_stage: "test",
       FB: FB
