@@ -6,6 +6,17 @@ function getDisplayElement() {
   return $('<div class = display_stage></div>').appendTo('body')
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({
+    exp_id: 'multiplication'
+  })
+}
+
+var getInstructFeedback = function() {
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
+    '</p></div>'
+}
+
 var get_response_time = function() {
   return response_time;
 }
@@ -28,10 +39,6 @@ var submit = function() {
   response = $('input:text').val()
 }
 
-var getInstructFeedback = function() {
-  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
-    '</p></div>'
-}
 
 /* ************************************ */
 /* Define experimental variables */
