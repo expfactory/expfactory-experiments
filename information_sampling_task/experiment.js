@@ -128,7 +128,6 @@ var getRound = function() {
 }
 
 
-
 var chooseCard = function(clicked_id) {
 	tempID = clicked_id
 	roundOver = 1
@@ -211,6 +210,7 @@ var resetRound = function() {
 	DWPoints = 250
 	FWPoints = 0
 	roundOver = 0
+	numCardReward = []
 	numClicks = 0
 	clickedCardsColor1 = [] //color1
 	clickedCardsColor2 = [] //color2
@@ -257,11 +257,10 @@ var resetRound = function() {
 
 }
 
-
 var getRewardFW = function() {
 	global_trial = jsPsych.progress().current_trial_global
-	lastAnswer = jsPsych.data.getData()[global_trial - 1].clicked_on
-	correctAnswer = jsPsych.data.getData()[global_trial - 1].correct_response
+	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).clicked_on
+	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
 	if (lastAnswer == correctAnswer) {
 		totFWPoints = totFWPoints + 100
 		reward = 100
@@ -276,10 +275,13 @@ var getRewardFW = function() {
 
 var getRewardDW = function() {
 	global_trial = jsPsych.progress().current_trial_global
-	lastAnswer = jsPsych.data.getData()[global_trial - 1].clicked_on
-	correctAnswer = jsPsych.data.getData()[global_trial - 1].correct_response
+	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).clicked_on
+	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
+		$.each(clickedCards, function(i, el){
+    	if($.inArray(el, numCardReward) === -1) numCardReward.push(el);
+		});
 	if (lastAnswer == correctAnswer) {
-		clicks = numClicks - 1
+		clicks = numCardReward.length
 		lossPoints = clicks * 10
 		DWPoints = DWPoints - lossPoints
 		reward = DWPoints
@@ -312,7 +314,6 @@ var instructionFunction = function(clicked_id) {
 }
 
 var makeInstructChoice = function(clicked_id) {
-	console.log(clicked_id)
 	if (clicked_id == 26) {
 		reward =
 			'<div class = centerbox><p class = center-block-text>Correct! You have won 100 points!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>'
@@ -361,6 +362,7 @@ var DWPoints = 250
 var FWPoints = 0
 var roundOver = 0
 var numClicks = 0
+var numCardReward = []
 var colors = jsPsych.randomization.repeat(['green', 'red', 'blue', 'teal', 'yellow', 'orange',
 	'purple', 'brown'
 ], 1)
