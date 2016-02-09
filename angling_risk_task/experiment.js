@@ -575,7 +575,6 @@ var game_node = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stroop",
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
