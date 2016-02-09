@@ -53,6 +53,7 @@ function getGame() {
 	*/
 	if (total_fish_num === 0) {
 		round_over = 0
+		trial_num = 0
 		game_state = game_setup
 		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
 		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
@@ -94,47 +95,39 @@ function getGame() {
 }
 
 function get_data() {
-	/* This records the data AFTER the choice has been made and so the values have all been updated. We are interested
-		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
-		To get this we need to subtract the changes due to this choice.
-	*/
-	if (last_pay == 0.05) {
-		FB = 1
-	} else {
-		FB = 0
-	}
-	return {
+	/* Records state of the world before the person made their choice
+	 */
+	var data = {
 		exp_stage: "test",
 		trial_id: "stim",
-		red_fish_num: red_fish_num + 1,
-		trip_bank: trip_bank - last_pay,
-		FB: FB,
+		red_fish_num: red_fish_num,
+		trip_bank: trip_bank,
 		tournament_bank: tournament_bank,
 		weather: weather,
-		release: release
+		release: release,
+		round_num: round_num,
+		trial_num: trial_num
 	}
+	trial_num += 1
+	return data
 }
 
 function get_practice_data() {
-	/* This records the data AFTER the choice has been made and so the values have all been updated. We are interested
-		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
-		To get this we need to subtract the changes due to this choice.
-	*/
-	if (last_pay == 0.05) {
-		FB = 1
-	} else {
-		FB = 0
-	}
-	return {
+	/* Records state of the world before the person made their choice
+	 */
+	var data = {
 		exp_stage: "practice",
 		trial_id: "stim",
-		red_fish_num: red_fish_num + 1,
-		trip_bank: trip_bank - last_pay,
-		FB: FB,
+		red_fish_num: red_fish_num,
+		trip_bank: trip_bank,
 		tournament_bank: tournament_bank,
 		weather: weather,
-		release: release
+		release: release,
+		round_num: round_num,
+		trial_num: trial_num
 	}
+	trial_num += 1
+	return data
 }
 
 function makeFish(fish_num) {
@@ -185,6 +178,7 @@ function goFish() {
 			total_fish_num = 0
 			last_pay = 0
 			round_over = 1
+			round_num += 1
 			round_over_text = "You caught the blue fish! You have lost all money collected this round."
 		} else {
 			if (release == "Keep") {
@@ -204,6 +198,7 @@ function goFish() {
 
 function collect() {
 	round_over = 1
+	round_num += 1
 	round_over_text = "You collected the money from the trip bank ($" + trip_bank +
 		") and moved it to your tournament bank."
 		// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
@@ -273,7 +268,6 @@ function place_fish() {
 			for (var i = 0; i < maxSearchIterations; i++) {
 				rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random())));
 				rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random())));
-				console.log(rand_x, rand_y)
 				area = {
 					x: rand_x,
 					y: rand_y,
@@ -367,6 +361,8 @@ var blocks = jsPsych.randomization.shuffle(blocks)
 var pay = 0.05 //payment for one red fish
 var last_pay = 0 //variable to hold the last amount of money received
 var lake_state = '' //variable for redrawing the board from trial to trial
+var trial_num = 0 // global variable to track the number of trials into a round
+var round_num = 0 // global variable to track the number of rounds into a tournament
 var round_over = 0 //equals 1 if a blue fish is caught or the participant 'collects'
 var round_over_text = '' //Either "You caught the blue fish and lost the money i." or "You collec."
 
@@ -538,7 +534,12 @@ var practice_block = {
 	stimulus: getGame,
 	button_class: 'select-button',
 	data: get_practice_data,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			'pay_on_trial': last_pay
+		})
+	}
 };
 
 
@@ -558,7 +559,12 @@ var game_block = {
 	stimulus: getGame,
 	button_class: 'select-button',
 	data: get_data,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			'pay_on_trial': last_pay
+		})
+	}
 };
 
 var game_node = {
@@ -612,12 +618,14 @@ for (b = 0; b < practiceblocks.length; b++) {
 		data: {
 			weather: weather,
 			release: release,
-			trial_id: "practice_intro"
+			exp_stage: "practice",
+			trial_id: "intro"
 		},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
-			tournament_bank = 0
+			tournament_bank = 0,
+				round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block_practice)
@@ -635,15 +643,15 @@ for (b = 0; b < blocks.length; b++) {
 	weather = block.weather
 	release = block.release
 	if (weather == "Sunny") {
-		start_fish_num = 128
 		weather_rule = "you can see how many fish are in the lake"
 	} else {
-		start_fish_num = 65
 		weather_rule = "you won't be able to see how many fish are in the lake"
 	}
 	if (release == "Keep") {
+		start_fish_num = 128
 		release_rule = "the fish you catch comes out of the lake"
 	} else {
+		start_fish_num = 65
 		release_rule = "the number of fish in the lake stays the same"
 	}
 	var tournament_intro_block = {
@@ -658,17 +666,19 @@ for (b = 0; b < blocks.length; b++) {
 		data: {
 			weather: weather,
 			release: release,
-			trial_id: "test_intro"
+			start_fish_num: start_fish_num,
+			trial_id: "intro",
+			exp_stage: "test"
 		},
 		on_finish: function(data) {
 			weather = data.weather
 			release = data.release
-			tournament_bank = 0
+			start_fish_num = data.start_fish_num
+			tournament_bank = 0,
+				round_num = 0
 		}
 	}
 	angling_risk_task_experiment.push(tournament_intro_block)
-	angling_risk_task_experiment.push(ask_fish_block)
-	angling_risk_task_experiment.push(set_fish_block)
 	for (i = 0; i < num_rounds; i++) {
 		angling_risk_task_experiment.push(game_node)
 		angling_risk_task_experiment.push(round_over_block)
