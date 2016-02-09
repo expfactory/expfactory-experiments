@@ -52,11 +52,10 @@ var appendProbeData = function() {
 		stim: [probe, probeType],
 		trial_num: currTrial
 	})
-	currTrial = currTrial + 1
 	global_trial = jsPsych.progress().current_trial_global
-	currSet = jsPsych.data.getData()[global_trial - 2].stim
-	whichProbe = jsPsych.data.getData()[global_trial].stim[0]
-	keyPress = jsPsych.data.getData()[global_trial].key_press
+	currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	whichProbe = jsPsych.data.getDataByTrialIndex(global_trial).stim[0]
+	keyPress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
 	if ((currSet.indexOf(whichProbe, 0) != -1) && (keyPress == 37)) {
 		jsPsych.data.addDataToLastTrial({
 			correct: 1
@@ -89,6 +88,16 @@ var appendFixData = function() {
 	})
 };
 
+var appendFixData2 = function() {
+	jsPsych.data.addDataToLastTrial({
+		trial_num: currTrial
+	})
+	currTrial=currTrial+1
+};
+
+var resetTrial = function() {
+	currTrial = 0
+}
 
 
 //returns the divs for training sets.  this algorithm also chooses the training set based on the rules given in the paper(training sets are 
@@ -118,7 +127,7 @@ var getTrainingSet = function() {
 
 	} else if (currTrial == 1) {
 		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getData()[global_trial - 5].stim, 1)
+		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial - 5).stim, 1)
 		tempNewStims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
 		})
@@ -148,8 +157,8 @@ var getTrainingSet = function() {
 
 	} else if (currTrial > 1) {
 		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getData()[global_trial - 5].stim, 1)
-		preceeding2stims = jsPsych.randomization.repeat(jsPsych.data.getData()[global_trial - 10].stim,
+		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial - 5).stim, 1)
+		preceeding2stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial - 10).stim,
 			1)
 		tempNewStims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
@@ -185,7 +194,7 @@ var getTrainingSet = function() {
 var getProbe = function() {
 	global_trial = jsPsych.progress().current_trial_global
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	currSet = jsPsych.data.getData()[global_trial - 2].stim
+	currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
 	if (currTrial === 0) {
 		temp = Math.floor(Math.random() * 2)
 		if (temp == 1) {
@@ -206,7 +215,7 @@ var getProbe = function() {
 				'"></img></div>'
 		}
 	} else if (currTrial > 0) {
-		lastSet = jsPsych.data.getData()[global_trial - 7].stim
+		lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 7).stim
 		probeType = probeTypeArray.pop()
 		if (probeType == 'rec_pos') {
 			recProbes = lastSet.filter(function(y) {
@@ -372,7 +381,8 @@ var start_test_block = {
 	},
 	text: '<div class = centerbox><p class = block-text>We will now start a test run. Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: resetTrial,
 };
 
 var start_fixation_block = {
@@ -419,9 +429,9 @@ var ITI_fixation_block = {
 	},
 	response_ends_trial: false,
 	timing_post_trial: 0,
-	timing_stim: 4000,
-	timing_response: 4000,
-	on_finish: appendFixData
+	timing_stim: 5000,
+	timing_response: 5000,
+	on_finish: appendFixData2
 }
 
 var training_block = {
@@ -435,8 +445,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2000,
-	timing_response: 2000,
+	timing_stim: 2500,
+	timing_response: 2500,
 	on_finish: appendTestData,
 };
 
