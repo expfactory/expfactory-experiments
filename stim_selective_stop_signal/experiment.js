@@ -610,13 +610,13 @@ stim_selective_stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 // Loop through the multiple blocks within each condition
-for (b = 0; b < numblocks; b++) {
+for (var b = 0; b < numblocks; b++) {
   stop_signal_exp_block = []
   var block = blocks[b]
   var stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go', 'go', 'go'],
       test_block_len / 5)
     // Loop through each trial within the block
-  for (i = 0; i < test_block_len; i++) {
+  for (var i = 0; i < test_block_len; i++) {
     stop_signal_exp_block.push(fixation_block)
       //Label each trial as an ignore, stop or go trial
     var stim_data = $.extend({}, block.data[i])

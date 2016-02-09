@@ -101,7 +101,6 @@ var test_trials = jsPsych.randomization.repeat(test_stimuli, 25);
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "simon",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -120,7 +119,6 @@ var attention_node = {
 var welcome_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simon",
     trial_id: "welcome"
   },
   timing_response: 180000,
@@ -134,7 +132,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simon",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -147,7 +144,6 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "simon",
     trial_id: "instruction"
   },
   pages: [
@@ -187,7 +183,6 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "simon",
     trial_id: "end"
   },
   timing_response: 180000,
@@ -200,7 +195,6 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "simon",
     trial_id: "test_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Press <strong>enter</strong> to begin.</p></div>',
@@ -211,7 +205,6 @@ var start_test_block = {
 var reset_block = {
   type: 'call-function',
   data: {
-    exp_id: "simon",
     trial_id: "reset_trial"
   },
   func: function() {
@@ -226,11 +219,10 @@ var practice_block = {
   timeline: practice_trials,
   is_html: true,
   data: {
-    exp_id: "simon",
     trial_id: "stim",
     exp_stage: "practice"
   },
-  correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
+  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: [37, 39],
@@ -247,7 +239,6 @@ var test_block = {
   type: 'poldrack-single-stim',
   timeline: test_trials,
   data: {
-    exp_id: "simon",
     trial_id: "stim",
     exp_stage: "test"
   },

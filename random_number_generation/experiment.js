@@ -187,7 +187,7 @@ random_number_generation_experiment.push(start_practice_block);
 for (var i = 0; i < practice_stims.length; i++) {
   var practice_block = {
     type: 'single-stim-button',
-    stimuli: [practice_stims[i]],
+    stimulus: practice_stims[i],
     button_class: 'num-button',
     data: {
       trial_id: "stim",
@@ -205,7 +205,7 @@ random_number_generation_experiment.push(start_test_block);
 for (var i = 0; i < practice_stims.length; i++) {
   var test_block = {
     type: 'single-stim-button',
-    stimuli: [test_stims[i]],
+    stimulus: test_stims[i],
     button_class: 'num-button',
     data: {
       trial_id: "stim",
