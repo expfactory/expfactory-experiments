@@ -432,7 +432,6 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
     timing_post_trial: 0,
     timing_stim: 850,
     timing_response: 1850,
-    response_ends_trial: false,
     prompt: prompt_text,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({
@@ -514,7 +513,6 @@ for (i = 0; i < practice_block_len; i++) {
     choices: [possible_responses[0][1], possible_responses[1][1]],
     timing_stim: 850,
     timing_response: 1850,
-    response_ends_trial: false,
     prompt: prompt_text,
     SSD: SSD,
     timing_SS: 250,
@@ -638,7 +636,6 @@ for (var b = 0; b < numblocks; b++) {
       choices: [possible_responses[0][1], possible_responses[1][1]],
       timing_stim: 850,
       timing_response: 1850,
-      response_ends_trial: false,
       SSD: getSSD,
       timing_SS: 500,
       timing_post_trial: 0,
