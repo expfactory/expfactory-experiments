@@ -52,7 +52,7 @@ var all_pages = [
   [
     "I don't like to make decisions quickly, even simple decisions, such as choosing what to wear, or what to have for dinner.",
     "I am good at taking advantage of unexpected opportunities,where you have to do something immediately or lose your chance.",
-    "Most of the time, i can put my thoughts into words very rapidly. ",
+    "Most of the time, I can put my thoughts into words very rapidly. ",
     "I am uncomfortable when l have to make up my mind rapidly.",
     "I like to take part in really fast-paced conversations, where you don't have much time to think before you speak.",
     "I don't like to do things quickly, even when I am doing something that is not very difﬁcult.",
