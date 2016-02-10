@@ -1,14 +1,15 @@
-
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement () {
+function getDisplayElement() {
   $('<div class = display_stage_background></div>').appendTo('body')
   return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({'exp_id': 'test_task'})
+  jsPsych.data.addDataToLastTrial({
+    'exp_id': 'test_task'
+  })
 }
 
 function evalAttentionChecks() {
@@ -21,8 +22,8 @@ function evalAttentionChecks() {
         checks_passed += 1
       }
     }
-    check_percent = checks_passed/attention_check_trials.length
-  } 
+    check_percent = checks_passed / attention_check_trials.length
+  }
   return check_percent
 }
 
@@ -54,7 +55,7 @@ var credit_var = true // If true, credit the participant
 // Set up attention check node
 var attention_check_block = {
   type: 'attention-check',
-  timing_response: 30000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -69,20 +70,20 @@ var attention_node = {
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
     // If using attentional checks, calculate the percent successful
     var check_percent = evalAttentionChecks()
-    // calculate average rt
+      // calculate average rt
     var total = 0;
-    for(var i = 0; i < rts.length; i++) {
+    for (var i = 0; i < rts.length; i++) {
       total += rts[i];
     }
     performance_var = total / rts.length
-    // If criteria passed, give credit
+      // If criteria passed, give credit
     credit_var = false
     if (performance_var > 100 && check_percent > attention_check_thresh) {
       credit_var = true
@@ -95,7 +96,9 @@ var test_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
   is_html: true,
-  data: {exp_id: "test_task", trial_id: "test"},
+  data: {
+    trial_id: "test"
+  },
   choices: [32],
   timing_post_trial: 100,
   on_finish: function(data) {
