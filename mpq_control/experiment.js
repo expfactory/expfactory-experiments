@@ -29,7 +29,7 @@ var welcome_block = {
   text: '<div class = centerbox><p class = block-text>Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
-    exp_id: "MPQ_control"
+    exp_id: "mpq_control"
   }
 };
 
@@ -42,7 +42,7 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000,
   data: {
-    exp_id: "MPQ_control"
+    exp_id: "mpq_control"
   }
 };
 
@@ -94,7 +94,7 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   data: {
-    exp_id: "MPQ_control"
+    exp_id: "mpq_control"
   }
 };
 
