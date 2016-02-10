@@ -202,6 +202,8 @@ var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
 var stop_thresh = 1
+var practice_repetitions = 1
+var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
@@ -446,6 +448,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 var NoSS_practice_node = {
   timeline: NoSS_practice_trials,
   loop_function: function(data) {
+    practice_repetitions += 1
     var sum_rt = 0;
     var sum_correct = 0;
     var go_length = 0;
@@ -467,9 +470,10 @@ var NoSS_practice_node = {
     var missed_responses = (go_length - num_responses) / go_length
     practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
       " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
-    if (average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh) {
+    if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+      missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
+      practice_repetitions = 1
       practice_feedback_text +=
         '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. It is equally important that you both respond quickly and accurately to the shapes when there is no blue stop signal <strong>and</strong> successfully stop your response on trials where there is a blue stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
@@ -533,6 +537,7 @@ var practice_node = {
   timeline: practice_trials,
   /* This function defines stopping criteria */
   loop_function: function(data) {
+    practice_repetitions += 1
     var sum_rt = 0;
     var sum_correct = 0;
     var go_length = 0;
@@ -564,9 +569,10 @@ var practice_node = {
     var stop_percent = successful_stops / stop_length
     practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
       " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
-    if (average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh && successful_stops < stop_thresh) {
+    if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+      missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
+      practice_repetitions = 1
       practice_feedback_text +=
         '</p><p class = block-text>Done with practice. We will now begin the ' + numblocks +
         ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
