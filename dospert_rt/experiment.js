@@ -39,7 +39,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate the <strong>likelihood</strong> that you would engage in the described activity or behavior if you were to find yourself in that situation.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate the <strong>likelihood</strong> that you would engage in the described activity or behavior if you were to find yourself in that situation.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
