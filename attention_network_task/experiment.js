@@ -96,9 +96,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</div></div></div>',
 			data: {
 				correct_response: 37,
-				direction: 'left',
-				flanker: 'neutral',
-				location: loc,
+				flanker_middle_direction: 'left',
+				flanker_type: 'neutral',
+				flanker_location: loc,
 				cue: c
 			}
 		}, {
@@ -106,9 +106,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &larr; &larr; &larr; &larr; &larr; </div></div></div>',
 			data: {
 				correct_response: 37,
-				direction: 'left',
-				flanker: 'congruent',
-				location: loc,
+				flanker_middle_direction: 'left',
+				flanker_type: 'congruent',
+				flanker_location: loc,
 				cue: c
 			}
 		}, {
@@ -116,9 +116,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </div></div></div>',
 			data: {
 				correct_response: 37,
-				direction: 'left',
-				flanker: 'incongruent',
-				location: loc,
+				flanker_middle_direction: 'left',
+				flanker_type: 'incongruent',
+				flanker_location: loc,
 				cue: c
 			}
 		}, {
@@ -126,9 +126,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </div></div></div>',
 			data: {
 				correct_response: 39,
-				direction: 'right',
-				flanker: 'neutral',
-				location: loc,
+				flanker_middle_direction: 'right',
+				flanker_type: 'neutral',
+				flanker_location: loc,
 				cue: c
 			}
 		}, {
@@ -136,9 +136,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </div></div></div>',
 			data: {
 				correct_response: 39,
-				direction: 'right',
-				flanker: 'congruent',
-				location: loc,
+				flanker_middle_direction: 'right',
+				flanker_type: 'congruent',
+				flanker_location: loc,
 				cue: c
 			}
 		}, {
@@ -146,9 +146,9 @@ for (l = 0; l < locations.length; l++) {
 				'><div class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </div></div></div>',
 			data: {
 				correct_response: 39,
-				direction: 'right',
-				flanker: 'incongruent',
-				location: loc,
+				flanker_middle_direction: 'right',
+				flanker_type: 'incongruent',
+				flanker_location: loc,
 				cue: c
 			}
 		}]
@@ -363,7 +363,7 @@ attention_network_task_experiment.push(practice_intro_block);
 /* set up ANT practice */
 var trial_num = 0
 var block = practice_block
-for (i = 0; i < block.data.length; i++) {
+for (i = 0; i < 5; i++) { //block.data.length
 	var trial_num = trial_num + 1
 	var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 	var first_fixation = {
@@ -456,9 +456,9 @@ attention_network_task_experiment.push(test_intro_block);
 
 /* Set up ANT main task */
 var trial_num = 0
-for (b = 0; b < blocks.length; b++) {
+for (b = 0; b < 1; b++) { //blocks.length
 	var block = blocks[b]
-	for (i = 0; i < block.data.length; i++) {
+	for (i = 0; i < 5; i++) { //block.data.length
 		var trial_num = trial_num + 1
 		var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 		var first_fixation = {
