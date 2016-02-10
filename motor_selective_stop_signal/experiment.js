@@ -582,7 +582,7 @@ var practice_node = {
 	}
 }
 
-//motor_selective_stop_signal_experiment.push(NoSS_practice_node)
+motor_selective_stop_signal_experiment.push(NoSS_practice_node)
 motor_selective_stop_signal_experiment.push(practice_node)
 motor_selective_stop_signal_experiment.push(practice_feedback_block)
 

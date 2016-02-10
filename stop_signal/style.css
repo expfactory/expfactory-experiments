@@ -42,7 +42,6 @@ img.square {
     left: 0;  
     right: 0;  
     margin: auto;  
-    max-height: 65%;
     content:url('images/square.png')
 }
 
@@ -55,7 +54,6 @@ img.circle {
     left: 0;  
     right: 0;  
     margin: auto;  
-    max-height: 75%;
     content:url('images/circle.png')
 }
 
@@ -68,7 +66,6 @@ img.triangle {
     left: 0;  
     right: 0;  
     margin: auto;  
-    max-height: 65%;
     content:url('images/triangle.png')
 }
 
@@ -81,7 +78,6 @@ img.diamond {
     left: 0;  
     right: 0;  
     margin: auto;  
-    max-height: 80%;
     content:url('images/diamond.png')
 }
 
