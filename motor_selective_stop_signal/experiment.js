@@ -174,7 +174,7 @@ var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
 var stop_thresh = 1
 var practice_repetitions = 1
-var practice_repetition_thresh = 2
+var practice_repetition_thresh = 5
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
