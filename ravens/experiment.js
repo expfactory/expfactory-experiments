@@ -106,7 +106,22 @@ var instruction_node = {
 // ADD PRACTICE BLOCK
 /////////////////////
 
-var practice_block = {
+var getPracticeInstruct = function() {
+  return '<div class = centerbox><p class = center-block-text>' + practice_instruct_text_1+ '</p></div>'
+}
+
+var practice_instruct_text_1 = 'Starting with first example trial.  Press <strong> Enter </strong> to continue.'
+var practice_instruct_block_1 = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getPracticeIntruct,
+  timing_post_trial: 0,
+  timing_response: 60000,
+  data: {exp_id: "ravens"}
+};
+/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+var practice_trials_1 = []   
+var practice_block_1 = {
   type: "poldrack-survey-multi-choice",
   exp_id: "ravens",
   horizontal: true,
@@ -118,6 +133,31 @@ var practice_block = {
   allow_backward: true,
   required: ,
 };
+practice_trials_1.push(practice_instruct_block_1)
+practice_trials_1.push(practice_block_1)
+
+var practice_node_1 = {
+    timeline: practice_trials_1,
+  /* This function defines stopping criteria */
+    loop_function: function(data){
+
+    
+
+    for(i=0;i<data.length;i++){
+      if((data[i].trial_type=='poldrack-survey-multi-choice') && (data[i].score_response!=-1)){
+        rt=data[i].rt
+        sumInstructTime=sumInstructTime+rt
+      }
+    }
+    if(sumInstructTime<=instructTimeThresh*1000){
+      feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+      return true
+    } else if(sumInstructTime>instructTimeThresh*1000){
+      feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+      return false
+    }
+    }
+}
 
 var start_test_block = {
   type: 'poldrack-text',
