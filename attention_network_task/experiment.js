@@ -363,7 +363,7 @@ attention_network_task_experiment.push(practice_intro_block);
 /* set up ANT practice */
 var trial_num = 0
 var block = practice_block
-for (i = 0; i < 5; i++) { //block.data.length
+for (i = 0; i < block.data.length; i++) { 
 	var trial_num = trial_num + 1
 	var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 	var first_fixation = {
@@ -456,9 +456,9 @@ attention_network_task_experiment.push(test_intro_block);
 
 /* Set up ANT main task */
 var trial_num = 0
-for (b = 0; b < 1; b++) { //blocks.length
+for (b = 0; b < blocks.length; b++) { 
 	var block = blocks[b]
-	for (i = 0; i < 5; i++) { //block.data.length
+	for (i = 0; i < block.data.length; i++) { 
 		var trial_num = trial_num + 1
 		var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 		var first_fixation = {
