@@ -194,7 +194,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><div class = instructionImgBox><img src = "static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div></div>',
     '<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' +
     task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' +
     task_colors[1] +
@@ -203,7 +203,7 @@ var instructions_block = {
     task_colors[1] +
     ' which means you should respond based on the smaller shapes. If the shape was instead ' +
     task_colors[0] +
-    ' you would press 2.</p><div class = instructionImgBox><img src = "static/experiments/local_global/images/' +
+    ' you would press 2.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/' +
     task_colors[1] + '_Xoftriangles.png" height = 200 width = 200></img></div></div>'
   ],
   allow_keys: false,
