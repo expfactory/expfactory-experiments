@@ -75,7 +75,7 @@ var all_pages = [
     "Generally do you prefer to enter cold sea water gradually, to diving or jumping straight in?",
     "Would you enjoy the sensation of skiing very fast down a high mountain slope?",
     "Would you like to go scuba diving?", "Would you enjoy fast driving?",
-    "Would you lke to go pot-holing?",
+    "Would you like to go pot-holing?",
     "Would you be put off a job involving quite a bit of danger?"
   ]
 ]

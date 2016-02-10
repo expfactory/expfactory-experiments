@@ -2,8 +2,16 @@
 /********     Headers/Text     **********/
 /****************************************/
 
+
+
 .center-text {
-	font: 2px;
+  text-align:center;
+  font-size: 40px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .titleboxLeft {
