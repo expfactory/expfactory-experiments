@@ -1,9 +1,9 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement () {
-    $('<div class = display_stage_background></div>').appendTo('body')
-    return $('<div class = display_stage></div>').appendTo('body')
+function getDisplayElement() {
+  $('<div class = display_stage_background></div>').appendTo('body')
+  return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function fillArray(value, len) {
@@ -26,7 +26,9 @@ var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  data: {exp_id: "future_time_perspective"}
+  data: {
+    exp_id: "future_time_perspective"
+  }
 };
 
 var instructions_block = {
@@ -37,16 +39,36 @@ var instructions_block = {
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000,
-  data: {exp_id : "future_time_perspective"}
+  data: {
+    exp_id: "future_time_perspective"
+  }
 };
 
 var opts = ["Very untrue - 1", "2", "3", "4", "5", "6", "Very true - 7"]
 
-var all_pages = [["Many opportunities await me in the future.","I expect that I will set many new goals in the future.","My future is filled with possibilities.","Most of my life lies ahead of me.","My future seems infinite to me.","I could do anything I want in the future.","There is plenty of time left in my life to make new plans.","I have the sense that time is running out.","There are only limited possibilities in my future.","As I get older, I begin to experience time as limited."]]
+var all_pages = [
+  ["Many opportunities await me in the future.",
+    "I expect that I will set many new goals in the future.",
+    "My future is filled with possibilities.", "Most of my life lies ahead of me.",
+    "My future seems infinite to me.", "I could do anything I want in the future.",
+    "There is plenty of time left in my life to make new plans.",
+    "I have the sense that time is running out.",
+    "There are only limited possibilities in my future.",
+    "As I get older, I begin to experience time as limited."
+  ]
+]
 
 var all_options = [fillArray(opts, 10)]
 
-var score_scale = {"Very untrue - 1":1, "2":2, "3":3, "4":4, "5":5, "6":6, "Very true - 7":7}
+var score_scale = {
+  "Very untrue - 1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+  "6": 6,
+  "Very true - 7": 7
+}
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -59,15 +81,19 @@ var survey_block = {
   show_clickable_nav: true,
   allow_backward: true,
   required: [fillArray(true, 10)],
-  reverse_score: [[false, false, false, false, false, false, false, false, false, false]],
+  reverse_score: [
+    [false, false, false, false, false, false, false, false, false, false]
+  ],
 };
 
 var end_block = {
   type: 'text',
-  timing_response: 60000,
+  timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Congratulations for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  data: {exp_id : "future_time_perspective"}
+  data: {
+    exp_id: "future_time_perspective"
+  }
 };
 
 
