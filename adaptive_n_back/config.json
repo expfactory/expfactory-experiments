@@ -14,7 +14,8 @@
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
                 "static/css/jspsych.css",
-                "static/css/default_style.css"
+                "static/css/default_style.css",
+                "style.css"
                 ],
         "contributors": [
                          "Ian Eisenberg",
