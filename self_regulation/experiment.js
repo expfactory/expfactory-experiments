@@ -51,7 +51,7 @@ var opts = ["Strongly disagree", "Somewhat disagree", "Neutral", "Somewhat agree
 var all_pages = [
   ["I don't notice the effects of my actions until it's too late.", "I put off making decision.",
     "It's hard for me to notice when I've 'had enough' (alcohol, food, sweets).",
-    "I have trouble following through with thing once I've made up my mind to do something.",
+    "I have trouble following through with things once I've made up my mind to do something.",
     "I don't seem to learn from my mistakes.",
     "I usually only have to make a mistake one time in order to learn from it.",
     "I can usually find several different possibilities when I want to change something.",
