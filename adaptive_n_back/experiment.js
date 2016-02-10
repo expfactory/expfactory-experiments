@@ -38,61 +38,60 @@ var randomDraw = function(lst) {
 };
 
 //Calculates whether the last trial was correct and records the accuracy in data object
-var record_acc = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	var stim_tmp = jsPsych.data.getData()[global_trial].stim.toLowerCase()
-	var target_tmp = jsPsych.data.getData()[global_trial].target.toLowerCase()
-	var key = jsPsych.data.getData()[global_trial].key_press
-	if (stim_tmp == target_tmp && key == 32) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'correct'
-		})
+var record_acc = function(data) {
+	var target_lower = data.target.toLowerCase()
+	var key = data.key_press
+	if (curr_stim == target_lower && key == 32) {
+		correct = 'correct'
 		block_acc += 1
-	} else if (stim_tmp != target_tmp && key == -1) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'correct'
-		})
+	} else if (curr_stim != target_lower && key == -1) {
+		correct = 'correct'
 		block_acc += 1
 	} else {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'incorrect'
-		})
+		correct = 'incorrect'
 	}
+	jsPsych.data.addDataToLastTrial({
+		correct: correct,
+		stim: curr_stim
+	})
 	current_trial = current_trial + 1
 };
 
 var update_delay = function() {
+	var acc = block_acc/num_trials
 	if (delay >= 2) {
-		if (block_acc / num_trials > acc_thresh) {
-			delay = delay + 1
-		} else if (block_acc / num_trials < (1 - acc_thresh)) {
-			delay = delay - 1
+		if (acc > acc_thresh) {
+			delay += 1
+		} else if (acc < (1 - acc_thresh)) {
+			delay -= 1
 		}
 	} else if (delay == 1) {
-		if (block_acc / num_trials > acc_thresh) {
-			delay = delay + 1
-		} else {
-			delay = 1
-		}
+		if (acc > acc_thresh) {
+			delay += 1
+		} 
 	}
 	block_acc = 0
 };
 
 var update_target = function() {
-	if (current_trial % num_trials >= delay) {
-		target = stims[current_trial - delay]
+	if (stims.length >= delay) {
+		target = stims.slice(-delay)[0]
 	} else {
 		target = ""
 	}
 };
 
+var getStim = function() {
+	curr_stim = randomDraw(letters)
+	stims.push(curr_stim)
+	return '<div class = "centerbox"><div class = "center-text">' + curr_stim + '</div></div>'
+}
+
 var getData = function() {
 	return {
-		exp_id: "adaptive_n_back",
 		trial_id: "stim",
-		exp_stage: "test",
+		exp_stage: "adaptive_test",
 		load: delay,
-		stim: stims[current_trial],
 		target: target,
 		trial_num: current_trial
 	}
@@ -111,11 +110,11 @@ var getText = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 1 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var letters = 'bBdDgGtTvV'
-var num_blocks = 20
+var num_blocks = 20 // number of adaptive blocks
 var num_trials = 25 // per block  
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
@@ -123,7 +122,8 @@ var delay = 2 // starting delay
 var acc_thresh = 0.8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
 var current_trial = 0
 var target = ""
-var stims = []
+var curr_stim = ''
+var stims = [] //hold stims per block
 var gap = 0
 
 /* ************************************ */
@@ -283,17 +283,14 @@ var start_control_block = {
 //Define control (0-back) block
 var control_trials = []
 for (var i = 0; i < num_trials; i++) {
-	var stim = randomDraw(letters)
 	var control_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
-		stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
+		stimulus: getStim,
 		data: {
-			exp_id: "adaptive_n_back",
 			trial_id: "stim",
-			exp_stage: "test",
+			exp_stage: "control",
 			load: 0,
-			stim: stim,
 			target: 't',
 			trial_num: current_trial
 		},
@@ -301,10 +298,11 @@ for (var i = 0; i < num_trials; i++) {
 		timing_stim: 500,
 		timing_response: 2000,
 		timing_post_trial: 0,
-		on_finish: record_acc
+		on_finish: function(data) {
+			record_acc(data)
+		}
 	};
 	control_trials.push(control_block)
-	current_trial = current_trial + 1
 }
 
 //Set up experiment
@@ -316,34 +314,36 @@ if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
-stims = []
+
 for (var b = 0; b < num_blocks; b++) {
-	current_trial = 0
 	var start_delay_block = {
 		type: 'poldrack-text',
 		data: {
 			exp_id: "adaptive_n_back",
 			trial_id: "delay_text"
 		},
-		text: getText(),
-		cont_key: [13]
+		text: getText,
+		cont_key: [13],
+		on_finish: function() {
+			stims = []
+		}
 	};
 	adaptive_n_back_experiment.push(start_delay_block)
 	adaptive_n_back_experiment.push(start_test_block)
 	for (var i = 0; i < num_trials; i++) {
-		var stim = randomDraw(letters)
-		stims.push(stim)
 		adaptive_n_back_experiment.push(update_target_block)
 		var test_block = {
 			type: 'poldrack-single-stim',
 			is_html: true,
-			stimulus: '<div class = "centerbox"><div class = "center-text">' + stim + '</div></div>',
-			data: getData(),
+			stimulus: getStim,
+			data: getData,
 			choices: [32],
 			timing_stim: 500,
 			timing_response: 2000,
 			timing_post_trial: 0,
-			on_finish: record_acc
+			on_finish: function(data) {
+				record_acc(data)
+			}
 		};
 		adaptive_n_back_experiment.push(test_block)
 	}
