@@ -91,13 +91,13 @@ var cues = [{
     image: '<div class = centerbox><div class = stim_left id = cue></div></div>',
     data: {
       trial_id: "cue",
-      condition: "left"
+      cue_placement: "left"
     }
   }, {
     image: '<div class = centerbox><div class = stim_right id = cue></div></div>',
     data: {
       trial_id: "cue",
-      condition: "right"
+      cue_placement: "right"
     }
   }
 
@@ -106,13 +106,13 @@ var targets = [{
   image: '<div class = centerbox><div class = stim_left id = target></div></div>',
   data: {
     trial_id: "target",
-    condition: "left"
+    target_placement: "left"
   }
 }, {
   image: '<div class = centerbox><div class = stim_right id = target></div></div>',
   data: {
     trial_id: "target",
-    condition: "right"
+    target_placement: "right"
   }
 }]
 
@@ -120,13 +120,13 @@ var masks = [{
   image: '<div class = centerbox><div class = stim_left id = mask></div></div>',
   data: {
     trial_id: "mask",
-    condition: "left"
+    mask_placement: "left"
   }
 }, {
   image: '<div class = centerbox><div class = stim_right id = mask></div></div>',
   data: {
     trial_id: "mask",
-    condition: "right"
+    mask_placement: "right"
   }
 }]
 
@@ -296,7 +296,8 @@ for (i = 0; i < practice_len; i++) {
       data: {
         trial_id: "target",
         correct_response: target_direction[1],
-        condition: 'right'
+        arrow_direction: target_direction[0],
+        arrow_placement: 'right'
       }
     }
     mask = masks[1]
@@ -308,7 +309,8 @@ for (i = 0; i < practice_len; i++) {
       data: {
         trial_id: "target",
         correct_response: target_direction[1],
-        condition: 'left'
+        arrow_direction: target_direction[0],
+        arrow_placement: 'left'
       }
     }
     mask = masks[0]
@@ -375,7 +377,8 @@ for (i = 0; i < exp_len; i++) {
       data: {
         trial_id: "target",
         correct_response: target_direction[1],
-        condition: 'right'
+        arrow_direction: target_direction[0],
+        arrow_placement: 'right'
       }
     }
     mask = masks[1]
@@ -387,7 +390,8 @@ for (i = 0; i < exp_len; i++) {
       data: {
         trial_id: "target",
         correct_response: target_direction[1],
-        condition: 'left'
+        arrow_direction: target_direction[0],
+        arrow_placement: 'left'
       }
     }
     mask = masks[0]
