@@ -79,7 +79,7 @@ var changeData = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 1 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 /* set up stim: location (2) * cue (4) * direction (2) * condition (3) */

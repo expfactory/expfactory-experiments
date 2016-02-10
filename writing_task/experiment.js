@@ -79,7 +79,7 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = block-text>In this task we want you to write. On the next page write for ' +
     timelimit +
-    'minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start.</p></div>'
+    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
