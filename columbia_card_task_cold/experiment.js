@@ -14,7 +14,7 @@ var getInstructFeedback = function() {
 
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
-		responses: currID,
+		num_cards_chosen: currID,
 		num_loss_cards: lossProb,
 		gain_amount: gainAmt,
 		loss_amount: lossAmt,
@@ -29,6 +29,9 @@ var getText = function() {
 		'</p></div>'
 }
 
+var appendPayoutData = function(){
+	jsPsych.data.addDataToLastTrial({reward: [prize1, prize2, prize3]})
+}
 
 
 var chooseButton = function(clicked_id) {
@@ -789,7 +792,8 @@ var payout_text = {
 		trial_id: 'reward'
 	},
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: appendPayoutData,
 };
 
 

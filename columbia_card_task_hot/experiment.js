@@ -12,13 +12,19 @@ var getInstructFeedback = function() {
 }
 
 var getReward = function() {
-	temp = jsPsych.randomization.repeat(points, 1)
-	reward1 = temp.pop()
-	reward2 = temp.pop()
-	reward3 = temp.pop()
+	tempData = jsPsych.data.getData()
+	allPoints = []
+	for(k=0; k<tempData.length; k++){
+		if(jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'endRoundButton' && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'|| jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'collectButton'  && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'){
+		allPoints.push(jsPsych.data.getDataByTrialIndex(k).round_points)
+		}
+	}
+	tempPoints = jsPsych.randomization.repeat(allPoints, 1)
+	reward1 = tempPoints.pop()
+	reward2 = tempPoints.pop()
+	reward3 = tempPoints.pop()
 	return '<div class = centerbox><p class = center-block-text>The round points selected are: ' +
 		reward1 + ', ' + reward2 + ', ' + reward3 + '</p></div>'
-
 }
 
 
@@ -155,7 +161,7 @@ var chooseCard = function(clicked_id) {
 			unclickedCards.splice(index, 1)
 			roundPoints = roundPoints - lossAmt
 			lossClicked = true
-			roundOver = 0
+			roundOver = 2
 			document.getElementById('current_round').innerHTML = 'Current Round: ' + roundPoints;
 			document.getElementById(clicked_id).src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
@@ -166,7 +172,14 @@ var chooseCard = function(clicked_id) {
 				document.getElementById('' + i + '').disabled = true;
 			}
 			setTimeout(endRound, 2000)
-
+			e = jQuery.Event("keydown");
+			e.which = 37; // # Some key code value
+			e.keyCode = 37
+			$(document).trigger(e);
+			e = jQuery.Event("keyup");
+			e.which = 37; // # Some key code value
+			e.keyCode = 37
+			$(document).trigger(e)
 
 		} else if (temp == -1) { // if you click on a gain card
 
@@ -231,6 +244,28 @@ var getRound = function() {
 		for (i = 0; i < clickedGainCards.length; i++) {
 			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
 				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
+		}
+		return gameState
+	} else if (roundOver == 2) { //this is for during the round
+		roundOver = 0
+		gameState = gameSetup
+		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
+		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
+		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+		gameState = deleteText(gameState, 'onclick = noCard()')
+
+		clickedGainCards.sort(function(a, b) {
+			return a - b
+		})
+		for (i = 0; i < clickedGainCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
+				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
+		}
+		for (i = 0; i < clickedLossCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedLossCards[i] + "'",
+				" src='/static/experiments/columbia_card_task_hot/images/loss.png'")
 		}
 		return gameState
 	}
@@ -883,7 +918,10 @@ var give_total = {
 		trial_id: 'reward'
 	},
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function(){
+	jsPsych.data.addDataToLastTrial({reward: [reward1,reward2,reward3]})
+	}
 };
 
 
@@ -895,7 +933,10 @@ var start_test_block = {
 	},
 	text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: function(){
+	whichClickInRound = 0
+	}
 };
 
 

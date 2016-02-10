@@ -234,7 +234,7 @@ var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "sensation_seeking",
   horizontal: false,
-  preamble: '',
+  preamble: 'Please choose one of each pair of options.',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
