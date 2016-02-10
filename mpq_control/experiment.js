@@ -75,7 +75,7 @@ var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "mpq_control",
   horizontal: true,
-  preamble: '',
+  preamble: 'Is it true or false that you generally...',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
