@@ -46,6 +46,14 @@ var instructions_block = {
 };
 
 var opts = ["Yes", "No"]
+var scale_reg = {
+  "Yes": 2,
+  "No": 1
+}
+var scale_rev = {
+  "Yes": 1,
+  "No": 2
+}
 
 var all_pages = [
   ['Do you often buy things on impulse?',
@@ -83,10 +91,14 @@ var all_pages = [
 var all_options = [fillArray(opts, 19), fillArray(opts, 16)]
 
 //higher = more impulsive
-var score_scale = {
-  "Yes": 2,
-  "No": 1
-}
+var score_scale = [
+    [scale_reg, scale_reg, scale_reg, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg,
+      scale_reg, scale_reg, scale_rev, scale_rev, scale_reg, scale_reg
+    ],
+    [scale_reg, scale_rev, scale_reg, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_reg,
+      scale_reg, scale_reg, scale_rev
+    ]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -98,15 +110,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 19), fillArray(true, 16)],
-  reverse_score: [
-    [false, false, false, false, true, false, false, false, false, false, false, false, false,
-      false, false, true, true, false, false
-    ],
-    [false, true, false, false, true, false, false, false, true, false, true, false, false,
-      false, false, true
-    ]
-  ],
+  required: [fillArray(true, 19), fillArray(true, 16)]
 };
 
 var end_block = {
