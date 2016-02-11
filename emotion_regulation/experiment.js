@@ -204,17 +204,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  data: {
-    trial_id: 'welcome'
-  },
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -227,7 +216,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -401,7 +390,6 @@ var view_block = {
 
 /* create experiment definition array */
 var emotion_regulation_experiment = [];
-emotion_regulation_experiment.push(welcome_block);
 emotion_regulation_experiment.push(instruction_node);
 for (var i = 0; i < training_len; i++) {
   emotion_regulation_experiment.push(training_instruct)

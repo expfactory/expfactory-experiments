@@ -149,20 +149,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	text: '<div class = "centerbox"><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	data: {
-		exp_id: "adaptive_n_back",
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -307,7 +295,6 @@ for (var i = 0; i < num_trials; i++) {
 
 //Set up experiment
 var adaptive_n_back_experiment = []
-adaptive_n_back_experiment.push(welcome_block);
 adaptive_n_back_experiment.push(instruction_node);
 
 if (control_before === 0) {

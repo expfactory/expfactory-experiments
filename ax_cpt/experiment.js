@@ -82,18 +82,6 @@ var attention_check_thresh = 0.65
 
 // task specific variables
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    exp_id: "ax_cpt",
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -107,7 +95,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -257,7 +245,6 @@ var other_probe = {
 /* ************************************ */
 
 var ax_cpt_experiment = []
-ax_cpt_experiment.push(welcome_block);
 ax_cpt_experiment.push(instruction_node);
 
 for (b = 0; b < blocks.length; b++) {

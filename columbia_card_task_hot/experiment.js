@@ -626,19 +626,8 @@ var practiceSetup2 =
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	text: "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
-	cont_key: [13],
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial: 'welcome'
-	},
-	timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],

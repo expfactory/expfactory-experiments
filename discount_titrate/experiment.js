@@ -154,19 +154,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: "welcome"
-  },
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -277,7 +266,6 @@ var end_block = {
 
 //Set up experiment
 var discount_titrate_experiment = []
-discount_titrate_experiment.push(welcome_block);
 discount_titrate_experiment.push(instruction_node);
 discount_titrate_experiment.push(start_practice_block);
 discount_titrate_experiment.push(practice_block);

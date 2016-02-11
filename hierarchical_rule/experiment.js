@@ -177,19 +177,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-}
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -357,7 +346,6 @@ var hierarchical_loop_node = {
 
 //Set up experiment
 var hierarchical_rule_experiment = []
-hierarchical_rule_experiment.push(welcome_block);
 hierarchical_rule_experiment.push(instruction_node);
 hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks

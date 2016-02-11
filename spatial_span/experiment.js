@@ -152,19 +152,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: "welcome"
-  },
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -393,7 +382,6 @@ var reverse_node = {
 
 /* create experiment definition array */
 var spatial_span_experiment = [];
-spatial_span_experiment.push(welcome_block);
 spatial_span_experiment.push(instruction_node);
 spatial_span_experiment.push(forward_node)
 spatial_span_experiment.push(attention_node)

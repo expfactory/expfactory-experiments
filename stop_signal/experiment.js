@@ -241,17 +241,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -264,7 +253,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -389,7 +378,6 @@ var reset_block = {
 /* ************************************ */
 
 var stop_signal_experiment = []
-stop_signal_experiment.push(welcome_block);
 stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
