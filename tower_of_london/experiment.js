@@ -37,7 +37,7 @@ function addID() {
 }
 
 var getStim = function() {
-  var ref_board = makeBoard('your_board', curr_placement)
+  var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', problems[problem_i])
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
   var hold_box;
@@ -54,7 +54,7 @@ var getStim = function() {
 }
 
 var getPractice = function() {
-  var ref_board = makeBoard('your_board', curr_placement)
+  var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', example_problem3)
   var canvas = '<div class = tol_canvas><div class="tol_vertical_line"></div></div>'
   var hold_box;
@@ -100,13 +100,13 @@ var getTime = function() {
 }
 
 var getText = function() {
-  return '<div class = centerbox><p class = block-text>About to start problem ' + (problem_i + 2) +
+  return '<div class = centerbox><p class = center-block-text>About to start problem ' + (problem_i + 2) +
     '. Press <strong>enter</strong> to begin.</p></div>'
 }
 
 var pegClick = function(peg_id) {
+  console.log(peg_id)
   choice = Number(peg_id.slice(-1)) - 1
-  console.log(choice)
   peg = curr_placement[choice]
   if (held_ball === 0) {
     for (var i = peg.length - 1; i >= 0; i--) {
@@ -126,7 +126,7 @@ var pegClick = function(peg_id) {
   }
 }
 
-var makeBoard = function(container, ball_placement) {
+var makeBoard = function(container, ball_placement, board_type) {
   var board = '<div class = tol_' + container + '><div class = tol_base></div>'
   if (container == 'your_board') {
     board += '<div class = tol_board_label><strong>Your Board</strong></div>'
@@ -136,7 +136,11 @@ var makeBoard = function(container, ball_placement) {
   for (var p = 0; p < 3; p++) {
     board += '<div id = tol_peg_' + (p + 1) + '><div class = tol_peg></div></div>' //place peg
       //place balls
-    board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+    if (board_type == 'ref') {
+      board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+    } else {
+      board += '<div class = special id = tol_peg_' + (p + 1) + ' >'
+    }
     var peg = ball_placement[p]
     for (var b = 0; b < peg.length; b++) {
       if (peg[b] !== 0) {
@@ -332,6 +336,7 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
+
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)
 
