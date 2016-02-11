@@ -61,24 +61,24 @@ var randomDraw = function(lst) {
 }
 
 var getStim = function() {
-  var bi = randomDraw([0, 1, 2, 3]) // get border index
-  var ii = randomDraw([0, 1]) // get inner index
-  var stim = stim_prefix + path_source + borders[bi] + ' </img></div></div>'
-  var stim2 = stim_prefix + path_source + borders[bi] +
+  var border_i = randomDraw([0, 1, 2, 3]) // get border index
+  var number_i = randomDraw([0, 1]) // get inner index
+  var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
+  var stim2 = stim_prefix + path_source + borders[border_i] +
     ' </img></div></div><div class = prp_centerbox><div class = "white-text center-text">' +
-    inners[ii] + '</div></div>'
+    inners[number_i] + '</div></div>'
     // set correct choice for first
   var gonogo_choice;
-  if (bi < 2) {
+  if (border_i < 2) {
     gonogo_choice = 75
   } else {
     gonogo_choice = -1
   }
   //update data
-  curr_data.gonogo_stim = bi
-  curr_data.choice_stim = ii
-  curr_dat.gonogo_correct_response = gonogo_choice
-  curr_data.choice_correct_response = [74, 76][ii]
+  curr_data.gonogo_stim = border_i
+  curr_data.choice_stim = number_i
+  curr_data.gonogo_correct_response = gonogo_choice
+  curr_data.choice_correct_response = [74, 76][number_i]
   return [stim, stim2]
 }
 
@@ -93,7 +93,7 @@ var getISI = function() {
   */
 var getFB = function() {
   var data = jsPsych.data.getLastTrialData()
-  var keys = JSON.parse(data.key_press)
+  var keys = JSON.parse(data.key_presses)
   var rts = JSON.parse(data.rt)
   var tooShort = false
   var gonogoFB;
@@ -362,7 +362,7 @@ var fixation_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
@@ -397,7 +397,7 @@ var feedback_block = {
 
 /* define test block */
 var test_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
