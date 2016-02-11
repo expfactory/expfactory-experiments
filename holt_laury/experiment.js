@@ -113,7 +113,7 @@ var all_options = [
 ]
 
 //higher - more impulsiveness: 1 is safe, 2 is risky
-var score_scale = {
+var scale_reg = {
   "10% chance of $100, 90% chance of $80": 1,
   "10% chance of $190, 90% chance of $5": 2,
   "20% chance of $100, 80% chance of $80": 1,
@@ -135,6 +135,7 @@ var score_scale = {
   "100% chance of $100, 0% chance of $80": 1,
   "100% chance of $190, 0% chance of $5": 2
 }
+var score_scale = [fillArray(scale_reg, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -146,10 +147,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 10)]
 };
 
 var end_block = {
