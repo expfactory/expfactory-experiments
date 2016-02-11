@@ -5,29 +5,6 @@ function getDisplayElement() {
   $('<div class = display_stage_background></div>').appendTo('body')
   return $('<div class = display_stage></div>').appendTo('body')
 }
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
@@ -161,12 +138,6 @@ var getFB = function() {
   }
 }
 
-var appendData = function(data, trial_id) {
-  curr_data.trial_id = trial_id
-  curr_data.trial_num = curr_trial
-  jsPsych.data.addDataToLastTrial(curr_data)
-}
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -179,7 +150,7 @@ var instructTimeThresh = 0 ///in seconds
 // task specific variables
 var practice_len = 36
 var exp_len = 180
-var curr_trial = 0
+var current_trial = 0
 var choices = [74, 75, 76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
   exp_len / 9)
@@ -324,7 +295,8 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'practice_intro'
+    trial_id: 'intro',
+    exp_stage: 'practice'
   },
   text: '<div class = prp_centerbox><p class = "white-text center-block-text">We will start ' +
     practice_len + ' practice trials. Press <strong>enter</strong> to begin.</p></div>',
@@ -335,13 +307,14 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'test_intro'
+    trial_id: 'intro',
+    exp_stage: 'test'
   },
   text: '<div class = prp_centerbox><p class ="white-text center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
-    curr_trial = 0
+    current_trial = 0
   }
 };
 
@@ -355,9 +328,11 @@ var fixation_block = {
     trial_id: 'fixation'
   },
   choices: 'none',
-  response_ends_trial: true,
   timing_post_trial: 1000,
-  on_finish: changeData,
+  on_finish: function(){
+    var last_trial= jsPsych.data.getDataByTrialIndex(jsPsych.progress().current_trial_global-1)
+    jsPsych.data.addDataToLastTrial({exp_stage: last_trial.exp_stage})  
+  }
 }
 
 /* define practice block */
@@ -374,8 +349,9 @@ var practice_block = {
   timing_response: 2000,
   response_ends_trial: true,
   on_finish: function() {
-    appendData('practice')
-    curr_trial += 1
+    curr_data.trial_num = current_trial
+    jsPsych.data.addDataToLastTrial(curr_data)
+    current_trial += 1
   },
   timing_post_trial: 500
 }
@@ -385,13 +361,13 @@ var feedback_block = {
   stimulus: getFB,
   is_html: true,
   data: {
-    trial_id: 'practice_feedback'
+    trial_id: 'feedback',
+    exp_stage: 'practice'
   },
   timing_stim: -1,
   timing_response: -1,
   response_ends_trial: true,
-  timing_post_trial: 500,
-  on_finish: changeData,
+  timing_post_trial: 500
 }
 
 
@@ -408,9 +384,10 @@ var test_block = {
   timing_stim: getISI,
   respond_ends_trial: true,
   timing_response: 2000,
-  on_finish: function(data) {
-    appendData('test')
-    curr_trial += 1
+  on_finish: function() {
+    curr_data.trial_num = current_trial
+    jsPsych.data.addDataToLastTrial(curr_data)
+    current_trial += 1
   },
   timing_post_trial: 500
 }
