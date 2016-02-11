@@ -125,11 +125,10 @@ var trials = [];
 
 //loop through each option to create html
 for (var i = 0; i < options.small_amt.length; i++) {
-  trials[i] =
-    "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$" +
+  trials.push({stimulus: "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$" +
     options.small_amt[i] + "<br>" + options.sooner_del[i] +
     "</font></center></div><div id = 'option'><center><font color='green'>$" + options.large_amt[i] +
-    "<br>" + options.later_del[i] + "</font></center></div></div></div></div>"
+    "<br>" + options.later_del[i] + "</font></center></div></div></div></div>"})
 }
 
 /* ************************************ */
@@ -222,11 +221,12 @@ var practice_block = {
     trial_id: "stim",
     exp_stage: "practice"
   },
-  stimuli: [
+  stimulus: [
     "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"
   ],
   is_html: true,
-  choices: ['q', 'p']
+  choices: ['q', 'p'],
+  response_ends_trial: true
 };
 
 var start_test_block = {
@@ -242,14 +242,15 @@ var start_test_block = {
 
 var test_block = {
   type: 'poldrack-single-stim',
-  stimuli: trials,
+  timeline: trials,
   data: {
     trial_id: "stim",
     exp_stage: "test"
   },
   is_html: true,
   choices: ['q', 'p'],
-  randomize_order: true
+  randomize_order: true,
+  response_ends_trial: true
 };
 
 var end_block = {
