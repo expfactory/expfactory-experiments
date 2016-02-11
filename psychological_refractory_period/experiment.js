@@ -77,7 +77,7 @@ var getStim = function() {
   //update data
   curr_data.gonogo_stim = bi
   curr_data.choice_stim = ii
-  curr_dat.gonogo_correct_response = gonogo_choice
+  curr_data.gonogo_correct_response = gonogo_choice
   curr_data.choice_correct_response = [74, 76][ii]
   return [stim, stim2]
 }
@@ -362,7 +362,7 @@ var fixation_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
@@ -397,7 +397,7 @@ var feedback_block = {
 
 /* define test block */
 var test_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
