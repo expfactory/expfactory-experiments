@@ -74,6 +74,32 @@ function fillArray(value, len) {
   return arr;
 }
 
+var testCount = 0
+var appendTestData = function(){
+	smaller_amount= options.small_amt[testCount]
+	sooner_delay= options.sooner_del[testCount]
+	larger_amount= options.large_amt[testCount]
+	later_delay = options.later_del[testCount]
+	global_trial = jsPsych.progress().current_trial_global
+	whichKey = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+	
+	if(whichKey == 81){
+		chosen_amount = smaller_amount
+		chosen_delay = sooner_delay
+	} else if (whichKey == 80){
+		chosen_amount = larger_amount
+		chosen_delay = later_delay
+	}
+	
+	jsPsych.data.addDataToLastTrial({chosen_amount: chosen_amount, chosen_delay: chosen_delay, smaller_amount: smaller_amount, sooner_delay: sooner_delay, larger_amount: larger_amount, later_delay: later_delay})
+	testCount = testCount+1
+}
+
+var getStim = function(){
+	tempStim = trials.shift()
+	return tempStim
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -231,13 +257,18 @@ var practice_block = {
   type: 'poldrack-single-stim',
   data: {
     trial_id: "stim",
-    exp_stage: "practice"
+    exp_stage: "practice",
+    smaller_amount: '20.58',
+    sooner_delay: 'today',
+    larger_amount: '25.93',
+    later_delay: '2 weeks'
   },
-  stimuli: [
+  stimulus: [
     "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"
   ],
   is_html: true,
-  choices: ['q', 'p']
+  choices: [80,81],
+  response_ends_trial: true,
 };
 
 var start_test_block = {
@@ -253,14 +284,16 @@ var start_test_block = {
 
 var test_block = {
   type: 'poldrack-single-stim',
-  stimuli: trials,
+  stimulus: getStim,
   data: {
     trial_id: "stim",
     exp_stage: "test"
   },
   is_html: true,
-  choices: ['q', 'p'],
-  randomize_order: true
+  choices: [80,81],
+  randomize_order: true,
+  response_ends_trial: true,
+  on_finish: appendTestData,
 };
 
 var end_block = {
@@ -282,6 +315,8 @@ discount_titrate_experiment.push(instruction_node);
 discount_titrate_experiment.push(start_practice_block);
 discount_titrate_experiment.push(practice_block);
 discount_titrate_experiment.push(start_test_block);
+for(i=0;i<trials.length;i++){
 discount_titrate_experiment.push(test_block);
+}
 discount_titrate_experiment.push(attention_node)
 discount_titrate_experiment.push(end_block)
