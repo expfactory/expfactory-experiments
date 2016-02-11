@@ -74,7 +74,7 @@ var getTestFeedback = function() {
 	}
 	if (missed_responses >= missed_response_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+			'</p><p class = block-text>Remember to respond to each shape unless you see the black stop signal.'
 	}
 	if (average_correct < accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' +
@@ -85,7 +85,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= (1 - accuracy_thresh)) {
 		test_feedback_text +=
-			'</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
+			'</p><p class = block-text> Remember to try to withold your response if you see the black stop signal.'
 	}
 	test_feedback_text +=
 		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -159,7 +159,7 @@ var instructTimeThresh = 0 ///in seconds
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
 var correct_responses = jsPsych.randomization.shuffle([
 	["M key", 77],
 	["M key", 77],
@@ -450,11 +450,11 @@ var NoSS_practice_node = {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
 				possible_responses[0][0] +
 				' you should <strong>not respond</strong> in any way.</p><p class = block-text>If the ' +
 				possible_responses[0][0] +
-				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -569,7 +569,7 @@ var practice_node = {
 			}
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the red stop signal AND the correct key is the ' +
+					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the black stop signal AND the correct key is the ' +
 					possible_responses[0][0] + '.'
 			}
 			if (average_correct <= accuracy_thresh) {
