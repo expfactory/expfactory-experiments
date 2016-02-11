@@ -249,7 +249,7 @@ var welcome_block = {
   data: {
     trial_id: 'welcome'
   },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -285,7 +285,7 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="white-text block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="white-text block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' +
+    '<div class = prp_centerbox><p class ="white-text block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="white-text block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press the "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' +
     box1 + box2,
     '<div class = prp_centerbox><p class ="white-text block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
