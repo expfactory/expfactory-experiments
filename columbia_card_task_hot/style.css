@@ -197,7 +197,7 @@
 }
 
 .instructBoxLeft {
-  width:17.5%;
+  width:20%;
   height: 3%;
   position:absolute;
   top:50%;
@@ -209,7 +209,7 @@
 }
 
 .instructBoxRight {
-  width:17.5%;
+  width:20%;
   height: 3%;
   position:absolute;
   top:50%;
@@ -243,7 +243,7 @@
 
 
 .instructBoxLeft1 {
-  width:17.5%;
+  width:20%;
   height: 3%;
   position:absolute;
   top:55%;
@@ -255,7 +255,7 @@
 }
 
 .instructBoxRight1 {
-  width:17.5%;
+  width:20%;
   height: 3%;
   position:absolute;
   top:55%;
