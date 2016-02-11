@@ -140,7 +140,7 @@ var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "holt_laury",
   horizontal: true,
-  preamble: '<p class = center-block-text>Please indicate your preference between the two gambles.</p>',
+  preamble: '<p class = center-block-text>Please indicate your preference between each of the pairs of gambles.</p>',
   pages: all_pages,
   options: all_options,
   scale: score_scale,

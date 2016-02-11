@@ -37,7 +37,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please indicate to what degree you agree with each of the following statements.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+    '<div class = centerbox><p class = block-text>Please indicate to what degree you agree with each of the following statements.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
