@@ -49,6 +49,14 @@ var instructions_block = {
 var opts = ["almost always", "very frequently", "somewhat frequently", "somewhat infrequently",
   "very infrequently", "almost never"
 ]
+var scale_reg = {
+  "almost always": 1,
+  "very frequently": 2,
+  "somewhat frequently": 3,
+  "somewhat infrequently": 4,
+  "very infrequently": 5,
+  "almost never": 6
+}
 
 var all_pages = [
   ["I could be experiencing some emotion and not be conscious of it until some time later.",
@@ -74,14 +82,7 @@ var all_pages = [
 var all_options = [fillArray(opts, 5), fillArray(opts, 5), fillArray(opts, 5)]
 
 //higher - more impulsiveness
-var score_scale = {
-  "almost always": 1,
-  "very frequently": 2,
-  "somewhat frequently": 3,
-  "somewhat infrequently": 4,
-  "very infrequently": 5,
-  "almost never": 6
-}
+var score_scale = [fillArray(scale_reg, 5), fillArray(scale_reg, 5), fillArray(scale_reg, 5)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -93,12 +94,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 5), fillArray(true, 5), fillArray(true, 5)],
-  reverse_score: [
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false]
-  ],
+  required: [fillArray(true, 5), fillArray(true, 5), fillArray(true, 5)]
 };
 
 var end_block = {
