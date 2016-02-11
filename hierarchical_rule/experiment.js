@@ -38,12 +38,12 @@ var getFixLength = function() {
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   if (last_trial.key_press == -1) {
-    return '<div class = centerbox><div class = "white-text center-text">Respond faster!</div></div>'
+    return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
-    return '<div class = centerbox><div class = "white-text center-text">Correct</div></div>'
+    return '<div class = centerbox><div class = "center-text">Correct</div></div>'
   } else {
-    return '<div class = centerbox><div class = "white-text center-text">Incorrect</div></div>'
+    return '<div class = centerbox><div class = "center-text">Incorrect</div></div>'
   }
 }
 
@@ -67,7 +67,7 @@ var getFlatData = function() {
 }
 
 var getInstructFeedback = function() {
-  return '<div class = centerbox><p class = "white-text center-block-text">' +
+  return '<div class = centerbox><p class = "center-block-text">' +
     feedback_instruct_text + '</p></div>'
 }
 
@@ -183,7 +183,7 @@ var welcome_block = {
   data: {
     trial_id: "welcome"
   },
-  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 }
@@ -208,9 +208,9 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = "white-text block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "white-text block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
+    '<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     instructions_grid,
-    '<div class = centerbox><p class = "white-text block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "white-text block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
+    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true
@@ -246,7 +246,7 @@ var end_block = {
   data: {
     trial_id: "end"
   },
-  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -258,7 +258,7 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = "white-text center-block-text">We will now start the test.</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">We will now start the test.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
