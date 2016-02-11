@@ -174,6 +174,8 @@ var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
 var stop_thresh = 1
+var practice_repetitions = 1
+var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
@@ -209,9 +211,9 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 
 //number of blocks per condition
 var test_block_len = 60
-numconditions = 1 //2
-numblocks = 2  //5
-condition_blocks = []
+var numconditions = 1 //2
+var numblocks = 2 //5
+var condition_blocks = []
 for (j = 0; j < numconditions; j++) {
 	blocks = []
 	for (i = 0; i < numblocks; i++) {
@@ -418,6 +420,8 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 var NoSS_practice_node = {
 	timeline: NoSS_practice_trials,
 	loop_function: function(data) {
+		practice_repetitions += 1
+		console.log(practice_repetitions)
 		var sum_rt = 0;
 		var sum_correct = 0;
 		var go_length = 0;
@@ -439,14 +443,15 @@ var NoSS_practice_node = {
 		var missed_responses = (go_length - num_responses) / go_length
 		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
 			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
-		if (average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-			missed_response_thresh) {
+		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+				missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
 			// end the loop
+			practice_repetitions = 1
 			practice_feedback_text +=
 				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
-			//rerandomize stim order
+				//rerandomize stim order
 			NoSS_practice_list = jsPsych.randomization.repeat(stimulus, 3, true)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
@@ -504,6 +509,7 @@ var practice_node = {
 	timeline: practice_trials,
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
+		practice_repetitions += 1
 		var sum_rt = 0;
 		var sum_correct = 0;
 		var go_length = 0;
@@ -534,16 +540,19 @@ var practice_node = {
 		var missed_responses = (go_length - num_responses) / go_length
 		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
 			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
-		if (average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-			missed_response_thresh && successful_stops >= stop_thresh) {
+		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+				missed_response_thresh && successful_stops >= stop_thresh) || practice_repetitions >
+			practice_repetition_thresh) {
 			// end the loop
+			practice_repetitions = 1
+				// end the loop
 			practice_feedback_text +=
 				'</p><p class = block-text>Done with practice. We will now begin the ' + numconditions *
 				numblocks +
 				' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
 			return false;
 		} else {
-			//rerandomize stim and stop_trial order
+				//rerandomize stim and stop_trial order
 			practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
 			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
 					'go', 'go', 'go', 'go'
