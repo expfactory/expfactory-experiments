@@ -92,6 +92,8 @@ var choices = [74, 75, 76]
 var correct = 0 // tracks correct trials
 
 //generate stims
+//1=red, 2=blue, 3=green, 4=yellow BORDER COLORS
+//1=vertical, 2=slant, 3=horizontal ORIENTATION OF STIMS
 flat_stims = []
 hierarchical_stims = []
 colors = jsPsych.randomization.shuffle([1, 2, 3, 4]) //border colors
