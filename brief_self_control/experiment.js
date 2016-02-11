@@ -48,6 +48,8 @@ var instructions_block = {
 };
 
 var opts = ["Not at all - 1", "2", "3", "4", "Very much - 5"]
+var scale_reg = {"Not at all - 1": 1,"2": 2,"3": 3,"4": 4,"Very much - 5": 5}
+var scale_rev = {"Not at all - 1": 5,"2": 4,"3": 3,"4": 2,"Very much - 5": 1}
 
 var all_pages = [
   ["I am good at resisting temptation.", "I have a hard time breaking bad habits.", "I am lazy.",
@@ -63,13 +65,7 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 13)]
 
-var score_scale = {
-  "Not at all - 1": 1,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "Very much - 5": 5
-}
+var score_scale = [[scale_reg, scale_rev, scale_rev, scale_rev, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_rev, scale_reg, scale_rev, scale_rev]]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -81,10 +77,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 13)],
-  reverse_score: [
-    [false, true, true, true, true, false, true, false, true, true, false, true, true]
-  ],
+  required: [fillArray(true, 13)]
 };
 
 var end_block = {
