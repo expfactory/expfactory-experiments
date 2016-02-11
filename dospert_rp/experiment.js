@@ -52,6 +52,15 @@ var instructions_block = {
 var opts = ["Not at all risky", "Slightly risky", "Somewhat risky", "Moderately risky", "Risky",
   "Very Risky", "Extremely Risky"
 ]
+var scale_reg = {
+  "Not at all risky": 1,
+  "Slightly risky": 2,
+  "Somewhat risky": 3,
+  "Moderately risky": 4,
+  "Risky": 5,
+  "Very Risky": 6,
+  "Extremely Risky": 7
+}
 
 var all_pages = [
   ["Admitting that your tastes are different from those of a friend.",
@@ -88,15 +97,9 @@ var all_options = [fillArray(opts, 6), fillArray(opts, 6), fillArray(opts, 6), f
   fillArray(opts, 6)
 ]
 
-var score_scale = {
-  "Not at all risky": 1,
-  "Slightly risky": 2,
-  "Somewhat risky": 3,
-  "Moderately risky": 4,
-  "Risky": 5,
-  "Very Risky": 6,
-  "Extremely Risky": 7
-}
+var score_scale = [fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6),
+  fillArray(scale_reg, 6)
+]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -110,14 +113,7 @@ var survey_block = {
   allow_backward: true,
   required: [fillArray(true, 6), fillArray(true, 6), fillArray(true, 6), fillArray(true, 6),
     fillArray(true, 6)
-  ],
-  reverse_score: [
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ],
+  ]
 };
 
 var end_block = {
