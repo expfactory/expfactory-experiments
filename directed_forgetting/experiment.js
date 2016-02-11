@@ -38,8 +38,9 @@ var getInstructFeedback = function() {
 //this adds the current trial and the stims shown to the data
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
-		trial_num: currTrial,
-		stim: [stim1, stim2, stim3, stim4, stim5, stim6]
+		trial_num: current_trial,
+		stim_top: [stim1, stim2, stim3],
+		stim_bottom: [stim4, stim5, stim6]
 	})
 };
 
@@ -47,46 +48,45 @@ var appendTestData = function() {
 var appendCueData = function() {
 	jsPsych.data.addDataToLastTrial({
 		stim: cue,
-		trial_num: currTrial
+		trial_num: current_trial
 	})
 };
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
 var appendProbeData = function() {
-	jsPsych.data.addDataToLastTrial({
-		stim: [probe, probeType],
-		trial_num: currTrial
-	})
-	global_trial = jsPsych.progress().current_trial_global
-	trialCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	trialProbe = jsPsych.data.getDataByTrialIndex(global_trial).stim[0]
-	lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim
-	keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+	var global_trial = jsPsych.progress().current_trial_global
+	var trialCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
+	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
+	var keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+	var memorySet = ''
 	if (trialCue == 'BOT') {
-		memorySet = lastSet.splice(0, 3)
+		memorySet = lastSet_top
 	} else if (trialCue == 'TOP') {
-		memorySet = lastSet.splice(3, 3)
+		memorySet = lastSet_bottom
 	}
-	if ((memorySet.indexOf(trialProbe, 0) == -1) && keypress == 39) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 1
-		})
-	} else if ((memorySet.indexOf(trialProbe, 0) != -1) && keypress == 37) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 1
-		})
-	} else {
-		jsPsych.data.addDataToLastTrial({
-			correct: -1
-		})
-	}
-	currTrial = currTrial + 1
+	correct = 'incorrect'
+	if ((memorySet.indexOf(probe, 0) == -1) && keypress == 39) {
+		correct = 'correct'
+	} else if ((memorySet.indexOf(probe, 0) != -1) && keypress == 37) {
+		correct = 'correct'
+	} 
+	jsPsych.data.addDataToLastTrial({
+		correct: correct,
+		probe_letter: probe,
+		probe_type: probeType,
+		trial_cue: trialCue,
+		trial_stim_top: lastSet_top,
+		trial_stim_bottom: lastSet_bottom,
+		trial_num: current_trial
+	})
+	current_trial = current_trial + 1
 };
 
 //this adds the trial number to the data
 var appendFixData = function() {
 	jsPsych.data.addDataToLastTrial({
-		trial_num: currTrial
+		trial_num: current_trial
 	})
 };
 
@@ -96,7 +96,7 @@ var getTrainingSet = function() {
 	preceeding1stims = []
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (currTrial < 1) {
+	if (current_trial < 1) {
 		stim1 = trainingArray[0];
 		stim2 = trainingArray[1];
 		stim3 = trainingArray[2];
@@ -117,7 +117,7 @@ var getTrainingSet = function() {
 			'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stim6 + fileType +
 			'"></img></div>'
 
-	} else if (currTrial == 1) {
+	} else if (current_trial == 1) {
 		global_trial = jsPsych.progress().current_trial_global
 		preceeding1stims = jsPsych.data.getDataByTrialIndex(global_trial - 5).stim
 		newArray = trainingArray.filter(function(y) {
@@ -183,39 +183,30 @@ var getCue = function() {
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
 var getProbe = function() {
 	probeType = probeTypeArray.pop()
-	global_trial = jsPsych.progress().current_trial_global
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim
+	var global_trial = jsPsych.progress().current_trial_global
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
+	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet[Math.floor(Math.random() * 3)]
-			return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-				'"></img></div>'
+			probe = lastSet_top[Math.floor(Math.random() * 3)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet[Math.floor(Math.random() * 3) + 3]
-			return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-				'"></img></div>'
+			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
 		}
 	} else if (probeType == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet[Math.floor(Math.random() * 3) + 3]
-			return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-				'"></img></div>'
+			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet[Math.floor(Math.random() * 3)]
-			return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-				'"></img></div>'
+			probe = lastSet_top[Math.floor(Math.random() * 3)]
 		}
 	} else if (probeType == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet[0] && y != lastSet[1] && y != lastSet[2] && y != lastSet[3] && y !=
-				lastSet[4] && y != lastSet[5])
+			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y != lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
 		})
 		probe = newArray.pop()
-		return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-			'"></img></div>'
 	}
+	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType + '"></img></div>'
 };
 
 
@@ -232,11 +223,13 @@ var instructTimeThresh = 0 ///in seconds
 var num_trials = 24 // num trials per run
 var num_runs = 3
 var experimentLength = num_trials * num_runs
-var currTrial = 0
+var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 var cueArray = ['TOP', 'BOT']
+var probe = ''
+var probeType = ''
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
 var stimFix = ['fixation']
