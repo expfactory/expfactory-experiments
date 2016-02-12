@@ -47,18 +47,52 @@ var instructions_block = {
 };
 
 var opts1 = ["Definitely true", "mostly true", "mostly false", "definitely false"]
+var scale1 = {
+  "Definitely true": 4,
+  "mostly true": 3,
+  "mostly false": 2,
+  "definitely false": 1,
+}
 
 var opts2 = ["Only at meal times", "sometimes between meals", "often between meals",
   "almost always"
 ]
+var scale2 = {"Only at meal times": 1,
+  "sometimes between meals": 2,
+  "often between meals": 3,
+  "almost always": 4,
+  }
 
 var opts3 = ["Almost never", "seldom", "usually", "almost always"]
+var scale3 = {"Almost never": 1,
+  "seldom": 2,
+  "usually": 3,
+  "almost always":4
+}
 
 var opts4 = ["Unlikely", "slightly likely", "moderately likely", "very likely"]
+var scale4 = {"Unlikely": 1,
+  "slightly likely": 2,
+  "moderately likely": 3,
+  "very likely": 4,
+  }
 
 var opts5 = ["Never", "rarely", "sometimes", "at least once a week"]
+var scale5 = {"Never": 1,
+  "rarely": 2,
+  "sometimes": 3,
+  "at least once a week": 4,
+  }
 
 var opts6 = ["1", "2", "3", "4", "5", "6", "7", "8"]
+var scale6 = {"1": 1,
+  "2": 1,
+  "3": 2,
+  "4": 2,
+  "5": 3,
+  "6": 3,
+  "7": 4,
+  "8": 4}
 
 var all_pages = [
   [
@@ -89,35 +123,9 @@ var all_options = [fillArray(opts1, 6), fillArray(opts1, 6), [opts1, opts2, opts
 ]]
 
 //higher - more impulsiveness
-var score_scale = {
-  "Definitely true": 4,
-  "mostly true": 3,
-  "mostly false": 2,
-  "definitely false": 1,
-  "Only at meal times": 1,
-  "sometimes between meals": 2,
-  "often between meals": 3,
-  "almost always": 4,
-  "Almost never": 1,
-  "seldom": 2,
-  "usually": 3,
-  "Unlikely": 1,
-  "slightly likely": 2,
-  "moderately likely": 3,
-  "very likely": 4,
-  "Never": 1,
-  "rarely": 2,
-  "sometimes": 3,
-  "at least once a week": 4,
-  "1": 1,
-  "2": 1,
-  "3": 2,
-  "4": 2,
-  "5": 3,
-  "6": 3,
-  "7": 4,
-  "8": 4
-}
+var score_scale = [fillArray(scale1, 6), fillArray(scale1, 6), [scale1, scale2, scale3, scale4, scale5,
+  scale6
+]]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -129,12 +137,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 6), fillArray(true, 6), fillArray(true, 6)],
-  reverse_score: [
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ]
+  required: [fillArray(true, 6), fillArray(true, 6), fillArray(true, 6)]
 };
 
 var end_block = {

@@ -5,29 +5,6 @@ function getDisplayElement() {
   $('<div class = display_stage_background></div>').appendTo('body')
   return $('<div class = display_stage></div>').appendTo('body')
 }
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
@@ -51,7 +28,7 @@ function evalAttentionChecks() {
 }
 
 var getInstructFeedback = function() {
-  return '<div class = centerbox><p class = "white-text center-block-text">' +
+  return '<div class = centerbox><p class = "center-block-text">' +
     feedback_instruct_text + '</p></div>'
 }
 
@@ -61,24 +38,24 @@ var randomDraw = function(lst) {
 }
 
 var getStim = function() {
-  var bi = randomDraw([0, 1, 2, 3]) // get border index
-  var ii = randomDraw([0, 1]) // get inner index
-  var stim = stim_prefix + path_source + borders[bi] + ' </img></div></div>'
-  var stim2 = stim_prefix + path_source + borders[bi] +
-    ' </img></div></div><div class = prp_centerbox><div class = "white-text center-text">' +
-    inners[ii] + '</div></div>'
+  var border_i = randomDraw([0, 1, 2, 3]) // get border index
+  var number_i = randomDraw([0, 1]) // get inner index
+  var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
+  var stim2 = stim_prefix + path_source + borders[border_i] +
+    ' </img></div></div><div class = prp_centerbox><div class = "center-text">' +
+    inners[number_i] + '</div></div>'
     // set correct choice for first
   var gonogo_choice;
-  if (bi < 2) {
+  if (border_i < 2) {
     gonogo_choice = 75
   } else {
     gonogo_choice = -1
   }
   //update data
-  curr_data.gonogo_stim = bi
-  curr_data.choice_stim = ii
-  curr_dat.gonogo_correct_response = gonogo_choice
-  curr_data.choice_correct_response = [74, 76][ii]
+  curr_data.gonogo_stim = border_i
+  curr_data.choice_stim = number_i
+  curr_data.gonogo_correct_response = gonogo_choice
+  curr_data.choice_correct_response = [74, 76][number_i]
   return [stim, stim2]
 }
 
@@ -93,7 +70,7 @@ var getISI = function() {
   */
 var getFB = function() {
   var data = jsPsych.data.getLastTrialData()
-  var keys = JSON.parse(data.key_press)
+  var keys = JSON.parse(data.key_presses)
   var rts = JSON.parse(data.rt)
   var tooShort = false
   var gonogoFB;
@@ -153,33 +130,27 @@ var getFB = function() {
     }
   }
   if (tooShort) {
-    return '<div class = prp_centerbox><p class = "white-text center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "center-block-text">Press any key to continue</p></div>'
   } else {
-    return '<div class = prp_centerbox><p class = "white-text center-block-text">' + gonogoFB +
-      '</p><p class = "white-text center-block-text">' + choiceFB +
-      '</p><p class = "white-text center-block-text">Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "center-block-text">' + gonogoFB +
+      '</p><p class = "center-block-text">' + choiceFB +
+      '</p><p class = "center-block-text">Press any key to continue</p></div>'
   }
-}
-
-var appendData = function(data, trial_id) {
-  curr_data.trial_id = trial_id
-  curr_data.trial_num = curr_trial
-  jsPsych.data.addDataToLastTrial(curr_data)
 }
 
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var practice_len = 36
+var practice_len = 2
 var exp_len = 180
-var curr_trial = 0
+var current_trial = 0
 var choices = [74, 75, 76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
   exp_len / 9)
@@ -213,12 +184,12 @@ var box2 =
 var box_number1 =
   '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' +
   path_source + borders[0] + ' </img></div></div>' +
-  '<div class = prp_left-instruction><div class = "white-text center-text">' + inners[0] +
+  '<div class = prp_left-instruction><div class = "center-text">' + inners[0] +
   '</div></div>'
 var box_number2 =
   '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' +
   path_source + borders[1] + ' </img></div></div>' +
-  '<div class = prp_right-instruction><div class = "white-text center-text">' + inners[1] +
+  '<div class = prp_right-instruction><div class = "center-text">' + inners[1] +
   '</div></div>'
 
 
@@ -244,29 +215,19 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: 'welcome'
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
     trial_id: 'end'
   },
-  text: '<div class = prp_centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = prp_centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -285,12 +246,12 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="white-text block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="white-text block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press "K" key with your middle finger. If it is not one of those colors, you should not respond.</p></div>' +
-    box1 + box2,
-    '<div class = prp_centerbox><p class ="white-text block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
+    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press the "K" key with your middle finger. If it is not one of those colors, you should not respond.</p>' +
+    box1 + box2 + '</div>',
+    '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
-    ' press the "L" key with your ring finger.</p><p class ="white-text block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p><p class ="white-text block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue.</p></div>' +
-    box_number1 + box_number2
+    ' press the "L" key with your ring finger.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p><p class ="block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue.</p>' +
+    box_number1 + box_number2 + '</div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -324,9 +285,10 @@ var instruction_node = {
 var start_practice_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'practice_intro'
+    trial_id: 'intro',
+    exp_stage: 'practice'
   },
-  text: '<div class = prp_centerbox><p class = "white-text center-block-text">We will start ' +
+  text: '<div class = prp_centerbox><p class = "center-block-text">We will start ' +
     practice_len + ' practice trials. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -335,19 +297,20 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'test_intro'
+    trial_id: 'intro',
+    exp_stage: 'test'
   },
-  text: '<div class = prp_centerbox><p class ="white-text center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = prp_centerbox><p class ="center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
-    curr_trial = 0
+    current_trial = 0
   }
 };
 
 var fixation_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = "white-text center-text">+</div></div>',
+  stimulus: '<div class = centerbox><div class = "center-text">+</div></div>',
   is_html: true,
   timing_stim: 300,
   timing_response: 300,
@@ -355,14 +318,16 @@ var fixation_block = {
     trial_id: 'fixation'
   },
   choices: 'none',
-  response_ends_trial: true,
   timing_post_trial: 1000,
-  on_finish: changeData,
+  on_finish: function(){
+    var last_trial= jsPsych.data.getDataByTrialIndex(jsPsych.progress().current_trial_global-1)
+    jsPsych.data.addDataToLastTrial({exp_stage: last_trial.exp_stage})  
+  }
 }
 
 /* define practice block */
 var practice_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
@@ -374,8 +339,9 @@ var practice_block = {
   timing_response: 2000,
   response_ends_trial: true,
   on_finish: function() {
-    appendData('practice')
-    curr_trial += 1
+    curr_data.trial_num = current_trial
+    jsPsych.data.addDataToLastTrial(curr_data)
+    current_trial += 1
   },
   timing_post_trial: 500
 }
@@ -385,19 +351,19 @@ var feedback_block = {
   stimulus: getFB,
   is_html: true,
   data: {
-    trial_id: 'practice_feedback'
+    trial_id: 'feedback',
+    exp_stage: 'practice'
   },
   timing_stim: -1,
   timing_response: -1,
   response_ends_trial: true,
-  timing_post_trial: 500,
-  on_finish: changeData,
+  timing_post_trial: 500
 }
 
 
 /* define test block */
 var test_block = {
-  type: 'multi-stim-multi-response',
+  type: 'poldrack-multi-stim-multi-response',
   stimuli: getStim,
   is_html: true,
   data: {
@@ -408,9 +374,10 @@ var test_block = {
   timing_stim: getISI,
   respond_ends_trial: true,
   timing_response: 2000,
-  on_finish: function(data) {
-    appendData('test')
-    curr_trial += 1
+  on_finish: function() {
+    curr_data.trial_num = current_trial
+    jsPsych.data.addDataToLastTrial(curr_data)
+    current_trial += 1
   },
   timing_post_trial: 500
 }
@@ -418,7 +385,6 @@ var test_block = {
 
 /* create experiment definition array */
 var psychological_refractory_period_experiment = [];
-psychological_refractory_period_experiment.push(welcome_block);
 psychological_refractory_period_experiment.push(instruction_node);
 psychological_refractory_period_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {

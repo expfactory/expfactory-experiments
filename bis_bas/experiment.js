@@ -47,9 +47,9 @@ var instructions_block = {
   }
 };
 
-var opts = ["Very true for me", "Somewhat true for me", "Somewhat false for me",
-  "Very false for me"
-]
+var opts = ["Very true for me", "Somewhat true for me", "Somewhat false for me","Very false for me"]
+var scale_reg = {"Very true for me": 1,"Somewhat true for me": 2,"Somewhat false for me": 3,"Very false for me": 4}
+var scale_rev = {"Very true for me": 4,"Somewhat true for me": 3,"Somewhat false for me": 2,"Very false for me": 1}
 
 var all_pages = [
   ["A person's family is the most important thing in life.",
@@ -82,12 +82,11 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 10), fillArray(opts, 10), fillArray(opts, 4)]
 
-var score_scale = {
-  "Very true for me": 1,
-  "Somewhat true for me": 2,
-  "Somewhat false for me": 3,
-  "Very false for me": 4
-}
+var score_scale = [
+    [scale_rev, scale_reg, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev],
+    [scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev, scale_rev],
+    [scale_rev, scale_reg, scale_rev, scale_rev]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -99,11 +98,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 4)],
-  reverse_score: [
-    [true, false].concat(fillArray(true, 8)), fillArray(true, 10), [true, false].concat(
-      fillArray(true, 2))
-  ],
+  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 4)]
 };
 
 var end_block = {

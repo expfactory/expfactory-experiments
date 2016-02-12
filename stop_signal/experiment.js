@@ -74,7 +74,7 @@ var getTestFeedback = function() {
 	}
 	if (missed_responses >= missed_response_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+			'</p><p class = block-text>Remember to respond to each shape unless you see the black stop signal.'
 	}
 	if (average_correct < accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' +
@@ -85,7 +85,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= (1 - accuracy_thresh)) {
 		test_feedback_text +=
-			'</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
+			'</p><p class = block-text> Remember to try to withold your response if you see the black stop signal.'
 	}
 	test_feedback_text +=
 		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -150,7 +150,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -159,7 +159,7 @@ var instructTimeThresh = 0 ///in seconds
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -241,17 +241,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -264,7 +253,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -389,7 +378,6 @@ var reset_block = {
 /* ************************************ */
 
 var stop_signal_experiment = []
-stop_signal_experiment.push(welcome_block);
 stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
@@ -448,7 +436,7 @@ var NoSS_practice_node = {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 				//rerandomize stim order

@@ -47,6 +47,8 @@ var instructions_block = {
 };
 
 var opts = ["True", "False"]
+var scale_reg = {"True": 2,"False": 1}
+var scale_rev = {"True": 1,"False": 2}
 
 var all_pages = [
   [
@@ -80,10 +82,10 @@ var all_pages = [
 var all_options = [fillArray(opts, 11), fillArray(opts, 12)]
 
 //higher = more impulsive
-var score_scale = {
-  "True": 2,
-  "False": 1
-}
+var score_scale = [
+    [scale_rev, scale_reg, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_reg, scale_rev, scale_reg, scale_rev],
+    [scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_rev, scale_rev, scale_rev, scale_reg]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -95,11 +97,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 11), fillArray(true, 12)],
-  reverse_score: [
-    [true, false, false, true, false, true, false, false, true, false, true],
-    [false, true, false, false, false, false, false, false, true, true, true, false]
-  ],
+  required: [fillArray(true, 11), fillArray(true, 12)]
 };
 
 var end_block = {

@@ -52,6 +52,15 @@ var instructions_block = {
 var opts = ["No benefits at all - 1", "2", "3", "Moderate benefits - 4", "5", "6",
   "Great benefits - 7"
 ]
+var scale_reg = {
+  "No benefits at all - 1": 1,
+  "2": 2,
+  "3": 3,
+  "Moderate benefits - 4": 4,
+  "5": 5,
+  "6": 6,
+  "Great benefits - 7": 7
+}
 
 var all_pages = [
   ["Admitting that your tastes are different from those of a friend.",
@@ -88,15 +97,9 @@ var all_options = [fillArray(opts, 6), fillArray(opts, 6), fillArray(opts, 6), f
   fillArray(opts, 6)
 ]
 
-var score_scale = {
-  "No benefits at all - 1": 1,
-  "2": 2,
-  "3": 3,
-  "Moderate benefits - 4": 4,
-  "5": 5,
-  "6": 6,
-  "Great benefits - 7": 7
-}
+var score_scale = [fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6),
+  fillArray(scale_reg, 6)
+]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -110,14 +113,7 @@ var survey_block = {
   allow_backward: true,
   required: [fillArray(true, 6), fillArray(true, 6), fillArray(true, 6), fillArray(true, 6),
     fillArray(true, 6)
-  ],
-  reverse_score: [
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ],
+  ]
 };
 
 var end_block = {
