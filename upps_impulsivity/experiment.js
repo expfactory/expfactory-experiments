@@ -48,6 +48,19 @@ var instructions_block = {
 
 var opts = ["Agree Strongly", "Agree Some", "Disagree Some", "Disagree Strongly"]
 
+var scale_reg = {
+  "Agree Strongly": 1,
+  "Agree Some": 2,
+  "Disagree Some": 3,
+  "Disagree Strongly": 4
+}
+var scale_rev = {
+  "Agree Strongly": 4,
+  "Agree Some": 3,
+  "Disagree Some": 2,
+  "Disagree Strongly": 1
+}
+
 var all_pages = [
   ["I have a reserved and cautious attitude toward life.",
     "I have trouble controlling my impulses.",
@@ -112,12 +125,18 @@ var all_pages = [
 var all_options = [fillArray(opts, 15), fillArray(opts, 15), fillArray(opts, 15), fillArray(opts,
   14)]
 
-var score_scale = {
-  "Agree Strongly": 1,
-  "Agree Some": 2,
-  "Disagree Some": 3,
-  "Disagree Strongly": 4
-}
+var score_scale = [
+    [scale_reg, scale_rev, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_rev, scale_rev, scale_rev, scale_reg, scale_rev, scale_rev, scale_reg,
+      scale_rev
+    ],
+    [scale_reg, scale_rev, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_rev, scale_reg, scale_rev, scale_rev, scale_reg, scale_reg, scale_rev,
+      scale_rev
+    ],
+    [scale_rev, scale_reg, scale_reg, scale_rev, scale_rev, scale_rev, scale_reg, scale_reg, scale_rev, scale_rev, scale_rev, scale_reg, scale_reg, scale_rev,
+      scale_rev
+    ],
+    [scale_rev, scale_rev, scale_reg, scale_rev, scale_rev, scale_rev, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_rev, scale_rev, scale_rev]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -129,19 +148,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 15), fillArray(true, 15), fillArray(true, 15), fillArray(true, 14)],
-  reverse_score: [
-    [false, true, true, false, true, false, true, true, true, true, false, true, true, false,
-      true
-    ],
-    [false, true, true, false, true, false, true, true, false, true, true, false, false, true,
-      true
-    ],
-    [true, false, false, true, true, true, false, false, true, true, true, false, false, true,
-      true
-    ],
-    [true, true, false, true, true, true, true, false, true, false, true, true, true, true]
-  ]
+  required: [fillArray(true, 15), fillArray(true, 15), fillArray(true, 15), fillArray(true, 14)]
 };
 
 var end_block = {
