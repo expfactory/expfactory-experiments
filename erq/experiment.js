@@ -50,6 +50,15 @@ var instructions_block = {
 var opts = ["Strongly disagree", "Mostly disagree", "Somewhat disagree",
   "Neither agree or disagree", "Somewhat agree", "Mostly agree", "Strongly agree"
 ]
+var scale_reg = {
+  "Strongly disagree": 1,
+  "Mostly disagree": 2,
+  "Somewhat disagree": 3,
+  "Neither agree or disagree": 4,
+  "Somewhat agree": 5,
+  "Mostly agree": 6,
+  "Strongly agree": 7
+}
 
 var all_pages = [
   ["I control my emotions by changing the way I think about the situation I am in.",
@@ -67,15 +76,7 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 10)]
 
-var score_scale = {
-  "Strongly disagree": 1,
-  "Mostly disagree": 2,
-  "Somewhat disagree": 3,
-  "Neither agree or disagree": 4,
-  "Somewhat agree": 5,
-  "Mostly agree": 6,
-  "Strongly agree": 7
-}
+var score_scale = [fillArray(scale_reg, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -87,10 +88,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 10)]
 };
 
 var end_block = {

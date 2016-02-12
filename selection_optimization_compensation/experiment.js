@@ -212,7 +212,7 @@ var all_options = [
 ]
 
 //target:1 distractor:2
-var score_scale = {
+var scale_reg = {
   "I concentrate all my energy on a few things": 1,
   "I divide my energy among many things": 2,
   "I always focus on the one most important goal at a given time": 1,
@@ -310,6 +310,7 @@ var score_scale = {
   "When something does not work as well as before, I listen to advisory broadcasts and books as well": 1,
   "When something does not work as well as before, I am the one who knows what is best for me": 2
 }
+var score_scale = [fillArray(scale_reg, 12), fillArray(scale_reg, 12), fillArray(scale_reg, 12), fillArray(scale_reg, 12)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -321,13 +322,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 12), fillArray(true, 12), fillArray(true, 12), fillArray(true, 12)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 12), fillArray(true, 12), fillArray(true, 12), fillArray(true, 12)]
 };
 
 var end_block = {

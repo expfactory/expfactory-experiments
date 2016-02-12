@@ -45,6 +45,20 @@ var instructions_block = {
 };
 
 var opts = ["Not at all like me - 1", "2", "3", "4", "Very much like me - 5"]
+var scale_reg = {
+  "Not at all like me - 1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "Very much like me - 5": 5
+}
+var scale_rev = {
+  "Not at all like me - 1": 5,
+  "2": 4,
+  "3": 3,
+  "4": 2,
+  "Very much like me - 5": 1
+}
 
 var all_pages = [
   ["I often set a goal but later choose to pursue a different one.",
@@ -58,13 +72,9 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 8)]
 
-var score_scale = {
-  "Not at all like me - 1": 1,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "Very much like me - 5": 5
-}
+var score_scale = [
+    [scale_reg, scale_reg, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_reg]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -76,10 +86,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 8)],
-  reverse_score: [
-    [false, false, false, true, false, false, false, false]
-  ],
+  required: [fillArray(true, 8)]
 };
 
 var end_block = {
