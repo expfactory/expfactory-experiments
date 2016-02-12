@@ -65,6 +65,7 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('probabilistic_selection','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('psychological_refractory_period','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('random_number_generation','web','.');"
+    - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('ravens','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('recent_probes','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('selection_optimization_compensation','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('self_regulation','web','.');"
