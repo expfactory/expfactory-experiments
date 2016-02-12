@@ -119,7 +119,7 @@ var practice_instruct_block_1 = {
   timing_response: 60000,
   data: {exp_id: "ravens"}
 };
-/// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
+
 var practice_trials_1 = []   
 var practice_block_1 = {
   type: "poldrack-survey-multi-choice",
@@ -173,7 +173,26 @@ var opts = ["A", "B", "C", "D", "E", "F", "G", "H"]
 
 var all_options = fillArray([opts], 18)
 
-var score_scale = {"A":1, "B":2, "C":3, "D":4, "E":5, "F":6, "G":7, "H":8}
+var scale_q1 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q2 = {"A":0, "B":0, "C":0, "D":0, "E":1, "F":0, "G":0, "H":0}
+var scale_q3 = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":1, "H":0}
+var scale_q4 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q5 = {"A":0, "B":0, "C":1, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q6 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q7 = {"A":0, "B":0, "C":0, "D":0, "E":1, "F":0, "G":0, "H":0}
+var scale_q8 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q9 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q10 = {"A":0, "B":0, "C":0, "D":0, "E":1, "F":0, "G":0, "H":0}
+var scale_q11 = {"A":1, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q12 = {"A":0, "B":0, "C":0, "D":0, "E":1, "F":0, "G":0, "H":0}
+var scale_q13 = {"A":1, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q14 = {"A":0, "B":0, "C":1, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q15 = {"A":0, "B":1, "C":0, "D":0, "E":0, "F":0, "G":0, "H":0}
+var scale_q16 = {"A":0, "B":0, "C":0, "D":0, "E":1, "F":0, "G":0, "H":0}
+var scale_q17 = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":1, "G":0, "H":0}
+var scale_q18 = {"A":0, "B":0, "C":0, "D":1, "E":0, "F":0, "G":0, "H":0}
+
+var score_scale = [[scale_q1],[scale_q2],[scale_q3],[scale_q4],[scale_q5],[scale_q6],[scale_q7],[scale_q8],[scale_q9],[scale_q10],[scale_q11],[scale_q12],[scale_q13],[scale_q14],[scale_q15],[scale_q16],[scale_q17],[scale_q18]]
 
 /////////////////////
 // ADD correct/incorrect
