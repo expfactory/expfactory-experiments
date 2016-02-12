@@ -344,7 +344,7 @@ var instructFunction = function() {
 		'/static/experiments/columbia_card_task_hot/images/chosen.png';
 	document.getElementById("instruct1").innerHTML =
 		'<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
-
+	document.getElementById("instructRoundTotal").innerHTML = 'Current Round:  70'
 }
 
 var instructFunction2 = function() {
@@ -357,6 +357,7 @@ var instructFunction2 = function() {
 	document.getElementById("c13").src = '/static/experiments/columbia_card_task_hot/images/loss.png';
 	document.getElementById("instruct2").innerHTML =
 		'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
+	document.getElementById("instructRoundTotal2").innerHTML = 'Current Round:  -160' 
 	setTimeout(instructTurnCards, 1500)
 
 
@@ -626,19 +627,8 @@ var practiceSetup2 =
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	text: "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
-	cont_key: [13],
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial: 'welcome'
-	},
-	timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -679,7 +669,7 @@ var instructions_block = {
 	
 	'<div class = centerbox-CCT><p class = block-text><div id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
-  	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
+  	"<div class = instructBoxRight><div id = instructRoundTotal>Current Round:  0</div></div>" +
   	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
   	"<div class = instructBoxLeft1><div>Loss Amount: 750</div></div>" +
   	"<div class = instructBoxRight1><div># of Loss Cards: 1</div></div>" +
@@ -726,7 +716,7 @@ var instructions_block = {
   
 	'<div class = centerbox-CCT><p class = block-text><div id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
-  	"<div class = instructBoxRight><div>Current Round:  0</div></div>" +
+  	"<div class = instructBoxRight><div id = instructRoundTotal2>Current Round:  0</div></div>" +
   	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
   	"<div class = instructBoxLeft1><div>Loss Amount: 250</div></div>" +
   	"<div class = instructBoxRight1><div># of Loss Cards: 3</div></div>" +

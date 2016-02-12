@@ -48,6 +48,8 @@ var instructions_block = {
 };
 
 var opts = ["Rarely/Never", "Occasionally", "Often", "Almost Always/Always"]
+var scale_reg = {"Rarely/Never": 1,"Occasionally": 2,"Often": 3,"Almost Always/Always": 4}
+var scale_rev = {"Rarely/Never": 4,"Occasionally": 3,"Often": 2,"Almost Always/Always": 1}
 
 var all_pages = [
   ["I plan tasks carefully.", "I do things without thinking.", "I make-up my mind quickly.",
@@ -71,12 +73,12 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 10), fillArray(opts, 10), fillArray(opts, 10)]
 
-var score_scale = {
-  "Rarely/Never": 1,
-  "Occasionally": 2,
-  "Often": 3,
-  "Almost Always/Always": 4
-}
+var score_scale = [
+    [scale_rev, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_rev, scale_rev, scale_rev, scale_rev],
+    [scale_reg, scale_rev, scale_rev, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_reg, scale_rev],
+    [scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_reg, scale_rev, scale_rev]
+  ]
+
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -88,12 +90,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10)],
-  reverse_score: [
-    [true, false, false, false, false, false, true, true, true, true],
-    [false, true, true, false, true, false, false, false, false, true],
-    [false, false, false, false, false, false, false, false, true, true]
-  ],
+  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10)]
 };
 
 var end_block = {

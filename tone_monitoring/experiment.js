@@ -88,7 +88,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -183,20 +183,8 @@ var attention_node = {
 
 
 /* define /static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'welcome'
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -314,7 +302,6 @@ var tone_introduction_block = {
 
 //Set up experiment
 var tone_monitoring_experiment = []
-tone_monitoring_experiment.push(welcome_block);
 tone_monitoring_experiment.push(instruction_node);
 tone_monitoring_experiment.push(tone_introduction_block);
 tone_monitoring_experiment.push(start_practice_block);

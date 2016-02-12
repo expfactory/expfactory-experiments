@@ -279,17 +279,6 @@ var held_ball = 0
 /* ************************************ */
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: "practice"
-  },
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   data: {
@@ -302,7 +291,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -517,7 +506,6 @@ var problem_node = {
 
 /* create experiment definition array */
 var tower_of_london_experiment = [];
-tower_of_london_experiment.push(welcome_block);
 tower_of_london_experiment.push(instruction_node);
 tower_of_london_experiment.push(practice_node);
 tower_of_london_experiment.push(feedback_block)

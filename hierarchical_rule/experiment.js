@@ -38,12 +38,12 @@ var getFixLength = function() {
 var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   if (last_trial.key_press == -1) {
-    return '<div class = centerbox><div class = "white-text center-text">Respond faster!</div></div>'
+    return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
-    return '<div class = centerbox><div class = "white-text center-text">Correct</div></div>'
+    return '<div class = centerbox><div class = "center-text">Correct</div></div>'
   } else {
-    return '<div class = centerbox><div class = "white-text center-text">Incorrect</div></div>'
+    return '<div class = centerbox><div class = "center-text">Incorrect</div></div>'
   }
 }
 
@@ -67,7 +67,7 @@ var getFlatData = function() {
 }
 
 var getInstructFeedback = function() {
-  return '<div class = centerbox><p class = "white-text center-block-text">' +
+  return '<div class = centerbox><p class = "center-block-text">' +
     feedback_instruct_text + '</p></div>'
 }
 
@@ -75,7 +75,7 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -92,11 +92,15 @@ var choices = [74, 75, 76]
 var correct = 0 // tracks correct trials
 
 //generate stims
+//1=red, 2=blue, 3=green, 4=yellow BORDER COLORS
+//1=vertical, 2=slant, 3=horizontal ORIENTATION OF STIMS
 flat_stims = []
 hierarchical_stims = []
 colors = jsPsych.randomization.shuffle([1, 2, 3, 4]) //border colors
 stims = jsPsych.randomization.shuffle([1, 2, 3, 4, 5, 6])
 orientations = [1, 2, 3]
+color_data = ['red','blue','green','yellow']
+orientation_data = ['vertical','slant','horizontal']
 random_correct = jsPsych.randomization.repeat(choices, 6) // correct responses for random stim
 for (var c = 0; c < colors.length; c++) {
   for (var s = 0; s < stims.length / 2; s++) {
@@ -107,8 +111,8 @@ for (var c = 0; c < colors.length; c++) {
             border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s],
-            orientation: orientations[o],
-            border: colors[c],
+            orientation: orientation_data[orientations[o]-1],
+            border: color_data[colors[c]-1],
             exp_stage: "test",
             correct_response: random_correct.pop()
           }
@@ -124,9 +128,9 @@ for (var c = 0; c < colors.length; c++) {
             '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s + (stims.length / 2)],
-            orientation: orientations[o],
+            orientation: orientation_data[orientations[o]-1],
             exp_stage: "test",
-            border: colors[c],
+            border: color_data[colors[c]-1],
             correct_response: correct_response
           }
         })
@@ -177,19 +181,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-}
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -208,9 +201,9 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = "white-text block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "white-text block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
+    '<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     instructions_grid,
-    '<div class = centerbox><p class = "white-text block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "white-text block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
+    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true
@@ -246,7 +239,7 @@ var end_block = {
   data: {
     trial_id: "end"
   },
-  text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -258,7 +251,7 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = "white-text center-block-text">We will now start the test.</p><p class = "white-text center-block-text">Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">We will now start the test.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -357,7 +350,6 @@ var hierarchical_loop_node = {
 
 //Set up experiment
 var hierarchical_rule_experiment = []
-hierarchical_rule_experiment.push(welcome_block);
 hierarchical_rule_experiment.push(instruction_node);
 hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks

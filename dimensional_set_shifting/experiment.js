@@ -28,7 +28,7 @@ function addID() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = "white-text center-block-text">' +
+	return '<div class = centerbox><p class = "center-block-text">' +
 		feedback_instruct_text + '</p></div>'
 }
 
@@ -82,7 +82,7 @@ function get_data() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -156,19 +156,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	timing_response: 180000,
-	data: {
-		trial_id: "welcome"
-	},
-	text: '<div class = centerbox><p class = "white-text center-block-text">Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -187,10 +176,10 @@ var instructions_block = {
 		trial_id: "instructions"
 	},
 	pages: [
-		'<div class = centerbox><p class = "white-text block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "white-text block-text">There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>',
+		'<div class = centerbox><p class = "block-text">In this task you will see two patterns placed in two of four boxes on the screen (shown on the next screen). One of the patterns is correct. You must select the one you think is correct by pressing the arrow key corresponding to the correct box (left, right, up or down).</p><p class = "block-text">There is a rule you can follow to make sure you make the correct choice each time. The computer will be keeping track of how well you arc doing and when it is clear that you know the rule then the computer will change, but this not happen very often. To begin with, there is nothing on the screen to tell you which of the two patterns is correct, so your first choice will be a simple guess. However, the computer will give a message after each attempt to tell you whether you are right or wrong. </p></div>',
 		instruction_stim +
-		'<div class = betweenStimBox><div class = "white-text center-text">An example trial.</div></div>',
-		'<div class = centerbox><p class = "white-text block-text">Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
+		'<div class = betweenStimBox><div class = "center-text">An example trial.</div></div>',
+		'<div class = centerbox><p class = "block-text">Once again, you will see two patterns similar to what you saw on the last page. One of the patterns is correct. You select a pattern by pressing the corresponding arrow key. After you respond you will get feedback about whether you were correct. After the computer knows that you have learned the rule, the rule will change. </p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -226,7 +215,7 @@ var end_block = {
 	data: {
 		trial_id: "end"
 	},
-	text: '<div class = centerbox><p class = "white-text center-block-text">Thanks for completing this task!</p><p class = "white-text center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
@@ -330,7 +319,6 @@ var reverse_stims = {
 
 /* create experiment definition array */
 dimensional_set_shifting_experiment = []
-dimensional_set_shifting_experiment.push(welcome_block)
 dimensional_set_shifting_experiment.push(instruction_node)
 	/* define test trials */
 for (b = 0; b < blocks.length; b++) {
@@ -352,8 +340,8 @@ for (b = 0; b < blocks.length; b++) {
 		stimulus: get_stim,
 		is_html: true,
 		key_answer: get_correct_response,
-		correct_text: '<div class = centerbox><div class = "white-text center-text"><font size = 20>Correct</font></div></div>',
-		incorrect_text: '<div class = centerbox><div class = "white-text center-text"><font size = 20>Incorrect</font></div></div>',
+		correct_text: '<div class = centerbox><div class = "center-text"><font size = 20>Correct</font></div></div>',
+		incorrect_text: '<div class = centerbox><div class = "center-text"><font size = 20>Incorrect</font></div></div>',
 		choices: responses,
 		timing_response: -1,
 		timing_stim: -1,

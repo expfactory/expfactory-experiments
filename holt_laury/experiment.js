@@ -33,7 +33,7 @@ function fillArray(value, len) {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 3 ///in seconds
@@ -42,16 +42,8 @@ var instructTimeThresh = 3 ///in seconds
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -113,7 +105,7 @@ var all_options = [
 ]
 
 //higher - more impulsiveness: 1 is safe, 2 is risky
-var score_scale = {
+var scale_reg = {
   "10% chance of $100, 90% chance of $80": 1,
   "10% chance of $190, 90% chance of $5": 2,
   "20% chance of $100, 80% chance of $80": 1,
@@ -135,6 +127,7 @@ var score_scale = {
   "100% chance of $100, 0% chance of $80": 1,
   "100% chance of $190, 0% chance of $5": 2
 }
+var score_scale = [fillArray(scale_reg, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -146,10 +139,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 10)]
 };
 
 var end_block = {
@@ -162,7 +152,6 @@ var end_block = {
 
 //Set up experiment
 var holt_laury_experiment = []
-holt_laury_experiment.push(welcome_block);
 holt_laury_experiment.push(instruction_node);
 holt_laury_experiment.push(survey_block);
 holt_laury_experiment.push(end_block)
