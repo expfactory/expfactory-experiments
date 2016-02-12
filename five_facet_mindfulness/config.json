@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Five Facet Mindfulness Questionnaire",
+        "template":"jspsych",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                 "experiment.js",
+                 "style.css",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
+               ],
+        "exp_id": "five_facet_mindfulness",
+        "cognitive_atlas_task_id": "trm_56ab12e0f1a61",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://asm.sagepub.com/content/13/1/27.short",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]
