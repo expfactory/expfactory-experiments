@@ -41,8 +41,6 @@ for (var i = 0; i < top_img.length; i++) {
   all_pages.push(page)
 }
 
-
-
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -114,7 +112,7 @@ var practice_instruct_text_1 = 'Starting with first example trial.  Press <stron
 var practice_instruct_block_1 = {
   type: 'poldrack-text',
   cont_key: [13],
-  text: getPracticeIntruct,
+  text: getPracticeInstruct,
   timing_post_trial: 0,
   timing_response: 60000,
   data: {exp_id: "ravens"}
@@ -126,12 +124,13 @@ var practice_block_1 = {
   exp_id: "ravens",
   horizontal: true,
   preamble: '',
-  pages: ,
-  options: ,
-  scale: ,
+  pages: [['<div><img src = "static/experiments/ravens/images/practice/practice_top_1.jpg"</img></div><div><img src = "static/experiments/ravens/images/practice/practice_bottom_1.jpg" id="bottom_img"</img></div>'
+]],
+  options: [[["A", "B", "C", "D", "E", "F", "G", "H"]]],
+  scale: [[{"A":0, "B":0, "C":1, "D":0, "E":0, "F":0, "G":0, "H":0}]],
   show_clickable_nav: true,
   allow_backward: true,
-  required: ,
+  required: [[[true]]],
 };
 practice_trials_1.push(practice_instruct_block_1)
 practice_trials_1.push(practice_block_1)
@@ -140,29 +139,24 @@ var practice_node_1 = {
     timeline: practice_trials_1,
   /* This function defines stopping criteria */
     loop_function: function(data){
-
-    
-
-    for(i=0;i<data.length;i++){
-      if((data[i].trial_type=='poldrack-survey-multi-choice') && (data[i].score_response!=-1)){
-        rt=data[i].rt
-        sumInstructTime=sumInstructTime+rt
-      }
-    }
-    if(sumInstructTime<=instructTimeThresh*1000){
-      feedback_instruct_text = 'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
-      return true
-    } else if(sumInstructTime>instructTimeThresh*1000){
-      feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
-      return false
-    }
-    }
+    //here it should check if the answer to the question is correct
+    for(var i = 0; i<data.length; i++){
+      if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response!=1)){
+        practice_instruct_text_1 = 'That is incorrect. Please try again.'
+        return false
+      } 
+      else if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response==1)){
+        practice_instruct_text_1 = 'That is correct.'
+        return true
+      } 
+    } 
+  }
 }
 
 var start_test_block = {
   type: 'poldrack-text',
   cont_key: [13],
-  text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.</p></div>',
+  text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.Press <strong> Enter </strong> to continue.</p></div>',
   timing_post_trial: 0,
   timing_response: 60000,
   data: {exp_id: "ravens"}
@@ -194,10 +188,6 @@ var scale_q18 = {"A":0, "B":0, "C":0, "D":1, "E":0, "F":0, "G":0, "H":0}
 
 var score_scale = [[scale_q1],[scale_q2],[scale_q3],[scale_q4],[scale_q5],[scale_q6],[scale_q7],[scale_q8],[scale_q9],[scale_q10],[scale_q11],[scale_q12],[scale_q13],[scale_q14],[scale_q15],[scale_q16],[scale_q17],[scale_q18]]
 
-/////////////////////
-// ADD correct/incorrect
-/////////////////////
-
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "ravens",
@@ -222,8 +212,8 @@ var end_block = {
 //Set up experiment
 var ravens_experiment = []
 ravens_experiment.push(welcome_block);
-ravens_experiment.push(instruction_node);
-ravens_experiment.push(practice_block);
+//ravens_experiment.push(instruction_node);
+//ravens_experiment.push(practice_node_1);
 ravens_experiment.push(start_test_block);
 ravens_experiment.push(survey_block);
 ravens_experiment.push(end_block);
