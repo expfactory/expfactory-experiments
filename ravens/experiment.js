@@ -100,11 +100,7 @@ var instruction_node = {
     }
 }
 
-/////////////////////
-// ADD PRACTICE BLOCK
-/////////////////////
-
-var getPracticeInstruct = function() {
+var getPracticeInstruct1 = function() {
   return '<div class = centerbox><p class = center-block-text>' + practice_instruct_text_1+ '</p></div>'
 }
 
@@ -112,7 +108,7 @@ var practice_instruct_text_1 = 'Starting with first example trial.  Press <stron
 var practice_instruct_block_1 = {
   type: 'poldrack-text',
   cont_key: [13],
-  text: getPracticeInstruct,
+  text: getPracticeInstruct1,
   timing_post_trial: 0,
   timing_response: 60000,
   data: {exp_id: "ravens"}
@@ -142,12 +138,61 @@ var practice_node_1 = {
     //here it should check if the answer to the question is correct
     for(var i = 0; i<data.length; i++){
       if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response!=1)){
-        practice_instruct_text_1 = 'That is incorrect. Please try again.'
-        return false
+        practice_instruct_text_1 = 'That is incorrect. Please press <strong>Enter</strong> to try again.'
+        return true
       } 
       else if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response==1)){
-        practice_instruct_text_1 = 'That is correct.'
+        practice_instruct_text_1 = 'That is correct. Please press <strong>Enter</strong> to continue.'
+        return false
+      } 
+    } 
+  }
+}
+
+var getPracticeInstruct2 = function() {
+  return '<div class = centerbox><p class = center-block-text>' + practice_instruct_text_2+ '</p></div>'
+}
+
+var practice_instruct_text_2 = 'Starting with second example trial.  Press <strong> Enter </strong> to continue.'
+var practice_instruct_block_2 = {
+  type: 'poldrack-text',
+  cont_key: [13],
+  text: getPracticeInstruct2,
+  timing_post_trial: 0,
+  timing_response: 60000,
+  data: {exp_id: "ravens"}
+};
+
+var practice_trials_2 = []   
+var practice_block_2 = {
+  type: "poldrack-survey-multi-choice",
+  exp_id: "ravens",
+  horizontal: true,
+  preamble: '',
+  pages: [['<div><img src = "static/experiments/ravens/images/practice/practice_top_2.jpg"</img></div><div><img src = "static/experiments/ravens/images/practice/practice_bottom_2.jpg" id="bottom_img"</img></div>'
+]],
+  options: [[["A", "B", "C", "D", "E", "F", "G", "H"]]],
+  scale: [[{"A":0, "B":0, "C":0, "D":0, "E":0, "F":1, "G":0, "H":0}]],
+  show_clickable_nav: true,
+  allow_backward: true,
+  required: [[[true]]],
+};
+practice_trials_2.push(practice_instruct_block_2)
+practice_trials_2.push(practice_block_2)
+
+var practice_node_2 = {
+    timeline: practice_trials_2,
+  /* This function defines stopping criteria */
+    loop_function: function(data){
+    //here it should check if the answer to the question is correct
+    for(var i = 0; i<data.length; i++){
+      if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response!=1)){
+        practice_instruct_text_2 = 'That is incorrect. Please press <strong>Enter</strong> to try again.'
         return true
+      } 
+      else if((data[i].trial_type=='poldrack-survey-multi-choice')&&(data[i].score_response==1)){
+        practice_instruct_text_2 = 'That is correct. Please press <strong>Enter</strong> to continue.'
+        return false
       } 
     } 
   }
@@ -156,7 +201,7 @@ var practice_node_1 = {
 var start_test_block = {
   type: 'poldrack-text',
   cont_key: [13],
-  text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.Press <strong> Enter </strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.<br><br>Press <strong> Enter </strong> to continue.</p></div>',
   timing_post_trial: 0,
   timing_response: 60000,
   data: {exp_id: "ravens"}
@@ -212,8 +257,9 @@ var end_block = {
 //Set up experiment
 var ravens_experiment = []
 ravens_experiment.push(welcome_block);
-//ravens_experiment.push(instruction_node);
-//ravens_experiment.push(practice_node_1);
+ravens_experiment.push(instruction_node);
+ravens_experiment.push(practice_node_1);
+ravens_experiment.push(practice_node_2);
 ravens_experiment.push(start_test_block);
 ravens_experiment.push(survey_block);
 ravens_experiment.push(end_block);
