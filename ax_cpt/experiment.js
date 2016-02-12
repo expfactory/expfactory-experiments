@@ -77,7 +77,7 @@ var attention_node = {
 }
 
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 
 // task specific variables

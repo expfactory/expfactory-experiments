@@ -97,7 +97,7 @@ var convertToMins = function(time) {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
