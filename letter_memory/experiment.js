@@ -236,7 +236,7 @@ letter_memory_experiment.push(welcome_block);
 letter_memory_experiment.push(instruction_node);
 
 // set up practice
-for (var b = 0; b < practice_block_num; b++) { //practice_block_num
+for (var b = 0; b < practice_block_num; b++) { 
 	block = practice_blocks[b]
 	letter_memory_experiment.push(start_practice_block)
 	var letter_seq_block = {
@@ -266,7 +266,7 @@ for (var b = 0; b < practice_block_num; b++) { //practice_block_num
 
 
 // set up test
-for (var b = 0; b < 1; b++) { //block_num
+for (var b = 0; b < block_num; b++) { 
 	block = blocks[b]
 	letter_memory_experiment.push(start_test_block)
 	var letter_seq_block = {

@@ -85,6 +85,19 @@ var getInstructFeedback = function() {
     return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
       '</p></div>'
   }
+  
+var appendTestData = function(){
+	global_trial = jsPsych.progress().current_trial_global
+	subjectResponse = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+	correctResponse = jsPsych.data.getDataByTrialIndex(global_trial).correct_response
+	
+	if(subjectResponse == correctResponse){
+	jsPsych.data.addDataToLastTrial({correct: 'TRUE'})
+	} else if(subjectResponse != correctResponse){
+	jsPsych.data.addDataToLastTrial({correct: 'FALSE'})
+	}
+}
+
   /* ************************************ */
   /* Define experimental variables */
   /* ************************************ */
@@ -122,11 +135,11 @@ for (c = 0; c < task_colors.length; c++) {
 }
 
 //Set up experiment stimulus order
-var practice_trials = makeTrialList(36, stim, data)
+var practice_trials = makeTrialList(2, stim, data)  //36
 for (i = 0; i < practice_trials.length; i++) {
   practice_trials[i].key_answer = practice_trials[i].data.correct_response
 }
-var test_trials = makeTrialList(96, stim, data)
+var test_trials = makeTrialList(2, stim, data) //96
 
 
 
@@ -285,7 +298,9 @@ var test_block = {
   },
   is_html: true,
   choices: [49, 50, 51, 52],
-  timing_post_trial: 500
+  timing_post_trial: 500,
+  response_ends_trial: true,
+  on_finish: appendTestData,
 };
 
 /* create experiment definition array */
