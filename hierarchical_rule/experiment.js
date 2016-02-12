@@ -92,11 +92,15 @@ var choices = [74, 75, 76]
 var correct = 0 // tracks correct trials
 
 //generate stims
+//1=red, 2=blue, 3=green, 4=yellow BORDER COLORS
+//1=vertical, 2=slant, 3=horizontal ORIENTATION OF STIMS
 flat_stims = []
 hierarchical_stims = []
 colors = jsPsych.randomization.shuffle([1, 2, 3, 4]) //border colors
 stims = jsPsych.randomization.shuffle([1, 2, 3, 4, 5, 6])
 orientations = [1, 2, 3]
+color_data = ['red','blue','green','yellow']
+orientation_data = ['vertical','slant','horizontal']
 random_correct = jsPsych.randomization.repeat(choices, 6) // correct responses for random stim
 for (var c = 0; c < colors.length; c++) {
   for (var s = 0; s < stims.length / 2; s++) {
@@ -107,8 +111,8 @@ for (var c = 0; c < colors.length; c++) {
             border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s],
-            orientation: orientations[o],
-            border: colors[c],
+            orientation: orientation_data[orientations[o]-1],
+            border: color_data[colors[c]-1],
             exp_stage: "test",
             correct_response: random_correct.pop()
           }
@@ -124,9 +128,9 @@ for (var c = 0; c < colors.length; c++) {
             '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s + (stims.length / 2)],
-            orientation: orientations[o],
+            orientation: orientation_data[orientations[o]-1],
             exp_stage: "test",
-            border: colors[c],
+            border: color_data[colors[c]-1],
             correct_response: correct_response
           }
         })

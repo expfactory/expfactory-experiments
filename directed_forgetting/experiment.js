@@ -307,7 +307,7 @@ var instructions_block = {
 		trial_id: "instructions"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your training set.  You must memorize all 6 letters. </p></div>',
 		'<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
 		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
 	],
