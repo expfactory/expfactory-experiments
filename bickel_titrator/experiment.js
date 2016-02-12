@@ -206,6 +206,7 @@ var test_block = {
   },
   is_html: true,
   choices: choices,
+  response_ends_trial: true,
   on_finish: function(data) {
     var choice;
     var choice_i = choices.indexOf(data.key_press)
