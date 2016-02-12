@@ -38,25 +38,33 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-150%,-10%);
+  transform: translate(-150%, 20%);
 }
 
 .prp_right-instruction {
   width:20vw;
   height: 20vw;
-  position:absolute;
+  position: absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(50%,-10%);
+  transform: translate(50%, 20%);
 }
 
 .prp_centerbox {
-  width:40vw;
+  width: 60vw;
   height: 35vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
+}
+
+div, p {
+  color: white;
+}
+
+.jspsych-instructions-nav {
+  margin-top: 0px;
 }

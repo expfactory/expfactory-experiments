@@ -82,3 +82,11 @@
   margin-right:-50%;
   transform: translate(-50%,-50%);
 }
+
+.jspsych-instructions-nav > p {
+  color: white;
+}
+
+div, p {
+  color: white;
+}

@@ -33,7 +33,7 @@ function fillArray(value, len) {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 3 ///in seconds
@@ -42,16 +42,8 @@ var instructTimeThresh = 3 ///in seconds
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -162,7 +154,6 @@ var end_block = {
 
 //Set up experiment
 var holt_laury_experiment = []
-holt_laury_experiment.push(welcome_block);
 holt_laury_experiment.push(instruction_node);
 holt_laury_experiment.push(survey_block);
 holt_laury_experiment.push(end_block)

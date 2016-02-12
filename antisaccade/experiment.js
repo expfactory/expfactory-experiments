@@ -70,7 +70,7 @@ var changeData = function() {
   /* Define experimental variables */
   /* ************************************ */
   // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -159,17 +159,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_response: 180000,
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   data: {
@@ -182,7 +171,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -276,7 +265,6 @@ var fixation_block = {
 /* ************************************ */
 
 var antisaccade_experiment = []
-antisaccade_experiment.push(welcome_block);
 antisaccade_experiment.push(instruction_node);
 
 //Set up practice

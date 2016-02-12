@@ -27,7 +27,7 @@
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
-                                        {"fullscreen": false,
+                                        {"fullscreen": true,
                                         "display_element": "getDisplayElement",
                                         "on_trial_finish": "addID()"}
                        }      

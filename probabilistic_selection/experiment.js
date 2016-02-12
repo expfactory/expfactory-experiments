@@ -104,7 +104,7 @@ var genResponses = function(stimuli) {
 /*                 DEFINE EXPERIMENTAL VARIABLES                         */
 /*************************************************************************/
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -402,20 +402,8 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
-
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -581,7 +569,6 @@ var end_block = {
 
 /* create experiment definition array */
 var probabilistic_selection_experiment = [];
-probabilistic_selection_experiment.push(welcome_block);
 probabilistic_selection_experiment.push(instruction_node);
 probabilistic_selection_experiment.push(FP_block);
 //probabilistic_selection_experiment.push(performance_criteria);
