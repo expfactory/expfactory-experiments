@@ -36,7 +36,22 @@ var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
 }
-
+/*
+var practiceCount = 0
+var practiceBlockCount = 0
+var appendPractice = function(){
+	global_trial = jsPsych.progress().current_trial_global
+	practiceStopCount = jsPsych.data.getDataByTrialIndex(global_trial).sequence_length
+	
+	console.log(practice_blocks[b][practiceCount])
+	jsPsych.data.addDataToLastTrial({stim: practice_blocks[practiceBlockCount][practiceCount].stimulus[pathSource.length]})
+	if(practiceCount == practiceStopCount){
+	practiceCount = 0
+	practiceBlockCount = practiceBlockCount + 1
+	} else if (practiceCount != practiceStopCount){
+	practiceCount = practiceCount +1
+	}
+}	*/
 
 /* ************************************ */
 /* Define experimental variables */
@@ -53,18 +68,21 @@ var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 var practice_block_num = 2
 var practice_blocks = []
 var practice_seq_lengths = [5, 7]
+var pathSource = '<div class = centerbox><div class = center-text>'
 
 for (var b = 0; b < practice_block_num; b++) {
 	var num_trials = practice_seq_lengths[b]
 	var block_trials = []
 	for (var i = 0; i < num_trials; i++) {
+		var stim = randomDraw(letters)
 		var tmp_obj = {
-			stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) +
+			stimulus: '<div class = centerbox><div class = center-text>' + stim +
 				'</div></div>',
 			data: {
 				trial_id: 'stim',
 				exp_stage: 'practice',
-				condition: 'seq_len_' + num_trials
+				sequence_length: num_trials,
+				stimulus: stim
 			}
 		}
 		block_trials.push(tmp_obj)
@@ -78,13 +96,15 @@ for (var b = 0; b < block_num; b++) {
 	var num_trials = randomDraw([5, 7, 9, 11])
 	var block_trials = []
 	for (var i = 0; i < num_trials; i++) {
+		var testStim = randomDraw(letters)
 		var tmp_obj = {
-			stimulus: '<div class = centerbox><div class = center-text>' + randomDraw(letters) +
+			stimulus: '<div class = centerbox><div class = center-text>' + testStim +
 				'</div></div>',
 			data: {
 				trial_id: 'stim',
 				exp_stage: 'test',
-				condition: 'seq_len_' + num_trials
+				sequence_length: num_trials,
+				stimulus: testStim
 			}
 		}
 		block_trials.push(tmp_obj)
@@ -216,7 +236,7 @@ letter_memory_experiment.push(welcome_block);
 letter_memory_experiment.push(instruction_node);
 
 // set up practice
-for (var b = 0; b < practice_block_num; b++) {
+for (var b = 0; b < practice_block_num; b++) { //practice_block_num
 	block = practice_blocks[b]
 	letter_memory_experiment.push(start_practice_block)
 	var letter_seq_block = {
@@ -226,7 +246,7 @@ for (var b = 0; b < practice_block_num; b++) {
 		choices: 'none',
 		timing_stim: 2000,
 		timing_response: 2000,
-		timing_post_trial: 0
+		timing_post_trial: 0,
 	};
 	letter_memory_experiment.push(letter_seq_block)
 
@@ -246,7 +266,7 @@ for (var b = 0; b < practice_block_num; b++) {
 
 
 // set up test
-for (var b = 0; b < block_num; b++) {
+for (var b = 0; b < 1; b++) { //block_num
 	block = blocks[b]
 	letter_memory_experiment.push(start_test_block)
 	var letter_seq_block = {
@@ -256,7 +276,7 @@ for (var b = 0; b < block_num; b++) {
 		choices: 'none',
 		timing_stim: 2000,
 		timing_response: 2000,
-		timing_post_trial: 0
+		timing_post_trial: 0,
 	};
 	letter_memory_experiment.push(letter_seq_block)
 
