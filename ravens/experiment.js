@@ -26,7 +26,7 @@ var attention_check_thresh = 0.65
 var sumInstructTime = 0    //ms
 var instructTimeThresh = 3   ///in seconds
 
-var path = 'static/experiments/ravens/images/'
+var path = '/static/experiments/ravens/images/'
 var prefix = '<div><img src = "'
 var bottom_id = '" id="bottom_img'
 var postfix = '"</img></div>'
@@ -47,20 +47,13 @@ for (var i = 0; i < top_img.length; i++) {
 
 /* define static blocks */
 
-var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  data: {exp_id: "ravens"}
-};
-
-var feedback_instruct_text = 'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+var feedback_instruct_text = 'Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 60000,
+  timing_response: 180000,
   data: {exp_id: "ravens"}
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
@@ -69,8 +62,8 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>This is a test of observation and clear thinking with 18 problems. The top part of each problem is a pattern with one part cut out of it. Your task is to look at the pattern, think of what the missing part must look like to complete the pattern correctly, both along the rows and the columns, and then find the right piece out of the eight shown. Only one of the answer choices is perfectly correct.<br><br>The following page will have an example trial.</p></div>',
-    '<div class = centerbox><p class = block-text><strong>Look at the top part (the pattern) of this sample problem.</strong> Notice that going across the rows, the number of horizontal lines is equal. Going down the columns, the number of squares is equal.<div class="sample_img"><img src = "static/experiments/ravens/images/practice/sample_matrix_top.jpg"</img></div><p class= "block-text"><strong>Look at the solution of this sample problem.</strong> The best completion of the missing cell is the alternative "E)" which is selected below.</p><div class="sample_img"><img src = "static/experiments/ravens/images/practice/sample_matrix_bottom.jpg" id="bottom_img"</img></div><div class="sample_img"><img src = "static/experiments/ravens/images/practice/Opt_E_selected.png"</img></div></p></div>',
-    '<div class = centerbox>You will now complete two practice trials with feedback. The test trials will not include feedback.<p class = block-text></p></div>'
+    '<div class = centerbox><p class = block-text><strong>Look at the top part (the pattern) of this sample problem.</strong> Notice that going across the rows, the number of horizontal lines is equal. Going down the columns, the number of squares is equal.<div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_top.jpg"</img></div><p class= "block-text"><strong>Look at the solution of this sample problem.</strong> The best completion of the missing cell is the alternative "E)" which is selected below.</p><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_bottom.jpg" id="bottom_img"</img></div><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/Opt_E_selected.png"</img></div></p></div>',
+    '<div class = centerbox><p class = center-block-text>You will now complete two practice trials with feedback. The test trials will not include feedback.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -110,7 +103,7 @@ var practice_instruct_block_1 = {
   cont_key: [13],
   text: getPracticeInstruct1,
   timing_post_trial: 0,
-  timing_response: 60000,
+  timing_response: 180000,
   data: {exp_id: "ravens"}
 };
 
@@ -120,7 +113,7 @@ var practice_block_1 = {
   exp_id: "ravens",
   horizontal: true,
   preamble: '',
-  pages: [['<div><img src = "static/experiments/ravens/images/practice/practice_top_1.jpg"</img></div><div><img src = "static/experiments/ravens/images/practice/practice_bottom_1.jpg" id="bottom_img"</img></div>'
+  pages: [['<div><img src = "/static/experiments/ravens/images/practice/practice_top_1.jpg"</img></div><div><img src = "/static/experiments/ravens/images/practice/practice_bottom_1.jpg" id="bottom_img"</img></div>'
 ]],
   options: [[["A", "B", "C", "D", "E", "F", "G", "H"]]],
   scale: [[{"A":0, "B":0, "C":1, "D":0, "E":0, "F":0, "G":0, "H":0}]],
@@ -159,7 +152,7 @@ var practice_instruct_block_2 = {
   cont_key: [13],
   text: getPracticeInstruct2,
   timing_post_trial: 0,
-  timing_response: 60000,
+  timing_response: 180000,
   data: {exp_id: "ravens"}
 };
 
@@ -169,7 +162,7 @@ var practice_block_2 = {
   exp_id: "ravens",
   horizontal: true,
   preamble: '',
-  pages: [['<div><img src = "static/experiments/ravens/images/practice/practice_top_2.jpg"</img></div><div><img src = "static/experiments/ravens/images/practice/practice_bottom_2.jpg" id="bottom_img"</img></div>'
+  pages: [['<div><img src = "/static/experiments/ravens/images/practice/practice_top_2.jpg"</img></div><div><img src = "/static/experiments/ravens/images/practice/practice_bottom_2.jpg" id="bottom_img"</img></div>'
 ]],
   options: [[["A", "B", "C", "D", "E", "F", "G", "H"]]],
   scale: [[{"A":0, "B":0, "C":0, "D":0, "E":0, "F":1, "G":0, "H":0}]],
@@ -203,7 +196,7 @@ var start_test_block = {
   cont_key: [13],
   text: '<div class = centerbox><p class = block-text>You are now ready to begin the test trials.<br><br>Press <strong> Enter </strong> to continue.</p></div>',
   timing_post_trial: 0,
-  timing_response: 60000,
+  timing_response: 180000,
   data: {exp_id: "ravens"}
 };
 
@@ -256,7 +249,6 @@ var end_block = {
 
 //Set up experiment
 var ravens_experiment = []
-ravens_experiment.push(welcome_block);
 ravens_experiment.push(instruction_node);
 ravens_experiment.push(practice_node_1);
 ravens_experiment.push(practice_node_2);
