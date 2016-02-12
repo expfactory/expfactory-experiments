@@ -47,6 +47,13 @@ var instructions_block = {
 var opts = ["Very uncharacteristic", "Uncharacteristic", "Neutral", "Characteristic",
   "Very characteristic"
 ]
+var scale_reg = {
+  "Very uncharacteristic": 1,
+  "Uncharacteristic": 2,
+  "Neutral": 3,
+  "Characteristic": 4,
+  "Very characteristic": 5
+}
 
 var all_pages = [
   [
@@ -115,13 +122,8 @@ var all_pages = [
 var all_options = [fillArray(opts, 10), fillArray(opts, 10), fillArray(opts, 10), fillArray(opts,
   10), fillArray(opts, 10), fillArray(opts, 6)]
 
-var score_scale = {
-  "Very uncharacteristic": 1,
-  "Uncharacteristic": 2,
-  "Neutral": 3,
-  "Characteristic": 4,
-  "Very characteristic": 5
-}
+var score_scale = [fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg,
+  10), fillArray(scale_reg, 10), fillArray(scale_reg, 6)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -135,15 +137,7 @@ var survey_block = {
   allow_backward: true,
   required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10), fillArray(true, 10),
     fillArray(true, 10), fillArray(true, 6)
-  ],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ],
+  ]
 };
 
 var end_block = {
