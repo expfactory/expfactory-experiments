@@ -47,6 +47,13 @@ var instructions_block = {
 };
 
 var opts = ["Strongly disagree", "Somewhat disagree", "Neutral", "Somewhat agree", "Strongly agree"]
+var scale_reg = {
+  "Strongly disagree": 1,
+  "Somewhat disagree": 2,
+  "Neutral": 3,
+  "Somewhat agree": 4,
+  "Strongly agree": 5
+}
 
 var all_pages = [
   ["I don't notice the effects of my actions until it's too late.", "I put off making decision.",
@@ -82,13 +89,8 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 11), fillArray(opts, 10), fillArray(opts, 10)]
 
-var score_scale = {
-  "Strongly disagree": 1,
-  "Somewhat disagree": 2,
-  "Neutral": 3,
-  "Somewhat agree": 4,
-  "Strongly agree": 5
-}
+//no instructions on reverse scoring. judging by the factor scores using raw scores
+var score_scale = [fillArray(score_scale, 11), fillArray(score_scale, 10), fillArray(score_scale, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -100,13 +102,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 11), fillArray(true, 10), fillArray(true, 10)],
-  //no instructions on reverse scoring. judging by the factor scores using raw scores
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 11), fillArray(true, 10), fillArray(true, 10)]
 };
 
 var end_block = {
