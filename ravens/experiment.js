@@ -30,7 +30,7 @@ var getPracticeInstruct = function() {
 var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
-var instructTimeThresh = 3 ///in seconds
+var instructTimeThresh = 0 ///in seconds
 
 var path = '/static/experiments/ravens/images/'
 var prefix = '<div><img src = "'
@@ -45,6 +45,8 @@ var bottom_img = ['bottom_1.jpg', 'bottom_2.jpg', 'bottom_3.jpg', 'bottom_4.jpg'
   'bottom_11.jpg', 'bottom_12.jpg', 'bottom_13.jpg', 'bottom_14.jpg', 'bottom_15.jpg',
   'bottom_16.jpg', 'bottom_17.jpg', 'bottom_18.jpg'
 ]
+var practice_tries = 0
+var practice_thresh = 5
 
 var all_pages = []
 
@@ -173,6 +175,7 @@ var practice_node_1 = {
   timeline: [practice_feedback_block, practice_block_1],
   /* This function defines stopping criteria */
   loop_function: function(data) {
+    practice_tries += 1
     //here it should check if the answer to the question is correct
     for (var i = 0; i < data.length; i++) {
       if ((data[i].trial_type == 'poldrack-survey-multi-choice') && (data[i].score_response !=
@@ -181,7 +184,12 @@ var practice_node_1 = {
         return true
       } else if ((data[i].trial_type == 'poldrack-survey-multi-choice') && (data[i].score_response ==
           1)) {
+        practice_tries = 0
         practice_feedback_text = 'That is correct. Please press <strong>Enter</strong> to continue.'
+        return false
+      } else if (practice_tries > practice_thresh) {
+        practice_tries = 0
+        practice_feedback_text = "That is incorrect, but we'll move on. Please press <strong>Enter</strong> to continue."
         return false
       }
     }
@@ -230,6 +238,7 @@ var practice_node_2 = {
   timeline: [practice_feedback_block, practice_block_2],
   /* This function defines stopping criteria */
   loop_function: function(data) {
+    practice_trials += 1
     //here it should check if the answer to the question is correct
     for (var i = 0; i < data.length; i++) {
       if ((data[i].trial_type == 'poldrack-survey-multi-choice') && (data[i].score_response !=
@@ -239,6 +248,11 @@ var practice_node_2 = {
       } else if ((data[i].trial_type == 'poldrack-survey-multi-choice') && (data[i].score_response ==
           1)) {
         practice_feedback_text = 'That is correct. Please press <strong>Enter</strong> to continue.'
+        practice_tries = 0
+        return false
+      } else if (practice_tries > practice_thresh) {
+        practice_feedback_text = "That is incorrect, but we'll move on. Please press <strong>Enter</strong> to continue."
+        practice_tries = 0
         return false
       }
     }
