@@ -238,7 +238,7 @@ var practice_node_2 = {
   timeline: [practice_feedback_block, practice_block_2],
   /* This function defines stopping criteria */
   loop_function: function(data) {
-    practice_trials += 1
+    practice_tries += 1
     //here it should check if the answer to the question is correct
     for (var i = 0; i < data.length; i++) {
       if ((data[i].trial_type == 'poldrack-survey-multi-choice') && (data[i].score_response !=
