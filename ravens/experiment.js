@@ -57,6 +57,211 @@ for (var i = 0; i < top_img.length; i++) {
   all_pages.push(page)
 }
 
+var opts = ["A", "B", "C", "D", "E", "F", "G", "H"]
+
+var all_options = fillArray([opts], 18)
+
+var scale_q1 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q2 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 1,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q3 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 1,
+  "H": 0
+}
+var scale_q4 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q5 = {
+  "A": 0,
+  "B": 0,
+  "C": 1,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q6 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q7 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 1,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q8 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q9 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q10 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 1,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q11 = {
+  "A": 1,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q12 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 1,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q13 = {
+  "A": 1,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q14 = {
+  "A": 0,
+  "B": 0,
+  "C": 1,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q15 = {
+  "A": 0,
+  "B": 1,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q16 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 1,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+var scale_q17 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 0,
+  "E": 0,
+  "F": 1,
+  "G": 0,
+  "H": 0
+}
+var scale_q18 = {
+  "A": 0,
+  "B": 0,
+  "C": 0,
+  "D": 1,
+  "E": 0,
+  "F": 0,
+  "G": 0,
+  "H": 0
+}
+
+var score_scale = [
+  [scale_q1],
+  [scale_q2],
+  [scale_q3],
+  [scale_q4],
+  [scale_q5],
+  [scale_q6],
+  [scale_q7],
+  [scale_q8],
+  [scale_q9],
+  [scale_q10],
+  [scale_q11],
+  [scale_q12],
+  [scale_q13],
+  [scale_q14],
+  [scale_q15],
+  [scale_q16],
+  [scale_q17],
+  [scale_q18]
+]
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -269,213 +474,6 @@ var start_test_block = {
     exp_id: "ravens"
   }
 };
-
-
-var opts = ["A", "B", "C", "D", "E", "F", "G", "H"]
-
-var all_options = fillArray([opts], 18)
-
-var scale_q1 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q2 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 1,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q3 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 1,
-  "H": 0
-}
-var scale_q4 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q5 = {
-  "A": 0,
-  "B": 0,
-  "C": 1,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q6 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q7 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 1,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q8 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q9 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q10 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 1,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q11 = {
-  "A": 1,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q12 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 1,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q13 = {
-  "A": 1,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q14 = {
-  "A": 0,
-  "B": 0,
-  "C": 1,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q15 = {
-  "A": 0,
-  "B": 1,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q16 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 1,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-var scale_q17 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 0,
-  "E": 0,
-  "F": 1,
-  "G": 0,
-  "H": 0
-}
-var scale_q18 = {
-  "A": 0,
-  "B": 0,
-  "C": 0,
-  "D": 1,
-  "E": 0,
-  "F": 0,
-  "G": 0,
-  "H": 0
-}
-
-var score_scale = [
-  [scale_q1],
-  [scale_q2],
-  [scale_q3],
-  [scale_q4],
-  [scale_q5],
-  [scale_q6],
-  [scale_q7],
-  [scale_q8],
-  [scale_q9],
-  [scale_q10],
-  [scale_q11],
-  [scale_q12],
-  [scale_q13],
-  [scale_q14],
-  [scale_q15],
-  [scale_q16],
-  [scale_q17],
-  [scale_q18]
-]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
