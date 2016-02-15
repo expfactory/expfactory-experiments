@@ -42,12 +42,20 @@ var arraysEqual = function(arr1, arr2) {
   return true;
 }
 
+var randomDraw = function(lst) {
+  var index = Math.floor(Math.random() * (lst.length))
+  return lst[index]
+}
+
 var setStims = function() {
   curr_seq = []
   stim_array = []
   time_array = []
+  var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  var last_num = 0
   for (var i = 0; i < num_digits; i++) {
-    var num = Math.floor(Math.random() * 9) + 1
+    var num = randomDraw(nums.filter(function(x) {return x!=last_num}))
+    last_num = num
     curr_seq.push(num)
     stim_array.push('<div class = centerbox><div class = digit-span-text>' + num.toString() +
       '</div></div>')
