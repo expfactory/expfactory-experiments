@@ -156,6 +156,12 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+// Define and load images
+var prefix = '/static/experiments/stop_signal/images/'
+var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
+  'diamond.png'
+]
+jsPsych.pluginAPI.preloadImages(images, function(){ console.log('finished') });
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
@@ -179,26 +185,25 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'square.png></img></div>',
-	data: {
-		correct_response: correct_responses[0][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+  data: {
+    correct_response: correct_responses[0][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'circle.png></img></div>',
-	data: {
-		correct_response: correct_responses[1][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
+  data: {
+    correct_response: correct_responses[1][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = stim src = ' + prefix +
-		'triangle.png></img></div>',
-	data: {
-		correct_response: correct_responses[2][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
+  data: {
+    correct_response: correct_responses[2][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'diamond.png></img></div>',
-	data: {
-		correct_response: correct_responses[3][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
+  data: {
+    correct_response: correct_responses[3][1]
+  }
 }]
 
 var NoSSpractice_block_len = 12
