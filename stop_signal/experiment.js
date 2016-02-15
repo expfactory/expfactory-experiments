@@ -161,7 +161,7 @@ var prefix = '/static/experiments/stop_signal/images/'
 var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
   'diamond.png'
 ]
-jsPsych.pluginAPI.preloadImages(images, function(){ console.log('finished') });
+jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
