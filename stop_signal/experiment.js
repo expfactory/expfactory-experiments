@@ -179,22 +179,23 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-	stimulus: '<div class = shapebox><img class = square></img></div>',
+	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'square.png></img></div>',
 	data: {
 		correct_response: correct_responses[0][1]
 	}
 }, {
-	stimulus: '<div class = shapebox><img class = circle></img></div>',
+	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'circle.png></img></div>',
 	data: {
 		correct_response: correct_responses[1][1]
 	}
 }, {
-	stimulus: '<div class = shapebox><img class = triangle></img></div>',
+	stimulus: '<div class = shapebox><img class = stim src = ' + prefix +
+		'triangle.png></img></div>',
 	data: {
 		correct_response: correct_responses[2][1]
 	}
 }, {
-	stimulus: '<div class = shapebox><img class = diamond></img></div>',
+	stimulus: '<div class = shapebox><img class = stim src = ' + prefix + 'diamond.png></img></div>',
 	data: {
 		correct_response: correct_responses[3][1]
 	}
@@ -439,7 +440,7 @@ var NoSS_practice_node = {
 				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
-				//rerandomize stim order
+			//rerandomize stim order
 			NoSS_practice_list = jsPsych.randomization.repeat(stimulus, 3, true)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
@@ -540,7 +541,7 @@ var practice_node = {
 				' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
 			return false;
 		} else {
-				//rerandomize stim and stop_trial order
+			//rerandomize stim and stop_trial order
 			practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
 			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
 					'go', 'go', 'go', 'go'

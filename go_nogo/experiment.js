@@ -68,7 +68,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
-  ['go', 32, 'respond'],
+  ['go', 32, 'respond by pressing the spacebar'],
   ['nogo', -1, 'not respond']
 ], 1)
 var gap = 0
@@ -168,12 +168,11 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p></div>',
-    '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should <strong>' +
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should <strong>' +
     correct_responses[0][2] +
     '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
     correct_responses[1][2] +
-    '</strong>.</p><p class = block-text>You will get feedback telling you if you were correct.</p></div>'
+    '</strong>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
