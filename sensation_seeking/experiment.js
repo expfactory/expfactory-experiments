@@ -213,7 +213,7 @@ var scale_reg = {
   "I prefer friends who are exciting unpredictable.": 2,
   "I prefer friends who are reliable and predictable.": 1,
   "When I go on a vacation I prefer the comfort of a good room and bed.": 1,
-  "When I go on a vacation vaould prefer the change of camping out.": 2,
+  "When I go on a vacation I prefer the change of camping out.": 2,
   "The essence of good art is in its clarity. symmetry of form, and harmony of colors.": 1,
   "I often ﬁnd beauty in the clashing colors and irregular forms of modern paintings.": 2,
   "The worst social sin is to be rude.": 1,

@@ -33,7 +33,7 @@
 }
 
 
-img.square {
+.stim {
     height: auto;
     width: auto\9; /* ie8 */
     position: absolute;  
@@ -42,44 +42,8 @@ img.square {
     left: 0;  
     right: 0;  
     margin: auto;  
-    content:url('images/square.png')
 }
 
-img.circle {
-    height: auto;
-    width: auto\9; /* ie8 */
-    position: absolute;  
-    top: 0;  
-    bottom: 0;  
-    left: 0;  
-    right: 0;  
-    margin: auto;  
-    content:url('images/circle.png')
-}
-
-img.triangle {
-    height: auto;
-    width: auto\9; /* ie8 */
-    position: absolute;  
-    top: 0;  
-    bottom: 0;  
-    left: 0;  
-    right: 0;  
-    margin: auto;  
-    content:url('images/triangle.png')
-}
-
-img.diamond {
-    height: auto;
-    width: auto\9; /* ie8 */
-    position: absolute;  
-    top: 0;  
-    bottom: 0;  
-    left: 0;  
-    right: 0;  
-    margin: auto;  
-    content:url('images/diamond.png')
-}
 
 .stopbox {
   width: 20%;

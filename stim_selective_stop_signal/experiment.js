@@ -182,6 +182,13 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+// Define and load images
+var prefix = '/static/experiments/stim_selective_stop_signal/images/'
+var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
+  'diamond.png'
+]
+jsPsych.pluginAPI.preloadImages(images);
+
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
@@ -207,22 +214,22 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-  stimulus: '<div class = shapebox><img class = square></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
     correct_response: correct_responses[0][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = circle></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
     correct_response: correct_responses[1][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = triangle></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
     correct_response: correct_responses[2][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = diamond></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
     correct_response: correct_responses[3][1]
   }
@@ -459,7 +466,7 @@ var NoSS_practice_node = {
     practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
       " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
     if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
+        missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
@@ -483,7 +490,8 @@ var NoSS_practice_node = {
         practice_feedback_text +=
           '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
       }
-      practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
+      practice_feedback_text +=
+        '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
     }
   }
@@ -558,7 +566,8 @@ var practice_node = {
     practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
       " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
     if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions > practice_repetition_thresh) {
+        missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions >
+      practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
@@ -590,7 +599,8 @@ var practice_node = {
         practice_feedback_text +=
           '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
       }
-      practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
+      practice_feedback_text +=
+        '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
     }
   }
@@ -645,7 +655,8 @@ for (var b = 0; b < numblocks; b++) {
     stop_signal_exp_block.push(stop_signal_block)
   }
 
-  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(stop_signal_exp_block)
+  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(
+    stop_signal_exp_block)
   if ($.inArray(b, [0, 1, 4]) != -1) {
     stim_selective_stop_signal_experiment.push(attention_node)
   }

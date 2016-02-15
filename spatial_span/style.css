@@ -10,7 +10,7 @@
 
 
 /* css for numpad */
-.square {
+.click_square, .square {
     float:left;
     position: relative;
     width: 18%;
@@ -41,11 +41,11 @@
     animation: color-change 1s forwards;
 }
 
-.square:hover, .submit_button:hover, .clear_button:hover {
+.click_square:hover, .submit_button:hover, .clear_button:hover {
     background-color: black;
 }
 
-.square:active, .submit_button:active, .clear_button:active {
+.click_square:active, .submit_button:active, .clear_button:active {
     background-color: red;
 }
 

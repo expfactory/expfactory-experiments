@@ -55,8 +55,8 @@ function getGame() {
 		round_over = 0
 		trial_num = 0
 		game_state = game_setup
-		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
-		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
+		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank.toFixed([2]))
+		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank.toFixed([2]))
 		game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', 0)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
@@ -76,8 +76,8 @@ function getGame() {
 			game_state = appendTextAfter(game_state, '# Blue Fish in lake: </strong>', total_fish_num -
 				red_fish_num)
 		}
-		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
-		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
+		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank.toFixed([2]))
+		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank.toFixed([2]))
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
 		if (release == "Keep") {
@@ -187,7 +187,6 @@ function goFish() {
 				total_fish_num -= 1
 			}
 			trip_bank += pay
-			trip_bank = Math.round(trip_bank * 100) / 100
 			last_pay = pay
 
 		}
@@ -199,16 +198,16 @@ function goFish() {
 function collect() {
 	round_over = 1
 	round_num += 1
-	round_over_text = "You collected the money from the trip bank ($" + trip_bank +
+	round_over_text = "You collected the money from the trip bank ($" + trip_bank.toFixed([2]) +
 		") and moved it to your tournament bank."
 		// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
 	tournament_bank += trip_bank
-	tournment_bank = Math.round(tournament_bank * 100) / 100
+	tournment_bank = tournament_bank
 	trip_bank = 0
 	$(".redfish").remove();
 	$(".bluefish").remove();
-	$('#tournament_bank').html('<strong>Tournament Bank:</strong> $' + tournament_bank)
-	$('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank)
+	$('#tournament_bank').html('<strong>Tournament Bank:</strong> $' + tournament_bank.toFixed([2]))
+	$('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank.toFixed([2]))
 	red_fish_num = 0
 	total_fish_num = 0
 	lake_state = $('.lake').html()
@@ -387,8 +386,8 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
 	"<div class = imgbox></div>" +
 	"</div>" +
 	"<div class = subinfocontainer>" +
-	"<div class = infobox><p class = info-text id = trip_bank>&nbsp<strong>Trip Bank: </strong>$</p></div> " +
-	"<div class = infobox><p class = info-text id = tournament_bank>&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
+	"<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank: </strong>$</p></div> " +
+	"<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank: </strong>$</p></div>" +
 	"</div>" +
 	"</div>" +
 	"<div class = buttonbox><button id = 'goFish' class = select-button onclick = goFish()>Go Fish</button><button id = 'Collect' class = select-button onclick = collect()>Collect</button></div>"

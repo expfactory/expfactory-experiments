@@ -42,24 +42,32 @@ var arraysEqual = function(arr1, arr2) {
   return true;
 }
 
+var randomDraw = function(lst) {
+  var index = Math.floor(Math.random() * (lst.length))
+  return lst[index]
+}
+
 var setStims = function() {
   curr_seq = []
   stim_array = [first_grid]
   time_array = [500]
+  var spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+  var last_space = 0
   for (var i = 0; i < num_spaces; i++) {
-    var num = Math.floor(Math.random() * 25) + 1
+    var space = randomDraw(spaces.filter(function(x) {return x!=last_space}))
+    last_space = space
     stim_grid = '<div class = numbox>'
     for (var j = 1; j < 26; j++) {
-      if (j == num) {
+      if (j == space) {
         stim_grid += '<button id = button_' + j +
-          ' class = "square red" onclick = "recordClick(this)"><div class = content></div></button>'
+          ' class = "square red" ><div class = content></div></button>'
       } else {
         stim_grid += '<button id = button_' + j +
-          ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+          ' class = "square"><div class = content></div></button>'
       }
     }
     stim_grid += '</div>'
-    curr_seq.push(num)
+    curr_seq.push(space)
     stim_array.push(stim_grid)
     time_array.push(stim_time)
   }
@@ -122,7 +130,7 @@ for (var i = 1; i < 26; i++) {
 var response_grid = '<div class = numbox>'
 for (var i = 1; i < 26; i++) {
   response_grid += '<button id = button_' + i +
-    ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+    ' class = "click_square" onclick = "recordClick(this)"><div class = content></div></button>'
 }
 response_grid +=
   '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
@@ -172,7 +180,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
+    '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you. Do your best to memorize the sequence, but do not write them down or use any other external tool to help you remember them.</p><p class = block-text></p><p class = block-text>Trials will start after you end instructions. </p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -291,7 +299,7 @@ var forward_response_block = {
         num_spaces -= 1
       }
       errors += 1
-      feedback = 'Incorrect!'
+      feedback = 'Incorrect'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
@@ -330,7 +338,7 @@ var reverse_response_block = {
         num_spaces -= 1
       }
       errors += 1
-      feedback = 'Incorrect!'
+      feedback = 'Incorrect'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
