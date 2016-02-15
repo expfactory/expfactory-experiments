@@ -60,10 +60,10 @@ var setStims = function() {
     for (var j = 1; j < 26; j++) {
       if (j == space) {
         stim_grid += '<button id = button_' + j +
-          ' class = "square red" onclick = "recordClick(this)"><div class = content></div></button>'
+          ' class = "square red" ><div class = content></div></button>'
       } else {
         stim_grid += '<button id = button_' + j +
-          ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+          ' class = "square"><div class = content></div></button>'
       }
     }
     stim_grid += '</div>'
@@ -130,7 +130,7 @@ for (var i = 1; i < 26; i++) {
 var response_grid = '<div class = numbox>'
 for (var i = 1; i < 26; i++) {
   response_grid += '<button id = button_' + i +
-    ' class = "square" onclick = "recordClick(this)"><div class = content></div></button>'
+    ' class = "click_square" onclick = "recordClick(this)"><div class = content></div></button>'
 }
 response_grid +=
   '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
