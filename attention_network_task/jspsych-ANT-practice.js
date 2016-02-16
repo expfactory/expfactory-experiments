@@ -25,6 +25,7 @@ jsPsych.plugins.attention_network_task_practice = (function() {
     trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
     trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
     // timing params
+    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? false : trial.response_ends_trial;
     trial.timing_stim = trial.timing_stim || -1; // default is to show image until response
     trial.timing_response = trial.timing_response || -1; // default is no max response time
     trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
@@ -70,6 +71,10 @@ jsPsych.plugins.attention_network_task_practice = (function() {
     // create response function
     var after_response = function(info) {
 
+      // after a valid response, the stimulus will have the CSS class 'responded'
+      // which can be used to provide visual feedback that a response was recorded
+      $("#jspsych-ant-stimulus").addClass('responded');
+
       // kill any remaining setTimeout handlers
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
         clearTimeout(setTimeoutHandlers[i]);
@@ -83,18 +88,44 @@ jsPsych.plugins.attention_network_task_practice = (function() {
         correct = true;
       }
 
+      //calculate stim and block duration
+      var stim_duration = trial.timing_stim
+      var block_duration = trial.timing_response
+      if (trial.response_ends_trial & info.rt != -1) {
+          block_duration = info.rt
+      }
+      if (stim_duration != -1) {
+        stim_duration = Math.min(block_duration,trial.timing_stim)
+      } else {
+        stim_duration = block_duration
+      }
+
       // save data
       trial_data = {
         "rt": info.rt,
         "correct": correct,
         "stimulus": trial.stimulus,
-        "key_press": info.key
+        "key_press": info.key,
+        "correct_response": trial.key_answer,
+        "possible_responses": trial.choices,
+        "stim_duration": stim_duration,
+        "block_duration": block_duration,
+        "feedback_duration": trial.timing_feedback_duration,
+        "timing_post_trial": trial.timing_post_trial
       };
 
-      display_element.html('');
-
       var timeout = info.rt == -1;
-      doFeedback(correct, timeout, info.rt);
+      // if response ends trial display feedback immediately
+      if (trial.response_ends_trial || info.rt == -1) {
+        display_element.html('');
+        doFeedback(correct, timeout, info.rt);
+      // otherwise wait until timing_response is reached
+      } else {
+        setTimeout(function() {
+          display_element.html('');
+          doFeedback(correct, timeout, info.rt);
+        }, trial.timing_response - info.rt);
+      }
     }
 
     jsPsych.pluginAPI.getKeyboardResponse({
