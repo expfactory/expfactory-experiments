@@ -141,9 +141,9 @@ var practice_block = jsPsych.randomization.repeat(test_stimuli.slice(0, 12).conc
 	18, 21)).concat(test_stimuli.slice(36, 45)), 1, true);
 
 /* set up repeats for three test blocks */
-var block1_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
-var block2_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
-var block3_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
+var block1_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
+var block2_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
+var block3_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
 var blocks = [block1_trials, block2_trials, block3_trials]
 
 
@@ -399,12 +399,12 @@ for (i = 0; i < block.data.length; i++) {
 
 	block.data[i].trial_num = trial_num
 	var attention_network_task_practice_trial = {
-		type: 'attention_network_task_practice',
+		type: 'poldrack-categorize',
 		stimulus: block.image[i],
 		is_html: true,
 		key_answer: block.data[i].correct_response,
-		correct_text: '<div class = centerbox><div class = center-text>Correct. <br></br>Reaction time: RT ms.</div></div>',
-		incorrect_text: '<div class = centerbox><div class = center-text>Incorrect. <br></br>Reaction time: RT ms.</div></div>',
+		correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
 		choices: [37, 39],
 		data: block.data[i],
