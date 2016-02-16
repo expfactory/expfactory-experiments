@@ -213,8 +213,8 @@ var choose_second_stage = function() {
 	var stim_ids = curr_fs_stims.data[current_trial].condition
 	if (action == -1) {
 		FB_on = 0;
-		return "<div class = centerbox style = text-align:center><p style = font-size:30px>" +
-			"Please respond faster </p></div>"
+		return "<div class = centerbox><div class = center-text>" +
+			"Please respond faster!</div></div>"
 	} else {
 		FB_on = 1;
 		stage = stim_ids[action]
@@ -284,8 +284,8 @@ After FB, the FB_atrix is updated.
 */
 var get_feedback = function() {
 	if (action == -1) {
-		return "<div class = centerbox style = text-align:center><p style = font-size:30px>" +
-			"Please respond faster </p></div>"
+		return "<div class = centerbox><div class = center-text>" +
+			"Please respond faster!</div></div>"
 	} else if (Math.random() < FB_matrix[second_selected - 2]) {
 		update_FB();
 		FB = 1
@@ -531,7 +531,6 @@ var intertrial_wait_update_FB = {
 		trial_id: 'wait_update_FB'
 	},
 	stimulus: update_FB_data, //dummy stimulus. Returns "" but updates previous trial
-	continue_after_response: false,
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,
@@ -543,8 +542,7 @@ var intertrial_wait = {
 	data: {
 		trial_id: 'wait'
 	},
-	stimulus: "", //dummy stimulus. Returns "" but updates previous trial
-	continue_after_response: false,
+	stimulus: " ", //dummy stimulus. Returns "" but updates previous trial
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,
