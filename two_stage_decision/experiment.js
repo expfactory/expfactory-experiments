@@ -1,31 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var changeData = function() {
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-}
-
-
 function getDisplayElement() {
 	$('<div class = display_stage_background></div>').appendTo('body')
 	return $('<div class = display_stage></div>').appendTo('body')
@@ -96,13 +71,13 @@ var change_phase = function() {
 		curr_colors = test_colors
 		curr_fs_stims = test_fs_stims
 		curr_ss_stim = test_ss_stim
-		phase = 'test'
+		exp_stage = 'test'
 	} else {
 		curr_images = practice_images
 		curr_colors = practice_colors
 		curr_fs_stims = practice_fs_stims
 		curr_ss_stim = practice_ss_stim
-		phase = 'practice'
+		exp_stage = 'practice'
 	}
 	current_trial = -1 //reset count
 }
@@ -207,7 +182,7 @@ var get_first_selected = function() {
 	jsPsych.data.addDataToLastTrial({
 		condition: stim_ids,
 		trial_num: current_trial,
-		trial_id: phase + '_first_stage'
+		trial_id: 'first_stage'
 	})
 	if (action != -1) {
 		first_selected = stim_ids[action]
@@ -267,7 +242,7 @@ var get_second_selected = function() {
 	jsPsych.data.addDataToLastTrial({
 		condition: stim_ids,
 		trial_num: current_trial,
-		trial_id: phase + '_second_stage'
+		trial_id: 'second_stage'
 	})
 	if (action != -1) {
 		second_selected = stim_ids[action]
@@ -330,7 +305,7 @@ var update_FB_data = function() {
 	jsPsych.data.addDataToLastTrial({
 		condition: FB,
 		trial_num: current_trial,
-		trial_id: phase + '_FB_stage',
+		trial_id: 'FB_stage',
 		FB_probs: FB_matrix.slice(0)
 	})
 	return ""
@@ -361,7 +336,7 @@ var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
 var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the four final stimulus
-var phase = 'practice'
+var exp_stage = 'practice'
 
 // Actions for left and right
 var actions = [37, 39]
@@ -378,7 +353,7 @@ var curr_colors = practice_colors
 var test_images = jsPsych.randomization.repeat(
 	["/static/experiments/two_stage_decision/images/11.png",
 		"/static/experiments/two_stage_decision/images/12.png",
-		"/static/experiments/two_stage_decision/images/[13].png",
+		"/static/experiments/two_stage_decision/images/13.png",
 		"/static/experiments/two_stage_decision/images/14.png",
 		"/static/experiments/two_stage_decision/images/15.png",
 		"/static/experiments/two_stage_decision/images/16.png",
@@ -392,6 +367,10 @@ var practice_images = jsPsych.randomization.repeat(
 		"/static/experiments/two_stage_decision/images/84.png",
 		"/static/experiments/two_stage_decision/images/85.png",
 	], 1)
+
+//Preload images
+jsPsych.pluginAPI.preloadImages(practice_images)
+jsPsych.pluginAPI.preloadImages(test_images)
 
 var curr_images = practice_images
 
@@ -471,7 +450,7 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
 		'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or not on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
 		'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
-		'<div class = centerbox><p class = block-text>After you press "Next" we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
+		'<div class = centerbox><p class = block-text>After you end instructions we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -595,7 +574,11 @@ var first_stage = {
 	data: {
 		trial_id: 'first_stage'
 	},
-	on_finish: changeData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var first_stage_selected = {
@@ -609,7 +592,11 @@ var first_stage_selected = {
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: changeData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var second_stage = {
@@ -624,7 +611,11 @@ var second_stage = {
 	timing_response: 2000,
 	response_ends_trial: true,
 	timing_post_trial: 0,
-	on_finish: changeData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var second_stage_selected = {
@@ -638,7 +629,11 @@ var second_stage_selected = {
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: changeData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var FB_stage = {
@@ -653,7 +648,11 @@ var FB_stage = {
 	timing_response: 500,
 	continue_after_response: false,
 	timing_post_trial: 0,
-	on_finish: changeData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var FB_node = {
