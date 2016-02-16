@@ -66,8 +66,7 @@ var getTestFeedback = function() {
 	var average_correct = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 	var stop_percent = successful_stops / stop_length
-	test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " +
-		Math.round(average_correct * 100) + "%"
+	test_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 	if (average_rt > RT_thresh) {
 		test_feedback_text +=
 			'</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
@@ -438,8 +437,7 @@ var NoSS_practice_node = {
 		var average_rt = sum_rt / num_responses;
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
 				missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
 			// end the loop
@@ -540,8 +538,7 @@ var practice_node = {
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
 		var stop_percent = successful_stops / stop_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
 				missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions >
 			practice_repetition_thresh) {

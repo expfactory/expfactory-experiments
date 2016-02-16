@@ -47,29 +47,6 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
-var changeData = function() {
-	data = jsPsych.data.getData()
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-}
 
 
 /* ************************************ */
@@ -86,6 +63,7 @@ var instructTimeThresh = 0 ///in seconds
 var locations = ['up', 'down']
 var cues = ['nocue', 'center', 'double', 'spatial']
 var current_trial = 0
+var exp_stage = 'practice'
 var test_stimuli = []
 for (l = 0; l < locations.length; l++) {
 	var loc = locations[l]
@@ -163,9 +141,9 @@ var practice_block = jsPsych.randomization.repeat(test_stimuli.slice(0, 12).conc
 	18, 21)).concat(test_stimuli.slice(36, 45)), 1, true);
 
 /* set up repeats for three test blocks */
-var block1_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
-var block2_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
-var block3_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 2, true);
+var block1_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
+var block2_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
+var block3_trials = jsPsych.randomization.repeat($.extend(true, [], test_stimuli), 1, true);
 var blocks = [block1_trials, block2_trials, block3_trials]
 
 
@@ -193,10 +171,11 @@ var practice_intro_block = {
 	text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "practice_intro"
+		trial_id: "intro",
+		exp_stage: "practice"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 1000
 };
 
 var test_intro_block = {
@@ -204,10 +183,14 @@ var test_intro_block = {
 	text: '<div class = centerbox><p class = center-block-text>We will now start the test.  Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "test_intro"
+		trial_id: "intro",
+		exp_stage: "test"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 1000,
+	on_finish: function() {
+		exp_stage = 'test'
+	}
 };
 
 var end_block = {
@@ -236,10 +219,10 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
-  type: 'poldrack-instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p></div>',
-	'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p></div>'	
+	type: 'poldrack-instructions',
+	pages: [
+		'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p></div>',
+		'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p></div>'
 	],
 	allow_keys: false,
 	data: {
@@ -254,11 +237,11 @@ instruction_trials.push(instructions_block)
 var instruction_node = {
 	timeline: instruction_trials,
 	/* This function defines stopping criteria */
-    loop_function: function(data){
-		for(i=0;i<data.length;i++){
-			if((data[i].trial_type=='poldrack-instructions') && (data[i].rt!=-1)){
-				rt=data[i].rt
-				sumInstructTime=sumInstructTime+rt
+	loop_function: function(data) {
+		for (i = 0; i < data.length; i++) {
+			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
+				rt = data[i].rt
+				sumInstructTime = sumInstructTime + rt
 			}
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
@@ -294,7 +277,11 @@ var fixation = {
 	timing_post_trial: 0,
 	timing_stim: 400,
 	timing_response: 400,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var no_cue = {
@@ -309,7 +296,11 @@ var no_cue = {
 	timing_post_trial: 0,
 	timing_stim: 100,
 	timing_response: 100,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 var center_cue = {
@@ -324,7 +315,11 @@ var center_cue = {
 	timing_post_trial: 0,
 	timing_stim: 100,
 	timing_response: 100,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 
 }
 
@@ -340,7 +335,11 @@ var double_cue = {
 	timing_post_trial: 0,
 	timing_stim: 100,
 	timing_response: 100,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 }
 
 /* set up ANT experiment */
@@ -351,7 +350,7 @@ attention_network_task_experiment.push(practice_intro_block);
 /* set up ANT practice */
 var trial_num = 0
 var block = practice_block
-for (i = 0; i < block.data.length; i++) { 
+for (i = 0; i < block.data.length; i++) {
 	var trial_num = trial_num + 1
 	var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 	var first_fixation = {
@@ -367,8 +366,7 @@ for (i = 0; i < block.data.length; i++) {
 		},
 		timing_post_trial: 0,
 		timing_stim: first_fixation_gap,
-		timing_response: first_fixation_gap,
-		on_finish: changeData,
+		timing_response: first_fixation_gap
 	}
 	attention_network_task_experiment.push(first_fixation)
 
@@ -386,15 +384,14 @@ for (i = 0; i < block.data.length; i++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-	
+
 				trial_id: 'spatialcue',
 				exp_stage: 'practice',
 				duration: 100
 			},
 			timing_post_trial: 0,
 			timing_stim: 100,
-			timing_response: 100,
-			on_finish: changeData,
+			timing_response: 100
 		}
 		attention_network_task_experiment.push(spatial_cue)
 	}
@@ -402,12 +399,12 @@ for (i = 0; i < block.data.length; i++) {
 
 	block.data[i].trial_num = trial_num
 	var attention_network_task_practice_trial = {
-		type: 'attention_network_task_practice',
+		type: 'poldrack-categorize',
 		stimulus: block.image[i],
 		is_html: true,
 		key_answer: block.data[i].correct_response,
-		correct_text: '<div class = centerbox><div class = center-text>Correct. <br></br>Reaction time: RT ms.</div></div>',
-		incorrect_text: '<div class = centerbox><div class = center-text>Incorrect. <br></br>Reaction time: RT ms.</div></div>',
+		correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
 		choices: [37, 39],
 		data: block.data[i],
@@ -416,7 +413,11 @@ for (i = 0; i < block.data.length; i++) {
 		timing_feedback_duration: 1000,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
-		on_finish: changeData,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+				exp_stage: exp_stage
+			})
+		}
 
 	}
 	attention_network_task_experiment.push(attention_network_task_practice_trial)
@@ -444,9 +445,9 @@ attention_network_task_experiment.push(test_intro_block);
 
 /* Set up ANT main task */
 var trial_num = 0
-for (b = 0; b < blocks.length; b++) { 
+for (b = 0; b < blocks.length; b++) {
 	var block = blocks[b]
-	for (i = 0; i < block.data.length; i++) { 
+	for (i = 0; i < block.data.length; i++) {
 		var trial_num = trial_num + 1
 		var first_fixation_gap = Math.floor(Math.random() * 1200) + 400;
 		var first_fixation = {
@@ -455,14 +456,14 @@ for (b = 0; b < blocks.length; b++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-	
+
 				trial_id: "fixation",
 				exp_stage: 'test',
 				duration: first_fixation_gap
 			},
 			timing_post_trial: 0,
 			timing_stim: first_fixation_gap,
-			timing_response: first_fixation_gap,
+			timing_response: first_fixation_gap
 		}
 		attention_network_task_experiment.push(first_fixation)
 
@@ -480,14 +481,14 @@ for (b = 0; b < blocks.length; b++) {
 				is_html: true,
 				choices: 'none',
 				data: {
-		
+
 					trial_id: "spatialcue",
 					exp_stage: 'test',
 					duration: 100
 				},
 				timing_post_trial: 0,
 				timing_stim: 100,
-				timing_response: 100,
+				timing_response: 100
 			}
 			attention_network_task_experiment.push(spatial_cue)
 		}
@@ -503,7 +504,11 @@ for (b = 0; b < blocks.length; b++) {
 			timing_response: 1700,
 			timing_stim: 1700,
 			timing_post_trial: 0,
-			on_finish: changeData,
+			on_finish: function() {
+				jsPsych.data.addDataToLastTrial({
+					exp_stage: exp_stage
+				})
+			}
 		}
 		attention_network_task_experiment.push(ANT_trial)
 
@@ -513,7 +518,7 @@ for (b = 0; b < blocks.length; b++) {
 			is_html: true,
 			choices: 'none',
 			data: {
-	
+
 				trial_id: "fixation",
 				exp_stage: 'test'
 			},
