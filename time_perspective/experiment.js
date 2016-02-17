@@ -34,7 +34,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please reach each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"</p></div>',
+    '<div class = centerbox><p class = block-text>Please read each item and answer the following question as honestly as you can: "How characteristic or true is this of you?"</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -58,7 +58,7 @@ var scale_reg = {
 var all_pages = [
   [
     "I believe that getting together with one's friends to party is one of life's important pleasures.",
-    "Familiar childhood sigKts, sounds, smells often bring back a flood of wonderful memories.",
+    "Familiar childhood sights, sounds, smells often bring back a flood of wonderful memories.",
     "Fate determines much in my life.",
     "I often think of what I should have done differently in my life.",
     "My decisions are mostly influenced by people and things around me.",
