@@ -385,8 +385,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var num_trials = 2 // 24 num trials per run
-var num_runs = 2 //3
+var num_trials = 24 // 24 num trials per run
+var num_runs = 3 //3
 var experimentLength = num_trials * num_runs
 var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
