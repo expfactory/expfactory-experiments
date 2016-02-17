@@ -1,6 +1,6 @@
 [
     {
-        "name": "Local-Global",
+        "name": "Local-Global: Shape Stimuli",
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
@@ -15,7 +15,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "local_global",
+        "exp_id": "local_global_shape",
         "cognitive_atlas_task_id": "trm_4f241d7adf14e",
         "contributors": [
                          "Ian Eisenberg",
