@@ -10,9 +10,9 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "static/js/jspsych/plugins/jspsych-survey-multi-choice.js",
                  "experiment.js",
-                 "style.css",
                  "static/css/jspsych.css",
-                 "static/css/default_style.css"
+                 "static/css/default_style.css",
+                 "style.css"
                ],
         "exp_id": "leisure_time_activity",
         "cognitive_atlas_task_id": "trm_56aaa613f0c1a",

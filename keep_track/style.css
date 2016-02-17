@@ -1,6 +1,6 @@
 .keep-track-text {
 	text-align: center;
-	font-size: 50px;
+	font-size: 60px;
 	position: relative;
     top: 50%; 
     transform: translateY(-50%);
@@ -19,7 +19,7 @@
 
 .prompt-text {
 	text-align: center;
-	font-size: 25px;
+	font-size: 30px;
 	position: relative;
     top: 50%; 
     transform: translateY(-50%);

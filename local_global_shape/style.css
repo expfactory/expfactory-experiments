@@ -19,3 +19,7 @@ img {
   margin-right:0%;
   transform: translate(-50%,-30%);
 }
+
+.responded {
+  visibility: hidden;
+}

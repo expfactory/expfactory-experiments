@@ -155,9 +155,10 @@ var instructions_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these cateogries will be "target" categories presented at the bottom of the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these categories will be "target" categories presented at on the screen. Your job is to remember the <strong>last</strong> word shown from each of the target categories and report them at the end of the trial.</p></div>',
 		'<div class = centerbox><p class = block-text>To make sure there is no confusion about which word is in each category, the words in each category are presented below: ' +
-		category_instructions + '</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
+		category_instructions +
+		'</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
 		'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may be: "dog"... "aunt"... "China"... "red"... "copper"... "bird"... etc. You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
 	],
 	allow_keys: false,
@@ -216,7 +217,7 @@ var end_practice_block = {
 	data: {
 		trial_id: 'practice_end'
 	},
-	text: '<div class = centerbox><p class = block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -246,7 +247,7 @@ prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.jo
 data = {
 	trial_id: 'prompt',
 	exp_stage: "practice",
-	condition: 'target_length_' + target.length,
+	load: target.length,
 	targets: target
 }
 var prompt_block = {
@@ -254,6 +255,7 @@ var prompt_block = {
 	stimulus: '<div class = centerbox><p class = block-text>Below are the target categories. They will remain on the bottom of the screen during the trial. Press enter when you are sure you can remember them. </p></div>',
 	is_html: true,
 	choices: [13],
+	response_ends_trial: true,
 	data: data,
 	prompt: prompt,
 	timing_post_trial: 0,
@@ -279,7 +281,7 @@ for (i = 0; i < block.length; i++) {
 	data = {
 		trial_id: block[i][0],
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
+		load: target.length,
 		targets: target
 	}
 	var track_block = {
@@ -305,7 +307,7 @@ var response_block = {
 	data: {
 		trial_id: 'response',
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
+		load: target.length,
 		targets: target
 	}
 }
@@ -324,7 +326,7 @@ for (b = 0; b < blocks.length; b++) {
 	data = {
 		trial_id: 'prompt',
 		exp_stage: "test",
-		condition: 'target_length_' + target.length,
+		load: target.length,
 		targets: target
 	}
 	var prompt_block = {
@@ -357,7 +359,7 @@ for (b = 0; b < blocks.length; b++) {
 		data = {
 			trial_id: block[i][0],
 			exp_stage: "test",
-			condition: 'target_length_' + target.length,
+			load: target.length,
 			targets: target
 		}
 		var track_block = {
@@ -383,7 +385,7 @@ for (b = 0; b < blocks.length; b++) {
 		data: {
 			trial_id: 'response',
 			exp_stage: 'test',
-			condition: 'target_length_' + target.length,
+			load: target.length,
 			targets: target
 		}
 	}

@@ -38,7 +38,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-150%, 20%);
+  transform: translate(-150%, 15%);
 }
 
 .prp_right-instruction {
@@ -48,7 +48,7 @@
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(50%, 20%);
+  transform: translate(50%, 15%);
 }
 
 .prp_centerbox {

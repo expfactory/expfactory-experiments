@@ -253,7 +253,7 @@ var start_test_block = {
 		trial_id: "text"
 	},
 	timing_response: 180000,
-	timing_post_trial: 1000
+	timing_post_trial: 2000
 };
 
 var start_control_block = {
@@ -265,7 +265,7 @@ var start_control_block = {
 		trial_id: "text"
 	},
 	timing_response: 180000,
-	timing_post_trial: 1000
+	timing_post_trial: 2000
 };
 
 //Define control (0-back) block
