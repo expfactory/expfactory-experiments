@@ -28,13 +28,14 @@ var welcome_block = {
   cont_key: [13],
   data: {
     exp_id: "leisure_time_activity"
-  }
+  },
+  timing_post_trial: 0
 };
 
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please answer the following question on your level of physical activity.</p></div>',
+    '<div class = centerbox><p class = center-block-text>Please answer the following question on your level of physical activity.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

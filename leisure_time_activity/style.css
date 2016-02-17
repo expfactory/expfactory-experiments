@@ -4,6 +4,10 @@
     margin: 3vh 3vw auto 3vw;
 }
 
+.jspsych-poldrack-survey-multi-choice-opts {
+    font-size: 16px;
+}
+
 .display_stage{
 	display: -webkit-flex;
 	display: flex;
