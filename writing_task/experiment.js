@@ -13,7 +13,7 @@ function addID() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 
 /* ************************************ */
@@ -31,18 +31,6 @@ var timelimit = 10
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    exp_id: "writing_task",
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_response: 180000,
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   data: {
@@ -79,7 +67,7 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = block-text>In this task we want you to write. On the next page write for ' +
     timelimit +
-    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start.</p></div>'
+    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start. The experiment will automatically end after 10 minutes.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -126,7 +114,7 @@ var test_block = {
 var loop_node = {
   timeline: [test_block],
   loop_function: function() {
-    var elapsed = (new Date() - start_time) / 180000
+    var elapsed = (new Date() - start_time) / 60000
     if (elapsed < timelimit) {
       return true;
     } else {
@@ -137,7 +125,6 @@ var loop_node = {
 
 /* create experiment definition array */
 var writing_task_experiment = [];
-writing_task_experiment.push(welcome_block);
 writing_task_experiment.push(instruction_node);
 writing_task_experiment.push(loop_node);
 writing_task_experiment.push(end_block);
