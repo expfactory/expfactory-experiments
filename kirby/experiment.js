@@ -79,7 +79,7 @@ for (var i = 0; i < options.small_amt.length; i++) {
 trials = []
 
 //used new features to include the stimulus properties in recorded data
-for (var i = 0; i < 3; i++) { //stim_html.length
+for (var i = 0; i < stim_html.length; i++) { 
   trials.push({
     stimulus: stim_html[i],
     data: data_prop[i]
