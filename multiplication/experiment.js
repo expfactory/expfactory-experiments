@@ -64,19 +64,8 @@ var fatigue_time = 45
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -235,7 +224,6 @@ var fatigue_block = {
 
 /* create experiment definition array */
 var multiplication_experiment = []
-multiplication_experiment.push(welcome_block)
 multiplication_experiment.push(instruction_node)
 for (var i = 0; i < 2; i++) { //n_large_steps
   multiplication_experiment.push(largeStep_block)

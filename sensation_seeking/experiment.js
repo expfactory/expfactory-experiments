@@ -26,7 +26,7 @@ function fillArray(value, len) {
 
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to this survey.<br><br> Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
     exp_id: "sensation_seeking"
@@ -159,7 +159,7 @@ var all_options = [
 ]
 
 //higher - more impulsiveness
-var score_scale = {
+var scale_reg = {
   "I would like a job which would require a lot of traveling.": 2,
   "I would prefer a job in one location.": 1,
   "I am invigorated by a brisk, cold day.": 2,
@@ -213,7 +213,7 @@ var score_scale = {
   "I prefer friends who are exciting unpredictable.": 2,
   "I prefer friends who are reliable and predictable.": 1,
   "When I go on a vacation I prefer the comfort of a good room and bed.": 1,
-  "When I go on a vacation vaould prefer the change of camping out.": 2,
+  "When I go on a vacation I prefer the change of camping out.": 2,
   "The essence of good art is in its clarity. symmetry of form, and harmony of colors.": 1,
   "I often ﬁnd beauty in the clashing colors and irregular forms of modern paintings.": 2,
   "The worst social sin is to be rude.": 1,
@@ -230,6 +230,8 @@ var score_scale = {
   "I would like to drive or ride on a motorcycle.": 2
 }
 
+var score_scale =  [fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg, 10), fillArray(scale_reg, 4)]
+
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "sensation_seeking",
@@ -240,13 +242,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10), fillArray(true, 4)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false, false, false, false, false, false, false],
-    [false, false, false, false]
-  ],
+  required: [fillArray(true, 10), fillArray(true, 10), fillArray(true, 10), fillArray(true, 4)]
 };
 
 var end_block = {

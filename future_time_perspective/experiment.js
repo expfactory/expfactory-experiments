@@ -45,6 +45,15 @@ var instructions_block = {
 };
 
 var opts = ["Very untrue - 1", "2", "3", "4", "5", "6", "Very true - 7"]
+var scale_reg = {
+  "Very untrue - 1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+  "6": 6,
+  "Very true - 7": 7
+}
 
 var all_pages = [
   ["Many opportunities await me in the future.",
@@ -60,15 +69,7 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 10)]
 
-var score_scale = {
-  "Very untrue - 1": 1,
-  "2": 2,
-  "3": 3,
-  "4": 4,
-  "5": 5,
-  "6": 6,
-  "Very true - 7": 7
-}
+var score_scale = [fillArray(scale_reg, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -80,10 +81,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10)],
-  reverse_score: [
-    [false, false, false, false, false, false, false, false, false, false]
-  ],
+  required: [fillArray(true, 10)]
 };
 
 var end_block = {

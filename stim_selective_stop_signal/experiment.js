@@ -81,8 +81,7 @@ var getTestFeedback = function() {
   var average_correct = sum_correct / go_length;
   var missed_responses = (go_length - num_responses) / go_length
   var stop_percent = successful_stops / stop_length
-  test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " +
-    Math.round(average_correct * 100) + "%"
+  test_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
   if (average_rt > RT_thresh) {
     test_feedback_text +=
       '</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
@@ -176,12 +175,19 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+// Define and load images
+var prefix = '/static/experiments/stim_selective_stop_signal/images/'
+var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
+  'diamond.png'
+]
+jsPsych.pluginAPI.preloadImages(images);
+
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
@@ -207,22 +213,22 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-  stimulus: '<div class = shapebox><img class = square></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
     correct_response: correct_responses[0][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = circle></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
     correct_response: correct_responses[1][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = triangle></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
     correct_response: correct_responses[2][1]
   }
 }, {
-  stimulus: '<div class = shapebox><img class = diamond></img></div>',
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
     correct_response: correct_responses[3][1]
   }
@@ -267,17 +273,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  timing_response: 180000,
-  data: {
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -290,7 +285,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -417,7 +412,6 @@ var reset_block = {
 /* ************************************ */
 
 var stim_selective_stop_signal_experiment = []
-stim_selective_stop_signal_experiment.push(welcome_block);
 stim_selective_stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
@@ -468,10 +462,9 @@ var NoSS_practice_node = {
     var average_rt = sum_rt / num_responses;
     var average_correct = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
-    practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-      " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+    practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
     if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
+        missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
@@ -495,7 +488,8 @@ var NoSS_practice_node = {
         practice_feedback_text +=
           '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
       }
-      practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
+      practice_feedback_text +=
+        '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
     }
   }
@@ -567,10 +561,10 @@ var practice_node = {
     var average_correct = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
     var stop_percent = successful_stops / stop_length
-    practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-      " ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+    practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
     if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-      missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions > practice_repetition_thresh) {
+        missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions >
+      practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
@@ -602,7 +596,8 @@ var practice_node = {
         practice_feedback_text +=
           '</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
       }
-      practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
+      practice_feedback_text +=
+        '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
     }
   }
@@ -657,7 +652,8 @@ for (var b = 0; b < numblocks; b++) {
     stop_signal_exp_block.push(stop_signal_block)
   }
 
-  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(stop_signal_exp_block)
+  stim_selective_stop_signal_experiment = stim_selective_stop_signal_experiment.concat(
+    stop_signal_exp_block)
   if ($.inArray(b, [0, 1, 4]) != -1) {
     stim_selective_stop_signal_experiment.push(attention_node)
   }

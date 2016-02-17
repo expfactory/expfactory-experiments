@@ -52,6 +52,15 @@ var instructions_block = {
 var opts = ["Extremely Unlikely", "Moderately Unlikely", "Somewhat Unlikely", "Not Sure",
   "Somewhat Likely", "Moderately Likely", "Extremely Likely"
 ]
+var scale_reg = {
+  "Extremely Unlikely": 1,
+  "Moderately Unlikely": 2,
+  "Somewhat Unlikely": 3,
+  "Not Sure": 4,
+  "Somewhat Likely": 5,
+  "Moderately Likely": 6,
+  "Extremely Likely": 7
+}
 
 var all_pages = [
   ["Admitting that your tastes are different from those of a friend.",
@@ -88,15 +97,9 @@ var all_options = [fillArray(opts, 6), fillArray(opts, 6), fillArray(opts, 6), f
   fillArray(opts, 6)
 ]
 
-var score_scale = {
-  "Extremely Unlikely": 1,
-  "Moderately Unlikely": 2,
-  "Somewhat Unlikely": 3,
-  "Not Sure": 4,
-  "Somewhat Likely": 5,
-  "Moderately Likely": 6,
-  "Extremely Likely": 7
-}
+var score_scale = [fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6), fillArray(scale_reg, 6),
+  fillArray(scale_reg, 6)
+]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -110,14 +113,7 @@ var survey_block = {
   allow_backward: true,
   required: [fillArray(true, 6), fillArray(true, 6), fillArray(true, 6), fillArray(true, 6),
     fillArray(true, 6)
-  ],
-  reverse_score: [
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false],
-    [false, false, false, false, false, false]
-  ],
+  ]
 };
 
 var end_block = {

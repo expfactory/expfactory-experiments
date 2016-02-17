@@ -1,6 +1,6 @@
 [
     {
-        "name": "mpq_control: Multidimensional Personality Questionnaire - Control (vs impulsiveness) Scale",
+        "name": "MPQ: Multidimensional Personality Questionnaire - Control (vs impulsiveness) Scale",
         "template":"jspsych",
         "run": [
                  "static/js/jspsych/jspsych.js",

@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Raven's Matrices",
+        "template":"jspsych",
+        "run": [
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/plugins/jspsych-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
+                 "experiment.js",
+                 "style.css",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css"
+               ],
+        "exp_id": "ravens",
+        "cognitive_atlas_task_id": "trm_4f24211a03b07",
+        "contributors": [
+                         "Zeynep Enkavi",
+                         "Ian Eisenberg",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":999,
+        "experiment_variables": "",
+        "reference": "http://link.springer.com/chapter/10.1007/978-1-4615-0153-4_11",
+        "notes": "",
+        "publish":"True",
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement"}
+                       }
+    
+   }
+]

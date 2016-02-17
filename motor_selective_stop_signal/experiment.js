@@ -66,15 +66,14 @@ var getTestFeedback = function() {
 	var average_correct = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 	var stop_percent = successful_stops / stop_length
-	test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " +
-		Math.round(average_correct * 100) + "%"
+	test_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 	if (average_rt > RT_thresh) {
 		test_feedback_text +=
 			'</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
 	}
 	if (missed_responses >= missed_response_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+			'</p><p class = block-text>Remember to respond to each shape unless you see the black stop signal.'
 	}
 	if (average_correct < accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' +
@@ -85,7 +84,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= (1 - accuracy_thresh)) {
 		test_feedback_text +=
-			'</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
+			'</p><p class = block-text> Remember to try to withold your response if you see the black stop signal.'
 	}
 	test_feedback_text +=
 		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -150,16 +149,23 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+// Define and load images
+var prefix = '/static/experiments/motor_selective_stop_signal/images/'
+var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
+  'diamond.png'
+]
+jsPsych.pluginAPI.preloadImages(images);
+
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
 var correct_responses = jsPsych.randomization.shuffle([
 	["M key", 77],
 	["M key", 77],
@@ -183,25 +189,25 @@ var stop_response = randomDraw(possible_responses)
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-	stimulus: '<div class = shapebox><img class = square></img></div>',
-	data: {
-		correct_response: correct_responses[0][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+  data: {
+    correct_response: correct_responses[0][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = circle></img></div>',
-	data: {
-		correct_response: correct_responses[1][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
+  data: {
+    correct_response: correct_responses[1][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = triangle></img></div>',
-	data: {
-		correct_response: correct_responses[2][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
+  data: {
+    correct_response: correct_responses[2][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = diamond></img></div>',
-	data: {
-		correct_response: correct_responses[3][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
+  data: {
+    correct_response: correct_responses[3][1]
+  }
 }]
 
 var NoSSpractice_block_len = 12
@@ -244,17 +250,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	timing_response: 180000,
-	data: {
-		trial_id: "welcome"
-	},
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the stop signal experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
@@ -267,7 +262,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -392,7 +387,6 @@ var reset_block = {
 /* ************************************ */
 
 var motor_selective_stop_signal_experiment = []
-motor_selective_stop_signal_experiment.push(welcome_block);
 motor_selective_stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
@@ -443,18 +437,17 @@ var NoSS_practice_node = {
 		var average_rt = sum_rt / num_responses;
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-			missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
+				missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
 				possible_responses[0][0] +
 				' you should <strong>not respond</strong> in any way.</p><p class = block-text>If the ' +
 				possible_responses[0][0] +
-				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -545,10 +538,10 @@ var practice_node = {
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
 		var stop_percent = successful_stops / stop_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-			missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions > practice_repetition_thresh) {
+				missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions >
+			practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
@@ -569,7 +562,7 @@ var practice_node = {
 			}
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the red stop signal AND the correct key is the ' +
+					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the black stop signal AND the correct key is the ' +
 					possible_responses[0][0] + '.'
 			}
 			if (average_correct <= accuracy_thresh) {

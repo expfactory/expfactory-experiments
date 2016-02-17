@@ -26,7 +26,7 @@ function fillArray(value, len) {
 
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to this survey. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   data: {
     exp_id: "ten_item_personality"
@@ -49,6 +49,24 @@ var instructions_block = {
 var opts = ["Disagree strongly", "Disagree moderately", "Disagree a little",
   "Neither agree nor disagree", "Agree a little", "Agree moderately", "Agree strongly"
 ]
+var scale_reg = {
+  "Disagree strongly": 1,
+  "Disagree moderately": 2,
+  "Disagree a little": 3,
+  "Neither agree nor disagree": 4,
+  "Agree a little": 5,
+  "Agree moderately": 6,
+  "Agree strongly": 7
+}
+var scale_rev = {
+  "Disagree strongly": 7,
+  "Disagree moderately": 6,
+  "Disagree a little": 5,
+  "Neither agree nor disagree": 4,
+  "Agree a little": 3,
+  "Agree moderately": 2,
+  "Agree strongly": 1
+}
 
 var all_pages = [
   ["Extraverted, enthusiastic.", "Critical, quarrelsome.", "Dependable, self-disciplined.",
@@ -60,15 +78,9 @@ var all_pages = [
 
 var all_options = [fillArray(opts, 10)]
 
-var score_scale = {
-  "Disagree strongly": 1,
-  "Disagree moderately": 2,
-  "Disagree a little": 3,
-  "Neither agree nor disagree": 4,
-  "Agree a little": 5,
-  "Agree moderately": 6,
-  "Agree strongly": 7
-}
+var score_scale = [
+    [scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
@@ -80,10 +92,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 10)],
-  reverse_score: [
-    [false, true, false, true, false, true, false, true, false, true]
-  ]
+  required: [fillArray(true, 10)]
 };
 
 var end_block = {

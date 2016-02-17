@@ -157,18 +157,6 @@ var answers = [2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    exp_id: 'tower_of_london_imagine',
-    trial_id: 'welcome'
-  },
-  timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   data: {
@@ -183,7 +171,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-  'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -284,7 +272,6 @@ var test_block = {
 
 /* create experiment definition array */
 var tower_of_london_imagine_experiment = [];
-tower_of_london_imagine_experiment.push(welcome_block);
 tower_of_london_imagine_experiment.push(instruction_node);
 tower_of_london_imagine_experiment.push(start_test_block);
 tower_of_london_imagine_experiment.push(test_block);

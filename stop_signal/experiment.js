@@ -66,7 +66,7 @@ var getTestFeedback = function() {
 	var average_correct = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 	var stop_percent = successful_stops / stop_length
-	test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " +
+	test_feedback_text = " Accuracy: " +
 		Math.round(average_correct * 100) + "%"
 	if (average_rt > RT_thresh) {
 		test_feedback_text +=
@@ -74,7 +74,7 @@ var getTestFeedback = function() {
 	}
 	if (missed_responses >= missed_response_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+			'</p><p class = block-text>Remember to respond to each shape unless you see the black stop signal.'
 	}
 	if (average_correct < accuracy_thresh) {
 		test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' +
@@ -85,7 +85,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= (1 - accuracy_thresh)) {
 		test_feedback_text +=
-			'</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
+			'</p><p class = block-text> Remember to try to withold your response if you see the black stop signal.'
 	}
 	test_feedback_text +=
 		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -150,16 +150,22 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = true
+var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+// Define and load images
+var prefix = '/static/experiments/stop_signal/images/'
+var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
+  'diamond.png'
+]
+jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -179,25 +185,25 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-	stimulus: '<div class = shapebox><img class = square></img></div>',
-	data: {
-		correct_response: correct_responses[0][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+  data: {
+    correct_response: correct_responses[0][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = circle></img></div>',
-	data: {
-		correct_response: correct_responses[1][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
+  data: {
+    correct_response: correct_responses[1][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = triangle></img></div>',
-	data: {
-		correct_response: correct_responses[2][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
+  data: {
+    correct_response: correct_responses[2][1]
+  }
 }, {
-	stimulus: '<div class = shapebox><img class = diamond></img></div>',
-	data: {
-		correct_response: correct_responses[3][1]
-	}
+  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
+  data: {
+    correct_response: correct_responses[3][1]
+  }
 }]
 
 var NoSSpractice_block_len = 12
@@ -241,17 +247,6 @@ var attention_node = {
 }
 
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "welcome"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0
-};
-
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -264,7 +259,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -389,7 +384,6 @@ var reset_block = {
 /* ************************************ */
 
 var stop_signal_experiment = []
-stop_signal_experiment.push(welcome_block);
 stop_signal_experiment.push(instruction_node);
 
 /* Practice block w/o SS */
@@ -441,17 +435,16 @@ var NoSS_practice_node = {
 		var average_rt = sum_rt / num_responses;
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
 				missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
-				//rerandomize stim order
+			//rerandomize stim order
 			NoSS_practice_list = jsPsych.randomization.repeat(stimulus, 3, true)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
@@ -538,8 +531,7 @@ var practice_node = {
 		var average_rt = sum_rt / num_responses;
 		var average_correct = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) +
-			" ms. Accuracy: " + Math.round(average_correct * 100) + "%"
+		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
 				missed_response_thresh && successful_stops >= stop_thresh) || practice_repetitions >
 			practice_repetition_thresh) {
@@ -552,7 +544,7 @@ var practice_node = {
 				' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
 			return false;
 		} else {
-				//rerandomize stim and stop_trial order
+			//rerandomize stim and stop_trial order
 			practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
 			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
 					'go', 'go', 'go', 'go'
