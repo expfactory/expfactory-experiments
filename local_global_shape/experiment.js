@@ -23,7 +23,7 @@ function evalAttentionChecks() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'local_global'
+    'exp_id': 'local_global_shape'
   })
 }
 
