@@ -42,6 +42,27 @@ var appendTestData = function() {
 		stim_top: [stim1, stim2, stim3],
 		stim_bottom: [stim4, stim5, stim6]
 	})
+	data = jsPsych.data.getTrialsOfType('poldrack-text')
+    practiceDataCount = 0
+    testDataCount = 0
+    for (i = 0; i < data.length; i++) {
+      if (data[i].trial_id == 'practice_intro') {
+        practiceDataCount = practiceDataCount + 1
+      } else if (data[i].trial_id == 'test_intro') {
+        testDataCount = testDataCount + 1
+      }
+    }
+    if (practiceDataCount >= 1 && testDataCount === 0) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "practice"
+      })
+    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "test"
+      })
+    }
 };
 
 //this adds the cue shown and trial number to data
@@ -50,6 +71,27 @@ var appendCueData = function() {
 		stim: cue,
 		trial_num: current_trial
 	})
+	data = jsPsych.data.getTrialsOfType('poldrack-text')
+    practiceDataCount = 0
+    testDataCount = 0
+    for (i = 0; i < data.length; i++) {
+      if (data[i].trial_id == 'practice_intro') {
+        practiceDataCount = practiceDataCount + 1
+      } else if (data[i].trial_id == 'test_intro') {
+        testDataCount = testDataCount + 1
+      }
+    }
+    if (practiceDataCount >= 1 && testDataCount === 0) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "practice"
+      })
+    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "test"
+      })
+    }
 };
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
@@ -68,19 +110,39 @@ var appendProbeData = function() {
 	correct = 'incorrect'
 	if ((memorySet.indexOf(probe, 0) == -1) && keypress == 39) {
 		correct = 'correct'
+		correct_response = 39
 	} else if ((memorySet.indexOf(probe, 0) != -1) && keypress == 37) {
 		correct = 'correct'
+		correct_response = 37
 	} 
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
 		probe_type: probeType,
-		trial_cue: trialCue,
-		trial_stim_top: lastSet_top,
-		trial_stim_bottom: lastSet_bottom,
-		trial_num: current_trial
+		trial_num: current_trial,
+		correct_response: correct_response
 	})
-	current_trial = current_trial + 1
+	data = jsPsych.data.getTrialsOfType('poldrack-text')
+    practiceDataCount = 0
+    testDataCount = 0
+    for (i = 0; i < data.length; i++) {
+      if (data[i].trial_id == 'practice_intro') {
+        practiceDataCount = practiceDataCount + 1
+      } else if (data[i].trial_id == 'test_intro') {
+        testDataCount = testDataCount + 1
+      }
+    }
+    if (practiceDataCount >= 1 && testDataCount === 0) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "practice"
+      })
+    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "test"
+      })
+    }
 };
 
 //this adds the trial number to the data
@@ -88,8 +150,56 @@ var appendFixData = function() {
 	jsPsych.data.addDataToLastTrial({
 		trial_num: current_trial
 	})
+	data = jsPsych.data.getTrialsOfType('poldrack-text')
+    practiceDataCount = 0
+    testDataCount = 0
+    for (i = 0; i < data.length; i++) {
+      if (data[i].trial_id == 'practice_intro') {
+        practiceDataCount = practiceDataCount + 1
+      } else if (data[i].trial_id == 'test_intro') {
+        testDataCount = testDataCount + 1
+      }
+    }
+    if (practiceDataCount >= 1 && testDataCount === 0) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "practice"
+      })
+    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "test"
+      })
+    }
 };
 
+var appendFixData2 = function() {
+	jsPsych.data.addDataToLastTrial({
+		trial_num: current_trial
+	})
+	current_trial = current_trial + 1
+	data = jsPsych.data.getTrialsOfType('poldrack-text')
+    practiceDataCount = 0
+    testDataCount = 0
+    for (i = 0; i < data.length; i++) {
+      if (data[i].trial_id == 'practice_intro') {
+        practiceDataCount = practiceDataCount + 1
+      } else if (data[i].trial_id == 'test_intro') {
+        testDataCount = testDataCount + 1
+      }
+    }
+    if (practiceDataCount >= 1 && testDataCount === 0) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "practice"
+      })
+    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
+      //temp_id = data[i].trial_id
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: "test"
+      })
+    }
+};
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
 var getTrainingSet = function() {
@@ -209,6 +319,61 @@ var getProbe = function() {
 	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType + '"></img></div>'
 };
 
+var getPracticeProbe = function(){
+	probeType = practiceProbeTypeArray.pop()
+	var global_trial = jsPsych.progress().current_trial_global
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
+	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
+	if (probeType == 'pos') {
+		if (lastCue == 'BOT') {
+			probe = lastSet_top[Math.floor(Math.random() * 3)]
+		} else if (lastCue == 'TOP') {
+			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+		}
+	} else if (probeType == 'neg') {
+		if (lastCue == 'BOT') {
+			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+		} else if (lastCue == 'TOP') {
+			probe = lastSet_top[Math.floor(Math.random() * 3)]
+		}
+	} else if (probeType == 'con') {
+		newArray = trainingArray.filter(function(y) {
+			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y != lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+		})
+		probe = newArray.pop()
+	}
+	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType + '"></img></div>'
+};
+
+var getResponse = function(){
+	if(cue == 'TOP'){
+		if(probe == stim4 || probe == stim5 || probe == stim6){
+		return 37
+		} else {
+		return 39
+		}
+		
+	} else if(cue == 'BOT'){
+		if(probe == stim1 || probe == stim2 || probe == stim3){
+		return 37
+		} else {
+		return 39
+		}
+	}
+}
+
+var appendPracticeProbeData = function(){
+jsPsych.data.addDataToLastTrial({
+	stim: [probe, probeType],
+	trial_num: current_trial
+	})
+}
+
+var resetTrial = function() {
+	current_trial = 0
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -220,8 +385,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var num_trials = 24 // num trials per run
-var num_runs = 3
+var num_trials = 2 // 24 num trials per run
+var num_runs = 2 //3
 var experimentLength = num_trials * num_runs
 var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -229,9 +394,16 @@ var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'
 ];
 var cueArray = ['TOP', 'BOT']
 var probe = ''
-var probeType = ''
+var cue = ''
+var stim1 = ''
+var stim2 = ''
+var stim3 = ''
+var stim4 = ''
+var stim5 = ''
+var stim6 = ''
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
+var practiceProbeTypeArray = jsPsych.randomization.repeat(probes,1)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
@@ -326,11 +498,13 @@ var start_test_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		trial_id: "test_intro"
+		trial_id: "test_intro",
+		exp_stage: "test"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now start a test run. Remeber, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now start a test run. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: resetTrial,
 };
 
 var start_fixation_block = {
@@ -376,7 +550,7 @@ var ITI_fixation_block = {
 	response_ends_trial: false,
 	timing_stim: 4000,
 	timing_response: 4000,
-	on_finish: appendFixData
+	on_finish: appendFixData2
 }
 
 var training_block = {
@@ -384,13 +558,12 @@ var training_block = {
 	stimulus: getTrainingSet,
 	is_html: true,
 	data: {
-		trial_id: "stim",
-		exp_stage: "test"
+		trial_id: "stim"
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2000,
-	timing_response: 2000,
+	timing_stim: 2500,
+	timing_response: 2500,
 	on_finish: appendTestData,
 };
 
@@ -427,10 +600,62 @@ var probe_block = {
 	on_finish: appendProbeData
 };
 
+var intro_test_block = {
+	type: 'poldrack-text',
+	timing_response: 180000,
+	data: {
+		trial_id: "intro_test",
+		exp_stage: "test"
+	},
+	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	cont_key: [13],
+	timing_post_trial: 1000,
+	on_finish: resetTrial,
+};
+
+var start_practice_block = {
+	type: 'poldrack-text',
+	timing_response: 180000,
+	data: {
+		trial_id: "practice_intro"
+	},
+	text: '<div class = centerbox><p class = block-text>We will now start with some practice.</p><p class = block-text> Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	cont_key: [13],
+	timing_post_trial: 1000,
+	on_finish: resetTrial,
+};
+
+var practice_probe_block = {
+	type: 'poldrack-categorize',
+	stimulus: getPracticeProbe,
+	key_answer: getResponse,
+	choices: [37, 39],
+	data: {trial_id: "probe", exp_stage: "practice"},
+	correct_text: '<div class = bottombox><p style="color:blue"; class = center-text>Correct!</p></div>',
+	incorrect_text: '<div class = bottombox><p style="color:red"; class = center-text>Incorrect</p></div>',
+	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
+	timing_stim: [2000],
+	timing_response: [2000],
+	timing_feedback_duration: [750],
+	is_html: true,
+	on_finish: appendPracticeProbeData,
+};
 
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(instruction_node);
+
+directed_forgetting_experiment.push(start_practice_block);
+for(i=0;i<4;i++){
+	directed_forgetting_experiment.push(start_fixation_block);
+	directed_forgetting_experiment.push(training_block);
+	directed_forgetting_experiment.push(cue_block);
+	directed_forgetting_experiment.push(fixation_block);
+	directed_forgetting_experiment.push(practice_probe_block);
+	directed_forgetting_experiment.push(ITI_fixation_block);
+}
+
+directed_forgetting_experiment.push(intro_test_block)
 for (r = 0; r < num_runs; r++) {
 	directed_forgetting_experiment.push(start_test_block);
 	for (i = 0; i < num_trials; i++) {
