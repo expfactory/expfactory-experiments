@@ -225,7 +225,6 @@ var test_block = {
     updateAmount(choice)
   },
   timing_post_trial: 1000,
-  response_ends_trial: true,
 };
 
 var end_block = {
