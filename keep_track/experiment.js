@@ -246,7 +246,7 @@ prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.jo
 data = {
 	trial_id: 'prompt',
 	exp_stage: "practice",
-	condition: 'target_length_' + target.length,
+	target_length: target.length,
 	targets: target
 }
 var prompt_block = {
@@ -257,6 +257,7 @@ var prompt_block = {
 	data: data,
 	prompt: prompt,
 	timing_post_trial: 0,
+	response_ends_trial: true
 }
 var wait_block = {
 	type: 'poldrack-single-stim',
@@ -274,13 +275,15 @@ var wait_block = {
 }
 keep_track_experiment.push(prompt_block)
 keep_track_experiment.push(wait_block)
-for (i = 0; i < block.length; i++) {
+for (i = 0; i < 2; i++) { //block.length
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
+	tempStim = block[i][1]
 	data = {
 		trial_id: block[i][0],
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
-		targets: target
+		target_length: target.length,
+		targets: target,
+		stim: tempStim
 	}
 	var track_block = {
 		type: 'poldrack-single-stim',
@@ -305,7 +308,7 @@ var response_block = {
 	data: {
 		trial_id: 'response',
 		exp_stage: "practice",
-		condition: 'target_length_' + target.length,
+		target_length: target.length,
 		targets: target
 	}
 }
@@ -315,7 +318,7 @@ keep_track_experiment.push(end_practice_block)
 
 
 // set up test blocks
-for (b = 0; b < blocks.length; b++) {
+for (b = 0; b < 2; b++) { //blocks.length
 	keep_track_experiment.push(start_test_block)
 	block = blocks[b]
 	target = targets[b]
@@ -324,7 +327,7 @@ for (b = 0; b < blocks.length; b++) {
 	data = {
 		trial_id: 'prompt',
 		exp_stage: "test",
-		condition: 'target_length_' + target.length,
+		target_length: target.length,
 		targets: target
 	}
 	var prompt_block = {
@@ -335,6 +338,7 @@ for (b = 0; b < blocks.length; b++) {
 		data: data,
 		prompt: prompt,
 		timing_post_trial: 0,
+		response_ends_trial: true
 	}
 	var wait_block = {
 		type: 'poldrack-single-stim',
@@ -354,11 +358,13 @@ for (b = 0; b < blocks.length; b++) {
 	keep_track_experiment.push(wait_block)
 	for (i = 0; i < block.length; i++) {
 		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
+		tempStim = block[i][1]
 		data = {
 			trial_id: block[i][0],
 			exp_stage: "test",
-			condition: 'target_length_' + target.length,
-			targets: target
+			target_length: target.length,
+			targets: target,
+			stim: tempStim
 		}
 		var track_block = {
 			type: 'poldrack-single-stim',
@@ -383,7 +389,7 @@ for (b = 0; b < blocks.length; b++) {
 		data: {
 			trial_id: 'response',
 			exp_stage: 'test',
-			condition: 'target_length_' + target.length,
+			target_length: target.length,
 			targets: target
 		}
 	}
