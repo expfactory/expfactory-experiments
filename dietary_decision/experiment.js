@@ -54,7 +54,7 @@ var getDecisionStim = function() {
 }
 
 var getDecisionText = function() {
-  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
+  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p>Press <strong>enter</strong> to begin.</p></div></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
     base_path + reference_stim + ' </img></div>'
 }
 

@@ -23,7 +23,7 @@ function evalAttentionChecks() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'local_global'
+    'exp_id': 'local_global_shape'
   })
 }
 
@@ -54,7 +54,7 @@ var makeTrialList = function(len, stim, data) {
   tmp_obj.data = tmp_data
   output_list.push(tmp_obj)
     /* randomly sample from either the global or local stimulus lists (first and half part of the stim/data arrays)
-	On stay trials randomly select an additional stimulus from that array. On switch trials choose from the other list. */
+  On stay trials randomly select an additional stimulus from that array. On switch trials choose from the other list. */
   for (i = 1; i < switch_trials.length; i++) {
     tmp_obj = {}
     if (switch_trials[i] == 1) {
@@ -110,11 +110,12 @@ var instructTimeThresh = 0 ///in seconds
 // task specific variables
 var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
 var task_shapes = ['circle', 'X', 'triangle', 'square']
-var path = '/static/experiments/local_global/images/'
-prefix = '<div class = centerbox><img src = "'
-postfix = '"</img></div>'
-stim = []
-data = []
+var path = '/static/experiments/local_global_shape/images/'
+var prefix = '<div class = centerbox><img src = "'
+var postfix = '"</img></div>'
+var stim = []
+var data = []
+var images = []
 for (c = 0; c < task_colors.length; c++) {
   if (c === 0) {
     condition = 'global'
@@ -123,6 +124,8 @@ for (c = 0; c < task_colors.length; c++) {
   }
   for (g = 0; g < task_shapes.length; g++) {
     for (l = 0; l < task_shapes.length; l++) {
+      images.push([path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +
+        's.png'])
       stim.push(prefix + path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +
         's.png' + postfix)
       data.push({
@@ -133,6 +136,9 @@ for (c = 0; c < task_colors.length; c++) {
     }
   }
 }
+
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
 
 //Set up experiment stimulus order
 var practice_trials = makeTrialList(36, stim, data)  //36
@@ -196,7 +202,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_shape/images/blue_squareofcircles.png" height = 200 width = 200></img></div></div>',
     '<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' +
     task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' +
     task_colors[1] +
@@ -205,7 +211,7 @@ var instructions_block = {
     task_colors[1] +
     ' which means you should respond based on the smaller shapes. If the shape was instead ' +
     task_colors[0] +
-    ' you would press 2.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/' +
+    ' you would press 2.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_shape/images/' +
     task_colors[1] + '_Xoftriangles.png" height = 200 width = 200></img></div></div>'
   ],
   allow_keys: false,
@@ -274,6 +280,7 @@ var practice_block = {
   choices: [49, 50, 51, 52],
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
+  timing_response: 2000,
   timing_post_trial: 500
 }
 
@@ -288,16 +295,17 @@ var test_block = {
   is_html: true,
   choices: [49, 50, 51, 52],
   timing_post_trial: 500,
-  response_ends_trial: true,
+  timing_response: 2000,
   on_finish: appendTestData,
+
 };
 
 /* create experiment definition array */
-var local_global_experiment = [];
-local_global_experiment.push(instruction_node);
-local_global_experiment.push(start_practice_block);
-local_global_experiment.push(practice_block);
-local_global_experiment.push(start_test_block);
-local_global_experiment.push(test_block);
-local_global_experiment.push(attention_node)
-local_global_experiment.push(end_block);
+var local_global_shape_experiment = [];
+local_global_shape_experiment.push(instruction_node);
+local_global_shape_experiment.push(start_practice_block);
+local_global_shape_experiment.push(practice_block);
+local_global_shape_experiment.push(start_test_block);
+local_global_shape_experiment.push(test_block);
+local_global_shape_experiment.push(attention_node)
+local_global_shape_experiment.push(end_block);
