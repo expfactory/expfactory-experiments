@@ -23,7 +23,7 @@ function evalAttentionChecks() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'local_global'
+    'exp_id': 'local_global_letter'
   })
 }
 
@@ -34,7 +34,7 @@ var randomDraw = function(lst) {
 
 var makeTrialList = function(len, stim, data) {
   //choice array: numeric key codes for the numbers 1-4
-  var choice_array = [49, 50, 51, 52]
+  var choice_array = [49, 51, 52]
     // 1 is a switch trial: ensure half the trials are switch trials
   var switch_trials = jsPsych.randomization.repeat([0, 1], len / 2)
     //create test array
@@ -50,7 +50,7 @@ var makeTrialList = function(len, stim, data) {
   tmp_obj.stimulus = stim[tmpi]
   var tmp_data = $.extend({}, data[tmpi])
   tmp_data.switch = 0
-  tmp_data.correct_response = choice_array[task_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
+  tmp_data.correct_response = choice_array[local_shapes.indexOf(data[tmpi][trial_index + '_shape'])]
   tmp_obj.data = tmp_data
   output_list.push(tmp_obj)
     /* randomly sample from either the global or local stimulus lists (first and half part of the stim/data arrays)
@@ -72,7 +72,7 @@ var makeTrialList = function(len, stim, data) {
     tmp_obj.stimulus = stim[tmpi]
     tmp_data = $.extend({}, data[tmpi])
     tmp_data.switch = switch_trials[i]
-    tmp_data.correct_response = choice_array[task_shapes.indexOf(data[tmpi][trial_index +
+    tmp_data.correct_response = choice_array[local_shapes.indexOf(data[tmpi][trial_index +
       '_shape'
     ])]
     tmp_obj.data = tmp_data
@@ -109,8 +109,9 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
-var task_shapes = ['circle', 'X', 'triangle', 'square']
-var path = '/static/experiments/local_global/images/'
+var global_shapes = ['s','h']
+var local_shapes = ['s','h','rectangle']
+var path = '/static/experiments/local_global_letter/images/'
 prefix = '<div class = centerbox><img src = "'
 postfix = '"</img></div>'
 stim = []
@@ -121,14 +122,14 @@ for (c = 0; c < task_colors.length; c++) {
   } else {
     condition = 'local'
   }
-  for (g = 0; g < task_shapes.length; g++) {
-    for (l = 0; l < task_shapes.length; l++) {
-      stim.push(prefix + path + task_colors[c] + '_' + task_shapes[g] + 'of' + task_shapes[l] +
-        's.png' + postfix)
+  for (g = 0; g < global_shapes.length; g++) {
+    for (l = 0; l < local_shapes.length; l++) {
+      stim.push(prefix + path + task_colors[c] + '_' + global_shapes[g] + '_of_' + local_shapes[l] +
+        '.png' + postfix)
       data.push({
         condition: condition,
-        global_shape: task_shapes[g],
-        local_shape: task_shapes[l]
+        global_shape: global_shapes[g],
+        local_shape: local_shapes[l]
       })
     }
   }
@@ -196,17 +197,17 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black shapes made up of smaller shapes, like the image below. All of the smaller shapes will always be the same shape. Both the large shape and the smaller shapes can either be a circle, X, triangle or square.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/blue_squareofcircles.png" height = 200 width = 200></img></div></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black letters made up of smaller letters, like the image below. All of the smaller shapes will always be the same shape. The large shape can take the form of S or H, while the smaller shape can take the form of an S, H, or a rectangle. </p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/blue_s_of_rectangle.png" height = 200 width = 200></img></div></div>',
     '<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' +
     task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' +
     task_colors[1] +
-    ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for a circle, 2 for an X, 3 for a triangle and 4 for a square.</p></div>',
-    '<div class = centerbox><p class = block-text>For instance, for the shape below you would press 3 because it is ' +
+    ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for S, 3 for H, and 4 for a rectangle.</p></div>',
+    '<div class = centerbox><p class = block-text>For instance, for the shape below you would press 1 because it is ' +
     task_colors[1] +
     ' which means you should respond based on the smaller shapes. If the shape was instead ' +
     task_colors[0] +
-    ' you would press 2.</p><div class = instructionImgBox><img src = "/static/experiments/local_global/images/' +
-    task_colors[1] + '_Xoftriangles.png" height = 200 width = 200></img></div></div>'
+    ' you would press 3.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/' +
+    task_colors[1] + '_h_of_s.png" height = 200 width = 200></img></div></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -271,7 +272,7 @@ var practice_block = {
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [49, 50, 51, 52],
+  choices: [49, 51, 52],
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_post_trial: 500
@@ -286,18 +287,18 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [49, 50, 51, 52],
+  choices: [49, 51, 52],
   timing_post_trial: 500,
   response_ends_trial: true,
   on_finish: appendTestData,
 };
 
 /* create experiment definition array */
-var local_global_experiment = [];
-local_global_experiment.push(instruction_node);
-local_global_experiment.push(start_practice_block);
-local_global_experiment.push(practice_block);
-local_global_experiment.push(start_test_block);
-local_global_experiment.push(test_block);
-local_global_experiment.push(attention_node)
-local_global_experiment.push(end_block);
+var local_global_letter_experiment = [];
+local_global_letter_experiment.push(instruction_node);
+local_global_letter_experiment.push(start_practice_block);
+local_global_letter_experiment.push(practice_block);
+local_global_letter_experiment.push(start_test_block);
+local_global_letter_experiment.push(test_block);
+local_global_letter_experiment.push(attention_node)
+local_global_letter_experiment.push(end_block);
