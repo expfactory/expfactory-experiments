@@ -112,7 +112,7 @@ var all_options = [
     ["I would like to learn to ﬂy an airplane.", "I would not like to learn to ﬂy an airplane."]
   ],
   [
-    ["I would not like to be hypnotiaed.",
+    ["I would not like to be hypnotized.",
       "I would like to have the experience of being hypnotized."
     ],
     [
