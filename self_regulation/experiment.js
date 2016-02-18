@@ -56,7 +56,7 @@ var scale_reg = {
 }
 
 var all_pages = [
-  ["I don't notice the effects of my actions until it's too late.", "I put off making decision.",
+  ["I don't notice the effects of my actions until it's too late.", "I put off making decisions.",
     "It's hard for me to notice when I've 'had enough' (alcohol, food, sweets).",
     "I have trouble following through with things once I've made up my mind to do something.",
     "I don't seem to learn from my mistakes.",
@@ -78,7 +78,7 @@ var all_pages = [
   ],
   ["I have trouble making up my mind about things.", "I get easily distracted from my plans.",
     "When it comes to deciding about a change, I feel overwhelmed by the choices.",
-    "Most of the time don't pay attention to what I'm doing.",
+    "Most of the time I don't pay attention to what I'm doing.",
     "I tend to keep doing the same thing, even when it doesn't work.",
     "Once I have a goal, I can usually plan how to reach it.",
     "If I wanted to change, I am confident that I could do it.",
