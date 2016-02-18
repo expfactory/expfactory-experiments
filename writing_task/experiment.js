@@ -13,9 +13,17 @@ function addID() {
 }
 
 var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
+  return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
 
+var getResponseTime = function() {
+  if (writing_start === 0 ) {
+    writing_start = new Date()
+  }
+  var timeLeft = (timelimit-elapsed)*60000
+  console.log('time remaining: ', timeLeft)
+  return timeLeft
+}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -24,25 +32,14 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var start_time = new Date();
-var timelimit = 10
+var writing_start = 0
+var timelimit = 2
+var elapsed = 0
 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-  type: 'poldrack-text',
-  data: {
-    exp_id: "writing_task",
-    trial_id: "welcome"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13],
-  timing_response: 180000,
-  timing_post_trial: 0
-};
-
 var end_block = {
   type: 'poldrack-text',
   data: {
@@ -79,7 +76,7 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = block-text>In this task we want you to write. On the next page write for ' +
     timelimit +
-    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start.</p></div>'
+    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start. The experiment will automatically end after ' + timelimit + ' minutes.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -120,13 +117,16 @@ var test_block = {
   },
   text_class: 'writing_class',
   is_html: true,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  timing_response: getResponseTime
 };
 
 var loop_node = {
   timeline: [test_block],
   loop_function: function() {
-    var elapsed = (new Date() - start_time) / 180000
+    elapsed = (new Date() - writing_start) / 60000
+    console.log('elapsed: ', elapsed)
+    console.log('timelimit: ', timelimit)
     if (elapsed < timelimit) {
       return true;
     } else {
@@ -137,7 +137,6 @@ var loop_node = {
 
 /* create experiment definition array */
 var writing_task_experiment = [];
-writing_task_experiment.push(welcome_block);
 writing_task_experiment.push(instruction_node);
 writing_task_experiment.push(loop_node);
 writing_task_experiment.push(end_block);

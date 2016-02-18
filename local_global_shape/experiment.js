@@ -297,7 +297,6 @@ var test_block = {
   timing_post_trial: 500,
   timing_response: 2000,
   on_finish: appendTestData,
-
 };
 
 /* create experiment definition array */

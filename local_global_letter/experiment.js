@@ -34,7 +34,7 @@ var randomDraw = function(lst) {
 
 var makeTrialList = function(len, stim, data) {
   //choice array: numeric key codes for the numbers 1-4
-  var choice_array = [49, 51, 52]
+  var choice_array = [72, 83]
     // 1 is a switch trial: ensure half the trials are switch trials
   var switch_trials = jsPsych.randomization.repeat([0, 1], len / 2)
     //create test array
@@ -120,7 +120,7 @@ for (c = 0; c < task_colors.length; c++) {
   if (c === 0) {
     condition = 'global'
     global_shape_length = 2
-    local_shape_lenght = 3
+    local_shape_length = 3
   } else {
     condition = 'local'
     global_shape_length = 3
@@ -201,16 +201,16 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black letters made up of smaller letters, like the image below. All of the smaller shapes will always be the same shape. The large shape can take the form of S or H, while the smaller shape can take the form of an S, H, or a rectangle. </p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/blue_s_of_rectangle.png" height = 200 width = 200></img></div></div>',
-    '<div class = centerbox><p class = block-text>Your task is to respond based on how many lines either the large or small shapes have, depending on the color. If the shape is ' +
-    task_colors[0] + ' respond based on how many lines the large shape has. If the shape is ' +
+    '<div class = centerbox><p class = block-text>In this experiment you will see blue or black letters made up of smaller letters, like the image below. All of the smaller letters will always be the same letter.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/blue_s_of_o.png" height = 200 width = 200></img></div></div>',
+    '<div class = centerbox><p class = block-text>Your task is to indicate whether the large or smaller letters is an "H" or "S", depending on the color. If the letter is ' +
+    task_colors[0] + ' indicate whether the large letter is an "H" or "S". If the letter is ' +
     task_colors[1] +
-    ' respond based on how many lines the small shape has.</p><p class = block-text>Use the number keys to respond 1 for S, 3 for H, and 4 for a rectangle.</p></div>',
-    '<div class = centerbox><p class = block-text>For instance, for the shape below you would press 1 because it is ' +
+    ' indicate wwhether the small letter is an "H" or "S".</p><p class = block-text>Use the "H" or "S" keys to indicate the letter.</p></div>',
+    '<div class = centerbox><p class = block-text>For instance, for the letter below you would press "S" because it is ' +
     task_colors[1] +
     ' which means you should respond based on the smaller shapes. If the shape was instead ' +
     task_colors[0] +
-    ' you would press 3.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/' +
+    ' you would press "H".</p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/' +
     task_colors[1] + '_h_of_s.png" height = 200 width = 200></img></div></div>'
   ],
   allow_keys: false,
@@ -276,9 +276,10 @@ var practice_block = {
   correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [49, 51, 52],
+  choices: [72, 83],
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
+  timing_response: 2000,
   timing_post_trial: 500
 }
 
@@ -291,9 +292,10 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [49, 51, 52],
+  choices: [72, 83],
   timing_post_trial: 500,
   response_ends_trial: true,
+  timing_response: 2000,
   on_finish: appendTestData,
 };
 

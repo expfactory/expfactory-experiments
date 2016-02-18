@@ -137,6 +137,15 @@ var trainingVars = {
   'instruction': [],
   'intense': []
 }
+
+var images = []
+for (var i = 0; i < low_intensity_stims.length; i++) {
+  images.push(base_path + low_intensity_stims[i])
+  images.push(base_path + high_intensity_stims[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
+
 if (Math.random() < 0.5) {
   trainingVars.instruction.push('distract');
   trainingVars.intense.push('low');
@@ -299,7 +308,7 @@ var start_practice_block = {
   data: {
     trial_id: 'start_practice'
   },
-  text: '<div class = centerbox><p class = "center-block-text">We will now start some practice. For the next block of trials you will either be told which strategy to use or instructed to select one yourself. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">Now that you are familiar with using the two strategies (distraction and reappraisal), we will continue. We will practice switching off using these strategies. For the next block of trials you will either be told which strategy to use or instructed to select one yourself. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 500
 };
