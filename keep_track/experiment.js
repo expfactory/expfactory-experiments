@@ -259,7 +259,6 @@ var prompt_block = {
 	data: data,
 	prompt: prompt,
 	timing_post_trial: 0,
-	response_ends_trial: true
 }
 var wait_block = {
 	type: 'poldrack-single-stim',
