@@ -49,11 +49,11 @@ var getFeedback = function() {
     return '<div class = centerbox><div class = center-text>Respond Faster!</p></div>'
   }
   if (condition == "AX" && response == 37) {
-    return '<div class = centerbox><div class = center-text>Correct</p></div>'
+    return '<div class = centerbox><div style="color:green"; class = center-text>Correct!</p></div>'
   } else if (condition != "AX" && response == 40) {
-    return '<div class = centerbox><div class = center-text>Correct</p></div>'
+    return '<div class = centerbox><div style="color:green"; class = center-text>Correct!</p></div>'
   } else {
-    return '<div class = centerbox><div class = center-text>Incorrect</p></div>'
+    return '<div class = centerbox><div style="color:red"; class = center-text>Inorrect</p></div>'
   }
 }
 

@@ -211,8 +211,8 @@ var practice_block = {
     trial_id: "stim",
     exp_stage: "practice"
   },
-  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
-  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
+  correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Inorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: [37, 39],
   timing_response: 1500,

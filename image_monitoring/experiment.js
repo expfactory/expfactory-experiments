@@ -292,8 +292,8 @@ for (i = 0; i < practice_trials.length; i++) {
 			trial_id: "stim",
 			exp_stage: "practice"
 		},
-		correct_text: '<div class = centerbox><div class = center-text>Correct</div></div>',
-		incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
+		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Inorrect</div></div>',
 		timeout_message: ' ',
 		choices: [32],
 		timing_stim: 500,
