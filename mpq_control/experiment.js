@@ -57,17 +57,17 @@ var scale_rev = {
 }
 
 var all_pages = [
-  ["Stop one activity before completing it.", "Take time to consider all aspects.",
-    "Think before doing.", "Stop and think.", "Fast and careless.", "Never reckless.",
-    "Buy something without thinking.", "Value rational approach."
+  ["I stop one activity before completing it.", "I take time to consider all aspects.",
+    "I think before doing.", "I stop and think.", "I am fast and careless.", "I am never reckless.",
+    "I buy something without thinking.", "I value rational approach."
   ],
-  ["Spur of the moment.", "Careful reasoning.", "Not as cautious.", "Cautious person.",
-    "Spontaneous person.", "Do first thing that comes to mind.", "Close track of money.",
-    "Play things by ear."
+  ["I do things on the spur of the moment.", "I am careful in reasoning.", "I am not as cautious.", "I am cautious person.",
+    "I am a spontaneous person.", "I do the first thing that comes to mind.", "I keep close track of money.",
+    "I play things by ear."
   ],
-  ["Know how to proceed.", "Very level-headed.", "Organize my work.", "Often start projects.",
-    "I am methodical.", "Not have detailed plans.", "Have a good idea of what I'm going to do.",
-    "Like to find out what to expect."
+  ["I know how to proceed.", "I am very level-headed.", "I organize my work.", "I often start projects.",
+    "I am methodical.", "I do not have detailed plans.", "I have a good idea of what I'm going to do.",
+    "I like to find out what to expect."
   ]
 ]
 
