@@ -109,8 +109,8 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
-var global_shapes = ['s','h']
-var local_shapes = ['s','h','rectangle']
+var global_shapes = ['s','h', 'o']
+var local_shapes = ['s','h','o']
 var path = '/static/experiments/local_global_letter/images/'
 prefix = '<div class = centerbox><img src = "'
 postfix = '"</img></div>'
@@ -119,11 +119,15 @@ data = []
 for (c = 0; c < task_colors.length; c++) {
   if (c === 0) {
     condition = 'global'
+    global_shape_length = 2
+    local_shape_lenght = 3
   } else {
     condition = 'local'
+    global_shape_length = 3
+    local_shape_length = 2
   }
-  for (g = 0; g < global_shapes.length; g++) {
-    for (l = 0; l < local_shapes.length; l++) {
+  for (g = 0; g < global_shape_length; g++) {
+    for (l = 0; l < local_shape_length; l++) {
       stim.push(prefix + path + task_colors[c] + '_' + global_shapes[g] + '_of_' + local_shapes[l] +
         '.png' + postfix)
       data.push({
