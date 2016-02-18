@@ -137,6 +137,15 @@ var trainingVars = {
   'instruction': [],
   'intense': []
 }
+
+var images = []
+for (var i = 0; i < low_intensity_stims.length; i++) {
+  images.push(base_path + low_intensity_stims[i])
+  images.push(base_path + high_intensity_stims[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
+
 if (Math.random() < 0.5) {
   trainingVars.instruction.push('distract');
   trainingVars.intense.push('low');
