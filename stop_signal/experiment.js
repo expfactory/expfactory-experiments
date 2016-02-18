@@ -597,8 +597,8 @@ for (c = 0; c < numconditions; c++) {
 		for (i = 0; i < test_block_len; i++) {
 			stop_signal_exp_block.push(fixation_block)
 			var trial_data = jQuery.extend(true, {}, block.data[i])
-			trial_data['condition'] = ss_freq
-			trial_data['exp_stage'] = 'test'
+			trial_data.condition = ss_freq
+			trial_data.exp_stage = 'test'
 			var stop_signal_block = {
 				type: 'stop-signal',
 				stimulus: block.stimulus[i],

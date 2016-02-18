@@ -129,11 +129,11 @@ var rewarded_feature = randomDraw(stim_att[rewarded_dim])
 //preload images
 var images = []
 for (var c = 0; c < 3; c++) {
-  var color = stim_att['colors'][c]
+  var color = stim_att.colors[c]
   for (var s = 0; s < 3; s++) {
-    var shape = stim_att['shapes'][s]
+    var shape = stim_att.shapes[s]
     for (var p = 0; p < 3; p++) {
-      var pattern = stim_att['patterns'][p]
+      var pattern = stim_att.patterns[p]
       images.push(path_source + color + '_' + shape + '_' + pattern + '.png')
     }
   }

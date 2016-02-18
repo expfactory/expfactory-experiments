@@ -605,7 +605,7 @@ for (var b = 0; b < numblocks; b++) {
       //Label each trial as an ignore, stop or go trial
     var trial_data = $.extend({}, block.data[i])
     trial_data.condition = stop_trials[i]
-    trial_data['exp_stage'] = 'test'
+    trial_data.exp_stage = 'test'
     if (stop_trials[i] == 'ignore') {
       var stop_trial = 'stop'
       var stop_stim = ignore_signal
