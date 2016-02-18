@@ -224,7 +224,7 @@ var test_block = {
     })
     updateAmount(choice)
   },
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
 };
 
 var end_block = {

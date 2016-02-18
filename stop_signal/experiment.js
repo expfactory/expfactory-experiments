@@ -158,8 +158,8 @@ var instructTimeThresh = 0 ///in seconds
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stop_signal/images/'
-var images = [prefix + 'square.png', prefix + 'circle.png', prefix + 'triangle.png', prefix +
-  'diamond.png'
+var images = [prefix + 'pentagon.png', prefix + 'hourglass.png', prefix + 'tear.png', prefix +
+  'square.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
@@ -173,9 +173,9 @@ var possible_responses = [
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
 	possible_responses[1], possible_responses[1]
 ])
-var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' +
-	correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] +
-	' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
+var prompt_text = '<ul list-text><li>Pentagon:  ' + correct_responses[0][0] + '</li><li>Hourglass:  ' +
+	correct_responses[1][0] + ' </li><li>Tear:  ' + correct_responses[2][0] +
+	' </li><li>Square:  ' + correct_responses[3][0] + ' </li></ul>'
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
