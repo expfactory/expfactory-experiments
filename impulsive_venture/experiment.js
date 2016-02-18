@@ -62,7 +62,7 @@ var all_pages = [
     'Are you an impulsive person?', 'Do you usually think carefully before doing anything?',
     'Do you often do things on the spur of the moment?',
     'Do you mostly speak before thinking things out?',
-    'Do you often get involved in things you later Wish you could get out of?',
+    'Do you often get involved in things you later wish you could get out of?',
     'Do you get so "carried away" by new and exciting ideas. that you never think of possible snags?',
     'Do you need to use a lot of self-control to keep out of trouble?',
     'Would you agree that almost everything enjoyable is illegal or immoral?',
