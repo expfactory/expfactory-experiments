@@ -109,10 +109,6 @@ var getSSD = function() {
 	return SSD
 }
 
-var resetSSD = function() {
-	SSD = 250
-}
-
 /* These methods allow NoSSPractice and SSPractice to be randomized for each iteration
 of the "while" loop */
 var getNoSSPracticeStim = function() {
@@ -165,7 +161,8 @@ jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+
 var correct_responses = jsPsych.randomization.shuffle([
 	["M key", 77],
 	["M key", 77],
@@ -191,22 +188,22 @@ var test_block_data = [] // records the data in the current block to calculate f
 var stimulus = [{
   stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
-    correct_response: correct_responses[0][1]
+    correct_response: correct_responses[0][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
-    correct_response: correct_responses[1][1]
+    correct_response: correct_responses[1][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
-    correct_response: correct_responses[2][1]
+    correct_response: correct_responses[2][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
-    correct_response: correct_responses[3][1]
+    correct_response: correct_responses[3][1], trial_id: 'stim',
   }
 }]
 
@@ -364,21 +361,13 @@ var test_feedback_block = {
 		exp_stage: "test"
 	},
 	cont_key: [13],
-	text: getTestFeedback
+	text: getTestFeedback,
+	on_finish: function() {
+		test_block_data = []
+	}
 };
 
-/* reset SSD block */
-var reset_block = {
-	type: 'call-function',
-	data: {
-		trial_id: "reset_SSD"
-	},
-	func: function() {
-		test_block_data = []
-		resetSSD()
-	},
-	timing_post_trial: 0
-}
+
 
 
 
@@ -406,7 +395,6 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				trial_id: 'stim',
 				exp_stage: "NoSS_practice"
 			})
 		}
@@ -597,7 +585,7 @@ for (b = 0; b < numblocks; b++) {
 			type: 'stop-signal',
 			stimulus: block.stimulus[i],
 			SS_stimulus: stop_signal,
-			SS_trial_type: stop_trial,
+			SS_trial_type: stop_trials[i],
 			data: block.data[i],
 			is_html: true,
 			choices: [possible_responses[0][1], possible_responses[1][1]],
@@ -609,7 +597,6 @@ for (b = 0; b < numblocks; b++) {
 			on_finish: function(data) {
 				updateSSD(data)
 				jsPsych.data.addDataToLastTrial({
-					trial_id: 'stim',
 					exp_stage: "test"
 				})
 				test_block_data.push(data)
@@ -625,6 +612,5 @@ for (b = 0; b < numblocks; b++) {
 	}
 	motor_selective_stop_signal_experiment.push(test_feedback_block)
 }
-motor_selective_stop_signal_experiment.push(reset_block)
 
 motor_selective_stop_signal_experiment.push(end_block)
