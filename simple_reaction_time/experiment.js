@@ -12,9 +12,29 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var rt_array = []
+  for (var i = 0; i < experiment_data.length; i++)
+    var rt = experiment_data[i].rt
+    if (typeof rt !== 'undefined') {
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum/rt_array.length
+}
 
 var post_trial_gap = function() {
-  gap = Math.floor(Math.random() * 2000) + 1000
+  gap = Math.floor(Math.random() * 1000) + 1000
   return gap;
 }
 
@@ -40,12 +60,10 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var practice_len = 5
-var experiment_len = 50
+var experiment_len = 5
 var gap = 0
 var current_trial = 0
-var post_trial_gap = 500
-
-stim = '<div class = shapebox><div id = cross></div></div>'
+var stim = '<div class = shapebox><div id = cross></div></div>'
 
 
 
@@ -61,7 +79,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =

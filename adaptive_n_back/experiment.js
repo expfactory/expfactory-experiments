@@ -27,6 +27,27 @@ function addID() {
 	})
 }
 
+function assessPerformance() {
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var rt_array = []
+	for (var i = 0; i < experiment_data.length; i++)
+		var rt = experiment_data[i].rt
+		if (typeof rt !== 'undefined') {
+			if (rt == -1) {
+				missed_count += 1
+			} else {
+				rt_array.push(rt)
+			}
+		}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum/rt_array.length
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
@@ -90,7 +111,7 @@ var getStim = function() {
 var getData = function() {
 	return {
 		trial_id: "stim",
-		exp_stage: "adaptive_test",
+		exp_stage: "test",
 		load: delay,
 		target: target,
 		trial_num: current_trial
@@ -229,7 +250,8 @@ var end_block = {
 		trial_id: "text"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0, 
+	on_finish: assessPerformance
 };
 
 var start_practice_block = {
