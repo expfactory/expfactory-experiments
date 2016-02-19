@@ -73,3 +73,13 @@ left:50%;
 margin-right:0%;
 transform: translate(-50%,15%);
 }
+
+.bottombox {
+width: 40vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,15%);
+}

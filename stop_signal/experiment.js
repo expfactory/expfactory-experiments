@@ -165,7 +165,8 @@ jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
-	'<div class = stopbox><div class = centeblack-shape id = stop-signal></div><div class = centeblack-shape id = stop-signal-inner></div></div>'
+	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
+	
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -187,22 +188,22 @@ var test_block_data = [] // records the data in the current block to calculate f
 var stimulus = [{
   stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
-    correct_response: correct_responses[0][1]
+    correct_response: correct_responses[0][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
-    correct_response: correct_responses[1][1]
+    correct_response: correct_responses[1][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
-    correct_response: correct_responses[2][1]
+    correct_response: correct_responses[2][1], trial_id: 'stim',
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
-    correct_response: correct_responses[3][1]
+    correct_response: correct_responses[3][1], trial_id: 'stim',
   }
 }]
 
@@ -217,8 +218,8 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 
 //number of blocks per condition
 var test_block_len = 60
-var numconditions = 1 //2
-var numblocks = 2 //5
+var numconditions = 2
+var numblocks = 5
 var condition_blocks = []
 for (j = 0; j < numconditions; j++) {
 	blocks = []
@@ -361,18 +362,20 @@ var test_feedback_block = {
 	},
 	timing_response: 120000,
 	cont_key: [13],
-	text: getTestFeedback
+	text: getTestFeedback,
+	on_finish: function() {
+		test_block_data = []
+	}
 };
 
 /* reset SSD block */
 var reset_block = {
 	type: 'call-function',
 	data: {
-		trial_id: "fixation"
+		trial_id: "reset"
 	},
 	func: function() {
 		resetSSD()
-		test_block_data = []
 	},
 	timing_post_trial: 0
 }
@@ -403,7 +406,6 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				trial_id: 'stim',
 				exp_stage: 'NoSS_practice'
 			})
 		}
@@ -415,7 +417,6 @@ var NoSS_practice_node = {
 	timeline: NoSS_practice_trials,
 	loop_function: function(data) {
 		practice_repetitions += 1
-		console.log(practice_repetitions)
 		var sum_rt = 0;
 		var sum_correct = 0;
 		var go_length = 0;
@@ -488,7 +489,6 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_post_trial: 0,
 		on_finish: function(data) {
 			jsPsych.data.addDataToLastTrial({
-				trial_id: 'stim',
 				exp_stage: 'practice'
 			})
 		}
@@ -579,7 +579,7 @@ stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 ss_freq = randomDraw(['high', 'low'])
-	// Loop through the two conditions
+// Loop through the two conditions
 for (c = 0; c < numconditions; c++) {
 	var blocks = condition_blocks[c]
 		// Loop through the multiple blocks within each condition
@@ -596,12 +596,15 @@ for (c = 0; c < numconditions; c++) {
 		// Loop through each trial within the block
 		for (i = 0; i < test_block_len; i++) {
 			stop_signal_exp_block.push(fixation_block)
+			var trial_data = jQuery.extend(true, {}, block.data[i])
+			trial_data.condition = ss_freq
+			trial_data.exp_stage = 'test'
 			var stop_signal_block = {
 				type: 'stop-signal',
 				stimulus: block.stimulus[i],
 				SS_stimulus: stop_signal,
 				SS_trial_type: stop_trials[i],
-				data: block.data[i],
+				data: trial_data,
 				is_html: true,
 				choices: [possible_responses[0][1], possible_responses[1][1]],
 				timing_stim: 850,
@@ -612,8 +615,6 @@ for (c = 0; c < numconditions; c++) {
 				on_finish: function(data) {
 					updateSSD(data)
 					jsPsych.data.addDataToLastTrial({
-						condition: ss_freq,
-						trial_id: 'stim',
 						exp_stage: 'test'
 					})
 					test_block_data.push(data)

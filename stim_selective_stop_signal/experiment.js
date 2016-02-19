@@ -124,10 +124,6 @@ var getSSD = function() {
   return SSD
 }
 
-var resetSSD = function() {
-  SSD = 250
-}
-
 /* These methods allow NoSSPractice and SSPractice to be randomized for each iteration
 of the "while" loop */
 var getNoSSPracticeStim = function() {
@@ -389,21 +385,12 @@ var test_feedback_block = {
   },
   timing_response: 120000,
   cont_key: [13],
-  text: getTestFeedback
+  text: getTestFeedback,
+  on_finish: function() {
+    test_block_data = []
+  }
 };
 
-/* reset SSD block */
-var reset_block = {
-  type: 'call-function',
-  data: {
-    trial_id: "fixation"
-  },
-  func: function() {
-    test_block_data = []
-    resetSSD()
-  },
-  timing_post_trial: 0
-}
 
 
 
@@ -431,7 +418,6 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
     prompt: prompt_text,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({
-        trial_id: 'stim',
         exp_stage: "NoSS_practice"
       })
     }
@@ -517,7 +503,6 @@ for (i = 0; i < practice_block_len; i++) {
     timing_post_trial: 0,
     on_finish: function(data) {
       jsPsych.data.addDataToLastTrial({
-        trial_id: 'stim',
         exp_stage: "practice"
       })
     }
@@ -618,8 +603,9 @@ for (var b = 0; b < numblocks; b++) {
   for (var i = 0; i < test_block_len; i++) {
     stop_signal_exp_block.push(fixation_block)
       //Label each trial as an ignore, stop or go trial
-    var stim_data = $.extend({}, block.data[i])
-    stim_data.condition = stop_trials[i]
+    var trial_data = $.extend({}, block.data[i])
+    trial_data.condition = stop_trials[i]
+    trial_data.exp_stage = 'test'
     if (stop_trials[i] == 'ignore') {
       var stop_trial = 'stop'
       var stop_stim = ignore_signal
@@ -632,7 +618,7 @@ for (var b = 0; b < numblocks; b++) {
       stimulus: block.stimulus[i],
       SS_stimulus: stop_signal,
       SS_trial_type: stop_trial,
-      data: stim_data,
+      data: trial_data,
       is_html: true,
       choices: [possible_responses[0][1], possible_responses[1][1]],
       timing_stim: 850,
@@ -642,10 +628,6 @@ for (var b = 0; b < numblocks; b++) {
       timing_post_trial: 0,
       on_finish: function(data) {
         updateSSD(data)
-        jsPsych.data.addDataToLastTrial({
-          trial_id: 'stim',
-          exp_stage: "test"
-        })
         test_block_data.push(data)
       }
     }

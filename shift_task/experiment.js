@@ -66,11 +66,11 @@ var getStim = function() {
     })
   }
   return '<div class = shift_left><img class = shift_stim src = ' + stim_htmls[0] +
-    ' width = "50%" </img></div>' +
+    ' </img></div>' +
     '<div class = shift_middle><img class = shift_stim src = ' + stim_htmls[1] +
-    ' width = "50%"  </img></div>' +
+    '  </img></div>' +
     '<div class = shift_right><img class = shift_stim src = ' + stim_htmls[2] +
-    ' width = "50%"  </img></div>'
+    '  </img></div>'
 }
 
 var getFeedback = function() {
@@ -80,7 +80,7 @@ var getFeedback = function() {
   var feedback_text;
   if (choice != -1) {
     image = '<div class = shift_' + position_array[choice] + '><img class = shift_stim src = ' +
-      stim_htmls[choice] + ' width = "50%" </img></div>'
+      stim_htmls[choice] + ' </img></div>'
     feedback_text = 'You won 0 points.'
     if (image.indexOf(rewarded_feature) != -1 && Math.random() > 0.25) {
       feedback_text = 'You won 1 point!'
@@ -125,6 +125,20 @@ var features = stim_att.colors.concat(stim_att.shapes).concat(stim_att.patterns)
 var path_source = '/static/experiments/shift_task/images/'
 var rewarded_dim = randomDraw(dims)
 var rewarded_feature = randomDraw(stim_att[rewarded_dim])
+
+//preload images
+var images = []
+for (var c = 0; c < 3; c++) {
+  var color = stim_att.colors[c]
+  for (var s = 0; s < 3; s++) {
+    var shape = stim_att.shapes[s]
+    for (var p = 0; p < 3; p++) {
+      var pattern = stim_att.patterns[p]
+      images.push(path_source + color + '_' + shape + '_' + pattern + '.png')
+    }
+  }
+}
+jsPsych.pluginAPI.preloadImages(images)
 
 // variables to track feature switch
 var last_dim = ''
