@@ -96,18 +96,19 @@ function jglMakeArray(low, step, high) {
 	if (step === undefined) {
 		step = 1;
 	}
-
+	var size = 0
+	var array = []
 	if (low < high) {
-		var size = Math.floor((high - low) / step);
-		var array = new Array(size);
+		size = Math.floor((high - low) / step);
+		array = new Array(size);
 		array[0] = low;
 		for (var i = 1; i < array.length; i++) {
 			array[i] = array[i - 1] + step;
 		}
 		return array;
 	} else if (low > high) {
-		var size = Math.floor((low - high) / step);
-		var array = new Array(size);
+		size = Math.floor((low - high) / step);
+		array = new Array(size);
 		array[0] = low;
 		for (var i = 1; i < array.length; i++) {
 			array[i] = array[i - 1] - step;
@@ -221,10 +222,10 @@ function getStim() {
 	}));
 	makeStim('canvas1', 'backCanvas1', 0, 0)
 	makeStim('canvas2', 'backCanvas2', angle, contrast)
-	curr_data['angle'] = angle
-	curr_data['reference_side'] = sides[0]
+	curr_data.angle = angle
+	curr_data.reference_side = sides[0]
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
-	curr_data['correct_response'] = correct_response
+	curr_data.correct_response = correct_response
 }
 
 function getEasyStim() {
@@ -239,11 +240,11 @@ function getEasyStim() {
 		id: 'jspsych-poldrack-single-stim-stimulus'
 	}));
 	makeStim('canvas1', 'backCanvas1', 0, 0)
-	makeStim('canvas2', 'backCanvas2', angle, .2)
-	curr_data['angle'] = angle
-	curr_data['reference_side'] = sides[0]
+	makeStim('canvas2', 'backCanvas2', angle, 0.2)
+	curr_data.angle = angle
+	curr_data.reference_side = sides[0]
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
-	curr_data['correct_response'] = correct_response
+	curr_data.correct_response = correct_response
 }
 
 var randomDraw = function(lst) {
@@ -262,8 +263,8 @@ var appendData = function(data) {
 	if (data.key_press == curr_data.correct_response) {
 		correct = true
 	}
-	curr_data['trial_num'] = current_trial
-	curr_data['correct'] = correct
+	curr_data.trial_num = current_trial
+	curr_data.correct = correct
 	jsPsych.data.addDataToLastTrial(curr_data)
 	curr_data = {}
 	current_trial = current_trial + 1
@@ -275,19 +276,19 @@ var afterTrialUpdate = function(data) {
 	if (data.key_press == curr_data.correct_response) {
 		correct = true
 	}
-	curr_data['trial_num'] = current_trial
-	curr_data['correct'] = correct
+	curr_data.trial_num = current_trial
+	curr_data.correct = correct
 	jsPsych.data.addDataToLastTrial(curr_data)
 	curr_data = {}
 	current_trial = current_trial + 1
 		//2 up 1 down staircase
 	if (data.key_press != -1) {
-		if (correct == false) {
-			contrast += .005
+		if (correct === false) {
+			contrast += 0.005
 		} else {
 			correct_counter += 1
 			if (correct_counter == 2) {
-				contrast -= .005
+				contrast -= 0.005
 				correct_counter = 0
 			}
 		}
@@ -304,7 +305,7 @@ var instructTimeThresh = 0 ///in seconds
 // task specific variables
 var practice_len = 10
 var exp_len = 100
-var contrast = .1
+var contrast = 0.1
 var correct_counter = 0
 var current_trial = 0
 var choices = [37, 39]
