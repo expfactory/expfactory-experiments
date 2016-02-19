@@ -90,7 +90,7 @@ var all_pages = [
 var all_options = [fillArray(opts, 11), fillArray(opts, 10), fillArray(opts, 10)]
 
 //no instructions on reverse scoring. judging by the factor scores using raw scores
-var score_scale = [fillArray(score_scale, 11), fillArray(score_scale, 10), fillArray(score_scale, 10)]
+var score_scale = [fillArray(scale_reg, 11), fillArray(scale_reg, 10), fillArray(scale_reg, 10)]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
