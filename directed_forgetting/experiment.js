@@ -366,7 +366,8 @@ var getResponse = function(){
 
 var appendPracticeProbeData = function(){
 jsPsych.data.addDataToLastTrial({
-	stim: [probe, probeType],
+	probe_letter: probe,
+	probeType: probeType,
 	trial_num: current_trial
 	})
 }
@@ -407,7 +408,14 @@ var practiceProbeTypeArray = jsPsych.randomization.repeat(probes,1)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
-
+var images = []
+for (var i = 0; i < stimArray.length; i++) {
+	images.push(pathSource + stimArray[i] + fileType)
+}
+images.push('TOP.png')
+images.push('BOT.png')
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -463,7 +471,7 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your training set.  You must memorize all 6 letters. </p></div>',
 		'<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
-		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
+		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -613,17 +621,6 @@ var intro_test_block = {
 	on_finish: resetTrial,
 };
 
-var start_practice_block = {
-	type: 'poldrack-text',
-	timing_response: 180000,
-	data: {
-		trial_id: "practice_intro"
-	},
-	text: '<div class = centerbox><p class = block-text>We will now start with some practice.</p><p class = block-text> Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 1000,
-	on_finish: resetTrial,
-};
 
 var practice_probe_block = {
 	type: 'poldrack-categorize',
@@ -632,7 +629,7 @@ var practice_probe_block = {
 	choices: [37, 39],
 	data: {trial_id: "probe", exp_stage: "practice"},
 	correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
-	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Inorrect</p></div>',
+	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
 	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
@@ -644,8 +641,6 @@ var practice_probe_block = {
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(instruction_node);
-
-directed_forgetting_experiment.push(start_practice_block);
 for(i=0;i<4;i++){
 	directed_forgetting_experiment.push(start_fixation_block);
 	directed_forgetting_experiment.push(training_block);
@@ -655,9 +650,12 @@ for(i=0;i<4;i++){
 	directed_forgetting_experiment.push(ITI_fixation_block);
 }
 
-directed_forgetting_experiment.push(intro_test_block)
 for (r = 0; r < num_runs; r++) {
-	directed_forgetting_experiment.push(start_test_block);
+	if (r === 0) {
+		recent_probes_experiment.push(intro_test_block)
+	} else {
+		recent_probes_experiment.push(start_test_block);
+	}
 	for (i = 0; i < num_trials; i++) {
 		directed_forgetting_experiment.push(start_fixation_block);
 		directed_forgetting_experiment.push(training_block);

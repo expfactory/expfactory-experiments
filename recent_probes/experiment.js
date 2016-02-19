@@ -70,7 +70,7 @@ var randomDraw = function(lst) {
 //this adds the trial number, which stims are shown, and if the trial was a correct trial to the data set
 var appendProbeData = function() {
 	jsPsych.data.addDataToLastTrial({
-		probe: probe,
+		probe_letter: probe,
 		probeType: probeType,
 		trial_num: currTrial
 	})
@@ -103,7 +103,7 @@ var appendProbeData = function() {
 
 var appendPracticeProbeData = function() {
 	jsPsych.data.addDataToLastTrial({
-		probe: probe,
+		probe_letter: probe,
 		probeType: probeType,
 		trial_num: currTrial
 	})
@@ -610,7 +610,7 @@ var practice_probe_block = {
 		exp_stage: "practice"
 	},
 	correct_text: '<div class = bottombox><p style="color:green"; style="color:green"; class = center-text>Correct!</p></div>',
-	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Inorrect</p></div>',
+	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
 	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
