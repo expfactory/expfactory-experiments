@@ -647,7 +647,7 @@ for (k = 0; k < 4; k++) {
 	recent_probes_experiment.push(ITI_fixation_block)
 }
 for (r = 0; r < num_runs; r++) {
-	if (r == 0) {
+	if (r === 0) {
 		recent_probes_experiment.push(intro_test_block)
 	} else {
 		recent_probes_experiment.push(start_test_block);
