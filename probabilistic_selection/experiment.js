@@ -473,7 +473,7 @@ for (i = 0; i < 6; i++) {
 		key_answer: getResponse,
 		choices: [37, 39],
 		correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
-		incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Inorrect</p></div>',
+		incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
 		timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
 		timing_stim: [4000],
 		timing_response: [4000],

@@ -404,7 +404,7 @@ for (i = 0; i < block.data.length; i++) {
 		is_html: true,
 		key_answer: block.data[i].correct_response,
 		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Inorrect</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
 		choices: [37, 39],
 		data: block.data[i],
