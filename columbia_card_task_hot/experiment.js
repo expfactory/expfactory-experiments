@@ -171,15 +171,8 @@ var chooseCard = function(clicked_id) {
 			for (i = 1; i < 33; i++) {
 				document.getElementById('' + i + '').disabled = true;
 			}
-			setTimeout(endRound, 2000)
-			e = jQuery.Event("keydown");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e);
-			e = jQuery.Event("keyup");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e)
+			setTimeout(endRound, 1000)
+			setTimeout(pressKey, 2500)
 
 		} else if (temp == -1) { // if you click on a gain card
 
@@ -259,12 +252,12 @@ var getRound = function() {
 		clickedGainCards.sort(function(a, b) {
 			return a - b
 		})
-		for (i = 0; i < clickedGainCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
+		for (i = 0; i < whichGainCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + whichGainCards[i] + "'",
 				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
 		}
-		for (i = 0; i < clickedLossCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedLossCards[i] + "'",
+		for (i = 0; i < whichLossCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + whichLossCards[i] + "'",
 				" src='/static/experiments/columbia_card_task_hot/images/loss.png'")
 		}
 		return gameState
