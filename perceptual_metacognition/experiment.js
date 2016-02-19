@@ -110,8 +110,8 @@ function jglMakeArray(low, step, high) {
 		size = Math.floor((low - high) / step);
 		array = new Array(size);
 		array[0] = low;
-		for (var i = 1; i < array.length; i++) {
-			array[i] = array[i - 1] - step;
+		for (var j = 1; j < array.length; j++) {
+			array[i] = array[j - 1] - step;
 		}
 		return array;
 	}
