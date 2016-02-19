@@ -1,0 +1,77 @@
+.display_stage {
+    position: fixed;
+    background: #900;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    background-color: black;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+#canvas1, #canvas2, #backCanvas1,#backCanvas2 {
+  width: 600px;
+  height: 600px;
+  display: block;
+    margin: 0 auto;
+}
+
+.leftbox {
+  width: 600px;
+  height: 600px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-110%,-50%);
+}
+
+.rightbox {
+  width: 600px;
+  height: 600px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(10%,-50%);
+}
+
+.response_div {
+  width: 40w;
+  height: 8vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,140%);
+}
+
+.response_button {
+  width: 10vw;
+  height: 10vw;
+  background: #505050;
+  margin: 1vw;
+  position: relative;
+  color: #fff;
+  border-radius:15px;
+  font-size: 24px;
+  vertical-align:top;
+}
+
+.response_button:hover {
+  color: red;
+}
+
+.response_button:active {
+  background-color: black;
+}
+
+div, p {
+  color: white;
+}
+
+.fixation {
+  color: grey;
+}
