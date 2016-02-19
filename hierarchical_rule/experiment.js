@@ -41,9 +41,11 @@ var getFeedback = function() {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
-    return '<div class = centerbox><div class = "center-text">Correct</div></div>'
+    return
+      '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
-    return '<div class = centerbox><div class = "center-text">Incorrect</div></div>'
+    return
+      '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
   }
 }
 
@@ -81,7 +83,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var exp_len = 200 //number of trials per rule-set
+var hierarchical_only = true //When this is true, do not run the flat task
+var exp_len = 360 //number of trials per rule-set
 var flat_first = 0 //  Math.floor(Math.random())
 var path_source = '/static/experiments/hierarchical_rule/images/'
 var stim_prefix = '<div class = centerbox><div class = stimBox><img class = hierarchicalStim src ='
@@ -99,8 +102,8 @@ hierarchical_stims = []
 colors = jsPsych.randomization.shuffle([1, 2, 3, 4]) //border colors
 stims = jsPsych.randomization.shuffle([1, 2, 3, 4, 5, 6])
 orientations = [1, 2, 3]
-color_data = ['red','blue','green','yellow']
-orientation_data = ['vertical','slant','horizontal']
+color_data = ['red', 'blue', 'green', 'yellow']
+orientation_data = ['vertical', 'slant', 'horizontal']
 random_correct = jsPsych.randomization.repeat(choices, 6) // correct responses for random stim
 for (var c = 0; c < colors.length; c++) {
   for (var s = 0; s < stims.length / 2; s++) {
@@ -111,8 +114,8 @@ for (var c = 0; c < colors.length; c++) {
             border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s],
-            orientation: orientation_data[orientations[o]-1],
-            border: color_data[colors[c]-1],
+            orientation: orientation_data[orientations[o] - 1],
+            border: color_data[colors[c] - 1],
             exp_stage: "test",
             correct_response: random_correct.pop()
           }
@@ -128,9 +131,9 @@ for (var c = 0; c < colors.length; c++) {
             '.bmp </img>' + border_prefix + path_source + colors[c] + '_border.png' + postfix,
           data: {
             stim: stims[s + (stims.length / 2)],
-            orientation: orientation_data[orientations[o]-1],
+            orientation: orientation_data[orientations[o] - 1],
             exp_stage: "test",
-            border: color_data[colors[c]-1],
+            border: color_data[colors[c] - 1],
             correct_response: correct_response
           }
         })
@@ -203,7 +206,7 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
     instructions_grid,
-    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">This experiment will take about 30 minutes. There will be a break half way through. Good luck!</p></div>'
+    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true
@@ -353,12 +356,16 @@ var hierarchical_rule_experiment = []
 hierarchical_rule_experiment.push(instruction_node);
 hierarchical_rule_experiment.push(start_test_block);
 // setup exp w loop nodes after pushing the practice etc. blocks
-if (flat_first == 1) {
-  hierarchical_rule_experiment.push(flat_loop_node, attention_node, start_test_block,
-    hierarchical_loop_node, attention_node);
+if (hierarchical_only) {
+  hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node);
 } else {
-  hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, start_test_block,
-    flat_loop_node, attention_node);
+  if (flat_first == 1) {
+    hierarchical_rule_experiment.push(flat_loop_node, attention_node, start_test_block,
+      hierarchical_loop_node, attention_node);
+  } else {
+    hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, start_test_block,
+      flat_loop_node, attention_node);
+  }
 }
 
 hierarchical_rule_experiment.push(end_block)
