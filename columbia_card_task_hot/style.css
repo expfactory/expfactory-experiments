@@ -6,7 +6,7 @@
 
 .center-text {
   text-align:center;
-  font-size: 40px;
+  font-size: 90%;
   position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
