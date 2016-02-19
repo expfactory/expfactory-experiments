@@ -12,10 +12,11 @@ var getInstructFeedback = function() {
 }
 
 var getBoard = function(board_type) {
+	var board = ''
 	if (board_type == 2) {
-		var board = "<div class = numbox2>"
+		board = "<div class = numbox2>"
 	} else {
-		var board = "<div class = numbox>"
+		board = "<div class = numbox>"
 	}
 	for (var i = 1; i < 33; i++) {
 		board += "<div class = square><input type='image' id = c" + i + " src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"

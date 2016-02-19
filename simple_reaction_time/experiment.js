@@ -16,8 +16,9 @@ function assessPerformance() {
   var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
   var missed_count = 0
   var rt_array = []
+  var rt = 0
   for (var i = 0; i < experiment_data.length; i++)
-    var rt = experiment_data[i].rt
+    rt = experiment_data[i].rt
     if (typeof rt !== 'undefined') {
       if (rt == -1) {
         missed_count += 1
