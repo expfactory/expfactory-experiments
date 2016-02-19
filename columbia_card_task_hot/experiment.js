@@ -11,6 +11,19 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
+var getBoard = function(board_type) {
+	if (board_type == 2) {
+		var board = "<div class = numbox2>"
+	} else {
+		var board = "<div class = numbox>"
+	}
+	for (var i = 1; i < 33; i++) {
+		board += "<div class = square><input type='image' id = c" + i + " src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"
+	}
+	return board
+}
+
+
 var getReward = function() {
 	tempData = jsPsych.data.getData()
 	allPoints = []
@@ -169,7 +182,7 @@ var chooseCard = function(clicked_id) {
 			document.getElementById("button1").disabled = true;
 			document.getElementById("button2").disabled = true;
 			for (i = 1; i < 33; i++) {
-				document.getElementById('' + i + '').disabled = true;
+				document.getElementById('c' + i + '').disabled = true;
 			}
 			setTimeout(endRound, 2000)
 			e = jQuery.Event("keydown");
@@ -278,10 +291,10 @@ var noCard = function() {
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/chosen.png';
 		} else if (whichLossCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
 		}
 	}
@@ -297,10 +310,10 @@ var endRound = function() {
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/chosen.png';
 		} else if (whichLossCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
 		}
 	}
@@ -314,10 +327,10 @@ var collect = function() {
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/chosen.png';
 		} else if (whichLossCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
+			document.getElementById('c' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
 		}
 	}
@@ -488,140 +501,32 @@ var gameSetup =
 	"<div class = titleboxLeft1><div id= loss_amount class = center-text>Loss Amount: </div></div>" +
 	"<div class = titleboxRight1><div id = num_loss_cards class = center-text># of Loss Cards: </div></div>" +
 	"<div class = titleboxMiddle1><div id = gain_amount class = center-text>Gain Amount: </div></div>" +
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" +
-
-
-	"<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div></div>"
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" + getBoard()
 
 
 var practiceSetup =
-	"<div class = instruct1><div class = center-text><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div> " +
+	"<div class = instruct1><div style = 'font-size: 90%'; class = center-block-text><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div> " +
 	"<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" +
 	"<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
 	"<div class = titleboxLeft><div id = game_round class = center-text>Game Round: 1</div></div>" +
 	"<div class = titleboxLeft1><div id= loss_amount class = center-text>Loss Amount: 250</div></div>" +
 	"<div class = titleboxRight1><div id = num_loss_cards class = center-text># of Loss Cards: 1</div></div>" +
 	"<div class = titleboxMiddle1><div id = gain_amount class = center-text>Gain Amount: 30</div></div>" +
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" +
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" + getBoard()
 
 
-	"<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
+	
 
 
 var practiceSetup2 =
-	"<div class = instruct1><div class = center-text><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div> " +
+	"<div class = instruct1><div style = 'font-size: 90%'; class = center-block-text><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div> " +
 	"<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" +
 	"<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
 	"<div class = titleboxLeft><div id = game_round class = center-text>Game Round: 2</div></div>" +
 	"<div class = titleboxLeft1><div id= loss_amount class = center-text>Loss Amount: 750</div></div>" +
 	"<div class = titleboxRight1><div id = num_loss_cards class = center-text># of Loss Cards: 3</div></div>" +
 	"<div class = titleboxMiddle1><div id = gain_amount class = center-text>Gain Amount: 10</div></div>" +
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" +
-
-
-	"<div class = numbox><div class = square><input type='image' id = '1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>" + getBoard()
 
 
 
@@ -677,44 +582,7 @@ var instructions_block = {
   	"<div class = instructBoxRight1><div># of Loss Cards: 1</div></div>" +
   	"<div class = instructBoxMiddle1><div>Gain Amount: 10</div></div>" +
 	"<button type='button' class = instructButton onclick= instructFunction()>See Result</button>"+
-
-  
-    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
-    '</p></div>',
+	getBoard(2),
   
 	'<div class = centerbox-CCT><p class = block-text><div class = center-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
@@ -723,45 +591,7 @@ var instructions_block = {
   	"<div class = instructBoxLeft1><div>Loss Amount: 250</div></div>" +
   	"<div class = instructBoxRight1><div># of Loss Cards: 3</div></div>" +
   	"<div class = instructBoxMiddle1><div>Gain Amount: 30</div></div>" +
-  	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+
-
-  
-    "<div class = numbox2><div class = square2><input type='image' id = 'c1' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c5' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c9' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c13' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c17' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c21' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c25' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c29' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c2' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c6' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c10' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c14' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c18' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c22' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c26' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c30' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c3' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c7' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c11' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c15' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c19' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c23' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c27' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-  
-    "<div class = square2><input type='image' id = 'c4' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c8' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c12' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c16' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c20' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c24' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c28' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div>"+
-    "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
-    '</p></div>',
+  	"<button type='button' class = instructButton onclick= instructFunction2()>See Result</button>"+ getBoard(2),
   
   ],
   allow_keys: false,

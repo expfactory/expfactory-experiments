@@ -274,7 +274,7 @@ var practice_block = {
     exp_stage: "practice"
   },
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Inorrect</div></div>',
+  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: [72, 83],
   timing_feedback_duration: 1000,

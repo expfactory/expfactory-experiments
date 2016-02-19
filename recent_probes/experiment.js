@@ -70,7 +70,7 @@ var randomDraw = function(lst) {
 //this adds the trial number, which stims are shown, and if the trial was a correct trial to the data set
 var appendProbeData = function() {
 	jsPsych.data.addDataToLastTrial({
-		probe: probe,
+		probe_letter: probe,
 		probeType: probeType,
 		trial_num: currTrial
 	})
@@ -103,7 +103,7 @@ var appendProbeData = function() {
 
 var appendPracticeProbeData = function() {
 	jsPsych.data.addDataToLastTrial({
-		probe: probe,
+		probe_letter: probe,
 		probeType: probeType,
 		trial_num: currTrial
 	})
