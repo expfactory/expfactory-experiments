@@ -49,14 +49,14 @@
 }
 
 .response_button {
-  width: 7vw;
-  height: 7vw;
+  width: 10vw;
+  height: 10vw;
   background: #505050;
   margin: 1vw;
   position: relative;
   color: #fff;
   border-radius:15px;
-  font-size: 22px;
+  font-size: 24px;
   vertical-align:top;
 }
 

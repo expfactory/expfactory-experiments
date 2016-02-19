@@ -230,8 +230,8 @@ function getStim() {
 function getEasyStim() {
 	var angle = Math.random() * 180
 	var sides = jsPsych.randomization.shuffle(['left', 'right'])
-	var stim = '<div class = leftbox><canvas id = canvas1></canvas></div>' +
-		'<div class = rightbox><canvas id = canvas2></canvas></div>' +
+	var stim = '<div class = ' + sides[0] + 'box><canvas id = canvas1></canvas></div>' +
+		'<div class = ' + sides[1] + 'box><canvas id = canvas2></canvas></div>' +
 		'<canvas id = backCanvas1></canvas><canvas id = backCanvas2></canvas>'
 	var display_el = jsPsych.getDisplayElement()
 	display_el.append($('<div>', {
@@ -312,10 +312,10 @@ var curr_data = {}
 
 var confidence_response_area =
 	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
-	'<button class = response_button id = Confidence_1>1: Not Confident At All</button>' +
+	'<button class = response_button id = Confidence_1>1:<br> Not Confident At All</button>' +
 	'<button class = response_button id = Confidence_2>2</button>' +
 	'<button class = response_button id = Confidence_3>3</button>' +
-	'<button class = response_button id = Confidence_4>4: Very Confidence</button>'
+	'<button class = response_button id = Confidence_4>4:<br> Very Confident</button>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
