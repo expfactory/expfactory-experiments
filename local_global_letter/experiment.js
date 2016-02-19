@@ -34,7 +34,7 @@ var randomDraw = function(lst) {
 
 var makeTrialList = function(len, stim, data) {
   //choice array: numeric key codes for the numbers 1-4
-  var choice_array = [72, 83]
+  var choice_array = [83, 72]
     // 1 is a switch trial: ensure half the trials are switch trials
   var switch_trials = jsPsych.randomization.repeat([0, 1], len / 2)
     //create test array

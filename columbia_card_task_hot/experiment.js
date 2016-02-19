@@ -527,8 +527,9 @@ var gameSetup =
 	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
 	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)></div></div>"
 
+
 var practiceSetup =
-	"<div class = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div> " +
+	"<div class = instruct1><div class = center-text><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div> " +
 	"<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" +
 	"<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
 	"<div class = titleboxLeft><div id = game_round class = center-text>Game Round: 1</div></div>" +
@@ -574,8 +575,9 @@ var practiceSetup =
 	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>" +
 	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div></div>"
 
+
 var practiceSetup2 =
-	"<div class = instruct1><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div> " +
+	"<div class = instruct1><div class = center-text><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div> " +
 	"<div class = titlebox><div class = center-text><strong>How many cards do you want to take?</strong></div></div>" +
 	"<div class = titleboxRight><div id = current_round class = center-text>Current Round:  </div></div>" +
 	"<div class = titleboxLeft><div id = game_round class = center-text>Game Round: 2</div></div>" +
@@ -667,7 +669,7 @@ var instructions_block = {
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
 	
-	'<div class = centerbox-CCT><p class = block-text><div id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
+	'<div class = centerbox-CCT><p class = block-text><div class = center-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
   	"<div class = instructBoxRight><div id = instructRoundTotal>Current Round:  0</div></div>" +
   	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
@@ -714,7 +716,7 @@ var instructions_block = {
     "<div class = square2><input type='image' id = 'c32' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png'></div></div>"+
     '</p></div>',
   
-	'<div class = centerbox-CCT><p class = block-text><div id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
+	'<div class = centerbox-CCT><p class = block-text><div class = center-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: </div>'+
 	"<div class = instructBox><div><strong>How many cards do you want to take?</strong></div></div>" + 
   	"<div class = instructBoxRight><div id = instructRoundTotal2>Current Round:  0</div></div>" +
   	"<div class = instructBoxLeft><div>Game Round: 1</div></div>" +
@@ -825,6 +827,22 @@ var practice_chunk = {
 		}
 	}
 }
+
+var testimg_block = {
+	type: 'poldrack-single-stim',
+	stimulus: getPractice1,
+	is_html: true,
+	data: {
+		exp_id: "columbia_card_task_hot",
+		trial_id: 'stim',
+		exp_stage: 'practice'
+	},
+	choices: [37],
+	timing_post_trial: 0,
+	on_finish: appendTestData,
+	response_ends_trial: true,
+};
+
 var practice_instruct_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getPractice1,
@@ -933,6 +951,7 @@ var start_test_block = {
 
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
+
 columbia_card_task_hot_experiment.push(instruction_node);
 columbia_card_task_hot_experiment.push(practice_chunk1);
 columbia_card_task_hot_experiment.push(practice_chunk2);
