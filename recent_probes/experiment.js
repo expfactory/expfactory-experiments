@@ -422,6 +422,12 @@ var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, 1)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/recent_probes/images/'
 var fileType = '.png'
+var images = []
+for (var i = 0; i < stimArray.length; i++) {
+	images.push(pathSource + stimArray[i] + fileType)
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
 
 
 /* ************************************ */
