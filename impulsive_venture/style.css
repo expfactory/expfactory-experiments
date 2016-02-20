@@ -1,6 +1,11 @@
-#jspsych-poldrack-survey-multi-choice-form {
+#top {
     -webkit-order: -1;
     order: -1;
+}
+
+#jspsych-poldrack-survey-multi-choice-form {
+    -webkit-order: 0;
+    order: 0;
     margin: 3vh 3vw auto 3vw;
 }
 
@@ -15,13 +20,13 @@
 
 
 .center-content{
-	-webkit-order: 0;
-    order: 0;
+	-webkit-order: 1;
+    order: 1;
 }
 
 .jspsych-survey-multi-choice-nav{
-	-webkit-order: 1;
-    order: 1;
+	-webkit-order: 2;
+    order: 2;
 }
 
 
