@@ -8,9 +8,9 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                  "experiment.js",
-                 "style.css",
                  "static/css/jspsych.css",
-                 "static/css/default_style.css"
+                 "static/css/default_style.css",
+                 "style.css"
                ],
         "exp_id": "impulsive_venture",
         "cognitive_atlas_task_id": "trm_56a91e3e982f9",
