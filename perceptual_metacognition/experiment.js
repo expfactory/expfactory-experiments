@@ -111,7 +111,7 @@ function jglMakeArray(low, step, high) {
 		array = new Array(size);
 		array[0] = low;
 		for (var j = 1; j < array.length; j++) {
-			array[i] = array[j - 1] - step;
+			array[j] = array[j - 1] - step;
 		}
 		return array;
 	}
