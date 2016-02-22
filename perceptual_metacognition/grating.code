@@ -1,0 +1,91 @@
+/**
+ * Make a sinusoidal grating. Creates a texture that later needs 
+ * to be used with jglCreateTexture. 
+ * Note: 0 deg means horizontal grating. 
+ * If you want to ramp the grating with 
+ * 2D Gaussian, also call function jglMakeGaussian and average the 
+ * results of both functions
+ * @param {Number} width: in pixels
+ * @param {Number} height: in pixels
+ * @param {Number} sf: spatial frequency in number of cycles per degree of visual angle
+ * @param {Number} angle: in degrees
+ * @param {Number} phase: in degrees 
+ * @param {Number} pixPerDeg: pixels per degree of visual angle 
+ * @memberof module:jglUtils
+ */
+ function jglMakeGrating(width, height, sf, angle, phase, pixPerDeg) {
+
+// Get sf in number of cycles per pixel
+sfPerPix = sf / pixPerDeg; 
+// Convert angle to radians
+angleInRad = ((angle+0)*Math.PI)/180;
+// Phase to radians
+phaseInRad = (phase*Math.PI)*180;
+
+// Get x and y coordinates for 2D grating
+xStep = 2*Math.PI/width; 
+yStep = 2*Math.PI/height; 
+x = jglMakeArray(-Math.PI, xStep, Math.PI+1);  // to nudge jglMakeArray to include +PI
+y = jglMakeArray(-Math.PI, yStep, Math.PI+1); 
+// To tilt the 2D grating, we need to tilt 
+// x and y coordinates. These are tilting constants.
+xTilt = Math.cos(angleInRad) * sf * 2 * Math.PI; 
+yTilt = Math.sin(angleInRad) * sf * 2 * Math.PI; 
+
+//What is width and height? Are these in degrees of visual angle or pixels? 
+//See how lines2d and dots work. For example, jglFillRect(x, y, size, color) uses size in pixels
+//
+
+//How does jgl compute size in degress of visual angle 
+var ixX, ixY; // x and y indices for arrays
+var grating = []; // 2D array 
+for (ixX = 0; ixX < x.length; ixX++) {
+	currentY = y[ixY];
+	grating[ixX] = [];
+	for (ixY=0; ixY < y.length; ixY++) {
+		grating[ixX][ixY] = Math.cos(x[ixX] * xTilt + y[ixY] * yTilt);
+		// Scale to grayscale between 0 and 255
+		grating[ixX][ixY] = Math.round(((grating[ixX][ixY] + 1)/2)*255);
+	}
+}
+return(grating); 
+
+}
+
+
+
+/**
+ * Function to make array starting at low,
+ * going to high, stepping by step.
+ * Note: the last element is not "high" but high-step
+ * @param {Number} low The low bound of the array
+ * @param {Number} step the step between two elements of the array
+ * @param {Number} high the high bound of the array
+ */
+function jglMakeArray(low, step, high) {
+	if (step === undefined) {
+		step = 1;
+	}
+	
+	if (low < high) {
+		var size = Math.floor((high - low) / step);
+		var array = new Array(size);
+		array[0] = low;
+		for (var i=1;i<array.length;i++) {
+			array[i] = array[i-1] + step;
+		}
+		return array;
+	} else if (low > high) {
+		var size = Math.floor((low - high) / step);
+		var array = new Array(size);
+		array[0] = low;
+		for (var i=1;i<array.length;i++) {
+			array[i] = array[i-1] - step;
+		}
+		return array;
+	}
+	return [low];
+}
+
+
+
