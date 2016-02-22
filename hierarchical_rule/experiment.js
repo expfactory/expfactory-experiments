@@ -27,6 +27,32 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].choices != 'none') {
+      rt = experiment_data[i].rt
+      trial_count += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -41,9 +67,11 @@ var getFeedback = function() {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
-    return '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
+    return
+      '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
-    return '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
+    return
+      '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
   }
 }
 
@@ -79,6 +107,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var hierarchical_only = true //When this is true, do not run the flat task
@@ -294,7 +323,6 @@ var flat_stim_block = {
   data: getFlatData,
   is_html: true,
   choices: choices,
-  response_ends_trial: false,
   timing_stim: 1000,
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
@@ -313,7 +341,6 @@ var hierarchical_stim_block = {
   data: getHierarchicalData,
   is_html: true,
   choices: choices,
-  response_ends_trial: false,
   timing_stim: 1000,
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
