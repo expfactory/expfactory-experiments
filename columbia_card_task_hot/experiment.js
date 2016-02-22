@@ -94,7 +94,6 @@ var getPractice2 = function() {
 }
 
 
-
 var instructCard = function(clicked_id) {
 	currID = parseInt(clicked_id)
 	if (whichLossCards.indexOf(currID) == -1) {
