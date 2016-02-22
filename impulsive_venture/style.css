@@ -1,6 +1,7 @@
+
 #jspsych-poldrack-survey-multi-choice-form {
-    -webkit-order: -1;
-    order: -1;
+    -webkit-order: 1;
+    order: 1;
     margin: 3vh 3vw auto 3vw;
 }
 
@@ -9,19 +10,23 @@
 	display: flex;
 	-webkit-flex-direction: column;
     flex-direction: column;
-    align-items: center;
-    -webkit-align-items: center;
+   
+   -webkit-box-align: center; -moz-box-align: center; /* OLD… */
+   -ms-flex-align: center;
+   -webkit-align-items: center;
+   align-items: center;
 }
 
 
 .center-content{
-	-webkit-order: 0;
-    order: 0;
+	-webkit-order: 2;
+    order: 2;
 }
 
 .jspsych-survey-multi-choice-nav{
-	-webkit-order: 1;
-    order: 1;
+	-webkit-order: 3;
+    order: 3;
 }
+
 
 
