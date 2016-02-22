@@ -83,12 +83,11 @@ var all_pages = [
     "Generally do you prefer to enter cold sea water gradually, to diving or jumping straight in?",
     "Would you enjoy the sensation of skiing very fast down a high mountain slope?",
     "Would you like to go scuba diving?", "Would you enjoy fast driving?",
-    "Would you like to go pot-holing?",
     "Would you be put off a job involving quite a bit of danger?"
   ]
 ]
 
-var all_options = [fillArray(opts, 19), fillArray(opts, 16)]
+var all_options = [fillArray(opts, 19), fillArray(opts, 15)]
 
 //higher = more impulsive
 var score_scale = [
@@ -96,7 +95,7 @@ var score_scale = [
       scale_reg, scale_reg, scale_rev, scale_rev, scale_reg, scale_reg
     ],
     [scale_reg, scale_rev, scale_reg, scale_reg, scale_rev, scale_reg, scale_reg, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_reg,
-      scale_reg, scale_reg, scale_rev
+      scale_reg, scale_rev
     ]
   ]
 
@@ -110,7 +109,7 @@ var survey_block = {
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true, 19), fillArray(true, 16)]
+  required: [fillArray(true, 19), fillArray(true, 15)]
 };
 
 var end_block = {
