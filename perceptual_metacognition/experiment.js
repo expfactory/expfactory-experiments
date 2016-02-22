@@ -438,7 +438,7 @@ var fixation_block = {
 var test_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getStim,
-	timing_stim: 3300,
+	timing_stim: 33,
 	response_ends_trial: true,
 	is_html: true,
 	data: {
@@ -456,7 +456,7 @@ var test_block = {
 var easy_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getEasyStim,
-	timing_stim: 125,
+	timing_stim: 33,
 	response_ends_trial: true,
 	is_html: true,
 	data: {
