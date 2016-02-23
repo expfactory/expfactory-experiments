@@ -32,6 +32,7 @@ function assessPerformance() {
     sum += rt_array[j]
   }
   var avg_rt = sum/rt_array.length
+  credit_var = (avg_rt > 100)
 }
 
 var post_trial_gap = function() {

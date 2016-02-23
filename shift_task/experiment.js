@@ -27,6 +27,32 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].choices != 'none') {
+      rt = experiment_data[i].rt
+      trial_count += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
     '</p></div>'
@@ -103,6 +129,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var choices = [37, 40, 39]
@@ -193,7 +220,8 @@ var end_block = {
   },
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =

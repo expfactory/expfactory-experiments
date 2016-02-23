@@ -497,7 +497,8 @@ var end_block = {
 		trial_id: "end_block"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var round_over_block = {

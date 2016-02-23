@@ -27,6 +27,33 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].choices != 'none') {
+      rt = experiment_data[i].rt
+      trial_count += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -188,6 +215,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var response_keys = jsPsych.randomization.repeat([{
@@ -236,7 +264,7 @@ var last_task = 'na' //object that holds the last task, set by setStims()
 var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
-var current_trial = 0 
+var current_trial = 0
 var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
@@ -339,7 +367,9 @@ var end_block = {
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  timing_response: 180000,
+  on_finish: assessPerformance
 };
 
 var start_practice_block = {
@@ -388,7 +418,9 @@ var fixation_block = {
   timing_response: 500,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      exp_stage: exp_stage
+    })
   }
 }
 
@@ -405,7 +437,9 @@ var cue_block = {
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      exp_stage: exp_stage
+    })
     appendData()
   }
 };
@@ -489,6 +523,3 @@ for (var i = 0; i < stims.length; i++) {
 }
 threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(end_block)
-
-
-

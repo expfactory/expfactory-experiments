@@ -228,7 +228,8 @@ var end_block = {
 		trial_id: "end"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
