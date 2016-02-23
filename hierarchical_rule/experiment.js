@@ -67,11 +67,9 @@ var getFeedback = function() {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
     correct += 1
-    return
-      '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
+    return '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
-    return
-      '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
+    return '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
   }
 }
 
