@@ -197,9 +197,15 @@ var possible_responses = [
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
   possible_responses[1], possible_responses[1]
 ])
-var prompt_text = '<ul list-text><li>Circle:  ' + correct_responses[0][0] + '</li><li>Rhombus:  ' +
-  correct_responses[1][0] + ' </li><li>L-shape:  ' + correct_responses[2][0] +
-  ' </li><li>Moon:  ' + correct_responses[3][0] + ' </li></ul>'
+var tab = '&nbsp&nbsp&nbsp&nbsp'
+var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
+  correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
+  tab +
+  correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+  '&nbsp&nbsp&nbsp' + correct_responses[2][0] +
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][
+    0
+  ] + ' </li></ul>'
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
@@ -390,7 +396,6 @@ var test_feedback_block = {
     test_block_data = []
   }
 };
-
 
 
 

@@ -44,6 +44,10 @@
     margin: auto;  
 }
 
+.prompt_stim {
+  height: 30px;
+  width: 30px;
+}
 
 .stopbox {
   width: 20%;

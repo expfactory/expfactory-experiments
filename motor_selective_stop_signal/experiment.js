@@ -154,7 +154,7 @@ var instructTimeThresh = 0 ///in seconds
 // Define and load images
 var prefix = '/static/experiments/motor_selective_stop_signal/images/'
 var images = [prefix + 'rectangle.png', prefix + 'oval.png', prefix + 'trapezoid.png', prefix +
-  'triangle.png'
+	'triangle.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
 
@@ -169,9 +169,16 @@ var correct_responses = jsPsych.randomization.shuffle([
 	["Z key", 90],
 	["Z key", 90]
 ])
-var prompt_text = '<ul class =  list-text><li>Rectangle:  ' + correct_responses[0][0] +
-	'</li><li>Oval:  ' + correct_responses[1][0] + ' </li><li>Trapezoid:  ' + correct_responses[2][0] +
-	' </li><li>Triangle:  ' + correct_responses[3][0] + ' </li></ul>'
+
+var tab = '&nbsp&nbsp&nbsp&nbsp'
+
+var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
+	correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' + tab +
+	correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+	'&nbsp&nbsp&nbsp' + correct_responses[2][0] +
+	' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
+	' </li></ul>'
+
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
@@ -186,25 +193,29 @@ var stop_response = randomDraw(possible_responses)
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
-  data: {
-    correct_response: correct_responses[0][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+	data: {
+		correct_response: correct_responses[0][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
-  data: {
-    correct_response: correct_responses[1][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
+	data: {
+		correct_response: correct_responses[1][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
-  data: {
-    correct_response: correct_responses[2][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
+	data: {
+		correct_response: correct_responses[2][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
-  data: {
-    correct_response: correct_responses[3][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
+	data: {
+		correct_response: correct_responses[3][1],
+		trial_id: 'stim',
+	}
 }]
 
 var NoSSpractice_block_len = 12
@@ -366,8 +377,6 @@ var test_feedback_block = {
 		test_block_data = []
 	}
 };
-
-
 
 
 
