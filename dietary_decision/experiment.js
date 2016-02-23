@@ -58,35 +58,49 @@ var getDecisionText = function() {
     base_path + reference_stim + ' </img></div>'
 }
 
+function median(values) {
+  values.sort(function(a, b) {
+    return a - b;
+  });
+  var half = Math.floor(values.length / 2);
+  if (values.length % 2)
+    return values[half];
+  else
+    return (values[half - 1] + values[half]) / 2.0;
+}
+
 var setUpTest = function() {
   // Calculate avg scores
   var random_stims = jsPsych.randomization.shuffle(stims)
-  var neutral_stim_chosen = false
-  var reference_stim;
-  var alternative_stim;
-  var alternative_stim_chosen = false
+  var ratings = {
+    'taste': [],
+    'health': []
+  }
+  for (var i = 0; i < stims.length; i++) {
+    var key = stims[i]
+    ratings.taste.push(stim_ratings[key].taste)
+    ratings.health.push(stim_ratings[key].health)
+  }
+  var median_taste = median(ratings.taste)
+  var median_health = median(ratings.health)
+  var min_distance = 100
   for (var i = 0; i < stims.length; i++) {
     var key = random_stims[i]
-    if (stim_ratings[key].health === 0 && stim_ratings[key].taste === 0 && neutral_stim_chosen ===
-      false) {
+    var taste_dist = Math.pow((stim_ratings[key].taste - median_taste), 2)
+    var health_dist = Math.pow((stim_ratings[key].health - median_health), 2)
+    var dist = health_dist + taste_dist
+    if (dist < min_distance) {
+      if (reference_stim != '') {
+        decision_stims.push(reference_stim)
+      }
       reference_stim = key
-      neutral_stim_chosen = true
-    } else if (stim_ratings[key].health === 1 && stim_ratings[key].taste === 0 &&
-      alternative_stim_chosen === false) {
-      alternative_stim = key
-      alternative_stim_chosen = true
+      min_distance = dist
     } else {
       decision_stims.push(key)
     }
   }
-  /* If no neural stim exists (the subject did not rate any item 0, 0), set the reference stim to the alternative stim
-   */
-  if (reference_stim === '') {
-    reference_stim = alternative_stim
-  } else {
-    decision_stims.push(alternative_stim)
-  }
 }
+
 
 var getInstructFeedback = function() {
     return '<div class = centerbox><p class = "center-block-text">' +
@@ -146,7 +160,7 @@ var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincaul
   'strawberries.bmp', 'strussel.bmp', 'uToberlorone.bmp', 'uTwix.bmp', 'wheatcrisps.bmp',
   'whitegrapes.bmp', 'wwbrownie.bmp', 'wwmuffin.bmp'
 ]
-
+stims = stims.slice(0,4)
 var health_stims = jsPsych.randomization.shuffle(stims)
 var taste_stims = jsPsych.randomization.shuffle(stims)
 var decision_stims = []
@@ -315,7 +329,7 @@ var health_block = {
       'stim': curr_stim.slice(0, -4),
       'coded_response': numeric_rating
     })
-    stim_ratings[curr_stim].health = Number(data.mouse_click)
+    stim_ratings[curr_stim].health = numeric_rating
   }
 }
 
@@ -338,13 +352,12 @@ var taste_block = {
       'stim': curr_stim.slice(0, -4),
       'coded_response': numeric_rating
     })
-    stim_ratings[curr_stim].taste = Number(data.mouse_click)
+    stim_ratings[curr_stim].taste = numeric_rating
   }
 }
 
 var decision_block = {
   type: 'single-stim-button',
-  // stimulus: getDecisionStim,
   stimulus: getDecisionStim,
   button_class: 'dd_response_button',
   data: {
@@ -364,7 +377,7 @@ var decision_block = {
       'reference': reference_stim.slice(0, -4),
       'stim_rating': stim_rating,
       'reference_rating': reference_rating,
-      'coded_response': numeric_rating
+      'coded_response': decision_rating
     })
   }
 }
