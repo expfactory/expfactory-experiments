@@ -225,12 +225,12 @@ var fatigue_block = {
 /* create experiment definition array */
 var multiplication_experiment = []
 multiplication_experiment.push(instruction_node)
-for (var i = 0; i < 2; i++) { //n_large_steps
+for (var i = 0; i < n_large_steps; i++) { 
   multiplication_experiment.push(largeStep_block)
 }
-for (var i = 0; i < 2; i++) { //n_small_steps
+for (var i = 0; i < n_small_steps; i++) { 
   multiplication_experiment.push(smallStep_block)
 }
-for (var i = 0; i < 2; i++) { //Math.floor(180000 * fatigue_time / response_time)
+for (var i = 0; i < Math.floor(180000 * fatigue_time / response_time); i++) { 
   multiplication_experiment.push(fatigue_block)
 }

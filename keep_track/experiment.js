@@ -59,7 +59,6 @@ var exemplars = {
 
 var difficulty_order = jsPsych.randomization.shuffle([3, 4, 5])
 var num_blocks = 3 //per difficulty level
-var trial_length = 15 //variable never used, just for reference
 var blocks = []
 var targets = []
 var practice_block = []
@@ -217,7 +216,7 @@ var end_practice_block = {
 	data: {
 		trial_id: 'practice_end'
 	},
-	text: '<div class = centerbox><p class = center-block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Finished with practice block. You will now complete 9 test blocks.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -276,7 +275,7 @@ var wait_block = {
 }
 keep_track_experiment.push(prompt_block)
 keep_track_experiment.push(wait_block)
-for (i = 0; i < 2; i++) { //block.length
+for (i = 0; i < block.length; i++) {
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
 	tempStim = block[i][1]
 	data = {
@@ -319,7 +318,7 @@ keep_track_experiment.push(end_practice_block)
 
 
 // set up test blocks
-for (b = 0; b < 2; b++) { //blocks.length
+for (b = 0; b < blocks.length; b++) { 
 	keep_track_experiment.push(start_test_block)
 	block = blocks[b]
 	target = targets[b]

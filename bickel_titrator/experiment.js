@@ -242,8 +242,8 @@ var end_block = {
 //Set up experiment
 var bickel_titrator_experiment = []
 bickel_titrator_experiment.push(instruction_node);
-for (var i = 0; i < 1; i++) { //delays.length
-  for (var j = 0; j < 3; j++) { //5
+for (var i = 0; i < delays.length; i++) { 
+  for (var j = 0; j < 5; j++) { 
     bickel_titrator_experiment.push(test_block);
   }
   bickel_titrator_experiment.push(update_delay_block);

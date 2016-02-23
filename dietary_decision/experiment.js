@@ -76,8 +76,9 @@ var setUpTest = function() {
     'taste': [],
     'health': []
   }
-  for (var i = 0; i < stims.length; i++) {
-    var key = stims[i]
+  var key = ''
+  for (var j = 0; j < stims.length; j++) {
+    key = stims[j]
     ratings.taste.push(stim_ratings[key].taste)
     ratings.health.push(stim_ratings[key].health)
   }
@@ -85,12 +86,12 @@ var setUpTest = function() {
   var median_health = median(ratings.health)
   var min_distance = 100
   for (var i = 0; i < stims.length; i++) {
-    var key = random_stims[i]
+    key = random_stims[i]
     var taste_dist = Math.pow((stim_ratings[key].taste - median_taste), 2)
     var health_dist = Math.pow((stim_ratings[key].health - median_health), 2)
     var dist = health_dist + taste_dist
     if (dist < min_distance) {
-      if (reference_stim != '') {
+      if (reference_stim !== '') {
         decision_stims.push(reference_stim)
       }
       reference_stim = key
