@@ -32,7 +32,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var writing_start = 0
-var timelimit = 2
+var timelimit = 5
 var elapsed = 0
 
 /* ************************************ */
