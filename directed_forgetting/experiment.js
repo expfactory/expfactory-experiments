@@ -198,34 +198,6 @@ var appendFixData = function() {
 	}
 };
 
-var appendFixData2 = function() {
-	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial
-	})
-	current_trial = current_trial + 1
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-};
-
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
 var getTrainingSet = function() {
 	preceeding1stims = []
@@ -403,6 +375,7 @@ var appendPracticeProbeData = function() {
 
 var resetTrial = function() {
 	current_trial = 0
+	exp_stage = 'test'
 }
 
 /* ************************************ */
@@ -416,6 +389,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
+var exp_stage = 'practice'
 var num_trials = 24 // 24 num trials per run
 var num_runs = 3 //3
 var experimentLength = num_trials * num_runs
@@ -552,13 +526,14 @@ var start_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation",
-		exp_stage: "test"
+		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: appendFixData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+	}
 }
 
 var fixation_block = {
@@ -567,29 +542,33 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation",
-		exp_stage: "test"
+		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
 	timing_stim: 3000,
 	timing_response: 3000,
-	on_finish: appendFixData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+	}
 }
-
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
 	is_html: true,
 	choices: [37, 39],
 	data: {
-		trial_id: "ITI_fixation",
-		exp_stage: "test"
+		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	response_ends_trial: false,
 	timing_stim: 4000,
 	timing_response: 4000,
-	on_finish: appendFixData2
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
+		current_trial = current_trial + 1
+	}
 }
 
 var training_block = {
