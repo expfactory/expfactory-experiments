@@ -21,7 +21,6 @@ var getResponseTime = function() {
     writing_start = new Date()
   }
   var timeLeft = (timelimit-elapsed)*60000
-  console.log('time remaining: ', timeLeft)
   return timeLeft
 }
 /* ************************************ */
@@ -125,8 +124,6 @@ var loop_node = {
   timeline: [test_block],
   loop_function: function() {
     elapsed = (new Date() - writing_start) / 60000
-    console.log('elapsed: ', elapsed)
-    console.log('timelimit: ', timelimit)
     if (elapsed < timelimit) {
       return true;
     } else {
