@@ -330,8 +330,8 @@ var images = []
 for (var i = 0; i < stimArray.length; i++) {
 	images.push(pathSource + stimArray[i] + fileType)
 }
-images.push('TOP.png')
-images.push('BOT.png')
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'BOT.png')
 	//preload images
 jsPsych.pluginAPI.preloadImages(images)
 
