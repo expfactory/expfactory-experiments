@@ -1,0 +1,186 @@
+.center-text {
+  text-align:center;
+  font-size: 90%;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.cardbox {
+ width:52.5vw;
+ height: 30vw;
+ position:absolute;
+ top:20%;
+ left:25%;
+ margin-right:50%;
+ transform: translate(-5%,5%);
+ background-color: white;
+}
+
+.practiceText {
+ width: 80vw;
+ height: 10vw;
+ position: absolute;
+ top: 0%;
+ left: 4.5%;
+ margin-right:50%;
+ transform: translate(0%,0%);
+ background-color: white;
+}
+
+.cardbox2 {
+ width:52.5vw;
+ height: 30vw;
+ position:absolute;
+ top:20%;
+ left:25%;
+ margin-right:50%;
+ transform: translate(-5%,5%);
+ background-color: white;
+}
+
+.cct-box {
+ width:87.5vw;
+ height: 92vh;
+ position: fixed;
+ top:0%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(7%,2.5%);
+ background-color: white;
+}
+
+.cct-box2 {
+ width:87.5vw;
+ height: 78vh;
+ position: fixed;
+ top:15%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(7%,2.5%);
+ background-color: white;
+}
+
+.titleBigBox {
+	width: 80vw;
+	height: 10vw;
+	position: absolute;
+	top: 0%;
+	left: 4.5%;
+	margin-right:50%;
+	transform: translate(0%,0%);
+	background-color: white;
+}
+
+.square {
+   float:left;
+   position: relative;
+   width: 10%;
+   padding-bottom : %; /* = width for a 1:1 aspect ratio */
+   margin:1%;
+   overflow:hidden;
+   color: #fff;
+   max-height: 20%;
+   max-width: 10%;
+}
+
+
+
+.titleboxLeft {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:10%;
+  left:6%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.titleboxLeft1 {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:40%;
+  left:9%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.titleboxRight {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:10%;
+  left:75%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.titleboxRight1 {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:40%;
+  left:72%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+
+
+.titlebox {
+  width:30vw;
+  height: 3vw;
+  position:absolute;
+  top:10%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,0%);
+}
+
+
+.titleboxMiddle1 {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:40%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.buttonbox {
+  width:14vw;
+  height: 2vw;
+  position:absolute;
+  top:65%;
+  left:43%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: white;
+}
+
+.buttonbox2 {
+  width:7vw;
+  height: 2vw;
+  position:absolute;
+  top:65%;
+  left:65%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: white;
+}
