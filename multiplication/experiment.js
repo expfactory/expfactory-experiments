@@ -59,7 +59,7 @@ var n_large_steps = 50
 var n_small_steps = 50
 var p = 0.5 // The probability of a correct response for the staircase
 var fatigue_start = 0
-var timelimit = 45 //time for fatigue block
+var timelimit = 1 //time for fatigue block
 var elapsed = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -243,10 +243,10 @@ var start_clock_block = {
 /* create experiment definition array */
 var multiplication_experiment = []
 multiplication_experiment.push(instruction_node)
-for (var i = 0; i < 2; i++) { 
+for (var i = 0; i < n_large_steps; i++) { 
   multiplication_experiment.push(largeStep_block)
 }
-for (var i = 0; i < 2; i++) { 
+for (var i = 0; i < n_small_steps; i++) { 
   multiplication_experiment.push(smallStep_block)
 }
 multiplication_experiment.push(start_clock_block)
