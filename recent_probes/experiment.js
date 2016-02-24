@@ -51,7 +51,7 @@ function assessPerformance() {
 		}
 	}
 	//calculate average rt
-	var sum = 0
+	var sum = 0	
 	for (var j = 0; j < rt_array.length; j++) {
 		sum += rt_array[j]
 	}
@@ -75,36 +75,26 @@ var randomDraw = function(lst) {
 
 //this adds the trial number, which stims are shown, and if the trial was a correct trial to the data set
 var appendProbeData = function() {
+	var global_trial = jsPsych.progress().current_trial_global
+	var currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
+	var keyPress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+	var correct = false
+	var correct_response = ''
+	if (currSet.indexOf(probe, 0) != -1) {
+		correct_response = 37
+	} else if (currSet.indexOf(probe, 0) == -1) {
+		correct_response = 39
+	} 
+	if (keyPress == correct_response) {
+		correct = true
+	}
 	jsPsych.data.addDataToLastTrial({
 		probe_letter: probe,
 		probeType: probeType,
-		trial_num: current_trial
+		trial_num: current_trial,
+		correct_response: correct_response,
+		correct: correct
 	})
-	global_trial = jsPsych.progress().current_trial_global
-	currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	whichProbe = jsPsych.data.getDataByTrialIndex(global_trial).stim[0]
-	keyPress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
-	if ((currSet.indexOf(whichProbe, 0) != -1) && (keyPress == 37)) {
-		jsPsych.data.addDataToLastTrial({
-			correct: true
-		})
-	} else if ((currSet.indexOf(whichProbe, 0) == -1) && (keyPress == 39)) {
-		jsPsych.data.addDataToLastTrial({
-			correct: true
-		})
-	} else if ((currSet.indexOf(whichProbe, 0) != -1) && (keyPress == 39)) {
-		jsPsych.data.addDataToLastTrial({
-			correct: false
-		})
-	} else if ((currSet.indexOf(whichProbe, 0) == -1) && (keyPress == 37)) {
-		jsPsych.data.addDataToLastTrial({
-			correct: true
-		})
-	} else {
-		jsPsych.data.addDataToLastTrial({
-			correct: true
-		})
-	}
 };
 
 var appendPracticeProbeData = function() {
@@ -114,8 +104,6 @@ var appendPracticeProbeData = function() {
 		trial_num: current_trial
 	})
 }
-
-
 
 //returns the divs for training sets.  this algorithm also chooses the training set based on the rules given in the paper(training sets are 
 //composed of three letters from the previous set, and three new letters.

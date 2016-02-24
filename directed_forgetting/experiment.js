@@ -65,58 +65,18 @@ var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		trial_num: current_trial,
 		stim_top: [stim1, stim2, stim3],
-		stim_bottom: [stim4, stim5, stim6]
+		stim_bottom: [stim4, stim5, stim6],
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
 };
 
 //this adds the cue shown and trial number to data
 var appendCueData = function() {
 	jsPsych.data.addDataToLastTrial({
 		stim: cue,
-		trial_num: current_trial
+		trial_num: current_trial,
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
 };
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
@@ -127,75 +87,29 @@ var appendProbeData = function() {
 	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
 	var keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
 	var memorySet = ''
+	var correct_response = ''
+	var correct = false
 	if (trialCue == 'BOT') {
 		memorySet = lastSet_top
 	} else if (trialCue == 'TOP') {
 		memorySet = lastSet_bottom
 	}
-	correct = 'incorrect'
-	if ((memorySet.indexOf(probe, 0) == -1) && keypress == 39) {
-		correct = 'correct'
+	if (memorySet.indexOf(probe, 0) == -1) {
 		correct_response = 39
-	} else if ((memorySet.indexOf(probe, 0) != -1) && keypress == 37) {
-		correct = 'correct'
+	} else if (memorySet.indexOf(probe, 0) != -1) {
 		correct_response = 37
+	}
+	if (keypress == correct_response) {
+		correct = true
 	}
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
 		probe_type: probeType,
 		trial_num: current_trial,
-		correct_response: correct_response
+		correct_response: correct_response,
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-};
-
-//this adds the trial number to the data
-var appendFixData = function() {
-	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial
-	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
 };
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
@@ -532,7 +446,10 @@ var start_fixation_block = {
 	timing_stim: 1000,
 	timing_response: 1000,
 	on_finish: function() {
-		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
 	}
 }
 
@@ -548,9 +465,13 @@ var fixation_block = {
 	timing_stim: 3000,
 	timing_response: 3000,
 	on_finish: function() {
-		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
 	}
 }
+
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
