@@ -664,7 +664,7 @@ var practice_probe_block = {
 	},
 	correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
 	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
-	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
+	timeout_message: '<div class = bottombox><p class = center-text>No response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
 	timing_feedback_duration: [750],
@@ -686,9 +686,9 @@ for (i = 0; i < 4; i++) {
 
 for (r = 0; r < num_runs; r++) {
 	if (r === 0) {
-		recent_probes_experiment.push(intro_test_block)
+		directed_forgetting_experiment.push(intro_test_block)
 	} else {
-		recent_probes_experiment.push(start_test_block);
+		directed_forgetting_experiment.push(start_test_block);
 	}
 	for (i = 0; i < num_trials; i++) {
 		directed_forgetting_experiment.push(start_fixation_block);

@@ -639,7 +639,7 @@ var practice_probe_block = {
 	},
 	correct_text: '<div class = bottombox><p style="color:green"; style="color:green"; class = center-text>Correct!</p></div>',
 	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
-	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
+	timeout_message: '<div class = bottombox><p class = center-text>No response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
 	timing_feedback_duration: [750],
