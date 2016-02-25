@@ -28,14 +28,22 @@ function addID() {
 }
 
 function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	choice_counts[32] = 0
 	for (var i = 0; i < experiment_data.length; i++) {
-		rt = experiment_data[i].rt
 		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
 		if (rt == -1) {
 			missed_count += 1
 		} else {
@@ -48,7 +56,20 @@ function assessPerformance() {
 		sum += rt_array[j]
 	}
 	var avg_rt = sum / rt_array.length
-	credit_var = (avg_rt > 200)
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	for (key in Object.keys(choice_counts)) {
+		if (choice_counts[key] > trial_count * .85) {
+			responses_ok = false
+			break
+		}
+	}
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * .85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
 }
 
 var getInstructFeedback = function() {
