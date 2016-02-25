@@ -32,19 +32,20 @@ function appendTextAfter2(input, search_term, new_text, deleted_text) {
 var getBoard = function(board_type) {
 	var board = ''
 	if (board_type == 2) {
-		board = "<div class = cardbox2>"
+		board = "<div class = cardbox>"
 		for (var i = 1; i < 33; i++) {
-		board += "<div class = square><input type='image' id = " + i +
+		board += "<div class = square><input type='image' class = card_image id = " + i +
 			" src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = instructCard(this.id)></div>"
 		}
 		
 	} else {
 		board = "<div class = cardbox>"
 		for (var i = 1; i < 33; i++) {
-		board += "<div class = square><input type='image' id = " + i +
+		board += "<div class = square><input class = card_image type='image' id = " + i +
 			" src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"
 		}
 	}
+	board += "</div>"
 	
 	return board
 }
@@ -99,15 +100,9 @@ var chooseCard = function(clicked_id) {
 			for (i = 1; i < 33; i++) {
 				document.getElementById('' + i + '').disabled = true;
 			}
-			setTimeout(endRound, 2000)
-			e = jQuery.Event("keydown");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e);
-			e = jQuery.Event("keyup");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e)
+			setTimeout(turnCards, 2000)
+			setTimeout(pressKey, 2500)
+	
 
 		} else if (temp == -1) { // if you click on a gain card
 
@@ -115,15 +110,7 @@ var chooseCard = function(clicked_id) {
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
 			roundPoints = roundPoints + gainAmt
-
-			e = jQuery.Event("keydown");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e);
-			e = jQuery.Event("keyup");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e)
+			pressKey()
 		}
 	}
 }
@@ -154,6 +141,8 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Current Round Total: ', roundPoints)
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+		gameState = deleteText(gameState, 'onclick = endRound()')
+		gameState = deleteText(gameState, 'onclick = collect()')
 
 		roundOver = 1
 		return gameState
@@ -165,6 +154,8 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = deleteText(gameState, 'onclick = noCard()')
+		gameState = deleteText(gameState, 'onclick = collect()')
+
 
 		clickedGainCards.sort(function(a, b) {
 			return a - b
@@ -173,8 +164,8 @@ var getRound = function() {
 			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," src='/static/experiments/columbia_hot_test/images/chosen.png'", " src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)")
 		}
 		return gameState
-	} else if (roundOver == 2) { //this is for during the round
-		roundOver = 0
+	} else if (roundOver == 2) { //this is for end the round
+		roundOver = 3
 		gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
@@ -182,6 +173,7 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = deleteText(gameState, 'onclick = noCard()')
+		
 
 		clickedGainCards.sort(function(a, b) {
 			return a - b
@@ -196,10 +188,26 @@ var getRound = function() {
 	}
 }
 
+var turnCards = function(){
+for (i = 0; i < 33; i++) {
+		if (whichGainCards.indexOf(i) != -1) {
+			document.getElementById('' + i + '').src =
+				'/static/experiments/columbia_hot_test/images/chosen.png';
+		} else if (whichLossCards.indexOf(i) != -1) {
+			document.getElementById('' + i + '').src =
+				'/static/experiments/columbia_hot_test/images/loss.png';
+		}
+	}
+}
 
+var turnOneCard = function(whichCard){
+document.getElementById(""+whichCard+"").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+}
 
 var noCard = function() {
 	currID = 'noCardButton'
+	roundOver=2
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
@@ -210,14 +218,14 @@ var noCard = function() {
 				'/static/experiments/columbia_hot_test/images/loss.png';
 		}
 	}
-	gameState = appendTextAfter(gameState, 'button3 ', 'onclick = collect()')
-
+	pressKey()
 }
 
 
 points = []
 var endRound = function() {
 	currID = 'endRoundButton'
+	roundOver=2
 	points.push(roundPoints)
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
@@ -229,7 +237,7 @@ var endRound = function() {
 				'/static/experiments/columbia_hot_test/images/loss.png';
 		}
 	}
-	gameState = appendTextAfter(gameState, 'button3 ', 'onclick = collect()')
+	pressKey()
 
 }
 
@@ -237,18 +245,8 @@ var endRound = function() {
 var collect = function() {
 	currID = 'collectButton'
 	whichClickInRound = whichClickInRound + 1
-	for (i = 0; i < 33; i++) {
-		if (whichGainCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
-				'/static/experiments/columbia_hot_test/images/chosen.png';
-		} else if (whichLossCards.indexOf(i) != -1) {
-			document.getElementById('' + i + '').src =
-				'/static/experiments/columbia_hot_test/images/loss.png';
-		}
-	}
 
-	roundOver = 0
-	setTimeout(pressKey, 2000)
+	pressKey()
 }
 
 var appendTestData = function() {
@@ -265,7 +263,132 @@ var appendTestData = function() {
 
 }
 
+var getPractice1 = function() {
+	unclickedCards = cardArray
+	cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+		24, 25, 26, 27, 28, 29, 30, 31, 32
+	]
+	clickedGainCards = [] //num
+	clickedLossCards = [] //num
+	lossProb = 1
+	gainAmt = 30
+	lossAmt = 250
 
+	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
+	whichLossCards = [] //this determines which are loss cards at the beginning of each round
+	for (i = 0; i < lossProb; i++) {
+		whichLossCards.push(shuffledCardArray.pop())
+	}
+	whichGainCards = shuffledCardArray
+	gameState = practiceSetup
+	return gameState
+}
+
+var getPractice2 = function() {
+	unclickedCards = cardArray
+	cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+		24, 25, 26, 27, 28, 29, 30, 31, 32
+	]
+	clickedGainCards = [] //num
+	clickedLossCards = [] //num
+	lossProb = 3
+	gainAmt = 10
+	lossAmt = 750
+
+	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
+	whichLossCards = [] //this determines which are loss cards at the beginning of each round
+	for (i = 0; i < lossProb; i++) {
+		whichLossCards.push(shuffledCardArray.pop())
+	}
+	whichGainCards = shuffledCardArray
+	gameState = practiceSetup2
+	return gameState
+}
+
+var instructCard = function(clicked_id) {
+	currID = parseInt(clicked_id)
+	document.getElementById("button1").disabled = true;
+	appendTextAfter(gameState, 'button2', ' onclick = turnCards()')
+	if (whichLossCards.indexOf(currID) == -1) {
+		instructPoints = instructPoints + gainAmt
+		document.getElementById('current_round').innerHTML = 'Current Round: ' + instructPoints;
+		document.getElementById(clicked_id).disabled = true;
+
+		document.getElementById(clicked_id).src =
+			'/static/experiments/columbia_hot_test/images/chosen.png';
+	} else if (whichLossCards.indexOf(currID) != -1) {
+		instructPoints = instructPoints - lossAmt
+		document.getElementById(clicked_id).disabled = true;
+		document.getElementById('current_round').innerHTML = 'Current Round: ' + instructPoints;
+		document.getElementById(clicked_id).src =
+			'/static/experiments/columbia_hot_test/images/loss.png';
+		setTimeout(endRound, 1500)
+	}
+}
+
+var instructFunction = function() {
+	setTimeout(turnOneCard(1),250)
+	setTimeout(turnOneCard(17),500)
+	setTimeout(turnOneCard(18),750)
+	setTimeout(turnOneCard(15),1000)
+	setTimeout(turnOneCard(27),1250)
+	setTimeout(turnOneCard(31),1500)
+	setTimeout(turnOneCard(8),1750)
+	
+	/*
+	document.getElementById("1").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("17").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("18").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("15").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("27").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("31").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("8").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("instruct1").innerHTML =
+		'<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
+	document.getElementById("current_round").innerHTML = 'Current Round:  70'
+	*/
+}
+
+var instructFunction2 = function() {
+	document.getElementById("1").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("4").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("30").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	document.getElementById("13").src = '/static/experiments/columbia_hot_test/images/loss.png';
+	document.getElementById("instruct2").innerHTML =
+		'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
+	document.getElementById("current_round").innerHTML = 'Current Round:  -160'
+	setTimeout(instructTurnCards, 1500)
+
+
+}
+
+
+tempArray=[3,5,6,7,9,10,11,12,19,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,31,32]
+var instructTurnCards = function() {
+	document.getElementById("8").src = '/static/experiments/columbia_hot_test/images/loss.png';
+	document.getElementById("2").src = '/static/experiments/columbia_hot_test/images/loss.png';
+	
+	for(i=0;i<tempArray.length;i++){
+	document.getElementById(""+tempArray[i]+"").src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+	}
+}
+
+var instructButton = function(clicked_id) {
+	currID = parseInt(clicked_id)
+	document.getElementById(clicked_id).src =
+		'/static/experiments/columbia_hot_test/images/chosen.png';
+}
 
 /* ************************************ */
 /* Experimental Variables               */
@@ -327,7 +450,6 @@ var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 
 ]
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
-var roundOver = 0
 
 var gameSetup =
 	"<div class = cct-box>"+
@@ -336,17 +458,17 @@ var gameSetup =
 	getBoard()
 
 var practiceSetup =
-	"<div class = practiceText><p class = center-text><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</p></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = button2 onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
-	"<div class = practiceText><p class = center-text><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</p></div>"+
-	"<div class = cct-box>"+
+	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
+	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = button2 onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div></div>"+
 	getBoard(2)
 
 
@@ -354,19 +476,9 @@ var practiceSetup2 =
 /* Set up jsPsych blocks */
 /* ************************************ */
 /* define static blocks */
-var welcome_block = {
-	type: 'poldrack-text',
-	text: "<div class = titlebox><div class = center-text><strong>Welcome to the Columbia Card Task</strong></div></div>",
-	cont_key: [13],
-	data: {
-		exp_id: "columbia_hot_test",
-		trial: 'welcome'
-	},
-	timing_post_trial: 0
-};
 
 var feedback_instruct_text =
-	'Starting with instructions.  Press <strong> Enter </strong> to continue.'
+	"Welcome to the experiment. Press <strong>enter</strong> to begin."
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -405,16 +517,16 @@ var instructions_block = {
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
 	
-	"<div class = practiceText><p class = center-text><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</p></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text>Current Round Total: </div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
 	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction()>See Result</button></div></div>"+
 	getBoard(2),
 	
-	"<div class = practiceText><p class = center-text><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</p></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text>Current Round Total: </div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
 	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
@@ -469,7 +581,7 @@ var practice_block = {
 var practice_chunk = {
 	timeline: [practice_block],
 	loop_function: function(data) {
-		if (roundOver === 0) {
+		if (currID == 'collectButton') {
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
@@ -477,7 +589,7 @@ var practice_chunk = {
 			whichRound = whichRound + 1
 			lossClicked = false
 			return false
-		} else if (roundOver == 1) {
+		} else {
 			return true
 		}
 	}
@@ -523,51 +635,10 @@ var start_test_block = {
 	}
 };
 
-var testimg_block = {
+
+var practice_instruct_block = {
 	type: 'poldrack-single-stim',
-	stimulus: 
-	
-	"<div class = practiceText><p class = center-text><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</p></div>"+
-	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><p class = center-text>Game Round: </p></div>   <div class = titleboxLeft1><p class = center-text>Loss Amount: </p></div>    <div class = titleboxMiddle1><p class = center-text>Gain Amount: </p></div>    <div class = titlebox><p class = center-text>How many cards do you want to take? </p></div>     <div class = titleboxRight1><p class = center-text>Number of Loss Cards: </p></div>   <div class = titleboxRight><p class = center-text>Current Round Total: </p></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
-	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction()>See Result</button></div></div>"+
-	
-	"<div class = cardbox2><div class = square><input type='image' id = '1' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '6' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '9' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"+
-	"<div class = square><input type='image' id = '11' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '16' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '17' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '21' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-
-	"<div class = square><input type='image' id = '25' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '26' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '27' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '28' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '29' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '30' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '31' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '32' src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div></div></div>",
+	stimulus: getPractice1,
 	is_html: true,
 	data: {
 		exp_id: "columbia_hot_test",
@@ -580,14 +651,64 @@ var testimg_block = {
 	response_ends_trial: true,
 };
 
+var practice_chunk1 = {
+	timeline: [practice_instruct_block],
+	loop_function: function(data) {
+		if (roundOver === 0) {
+			instructPoints = 0
+			roundOver = 0
+			roundPoints = 0
+			whichClickInRound = 0
+			currTrial = 0
+			whichRound = whichRound + 1
+			lossClicked = false
+			return false
+		} else if (roundOver == 1) {
+			return true
+		}
+	}
+}
+
+var practice_instruct_block2 = {
+	type: 'poldrack-single-stim',
+	stimulus: getPractice2,
+	is_html: true,
+	data: {
+		exp_id: "columbia_hot_test",
+		trial_id: 'stim',
+		exp_stage: 'practice'
+	},
+	choices: [37],
+	timing_post_trial: 0,
+	on_finish: appendTestData,
+	response_ends_trial: true,
+};
+
+var practice_chunk2 = {
+	timeline: [practice_instruct_block2],
+	loop_function: function(data) {
+		if (roundOver === 0) {
+			roundOver = 0
+			roundPoints = 0
+			whichClickInRound = 0
+			currTrial = 0
+			whichRound = 1
+			lossClicked = false
+			return false
+		} else if (roundOver == 1) {
+			return true
+		}
+	}
+}
+
 
 /* create experiment definition array */
 var columbia_hot_test_experiment = [];
-//columbia_hot_test_experiment.push(testimg_block);
+//columbia_hot_test_experiment.push(test_img_block);
 
-//columbia_hot_test_experiment.push(instruction_node);
-//columbia_hot_test_experiment.push(practice_chunk1);
-//columbia_hot_test_experiment.push(practice_chunk2);
+columbia_hot_test_experiment.push(instruction_node);
+columbia_hot_test_experiment.push(practice_chunk1);
+columbia_hot_test_experiment.push(practice_chunk2);
 
 columbia_hot_test_experiment.push(start_test_block);
 for (i = 0; i < numRounds; i++) {
