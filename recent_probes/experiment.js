@@ -67,7 +67,7 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * .85) {
+		if (choice_counts[key] > trial_count * 0.85) {
 			responses_ok = false
 		}
 	})
