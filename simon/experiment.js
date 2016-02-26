@@ -60,12 +60,6 @@ function assessPerformance() {
 	var avg_rt = sum / rt_array.length
 		//calculate whether response distribution is okay
 	var responses_ok = true
-	for (key in Object.keys(choice_counts)) {
-		if (choice_counts[key] > trial_count * .85) {
-			responses_ok = false
-			break
-		}
-	}
 	Object.keys(choice_counts).forEach(function(key, index) {
 		if (choice_counts[key] > trial_count * .85) {
 			responses_ok = false
