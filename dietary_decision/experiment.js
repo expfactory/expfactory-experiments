@@ -222,7 +222,7 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    "<div class = centerbox><p class = 'block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>"
+    "<div class = centerbox><p class = 'block-text'>In this task you will be rating different food items based on their tastiness and healthiness. Respond before the food item leaves the screen. The whole task should not take more than 10 minutes.</p></div>"
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -270,7 +270,7 @@ var start_taste_block = {
     trial_id: 'start_taste'
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = "center-block-text">In the next block of trials, rate the taste of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = "center-block-text">In the next block of trials, rate the tastiness of each food item without regard for its healthiness. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 500
 };

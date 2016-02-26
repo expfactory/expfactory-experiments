@@ -516,9 +516,9 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares, you will see two larger colored squares.</p></div>',
-		'<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out whether the majority of the smaller squares match the color of the large left square or the large right square.</p></div>',
-		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want to make your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Below the small grey squares, you will see two larger colored squares.</p></div>',
+		'<div class = centerbox><p class = block-text>Upon clicking one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares below.</p><p class = block-text>You should try to figure out whether the majority of the smaller squares match the color of the large left square or the large right square.</p></div>',
+		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
 	],
 
 

@@ -459,7 +459,7 @@ var NoSS_practice_node = {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
-        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. It is equally important that you both respond quickly and accurately to the shapes when there is no blue stop signal <strong>and</strong> successfully stop your response on trials where there is a blue stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a blue stop signal occurs.<p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
     } else {
       //rerandomize stim order

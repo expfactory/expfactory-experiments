@@ -147,12 +147,12 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>',
-    '<div class = centerbox><p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should press the <strong>' +
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p>' +
+    '<p class = block-text>We will begin with practice. If you see the <font color="orange">orange</font> square you should press the <strong>' +
     correct_responses[0][0] +
     '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' +
     correct_responses[1][0] +
-    '</strong> key.</p><p class = block-text>You will get feedback telling you if you were correct. Press <strong>enter</strong> to begin.</p></div>'
+    '</strong> key.</p><p class = block-text>You should respond as quickly and accurately as possible. You will get feedback telling you if you were correct. </p></div>'
   ],
   allow_keys: false,
   data: {
