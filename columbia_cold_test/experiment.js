@@ -34,7 +34,7 @@ if(buttonType == 2){
 	return buttons
 } else {
 	buttons = "<div class = allbuttons>"
-		for (var i = 1; i < 33; i++) {
+		for (i = 1; i < 33; i++) {
 		buttons += "<button type = 'button' class  = select-button2 id = " + i + " onclick = chooseButton1(this.id)>"+i+"</button>" 
 		}
 	return buttons
@@ -45,14 +45,14 @@ var getBoard = function(board_type) {
 	var board = ''
 	if (board_type == 2) {
 		board = "<div class = cardbox>"
-		for (var i = 1; i < 33; i++) {
+		for (i = 1; i < 33; i++) {
 		board += "<div class = square><input type='image' class = card_image id = " + i +
 			" src='/static/experiments/columbia_cold_test/images/beforeChosen.png'></div>"
 		}
 		
 	} else {
 		board = "<div class = cardbox2>"
-		for (var i = 1; i < 33; i++) {
+		for (i = 1; i < 33; i++) {
 		board += "<div class = square><input class = card_image type='image' id = " + i +
 			" src='/static/experiments/columbia_cold_test/images/beforeChosen.png'></div>"
 		}

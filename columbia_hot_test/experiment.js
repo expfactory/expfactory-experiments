@@ -40,7 +40,7 @@ var getBoard = function(board_type) {
 		
 	} else {
 		board = "<div class = cardbox>"
-		for (var i = 1; i < 33; i++) {
+		for (i = 1; i < 33; i++) {
 		board += "<div class = square><input class = card_image type='image' id = " + i +
 			" src='/static/experiments/columbia_hot_test/images/beforeChosen.png' onclick = chooseCard(this.id)></div>"
 		}
