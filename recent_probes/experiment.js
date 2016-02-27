@@ -609,9 +609,9 @@ var practice_probe_block = {
 		trial_id: "probe",
 		exp_stage: "practice"
 	},
-	correct_text: '<div class = bottombox><p style="color:green"; style="color:green"; class = center-text>Correct!</p></div>',
-	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
-	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
+	correct_text: '<div class = bottombox><div style="color:green"; style="color:green"; class = center-text>Correct!</div></div>',
+	incorrect_text: '<div class = bottombox><div style="color:red"; style="color:red"; class = center-text>Incorrect</div></div>',
+	timeout_message: '<div class = bottombox><div class = center-text>no response detected</div></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
 	timing_feedback_duration: [750],
