@@ -400,7 +400,7 @@ var stim_block = {
   timing_response: 1000,
   timing_post_trial: 0,
   response_ends_trial: true,
-  on_finish: function() {
+  on_finish: function(data) {
     var choice = choices.indexOf(data.key_press)
     jsPsych.data.addDataToLastTrial({
       trial_id: "stim",
