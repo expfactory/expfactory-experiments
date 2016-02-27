@@ -14,7 +14,7 @@ function appendTextAfter(input, search_term, new_text) {
 function appendTextAfter2(input, search_term, new_text) {
 	var index = input.indexOf(search_term) + search_term.length
 	return input.slice(0, index) + new_text + input.slice(index +
-		'/static/experiments/information_sampling_task/images/grey_small_square.png'.length + 6 + 1)
+		"'/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)".length + 5)
 }
 
 var appendTestData = function() {
@@ -298,12 +298,11 @@ var instructionFunction = function(clicked_id) {
 	tempID = clicked_id
 	currID = parseInt(clicked_id)
 	clickedCards.push(clicked_id)
-	temp = color1.indexOf(currID, 0)
+	temp = color1.indexOf(clicked_id, 0)
 	if (temp != -1) {
 		clickedCardsColor1.push(currID)
 		document.getElementById(clicked_id).src =
 			'/static/experiments/information_sampling_task/images/' + whichSmallColor1 + '.png';
-
 	} else if (temp == -1) {
 		clickedCardsColor2.push(currID)
 		document.getElementById(clicked_id).src =
