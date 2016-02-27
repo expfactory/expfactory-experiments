@@ -28,7 +28,7 @@ var getButtons = function(buttonType){
 var buttons = ""
 if(buttonType == 2){
 	buttons = "<div class = allbuttons>"
-		for (var i = 1; i < 33; i++) {
+		for (i = 1; i < 33; i++) {
 		buttons += "<button type = 'button' class  = select-button2 id = " + i + " onclick = chooseButton(this.id)>"+i+"</button>" 
 		}
 	return buttons
@@ -229,6 +229,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var e = ""
+var i = ""
 var numRounds = 27
 var whichRound = 0
 var roundPoints = 0
