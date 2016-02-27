@@ -27,6 +27,49 @@ function evalAttentionChecks() {
 	return check_percent
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. 
+	 */
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var randomDraw = function(lst) {
 	var index = Math.floor(Math.random() * (lst.length))
 	return lst[index]
@@ -154,6 +197,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 // Define and load images
@@ -171,6 +215,7 @@ var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
 ]
+var choices = [possible_responses[0][1], possible_responses[1][1]]
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
 	possible_responses[1], possible_responses[1]
 ])
@@ -267,7 +312,8 @@ var end_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -410,7 +456,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 		stimulus: getNoSSPracticeStim,
 		data: getNoSSPracticeData,
 		is_html: true,
-		choices: [possible_responses[0][1], possible_responses[1][1]],
+		choices: choices,
 		timing_post_trial: 0,
 		timing_stim: 850,
 		timing_response: 1850,
@@ -491,7 +537,7 @@ for (i = 0; i < practice_block_len; i++) {
 		SS_trial_type: getSSPractice_trial_type,
 		data: getSSPracticeData,
 		is_html: true,
-		choices: [possible_responses[0][1], possible_responses[1][1]],
+		choices: choices,
 		timing_stim: 850,
 		timing_response: 1850,
 		prompt: prompt_text,
@@ -617,7 +663,7 @@ for (c = 0; c < numconditions; c++) {
 				SS_trial_type: stop_trials[i],
 				data: trial_data,
 				is_html: true,
-				choices: [possible_responses[0][1], possible_responses[1][1]],
+				choices: choices,
 				timing_stim: 850,
 				timing_response: 1850,
 				SSD: getSSD,
