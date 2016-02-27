@@ -583,7 +583,7 @@ var practice_probe_block = {
 	timeout_message: '<div class = bottombox><p class = center-text>No response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
-	timing_feedback_duration: [750],
+	timing_feedback_duration: 750,
 	is_html: true,
 	on_finish: appendPracticeProbeData,
 };
