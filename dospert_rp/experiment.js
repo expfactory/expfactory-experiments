@@ -39,7 +39,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>People often see some risk in situations that contain uncertainty about what the outcome or consequences will be and for which there is the possibility of negative consequences. However, riskiness is a very personal and intuitive notion, and we are interested in <strong>your gut level assessment of how risky</strong> each situation or behavior is.<br><br>For each of the following statements, please indicate <strong>how risky you perceive</strong> each situation.</p></div>',
+    '<div class = centerbox><p class = block-text>People often see some risk in situations that contain uncertainty about what the outcome or consequences will be and for which there is the possibility of negative consequences. However, riskiness is a very personal and intuitive notion, and we are interested in <strong>your assessment of how risky</strong> each situation or behavior is.<br><br>For each of the following statements, please indicate <strong>how risky you perceive</strong> each situation.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
