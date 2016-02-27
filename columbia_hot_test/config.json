@@ -1,6 +1,6 @@
 [
     {
-        "name": "Columbia Card Task Cold Version",
+        "name": "Columbia Card Task Hot Version Test",
         "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
@@ -8,13 +8,12 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "experiment.js",
              	"static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "columbia_cold_test",
+        "exp_id": "columbia_hot_test",
         "cognitive_atlas_task_id": "trm_5667492c555b7",
         "template":"jspsych",
         "contributors": [
@@ -33,6 +32,6 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"}
-                       }  
+                       } 
    }
 ]

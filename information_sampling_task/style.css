@@ -5,7 +5,7 @@
    padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
    margin: 0%;
    overflow:none;
-    color: #fff;
+   color: #fff;
 }
 
 .numbox {
@@ -23,8 +23,8 @@
   width: 5vw;
   height: 5vw;
   position:absolute;
-  top:75%;
-  left:41.25%;
+  top:30%;
+  left:31.25%;
   margin-right:-50%;
   transform: translate(-125%,-25%);
 }
@@ -33,8 +33,8 @@
   width:5vw;
   height: 5vw;
   position:absolute;
-  top:75%;
-  left:61.25%;
+  top:30%;
+  left:71.25%;
   margin-right:-50%;
   transform: translate(-125%,-25%);
 }
@@ -48,4 +48,25 @@
  margin-right:0%;
  transform: translate(-5%,-2%);
  background-color: black;
+}
+
+.smallbox {
+ width:50vw;
+ height: 20vh;
+ position:absolute;
+ top:70%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-50%,-2%);
+ background-color: black;
+}
+
+.card_image {
+   height: 7vw;
+   width: 7vw;
+}
+
+.card_image2 {
+   height: 10vw;
+   width: 10vw;
 }

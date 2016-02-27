@@ -93,76 +93,6 @@ var getPractice2 = function() {
 	return gameState
 }
 
-var getRound = function() {
-	if (roundOver === 0) { //this is for the start of a round
-		whichClickInRound = 0
-		unclickedCards = cardArray
-		cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
-		]
-		clickedGainCards = [] //num
-		clickedLossCards = [] //num
-		roundParams = shuffledParamsArray.pop()
-		lossProb = roundParams[0]
-		gainAmt = roundParams[1]
-		lossAmt = roundParams[2]
-		shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
-
-		whichLossCards = [] //this determines which are loss cards at the beginning of each round
-		for (i = 0; i < lossProb; i++) {
-			whichLossCards.push('c' + shuffledCardArray.pop())
-		}
-		whichGainCards = shuffledCardArray
-		gameState = gameSetup
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
-		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
-		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-
-		roundOver = 1
-		return gameState
-	} else if (roundOver == 1) { //this is for during the round
-		gameState = gameSetup
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
-		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
-		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-		gameState = deleteText(gameState, 'onclick = noCard()')
-
-		clickedGainCards.sort(function(a, b) {
-			return a - b
-		})
-		for (i = 0; i < clickedGainCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
-				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
-		}
-		return gameState
-	} else if (roundOver == 2) { //this is for during the round
-		roundOver = 0
-		gameState = gameSetup
-		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
-		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
-		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-		gameState = deleteText(gameState, 'onclick = noCard()')
-
-		clickedGainCards.sort(function(a, b) {
-			return a - b
-		})
-		for (i = 0; i < clickedGainCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
-				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
-		}
-		for (i = 0; i < clickedLossCards.length; i++) {
-			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedLossCards[i] + "'",
-				" src='/static/experiments/columbia_card_task_hot/images/loss.png'")
-		}
-		return gameState
-	}
-}
-
 
 var instructCard = function(clicked_id) {
 	currID = parseInt(clicked_id)
@@ -249,15 +179,8 @@ var chooseCard = function(clicked_id) {
 			for (i = 1; i < 33; i++) {
 				document.getElementById('c' + i + '').disabled = true;
 			}
-			setTimeout(endRound, 2000)
-			e = jQuery.Event("keydown");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e);
-			e = jQuery.Event("keyup");
-			e.which = 37; // # Some key code value
-			e.keyCode = 37
-			$(document).trigger(e)
+			setTimeout(endRound, 1000)
+			setTimeout(pressKey, 2500)
 
 		} else if (temp == -1) { // if you click on a gain card
 
@@ -277,6 +200,78 @@ var chooseCard = function(clicked_id) {
 		}
 	}
 }
+
+var getRound = function() {
+	if (roundOver === 0) { //this is for the start of a round
+		whichClickInRound = 0
+		unclickedCards = cardArray
+		cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+			24, 25, 26, 27, 28, 29, 30, 31, 32
+		]
+		clickedGainCards = [] //num
+		clickedLossCards = [] //num
+		roundParams = shuffledParamsArray.pop()
+		lossProb = roundParams[0]
+		gainAmt = roundParams[1]
+		lossAmt = roundParams[2]
+		shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
+
+		whichLossCards = [] //this determines which are loss cards at the beginning of each round
+		for (i = 0; i < lossProb; i++) {
+			whichLossCards.push(shuffledCardArray.pop())
+		}
+		whichGainCards = shuffledCardArray
+		gameState = gameSetup
+		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
+		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
+		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+
+		roundOver = 1
+		return gameState
+	} else if (roundOver == 1) { //this is for during the round
+		gameState = gameSetup
+		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
+		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
+		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+		gameState = deleteText(gameState, 'onclick = noCard()')
+
+		clickedGainCards.sort(function(a, b) {
+			return a - b
+		})
+		for (i = 0; i < clickedGainCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + clickedGainCards[i] + "'",
+				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
+		}
+		return gameState
+	} else if (roundOver == 2) { //this is for during the round
+		roundOver = 0
+		gameState = gameSetup
+		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
+		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
+		gameState = appendTextAfter(gameState, 'Current Round: ', roundPoints)
+		gameState = appendTextAfter(gameState, '# of Loss Cards: ', lossProb)
+		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+		gameState = deleteText(gameState, 'onclick = noCard()')
+
+		clickedGainCards.sort(function(a, b) {
+			return a - b
+		})
+		for (i = 0; i < whichGainCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + whichGainCards[i] + "'",
+				" src='/static/experiments/columbia_card_task_hot/images/chosen.png'")
+		}
+		for (i = 0; i < whichLossCards.length; i++) {
+			gameState = appendTextAfter2(gameState, "id = '" + "" + whichLossCards[i] + "'",
+				" src='/static/experiments/columbia_card_task_hot/images/loss.png'")
+		}
+		return gameState
+	}
+}
+
 
 
 var noCard = function() {
