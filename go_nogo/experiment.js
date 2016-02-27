@@ -72,7 +72,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
-  ['go', 32, 'respond by pressing the spacebar'],
+  ['go', 32, 'respond by pressing the spacebar as quickly as possible'],
   ['nogo', -1, 'not respond']
 ], 1)
 var gap = 0

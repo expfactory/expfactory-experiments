@@ -197,9 +197,15 @@ var possible_responses = [
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
   possible_responses[1], possible_responses[1]
 ])
-var prompt_text = '<ul list-text><li>Circle:  ' + correct_responses[0][0] + '</li><li>Rhombus:  ' +
-  correct_responses[1][0] + ' </li><li>L-shape:  ' + correct_responses[2][0] +
-  ' </li><li>Moon:  ' + correct_responses[3][0] + ' </li></ul>'
+var tab = '&nbsp&nbsp&nbsp&nbsp'
+var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
+  correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
+  tab +
+  correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+  '&nbsp&nbsp&nbsp' + correct_responses[2][0] +
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][
+    0
+  ] + ' </li></ul>'
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
@@ -393,7 +399,6 @@ var test_feedback_block = {
 
 
 
-
 /* ************************************ */
 /* Set up experiment */
 /* ************************************ */
@@ -454,7 +459,7 @@ var NoSS_practice_node = {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
-        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. It is equally important that you both respond quickly and accurately to the shapes when there is no blue stop signal <strong>and</strong> successfully stop your response on trials where there is a blue stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a blue stop signal occurs.<p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
     } else {
       //rerandomize stim order

@@ -469,9 +469,9 @@ var instructions_block = {
 		trial_id: "instructions"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your training set.  You must memorize all 6 letters. </p></div>',
-		'<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
-		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p>' +
+		'<p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>' +
+		'<p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -628,7 +628,7 @@ var practice_probe_block = {
 	key_answer: getResponse,
 	choices: [37, 39],
 	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
+	correct_text: '<div class = bottombox><p style="color:green"; style="color:green"; class = center-text>Correct!</p></div>',
 	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
 	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
 	timing_stim: [2000],
