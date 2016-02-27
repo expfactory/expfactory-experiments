@@ -442,9 +442,7 @@ var NoSS_practice_node = {
 			practice_feedback_text +=
 				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials, if the correct response to the shape is the ' +
 				possible_responses[0][0] +
-				' you should <strong>not respond</strong> in any way.</p><p class = block-text>If the ' +
-				possible_responses[0][0] +
-				' was not the correct responses, or the stop signal does not appear, you should response normally. It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				' you should <strong>not respond</strong> in any way. If the correct response is the ' + possible_responses[1][0] + ' you should respond in spite of the stop signal.</p><p class = block-text>Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a stop signal occurs and you were going to respond with the ' + possible_responses[0][0] + '.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
