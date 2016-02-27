@@ -462,26 +462,21 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
 		trial_id: "instructions"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p>' +
-		'<p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>' +
-		'<p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {

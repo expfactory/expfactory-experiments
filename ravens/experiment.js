@@ -281,7 +281,6 @@ var feedback_instruct_block = {
   }
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
@@ -296,11 +295,9 @@ var instructions_block = {
     exp_id: "ravens"
   }
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {

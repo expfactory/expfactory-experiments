@@ -147,7 +147,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -158,17 +157,15 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>To make sure there is no confusion about which word is in each category, the words in each category are presented below: ' +
 		category_instructions +
 		'</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
-		'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may end with: "... dog"... "aunt"... "China"... "red"... "titanium"... "bird". You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
+		'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may end with: "... dog"... "aunt"... "China"... "red"... "titanium"... "bird". You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p><p class = block-text>After you end instructions you will complete a practice block of trials.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -199,17 +196,6 @@ var end_block = {
 	timing_post_trial: 0
 };
 
-var start_practice_block = {
-	type: 'poldrack-text',
-	timing_response: 180000,
-	data: {
-		trial_id: 'practice_intro'
-	},
-	text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 1000
-};
-
 var end_practice_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
@@ -238,7 +224,6 @@ var keep_track_experiment = []
 keep_track_experiment.push(instruction_node);
 
 // set up practice
-keep_track_experiment.push(start_practice_block)
 block = practice_block[0]
 target = practice_targets[0]
 prompt = '<div class = promptbox><div class = prompt-text>Targets: ' + target.join(', ') +
@@ -257,7 +242,7 @@ var prompt_block = {
 	response_ends_trial: true,
 	data: data,
 	prompt: prompt,
-	timing_post_trial: 0,
+	timing_post_trial: 1000,
 }
 var wait_block = {
 	type: 'poldrack-single-stim',
@@ -337,7 +322,7 @@ for (b = 0; b < blocks.length; b++) {
 		choices: [13],
 		data: data,
 		prompt: prompt,
-		timing_post_trial: 0,
+		timing_post_trial: 1000,
 		response_ends_trial: true
 	}
 	var wait_block = {
