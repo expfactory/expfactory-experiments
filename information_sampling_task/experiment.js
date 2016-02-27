@@ -17,7 +17,6 @@ function appendTextAfter2(input, search_term, new_text) {
 		'/static/experiments/information_sampling_task/images/grey_small_square.png'.length + 6 + 1)
 }
 
-
 var appendTestData = function() {
 	if (whichColor == 1) {
 		if (color1.indexOf(tempID, 0) != -1) {
@@ -514,9 +513,8 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Below the small grey squares, you will see two larger colored squares.</p></div>',
-		'<div class = centerbox><p class = block-text>Upon clicking one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares below.</p><p class = block-text>You should try to figure out whether the majority of the smaller squares match the color of the large left square or the large right square.</p></div>',
-		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will see small  squares arranged in a 5 by 5 matrix. Initially all the squares will be greyed out, but when you click on a box it will reveal itself to be one of two colors corresponding to two larger squares at the bottom of the screen.<p class = block-text>Your task is to decide which color you think is in the majority.</p></div>',
+		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>It is entirely up to you how many boxes you open before you make your decision.</p><p class = block-text>When you have made your decision, you should touch that larger color square at the bottom of the screen. After you end instructions you will complete a practice trial.</p></div>',
 	],
 
 
@@ -549,17 +547,6 @@ var instruction_node = {
 }
 
 
-var start_practice_block = {
-	type: 'poldrack-text',
-	data: {
-		exp_id: "information_sampling_task",
-		trial_id: "practice_intro"
-	},
-	text: '<div class = centerbox><p class = block-text>We will show you a practice trial.  Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 1000
-};
-
 var subjectPracticeBlock = {
 	type: 'poldrack-single-stim',
 	stimulus: instructionsSetup,
@@ -581,7 +568,7 @@ var start_test_block = {
 		exp_id: "information_sampling_task",
 		trial_id: "test_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>A trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = block-text>Each trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 };
@@ -676,9 +663,7 @@ var subjectRewardBlock = {
 	}
 };
 
-
-
-var practice_chunk = {
+var practice_node = {
 	timeline: [practice_block],
 	loop_function: function(data) {
 		if (roundOver == 2) {
@@ -705,7 +690,6 @@ var reset_block = {
 /* create experiment definition array */
 var information_sampling_task_experiment = [];
 information_sampling_task_experiment.push(instruction_node);
-information_sampling_task_experiment.push(start_practice_block);
 information_sampling_task_experiment.push(subjectPracticeBlock);
 information_sampling_task_experiment.push(subjectRewardBlock);
 information_sampling_task_experiment.push(start_test_block);
@@ -713,13 +697,13 @@ information_sampling_task_experiment.push(start_test_block);
 if (whichCond === 0) { // do the FW first, then DW
 	information_sampling_task_experiment.push(FW_intro_block);
 	for (var i = 0; i < 10; i++) {
-		information_sampling_task_experiment.push(practice_chunk);
+		information_sampling_task_experiment.push(practice_node);
 		information_sampling_task_experiment.push(rewardFW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(DW_intro_block);
 	for (var i = 0; i < 10; i++) {
-		information_sampling_task_experiment.push(practice_chunk);
+		information_sampling_task_experiment.push(practice_node);
 		information_sampling_task_experiment.push(rewardDW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
@@ -727,13 +711,13 @@ if (whichCond === 0) { // do the FW first, then DW
 } else if (whichCond == 1) { ////do DW first then FW
 	information_sampling_task_experiment.push(DW_intro_block);
 	for (var i = 0; i < 10; i++) {
-		information_sampling_task_experiment.push(practice_chunk);
+		information_sampling_task_experiment.push(practice_node);
 		information_sampling_task_experiment.push(rewardDW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(FW_intro_block);
 	for (var i = 0; i < 10; i++) {
-		information_sampling_task_experiment.push(practice_chunk);
+		information_sampling_task_experiment.push(practice_node);
 		information_sampling_task_experiment.push(rewardFW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
