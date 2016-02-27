@@ -1,43 +1,37 @@
 [
     {
-        "name": "Adaptive Bickel Titrator",
+        "name": "Columbia Card Task Hot Version Test",
         "template":"jspsych",
-        "run": [
-                "static/js/jspsych/jspsych.js",
+        "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
-                "static/css/jspsych.css",
+             	"static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "bickel_titrator",
-        "cognitive_atlas_task_id": "trm_5696a599bfcb6",
+        "exp_id": "columbia_hot_test",
+        "cognitive_atlas_task_id": "trm_5667492c555b7",
+        "template":"jspsych",
         "contributors": [
+                         "Jamie Li",
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":2,
+        "time":999,
         "experiment_variables": "",
-        "reference": "http://psycnet.apa.org/journals/pha/22/3/222.pdf",
+        "reference": "http://psycnet.apa.org/journals/xlm/35/3/709.pdf",
+        "notes": "",
         "publish":"True",
-        "experiment_variables": [{
-                                 "name":"credit_var",
-                                 "type":"credit",
-                                 "datatype": "boolean",
-                                 "description":"True if avg_rt > 200"
-                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
-                       }
+                                        "display_element": "getDisplayElement"}
+                       } 
    }
 ]

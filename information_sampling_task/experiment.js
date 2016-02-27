@@ -402,82 +402,80 @@ whichSmallColor2 = colors[2] + '_' + shapes[0]
 
 
 gameSetup = "<div class = bigbox><div class = numbox>" +
-	"<div class = square><input type='image' id = '1' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '1' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '2' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '3' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '4' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '5' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '6' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '9' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '6' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '7' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '8' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '9' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '10' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '11' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '11' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '12' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '13' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '14' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '15' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '16' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '17' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '16' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '17' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '18' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '19' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '20' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '21' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
-	"<div class = square><input type='image' id = '25' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div></div>" +
+	"<div class = square><input type='image' class = card_image id = '21' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '22' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '23' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '24' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '25' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = chooseCard(this.id)></div></div>" +
 
-
-
-	"<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/information_sampling_task/images/" +
+	"<div class = smallbox>"+
+	"<div class = bottomLeft><input type='image' class = card_image2 id = '26' src='/static/experiments/information_sampling_task/images/" +
 	whichLargeColor1 + ".png' onclick = makeChoice(this.id)></div>" +
-	"<div class = bottomRight><input type='image' id = '27' src='/static/experiments/information_sampling_task/images/" +
-	whichLargeColor2 + ".png' onclick = makeChoice(this.id)></div></div></div>"
+	"<div class = bottomRight><input type='image' class = card_image2 id = '27' src='/static/experiments/information_sampling_task/images/" +
+	whichLargeColor2 + ".png' onclick = makeChoice(this.id)></div></div></div></div>"
 
 
 
 instructionsSetup = "<div class = bigbox><div class = numbox>" +
-	"<div class = square><input type='image' id = '1' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '2' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '3' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '4' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '5' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '1' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '2' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '3' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '4' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '5' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '6' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '7' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '8' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '9' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '10' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '6' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '7' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '8' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '9' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '10' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '11' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '12' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '13' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '14' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '15' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '11' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '12' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '13' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '14' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '15' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '16' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '17' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '18' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '19' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '20' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '16' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '17' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '18' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '19' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '20' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
 
-	"<div class = square><input type='image' id = '21' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '22' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '23' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '24' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
-	"<div class = square><input type='image' id = '25' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div></div>" +
+	"<div class = square><input type='image' class = card_image id = '21' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '22' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '23' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '24' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div>" +
+	"<div class = square><input type='image' class = card_image id = '25' src='/static/experiments/information_sampling_task/images/grey_small_square.png' onclick = instructionFunction(this.id)></div></div>" +
 
-
-
-	"<div class = bottomLeft><input type='image' id = '26' src='/static/experiments/information_sampling_task/images/" +
+	"<div class = smallbox>"+
+	"<div class = bottomLeft><input type='image' class = card_image2 id = '26' src='/static/experiments/information_sampling_task/images/" +
 	whichLargeColor1 + ".png' onclick = makeInstructChoice(this.id)></div>" +
-	"<div class = bottomRight><input type='image' id = '27' src='/static/experiments/information_sampling_task/images/" +
-	whichLargeColor2 + ".png' onclick = makeInstructChoice(this.id)></div></div></div>"
+	"<div class = bottomRight><input type='image' class = card_image2 id = '27' src='/static/experiments/information_sampling_task/images/" +
+	whichLargeColor2 + ".png' onclick = makeInstructChoice(this.id)></div></div></div></div>"
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -699,6 +697,7 @@ var reset_block = {
 	func: resetRound,
 	timing_post_trial: 0
 }
+
 
 /* create experiment definition array */
 var information_sampling_task_experiment = [];

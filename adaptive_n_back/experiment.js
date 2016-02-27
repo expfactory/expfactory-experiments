@@ -28,25 +28,42 @@ function addID() {
 }
 
 function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
 	var missed_count = 0
+	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	for (var i = 0; i < experiment_data.length; i++)
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	choice_counts[32] = 0
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
 		rt = experiment_data[i].rt
-		if (typeof rt !== 'undefined') {
-			if (rt == -1) {
-				missed_count += 1
-			} else {
-				rt_array.push(rt)
-			}
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
 		}
+	}
 	//calculate average rt
 	var sum = 0
 	for (var j = 0; j < rt_array.length; j++) {
 		sum += rt_array[j]
 	}
-	var avg_rt = sum/rt_array.length
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
 }
 
 var getInstructFeedback = function() {
@@ -80,7 +97,7 @@ var record_acc = function(data) {
 };
 
 var update_delay = function() {
-	var acc = block_acc/num_trials
+	var acc = block_acc / num_trials
 	if (delay >= 2) {
 		if (acc > acc_thresh) {
 			delay += 1
@@ -90,7 +107,7 @@ var update_delay = function() {
 	} else if (delay == 1) {
 		if (acc > acc_thresh) {
 			delay += 1
-		} 
+		}
 	}
 	block_acc = 0
 };
@@ -121,7 +138,7 @@ var getData = function() {
 
 var getText = function() {
 	return '<div class = "centerbox"><p class = "block-text">In these next blocks, you should respond when the current letter matches the letter that appeared ' +
-		delay +
+	delay +
 		' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>'
 }
 
@@ -133,6 +150,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true //default to true
 
 // task specific variables
 var letters = 'bBdDgGtTvV'
@@ -248,7 +266,7 @@ var end_block = {
 		trial_id: "text"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0, 
+	timing_post_trial: 0,
 	on_finish: assessPerformance
 };
 

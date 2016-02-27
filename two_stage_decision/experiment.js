@@ -12,6 +12,52 @@ function addID() {
 	})
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
+		'</p></div>'
+}
+
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -310,18 +356,16 @@ var update_FB_data = function() {
 	})
 	return ""
 }
-var getInstructFeedback = function() {
-		return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
-			'</p></div>'
-	}
-	/* ************************************ */
-	/* Define experimental variables */
-	/* ************************************ */
-	// generic task variables
+
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+// generic task variables
 var run_attention_checks = false
 var attention_check_thresh = 0.62
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var practice_trials_num = 10
@@ -339,7 +383,7 @@ var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the
 var exp_stage = 'practice'
 
 // Actions for left and right
-var actions = [37, 39]
+var choices = [37, 39]
 var stim_side = ['decision-left', 'decision-right']
 var stim_move = ['selected-left', 'selected-right']
 
@@ -486,7 +530,8 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var wait_block = {
@@ -560,7 +605,7 @@ var first_stage = {
 	type: "poldrack-single-stim",
 	stimulus: choose_first_stage,
 	is_html: true,
-	choices: actions,
+	choices: choices,
 	timing_stim: 2000,
 	timing_response: 2000,
 	show_response: true,
@@ -601,7 +646,7 @@ var second_stage = {
 	},
 	stimulus: choose_second_stage,
 	is_html: true,
-	choices: actions,
+	choices: choices,
 	timing_stim: 2000,
 	timing_response: 2000,
 	response_ends_trial: true,

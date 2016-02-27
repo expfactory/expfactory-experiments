@@ -155,7 +155,9 @@
    padding-bottom : %; /* = width for a 1:1 aspect ratio */
    margin:1%;
    overflow:hidden;
-    color: #fff;
+   color: #fff;
+   max-height: 20%;
+   max-width: 10%;
 }
 
 .numbox {
