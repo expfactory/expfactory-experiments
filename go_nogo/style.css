@@ -12,7 +12,7 @@
 #stim2 {
 	width: 15vw;
 	height: 15vw;
-	background: blue;
+	background: DodgerBlue;
 	position: absolute;
     top:50%;
     left:50%;
@@ -21,7 +21,7 @@
 }
 
 .responded #stim1, .responded #stim2{
-	-moz-box-shadow:    inset 0 0 30px #000000;
-   -webkit-box-shadow: inset 0 0 30px #000000;
-   box-shadow:         inset 0 0 30px #000000;
+	-moz-box-shadow:    inset 0 0 40px #000000;
+   -webkit-box-shadow: inset 0 0 40px #000000;
+   box-shadow:         inset 0 0 40px #000000;
 }
