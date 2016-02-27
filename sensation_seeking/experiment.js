@@ -36,7 +36,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please indicate which of the following scenarios you would prefer.</p></div>',
+    '<div class = centerbox><p class = center-block-text>Please indicate which of the following scenarios you would prefer.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
