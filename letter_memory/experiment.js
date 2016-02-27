@@ -132,7 +132,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var [feedback_instruct_block, instructions_block] = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -146,8 +145,7 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 01000
 };
-[feedback_instruct_block, instructions_block].push(feedback_instruct_block)
-[feedback_instruct_block, instructions_block].push(instructions_block)
+
 
 var instruction_node = {
 	timeline: [feedback_instruct_block, instructions_block],
