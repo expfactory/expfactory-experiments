@@ -161,6 +161,13 @@ var stims = ['100Grand.bmp', 'banana.bmp', 'blueberryyogart.bmp', 'brocollincaul
   'strawberries.bmp', 'strussel.bmp', 'uToberlorone.bmp', 'uTwix.bmp', 'wheatcrisps.bmp',
   'whitegrapes.bmp', 'wwbrownie.bmp', 'wwmuffin.bmp'
 ]
+var images = []
+for (var i = 0; i < stims.length; i++) {
+  images.push(base_path + stims[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
+
 stims = stims.slice(0,4)
 var health_stims = jsPsych.randomization.shuffle(stims)
 var taste_stims = jsPsych.randomization.shuffle(stims)
