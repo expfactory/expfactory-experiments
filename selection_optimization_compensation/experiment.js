@@ -36,7 +36,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Please select which of the two statements is more true for you.</p></div>',
+    '<div class = centerbox><p class = center-block-text>Please select which of the two statements is more true for you.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
