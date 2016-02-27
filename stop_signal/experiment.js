@@ -203,14 +203,14 @@ var credit_var = true
 // Define and load images
 var prefix = '/static/experiments/stop_signal/images/'
 var images = [prefix + 'pentagon.png', prefix + 'hourglass.png', prefix + 'tear.png', prefix +
-  'square.png'
+	'square.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
 	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
-	
+
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -219,9 +219,16 @@ var choices = [possible_responses[0][1], possible_responses[1][1]]
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
 	possible_responses[1], possible_responses[1]
 ])
-var prompt_text = '<ul list-text><li>Pentagon:  ' + correct_responses[0][0] + '</li><li>Hourglass:  ' +
-	correct_responses[1][0] + ' </li><li>Tear:  ' + correct_responses[2][0] +
-	' </li><li>Square:  ' + correct_responses[3][0] + ' </li></ul>'
+
+var tab = '&nbsp&nbsp&nbsp&nbsp'
+
+var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
+	correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' + tab +
+	correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+	tab + correct_responses[2][0] +
+	' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
+	' </li></ul>'
+	
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
@@ -231,25 +238,29 @@ var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
 
 var stimulus = [{
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
-  data: {
-    correct_response: correct_responses[0][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+	data: {
+		correct_response: correct_responses[0][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
-  data: {
-    correct_response: correct_responses[1][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
+	data: {
+		correct_response: correct_responses[1][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
-  data: {
-    correct_response: correct_responses[2][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
+	data: {
+		correct_response: correct_responses[2][1],
+		trial_id: 'stim',
+	}
 }, {
-  stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
-  data: {
-    correct_response: correct_responses[3][1], trial_id: 'stim',
-  }
+	stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
+	data: {
+		correct_response: correct_responses[3][1],
+		trial_id: 'stim',
+	}
 }]
 
 var NoSSpractice_block_len = 12
@@ -488,7 +499,7 @@ var NoSS_practice_node = {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no black stop signal <strong>and</strong> successfully stop your response on trials where there is a black stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a stop signal occurs.<p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -625,7 +636,7 @@ stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 ss_freq = randomDraw(['high', 'low'])
-// Loop through the two conditions
+	// Loop through the two conditions
 for (c = 0; c < numconditions; c++) {
 	var blocks = condition_blocks[c]
 		// Loop through the multiple blocks within each condition
