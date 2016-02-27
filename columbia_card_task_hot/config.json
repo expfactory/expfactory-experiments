@@ -1,6 +1,6 @@
 [
     {
-        "name": "Columbia Card Task Hot Version",
+        "name": "Columbia Card Task Hot Version Test",
         "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",

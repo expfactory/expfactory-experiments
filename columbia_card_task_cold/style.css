@@ -1,10 +1,6 @@
-/****************************************/
-/********     Headers/Text     **********/
-/****************************************/
-
 .center-text {
   text-align:center;
-  font-size: 40px;
+  font-size: 90%;
   position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
@@ -12,109 +8,81 @@
   transform: translateY(-50%);
 }
 
-
-.titleboxLeft {
-  width:15vw;
-  height: 2vw;
-  position:absolute;
-  top:25%;
-  left:20%;
-  margin-right:-50%;
-  transform: translate(-50%,-425%);
-  border-style: solid;
-  border-color: black;
+.block-text2 {
+  font-size: 90%;
+  width:100%;
+  height 100vw;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  line-height: 120%;
 }
 
-.titleboxRight {
-  width:15vw;
-  height: 2vw;
-  position:absolute;
-  top:25%;
-  left:80%;
-  margin-right:-50%;
-  transform: translate(-50%,-425%);
-  border-style: solid;
-  border-color: black;
+.practiceText {
+ width: 80vw;
+ height: 10vw;
+ position: absolute;
+ top: 1%;
+ left: 4.5%;
+ margin-right:50%;
+ transform: translate(0%,0%);
+ background-color: white;
 }
 
-
-.titlebox {
-  width:30vw;
-  height: 5vw;
-  position:absolute;
-  top:45%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-425%);
+.cardbox {
+ width:50vw;
+ height: 0vw;
+ position:absolute;
+ top:25%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-47%,0%);
+ background-color: white;
 }
 
-
-.titleboxLeft1 {
-  width:15vw;
-  height: 2vw;
-  position:absolute;
-  top:30%;
-  left:20%;
-  margin-right:-50%;
-  transform: translate(-60%,-425%);
-  border-style: solid;
-  border-color: black;
+.cardbox2 {
+ width:50vw;
+ height: 0vw;
+ position:absolute;
+ top:100%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-48%,0%); //-47
+ background-color: white;
 }
 
-.titleboxRight1 {
-  width:15vw;
-  height: 2vw;
-  position:absolute;
-  top:30%;
-  left:80%;
-  margin-right:-50%;
-  transform: translate(-40%,-425%);
-  border-style: solid;
-  border-color: black;
+.cct-box {
+ width:87.5vw;
+ height: 80vh;
+ position: fixed;
+ top:14%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(7%,2.5%);
+ background-color: white;
 }
 
-.titleboxMiddle1 {
-  width:15vw;
-  height: 2vw;
-  position:absolute;
-  top:30%;
-  left:48.75%;
-  margin-right:-50%;
-  transform: translate(-40%,-425%);
-  border-style: solid;
-  border-color: black;
+.cct-box2 {
+ width:87.5vw;
+ height: 78vh;
+ position: fixed;
+ top:12.5%;
+ left:0%;
+ margin-right:0%;
+ transform: translate(7%,2.5%);
+ background-color: white;
 }
 
-
-/****************************************/
-/********        BUTTONS     ************/
-/****************************************/
-
-
-.select-button2 {
-  width:3.125%;
-  min-width:0vw;
-  height: 50%;
-  float: left;
-  margin: 0;
-} 
-
-.buttonbox2 {
-  width:90vw;
-  height: 3vw;
-  position:absolute;
-  top:17.5%;
-  left:0%;
-  margin-right:-50%;
-  transform: translate(-0.2%,0%);
-  border-style: solid;
-  border-color: White;
-} 
-
-/****************************************/
-/****         card placement         ****/
-/****************************************/	
-
+.titleBigBox {
+	width: 80vw;
+	height: 15vw;
+	position: absolute;
+	top: 0%;
+	left: 4.5%;
+	margin-right:50%;
+	transform: translate(0%,0%);
+	background-color: white;
+}
 
 .square {
    float:left;
@@ -123,197 +91,128 @@
    padding-bottom : %; /* = width for a 1:1 aspect ratio */
    margin:1%;
    overflow:hidden;
-    color: #fff;
+   color: #fff;
 }
 
-.numbox {
- width:82.5vw;
- height: 32.5vw;
- position:absolute;
- top:25%;
- left:6%;
- margin-right:50%;
- transform: translate(0%,0%);
- background-color: white;
+.card_image {
+   height: 6vw;
 }
 
-/****************************************/
-/****         Instructions           ****/
-/****************************************/	
 
 
-.square2 {
-   float:left;
-   position: relative;
-   width: 10%;
-   padding-bottom : %; /* = width for a 1:1 aspect ratio */
-   margin:1%;
-   overflow:hidden;
-    color: #fff;
-}
-
-.numbox2 {
- width:80vw;
- height: 30vw;
- position:absolute;
- top:45%;
- left:1.25%;
- margin-right:0%;
- transform: translate(-25%,0%);
- background-color: white;
-}
-
-.instructBoxLeft {
-  width:17.5%;
-  height: 3%;
-  position:absolute;
-  top:50%;
-  left:20%;
-  margin-right:-50%;
-  transform: translate(-50%,-425%);
-  border-style: solid;
-  border-color: black;
-}
-
-.practiceBox {
-  width:90%;
-  height: 30%;
+.titleboxLeft {
+  width:15vw;
+  height: 2vw;
   position:absolute;
   top:10%;
-  left:2.5%;
+  left:6%;
   margin-right:-50%;
-  transform: translate(-0%,-0%);
+  transform: translate(0%,0%);
   border-style: solid;
-  border-color: white;
+  border-color: black;
 }
 
-.instructBoxRight {
-  width:20%;
-  height: 3%;
+.titleboxLeft1 {
+  width:15vw;
+  height: 2vw;
   position:absolute;
-  top:50%;
-  left:80%;
+  top:40%;
+  left:9%;
   margin-right:-50%;
-  transform: translate(-50%,-425%);
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.titleboxRight {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:10%;
+  left:75%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.titleboxRight1 {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:40%;
+  left:72%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
   border-style: solid;
   border-color: black;
 }
 
 
-.instructBox {
-  width:80%;
-  height: 8%;
-  position:absolute;
-  top:72.5%;
-  left:73.5%;
-  margin-right:-50%;
-  transform: translate(-50%,-425%);
-}
 
-
-.instructBoxLeft1 {
-  width:20%;
-  height: 3%;
-  position:absolute;
-  top:55%;
-  left:20%;
-  margin-right:-50%;
-  transform: translate(-60%,-425%);
-  border-style: solid;
-  border-color: black;
-}
-
-.instructBoxRight1 {
-  width:20%;
-  height: 3%;
-  position:absolute;
-  top:55%;
-  left:80%;
-  margin-right:-50%;
-  transform: translate(-40%,-425%);
-  border-style: solid;
-  border-color: black;
-}
-
-.instructBoxMiddle1 {
-  width:20%;
-  height: 3%;
-  position:absolute;
-  top:50%;
-  left:48.75%;
-  margin-right:-50%;
-  transform: translate(-40%,-425%);
-  border-style: solid;
-  border-color: black;
-}
-
-.instructButton {
-  width:10%;
-  height: 3%;
-  position:absolute;
-  top:47.5%;
-  left:95%;
-  margin-right:-50%;
-  transform: translate(0%,-425%);
-  border-style: solid;
-  border-color: black;
-}
-
-
-.centerbox-CCT {
-  width:35vw;
-  height: 30vw;
-  position:absolute;
-  top:30%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-50%);
-  border-style: solid;
-  border-color: white;
-}
-
-.centerbox-CCT2 {
-  width:50vw;
-  height: 30vw;
-  position:absolute;
-  top:30%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-50%);
-  border-style: solid;
-  border-color: white;
-}
-
-.centerbox-CCT3 {
-  width:50vw;
-  height: 30vw;
-  position:absolute;
-  top:30%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-50%);
-  border-style: solid;
-  border-color: white;
-}
-.numbox3 {
- width:80vw;
- height: 30vw;
- position:absolute;
- top:50%;
- left:15%;
- margin-right:0%;
- transform: translate(-25%,0%);
- background-color: white;
-}
-
-.buttonbox3 {
-  width:90vw;
+.titlebox {
+  width:30vw;
   height: 3vw;
   position:absolute;
-  top:45%;
+  top:10%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,0%);
+}
+
+
+.titleboxMiddle1 {
+  width:15vw;
+  height: 2vw;
+  position:absolute;
+  top:40%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,0%);
+  border-style: solid;
+  border-color: black;
+}
+
+.buttonbox {
+  width:17vw;
+  height: 2vw;
+  position:absolute;
+  top:65%;
+  left:41%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: white;
+}
+
+.buttonbox2 {
+  width:7vw;
+  height: 2vw;
+  position:absolute;
+  top:65%;
+  left:65%;
+  margin-right:-50%;
+  transform: translate(0%,0%);
+  border-style: solid;
+  border-color: white;
+}
+
+.allbuttons {
+  width:85vw;
+  height: 3vw;
+  position:absolute;
+  top:80%;
   left:0%;
   margin-right:0%;
-  transform: translate(-22.25%,0%);
+  transform: translate(-3%,0%);
   border-style: solid;
   border-color: White;
+}
+
+.select-button2 {
+  width:3.125%;
+  min-width:0vw;
+  height: 50%;
+  float: left;
+  margin: 0;
 } 
