@@ -35,7 +35,7 @@ var getBoard = function(board_type) {
 		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 			board += "<div class = square><input type='image' id = " + i +
-				" class = 'card_image select-button' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"
+				" class = 'card_image' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = instructCard(this.id)></div>"
 		}
 
 	} else {
@@ -204,8 +204,6 @@ var noCard = function() {
 	}
 }
 
-
-points = []
 var endRound = function() {
 	currID = 'endRoundButton'
 	roundOver=2
@@ -307,14 +305,12 @@ var instructCard = function(clicked_id) {
 
 var instructFunction = function() {
 	$('#jspsych-instructions-next').click(function() {
-		console.log('clear')
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
 		}
 	})
 
 	$('#jspsych-instructions-back').click(function() {
-		console.log('clear')
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
 		}
@@ -340,14 +336,12 @@ var instructFunction = function() {
 
 var instructFunction2 = function() {
 	$('#jspsych-instructions-next').click(function() {
-		console.log('clear')
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
 		}
 	})
 
 	$('#jspsych-instructions-back').click(function() {
-		console.log('clear')
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
 		}
@@ -413,6 +407,7 @@ var currID = ""
 var lossProb = ""
 var gainAmt = ""
 var lossAmt = ""
+var points = []
 var CCT_timeouts = []
 var i = ""
 var e = ""
@@ -473,14 +468,14 @@ var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = select-button id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' id = NoCardButton onclick = turnCards()>No Card</button><button type='button' id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = select-button id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' id = NoCardButton onclick = turnCards()>No Card</button><button type='button' id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
 	getBoard(2)
 
 
@@ -541,7 +536,7 @@ var instructions_block = {
 	"<div class = buttonbox><button type='button' class = select-button id = NoCardButton>No Card</button><button type='button' class = select-button class = select-button id = turnButton >STOP/Turn Over</button><button type='button' class = select-button id = collectButton  >Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
-	"<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages. Please go back if you need.</p></div>"
+	"<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages before ending the instructions.</p></div>"
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -569,23 +564,6 @@ var instruction_node = {
 	}
 }
 
-
-/*
-var practice_block = {
-	type: 'poldrack-single-stim',
-	stimulus: getRound,
-	is_html: true,
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial_id: 'stim',
-		exp_stage: 'test'
-	},
-	choices: [45],
-	timing_post_trial: 0,
-	on_finish: appendTestData,
-	response_ends_trial: true,
-};
-*/
 
 var practice_block = {
 	type: 'single-stim-button',
@@ -661,8 +639,9 @@ var start_test_block = {
 };
 
 
-var practice_instruct_block = {
-	type: 'poldrack-single-stim',
+var practice_instruct_block1 = {
+	type: 'single-stim-button',
+	button_class: 'select-button',
 	stimulus: getPractice1,
 	is_html: true,
 	data: {
@@ -670,14 +649,13 @@ var practice_instruct_block = {
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
-	choices: [45],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
 	response_ends_trial: true,
 };
 
 var practice_node1 = {
-	timeline: [practice_instruct_block],
+	timeline: [practice_instruct_block1],
 	loop_function: function(data) {
 		if (roundOver === 0) {
 			instructPoints = 0
@@ -695,7 +673,8 @@ var practice_node1 = {
 }
 
 var practice_instruct_block2 = {
-	type: 'poldrack-single-stim',
+	type: 'single-stim-button',
+	button_class: 'select-button',
 	stimulus: getPractice2,
 	is_html: true,
 	data: {
@@ -703,7 +682,6 @@ var practice_instruct_block2 = {
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
-	choices: [45],
 	timing_post_trial: 0,
 	on_finish: appendTestData,
 	response_ends_trial: true,
