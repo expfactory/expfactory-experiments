@@ -126,8 +126,6 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = deleteText(gameState, 'class = select-button onclick = endRound()')
-		gameState = deleteText(gameState, 'class = select-button onclick = collect()')
-
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
@@ -138,9 +136,6 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = deleteText(gameState, 'class = select-button onclick = noCard()')
-		gameState = deleteText(gameState, 'class = select-button onclick = collect()')
-
-
 		clickedGainCards.sort(function(a, b) {
 			return a - b
 		})
@@ -156,6 +151,8 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Current Round Total: ', roundPoints)
 		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
+		gameState = appendTextAfter(gameState, 'id = collectButton', ' class = select-button onclick = collect()')
+		gameState = deleteText(gameState, 'class = select-button onclick = endRound()')
 		gameState = deleteText(gameState, 'class = select-button onclick = noCard()')
 		
 
@@ -461,7 +458,7 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
 var gameSetup =
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' id = NoCardButton class = select-button onclick = noCard()>No Card</button><button type='button' id = turnButton class = select-button onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton  class = select-button onclick = collect()>Next Round</button></div></div>"+
+	"<div class = buttonbox><button type='button' id = NoCardButton class = select-button onclick = noCard()>No Card</button><button type='button' id = turnButton class = select-button onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
