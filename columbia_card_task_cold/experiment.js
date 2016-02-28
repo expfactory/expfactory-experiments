@@ -29,13 +29,13 @@ var buttons = ""
 if(buttonType == 2){
 	buttons = "<div class = allbuttons>"
 		for (i = 1; i < 33; i++) {
-		buttons += "<button type = 'button' class  = select-button2 id = " + i + " onclick = chooseButton(this.id)>"+i+"</button>" 
+		buttons += "<button type = 'button' class = select-button id = " + i + " onclick = chooseButton(this.id)>"+i+"</button>" 
 		}
 	return buttons
 } else {
 	buttons = "<div class = allbuttons>"
 		for (i = 1; i < 33; i++) {
-		buttons += "<button type = 'button' class  = select-button2 id = " + i + " onclick = chooseButton1(this.id)>"+i+"</button>" 
+		buttons += "<button type = 'button' class = select-button id = " + i + " onclick = chooseButton1(this.id)>"+i+"</button>" 
 		}
 	return buttons
 }
@@ -58,7 +58,6 @@ var getBoard = function(board_type) {
 		}
 	}
 	board += "</div>"
-	
 	return board
 }
 
@@ -66,6 +65,18 @@ var getText = function() {
 	return '<div class = centerbox><p class = block-text>These are your prizes from three randomly picked trials:  ' +
 		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
 		'</p></div>'
+}
+
+var turnCards = function(){
+for (i = 0; i < 33; i++) {
+		if (whichGainCards.indexOf(i) != -1) {
+			document.getElementById('' + i + '').src =
+				'/static/experiments/columbia_card_task_hot/images/chosen.png';
+		} else if (whichLossCards.indexOf(i) != -1) {
+			document.getElementById('' + i + '').src =
+				'/static/experiments/columbia_card_task_hot/images/loss.png';
+		}
+	}
 }
 
 var turnOneCard = function(whichCard){
@@ -242,7 +253,7 @@ var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> In the version of the card game you are about to play, you will not turn the cards over one by one.  Rather, you will simply choose the total number of cards you would like to turn over (from 0 to 32) and then continue to the next round.  If turning over any cards seems too risky to you can click the zero button, in which case your score for this round will automatically be zero.  This is a practice round, and it looks just like the game you will play.  Please select the number of cards you would like to turn over, given the number of loss cards and the amount that you can gain or lose if you turn over a gain or loss card, as shown below.  Please note: The computer will tell you how well you did after all 27 game rounds are over!</div></div>" +
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = button2 onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div>"+
 	getButtons()+
 	"</div>"+
 	getBoard()
@@ -250,10 +261,10 @@ var practiceSetup =
 
 
 var practiceSetup2 =
- 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 24 rounds of the game.  This is the second practice round. Please again select as many cards as you would like to, give the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
+ 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 24 rounds of the game.  This is the second practice round. Please again select as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = button2 onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div>"+
 	getButtons()+
 	"</div>"+
 	getBoard()	
@@ -299,7 +310,7 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
 var gameSetup = 
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = button2 onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = turnCards()>No Card</button><button type='button' class = select-button id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div>"+
 	getButtons(2)+
 	"</div>"+
 	getBoard()
@@ -346,21 +357,21 @@ var instructions_block = {
 	"<p><input type='image' src='/static/experiments/columbia_card_task_cold/images/chosen.png'>"+
 	'<p><strong>The Loss Card:</strong></p>'+
 	"<p><input type='image' src='/static/experiments/columbia_card_task_cold/images/loss.png'></p>"+
-	'<p>For every loss card you turn over, your score decreases by either 250,500, or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1,2, or 3 loss cards in any given round.</p>'+
+	'<p>For every loss card you turn over, your score decreases by either 250, 500, or 750 points in different rounds. Furthermore, the round immediately ends (you cannot turn over any more cards). There will be either 1,2, or 3 loss cards in any given round.</p>'+
 	'<p>The number of loss cards and the value of points that can be won or lost by turning over a gain or loss card are fixed in each round. This information will always be on display so you know what kind of round you are in.</p>'+
 	'</p></div>',
 	
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = turnButton onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction()>See Result</button></div></div>"+
 	getBoard(2),
 	
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
+	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = turnButton onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
   ],
@@ -480,7 +491,7 @@ var start_test_block = {
 		exp_id: "columbia_card_task_cold",
 		trial_id: 'test_intro'
 	},
-	text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };

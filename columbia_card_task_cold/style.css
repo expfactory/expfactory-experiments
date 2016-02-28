@@ -59,7 +59,6 @@
  left:0%;
  margin-right:0%;
  transform: translate(7%,2.5%);
- background-color: white;
 }
 
 .cct-box2 {
@@ -70,7 +69,6 @@
  left:0%;
  margin-right:0%;
  transform: translate(7%,2.5%);
- background-color: white;
 }
 
 .titleBigBox {
@@ -209,10 +207,3 @@
   border-color: White;
 }
 
-.select-button2 {
-  width:3.125%;
-  min-width:0vw;
-  height: 50%;
-  float: left;
-  margin: 0;
-} 
