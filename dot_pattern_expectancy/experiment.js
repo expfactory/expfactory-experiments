@@ -128,6 +128,14 @@ var cues = jsPsych.randomization.shuffle(['cue1.png', 'cue2.png', 'cue3.png', 'c
 var probes = jsPsych.randomization.shuffle(['probe1.png', 'probe2.png', 'probe3.png', 'probe4.png',
   'probe5.png', 'probe6.png'
 ])
+var images = []
+for (var i = 0; i < cues.length; i++) {
+  images.push(path + cues[i])
+  images.push(path + probes[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
+
 var valid_cue = cues.pop()
 var valid_probe = probes.pop()
 
@@ -140,14 +148,6 @@ var block2_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var block3_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var block4_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var blocks = [block1_list, block2_list, block3_list, block4_list]
-
-var images = []
-for (var i = 0; i < cues.length; i++) {
-  images.push(cues[i])
-  images.push(probes[i])
-}
-//preload images
-jsPsych.pluginAPI.preloadImages(images)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
