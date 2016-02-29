@@ -12,6 +12,13 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({
+    'exp_id': 'columbia_card_task_cold'
+  })
+}
+
+
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		num_cards_chosen: currID,
@@ -373,7 +380,6 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'instruction'
 	},
 	text: getInstructFeedback,
@@ -384,7 +390,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {exp_id: "columbia_card_task_cold", trial: 'instructions'},
+  data: {trial: 'instructions'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -453,7 +459,6 @@ var end_instructions = {
 	stimulus: '<div class = centerbox><p class = center-block-text><strong>End of Instructions </strong></p><p class = center-block-text>Press <strong>enter</strong> when you are ready to play the game.</p></div>',
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'end_instructions'
 	},
 	choices: [13],
@@ -464,7 +469,6 @@ var end_instructions = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'end'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -475,7 +479,6 @@ var end_block = {
 var start_practice_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'practice_intro'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Hello<strong>enter</strong> to begin.</p></div>',
@@ -486,7 +489,6 @@ var start_practice_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'test_intro'
 	},
 	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
@@ -498,7 +500,6 @@ var payout_text = {
 	type: 'poldrack-text',
 	text: getText,
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'reward'
 	},
 	cont_key: [13],
@@ -513,14 +514,13 @@ var practice_block1 = {
 	stimulus: getPractice1,
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
 	timing_post_trial: 0,
-	on_finish: appendTestData,
 	response_ends_trial: true,
 	on_finish: function() {
+		appendTestData()
 		roundOver = 0
 		roundPoints = 0
 		whichClickInRound = 0
@@ -536,14 +536,13 @@ var practice_block2 = {
 	stimulus: getPractice2,
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
 	timing_post_trial: 0,
-	on_finish: appendTestData,
 	response_ends_trial: true,
 	on_finish: function() {
+		appendTestData()
 		roundOver = 0
 		roundPoints = 0
 		whichClickInRound = 0
@@ -558,7 +557,6 @@ var test_block = {
 	button_class: 'select-button',
 	stimulus: getRound,
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'stim',
 		exp_stage: 'test'
 	},
@@ -571,7 +569,6 @@ var test_block = {
 var payoutTrial = {
 	type: 'call-function',
 	data: {
-		exp_id: "columbia_card_task_cold",
 		trial_id: 'calculate reward'
 	},
 	func: function() {

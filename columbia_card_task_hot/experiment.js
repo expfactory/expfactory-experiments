@@ -11,6 +11,12 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({
+    'exp_id': 'columbia_card_task_hot'
+  })
+}
+
 function deleteText(input, search_term) {
 	index = input.indexOf(search_term)
 	indexAfter = input.indexOf(search_term) + search_term.length
@@ -86,7 +92,9 @@ var chooseCard = function(clicked_id) {
 			for (i = 1; i < 33; i++) {
 				document.getElementById('' + i + '').disabled = true;
 			}
-			CCT_timeouts.push(setTimeout(function() {turnCards}, 2000))
+			CCT_timeouts.push(setTimeout(function() {
+				turnCards()
+			}, 2000))
 	
 
 		} else if (temp == -1) { // if you click on a gain card
@@ -425,7 +433,7 @@ var gainAmt = ""
 var lossAmt = ""
 var points = []
 var CCT_timeouts = []
-var numRounds = 27
+var numRounds =  27
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -504,7 +512,6 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial: 'instructions'
 	},
 	text: getInstructFeedback,
@@ -514,7 +521,7 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {exp_id: "columbia_card_task_hot", trial: 'instructions'},
+  data: {trial: 'instructions'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
@@ -585,7 +592,6 @@ var instruction_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'end'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -596,7 +602,6 @@ var give_total = {
 	type: 'poldrack-text',
 	text: getReward,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'reward'
 	},
 	cont_key: [13],
@@ -610,7 +615,6 @@ var give_total = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'test_intro'
 	},
 	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
@@ -628,14 +632,18 @@ var practice_block1 = {
 	stimulus: getPractice1,
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
 	timing_post_trial: 0,
-	on_finish: appendTestData,
 	response_ends_trial: true,
 	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			num_loss_cards: numLossCards,
+			gain_amount: gainAmt,
+			loss_amount: lossAmt,
+			instruct_points: instructPoints,
+		})
 		instructPoints = 0
 	}
 };
@@ -646,14 +654,18 @@ var practice_block2 = {
 	stimulus: getPractice2,
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'stim',
 		exp_stage: 'practice'
 	},
 	timing_post_trial: 0,
-	on_finish: appendTestData,
 	response_ends_trial: true,
 	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			num_loss_cards: numLossCards,
+			gain_amount: gainAmt,
+			loss_amount: lossAmt,
+			instruct_points: instructPoints,
+		})
 		instructPoints = 0
 	}
 };
@@ -664,7 +676,6 @@ var test_block = {
 	stimulus: getRound,
 	is_html: true,
 	data: {
-		exp_id: "columbia_card_task_hot",
 		trial_id: 'stim',
 		exp_stage: 'test'
 	},
