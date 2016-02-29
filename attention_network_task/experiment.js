@@ -110,14 +110,18 @@ var current_trial = 0
 var exp_stage = 'practice'
 var test_stimuli = []
 var choices = [37, 39]
+var path = '/static/experiments/attention_network_task/images/'
+var images = [path + 'right_arrow.png', path + 'left_arrow.png', path + 'no_arrow.png']
+//preload
+jsPsych.pluginAPI.preloadImages(images)
 
 for (l = 0; l < locations.length; l++) {
 	var loc = locations[l]
 	for (ci = 0; ci < cues.length; ci++) {
 		var c = cues[ci]
 		stims = [{
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -126,8 +130,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &larr; &larr; &larr; &larr; &larr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -136,8 +140,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -146,8 +150,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -156,8 +160,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -166,8 +170,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -444,7 +448,7 @@ for (i = 0; i < block.data.length; i++) {
 	block.data[i].trial_num = trial_num
 	var attention_network_task_practice_trial = {
 		type: 'poldrack-categorize',
-		stimulus: block.image[i],
+		stimulus: block.stimulus[i],
 		is_html: true,
 		key_answer: block.data[i].correct_response,
 		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
@@ -541,7 +545,7 @@ for (b = 0; b < blocks.length; b++) {
 		block.data[i].trial_num = trial_num
 		var ANT_trial = {
 			type: 'poldrack-single-stim',
-			stimulus: block.image[i],
+			stimulus: block.stimulus[i],
 			is_html: true,
 			choices: choices,
 			data: block.data[i],
