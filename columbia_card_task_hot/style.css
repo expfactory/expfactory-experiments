@@ -161,13 +161,13 @@
 }
 
 .buttonbox {
-  width:17vw;
+  width:25vw;
   height: 2vw;
   position:absolute;
   top:65%;
-  left:41%;
+  left:50%;
   margin-right:-50%;
-  transform: translate(0%,0%);
+  transform: translate(-50%,0%);
   border-style: solid;
   border-color: white;
 }
@@ -182,4 +182,36 @@
   transform: translate(0%,0%);
   border-style: solid;
   border-color: white;
+}
+
+.CCT-btn {
+  font-size:16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 2px;
+  color: white;
+  background-color:cornflowerblue;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 100%;
+  width: 30%;
+}
+
+.CCT-btn:hover {
+  border-color:#999;
+  background-color: darkblue;
+}
+
+.CCT-btn:disabled {
+  background-color: #8ea0c2;
+}
+
+#instructButton {
+  width: 100%;
 }

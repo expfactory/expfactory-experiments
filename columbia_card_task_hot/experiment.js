@@ -54,7 +54,7 @@ var getReward = function() {
 	allPoints = []
 	for(k=0; k<tempData.length; k++){
 		if(jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'endRoundButton' && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'|| jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'collectButton'  && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'){
-		allPoints.push(jsPsych.data.getDataByTrialIndex(k).round_points)
+		allPoints.push(jsPsych.data.getDataByTrialIndex(k).roundPoints)
 		}
 	}
 	tempPoints = jsPsych.randomization.repeat(allPoints, 1)
@@ -77,7 +77,7 @@ var chooseCard = function(clicked_id) {
 			roundPoints = roundPoints - lossAmt
 			lossClicked = true
 			roundOver = 2
-			document.getElementById('current_round').innerHTML = 'Current Round: ' + roundPoints;
+			document.getElementById('current_round').innerHTML = 'Current Round Points: ' + roundPoints;
 			document.getElementById(clicked_id).src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
 
@@ -86,7 +86,7 @@ var chooseCard = function(clicked_id) {
 			for (i = 1; i < 33; i++) {
 				document.getElementById('' + i + '').disabled = true;
 			}
-			setTimeout(turnCards, 2000)
+			CCT_timeouts.push(setTimeout(function() {turnCards}, 2000))
 	
 
 		} else if (temp == -1) { // if you click on a gain card
@@ -109,33 +109,34 @@ var getRound = function() {
 		clickedGainCards = [] //num
 		clickedLossCards = [] //num
 		roundParams = shuffledParamsArray.pop()
-		lossProb = roundParams[0]
+		numLossCards = roundParams[0]
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
 		shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 
 		whichLossCards = [] //this determines which are loss cards at the beginning of each round
-		for (i = 0; i < lossProb; i++) {
+		for (i = 0; i < numLossCards; i++) {
 			whichLossCards.push(shuffledCardArray.pop())
 		}
 		whichGainCards = shuffledCardArray
 		gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round Total: ', roundPoints)
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
+		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
+		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-		gameState = deleteText(gameState, 'class = select-button onclick = endRound()')
+		gameState = appendTextAfter(gameState, "endRound()", " disabled")
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
 		gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round Total: ', roundPoints)
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
+		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
+		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-		gameState = deleteText(gameState, 'class = select-button onclick = noCard()')
+		gameState = appendTextAfter(gameState, "noCard()", " disabled")
+		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
 		clickedGainCards.sort(function(a, b) {
 			return a - b
 		})
@@ -148,12 +149,12 @@ var getRound = function() {
 		gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-		gameState = appendTextAfter(gameState, 'Current Round Total: ', roundPoints)
-		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', lossProb)
+		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
+		gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-		gameState = appendTextAfter(gameState, 'id = collectButton', ' class = select-button onclick = collect()')
-		gameState = deleteText(gameState, 'class = select-button onclick = endRound()')
-		gameState = deleteText(gameState, 'class = select-button onclick = noCard()')
+		gameState = appendTextAfter2(gameState, "id = collectButton class = 'CCT-btn", " select-button' onclick = collect()", "' disabled")
+		gameState = appendTextAfter(gameState, "endRound()", " disabled")
+		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		
 
 		clickedGainCards.sort(function(a, b) {
@@ -169,8 +170,13 @@ var getRound = function() {
 	}
 }
 
-var turnCards = function(){
-for (i = 0; i < 33; i++) {
+var turnCards = function() {
+	/*These two commands are only for practice. In the rest of the experiment the whole
+	board is redrawn, so disabling buttons is taken care of by the getRound function
+	*/
+	$('#collectButton').prop('disabled', false)
+	$('#NoCardButton').prop('disabled', true)
+	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
 			document.getElementById('' + i + '').src =
 				'/static/experiments/columbia_card_task_hot/images/chosen.png';
@@ -181,9 +187,21 @@ for (i = 0; i < 33; i++) {
 	}
 }
 
-var turnOneCard = function(whichCard){
-document.getElementById(""+whichCard+"").src =
-		'/static/experiments/columbia_card_task_hot/images/chosen.png';
+var turnOneCard = function(whichCard, win) {
+	if (win === 'loss') {
+		document.getElementById("" + whichCard + "").src =
+			'/static/experiments/columbia_card_task_hot/images/loss.png';
+	} else {
+		document.getElementById("" + whichCard + "").src =
+			'/static/experiments/columbia_card_task_hot/images/chosen.png';
+	}
+}
+
+function doSetTimeout(card_i, delay, points, win) {
+	CCT_timeouts.push(setTimeout(function() {
+		turnOneCard(card_i, win);
+		document.getElementById("current_round").innerHTML = 'Current Round Points: ' + points
+	}, delay));
 }
 
 var noCard = function() {
@@ -202,6 +220,12 @@ var noCard = function() {
 }
 
 var endRound = function() {
+	/*These two commands are only for practice. In the rest of the experiment the whole
+	board is redrawn, so disabling buttons is taken care of by the getRound function
+	*/
+	$('#collectButton').prop('disabled',false)
+	$('#turnButton').prop('disabled',true)
+
 	currID = 'endRoundButton'
 	roundOver=2
 	points.push(roundPoints)
@@ -219,6 +243,9 @@ var endRound = function() {
 
 
 var collect = function() {
+	for (var i = 0; i < CCT_timeouts.length; i++) {
+			clearTimeout(CCT_timeouts[i]);
+		}
 	currID = 'collectButton'
 	whichClickInRound = whichClickInRound + 1
 }
@@ -228,7 +255,7 @@ var appendTestData = function() {
 		which_round: whichRound,
 		whichButtonWasClicked: currID,
 		num_click_in_round: whichClickInRound,
-		num_loss_cards: lossProb,
+		num_loss_cards: numLossCards,
 		gain_amount: gainAmt,
 		loss_amount: lossAmt,
 		round_points: roundPoints,
@@ -244,13 +271,13 @@ var getPractice1 = function() {
 	]
 	clickedGainCards = [] //num
 	clickedLossCards = [] //num
-	lossProb = 1
+	numLossCards = 1
 	gainAmt = 30
 	lossAmt = 250
 
 	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 	whichLossCards = [] //this determines which are loss cards at the beginning of each round
-	for (i = 0; i < lossProb; i++) {
+	for (i = 0; i < numLossCards; i++) {
 		whichLossCards.push(shuffledCardArray.pop())
 	}
 	whichGainCards = shuffledCardArray
@@ -265,13 +292,13 @@ var getPractice2 = function() {
 	]
 	clickedGainCards = [] //num
 	clickedLossCards = [] //num
-	lossProb = 3
+	numLossCards = 3
 	gainAmt = 10
 	lossAmt = 750
 
 	shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 	whichLossCards = [] //this determines which are loss cards at the beginning of each round
-	for (i = 0; i < lossProb; i++) {
+	for (i = 0; i < numLossCards; i++) {
 		whichLossCards.push(shuffledCardArray.pop())
 	}
 	whichGainCards = shuffledCardArray
@@ -282,10 +309,11 @@ var getPractice2 = function() {
 var instructCard = function(clicked_id) {
 	currID = parseInt(clicked_id)
 	document.getElementById("NoCardButton").disabled = true;
+	document.getElementById("turnButton").disabled = false;
 	appendTextAfter(gameState, 'turnButton', ' onclick = turnCards()')
 	if (whichLossCards.indexOf(currID) == -1) {
 		instructPoints = instructPoints + gainAmt
-		document.getElementById('current_round').innerHTML = 'Current Round: ' + instructPoints;
+		document.getElementById('current_round').innerHTML = 'Current Round Points: ' + instructPoints;
 		document.getElementById(clicked_id).disabled = true;
 
 		document.getElementById(clicked_id).src =
@@ -293,10 +321,10 @@ var instructCard = function(clicked_id) {
 	} else if (whichLossCards.indexOf(currID) != -1) {
 		instructPoints = instructPoints - lossAmt
 		document.getElementById(clicked_id).disabled = true;
-		document.getElementById('current_round').innerHTML = 'Current Round: ' + instructPoints;
+		document.getElementById('current_round').innerHTML = 'Current Round Points: ' + instructPoints;
 		document.getElementById(clicked_id).src =
 			'/static/experiments/columbia_card_task_hot/images/loss.png';
-		setTimeout(endRound, 1500)
+		CCT_timeouts.push(setTimeout(function() {turnCards()}, 2000))
 	}
 }
 
@@ -313,12 +341,6 @@ var instructFunction = function() {
 		}
 	})
 
-	function doSetTimeout(card_i, delay, points) {
-		CCT_timeouts.push(setTimeout(function() {
-			turnOneCard(card_i);
-			document.getElementById("current_round").innerHTML = 'Current Round: ' + points
-		}, delay));
-	}
 	var cards_to_turn = [1, 17, 18, 15, 27, 31, 8]
 	var total_points = 0
 	var points_per_card = 10
@@ -327,11 +349,28 @@ var instructFunction = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		doSetTimeout(card_i, delay, total_points)
+		doSetTimeout(card_i, delay, total_points, 'win')
 	}
+	CCT_timeouts.push(setTimeout(function() {
+		document.getElementById("instruct1").innerHTML =
+		'<strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>'
+		}, delay))
 }
 
 var instructFunction2 = function() {
+	var tempArray = [3, 5, 6, 7, 9, 10, 11, 12, 19, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26,
+		27, 28, 29, 31, 32
+	]
+	var instructTurnCards = function() {
+		document.getElementById("8").src = '/static/experiments/columbia_card_task_hot/images/loss.png';
+		document.getElementById("2").src = '/static/experiments/columbia_card_task_hot/images/loss.png';
+
+		for (i = 0; i < tempArray.length; i++) {
+			document.getElementById("" + tempArray[i] + "").src =
+				'/static/experiments/columbia_card_task_hot/images/chosen.png';
+		}
+	}
+
 	$('#jspsych-instructions-next').click(function() {
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
@@ -343,13 +382,6 @@ var instructFunction2 = function() {
 			clearTimeout(CCT_timeouts[i]);
 		}
 	})
-
-	function doSetTimeout(card_i, delay, points) {
-		CCT_timeouts.push(setTimeout(function() {
-			turnOneCard(card_i);
-			document.getElementById("current_round").innerHTML = 'Current Round: ' + points
-		}, delay));
-	}
 	var cards_to_turn = [1, 4, 30]
 	var total_points = 0
 	var points_per_card = 30
@@ -358,15 +390,11 @@ var instructFunction2 = function() {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		total_points += points_per_card
-		doSetTimeout(card_i, delay, total_points)
+		doSetTimeout(card_i, delay, total_points, 'win')
 	}
 	delay += 250
 	total_points -= 250
-	CCT_timeouts.push(setTimeout(function() {
-		document.getElementById("13").src =
-			'/static/experiments/columbia_card_task_hot/images/loss.png';
-		document.getElementById("current_round").innerHTML = 'Current Round: ' + total_points
-	}, delay));
+	doSetTimeout(13, delay, total_points, 'loss')
 	CCT_timeouts.push(setTimeout(function() {
 		document.getElementById("instruct2").innerHTML =
 			'<strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the "See Result" button to see what happens: <font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>'
@@ -375,16 +403,7 @@ var instructFunction2 = function() {
 }
 
 
-tempArray=[3,5,6,7,9,10,11,12,19,14,15,16,17,18,20,21,22,23,24,25,26,27,28,29,31,32]
-var instructTurnCards = function() {
-	document.getElementById("8").src = '/static/experiments/columbia_card_task_hot/images/loss.png';
-	document.getElementById("2").src = '/static/experiments/columbia_card_task_hot/images/loss.png';
-	
-	for(i=0;i<tempArray.length;i++){
-	document.getElementById(""+tempArray[i]+"").src =
-		'/static/experiments/columbia_card_task_hot/images/chosen.png';
-	}
-}
+
 
 var instructButton = function(clicked_id) {
 	currID = parseInt(clicked_id)
@@ -401,19 +420,17 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var currID = ""
-var lossProb = ""
+var numLossCards = ""
 var gainAmt = ""
 var lossAmt = ""
 var points = []
 var CCT_timeouts = []
-var i = ""
-var e = ""
 var numRounds = 27
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
 var roundPoints = 0
-var totPoints = 0
+var totalPoints = 0
 var roundOver = 0
 var currTrial = 0
 var instructPoints = 0
@@ -457,22 +474,22 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
 
 var gameSetup =
 	"<div class = cct-box>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' id = NoCardButton class = select-button onclick = noCard()>No Card</button><button type='button' id = turnButton class = select-button onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton>Next Round</button></div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>"+
 	getBoard()
 
 var practiceSetup =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> As you click on cards, you can see your Round Total change in the box in the upper right.  If you turn over a few cards and then want to stop and go to the next round, click the <strong>Stop/Turn Over</strong> button and then <strong>Next Round</strong>.  If turning over cards seems too risky, you can click the <strong>No Card</strong> button, in which case your score for the round will automatically be zero.  This is a practice round, that looks just like the game you will play.  Please select the number of cards you would turn over, given the number of loss cards and the amounts of the gain and loss cards shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' id = NoCardButton onclick = turnCards()>No Card</button><button type='button' id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
 var practiceSetup2 =
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' id = NoCardButton onclick = turnCards()>No Card</button><button type='button' id = turnButton onclick = turnCards()>STOP/Turn Over</button><button type='button' class = select-button id = collectButton  onclick = collect()>Next Round</button></div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
 	getBoard(2)
 
 
@@ -522,16 +539,16 @@ var instructions_block = {
 	
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Example 1: </strong>In the example below, you see 32 unknown cards. The display shows you that 1 of these cards is a loss card. It also tells you that turning over each gain card is worth 10 points to you, and that turning over the loss card will cost you 750 points. Let us suppose you decided to turn over 7 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = NoCardButton>No Card</button><button type='button' class = select-button class = select-button id = turnButton>STOP/Turn Over</button><button type='button' class = select-button id = collectButton>Next Round</button></div>"+
-	"<div class = buttonbox2><button type='button' id = instructButton onclick= instructFunction()>See Result</button></div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
+	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div></div>"+
 	getBoard(2),
 	
 	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Example 2: </strong>In the example below, you see 32 unknown cards. The display shows you that 3 of these cards is a loss card. It also tells you that turning over each gain card is worth 30 points to you, and that turning over the loss card will cost you 250 points. Let us suppose you decided to turn over 10 cards and then decided to stop. Please click the 'See Result' button to see what happens:</div></div>"+
 	"<div class = cct-box2>"+
-	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Total: </div></div>"+
-	"<div class = buttonbox><button type='button' class = select-button id = NoCardButton>No Card</button><button type='button' class = select-button class = select-button id = turnButton >STOP/Turn Over</button><button type='button' class = select-button id = collectButton  >Next Round</button></div>"+
-	"<div class = buttonbox2><button type='button' id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
+	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
+	"<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>"+
+	"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
 	"<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages before ending the instructions.</p></div>"
   ],
@@ -562,38 +579,7 @@ var instruction_node = {
 }
 
 
-var practice_block = {
-	type: 'single-stim-button',
-	button_class: 'select-button',
-	stimulus: getRound,
-	is_html: true,
-	data: {
-		exp_id: "columbia_card_task_hot",
-		trial_id: 'stim',
-		exp_stage: 'test'
-	},
-	timing_post_trial: 0,
-	on_finish: appendTestData,
-	response_ends_trial: true,
-};
 
-
-var practice_node = {
-	timeline: [practice_block],
-	loop_function: function(data) {
-		if (currID == 'collectButton') {
-			roundOver = 0
-			roundPoints = 0
-			whichClickInRound = 0
-			currTrial = 0
-			whichRound = whichRound + 1
-			lossClicked = false
-			return false
-		} else {
-			return true
-		}
-	}
-}
 
 
 var end_block = {
@@ -636,7 +622,7 @@ var start_test_block = {
 };
 
 
-var practice_instruct_block1 = {
+var practice_block1 = {
 	type: 'single-stim-button',
 	button_class: 'select-button',
 	stimulus: getPractice1,
@@ -649,27 +635,12 @@ var practice_instruct_block1 = {
 	timing_post_trial: 0,
 	on_finish: appendTestData,
 	response_ends_trial: true,
+	on_finish: function() {
+		instructPoints = 0
+	}
 };
 
-var practice_node1 = {
-	timeline: [practice_instruct_block1],
-	loop_function: function(data) {
-		if (roundOver === 0) {
-			instructPoints = 0
-			roundOver = 0
-			roundPoints = 0
-			whichClickInRound = 0
-			currTrial = 0
-			whichRound = whichRound + 1
-			lossClicked = false
-			return false
-		} else if (roundOver == 1) {
-			return true
-		}
-	}
-}
-
-var practice_instruct_block2 = {
+var practice_block2 = {
 	type: 'single-stim-button',
 	button_class: 'select-button',
 	stimulus: getPractice2,
@@ -682,37 +653,54 @@ var practice_instruct_block2 = {
 	timing_post_trial: 0,
 	on_finish: appendTestData,
 	response_ends_trial: true,
+	on_finish: function() {
+		instructPoints = 0
+	}
 };
 
-var practice_node2 = {
-	timeline: [practice_instruct_block2],
+var test_block = {
+	type: 'single-stim-button',
+	button_class: 'select-button',
+	stimulus: getRound,
+	is_html: true,
+	data: {
+		exp_id: "columbia_card_task_hot",
+		trial_id: 'stim',
+		exp_stage: 'test'
+	},
+	timing_post_trial: 0,
+	on_finish: appendTestData,
+	response_ends_trial: true,
+};
+
+
+var test_node = {
+	timeline: [test_block],
 	loop_function: function(data) {
-		if (roundOver === 0) {
+		if (currID == 'collectButton') {
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
 			currTrial = 0
-			whichRound = 1
+			whichRound = whichRound + 1
 			lossClicked = false
 			return false
-		} else if (roundOver == 1) {
+		} else {
 			return true
 		}
 	}
 }
-
-
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
 //columbia_card_task_hot_experiment.push(test_img_block);
 
 columbia_card_task_hot_experiment.push(instruction_node);
-columbia_card_task_hot_experiment.push(practice_node1);
-columbia_card_task_hot_experiment.push(practice_node2);
+columbia_card_task_hot_experiment.push(practice_block1);
+columbia_card_task_hot_experiment.push(practice_block2);
 
 columbia_card_task_hot_experiment.push(start_test_block);
 for (i = 0; i < numRounds; i++) {
-	columbia_card_task_hot_experiment.push(practice_node);
+	columbia_card_task_hot_experiment.push(test_node);
 }
 columbia_card_task_hot_experiment.push(give_total);
 columbia_card_task_hot_experiment.push(end_block);

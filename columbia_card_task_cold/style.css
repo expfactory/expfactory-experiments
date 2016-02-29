@@ -47,7 +47,7 @@
  top:100%;
  left:50%;
  margin-right:50%;
- transform: translate(-48%,0%); //-47
+ transform: translate(-48%,0%); 
  background-color: white;
 }
 
@@ -172,25 +172,13 @@
 }
 
 .buttonbox {
-  width:17vw;
+  width:10vw;
   height: 2vw;
   position:absolute;
-  top:65%;
-  left:41%;
+  top:58%;
+  left:50%;
   margin-right:-50%;
-  transform: translate(0%,0%);
-  border-style: solid;
-  border-color: white;
-}
-
-.buttonbox2 {
-  width:7vw;
-  height: 2vw;
-  position:absolute;
-  top:65%;
-  left:65%;
-  margin-right:-50%;
-  transform: translate(0%,0%);
+  transform: translate(-50%,0%);
   border-style: solid;
   border-color: white;
 }
@@ -199,7 +187,7 @@
   width:85vw;
   height: 3vw;
   position:absolute;
-  top:80%;
+  top:76%;
   left:0%;
   margin-right:0%;
   transform: translate(-3%,0%);
@@ -207,3 +195,35 @@
   border-color: White;
 }
 
+.CCT-btn {
+  font-size:16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0px 0px 0px 0px;
+  color: white;
+  background-color:cornflowerblue;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.CCT-btn:hover {
+  border-color:#999;
+  background-color: darkblue;
+}
+
+.chooseButton {
+  width: 2.3vw;
+  height: 3vw;
+  margin: 0px 2px;
+}
+
+.CCT-btn:disabled {
+  background-color: #8ea0c2;
+}
