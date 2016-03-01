@@ -100,6 +100,7 @@ var correct_responses = jsPsych.randomization.repeat([
   ["left arrow", 37],
   ["right arrow", 39]
 ], 1)
+var choices = [37, 39]
 var current_trial = 0
 var gap = Math.floor(Math.random() * 2000) + 1000
 var test_stimuli = [{
@@ -254,7 +255,7 @@ var practice_block = {
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [37, 39],
+  choices: choices,
   timing_response: 1500,
   timing_stim: 1500,
   timing_feedback_duration: 1000,
@@ -272,7 +273,7 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [37, 39],
+  choices: choices,
   timing_response: 1500,
   timing_post_trial: post_trial_gap,
   on_finish: appendData

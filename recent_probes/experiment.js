@@ -575,9 +575,9 @@ var practice_probe_block = {
 	correct_text: '<div class = bottombox><div style="color:green"; style="color:green"; class = center-text>Correct!</div></div>',
 	incorrect_text: '<div class = bottombox><div style="color:red"; style="color:red"; class = center-text>Incorrect</div></div>',
 	timeout_message: '<div class = bottombox><div class = center-text>no response detected</div></div>',
-	timing_stim: [2000],
-	timing_response: [2000],
-	timing_feedback_duration: [750],
+	timing_stim: 2000,
+	timing_response: 2000,
+	timing_feedback_duration: 750,
 	is_html: true,
 	on_finish: appendPracticeProbeData,
 };
