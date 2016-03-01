@@ -230,16 +230,17 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: practice_trials.image[i],
 		is_html: true,
 		key_answer: practice_response_array[i],
-		correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
-		incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
-		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster!</div></div>',
+		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
+		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster</div></div>',
 		choices: [70, 72],
 		data: practice_trials.data[i],
 		timing_feedback_duration: 1000,
 		show_stim_with_feedback: false,
+		timing_response: 1500,
 		timing_post_trial: 500,
 		on_finish: function() {
-			jsPsych.addDataToLastTrial({
+			jsPsych.data.addDataToLastTrial({
 				exp_stage: "practice"
 			})
 		}
@@ -257,16 +258,17 @@ for (i = 0; i < exp_len; i++) {
 		stimulus: test_trials.image[i],
 		is_html: true,
 		key_answer: test_response_array[i],
-		correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
-		incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
+		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster!</div></div>',
 		choices: [70, 72],
 		data: test_trials.data[i],
 		timing_feedback_duration: 1000,
+		timing_response: 1500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 500,
 		on_finish: function() {
-			jsPsych.addDataToLastTrial({
+			jsPsych.data.addDataToLastTrial({
 				exp_stage: "test"
 			})
 		}
