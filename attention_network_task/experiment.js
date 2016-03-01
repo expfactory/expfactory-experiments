@@ -77,7 +77,7 @@ var getInstructFeedback = function() {
 
 var post_trial_gap = function() {
 	var curr_trial = jsPsych.progress().current_trial_global
-	return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
+	return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].block_duration
 }
 
 var get_RT = function() {
@@ -319,7 +319,6 @@ var fixation = {
 	choices: 'none',
 	data: {
 		trial_id: 'fixation',
-		duration: 400
 	},
 	timing_post_trial: 0,
 	timing_stim: 400,
@@ -338,7 +337,6 @@ var no_cue = {
 	choices: 'none',
 	data: {
 		trial_id: 'nocue',
-		duration: 100
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -356,8 +354,7 @@ var center_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'centercue',
-		duration: 100
+		trial_id: 'centercue'
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -376,8 +373,7 @@ var double_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'doublecue',
-		duration: 100
+		trial_id: 'doublecue'
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -408,8 +404,7 @@ for (i = 0; i < block.data.length; i++) {
 		data: {
 
 			trial_id: 'fixation',
-			exp_stage: 'practice',
-			duration: 100
+			exp_stage: 'practice'
 		},
 		timing_post_trial: 0,
 		timing_stim: first_fixation_gap,
@@ -433,8 +428,7 @@ for (i = 0; i < block.data.length; i++) {
 			data: {
 
 				trial_id: 'spatialcue',
-				exp_stage: 'practice',
-				duration: 100
+				exp_stage: 'practice'
 			},
 			timing_post_trial: 0,
 			timing_stim: 100,
@@ -477,8 +471,7 @@ for (i = 0; i < block.data.length; i++) {
 		data: {
 
 			trial_id: 'fixation',
-			exp_stage: 'practice',
-			duration: 100
+			exp_stage: 'practice'
 		},
 		timing_post_trial: 0,
 		timing_stim: post_trial_gap,
@@ -505,8 +498,7 @@ for (b = 0; b < blocks.length; b++) {
 			data: {
 
 				trial_id: "fixation",
-				exp_stage: 'test',
-				duration: first_fixation_gap
+				exp_stage: 'test'
 			},
 			timing_post_trial: 0,
 			timing_stim: first_fixation_gap,
@@ -530,8 +522,7 @@ for (b = 0; b < blocks.length; b++) {
 				data: {
 
 					trial_id: "spatialcue",
-					exp_stage: 'test',
-					duration: 100
+					exp_stage: 'test'
 				},
 				timing_post_trial: 0,
 				timing_stim: 100,

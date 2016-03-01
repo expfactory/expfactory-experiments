@@ -59,7 +59,7 @@ var n_large_steps = 50
 var n_small_steps = 50
 var p = 0.5 // The probability of a correct response for the staircase
 var fatigue_start = 0
-var timelimit = 1 //time for fatigue block
+var timelimit = 45 //time for fatigue block
 var elapsed = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
