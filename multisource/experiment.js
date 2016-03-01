@@ -29,6 +29,12 @@ var getInstructFeedback = function() {
     '</p></div>'
 }
 
+function addID() {
+  jsPsych.data.addDataToLastTrial({
+    'exp_id': 'multisource'
+  })
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -47,7 +53,6 @@ var practice_control_stimulus = [{
   data: {
     correct_response: 49,
     trial_id: "large_middle",
-    exp_id: 'multisource',
     condition: "practice_control",
     exp_stage: "practice"
   }
@@ -56,7 +61,6 @@ var practice_control_stimulus = [{
   data: {
     correct_response: 50,
     trial_id: "large_right",
-    exp_id: 'multisource',
     condition: "practice_control",
     exp_stage: "practice"
   }
@@ -65,7 +69,6 @@ var practice_control_stimulus = [{
   data: {
     correct_response: 51,
     trial_id: "small_middle",
-    exp_id: 'multisource',
     condition: "practice_control",
     exp_stage: "practice"
   }
@@ -75,7 +78,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -84,7 +86,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -93,7 +94,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -102,7 +102,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -111,7 +110,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -120,7 +118,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -129,7 +126,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -138,7 +134,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -147,7 +142,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -156,7 +150,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -165,7 +158,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -174,7 +166,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -183,7 +174,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -192,7 +182,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -201,7 +190,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -210,7 +198,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -219,7 +206,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -228,7 +214,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -237,7 +222,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -246,7 +230,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -255,7 +238,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -264,7 +246,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -273,7 +254,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -282,7 +262,6 @@ var practice_interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "practice_interference",
       exp_stage: "practice"
     }
@@ -295,7 +274,6 @@ var control_stimulus = [{
   data: {
     correct_response: 49,
     trial_id: "large_middle",
-    exp_id: 'multisource',
     condition: "control",
     exp_stage: "test"
   }
@@ -304,7 +282,6 @@ var control_stimulus = [{
   data: {
     correct_response: 50,
     trial_id: "large_right",
-    exp_id: 'multisource',
     condition: "control",
     exp_stage: "test"
   }
@@ -313,7 +290,6 @@ var control_stimulus = [{
   data: {
     correct_response: 51,
     trial_id: "small_middle",
-    exp_id: 'multisource',
     condition: "control",
     exp_stage: "test"
   }
@@ -323,7 +299,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -332,7 +307,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -341,7 +315,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -350,7 +323,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -359,7 +331,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -368,7 +339,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -377,7 +347,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -386,7 +355,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 49,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -395,7 +363,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -404,7 +371,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -413,7 +379,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -422,7 +387,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -431,7 +395,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -440,7 +403,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "large_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -449,7 +411,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -458,7 +419,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 50,
       trial_id: "small_right",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -467,7 +427,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -476,7 +435,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -485,7 +443,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -494,7 +451,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -503,7 +459,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -512,7 +467,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "large_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -521,7 +475,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 511,
       trial_id: "small_left",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
@@ -530,7 +483,6 @@ var interference_stimulus = [{
     data: {
       correct_response: 51,
       trial_id: "small_middle",
-      exp_id: 'multisource',
       condition: "interference",
       exp_stage: "test"
     }
