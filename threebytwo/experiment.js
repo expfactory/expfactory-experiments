@@ -243,7 +243,7 @@ var response_keys = jsPsych.randomization.repeat([{
   key_name: 'Z'
 }], 1, true)
 var choices = response_keys.key
-var practice_length = 100
+var practice_length = 60
 var test_length = 340
 
 //set up block stim. correct_responses indexed by [block][stim][type]
@@ -467,11 +467,11 @@ var practice_block = {
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
+  correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
+  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div><div class = promptbox>' +
+  timeout_message: '<div class = centerbox><div class = center-text>Too Slow</div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
   choices: choices,
   data: {
@@ -506,7 +506,7 @@ var test_block = {
 
 var gap_block = {
   type: 'poldrack-single-stim',
-  stimulus: '',
+  stimulus: ' ',
   is_html: true,
   choices: 'none',
   data: {
