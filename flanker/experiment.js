@@ -135,7 +135,8 @@ var feedback_instruct_block = {
 var instruction_trials = []	   
 var instructions_block = {
   type: 'poldrack-instructions',
-  pages: ["<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of f's and h's. For instance, you might see 'fffff' or 'hhfhh'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'ffhff' you would press the 'h' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"],
+  pages: ["<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of f's and h's. For instance, you might see 'fffff' or 'hhfhh'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'ffhff' you would press the 'h' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>",
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 6.5 minutes</p></div>'],
   allow_keys: false,
   data: {exp_id: "flanker", trial_id: "instruction"},
   show_clickable_nav: true,

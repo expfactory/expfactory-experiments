@@ -114,7 +114,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. One of the amounts will be available now and the other will be available in the future. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
-  ],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 5 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true
 };

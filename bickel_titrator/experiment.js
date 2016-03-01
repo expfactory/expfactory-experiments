@@ -147,7 +147,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
-  ],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>'],
   allow_keys: false,
   data: {exp_id: 'bickel_titrator', trial_id: 'instructions'},
   show_clickable_nav: true,

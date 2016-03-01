@@ -106,7 +106,7 @@ var instructions_block = {
   pages: [
 	'<div class = centerbox><p class = block-text>In this task, on each trial you will see a letter presented for a short time, followed by the presentation of another letter. For instance you may see "A", which would then disappear to be replaced by "F".</p><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> letter. If the first letter was an "A" <strong>AND</strong> the second letter was an "X", press the ' + possible_responses[0][0] + '. Otherwise press the ' + possible_responses[1][0] + '.</p></div>',
 	'<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key after you see "A" followed by an "X", and the down arrow key for all other combinations.</p></div>'
-	],
+	'<div class = centerbox><p class = block-text>This experiment will last around 20 minutes</p></div>'],
   allow_keys: false,
   data: {exp_id: "ax_cpt", trial_id: "instructions"},
   show_clickable_nav: true,

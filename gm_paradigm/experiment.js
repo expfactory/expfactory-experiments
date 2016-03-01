@@ -644,7 +644,8 @@ var instructions_block = {
 	'<div class =centerbox><p class = center-block-text>Your goal for the first phase is to try to maximize your earnings by choosing to press the space bar or not based upon the presentation of 8 different colored squares.  Each of the eight colors will be rewarded according to one of the following four reward schedules:</p><p class =block-text>'+ 
 	'<ul list-text><li> 1) <strong> Press space bar to gain 25 cents:</strong> Press nothing to gain 0 cents. </li><li> 2) <strong> Press space bar to lose 0 cents: </strong>Press nothing to lose 25 cents.</li><li> 3)<strong> Press nothing to gain 25 cents: </strong>Press space bar to gain 0 cents. </li><li>4) <strong> Press nothing to lose 0 cents: </strong> Press space bar to lose 25 cents</li></ul></p>'+
 	'<p class = block-text>We will go over each of these rules.</div>',
-  ],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 45 minutes</p></div>',
+  	],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 0,

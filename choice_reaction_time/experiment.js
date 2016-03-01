@@ -125,7 +125,8 @@ var feedback_instruct_block = {
 var instruction_trials = []	 
 var instructions_block = {
   type: 'poldrack-instructions',
-  pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>'],
+  pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the "M" key and to the other by pressing the "Z" key. </p></div>',
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>'],
   allow_keys: false,
   data: {exp_id: 'choice_reaction_time', trial_id: 'instructions'},
   show_clickable_nav: true,

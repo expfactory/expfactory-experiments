@@ -164,7 +164,7 @@ var instructions_block = {
   data: {exp_id: "digit_span", trial_id: "instruction"},
   pages: [
   '<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred.</p><p class = block-text></p><p class = block-text>If you correctly remember all of the numbers then the next list of numbers will be one number longer. If you make a mistake then the next list of numbers will be one number shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions.</p></div>'
-  ],
+  '<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

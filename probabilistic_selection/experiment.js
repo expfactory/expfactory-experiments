@@ -224,7 +224,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During each trial of the first phase, you will be presented with one of three pairs of abstract shapes (6 total).  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>In the second phase of this task, you must also choose between pairs of shapes.  During the second phase, one of the pairs from the first phase will always be used as a reference image.  The reference pair will be separated, and will be individually presented alongside one of the remaining 4 abstract shapes not considered as a reference  </p><p class = block-text> You must choose between the new pairings of shapes by pressing either the <strong>left</strong> or <strong> right arrow key</strong> </p></div>',
 	'<div class = centerbox><p class = block-text>You will get feedback during the first phase, but not during the second.</p></div>',
-	],
+	'<div class = centerbox><p class = block-text>This experiment will last around 15 minutes</p></div>'],
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000

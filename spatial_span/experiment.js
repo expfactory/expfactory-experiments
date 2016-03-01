@@ -163,8 +163,8 @@ var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-  '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>'
-  ],
+  '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you.</p><p class = block-text></p><p class = block-text>If you correctly remember the whole sequence, the next sequence will be one "square" longer. If you make a mistake then the next sequence will be one "square" shorter.</p><p class = block-text>After three errors, the test will end. Trials will start after you end instructions. </p></div>',
+  '<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

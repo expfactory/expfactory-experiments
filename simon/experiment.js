@@ -121,7 +121,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a red box, press the ' + correct_responses[0][0] + '. If you see a blue box, press the ' + correct_responses[1][0] + '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
-	],
+	'<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

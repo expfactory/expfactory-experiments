@@ -250,7 +250,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages:  [
 	'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your memory set.  You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay and then you will be presented with a  single letter. Respond with the <strong> Left</strong> arrow key if it was in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
-  ],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

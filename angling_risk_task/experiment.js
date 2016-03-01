@@ -397,7 +397,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>The weather will also differ between tournaments. When the weather is sunny you will be able to see how many fish are in the lake. There will also be counters below the lake that tell you exactly how many red and blue fish are still in the lake.</p><p class = block-text>When the weather is cloudy, the lake is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in "Catch N Release", the number of fish in the lake stay the same after each "Go Fish". If you are in "Catch N Keep", the fish come out of the lake.</p></div>',
 	'<div class = centerbox><p class = block-text>You will play one tournament with each combination of weather (sunny or cloudy) and release (release or keep) rules. Each tournament is independent. The money you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best!</p></div>',
 	'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>',
-  ],
+ 	'<div class = centerbox><p class = block-text>This experiment will last around 45 minutes</p></div>' ],
   allow_keys: false,
   data: {trial_id: "instructions"},
   show_clickable_nav: true,
