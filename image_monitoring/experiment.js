@@ -38,7 +38,7 @@ var get_correct_key = function() {
 
 var update_count = function() {
 	if (practice_count < practice_trials.length) {
-		var stim = practice_trials[practice_count].data.trial_id
+		var stim = practice_trials[practice_count].data.stim_color
 		if (stim == 'red') {
 			red_count += 1
 		} else if (stim == 'green') {
@@ -62,8 +62,9 @@ var update_count = function() {
 		practice_count += 1
 	}
 }
+
 var reset_count = function(data) {
-	var stim = data.trial_id
+	var stim = data.stim_color
 	var key = data.key_press
 	if (stim == 'red' && key != -1) {
 		red_count = 0
