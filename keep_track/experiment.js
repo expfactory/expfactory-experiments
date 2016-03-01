@@ -159,6 +159,7 @@ var instructions_block = {
 		category_instructions +
 		'</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',
 		'<div class = centerbox><p class = block-text>To summarize, a trial will start by presenting you with 3-5 target categories (e.g. "colors, animals, relatives"). You will then see a sequence of words from all six categories, one after the other.</p><p class = block-text>For instance, a trial may end with: "... dog"... "aunt"... "China"... "red"... "titanium"... "bird". You have to remember the last word in each of the target categories, which you will write down at the end of the trial.</p><p class = block-text>For the example sequence with the previously mentioned targets, you  would respond "red, aunt, bird" as those were the last colors, relatives, and animals, respectively. The order that you write the categories down does not matter.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 6 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

@@ -105,7 +105,8 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment, we are testing how fast you can respond. On each trial press the spacebar as quickly as possible <strong>after</strong> you see the large "X".</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment, we are testing how fast you can respond. On each trial press the spacebar as quickly as possible <strong>after</strong> you see the large "X".</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 3.5 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

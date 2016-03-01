@@ -211,7 +211,8 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key only after seeing the target pair. The target pair is shown below (for the last time). Memorize it!</p><p class = block-text>Answer as quickly and accurately as possible. You will start practice after you end the instructions.</p><br><p class = center-block-text><img src = "/static/experiments/dot_pattern_expectancy/images/' +
     valid_cue +
     '" ></img>&nbsp&nbsp&nbsp...followed by...&nbsp&nbsp&nbsp<img src = "/static/experiments/dot_pattern_expectancy/images/' +
-    valid_probe + '" ></img></p></div>'
+    valid_probe + '" ></img></p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 15 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

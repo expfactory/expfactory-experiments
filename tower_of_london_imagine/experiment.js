@@ -200,7 +200,8 @@ var instructions_block = {
     '<div class = tol_bottombox><p class = block-text>Imagine that the balls in the target picture are fixed in place, but the balls in the reference picture are movable. You have to move them to make the reference picture look like the target picture. It is considered one move when you take a ball from one peg and place it on another. You can only move one ball at a time. Sometime you will have to move a ball to a different peg in order to get to the ball below it. During this task it is important that you remember, you are imagining the <strong>fewest possible moves</strong> that are required to make the reference picture look like the target picture. You will have 20 seconds to make your decision.</p></div>',
     '<div class = tol_topbox><p class = block-text>Here is an example. Notice that the balls in the reference picture are in a different arrangement than in the target picture. If we move the red ball from the first peg in the reference picture to the third peg then it would look like the target picture.</p></div>' +
     ref_board + makeBoard('peg_board', example_problem2) +
-    '<div class = tol_bottombox><p class = block-text>We only moved one ball one time, so the answer is one move. During the test you will enter your answer using buttons on the screen.</p></div>'
+    '<div class = tol_bottombox><p class = block-text>We only moved one ball one time, so the answer is one move. During the test you will enter your answer using buttons on the screen.</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

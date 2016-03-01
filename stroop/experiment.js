@@ -246,7 +246,8 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment you will see "color" words (RED, BLUE, GREEN) appear one at a time. The "ink" of the words also will be colored. For example, you may see: <span class = "large" style = "color:blue">RED</span>, <span class = "large" style = "color:blue">BLUE</span> or <span class = "large" style = "color:red">BLUE</span>.</p><p class = block-text>Your task is to press the button corresponding to the <strong> ink color </strong> of the word. It is important that you respond as quickly and accurately as possible. The response keys are as follows:</p>' +
-		response_keys + '</div>'
+		response_keys + '</div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

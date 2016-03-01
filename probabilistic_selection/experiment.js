@@ -467,6 +467,7 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During the first phase, you will be presented with one of three pairs of abstract shapes.  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong> to correspond with the left or right image respectively.</p></div>',
 		'<div class = centerbox><p class = block-text>Your job is to pick the shape that is more correct.  These shapes will not always be rewarded deterministically, so try to do your best to pick the shape that is correct given the feedback for the shape.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 15 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

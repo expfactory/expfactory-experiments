@@ -246,7 +246,8 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your should try to get as many trials correct as possible. There are 18 stimuli in this experiment. On the next page are the 18 stimuli you will be responding to.</p></div>',
     instructions_grid,
-    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>'
+    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>',
+	'<div class = centerbox><p class = block-text>This experiment will last around 41 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true
