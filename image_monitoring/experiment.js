@@ -37,34 +37,34 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	var stim = practice_trials[practice_count].data.trial_id
-	if (stim == 'red') {
-		red_count += 1
-	} else if (stim == 'green') {
-		green_count += 1
-	} else if (stim == 'blue') {
-		blue_count += 1
-	}
+	if (practice_count < practice_trials.length) {
+		var stim = practice_trials[practice_count].data.trial_id
+		if (stim == 'red') {
+			red_count += 1
+		} else if (stim == 'green') {
+			green_count += 1
+		} else if (stim == 'blue') {
+			blue_count += 1
+		}
 
-	if (stim == 'red' && red_count == 4) {
-		correct_key = 32
-		red_count = 0
-	} else if (stim == 'green' && green_count == 4) {
-		correct_key = 32
-		green_count = 0
-	} else if (stim == 'blue' && blue_count == 4) {
-		correct_key = 32
-		blue_count = 0
-	} else {
-		correct_key = 'none'
+		if (stim == 'red' && red_count == 4) {
+			correct_key = 32
+			red_count = 0
+		} else if (stim == 'green' && green_count == 4) {
+			correct_key = 32
+			green_count = 0
+		} else if (stim == 'blue' && blue_count == 4) {
+			correct_key = 32
+			blue_count = 0
+		} else {
+			correct_key = 'none'
+		}
+		practice_count += 1
 	}
-	practice_count += 1
 }
-
-var reset_count = function() {
-	var curr_trial = jsPsych.progress().current_trial_global
-	var stim = jsPsych.data.getData()[curr_trial].trial_id
-	var key = jsPsych.data.getData()[curr_trial].key_press
+var reset_count = function(data) {
+	var stim = data.trial_id
+	var key = data.key_press
 	if (stim == 'red' && key != -1) {
 		red_count = 0
 	} else if (stim == 'green' && key != -1) {
@@ -99,40 +99,40 @@ var practice_count = 0
 practice_stims = [{
 	stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 	data: {
-		trial_id: 'red',
-		condition: 'practice'
+		stim_color: 'red',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 	data: {
-		trial_id: 'green',
-		condition: 'practice'
+		stim_color: 'green',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 	data: {
-		trial_id: 'blue',
-		condition: 'practice'
+		stim_color: 'blue',
+		trial_id: 'stim'
 	}
 }]
 
 stims = [{
 	stimulus: '<div class = centerbox><div class = shape id = stim1></div></div>',
 	data: {
-		trial_id: 'red',
-		condition: 'test'
+		stim_color: 'red',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim2></div></div>',
 	data: {
-		trial_id: 'green',
-		condition: 'test'
+		stim_color: 'green',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '<div class = centerbox><div class = shape id = stim3></div></div>',
 	data: {
-		trial_id: 'blue',
-		condition: 'test'
+		stim_color: 'blue',
+		trial_id: 'stim'
 	}
 }]
 
@@ -262,7 +262,7 @@ var start_test_block = {
 	timing_post_trial: 1000
 };
 
-var update_function = {
+var update_block = {
 	type: 'call-function',
 	data: {
 		exp_id: "image_monitoring",
@@ -276,34 +276,32 @@ var update_function = {
 var image_monitoring_experiment = []
 image_monitoring_experiment.push(instruction_node);
 image_monitoring_experiment.push(start_practice_block);
-
 // set up practice
-for (i = 0; i < practice_trials.length; i++) {
-	var practice_shape_block = {
-		type: 'poldrack-categorize',
-		is_html: true,
-		timeline: practice_trials,
-		key_answer: get_correct_key,
-		data: {
-			exp_id: "image_monitoring",
-			trial_id: "stim",
-			exp_stage: "practice"
-		},
-		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-		timeout_message: ' ',
-		choices: [32],
-		timing_stim: 500,
-		timing_response: 2000,
-		timing_feedback_duration: 1000,
-		show_stim_with_feedback: false,
-		timing_post_trial: 500,
-		on_trial_start: update_count,
-		on_finish: reset_count
-	};
-	image_monitoring_experiment.push(update_function)
-	image_monitoring_experiment.push(practice_shape_block)
-}
+image_monitoring_experiment.push(update_block)
+var practice_shape_block = {
+	type: 'poldrack-categorize',
+	is_html: true,
+	timeline: practice_trials,
+	key_answer: get_correct_key,
+	correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+	incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
+	timeout_message: ' ',
+	choices: [32],
+	timing_stim: 500,
+	timing_response: 2000,
+	timing_feedback_duration: 1000,
+	show_stim_with_feedback: false,
+	response_ends_trial: false,
+	timing_post_trial: 500,
+	on_finish: function(data) {
+		update_count()
+		reset_count(data)
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: 'practice'
+		})
+	}
+};
+image_monitoring_experiment.push(practice_shape_block)
 
 // set up test
 for (b = 0; b < block_num; b++) {
@@ -312,17 +310,17 @@ for (b = 0; b < block_num; b++) {
 	var test_shape_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
-		data: {
-			exp_id: "image_monitoring",
-			trial_id: "stim",
-			exp_stage: "test"
-		},
 		timeline: block,
 		choices: [32],
 		timing_stim: 500,
 		timing_response: 2500,
 		response_ends_trial: false,
-		timing_post_trial: 0
+		timing_post_trial: 0,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+				exp_stage: 'test'
+			})
+		}
 	};
 	image_monitoring_experiment.push(test_shape_block)
 	if ($.inArray(b, [0, 2, 3]) != -1) {
