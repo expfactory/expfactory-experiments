@@ -106,10 +106,26 @@ var test_block = {
   }
 }
 
+var ask_fish_block = {
+	type: 'survey-text',
+	data: {
+		trial_id: "ask fish"
+	},
+	rows: [10],
+	questions: [
+		[
+			"<p>For this tournament, how many red fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of red fish will be randomly set between 1-200.</p>"
+		]
+	],
+}
+
 /* create experiment definition array */
 var test_task_experiment = [];
+test_task_experiment.push(ask_fish_block)
+/*
 for (var i = 0; i < experiment_len; i++) {
   test_task_experiment.push(test_block);
 }
+*/
 test_task_experiment.push(attention_node)
 test_task_experiment.push(end_block);

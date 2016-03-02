@@ -285,7 +285,6 @@ var practice_block = {
 		"<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"
 	],
 	is_html: true,
-<<<<<<< HEAD
 	choices: choices,
 	response_ends_trial: true,
 	on_finish: function(data) {
@@ -303,10 +302,6 @@ var practice_block = {
 			chosen_delay: chosen_delay,
 		})
 	}
-=======
-	choices: [80,81],
-	response_ends_trial: true,
->>>>>>> jamies_fixes
 };
 
 var start_test_block = {
@@ -324,7 +319,6 @@ var test_block = {
 	type: 'poldrack-single-stim',
 	timeline: trials,
 	is_html: true,
-<<<<<<< HEAD
 	choices: choices,
 	randomize_order: true,
 	response_ends_trial: true,
@@ -343,11 +337,6 @@ var test_block = {
 			chosen_delay: chosen_delay,
 		})
 	}
-=======
-	choices: [80,81],
-  randomize_order: true,
-  response_ends_trial: true,
->>>>>>> jamies_fixes
 };
 
 var end_block = {

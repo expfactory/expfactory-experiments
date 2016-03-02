@@ -239,7 +239,6 @@ var update_delay_block = {
 }
 
 var test_block = {
-<<<<<<< HEAD
   type: 'poldrack-single-stim',
   stimulus: getStim,
   data: {
@@ -249,14 +248,6 @@ var test_block = {
   is_html: true,
   choices: choices,
   response_ends_trial: true,
-=======
-	type: 'poldrack-single-stim',
-	stimulus: getStim,
-    data: {exp_id: 'bickel_titrator', trial_id: 'stim', exp_stage: 'test'},
-	is_html: true,
-	choices: choices,
-	response_ends_trial: true,
->>>>>>> jamies_fixes
   on_finish: function(data) {
     var choice;
     var choice_i = choices.indexOf(data.key_press)
