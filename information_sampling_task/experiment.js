@@ -13,7 +13,7 @@ var getInstructFeedback = function() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'information_sample_task'
+    'exp_id': 'information_sampling_task'
   })
 }
 
@@ -205,11 +205,10 @@ var getRewardDW = function() {
 
 var instructionFunction = function(clicked_id) {
 	currID = parseInt(clicked_id)
-	temp = color1_index.indexOf(currID)
-	if (temp != -1) {
+	if (color1_index.indexOf(currID) != -1) {
 		document.getElementById(clicked_id).src =
 			'/static/experiments/information_sampling_task/images/' + whichSmallColor1 + '.png';
-	} else if (temp == -1) {
+	} else {
 		document.getElementById(clicked_id).src =
 			'/static/experiments/information_sampling_task/images/' + whichSmallColor2 + '.png';
 
@@ -219,14 +218,18 @@ var instructionFunction = function(clicked_id) {
 var makeInstructChoice = function(clicked_id) {
 	clickedCards = numbers //set all cards as 'clicked'
 	if (clicked_id == 26) {
-		reward = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</div></div>'
+		reward = 100
 	} else if (clicked_id == 27) {
-		reward = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		reward = -100
 	}
 }
 
 var getReward = function() {
-	return reward
+	if (reward === 100) {
+		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</div></div>'
+	} else if (reward === -100) {
+		reward = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+	}
 }
 
 
@@ -238,6 +241,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var reward = 0 //reward value
 var totFWPoints = 0
 var totDWPoints = 0
 var DWPoints = 250
