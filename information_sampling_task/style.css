@@ -12,11 +12,10 @@
  width:35vw;
  height: 35vw;
  position:absolute;
- top:2.5%;
- left:32.5%;
+ top:50%;
+ left:50%;
  margin-right:50%;
- transform: translate(0%,0%);
- background-color: black;
+ transform: translate(-50%,-70%);
 }
 
 .bottomLeft {
@@ -40,13 +39,12 @@
 }
 
 .bigbox {
- width:100vw;
- height: 100vh;
+ width:100%;
+ height: 100%;
  position:absolute;
  top:0%;
  left:0%;
  margin-right:0%;
- transform: translate(-5%,-2%);
  background-color: black;
 }
 
@@ -57,16 +55,40 @@
  top:70%;
  left:50%;
  margin-right:50%;
- transform: translate(-50%,-2%);
- background-color: black;
+ transform: translate(-50%, 15%);
 }
 
-.card_image {
+.small_square {
    height: 7vw;
    width: 7vw;
 }
 
-.card_image2 {
+.big_square {
    height: 10vw;
    width: 10vw;
+}
+
+.rewardbox {
+  width: 25vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-100%);
+  background: gray;
+  background-color:rgba(0,0,0,0.8);
+}
+
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.reward-text {
+  text-align:center;
+  font-size: 24px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: white;
 }
