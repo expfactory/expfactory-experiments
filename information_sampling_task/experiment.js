@@ -435,7 +435,7 @@ var instructions_block = {
   pages: ['<div class = centerbox><p class = block-text>In this experiment, you will see small grey squares arranged in a 5 by 5 matrix.  Underneath the small grey squares squares, you will see two larger colored squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>Upon touching one of the smaller squares, the smaller square will open up to show you that it is one of the two colors from the larger squares underneath.</p><p class = block-text>Your job is to figure out which color holds the majority in the smaller squares.</p></div>',
   		  '<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want to make your choice.</p><p class = block-text>When you decide that you have enough information to determine which color holds the majority, click on the larger square whose color you think holds the majority.</p></div>',
-  		  '<div class = centerbox><p class = block-text>This experiment will last around 13 minutes</p></div>',
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 12 minutes</p></div>',
   		  ],
 
   

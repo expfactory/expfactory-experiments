@@ -247,7 +247,7 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
     '<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p></div>',
     '<div class = centerbox><p class = block-text>There will be 6 runs of 24 trials each. You will get a break between each run.</p></div>'
-  	'<div class = centerbox><p class = block-text>This experiment will last around 23 minutes</p></div>'],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

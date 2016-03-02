@@ -447,6 +447,7 @@ var round_over_block = {
 var ask_fish_block = {
 		type: 'survey-text',
 		data: {trial_id: "ask fish"},
+		rows: 100,
 		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]],
 }
 

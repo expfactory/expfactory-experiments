@@ -206,7 +206,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   data: {exp_id: 'dietary_decision', trial_id: 'instruction'},
   pages: ["<div class = centerbox><p class = 'white-text block-text'>In this task you will be rating different food items based on their tastiness and healthiness. You have to respond within 4 seconds of the food item being presented, which should be plenty of time. The whole task should not take more than 10 minutes.</p></div>",
-  		  '<div class = centerbox><p class = block-text>This experiment will last around 19 minutes</p></div>'],
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 14 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   //timing_post_trial: 1000

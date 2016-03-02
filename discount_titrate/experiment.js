@@ -167,7 +167,7 @@ var instructions_block = {
   data: {exp_id: "discount_titrate", trial_id: "instructions"},
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p></div>',
-  	'<div class = centerbox><p class = block-text>This experiment will last around 10 minutes</p></div>'],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 3 minutes</p></div>'],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -209,7 +209,8 @@ var practice_block = {
 	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "practice"},
 	stimuli: ["<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20.58<br>today</font></center></div><div id = 'option'><center><font color='green'>$25.93<br>2 weeks</font></center></div></div></div></div>"],
 	is_html: true,
-	choices: ['q', 'p']
+	choices: [80,81],
+	response_ends_trial: true,
 };
 
 var start_test_block = {
@@ -226,8 +227,9 @@ var test_block = {
 	stimuli: trials,
 	data: {exp_id: "discount_titrate", trial_id: "stim", exp_stage: "test"},
 	is_html: true,
-	choices: ['q', 'p'],
-  randomize_order: true
+	choices: [80,81],
+  randomize_order: true,
+  response_ends_trial: true,
 };
 
 var end_block = {

@@ -393,7 +393,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or lost on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
 	'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
 	'<div class = centerbox><p class = block-text>After you press "Next" we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>',
-	'<div class = centerbox><p class = block-text>This experiment will last around 26 minutes</p></div>'
+	'<div class = centerbox><p class = block-text>This experiment will last around 30 minutes</p></div>'
 	],
   allow_keys: false,
   show_clickable_nav: true,

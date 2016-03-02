@@ -141,7 +141,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   data: {exp_id: "go_nogo", trial_id: "instruction"},
   pages: ['<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p></div>',
-  		  '<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>',
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 6.5 minutes</p></div>',
   		  ],
   allow_keys: false,
   show_clickable_nav: true,
