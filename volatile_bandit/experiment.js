@@ -168,7 +168,6 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruction_trials = []
 var instructions_block = {
-<<<<<<< HEAD
 	type: 'poldrack-instructions',
 	data: {
 		exp_id: 'volatile_bandit',
@@ -180,15 +179,6 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>As you could see, each shape is associated with a certain value (between 0-100). The value of both shapes will always equal 100. So if the blue shape has a value of 30, the green shape will have a value of 70.</p><p class = block-text>When you select a shape, if you chose correctly (explained on the next slide), you will get the number of points listed on the shape.</p><p class = block-text>At the bottom of the screen is a red bar that tracks how many points you have earned. If the bar passes the grey line you will get a bonus. If it passes the yellow line you will get an even larger bonus.</p></div>',
 		'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. So if green has been correct most often for the last few trials, it is likely to be correct in the future.</p><p class = block-text>Regardless of which color you choose, the correct color for that trial will be shown after you make your response. If you selected that color, you will get the associated points. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p></div>'
 		'<div class = centerbox><p class = block-text>This experiment will last around 27 minutes</p></div>',
-=======
-  type: 'poldrack-instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>In this task you will job is to earn points by selecting one of two shapes using the arrow keys. On the next page you will see an example trial.</p></div>',
-	'<div class = centerbox><div class = stim_center id = fb_holder></div><div class = "stim_left" id = blue_stim><div class = center-text>59</div></div><div class = "stim_right" id = green_stim><div class = center-text>41</div></div></div><progress class = feedback_bar value = 42 max = "100"></progress><div class = goal_1></div><div class = goal_2></div>',
-	'<div class = centerbox><p class = block-text>As you could see, each shape is associated with a certain value (between 0-100). The value of both shapes will always equal 100. So if the blue shape has a value of 30, the green shape will have a value of 70.</p><p class = block-text>When you select a shape, if you chose correctly (explained on the next slide), you will get the number of points listed on the shape.</p><p class = block-text>At the bottom of the screen is a red bar that tracks how many points you have earned. If the bar passes the grey line you will get a bonus. If it passes the yellow line you will get an even larger bonus.</p></div>',
-	'<div class = centerbox><p class = block-text>The correct color shape on each trial is probabilistic, like a coin flip. The chance of of the correct color being blue or green can change during the experiment, but depends only on the recent outcome history. So if green has been correct most often for the last few trials, it is likely to be correct in the future.</p><p class = block-text>Regardless of which color you choose, the correct color for that trial will be shown after you make your response. If you selected that color, you will get the associated points. Each color shape can show up on either side of the screen, but the side does not affect how likely that shape is to win.</p><p class = block-text>To summarize, on each trial you will select either the blue or green shape. If you are correct, you will get the points listed on that shape added to your total. Your job is to get as many points as possible.</p></div>',	
-	'<div class = centerbox><p class = block-text>This experiment will last around 27 minutes</p></div>',
->>>>>>> jamies_fixes
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
