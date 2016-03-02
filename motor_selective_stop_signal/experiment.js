@@ -339,7 +339,7 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' +
 		prompt_text +
 		'<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
-		'<div class = centerbox><p class = block-text>This experiment will last around 23 minutes</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

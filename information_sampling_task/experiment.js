@@ -514,13 +514,14 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment, you will see small  squares arranged in a 5 by 5 matrix. Initially all the squares will be greyed out, but when you click on a box it will reveal itself to be one of two colors corresponding to two larger squares at the bottom of the screen.<p class = block-text>Your task is to decide which color you think is in the majority.</p></div>',
 		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>It is entirely up to you how many boxes you open before you make your decision.</p><p class = block-text>When you have made your decision, you should touch that larger color square at the bottom of the screen. After you end instructions you will complete a practice trial.</p></div>',
-		'<div class = centerbox><p class = block-text>This experiment will last around 13 minutes</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 12 minutes</p></div>',
 	],
 
 
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000
+
 };
 instruction_trials.push(feedback_instruct_block)
 instruction_trials.push(instructions_block)

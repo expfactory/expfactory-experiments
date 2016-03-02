@@ -207,7 +207,7 @@ var instructions_block = {
     '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
     correct_responses[1][2] +
     '</strong>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>',
-    '<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 6.5 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

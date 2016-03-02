@@ -198,7 +198,7 @@ var instructions_block = {
     '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' +
     correct_responses[1][0] +
     '</strong> key.</p><p class = block-text>You should respond as quickly and accurately as possible. You will get feedback telling you if you were correct. </p></div>',
-    '<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>'
+    '<div class = centerbox><p class = block-text>This experiment will last around 5 minutes</p></div>'
   ],
   allow_keys: false,
   data: {

@@ -531,6 +531,8 @@ var instructions_block = {
 	"<div class = buttonbox><button type='button' class = select-button id = button1 onclick = noCard()>No Card</button><button type='button' class = select-button id = button2 onclick = endRound()>STOP/Turn Over</button><button type='button' class = select-button id = button3  onclick = collect()>Next Round</button></div>"+
 	"<div class = buttonbox2><button type='button' class = instructButton onclick= instructFunction2()>See Result</button></div></div>"+
 	getBoard(2),
+	
+	'<div class = centerbox><p class = block-text>This experiment will last around 20 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

@@ -527,6 +527,7 @@ var round_over_block = {
 };
 
 var ask_fish_block = {
+<<<<<<< HEAD
 	type: 'survey-text',
 	on_finish: changeData,
 	data: {
@@ -537,6 +538,12 @@ var ask_fish_block = {
 			"<p>For this tournament, how many red fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of red fish will be randomly set between 1-200.</p>"
 		]
 	],
+=======
+		type: 'survey-text',
+		data: {trial_id: "ask fish"},
+		rows: 100,
+		questions: [["<p>For this tournament, how many fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-200.</p>"]],
+>>>>>>> jamies_fixes
 }
 
 var set_fish_block = {

@@ -208,7 +208,7 @@ var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
 		'<div class = "centerbox"><p class = "block-text">In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured some number of trials before (the number of trials is called the "delay"). The letters will be both lower and upper case. You should ignore the case (so "t" matches "T").</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occurred 2 trials ago. If you saw the sequence: g...G...v...T...b...t...b, you would respond on the last "t" and the last "b".</p><p class = block-text>On one block of trials there will be no delay. On this block you will be instructed to respond to the presentation of a specific letter on that trial. For instance, you may have to respond every time you see a "t" or "T".</p></div>',
-		'<div class = centerbox><p class = block-text>This experiment will last around 25 minutes</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 23 minutes</p></div>',
 	],
 	data: {
 		exp_id: "adaptive_n_back",

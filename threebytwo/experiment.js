@@ -350,7 +350,7 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be six different cues indicating three different tasks. Thee cues and tasks are described below:</p>' +
     task_list +
     '<p class = block-text>Practice will start after you end instructions.</p></div>',
-    '<div class = centerbox><p class = block-text>This experiment will last around 25 minutes</p></div>'
+    '<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

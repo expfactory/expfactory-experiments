@@ -229,8 +229,8 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    "<div class = centerbox><p class = 'block-text'>In this task you will be rating different food items based on their tastiness and healthiness. Respond before the food item leaves the screen. The whole task should not take more than 10 minutes.</p></div>",
-    '<div class = centerbox><p class = block-text>This experiment will last around 19 minutes</p></div>'
+    "<div class = centerbox><p class = 'block-text'>In this task you will be rating different food items based on their tastiness and healthiness. Respond before the food item leaves the screen. The whole task should not take more than 12 minutes.</p></div>",
+    '<div class = centerbox><p class = block-text>This experiment will last around 12 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

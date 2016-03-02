@@ -120,7 +120,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured either 1, 2 or 3 trials before. The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t...b, you would respond on the last "t" and the last "b".</p><p class = block-text>On one block of trials there will be no delay. On this block you will be instructed to respond to the presentation of a specific letter on that trial. For instance, you may have to respond every time you see a "t" or "T".</p></div>',
-		'<div class = centerbox><p class = block-text>This experiment will last around 17 minutes</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 16 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

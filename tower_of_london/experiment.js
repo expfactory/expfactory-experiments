@@ -320,7 +320,7 @@ var instructions_block = {
     ref_board + makeBoard('peg_board', example_problem2) +
     '<div class = tol_bottombox><p class = block-text>We would only move one ball one time, so the answer is one move.</p></div>',
     "<div class = centerbox><p class = block-text>During the test you will move the balls on your board by clicking on the pegs. When you click on a peg, the top ball will move into a box called 'your hand'. When you click on another peg, the ball in 'your hand' will move to the top of that peg.</p><p class = block-text>If you try to select a peg with no balls or try to place a ball on a full peg, nothing will happen. If you successfully make your board look like the target board, the trial will end and you will move to the next problem.</p><p class = block-text>We will start with an easy example so that you can learn the controls.</p></div>",
-    '<div class = centerbox><p class = block-text>This experiment will last around 8 minutes</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
