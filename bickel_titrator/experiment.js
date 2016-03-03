@@ -32,6 +32,47 @@ var getInstructFeedback = function() {
     '</p></div>'
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
+  }
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var getStim = function() {
   var immediate_stim;
   var delayed_stim;
@@ -153,7 +194,7 @@ var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
-  ],
+  	'<div class = centerbox><p class = block-text>This experiment will last around 3 minutes</p></div>'],
   allow_keys: false,
   data: {
     trial_id: 'instructions'
@@ -235,15 +276,16 @@ var end_block = {
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 
 //Set up experiment
 var bickel_titrator_experiment = []
 bickel_titrator_experiment.push(instruction_node);
-for (var i = 0; i < 1; i++) { //delays.length
-  for (var j = 0; j < 3; j++) { //5
+for (var i = 0; i < delays.length; i++) { 
+  for (var j = 0; j < 5; j++) { 
     bickel_titrator_experiment.push(test_block);
   }
   bickel_titrator_experiment.push(update_delay_block);

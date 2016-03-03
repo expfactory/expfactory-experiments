@@ -36,7 +36,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In the following pages you will be presented with a number of statements that describe ways in which people act and think. For each statement, please indicate how much you agree or disagree with the statement.  Be sure to indicate your agreement or disagreement for every statement.</p></div>',
+    '<div class = centerbox><p class = block-text>In the following pages you will be presented with a number of statements that describe ways in which people act and think. For each statement, please indicate how much you agree or disagree with the statement.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

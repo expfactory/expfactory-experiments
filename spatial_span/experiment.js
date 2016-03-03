@@ -180,7 +180,8 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you. Do your best to memorize the sequence, but do not write them down or use any other external tool to help you remember them.</p><p class = block-text></p><p class = block-text>Trials will start after you end instructions. </p></div>'
+		'<div class = centerbox><p class = block-text>In this test you will see a grid of squares that will flash red one at a time. You have to remember the order that the squares flashed red. At the end of each trial, enter the sequence into the grid as you saw it presented to you. Do your best to memorize the sequence, but do not write them down or use any other external tool to help you remember them.</p><p class = block-text></p><p class = block-text>Trials will start after you end instructions. </p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 7 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

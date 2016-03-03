@@ -1,12 +1,13 @@
 [
     {
-        "name": "Columbia Card Task Hot Version",
+        "name": "Columbia Card Task Hot Version Test",
         "template":"jspsych",
         "run": ["static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
              	"static/css/jspsych.css",
@@ -31,7 +32,8 @@
         "publish":"True",
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement"}
+                                        "display_element": "getDisplayElement"},
+                                        "on_trial_finish": "addID()"
                        } 
    }
 ]

@@ -27,6 +27,47 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
+  }
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -69,12 +110,15 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = 0
 
 // task specific variables
+var choices = [37, 40]
 var correct_responses = [
   ["left arrow", 37],
   ["down arrow", 40]
 ]
+var exp_stage = 'practice'
 var path = '/static/experiments/dot_pattern_expectancy/images/'
 var prefix = '<div class = centerbox><div class = img-container><img src = "'
 var postfix = '"</img></div></div>'
@@ -90,11 +134,20 @@ var valid_probe = probes.pop()
 var trial_proportions = ["AX", "AX", "AX", "AX", "AX", "AX", "AX", "AX", "AX", "AX", "AX", "BX",
   "BX", "AY", "AY", "BY"
 ]
+var practice_block = jsPsych.randomization.repeat(trial_proportions, 2)
 var block1_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var block2_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var block3_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var block4_list = jsPsych.randomization.repeat(trial_proportions, 2)
 var blocks = [block1_list, block2_list, block3_list, block4_list]
+
+var images = []
+for (var i = 0; i < cues.length; i++) {
+  images.push(cues[i])
+  images.push(probes[i])
+}
+//preload images
+jsPsych.pluginAPI.preloadImages(images)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -126,7 +179,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -149,15 +203,16 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><p class = block-text><img src = "/static/experiments/dot_pattern_expectancy/images/cue2.png" ></img>	...followed by...		<img src = "/static/experiments/dot_pattern_expectancy/images/probe2.png" ></img><br><br></p></div>',
-    '<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. For most pairs of circles you should press the <strong>down</strong> arrow key. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><p class = block-text><img src = "/static/experiments/dot_pattern_expectancy/images/' +
+    '<div class = centerbox><p class = block-text>In this task, on each trial you will see a group of blue circles presented for a short time, followed by the presentation of  group of black circles. For instance you may see:</p><br><p class = center-block-text><img src = "/static/experiments/dot_pattern_expectancy/images/cue2.png" ></img>&nbsp&nbsp&nbsp...followed by...&nbsp&nbsp&nbsp<img src = "/static/experiments/dot_pattern_expectancy/images/probe2.png" ></img></p></div>',
+    '<div class = centerbox><p class = block-text>Your job is to respond by pressing an arrow key during the presentation of the <strong>second</strong> group  of circles. One pair of circles is the <strong>target</strong> pair, and for this pair you should press the <strong>left</strong> arrow key. For any other pair of circles, you should press the <strong>down</strong> arrow key.</p><p class = block-text>After you respond you will get feedback about whether you were correct. The target pair is shown below:</p><br><p class = center-block-text><img src = "/static/experiments/dot_pattern_expectancy/images/' +
     valid_cue +
-    '" ></img>	...followed by...		<img src = "/static/experiments/dot_pattern_expectancy/images/' +
+    '" ></img>&nbsp&nbsp&nbsp...followed by...&nbsp&nbsp&nbsp<img src = "/static/experiments/dot_pattern_expectancy/images/' +
     valid_probe + '" ></img><br></br></p></div>',
-    '<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key only after seeing the target pair. The target pair is shown below (for the last time). Memorize it!</p><p class = block-text><img src = "/static/experiments/dot_pattern_expectancy/images/' +
+    '<div class = centerbox><p class = block-text>We will now start the experiment. Remember, press the left arrow key only after seeing the target pair. The target pair is shown below (for the last time). Memorize it!</p><p class = block-text>Answer as quickly and accurately as possible. You will start practice after you end the instructions.</p><br><p class = center-block-text><img src = "/static/experiments/dot_pattern_expectancy/images/' +
     valid_cue +
-    '" ></img>	...followed by...		<img src = "/static/experiments/dot_pattern_expectancy/images/' +
-    valid_probe + '" ></img><br></br></p></div>'
+    '" ></img>&nbsp&nbsp&nbsp...followed by...&nbsp&nbsp&nbsp<img src = "/static/experiments/dot_pattern_expectancy/images/' +
+    valid_probe + '" ></img></p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 15 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -205,27 +260,45 @@ var feedback_block = {
   choices: 'none',
   data: {
     trial_id: "feedback",
-    exp_stage: "test"
   },
   timing_post_trial: 0,
   timing_stim: 1000,
-  timing_response: 1000
+  timing_response: 1000,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 }
 
 var fixation_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
-  choices: [37, 40],
+  choices: choices,
   data: {
     trial_id: "fixation",
-    exp_stage: "test"
   },
   timing_post_trial: 0,
   timing_stim: 2000,
   timing_response: 2000,
-  response_ends_trial: false
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 }
+
+var start_test_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "end"
+  },
+  timing_response: 180000,
+  text: '<div class = centerbox><p class = center-block-text>Done with practice. We will now start the test.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 0,
+  on_finish: function() {
+    exp_stage = 'test'
+  }
+};
+
 
 /* define test block cues and probes*/
 var A_cue = {
@@ -235,11 +308,13 @@ var A_cue = {
   choices: 'none',
   data: {
     trial_id: "cue",
-    exp_stage: "test"
   },
   timing_stim: 500,
   timing_response: 500,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 };
 
 var other_cue = {
@@ -253,37 +328,44 @@ var other_cue = {
   },
   timing_stim: 500,
   timing_response: 500,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 };
 
 var X_probe = {
   type: 'poldrack-single-stim',
   stimulus: prefix + path + valid_probe + postfix,
   is_html: true,
-  choices: [37, 40],
+  choices: choices,
   data: {
     trial_id: "probe",
     exp_stage: "test"
   },
   timing_stim: 500,
   timing_response: 1500,
-  response_ends_trial: false,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 };
 
 var other_probe = {
   type: 'poldrack-single-stim',
   stimulus: getInvalidProbe,
   is_html: true,
-  choices: [37, 40],
+  choices: choices,
   data: {
     trial_id: "probe",
     exp_stage: "test"
   },
   timing_stim: 500,
   timing_response: 1500,
-  response_ends_trial: false,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+  }
 };
 
 /* ************************************ */
@@ -292,7 +374,42 @@ var other_probe = {
 
 var dot_pattern_expectancy_experiment = []
 dot_pattern_expectancy_experiment.push(instruction_node);
+for (i = 0; i < practice_block.length; i++) {
+  switch (practice_block[i]) {
+    case "AX":
+      cue = jQuery.extend(true, {}, A_cue)
+      probe = jQuery.extend(true, {}, X_probe)
+      cue.data.condition = "AX"
+      probe.data.condition = "AX"
+      break;
+    case "BX":
+      cue = jQuery.extend(true, {}, other_cue)
+      probe = jQuery.extend(true, {}, X_probe)
+      cue.data.condition = "BX"
+      probe.data.condition = "BX"
+      break;
+    case "AY":
+      cue = jQuery.extend(true, {}, A_cue)
+      probe = jQuery.extend(true, {}, other_probe)
+      cue.data.condition = "AY"
+      probe.data.condition = "AY"
+      break;
+    case "BY":
+      cue = jQuery.extend(true, {}, other_cue)
+      probe = jQuery.extend(true, {}, other_probe)
+      cue.data.condition = "BY"
+      probe.data.condition = "BY"
+      break;
+  }
+  dot_pattern_expectancy_experiment.push(cue)
+  dot_pattern_expectancy_experiment.push(fixation_block)
+  dot_pattern_expectancy_experiment.push(probe)
+  dot_pattern_expectancy_experiment.push(feedback_block)
+}
 
+
+
+dot_pattern_expectancy_experiment.push(start_test_block);
 for (b = 0; b < blocks.length; b++) {
   var block = blocks[b]
   for (i = 0; i < block.length; i++) {

@@ -27,6 +27,50 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. 
+	 */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
+  }
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -188,6 +232,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var response_keys = jsPsych.randomization.repeat([{
@@ -197,7 +242,8 @@ var response_keys = jsPsych.randomization.repeat([{
   key: 90,
   key_name: 'Z'
 }], 1, true)
-var practice_length = 100
+var choices = response_keys.key
+var practice_length = 60
 var test_length = 340
 
 //set up block stim. correct_responses indexed by [block][stim][type]
@@ -236,7 +282,7 @@ var last_task = 'na' //object that holds the last task, set by setStims()
 var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
-var current_trial = 0 
+var current_trial = 0
 var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
@@ -303,7 +349,8 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the left or right arrow keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
     '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be six different cues indicating three different tasks. Thee cues and tasks are described below:</p>' +
     task_list +
-    '<p class = block-text>Practice will start after you end instructions.</p></div>'
+    '<p class = block-text>Practice will start after you end instructions.</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -339,7 +386,9 @@ var end_block = {
     trial_id: "end"
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  timing_response: 180000,
+  on_finish: assessPerformance
 };
 
 var start_practice_block = {
@@ -388,7 +437,9 @@ var fixation_block = {
   timing_response: 500,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      exp_stage: exp_stage
+    })
   }
 }
 
@@ -405,7 +456,9 @@ var cue_block = {
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      exp_stage: exp_stage
+    })
     appendData()
   }
 };
@@ -415,13 +468,13 @@ var practice_block = {
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
+  correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
+  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  timeout_message: '<div class = centerbox><div class = center-text><font size = 20>Too Slow</font></div></div><div class = promptbox>' +
+  timeout_message: '<div class = centerbox><div class = center-text>Too Slow</div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  choices: response_keys.key,
+  choices: choices,
   data: {
     trial_id: 'stim',
     exp_stage: "practice"
@@ -440,7 +493,7 @@ var test_block = {
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  choices: response_keys.key,
+  choices: choices,
   data: {
     trial_id: 'stim',
     exp_stage: 'test'
@@ -454,7 +507,7 @@ var test_block = {
 
 var gap_block = {
   type: 'poldrack-single-stim',
-  stimulus: '',
+  stimulus: ' ',
   is_html: true,
   choices: 'none',
   data: {
@@ -489,6 +542,3 @@ for (var i = 0; i < stims.length; i++) {
 }
 threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(end_block)
-
-
-

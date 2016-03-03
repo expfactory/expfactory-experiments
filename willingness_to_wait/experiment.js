@@ -25,6 +25,33 @@ var changeData = function() {
   }
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].choices != 'none') {
+      rt = experiment_data[i].rt
+      trial_count += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
+
 function getDisplayElement() {
   $('<div class = display_stage_background></div>').appendTo('body')
   return $('<div class = display_stage></div>').appendTo('body')
@@ -95,6 +122,7 @@ var run_attention_checks = false
 var attention_check_thresh = 1
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
@@ -145,7 +173,8 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 
@@ -165,12 +194,9 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {
-    trial_id: 'introduction'
-  },
-  pages: [
-    '<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'
-  ],
+  pages: ['<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>',
+  		  '<div class = centerbox><p class = block-text>This experiment will last around 10 minutes</p></div>',
+  		  ],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000

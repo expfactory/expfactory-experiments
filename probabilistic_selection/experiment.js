@@ -32,6 +32,48 @@ function addID() {
 	})
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var getStim = function() {
 	stim = firstPhaseStimsComplete.image.pop()
 	curr_data = firstPhaseStimsComplete.data.pop()
@@ -108,9 +150,10 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
-
+var choices = [37, 39]
 /* SPECIFY HOW MANY TRIALS YOU WANT FOR FIRST PHASE, and SECOND PHASE.  FP=first(must be divisible by 60), SP=second(must be divisible by 22) */
 var FP_trials = 6;
 var SP_trials = 22;
@@ -424,6 +467,7 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During the first phase, you will be presented with one of three pairs of abstract shapes.  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong> to correspond with the left or right image respectively.</p></div>',
 		'<div class = centerbox><p class = block-text>Your job is to pick the shape that is more correct.  These shapes will not always be rewarded deterministically, so try to do your best to pick the shape that is correct given the feedback for the shape.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 14 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -471,7 +515,7 @@ for (i = 0; i < 6; i++) {
 		type: 'poldrack-categorize',
 		stimulus: getStim,
 		key_answer: getResponse,
-		choices: [37, 39],
+		choices: choices,
 		correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
 		incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
 		timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
@@ -549,7 +593,7 @@ var second_phase_trials = {
 	stimulus: getSecondPhaseStim,
 	is_html: true,
 	data: getData,
-	choices: [37, 39],
+	choices: choices,
 	timing_stim: [1000, -1],
 	timing_response: [1000],
 };
@@ -562,7 +606,8 @@ var end_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-	cont_key: [13]
+	cont_key: [13],
+	in_finish: assessPerformance
 };
 
 

@@ -120,7 +120,8 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
     '<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left for odd, right for even.</p></div>',
-    '<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p></div>'
+    '<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 10 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

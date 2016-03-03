@@ -21,7 +21,6 @@ var getResponseTime = function() {
     writing_start = new Date()
   }
   var timeLeft = (timelimit-elapsed)*60000
-  console.log('time remaining: ', timeLeft)
   return timeLeft
 }
 /* ************************************ */
@@ -33,7 +32,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var writing_start = 0
-var timelimit = 2
+var timelimit = 5
 var elapsed = 0
 
 /* ************************************ */
@@ -76,8 +75,9 @@ var instructions_block = {
   pages: [
     '<div class = centerbox><p class = block-text>In this task we want you to write. On the next page write for ' +
     timelimit +
-    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start. The experiment will automatically end after ' + timelimit + ' minutes.</p></div>'
-  ],
+    ' minutes in response to the prompt "What happened in the last month?".</p><p class = block-text> It is important that you write for the entire time and stay on task. After you end the instructions you will start. The experiment will automatically end after ' + timelimit + ' minutes.</p></div>',
+  	'<div class = centerbox><p class = block-text>This experiment will last around 4 minutes</p></div>',
+  	],
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -125,8 +125,6 @@ var loop_node = {
   timeline: [test_block],
   loop_function: function() {
     elapsed = (new Date() - writing_start) / 60000
-    console.log('elapsed: ', elapsed)
-    console.log('timelimit: ', timelimit)
     if (elapsed < timelimit) {
       return true;
     } else {

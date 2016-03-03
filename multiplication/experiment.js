@@ -28,11 +28,11 @@ var randomDraw = function(lst) {
 
 var getStim = function() {
   response = 0
-  num1 = Math.floor(Math.random() * 99) + 1
-  num2 = Math.floor(Math.random() * 99) + 1
+  num1 = Math.floor(Math.random() * 89) + 10
+  num2 = Math.floor(Math.random() * 89) + 10
   answer = num1 * num2
   var text = '<div class = centerbox><form style="font-size: 24px">' + num1 + ' * ' + num2 +
-    ' =  <input type ="text" id ="mathtext" style="font-size: 24px"></form><br></br><button class = "default_button submitButton" id = submit_button onclick = submit()>Submit Answer</button></div>'
+    ' =  <input type ="text" id ="mathtext" style="font-size: 24px"></form><br></br><button class = "jspsych-btn submitButton" id = submit_button onclick = submit()>Submit Answer</button></div>'
   return text
 }
 var submit = function() {
@@ -58,8 +58,9 @@ var sstep = 1000
 var n_large_steps = 50
 var n_small_steps = 50
 var p = 0.5 // The probability of a correct response for the staircase
-var fatigue_time = 45
-
+var fatigue_start = 0
+var timelimit = 45 //time for fatigue block
+var elapsed = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -84,7 +85,8 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment we are interested in how people multiply numbers. Every trial in this experiment will require you to multiply two 2-digit numbers (e.g. 37 * 86) together and enter the answer.</p><p class = block-text>While doing the multiplication you are free to use paper and pencil or do them in your head, but be consistent and do not use a calculator or your computer. That means if you decide to use paper and pencil, please use paper and pencil for the entire experiment.</p><p class = block-text>Finally, this experiment is long! To figure out how people multiple we need you to multiply many numbers and it is important that you stay engaged! The whole experiment will take about an hour.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment we are interested in how people multiply numbers. Every trial in this experiment will require you to multiply two 2-digit numbers (e.g. 37 * 86) together and enter the answer.</p><p class = block-text>While doing the multiplication you are free to use paper and pencil or do them in your head, but be consistent and do not use a calculator or your computer. That means if you decide to use paper and pencil, please use paper and pencil for the entire experiment.</p><p class = block-text>Finally, this experiment is long! To figure out how people multiple we need you to multiply many numbers and it is important that you stay engaged! The whole experiment will take about an hour.</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 60 minutes</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -220,17 +222,34 @@ var fatigue_block = {
   }
 }
 
+var fatigue_node = {
+  timeline: [fatigue_block],
+  loop_function: function() {
+    elapsed = (new Date() - fatigue_start) / 60000
+    if (elapsed < timelimit) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
+var start_clock_block = {
+	type: 'call-function',
+	func: function() {
+		fatigue_start = new Date()
+	}
+}
 
 /* create experiment definition array */
 var multiplication_experiment = []
 multiplication_experiment.push(instruction_node)
-for (var i = 0; i < 2; i++) { //n_large_steps
+for (var i = 0; i < n_large_steps; i++) { 
   multiplication_experiment.push(largeStep_block)
 }
-for (var i = 0; i < 2; i++) { //n_small_steps
+for (var i = 0; i < n_small_steps; i++) { 
   multiplication_experiment.push(smallStep_block)
 }
-for (var i = 0; i < 2; i++) { //Math.floor(180000 * fatigue_time / response_time)
-  multiplication_experiment.push(fatigue_block)
-}
+multiplication_experiment.push(start_clock_block)
+multiplication_experiment.push(fatigue_node)
+multiplication_experiment.push(end_block)

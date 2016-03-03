@@ -27,11 +27,51 @@ function addID() {
 	})
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
 }
-
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 
@@ -40,58 +80,18 @@ var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		trial_num: current_trial,
 		stim_top: [stim1, stim2, stim3],
-		stim_bottom: [stim4, stim5, stim6]
+		stim_bottom: [stim4, stim5, stim6],
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
 };
 
 //this adds the cue shown and trial number to data
 var appendCueData = function() {
 	jsPsych.data.addDataToLastTrial({
 		stim: cue,
-		trial_num: current_trial
+		trial_num: current_trial,
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
 };
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
@@ -102,103 +102,29 @@ var appendProbeData = function() {
 	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
 	var keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
 	var memorySet = ''
+	var correct_response = ''
+	var correct = false
 	if (trialCue == 'BOT') {
 		memorySet = lastSet_top
 	} else if (trialCue == 'TOP') {
 		memorySet = lastSet_bottom
 	}
-	correct = 'incorrect'
-	if ((memorySet.indexOf(probe, 0) == -1) && keypress == 39) {
-		correct = 'correct'
+	if (memorySet.indexOf(probe, 0) == -1) {
 		correct_response = 39
-	} else if ((memorySet.indexOf(probe, 0) != -1) && keypress == 37) {
-		correct = 'correct'
+	} else if (memorySet.indexOf(probe, 0) != -1) {
 		correct_response = 37
-	} 
+	}
+	if (keypress == correct_response) {
+		correct = true
+	}
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
 		probe_type: probeType,
 		trial_num: current_trial,
-		correct_response: correct_response
+		correct_response: correct_response,
+		exp_stage: exp_stage
 	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
-};
-
-//this adds the trial number to the data
-var appendFixData = function() {
-	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial
-	})
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
-};
-
-var appendFixData2 = function() {
-	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial
-	})
-	current_trial = current_trial + 1
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
 };
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
@@ -312,14 +238,16 @@ var getProbe = function() {
 		}
 	} else if (probeType == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y != lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
+				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
 		})
 		probe = newArray.pop()
 	}
-	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType + '"></img></div>'
+	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
+		'"></img></div>'
 };
 
-var getPracticeProbe = function(){
+var getPracticeProbe = function() {
 	probeType = practiceProbeTypeArray.pop()
 	var global_trial = jsPsych.progress().current_trial_global
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
@@ -340,40 +268,43 @@ var getPracticeProbe = function(){
 		}
 	} else if (probeType == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y != lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
+				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
 		})
 		probe = newArray.pop()
 	}
-	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType + '"></img></div>'
+	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
+		'"></img></div>'
 };
 
-var getResponse = function(){
-	if(cue == 'TOP'){
-		if(probe == stim4 || probe == stim5 || probe == stim6){
-		return 37
+var getResponse = function() {
+	if (cue == 'TOP') {
+		if (probe == stim4 || probe == stim5 || probe == stim6) {
+			return 37
 		} else {
-		return 39
+			return 39
 		}
-		
-	} else if(cue == 'BOT'){
-		if(probe == stim1 || probe == stim2 || probe == stim3){
-		return 37
+
+	} else if (cue == 'BOT') {
+		if (probe == stim1 || probe == stim2 || probe == stim3) {
+			return 37
 		} else {
-		return 39
+			return 39
 		}
 	}
 }
 
-var appendPracticeProbeData = function(){
-jsPsych.data.addDataToLastTrial({
-	probe_letter: probe,
-	probeType: probeType,
-	trial_num: current_trial
+var appendPracticeProbeData = function() {
+	jsPsych.data.addDataToLastTrial({
+		probe_letter: probe,
+		probeType: probeType,
+		trial_num: current_trial
 	})
 }
 
 var resetTrial = function() {
 	current_trial = 0
+	exp_stage = 'test'
 }
 
 /* ************************************ */
@@ -384,10 +315,13 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
-var num_trials = 24 // 24 num trials per run
-var num_runs = 3 //3
+var choices = [37, 39]
+var exp_stage = 'practice'
+var num_trials = 24
+var num_runs = 3 
 var experimentLength = num_trials * num_runs
 var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -404,7 +338,7 @@ var stim5 = ''
 var stim6 = ''
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
-var practiceProbeTypeArray = jsPsych.randomization.repeat(probes,1)
+var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, 1)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
@@ -412,9 +346,9 @@ var images = []
 for (var i = 0; i < stimArray.length; i++) {
 	images.push(pathSource + stimArray[i] + fileType)
 }
-images.push('TOP.png')
-images.push('BOT.png')
-//preload images
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'BOT.png')
+	//preload images
 jsPsych.pluginAPI.preloadImages(images)
 
 /* ************************************ */
@@ -446,7 +380,8 @@ var end_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -469,9 +404,10 @@ var instructions_block = {
 		trial_id: "instructions"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial, known as your training set.  You must memorize all 6 letters. </p></div>',
-		'<div class = centerbox><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>',
-		'<div class = centerbox><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p>' +
+		'<p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p></div>' +
+		'<p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 22 minutes</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -521,13 +457,17 @@ var start_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation",
-		exp_stage: "test"
+		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
 	timing_stim: 1000,
 	timing_response: 1000,
-	on_finish: appendFixData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
+	}
 }
 
 var fixation_block = {
@@ -536,29 +476,37 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation",
-		exp_stage: "test"
+		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
 	timing_stim: 3000,
 	timing_response: 3000,
-	on_finish: appendFixData
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
+	}
 }
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
 	is_html: true,
-	choices: [37, 39],
+	choices: choices,
 	data: {
-		trial_id: "ITI_fixation",
-		exp_stage: "test"
+		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	response_ends_trial: false,
 	timing_stim: 4000,
 	timing_response: 4000,
-	on_finish: appendFixData2
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage,
+			trial_num: current_trial
+		})
+		current_trial = current_trial + 1
+	}
 }
 
 var training_block = {
@@ -600,7 +548,7 @@ var probe_block = {
 		trial_id: "probe",
 		exp_stage: "test"
 	},
-	choices: [37, 39],
+	choices: choices,
 	timing_post_trial: 0,
 	timing_stim: 2000,
 	timing_response: 2000,
@@ -626,14 +574,17 @@ var practice_probe_block = {
 	type: 'poldrack-categorize',
 	stimulus: getPracticeProbe,
 	key_answer: getResponse,
-	choices: [37, 39],
-	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '<div class = bottombox><p style="color:blue"; style="color:green"; class = center-text>Correct!</p></div>',
-	incorrect_text: '<div class = bottombox><p style="color:red"; style="color:red"; class = center-text>Incorrect</p></div>',
-	timeout_message: '<div class = bottombox><p class = center-text>no response detected</p></div>',
+	choices: choices,
+	data: {
+		trial_id: "probe",
+		exp_stage: "practice"
+	},
+	correct_text: '<div class = bottombox><p style="color:green"; class = center-text>Correct!</p></div>',
+	incorrect_text: '<div class = bottombox><p style="color:red"; class = center-text>Incorrect</p></div>',
+	timeout_message: '<div class = bottombox><p class = center-text>No response detected</p></div>',
 	timing_stim: [2000],
 	timing_response: [2000],
-	timing_feedback_duration: [750],
+	timing_feedback_duration: 750,
 	is_html: true,
 	on_finish: appendPracticeProbeData,
 };
@@ -641,7 +592,7 @@ var practice_probe_block = {
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(instruction_node);
-for(i=0;i<4;i++){
+for (i = 0; i < 4; i++) {
 	directed_forgetting_experiment.push(start_fixation_block);
 	directed_forgetting_experiment.push(training_block);
 	directed_forgetting_experiment.push(cue_block);
@@ -652,9 +603,9 @@ for(i=0;i<4;i++){
 
 for (r = 0; r < num_runs; r++) {
 	if (r === 0) {
-		recent_probes_experiment.push(intro_test_block)
+		directed_forgetting_experiment.push(intro_test_block)
 	} else {
-		recent_probes_experiment.push(start_test_block);
+		directed_forgetting_experiment.push(start_test_block);
 	}
 	for (i = 0; i < num_trials; i++) {
 		directed_forgetting_experiment.push(start_fixation_block);

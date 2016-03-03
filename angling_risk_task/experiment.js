@@ -30,6 +30,30 @@ function addID() {
 	})
 }
 
+function assessPerformance() {
+	var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	for (var i = 0; i < experiment_data.length; i++) {
+		rt = experiment_data[i].rt
+		trial_count += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+	credit_var = (avg_rt > 200)
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
@@ -332,6 +356,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var num_practice_rounds = 2
@@ -427,11 +452,8 @@ var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		'<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Each round, you will see a lake which has many fish in it, and your goal is to catch as many fish as possible.</p><p class = block-text>On the screen you will see a lake and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 5 cents towards that round\'s "Trip Bank", which you can then "Collect" to move the money to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the money you earned that round.</p></div>',
-		'<div class = centerbox><p class = block-text>To keep your money from round to round you must  stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>You will participate in four tournaments, each with different rules. One way the tournaments differ is whether you keep or release the fish you catch. In the "Catch N Release" condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the tournament.</p><p class = block-text>In the "Catch N Keep" condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
-		'<div class = centerbox><p class = block-text>The weather will also differ between tournaments. When the weather is sunny you will be able to see how many fish are in the lake. There will also be counters below the lake that tell you exactly how many red and blue fish are still in the lake.</p><p class = block-text>When the weather is cloudy, the lake is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in "Catch N Release", the number of fish in the lake stay the same after each "Go Fish". If you are in "Catch N Keep", the fish come out of the lake.</p></div>',
-		'<div class = centerbox><p class = block-text>You will play one tournament with each combination of weather (sunny or cloudy) and release (release or keep) rules. Each tournament is independent. The money you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best!</p></div>',
-		'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>',
+		'<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Each round, you will see a lake which has many fish in it. Your goal is to catch as many fish as possible.</p><p class = block-text>On the screen you will see a lake and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 5 cents towards that round\'s "Trip Bank", which you can then "Collect" to move the money to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the money you earned that round.</p><p class = block-text>To keep your money from round to round you must  stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>After you end instructions you will play ' + num_practice_rounds + ' rounds of the fishing game to practice.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 45 minutes</p></div>',
 	],
 	allow_keys: false,
 	data: {
@@ -464,6 +486,22 @@ var instruction_node = {
 	}
 }
 
+var conditions_instructions_block = {
+	type: 'poldrack-instructions',
+	pages: [
+		'<div class = centerbox><p class = block-text><p class = block-text>You will participate in four tournaments, each with different rules. One way the tournaments differ is whether you keep or release the fish you catch. In the <span style="color:red">Catch N Release</span> condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the tournament.</p><p class = block-text>In the <span style="color:red">Catch N Keep</span> condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
+		'<div class = centerbox><p class = block-text>The <span style="color:blue">weather</span> will also differ between tournaments. When the weather is <span style="color:blue">sunny</span> you will be able to see how many fish are in the lake. There will also be counters below the lake that tell you exactly how many red and blue fish are still in the lake.</p><p class = block-text>When the weather is <span style="color:blue">cloudy</span>, the lake is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in <span style="color:red">Catch N Release</span>, the number of fish in the lake stay the same after each "Go Fish". If you are in <span style="color:red">Catch N Keep</span>, the fish come out of the lake.</p></div>',
+		'<div class = centerbox><p class = block-text>You will play one tournament with each combination of <span style="color:blue">weather</span> (sunny or cloudy) and <span style="color:red">release</span> (release or keep) rules. Each tournament is independent. The money you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best to maximize your earnings! Your bonus pay will be proportional to your earnings.</p></div>',
+		'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>'
+	],
+	allow_keys: false,
+	data: {
+		trial_id: "instructions"
+	},
+	show_clickable_nav: true,
+	timing_post_trial: 1000
+};
+
 var end_block = {
 	type: 'poldrack-text',
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -472,7 +510,8 @@ var end_block = {
 		trial_id: "end_block"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var round_over_block = {
@@ -510,7 +549,7 @@ var set_fish_block = {
 		var last_data = jsPsych.data.getData().slice(-1)[0]
 		var last_response = parseInt(last_data.responses.slice(7, 10))
 		start_fish_num = last_response + 1
-		if (isNaN(start_fish_num) || start_fish_num > 200 || start_fish_num < 0) {
+		if (isNaN(start_fish_num) || start_fish_num >= 200 || start_fish_num < 0) {
 			start_fish_num = Math.floor(Math.random() * 200) + 1
 		}
 	},
@@ -577,8 +616,48 @@ var start_test_block = {
 	timing_post_trial: 1000
 };
 
+//Setup task
 angling_risk_task_experiment = []
 angling_risk_task_experiment.push(instruction_node)
+//Practice basic layout
+weather = "Sunny"
+release = "Keep"
+weather_rule = "you can see how many fish are in the lake"
+release_rule = "the fish you catch comes out of the lake"
+var tournament_intro_block_practice = {
+	type: 'poldrack-text',
+	text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
+		weather + '</span> which means ' + weather_rule +
+		'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
+		release_rule +
+		'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+	cont_key: [13],
+	timing_response: 180000,
+	data: {
+		weather: weather,
+		release: release,
+		exp_stage: "practice",
+		trial_id: "intro"
+	},
+	on_finish: function(data) {
+		weather = data.weather
+		release = data.release
+		tournament_bank = 0
+		round_num = 0
+	}
+}
+angling_risk_task_experiment.push(tournament_intro_block_practice)
+angling_risk_task_experiment.push(ask_fish_block)
+angling_risk_task_experiment.push(set_fish_block)
+for (i = 0; i < num_practice_rounds; i++) {
+	angling_risk_task_experiment.push(practice_node)
+	angling_risk_task_experiment.push(round_over_block)
+}
+
+
+
+angling_risk_task_experiment.push(conditions_instructions_block)
+//practice each condition
 for (b = 0; b < practiceblocks.length; b++) {
 	block = practiceblocks[b]
 	weather = block.weather
@@ -597,7 +676,7 @@ for (b = 0; b < practiceblocks.length; b++) {
 		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
 			weather + '</span> which means ' + weather_rule +
-			'. The release rule is <span style="color:red">"' + release + '"</span>, which means ' +
+			'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
 			release_rule +
 			'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
@@ -645,7 +724,7 @@ for (b = 0; b < blocks.length; b++) {
 		type: 'poldrack-text',
 		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
 			weather + '</span> which means ' + weather_rule +
-			'. The release rule is <span style="color:red">"' + release + '"</span>, which means ' +
+			'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
 			release_rule +
 			'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],

@@ -27,6 +27,30 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-multi-stim-multi-response')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    rts = JSON.parse(experiment_data[i].rt)[0]
+    trial_count += 1
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = "center-block-text">' +
     feedback_instruct_text + '</p></div>'
@@ -146,9 +170,10 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
-var practice_len = 2
+var practice_len = 20
 var exp_len = 180
 var current_trial = 0
 var choices = [74, 75, 76]
@@ -223,7 +248,8 @@ var end_block = {
   },
   text: '<div class = prp_centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -251,7 +277,8 @@ var instructions_block = {
     '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
     ' press the "L" key with your ring finger.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p>' +
-    box_number1 + box_number2 + '</div>', '<div class = prp_centerbox><p class ="block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue. Go through the instructions again if you need to.</p></div>'
+    box_number1 + box_number2 + '</div>', '<div class = prp_centerbox><p class ="block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue. Go through the instructions again if you need to.</p></div>',
+    '<div class = centerbox><p class = block-text>This experiment will last around 15 minutes</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

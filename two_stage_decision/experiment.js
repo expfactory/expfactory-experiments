@@ -12,6 +12,52 @@ function addID() {
 	})
 }
 
+var getInstructFeedback = function() {
+	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
+		'</p></div>'
+}
+
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -172,25 +218,25 @@ After a stimulus is selected, an animation proceeds whereby the selected stimulu
 the other stimulus fades. This function accomplishes this by creating a new html object to display composed of the old stim
 with appropriate handles to start the relevant animations.
 
-Also updates the global variables action, first_selected and first_notselected, which are used in the next function
+Also updates the global variables choice, first_selected and first_notselected, which are used in the next function
 */
 var get_first_selected = function() {
 	var global_trial = jsPsych.progress().current_trial_global
 	var first_stage_trial = jsPsych.data.getData()[global_trial - 1]
 	var stim_ids = curr_fs_stims.data[current_trial].condition
-	action = actions.indexOf(first_stage_trial.key_press)
+	choice = choices.indexOf(first_stage_trial.key_press)
 	jsPsych.data.addDataToLastTrial({
 		condition: stim_ids,
 		trial_num: current_trial,
 		trial_id: 'first_stage'
 	})
-	if (action != -1) {
-		first_selected = stim_ids[action]
-		first_notselected = stim_ids[1 - action]
-		return "<div class = 'selected " + stim_side[action] + "' style='background:" + curr_colors[0] +
+	if (choice != -1) {
+		first_selected = stim_ids[choice]
+		first_notselected = stim_ids[1 - choice]
+		return "<div class = 'selected " + stim_side[choice] + "' style='background:" + curr_colors[0] +
 			"; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[first_selected] + "'></div>" +
-			"<div class = '" + stim_side[1 - action] + " fade' style='background:" + curr_colors[0] +
+			"<div class = '" + stim_side[1 - choice] + " fade' style='background:" + curr_colors[0] +
 			"; '>" +
 			"<img class = 'decision-stim  fade' src= '" + curr_images[first_notselected] + "'></div>"
 	} else {
@@ -204,20 +250,20 @@ The second stage is probabilistically chosen based on the first stage choice. Ea
 with one of two second stages, but the transition is ultimately probabilistic.
 
 This function checks to see if there was any first stage response. If not, set the global variable FB_on to off and display a reminder
-If an action was taken, display the chosen stimulus at the top of the screen and select a second stage (choosing the one associated with the
-action 70% of the time). Randomly select a presentation order for the two stimulus associated with the second stage
+If an choice was taken, display the chosen stimulus at the top of the screen and select a second stage (choosing the one associated with the
+choice 70% of the time). Randomly select a presentation order for the two stimulus associated with the second stage
 */
 var choose_second_stage = function() {
 	var global_trial = jsPsych.progress().current_trial_global
 	var first_stage_trial = jsPsych.data.getData()[global_trial - 2]
 	var stim_ids = curr_fs_stims.data[current_trial].condition
-	if (action == -1) {
+	if (choice == -1) {
 		FB_on = 0;
 		return "<div class = centerbox><div class = center-text>" +
 			"Please respond faster!</div></div>"
 	} else {
 		FB_on = 1;
-		stage = stim_ids[action]
+		stage = stim_ids[choice]
 		if (Math.random() < 0.3) {
 			stage = 1 - stage
 		}
@@ -238,19 +284,19 @@ var get_second_selected = function() {
 	var stim_index = curr_ss_stim.stimulus.indexOf(second_stage_trial.stimulus.slice(
 		slice_start_index))
 	var stim_ids = curr_ss_stim.data[stim_index].condition
-	action = actions.indexOf(second_stage_trial.key_press)
+	choice = choices.indexOf(second_stage_trial.key_press)
 	jsPsych.data.addDataToLastTrial({
 		condition: stim_ids,
 		trial_num: current_trial,
 		trial_id: 'second_stage'
 	})
-	if (action != -1) {
-		second_selected = stim_ids[action]
-		second_notselected = stim_ids[1 - action]
-		return "<div class = '" + stim_side[action] + " selected' style='background:" + curr_colors[
+	if (choice != -1) {
+		second_selected = stim_ids[choice]
+		second_notselected = stim_ids[1 - choice]
+		return "<div class = '" + stim_side[choice] + " selected' style='background:" + curr_colors[
 				stage + 1] + "; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[second_selected] + "'></div>" +
-			"<div class = 'fade " + stim_side[1 - action] + "' style='background:" + curr_colors[stage + 1] +
+			"<div class = 'fade " + stim_side[1 - choice] + "' style='background:" + curr_colors[stage + 1] +
 			"; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[second_notselected] + "'></div>"
 	} else {
@@ -276,14 +322,14 @@ var update_FB = function() {
 }
 
 /*
-If no action was taken during the second stage display a reminder.
+If no choice was taken during the second stage display a reminder.
 Otherwise, check the FB_matrix which determines the reward probabilities for each stimulus (there are 4 final stimulus associated with rewards:
 2 for each of the 2 second stages). Flip a coin using the relevant probability and give FB.
 
 After FB, the FB_atrix is updated.
 */
 var get_feedback = function() {
-	if (action == -1) {
+	if (choice == -1) {
 		return "<div class = centerbox><div class = center-text>" +
 			"Please respond faster!</div></div>"
 	} else if (Math.random() < FB_matrix[second_selected - 2]) {
@@ -310,18 +356,16 @@ var update_FB_data = function() {
 	})
 	return ""
 }
-var getInstructFeedback = function() {
-		return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
-			'</p></div>'
-	}
-	/* ************************************ */
-	/* Define experimental variables */
-	/* ************************************ */
-	// generic task variables
+
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+// generic task variables
 var run_attention_checks = false
 var attention_check_thresh = 0.62
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var practice_trials_num = 10
@@ -331,7 +375,7 @@ var first_selected = -1 //Tracks the ID of the selected fs stimulus
 var first_notselected = -1 //The fs stimulus not selected
 var second_selected = -1 //Tracks the ID of the selected fs stimulus
 var second_notselected = -1 //The fs stimulus not selected
-var action = -1 //tracks which action was last taken
+var choice = -1 //tracks which choice was last taken
 var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
@@ -339,7 +383,7 @@ var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the
 var exp_stage = 'practice'
 
 // Actions for left and right
-var actions = [37, 39]
+var choices = [37, 39]
 var stim_side = ['decision-left', 'decision-right']
 var stim_move = ['selected-left', 'selected-right']
 
@@ -450,7 +494,8 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
 		'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or not on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
 		'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
-		'<div class = centerbox><p class = block-text>After you end instructions we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
+		'<div class = centerbox><p class = block-text>After you end instructions we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment will last around 30 minutes</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -489,7 +534,8 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var wait_block = {
@@ -563,7 +609,7 @@ var first_stage = {
 	type: "poldrack-single-stim",
 	stimulus: choose_first_stage,
 	is_html: true,
-	choices: actions,
+	choices: choices,
 	timing_stim: 2000,
 	timing_response: 2000,
 	show_response: true,
@@ -604,7 +650,7 @@ var second_stage = {
 	},
 	stimulus: choose_second_stage,
 	is_html: true,
-	choices: actions,
+	choices: choices,
 	timing_stim: 2000,
 	timing_response: 2000,
 	response_ends_trial: true,
