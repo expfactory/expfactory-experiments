@@ -34,7 +34,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>Read each item and, as honestly as you can, answer the questions: “How true is this of you?”</p></div>',
+    '<div class = centerbox><p class = block-text>Read each item and answer the question: “How true is this of you?”</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
