@@ -27,6 +27,49 @@ function addID() {
 	})
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. 
+	 */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
@@ -34,7 +77,7 @@ var getInstructFeedback = function() {
 
 var post_trial_gap = function() {
 	var curr_trial = jsPsych.progress().current_trial_global
-	return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
+	return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].block_duration
 }
 
 var get_RT = function() {
@@ -57,6 +100,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 /* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
@@ -65,13 +109,19 @@ var cues = ['nocue', 'center', 'double', 'spatial']
 var current_trial = 0
 var exp_stage = 'practice'
 var test_stimuli = []
+var choices = [37, 39]
+var path = '/static/experiments/attention_network_task/images/'
+var images = [path + 'right_arrow.png', path + 'left_arrow.png', path + 'no_arrow.png']
+//preload
+jsPsych.pluginAPI.preloadImages(images)
+
 for (l = 0; l < locations.length; l++) {
 	var loc = locations[l]
 	for (ci = 0; ci < cues.length; ci++) {
 		var c = cues[ci]
 		stims = [{
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &mdash; &mdash; &larr; &mdash; &mdash;</div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -80,8 +130,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &larr; &larr; &larr; &larr; &larr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -90,8 +140,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &rarr; &rarr; &larr; &rarr; &rarr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img></div></div>',
 			data: {
 				correct_response: 37,
 				flanker_middle_direction: 'left',
@@ -100,8 +150,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &mdash; &mdash; &rarr; &mdash; &mdash; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[2] + '></img><img class = ANT_img src = ' + images[2] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -110,8 +160,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &rarr; &rarr; &rarr; &rarr; &rarr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[0] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -120,8 +170,8 @@ for (l = 0; l < locations.length; l++) {
 				cue: c
 			}
 		}, {
-			image: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
-				'><div class = ANT_text> &larr; &larr; &rarr; &larr; &larr; </div></div></div>',
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
+				'><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[0] + '></img><img class = ANT_img src = ' + images[1] + '></img><img class = ANT_img src = ' + images[1] + '></img></div></div>',
 			data: {
 				correct_response: 39,
 				flanker_middle_direction: 'right',
@@ -201,7 +251,8 @@ var end_block = {
 		trial_id: "end"
 	},
 	timing_response: 180000,
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -217,12 +268,11 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p></div>',
-		'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p></div>'
+		'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an * will occasionally come up somewhere on the screen.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the direction of the center arrow.</p></div>'
 	],
 	allow_keys: false,
 	data: {
@@ -231,11 +281,9 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -271,8 +319,7 @@ var fixation = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'fixation',
-		duration: 400
+		trial_id: 'fixation'
 	},
 	timing_post_trial: 0,
 	timing_stim: 400,
@@ -290,8 +337,7 @@ var no_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'nocue',
-		duration: 100
+		trial_id: 'nocue'
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -309,8 +355,7 @@ var center_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'centercue',
-		duration: 100
+		trial_id: 'centercue'
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -329,8 +374,7 @@ var double_cue = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: 'doublecue',
-		duration: 100
+		trial_id: 'doublecue'
 	},
 	timing_post_trial: 0,
 	timing_stim: 100,
@@ -361,8 +405,7 @@ for (i = 0; i < block.data.length; i++) {
 		data: {
 
 			trial_id: 'fixation',
-			exp_stage: 'practice',
-			duration: 100
+			exp_stage: 'practice'
 		},
 		timing_post_trial: 0,
 		timing_stim: first_fixation_gap,
@@ -386,8 +429,7 @@ for (i = 0; i < block.data.length; i++) {
 			data: {
 
 				trial_id: 'spatialcue',
-				exp_stage: 'practice',
-				duration: 100
+				exp_stage: 'practice'
 			},
 			timing_post_trial: 0,
 			timing_stim: 100,
@@ -400,13 +442,13 @@ for (i = 0; i < block.data.length; i++) {
 	block.data[i].trial_num = trial_num
 	var attention_network_task_practice_trial = {
 		type: 'poldrack-categorize',
-		stimulus: block.image[i],
+		stimulus: block.stimulus[i],
 		is_html: true,
 		key_answer: block.data[i].correct_response,
 		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
 		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
-		choices: [37, 39],
+		choices: choices,
 		data: block.data[i],
 		timing_response: 1700,
 		timing_stim: 1700,
@@ -430,8 +472,7 @@ for (i = 0; i < block.data.length; i++) {
 		data: {
 
 			trial_id: 'fixation',
-			exp_stage: 'practice',
-			duration: 100
+			exp_stage: 'practice'
 		},
 		timing_post_trial: 0,
 		timing_stim: post_trial_gap,
@@ -458,8 +499,7 @@ for (b = 0; b < blocks.length; b++) {
 			data: {
 
 				trial_id: "fixation",
-				exp_stage: 'test',
-				duration: first_fixation_gap
+				exp_stage: 'test'
 			},
 			timing_post_trial: 0,
 			timing_stim: first_fixation_gap,
@@ -483,8 +523,7 @@ for (b = 0; b < blocks.length; b++) {
 				data: {
 
 					trial_id: "spatialcue",
-					exp_stage: 'test',
-					duration: 100
+					exp_stage: 'test'
 				},
 				timing_post_trial: 0,
 				timing_stim: 100,
@@ -497,9 +536,9 @@ for (b = 0; b < blocks.length; b++) {
 		block.data[i].trial_num = trial_num
 		var ANT_trial = {
 			type: 'poldrack-single-stim',
-			stimulus: block.image[i],
+			stimulus: block.stimulus[i],
 			is_html: true,
-			choices: [37, 39],
+			choices: choices,
 			data: block.data[i],
 			timing_response: 1700,
 			timing_stim: 1700,
