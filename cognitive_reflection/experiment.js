@@ -34,13 +34,10 @@ var experiment_block = {
 	preamble: '<strong>For every question except the last, enter your numeric answer below the question.</strong>',
 	questions: [
 		[
-			'A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost? <br><strong>Answer</strong>: _____ cents'
+			'If three elves can wrap three toys in hour, how many elves are needed to wrap six toys in 2 hours? <br><strong>Answer</strong>: _____ elves'
 		],
 		[
-			'If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets? <br><strong>Answer</strong>: _____ minutes'
-		],
-		[
-			'In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake? <br><strong>Answer</strong>: _____ days'
+			'In an athletics team, tall members are three times more likely to win a medal than short members. This year theteam has won 60 medals so far. How many of these have been won by short athletes?  <br><strong>Answer</strong>: _____ medals'
 		],
 		[
 			'If John can drink one barrel of water in 6 days, and Mary can drink one barrel of water in 12 days, how long would it take them to drink one barrel of water together? <br><strong>Answer</strong>: _____ days'
