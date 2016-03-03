@@ -29,43 +29,33 @@ function appendTextAfter2(input, search_term, new_text) {
 }
 
 var appendTestData = function() {
+	var clicked_on = ''
 	if (color1_index.indexOf(currID, 0) != -1) {
-		jsPsych.data.addDataToLastTrial({
-			clicked_on: colors[0],
-			box_id: currID,
-			which_click_in_round: numClicks,
-			correct_response: colors[0]
-		})
+		clicked_on = colors[0]
+
 	} else if (color2_index.indexOf(currID, 0) != -1) {
-		jsPsych.data.addDataToLastTrial({
-			clicked_on: colors[1],
-			box_id: currID,
-			which_click_in_round: numClicks,
-			correct_response: colors[0]
-		})
+		clicked_on = colors[1]
 	} else if (currID == 26) {
-		jsPsych.data.addDataToLastTrial({
-			clicked_on: colors[0],
-			box_id: currID,
-			which_click_in_round: numClicks,
-			correct_response: colors[0]
-		})
+		clicked_on = largeColors[0]
 	} else if (currID == 27) {
-		jsPsych.data.addDataToLastTrial({
-			clicked_on: colors[1],
-			box_id: currID,
-			which_click_in_round: numClicks,
-			correct_response: colors[0]
-		})
+		clicked_on = largeColors[1]
 	}
+	jsPsych.data.addDataToLastTrial({
+		exp_stage: exp_stage,
+		clicked_on: clicked_on,
+		box_id: currID,
+		which_click_in_round: numClicks,
+		correct_response: colors[0]
+	})
 }
 
 var getBoard = function(colors, board_type) {
-	whichSmallColor1 = colors[0] + '_' + shapes[0]
-	whichSmallColor2 = colors[1] + '_' + shapes[0]
+	largeColors = jsPsych.randomization.shuffle([colors[0],colors[1]])
+	var whichSmallColor1 = colors[0] + '_' + shapes[0]
+	var whichSmallColor2 = colors[1] + '_' + shapes[0]
 
-	whichLargeColor1 = colors[0] + '_' + shapes[1]
-	whichLargeColor2 = colors[1] + '_' + shapes[1]
+	var whichLargeColor1 = largeColors[0] + '_' + shapes[1]
+	var whichLargeColor2 = largeColors[1] + '_' + shapes[1]
 	var board = "<div class = bigbox><div class = numbox>"
 	var click_function = ''
 	var click_class = ''
@@ -184,12 +174,9 @@ var getRewardDW = function() {
 	global_trial = jsPsych.progress().current_trial_global
 	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).clicked_on
 	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
+	clicks = clickedCards.length
 	clickedCards = numbers //set all cards as 'clicked'
-		$.each(clickedCards, function(i, el){
-    	if($.inArray(el, numCardReward) === -1) numCardReward.push(el);
-		});
 	if (lastAnswer == correctAnswer) {
-		clicks = numCardReward.length
 		lossPoints = clicks * 10
 		DWPoints = DWPoints - lossPoints
 		reward = DWPoints
@@ -228,7 +215,7 @@ var getReward = function() {
 	if (reward === 100) {
 		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</div></div>'
 	} else if (reward === -100) {
-		reward = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		 return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	}
 }
 
@@ -241,6 +228,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var exp_stage = ''
 var reward = 0 //reward value
 var totFWPoints = 0
 var totDWPoints = 0
@@ -252,14 +240,11 @@ var numCardReward = []
 var colors = jsPsych.randomization.repeat(['green', 'red', 'blue', 'teal', 'yellow', 'orange',
 	'purple', 'brown'
 ], 1)
-colors.splice(0, 0, 'grey')
+var largeColors = []
 var shapes = ['small_square', 'large_square']
 var numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-var conditions = ['FW', 'DW']
-var whichCond = Math.floor(Math.random() * 2)
 var numbersArray = jsPsych.randomization.repeat(numbers, 1)
 var clickedCards = []
-var whichColor = 1
 
 resetRound()
 instructionsSetup = getBoard(colors, 'instruction')
@@ -341,21 +326,28 @@ var start_test_block = {
 var DW_intro_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "DW_condition_intro"
+		trial_id: "DW_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		exp_stage = 'DW'
+	}
+
 };
 
 var FW_intro_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "FW_condition_intro"
+		trial_id: "FW_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function() {
+		exp_stage = 'FW'
+	}
 };
 
 
@@ -366,7 +358,7 @@ var rewardFW_block = {
 	is_html: true,
 	data: {
 		trial_id: "reward",
-		exp_stage: "test"
+		exp_stage: "FW"
 	},
 	choices: [13],
 	timing_post_trial: 1000,
@@ -380,7 +372,7 @@ var rewardDW_block = {
 	is_html: true,
 	data: {
 		trial_id: "reward",
-		exp_stage: "test"
+		exp_stage: "DW"
 	},
 	choices: [13],
 	timing_post_trial: 1000,
@@ -461,7 +453,7 @@ information_sampling_task_experiment.push(practice_block);
 information_sampling_task_experiment.push(practiceRewardBlock);
 information_sampling_task_experiment.push(start_test_block);
 
-if (whichCond === 0) { // do the FW first, then DW
+if (Math.random() < .5) { // do the FW first, then DW
 	information_sampling_task_experiment.push(FW_intro_block);
 	for (var i = 0; i < 10; i++) {
 		information_sampling_task_experiment.push(test_node);
@@ -475,7 +467,7 @@ if (whichCond === 0) { // do the FW first, then DW
 		information_sampling_task_experiment.push(reset_block);
 	}
 
-} else if (whichCond == 1) { ////do DW first then FW
+} else  { ////do DW first then FW
 	information_sampling_task_experiment.push(DW_intro_block);
 	for (var i = 0; i < 10; i++) {
 		information_sampling_task_experiment.push(test_node);
