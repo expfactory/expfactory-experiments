@@ -34,7 +34,7 @@ var appendTestData = function() {
 var getButtons = function(buttonType) {
 	var buttons = ""
 	buttons = "<div class = allbuttons>"
-	for (i = 1; i < 33; i++) {
+	for (i = 0; i < 33; i++) {
 		buttons += "<button type = 'button' class = 'CCT-btn chooseButton' id = " + i +
 			" onclick = chooseButton(this.id)>" + i + "</button>"
 	}
@@ -216,7 +216,7 @@ var appendPayoutData = function(){
 }
 
 var chooseButton = function(clicked_id) {
-	$('#nextButton').html('Next Round')
+	$('#nextButton').prop('disabled',false)
 	$('.chooseButton').prop('disabled',true)
 	currID = parseInt(clicked_id)
 	var cards_to_turn = jsPsych.randomization.repeat(cardArray, 1).slice(0, currID)
@@ -231,6 +231,7 @@ var chooseButton = function(clicked_id) {
 		} else {
 			roundPoints -= lossAmt
 			doSetTimeout(card_i, delay, roundPoints, 'loss')
+			break
 		}
 	}
 }
@@ -306,7 +307,7 @@ var practiceSetup1 =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> In the version of the card game you are about to play, you will not turn the cards over one by one.  Rather, you will simply choose the total number of cards you would like to turn over (from 0 to 32) and then continue to the next round.  If turning over any cards seems too risky to you can click the zero button, in which case your score for this round will automatically be zero.  This is a practice round, and it looks just like the game you will play.  Please select the number of cards you would like to turn over, given the number of loss cards and the amount that you can gain or lose if you turn over a gain or loss card, as shown below.  Please note: The computer will tell you how well you did after all 27 game rounds are over!</div></div>" +
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
-	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers()>Take no cards</button></div>"+
+	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers() disabled>Next Round</button></div>"+
 	getButtons()+
 	"</div>"+
 	getBoard()
@@ -317,7 +318,7 @@ var practiceSetup2 =
  	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 24 rounds of the game.  This is the second practice round. Please again select as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
-	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers()>Take no cards</button></div>"+
+	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers() disabled>Next Round</button></div>"+
 	getButtons()+
 	"</div>"+
 	getBoard()	
@@ -363,7 +364,7 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
 var gameSetup = 
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
-	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers()>Take no cards</button></div>"+
+	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers() disabled>Next Round</button></div>"+
 	getButtons()+
 	"</div>"+
 	getBoard()
