@@ -42,41 +42,17 @@ var getFixationLength = function() {
 }
 
 
-
-var changeData = function() {
-    data = jsPsych.data.getTrialsOfType('poldrack-text')
-    practiceDataCount = 0
-    testDataCount = 0
-    for (i = 0; i < data.length; i++) {
-      if (data[i].trial_id == 'practice_intro') {
-        practiceDataCount = practiceDataCount + 1
-      } else if (data[i].trial_id == 'test_intro') {
-        testDataCount = testDataCount + 1
-      }
-    }
-    if (practiceDataCount >= 1 && testDataCount === 0) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
-      })
-    } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-      //temp_id = data[i].trial_id
-      jsPsych.data.addDataToLastTrial({
-        exp_stage: "test"
-      })
-    }
-  }
-  /* ************************************ */
-  /* Define experimental variables */
-  /* ************************************ */
-  // generic task variables
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+// generic task variables
 var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-
+var exp_stage = 'practice'
 var correct_responses = jsPsych.randomization.repeat([
   ["left arrow", 37],
   ["left arrow", 37],
@@ -87,43 +63,35 @@ var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</l
   correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] +
   ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 
+var path = '/static/experiments/antisaccade/images/'
+var cue_img = path + 'square.png'
+var mask_img = path + 'mask.png'
+var left_arrow = path + 'left_arrow.png'
+var right_arrow = path + 'right_arrow.png'
+var up_arrow = path + 'up_arrow.png'
 var cues = [{
-    image: '<div class = centerbox><div class = stim_left id = cue></div></div>',
+    image: '<div class = centerbox><div class = stim_left><img src = ' + cue_img + '></img></div></div>',
     data: {
       trial_id: "cue",
       cue_placement: "left"
     }
   }, {
-    image: '<div class = centerbox><div class = stim_right id = cue></div></div>',
+    image: '<div class = centerbox><div class = stim_right><img src = ' + cue_img + '></img></div></div>',
     data: {
       trial_id: "cue",
       cue_placement: "right"
     }
   }
-
 ]
-var targets = [{
-  image: '<div class = centerbox><div class = stim_left id = target></div></div>',
-  data: {
-    trial_id: "target",
-    target_placement: "left"
-  }
-}, {
-  image: '<div class = centerbox><div class = stim_right id = target></div></div>',
-  data: {
-    trial_id: "target",
-    target_placement: "right"
-  }
-}]
 
 var masks = [{
-  image: '<div class = centerbox><div class = stim_left id = mask></div></div>',
+  image: '<div class = centerbox><div class = stim_left><img src = ' + mask_img + '></img></div></div>',
   data: {
     trial_id: "mask",
     mask_placement: "left"
   }
 }, {
-  image: '<div class = centerbox><div class = stim_right id = mask></div></div>',
+  image: '<div class = centerbox><div class = stim_right><img src = ' + mask_img + '></img></div></div>',
   data: {
     trial_id: "mask",
     mask_placement: "right"
@@ -237,7 +205,10 @@ var begin_test_block = {
     trial_id: "test_intro"
   },
   timing_response: 180000,
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    exp_stage = 'test'
+  }
 };
 
 
@@ -252,7 +223,11 @@ var fixation_block = {
   timing_post_trial: 0,
   timing_stim: getFixationLength(),
   timing_response: 500,
-  on_finish: changeData,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({
+      exp_stage: exp_stage
+    })
+  },
 }
 
 
@@ -269,19 +244,18 @@ antisaccade_experiment.push(begin_practice_block)
 for (i = 0; i < practice_len; i++) {
   antisaccade_experiment.push(fixation_block)
   target_direction = randomDraw([
-    ['left', 37],
-    ['right', 39],
-    ['up', 38]
+    [left_arrow, 'left', 37],
+    [right_arrow, 'right', 39],
+    [up_arrow, 'up', 38]
   ])
   if (practice_cue_sides[i] === 0) {
     cue = cues[0]
     target = {
-      image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] +
-        '></div></div>',
+      image: '<div class = centerbox><div class = stim_right><img src = ' + target_direction[0] + '></img></div></div>',
       data: {
         trial_id: "target",
-        correct_response: target_direction[1],
-        arrow_direction: target_direction[0],
+        correct_response: target_direction[2],
+        arrow_direction: target_direction[1],
         arrow_placement: 'right'
       }
     }
@@ -289,12 +263,11 @@ for (i = 0; i < practice_len; i++) {
   } else {
     cue = cues[1]
     target = {
-      image: '<div class = centerbox><div class = stim_left id = target_' + target_direction[0] +
-        '></div></div>',
+      image: '<div class = centerbox><div class = stim_left><img src = ' + target_direction[0] + '></img></div></div>',
       data: {
         trial_id: "target",
-        correct_response: target_direction[1],
-        arrow_direction: target_direction[0],
+        correct_response: target_direction[2],
+        arrow_direction: target_direction[1],
         arrow_placement: 'left'
       }
     }
@@ -310,7 +283,11 @@ for (i = 0; i < practice_len; i++) {
     timing_stim: 225,
     timing_response: 225,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
   }
 
   var target_block = {
@@ -323,7 +300,11 @@ for (i = 0; i < practice_len; i++) {
     timing_stim: 150,
     timing_response: 150,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
 
   }
 
@@ -337,7 +318,11 @@ for (i = 0; i < practice_len; i++) {
     timing_stim: 1000,
     timing_response: 1000,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
   }
   antisaccade_experiment.push(cue_block)
   antisaccade_experiment.push(target_block)
@@ -350,19 +335,18 @@ antisaccade_experiment.push(begin_test_block)
 for (i = 0; i < exp_len; i++) {
   antisaccade_experiment.push(fixation_block)
   target_direction = randomDraw([
-    ['left', 37],
-    ['right', 39],
-    ['up', 38]
+    [left_arrow, 'left', 37],
+    [right_arrow, 'right', 39],
+    [up_arrow, 'up', 38]
   ])
   if (test_cue_sides[i] === 0) {
     cue = cues[0]
     target = {
-      image: '<div class = centerbox><div class = stim_right id = target_' + target_direction[0] +
-        '></div></div>',
+      image: '<div class = centerbox><div class = stim_right><img src = ' + target_direction[0] + '></img></div></div>',
       data: {
         trial_id: "target",
-        correct_response: target_direction[1],
-        arrow_direction: target_direction[0],
+        correct_response: target_direction[2],
+        arrow_direction: target_direction[1],
         arrow_placement: 'right'
       }
     }
@@ -370,12 +354,11 @@ for (i = 0; i < exp_len; i++) {
   } else {
     cue = cues[1]
     target = {
-      image: '<div class = centerbox><div class = stim_left id = target_' + target_direction[0] +
-        '></div></div>',
+      image: '<div class = centerbox><div class = stim_left><img src = ' + target_direction[0] + '></img></div></div>',
       data: {
         trial_id: "target",
-        correct_response: target_direction[1],
-        arrow_direction: target_direction[0],
+        correct_response: target_direction[2],
+        arrow_direction: target_direction[1],
         arrow_placement: 'left'
       }
     }
@@ -391,7 +374,11 @@ for (i = 0; i < exp_len; i++) {
     timing_stim: 225,
     timing_response: 225,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
 
   }
 
@@ -405,7 +392,11 @@ for (i = 0; i < exp_len; i++) {
     timing_stim: 150,
     timing_response: 150,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
   }
 
   var mask_block = {
@@ -418,7 +409,11 @@ for (i = 0; i < exp_len; i++) {
     timing_stim: 1000,
     timing_response: 1000,
     response_ends_trial: false,
-    on_finish: changeData,
+    on_finish: function() {
+      jsPsych.data.addDataToLastTrial({
+        exp_stage: exp_stage
+      })
+    },
   }
   antisaccade_experiment.push(cue_block)
   antisaccade_experiment.push(target_block)
