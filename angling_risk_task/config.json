@@ -29,6 +29,12 @@
         "time":45,
         "reference": "http://www.ncbi.nlm.nih.gov/pubmed/18194061",
         "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
