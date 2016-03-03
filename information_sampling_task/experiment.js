@@ -50,7 +50,6 @@ var appendTestData = function() {
 }
 
 var getBoard = function(colors, board_type) {
-	largeColors = jsPsych.randomization.shuffle([colors[0],colors[1]])
 	var whichSmallColor1 = colors[0] + '_' + shapes[0]
 	var whichSmallColor2 = colors[1] + '_' + shapes[0]
 
@@ -151,6 +150,7 @@ var resetRound = function() {
 	numbersArray = jsPsych.randomization.repeat(numbers, 1)
 	color1_index = numbersArray.slice(0,13)
 	color2_index = numbersArray.slice(13)
+	largeColors = jsPsych.randomization.shuffle([colors[0],colors[1]])
 }
 
 var getRewardFW = function() {
