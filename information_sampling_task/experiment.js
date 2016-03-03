@@ -159,11 +159,11 @@ var getRewardFW = function() {
 	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
 	clickedCards = numbers //set all cards as 'clicked'
 	if (lastAnswer == correctAnswer) {
-		totFWPoints = totFWPoints + 100
+		totFWPoints += 100
 		reward = 100
 		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	} else if (lastAnswer != correctAnswer) {
-		totFWPoints = totFWPoints - 100
+		totFWPoints -= 100
 		reward = -100
 		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	}
@@ -180,17 +180,19 @@ var getRewardDW = function() {
 		lossPoints = clicks * 10
 		DWPoints = DWPoints - lossPoints
 		reward = DWPoints
-		totDWPoints = totDWPoints + DWPoints
+		totDWPoints +=  DWPoints
 		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Correct! You have won ' + DWPoints +
 			' points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	} else if (lastAnswer != correctAnswer) {
-		totDWPoints = totDWPoints - DWPoints
-		reward = DWPoints - 100
+		totDWPoints -= 100
+		reward = -100
 		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	}
 }
 
 var instructionFunction = function(clicked_id) {
+	var whichSmallColor1 = colors[0] + '_' + shapes[0]
+	var whichSmallColor2 = colors[1] + '_' + shapes[0]
 	currID = parseInt(clicked_id)
 	if (color1_index.indexOf(currID) != -1) {
 		document.getElementById(clicked_id).src =
@@ -214,7 +216,7 @@ var makeInstructChoice = function(clicked_id) {
 var getReward = function() {
 	if (reward === 100) {
 		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</div></div>'
-	} else if (reward === -100) {
+	} else  {
 		 return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
 	}
 }
@@ -245,7 +247,14 @@ var shapes = ['small_square', 'large_square']
 var numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
 var numbersArray = jsPsych.randomization.repeat(numbers, 1)
 var clickedCards = []
-
+//preload images
+images = []
+var path = '/static/experiments/information_sampling_task/images/'
+for (var c = 0; c<colors.length; c++) {
+	images.push(path + colors[c] + '_small_square.png')
+	images.push(path + colors[c] + '_large_square.png')
+}
+jsPsych.pluginAPI.preloadImages(images)
 resetRound()
 instructionsSetup = getBoard(colors, 'instruction')
 
