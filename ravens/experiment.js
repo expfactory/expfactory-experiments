@@ -281,12 +281,11 @@ var feedback_instruct_block = {
   }
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
     '<div class = centerbox><p class = block-text>This is a test of observation and clear thinking with 18 problems. The top part of each problem is a pattern with one part cut out of it. Your task is to look at the pattern, think of what the missing part must look like to complete the pattern correctly, both along the rows and the columns, and then find the right piece out of the eight shown. Only one of the answer choices is perfectly correct.<br><br>The following page will have an example trial.</p></div>',
-    '<div class = centerbox><p class = block-text><strong>Look at the top part (the pattern) of this sample problem.</strong> Notice that going across the rows, the number of horizontal lines is equal. Going down the columns, the number of squares is equal.<div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_top.jpg"</img></div><p class= "block-text"><strong>Look at the solution of this sample problem.</strong> The best completion of the missing cell is the alternative "E)" which is selected below.</p><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_bottom.jpg" id="bottom_img"</img></div><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/Opt_E_selected.png"</img></div></p></div>',
+    '<div class = centerbox><p class = block-text><strong>Look at the top part (the pattern) of this sample problem.</strong> Notice that going across the rows, the number of horizontal lines is equal. Going down the columns, the number of squares is equal.<div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_top.jpg"</img></div><p class= "block-text"><strong>Look at the solution of this sample problem.</strong> The best completion of the missing cell is the alternative "E" which is selected below.</p><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/sample_matrix_bottom.jpg" id="bottom_img"</img></div><div class="sample_img"><img src = "/static/experiments/ravens/images/practice/Opt_E_selected.png"</img></div></p></div>',
     '<div class = centerbox><p class = center-block-text>You will now complete two practice trials with feedback. The test trials will not include feedback.</p></div>'
   ],
   allow_keys: false,
@@ -296,11 +295,9 @@ var instructions_block = {
     exp_id: "ravens"
   }
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
