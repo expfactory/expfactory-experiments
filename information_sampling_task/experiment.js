@@ -453,7 +453,7 @@ information_sampling_task_experiment.push(practice_block);
 information_sampling_task_experiment.push(practiceRewardBlock);
 information_sampling_task_experiment.push(start_test_block);
 
-if (Math.random() < .5) { // do the FW first, then DW
+if (Math.random() < 0.5) { // do the FW first, then DW
 	information_sampling_task_experiment.push(FW_intro_block);
 	for (var i = 0; i < 10; i++) {
 		information_sampling_task_experiment.push(test_node);
