@@ -28,6 +28,12 @@
         "reference": "http://www.mitpressjournals.org/doi/pdf/10.1162/jocn_a_00709",
         "notes": "Condition indicates cue/target trial type: AX, BX, AY, BY",
         "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
