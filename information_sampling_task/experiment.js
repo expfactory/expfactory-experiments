@@ -434,9 +434,9 @@ var test_block = {
 var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
-		if (roundOver == 1) {
+		if (roundOver === 1) {
 			return false
-		} else if (roundOver == 0) {
+		} else if (roundOver === 0) {
 			return true
 		}
 	}
