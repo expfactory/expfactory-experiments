@@ -7,4 +7,6 @@
     -webkit-transform: translateY(-50%);
 }
 
-
+.responded {
+	visibility: hidden;
+}

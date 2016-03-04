@@ -27,6 +27,47 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
+  }
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -79,11 +120,12 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var hierarchical_only = true //When this is true, do not run the flat task
 var exp_len = 360 //number of trials per rule-set
-var flat_first = 0 //  Math.floor(Math.random())
+var flat_first =  Math.floor(Math.random())
 var path_source = '/static/experiments/hierarchical_rule/images/'
 var stim_prefix = '<div class = centerbox><div class = stimBox><img class = hierarchicalStim src ='
 var border_prefix = '<img class = hierarchicalBorder src ='
@@ -139,25 +181,27 @@ for (var c = 0; c < colors.length; c++) {
     }
   }
 }
+//instruction stims
+var instruct_stims = []
+var hierarchical_instruct_stims = jsPsych.randomization.repeat(hierarchical_stims, 1, true).stimulus
+var flat_instruct_stims = jsPsych.randomization.repeat(flat_stims, 1, true).stimulus
+if (flat_first === 0) {
+  instruct_stims = hierarchical_instruct_stims
+  instruct_stims2 = flat_instruct_stims
+} else {
+  instruct_stims = flat_instruct_stims
+  instruct_stims2 = hierarchical_instruct_stims
+}
+
 // flat_stims = jsPsych.randomization.repeat(flat_stims,20,true)
 // hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20,true)
 // Change structure of object array to work with new structure
 flat_stims = jsPsych.randomization.repeat(flat_stims, 20, true)
 hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims, 20, true)
+//preload stims
+jsPsych.pluginAPI.preloadImages(flat_stims)
+jsPsych.pluginAPI.preloadImages(hierarchical_stims)
 
-instructions_grid = '<div class = gridBox>'
-for (var c = 0; c < colors.length / 2; c++) {
-  for (var s = 0; s < stims.length / 2; s++) {
-    for (var o = 0; o < orientations.length; o++) {
-      instructions_grid +=
-        '<div class = imgGridBox><img class = gridImage src = ' + path_source + stims[s] +
-        orientations[o] + '.bmp </img>'
-      instructions_grid +=
-        '<img class = gridBorder src = ' + path_source + colors[c] + '_border.png </img></div>'
-    }
-  }
-}
-instructions_grid += '</div>'
 
 
 /* ************************************ */
@@ -195,25 +239,24 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
+var instruct_text_array = ['<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your should try to get as many trials correct as possible. There are 18 stimuli in this experiment. Press next to go through the 18 stimuli you will be responding to.</p></div>']
+for (var i = 0; i < instruct_stims.length; i++) {
+  instruct_text_array.push(instruct_stims[i] + '<div class = instructionBox><p class = center-block-text>Please familiarize yourself with the stimulus shown on this page.</p></div>')
+}
+instruct_text_array.push('<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli you just saw. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>')
+
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
     trial_id: "instruction"
   },
-  pages: [
-    '<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your job is to get as many trials correct as possible! On the next page are the stimuli you will be responding to.</p></div>',
-    instructions_grid,
-    '<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli on the last page. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>'
-  ],
+  pages: instruct_text_array,
   allow_keys: false,
   show_clickable_nav: true
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -234,6 +277,22 @@ var instruction_node = {
   }
 }
 
+var instruct_text_array2 = ['<div class = centerbox><p class = "block-text">You will now respond to new stimuli. You should still respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not, just as in the last task.<p class = "block-text">There are 18 stimuli in this experiment. Press next to go through the 18 stimuli you will be responding to.</p></div>']
+for (var i = 0; i < instruct_stims2.length; i++) {
+  instruct_text_array2.push(instruct_stims2[i] + '<div class = instructionBox><p class = center-block-text>Please familiarize yourself with the stimulus shown on this page.</p></div>')
+}
+instruct_text_array2.push('<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli you just saw. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>')
+
+var instructions_block2 = {
+  type: 'poldrack-instructions',
+  data: {
+    trial_id: "instruction"
+  },
+  pages: instruct_text_array2,
+  allow_keys: false,
+  show_clickable_nav: true
+};
+
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -242,7 +301,8 @@ var end_block = {
   },
   text: '<div class = centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 
@@ -294,7 +354,6 @@ var flat_stim_block = {
   data: getFlatData,
   is_html: true,
   choices: choices,
-  response_ends_trial: false,
   timing_stim: 1000,
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
@@ -313,7 +372,6 @@ var hierarchical_stim_block = {
   data: getHierarchicalData,
   is_html: true,
   choices: choices,
-  response_ends_trial: false,
   timing_stim: 1000,
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
@@ -358,10 +416,10 @@ if (hierarchical_only) {
   hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node);
 } else {
   if (flat_first == 1) {
-    hierarchical_rule_experiment.push(flat_loop_node, attention_node, start_test_block,
+    hierarchical_rule_experiment.push(flat_loop_node, attention_node, instruct_block2, start_test_block,
       hierarchical_loop_node, attention_node);
   } else {
-    hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, start_test_block,
+    hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node, instruct_block2, start_test_block,
       flat_loop_node, attention_node);
   }
 }
