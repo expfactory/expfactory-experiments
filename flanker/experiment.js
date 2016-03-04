@@ -150,7 +150,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
@@ -163,11 +162,9 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -233,16 +230,17 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: practice_trials.image[i],
 		is_html: true,
 		key_answer: practice_response_array[i],
-		correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
-		incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
-		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster!</div></div>',
+		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
+		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster</div></div>',
 		choices: [70, 72],
 		data: practice_trials.data[i],
 		timing_feedback_duration: 1000,
 		show_stim_with_feedback: false,
+		timing_response: 1500,
 		timing_post_trial: 500,
 		on_finish: function() {
-			jsPsych.addDataToLastTrial({
+			jsPsych.data.addDataToLastTrial({
 				exp_stage: "practice"
 			})
 		}
@@ -260,16 +258,17 @@ for (i = 0; i < exp_len; i++) {
 		stimulus: test_trials.image[i],
 		is_html: true,
 		key_answer: test_response_array[i],
-		correct_text: '<div class = centerbox><div class = flanker-text>Correct</div></div>',
-		incorrect_text: '<div class = centerbox><div class = flanker-text>Incorrect</div></div>',
+		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = centerbox><div class = flanker-text>Response faster!</div></div>',
 		choices: [70, 72],
 		data: test_trials.data[i],
 		timing_feedback_duration: 1000,
+		timing_response: 1500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 500,
 		on_finish: function() {
-			jsPsych.addDataToLastTrial({
+			jsPsych.data.addDataToLastTrial({
 				exp_stage: "test"
 			})
 		}

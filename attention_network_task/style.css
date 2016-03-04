@@ -1,20 +1,22 @@
 
 .ANT_up {
-  height: 15vw;
+  height: 7vw;
+  width: 25vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-175%);
+  transform: translate(-50%,-300%);
 }
 
 .ANT_down {
-  height: 15vw;
+  height: 7vw;
+  width: 25vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,75%);
+  transform: translate(-50%,200%);
 }
 
 .ANT_text {
@@ -37,4 +39,9 @@
 
 .responded {
   visibility: hidden;
+}
+
+.ANT_img {
+  max-width: 16%;
+  padding: 0px 4% 0px 0px;
 }
