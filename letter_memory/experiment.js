@@ -36,22 +36,7 @@ var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
 }
-/*
-var practiceCount = 0
-var practiceBlockCount = 0
-var appendPractice = function(){
-	global_trial = jsPsych.progress().current_trial_global
-	practiceStopCount = jsPsych.data.getDataByTrialIndex(global_trial).sequence_length
-	
-	console.log(practice_blocks[b][practiceCount])
-	jsPsych.data.addDataToLastTrial({stim: practice_blocks[practiceBlockCount][practiceCount].stimulus[pathSource.length]})
-	if(practiceCount == practiceStopCount){
-	practiceCount = 0
-	practiceBlockCount = practiceBlockCount + 1
-	} else if (practiceCount != practiceStopCount){
-	practiceCount = practiceCount +1
-	}
-}	*/
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -147,7 +132,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -161,11 +145,10 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 01000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
+
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {

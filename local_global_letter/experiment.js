@@ -27,6 +27,48 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -106,8 +148,10 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
+var choices = [72, 83]
 var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
 var global_shapes = ['s','h', 'o']
 var local_shapes = ['s','h','o']
@@ -178,7 +222,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -194,7 +239,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -202,10 +246,10 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see blue or black letters made up of smaller letters, like the image below. All of the smaller letters will always be the same letter.</p><div class = instructionImgBox><img src = "/static/experiments/local_global_letter/images/blue_s_of_o.png" height = 200 width = 200></img></div></div>',
-    '<div class = centerbox><p class = block-text>Your task is to indicate whether the large or smaller letters is an "H" or "S", depending on the color. If the letter is ' +
-    task_colors[0] + ' indicate whether the large letter is an "H" or "S". If the letter is ' +
+    '<div class = centerbox><p class = block-text>Your task is to indicate whether the larger or smaller letters is an "H" or "S", depending on the color. If the letter is ' +
+    task_colors[0] + ' indicate whether the larger letter is an "H" or "S". If the letter is ' +
     task_colors[1] +
-    ' indicate wwhether the small letter is an "H" or "S".</p><p class = block-text>Use the "H" or "S" keys to indicate the letter.</p></div>',
+    ' indicate whether the smallerletter is an "H" or "S".</p><p class = block-text>Use the "H" or "S" keys to indicate the letter.</p></div>',
     '<div class = centerbox><p class = block-text>For instance, for the letter below you would press "S" because it is ' +
     task_colors[1] +
     ' which means you should respond based on the smaller shapes. If the shape was instead ' +
@@ -217,11 +261,10 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
+
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -276,7 +319,7 @@ var practice_block = {
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [72, 83],
+  choices: choices,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_response: 2000,
@@ -292,7 +335,7 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [72, 83],
+  choices: choices,
   timing_post_trial: 500,
   response_ends_trial: true,
   timing_response: 2000,

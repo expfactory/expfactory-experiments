@@ -31,6 +31,12 @@
         "reference": "http://www.jneurosci.org/content/27/14/3743.short",
         "notes": "",
         "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
