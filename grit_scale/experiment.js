@@ -34,7 +34,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate the descriptive they are of you.</p></div>',
+    '<div class = centerbox><p class = block-text>For each of the following statements, please indicate how descriptive they are of you.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,

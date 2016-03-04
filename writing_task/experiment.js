@@ -21,7 +21,6 @@ var getResponseTime = function() {
     writing_start = new Date()
   }
   var timeLeft = (timelimit-elapsed)*60000
-  console.log('time remaining: ', timeLeft)
   return timeLeft
 }
 /* ************************************ */
@@ -33,7 +32,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var writing_start = 0
-var timelimit = 2
+var timelimit = 5
 var elapsed = 0
 
 /* ************************************ */
@@ -66,7 +65,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -82,11 +80,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -125,8 +121,6 @@ var loop_node = {
   timeline: [test_block],
   loop_function: function() {
     elapsed = (new Date() - writing_start) / 60000
-    console.log('elapsed: ', elapsed)
-    console.log('timelimit: ', timelimit)
     if (elapsed < timelimit) {
       return true;
     } else {

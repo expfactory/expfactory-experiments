@@ -82,8 +82,19 @@
   transform: translate(-50%,-50%);
 }
 
+
+.instructionBox {
+	position: relative;
+	width: 60vw;
+	height: 10vw;
+	left: 50%;
+	top: 3%;
+	transform: translate(-50%, 0%);
+}
+
 .jspsych-instructions-nav > p {
   color: white;
+  margin-top: 10px;
 }
 
 div, p {
