@@ -258,18 +258,19 @@ var test_block = {
   timing_response: 20000,
   timing_post_trial: 1000,
   on_finish: function() {
-    jsPsych.data.addDataTolastTrial({
+    jsPsych.data.addDataToLastTrial({
       'problem': problems[problem_i],
       'answer': answers[problem_i]
     })
     problem_i += 1
-  },
-  repetitions: 12
+  }
 };
 
 /* create experiment definition array */
 var tower_of_london_imagine_experiment = [];
 tower_of_london_imagine_experiment.push(instruction_node);
 tower_of_london_imagine_experiment.push(start_test_block);
-tower_of_london_imagine_experiment.push(test_block);
+for (var i = 0; i < problems.length; i++) {
+  tower_of_london_imagine_experiment.push(test_block);
+}
 tower_of_london_imagine_experiment.push(end_block);
