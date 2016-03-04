@@ -27,19 +27,48 @@ function evalAttentionChecks() {
   return check_percent
 }
 
-function evalAttentionChecks() {
-  var check_percent = 1
-  if (run_attention_checks) {
-    var attention_check_trials = jsPsych.data.getTrialsOfType('attention-check')
-    var checks_passed = 0
-    for (var i = 0; i < attention_check_trials.length; i++) {
-      if (attention_check_trials[i].correct === true) {
-        checks_passed += 1
-      }
-    }
-    check_percent = checks_passed / attention_check_trials.length
+
+function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. 
+	 */
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
   }
-  return check_percent
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
 }
 
 var randomDraw = function(lst) {
@@ -175,6 +204,7 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 // Define and load images
@@ -194,12 +224,19 @@ var possible_responses = [
   ["M key", 77],
   ["Z key", 90]
 ]
+var choices = [possible_responses[0][1], possible_responses[1][1]]
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
   possible_responses[1], possible_responses[1]
 ])
-var prompt_text = '<ul list-text><li>Circle:  ' + correct_responses[0][0] + '</li><li>Rhombus:  ' +
-  correct_responses[1][0] + ' </li><li>L-shape:  ' + correct_responses[2][0] +
-  ' </li><li>Moon:  ' + correct_responses[3][0] + ' </li></ul>'
+var tab = '&nbsp&nbsp&nbsp&nbsp'
+var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
+  correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
+  tab +
+  correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+  '&nbsp&nbsp&nbsp' + correct_responses[2][0] +
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][
+    0
+  ] + ' </li></ul>'
 var RT_thresh = 1000
 var missed_response_thresh = 0.15
 var accuracy_thresh = 0.75
@@ -277,7 +314,8 @@ var end_block = {
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
@@ -293,7 +331,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -309,11 +346,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -393,7 +428,6 @@ var test_feedback_block = {
 
 
 
-
 /* ************************************ */
 /* Set up experiment */
 /* ************************************ */
@@ -411,7 +445,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
     stimulus: getNoSSPracticeStim,
     data: getNoSSPracticeData,
     is_html: true,
-    choices: [possible_responses[0][1], possible_responses[1][1]],
+    choices: choices,
     timing_post_trial: 0,
     timing_stim: 850,
     timing_response: 1850,
@@ -454,7 +488,7 @@ var NoSS_practice_node = {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
-        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. It is equally important that you both respond quickly and accurately to the shapes when there is no blue stop signal <strong>and</strong> successfully stop your response on trials where there is a blue stop signal.<p class = block-text>Press <strong>Enter</strong> to continue'
+        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange "signal" will appear around the shape after a short delay. If the signal is blue it is a "stop signal". On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>If the signal is orange you should respond like you normally would. Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a blue stop signal occurs.<p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
     } else {
       //rerandomize stim order
@@ -494,7 +528,7 @@ for (i = 0; i < practice_block_len; i++) {
     SS_trial_type: getSSPractice_trial_type,
     data: getSSPracticeData,
     is_html: true,
-    choices: [possible_responses[0][1], possible_responses[1][1]],
+    choices: choices,
     timing_stim: 850,
     timing_response: 1850,
     prompt: prompt_text,
@@ -620,7 +654,7 @@ for (var b = 0; b < numblocks; b++) {
       SS_trial_type: stop_trial,
       data: trial_data,
       is_html: true,
-      choices: [possible_responses[0][1], possible_responses[1][1]],
+      choices: choices,
       timing_stim: 850,
       timing_response: 1850,
       SSD: getSSD,
