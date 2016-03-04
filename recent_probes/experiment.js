@@ -79,7 +79,9 @@ function assessPerformance() {
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		trial_num: current_trial,
-		stim: [stim1, stim2, stim3, stim4, stim5, stim6],
+		stim: stims,
+		stims_1back: preceeding1stims,
+		stims_2back: preceeding2stims,
 		exp_stage: exp_stage
 	})
 };
@@ -92,13 +94,12 @@ var randomDraw = function(lst) {
 //this adds the trial number, which stims are shown, and if the trial was a correct trial to the data set
 var appendProbeData = function() {
 	var global_trial = jsPsych.progress().current_trial_global
-	var currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
 	var keyPress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
 	var correct = false
 	var correct_response = ''
-	if (currSet.indexOf(probe, 0) != -1) {
+	if (stims.indexOf(probe, 0) != -1) {
 		correct_response = 37
-	} else if (currSet.indexOf(probe, 0) == -1) {
+	} else if (stims.indexOf(probe, 0) == -1) {
 		correct_response = 39
 	} 
 	if (keyPress == correct_response) {
@@ -124,216 +125,161 @@ var appendPracticeProbeData = function() {
 //returns the divs for training sets.  this algorithm also chooses the training set based on the rules given in the paper(training sets are 
 //composed of three letters from the previous set, and three new letters.
 var getTrainingSet = function() {
+	var oldStims = []
+	var newStims = []
+	var newStimArray = []
+	var tempNewStims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial === 0) {
-		stim1 = trainingArray[0];
-		stim2 = trainingArray[1];
-		stim3 = trainingArray[2];
-		stim4 = trainingArray[3];
-		stim5 = trainingArray[4];
-		stim6 = trainingArray[5];
-		return  '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = recentStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = recentStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = recentStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = recentStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = recentStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = recentStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
-
+		stims = trainingArray.slice(0,6)
 	} else if (current_trial == 1) {
-		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial -
-			5).stim, 1)
+		preceeding1stims = stims.slice()
 		tempNewStims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
 		})
 		oldStims = preceeding1stims.slice(0, 3)
 		newStims = tempNewStims.slice(0, 3)
 		newStimArray = oldStims.concat(newStims)
-		newArray = jsPsych.randomization.repeat(newStimArray, 1)
-		stim1 = newArray[0];
-		stim2 = newArray[1];
-		stim3 = newArray[2];
-		stim4 = newArray[3];
-		stim5 = newArray[4];
-		stim6 = newArray[5];
-		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = recentStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = recentStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = recentStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = recentStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = recentStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = recentStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
-
+		stims = jsPsych.randomization.repeat(newStimArray, 1)
 	} else if (current_trial > 1) {
-		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial -
-			5).stim, 1)
-		preceeding2stims = jsPsych.randomization.repeat(jsPsych.data.getDataByTrialIndex(global_trial -
-				10).stim,
-			1)
+		preceeding2stims = preceeding1stims.slice()
+		preceeding1stims = stims.slice()
 		tempNewStims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
 		})
 		oldStims = preceeding1stims.slice(0, 3)
 		newStims = tempNewStims.slice(0, 3)
 		newStimArray = oldStims.concat(newStims)
-		newArray = jsPsych.randomization.repeat(newStimArray, 1)
-		stim1 = newArray[0];
-		stim2 = newArray[1];
-		stim3 = newArray[2];
-		stim4 = newArray[3];
-		stim5 = newArray[4];
-		stim6 = newArray[5];
-		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = recentStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = recentStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = recentStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = recentStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = recentStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = recentStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
+		stims = jsPsych.randomization.repeat(newStimArray, 1)
 	}
+	return  '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		'<div class = topLeft><img class = recentStim src ="' + pathSource + stims[0] + fileType +
+		'"></img></div>' +
+		'<div class = topMiddle><img class = recentStim src ="' + pathSource + stims[1] + fileType +
+		'"></img></div>' +
+		'<div class = topRight><img class = recentStim src ="' + pathSource + stims[2] + fileType +
+		'"></img></div>' +
+		'<div class = bottomLeft><img class = recentStim src ="' + pathSource + stims[3] + fileType +
+		'"></img></div>' +
+		'<div class = bottomMiddle><img class = recentStim src ="' + pathSource + stims[4] + fileType +
+		'"></img></div>' +
+		'<div class = bottomRight><img class = recentStim src ="' + pathSource + stims[5] + fileType +
+		'"></img></div>'
+
 };
 
 //this returns the divs for the probe stims.  This goes through the entire probeTypeArray and pops one out each time, then chooses a probe that is
 //congruent with that probe type
 var getProbe = function() {
-	global_trial = jsPsych.progress().current_trial_global
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
 	if (current_trial === 0) {
 		temp = Math.floor(Math.random() * 2)
 		if (temp == 1) {
 			probeType = 'xrec_pos'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_pos'), 1)
-			temp2 = jsPsych.randomization.repeat(currSet, 1)
+			temp2 = jsPsych.randomization.repeat(stims, 1)
 			probe = temp2.pop()
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (temp === 0) {
 			probeType = 'xrec_neg'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_neg'), 1)
 			temp2 = trainingArray.filter(function(y) {
-				return (jQuery.inArray(y, currSet) == -1)
+				return (jQuery.inArray(y, stims) == -1)
 			})
 			probe = temp2.pop()
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		}
 	} else if (current_trial > 0) {
-		lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 7).stim
 		probeType = probeTypeArray.pop()
 		if (probeType == 'rec_pos') {
-			recProbes = lastSet.filter(function(y) {
-				return (jQuery.inArray(y, currSet) > -1)
+			recProbes = preceeding1stims.filter(function(y) {
+				return (jQuery.inArray(y, stims) > -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'rec_neg') {
-			recProbes = lastSet.filter(function(y) {
-				return (jQuery.inArray(y, currSet) == -1)
+			recProbes = preceeding1stims.filter(function(y) {
+				return (jQuery.inArray(y, stims) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'xrec_pos') {
-			recProbes = currSet.filter(function(y) {
-				return (jQuery.inArray(y, lastSet) == -1)
+			recProbes = stims.filter(function(y) {
+				return (jQuery.inArray(y, preceeding1stims) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'xrec_neg') {
 			recProbes = trainingArray.filter(function(y) {
-				return (jQuery.inArray(y, currSet.concat(lastSet)) == -1)
+				return (jQuery.inArray(y, stims.concat(preceeding1stims)) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		}
 	}
 };
 
 var getPracticeProbe = function() {
-	global_trial = jsPsych.progress().current_trial_global
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	currSet = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
 	if (current_trial === 0) {
 		temp = Math.floor(Math.random() * 2)
 		if (temp == 1) {
 			probeType = 'xrec_pos'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_pos'), 1)
-			temp2 = jsPsych.randomization.repeat(currSet, 1)
+			temp2 = jsPsych.randomization.repeat(stims, 1)
 			probe = temp2.pop()
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (temp === 0) {
 			probeType = 'xrec_neg'
 			probeTypeArray.splice(probeTypeArray.indexOf('xrec_neg'), 1)
 			temp2 = trainingArray.filter(function(y) {
-				return (jQuery.inArray(y, currSet) == -1)
+				return (jQuery.inArray(y, stims) == -1)
 			})
 			probe = temp2.pop()
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		}
 	} else if (current_trial > 0) {
-		lastSet = jsPsych.data.getDataByTrialIndex(global_trial - 7).stim
 		probeType = practiceProbeTypeArray.pop()
 		if (probeType == 'rec_pos') {
-			recProbes = lastSet.filter(function(y) {
-				return (jQuery.inArray(y, currSet) > -1)
+			recProbes = preceeding1stims.filter(function(y) {
+				return (jQuery.inArray(y, stims) > -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'rec_neg') {
-			recProbes = lastSet.filter(function(y) {
-				return (jQuery.inArray(y, currSet) == -1)
+			recProbes = preceeding1stims.filter(function(y) {
+				return (jQuery.inArray(y, stims) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'xrec_pos') {
-			recProbes = currSet.filter(function(y) {
-				return (jQuery.inArray(y, lastSet) == -1)
+			recProbes = stims.filter(function(y) {
+				return (jQuery.inArray(y, preceeding1stims) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		} else if (probeType == 'xrec_neg') {
 			recProbes = trainingArray.filter(function(y) {
-				return (jQuery.inArray(y, currSet.concat(lastSet)) == -1)
+				return (jQuery.inArray(y, stims.concat(preceeding1stims)) == -1)
 			})
 			probe = randomDraw(recProbes)
-			return '<div class = centerBox><img class = recentStim src="' + pathSource + probe + fileType +
+			return '<div class = centerbox><img class = recentStim src="' + pathSource + probe + fileType +
 				'"></img></div>'
 		}
 	}
 };
 
 var getResponse = function() {
-	if (probe == stim1 || probe == stim2 || probe == stim3 || probe == stim4 || probe == stim5 ||
-		probe == stim6) {
+	if (jQuery.inArray(probe, stims)) {
 		return 37
 	} else {
 		return 39
@@ -359,13 +305,11 @@ var credit_var = true
 
 // task specific variables
 var probeType = ''
-var stim1 = ''
-var stim2 = ''
-var stim3 = ''
-var stim4 = ''
-var stim5 = ''
+var stims = []
+var preceeding1stims = []
+var preceeding2stims = []
 var probe = ''
-var choices = choices
+var choices = [37, 39]
 var exp_stage = 'practice'
 
 var num_trials = 24 //  num trials per run
@@ -579,9 +523,11 @@ var practice_probe_block = {
 	timing_response: 2000,
 	timing_feedback_duration: 750,
 	is_html: true,
-	on_finish: appendPracticeProbeData,
+	on_finish: function() {
+		appendPracticeProbeData()
+		current_trial += 1
+	}
 };
-
 
 var probe_block = {
 	type: 'poldrack-single-stim',
@@ -594,10 +540,13 @@ var probe_block = {
 	choices: choices,
 	timing_post_trial: 0,
 	timing_stim: 2000,
-	timing_response: 2000,
-	on_finish: appendProbeData,
+	timing_response: 7000,
+	prompt: '<div class = fixation style = "z-index: -1"><span style="color:red">+</span></div>',
+	on_finish: function() {
+		appendProbeData()
+		current_trial += 1
+	},
 };
-
 
 /* create experiment definition array */
 var recent_probes_experiment = [];
@@ -620,7 +569,6 @@ for (r = 0; r < num_runs; r++) {
 		recent_probes_experiment.push(training_block);
 		recent_probes_experiment.push(fixation_block);
 		recent_probes_experiment.push(probe_block);
-		recent_probes_experiment.push(ITI_fixation_block)
 	}
 	if ($.inArray(r, [0, 2]) != -1) {
 		recent_probes_experiment.push(attention_node);
