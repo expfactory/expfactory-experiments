@@ -124,14 +124,13 @@ var getRound = function() {
 
 
 var chooseCard = function(clicked_id) {
-	roundOver = 1
 	numClicks = numClicks + 1
 	currID = parseInt(clicked_id)
 	clickedCards.push(currID)
 }
 
 var makeChoice = function(clicked_id) {
-	roundOver = 2
+	roundOver = 1
 	numClicks = numClicks + 1
 	currID = parseInt(clicked_id)
 }
@@ -435,9 +434,9 @@ var test_block = {
 var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
-		if (roundOver == 2) {
+		if (roundOver == 1) {
 			return false
-		} else if (roundOver == 1 || roundOver === 0) {
+		} else if (roundOver == 0) {
 			return true
 		}
 	}
