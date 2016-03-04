@@ -27,6 +27,47 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+		//record choices participants made
+	var choice_counts = {}
+	choice_counts[-1] = 0
+	for (var k = 0; k < choices.length; k++) {
+		choice_counts[choices[k]] = 0
+	}
+	for (var i = 0; i < experiment_data.length; i++) {
+		trial_count += 1
+		rt = experiment_data[i].rt
+		key = experiment_data[i].key_press
+		choice_counts[key] += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+		//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	credit_var = (avg_rt > 200) && responses_ok
+}
+
 var post_trial_gap = function() {
   gap = Math.floor(Math.random() * 2000) + 1000
   return gap;
@@ -52,12 +93,14 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
   ["left arrow", 37],
   ["right arrow", 39]
 ], 1)
+var choices = [37, 39]
 var current_trial = 0
 var gap = Math.floor(Math.random() * 2000) + 1000
 var test_stimuli = [{
@@ -129,7 +172,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -144,11 +186,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
@@ -177,7 +217,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var start_test_block = {
@@ -214,7 +255,7 @@ var practice_block = {
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [37, 39],
+  choices: choices,
   timing_response: 1500,
   timing_stim: 1500,
   timing_feedback_duration: 1000,
@@ -232,7 +273,7 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [37, 39],
+  choices: choices,
   timing_response: 1500,
   timing_post_trial: post_trial_gap,
   on_finish: appendData
