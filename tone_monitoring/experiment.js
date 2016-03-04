@@ -40,34 +40,35 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	var stim = practice_trials[practice_count].data.trial_id
-	if (stim == 'high') {
-		high_count += 1
-	} else if (stim == 'medium') {
-		medium_count += 1
-	} else if (stim == 'low') {
-		low_count += 1
-	}
+	if (practice_count < practice_trials.length) {
+		var stim = practice_trials[practice_count].data.trial_id
+		if (stim == 'high') {
+			high_count += 1
+		} else if (stim == 'medium') {
+			medium_count += 1
+		} else if (stim == 'low') {
+			low_count += 1
+		}
 
-	if (stim == 'high' && high_count == 4) {
-		correct_key = 32
-		high_count = 0
-	} else if (stim == 'medium' && medium_count == 4) {
-		correct_key = 32
-		medium_count = 0
-	} else if (stim == 'low' && low_count == 4) {
-		correct_key = 32
-		low_count = 0
-	} else {
-		correct_key = 'none'
+		if (stim == 'high' && high_count == 4) {
+			correct_key = 32
+			high_count = 0
+		} else if (stim == 'medium' && medium_count == 4) {
+			correct_key = 32
+			medium_count = 0
+		} else if (stim == 'low' && low_count == 4) {
+			correct_key = 32
+			low_count = 0
+		} else {
+			correct_key = 'none'
+		}
+		practice_count += 1
 	}
-	practice_count += 1
 }
 
-var reset_count = function() {
-	var curr_trial = jsPsych.progress().current_trial_global
-	var stim = jsPsych.data.getData()[curr_trial].trial_id
-	var key = jsPsych.data.getData()[curr_trial].key_press
+var reset_count = function(data) {
+	var stim = data.trial_id
+	var key = data.key_press
 	if (stim == 'high' && key != -1) {
 		high_count = 0
 	} else if (stim == 'medium' && key != -1) {
@@ -103,46 +104,40 @@ var practice_count = 0
 practice_stims = [{
 	stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'high',
-		condition: 'practice'
+		stim_tone: 'high',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'medium',
-		condition: 'practice'
+		stim_tone: 'medium',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'low',
-		condition: 'practice'
+		stim_tone: 'low',
+		trial_id: 'stim'
 	}
 }]
 
 stims = [{
 	stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'high',
-		condition: 'test'
+		stim_tone: 'high',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'medium',
-		condition: 'test'
+		stim_tone: 'medium',
+		trial_id: 'stim'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 	data: {
-		exp_id: 'tone_monitoring',
-		trial_id: 'low',
-		condition: 'test'
+		stim_tone: 'low',
+		trial_id: 'stim'
 	}
 }]
 
@@ -197,7 +192,6 @@ var feedback_instruct_block = {
 	timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -214,11 +208,9 @@ var instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-	timeline: instruction_trials,
+	timeline: [feedback_instruct_block, instructions_block],
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
@@ -307,30 +299,29 @@ tone_monitoring_experiment.push(tone_introduction_block);
 tone_monitoring_experiment.push(start_practice_block);
 
 // set up practice
-for (i = 0; i < practice_trials.length; i++) {
-	var practice_tone_block = {
-		type: 'categorize-audio',
-		data: {
-			exp_id: 'tone_monitoring',
-			trial_id: 'tone',
+var practice_tone_block = {
+	type: 'categorize-audio',
+	timeline: practice_trials,
+	key_answer: get_correct_key,
+	correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
+	incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
+	timeout_message: ' ',
+	choices: [32],
+	timing_response: 2000,
+	timing_feedback_duration: 1000,
+	timing_post_trial: 500,
+	on_trial_start: update_count,
+	on_finish: function(data) {
+		reset_count(data)
+		update_count()
+		jsPsych.data.addDataToLastTrial({
 			exp_stage: 'practice'
-		},
-		timeline: practice_trials,
-		key_answer: get_correct_key,
-		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-		timeout_message: ' ',
-		choices: [32],
-		timing_response: 2000,
-		timing_feedback_duration: 1000,
-		timing_post_trial: 500,
-		on_trial_start: update_count,
-		on_finish: reset_count,
-		prompt: '<div class = centerbox><div class = block-text>Press the spacebar when any tone repeats four times. After you press the spacebar (for any reason), reset your count for that tone.</div></div>'
-	};
-	tone_monitoring_experiment.push(update_function)
-	tone_monitoring_experiment.push(practice_tone_block)
-}
+		})
+	},
+	prompt: '<div class = centerbox><div class = block-text>Press the spacebar when any tone repeats four times. After you press the spacebar (for any reason), reset your count for that tone.</div></div>'
+};
+tone_monitoring_experiment.push(practice_tone_block)
+
 
 // set up test
 for (b = 0; b < block_num; b++) {
@@ -338,17 +329,17 @@ for (b = 0; b < block_num; b++) {
 	tone_monitoring_experiment.push(start_test_block)
 	var test_tone_block = {
 		type: 'single-audio',
-		data: {
-			exp_id: 'tone_monitoring',
-			trial_id: 'tone',
-			exp_stage: 'test'
-		},
 		timeline: block,
 		choices: [32],
 		timing_stim: 2500,
 		timing_response: 2500,
 		timing_post_trial: 0,
-		response_ends_trial: false
+		response_ends_trial: false,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+			exp_stage: 'test'
+		})
+		}
 	};
 	tone_monitoring_experiment.push(test_tone_block)
 	if ($.inArray(b, [0, 2, 3]) != -1) {
