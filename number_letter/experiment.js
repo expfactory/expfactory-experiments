@@ -28,14 +28,16 @@ var getStim = function() {
 
 var getTopStim = function() {
   stim_place = 'top' + randomDraw(['left', 'right'])
-  return [stim_place, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + getStim() +
+  stim_id = getStim()
+  return [stim_place, stim_id, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + stim_id +
     '</p></div><div class = vertical-line></div><div class = horizontal-line></div>'
   ]
 }
 
 var getBottomStim = function() {
   stim_place = 'bottom' + randomDraw(['left', 'right'])
-  return [stim_place, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + getStim() +
+  stim_id = getStim()
+  return [stim_place, stim_id, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + stim_id +
     '</p></div><div class = vertical-line></div><div class = horizontal-line></div>'
   ]
 }
@@ -72,8 +74,8 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
-  ["left arrow", 37],
-  ["right arrow", 39]
+  ["left arrow", 90],
+  ["right arrow", 77]
 ], 1)
 var evens = [2, 4, 6, 8]
 var odds = [3, 5, 7, 9]
@@ -82,7 +84,7 @@ var consonants = ["G", "K", "M", "R"]
 var vowels = ["A", "E", "I", "U"]
 var letters = [consonants, vowels]
 var place = randomDraw([0, 1, 2, 3])
-
+var choices = [90, 77]
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -118,8 +120,8 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
-    '<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left for odd, right for even.</p></div>',
-    '<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p></div>'
+    '<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the "Z" and "M" keys: "Z" for odd, "M" for even.</p></div>',
+    '<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the same keys: "Z" for consonant, "M" for vowel.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -148,6 +150,19 @@ var instruction_node = {
   }
 }
 
+var gap_block = {
+  type: 'poldrack-single-stim',
+  stimulus: '<div class = vertical-line></div><div class = horizontal-line></div>',
+  choices: 'none',
+  is_html: true,
+  data: {
+    trial_id: 'gap'
+  },
+  timing_response: 150,
+  timing_stim: 150,
+  timing_post_trial: 0
+
+}
 /* create experiment definition array */
 var number_letter_experiment = []
 number_letter_experiment.push(instruction_node)
@@ -158,51 +173,60 @@ for (i = 0; i < half_block_len; i++) {
   stim = getTopStim()
   var top_block = {
     type: 'poldrack-single-stim',
-    stimulus: stim[1],
+    stimulus: stim[2],
     is_html: true,
-    choices: [37, 39],
+    choices: choices,
     data: {
       trial_id: 'stim',
       exp_stage: 'test',
-      stim: stim[0],
+      stim_place: stim[0],
+      stim_id: stim[1],
       'condition': 'top_oddeven'
     },
-    timing_post_trial: 150
+    timing_post_trial: 0,
+    response_ends_trial: true
   }
   number_letter_experiment.push(top_block)
+  number_letter_experiment.push(gap_block)
 }
 for (i = 0; i < half_block_len; i++) {
   stim = getBottomStim()
   var bottom_block = {
     type: 'poldrack-single-stim',
-    stimulus: stim[1],
+    stimulus: stim[2],
     is_html: true,
-    choices: [37, 39],
+    choices: choices,
     data: {
       trial_id: 'stim',
       exp_stage: 'test',
-      stim: stim[0],
+      stim_place: stim[0],
+      stim_id: stim[1],
       'condition': 'bottom_consonantvowel'
     },
-    timing_post_trial: 150
+    timing_post_trial: 0,
+    response_ends_trial: true
   }
   number_letter_experiment.push(bottom_block)
+  number_letter_experiment.push(gap_block)
 }
 for (i = 0; i < rotate_block_len; i++) {
   stim = getRotateStim()
   var rotate_block = {
     type: 'poldrack-single-stim',
-    stimulus: stim[1],
+    stimulus: stim[2],
     is_html: true,
-    choices: [37, 39],
+    choices: choices,
     data: {
       trial_id: 'stim',
       exp_stage: 'test',
-      stim: stim[0],
+      stim_place: stim[0],
+      stim_id: stim[1],
       'condition': 'rotate_switch'
     },
-    timing_post_trial: 150
+    timing_post_trial: 0,
+    response_ends_trial: true
   }
   number_letter_experiment.push(rotate_block)
+  number_letter_experiment.push(gap_block)
 }
 number_letter_experiment.push(end_block)
