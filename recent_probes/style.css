@@ -83,3 +83,7 @@ left:50%;
 margin-right:0%;
 transform: translate(-50%,15%);
 }
+
+.centerbox {
+	background-color: white;
+}
