@@ -1,6 +1,34 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+
+function assessPerformance() {
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].choices != 'none') {
+      rt = experiment_data[i].rt
+      trial_count += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  credit_var = (avg_rt > 200)
+}
+
+
 function getDisplayElement() {
   $('<div class = display_stage_background></div>').appendTo('body')
   return $('<div class = display_stage></div>').appendTo('body')
@@ -71,6 +99,7 @@ var run_attention_checks = false
 var attention_check_thresh = 1
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var token_zero = '<div class = wtw_token><div class = token_text>0&cent;</div></div>'
@@ -123,7 +152,8 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 
@@ -140,7 +170,6 @@ var feedback_instruct_block = {
   timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
-var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
@@ -153,11 +182,9 @@ var instructions_block = {
   show_clickable_nav: true,
   timing_post_trial: 1000
 };
-instruction_trials.push(feedback_instruct_block)
-instruction_trials.push(instructions_block)
 
 var instruction_node = {
-  timeline: instruction_trials,
+  timeline: [feedback_instruct_block, instructions_block],
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
