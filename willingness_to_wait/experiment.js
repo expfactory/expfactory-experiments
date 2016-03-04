@@ -1,29 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
 
 function assessPerformance() {
   var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
@@ -134,6 +111,8 @@ var delay = 0
 var practice_delays = [10000, 50000, 5000]
 var block_start_time = new Date();
 var total_money = 0 //in dollars
+var time_limit = 10
+var exp_stage = 'practice'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -234,7 +213,10 @@ var start_test_block = {
   text: '<div class = centerbox><p class = center-block-text>We will now start the main experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 180000,
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    exp_stage = 'test'
+  }
 };
 
 var start_practice_block = {
@@ -304,17 +286,17 @@ var feedback_block = {
   timing_post_trial: 1000,
   on_finish: function(data) {
     jsPsych.data.addDataToLastTrial({
-      'delay': delay
+      'delay': delay,
+      exp_stage: exp_stage
     })
-    changeData()
   }
 };
 
 var test_node = {
   timeline: [test_block, feedback_block],
   loop_function: function() {
-    var elapsed = (new Date() - block_start_time) / 180000
-    if (elapsed > 10) {
+    var elapsed = (new Date() - block_start_time) / 60000
+    if (elapsed > time_limit) {
       return false
     } else {
       return true
