@@ -106,7 +106,7 @@ var genStims = function(n) {
 
 //Sets the cue-target-interval for the cue block
 var setCTI = function() {
-  return randomDraw([1, 100, 200, 400, 800])
+  return randomDraw([100, 900])
 }
 
 var getCTI = function() {
@@ -244,7 +244,7 @@ var response_keys = jsPsych.randomization.repeat([{
 }], 1, true)
 var choices = response_keys.key
 var practice_length = 60
-var test_length = 340
+var test_length = 440
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -477,7 +477,7 @@ var practice_block = {
   },
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
-  timing_response: 1500,
+  timing_response: 2000,
   timing_stim: 1000,
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
@@ -495,7 +495,7 @@ var test_block = {
     exp_stage: 'test'
   },
   timing_post_trial: 0,
-  timing_response: 1500,
+  timing_response: 2000,
   timing_stim: 1000,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: appendData
