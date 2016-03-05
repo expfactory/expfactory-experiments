@@ -8,6 +8,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "experiment.js",
              	"static/css/jspsych.css",
