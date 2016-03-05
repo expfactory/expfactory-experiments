@@ -76,6 +76,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 // generic task variables
 var run_attention_checks = false
 var attention_check_thresh = 0.65
@@ -280,4 +292,5 @@ for (b = 0; b < blocks.length; b++) {
   ax_cpt_experiment.push(attention_node)
   ax_cpt_experiment.push(rest_block)
 }
+ax_cpt_experiment.push(post_task_block)
 ax_cpt_experiment.push(end_block)

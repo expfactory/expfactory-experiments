@@ -504,6 +504,18 @@ var practiceSetup2 =
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 
 var feedback_instruct_text =
@@ -714,4 +726,5 @@ for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
 columbia_card_task_hot_experiment.push(give_total);
+columbia_card_task_hot_experiment.push(post_task_block)
 columbia_card_task_hot_experiment.push(end_block);

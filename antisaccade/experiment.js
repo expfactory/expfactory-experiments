@@ -126,6 +126,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -420,4 +432,5 @@ for (i = 0; i < exp_len; i++) {
   antisaccade_experiment.push(mask_block)
 }
 antisaccade_experiment.push(attention_node)
+antisaccade_experiment.push(post_task_block)
 antisaccade_experiment.push(end_block)
