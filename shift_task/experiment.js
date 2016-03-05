@@ -88,7 +88,7 @@ var getData = function() {
 }
 
 var getAlert = function() {
-  return '<div class = alertbox><div class = alert-text>The important feature is <strong>' +
+  return '<div class = alertbox><div class = alert-text>The relevant feature is <strong>' +
     rewarded_feature + '</strong>!</div></div>'
 }
 var getStim = function() {
@@ -260,7 +260,7 @@ var instructions_block = {
     getStim() +
     '<div class = instructionbox><p class = block-text>On each trial of this experiment three patterned objects will be presented. They will differ in their color, shape and internal pattern.</p><p class = block-text>For instance, the objects may look something like this:</p></div><div class = navBox></div>',
     '<div class = centerbox><p class = block-text>On each trial you select one of the objects to get points using the arrow keys (left, down and right keys for the left, middle and right objects, respectively). The object you choose determines the chance of getting a point.</p><p class = block-text>The objects differ in three dimensions: their color (red, blue, green), shape (square, circle, triangle) and pattern (lines, dots, waves). Only one dimension (color, shape or pattern) is relevant for determining the probability of winning a point at any time.</p><p class = block-text>One feature of that dimension will result in rewards more often than the others. For instance, if the relevant dimension is "color", "blue" objects may result in earning a point more often than "green" or "red" objects.</p><p class = block-text>Importantly, all rewards are probabilistic. This means that even the best object will sometimes not result in any points and bad objects can sometimes give points.</div>',
-    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the important dimension with "waves" the important feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the important feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session after you end instructions.</p></div>'
+    '<div class = centerbox><p class = block-text>The relevant dimension and feature can change between trials. One trial "color" may be the relevant dimension with "red" the relevant feature, while on the next trial "pattern" is the relevant dimension with "waves" the relevant feature.</p><p class = block-text>During an initial practice session these changes will be explicitly signaled and you will be told what the relevant feature is. During the main task, however, there will be no explicit instructions - you will have to figure out the relevant feature yourself.</p><p class = block-text>Your objective is to get as many point as possible! The trials go by quickly so you must respond quickly. There will be a number of breaks throughout the task. We will start with a practice session after you end instructions.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -306,7 +306,7 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = shift-center-text>We will now start the test. You will no longer be told what the important feature is or when it switches. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = shift-center-text>We will now start the test. You will no longer be told what the relevant feature is or when it switches. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
