@@ -79,8 +79,8 @@ var getInstructFeedback = function() {
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
 		trial_num: current_trial,
-		stim_top: [stim1, stim2, stim3],
-		stim_bottom: [stim4, stim5, stim6],
+		stim_top: stims.slice(0,3),
+		stim_bottom: stims.slice(3),
 		exp_stage: exp_stage
 	})
 };
@@ -95,12 +95,11 @@ var appendCueData = function() {
 };
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
-var appendProbeData = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	var trialCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
-	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
-	var keypress = jsPsych.data.getDataByTrialIndex(global_trial).key_press
+var appendProbeData = function(data) {
+	var trialCue = cue
+	var lastSet_top = stims.slice(0,3)
+	var lastSet_bottom = stims.slice(3)
+	var keypress = data.key_press
 	var memorySet = ''
 	var correct_response = ''
 	var correct = false
@@ -133,79 +132,32 @@ var getTrainingSet = function() {
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial < 1) {
-		stim1 = trainingArray[0];
-		stim2 = trainingArray[1];
-		stim3 = trainingArray[2];
-		stim4 = trainingArray[3];
-		stim5 = trainingArray[4];
-		stim6 = trainingArray[5];
-		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = forgetStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
-
+		stims = trainingArray.slice(0,6)
 	} else if (current_trial == 1) {
-		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.data.getDataByTrialIndex(global_trial - 5).stim
-		newArray = trainingArray.filter(function(y) {
+		preceeding1stims = stims.slice()
+		stims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
-		})
-		stim1 = newArray[0];
-		stim2 = newArray[1];
-		stim3 = newArray[2];
-		stim4 = newArray[3];
-		stim5 = newArray[4];
-		stim6 = newArray[5];
-		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = forgetStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
-
+		}).slice(0,6)
 	} else {
-		global_trial = jsPsych.progress().current_trial_global
-		preceeding1stims = jsPsych.data.getDataByTrialIndex(global_trial - 5).stim
-		preceeding2stims = jsPsych.data.getDataByTrialIndex(global_trial - 10).stim
-		newArray = trainingArray.filter(function(y) {
+		preceeding2stims = preceeding1stims.slice()
+		preceeding1stims = stims.slice()
+		stims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		})
-		stim1 = newArray[0];
-		stim2 = newArray[1];
-		stim3 = newArray[2];
-		stim4 = newArray[3];
-		stim5 = newArray[4];
-		stim6 = newArray[5];
-		return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-			'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim1 + fileType +
-			'"></img></div>' +
-			'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim2 + fileType +
-			'"></img></div>' +
-			'<div class = topRight><img class = forgetStim src ="' + pathSource + stim3 + fileType +
-			'"></img></div>' +
-			'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stim4 + fileType +
-			'"></img></div>' +
-			'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stim5 + fileType +
-			'"></img></div>' +
-			'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stim6 + fileType +
-			'"></img></div>'
+		}).slice(0,6)
 	}
+	return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
+		'<div class = topLeft><img class = forgetStim src ="' + pathSource + stims[0] + fileType +
+		'"></img></div>' +
+		'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stims[1] + fileType +
+		'"></img></div>' +
+		'<div class = topRight><img class = forgetStim src ="' + pathSource + stims[2] + fileType +
+		'"></img></div>' +
+		'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stims[3] + fileType +
+		'"></img></div>' +
+		'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stims[4] + fileType +
+		'"></img></div>' +
+		'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stims[5] + fileType +
+		'"></img></div>'
 };
 
 //returns a cue pseudorandomly, either TOP or BOT
@@ -219,11 +171,10 @@ var getCue = function() {
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
 var getProbe = function() {
 	probeType = probeTypeArray.pop()
-	var global_trial = jsPsych.progress().current_trial_global
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	var lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
-	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
+	var lastCue = cue
+	var lastSet_top = stims.slice(0,3)
+	var lastSet_bottom = stims.slice(3)
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
 			probe = lastSet_top[Math.floor(Math.random() * 3)]
@@ -249,11 +200,10 @@ var getProbe = function() {
 
 var getPracticeProbe = function() {
 	probeType = practiceProbeTypeArray.pop()
-	var global_trial = jsPsych.progress().current_trial_global
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	var lastCue = jsPsych.data.getDataByTrialIndex(global_trial - 2).stim
-	var lastSet_top = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_top
-	var lastSet_bottom = jsPsych.data.getDataByTrialIndex(global_trial - 3).stim_bottom
+	var lastCue = cue
+	var lastSet_top = stims.slice(0,3)
+	var lastSet_bottom = stims.slice(3)
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
 			probe = lastSet_top[Math.floor(Math.random() * 3)]
@@ -279,14 +229,14 @@ var getPracticeProbe = function() {
 
 var getResponse = function() {
 	if (cue == 'TOP') {
-		if (probe == stim4 || probe == stim5 || probe == stim6) {
+		if (jQuery.inArray(probe, stims.slice(3)) != -1) {
 			return 37
 		} else {
 			return 39
 		}
 
 	} else if (cue == 'BOT') {
-		if (probe == stim1 || probe == stim2 || probe == stim3) {
+		if (jQuery.inArray(probe, stims.slice(0,3)) != -1) {
 			return 37
 		} else {
 			return 39
@@ -330,12 +280,9 @@ var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'
 var cueArray = ['TOP', 'BOT']
 var probe = ''
 var cue = ''
-var stim1 = ''
-var stim2 = ''
-var stim3 = ''
-var stim4 = ''
-var stim5 = ''
-var stim6 = ''
+var stims = []
+var preceeding1stims = []
+var preceeding2stims = []
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
 var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, 1)
@@ -547,7 +494,9 @@ var probe_block = {
 	timing_stim: 2000,
 	timing_response: 2000,
 	response_ends_trial: false,
-	on_finish: appendProbeData
+	on_finish: function(data) {
+		appendProbeData(data)
+	}
 };
 
 var intro_test_block = {
