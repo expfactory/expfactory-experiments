@@ -62,7 +62,7 @@ var randomDraw = function(lst) {
 }
 
 var getStim = function() {
-  var border_i = randomDraw([0, 1, 2, 3]) // get border index
+  var border_i = randomDraw([0, 1]) // get border index
   var number_i = randomDraw([0, 1]) // get inner index
   var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
   var stim2 = stim_prefix + path_source + borders[border_i] +
@@ -70,7 +70,7 @@ var getStim = function() {
     inners[number_i] + '</div></div>'
     // set correct choice for first
   var gonogo_choice;
-  if (border_i < 2) {
+  if (border_i == 0) {
     gonogo_choice = 75
   } else {
     gonogo_choice = -1
@@ -194,7 +194,7 @@ var curr_data = {
 var path_source = '/static/experiments/psychological_refractory_period/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
   // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
-var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png', '3_border.png',
+var borders = jsPsych.randomization.shuffle(['2_border.png',
     '4_border.png'
   ])
   // inner number reflect the choice RT. 
@@ -271,7 +271,7 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press the "K" key with your middle finger. If it is not one of those colors, you should not respond.</p>' +
+    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is the one on the left below, you should press the "K" key with your middle finger. If it is the one on the right, you should not respond.</p>' +
     box1 + box2 + '</div>',
     '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
