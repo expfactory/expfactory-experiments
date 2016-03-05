@@ -40,8 +40,8 @@ var get_correct_key = function() {
 }
 
 var update_count = function() {
-	if (practice_count < practice_trials.length) {
-		var stim = practice_trials[practice_count].data.trial_id
+	if (update_i < update_trials.length) {
+		var stim = update_trials[update_i].data.stim_tone
 		if (stim == 'high') {
 			high_count += 1
 		} else if (stim == 'medium') {
@@ -62,7 +62,7 @@ var update_count = function() {
 		} else {
 			correct_key = 'none'
 		}
-		practice_count += 1
+		update_i += 1
 	}
 }
 
@@ -99,25 +99,28 @@ var high_count = 0
 var medium_count = 0
 var low_count = 0
 var correct_key = 'none'
-var practice_count = 0
+var update_i = 0
 
 practice_stims = [{
 	stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'high',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'practice'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'medium',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'practice'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'low',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'practice'
 	}
 }]
 
@@ -125,25 +128,29 @@ stims = [{
 	stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'high',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'test'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'medium',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'test'
 	}
 }, {
 	stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3',
 	data: {
 		stim_tone: 'low',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		exp_stage: 'test'
 	}
 }]
 
 last_tone = randomDraw(practice_stims)
 practice_trials = jsPsych.randomization.repeat(practice_stims, 8);
 practice_trials.push(last_tone)
+update_trials = practice_trials
 
 block_num = 4
 blocks = []
@@ -152,6 +159,7 @@ for (b = 0; b < block_num; b++) {
 	last_tone = randomDraw(stims)
 	block_trials.push(last_tone)
 	blocks.push(block_trials)
+	update_trials = update_trials.concat(block_trials)
 }
 
 /* ************************************ */
@@ -262,10 +270,15 @@ var start_test_block = {
 	},
 	text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a tone repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 01000
+	timing_post_trial: 1000,
+	on_finish: function() {
+		low_count = 0
+		medium_count = 0
+		high_count = 0
+	}
 };
 
-var update_function = {
+var update_block = {
 	type: 'call-function',
 	data: {
 		exp_id: 'tone_monitoring',
@@ -281,15 +294,15 @@ var tone_introduction_block = {
 		exp_id: 'tone_monitoring',
 		trial_id: 'tone_intro'
 	},
-	stimuli: ['/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
-		'/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3',
-		'/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3'
+	timeline: [{stimulus: '/static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3'},
+		{stimulus: '/static/experiments/tone_monitoring/sounds/440Hz_-6dBFS_.5s.mp3'},
+		{stimulus: '/static/experiments/tone_monitoring/sounds/220Hz_-6dBFS_.5s.mp3'}
 	],
 	choices: 'none',
 	timing_stim: 2500,
 	timing_response: 2500,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><div class = block-text>First you will hear the high tone, then the medium tone, then the low tone.</div></div>'
+	prompt: '<div class = centerbox><div class = center-block-text>First you will hear the high tone, then the medium tone, then the low tone.</div></div>'
 };
 
 //Set up experiment
@@ -309,17 +322,19 @@ var practice_tone_block = {
 	choices: [32],
 	timing_response: 2000,
 	timing_feedback_duration: 1000,
-	timing_post_trial: 500,
-	on_trial_start: update_count,
+	timing_post_trial: 0,
 	on_finish: function(data) {
+		jsPsych.data.addDataToLastTrial({
+			high_count: high_count,
+			medium_count: medium_count,
+			low_count: low_count
+		})
 		reset_count(data)
 		update_count()
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: 'practice'
-		})
 	},
 	prompt: '<div class = centerbox><div class = block-text>Press the spacebar when any tone repeats four times. After you press the spacebar (for any reason), reset your count for that tone.</div></div>'
 };
+tone_monitoring_experiment.push(update_block)
 tone_monitoring_experiment.push(practice_tone_block)
 
 
@@ -335,12 +350,18 @@ for (b = 0; b < block_num; b++) {
 		timing_response: 2500,
 		timing_post_trial: 0,
 		response_ends_trial: false,
-		on_finish: function() {
+		on_finish: function(data) {
 			jsPsych.data.addDataToLastTrial({
-			exp_stage: 'test'
-		})
+				high_count: high_count,
+				medium_count: medium_count,
+				low_count: low_count,
+				correct_key: correct_key
+			})
+			reset_count(data)
+			update_count()
 		}
 	};
+	tone_monitoring_experiment.push(update_block)
 	tone_monitoring_experiment.push(test_tone_block)
 	if ($.inArray(b, [0, 2, 3]) != -1) {
 		tone_monitoring_experiment.push(attention_node)
