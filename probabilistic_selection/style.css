@@ -9,22 +9,24 @@
 }
 
 .decision-left {
-    width:330px;
+  width:12vw;
+  height: 12vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-125%,-50%);
+  transform: translate(-175%,-50%);
 }
 
 
 .decision-right {
-    width:400px;
+  width:12vw;
+  height: 12vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(25%,-50%);
+  transform: translate(75%,-50%);
 }
 .centerbox {
   width:35vw;
@@ -75,9 +77,9 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%,-50%);
+}
 
-
-]/* As above but centered instead of justified. Good for instructions with few lines */
+/* As above but centered instead of justified. Good for instructions with few lines */
 .center-block-text {
   width:100%;
   height 100vw;
@@ -86,4 +88,8 @@ transform: translate(-50%,-50%);
   margin-bottom: 1em;
   font-size: 20px;
   line-height: 120%;
+}
+
+.responded {
+  visibility: hidden;
 }

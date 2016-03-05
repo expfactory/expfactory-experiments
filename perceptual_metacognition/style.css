@@ -12,8 +12,6 @@
 }
 
 #canvas1, #canvas2, #backCanvas1,#backCanvas2 {
-  width: 600px;
-  height: 600px;
   display: block;
     margin: 0 auto;
 }

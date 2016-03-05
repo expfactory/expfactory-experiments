@@ -81,3 +81,23 @@ transform: translate(-50%,-50%);
 .responded {
   visibility: hidden;
 }
+
+.alertbox {
+  width: 50vw;
+  height: 80vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.alert-text {
+  text-align:center;
+  font-size: 40px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
