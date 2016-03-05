@@ -434,6 +434,18 @@ var attention_node = {
 	}
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questoins"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var feedback_instruct_text =
 	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
@@ -530,7 +542,7 @@ var ask_fish_block = {
 	},
 	questions: [
 		[
-			"<p>For this tournament, how many red fish are in the lake? Please enter a number between 1-200</p><p>If you don't respond, or respond out of these bounds the number of red fish will be randomly set between 1-200.</p>"
+			"<p class = center-block-text>For this tournament, how many red fish are in the lake? Please enter a number between 1-200</p><p class = center-block-text>If you don't respond, or respond out of these bounds the number of red fish will be randomly set between 1-200.</p>"
 		]
 	],
 }
@@ -749,4 +761,5 @@ for (b = 0; b < blocks.length; b++) {
 		angling_risk_task_experiment.push(attention_node)
 	}
 }
+angling_risk_task_experiment.push(post_task_block)
 angling_risk_task_experiment.push(end_block)

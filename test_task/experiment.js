@@ -64,11 +64,12 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       trial_id: "ask fish"
+       trial_id: "post task questions"
    },
-   questions: ["<p>Please summarize what you were asked to do in this task.</p>",
-              "<p>Do you have any comments about this task?</p>"],
-   rows: [10, 20]
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
 };
 
 /* define static blocks */
