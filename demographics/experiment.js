@@ -49,10 +49,10 @@ var instructions_block = {
 
 
 var all_pages = [
-  ["What is your sex?", "What is your marital status?", "If you've been divorced, how many times?", "What is your ethnic background?", "How many children do you have?","How many traffic tickets have you gotten in the last year?"],
-  ["Altogether, have you smoked at least 100 or more cigarettes in your entire lifetime?", "How long have you smoked (cumulatively)?", "Do you now smoke cigarettes every day, some days or not at all?", "On average, how many cigarettes do you now smoke a day (1 pack = 20 cigarettes)?", "How soon after you wake up do you smoke your first cigarette?", "In the past 30 days have you used chewing tobacco?", "In the past 30 days have you used cigard?", "In the past 30 days have you used a pipe?", "In the past 30 days have you used tobacco for your nose (snuff)?", "In the past 30 days have you used e-cigarettes, e-hookah or vape pens?", "In the past 30 days have you used cigarillos or little cigars?"],
+  ["What is your sex?", "What is your marital status?", "If you've been divorced, how many times?", "What is your ethnic background?", "If you chose 'Other' for your ethic background how would you describe it?", "How many children do you have?","How tall are you (in inches - one foot = 12 inches)?","How much you do weigh?","How many traffic tickets have you gotten in the last year?"],
+  ["Altogether, have you smoked at least 100 or more cigarettes in your entire lifetime?", "How long have you smoked (cumulatively)?", "Do you now smoke cigarettes every day, some days or not at all?", "On average, how many cigarettes do you now smoke a day (1 pack = 20 cigarettes)?", "How soon after you wake up do you smoke your first cigarette?", "In the past 30 days, what tobacco products OTHER THAN cigarettes have you used (check all that apply)?"],
   ["How often do you have a drink containing alcohol?", "How many drinks containing alcohol do you have on a typical day when you are drinking?", "How often do you have six or more drinks on one occasion?", "How often during the last year have you found that you were not able to stop drinking once you had started?", "How often during the last year have you failed to do what was normally expected from you because of drinking?", "How often during the last year have you needed a first drink in the morning to get yourself going after a heavy drinking session?", "How often during the last year have you had a feeling of guilt or remorse after drinking?", "How often during the last year have you been unable to remember what happened the night before because you had been drinking?", "Have you or someone else been injured as a result of your drinking?", "Has a relative or friend or a doctor or another health worker been concerned about your drinking or suggested you cut down?"],
-  ["What is your daily caffeine intake? (1 cup of regular coffee ~ 120 mg, 1 cup black tea ~ 50 mg, 1 cup green tea ~ 40 mg)", "Do you have any chronic medical problems which continue to interfere with your life?", "Are you taking any prescribed medication on a regular basis for a physical problem?", "In addition to visits related to a chronic problem how often do you visit your doctor/have annual check ups?", "How many times in your life have you been arrested and/or charged with illigal activities?", "Do you have a retirement account?", "If you do have a retirement account what percent is in stocks?", "Do you have any debt (credit card or other)?", "If you have any debt how much?", "Do you own or the house you live in?"]
+  ["What is your daily caffeine intake (in mg)? (1 cup of regular coffee ~ 120 mg, 1 cup black tea ~ 50 mg, 1 cup green tea ~ 40 mg)", "Do you have any chronic medical problems which continue to interfere with your life?", "Are you taking any prescribed medication on a regular basis for a physical problem?", "In addition to visits related to a chronic problem how often do you visit your doctor/have annual check ups in a year?", "How many times in your life have you been arrested and/or charged with illigal activities?", "Do you have a retirement account?", "If you do have a retirement account what percent is in stocks?", "Do you have any debt (credit card or other)?", "If you have any debt how much (in dollars)?", "Do you own or the house you live in?", "What are you motivations for participating in this experiment?", "Please list other motivations."]
 ]
 
 var opts_1 = ["Male", "Female", "Choose not to respond"]
@@ -106,30 +106,39 @@ var scale_16 = {"<10%":1, "10-20%":2, "20-30%":2, "30-40%":3, "40-50%":4, "60-70
 var opts_17 = ["<$500", "$500-$2500", "$2500-$10000", "$10000-$25000", "$25000-$50000", "$50000-$100000", "$100000-$200000", ">$200000"]
 var scale_17 = {"<$500":1, "$500-$2500":2, "$2500-$10000":3, "$10000-$25000":4, "$25000-$50000":5, "$50000-$100000":6, "$100000-$200000":7, ">$200000":8}
 
-var all_options = [[opts_1, opts_2, opts_3, opts_4, opts_10, opts_10],
-[opts_5, opts_6, opts_7, opts_8, opts_9, opts_5, opts_5, opts_5, opts_5, opts_5, opts_5],
+var opts_18 = ["Chewing tobacco (dip)", "Cigars", "Pipe", "Tobacco for your nose (snuff)", "E-cigarettes", "E-hookah or vape pens", "Cigarillos or little cigars", "Don't Know"]
+var scale_18 = {"Chewing tobacco (dip)":1, "Cigars":2, "Pipe":3, "Tobacco for your nose (snuff)":4, "E-cigarettes":5, "E-hookah or vape pens":6, "Cigarillos or little cigars":7, "Don't Know":8}
+
+var opts_19 = ["money", "tasks are fun", "want to contribute to research", "other"]
+var scale_19 = {"money":1, "tasks are fun":2, "want to contribute to research":3, "other":4}
+
+var all_options = [[opts_1, opts_2, opts_3, opts_4, opts_4, opts_10, opts_10,opts_10,opts_10],
+[opts_5, opts_6, opts_7, opts_8, opts_9, opts_18],
 [opts_11, opts_12, opts_13, opts_13, opts_13, opts_13, opts_13, opts_13, opts_14, opts_14],
-[opts_15, opts_5, opts_5, opts_10, opts_10, opts_5, opts_16, opts_5, opts_17, opts_5]
+[opts_15, opts_5, opts_5, opts_10, opts_10, opts_5, opts_16, opts_5, opts_17, opts_5, opts_19, opts_19]
 ]
 
-var score_scale = [[scale_1, scale_2, scale_3, scale_4, scale_10, scale_10],
-[scale_5, scale_6, scale_7, scale_8, scale_9, scale_5, scale_5, scale_5, scale_5, scale_5, scale_5],
+var score_scale = [[scale_1, scale_2, scale_3, scale_4, scale_4, scale_10, scale_10,scale_10,scale_10],
+[scale_5, scale_6, scale_7, scale_8, scale_9, scale_18],
 [scale_11, scale_12, scale_13, scale_13, scale_13, scale_13, scale_13, scale_13, scale_14, scale_14],
-[scale_15, scale_5, scale_5, scale_10, scale_10, scale_5, scale_16, scale_5, scale_17, scale_5]
+[scale_15, scale_5, scale_5, scale_10, scale_10, scale_5, scale_16, scale_5, scale_17, scale_5, scale_19, scale_19]
 ]
-
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
   exp_id: "demographics",
   horizontal: true,
-  preamble: '<div><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
+  preamble: '',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(false, 6),fillArray(false, 11), fillArray(false, 10), fillArray(false, 10)]
+  required: [fillArray(false, 9),fillArray(false, 6), fillArray(false, 10), fillArray(false, 12)],
+  input_type: [["radio", "radio", "number", "checkbox","text", "number", "number","number", "number"],
+  ["radio", "radio", "radio", "number", "radio", "checkbox"],
+  ["radio","radio","radio","radio","radio","radio","radio","radio","radio","radio"],
+  ["number", "radio", "radio", "number", "number", "radio", "number", "radio", "number", "radio", "checkbox", "text"]]
 };
 
 var end_block = {
