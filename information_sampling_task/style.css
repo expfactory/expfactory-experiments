@@ -5,26 +5,25 @@
    padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
    margin: 0%;
    overflow:none;
-    color: #fff;
+   color: #fff;
 }
 
 .numbox {
  width:35vw;
  height: 35vw;
  position:absolute;
- top:2.5%;
- left:32.5%;
+ top:50%;
+ left:50%;
  margin-right:50%;
- transform: translate(0%,0%);
- background-color: black;
+ transform: translate(-50%,-70%);
 }
 
 .bottomLeft {
   width: 5vw;
   height: 5vw;
   position:absolute;
-  top:75%;
-  left:41.25%;
+  top:30%;
+  left:31.25%;
   margin-right:-50%;
   transform: translate(-125%,-25%);
 }
@@ -33,19 +32,63 @@
   width:5vw;
   height: 5vw;
   position:absolute;
-  top:75%;
-  left:61.25%;
+  top:30%;
+  left:71.25%;
   margin-right:-50%;
   transform: translate(-125%,-25%);
 }
 
 .bigbox {
- width:100vw;
- height: 100vh;
+ width:100%;
+ height: 100%;
  position:absolute;
  top:0%;
  left:0%;
  margin-right:0%;
- transform: translate(-5%,-2%);
  background-color: black;
+}
+
+.smallbox {
+ width:50vw;
+ height: 20vh;
+ position:absolute;
+ top:70%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-50%, 15%);
+}
+
+.small_square {
+   height: 7vw;
+   width: 7vw;
+}
+
+.big_square {
+   height: 10vw;
+   width: 10vw;
+}
+
+.rewardbox {
+  width: 25vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-100%);
+  background: gray;
+  background-color:rgba(0,0,0,0.7);
+}
+
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.reward-text {
+  text-align:center;
+  font-size: 24px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: white;
 }
