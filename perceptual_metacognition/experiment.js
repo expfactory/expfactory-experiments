@@ -395,7 +395,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. We will begin with practice after you end the instructions.</p></div>'
+		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. There is a fixation cross in the middle of the screen. The patches come on the screen for a very short amount of time, so keep your eyes on the cross.</p><p class = block-text>After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. We will begin with practice after you end the instructions.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -430,7 +430,7 @@ var start_test_block = {
 		trial_id: "end"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>We are done with practice. We will now start the test. This will be identical to the practice - your task is to indicate where the grating is by pressing the arrow keys. After you make your choice, rate how confidence you are that your response was accurate.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We are done with practice. We will now start the test. This will be identical to the practice - your task is to indicate where the grating is by pressing the arrow keys. After you make your choice, rate how confident you are that your response was accurate.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
@@ -486,7 +486,6 @@ var easy_block = {
 
 var confidence_block = {
 	type: 'single-stim-button',
-	// stimulus: getHealthStim,
 	stimulus: confidence_response_area,
 	button_class: 'response_button',
 	data: {
