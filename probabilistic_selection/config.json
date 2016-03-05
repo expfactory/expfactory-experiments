@@ -26,7 +26,7 @@
                          "Russell Poldrack"
                         ], 
         "time":999,
-        "reference": "http://www.nature.com/neuro/journal/v14/n2/fig_tab/nn.2723_F3.html",
+        "reference": "http://science.sciencemag.org/content/306/5703/1940.full",
         "publish":"True",
         "experiment_variables": [{
                                  "name":"credit_var",
