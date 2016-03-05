@@ -105,7 +105,7 @@ var getFB = function() {
       tooShort = true
     } else {
       if (data.gonogo_correct_response != -1) {
-        gonogoFB = 'You responded to the colored square correctly!'
+        gonogoFB = 'You responded correctly to the colored square!'
       } else {
         gonogoFB = 'You should not respond to that colored square.'
       }
