@@ -9,7 +9,8 @@
                  "static/js/jspsych/plugins/jspsych-survey-text.js",
                  "experiment.js",
                  "static/css/jspsych.css",
-                 "static/css/default_style.css"
+                 "static/css/default_style.css",
+                 "style.css"
                ],
         "exp_id": "cognitive_reflection",
         "cognitive_atlas_task_id": "trm_56675359b663a",

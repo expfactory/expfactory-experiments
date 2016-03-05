@@ -27,11 +27,6 @@ function evalAttentionChecks() {
   return check_percent
 }
 
-function calcAvgRT() {
-  jsPsych.data.getData()
-}
-
-
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -44,9 +39,7 @@ var experiment_len = 3
 var gap = 0
 var current_trial = 0
 var stim = '<div class = "shapebox"><div id = "cross"></div></div>'
-var rts = []
-var performance_var = 0 // Holds the Average RT
-var credit_var = true // If true, credit the participant
+
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -67,29 +60,26 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: function() {
-    // If using attentional checks, calculate the percent successful
-    var check_percent = evalAttentionChecks()
-      // calculate average rt
-    var total = 0;
-    for (var i = 0; i < rts.length; i++) {
-      total += rts[i];
-    }
-    performance_var = total / rts.length
-      // If criteria passed, give credit
-    credit_var = false
-    if (performance_var > 100 && check_percent > attention_check_thresh) {
-      credit_var = true
-    }
-  }
-};
+  timing_post_trial: 0
+}
 
 /* define test block */
 var test_block = {
@@ -100,10 +90,8 @@ var test_block = {
     trial_id: "test"
   },
   choices: [32],
-  timing_post_trial: 100,
-  on_finish: function(data) {
-    rts.push(data.rt)
-  }
+  timing_response: 2000,
+  timing_post_trial: 100
 }
 
 /* create experiment definition array */
@@ -112,4 +100,5 @@ for (var i = 0; i < experiment_len; i++) {
   test_task_experiment.push(test_block);
 }
 test_task_experiment.push(attention_node)
+test_task_experiment.push(post_task_block)
 test_task_experiment.push(end_block);
