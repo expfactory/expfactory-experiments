@@ -352,7 +352,7 @@ var correct_counter = 0
 var current_trial = 0
 var choices = [37, 39]
 var curr_data = {}
-
+var confidence_choices = [49, 50, 51, 52]
 var confidence_response_area =
 	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
 	'<button class = response_button id = Confidence_1>1:<br> Not Confident At All</button>' +
@@ -395,7 +395,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. There is a fixation cross in the middle of the screen. The patches come on the screen for a very short amount of time, so keep your eyes on the cross.</p><p class = block-text>After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. We will begin with practice after you end the instructions.</p></div>'
+		'<div class = centerbox><p class = block-text>In this experiment, you will see two patches of random noise. In one of the patches there is a slight grating (a striped pattern). Your task is to indicate whether the left or right stimulus has the grating by using the arrow keys. There is a fixation cross in the middle of the screen. The patches come on the screen for a very short amount of time, so keep your eyes on the cross.</p><p class = block-text>After you make your choice you will be asked to rate how confident you are that you were correct, on a scale from 1 to 4. Press the corresponding number key to indicate your confidence. We will begin with practice after you end the instructions.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -484,6 +484,7 @@ var easy_block = {
 	}
 };
 
+//below are two different response options - either button click or key press
 var confidence_block = {
 	type: 'single-stim-button',
 	stimulus: confidence_response_area,
@@ -498,18 +499,37 @@ var confidence_block = {
 	timing_post_trial: 0
 }
 
+var confidence_key_block = {
+	type: 'poldrack-single-stim',
+	stimulus: confidence_response_area,
+	choices: confidence_choices,
+	data: {
+		trial_id: 'confidence_rating',
+		exp_stage: 'test'
+	},
+	is_html: true,
+	timing_stim: 4000,
+	timing_response: 4000,
+	response_ends_trial: true,
+	timing_post_trial: 0,
+	on_finish: function(data) {
+		var index = confidence_choices.indexOf(data.key_press)
+		jsPsych.data.addDataToLastTrial({confidence: 'confidence_' + (index+1)})
+	}
+}
+
 /* create experiment definition array */
 var perceptual_metacognition_experiment = [];
 perceptual_metacognition_experiment.push(instruction_node);
 for (var i = 0; i < practice_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
 	perceptual_metacognition_experiment.push(easy_block);
-	perceptual_metacognition_experiment.push(confidence_block);
+	perceptual_metacognition_experiment.push(confidence_key_block);
 }
 perceptual_metacognition_experiment.push(start_test_block)
 for (var i = 0; i < exp_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
 	perceptual_metacognition_experiment.push(test_block);
-	perceptual_metacognition_experiment.push(confidence_block);
+	perceptual_metacognition_experiment.push(confidence_key_block);
 }
 perceptual_metacognition_experiment.push(end_block);
