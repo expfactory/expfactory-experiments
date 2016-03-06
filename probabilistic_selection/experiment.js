@@ -154,6 +154,8 @@ var credit_var = true
 
 // task specific variables
 var choices = [37, 39]
+var curr_data = []
+var stim = ''
 /* SPECIFY HOW MANY TRIALS YOU WANT FOR FIRST PHASE, and SECOND PHASE.  FP=first(must be divisible by 60), SP=second(must be divisible by 22) */
 var FP_trials = 6;
 var SP_trials = 22;
@@ -169,6 +171,7 @@ var stimArray = ["/static/experiments/probabilistic_selection/images/1.png",
 	"/static/experiments/probabilistic_selection/images/5.png",
 	"/static/experiments/probabilistic_selection/images/6.png"
 ];
+jsPsych.pluginAPI.preloadImages(stimArray)
 var randomStimArray = jsPsych.randomization.repeat(stimArray, 1);
 var prob80 = randomStimArray[0];
 var prob20 = randomStimArray[1];
@@ -464,8 +467,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During the first phase, you will be presented with one of three pairs of abstract shapes.  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong> to correspond with the left or right image respectively.</p></div>',
-		'<div class = centerbox><p class = block-text>Your job is to pick the shape that is more correct.  These shapes will not always be rewarded deterministically, so try to do your best to pick the shape that is correct given the feedback for the shape.</p></div>',
+		'<div class = centerbox><p class = block-text>This experiment is composed of two phases.  During the first phase, you will be presented with one of three pairs of abstract shapes.  For each pair, you must choose one of the shapes by pressing either the <strong>left</strong> or <strong>right arrow key</strong> to correspond with the left or right image respectively.</p><p class = block-text>Each shape has a different chance of being correct. Your task is to maximize your points by selecting the shape with the higher probability of being correct on each trial.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -512,12 +514,14 @@ for (i = 0; i < 6; i++) {
 		stimulus: getStim,
 		key_answer: getResponse,
 		choices: choices,
-		correct_text: '<div class = bottombox><div style="color:green"; style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = bottombox><div style="color:red"; style="color:red"; class = center-text>Incorrect</div></div>',
+		correct_text: '<div class = bottombox><div style="color:green"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = bottombox><div style="color:red"; class = center-text>Incorrect</div></div>',
 		timeout_message: '<div class = bottombox><div class = center-text>no response detected</div></div>',
-		timing_stim: [4000],
-		timing_response: [4000],
-		timing_feedback_duration: [750],
+		timing_stim: 4000,
+		timing_response: 4000,
+		timing_feedback_duration: 750,
+		response_ends_trial: true,
+		timing_post_trial: 500,
 		is_html: true,
 		data: getData
 	};
@@ -579,7 +583,7 @@ var SP_block = {
 	data: {
 		trial_id: "second_phase_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>These trials will not have feedback, so do your best to pick the shape that is correct given your experience with the shape.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>In this phase there will be no visual feedback, but your are still earning points. Your task is still to choose the shape that has the higher probability of being correct to maximize your points.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
 	cont_key: [13]
 };
 
@@ -590,8 +594,9 @@ var second_phase_trials = {
 	is_html: true,
 	data: getData,
 	choices: choices,
-	timing_stim: [1000, -1],
-	timing_response: [1000],
+	timing_stim: 2500,
+	timing_response: 2500,
+	timing_post_trial: 500,
 };
 
 
@@ -612,11 +617,11 @@ var end_block = {
 var probabilistic_selection_experiment = [];
 probabilistic_selection_experiment.push(instruction_node);
 probabilistic_selection_experiment.push(FP_block);
-//probabilistic_selection_experiment.push(performance_criteria);
+probabilistic_selection_experiment.push(performance_criteria);
 probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(SP_block);
 for(var i = 0; i<SP_trials; i++){
-probabilistic_selection_experiment.push(second_phase_trials);
+	probabilistic_selection_experiment.push(second_phase_trials);
 }
 probabilistic_selection_experiment.push(attention_node);
 probabilistic_selection_experiment.push(end_block);

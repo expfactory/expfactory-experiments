@@ -62,7 +62,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var practice_len = 5
-var experiment_len = 5
+var experiment_len = 50
 var gap = 0
 var current_trial = 0
 var stim = '<div class = shapebox><div id = cross></div></div>'

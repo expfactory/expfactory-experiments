@@ -248,22 +248,26 @@ var test_block_data = [] // records the data in the current block to calculate f
 var stimulus = [{
   stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
-    correct_response: correct_responses[0][1]
+    correct_response: correct_responses[0][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
   data: {
-    correct_response: correct_responses[1][1]
+    correct_response: correct_responses[1][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
   data: {
-    correct_response: correct_responses[2][1]
+    correct_response: correct_responses[2][1],
+    trial_id: 'stim'
   }
 }, {
   stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
   data: {
-    correct_response: correct_responses[3][1]
+    correct_response: correct_responses[3][1],
+    trial_id: 'stim'
   }
 }]
 
@@ -593,8 +597,7 @@ var practice_node = {
     } else {
       //rerandomize stim and stop_trial order
       practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
-      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go',
-          'go', 'go', 'go', 'go', 'go'
+      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'ignore', 'ignore', 'go', 'go', 'go', 'go', 'go', 'go'
         ], practice_list.data.length / 10, false)
         // keep going until they are faster!
       practice_feedback_text +=

@@ -20,6 +20,18 @@ function addID() {
 /* Set up jsPsych blocks */
 /* ************************************ */
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var welcome_block = {
 	type: 'poldrack-text',
@@ -67,4 +79,5 @@ var end_block = {
 var cognitive_reflection_experiment = []
 cognitive_reflection_experiment.push(welcome_block);
 cognitive_reflection_experiment.push(experiment_block);
+cognitive_reflection_experiment.push(post_task_block)
 cognitive_reflection_experiment.push(end_block)

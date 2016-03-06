@@ -32,14 +32,41 @@ var numbers = [];
 for (var i = 10; i <= 99; i++) {
   numbers.push(i.toString());
 }
-var numbers = jsPsych.randomization.repeat(numbers, 1, false)
-var add_list = numbers.slice(0, 30)
-var minus_list = numbers.slice(30, 60)
-var alternate_list = numbers.slice(60, 90)
+var numbers = jsPsych.randomization.shuffle(numbers)
+var practice_numbers = jsPsych.randomization.shuffle(numbers).slice(0,15)
+var add_list = []
+var minus_list = []
+var alternate_list = []
+var practice_list = []
+for (var i = 0; i < practice_numbers.length; i++) {
+  practice_list.push('<p class = center-block-text>' + practice_numbers[i] + '</p>')
+}
+
+for (var i = 0; i < numbers.length; i++) {
+  if (i < 30) {
+    add_list.push('<p class = center-block-text>' + numbers[i] + '</p>')
+  } else if (i < 60) {
+    minus_list.push('<p class = center-block-text>' + numbers[i] + '</p>')
+  } else {
+    alternate_list.push('<p class = center-block-text>' + numbers[i] + '</p>')
+  }
+}
 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post_task"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
 
 /* define static blocks */
 var end_block = {
@@ -127,7 +154,7 @@ var start_alternate_block = {
   data: {
     trial_id: "start_alternative_block"
   },
-  text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Alternate between adding and subtracting 3</strong> to the numbers and enter the value in the box below the number.</p><p class = block-text>For instance, if the numbers were 27, [13], 40, your responses should be 30 (27+3), 10 ([13]-3), 43 (40+3). Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Alternate between adding and subtracting 3</strong> to the numbers and enter the value in the box below the number.</p><p class = block-text>For instance, if the numbers were 27, 13, 40, your responses should be 30 (27+3), 10 (13-3), 43 (40+3). Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>',
   timing_post_trial: 1000
 };
 
@@ -137,12 +164,12 @@ var practice_block = {
     trial_id: "stim",
     exp_stage: "practice"
   },
-  questions: ["57", "20", "17", "87", "11", "43", "16", "26", "66", "14", "19", "75"]
+  questions: practice_list
 };
 
 var add_block = {
   type: 'survey-text',
-  questions: [add_list],
+  questions: add_list,
   data: {
     exp_id: 'plus_minus',
     condition: 'add',
@@ -153,7 +180,7 @@ var add_block = {
 
 var minus_block = {
   type: 'survey-text',
-  questions: [add_list],
+  questions: minus_list,
   data: {
     exp_id: 'plus_minus',
     condition: 'subtract',
@@ -164,7 +191,7 @@ var minus_block = {
 
 var alternate_block = {
   type: 'survey-text',
-  questions: [alternate_list],
+  questions: alternate_list,
   data: {
     exp_id: 'plus_minus',
     condition: 'alternate',
@@ -194,4 +221,5 @@ plus_minus_experiment.push(start_minus_block)
 plus_minus_experiment.push(minus_block)
 plus_minus_experiment.push(start_alternate_block)
 plus_minus_experiment.push(alternate_block)
+plus_minus_experiment.push(post_task_block)
 plus_minus_experiment.push(end_block)

@@ -5,6 +5,7 @@
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
