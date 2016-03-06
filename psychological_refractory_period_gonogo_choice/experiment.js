@@ -70,7 +70,7 @@ var getStim = function() {
     inners[number_i] + '</div></div>'
     // set correct choice for first
   var gonogo_choice;
-  if (border_i == 0) {
+  if (border_i === 0) {
     gonogo_choice = 75
   } else {
     gonogo_choice = -1
