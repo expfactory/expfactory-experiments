@@ -13,6 +13,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "experiment.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
