@@ -227,13 +227,14 @@ var chooseButton = function(clicked_id) {
 		delay += 250
 		if (whichLossCards.indexOf(card_i) == -1) {
 			roundPoints += gainAmt
-			doSetTimeout(card_i, delay, roundPoints, 'win')
+			//doSetTimeout(card_i, delay, roundPoints, 'win') //uncomment if animation is desired
 		} else {
 			roundPoints -= lossAmt
-			doSetTimeout(card_i, delay, roundPoints, 'loss')
+			//doSetTimeout(card_i, delay, roundPoints, 'loss') //uncomment if animation is desired
 			break
 		}
 	}
+	document.getElementById("current_round").innerHTML = 'Current Round Points: ' + roundPoints
 }
 
 
@@ -389,7 +390,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This task will take around 15 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],

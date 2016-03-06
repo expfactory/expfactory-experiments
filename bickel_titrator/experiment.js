@@ -76,21 +76,24 @@ function assessPerformance() {
 var getStim = function() {
   var immediate_stim;
   var delayed_stim;
+  var immediate_display = immediate_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
+  var delayed_display = delayed_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
   if (Math.random() < 0.5) {
-    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_amount +
+    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_display +
       ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_amount +
+    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_display +
       ' in ' + curr_delay + '</p></div>'
     displayed_amounts = [immediate_amount, delayed_amount] // in order from left to right
   } else {
     immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' +
-      immediate_amount + ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_amount +
+      immediate_display + ' immediately</div></div>'
+    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_display +
       ' in ' + curr_delay + '</div></div>'
     displayed_amounts = [delayed_amount, immediate_amount] // in order from left to right
   }
   return immediate_stim + delayed_stim
 }
+
 
 var updateAmount = function(choice) {
   if (choice == 'delayed') {
@@ -102,10 +105,21 @@ var updateAmount = function(choice) {
 }
 
 var updateDelay = function() {
-  step = 250
-  immediate_amount = 500
+  step = original_immediate/2
+  immediate_amount = original_immediate
+  delayed_amount = original_delayed
   curr_delay = delays.shift()
   curr_delay_in_minutes = convertToMins(curr_delay)
+}
+
+var post_trial_gap = function() {
+  var curr_trial = jsPsych.progress().current_trial_global
+  var gap = 2000 - jsPsych.data.getData()[curr_trial - 1].rt
+  if (gap < 0) {
+    gap = 1000
+  }
+  return gap
+
 }
 
 var convertToMins = function(time) {
@@ -147,11 +161,14 @@ var instructTimeThresh = 0 ///in seconds
 var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year',
   '5 years', '25 years'
 ])
+var magnitudes = jsPsych.randomization.shuffle([10, 1000, 1000000])
 var choices = [37, 39]
 var curr_delay = delays.shift()
 var curr_delay_in_minutes = convertToMins(curr_delay)
-var immediate_amount = 500
-var delayed_amount = 1000
+var original_immediate = 0
+var original_delayed = 0
+var immediate_amount = 0
+var delayed_amount = 0
 var displayed_amounts = []
 var step = 250
   /* ************************************ */
@@ -189,7 +206,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This task will take around 5 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -247,6 +264,18 @@ var update_delay_block = {
   timing_post_trial: 0
 }
 
+var update_mag_block = {
+  type: 'call-function',
+  data: {
+    trial_id: 'update_mag'
+  },
+  func: function() {
+    original_delayed = magnitudes.shift()
+    original_immediate = original_delayed/2
+  },
+  timing_post_trial: 0
+}
+
 var test_block = {
   type: 'poldrack-single-stim',
   stimulus: getStim,
@@ -260,7 +289,7 @@ var test_block = {
   on_finish: function(data) {
     var choice;
     var choice_i = choices.indexOf(data.key_press)
-    if (displayed_amounts[choice_i] == 1000) {
+    if (displayed_amounts[choice_i] == original_delayed) {
       choice = 'delayed'
     } else {
       choice = 'immediate'
@@ -274,8 +303,23 @@ var test_block = {
     })
     updateAmount(choice)
   },
-  timing_post_trial: 1000,
+  timing_post_trial: 0
 };
+
+var gap_block = {
+    type: 'poldrack-single-stim',
+    stimulus: ' ',
+    is_html: true,
+    choices: 'none',
+    data: {
+
+      trial_id: 'gap',
+      exp_stage: 'test'
+    },
+    timing_post_trial: 0,
+    timing_stim: post_trial_gap,
+    timing_response: post_trial_gap,
+  }
 
 var end_block = {
   type: 'poldrack-text',
@@ -293,13 +337,18 @@ var end_block = {
 //Set up experiment
 var bickel_titrator_experiment = []
 bickel_titrator_experiment.push(instruction_node);
-for (var i = 0; i < delays.length; i++) { 
-  for (var j = 0; j < 5; j++) { 
-    bickel_titrator_experiment.push(test_block);
-  }
-  bickel_titrator_experiment.push(update_delay_block);
-  if ($.inArray(i, [0, 3, 5]) != -1) {
-    bickel_titrator_experiment.push(attention_node)
+
+for (var k = 0; k < magnitudes.length; k++) {
+  bickel_titrator_experiment.push(update_mag_block);
+  for (var i = 0; i < delays.length; i++) {
+    bickel_titrator_experiment.push(update_delay_block);
+    for (var j = 0; j < 5; j++) {
+      bickel_titrator_experiment.push(test_block);
+      bickel_titrator_experiment.push(gap_block);
+    }
+    if ($.inArray(i, [0, 3, 5]) != -1) {
+      bickel_titrator_experiment.push(attention_node)
+    }
   }
 }
 bickel_titrator_experiment.push(post_task_block)
