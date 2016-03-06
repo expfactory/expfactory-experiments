@@ -69,9 +69,9 @@ var getStim = function() {
     ' </img></div></div><div class = prp_centerbox><div class = "center-text">' +
     inners[number_i] + '</div></div>'
   //update data
-  curr_data.choice_stim = border_i
+  curr_data.choice1_stim = border_i
   curr_data.choice2_stim = number_i
-  curr_data.choice_correct_response = choices1[border_i]
+  curr_data.choice1_correct_response = choices1[border_i]
   curr_data.choice2_correct_response = choices2[number_i]
   return [stim, stim2]
 }
@@ -90,46 +90,46 @@ var getFB = function() {
   var keys = JSON.parse(data.key_presses)
   var rts = JSON.parse(data.rt)
   var tooShort = false
-  var choice1FB;
-  var choice2FB;
-  // If the person responded to the colored square
-  if (jQuery.inArray(keys[0],choices1) != -1) {
-    if (rts[1] < data.ISI + 50 && rts[1] > 0) {
-      tooShort = true
-    } else {
-      if (keys[0] == data.choice1_correct_response) {
+  var choice1FB = ''
+  var choice2FB = ''
+    // If the person only responded once
+  if (rts[0] !== -1 && rts[1] === -1) {
+    if (jQuery.inArray(keys[0], choices1) === -1) {
+      choice1FB = 'You did not respond to the colored square!'
+      if (keys[0] === data.choice2_correct_response) {
+        choice2FB = 'You responded correctly to the number!'
+      } else {
+        choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
+          inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
+          ' press the "M" key with your ring finger.'
+      }
+    } else if (jQuery.inArray(keys[0], choices2) === -1) {
+      choice2FB = 'You did not respond to the number!'
+      if (keys[0] === data.choice1_correct_response) {
         choice1FB = 'You responded correctly to the colored square!'
       } else {
         choice1FB = 'You did not respond correctly to the colored square.'
       }
-      if (keys[1] == data.choice2_correct_response) {
-        choice2FB = 'You responded correctly to the number!'
-      } else if (keys[1] == -1) {
-        choice2FB = 'Remember to respond to the number.'
-      } else {
-        choice2FB = 'You did not respond to the number correctly. Remember: if the number is ' +
-          inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
-          ' press the "M" key with your ring finger.'
-      }
     }
-  }
-  // If the person responded to the number first
-  else if (jQuery.inArray(keys[0],choices2) != -1) {
-    if (rts[0] > 0 && rts[0] < data.ISI + 50) {
-      tooShort = true
+  } else if (rts[0] !== -1 && rts[1] !== -1) { //if the person responded twice
+    if (rts[1] < data.ISI + 50) {
+      tooShort = true //if they respond to the number before they should be able to
+    }
+    if (keys[0] === data.choice1_correct_response) {
+      choice1FB = 'You responded correctly to the colored square!'
     } else {
-        choice1FB = 'Respond to the colored square before the number.'
-      if (keys[0] == data.choice2_correct_response) {
-        choice2FB = 'You responded correctly to the number!'
-      } else if (keys[0] == -1) {
-        choice2FB = 'Remember to respond to the colored square and number.'
-      } else {
-        choice2FB = 'You did not respond to the number correctly. Remember: if the number is ' +
-          inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
-          ' press the "M" key with your ring finger.'
-      }
+      choice1FB = 'You did not respond correctly to the colored square.'
     }
-  } 
+    if (keys[1] === data.choice2_correct_response) {
+      choice2FB = 'You responded correctly to the number!'
+    } else {
+      choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
+        inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
+        ' press the "M" key with your ring finger.'
+    }
+  } else { //if they didn't respond
+    choice1FB = 'Respond to the square and number!'
+  }
   if (tooShort) {
     return '<div class = prp_centerbox><p class = "center-block-text">You pressed either "N" or "M" before the number was on the screen! Wait for the number to respond!</p><p class = "center-block-text">Press any key to continue</p></div>'
   } else {
@@ -138,6 +138,8 @@ var getFB = function() {
       '</p><p class = "center-block-text">Press any key to continue</p></div>'
   }
 }
+
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -153,8 +155,8 @@ var credit_var = true
 var practice_len = 20
 var exp_len = 180
 var current_trial = 0
-var choices1 = [88,90]
-var choices2 = [77,78]
+var choices1 = [90,88]
+var choices2 = [78,77]
 var choices = choices1.concat(choices2)
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
   exp_len / 9)
@@ -164,9 +166,9 @@ var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 2
 var curr_data = {
     trial_id: '',
     ISI: '',
-    choice_stim: '',
+    choice1_stim: '',
     choice2_stim: '',
-    choice_correct_response: '',
+    choice1_correct_response: '',
     choice2_correct_response: ''
   }
   //stim variables
