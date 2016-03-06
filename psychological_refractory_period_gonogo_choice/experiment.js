@@ -8,7 +8,7 @@ function getDisplayElement() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'psychological_refractory_period'
+    'exp_id': 'psychological_refractory_period_gonogo_choice'
   })
 }
 
@@ -191,7 +191,7 @@ var curr_data = {
     choice_correct_response: ''
   }
   //stim variables
-var path_source = '/static/experiments/psychological_refractory_period/images/'
+var path_source = '/static/experiments/psychological_refractory_period_gonogo_choice/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
   // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
 var borders = jsPsych.randomization.shuffle(['2_border.png',
@@ -407,19 +407,19 @@ var test_block = {
 
 
 /* create experiment definition array */
-var psychological_refractory_period_experiment = [];
-psychological_refractory_period_experiment.push(instruction_node);
-psychological_refractory_period_experiment.push(start_practice_block);
+var psychological_refractory_period_gonogo_choice_experiment = [];
+psychological_refractory_period_gonogo_choice_experiment.push(instruction_node);
+psychological_refractory_period_gonogo_choice_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(practice_block);
-  psychological_refractory_period_experiment.push(feedback_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(fixation_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(practice_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(feedback_block);
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(start_test_block);
+psychological_refractory_period_gonogo_choice_experiment.push(attention_node);
+psychological_refractory_period_gonogo_choice_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(test_block)
+  psychological_refractory_period_gonogo_choice_experiment.push(fixation_block);
+  psychological_refractory_period_gonogo_choice_experiment.push(test_block)
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(end_block);
+psychological_refractory_period_gonogo_choice_experiment.push(attention_node);
+psychological_refractory_period_gonogo_choice_experiment.push(end_block);
