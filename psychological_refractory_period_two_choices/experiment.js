@@ -8,7 +8,7 @@ function getDisplayElement() {
 
 function addID() {
   jsPsych.data.addDataToLastTrial({
-    'exp_id': 'psychological_refractory_period'
+    'exp_id': 'psychological_refractory_period_two_choices'
   })
 }
 
@@ -62,24 +62,17 @@ var randomDraw = function(lst) {
 }
 
 var getStim = function() {
-  var border_i = randomDraw([0, 1, 2, 3]) // get border index
+  var border_i = randomDraw([0, 1]) // get border index
   var number_i = randomDraw([0, 1]) // get inner index
   var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
   var stim2 = stim_prefix + path_source + borders[border_i] +
     ' </img></div></div><div class = prp_centerbox><div class = "center-text">' +
     inners[number_i] + '</div></div>'
-    // set correct choice for first
-  var gonogo_choice;
-  if (border_i < 2) {
-    gonogo_choice = 75
-  } else {
-    gonogo_choice = -1
-  }
   //update data
-  curr_data.gonogo_stim = border_i
-  curr_data.choice_stim = number_i
-  curr_data.gonogo_correct_response = gonogo_choice
-  curr_data.choice_correct_response = [74, 76][number_i]
+  curr_data.choice1_stim = border_i
+  curr_data.choice2_stim = number_i
+  curr_data.choice1_correct_response = choices1[border_i]
+  curr_data.choice2_correct_response = choices2[number_i]
   return [stim, stim2]
 }
 
@@ -97,70 +90,56 @@ var getFB = function() {
   var keys = JSON.parse(data.key_presses)
   var rts = JSON.parse(data.rt)
   var tooShort = false
-  var gonogoFB;
-  var choiceFB;
-  // If the person responded to the colored square
-  if (keys[0] == choices[1]) {
-    if (rts[1] < data.ISI + 50 && rts[1] > 0) {
-      tooShort = true
-    } else {
-      if (data.gonogo_correct_response != -1) {
-        gonogoFB = 'You responded to the colored square correctly!'
+  var choice1FB = ''
+  var choice2FB = ''
+    // If the person only responded once
+  if (rts[0] !== -1 && rts[1] === -1) {
+    if (jQuery.inArray(keys[0], choices1) === -1) {
+      choice1FB = 'You did not respond to the colored square!'
+      if (keys[0] === data.choice2_correct_response) {
+        choice2FB = 'You responded correctly to the number!'
       } else {
-        gonogoFB = 'You should not respond to that colored square.'
+        choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
+          inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
+          ' press the "M" key with your ring finger.'
       }
-      if (keys[1] == data.choice_correct_response) {
-        choiceFB = 'You responded correctly to the number!'
-      } else if (keys[1] == -1) {
-        choiceFB = 'Remember to respond to the number.'
+    } else if (jQuery.inArray(keys[0], choices2) === -1) {
+      choice2FB = 'You did not respond to the number!'
+      if (keys[0] === data.choice1_correct_response) {
+        choice1FB = 'You responded correctly to the colored square!'
       } else {
-        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' +
-          inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
-          ' press the "L" key with your ring finger.'
-      }
-    }
-  }
-  // If the person didn't respond to the colored square
-  else if (keys[1] == -1 && keys[0] != choices[1]) {
-    if (rts[0] > 0 && rts[0] < data.ISI + 50) {
-      tooShort = true
-    } else {
-      if (data.gonogo_correct_response == -1) {
-        gonogoFB = 'You responded to the colored square correctly!'
-      } else {
-        gonogoFB =
-          'You should respond to that colored square by pressing the "K" key with your middle finger.'
-      }
-      if (keys[0] == data.choice_correct_response) {
-        choiceFB = 'You responded correctly to the number!'
-      } else if (keys[0] == -1) {
-        choiceFB = 'Remember to respond to the number.'
-      } else {
-        choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' +
-          inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
-          ' press the "L" key with your ring finger.'
+        choice1FB = 'You did not respond correctly to the colored square.'
       }
     }
-  } else if (keys[0] != choices[1] && keys[1] == choices[1]) {
-    gonogoFB = 'You must respond to the colored square BEFORE the number.'
-    if (keys[0] == data.choice_correct_response) {
-      choiceFB = 'You responded correctly to the number!'
-    } else if (keys[0] == -1) {
-      choiceFB = 'Remember to respond to the number.'
-    } else {
-      choiceFB = 'You did not respond to the number correctly. Remember: if the number is ' +
-        inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
-        ' press the "L" key with your ring finger.'
+  } else if (rts[0] !== -1 && rts[1] !== -1) { //if the person responded twice
+    if (rts[1] < data.ISI + 50) {
+      tooShort = true //if they respond to the number before they should be able to
     }
+    if (keys[0] === data.choice1_correct_response) {
+      choice1FB = 'You responded correctly to the colored square!'
+    } else {
+      choice1FB = 'You did not respond correctly to the colored square.'
+    }
+    if (keys[1] === data.choice2_correct_response) {
+      choice2FB = 'You responded correctly to the number!'
+    } else {
+      choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
+        inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
+        ' press the "M" key with your ring finger.'
+    }
+  } else { //if they didn't respond
+    choice1FB = 'Respond to the square and number!'
   }
   if (tooShort) {
-    return '<div class = prp_centerbox><p class = "center-block-text">You pressed either "J" or "L" before the number was on the screen! Wait for the number to respond!</p><p class = "center-block-text">Press any key to continue</p></div>'
+    return '<div class = prp_centerbox><p class = "center-block-text">You pressed either "N" or "M" before the number was on the screen! Wait for the number to respond!</p><p class = "center-block-text">Press any key to continue</p></div>'
   } else {
-    return '<div class = prp_centerbox><p class = "center-block-text">' + gonogoFB +
-      '</p><p class = "center-block-text">' + choiceFB +
+    return '<div class = prp_centerbox><p class = "center-block-text">' + choice1FB +
+      '</p><p class = "center-block-text">' + choice2FB +
       '</p><p class = "center-block-text">Press any key to continue</p></div>'
   }
 }
+
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -176,7 +155,9 @@ var credit_var = true
 var practice_len = 20
 var exp_len = 180
 var current_trial = 0
-var choices = [74, 75, 76]
+var choices1 = [90,88]
+var choices2 = [78,77]
+var choices = choices1.concat(choices2)
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
   exp_len / 9)
 var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500,
@@ -185,16 +166,16 @@ var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 2
 var curr_data = {
     trial_id: '',
     ISI: '',
-    gonogo_stim: '',
-    choice_stim: '',
-    gonogo_correct_response: '',
-    choice_correct_response: ''
+    choice1_stim: '',
+    choice2_stim: '',
+    choice1_correct_response: '',
+    choice2_correct_response: ''
   }
   //stim variables
-var path_source = '/static/experiments/psychological_refractory_period/images/'
+var path_source = '/static/experiments/psychological_refractory_period_two_choices/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
   // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
-var borders = jsPsych.randomization.shuffle(['1_border.png', '2_border.png', '3_border.png',
+var borders = jsPsych.randomization.shuffle(['2_border.png',
     '4_border.png'
   ])
   // inner number reflect the choice RT. 
@@ -271,11 +252,11 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "J", "K" and "L" keys with your index, middle and ring fingers respectively.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is either of the two below, you should press the "K" key with your middle finger. If it is not one of those colors, you should not respond.</p>' +
+    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "Z", "X",  "N" and "M" keys with your index and middle fingers of both hands.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is the one on the left below, you should press the "Z" key with your middle finger. If it is the one on the right, you should press the "X" key.</p>' +
     box1 + box2 + '</div>',
     '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
-    inners[0] + ' press the "J" key with your index finger. If the number is ' + inners[1] +
-    ' press the "L" key with your ring finger.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p>' +
+    inners[0] + ' press the "N" key. If the number is ' + inners[1] +
+    ' press the "M key.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p>' +
     box_number1 + box_number2 + '</div>', '<div class = prp_centerbox><p class ="block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue. Go through the instructions again if you need to.</p></div>'
   ],
   allow_keys: false,
@@ -407,19 +388,19 @@ var test_block = {
 
 
 /* create experiment definition array */
-var psychological_refractory_period_experiment = [];
-psychological_refractory_period_experiment.push(instruction_node);
-psychological_refractory_period_experiment.push(start_practice_block);
+var psychological_refractory_period_two_choices_experiment = [];
+psychological_refractory_period_two_choices_experiment.push(instruction_node);
+psychological_refractory_period_two_choices_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(practice_block);
-  psychological_refractory_period_experiment.push(feedback_block);
+  psychological_refractory_period_two_choices_experiment.push(fixation_block);
+  psychological_refractory_period_two_choices_experiment.push(practice_block);
+  psychological_refractory_period_two_choices_experiment.push(feedback_block);
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(start_test_block);
+psychological_refractory_period_two_choices_experiment.push(attention_node);
+psychological_refractory_period_two_choices_experiment.push(start_test_block);
 for (var i = 0; i < exp_len; i++) {
-  psychological_refractory_period_experiment.push(fixation_block);
-  psychological_refractory_period_experiment.push(test_block)
+  psychological_refractory_period_two_choices_experiment.push(fixation_block);
+  psychological_refractory_period_two_choices_experiment.push(test_block)
 }
-psychological_refractory_period_experiment.push(attention_node);
-psychological_refractory_period_experiment.push(end_block);
+psychological_refractory_period_two_choices_experiment.push(attention_node);
+psychological_refractory_period_two_choices_experiment.push(end_block);
