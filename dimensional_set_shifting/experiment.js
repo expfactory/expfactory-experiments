@@ -169,7 +169,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will last around 10 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
