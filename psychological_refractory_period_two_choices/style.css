@@ -1,0 +1,70 @@
+.display_stage {
+    position: fixed;
+    background: black;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+
+.prp_stimBox {
+  width: 20vw;
+  height: 20vw;
+  position:relative;
+  top:50%;
+  left:50%;
+  margin-right:0%;
+  transform: translate(-50%,-50%);
+}
+
+.prpStim {
+  display: block;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
+}
+
+
+.prp_left-instruction {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-150%, 15%);
+}
+
+.prp_right-instruction {
+  width:20vw;
+  height: 20vw;
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(50%, 15%);
+}
+
+.prp_centerbox {
+  width: 60vw;
+  height: 35vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+div, p {
+  color: white;
+}
+
+.jspsych-instructions-nav {
+  margin-top: 0px;
+}
