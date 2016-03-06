@@ -35,9 +35,24 @@ function assessPerformance() {
   credit_var = (avg_rt > 100)
 }
 
-var post_trial_gap = function() {
-  gap = Math.floor(Math.random() * 1000) + 1000
-  return gap;
+var get_trial_time = function() {
+  function randomExponential(rate, randomUniform) {
+    // http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
+    rate = rate || 1;
+
+    // Allow to pass a random uniform value or function
+    // Default to Math.random()
+    var U = randomUniform;
+    if (typeof randomUniform === 'function') U = randomUniform();
+    if (!U) U = Math.random();
+
+    return -Math.log(U) / rate;
+  }
+  gap = randomExponential(1)*1000
+  if (gap > 4000) {
+    gap = 4000
+  }
+  return gap + 2000;
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
@@ -184,8 +199,8 @@ var reset_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
-  timing_stim: 1000,
-  timing_response: 1000,
+  timing_stim: 2000,
+  timing_response: get_trial_time,
   response_ends_trial: false,
   is_html: true,
   data: {
@@ -193,7 +208,6 @@ var practice_block = {
     exp_stage: "practice"
   },
   choices: [32],
-  timing_post_trial: post_trial_gap,
   on_finish: appendData,
 };
 
@@ -201,8 +215,8 @@ var practice_block = {
 var test_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
-  timing_stim: 1000,
-  timing_response: 1000,
+  timing_stim: 2000,
+  timing_response: get_trial_time,
   response_ends_trial: false,
   is_html: true,
   data: {
@@ -210,7 +224,6 @@ var test_block = {
     exp_stage: "test"
   },
   choices: [32],
-  timing_post_trial: post_trial_gap,
   on_finish: appendData,
 };
 
