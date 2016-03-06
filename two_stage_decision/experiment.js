@@ -56,6 +56,7 @@ function assessPerformance() {
 		}
 	})
 	credit_var = (avg_rt > 200) && responses_ok
+	performance_var = total_score
 }
 
 function evalAttentionChecks() {
@@ -125,6 +126,7 @@ var change_phase = function() {
 		curr_ss_stim = practice_ss_stim
 		exp_stage = 'practice'
 	}
+	total_score = 0
 	current_trial = -1 //reset count
 }
 
@@ -335,6 +337,7 @@ var get_feedback = function() {
 	} else if (Math.random() < FB_matrix[second_selected - 2]) {
 		update_FB();
 		FB = 1
+		total_score += 1
 		return "<div class = 'decision-top faded' style='background:" + curr_colors[stage + 1] + "; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[second_selected] + "'></div>" +
 			"<div><img  class = decision-fb src = '/static/experiments/two_stage_decision/images/gold_coin.png'></img></div>"
@@ -366,9 +369,11 @@ var attention_check_thresh = 0.62
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = true
+var performance_var = 0
 
 // task specific variables
-var practice_trials_num = 10
+var total_score = 0 //track performance
+var practice_trials_num = 50
 var test_trials_num = 200
 var current_trial = -1
 var first_selected = -1 //Tracks the ID of the selected fs stimulus
@@ -501,11 +506,8 @@ var instructions_block = {
 		curr_colors[0] + "; '><img class = 'decision-stim' src= '" + curr_images[0] +
 		"'></img></div><div class = decision-right style='background:" + curr_colors[0] +
 		"; '><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div></div>",
-		'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p></div>',
-		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p></div>',
-		'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or not on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
-		'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
-		'<div class = centerbox><p class = block-text>After you end instructions we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
+		'<div class = centerbox><p class = block-text>Both the first and second stages will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b, each with their own background color and shapes.</p></div>',
+		'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and seldom bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key.</p><p class = block-text>After you end these instructions you will see an example trial.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -533,6 +535,20 @@ var instruction_node = {
 	}
 }
 
+var second_instructions_block = {
+	type: 'poldrack-instructions',
+	data: {
+		trial_id: 'instruction'
+	},
+	pages: [
+		'<div class = centerbox><p class = block-text>As you saw, you get feedback after your second-stage choice: either a gold coin or a red "0". The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p></div>',
+		'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p></div>',
+		'<div class = centerbox><p class = block-text>After you end instructions we will start with some practice.</p><p class = block-text>After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 1000
+}
 
 var end_block = {
 	type: 'poldrack-text',
@@ -573,7 +589,7 @@ var start_test_block = {
 	data: {
 		trial_id: 'test_intro'
 	},
-	text: '<div class = centerbox><p class = center-block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+	text: "<div class = centerbox><p class = center-block-text>Finished with practice. We will now start the test with new shapes and stages.</p><p class = block-text>Just like in the practice, each first-stage choice is primarily associated with one second-stage and each second-stage shape has a different chance of earning a point. Each second-stage shape's chance of earning a gold coin changes over the expeirment, so the best shape early on may not be the best shape later. In contrast, once you learn which stage a first-stage choice brings you to most of the time, it will stay the same for the whole experiment.</p><p class = block-text>Your task is to earn as many gold coins as possible. Press <strong>enter</strong> to begin.</p></div>",
 	cont_key: [13],
 	timing_response: 180000,
 	timing_post_trial: 1000
@@ -723,6 +739,14 @@ var noFB_node = {
 
 var two_stage_decision_experiment = []
 two_stage_decision_experiment.push(instruction_node);
+//example trial
+two_stage_decision_experiment.push(first_stage)
+two_stage_decision_experiment.push(first_stage_selected)
+two_stage_decision_experiment.push(second_stage)
+two_stage_decision_experiment.push(FB_node)
+two_stage_decision_experiment.push(noFB_node)
+//continue instructions
+two_stage_decision_experiment.push(second_instructions_block);
 two_stage_decision_experiment.push(start_practice_block);
 two_stage_decision_experiment.push(attention_node)
 for (var i = 0; i < practice_trials_num; i++) {

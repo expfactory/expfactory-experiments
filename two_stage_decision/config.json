@@ -34,6 +34,12 @@
                                  "type":"credit",
                                  "datatype": "boolean",
                                  "description":"True if avg_rt > 200"
+                                  },
+                                  {
+                                 "name":"performance_var",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "description":"Tracks gold coins earned. Min: 0, Theoretical Max: 200, but realistically limited by probabilistic feedback"
                                   }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
