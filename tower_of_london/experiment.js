@@ -277,6 +277,17 @@ var held_ball = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
 
 /* define static blocks */
 var end_block = {
@@ -510,4 +521,5 @@ for (var i = 0; i < problems.length; i++) {
   tower_of_london_experiment.push(feedback_block)
   tower_of_london_experiment.push(advance_problem_block)
 }
+tower_of_london_experiment.push(post_task_block)
 tower_of_london_experiment.push(end_block);

@@ -11,6 +11,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",

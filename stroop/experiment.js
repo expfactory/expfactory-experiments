@@ -220,6 +220,18 @@ var attention_node = {
 	}
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var response_keys =
 	'<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
@@ -384,4 +396,5 @@ for (i = 0; i < exp_len; i++) {
 	stroop_experiment.push(test_block)
 }
 stroop_experiment.push(attention_node)
+stroop_experiment.push(post_task_block)
 stroop_experiment.push(end_block)

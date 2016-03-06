@@ -354,6 +354,18 @@ var attention_node = {
 	}
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 var end_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
@@ -574,4 +586,5 @@ for (r = 0; r < num_runs; r++) {
 		recent_probes_experiment.push(attention_node);
 	}
 }
+recent_probes_experiment.push(post_task_block)
 recent_probes_experiment.push(end_block)
