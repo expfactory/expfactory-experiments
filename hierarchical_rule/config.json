@@ -24,7 +24,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":5,
+        "time": 22,
         "reference": "http://www.sciencedirect.com/science/article/pii/S0896627310001960",
         "publish":"True",
         "experiment_variables": [{
@@ -32,6 +32,12 @@
                                  "type":"credit",
                                  "datatype": "boolean",
                                  "description":"True if avg_rt > 200"
+                                  },
+                                  {
+                                 "name":"performance_var",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "description":"Number of correct choices. Min: 0, Max: 360"
                                   }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
