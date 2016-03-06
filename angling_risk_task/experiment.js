@@ -52,6 +52,7 @@ function assessPerformance() {
 	}
 	var avg_rt = sum / rt_array.length
 	credit_var = (avg_rt > 200)
+	performance_var = total_points
 }
 
 var getInstructFeedback = function() {
@@ -356,6 +357,7 @@ var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = true
+var performance_var = 0
 
 // task specific variables
 var num_practice_rounds = 2
@@ -365,6 +367,7 @@ var total_fish_num = 0
 var start_fish_num = 0
 var trip_bank = 0
 var tournament_bank = 0
+var total_points = 0 // used to determine bonus pay
 	//each block defines the weather and release law
 var blocks = [{
 	weather: "Sunny",
@@ -618,9 +621,12 @@ var start_test_block = {
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments. There will be four tournaments, each with 30 rounds of fishing.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: function() {
+		tournament_bank = 0
+	}
 };
 
 //Setup task
@@ -747,6 +753,7 @@ for (b = 0; b < blocks.length; b++) {
 			weather = data.weather
 			release = data.release
 			start_fish_num = data.start_fish_num
+			total_points += tournament_bank
 			tournament_bank = 0
 			round_num = 0
 		}

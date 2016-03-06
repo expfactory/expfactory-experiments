@@ -34,6 +34,12 @@
                                  "type":"credit",
                                  "datatype": "boolean",
                                  "description":"True if avg_rt > 200"
+                                  },
+                                  {
+                                 "name":"performance_var",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "description":"Number of points. Original paper interpreted each point as 5 cents and paid out an average of 5 dollars."
                                   }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
