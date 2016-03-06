@@ -228,21 +228,9 @@ var post_task_block = {
 };
 
 /* define static blocks */
-var practice_intro_block = {
-	type: 'poldrack-text',
-	text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
-	data: {
-		trial_id: "intro",
-		exp_stage: "practice"
-	},
-	timing_response: 180000,
-	timing_post_trial: 1000
-};
-
 var test_intro_block = {
 	type: 'poldrack-text',
-	text: '<div class = centerbox><p class = center-block-text>We will now start the test.  Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
 		trial_id: "intro",
@@ -284,7 +272,7 @@ var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p></div>',
-		'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an * will occasionally come up somewhere on the screen.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the direction of the center arrow.</p></div>'
+		'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an * will occasionally come up somewhere on the screen.</p><p class = block-text>Irrespective of whether or where the * appears, it is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the direction of the center arrow.</p><p class = block-text>After you end instructions we will start with practice.</p></div>'
 	],
 	allow_keys: false,
 	data: {
@@ -401,7 +389,6 @@ var double_cue = {
 /* set up ANT experiment */
 var attention_network_task_experiment = [];
 attention_network_task_experiment.push(instruction_node);
-attention_network_task_experiment.push(practice_intro_block);
 
 /* set up ANT practice */
 var trial_num = 0
@@ -464,6 +451,7 @@ for (i = 0; i < block.data.length; i++) {
 		data: block.data[i],
 		timing_response: 1700,
 		timing_stim: 1700,
+		response_ends_trial: true,
 		timing_feedback_duration: 1000,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -554,6 +542,7 @@ for (b = 0; b < blocks.length; b++) {
 			data: block.data[i],
 			timing_response: 1700,
 			timing_stim: 1700,
+			response_ends_trial: true,
 			timing_post_trial: 0,
 			on_finish: function() {
 				jsPsych.data.addDataToLastTrial({
