@@ -79,8 +79,8 @@ function getGame() {
 		round_over = 0
 		trial_num = 0
 		game_state = game_setup
-		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank.toFixed([2]))
-		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank.toFixed([2]))
+		game_state = appendTextAfter(game_state, 'Trip Bank (points): </strong>', trip_bank)
+		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>', tournament_bank)
 		game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', 0)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
@@ -100,13 +100,12 @@ function getGame() {
 			game_state = appendTextAfter(game_state, '# Blue Fish in lake: </strong>', total_fish_num -
 				red_fish_num)
 		}
-		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank.toFixed([2]))
-		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank.toFixed([2]))
+		game_state = appendTextAfter(game_state, 'Trip Bank (points): </strong>', trip_bank)
+		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>', tournament_bank)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
 		if (release == "Keep") {
-			game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', Math.round(trip_bank /
-				pay * 100) / 100)
+			game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', trip_bank)
 		}
 		$('.jspsych-display-element').html(game_state)
 		if (weather == "Sunny") {
@@ -203,7 +202,7 @@ function goFish() {
 			last_pay = 0
 			round_over = 1
 			round_num += 1
-			round_over_text = "You caught the blue fish! You have lost all money collected this round."
+			round_over_text = "You caught the blue fish! You have lost all points collected this round."
 		} else {
 			if (release == "Keep") {
 				$('#red_fish' + red_fish_num).remove()
@@ -222,16 +221,16 @@ function goFish() {
 function collect() {
 	round_over = 1
 	round_num += 1
-	round_over_text = "You collected the money from the trip bank ($" + trip_bank.toFixed([2]) +
-		") and moved it to your tournament bank."
-		// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
+	round_over_text = "You collected the points from the trip bank (" + trip_bank +
+		" points) and moved it to your tournament bank."
+		// Tranfers points from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
 	tournament_bank += trip_bank
 	tournment_bank = tournament_bank
 	trip_bank = 0
 	$(".redfish").remove();
 	$(".bluefish").remove();
-	$('#tournament_bank').html('<strong>Tournament Bank:</strong> $' + tournament_bank.toFixed([2]))
-	$('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank.toFixed([2]))
+	$('#tournament_bank').html('<strong>Tournament Bank:</strong> ' + tournament_bank)
+	$('#trip_bank').html('<strong>Trip Bank (points):</strong> ' + trip_bank)
 	red_fish_num = 0
 	total_fish_num = 0
 	lake_state = $('.lake').html()
@@ -382,13 +381,13 @@ var blocks = [{
 }]
 var practiceblocks = jsPsych.randomization.shuffle(blocks)
 var blocks = jsPsych.randomization.shuffle(blocks)
-var pay = 0.05 //payment for one red fish
-var last_pay = 0 //variable to hold the last amount of money received
+var pay = 1 //payment for one red fish
+var last_pay = 0 //variable to hold the last amount of points received
 var lake_state = '' //variable for redrawing the board from trial to trial
 var trial_num = 0 // global variable to track the number of trials into a round
 var round_num = 0 // global variable to track the number of rounds into a tournament
 var round_over = 0 //equals 1 if a blue fish is caught or the participant 'collects'
-var round_over_text = '' //Either "You caught the blue fish and lost the money i." or "You collec."
+var round_over_text = '' //Either "You caught the blue fish and lost the points i." or "You collec."
 
 //Variables for placing fish
 var maxSearchIterations = 100;
@@ -411,8 +410,8 @@ var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div>
 	"<div class = imgbox></div>" +
 	"</div>" +
 	"<div class = subinfocontainer>" +
-	"<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank: </strong>$</p></div> " +
-	"<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank: </strong>$</p></div>" +
+	"<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank (points): </strong></p></div> " +
+	"<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank: </strong></p></div>" +
 	"</div>" +
 	"</div>" +
 	"<div class = buttonbox><button id = 'goFish' class = select-button onclick = goFish()>Go Fish</button><button id = 'Collect' class = select-button onclick = collect()>Collect</button></div>"
@@ -448,7 +447,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 45 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -463,7 +462,7 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		'<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Each round, you will see a lake which has many fish in it. Your goal is to catch as many fish as possible.</p><p class = block-text>On the screen you will see a lake and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 5 cents towards that round\'s "Trip Bank", which you can then "Collect" to move the money to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the money you earned that round.</p><p class = block-text>To keep your money from round to round you must  stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>After you end instructions you will play ' + num_practice_rounds + ' rounds of the fishing game to practice.</p></div>'
+		'<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Each round, you will see a lake which has many fish in it. Your goal is to catch as many fish as possible.</p><p class = block-text>On the screen you will see a lake and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 1 point towards that round\'s "Trip Bank", which you can then "Collect" to move the points to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the points you earned that round.</p><p class = block-text>To keep your points from round to round you must  stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>After you end instructions you will play ' + num_practice_rounds + ' rounds of the fishing game to practice.</p></div>'
 	],
 	allow_keys: false,
 	data: {
@@ -499,7 +498,7 @@ var conditions_instructions_block = {
 	pages: [
 		'<div class = centerbox><p class = block-text><p class = block-text>You will participate in four tournaments, each with different rules. One way the tournaments differ is whether you keep or release the fish you catch. In the <span style="color:red">Catch N Release</span> condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the tournament.</p><p class = block-text>In the <span style="color:red">Catch N Keep</span> condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
 		'<div class = centerbox><p class = block-text>The <span style="color:blue">weather</span> will also differ between tournaments. When the weather is <span style="color:blue">sunny</span> you will be able to see how many fish are in the lake. There will also be counters below the lake that tell you exactly how many red and blue fish are still in the lake.</p><p class = block-text>When the weather is <span style="color:blue">cloudy</span>, the lake is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in <span style="color:red">Catch N Release</span>, the number of fish in the lake stay the same after each "Go Fish". If you are in <span style="color:red">Catch N Keep</span>, the fish come out of the lake.</p></div>',
-		'<div class = centerbox><p class = block-text>You will play one tournament with each combination of <span style="color:blue">weather</span> (sunny or cloudy) and <span style="color:red">release</span> (release or keep) rules. Each tournament is independent. The money you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best to maximize your earnings! Your bonus pay will be proportional to your earnings.</p></div>',
+		'<div class = centerbox><p class = block-text>You will play one tournament with each combination of <span style="color:blue">weather</span> (sunny or cloudy) and <span style="color:red">release</span> (release or keep) rules. Each tournament is independent. The points you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best to maximize your earnings! Your bonus pay will be proportional to your earnings.</p></div>',
 		'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>'
 	],
 	allow_keys: false,
