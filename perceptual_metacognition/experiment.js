@@ -346,13 +346,14 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 10
-var exp_len = 100
+var exp_len = 300
 var contrast = 0.1
 var correct_counter = 0
 var current_trial = 0
 var choices = [37, 39]
 var curr_data = {}
 var confidence_choices = [49, 50, 51, 52]
+var catch_trials = [25, 57, 150, 220, 270]
 var confidence_response_area =
 	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
 	'<button class = response_button id = Confidence_1>1:<br> Not Confident At All</button>' +
@@ -389,7 +390,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment should take about 30 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -541,7 +542,11 @@ for (var i = 0; i < practice_len; i++) {
 perceptual_metacognition_experiment.push(start_test_block)
 for (var i = 0; i < exp_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
-	perceptual_metacognition_experiment.push(test_block);
+	if (jQuery.inArray(i,catch_trials)) {
+		perceptual_metacognition_experiment.push(easy_block)
+	} else {
+		perceptual_metacognition_experiment.push(test_block);
+	}
 	perceptual_metacognition_experiment.push(confidence_key_block);
 }
 perceptual_metacognition_experiment.push(post_task_block)

@@ -25,7 +25,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":5,
+        "time":8,
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
         "publish":"True",
         "deployment_variables":{"jspsych_init":

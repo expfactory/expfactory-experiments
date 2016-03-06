@@ -153,7 +153,7 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 20
-var exp_len = 180
+var exp_len = 200
 var current_trial = 0
 var choices1 = [90,88]
 var choices2 = [78,77]
@@ -246,7 +246,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 12 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
