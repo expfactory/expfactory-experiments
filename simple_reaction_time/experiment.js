@@ -72,6 +72,18 @@ var stim = '<div class = shapebox><div id = cross></div></div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -215,4 +227,5 @@ simple_reaction_time_experiment.push(start_test_block);
 for (var i = 0; i < experiment_len; i++) {
   simple_reaction_time_experiment.push(test_block);
 }
+simple_reaction_time_experiment.push(post_task_block)
 simple_reaction_time_experiment.push(end_block);

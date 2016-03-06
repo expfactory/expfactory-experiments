@@ -325,6 +325,18 @@ var attention_node = {
   }
 }
 
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var feedback_instruct_text =
   'Welcome to the experiment. Press <strong>enter</strong> to begin.'
@@ -537,4 +549,5 @@ for (var i = 0; i < stims.length; i++) {
   threebytwo_experiment.push(test_block);
 }
 threebytwo_experiment.push(attention_node)
+threebytwo_experiment.push(post_task_block)
 threebytwo_experiment.push(end_block)

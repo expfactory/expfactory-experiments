@@ -38,6 +38,18 @@ var elapsed = 0
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+//Set up post task questionnaire
+var post_task_block = {
+   type: 'survey-text',
+   data: {
+       trial_id: "post task questions"
+   },
+   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
+              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   rows: [15, 15],
+   columns: [60,60]
+};
+
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
@@ -133,4 +145,5 @@ var loop_node = {
 var writing_task_experiment = [];
 writing_task_experiment.push(instruction_node);
 writing_task_experiment.push(loop_node);
+writing_task_experiment.push(post_task_block)
 writing_task_experiment.push(end_block);
