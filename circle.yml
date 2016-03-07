@@ -15,6 +15,7 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import validate_circle_yml; validate_circle_yml('.')"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('adaptive_n_back','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('angling_risk_task','web','.');"
+    - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('angling_risk_task_always_sunny','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('antisaccade','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('attention_network_task','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('ax_cpt','web','.');"

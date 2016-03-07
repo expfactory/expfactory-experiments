@@ -26,7 +26,7 @@ function evalAttentionChecks() {
 
 function addID() {
 	jsPsych.data.addDataToLastTrial({
-		exp_id: 'angling_risk_task'
+		exp_id: 'angling_risk_task_always_sunny'
 	})
 }
 
@@ -361,7 +361,7 @@ var performance_var = 0
 
 // task specific variables
 var num_practice_rounds = 2
-var num_rounds = 30
+var num_rounds = 20
 var red_fish_num = 0
 var total_fish_num = 0
 var start_fish_num = 0
@@ -375,13 +375,8 @@ var blocks = [{
 }, {
 	weather: "Sunny",
 	release: "Keep"
-}, {
-	weather: "Cloudy",
-	release: "Release"
-}, {
-	weather: "Cloudy",
-	release: "Keep"
 }]
+
 var practiceblocks = jsPsych.randomization.shuffle(blocks)
 var blocks = jsPsych.randomization.shuffle(blocks)
 var pay = 1 //payment for one red fish
@@ -450,7 +445,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take around 25 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 20 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -499,10 +494,9 @@ var instruction_node = {
 var conditions_instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		'<div class = centerbox><p class = block-text><p class = block-text>You will participate in four tournaments, each with different rules. One way the tournaments differ is whether you keep or release the fish you catch. In the <span style="color:red">Catch N Release</span> condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the round.</p><p class = block-text>In the <span style="color:red">Catch N Keep</span> condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
-		'<div class = centerbox><p class = block-text>The <span style="color:blue">weather</span> will also differ between tournaments. When the weather is <span style="color:blue">sunny</span> you will be able to see how many fish are in the lake. There will also be counters below the lake that tell you exactly how many red and blue fish are still in the lake.</p><p class = block-text>When the weather is <span style="color:blue">cloudy</span>, the lake is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in <span style="color:red">Catch N Release</span>, the number of fish in the lake stay the same after each "Go Fish". If you are in <span style="color:red">Catch N Keep</span>, the fish come out of the lake.</p></div>',
-		'<div class = centerbox><p class = block-text>You will play one tournament with each combination of <span style="color:blue">weather</span> (sunny or cloudy) and <span style="color:red">release</span> (release or keep) rules. Each tournament is independent. The points you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best to maximize your earnings! Your bonus pay will be proportional to your earnings.</p></div>',
-		'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>'
+		'<div class = centerbox><p class = block-text><p class = block-text>You will participate in two tournaments, each with different rules. The tournaments differ in whether you keep or release the fish you catch. In the <span style="color:red">Catch N Release</span> condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the round.</p><p class = block-text>In the <span style="color:red">Catch N Keep</span> condition, the fish you catch will come out of the lake and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p></div>',
+		'<div class = centerbox><p class = block-text>Each tournament is independent. The points you earn in one tournament has no effect on the next. Your goal is to do as well as possible in both tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best to maximize your earnings! Your bonus pay will be proportional to your earnings.</p></div>',
+		'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the tournaments. Before each practice tournament starts you will choose the number of fish in the lake (1-200). During the actual experiment, you will not be able to choose the number of fish.</p></div>'
 	],
 	allow_keys: false,
 	data: {
@@ -621,7 +615,7 @@ var start_test_block = {
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments. There will be four tournaments, each with 30 rounds of fishing.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments. There will be four tournaments, each with 20 rounds of fishing.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
@@ -630,18 +624,15 @@ var start_test_block = {
 };
 
 //Setup task
-angling_risk_task_experiment = []
-angling_risk_task_experiment.push(instruction_node)
+angling_risk_task_always_sunny_experiment = []
+angling_risk_task_always_sunny_experiment.push(instruction_node)
 //Practice basic layout
 weather = "Sunny"
 release = "Keep"
-weather_rule = "you can see how many fish are in the lake"
 release_rule = "the fish you catch comes out of the lake"
 var tournament_intro_block_practice = {
 	type: 'poldrack-text',
-	text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
-		weather + '</span> which means ' + weather_rule +
-		'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
+	text: '<div class = centerbox><p class = block-text>You will now start a tournament. The release rule is <span style="color:red">' + release + '</span>, which means ' +
 		release_rule +
 		'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
@@ -659,27 +650,22 @@ var tournament_intro_block_practice = {
 		round_num = 0
 	}
 }
-angling_risk_task_experiment.push(tournament_intro_block_practice)
-angling_risk_task_experiment.push(ask_fish_block)
-angling_risk_task_experiment.push(set_fish_block)
+angling_risk_task_always_sunny_experiment.push(tournament_intro_block_practice)
+angling_risk_task_always_sunny_experiment.push(ask_fish_block)
+angling_risk_task_always_sunny_experiment.push(set_fish_block)
 for (i = 0; i < num_practice_rounds; i++) {
-	angling_risk_task_experiment.push(practice_node)
-	angling_risk_task_experiment.push(round_over_block)
+	angling_risk_task_always_sunny_experiment.push(practice_node)
+	angling_risk_task_always_sunny_experiment.push(round_over_block)
 }
 
 
 
-angling_risk_task_experiment.push(conditions_instructions_block)
+angling_risk_task_always_sunny_experiment.push(conditions_instructions_block)
 //practice each condition
 for (b = 0; b < practiceblocks.length; b++) {
 	block = practiceblocks[b]
 	weather = block.weather
 	release = block.release
-	if (weather == "Sunny") {
-		weather_rule = "you can see how many fish are in the lake"
-	} else {
-		weather_rule = "you won't be able to see how many fish are in the lake"
-	}
 	if (release == "Keep") {
 		release_rule = "the fish you catch comes out of the lake"
 	} else {
@@ -687,9 +673,7 @@ for (b = 0; b < practiceblocks.length; b++) {
 	}
 	var tournament_intro_block_practice = {
 		type: 'poldrack-text',
-		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
-			weather + '</span> which means ' + weather_rule +
-			'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
+		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The release rule is <span style="color:red">' + release + '</span>, which means ' +
 			release_rule +
 			'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
@@ -707,25 +691,20 @@ for (b = 0; b < practiceblocks.length; b++) {
 			round_num = 0
 		}
 	}
-	angling_risk_task_experiment.push(tournament_intro_block_practice)
-	angling_risk_task_experiment.push(ask_fish_block)
-	angling_risk_task_experiment.push(set_fish_block)
+	angling_risk_task_always_sunny_experiment.push(tournament_intro_block_practice)
+	angling_risk_task_always_sunny_experiment.push(ask_fish_block)
+	angling_risk_task_always_sunny_experiment.push(set_fish_block)
 	for (i = 0; i < num_practice_rounds; i++) {
-		angling_risk_task_experiment.push(practice_node)
-		angling_risk_task_experiment.push(round_over_block)
+		angling_risk_task_always_sunny_experiment.push(practice_node)
+		angling_risk_task_always_sunny_experiment.push(round_over_block)
 	}
 }
 
-angling_risk_task_experiment.push(start_test_block)
+angling_risk_task_always_sunny_experiment.push(start_test_block)
 for (b = 0; b < blocks.length; b++) {
 	block = blocks[b]
 	weather = block.weather
 	release = block.release
-	if (weather == "Sunny") {
-		weather_rule = "you can see how many fish are in the lake"
-	} else {
-		weather_rule = "you won't be able to see how many fish are in the lake"
-	}
 	if (release == "Keep") {
 		start_fish_num = 128
 		release_rule = "the fish you catch comes out of the lake"
@@ -735,9 +714,7 @@ for (b = 0; b < blocks.length; b++) {
 	}
 	var tournament_intro_block = {
 		type: 'poldrack-text',
-		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is <span style="color:blue">' +
-			weather + '</span> which means ' + weather_rule +
-			'. The release rule is <span style="color:red">' + release + '</span>, which means ' +
+		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The release rule is <span style="color:red">' + release + '</span>, which means ' +
 			release_rule +
 			'.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13],
@@ -758,14 +735,14 @@ for (b = 0; b < blocks.length; b++) {
 			round_num = 0
 		}
 	}
-	angling_risk_task_experiment.push(tournament_intro_block)
+	angling_risk_task_always_sunny_experiment.push(tournament_intro_block)
 	for (i = 0; i < num_rounds; i++) {
-		angling_risk_task_experiment.push(game_node)
-		angling_risk_task_experiment.push(round_over_block)
+		angling_risk_task_always_sunny_experiment.push(game_node)
+		angling_risk_task_always_sunny_experiment.push(round_over_block)
 	}
 	if ($.inArray(b, [0, 2]) != -1) {
-		angling_risk_task_experiment.push(attention_node)
+		angling_risk_task_always_sunny_experiment.push(attention_node)
 	}
 }
-angling_risk_task_experiment.push(post_task_block)
-angling_risk_task_experiment.push(end_block)
+angling_risk_task_always_sunny_experiment.push(post_task_block)
+angling_risk_task_always_sunny_experiment.push(end_block)
