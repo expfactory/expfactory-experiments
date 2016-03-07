@@ -150,7 +150,7 @@ var welcome_block = {
   data: {
     trial_id: 'welcome'
   },
-  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Welcome to the experiment. This task will take about 11 minutes. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_response: 180000,
   timing_post_trial: 0

@@ -361,7 +361,7 @@ var performance_var = 0
 
 // task specific variables
 var num_practice_rounds = 2
-var num_rounds = 30
+var num_rounds = 15
 var red_fish_num = 0
 var total_fish_num = 0
 var start_fish_num = 0
@@ -450,7 +450,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take around 45 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 25 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
