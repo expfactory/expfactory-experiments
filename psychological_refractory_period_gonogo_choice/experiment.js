@@ -174,7 +174,7 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 20
-var exp_len = 180
+var exp_len = 200
 var current_trial = 0
 var choices = [74, 75, 76]
 var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
@@ -265,7 +265,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 12 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {

@@ -27,7 +27,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":3.5,
+        "time":20,
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053810011002303",
         "publish":"True",
         "experiment_variables": [{
