@@ -18,6 +18,29 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+	var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	for (var i = 0; i < experiment_data.length; i++) {
+		rt = experiment_data[i].rt
+		trial_count += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+	credit_var = (avg_rt > 200)
+}
 
 var appendTestData = function() {
 	jsPsych.data.addDataToLastTrial({
@@ -62,7 +85,7 @@ var getBoard = function(board_type) {
 }
 
 var getText = function() {
-	return '<div class = centerbox><p class = block-text>These are your prizes from three randomly picked trials:  ' +
+	return '<div class = centerbox><p class = block-text>These are the points used for your bonus from three randomly picked trials:  ' +
 		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
 		'</p></div>'
 }
@@ -216,27 +239,37 @@ var appendPayoutData = function(){
 }
 
 var chooseButton = function(clicked_id) {
-	$('#nextButton').prop('disabled',false)
-	$('.chooseButton').prop('disabled',true)
+	$('#nextButton').prop('disabled', false)
+	$('.chooseButton').prop('disabled', true)
 	currID = parseInt(clicked_id)
 	var cards_to_turn = jsPsych.randomization.repeat(cardArray, 1).slice(0, currID)
 	var points_per_card = 30
 	var delay = 0
+	var num_loss_cards = 0
+	var num_gain_cards = 0
 	for (var i = 0; i < cards_to_turn.length; i++) {
 		var card_i = cards_to_turn[i]
 		delay += 250
 		if (whichLossCards.indexOf(card_i) == -1) {
 			roundPoints += gainAmt
-			//doSetTimeout(card_i, delay, roundPoints, 'win') //uncomment if animation is desired
+			num_gain_cards += 1
+				//doSetTimeout(card_i, delay, roundPoints, 'win') //uncomment if animation is desired
 		} else {
 			roundPoints -= lossAmt
-			//doSetTimeout(card_i, delay, roundPoints, 'loss') //uncomment if animation is desired
+			num_loss_cards += 1
+				//doSetTimeout(card_i, delay, roundPoints, 'loss') //uncomment if animation is desired
 			break
 		}
 	}
+	roundPointsArray.push(roundPoints)
 	document.getElementById("current_round").innerHTML = 'Current Round Points: ' + roundPoints
+	if ($('#feedback').length) {
+		document.getElementById("feedback").innerHTML =
+			'You chose ' + clicked_id +
+			' cards. You turned over ' + num_gain_cards + ' gain cards and ' + num_loss_cards +
+			' loss cards. Your score has been updated to reflect these cards. When you click on the "Next" button, the next round starts. Please note that the loss amount, the gain amount, and the number of loss cards might have changed.'
+	}
 }
-
 
 var instructButton = function(clicked_id) {
 	currID = parseInt(clicked_id)
@@ -287,6 +320,8 @@ var getRound = function() {
 // generic task variables
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
+var performance_var = 0
 
 // task specific variables
 var currID = 0
@@ -302,7 +337,9 @@ var roundPoints = 0
 var totPoints = 0
 var roundOver = 0
 var roundPointsArray = []
-
+var prize1 = 0
+var prize2 = 0
+var prize3 = 0
 
 var practiceSetup1 =
 	"<div class = practiceText><div class = block-text2 id = instruct1><strong>Practice 1: </strong> In the version of the card game you are about to play, you will not turn the cards over one by one.  Rather, you will simply choose the total number of cards you would like to turn over (from 0 to 32) and then continue to the next round.  If turning over any cards seems too risky to you can click the zero button, in which case your score for this round will automatically be zero.  This is a practice round, and it looks just like the game you will play.  Please select the number of cards you would like to turn over, given the number of loss cards and the amount that you can gain or lose if you turn over a gain or loss card, as shown below.  Please note: The computer will tell you how well you did after all 27 game rounds are over!</div></div>" +
@@ -363,6 +400,7 @@ var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, 1)
 
 
 var gameSetup = 
+	"<div class = practiceText><div class = block-text2 id = feedback></div></div>" +
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
 	"<div class = buttonbox><button type='button' id = nextButton class = 'CCT-btn select-button' onclick = clearTimers() disabled>Next Round</button></div>"+
@@ -411,7 +449,7 @@ var instructions_block = {
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
 	'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>'+
 	'<p>-You indicate the number of cards (from 0 to 32) you want to turn over by clicking on a small button. Then, cards are randomly chosen to be turned over, one at a time. For each gain card turned over, points are added to your round total and another card is turned over. This continues until a loss card is uncovered or until the number of cards you chose to turn over is reached. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over – even if you indicated that more cards should be turned over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>'+
-	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money. Each point is worth 1 cent.</p>',
+	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will get a bonus payment proportional to those rounds. Each point is worth 1 cent.</p>',
 	
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
@@ -511,18 +549,6 @@ var start_test_block = {
 	timing_post_trial: 1000
 };
 
-var payout_text = {
-	type: 'poldrack-text',
-	text: getText,
-	data: {
-		trial_id: 'reward'
-	},
-	cont_key: [13],
-	timing_post_trial: 1000,
-	on_finish: appendPayoutData,
-};
-
-
 var practice_block1 = {
 	type: 'single-stim-button',
 	button_class: 'select-button',
@@ -580,6 +606,16 @@ var test_block = {
 	response_ends_trial: true,
 };
 
+var payout_text = {
+	type: 'poldrack-text',
+	text: getText,
+	data: {
+		trial_id: 'reward'
+	},
+	cont_key: [13],
+	timing_post_trial: 1000,
+	on_finish: appendPayoutData,
+};
 
 var payoutTrial = {
 	type: 'call-function',
@@ -591,6 +627,7 @@ var payoutTrial = {
 		prize1 = randomRoundPointsArray.pop()
 		prize2 = randomRoundPointsArray.pop()
 		prize3 = randomRoundPointsArray.pop()
+		performance_var = prize1 + prize2 + prize3
 	}
 };
 

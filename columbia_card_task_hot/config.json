@@ -31,6 +31,18 @@
         "reference": "http://psycnet.apa.org/journals/xlm/35/3/709.pdf",
         "notes": "",
         "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  },
+                                  {
+                                 "name":"performance_var",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "description":"Sum of points from three randomly chosen rounds."
+                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"},
