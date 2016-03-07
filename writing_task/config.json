@@ -24,7 +24,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":15,
+        "time":5,
         "reference": "",
         "publish":"True",
         "deployment_variables":{"jspsych_init":

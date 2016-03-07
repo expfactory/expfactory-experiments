@@ -26,7 +26,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":5,
+        "time":7,
         "reference": "http://www.cambridgebrainsciences.com/assets/default/files/pdf/Bor2003.pdf",
         "publish":"True",
         "deployment_variables":{"jspsych_init":
