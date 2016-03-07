@@ -264,6 +264,7 @@ function getStim() {
 	makeStim('canvas1', 'backCanvas1', 0, 0)
 	makeStim('canvas2', 'backCanvas2', angle, contrast)
 	curr_data.angle = angle
+	curr_data.contrast = contrast
 	curr_data.reference_side = sides[0]
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
 	curr_data.correct_response = correct_response
@@ -283,7 +284,7 @@ function getEasyStim() {
 	makeStim('canvas1', 'backCanvas1', 0, 0)
 	makeStim('canvas2', 'backCanvas2', angle, 0.2)
 	curr_data.angle = angle
-	curr_data.reference_side = sides[0]
+	curr_data.contrast = contrast
 	correct_response = choices[['left', 'right'].indexOf(sides[1])]
 	curr_data.correct_response = correct_response
 }
@@ -322,7 +323,7 @@ var afterTrialUpdate = function(data) {
 	jsPsych.data.addDataToLastTrial(curr_data)
 	curr_data = {}
 	current_trial = current_trial + 1
-		//2 up 1 down staircase
+	//2 up 1 down staircase
 	if (data.key_press != -1) {
 		if (correct === false) {
 			contrast += 0.005
@@ -346,19 +347,27 @@ var credit_var = true
 
 // task specific variables
 var practice_len = 10
-var exp_len = 100
+var exp_len = 300
 var contrast = 0.1
 var correct_counter = 0
 var current_trial = 0
 var choices = [37, 39]
 var curr_data = {}
 var confidence_choices = [49, 50, 51, 52]
+var catch_trials = [25, 57, 150, 220, 270]
 var confidence_response_area =
 	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
 	'<button class = response_button id = Confidence_1>1:<br> Not Confident At All</button>' +
 	'<button class = response_button id = Confidence_2>2</button>' +
 	'<button class = response_button id = Confidence_3>3</button>' +
 	'<button class = response_button id = Confidence_4>4:<br> Very Confident</button>'
+
+var confidence_response_area_key =
+	'<div class = centerbox><div class = fixation>+</div></div><div class = response_div>' +
+	'<button class = response_button_key id = Confidence_1>1:<br> Not Confident At All</button>' +
+	'<button class = response_button_key id = Confidence_2>2</button>' +
+	'<button class = response_button_key id = Confidence_3>3</button>' +
+	'<button class = response_button_key id = Confidence_4>4:<br> Very Confident</button>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -389,7 +398,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment should take about 30 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -513,7 +522,7 @@ var confidence_block = {
 
 var confidence_key_block = {
 	type: 'poldrack-single-stim',
-	stimulus: confidence_response_area,
+	stimulus: confidence_response_area_key,
 	choices: confidence_choices,
 	data: {
 		trial_id: 'confidence_rating',
@@ -533,6 +542,7 @@ var confidence_key_block = {
 /* create experiment definition array */
 var perceptual_metacognition_experiment = [];
 perceptual_metacognition_experiment.push(instruction_node);
+
 for (var i = 0; i < practice_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
 	perceptual_metacognition_experiment.push(easy_block);
@@ -541,7 +551,11 @@ for (var i = 0; i < practice_len; i++) {
 perceptual_metacognition_experiment.push(start_test_block)
 for (var i = 0; i < exp_len; i++) {
 	perceptual_metacognition_experiment.push(fixation_block);
-	perceptual_metacognition_experiment.push(test_block);
+	if (jQuery.inArray(i,catch_trials) !== -1) {
+		perceptual_metacognition_experiment.push(easy_block)
+	} else {
+		perceptual_metacognition_experiment.push(test_block);
+	}
 	perceptual_metacognition_experiment.push(confidence_key_block);
 }
 perceptual_metacognition_experiment.push(post_task_block)

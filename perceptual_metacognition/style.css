@@ -66,6 +66,19 @@
   background-color: black;
 }
 
+.response_button_key {
+  width: 10vw;
+  height: 10vw;
+  background: #505050;
+  margin: 1vw;
+  position: relative;
+  color: #fff;
+  border-radius:15px;
+  font-size: 24px;
+  vertical-align:top;
+}
+
+
 div, p {
   color: white;
 }

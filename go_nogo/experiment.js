@@ -195,7 +195,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This task will take around 7 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -332,5 +332,5 @@ go_nogo_experiment.push(reset_block)
 go_nogo_experiment.push(start_test_block);
 go_nogo_experiment.push(test_block);
 go_nogo_experiment.push(attention_node)
-go_nogo_experiment.push(post_trial_gap)
+go_nogo_experiment.push(post_task_block)
 go_nogo_experiment.push(end_block)

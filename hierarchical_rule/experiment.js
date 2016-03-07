@@ -66,6 +66,7 @@ function assessPerformance() {
 		}
 	})
 	credit_var = (avg_rt > 200) && responses_ok
+  performance_var = total_correct
 }
 
 var randomDraw = function(lst) {
@@ -81,7 +82,7 @@ var getFeedback = function() {
   if (last_trial.key_press == -1) {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
   } else if (last_trial.key_press == last_trial.correct_response) {
-    correct += 1
+    total_correct += 1
     return '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
     return '<div class = centerbox><div style = "color: red"; class = "center-text">Incorrect</div></div>'
@@ -121,6 +122,7 @@ var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = true
+var performance_var = 0
 
 // task specific variables
 var hierarchical_only = true //When this is true, do not run the flat task
@@ -132,7 +134,7 @@ var border_prefix = '<img class = hierarchicalBorder src ='
 var prompt_prefix = '<img class = hierarchicalPrompt src ='
 var postfix = ' </img></div></div>'
 var choices = [74, 75, 76]
-var correct = 0 // tracks correct trials
+var total_correct = 0 // tracks correct trials
 
 //generate stims
 //1=red, 2=blue, 3=green, 4=yellow BORDER COLORS
@@ -162,9 +164,9 @@ for (var c = 0; c < colors.length; c++) {
         })
       } else {
         if (c == 2) {
-          correct_response = choices[s - 1]
+          correct_response = choices[s]
         } else if (c == 3) {
-          correct_response = choices[o - 1]
+          correct_response = choices[o]
         }
         hierarchical_stims.push({
           stimulus: stim_prefix + path_source + stims[s + (stims.length / 2)] + orientations[o] +
@@ -238,8 +240,10 @@ var post_task_block = {
 };
 
 /* define static blocks */
-var feedback_instruct_text =
-  'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+var feedback_instruct_text = 'Welcome to the experiment. This experiment will take about 40 minutes. Press <strong>enter</strong> to begin.'
+if (hierarchical_only === true) {
+  feedback_instruct_text ='Welcome to the experiment. This experiment will take about 22 minutes. Press <strong>enter</strong> to begin.'
+}
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -253,7 +257,7 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruct_text_array = ['<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your should try to get as many trials correct as possible. There are 18 stimuli in this experiment. Press next to go through the 18 stimuli you will be responding to.</p></div>']
 for (var i = 0; i < instruct_stims.length; i++) {
-  instruct_text_array.push(instruct_stims[i] + '<div class = instructionBox><p class = center-block-text>Please familiarize yourself with the stimulus shown on this page.</p></div>')
+  instruct_text_array.push(instruct_stims[i] + '<div class = instructionBox><p class = center-block-text>Please familiarize yourself with the stimulus shown on these pages.</p></div>')
 }
 instruct_text_array.push('<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli you just saw. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>')
 

@@ -147,7 +147,7 @@ var category_instructions = '<ul class = list-text>' +
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This expeirment will take around 6 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
