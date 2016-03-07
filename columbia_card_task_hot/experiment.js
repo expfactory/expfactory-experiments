@@ -17,6 +17,30 @@ function addID() {
   })
 }
 
+function assessPerformance() {
+	var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button')
+	var missed_count = 0
+	var trial_count = 0
+	var rt_array = []
+	var rt = 0
+	for (var i = 0; i < experiment_data.length; i++) {
+		rt = experiment_data[i].rt
+		trial_count += 1
+		if (rt == -1) {
+			missed_count += 1
+		} else {
+			rt_array.push(rt)
+		}
+	}
+	//calculate average rt
+	var sum = 0
+	for (var j = 0; j < rt_array.length; j++) {
+		sum += rt_array[j]
+	}
+	var avg_rt = sum / rt_array.length
+	credit_var = (avg_rt > 200)
+}
+
 function deleteText(input, search_term) {
 	index = input.indexOf(search_term)
 	indexAfter = input.indexOf(search_term) + search_term.length
@@ -55,20 +79,15 @@ var getBoard = function(board_type) {
 	return board
 }
 
-var getReward = function() {
-	tempData = jsPsych.data.getData()
-	allPoints = []
-	for(k=0; k<tempData.length; k++){
-		if(jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'endRoundButton' && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'|| jsPsych.data.getDataByTrialIndex(k).whichButtonWasClicked == 'collectButton'  && jsPsych.data.getDataByTrialIndex(k).exp_stage == 'test'){
-		allPoints.push(jsPsych.data.getDataByTrialIndex(k).roundPoints)
-		}
-	}
-	tempPoints = jsPsych.randomization.repeat(allPoints, 1)
-	reward1 = tempPoints.pop()
-	reward2 = tempPoints.pop()
-	reward3 = tempPoints.pop()
-	return '<div class = centerbox><p class = center-block-text>The round points selected are: ' +
-		reward1 + ', ' + reward2 + ', ' + reward3 + '</p></div>'
+
+var getText = function() {
+	return '<div class = centerbox><p class = block-text>These are the points used for your bonus from three randomly picked trials:  ' +
+		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
+		'</p></div>'
+}
+
+var appendPayoutData = function(){
+	jsPsych.data.addDataToLastTrial({reward: [prize1, prize2, prize3]})
 }
 
 var chooseCard = function(clicked_id) {
@@ -236,7 +255,6 @@ var endRound = function() {
 
 	currID = 'endRoundButton'
 	roundOver=2
-	points.push(roundPoints)
 	whichClickInRound = whichClickInRound + 1
 	for (i = 0; i < 33; i++) {
 		if (whichGainCards.indexOf(i) != -1) {
@@ -425,15 +443,16 @@ var instructButton = function(clicked_id) {
 // generic task variables
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
+var performance_var = 0
 
 // task specific variables
 var currID = ""
 var numLossCards = ""
 var gainAmt = ""
 var lossAmt = ""
-var points = []
 var CCT_timeouts = []
-var numRounds =  27
+var numRounds =  4
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -444,7 +463,11 @@ var currTrial = 0
 var instructPoints = 0
 var clickedGainCards = []
 var clickedLossCards = []
-	// this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
+var roundPointsArray = [] 
+var prize1 = 0
+var prize2 = 0
+var prize3 = 0
+// this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
 	[1, 10, 250],
 	[1, 10, 500],
@@ -610,19 +633,6 @@ var end_block = {
 	cont_key: [13],
 	timing_post_trial: 0
 };
-var give_total = {
-	type: 'poldrack-text',
-	text: getReward,
-	data: {
-		trial_id: 'reward'
-	},
-	cont_key: [13],
-	timing_post_trial: 0,
-	on_finish: function(){
-	jsPsych.data.addDataToLastTrial({reward: [reward1,reward2,reward3]})
-	}
-};
-
 
 var start_test_block = {
 	type: 'poldrack-text',
@@ -701,6 +711,7 @@ var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
 		if (currID == 'collectButton') {
+			roundPointsArray.push(roundPoints)
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
@@ -713,6 +724,32 @@ var test_node = {
 		}
 	}
 }
+
+var payout_text = {
+	type: 'poldrack-text',
+	text: getText,
+	data: {
+		trial_id: 'reward'
+	},
+	cont_key: [13],
+	timing_post_trial: 1000,
+	on_finish: appendPayoutData,
+};
+
+var payoutTrial = {
+	type: 'call-function',
+	data: {
+		trial_id: 'calculate reward'
+	},
+	func: function() {
+		randomRoundPointsArray = jsPsych.randomization.repeat(roundPointsArray, 1)
+		prize1 = randomRoundPointsArray.pop()
+		prize2 = randomRoundPointsArray.pop()
+		prize3 = randomRoundPointsArray.pop()
+		performance_var = prize1 + prize2 + prize3
+	}
+};
+
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
 //columbia_card_task_hot_experiment.push(test_img_block);
@@ -725,6 +762,7 @@ columbia_card_task_hot_experiment.push(start_test_block);
 for (i = 0; i < numRounds; i++) {
 	columbia_card_task_hot_experiment.push(test_node);
 }
-columbia_card_task_hot_experiment.push(give_total);
+columbia_card_task_hot_experiment.push(payoutTrial);
+columbia_card_task_hot_experiment.push(payout_text);
 columbia_card_task_hot_experiment.push(post_task_block)
 columbia_card_task_hot_experiment.push(end_block);
