@@ -37,7 +37,7 @@ var welcome_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>People differ in the ways they act and think in different situations. This is a test to measure some of the ways in which you act and think. Read each statement and click on the appropriate circle below the question. Do not spend too much time on any statement. Answer quickly and honestly.</p></div>',
+    '<div class = centerbox><p class = block-text>Please answer the following questions regarding your demographics.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
