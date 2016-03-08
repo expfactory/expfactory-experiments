@@ -1,6 +1,6 @@
 [
     {
-        "name": "Psychological Refractory Period",
+        "name": "Psychological Refractory Period Two Choices",
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
