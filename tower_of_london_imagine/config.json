@@ -1,6 +1,6 @@
 [
     {
-        "name": "Tower of London",
+        "name": "Tower of London Imagine",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
