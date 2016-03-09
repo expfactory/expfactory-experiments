@@ -1,6 +1,7 @@
 [
     {
         "name": "Tower of London Imagine",
+        "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
