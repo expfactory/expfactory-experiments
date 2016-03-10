@@ -157,7 +157,7 @@ var choices = [37, 39]
 var curr_data = []
 var stim = ''
 /* SPECIFY HOW MANY TRIALS YOU WANT FOR FIRST PHASE, and SECOND PHASE.  FP=first(must be divisible by 60), SP=second(must be divisible by 22) */
-var FP_trials = 6;
+var FP_trials = 60;
 var SP_trials = 22;
 var eachComboNum = FP_trials / 6; /* don't change this line */
 var eachComboNumSP = SP_trials / 22; /* don't change this line */
