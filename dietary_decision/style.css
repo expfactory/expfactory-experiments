@@ -79,10 +79,6 @@
   transform: translate(-50%,-50%); 
 }
 
-.jspsych-instructions-nav > p {
-  color: white;
-}
-
-div p {
+.display_stage > div, .display_stage > p {
   color: white;
 }
