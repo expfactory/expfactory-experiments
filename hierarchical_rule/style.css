@@ -93,10 +93,9 @@
 }
 
 .jspsych-instructions-nav > p {
-  color: white;
   margin-top: 10px;
 }
 
-div, p {
+.display_stage > div, .display_stage > p {
   color: white;
 }

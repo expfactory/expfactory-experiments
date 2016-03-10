@@ -129,10 +129,6 @@
     align-items: center; /* align vertical */
 }
 
-.jspsych-instructions-nav > p {
-  color: white;
-}
-
-div, p {
+.display_stage > div, .display_stage > p {
   color: white;
 }

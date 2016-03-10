@@ -78,8 +78,7 @@
   vertical-align:top;
 }
 
-
-div, p {
+.display_stage > div, .display_stage > p {
   color: white;
 }
 
