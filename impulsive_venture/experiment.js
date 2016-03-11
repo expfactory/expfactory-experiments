@@ -69,7 +69,11 @@ var all_pages = [
     "Are you often surprised at people's reactions to what you do or say?",
     "Do you think an evening out is more successful if it is unplanned or arranged at the last moment?",
     "Do you usually work quickly, without bothering to check?",
-    "Do you often change your interests?"
+    "Do you often change your interests?",
+    "Before making up your mind, do you consider all the advantages and disadvantages?",
+    "Do you prefer to 'sleep on it' before making decisions?",
+    "When people shout at you, do you shout back?",
+    "Do you usually make up your mind quickly?"
   ],
   ["Would you enjoy water skiing?",
     "Usually do you prefer to stick to brands you know are reliable to trying new ones on the chance of finding something better?",
