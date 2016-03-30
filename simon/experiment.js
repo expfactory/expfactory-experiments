@@ -81,6 +81,18 @@ var appendData = function() {
   current_trial = current_trial + 1
 }
 
+var appendTestData = function(data) {
+  correct = false
+  if (data.key_press == data.correct_response) {
+  	correct = true
+  }
+  jsPsych.data.addDataToLastTrial({
+  	correct: correct,
+    trial_num: current_trial
+  })
+  current_trial = current_trial + 1
+}
+
 var getInstructFeedback = function() {
     return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
       '</p></div>'
@@ -96,39 +108,41 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var correct_responses = jsPsych.randomization.repeat([
-  ["left arrow", 37],
-  ["right arrow", 39]
-], 1)
+var stims = jsPsych.randomization.shuffle(['stim1', 'stim2'])
+var correct_responses = [["left arrow", 37],["right arrow", 39]]
 var choices = [37, 39]
 var current_trial = 0
 var gap = Math.floor(Math.random() * 2000) + 1000
 var test_stimuli = [{
-  stimulus: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_left id = ' + stims[0] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
-    condition: 'left'
+    stim_side: 'left',
+    condition: 'congruent'
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = centerbox><div class = simon_right id = "stim1"></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_right id = ' + stims[0] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
-    condition: 'right'
+    stim_side: 'right',
+    condition: 'incongruent'
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = simon_leftbox><div class = simon_left id = "stim2"></div></div>',
+  stimulus: '<div class = simon_leftbox><div class = simon_left id = ' + stims[1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: 'left'
+    stim_side: 'left',
+    condition: 'incongruent'
   },
   key_answer: correct_responses[1][1]
 }, {
-  stimulus: '<div class = simon_rightbox><div class = simon_right id = "stim2"></div></div>',
+  stimulus: '<div class = simon_rightbox><div class = simon_right id = ' + stims[1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: 'right'
+    stim_side: 'right',
+    condition: 'congruent'
   },
   key_answer: correct_responses[1][1]
 }];
@@ -288,7 +302,9 @@ var test_block = {
   choices: choices,
   timing_response: 1500,
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: function(data){
+  	appendTestData(data)
+  }
 };
 
 /* create experiment definition array */
