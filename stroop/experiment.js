@@ -111,6 +111,7 @@ var credit_var = 0
 var congruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">RED</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'congruent',
 		stim_color: 'red',
 		stim_word: 'red',
@@ -120,6 +121,7 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">BLUE</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'congruent',
 		stim_color: 'blue',
 		stim_word: 'blue',
@@ -129,6 +131,7 @@ var congruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">GREEN</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'congruent',
 		stim_color: 'green',
 		stim_word: 'green',
@@ -140,6 +143,7 @@ var congruent_stim = [{
 var incongruent_stim = [{
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">BLUE</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'red',
 		stim_word: 'blue',
@@ -149,6 +153,7 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:red">GREEN</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'red',
 		stim_word: 'green',
@@ -158,6 +163,7 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">RED</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'blue',
 		stim_word: 'red',
@@ -167,6 +173,7 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:blue">GREEN</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'blue',
 		stim_word: 'green',
@@ -176,6 +183,7 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">RED</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'green',
 		stim_word: 'red',
@@ -185,6 +193,7 @@ var incongruent_stim = [{
 }, {
 	stimulus: '<div class = centerbox><div class = stroop-stim style = "color:green">BLUE</div></div>',
 	data: {
+		trial_id: 'stim',
 		condition: 'incongruent',
 		stim_color: 'green',
 		stim_word: 'blue',
