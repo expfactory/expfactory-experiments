@@ -357,8 +357,8 @@ var alert_block = {
   stimulus: getAlert,
   is_html: true,
   choices: 'none',
-  timing_stim: 200000,
-  timing_response: 200000,
+  timing_stim: 5000,
+  timing_response: 5000,
   timing_post_trial: 1000
 };
 
