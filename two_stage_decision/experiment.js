@@ -132,37 +132,29 @@ var change_phase = function() {
 
 
 /*
-Generate first stage stims. Takes in an array of images and colors (which change between practice anad test),
-as well as a "condition" string that is used in the data object
+Generate first stage stims. Takes in an array of images and colors (which change between practice anad test)
 */
-var get_fs_stim = function(images, colors, condition) {
+var get_fs_stim = function(images, colors) {
 	var fs_stim = [{
 		stimulus: "<div class = decision-left style='background:" + colors[0] + "; '>" +
 			"<img class = 'decision-stim' src= '" + images[0] + "'></img></div>" +
 			"<div class = decision-right style='background:" + colors[0] + "; '>" +
 			"<img class = 'decision-stim' src= '" + images[1] + "'></img></div>",
-		data: {
-			trial_id: condition + '_first_stage',
-			condition: [0, 1]
-		}
+		stim_order: [0, 1]
 	}, {
 		stimulus: "<div class = decision-left style='background:" + colors[0] + "; '>" +
 			"<img class = 'decision-stim' src= '" + images[1] + "'></img></div>" +
 			"<div class = decision-right style='background:" + colors[0] + "; '>" +
 			"<img class = 'decision-stim' src= '" + images[0] + "'></img></div>",
-		data: {
-			trial_id: condition + '_first_stage',
-			condition: [1, 0]
-		}
+		stim_order: [1, 0]
 	}]
 	return fs_stim
 }
 
 /*
-Generate second stage stims. Takes in an array of images and colors (which change between practice anad test),
-as well as a "condition" string that is used in the data object
+Generate second stage stims. Takes in an array of images and colors (which change between practice and test)
 */
-var get_ss_stim = function(images, colors, condition) {
+var get_ss_stim = function(images, colors) {
 	var ss_stim_array = [
 		["<div class = decision-left style='background:" + colors[1] + "; '>" +
 			"<img class = 'decision-stim' src= '" + images[2] + "'></img></div>" +
@@ -186,19 +178,7 @@ var get_ss_stim = function(images, colors, condition) {
 
 	var ss_stim = {
 		stimulus: [ss_stim_array[0][0], ss_stim_array[0][1], ss_stim_array[1][0], ss_stim_array[1][1]],
-		data: [{
-			trial_id: condition + '_second_stage',
-			condition: [2, 3]
-		}, {
-			trial_id: condition + '_second_stage',
-			condition: [3, 2]
-		}, {
-			trial_id: condition + '_second_stage',
-			condition: [4, 5]
-		}, {
-			trial_id: condition + '_second_stage',
-			condition: [5, 4]
-		}]
+		stim_order: [[2, 3], [3, 2], [4, 5], [5, 4]]
 	}
 	return ss_stim
 }
@@ -212,7 +192,8 @@ and FB. The "get_selected" functions also append data to the preceeding trials
 /* Selects the next first stage from a predefined, randomized list of first stages and increases the trial count*/
 var choose_first_stage = function() {
 	current_trial = current_trial + 1
-	return curr_fs_stims.stimulus.shift()
+	stim_ids = curr_fs_stims.stim_order[current_trial]
+	return curr_fs_stims.stimulus[current_trial]
 }
 
 /*
@@ -223,18 +204,17 @@ with appropriate handles to start the relevant animations.
 Also updates the global variables choice, first_selected and first_notselected, which are used in the next function
 */
 var get_first_selected = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	var first_stage_trial = jsPsych.data.getData()[global_trial - 1]
-	var stim_ids = curr_fs_stims.data[current_trial].condition
-	choice = choices.indexOf(first_stage_trial.key_press)
-	jsPsych.data.addDataToLastTrial({
-		condition: stim_ids,
-		trial_num: current_trial,
-		trial_id: 'first_stage'
-	})
+	var first_stage_trial = jsPsych.data.getLastTrialData()
+	var choice = choices.indexOf(first_stage_trial.key_press)
 	if (choice != -1) {
 		first_selected = stim_ids[choice]
-		first_notselected = stim_ids[1 - choice]
+		var first_notselected = stim_ids[1 - choice]
+		jsPsych.data.addDataToLastTrial({
+			stim_selected: first_selected,
+			stim_order: stim_ids,
+			stage: 0,
+			trial_num: current_trial
+		})
 		return "<div class = 'selected " + stim_side[choice] + "' style='background:" + curr_colors[0] +
 			"; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[first_selected] + "'></div>" +
@@ -243,7 +223,12 @@ var get_first_selected = function() {
 			"<img class = 'decision-stim  fade' src= '" + curr_images[first_notselected] + "'></div>"
 	} else {
 		first_selected = -1
-		first_notselected = -1
+		jsPsych.data.addDataToLastTrial({
+			stim_selected: first_selected,
+			stim_order: stim_ids,
+			stage: 0,
+			trial_num: current_trial
+		})
 	}
 }
 
@@ -256,23 +241,24 @@ If an choice was taken, display the chosen stimulus at the top of the screen and
 choice 70% of the time). Randomly select a presentation order for the two stimulus associated with the second stage
 */
 var choose_second_stage = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	var first_stage_trial = jsPsych.data.getData()[global_trial - 2]
-	var stim_ids = curr_fs_stims.data[current_trial].condition
-	if (choice == -1) {
+	if (first_selected == -1) {
 		FB_on = 0;
 		return "<div class = centerbox><div class = center-text>" +
 			"Please respond faster!</div></div>"
 	} else {
 		FB_on = 1;
-		stage = stim_ids[choice]
+		stage = first_selected
+		transition = 'frequent'
 		if (Math.random() < 0.3) {
 			stage = 1 - stage
+			transition = 'infrequent'
 		}
-		stage_tmp = stage * 2
+		var stage_index = stage * 2
+		var stim_index = stage_index + Math.round(Math.random())
+		stim_ids = curr_ss_stims.stim_order[stim_index]
 		return "<div class = 'decision-top faded' style='background:" + curr_colors[0] + "; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[first_selected] + "'></div>" +
-			curr_ss_stim.stimulus[stage_tmp + Math.round(Math.random())]
+			curr_ss_stims.stimulus[stim_index]
 	}
 }
 
@@ -280,21 +266,18 @@ var choose_second_stage = function() {
 Animates second stage choice, similarly to get_first_selected
 */
 var get_second_selected = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	var second_stage_trial = jsPsych.data.getData()[global_trial - 1]
-	var slice_start_index = second_stage_trial.stimulus.search('<div class = decision-left')
-	var stim_index = curr_ss_stim.stimulus.indexOf(second_stage_trial.stimulus.slice(
-		slice_start_index))
-	var stim_ids = curr_ss_stim.data[stim_index].condition
-	choice = choices.indexOf(second_stage_trial.key_press)
-	jsPsych.data.addDataToLastTrial({
-		condition: stim_ids,
-		trial_num: current_trial,
-		trial_id: 'second_stage'
-	})
+	var second_stage_trial = jsPsych.data.getLastTrialData()
+	var choice = choices.indexOf(second_stage_trial.key_press)
 	if (choice != -1) {
 		second_selected = stim_ids[choice]
-		second_notselected = stim_ids[1 - choice]
+		var second_notselected = stim_ids[1 - choice]
+		jsPsych.data.addDataToLastTrial({
+			stim_selected: second_selected,
+			stim_order: stim_ids,
+			stage: stage + 1,
+			stage_transition: transition,
+			trial_num: current_trial
+		})
 		return "<div class = '" + stim_side[choice] + " selected' style='background:" + curr_colors[
 				stage + 1] + "; '>" +
 			"<img class = 'decision-stim' src= '" + curr_images[second_selected] + "'></div>" +
@@ -303,8 +286,15 @@ var get_second_selected = function() {
 			"<img class = 'decision-stim' src= '" + curr_images[second_notselected] + "'></div>"
 	} else {
 		second_selected = -1
-		second_notselected = -1
+		jsPsych.data.addDataToLastTrial({
+			stim_selected: second_selected,
+			stim_order: stim_ids,
+			stage: stage + 1,
+			stage_transition: transition,
+			trial_num: current_trial
+		})
 	}
+	
 }
 
 /*
@@ -331,7 +321,7 @@ Otherwise, check the FB_matrix which determines the reward probabilities for eac
 After FB, the FB_atrix is updated.
 */
 var get_feedback = function() {
-	if (choice == -1) {
+	if (second_selected == -1) {
 		return "<div class = centerbox><div class = center-text>" +
 			"Please respond faster!</div></div>"
 	} else if (Math.random() < FB_matrix[second_selected - 2]) {
@@ -352,9 +342,8 @@ var get_feedback = function() {
 
 var update_FB_data = function() {
 	jsPsych.data.addDataToLastTrial({
-		condition: FB,
+		feedback: FB,
 		trial_num: current_trial,
-		trial_id: 'FB_stage',
 		FB_probs: FB_matrix.slice(0)
 	})
 	return ""
@@ -375,12 +364,10 @@ var performance_var = 0
 var total_score = 0 //track performance
 var practice_trials_num = 50
 var test_trials_num = 200
+var stim_ids = [] //Tracks the ids of the last chosen stims. 
 var current_trial = -1
 var first_selected = -1 //Tracks the ID of the selected fs stimulus
-var first_notselected = -1 //The fs stimulus not selected
 var second_selected = -1 //Tracks the ID of the selected fs stimulus
-var second_notselected = -1 //The fs stimulus not selected
-var choice = -1 //tracks which choice was last taken
 var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
@@ -423,18 +410,18 @@ jsPsych.pluginAPI.preloadImages(test_images)
 
 var curr_images = practice_images
 
-var test_fs_stim = get_fs_stim(test_images, test_colors, 'test')
-var practice_fs_stim = get_fs_stim(practice_images, practice_colors, 'practice')
+var test_fs_stim = get_fs_stim(test_images, test_colors)
+var practice_fs_stim = get_fs_stim(practice_images, practice_colors)
 
-var test_ss_stim = get_ss_stim(test_images, test_colors, 'test')
-var practice_ss_stim = get_ss_stim(practice_images, practice_colors, 'practice')
+var test_ss_stim = get_ss_stim(test_images, test_colors)
+var practice_ss_stim = get_ss_stim(practice_images, practice_colors)
 
 var test_fs_stims = jsPsych.randomization.repeat(test_fs_stim, test_trials_num, true);
 var practice_fs_stims = jsPsych.randomization.repeat(practice_fs_stim, practice_trials_num, true);
 
 
 var curr_fs_stims = practice_fs_stims
-var curr_ss_stim = practice_ss_stim
+var curr_ss_stims = practice_ss_stim
 
 
 /* ************************************ */
@@ -652,7 +639,7 @@ var first_stage = {
 var first_stage_selected = {
 	type: "poldrack-single-stim",
 	data: {
-		trial_id: 'first_stage'
+		trial_id: 'first_stage_selected'
 	},
 	stimulus: get_first_selected,
 	choices: 'none',
@@ -670,7 +657,7 @@ var first_stage_selected = {
 var second_stage = {
 	type: "poldrack-single-stim",
 	data: {
-		trial_id: 'first_stage'
+		trial_id: 'second_stage'
 	},
 	stimulus: choose_second_stage,
 	is_html: true,
@@ -689,7 +676,7 @@ var second_stage = {
 var second_stage_selected = {
 	type: "poldrack-single-stim",
 	data: {
-		trial_id: 'first_stage'
+		trial_id: 'second_stage_selected'
 	},
 	stimulus: get_second_selected,
 	choices: 'none',
@@ -707,7 +694,7 @@ var second_stage_selected = {
 var FB_stage = {
 	type: "poldrack-single-stim",
 	data: {
-		trial_id: 'first_stage'
+		trial_id: 'feedback_stage'
 	},
 	stimulus: get_feedback,
 	is_html: true,
