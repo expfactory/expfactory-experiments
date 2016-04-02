@@ -79,11 +79,12 @@ var randomDraw = function(lst) {
 //Calculates whether the last trial was correct and records the accuracy in data object
 var record_acc = function(data) {
 	var target_lower = data.target.toLowerCase()
+	var stim_lower = curr_stim.toLowerCase(0)
 	var key = data.key_press
-	if (curr_stim == target_lower && key == 32) {
+	if (stim_lower == target_lower && key == 32) {
 		correct = 'correct'
 		block_acc += 1
-	} else if (curr_stim != target_lower && key == -1) {
+	} else if (stim_lower != target_lower && key == -1) {
 		correct = 'correct'
 		block_acc += 1
 	} else {
