@@ -1,4 +1,4 @@
-s// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18193561
+// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18193561
 // Decision Making and Learning While Taking Sequential Risks. Pleskac 2008
 
 /* ************************************ */
