@@ -212,7 +212,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   data: {
-    trial_id: 'instructions'
+    trial_id: 'instruction'
   },
   timing_post_trial: 0,
   timing_response: 180000
@@ -225,7 +225,7 @@ var instructions_block = {
   ],
   allow_keys: false,
   data: {
-    trial_id: 'instructions'
+    trial_id: 'instruction'
   },
   show_clickable_nav: true,
   timing_post_trial: 1000
