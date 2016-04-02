@@ -97,15 +97,16 @@ var record_acc = function(data) {
 };
 
 var update_delay = function() {
-	var acc = block_acc / num_trials
+	var total_trials = base_num_trials + delay
+	var mistakes = total_trials - block_acc
 	if (delay >= 2) {
-		if (acc > acc_thresh) {
+		if (mistakes < 3) {
 			delay += 1
-		} else if (acc < (1 - acc_thresh)) {
+		} else if (mistakes > 5) {
 			delay -= 1
 		}
 	} else if (delay == 1) {
-		if (acc > acc_thresh) {
+		if (mistakes < 3) {
 			delay += 1
 		}
 	}
@@ -121,7 +122,14 @@ var update_target = function() {
 };
 
 var getStim = function() {
-	curr_stim = randomDraw(letters)
+	var trial_type = target_trials.shift()
+	var targets = letters.filter(function(x) { return x.toLowerCase() == target.toLowerCase()})
+	var non_targets = letters.filter(function(x) { return x.toLowerCase() != target.toLowerCase()})
+	if (trial_type === 'target') {
+		curr_stim = randomDraw(targets)
+	} else {
+		curr_stim = randomDraw(non_targets)
+	}
 	stims.push(curr_stim)
 	return '<div class = "centerbox"><div class = "center-text">' + curr_stim + '</div></div>'
 }
@@ -153,13 +161,14 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true //default to true
 
 // task specific variables
-var letters = 'bBdDgGtTvV'
+var letters = 'bBdDgGtTvV'.split("")
 var num_blocks = 20 // number of adaptive blocks
-var num_trials = 25 // per block  
+var base_num_trials = 20 // total num_trials = base + load 
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
-var acc_thresh = 0.8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
+var trials_left = 0 // counter used by adaptive_test_node
+var target_trials = [] // array defining whether each trial in a block is a target trial
 var current_trial = 0
 var target = ""
 var curr_stim = ''
@@ -250,26 +259,6 @@ var instruction_node = {
 	}
 }
 
-var update_delay_block = {
-	type: 'call-function',
-	func: update_delay,
-	data: {
-		exp_id: "adaptive_n_back",
-		trial_id: "update_delay"
-	},
-	timing_post_trial: 0
-}
-
-var update_target_block = {
-	type: 'call-function',
-	func: update_target,
-	data: {
-		exp_id: "adaptive_n_back",
-		trial_id: "update_target"
-	},
-	timing_post_trial: 0
-}
-
 var end_block = {
 	type: 'poldrack-text',
 	text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -294,17 +283,25 @@ var start_practice_block = {
 	timing_post_trial: 1000
 };
 
-var start_test_block = {
-	type: 'poldrack-text',
-	text: '<div class = "centerbox"><p class = "center-block-text">Starting a test block.</p><p class = "center-block-text">Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
+var update_delay_block = {
+	type: 'call-function',
+	func: update_delay,
 	data: {
 		exp_id: "adaptive_n_back",
-		trial_id: "text"
+		trial_id: "update_delay"
 	},
-	timing_response: 180000,
-	timing_post_trial: 2000
-};
+	timing_post_trial: 0
+}
+
+var update_target_block = {
+	type: 'call-function',
+	func: update_target,
+	data: {
+		exp_id: "adaptive_n_back",
+		trial_id: "update_target"
+	},
+	timing_post_trial: 0
+}
 
 var start_control_block = {
 	type: 'poldrack-text',
@@ -315,12 +312,58 @@ var start_control_block = {
 		trial_id: "text"
 	},
 	timing_response: 180000,
-	timing_post_trial: 2000
+	timing_post_trial: 2000,
+	on_finish: function() {
+		target = 't'
+		target_trials = jsPsych.randomization.repeat(['target','0', '0'], base_num_trials/3).slice(0,base_num_trials)
+	}
+};
+
+var start_adaptive_block = {
+	type: 'poldrack-text',
+	data: {
+		exp_id: "adaptive_n_back",
+		trial_id: "delay_text"
+	},
+	text: getText,
+	cont_key: [13],
+	on_finish: function() {
+		stims = []
+		trials_left = base_num_trials + delay
+		target_trials = []
+		for (var i = 0; i < delay; i++) {
+			target_trials.push('0')
+		}
+		var trials_to_add = []
+		for ( var j = 0; j < (trials_left - delay); j++) {
+			if (j < (trials_left/3-1)) {
+				trials_to_add.push('target')
+			} else {
+				trials_to_add.push('0')
+			}
+		}
+		trials_to_add = jsPsych.randomization.shuffle(trials_to_add)
+		target_trials = target_trials.concat(trials_to_add)
+	}
+};
+
+var adaptive_block = {
+	type: 'poldrack-single-stim',
+	is_html: true,
+	stimulus: getStim,
+	data: getData,
+	choices: [32],
+	timing_stim: 500,
+	timing_response: 2000,
+	timing_post_trial: 0,
+	on_finish: function(data) {
+		record_acc(data)
+	}
 };
 
 //Define control (0-back) block
 var control_trials = []
-for (var i = 0; i < num_trials; i++) {
+for (var i = 0; i < base_num_trials; i++) {
 	var control_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
@@ -329,7 +372,7 @@ for (var i = 0; i < num_trials; i++) {
 			trial_id: "stim",
 			exp_stage: "control",
 			load: 0,
-			target: 't',
+			target: target,
 			trial_num: current_trial
 		},
 		choices: [32],
@@ -343,47 +386,31 @@ for (var i = 0; i < num_trials; i++) {
 	control_trials.push(control_block)
 }
 
+var adaptive_test_node = {
+	timeline: [update_target_block, adaptive_block],
+	loop_function: function() {
+		trials_left -= 1
+		if (trials_left === 0) {
+			return false
+		} else { 
+			return true 
+		}
+	}
+}
+	
+
 //Set up experiment
 var adaptive_n_back_experiment = []
 adaptive_n_back_experiment.push(instruction_node);
 
-if (control_before === 0) {
+if (control_before === 1) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
 
 for (var b = 0; b < num_blocks; b++) {
-	var start_delay_block = {
-		type: 'poldrack-text',
-		data: {
-			exp_id: "adaptive_n_back",
-			trial_id: "delay_text"
-		},
-		text: getText,
-		cont_key: [13],
-		on_finish: function() {
-			stims = []
-		}
-	};
-	adaptive_n_back_experiment.push(start_delay_block)
-	adaptive_n_back_experiment.push(start_test_block)
-	for (var i = 0; i < num_trials; i++) {
-		adaptive_n_back_experiment.push(update_target_block)
-		var test_block = {
-			type: 'poldrack-single-stim',
-			is_html: true,
-			stimulus: getStim,
-			data: getData,
-			choices: [32],
-			timing_stim: 500,
-			timing_response: 2000,
-			timing_post_trial: 0,
-			on_finish: function(data) {
-				record_acc(data)
-			}
-		};
-		adaptive_n_back_experiment.push(test_block)
-	}
+	adaptive_n_back_experiment.push(start_adaptive_block)
+	adaptive_n_back_experiment.push(adaptive_test_node)
 	if ($.inArray(b, [4, 7, 15]) != -1) {
 		adaptive_n_back_experiment.push(attention_node)
 	}
