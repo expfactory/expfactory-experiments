@@ -450,7 +450,7 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		trial_id: "instructions"
+		trial_id: 'instruction'
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
@@ -464,7 +464,7 @@ var instructions_block = {
 	],
 	allow_keys: false,
 	data: {
-		trial_id: "instructions"
+		trial_id: 'instruction'
 	},
 	show_clickable_nav: true,
 	timing_post_trial: 1000
@@ -500,7 +500,7 @@ var conditions_instructions_block = {
 	],
 	allow_keys: false,
 	data: {
-		trial_id: "instructions"
+		trial_id: 'instruction'
 	},
 	show_clickable_nav: true,
 	timing_post_trial: 1000

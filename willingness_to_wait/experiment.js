@@ -174,7 +174,7 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'introduction'
+    trial_id: 'instruction'
   },
   cont_key: [13],
   text: getInstructFeedback,
@@ -185,7 +185,7 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    trial_id: 'introduction'
+    trial_id: 'instruction'
   },
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment a coin worth 0&cent; will appear on the screen. After a time it will become a 30&cent; coin. At any point you can collect the coin by pressing the spacebar and moving on to another trial.</p><p class = block-text>Your job is to get as much money as possible in 10 minutes. We will start with a few practice trials which will start after you end instructions.</p></div>'

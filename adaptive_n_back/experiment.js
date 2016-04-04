@@ -218,7 +218,7 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	data: {
 		exp_id: "adaptive_n_back",
-		trial_id: "instructions"
+		trial_id: 'instruction'
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
@@ -232,7 +232,7 @@ var instructions_block = {
 	],
 	data: {
 		exp_id: "adaptive_n_back",
-		trial_id: "instructions"
+		trial_id: 'instruction'
 	},
 	allow_keys: false,
 	show_clickable_nav: true,
