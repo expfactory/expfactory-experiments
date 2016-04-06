@@ -8,7 +8,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-survey-multi-choice.js",
                 "experiment.js",
-				"static/css/jspsych.css",
+		"static/css/jspsych.css",
                 "static/css/default_style.css"
                ],
         "exp_id": "treatment_self_regulation_questionnaire",
