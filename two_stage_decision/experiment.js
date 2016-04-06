@@ -117,7 +117,7 @@ var change_phase = function() {
 		curr_images = test_images
 		curr_colors = test_colors
 		curr_fs_stims = test_fs_stims
-		curr_ss_stim = test_ss_stim
+		curr_ss_stims = test_ss_stim
 		exp_stage = 'test'
 	} else {
 		curr_images = practice_images
@@ -576,7 +576,7 @@ var start_test_block = {
 	data: {
 		trial_id: 'test_intro'
 	},
-	text: "<div class = centerbox><p class = center-block-text>Finished with practice. We will now start the test with new shapes and stages.</p><p class = block-text>Just like in the practice, each first-stage choice is primarily associated with one second-stage and each second-stage shape has a different chance of earning a point. Each second-stage shape's chance of earning a gold coin changes over the expeirment, so the best shape early on may not be the best shape later. In contrast, once you learn which stage a first-stage choice brings you to most of the time, it will stay the same for the whole experiment.</p><p class = block-text>Your task is to earn as many gold coins as possible. Press <strong>enter</strong> to begin.</p></div>",
+	text: "<div class = centerbox><p class = block-text>Finished with practice. We will now start the test with new shapes and stages.</p><p class = block-text>Just like in the practice, each first-stage choice is primarily associated with one second-stage and each second-stage shape has a different chance of earning a point. Each second-stage shape's chance of earning a gold coin changes over the expeirment, so the best shape early on may not be the best shape later. In contrast, once you learn which stage a first-stage choice brings you to most of the time, it will stay the same for the whole experiment.</p><p class = block-text>Your task is to earn as many gold coins as possible. Press <strong>enter</strong> to begin.</p></div>",
 	cont_key: [13],
 	timing_response: 180000,
 	timing_post_trial: 1000
