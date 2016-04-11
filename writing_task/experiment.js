@@ -126,16 +126,20 @@ var test_block = {
   text_class: 'writing_class',
   is_html: true,
   timing_post_trial: 0,
-  timing_response: getResponseTime
+  timing_response: getResponseTime,
+  on_finish: function() {
+    elapsed = (new Date() - writing_start) / 60000
+  }
 };
 
 var loop_node = {
   timeline: [test_block],
   loop_function: function() {
-    elapsed = (new Date() - writing_start) / 60000
+    console.log(elapsed)
     if (elapsed < timelimit) {
       return true;
     } else {
+      jsPsych.getDisplayElement().html('');
       return false;
     }
   }

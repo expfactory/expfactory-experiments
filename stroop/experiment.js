@@ -26,17 +26,6 @@ var changeData = function() {
 	}
 }
 
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'stroop'
-	})
-}
-
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-categorize')
 	var missed_count = 0

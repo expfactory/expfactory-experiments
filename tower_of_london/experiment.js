@@ -25,17 +25,6 @@ var changeData = function() {
   }
 }
 
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'tower_of_london'
-  })
-}
-
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', problems[problem_i])

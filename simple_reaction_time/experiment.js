@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'simple_reaction_time'
-  })
-}
-
 function assessPerformance() {
   var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
   var missed_count = 0

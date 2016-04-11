@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'tower_of_london_imagine'
-  })
-}
-
 var getStim = function() {
   var response_area = '<div class = tol_response_div>' +
     '<button class = tol_response_button id = 1>1</button>' +
