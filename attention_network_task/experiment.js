@@ -238,7 +238,8 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "end"
+		trial_id: "end",
+    	exp_id: 'attention_network_task'
 	},
 	timing_response: 180000,
 	timing_post_trial: 0,

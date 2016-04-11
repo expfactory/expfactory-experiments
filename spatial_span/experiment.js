@@ -212,7 +212,8 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "end"
+    trial_id: "end",
+    exp_id: 'spatial_span'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',

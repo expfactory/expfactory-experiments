@@ -3,17 +3,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'volatile_bandit'
-	})
-}
-
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -136,7 +125,6 @@ for (var b = 0; b < volatile_blocks.length; b++) {
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: 'volatile_bandit',
 		trial_id: 'attention_check'
 	},
 	timing_response: 180000,
@@ -169,7 +157,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'volatile_bandit',
 		trial_id: 'instruction'
 	},
 	cont_key: [13],
@@ -181,7 +168,6 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: 'volatile_bandit',
 		trial_id: 'instruction'
 	},
 	pages: [
@@ -220,8 +206,8 @@ var instruction_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'volatile_bandit',
-		trial_id: 'end'
+		trial_id: 'end',
+    	exp_id: 'volatile_bandit'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
@@ -232,7 +218,6 @@ var end_block = {
 var start_test_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: 'volatile_bandit',
 		trial_id: 'test_intro'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
@@ -280,7 +265,6 @@ for (var i = 0; i < stage1_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'stim_response',
 			condition: 'stable',
-			exp_id: 'volatile_bandit',
 			exp_stage: 'test'
 		},
 		timing_stim: 1500,
@@ -301,7 +285,6 @@ for (var i = 0; i < stage1_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'show_response',
 			condition: 'stable',
-			exp_id: 'volatile_bandit',
 			exp_stage: 'test'
 		},
 		timing_stim: 1500,
@@ -322,7 +305,6 @@ for (var i = 0; i < stage1_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'FB',
 			condition: 'stable',
-			exp_id: 'volatile_bandit',
 			exp_stage: 'test'
 		},
 		timing_stim: 1500,
@@ -370,7 +352,6 @@ for (var i = 0; i < stage2_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'stim_response',
 			condition: 'volatile',
-			exp_id: 'volatile_bandit',
 			block: 'block_' + block_index[i],
 			exp_stage: 'test'
 		},
@@ -392,7 +373,6 @@ for (var i = 0; i < stage2_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'show_response',
 			condition: 'volatile',
-			exp_id: 'volatile_bandit',
 			block: 'block_' + block_index[i],
 			exp_stage: 'test'
 		},
@@ -414,7 +394,6 @@ for (var i = 0; i < stage2_trials; i++) {
 			stim2_value: 100 - stim1_value,
 			trial_id: 'FB',
 			condition: 'volatile',
-			exp_id: 'volatile_bandit',
 			block: 'block_' + block_index[i],
 			exp_stage: 'test'
 		},

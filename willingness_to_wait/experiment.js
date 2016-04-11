@@ -28,18 +28,6 @@ function assessPerformance() {
   credit_var = (avg_rt > 200)
 }
 
-
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'willingness_to_wait'
-  })
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -159,7 +147,8 @@ var welcome_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: 'end'
+    trial_id: 'end',
+    exp_id: 'willingness_to_wait'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],

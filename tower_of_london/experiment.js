@@ -282,7 +282,8 @@ var post_task_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "practice",
+    exp_id: 'tower_of_london'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',

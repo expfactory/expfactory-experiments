@@ -102,7 +102,6 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   data: {
-    exp_id: "ax_cpt",
     trial_id: 'instruction'
   },
   timing_post_trial: 0,
@@ -152,7 +151,6 @@ var rest_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "ax_cpt",
     trial_id: "rest"
   },
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
@@ -165,7 +163,6 @@ var wait_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "wait"
   },
   timing_post_trial: 500,
@@ -180,7 +177,6 @@ var A_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -196,7 +192,6 @@ var other_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -212,7 +207,6 @@ var X_probe = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {
-    exp_id: "ax_cpt",
     trial_id: "probe",
     exp_stage: "test"
   },
@@ -228,7 +222,6 @@ var other_probe = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {
-    exp_id: "ax_cpt",
     trial_id: "probe",
     exp_stage: "test"
   },

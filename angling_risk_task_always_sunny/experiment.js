@@ -500,7 +500,8 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "end_block"
+		trial_id: "end_block",
+    	exp_id: 'angling_risk_task_always_sunny'
 	},
 	timing_response: 180000,
 	timing_post_trial: 0,

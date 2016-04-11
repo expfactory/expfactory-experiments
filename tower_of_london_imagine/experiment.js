@@ -176,7 +176,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'instruction'
   },
   cont_key: [13],
@@ -188,7 +187,6 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'instruction'
   },
   pages: [
@@ -234,7 +232,6 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'test_intro'
   },
   timing_response: 180000,
@@ -249,7 +246,6 @@ var start_test_block = {
 var test_block = {
   type: 'single-stim-button',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'stim',
     exp_stage: 'test'
   },
