@@ -1,30 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
-
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', problems[problem_i])
@@ -167,6 +143,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var exp_stage = 'practice'
 var colors = ['Green', 'Red', 'Blue']
 var choices = [49, 50, 51]
 var problem_i = 0
@@ -359,6 +336,7 @@ var start_test_block = {
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
+    exp_stage = 'test'
     held_ball = 0
     time_elapsed = 0
     num_moves = 0;
@@ -457,7 +435,9 @@ var feedback_block = {
   timing_stim: 2000,
   timing_response: 2000,
   timing_post_trial: 500,
-  on_finish: changeData,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+  },
 }
 
 var practice_node = {

@@ -91,7 +91,10 @@ var test_block = {
   },
   choices: [32],
   timing_response: 2000,
-  timing_post_trial: 100
+  timing_post_trial: 100,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({'addingOnTrial': 'added!'})
+  }
 }
 
 /* create experiment definition array */

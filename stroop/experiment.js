@@ -1,31 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
-var changeData = function() {
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-}
-
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-categorize')
 	var missed_count = 0
@@ -196,6 +171,7 @@ var practice_stims = jsPsych.randomization.repeat(stims, practice_len / 12, true
 var exp_len = 96
 var test_stims = jsPsych.randomization.repeat(stims, exp_len / 12, true)
 var choices = [66, 71, 82]
+var exp_stage = 'practice'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -315,7 +291,10 @@ var start_test_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: function() {
+		exp_stage = 'test'
+	}
 };
 
 var fixation_block = {
@@ -329,7 +308,9 @@ var fixation_block = {
 	timing_post_trial: 500,
 	timing_stim: 500,
 	timing_response: 500,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+	},
 }
 
 /* create experiment definition array */
