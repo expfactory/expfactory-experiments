@@ -49,6 +49,13 @@ var attention_node = {
   }
 }
 
+var add_data = {
+  type: 'call-function',
+  func: function() {
+    jsPsych.data.addDataToLastTrial({'added_Data?': 'success!'})
+  }
+}
+
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -58,7 +65,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
 };
 
 /* define static blocks */
@@ -92,6 +99,7 @@ var test_task_experiment = [];
 for (var i = 0; i < experiment_len; i++) {
   test_task_experiment.push(test_block);
 }
+test_task_experiment.push(add_data)
 test_task_experiment.push(attention_node)
 test_task_experiment.push(post_task_block)
 test_task_experiment.push(end_block);
