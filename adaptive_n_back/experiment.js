@@ -2,6 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 var focus_tracker = function(win) {
+	var self = this
     this.shift_away = 0;
 
   this.add_shift = function() {
@@ -16,7 +17,9 @@ var focus_tracker = function(win) {
   	this.shift_away = 0
   }
 
-
+  $(win).blur(function(){
+	  self.add_shift()
+	});
 }
 
 var focuser = new focus_tracker(window)
