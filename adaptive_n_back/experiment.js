@@ -1,6 +1,27 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+class focus_track {
+  constructor() {
+    this.shift_away = 0;
+  }
+
+  add_shift() {
+  	this.shift_away += 1
+  }
+
+  get_shifts() {
+    return this.shift_away;
+  }
+
+  reset() {
+  	this.shift_away = 0
+  }
+}
+
+var focuser = new focus_track()
+
+
 function getDisplayElement() {
 	$('<div class = display_stage_background></div>').appendTo('body')
 	return $('<div class = display_stage></div>').appendTo('body')
@@ -26,6 +47,7 @@ function addID(exp_id) {
 	jsPsych.data.addDataToLastTrial({
 		exp_id: exp_id,
 		full_screen: isFullScreen,
+		focus_shifts: focuser.get_shifts()
 	})
 }
 
