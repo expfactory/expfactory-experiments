@@ -13,7 +13,6 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
-                "static/js/utils/poldrack_utils.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -38,8 +37,7 @@
                                   }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
-                                        "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('adaptive_n_back')"}
+                                        "display_element": "getDisplayElement"}
                        }
    }
 ]
