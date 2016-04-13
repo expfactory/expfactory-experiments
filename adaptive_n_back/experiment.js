@@ -1,6 +1,45 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+// Class to track focus shifts during experiment
+var focus_tracker = function(win) {
+  var self = this
+    this.shift_away = 0;
+
+  this.add_shift = function() {
+    this.shift_away += 1
+  },
+
+  this.get_shifts = function() {
+    return this.shift_away;
+  },
+
+  this.reset = function() {
+    this.shift_away = 0
+  }
+
+  $(win).blur(function(){
+    self.add_shift()
+  });
+}
+
+var focuser = new focus_tracker(window)
+
+/**
+* Adds the experiment ID as well as the number of focus shifts and whether the experiment was in
+* full screen during that trial
+* @param {exp_id} string to specify the experiment id
+*/
+function addID(exp_id) {
+  var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
+	jsPsych.data.addDataToLastTrial({
+		exp_id: exp_id,
+		full_screen: isFullScreen,
+		focus_shifts: focuser.get_shifts()
+	})
+	focuser.reset()
+}
+
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
