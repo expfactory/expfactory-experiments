@@ -16,7 +16,7 @@ var focus_tracker = function(win) {
 
   this.reset = function() {
     this.shift_away = 0
-  }
+  },
 
   $(win).blur(function(){
     self.add_shift()
