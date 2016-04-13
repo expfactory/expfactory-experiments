@@ -1,11 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -19,12 +14,6 @@ function evalAttentionChecks() {
     check_percent = checks_passed / attention_check_trials.length
   }
   return check_percent
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'ax_cpt'
-  })
 }
 
 var getChar = function() {
@@ -113,7 +102,6 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   data: {
-    exp_id: "ax_cpt",
     trial_id: 'instruction'
   },
   timing_post_trial: 0,
@@ -163,7 +151,6 @@ var rest_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    exp_id: "ax_cpt",
     trial_id: "rest"
   },
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>',
@@ -176,7 +163,6 @@ var wait_block = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "wait"
   },
   timing_post_trial: 500,
@@ -191,7 +177,6 @@ var A_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -207,7 +192,6 @@ var other_cue = {
   is_html: true,
   choices: 'none',
   data: {
-    exp_id: "ax_cpt",
     trial_id: "cue",
     exp_stage: "test"
   },
@@ -223,7 +207,6 @@ var X_probe = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {
-    exp_id: "ax_cpt",
     trial_id: "probe",
     exp_stage: "test"
   },
@@ -239,7 +222,6 @@ var other_probe = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   data: {
-    exp_id: "ax_cpt",
     trial_id: "probe",
     exp_stage: "test"
   },

@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'test_task'
-  })
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -82,6 +71,10 @@ var post_task_block = {
 /* define static blocks */
 var end_block = {
   type: 'poldrack-text',
+  data: {
+    trial_id: 'end',
+    exp_id: 'test_task'
+  },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -98,7 +91,10 @@ var test_block = {
   },
   choices: [32],
   timing_response: 2000,
-  timing_post_trial: 100
+  timing_post_trial: 100,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({'addingOnTrial': 'added!'})
+  }
 }
 
 /* create experiment definition array */

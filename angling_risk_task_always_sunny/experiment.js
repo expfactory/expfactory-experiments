@@ -4,11 +4,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
-}
-
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -22,12 +17,6 @@ function evalAttentionChecks() {
 		check_percent = checks_passed / attention_check_trials.length
 	}
 	return check_percent
-}
-
-function addID() {
-	jsPsych.data.addDataToLastTrial({
-		exp_id: 'angling_risk_task_always_sunny'
-	})
 }
 
 function assessPerformance() {
@@ -324,29 +313,6 @@ function place_fish() {
 	}
 }
 
-var changeData = function() {
-	data = jsPsych.data.getTrialsOfType('poldrack-text')
-	practiceDataCount = 0
-	testDataCount = 0
-	for (i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'practice_intro') {
-			practiceDataCount = practiceDataCount + 1
-		} else if (data[i].trial_id == 'test_intro') {
-			testDataCount = testDataCount + 1
-		}
-	}
-	if (practiceDataCount >= 1 && testDataCount === 0) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "practice"
-		})
-	} else if (practiceDataCount >= 1 && testDataCount >= 1) {
-		//temp_id = data[i].trial_id
-		jsPsych.data.addDataToLastTrial({
-			exp_stage: "test"
-		})
-	}
-}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -360,6 +326,7 @@ var credit_var = true
 var performance_var = 0
 
 // task specific variables
+var exp_stage = 'practice'
 var num_practice_rounds = 2
 var num_rounds = 20
 var red_fish_num = 0
@@ -511,7 +478,8 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "end_block"
+		trial_id: "end_block",
+    	exp_id: 'angling_risk_task_always_sunny'
 	},
 	timing_response: 180000,
 	timing_post_trial: 0,
@@ -527,12 +495,20 @@ var round_over_block = {
 		trial_id: "round_over"
 	},
 	timing_post_trial: 0,
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	}
 };
 
 var ask_fish_block = {
 	type: 'survey-text',
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	},
 	data: {
 		trial_id: "ask fish"
 	},
@@ -545,7 +521,11 @@ var ask_fish_block = {
 
 var set_fish_block = {
 	type: 'call-function',
-	on_finish: changeData,
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+			exp_stage: exp_stage
+		})
+	},
 	data: {
 		trial_id: "set_fish"
 	},
@@ -620,6 +600,7 @@ var start_test_block = {
 	timing_post_trial: 1000,
 	on_finish: function() {
 		tournament_bank = 0
+		exp_stage = 'test'
 	}
 };
 

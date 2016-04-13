@@ -1,16 +1,7 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
-}
 
-function addID() {
-	jsPsych.data.addDataToLastTrial({
-		exp_id: 'two_stage_decision'
-	})
-}
 
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
@@ -540,7 +531,8 @@ var second_instructions_block = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: 'end'
+		trial_id: 'end',
+    	exp_id: 'two_stage_decision'
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],

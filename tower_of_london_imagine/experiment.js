@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'tower_of_london_imagine'
-  })
-}
-
 var getStim = function() {
   var response_area = '<div class = tol_response_div>' +
     '<button class = tol_response_button id = 1>1</button>' +
@@ -187,7 +176,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'instruction'
   },
   cont_key: [13],
@@ -199,7 +187,6 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'instruction'
   },
   pages: [
@@ -245,7 +232,6 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'test_intro'
   },
   timing_response: 180000,
@@ -260,7 +246,6 @@ var start_test_block = {
 var test_block = {
   type: 'single-stim-button',
   data: {
-    exp_id: 'tower_of_london_imagine',
     trial_id: 'stim',
     exp_stage: 'test'
   },

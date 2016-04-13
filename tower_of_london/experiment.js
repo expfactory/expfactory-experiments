@@ -1,41 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-var changeData = function() {
-  data = jsPsych.data.getTrialsOfType('poldrack-text')
-  practiceDataCount = 0
-  testDataCount = 0
-  for (i = 0; i < data.length; i++) {
-    if (data[i].trial_id == 'practice_intro') {
-      practiceDataCount = practiceDataCount + 1
-    } else if (data[i].trial_id == 'test_intro') {
-      testDataCount = testDataCount + 1
-    }
-  }
-  if (practiceDataCount >= 1 && testDataCount === 0) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "practice"
-    })
-  } else if (practiceDataCount >= 1 && testDataCount >= 1) {
-    //temp_id = data[i].trial_id
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: "test"
-    })
-  }
-}
-
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'tower_of_london'
-  })
-}
-
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', problems[problem_i])
@@ -178,6 +143,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var exp_stage = 'practice'
 var colors = ['Green', 'Red', 'Blue']
 var choices = [49, 50, 51]
 var problem_i = 0
@@ -293,7 +259,8 @@ var post_task_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "practice",
+    exp_id: 'tower_of_london'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -369,6 +336,7 @@ var start_test_block = {
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
+    exp_stage = 'test'
     held_ball = 0
     time_elapsed = 0
     num_moves = 0;
@@ -467,7 +435,9 @@ var feedback_block = {
   timing_stim: 2000,
   timing_response: 2000,
   timing_post_trial: 500,
-  on_finish: changeData,
+  on_finish: function() {
+    jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+  },
 }
 
 var practice_node = {

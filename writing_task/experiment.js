@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'writing_task'
-  })
-}
-
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text + '</p></div>'
 }
@@ -68,7 +57,6 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "writing_task",
     trial_id: "instruction"
   },
   cont_key: [13],
@@ -80,7 +68,6 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "writing_task",
     trial_id: "instruction"
   },
   pages: [
@@ -119,23 +106,25 @@ var instruction_node = {
 var test_block = {
   type: 'writing',
   data: {
-    exp_id: "writing_task",
     trial_id: "write",
     exp_stage: 'test'
   },
   text_class: 'writing_class',
   is_html: true,
   timing_post_trial: 0,
-  timing_response: getResponseTime
+  timing_response: getResponseTime,
+  on_finish: function() {
+    elapsed = (new Date() - writing_start) / 60000
+  }
 };
 
 var loop_node = {
   timeline: [test_block],
   loop_function: function() {
-    elapsed = (new Date() - writing_start) / 60000
     if (elapsed < timelimit) {
       return true;
     } else {
+      jsPsych.getDisplayElement().html('');
       return false;
     }
   }
