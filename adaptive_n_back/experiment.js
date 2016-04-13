@@ -15,7 +15,7 @@ var focus_tracker = function(win) {
 
   this.reset = function() {
   	this.shift_away = 0
-  }
+  },
 
   $(win).blur(function(){
 	  self.add_shift()
@@ -292,7 +292,8 @@ var end_block = {
 	text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "text"
+		trial_id: "text",
+		exp_id: "adaptive_n_back"
 	},
 	timing_response: 180000,
 	timing_post_trial: 0,
