@@ -3,11 +3,11 @@
 /* ************************************ */
 // Class to track focus shifts during experiment
 var focus_tracker = function(win) {
-  var self = this
+	var self = this
     this.shift_away = 0;
 
   this.add_shift = function() {
-    this.shift_away += 1
+  	this.shift_away += 1
   },
 
   this.get_shifts = function() {
@@ -15,21 +15,22 @@ var focus_tracker = function(win) {
   },
 
   this.reset = function() {
-    this.shift_away = 0
+  	this.shift_away = 0
   },
 
   $(win).blur(function(){
-    self.add_shift()
-  });
+	  self.add_shift()
+	});
 }
 
 var focuser = new focus_tracker(window)
 
-/**
-* Adds the experiment ID as well as the number of focus shifts and whether the experiment was in
-* full screen during that trial
-* @param {exp_id} string to specify the experiment id
-*/
+
+function getDisplayElement() {
+	$('<div class = display_stage_background></div>').appendTo('body')
+	return $('<div class = display_stage></div>').appendTo('body')
+}
+
 function addID(exp_id) {
   var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
 	jsPsych.data.addDataToLastTrial({
@@ -37,12 +38,6 @@ function addID(exp_id) {
 		full_screen: isFullScreen,
 		focus_shifts: focuser.get_shifts()
 	})
-	focuser.reset()
-}
-
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
 }
 
 function evalAttentionChecks() {
