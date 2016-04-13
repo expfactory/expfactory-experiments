@@ -5,9 +5,6 @@ var focus_tracker = function(win) {
 	var self = this
     this.shift_away = 0;
 
-  this.add_shift = function() {
-  	this.shift_away += 1
-  },
 
   this.get_shifts = function() {
     return this.shift_away;
@@ -18,7 +15,7 @@ var focus_tracker = function(win) {
   },
 
   $(win).blur(function(){
-	  self.add_shift()
+	  self.shift_away += 1
 	});
 }
 
@@ -48,7 +45,7 @@ function evalAttentionChecks() {
 function addID(exp_id) {
   var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
 	jsPsych.data.addDataToLastTrial({
-		exp_id: exp_id,
+		exp_id: 'adaptive_n_back',
 		full_screen: isFullScreen,
 		focus_shifts: focuser.get_shifts()
 	})
