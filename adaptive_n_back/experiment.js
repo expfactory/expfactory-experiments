@@ -21,9 +21,11 @@ function evalAttentionChecks() {
 	return check_percent
 }
 
-function addID() {
+function addID(exp_id) {
+  var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
 	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'adaptive_n_back'
+		exp_id: exp_id,
+		full_screen: isFullScreen,
 	})
 }
 
