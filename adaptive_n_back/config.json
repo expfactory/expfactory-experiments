@@ -25,7 +25,7 @@
                          "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
-        "time":20,
+        "time":21,
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
         "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is a match or not. Condition records the n for that block of trials. The second reference is not explicitly used.",
         "publish":"True",
@@ -38,7 +38,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('adaptive_n_back')"}
                        }
    }
 ]

@@ -1,6 +1,27 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+var focus_tracker = function(win) {
+  var self = this;
+    this.shift_away = 0;
+		
+  this.get_shifts = function() {
+    return this.shift_away;
+  };
+  
+  this.reset = function() {
+    this.shift_away = 0;
+  };
+  
+  $(win).blur(function() {
+    self.shift_away += 1;
+  });
+};
+
+
+var focuser = new focus_tracker(window);
+
+
 function getDisplayElement() {
 	$('<div class = display_stage_background></div>').appendTo('body')
 	return $('<div class = display_stage></div>').appendTo('body')
@@ -21,9 +42,12 @@ function evalAttentionChecks() {
 	return check_percent
 }
 
-function addID() {
+function addID(exp_id) {
+  var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
 	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'adaptive_n_back'
+		exp_id: 'adaptive_n_back',
+		full_screen: isFullScreen,
+		focus_shifts: focuser.get_shifts()
 	})
 }
 
@@ -265,7 +289,8 @@ var end_block = {
 	text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "text"
+		trial_id: "text",
+		exp_id: "adaptive_n_back"
 	},
 	timing_response: 180000,
 	timing_post_trial: 0,
