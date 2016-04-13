@@ -1,25 +1,28 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-class focus_track {
-  constructor() {
+var focus_tracker = function(win) {
     this.shift_away = 0;
-  }
 
-  add_shift() {
+  this.add_shift = function() {
   	this.shift_away += 1
-  }
+  },
 
-  get_shifts() {
+  this.get_shifts = function() {
     return this.shift_away;
-  }
+  },
 
-  reset() {
+  this.reset = function() {
   	this.shift_away = 0
   }
+
+  $(win).blur(function(){
+  	console.log('blur')
+	  focuser.add_shift()
+	});
 }
 
-var focuser = new focus_track()
+var focuser = new focus_tracker(window)
 
 
 function getDisplayElement() {
