@@ -2,24 +2,24 @@
 /* Define helper functions */
 /* ************************************ */
 var focus_tracker = function(win) {
-	var self = this
+  var self = this;
     this.shift_away = 0;
-
-
+		
   this.get_shifts = function() {
     return this.shift_away;
-  },
-
+  };
+  
   this.reset = function() {
-  	this.shift_away = 0
-  },
+    this.shift_away = 0;
+  };
+  
+  $(win).blur(function() {
+    self.shift_away += 1;
+  });
+};
 
-  $(win).blur(function(){
-	  self.shift_away += 1
-	})
-}
 
-var focuser = new focus_tracker(window)
+var focuser = new focus_tracker(window);
 
 
 function getDisplayElement() {
