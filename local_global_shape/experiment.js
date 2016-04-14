@@ -1,11 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -19,12 +14,6 @@ function evalAttentionChecks() {
     check_percent = checks_passed / attention_check_trials.length
   }
   return check_percent
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'local_global_shape'
-  })
 }
 
 var randomDraw = function(lst) {
@@ -186,7 +175,8 @@ var post_task_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "end"
+    trial_id: "end",
+    exp_id: 'local_global_shape'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
