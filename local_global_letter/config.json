@@ -11,6 +11,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/utils/poldrack_utils.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -37,7 +38,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('local_global_letter')"}
                        }    
    }
 ]

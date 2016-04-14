@@ -1,17 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'psychological_refractory_period_gonogo_choice'
-  })
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -256,7 +245,8 @@ var end_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
-    trial_id: 'end'
+    trial_id: 'end',
+    exp_id: 'psychological_refractory_period_gonogo_choice'
   },
   text: '<div class = prp_centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
