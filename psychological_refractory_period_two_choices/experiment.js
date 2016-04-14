@@ -53,8 +53,8 @@ var randomDraw = function(lst) {
 var getStim = function() {
   var border_i = randomDraw([0, 1]) // get border index
   var number_i = randomDraw([0, 1]) // get inner index
-  var stim = stim_prefix + path_source + borders[border_i] + ' </img></div></div>'
-  var stim2 = stim_prefix + path_source + borders[border_i] +
+  var stim = stim_prefix + path_source + borders[border_i][0] + ' </img></div></div>'
+  var stim2 = stim_prefix + path_source + borders[border_i][0] +
     ' </img></div></div><div class = prp_centerbox><div class = "center-text">' +
     inners[number_i] + '</div></div>'
   //update data
@@ -85,19 +85,22 @@ var getFB = function() {
   if (rts[0] !== -1 && rts[1] === -1) {
     if (jQuery.inArray(keys[0], choices1) === -1) {
       choice1FB = 'You did not respond to the colored square!'
+      if (rts[0] < data.ISI + 50) {
+        tooShort = true //if they respond to the number before they should be able to
+      }
       if (keys[0] === data.choice2_correct_response) {
         choice2FB = 'You responded correctly to the number!'
       } else {
         choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
-          inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
-          ' press the "M" key with your ring finger.'
+          inners[0] + ' press the "N" key. If the number is ' + inners[1] +
+          ' press the "M" key.'
       }
     } else if (jQuery.inArray(keys[0], choices2) === -1) {
       choice2FB = 'You did not respond to the number!'
       if (keys[0] === data.choice1_correct_response) {
         choice1FB = 'You responded correctly to the colored square!'
       } else {
-        choice1FB = 'You did not respond correctly to the colored square.'
+        choice1FB = 'You did not respond correctly to the colored square. Remember: if the square is ' + borders[0][1] + ' press the "Z" key. If the square is ' + borders[1][1] + ' press the "X" key.'
       }
     }
   } else if (rts[0] !== -1 && rts[1] !== -1) { //if the person responded twice
@@ -107,14 +110,14 @@ var getFB = function() {
     if (keys[0] === data.choice1_correct_response) {
       choice1FB = 'You responded correctly to the colored square!'
     } else {
-      choice1FB = 'You did not respond correctly to the colored square.'
+      choice1FB = 'You did not respond correctly to the colored square. Remember: if the square is ' + borders[0][1] + ' press the "Z" key. If the square is ' + borders[1][1] + ' press the "X" key.'
     }
     if (keys[1] === data.choice2_correct_response) {
       choice2FB = 'You responded correctly to the number!'
     } else {
       choice2FB = 'You did not respond correctly to the number. Remember: if the number is ' +
-        inners[0] + ' press the "N" key with your index finger. If the number is ' + inners[1] +
-        ' press the "M" key with your ring finger.'
+          inners[0] + ' press the "N" key. If the number is ' + inners[1] +
+          ' press the "M" key.'
     }
   } else { //if they didn't respond
     choice1FB = 'Respond to the square and number!'
@@ -164,26 +167,26 @@ var curr_data = {
 var path_source = '/static/experiments/psychological_refractory_period_two_choices/images/'
 var stim_prefix = '<div class = prp_centerbox><div class = prp_stimBox><img class = prpStim src ='
   // border color relates to the go-nogo task. The subject should GO to the first two borders in the following array:
-var borders = jsPsych.randomization.shuffle(['2_border.png',
-    '4_border.png'
+var borders = jsPsych.randomization.shuffle([['2_border.png', 'blue'],
+    ['4_border.png', 'yellow']
   ])
   // inner number reflect the choice RT. 
 var inners = jsPsych.randomization.shuffle([3, 4])
 
 //instruction stim
 var box1 = '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' +
-  path_source + borders[0] + ' </img></div></div>'
+  path_source + borders[0][0] + ' </img></div></div>'
 var box2 =
   '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' +
-  path_source + borders[1] + ' </img></div></div>'
+  path_source + borders[1][0] + ' </img></div></div>'
 var box_number1 =
   '<div class = prp_left-instruction><div class = prp_stimBox><img class = prpStim src = ' +
-  path_source + borders[0] + ' </img></div></div>' +
+  path_source + borders[0][0] + ' </img></div></div>' +
   '<div class = prp_left-instruction><div class = "center-text">' + inners[0] +
   '</div></div>'
 var box_number2 =
   '<div class = prp_right-instruction><div class = prp_stimBox><img class = prpStim src = ' +
-  path_source + borders[1] + ' </img></div></div>' +
+  path_source + borders[1][0] + ' </img></div></div>' +
   '<div class = prp_right-instruction><div class = "center-text">' + inners[1] +
   '</div></div>'
 
@@ -254,11 +257,11 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "Z", "X",  "N" and "M" keys with your index and middle fingers of both hands.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is the one on the left below, you should press the "Z" key with your middle finger. If it is the one on the right, you should press the "X" key.</p>' +
+    '<div class = prp_centerbox><p class ="block-text">In this experiment, you will have to do two tasks in quick succession. You will respond by pressing the "Z", "X",  "N" and "M" keys with your index and middle fingers of both hands.</p><p class ="block-text">First, a colored square will appear on the screen. If the square is the ' + borders[0][1] + ' square one on the left below, you should press the "Z" key. If it is the ' + borders[1][1] + ' square on the right, you should press the "X" key.</p>' +
     box1 + box2 + '</div>',
     '<div class = prp_centerbox><p class ="block-text">After a short delay one of two numbers will appear in the square (as you can see below). If the number is ' +
     inners[0] + ' press the "N" key. If the number is ' + inners[1] +
-    ' press the "M key.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. If you are supposed to respond to the colored square, respond as quickly as you can and then respond to the number. If you are not supposed to respond to the colored square, respond as quickly as possible to the number.</p>' +
+    ' press the "M key.</p><p class ="block-text">It is very important that you respond as quickly as possible! You should respond to the colored square first and then the number. Respond as quickly as you can to the colored square and then respond to the number.</p>' +
     box_number1 + box_number2 + '</div>', '<div class = prp_centerbox><p class ="block-text">We will start with some practice after you end the instructions. Make sure you remember which colored squares to respond to and which keys to press for the two numbers before you continue. Go through the instructions again if you need to.</p></div>'
   ],
   allow_keys: false,
@@ -306,7 +309,7 @@ var start_test_block = {
     trial_id: 'intro',
     exp_stage: 'test'
   },
-  text: '<div class = prp_centerbox><p class ="center-block-text">We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = prp_centerbox><p class ="center-block-text">We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
