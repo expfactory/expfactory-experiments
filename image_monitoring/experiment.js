@@ -1,11 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-	$('<div class = display_stage_background></div>').appendTo('body')
-	return $('<div class = display_stage></div>').appendTo('body')
-}
-
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -19,12 +14,6 @@ function evalAttentionChecks() {
 		check_percent = checks_passed / attention_check_trials.length
 	}
 	return check_percent
-}
-
-function addID() {
-	jsPsych.data.addDataToLastTrial({
-		'exp_id': 'image_monitoring'
-	})
 }
 
 var randomDraw = function(lst) {
@@ -157,7 +146,6 @@ for (b = 0; b < block_num; b++) {
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -191,7 +179,6 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "instruction"
 	},
 	text: getInstructFeedback,
@@ -202,7 +189,6 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "instruction"
 	},
 	pages: [
@@ -253,7 +239,6 @@ var start_practice_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "practice_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' +
@@ -267,7 +252,6 @@ var start_test_block = {
 	type: 'poldrack-text',
 	timing_response: 180000,
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "test_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a shape repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
@@ -278,7 +262,6 @@ var start_test_block = {
 var update_block = {
 	type: 'call-function',
 	data: {
-		exp_id: "image_monitoring",
 		trial_id: "reset_post_trial_gap"
 	},
 	func: update_count,

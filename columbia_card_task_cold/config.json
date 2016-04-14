@@ -10,6 +10,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-single-stim-button.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/utils/poldrack_utils.js",
                 "experiment.js",
              	"static/css/jspsych.css",
                 "static/css/default_style.css",
@@ -46,7 +47,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement"},
-                                        "on_trial_finish": "addID()"
+                                        "on_trial_finish": "addID('columbia_card_task_cold')"
                        }  
    }
 ]

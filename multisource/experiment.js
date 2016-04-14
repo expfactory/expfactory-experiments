@@ -4,11 +4,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function getDisplayElement() {
-  $('<div class = display_stage_background></div>').appendTo('body')
-  return $('<div class = display_stage></div>').appendTo('body')
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -27,12 +22,6 @@ function evalAttentionChecks() {
 var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
     '</p></div>'
-}
-
-function addID() {
-  jsPsych.data.addDataToLastTrial({
-    'exp_id': 'multisource'
-  })
 }
 
 /* ************************************ */
@@ -514,7 +503,6 @@ var practice_blocks = [practice_control, practice_interference]
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "multisource",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -548,7 +536,6 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   data: {
-    exp_id: "multisource",
     trial_id: "instruction"
   },
   text: getInstructFeedback,
@@ -559,7 +546,6 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    exp_id: "multisource",
     trial_id: "instruction"
   },
   pages: [
@@ -608,7 +594,6 @@ var end_block = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    exp_id: "multisource",
     trial_id: "test_intro"
   },
   timing_response: 180000,
