@@ -236,7 +236,7 @@ var getResponse = function() {
 var appendPracticeProbeData = function() {
 	jsPsych.data.addDataToLastTrial({
 		probe_letter: probe,
-		probeType: probeType,
+		probe_type: probeType,
 		trial_num: current_trial
 	})
 }

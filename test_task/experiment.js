@@ -16,6 +16,37 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+  /* Function to calculate the "credit_var", which is a boolean used to
+  credit individual experiments in expfactory. 
+   */
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+  for (var i = 0; i < experiment_data.length; i++) {
+    trial_count += 1
+    rt = experiment_data[i].rt
+    key = experiment_data[i].key_press
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
+    }
+
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length
+  performance_var = Math.max(0, 1000 - avg_rt)
+  credit_var = (avg_rt > 200)
+}
+
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -28,7 +59,8 @@ var experiment_len = 3
 var gap = 0
 var current_trial = 0
 var stim = '<div class = "shapebox"><div id = "cross"></div></div>'
-
+var credit_var = true
+var performance_var = 0
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -78,7 +110,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 }
 
 /* define test block */

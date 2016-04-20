@@ -431,7 +431,7 @@ var feedback_instruct_block = {
 var instruction_trials = []
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {trial: 'instructions'},
+  data: {trial_id: 'instruction'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+

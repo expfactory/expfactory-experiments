@@ -536,7 +536,7 @@ var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
 	data: {
-		trial: 'instructions'
+		trial_id: 'instruction'
 	},
 	text: getInstructFeedback,
 	timing_post_trial: 0,
@@ -545,7 +545,7 @@ var feedback_instruct_block = {
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
   type: 'poldrack-instructions',
-  data: {trial: 'instructions'},
+  data: {trial_id: 'instruction'},
   pages: [
 	'<div class = centerbox><p class = block-text><strong>Introduction and Explanation</strong>'+
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
