@@ -30,14 +30,14 @@
                                  "name":"performance_var",
                                  "type":"bonus",
                                  "datatype": "numeric",
-                                 "range": [0,Infinity],
-                                 "description":"Average RT."
+                                 "range": [0,1000],
+                                 "description":"Faster responses get higher values"
                                   },
                                   {
                                  "name":"credit_var",
                                  "type":"credit",
                                  "datatype": "boolean",
-                                 "description":"True if avg_rt < 100"
+                                 "description":"True if avg_rt > 200"
                                   }],
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "publish":"True",

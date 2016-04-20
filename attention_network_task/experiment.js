@@ -117,7 +117,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'left',
 				flanker_type: 'neutral',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}, {
 			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -127,7 +128,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'left',
 				flanker_type: 'congruent',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}, {
 			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -137,7 +139,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'left',
 				flanker_type: 'incongruent',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}, {
 			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -147,7 +150,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'right',
 				flanker_type: 'neutral',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}, {
 			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -157,7 +161,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'right',
 				flanker_type: 'congruent',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}, {
 			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = ANT_' + loc +
@@ -167,7 +172,8 @@ for (l = 0; l < locations.length; l++) {
 				flanker_middle_direction: 'right',
 				flanker_type: 'incongruent',
 				flanker_location: loc,
-				cue: c
+				cue: c, 
+				trial_id: 'stim'
 			}
 		}]
 		for (i = 0; i < stims.length; i++) {
