@@ -373,7 +373,8 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation"
+		trial_id: "fixation",
+		exp_stage: "test"
 	},
 	timing_post_trial: 0,
 	timing_stim: 500,
@@ -388,7 +389,8 @@ var prompt_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "prompt_fixation"
+		trial_id: "fixation",
+		exp_stage: "practice"
 	},
 	timing_post_trial: 0,
 	timing_stim: 500,
@@ -402,7 +404,8 @@ var practice_feedback_text =
 var practice_feedback_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "feedback"
+		trial_id: "feedback",
+		exp_stage: "practice"
 	},
 	timing_response: 180000,
 	cont_key: [13],
