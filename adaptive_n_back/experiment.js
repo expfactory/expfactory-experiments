@@ -254,7 +254,7 @@ var end_block = {
 	text: '<div class = "centerbox"><p class = "center-block-text">Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "text",
+		trial_id: "end",
     	exp_id: 'adaptive_n_back'
 	},
 	timing_response: 180000,
@@ -268,7 +268,7 @@ var start_practice_block = {
 	cont_key: [13],
 	data: {
 		exp_id: "adaptive_n_back",
-		trial_id: "text"
+		trial_id: "instruction"
 	},
 	timing_response: 180000,
 	timing_post_trial: 1000
@@ -300,7 +300,7 @@ var start_control_block = {
 	cont_key: [13],
 	data: {
 		exp_id: "adaptive_n_back",
-		trial_id: "text"
+		trial_id: "instruction"
 	},
 	timing_response: 180000,
 	timing_post_trial: 2000,
