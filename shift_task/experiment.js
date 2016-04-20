@@ -120,6 +120,15 @@ var getFeedback = function() {
     image = last_trial.stimulus
     feedback_text = 'Respond faster!'
   }
+  var FB = -1
+  if (feedback_text.indexOf('won 1 point') != -1) {
+    FB = 1
+  } else if (feedback_text.indexOf('won 0 point') != -1) {
+    FB = 0
+  }
+  jsPsych.data.addDataToLastTrial({
+    FB: FB
+  })
   return image + '<div class = shift_feedback_box><p class = center-text>' + feedback_text +
     '</p></div>'
 }
@@ -401,11 +410,15 @@ var stim_block = {
   response_ends_trial: true,
   on_finish: function(data) {
     var choice = choices.indexOf(data.key_press)
+    var choice_stim = -1
+    if (choice != -1) {
+      choice_stim = JSON.stringify(stims[choice])
+    }
     jsPsych.data.addDataToLastTrial({
       trial_id: "stim",
       exp_stage: "test",
       stims: JSON.stringify(stims),
-      choice_stim: JSON.stringify(stims[choice]),
+      choice_stim: choice_stim,
       choice_position: position_array[choice]
     })
   }
@@ -421,10 +434,12 @@ var practice_feedback_block = {
   timing_response: 1000,
   timing_post_trial: 500,
   on_finish: function(data) {
-    var FB = 0
+    var FB = -1
     if (data.stimulus.indexOf('won 1 point') != -1) {
-      total_points += 1
       FB = 1
+      total_points += 1
+    } else if (data.stimulus.indexOf('won 0 point') != -1) {
+      FB = 0
     }
     jsPsych.data.addDataToLastTrial({
       trial_id: "feedback",
@@ -468,9 +483,12 @@ var feedback_block = {
   timing_response: 1000,
   timing_post_trial: 500,
   on_finish: function(data) {
-    var FB = 0
+    var FB = -1
     if (data.stimulus.indexOf('won 1 point') != -1) {
       FB = 1
+      total_points += 1
+    } else if (data.stimulus.indexOf('won 0 point') != -1) {
+      FB = 0
     }
     jsPsych.data.addDataToLastTrial({
       trial_id: "feedback",
