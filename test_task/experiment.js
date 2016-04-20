@@ -29,7 +29,6 @@ function assessPerformance() {
     trial_count += 1
     rt = experiment_data[i].rt
     key = experiment_data[i].key_press
-    choice_counts[key] += 1
     if (rt == -1) {
       missed_count += 1
     } else {
@@ -43,7 +42,7 @@ function assessPerformance() {
     sum += rt_array[j]
   }
   var avg_rt = sum / rt_array.length
-  performance_var = Math.min(0, 1000 - avg_rt)
+  performance_var = Math.max(0, 1000 - avg_rt)
   credit_var = (avg_rt > 200)
 }
 
