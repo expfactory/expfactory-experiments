@@ -357,7 +357,7 @@ var lake_state = '' //variable for redrawing the board from trial to trial
 var trial_num = 0 // global variable to track the number of trials into a round
 var round_num = 0 // global variable to track the number of rounds into a tournament
 var round_over = 0 //equals 1 if a blue fish is caught or the participant 'collects'
-var round_over_text = '' //Either "You caught the blue fish and lost the points i." or "You collec."
+var round_over_text = '' 
 
 //Variables for placing fish
 var maxSearchIterations = 100;
@@ -484,7 +484,7 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	data: {
-		trial_id: "end_block",
+		trial_id: "end",
     	exp_id: 'angling_risk_task'
 	},
 	timing_response: 180000,
@@ -502,8 +502,13 @@ var round_over_block = {
 	},
 	timing_post_trial: 0,
 	on_finish: function() {
+		caught_blue = false
+		if (round_over_text.indexOf('You caught the blue fish!') != -1) {
+			caught_blue = true
+		}
 		jsPsych.data.addDataToLastTrial({
-			exp_stage: exp_stage
+			exp_stage: exp_stage,
+			caught_blue: caught_blue
 		})
 	},
 };
