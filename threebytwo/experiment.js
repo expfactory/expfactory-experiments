@@ -523,7 +523,7 @@ var gap_block = {
 var threebytwo_experiment = [];
 threebytwo_experiment.push(instruction_node);
 threebytwo_experiment.push(start_practice_block);
-for (var i = 0; i < practiceStims.length; i++) {
+for (var i = 0; i < practice_length; i++) {
   threebytwo_experiment.push(setStims_block)
   threebytwo_experiment.push(fixation_block)
   threebytwo_experiment.push(cue_block);
@@ -532,7 +532,7 @@ for (var i = 0; i < practiceStims.length; i++) {
 }
 threebytwo_experiment.push(attention_node)
 threebytwo_experiment.push(start_test_block)
-for (var i = 0; i < stims.length; i++) {
+for (var i = 0; i < test_length; i++) {
   threebytwo_experiment.push(setStims_block)
   threebytwo_experiment.push(fixation_block)
   threebytwo_experiment.push(cue_block);

@@ -412,7 +412,8 @@ var practice_feedback_text =
 var practice_feedback_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice_feedback"
+    trial_id: "feedback",
+    exp_stage: "practice"
   },
   timing_response: 180000,
   cont_key: [13],
@@ -422,7 +423,8 @@ var practice_feedback_block = {
 var test_feedback_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "test_feedback"
+    trial_id: "feedback",
+    exp_stage: "test"
   },
   timing_response: 120000,
   cont_key: [13],
