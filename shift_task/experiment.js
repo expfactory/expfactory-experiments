@@ -68,6 +68,7 @@ var randomDraw = function(lst) {
 
 var getData = function() {
   return {
+    shift_type: recorded_shift_type,
     rewarded_feature: rewarded_feature,
     rewarded_dim: rewarded_dim,
     trials_since_switch: switch_count,
@@ -150,6 +151,7 @@ var exp_len = 410
 var practice_len = 65
 var total_points = 0 //tracks points earned during test
 var position_array = ['left', 'middle', 'right']
+var recorded_shift_type = 'stay'
 
 // stim variables
 var stim_att = {
@@ -188,6 +190,7 @@ var num_switches = switch_bounds.length
   /* controls how often the shift is extra-dimensional (across dims) vs intra (across features within a dim) */
 var shift_types = jsPsych.randomization.repeat(['extra', 'extra', 'intra', 'reversal'],
   num_switches / 4)
+//Makes sure reversal isn't first
 while (shift_types[0] == 'reversal') {
   var ran_i = Math.floor(Math.random() * (num_switches - 1)) + 1
   var tmp = shift_types[ran_i]
@@ -449,6 +452,7 @@ var practice_feedback_block = {
     switch_count += 1
     if (switch_count == switch_bound) {
       switch_count = 0
+      recorded_shift_type = shift_type
       if (shift_type == 'extra') {
         last_dim = rewarded_dim
         last_feature = rewarded_feature
@@ -468,6 +472,8 @@ var practice_feedback_block = {
       }
       switch_bound = switch_bounds.shift()
       shift_type = shift_types.shift()
+    } else {
+      recorded_shift_type = 'stay'
     }
     current_trial += 1
   }
@@ -498,7 +504,7 @@ var feedback_block = {
     switch_count += 1
     if (switch_count == switch_bound) {
       switch_count = 0
-      switch_bound = switch_bounds.shift()
+      recorded_shift_type = shift_type
       if (shift_type == 'extra') {
         last_dim = rewarded_dim
         last_feature = rewarded_feature
@@ -516,7 +522,10 @@ var feedback_block = {
         rewarded_dim = last_dim
         rewarded_feature = last_feature
       }
+      switch_bound = switch_bounds.shift()
       shift_type = shift_types.shift()
+    } else {
+      recorded_shift_type = 'stay'
     }
     current_trial += 1
   }
