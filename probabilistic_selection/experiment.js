@@ -174,17 +174,17 @@ firstPhaseStims = []
 /* THIS IS FOR FIRST PHASE STIMS,  randomized and counterbalanced*/
 for (var i = 0; i<3; i++) {
 	var order1_stim = {}
-	order1_stim['image'] = "<div class = decision-left><img src='" + stims[i*2][1] +
+	order1_stim.image = "<div class = decision-left><img src='" + stims[i*2][1] +
 		"'></img></div><div class = decision-right><img src='" + stims[i*2+1][1] + "'></img></div>"
-	order1_stim['data'] = {
+	order1_stim.data = {
 		trial_id: 'stim',
 		exp_stage: 'training',
 		condition: stims[i*2][0] + '_' + stims[i*2+1][0]
 	}
 	var order2_stim = {}
-	order2_stim['image'] = "<div class = decision-left><img src='" + stims[i*2+1][1] +
+	order2_stim.image = "<div class = decision-left><img src='" + stims[i*2+1][1] +
 		"'></img></div><div class = decision-right><img src='" + stims[i*2][1] + "'></img></div>"
-	order2_stim['data'] = {
+	order2_stim.data = {
 		trial_id: 'stim',
 		exp_stage: 'training',
 		condition: stims[i*2+1][0] + '_' + stims[i*2][0]
@@ -204,17 +204,17 @@ for (var i = 0; i<5; i++) {
 	for (var j = i+1; j < 6; j++) {
 		console.log(stims[i])
 		var order1_stim = {}
-		order1_stim['image'] = "<div class = decision-left><img src='" + stims[i][1] +
+		order1_stim.image = "<div class = decision-left><img src='" + stims[i][1] +
 			"'></img></div><div class = decision-right><img src='" + stims[j][1] + "'></img></div>"
-		order1_stim['data'] = {
+		order1_stim.data = {
 			trial_id: 'stim',
 			exp_stage: 'test',
 			condition: stims[i][0] + '_' + stims[j][0]
 		}
 		var order2_stim = {}
-		order2_stim['image'] = "<div class = decision-left><img src='" + stims[j][1] +
+		order2_stim.image = "<div class = decision-left><img src='" + stims[j][1] +
 			"'></img></div><div class = decision-right><img src='" + stims[i][1] + "'></img></div>"
-		order2_stim['data'] = {
+		order2_stim.data = {
 			trial_id: 'stim',
 			exp_stage: 'test',
 			condition: stims[j][0] + '_' + stims[i][0]
