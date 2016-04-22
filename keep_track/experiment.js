@@ -287,8 +287,8 @@ for (i = 0; i < block.length; i++) {
 		prompt: prompt,
 		timing_post_trial: 0,
 		on_finish: function(data) {
-			if ($.inArray(data['category'], data['targets']) != -1) {
-				last_targets[data['category']] = data['stim']
+			if ($.inArray(data.category, data.targets) != -1) {
+				last_targets[data.category] = data.stim
 			}
 		}
 	}
@@ -376,8 +376,8 @@ for (b = 0; b < blocks.length; b++) {
 			prompt: prompt,
 			timing_post_trial: 0,
 			on_finish: function(data) {
-				if ($.inArray(data['category'], data['targets']) != -1) {
-					last_targets[data['category']] = data['stim']
+				if ($.inArray(data.category, data.targets) != -1) {
+					last_targets[data.category] = data.stim
 				}
 			}
 		}

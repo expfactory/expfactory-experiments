@@ -9,24 +9,24 @@
 }
 
 .decision-left {
-  width:12vw;
-  height: 12vw;
+  width:14vw;
+  height: 20vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-175%,-50%);
+  transform: translate(-165%,-50%);
 }
 
 
 .decision-right {
-  width:12vw;
-  height: 12vw;
+  width:14vw;
+  height: 14vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(75%,-50%);
+  transform: translate(65%,-50%);
 }
 .centerbox {
   width:35vw;
@@ -50,7 +50,7 @@ transform: translate(-50%, -25%);
 
 img {
 display: block;
-height: 10vw;
+height: 13vw;
 position: absolute;
 top: 50%;
 left: 50%;

@@ -147,9 +147,9 @@ var curr_data = []
 var stim = ''
 /* SPECIFY HOW MANY TRIALS YOU WANT FOR FIRST PHASE, and SECOND PHASE.  FP=first(must be divisible by 60), SP=second(must be divisible by 22) */
 var FP_trials = 60;
-var SP_trials = 22;
+var SP_trials = 90;
 var eachComboNum = FP_trials / 6; /* don't change this line */
-var eachComboNumSP = SP_trials / 22; /* don't change this line */
+var eachComboNumSP = SP_trials / 30; /* don't change this line */
 
 
 /* THIS IS TO RANDOMIZE STIMS */
@@ -162,249 +162,67 @@ var stimArray = ["/static/experiments/probabilistic_selection/images/1.png",
 ];
 jsPsych.pluginAPI.preloadImages(stimArray)
 var randomStimArray = jsPsych.randomization.repeat(stimArray, 1);
-var prob80 = randomStimArray[0];
-var prob20 = randomStimArray[1];
-var prob70 = randomStimArray[2];
-var prob30 = randomStimArray[3];
-var prob60 = randomStimArray[4];
-var prob40 = randomStimArray[5];
+var stims = [['80', randomStimArray[0]],
+			['20', randomStimArray[1]],
+			['70', randomStimArray[2]],
+			['30', randomStimArray[3]],
+			['60', randomStimArray[4]],
+			['40', randomStimArray[5]]]
 
+firstPhaseStims = []
 
 /* THIS IS FOR FIRST PHASE STIMS,  randomized and counterbalanced*/
-firstPhaseStims = [{
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '80_20',
-		trial_id: "stim",
-		exp_stage: "practice"
+for (var i = 0; i<3; i++) {
+	var order1_stim = {}
+	order1_stim['image'] = "<div class = decision-left><img src='" + stims[i*2][1] +
+		"'></img></div><div class = decision-right><img src='" + stims[i*2+1][1] + "'></img></div>"
+	order1_stim['data'] = {
+		trial_id: 'stim',
+		exp_stage: 'training',
+		condition: stims[i*2][0] + '_' + stims[i*2+1][0]
 	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '20_80',
-		trial_id: "stim",
-		exp_stage: "practice"
+	var order2_stim = {}
+	order2_stim['image'] = "<div class = decision-left><img src='" + stims[i*2+1][1] +
+		"'></img></div><div class = decision-right><img src='" + stims[i*2][1] + "'></img></div>"
+	order2_stim['data'] = {
+		trial_id: 'stim',
+		exp_stage: 'training',
+		condition: stims[i*2+1][0] + '_' + stims[i*2][0]
 	}
-}, {
-	image: "<div class = decision-left><img src='" + prob70 +
-		"'></img></div><div class = decision-right><img src='" + prob30 + "'></img></div>",
-	data: {
-		condition: '70_30',
-		trial_id: "stim",
-		exp_stage: "practice"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob30 +
-		"'></img></div><div class = decision-right><img src='" + prob70 + "'></img></div>",
-	data: {
-		condition: '30_70',
-		trial_id: "stim",
-		exp_stage: "practice"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob60 +
-		"'></img></div><div class = decision-right><img src='" + prob40 + "'></img></div>",
-	data: {
-		condition: '60_40',
-		trial_id: "stim",
-		exp_stage: "practice"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob40 +
-		"'></img></div><div class = decision-right><img src='" + prob60 + "'></img></div>",
-	data: {
-		condition: '40_60',
-		trial_id: "stim",
-		exp_stage: "practice"
-	}
-}]
+	firstPhaseStims.push(order1_stim)
+	firstPhaseStims.push(order2_stim)
+}
+
 
 var firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, eachComboNum, true);
 var answers = genResponses(firstPhaseStimsComplete)
 var curr_data = ''
 
 /*THIS IS FOR SECOND PHASE STIMS, randomized and counterbalanced*/
-
-secondPhaseStims = [{
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob70 + "'></img></div>",
-	data: {
-		condition: '80_70',
-		trial_id: "stim",
-		exp_stage: "test"
+secondPhaseStims = []
+for (var i = 0; i<5; i++) {
+	for (var j = i+1; j < 6; j++) {
+		console.log(stims[i])
+		var order1_stim = {}
+		order1_stim['image'] = "<div class = decision-left><img src='" + stims[i][1] +
+			"'></img></div><div class = decision-right><img src='" + stims[j][1] + "'></img></div>"
+		order1_stim['data'] = {
+			trial_id: 'stim',
+			exp_stage: 'test',
+			condition: stims[i][0] + '_' + stims[j][0]
+		}
+		var order2_stim = {}
+		order2_stim['image'] = "<div class = decision-left><img src='" + stims[j][1] +
+			"'></img></div><div class = decision-right><img src='" + stims[i][1] + "'></img></div>"
+		order2_stim['data'] = {
+			trial_id: 'stim',
+			exp_stage: 'test',
+			condition: stims[j][0] + '_' + stims[i][0]
+		}
+		secondPhaseStims.push(order1_stim)
+		secondPhaseStims.push(order2_stim)
 	}
-}, {
-	image: "<div class = decision-left><img src='" + prob70 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '70_80',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob30 + "'></img></div>",
-	data: {
-		condition: '80_30',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob30 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '30_80',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob60 + "'></img></div>",
-	data: {
-		condition: '80_60',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob60 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '60_80',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob40 + "'></img></div>",
-	data: {
-		condition: '80_40',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob40 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '40_80',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob70 + "'></img></div>",
-	data: {
-		condition: '20_70',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob70 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '70_20',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob30 + "'></img></div>",
-	data: {
-		condition: '20_30',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob30 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '30_20',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob60 + "'></img></div>",
-	data: {
-		condition: '20_60',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob60 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '60_20',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob40 + "'></img></div>",
-	data: {
-		condition: '20_40',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob40 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '40_20',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob80 +
-		"'></img></div><div class = decision-right><img src='" + prob20 + "'></img></div>",
-	data: {
-		condition: '80_20',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob20 +
-		"'></img></div><div class = decision-right><img src='" + prob80 + "'></img></div>",
-	data: {
-		condition: '20_80',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob70 +
-		"'></img></div><div class = decision-right><img src='" + prob30 + "'></img></div>",
-	data: {
-		condition: '70_30',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob30 +
-		"'></img></div><div class = decision-right><img src='" + prob70 + "'></img></div>",
-	data: {
-		condition: '30_70',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob60 +
-		"'></img></div><div class = decision-right><img src='" + prob40 + "'></img></div>",
-	data: {
-		condition: '60_40',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}, {
-	image: "<div class = decision-left><img src='" + prob40 +
-		"'></img></div><div class = decision-right><img src='" + prob60 + "'></img></div>",
-	data: {
-		condition: '40_60',
-		trial_id: "stim",
-		exp_stage: "test"
-	}
-}]
-
+}
 
 var secondPhaseStimsComplete = jsPsych.randomization.repeat(secondPhaseStims, eachComboNumSP, true);
 
@@ -509,7 +327,7 @@ var FP_block = {
 
 
 training_trials = []
-for (i = 0; i < 6; i++) {
+for (i = 0; i < 60; i++) {
 	var training_block = {
 		type: 'poldrack-categorize',
 		stimulus: getStim,
@@ -584,7 +402,7 @@ var SP_block = {
 	data: {
 		trial_id: "second_phase_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>In this phase there will be no visual feedback, but your are still earning points. Your task is still to choose the shape that has the higher probability of being correct to maximize your points.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>In this phase there will be no visual feedback, but your are still earning points. Your task is still to choose the shape that has the higher probability of being correct to maximize your points. If you are not sure how to respond, use your gut instinct.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
 	cont_key: [13]
 };
 
