@@ -77,7 +77,7 @@ var appendTestData = function() {
 //this adds the cue shown and trial number to data
 var appendCueData = function() {
 	jsPsych.data.addDataToLastTrial({
-		stim: cue,
+		cue: cue,
 		trial_num: current_trial,
 		exp_stage: exp_stage
 	})
