@@ -25,6 +25,7 @@ function assessPerformance() {
 }
 
 var get_trial_time = function() {
+  // ref: https://gist.github.com/nicolashery/5885280
   function randomExponential(rate, randomUniform) {
     // http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
     rate = rate || 1;
@@ -38,8 +39,8 @@ var get_trial_time = function() {
     return -Math.log(U) / rate;
   }
   gap = randomExponential(1)*1000
-  if (gap > 4000) {
-    gap = 4000
+  if (gap > 4500) {
+    gap = 4500
   }
   return gap + 2000;
 }
