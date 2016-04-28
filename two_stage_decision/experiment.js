@@ -48,7 +48,7 @@ function assessPerformance() {
 	})
 	credit_var = (avg_rt > 200) && responses_ok
 	performance_var = total_score
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var, "performance_var": performance_var})
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var, "performance_var": performance_var, "jamie"})
 }
 
 function evalAttentionChecks() {
