@@ -61,6 +61,7 @@ function assessPerformance() {
 		}
 	})
 	credit_var = (avg_rt > 200) && responses_ok
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
 var getStim = function() {
