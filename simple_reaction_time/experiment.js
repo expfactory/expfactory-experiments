@@ -22,6 +22,7 @@ function assessPerformance() {
   }
   var avg_rt = sum/rt_array.length
   credit_var = (avg_rt > 100)
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
 var get_trial_time = function() {
