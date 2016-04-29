@@ -30,6 +30,12 @@
         "time":3,
         "reference": "http://www.sciencedirect.com/science/article/pii/0001691869900651",
         "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",

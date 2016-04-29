@@ -42,6 +42,8 @@ function assessPerformance() {
 	var avg_rt = sum / rt_array.length
 	credit_var = (avg_rt > 200)
 	performance_var = total_points
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var, "performance_var": performance_var})
+
 }
 
 var getInstructFeedback = function() {
