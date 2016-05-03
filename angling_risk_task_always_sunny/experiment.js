@@ -41,8 +41,8 @@ function assessPerformance() {
 	}
 	var avg_rt = sum / rt_array.length || -1
   	var missed_percent = missed_count/experiment_data.length
-  	credit_var = (missed_percent < .4 && avg_rt > 200)
-  	if (credit_var == true) {
+  	credit_var = (missed_percent < 0.4 && avg_rt > 200)
+  	if (credit_var === true) {
   	  performance_var = total_points
   	} else {
    	  performance_var = 0

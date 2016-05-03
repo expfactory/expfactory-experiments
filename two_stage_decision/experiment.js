@@ -49,8 +49,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < .4 && avg_rt > 200 && responses_ok)
-	if (credit_var == true) {
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	if (credit_var === true) {
 	  performance_var = total_score
 	} else {
 	  performance_var = 0

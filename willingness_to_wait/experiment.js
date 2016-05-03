@@ -26,7 +26,7 @@ function assessPerformance() {
   }
   var avg_rt = sum / rt_array.length || -1
 	var missed_percent = missed_count/total_count
-	credit_var = (missed_percent < .4 && avg_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200)
 
   jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }

@@ -55,8 +55,8 @@ function assessPerformance() {
 		}
 	})
   var missed_percent = missed_count/experiment_data.length
-  credit_var = (missed_percent < .4 && avg_rt > 200 && responses_ok)
-  if (credit_var == true) {
+  credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+  if (credit_var === true) {
     performance_var = total_correct
   } else {
     performance_var = 0

@@ -60,7 +60,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < .4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
