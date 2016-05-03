@@ -26,8 +26,9 @@ function assessPerformance() {
 	for (var j = 0; j < rt_array.length; j++) {
 		sum += rt_array[j]
 	}
-	var avg_rt = sum / rt_array.length
-	credit_var = (avg_rt > 200)
+	var avg_rt = sum / rt_array.length || -1
+	var missed_percent = missed_count/experiment_data.length
+  	credit_var = (missed_percent < .4 && avg_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
