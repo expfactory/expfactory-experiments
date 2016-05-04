@@ -29,6 +29,13 @@
         "reference": "http://www.nature.com/neuro/journal/v18/n5/full/nn.3994.html",
         "publish":"True",
         "experiment_variables": [{
+                                 "name":"performance_var",
+                                 "type":"bonus",
+                                 "datatype": "numeric",
+                                 "range": [0,1000],
+                                 "description":"Money earned during trial. E(bonus) with perfect performance = 300"
+                                  },
+                                  {
                                  "name":"credit_var",
                                  "type":"credit",
                                  "datatype": "boolean",

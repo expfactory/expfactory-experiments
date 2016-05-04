@@ -41,9 +41,15 @@ function assessPerformance() {
   for (var j = 0; j < rt_array.length; j++) {
     sum += rt_array[j]
   }
-  var avg_rt = sum / rt_array.length
-  performance_var = Math.max(0, 1000 - avg_rt)
-  credit_var = (avg_rt > 200)
+  var avg_rt = sum / rt_array.length || -1
+  var missed_percent = missed_count/trial_count
+  credit_var = (missed_percent < 0.4 && avg_rt > 200)
+  if (credit_var === true) {
+      performance_var = Math.max(0, 1000 - avg_rt)
+  } else {
+      performance_var = 0
+  }
+
   jsPsych.data.addDataToLastTrial({"credit_var": credit_var,"performance_var": performance_var})
 }
 
