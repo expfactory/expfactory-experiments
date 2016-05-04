@@ -76,7 +76,7 @@ var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   if (last_trial.key_press === -1) {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
-  } else if (last_trial.correct == true) {
+  } else if (last_trial.correct === true) {
     total_correct += 1
     return '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
