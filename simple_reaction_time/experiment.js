@@ -3,18 +3,19 @@
 /* ************************************ */
 function assessPerformance() {
   var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var trial_count = 0
   var missed_count = 0
   var rt_array = []
   var rt = 0
-  for (var i = 0; i < experiment_data.length; i++)
+  for (var i = 0; i < experiment_data.length; i++) {
+    trial_count += 1
     rt = experiment_data[i].rt
-    if (typeof rt !== 'undefined') {
-      if (rt == -1) {
-        missed_count += 1
-      } else {
-        rt_array.push(rt)
-      }
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
     }
+  }
   //calculate average rt
   var sum = 0
   for (var j = 0; j < rt_array.length; j++) {

@@ -76,7 +76,7 @@ var getFeedback = function() {
   var last_trial = jsPsych.data.getLastTrialData()
   if (last_trial.key_press == -1) {
     return '<div class = centerbox><div class = "center-text">Respond faster!</div></div>'
-  } else if (last_trial.key_press == last_trial.correct_response) {
+  } else if (last_trial.correct == true) {
     total_correct += 1
     return '<div class = centerbox><div style = "color: lime"; class = "center-text">Correct!</div></div>'
   } else {
@@ -190,14 +190,15 @@ if (flat_first === 0) {
   instruct_stims2 = hierarchical_instruct_stims
 }
 
-// flat_stims = jsPsych.randomization.repeat(flat_stims,20,true)
-// hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20,true)
-// Change structure of object array to work with new structure
-flat_stims = jsPsych.randomization.repeat(flat_stims, 20, true)
-hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims, 20, true)
 //preload stims
 jsPsych.pluginAPI.preloadImages(flat_stims)
 jsPsych.pluginAPI.preloadImages(hierarchical_stims)
+// flat_stims = jsPsych.randomization.repeat(flat_stims,20,true)
+// hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims,20,true)
+// Change structure of object array to work with new structure
+flat_stims = jsPsych.randomization.repeat(flat_stims, exp_len/18, true)
+hierarchical_stims = jsPsych.randomization.repeat(hierarchical_stims, exp_len/18, true)
+
 
 
 
@@ -370,10 +371,15 @@ var flat_stim_block = {
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
   timing_post_trial: 0,
-  on_finish: function() {
+  on_finish: function(data) {
+  	var correct = false
+  	if (data.key_press == data.correct_response) {
+  		correct = true
+  	}
     jsPsych.data.addDataToLastTrial({
       trial_id: "flat_stim",
-      exp_stage: "test"
+      exp_stage: "test",
+      correct: correct
     })
   }
 }
@@ -388,10 +394,15 @@ var hierarchical_stim_block = {
   timing_response: 3000,
   prompt: prompt_prefix + path_source + 'FIX_GREEN.png' + ' style:"z-index: -1"' + postfix,
   timing_post_trial: 0,
-  on_finish: function() {
+  on_finish: function(data) {
+  	var correct = false
+  	if (data.key_press == data.correct_response) {
+  		correct = true
+  	}
     jsPsych.data.addDataToLastTrial({
       trial_id: "hierarchical_stim",
-      exp_stage: "test"
+      exp_stage: "test",
+      correct: correct
     })
   }
 }
@@ -423,7 +434,7 @@ var hierarchical_loop_node = {
 var hierarchical_rule_experiment = []
 hierarchical_rule_experiment.push(instruction_node);
 hierarchical_rule_experiment.push(start_test_block);
-// setup exp w loop nodes after pushing the practice etc. blocks
+// setup exp w/ loop nodes after pushing the practice etc. blocks
 if (hierarchical_only) {
   hierarchical_rule_experiment.push(hierarchical_loop_node, attention_node);
 } else {
