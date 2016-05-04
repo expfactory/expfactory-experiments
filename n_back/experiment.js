@@ -39,19 +39,18 @@ var record_acc = function() {
 	var stim = jsPsych.data.getData()[global_trial].stim.toLowerCase()
 	var target = jsPsych.data.getData()[global_trial].target.toLowerCase()
 	var key = jsPsych.data.getData()[global_trial].key_press
-	if (stim == target && key == 32) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'correct'
-		})
-	} else if (stim != target && key == -1) {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'correct'
-		})
+	if (stim == target && key == 37) {
+		correct = true
+	} else if (stim != target && key == 40) {
+		correct = true
 	} else {
-		jsPsych.data.addDataToLastTrial({
-			correct: 'incorrect'
-		})
+		correct = false
 	}
+	jsPsych.data.addDataToLastTrial({
+		correct: correct,
+		trial_num: current_trial
+	})
+	current_trial = current_trial + 1
 }
 
 
@@ -65,11 +64,14 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var current_trial = 0
 var letters = 'bBdDgGtTvV'
 var num_blocks = 2 //of each delay
 var num_trials = 50
+var num_practice_trials = 25
 var delays = jsPsych.randomization.shuffle([1, 2, 3])
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
+var stims = [] //hold stims per block
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -124,7 +126,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the spacebar when the letter matches the same letter that occured either 1, 2 or 3 trials before. The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to respond when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t...b, you would respond on the last "t" and the last "b".</p><p class = block-text>On one block of trials there will be no delay. On this block you will be instructed to respond to the presentation of a specific letter on that trial. For instance, you may have to respond every time you see a "t" or "T".</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to respond by pressing the <strong>left arrow key</strong> when the letter matches the same letter that occured either 1, 2 or 3 trials before, otherwise you should press the <strong>down arrow key</strong>. The letters will be both lower and upper case. You should ignore the case (so "t" matches "T")</p><p class = block-text>The specific delay you should pay attention to will differ between blocks of trials, and you will be told the delay before starting a trial block.</p><p class = block-text>For instance, if the delay is 2, you are supposed to press the left arrow key when the current letter matches the letter that occured 2 trials ago. If you saw the sequence: g...G...v...T...b...t...b, you would press the left arrow key on the last "t" and the last "b" and the down arrow key for every other letter.</p><p class = block-text>On one block of trials there will be no delay. On this block you will be instructed to press the left arrow key to the presentation of a specific letter on that trial. For instance, the specific letter may be "t", in which case you would press the left arrow key to "t" or "T".</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -164,14 +166,15 @@ var end_block = {
 	timing_post_trial: 0
 };
 
+
 var start_practice_block = {
 	type: 'poldrack-text',
+	text: '<div class = centerbox><p class = block-text>Starting practice. During practice, you should press the left arrow key when the current letter matches the letter that appeared 1 trial before. Otherwise press the down arrow key</p><p class = center-block-text>You will receive feedback about whether you were correct or not during practice. There will be no feedback during the main experiment. Press <strong>enter</strong> to begin.</p></div>',
+	cont_key: [13],
 	data: {
-		trial_id: "practice_intro"
+		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-	cont_key: [13],
 	timing_post_trial: 1000
 };
 
@@ -192,10 +195,47 @@ var start_control_block = {
 	data: {
 		trial_id: "control_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the spacebar everytime you see a "t" or "T".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = block-text>In this block you do not have to match letters to previous letters. Instead, press the left arrow key everytime you see a "t" or "T" and the down arrow key for all other letters.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
+
+//Setup 1-back practice
+practice_trials = []
+for (var i = 0; i < (num_practice_trials); i++) {
+	var stim = randomDraw(letters)
+	stims.push(stim)
+	if (i >= 1) {
+		target = stims[i - 1]
+	}
+	if (stim == target) { 
+		correct_response = 37
+	} else {
+		correct_response = 40
+	}
+	var practice_block = {
+		type: 'poldrack-categorize',
+		is_html: true,
+		stimulus: '<div class = centerbox><div class = center-text>' + stim + '</div></div>',
+		key_answer: correct_response,
+		data: {
+			trial_id: "stim",
+			exp_stage: "practice",
+			stim: stim,
+			target: target
+		},
+		correct_text: '<div class = centerbox><div style="color:green;font-size:60px"; class = center-text>Correct!</div></div>',
+		incorrect_text: '<div class = centerbox><div style="color:red;font-size:60px"; class = center-text>Incorrect</div></div>',
+		timeout_message: '<div class = centerbox><div style="font-size:60px" class = center-text>Respond Faster!</div></div>',
+		timing_feedback_duration: 500,
+		show_stim_with_feedback: false,
+		choices: [37,40],
+		timing_stim: 500,
+		timing_response: 2000,
+		timing_post_trial: 500
+	};
+	practice_trials.push(practice_block)
+}
 
 //Define control (0-back) block
 var control_trials = []
@@ -212,7 +252,7 @@ for (var i = 0; i < num_trials; i++) {
 			stim: stim,
 			target: 't'
 		},
-		choices: [32],
+		choices: [37,40],
 		timing_stim: 500,
 		timing_response: 2000,
 		timing_post_trial: 0,
@@ -224,6 +264,8 @@ for (var i = 0; i < num_trials; i++) {
 //Set up experiment
 var n_back_experiment = []
 n_back_experiment.push(instruction_node);
+n_back_experiment.push(start_practice_block)
+n_back_experiment = n_back_experiment.concat(practice_trials)
 
 if (control_before === 0) {
 	n_back_experiment.push(start_control_block)
@@ -237,16 +279,16 @@ for (var d = 0; d < delays.length; d++) {
 			trial_id: "delay_text"
 		},
 		timing_response: 180000,
-		text: '<div class = centerbox><p class = block-text>In these next blocks, you should respond when the current letter matches the letter that appeared ' +
+		text: '<div class = centerbox><p class = block-text>In these next blocks, you should press the left arrow key when the current letter matches the letter that appeared ' +
 			delay +
-			' trials before.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+			' trials before. Otherwise press the down arrow key</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
 		cont_key: [13]
 	};
 	n_back_experiment.push(start_delay_block)
 	for (var b = 0; b < num_blocks; b++) {
 		n_back_experiment.push(start_test_block)
 		var target = ''
-		var stims = []
+		stims = []
 		for (var i = 0; i < num_trials; i++) {
 			var stim = randomDraw(letters)
 			stims.push(stim)
@@ -264,7 +306,7 @@ for (var d = 0; d < delays.length; d++) {
 					stim: stim,
 					target: target
 				},
-				choices: [32],
+				choices: [37,40],
 				timing_stim: 500,
 				timing_response: 2000,
 				timing_post_trial: 0,
