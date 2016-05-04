@@ -25,10 +25,14 @@ function assessPerformance() {
     sum += rt_array[j]
   }
   var avg_rt = sum / rt_array.length || -1
-	var missed_percent = missed_count/total_count
+	var missed_percent = missed_count/trial_count
 	credit_var = (missed_percent < 0.4 && avg_rt > 200)
-
-  jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	if (credit_var === true) {
+		performance_var = total_money
+	} else {
+		performance_var = 0
+	}
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var, "performance_var": performance_var})
 }
 
 function evalAttentionChecks() {
@@ -72,7 +76,9 @@ var getFB = function() {
     token = token_zero
   } else {
     token = token_thirty
-    total_money += 0.30
+    if (exp_stage == 'test') {
+      total_money += 0.30
+    }
   }
   return token +
     '<div class = soldBox><div class = center-text><font color="red">SOLD!</font></div></div>'
@@ -100,10 +106,12 @@ var progress_bar =
   '<div class = wtw_progressBox><div class="meter"> <span style="width: 100%"></span></div></div>'
 var delay = 0
 var practice_delays = [10000, 50000, 5000]
-var block_start_time = new Date();
+var block_start_time = 0;
 var total_money = 0 //in dollars
 var time_limit = 10
 var exp_stage = 'practice'
+var credit_var = true
+var performance_var = 0
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -220,6 +228,7 @@ var start_test_block = {
   timing_post_trial: 1000,
   on_finish: function() {
     exp_stage = 'test'
+    block_start_time = new Date();
   }
 };
 
