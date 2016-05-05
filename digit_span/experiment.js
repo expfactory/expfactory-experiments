@@ -75,12 +75,10 @@ var getFeedback = function() {
 
 var recordClick = function(elm) {
   response.push(Number($(elm).text()))
-  console.log(response)
 }
 
 var clearResponse = function() {
   response = []
-  console.log(response)
 }
 
 
@@ -276,28 +274,28 @@ var forward_response_block = {
   },
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      "response": response,
+      "response": response.slice(),
       "sequence": curr_seq,
       "num_digits": num_digits,
       "condition": "forward"
     })
-    var fb = 0
+    var correct = false
       // staircase
     if (arraysEqual(response, curr_seq)) {
       num_digits += 1
-      feedback = 'Correct!'
+      feedback = '<span style="color:green">Correct!</span>'
       stims = setStims()
-      fb = 1
+      correct = true
     } else {
       if (num_digits > 1) {
         num_digits -= 1
       }
       errors += 1
-      feedback = 'Incorrect!'
+      feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
-      feedback: fb
+      correct: correct
     })
     response = []
   },
@@ -314,29 +312,28 @@ var reverse_response_block = {
   },
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
-      "response": response,
+      "response": response.slice(),
       "sequence": curr_seq,
       "num_digits": num_digits,
-      "condition": "reverse",
-      feedback: fb
+      "condition": "reverse"
     })
-    var fb = 0
+    var correct = false
       // staircase
     if (arraysEqual(response.reverse(), curr_seq)) {
       num_digits += 1
-      feedback = 'Correct!'
+      feedback = '<span style="color:green">Correct!</span>'
       stims = setStims()
-      fb = 1
+      correct = true
     } else {
       if (num_digits > 1) {
         num_digits -= 1
       }
       errors += 1
-      feedback = 'Incorrect!'
+      feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
-      feedback: fb
+      correct: correct
     })
     response = []
   },
