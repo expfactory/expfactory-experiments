@@ -39,7 +39,7 @@ var randomDraw = function(lst) {
 var setStims = function() {
   curr_seq = []
   stim_array = [first_grid]
-  time_array = [500]
+  time_array = [1000]
   var spaces = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
   var last_space = 0
   for (var i = 0; i < num_spaces; i++) {
@@ -60,7 +60,7 @@ var setStims = function() {
     stim_array.push(stim_grid)
     time_array.push(stim_time)
   }
-  total_time = num_spaces * (stim_time)
+  total_time = num_spaces * (stim_time) + 1000
 }
 
 var getTestText = function() {
@@ -102,7 +102,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var num_spaces = 3
-var num_trials = 10
+var num_trials = 14
 var curr_seq = []
 var stim_time = 1000
 var time_array = []
@@ -162,7 +162,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take about 7 minutes. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take less than 10 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -243,7 +243,12 @@ var start_reverse_block = {
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  on_finish: function() {
+  	errors = 0
+    num_spaces = 3
+    stims = setStims()
+  }
 }
 
 /* define test block */
@@ -293,10 +298,11 @@ var forward_response_block = {
       stims = setStims()
       correct = true
     } else {
-      if (num_spaces > 1) {
-        num_spaces -= 1
-      }
       errors += 1
+      if (num_spaces > 1 && errors == 2) {
+        num_spaces -= 1
+        errors = 0
+      }
       feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
@@ -331,10 +337,11 @@ var reverse_response_block = {
       stims = setStims()
       correct = true
     } else {
-      if (num_spaces > 1) {
-        num_spaces -= 1
-      }
       errors += 1
+      if (num_spaces > 1 && errors == 2) {
+        num_spaces -= 1
+        errors = 0
+      }
       feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
@@ -360,37 +367,22 @@ var feedback_block = {
   response_ends_trial: true
 }
 
-var forward_node = {
-  timeline: [start_test_block, test_block, forward_response_block, feedback_block],
-  loop_function: function(data) {
-    if (errors < error_lim) {
-      return true
-    } else {
-      errors = 0
-      num_spaces = 3
-      stims = setStims()
-      return false
-    }
-  }
-}
-
-var reverse_node = {
-  timeline: [start_test_block, test_block, reverse_response_block, feedback_block],
-  loop_function: function(data) {
-    if (errors < error_lim) {
-      return true
-    } else {
-      return false
-    }
-  }
-}
-
 /* create experiment definition array */
 var spatial_span_experiment = [];
 spatial_span_experiment.push(instruction_node);
-spatial_span_experiment.push(forward_node)
+for (i = 0; i < num_trials ; i++ ) {
+	spatial_span_experiment.push(start_test_block)
+	spatial_span_experiment.push(test_block)
+	spatial_span_experiment.push(forward_response_block)
+	spatial_span_experiment.push(feedback_block)
+}
 spatial_span_experiment.push(attention_node)
 spatial_span_experiment.push(start_reverse_block)
-spatial_span_experiment.push(reverse_node)
+for (i = 0; i < num_trials ; i++ ) {
+	spatial_span_experiment.push(start_test_block)
+	spatial_span_experiment.push(test_block)
+	spatial_span_experiment.push(reverse_response_block)
+	spatial_span_experiment.push(feedback_block)
+}
 spatial_span_experiment.push(post_task_block)
 spatial_span_experiment.push(end_block)

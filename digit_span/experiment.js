@@ -43,7 +43,7 @@ var setStims = function() {
   var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   var last_num = 0
   for (var i = 0; i < num_digits; i++) {
-    var num = randomDraw(nums.filter(function(x) {return x!=last_num}))
+    var num = randomDraw(nums.filter(function(x) {return Math.abs(x-last_num)>2}))
     last_num = num
     curr_seq.push(num)
     stim_array.push('<div class = centerbox><div class = digit-span-text>' + num.toString() +
@@ -93,8 +93,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var num_digits = 4
-var num_trials = 10
+var num_digits = 3
+var num_trials = 14
 var curr_seq = []
 var stim_time = 800
 var gap_time = 200
@@ -236,7 +236,12 @@ var start_reverse_block = {
     trial_id: "start_reverse"
   },
   text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  on_finish: function() {
+  	errors = 0
+    num_digits = 3
+    stims = setStims()
+  }
 }
 
 /* define test block */
@@ -287,10 +292,11 @@ var forward_response_block = {
       stims = setStims()
       correct = true
     } else {
-      if (num_digits > 1) {
-        num_digits -= 1
-      }
       errors += 1
+      if (num_digits > 1 && errors == 2) {
+        num_digits -= 1
+        errors = 0
+      }
       feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
@@ -325,10 +331,11 @@ var reverse_response_block = {
       stims = setStims()
       correct = true
     } else {
-      if (num_digits > 1) {
-        num_digits -= 1
-      }
       errors += 1
+      if (num_digits > 1 && errors == 2) {
+        num_digits -= 1
+        errors = 0
+      }
       feedback = '<span style="color:red">Incorrect</span>'
       stims = setStims()
     }
@@ -353,37 +360,22 @@ var feedback_block = {
   response_ends_trial: true
 }
 
-var forward_node = {
-  timeline: [start_test_block, test_block, forward_response_block, feedback_block],
-  loop_function: function(data) {
-    if (errors < error_lim) {
-      return true
-    } else {
-      errors = 0
-      num_digits = 4
-      stims = setStims()
-      return false
-    }
-  }
-}
-
-var reverse_node = {
-  timeline: [start_test_block, test_block, reverse_response_block, feedback_block],
-  loop_function: function(data) {
-    if (errors < error_lim) {
-      return true
-    } else {
-      return false
-    }
-  }
-}
-
 /* create experiment definition array */
 var digit_span_experiment = [];
 digit_span_experiment.push(instruction_node);
-digit_span_experiment.push(forward_node)
+for (i = 0; i < num_trials ; i++ ) {
+	digit_span_experiment.push(start_test_block)
+	digit_span_experiment.push(test_block)
+	digit_span_experiment.push(forward_response_block)
+	digit_span_experiment.push(feedback_block)
+}
 digit_span_experiment.push(attention_node)
 digit_span_experiment.push(start_reverse_block)
-digit_span_experiment.push(reverse_node)
+for (i = 0; i < num_trials ; i++ ) {
+	digit_span_experiment.push(start_test_block)
+	digit_span_experiment.push(test_block)
+	digit_span_experiment.push(reverse_response_block)
+	digit_span_experiment.push(feedback_block)
+}
 digit_span_experiment.push(post_task_block)
 digit_span_experiment.push(end_block)
