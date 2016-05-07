@@ -547,8 +547,10 @@ for (b = 0; b < blocks.length; b++) {
 			timing_stim: 1700,
 			response_ends_trial: true,
 			timing_post_trial: 0,
-			on_finish: function() {
+			on_finish: function(data) {
+				correct = data.key_press === data.correct_response
 				jsPsych.data.addDataToLastTrial({
+					correct: correct,
 					exp_stage: exp_stage
 				})
 			}
