@@ -422,7 +422,7 @@ for (i = 0; i < block.data.length; i++) {
 	} else {
 		var spatial_cue = {
 			type: 'poldrack-single-stim',
-			stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
+			stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
 				'><div class = ANT_text>*</p></div></div>',
 			is_html: true,
 			choices: 'none',
@@ -519,7 +519,7 @@ for (b = 0; b < blocks.length; b++) {
 		} else {
 			var spatial_cue = {
 				type: 'poldrack-single-stim',
-				stimulus: '<div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
+				stimulus: '<div class = centerbox><div class = ANT_text>+</div></div><div class = centerbox><div class = ANT_' + block.data[i].flanker_location +
 					'><div class = ANT_text>*</p></div></div>',
 				is_html: true,
 				choices: 'none',
