@@ -351,7 +351,7 @@ for (var i = 0; i < (base_num_trials + 1); i++) {
 	if (i >= 1) {
 		target = stims[i - 1]
 	}
-	if (stim == target) { 
+	if (stim.toLowerCase() == target.toLowerCase()) { 
 		correct_response = 37
 	} else {
 		correct_response = 40
