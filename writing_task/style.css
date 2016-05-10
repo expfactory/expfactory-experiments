@@ -1,6 +1,6 @@
 .writing_class {
   width: 48em;
-  height: 100em;
+  height: 100%;
   top:10%;
   display: block;
   margin-left: auto;
@@ -10,10 +10,7 @@
   font-family: Tahoma, sans-serif;
   font-size: 16px;
   max-height: 85vh;
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+  outline: none;
 }
 
-.writing_class:focus {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  padding: 3px 0px 3px 3px;
-  border: 1px solid rgba(81, 203, 238, 1);
-}
