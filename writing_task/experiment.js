@@ -101,9 +101,8 @@ var instruction_node = {
     }
   }
 }
-
 /* define test block */
-var test_block = {
+var write_block = {
   type: 'writing',
   data: {
     trial_id: "write",
@@ -111,28 +110,15 @@ var test_block = {
   },
   text_class: 'writing_class',
   is_html: true,
+  initial_text: 'Write here for ' + timelimit + ' minutes.',
   timing_post_trial: 0,
-  timing_response: getResponseTime,
-  on_finish: function() {
-    elapsed = (new Date() - writing_start) / 60000
-  }
+  timing_response: timelimit * 60000
 };
 
-var loop_node = {
-  timeline: [test_block],
-  loop_function: function() {
-    if (elapsed < timelimit) {
-      return true;
-    } else {
-      jsPsych.getDisplayElement().html('');
-      return false;
-    }
-  }
-}
 
 /* create experiment definition array */
 var writing_task_experiment = [];
 writing_task_experiment.push(instruction_node);
-writing_task_experiment.push(loop_node);
+writing_task_experiment.push(write_block);
 writing_task_experiment.push(post_task_block)
 writing_task_experiment.push(end_block);
