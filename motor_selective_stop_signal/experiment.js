@@ -127,9 +127,6 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
-	jsPsych.data.addDataToLastTrial({
-		'SSD': SSD
-	})
 	if (data.SS_trial_type == 'stop' && data.correct_response == stop_response[1]) {
 		if (data.rt == -1 && SSD < 850) {
 			SSD = SSD + 50
@@ -147,7 +144,6 @@ var getSSD = function() {
 of the "while" loop */
 var getNoSSPracticeStim = function() {
 	practice_trial_data = NoSS_practice_list.data.pop()
-	practice_trial_data.condition = "NoSS_practice"
 	return NoSS_practice_list.stimulus.pop()
 }
 
@@ -157,7 +153,6 @@ var getNoSSPracticeData = function() {
 
 var getSSPracticeStim = function() {
 	practice_trial_data = practice_list.data.pop()
-	practice_trial_data.condition = "practice"
 	return practice_list.stimulus.pop()
 }
 
@@ -535,7 +530,7 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_response: 1850,
 		prompt: prompt_text,
 		SSD: SSD,
-		timing_SS: 250,
+		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: function(data) {
 			jsPsych.data.addDataToLastTrial({

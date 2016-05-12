@@ -128,9 +128,6 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
-	jsPsych.data.addDataToLastTrial({
-		'SSD': SSD
-	})
 	if (data.SS_trial_type == 'stop') {
 		if (data.rt == -1 && SSD < 850) {
 			SSD = SSD + 50
@@ -544,7 +541,7 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_response: 1850,
 		prompt: prompt_text,
 		SSD: SSD,
-		timing_SS: 250,
+		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: function(data) {
 			jsPsych.data.addDataToLastTrial({
