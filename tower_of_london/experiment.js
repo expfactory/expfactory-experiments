@@ -70,7 +70,6 @@ var getText = function() {
 }
 
 var pegClick = function(peg_id) {
-  console.log(peg_id)
   choice = Number(peg_id.slice(-1)) - 1
   peg = curr_placement[choice]
   if (held_ball === 0) {
@@ -351,7 +350,7 @@ var start_test_block = {
 var advance_problem_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "stim",
+    trial_id: "advance",
     exp_stage: 'test'
   },
   timing_response: 180000,
@@ -392,7 +391,8 @@ var practice_block = {
       'current_position': curr_placement,
       'num_moves_made': num_moves,
       'target': example_problem3,
-      'min_moves': 1
+      'min_moves': 1,
+      'problem_id': 'practice'
     })
   }
 }
@@ -419,7 +419,8 @@ var test_block = {
       'current_position': curr_placement,
       'num_moves_made': num_moves,
       'target': problems[problem_i],
-      'min_moves': answers[problem_i]
+      'min_moves': answers[problem_i],
+      'problem_id': problem_i
     })
   }
 }
