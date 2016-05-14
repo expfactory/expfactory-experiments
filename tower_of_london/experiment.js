@@ -70,8 +70,9 @@ var getText = function() {
 }
 
 var pegClick = function(peg_id) {
-  choice = Number(peg_id.slice(-1)) - 1
-  peg = curr_placement[choice]
+  var choice = Number(peg_id.slice(-1)) - 1
+  var peg = curr_placement[choice]
+  var ball_location = 0
   if (held_ball === 0) {
     for (var i = peg.length - 1; i >= 0; i--) {
       if (peg[i] !== 0) {
@@ -101,7 +102,13 @@ var makeBoard = function(container, ball_placement, board_type) {
     board += '<div id = tol_peg_' + (p + 1) + '><div class = tol_peg></div></div>' //place peg
       //place balls
     if (board_type == 'ref') {
-      board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      if (ball_placement[p][0] === 0 & held_ball === 0) {
+        board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      } else if (ball_placement[p].slice(-1) != 0 & held_ball != 0) {
+        board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      } else {
+        board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      }
     } else {
       board += '<div class = special id = tol_peg_' + (p + 1) + ' >'
     }
@@ -493,7 +500,10 @@ var feedback_block = {
   timing_response: 2000,
   timing_post_trial: 500,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      'exp_stage': exp_stage,
+      'problem_time': time_elapsed
+    })
   },
 }
 
