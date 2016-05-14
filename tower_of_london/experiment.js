@@ -369,13 +369,13 @@ var advance_problem_block = {
   }
 }
 
-var practice_block = {
+var practice_tohand = {
   type: 'single-stim-button',
   stimulus: getPractice,
   button_class: 'special',
   is_html: true,
   data: {
-    trial_id: "stim",
+    trial_id: "to_hand",
     exp_stage: 'practice'
   },
   timing_stim: getTime,
@@ -388,7 +388,7 @@ var practice_block = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': curr_placement,
+      'current_position': jQuery.extend(true, {}, curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
       'min_moves': 1,
@@ -397,13 +397,41 @@ var practice_block = {
   }
 }
 
-var test_block = {
+var practice_toboard = {
+  type: 'single-stim-button',
+  stimulus: getPractice,
+  button_class: 'special',
+  is_html: true,
+  data: {
+    trial_id: "to_board",
+    exp_stage: 'practice'
+  },
+  timing_stim: getTime,
+  timing_response: getTime,
+  timing_post_trial: 0,
+  on_finish: function(data) {
+    if (data.mouse_click != -1) {
+      time_elapsed += data.rt
+    } else {
+      time_elapsed += getTime()
+    }
+    jsPsych.data.addDataToLastTrial({
+      'current_position': jQuery.extend(true, {}, curr_placement),
+      'num_moves_made': num_moves,
+      'target': example_problem3,
+      'min_moves': 1,
+      'problem_id': 'practice'
+    })
+  }
+}
+
+var test_tohand = {
   type: 'single-stim-button',
   stimulus: getStim,
   button_class: 'special',
   is_html: true,
   data: {
-    trial_id: "stim",
+    trial_id: "to_hand",
     exp_stage: 'test'
   },
   timing_stim: getTime,
@@ -416,7 +444,35 @@ var test_block = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': curr_placement,
+      'current_position': jQuery.extend(true, {}, curr_placement),
+      'num_moves_made': num_moves,
+      'target': problems[problem_i],
+      'min_moves': answers[problem_i],
+      'problem_id': problem_i
+    })
+  }
+}
+
+var test_toboard = {
+  type: 'single-stim-button',
+  stimulus: getStim,
+  button_class: 'special',
+  is_html: true,
+  data: {
+    trial_id: "to_board",
+    exp_stage: 'test'
+  },
+  timing_stim: getTime,
+  timing_response: getTime,
+  timing_post_trial: 0,
+  on_finish: function(data) {
+    if (data.mouse_click != -1) {
+      time_elapsed += data.rt
+    } else {
+      time_elapsed += getTime()
+    }
+    jsPsych.data.addDataToLastTrial({
+      'current_position': jQuery.extend(true, {}, curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
       'min_moves': answers[problem_i],
@@ -442,12 +498,12 @@ var feedback_block = {
 }
 
 var practice_node = {
-  timeline: [practice_block],
+  timeline: [practice_tohand, practice_toboard],
   loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    data = data[0]
+    data = data[1]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
@@ -462,12 +518,12 @@ var practice_node = {
 }
 
 var problem_node = {
-  timeline: [test_block],
+  timeline: [test_tohand, test_toboard],
   loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    data = data[0]
+    data = data[1]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
