@@ -108,7 +108,7 @@ var getTestFeedback = function() {
 		}
 	}
 	var average_rt = median(rt_array);
-	var rt_dff = 0
+	var rt_diff = 0
 	if (rtMedians.length !== 0) {
 		rt_diff = Math.abs(average_rt - rtMedians.slice(-1)[0])
 	}
@@ -143,8 +143,7 @@ var getTestFeedback = function() {
 	 	test_feedback_text +=
 	 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 	}
-	test_feedback_text +=
-		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
+
 	return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
 }
 

@@ -146,8 +146,7 @@ var getTestFeedback = function() {
 	 	test_feedback_text +=
 	 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 	}
-	test_feedback_text +=
-		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
+
 	return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
 }
 
@@ -243,7 +242,7 @@ var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
 var practice_repetitions = 1
-var practice_repetition_thresh = 5
+var practice_repetition_thresh = 2
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -278,8 +277,8 @@ var stimulus = [{
 	}
 }]
 
-var NoSSpractice_block_len = 12
-var practice_block_len = 30
+var NoSSpractice_block_len = 4
+var practice_block_len = 10
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus, NoSSpractice_block_len / 4, true)
 var practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len / 4, true)
@@ -288,7 +287,7 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 ], practice_block_len / 10)
 
 //number of blocks
-var test_block_len = 50
+var test_block_len = 5
 var numblocks = 6
 var blocks = []
 for (i = 0; i < numblocks; i++) {
@@ -439,12 +438,12 @@ var practice_feedback_block = {
 
 var test_feedback_block = {
 	type: 'poldrack-text',
-	timing_response: 120000,
+	timing_response: 20000,
 	data: {
 		trial_id: "feedback",
 		exp_stage: "test"
 	},
-	cont_key: [13],
+	cont_key: 'none',
 	text: getTestFeedback,
 	on_finish: function() {
 		test_block_data = []
@@ -650,87 +649,6 @@ var practice_node = {
 	}
 }
 
-var practice_node = {
-	timeline: practice_trials,
-	/* This function defines stopping criteria */
-	loop_function: function(data) {
-		practice_repetitions += 1
-		var rt_array = [];
-		var sum_correct = 0;
-		var go_length = 0;
-		var num_responses = 0;
-		var stop_length = 0
-		var successful_stops = 0
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].trial_id == 'stim') {
-				if (data[i].SS_trial_type == 'stop' && data[i].correct_response == stop_response[1]) {
-					stop_length += 1
-					if (data[i].rt == -1) {
-						successful_stops += 1
-					}
-				} else {
-					if (data[i].rt != -1) {
-						num_responses += 1
-						rt_array.push(data[i].rt);
-						if (data[i].key_press == data[i].correct_response) {
-							sum_correct += 1
-						}
-					}
-					go_length += 1
-				}
-			}
-		}
-		var average_rt = median(rt_array);
-		var GoCorrect_percent = sum_correct / go_length;
-		var missed_responses = (go_length - num_responses) / go_length
-		var StopCorrect_percent = successful_stops / stop_length
-		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
-		if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
-				missed_response_thresh && StopCorrect_percent >= (0.5-stop_thresh) && StopCorrect_percent <= (0.5+stop_thresh)) || practice_repetitions >
-			practice_repetition_thresh) {
-			// end the loop
-			practice_repetitions = 1
-				// end the loop
-			practice_feedback_text +=
-				'</p><p class = block-text>Done with practice. We will now begin the ' + numconditions *
-				numblocks +
-				' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
-			return false;
-		} else {
-			//rerandomize stim and stop_trial order
-			practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
-			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
-					'go', 'go', 'go', 'go'
-				], practice_list.data.length / 10, false)
-				// keep going until they are faster!
-			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
-
-			if (average_rt > RT_thresh) {
-				practice_feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-			}
-
-			if (missed_responses >= missed_response_thresh) {
-				practice_feedback_text +=
-					'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
-			}
-
-			if (GoCorrect_percent <= accuracy_thresh) {
-				practice_feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
-			}
-			if (StopCorrect_percent < 0.8 ){
-			 	practice_feedback_text +=
-			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
-			} else if (StopCorrect_percent > 0.2){
-			 	practice_feedback_text +=
-			 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
-			}
-			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
-			return true;
-		}
-	}
-}
 
 motor_selective_stop_signal_experiment.push(NoSS_practice_node)
 motor_selective_stop_signal_experiment.push(practice_node)

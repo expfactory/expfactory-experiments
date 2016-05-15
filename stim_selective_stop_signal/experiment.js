@@ -144,8 +144,7 @@ var getTestFeedback = function() {
     test_feedback_text +=
       '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
   }
-  test_feedback_text +=
-    '</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
+
   return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
 }
 
@@ -452,8 +451,8 @@ var test_feedback_block = {
     trial_id: "feedback",
     exp_stage: "test"
   },
-  timing_response: 120000,
-  cont_key: [13],
+  timing_response: 20000,
+  cont_key: 'none',
   text: getTestFeedback,
   on_finish: function() {
     test_block_data = []
