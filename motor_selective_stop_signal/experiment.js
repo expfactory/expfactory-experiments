@@ -46,7 +46,7 @@ function assessPerformance() {
 
 	}
 	//calculate average rt
-	if (rt_array.length !== 0) 
+	if (rt_array.length !== 0) {}
 	      avg_rt = math.median(rt_array)
 	}
 	//calculate whether response distribution is okay
