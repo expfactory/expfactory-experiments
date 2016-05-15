@@ -240,7 +240,7 @@ var RT_thresh = 1000
 var rt_diff_thresh = 50
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
-var stop_thresh = 1
+var stop_thresh = 0.2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
 var possible_responses = [
@@ -607,7 +607,7 @@ var practice_node = {
 		var stop_percent = successful_stops / stop_length
 		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
 		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-				missed_response_thresh && successful_stops < stop_thresh) || practice_repetitions >
+				missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
 			practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1

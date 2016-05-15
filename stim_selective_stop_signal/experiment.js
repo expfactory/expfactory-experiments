@@ -312,7 +312,7 @@ var RT_thresh = 1000
 var rt_diff_thresh = 50
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
-var stop_thresh = 1
+var stop_thresh = 0.2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
@@ -672,7 +672,7 @@ var practice_node = {
     var StopCorrect_percent = successful_stops / stop_length
     practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
-        missed_response_thresh && StopCorrect_percent >= (0.5-stop_thresh) && StopCorrect_percent <= (0.5+stop_thresh)) || practice_repetitions >
+        missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
       practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
