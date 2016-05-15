@@ -1,18 +1,6 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-function median(values) {
-
-    values.sort( function(a,b) {return a - b;} );
-
-    var half = Math.floor(values.length/2);
-
-    if(values.length % 2)
-        return values[half];
-    else
-        return (values[half-1] + values[half]) / 2.0;
-}
-
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -57,11 +45,11 @@ function assessPerformance() {
 
 	}
 	//calculate average rt
-	var sum = 0
-	for (var j = 0; j < rt_array.length; j++) {
-		sum += rt_array[j]
-	}
-	var avg_rt = sum / rt_array.length || -1
+  if (rt_array.length == 0) {
+    avg_rt = -1
+  } else {
+    var avg_rt = math.median(rt_array)
+  }
 		//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
@@ -108,7 +96,7 @@ var getTestFeedback = function() {
       }
     }
   }
-  var average_rt = median(rt_array);
+  var average_rt = math.median(rt_array);
   var rt_diff = 0
   if (rtMedians.length !== 0) {
       rt_diff = Math.abs(average_rt - rtMedians.slice(-1)[0])
@@ -118,11 +106,7 @@ var getTestFeedback = function() {
   var StopCorrect_percent = successful_stops / stop_length
   stopAccMeans.push(StopCorrect_percent)
   rtMedians.push(average_rt)
-  var stopAccAveSum = 0
-  for(xx=0; xx < stopAccMeans.length; xx++){
-    stopAccAveSum += stopAccMeans[xx]
-  }
-  var stopAverage = stopAccAveSum/stopAccMeans.length
+  var stopAverage = math.mean(stopAccMeans)
 
   test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
   test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
@@ -511,7 +495,7 @@ var NoSS_practice_node = {
         go_length += 1
       }
     }
-    var average_rt = median(rt_array);
+    var average_rt = math.median(rt_array);
     var GoCorrect_percent = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
     practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
@@ -606,7 +590,7 @@ var practice_node = {
         }
       }
     }
-    var average_rt = median(rt_array);
+    var average_rt = math.median(rt_array);
     var GoCorrect_percent = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
     var StopCorrect_percent = successful_stops / stop_length
