@@ -46,7 +46,9 @@
 
 .prompt_stim {
   height: 60px;
-  width: 60px;
+}
+.prompt_oval_stim {
+  height: 40px;
 }
 
 .stopbox {
