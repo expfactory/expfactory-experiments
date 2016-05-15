@@ -16,6 +16,36 @@ function evalAttentionChecks() {
   return check_percent
 }
 
+function assessPerformance() {
+  /* Function to calculate the "credit_var", which is a boolean used to
+  credit individual experiments in expfactory.
+   */
+  var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button');
+  var missed_count = 0;
+  var trial_count = 0;
+  var rt_array = [];
+  var rt = 0;
+  var avg_rt = -1;
+  //record choices participants made
+  for (var i = 0; i < experiment_data.length; i++) {
+    trial_count += 1
+    rt = experiment_data[i].rt
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
+    }
+  }
+  //calculate average rt
+  if (rt_array.length !== 0) {
+    avg_rt = math.median(rt_array)
+  } else {
+    avg_rt = -1
+  }
+  credit_var = (avg_rt > 200)
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+}
+
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
   return lst[index]
@@ -43,20 +73,10 @@ var getDecisionStim = function() {
 }
 
 var getDecisionText = function() {
-  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p>Press <strong>enter</strong> to begin.</p></div></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
+  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
     base_path + reference_stim + ' </img></div>'
 }
 
-function median(values) {
-  values.sort(function(a, b) {
-    return a - b;
-  });
-  var half = Math.floor(values.length / 2);
-  if (values.length % 2)
-    return values[half];
-  else
-    return (values[half - 1] + values[half]) / 2.0;
-}
 
 var setUpTest = function() {
   // Calculate avg scores
@@ -71,8 +91,8 @@ var setUpTest = function() {
     ratings.taste.push(stim_ratings[key].taste)
     ratings.health.push(stim_ratings[key].health)
   }
-  var median_taste = median(ratings.taste)
-  var median_health = median(ratings.health)
+  var median_taste = math.median(ratings.taste)
+  var median_health = math.median(ratings.health)
   var min_distance = 100
   for (var i = 0; i < stims.length; i++) {
     key = random_stims[i]
@@ -104,12 +124,9 @@ var run_attention_checks = false
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
-var practice_len = 36
-var exp_len = 180
-var curr_trial = 0
-var choices = [74, 75, 76]
 var healthy_responses = ['Very_Unhealthy', 'Unhealthy', 'Neutral', 'Healthy', 'Very_Healthy']
 var tasty_responses = ['Very_Bad', 'Bad', 'Neutral', 'Good', 'Very_Good']
 var decision_responses = ['Strong_No', 'No', 'Neutral', 'Yes', 'Very_Yes']
@@ -157,7 +174,7 @@ for (var i = 0; i < stims.length; i++) {
 //preload images
 jsPsych.pluginAPI.preloadImages(images)
 
-stims = stims.slice(0,4)
+stims = stims
 var health_stims = jsPsych.randomization.shuffle(stims)
 var taste_stims = jsPsych.randomization.shuffle(stims)
 var decision_stims = []
@@ -208,7 +225,8 @@ var end_block = {
   },
   text: '<div class = centerbox><p class = "center-block-text">Thanks for completing this task!</p><p class = "center-block-text">Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =
