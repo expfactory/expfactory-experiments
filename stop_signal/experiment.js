@@ -20,12 +20,12 @@ function assessPerformance() {
 	/* Function to calculate the "credit_var", which is a boolean used to
 	credit individual experiments in expfactory. 
 	 */
-	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
-	var missed_count = 0
-	var trial_count = 0
-	var rt_array = []
-	var rt = 0
-	var avg_rt = -1
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal');
+	var missed_count = 0;
+	var trial_count = 0;
+	var rt_array = [];
+	var rt = 0;
+	var avg_rt = -1;
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,9 +46,11 @@ function assessPerformance() {
 	}
 	//calculate average rt
 	if (rt_array.length !== 0) {
-	      avg_rt = math.median(rt_array)
+		avg_rt = math.median(rt_array)
+	} else {
+		avg_rt = -1
 	}
-		//calculate whether response distribution is okay
+	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
 		if (choice_counts[key] > trial_count * 0.85) {
