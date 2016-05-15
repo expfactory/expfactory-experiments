@@ -135,12 +135,13 @@ var getTestFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-			prompt_text
+		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 	}
 	if (StopCorrect_percent < (0.5-stop_thresh) || stopAverage < 0.45){
 			 	test_feedback_text +=
-			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
+			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal AND the correct key is the ' +
+					possible_responses[0][0] + '.</strong>' 
+
 	} else if (StopCorrect_percent > (0.5+stop_thresh) || stopAverage > 0.55){
 	 	test_feedback_text +=
 	 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
@@ -362,8 +363,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' +
-		prompt_text +
+		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text +
 		'</p><p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
 	allow_keys: false,
@@ -530,8 +530,7 @@ var NoSS_practice_node = {
 			}
 			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-					prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 			}
 			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
@@ -602,11 +601,11 @@ var practice_node = {
 			}
 		}
 		var average_rt = median(rt_array);
-		var average_correct = sum_correct / go_length;
+		var GoCorrect_percent = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		var stop_percent = successful_stops / stop_length
-		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
-		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+		var StopCorrect_percent = successful_stops / stop_length
+		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+		if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
 				missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
 			practice_repetition_thresh) {
 			// end the loop
@@ -632,14 +631,19 @@ var practice_node = {
 					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the black stop signal AND the correct key is the ' +
 					possible_responses[0][0] + '.'
 			}
-			if (average_correct <= accuracy_thresh) {
+			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+					 '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 			}
-			if (successful_stops < stop_thresh) {
-				practice_feedback_text +=
-					'</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
-			}
+			if (StopCorrect_percent < 0.8){
+		        practice_feedback_text +=
+		          '</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal AND the correct key is the ' +
+					possible_responses[0][0] + '.</strong>' 
+
+		      } else if (StopCorrect_percent > 0.2){
+		        practice_feedback_text +=
+		          '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
+		      }
 			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
 		}
@@ -713,8 +717,7 @@ var practice_node = {
 
 			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-			prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 			}
 			if (StopCorrect_percent < 0.8 ){
 			 	practice_feedback_text +=

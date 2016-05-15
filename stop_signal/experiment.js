@@ -134,8 +134,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-			prompt_text
+		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 	}
 	if (StopCorrect_percent < (0.5-stop_thresh) || stopAverage < 0.45){
 			 	test_feedback_text +=
@@ -363,8 +362,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
-		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' +
-		prompt_text +
+		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text +
 		'</p><p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
 	allow_keys: false,
@@ -541,8 +539,7 @@ var NoSS_practice_node = {
 			}
 			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-					prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 			}
 			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
@@ -648,8 +645,7 @@ var practice_node = {
 
 			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
-			prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
 			}
 			if (StopCorrect_percent < 0.8){
 			 	practice_feedback_text +=
