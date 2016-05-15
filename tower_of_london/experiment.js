@@ -70,9 +70,9 @@ var getText = function() {
 }
 
 var pegClick = function(peg_id) {
-  console.log(peg_id)
-  choice = Number(peg_id.slice(-1)) - 1
-  peg = curr_placement[choice]
+  var choice = Number(peg_id.slice(-1)) - 1
+  var peg = curr_placement[choice]
+  var ball_location = 0
   if (held_ball === 0) {
     for (var i = peg.length - 1; i >= 0; i--) {
       if (peg[i] !== 0) {
@@ -102,7 +102,13 @@ var makeBoard = function(container, ball_placement, board_type) {
     board += '<div id = tol_peg_' + (p + 1) + '><div class = tol_peg></div></div>' //place peg
       //place balls
     if (board_type == 'ref') {
-      board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      if (ball_placement[p][0] === 0 & held_ball === 0) {
+        board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      } else if (ball_placement[p].slice(-1) !== 0 & held_ball !== 0) {
+        board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      } else {
+        board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
+      }
     } else {
       board += '<div class = special id = tol_peg_' + (p + 1) + ' >'
     }
@@ -351,7 +357,7 @@ var start_test_block = {
 var advance_problem_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "stim",
+    trial_id: "advance",
     exp_stage: 'test'
   },
   timing_response: 180000,
@@ -370,13 +376,13 @@ var advance_problem_block = {
   }
 }
 
-var practice_block = {
+var practice_tohand = {
   type: 'single-stim-button',
   stimulus: getPractice,
   button_class: 'special',
   is_html: true,
   data: {
-    trial_id: "stim",
+    trial_id: "to_hand",
     exp_stage: 'practice'
   },
   timing_stim: getTime,
@@ -389,21 +395,50 @@ var practice_block = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': curr_placement,
+      'current_position': jQuery.extend(true, {}, curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
-      'min_moves': 1
+      'min_moves': 1,
+      'problem_id': 'practice'
     })
   }
 }
 
-var test_block = {
+var practice_toboard = {
+  type: 'single-stim-button',
+  stimulus: getPractice,
+  button_class: 'special',
+  is_html: true,
+  data: {
+    trial_id: "to_board",
+    exp_stage: 'practice'
+  },
+  timing_stim: getTime,
+  timing_response: getTime,
+  timing_post_trial: 0,
+  on_finish: function(data) {
+    if (data.mouse_click != -1) {
+      time_elapsed += data.rt
+    } else {
+      time_elapsed += getTime()
+    }
+    jsPsych.data.addDataToLastTrial({
+      'current_position': jQuery.extend(true, {}, curr_placement),
+      'num_moves_made': num_moves,
+      'target': example_problem3,
+      'min_moves': 1,
+      'problem_id': 'practice'
+    })
+  }
+}
+
+var test_tohand = {
   type: 'single-stim-button',
   stimulus: getStim,
   button_class: 'special',
   is_html: true,
   data: {
-    trial_id: "stim",
+    trial_id: "to_hand",
     exp_stage: 'test'
   },
   timing_stim: getTime,
@@ -416,10 +451,39 @@ var test_block = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': curr_placement,
+      'current_position': jQuery.extend(true, {}, curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
-      'min_moves': answers[problem_i]
+      'min_moves': answers[problem_i],
+      'problem_id': problem_i
+    })
+  }
+}
+
+var test_toboard = {
+  type: 'single-stim-button',
+  stimulus: getStim,
+  button_class: 'special',
+  is_html: true,
+  data: {
+    trial_id: "to_board",
+    exp_stage: 'test'
+  },
+  timing_stim: getTime,
+  timing_response: getTime,
+  timing_post_trial: 0,
+  on_finish: function(data) {
+    if (data.mouse_click != -1) {
+      time_elapsed += data.rt
+    } else {
+      time_elapsed += getTime()
+    }
+    jsPsych.data.addDataToLastTrial({
+      'current_position': jQuery.extend(true, {}, curr_placement),
+      'num_moves_made': num_moves,
+      'target': problems[problem_i],
+      'min_moves': answers[problem_i],
+      'problem_id': problem_i
     })
   }
 }
@@ -436,17 +500,20 @@ var feedback_block = {
   timing_response: 2000,
   timing_post_trial: 500,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+    jsPsych.data.addDataToLastTrial({
+      'exp_stage': exp_stage,
+      'problem_time': time_elapsed
+    })
   },
 }
 
 var practice_node = {
-  timeline: [practice_block],
+  timeline: [practice_tohand, practice_toboard],
   loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    data = data[0]
+    data = data[1]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
@@ -461,12 +528,12 @@ var practice_node = {
 }
 
 var problem_node = {
-  timeline: [test_block],
+  timeline: [test_tohand, test_toboard],
   loop_function: function(data) {
     if (time_elapsed >= time_per_trial) {
       return false
     }
-    data = data[0]
+    data = data[1]
     var target = data.target
     var isequal = true
     for (var i = 0; i < target.length; i++) {
