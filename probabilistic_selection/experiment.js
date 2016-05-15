@@ -389,7 +389,7 @@ var performance_criteria = {
 		training_count = training_count + 1;
 
 		if ((ab_percent > 0.7 && cd_percent > 0.65 && ef_percent > 0.5 && training_count > 3) || (
-				training_count == 10)) {
+				training_count == 8)) {
 			return false
 		} else {
 			firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, eachComboNum, true);
