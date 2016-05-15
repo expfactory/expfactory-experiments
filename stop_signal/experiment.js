@@ -136,10 +136,10 @@ var getTestFeedback = function() {
 		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
 			prompt_text
 	}
-	if (StopCorrect_percent < (.5-stop_thresh) || stopAverage < .45){
+	if (StopCorrect_percent < (0.5-stop_thresh) || stopAverage < 0.45){
 			 	test_feedback_text +=
 			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
-	} else if (StopCorrect_percent > (.5+stop_thresh) || stopAverage > .55){
+	} else if (StopCorrect_percent > (0.5+stop_thresh) || stopAverage > 0.55){
 	 	test_feedback_text +=
 	 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 	}
@@ -616,7 +616,7 @@ var practice_node = {
 		var StopCorrect_percent = successful_stops / stop_length
 		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 		if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
-				missed_response_thresh && StopCorrect_percent >= (.5-stop_thresh) && StopCorrect_percent <= (.5+stop_thresh)) || practice_repetitions >
+				missed_response_thresh && StopCorrect_percent >= (0.5-stop_thresh) && StopCorrect_percent <= (0.5+stop_thresh)) || practice_repetitions >
 			practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
@@ -650,10 +650,10 @@ var practice_node = {
 					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
 			prompt_text
 			}
-			if (StopCorrect_percent < (.8) ){
+			if (StopCorrect_percent < 0.8){
 			 	practice_feedback_text +=
 			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
-			} else if (StopCorrect_percent > (.2)){
+			} else if (StopCorrect_percent > 0.2){
 			 	practice_feedback_text +=
 			 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 			}
