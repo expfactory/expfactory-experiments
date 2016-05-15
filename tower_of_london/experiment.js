@@ -104,13 +104,13 @@ var makeBoard = function(container, ball_placement, board_type) {
     if (board_type == 'ref') {
       if (ball_placement[p][0] === 0 & held_ball === 0) {
         board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
-      } else if (ball_placement[p].slice(-1) !== 0 & held_ball !== 0) {
+      } else if (ball_placement[p].slice(-1)[0] !== 0 & held_ball !== 0) {
         board += '<div id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
       } else {
         board += '<div class = special id = tol_peg_' + (p + 1) + ' onclick = "pegClick(this.id)">'
       }
     } else {
-      board += '<div class = special id = tol_peg_' + (p + 1) + ' >'
+      board += '<div id = tol_peg_' + (p + 1) + ' >'
     }
     var peg = ball_placement[p]
     for (var b = 0; b < peg.length; b++) {
