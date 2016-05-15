@@ -25,7 +25,8 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-		//record choices participants made
+	var avg_rt = -1
+	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
 	for (var k = 0; k < choices.length; k++) {
@@ -44,10 +45,8 @@ function assessPerformance() {
 
 	}
 	//calculate average rt
-	if (rt_array.length == 0) {
-		avg_rt = -1
-	} else {
-		var avg_rt = math.median(rt_array)
+	if (rt_array.length !== 0) 
+	      avg_rt = math.median(rt_array)
 	}
 		//calculate whether response distribution is okay
 	var responses_ok = true

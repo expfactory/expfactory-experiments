@@ -25,6 +25,7 @@ function assessPerformance() {
   var trial_count = 0
   var rt_array = []
   var rt = 0
+  var avg_rt = -1
   //record choices participants made
   for (var i = 0; i < experiment_data.length; i++) {
     trial_count += 1
@@ -36,10 +37,8 @@ function assessPerformance() {
     }
   }
   //calculate average rt
-  if (rt_array.length == 0) {
-    avg_rt = -1
-  } else {
-    var avg_rt = math.median(rt_array)
+  if (rt_array.length !== 0) 
+      avg_rt = math.median(rt_array)
   }
   credit_var = (avg_rt > 200)
   jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
