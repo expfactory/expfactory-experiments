@@ -615,10 +615,8 @@ var practice_node = {
 			return false;
 		} else {
 			//rerandomize stim and stop_trial order
-			practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
-			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
-					'go', 'go', 'go', 'go'
-				], practice_list.data.length / 10)
+			practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len/4, true)
+			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go', 'go', 'go', 'go', 'go'], practice_list.data.length / 10, false)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 			if (average_rt > RT_thresh) {
@@ -659,8 +657,8 @@ motor_selective_stop_signal_experiment.push(practice_feedback_block)
 for (b = 0; b < numblocks; b++) {
 	stop_signal_exp_block = []
 	var block = blocks[b]
-	var stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'go', 'go', 'go'], test_block_len /
-			5, false)
+	var stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go', 'go', 'go', 'go', 'go'], test_block_len /
+			10, false)
 		// Loop through each trial within the block
 	for (i = 0; i < test_block_len; i++) {
 		stop_signal_exp_block.push(fixation_block)

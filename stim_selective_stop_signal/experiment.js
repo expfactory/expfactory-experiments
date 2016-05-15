@@ -291,9 +291,8 @@ var practice_block_len = 30
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus, NoSSpractice_block_len / 4, true)
 var practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len / 4, true)
-var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'ignore', 'ignore', 'go',
-  'go', 'go', 'go', 'go', 'go'
-], practice_block_len / 10)
+var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go',
+  'go', 'go'], practice_block_len / 5)
 
 //number of blocks
 var test_block_len = 50
@@ -619,16 +618,14 @@ var practice_node = {
       practice_repetitions = 1
         // end the loop
       practice_feedback_text +=
-        '</p><p class = block-text>Done with practice. We will now begin the ' + numconditions *
+        '</p><p class = block-text>Done with practice. We will now begin the ' + 
         numblocks +
         ' test blocks. There will be a break after each block. Press <strong>enter</strong> to continue.'
       return false;
     } else {
       //rerandomize stim and stop_trial order
-      practice_list = jsPsych.randomization.repeat(stimulus, 5, true)
-      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
-          'go', 'go', 'go', 'go'
-        ], practice_list.data.length / 10, false)
+      practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len/4, true)
+      practice_stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go', 'go', 'go'], practice_list.data.length / 5, false)
         // keep going until they are faster!
       practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 
@@ -687,7 +684,7 @@ for (var b = 0; b < numblocks; b++) {
     var stop_signal_block = {
       type: 'stop-signal',
       stimulus: block.stimulus[i],
-      SS_stimulus: stop_signal,
+      SS_stimulus: stop_stim,
       SS_trial_type: stop_trial,
       data: trial_data,
       is_html: true,
