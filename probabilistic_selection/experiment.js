@@ -205,22 +205,25 @@ var curr_data = ''
 secondPhaseStims = []
 for (var i = 0; i<5; i++) {
 	for (var j = i+1; j < 6; j++) {
-		console.log(stims[i])
 		var order1_stim = {}
 		order1_stim.image = "<div class = decision-left><img src='" + stims[i][1] +
 			"'></img></div><div class = decision-right><img src='" + stims[j][1] + "'></img></div>"
+		var correct_response1 = choices[stims[i][0] < stims[j][0] ? 1 : 0]
 		order1_stim.data = {
 			trial_id: 'stim',
 			exp_stage: 'test',
-			condition: stims[i][0] + '_' + stims[j][0]
+			condition: stims[i][0] + '_' + stims[j][0],
+			correct_response: correct_response1
 		}
 		var order2_stim = {}
 		order2_stim.image = "<div class = decision-left><img src='" + stims[j][1] +
 			"'></img></div><div class = decision-right><img src='" + stims[i][1] + "'></img></div>"
+		var correct_response2 = choices[stims[i][0] > stims[j][0] ? 1 : 0]
 		order2_stim.data = {
 			trial_id: 'stim',
 			exp_stage: 'test',
-			condition: stims[j][0] + '_' + stims[i][0]
+			condition: stims[j][0] + '_' + stims[i][0],
+			correct_response: correct_response2
 		}
 		secondPhaseStims.push(order1_stim)
 		secondPhaseStims.push(order2_stim)
@@ -386,7 +389,7 @@ var performance_criteria = {
 		training_count = training_count + 1;
 
 		if ((ab_percent > 0.7 && cd_percent > 0.65 && ef_percent > 0.5 && training_count > 3) || (
-				training_count == 6)) {
+				training_count == 10)) {
 			return false
 		} else {
 			firstPhaseStimsComplete = jsPsych.randomization.repeat(firstPhaseStims, eachComboNum, true);
@@ -419,6 +422,13 @@ var second_phase_trials = {
 	timing_stim: 2500,
 	timing_response: 2500,
 	timing_post_trial: 500,
+	on_finish: function(data) {
+		correct = false
+		if (data.key_press == data.correct_response){
+			correct = true
+		}
+		jsPsych.data.addDataToLastTrial({'correct': correct})
+	}
 };
 
 

@@ -504,7 +504,18 @@ var test_block = {
   timing_response: 2000,
   timing_stim: 1000,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: appendData
+  on_finish: function(data) {
+    appendData()
+    correct_response = getResponse()
+    correct = false
+    if (data.key_press === correct_response) {
+      correct = true
+    }
+    jsPsych.data.addDataToLastTrial({
+      'correct_response': correct_response,
+      'correct': correct
+    })
+  }
 }
 
 var gap_block = {

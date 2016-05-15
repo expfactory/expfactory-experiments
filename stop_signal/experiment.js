@@ -1,6 +1,17 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function median(values) {
+
+    values.sort( function(a,b) {return a - b;} );
+
+    var half = Math.floor(values.length/2);
+
+    if(values.length % 2)
+        return values[half];
+    else
+        return (values[half-1] + values[half]) / 2.0;
+}
 
 function evalAttentionChecks() {
 	var check_percent = 1
@@ -73,7 +84,7 @@ var getPracticeFeedback = function() {
 /* After each test block let the subject know their average RT and accuracy. If they succeed or fail on too many stop signal trials, give them a reminder */
 var getTestFeedback = function() {
 	var data = test_block_data
-	var sum_rt = 0;
+	var rt_array = [];
 	var sum_correct = 0;
 	var go_length = 0;
 	var stop_length = 0;
@@ -84,7 +95,7 @@ var getTestFeedback = function() {
 			go_length += 1
 			if (data[i].rt != -1) {
 				num_responses += 1
-				sum_rt += data[i].rt;
+				rt_array.push(data[i].rt);
 				if (data[i].key_press == data[i].correct_response) {
 					sum_correct += 1
 				}
@@ -96,30 +107,41 @@ var getTestFeedback = function() {
 			}
 		}
 	}
-	var average_rt = sum_rt / num_responses;
-	var average_correct = sum_correct / go_length;
+	var average_rt = median(rt_array);
+	if (rtMedians.length !== 0) {
+		var rt_diff = Math.abs(average_rt - rtMedians.slice(-1)[0])
+	}
+	var GoCorrect_percent = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
-	var stop_percent = successful_stops / stop_length
-	test_feedback_text = " Accuracy: " +
-		Math.round(average_correct * 100) + "%"
-	if (average_rt > RT_thresh) {
+	var StopCorrect_percent = successful_stops / stop_length
+	stopAccMeans.push(StopCorrect_percent)
+	rtMedians.push(average_rt)
+	var stopAccAveSum = 0
+	for(xx=0; xx < stopAccMeans.length; xx++){
+		stopAccAveSum += stopAccMeans[xx]
+	}
+	var stopAverage = stopAccAveSum/stopAccMeans.length
+
+	test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
+	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
+			'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 	}
 	if (missed_responses >= missed_response_thresh) {
 		test_feedback_text +=
-			'</p><p class = block-text>Remember to respond to each shape unless you see the black stop signal.'
+			'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
-	if (average_correct < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' +
+	if (GoCorrect_percent < accuracy_thresh) {
+		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
 			prompt_text
 	}
-	if (stop_percent >= accuracy_thresh) {
-		test_feedback_text +=
-			'</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
-	} else if (stop_percent <= (1 - accuracy_thresh)) {
-		test_feedback_text +=
-			'</p><p class = block-text> Remember to try to withold your response if you see the black stop signal.'
+	if (StopCorrect_percent < (.5-stop_thresh) || stopAverage < .45){
+			 	test_feedback_text +=
+			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
+	} else if (StopCorrect_percent > (.5+stop_thresh) || stopAverage > .55){
+	 	test_feedback_text +=
+	 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 	}
 	test_feedback_text +=
 		'</p><p class = block-text> Press <strong>enter</strong> to start the next block.'
@@ -216,11 +238,14 @@ var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0
 	tab + correct_responses[2][0] +
 	' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
 	' </li></ul>'
-	
+
+var rtMedians = []
+var stopAccMeans =[]	
 var RT_thresh = 1000
-var missed_response_thresh = 0.15
-var accuracy_thresh = 0.75
-var stop_thresh = 1
+var rt_diff_thresh = 50
+var missed_response_thresh = 0.1
+var accuracy_thresh = 0.8
+var stop_thresh = .2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
@@ -261,9 +286,9 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 ], practice_list.data.length / 10)
 
 //number of blocks per condition
-var test_block_len = 60
+var test_block_len = 50
 var numconditions = 2
-var numblocks = 5
+var numblocks = 6
 var condition_blocks = []
 for (j = 0; j < numconditions; j++) {
 	blocks = []
@@ -339,7 +364,7 @@ var instructions_block = {
 		'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the "Z" and "M" keys.</p></div>',
 		'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' +
 		prompt_text +
-		'<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
+		'</p><p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -416,8 +441,8 @@ var test_feedback_block = {
 		trial_id: "feedback",
 		exp_stage: "test"
 	},
-	timing_response: 120000,
-	cont_key: [13],
+	timing_response: 20000,
+	cont_key: 'none',
 	text: getTestFeedback,
 	on_finish: function() {
 		test_block_data = []
@@ -473,7 +498,7 @@ var NoSS_practice_node = {
 	timeline: NoSS_practice_trials,
 	loop_function: function(data) {
 		practice_repetitions += 1
-		var sum_rt = 0;
+		var rt_array = [];
 		var sum_correct = 0;
 		var go_length = 0;
 		var num_responses = 0;
@@ -481,7 +506,7 @@ var NoSS_practice_node = {
 			if (data[i].trial_id == 'stim') {
 				if (data[i].rt != -1) {
 					num_responses += 1
-					sum_rt += data[i].rt;
+					rt_array.push(data[i].rt);
 					if (data[i].key_press == data[i].correct_response) {
 						sum_correct += 1
 					}
@@ -489,33 +514,34 @@ var NoSS_practice_node = {
 				go_length += 1
 			}
 		}
-		var average_rt = sum_rt / num_responses;
-		var average_correct = sum_correct / go_length;
+		var average_rt = median(rt_array);
+		var GoCorrect_percent = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
-		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
+		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+		if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
 				missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Do not slow down your responses to wait for a stop signal, but try your best to stop your response when a stop signal occurs.<p class = block-text>Press <strong>Enter</strong> to continue'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal" in the shape of a star will appear around the shape. When this happens please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a star appears. However, if you continue to try very hard to stop when a star appears, you will be able to stop sometimes but not always.</p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
 			NoSS_practice_list = jsPsych.randomization.repeat(stimulus, 3, true)
-				// keep going until they are faster!
+			// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 			if (average_rt > RT_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Responded too slowly. Remember, try to response as quickly and accurately as possible.'
+					'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape.'
+					'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape.</strong>'
 			}
-			if (average_correct <= accuracy_thresh) {
+			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
+					prompt_text
 			}
 			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
@@ -559,7 +585,7 @@ var practice_node = {
 	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		practice_repetitions += 1
-		var sum_rt = 0;
+		var rt_array = [];
 		var sum_correct = 0;
 		var go_length = 0;
 		var num_responses = 0;
@@ -570,7 +596,7 @@ var practice_node = {
 				if (data[i].SS_trial_type == "go") {
 					if (data[i].rt != -1) {
 						num_responses += 1
-						sum_rt += data[i].rt;
+						rt_array.push(data[i].rt);
 						if (data[i].key_press == data[i].correct_response) {
 							sum_correct += 1
 						}
@@ -584,12 +610,13 @@ var practice_node = {
 				}
 			}
 		}
-		var average_rt = sum_rt / num_responses;
-		var average_correct = sum_correct / go_length;
+		var average_rt = median(rt_array);
+		var GoCorrect_percent = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
-		practice_feedback_text = "Accuracy: " + Math.round(average_correct * 100) + "%"
-		if ((average_rt < RT_thresh && average_correct > accuracy_thresh && missed_responses <
-				missed_response_thresh && successful_stops >= stop_thresh) || practice_repetitions >
+		var StopCorrect_percent = successful_stops / stop_length
+		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+		if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
+				missed_response_thresh && StopCorrect_percent >= (.5-stop_thresh) && StopCorrect_percent <= (.5+stop_thresh)) || practice_repetitions >
 			practice_repetition_thresh) {
 			// end the loop
 			practice_repetitions = 1
@@ -607,21 +634,28 @@ var practice_node = {
 				], practice_list.data.length / 10, false)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
+
 			if (average_rt > RT_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Responded too slowly. Remember, try to response as quickly and accurately as possible.'
+					'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
+
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the stop signal.'
+					'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 			}
-			if (average_correct <= accuracy_thresh) {
+
+			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+					'</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' +
+			prompt_text
 			}
-			if (successful_stops < stop_thresh) {
-				practice_feedback_text +=
-					'</p><p class = block-text> Remember to try to withhold your response when you see a stop signal.'
+			if (StopCorrect_percent < (.8) ){
+			 	practice_feedback_text +=
+			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal.</strong>'	
+			} else if (StopCorrect_percent > (.2)){
+			 	practice_feedback_text +=
+			 		'</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
 			}
 			practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return true;
