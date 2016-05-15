@@ -237,12 +237,12 @@ var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0
 var rtMedians = []
 var stopAccMeans =[]
 var RT_thresh = 1000
-var rt_diff_thresh = 50
+var rt_diff_thresh = 75
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
 var practice_repetitions = 1
-var practice_repetition_thresh = 2
+var practice_repetition_thresh = 5
 var possible_responses = [
 	["M key", 77],
 	["Z key", 90]
@@ -277,8 +277,8 @@ var stimulus = [{
 	}
 }]
 
-var NoSSpractice_block_len = 4
-var practice_block_len = 10
+var NoSSpractice_block_len = 12
+var practice_block_len = 30
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus, NoSSpractice_block_len / 4, true)
 var practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len / 4, true)
@@ -287,7 +287,7 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 ], practice_block_len / 10)
 
 //number of blocks
-var test_block_len = 5
+var test_block_len = 50
 var numblocks = 6
 var blocks = []
 for (i = 0; i < numblocks; i++) {

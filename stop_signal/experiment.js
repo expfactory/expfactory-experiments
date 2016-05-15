@@ -241,7 +241,7 @@ var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0
 var rtMedians = []
 var stopAccMeans =[]	
 var RT_thresh = 1000
-var rt_diff_thresh = 50
+var rt_diff_thresh = 75
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
