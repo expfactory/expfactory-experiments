@@ -159,7 +159,6 @@ var instructTimeThresh = 0 ///in seconds
 var correct = false
 var exp_stage = 'practice'
 var colors = ['Green', 'Red', 'Blue']
-var choices = [49, 50, 51]
 var problem_i = 0
 var time_per_trial = 20000 //time per trial in seconds
 var time_elapsed = 0 //tracks time for a problem

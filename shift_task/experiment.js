@@ -398,7 +398,7 @@ var practice_stim_block = {
       exp_stage: "practice",
       stims: JSON.stringify(stims),
       choice_stim: choice_stim,
-      choice_position: position_array[choice] || -1
+      choice_position: position_array[choice]
     })
   }
 };
@@ -424,7 +424,7 @@ var stim_block = {
       exp_stage: "test",
       stims: JSON.stringify(stims),
       choice_stim: choice_stim,
-      choice_position: position_array[choice] || -1
+      choice_position: position_array[choice]
     })
   }
 };
