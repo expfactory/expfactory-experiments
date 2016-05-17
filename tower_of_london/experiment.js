@@ -403,7 +403,7 @@ var practice_tohand = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
       'min_moves': 1,
@@ -431,7 +431,7 @@ var practice_toboard = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
       'min_moves': 1,
@@ -459,7 +459,7 @@ var test_tohand = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
       'min_moves': answers[problem_i],
@@ -487,7 +487,7 @@ var test_toboard = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
       'min_moves': answers[problem_i],
