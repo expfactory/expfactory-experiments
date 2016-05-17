@@ -273,7 +273,7 @@ var post_task_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice",
+    trial_id: "end",
     exp_id: 'tower_of_london'
   },
   timing_response: 180000,
@@ -287,7 +287,7 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   cont_key: [13],
   text: getInstructFeedback,
@@ -298,7 +298,7 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   pages: [
     '<div class = tol_topbox><p class = block-text>During this task, two boards will be presented at a time. The boards will be of colored balls arranged on pegs like this:</p></div>' +
@@ -342,7 +342,7 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>We will now start Problem 1. There will be ' +
