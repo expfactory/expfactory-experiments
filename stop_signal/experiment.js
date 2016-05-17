@@ -99,8 +99,9 @@ var getTestFeedback = function() {
 	var average_rt = math.median(rt_array);
 	var rt_diff = 0
 	if (rtMedians.length !== 0) {
-		rt_diff = Math.abs(average_rt - rtMedians.slice(-1)[0])
+		rt_diff = (average_rt - rtMedians.slice(-1)[0])
 	}
+	console.log(rt_diff)
 	var GoCorrect_percent = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 	var StopCorrect_percent = successful_stops / stop_length
@@ -270,7 +271,7 @@ var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop',
 ], practice_list.data.length / 10)
 
 //number of blocks per condition
-var test_block_len = 50
+var test_block_len = 5
 var numconditions = 2
 var numblocks = 6
 var condition_blocks = []
@@ -641,10 +642,6 @@ var practice_node = {
 		}
 	}
 }
-
-stop_signal_experiment.push(NoSS_practice_node)
-stop_signal_experiment.push(practice_node)
-stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 ss_freq = randomDraw(['high', 'low'])

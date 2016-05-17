@@ -39,6 +39,7 @@ var getFB = function() {
   var data = jsPsych.data.getLastTrialData()
   var target = data.target
   var isequal = true
+  correct = false
   for (var i = 0; i < target.length; i++) {
     isequal = arraysEqual(target[i], data.current_position[i])
     if (isequal === false) {
@@ -48,6 +49,7 @@ var getFB = function() {
   var feedback;
   if (isequal === true) {
     feedback = "You got it!"
+    correct = true
   } else {
     feedback = "Didn't get that one."
   }
@@ -61,7 +63,12 @@ var getFB = function() {
 
 
 var getTime = function() {
-  return time_per_trial - time_elapsed
+  if ((time_per_trial - time_elapsed) > 0) {
+    return time_per_trial - time_elapsed
+  } else {
+    return 1
+  }
+  
 }
 
 var getText = function() {
@@ -149,9 +156,9 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var correct = false
 var exp_stage = 'practice'
 var colors = ['Green', 'Red', 'Blue']
-var choices = [49, 50, 51]
 var problem_i = 0
 var time_per_trial = 20000 //time per trial in seconds
 var time_elapsed = 0 //tracks time for a problem
@@ -265,7 +272,7 @@ var post_task_block = {
 var end_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice",
+    trial_id: "end",
     exp_id: 'tower_of_london'
   },
   timing_response: 180000,
@@ -279,7 +286,7 @@ var feedback_instruct_text =
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   cont_key: [13],
   text: getInstructFeedback,
@@ -290,7 +297,7 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   pages: [
     '<div class = tol_topbox><p class = block-text>During this task, two boards will be presented at a time. The boards will be of colored balls arranged on pegs like this:</p></div>' +
@@ -334,7 +341,7 @@ var instruction_node = {
 var start_test_block = {
   type: 'poldrack-text',
   data: {
-    trial_id: "practice"
+    trial_id: "instruction"
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>We will now start Problem 1. There will be ' +
@@ -395,7 +402,7 @@ var practice_tohand = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
       'min_moves': 1,
@@ -423,7 +430,7 @@ var practice_toboard = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': example_problem3,
       'min_moves': 1,
@@ -451,7 +458,7 @@ var test_tohand = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
       'min_moves': answers[problem_i],
@@ -479,7 +486,7 @@ var test_toboard = {
       time_elapsed += getTime()
     }
     jsPsych.data.addDataToLastTrial({
-      'current_position': jQuery.extend(true, {}, curr_placement),
+      'current_position': jQuery.extend(true, [], curr_placement),
       'num_moves_made': num_moves,
       'target': problems[problem_i],
       'min_moves': answers[problem_i],
@@ -502,7 +509,8 @@ var feedback_block = {
   on_finish: function() {
     jsPsych.data.addDataToLastTrial({
       'exp_stage': exp_stage,
-      'problem_time': time_elapsed
+      'problem_time': time_elapsed,
+      'correct': correct
     })
   },
 }
@@ -556,7 +564,9 @@ tower_of_london_experiment.push(start_test_block);
 for (var i = 0; i < problems.length; i++) {
   tower_of_london_experiment.push(problem_node);
   tower_of_london_experiment.push(feedback_block)
-  tower_of_london_experiment.push(advance_problem_block)
+  if (i != problems.length-1) {
+    tower_of_london_experiment.push(advance_problem_block)
+  }
 }
 tower_of_london_experiment.push(post_task_block)
 tower_of_london_experiment.push(end_block);

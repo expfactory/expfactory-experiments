@@ -124,14 +124,16 @@ var test_stimuli_block = [{
   data: {
     stim_id: 1,
     trial_id: 'stim',
-    exp_stage: 'test'
+    exp_stage: 'test',
+    correct_response: correct_responses[0][1]
   }
 }, {
   stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
   data: {
     stim_id: 2,
     trial_id: 'stim',
-    exp_stage: 'test'
+    exp_stage: 'test',
+    correct_response: correct_responses[1][1]
   }
 }];
 
@@ -303,7 +305,14 @@ var test_block = {
   choices: choices,
   timing_response: 2000,
   timing_post_trial: post_trial_gap,
-  on_finish: appendData
+  on_finish: function(data) {
+    appendData()
+    correct = false
+    if (data.key_press === data.correct_response) {
+      correct = true
+    }
+    jsPsych.data.addDataToLastTrial({correct: correct})
+  }
 };
 
 
