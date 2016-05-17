@@ -100,7 +100,7 @@ var getTestFeedback = function() {
   var average_rt = math.median(rt_array);
   var rt_diff = 0
   if (rtMedians.length !== 0) {
-      rt_diff = Math.abs(average_rt - rtMedians.slice(-1)[0])
+      rt_diff = (average_rt - rtMedians.slice(-1)[0])
   }
   var GoCorrect_percent = sum_correct / go_length;
   var missed_responses = (go_length - num_responses) / go_length

@@ -423,7 +423,7 @@ adaptive_n_back_experiment.push(instruction_node);
 adaptive_n_back_experiment.push(start_practice_block)
 adaptive_n_back_experiment = adaptive_n_back_experiment.concat(practice_trials)
 
-if (control_before === 1) {
+if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
