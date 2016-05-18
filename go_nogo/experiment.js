@@ -101,14 +101,15 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var correct_responses = jsPsych.randomization.repeat([
+var correct_responses = [
   ['go', 32, 'respond by pressing the spacebar as quickly as possible'],
   ['nogo', -1, 'not respond']
-], 1)
+]
+stims = jsPsych.randomization.shuffle(["stim1","stim2"])
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{
-  stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
@@ -116,7 +117,7 @@ var practice_stimuli = [{
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
+  stimulus: '<div class = centerbox><div id = ' + stims[1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
@@ -128,14 +129,29 @@ var practice_stimuli = [{
 
 //set up block stim. test_stim_responses indexed by [block][stim][type]
 var test_stimuli_block = [{
-  stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
     trial_id: 'test_block'
   }
 }, {
-  stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  data: {
+    correct_response: correct_responses[0][1],
+    condition: correct_responses[0][0],
+    trial_id: 'test_block'
+  }
+},
+{
+  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  data: {
+    correct_response: correct_responses[0][1],
+    condition: correct_responses[0][0],
+    trial_id: 'test_block'
+  }
+}, {
+  stimulus: '<div class = centerbox><div id = ' + stims[1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
@@ -146,7 +162,7 @@ var test_stimuli_block = [{
 
 
 var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);   
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);   
 
 
 
