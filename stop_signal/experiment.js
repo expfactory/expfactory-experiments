@@ -312,7 +312,7 @@ var post_task_block = {
    columns: [60,60]
 };
 
-/* define static blocks */
+/* define static blocks  */
 var end_block = {
 	type: 'poldrack-text',
 	data: {
