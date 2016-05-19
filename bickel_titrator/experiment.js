@@ -264,7 +264,12 @@ var update_mag_block = {
     original_delayed = magnitudes.shift()
     original_immediate = original_delayed/2
   },
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year',
+      '5 years', '25 years'
+    ])
+  }
 }
 
 var test_block = {
