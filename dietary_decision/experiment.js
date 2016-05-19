@@ -88,8 +88,12 @@ var setUpTest = function() {
   var key = ''
   for (var j = 0; j < stims.length; j++) {
     key = stims[j]
-    ratings.taste.push(stim_ratings[key].taste)
-    ratings.health.push(stim_ratings[key].health)
+    if (stim_ratings[key].taste !== 'NaN') {
+      ratings.taste.push(stim_ratings[key].taste)
+    }
+    if (stim_ratings[key].health !== 'NaN') {
+      ratings.health.push(stim_ratings[key].health)
+    }
   }
   var median_taste = math.median(ratings.taste)
   var median_health = math.median(ratings.health)
@@ -350,6 +354,9 @@ var health_block = {
   timing_post_trial: 500,
   on_finish: function(data) {
     var numeric_rating = healthy_responses.indexOf(data.mouse_click) - 2
+    if (data.mouse_click === -1) {
+      numeric_rating = 'NaN'
+    }
     jsPsych.data.addDataToLastTrial({
       'stim': curr_stim.slice(0, -4),
       'coded_response': numeric_rating
@@ -373,6 +380,9 @@ var taste_block = {
   timing_post_trial: 500,
   on_finish: function(data) {
     var numeric_rating = tasty_responses.indexOf(data.mouse_click) - 2
+    if (data.mouse_click === -1) {
+      numeric_rating = 'NaN'
+    }
     jsPsych.data.addDataToLastTrial({
       'stim': curr_stim.slice(0, -4),
       'coded_response': numeric_rating
