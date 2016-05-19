@@ -150,6 +150,13 @@ var test_stimuli_block = [{
     condition: correct_responses[0][0],
     trial_id: 'test_block'
   }
+},{
+  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  data: {
+    correct_response: correct_responses[0][1],
+    condition: correct_responses[0][0],
+    trial_id: 'test_block'
+  }
 }, {
   stimulus: '<div class = centerbox><div id = ' + stims[1] + '></div></div>',
   data: {
@@ -162,7 +169,7 @@ var test_stimuli_block = [{
 
 
 var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);   
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
 
 
 
@@ -201,7 +208,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This task will take around 7 minutes. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This task will take around 10 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
