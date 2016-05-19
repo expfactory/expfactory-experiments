@@ -96,7 +96,11 @@ var getTestFeedback = function() {
 			}
 		}
 	}
-	var average_rt = math.median(rt_array);
+	var average_rt = -1;
+    if (rt_array.length !== 0) {
+      average_rt = math.median(rt_array);
+      rtMedians.push(average_rt)
+    }
 	var rt_diff = 0
 	if (rtMedians.length !== 0) {
 		rt_diff = (average_rt - rtMedians.slice(-1)[0])
@@ -105,7 +109,6 @@ var getTestFeedback = function() {
 	var missed_responses = (go_length - num_responses) / go_length
 	var StopCorrect_percent = successful_stops / stop_length
 	stopAccMeans.push(StopCorrect_percent)
-	rtMedians.push(average_rt)
 	var stopAverage = math.mean(stopAccMeans)
 
 	test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
@@ -497,7 +500,10 @@ var NoSS_practice_node = {
 				go_length += 1
 			}
 		}
-		var average_rt = math.median(rt_array);
+		var average_rt = -1
+		if (rt_array.length !== 0) {
+			average_rt = math.median(rt_array);
+		}
 		var GoCorrect_percent = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
 		practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
@@ -592,7 +598,10 @@ var practice_node = {
 				}
 			}
 		}
-		var average_rt = math.median(rt_array);
+		var average_rt = -1
+		if (rt_array.length !== 0) {
+			average_rt = math.median(rt_array);
+		}
 		var GoCorrect_percent = sum_correct / go_length;
 		var missed_responses = (go_length - num_responses) / go_length
 		var StopCorrect_percent = successful_stops / stop_length
