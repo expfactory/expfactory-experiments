@@ -550,9 +550,16 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: function(data) {
+			var condition = "go"
+			if (data.SS_trial_type === "stop" && correct_response === stop_response[1]) {
+				condition = "stop"
+			} else if (data.SS_trial_type === "stop" && correct_response !== stop_response[1] {
+				condition = "ignore"
+			}
 			jsPsych.data.addDataToLastTrial({
-				trial_id: "stim",
-				exp_stage: "practice"
+				exp_stage: "practice",
+				condition: condition,
+				stop_response: stop_response[1]
 			})
 		}
 	}
@@ -672,8 +679,16 @@ for (b = 0; b < numblocks; b++) {
 			timing_post_trial: 0,
 			on_finish: function(data) {
 				updateSSD(data)
+				var condition = "go"
+				if (data.SS_trial_type === "stop" && correct_response === stop_response[1]) {
+					condition = "stop"
+				} else if (data.SS_trial_type === "stop" && correct_response !== stop_response[1] {
+					condition = "ignore"
+				}
 				jsPsych.data.addDataToLastTrial({
-					exp_stage: "test"
+					exp_stage: "test",
+					condition: condition,
+					stop_response: stop_response[1]
 				})
 				test_block_data.push(data)
 			}
