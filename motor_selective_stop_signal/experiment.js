@@ -129,7 +129,7 @@ var getTestFeedback = function() {
 	if (StopCorrect_percent < (0.5-stop_thresh) || stopAverage < 0.45){
 			 	test_feedback_text +=
 			 		'</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal AND the correct key is the ' +
-					possible_responses[0][0] + '.</strong>' 
+					stop_response[0] + '.</strong>' 
 
 	} else if (StopCorrect_percent > (0.5+stop_thresh) || stopAverage > 0.55){
 	 	test_feedback_text +=
@@ -504,7 +504,8 @@ var NoSS_practice_node = {
 			// end the loop
 			practice_repetitions = 1
 			practice_feedback_text +=
-				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal" in the shape of a star will appear around the shape. When this happens please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a star appears. However, if you continue to try very hard to stop when a star appears, you will be able to stop sometimes but not always.</p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
+				'</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal" in the shape of a star will appear around the shape. When this happens, if the correct key on that trial was the ' +
+					stop_response[0] + ', please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a star appears. However, if you continue to try very hard to stop when a star appears, you will be able to stop sometimes but not always.</p><p class = block-text>If the correct response was not the ' + stop_response[0] + ' respond like you normally would.</p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
 			return false;
 		} else {
 			//rerandomize stim order
@@ -550,9 +551,16 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: function(data) {
+			var condition = "go"
+			if (data.SS_trial_type === "stop" && data.correct_response === stop_response[1]) {
+				condition = "stop"
+			} else if (data.SS_trial_type === "stop" && data.correct_response !== stop_response[1]) {
+				condition = "ignore"
+			}
 			jsPsych.data.addDataToLastTrial({
-				trial_id: "stim",
-				exp_stage: "practice"
+				exp_stage: "practice",
+				condition: condition,
+				stop_response: stop_response[1]
 			})
 		}
 	}
@@ -620,8 +628,7 @@ var practice_node = {
 			}
 			if (missed_responses >= missed_response_thresh) {
 				practice_feedback_text +=
-					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the black stop signal AND the correct key is the ' +
-					possible_responses[0][0] + '.'
+					'</p><p class = block-text>Missed too many responses. Remember to respond to each shape unless you see the black stop signal AND the correct key is the ' + stop_response[0] + '.'
 			}
 			if (GoCorrect_percent <= accuracy_thresh) {
 				practice_feedback_text +=
@@ -630,7 +637,7 @@ var practice_node = {
 			if (StopCorrect_percent < 0.8){
 		        practice_feedback_text +=
 		          '</p><p class = block-text><strong>Remember to try and withhold your response when you see a stop signal AND the correct key is the ' +
-					possible_responses[0][0] + '.</strong>' 
+					stop_response[0] + '.</strong>' 
 
 		      } else if (StopCorrect_percent > 0.2){
 		        practice_feedback_text +=
@@ -672,8 +679,16 @@ for (b = 0; b < numblocks; b++) {
 			timing_post_trial: 0,
 			on_finish: function(data) {
 				updateSSD(data)
+				var condition = "go"
+				if (data.SS_trial_type === "stop" && data.correct_response === stop_response[1]) {
+					condition = "stop"
+				} else if (data.SS_trial_type === "stop" && data.correct_response !== stop_response[1]){
+					condition = "ignore"
+				}
 				jsPsych.data.addDataToLastTrial({
-					exp_stage: "test"
+					exp_stage: "test",
+					condition: condition,
+					stop_response: stop_response[1]
 				})
 				test_block_data.push(data)
 			}
