@@ -350,7 +350,15 @@ for (i = 0; i < 60; i++) {
 		response_ends_trial: true,
 		timing_post_trial: 500,
 		is_html: true,
-		data: getData
+		data: getData,
+		on_finish: function(data) {
+			choice = choices.indexOf(data.key_press)
+			stims = data.condition.split('_')
+			chosen_stim = stims[choice]
+			jsPsych.data.addDataToLastTrial({
+				'stim_chosen': chosen_stim
+			})
+		}
 	};
 	training_trials.push(training_block)
 }
@@ -425,10 +433,16 @@ var second_phase_trials = {
 	timing_post_trial: 500,
 	on_finish: function(data) {
 		correct = false
+		choice = choices.indexOf(data.key_press)
+		stims = data.condition.split('_')
+		chosen_stim = stims[choice]
 		if (data.key_press == data.optimal_response){
 			correct = true
 		}
-		jsPsych.data.addDataToLastTrial({'correct': correct})
+		jsPsych.data.addDataToLastTrial({
+			'correct': correct,
+			'stim_chosen': chosen_stim
+		})
 	}
 };
 
