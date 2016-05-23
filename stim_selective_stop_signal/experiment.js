@@ -113,14 +113,14 @@ var getTestFeedback = function() {
   var stopAverage = math.mean(stopAccMeans)
 
   test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
-  test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+  test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
   if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
     test_feedback_text +=
       '</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
   }
   if (missed_responses >= missed_response_thresh) {
     test_feedback_text +=
-      '</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
+      '</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a blue star appears.</strong>'
   }
   if (GoCorrect_percent < accuracy_thresh) {
     test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
@@ -505,13 +505,13 @@ var NoSS_practice_node = {
     }
     var GoCorrect_percent = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
-    practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+    practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
         missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
       practice_repetitions = 1
       practice_feedback_text +=
-        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a black "stop signal" in the shape of a star will appear around the shape. When this happens please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a star appears. However, if you continue to try very hard to stop when a star appears, you will be able to stop sometimes but not always.</p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
+        '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange star will appear around the shape. If the star is blue, it is a "stop signal". When a blue star appears please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a blue star appears. However, if you continue to try very hard to stop when a blue star appears, you will be able to stop sometimes but not always.</p><p class = block-text>If an orange star appears, respond as you normally would by pressing the correct key. </p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the blue stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
       return false;
     } else {
       //rerandomize stim order
@@ -604,7 +604,7 @@ var practice_node = {
     var GoCorrect_percent = sum_correct / go_length;
     var missed_responses = (go_length - num_responses) / go_length
     var StopCorrect_percent = successful_stops / stop_length
-    practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
+    practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
         missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
       practice_repetition_thresh) {
@@ -630,7 +630,7 @@ var practice_node = {
 
       if (missed_responses >= missed_response_thresh) {
         practice_feedback_text +=
-          '</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
+          '</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a blue star appears.</strong>'
       }
 
       if (GoCorrect_percent <= accuracy_thresh) {
