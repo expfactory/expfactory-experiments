@@ -355,7 +355,13 @@ for (i = 0; i < 60; i++) {
 			choice = choices.indexOf(data.key_press)
 			stims = data.condition.split('_')
 			chosen_stim = stims[choice]
+			correct = false
+			if (data.key_press == data.optimal_response){
+				correct = true
+			}
 			jsPsych.data.addDataToLastTrial({
+				'feedback': data.correct,
+				'correct': correct,
 				'stim_chosen': chosen_stim
 			})
 		}
@@ -432,10 +438,10 @@ var second_phase_trials = {
 	timing_response: 2500,
 	timing_post_trial: 500,
 	on_finish: function(data) {
-		correct = false
 		choice = choices.indexOf(data.key_press)
 		stims = data.condition.split('_')
 		chosen_stim = stims[choice]
+		correct = false
 		if (data.key_press == data.optimal_response){
 			correct = true
 		}

@@ -130,7 +130,7 @@ var getFeedback = function() {
     FB = 0
   }
   jsPsych.data.addDataToLastTrial({
-    FB: FB
+    'feedback': FB
   })
   return image + '<div class = shift_feedback_box><p class = center-text>' + feedback_text +
     '</p></div>'
@@ -449,7 +449,7 @@ var practice_feedback_block = {
     jsPsych.data.addDataToLastTrial({
       trial_id: "feedback",
       exp_stage: "practice",
-      FB: FB
+      'feedback': FB
     })
     switch_count += 1
     if (switch_count == switch_bound) {
@@ -501,7 +501,7 @@ var feedback_block = {
     jsPsych.data.addDataToLastTrial({
       trial_id: "feedback",
       exp_stage: "test",
-      FB: FB
+      'feedback': FB
     })
     switch_count += 1
     if (switch_count == switch_bound) {
