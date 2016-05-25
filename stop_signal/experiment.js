@@ -448,6 +448,7 @@ var reset_block = {
 	},
 	func: function() {
 		resetSSD()
+		current_trial = 0
 	},
 	timing_post_trial: 0
 }
@@ -481,6 +482,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
 				exp_stage: 'NoSS_practice',
 				trial_num: current_trial
 			})
+			current_trial += 1
 		}
 	}
 	NoSS_practice_trials.push(stim_block)
@@ -569,6 +571,7 @@ for (i = 0; i < practice_block_len; i++) {
 				exp_stage: 'practice',
 				trial_num: current_trial
 			})
+			current_trial += 1
 		}
 	}
 	practice_trials.push(stop_signal_block)
@@ -699,6 +702,7 @@ for (c = 0; c < numconditions; c++) {
 						exp_stage: 'test',
 						trial_num: current_trial
 					})
+					current_trial += 1
 					test_block_data.push(data)
 				}
 			}

@@ -371,6 +371,7 @@ var health_block = {
       'coded_response': numeric_rating,
       'trial_num': current_trial
     })
+    current_trial += 1
     stim_ratings[curr_stim].health = numeric_rating
   }
 }
@@ -398,6 +399,7 @@ var taste_block = {
       'coded_response': numeric_rating,
       'trial_num': current_trial
     })
+    current_trial += 1
     stim_ratings[curr_stim].taste = numeric_rating
   }
 }
@@ -426,6 +428,7 @@ var decision_block = {
       'coded_response': decision_rating,
       'trial_num': current_trial
     })
+    current_trial += 1
   }
 }
 

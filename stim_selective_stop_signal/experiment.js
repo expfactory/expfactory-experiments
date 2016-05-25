@@ -482,6 +482,7 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
         exp_stage: "NoSS_practice",
         trial_num: current_trial
       })
+      current_trial += 1
     }
   }
   NoSS_practice_trials.push(stim_block)
@@ -570,6 +571,7 @@ for (i = 0; i < practice_block_len; i++) {
         exp_stage: "practice",
         trial_num: current_trial
       })
+      current_trial += 1
     }
   }
   practice_trials.push(stop_signal_block)
@@ -703,6 +705,7 @@ for (var b = 0; b < numblocks; b++) {
         jsPsych.data.addDataToLastTrial({
           trial_num: current_trial
         })
+        current_trial += 1
       }
     }
     stop_signal_exp_block.push(stop_signal_block)
