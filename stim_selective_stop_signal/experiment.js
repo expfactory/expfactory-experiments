@@ -699,8 +699,10 @@ for (var b = 0; b < numblocks; b++) {
       timing_post_trial: 0,
       on_finish: function(data) {
         updateSSD(data)
-        test_block_data.push(data),
-        trial_num: current_trial
+        test_block_data.push(data)
+        jsPsych.data.addDataToLastTrial({
+          trial_num: current_trial
+        })
       }
     }
     stop_signal_exp_block.push(stop_signal_block)
