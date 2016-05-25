@@ -219,11 +219,14 @@ var stop_signal =
   '<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 var ignore_signal =
   '<div class = stopbox><div class = centered-shape id = ignore-signal></div><div class = centered-shape id = ignore-signal-inner></div></div>'
+
+/* Instruction Prompt */
 var possible_responses = [
   ["M key", 77],
   ["Z key", 90]
 ]
 var choices = [possible_responses[0][1], possible_responses[1][1]]
+
 var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], possible_responses[0],
   possible_responses[1], possible_responses[1]
 ])
@@ -237,6 +240,8 @@ var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0
     0
   ] + ' </li></ul>'
 
+/* Global task variables */
+var current_trial = 0
 var rtMedians = []
 var stopAccMeans =[]
 var RT_thresh = 1000
@@ -247,7 +252,12 @@ var stop_thresh = 0.2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
 var test_block_data = [] // records the data in the current block to calculate feedback
+var NoSSpractice_block_len = 12
+var practice_block_len = 30
+var test_block_len = 50
+var numblocks = 6
 
+/* Define Stims */
 var stimulus = [{
   stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
   data: {
@@ -274,17 +284,14 @@ var stimulus = [{
   }
 }]
 
-var NoSSpractice_block_len = 12
-var practice_block_len = 30
+
 var practice_trial_data = '' //global variable to track randomized practice trial data
 var NoSS_practice_list = jsPsych.randomization.repeat(stimulus, NoSSpractice_block_len / 4, true)
 var practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len / 4, true)
 var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go',
   'go', 'go'], practice_block_len / 5)
 
-//number of blocks
-var test_block_len = 50
-var numblocks = 6
+//setup blocks
 var blocks = []
 for (i = 0; i < numblocks; i++) {
   blocks.push(jsPsych.randomization.repeat(stimulus, test_block_len / 4, true))
@@ -472,8 +479,10 @@ for (i = 0; i < NoSSpractice_block_len; i++) {
     prompt: prompt_text,
     on_finish: function() {
       jsPsych.data.addDataToLastTrial({
-        exp_stage: "NoSS_practice"
+        exp_stage: "NoSS_practice",
+        trial_num: current_trial
       })
+      current_trial += 1
     }
   }
   NoSS_practice_trials.push(stim_block)
@@ -509,6 +518,7 @@ var NoSS_practice_node = {
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
         missed_response_thresh) || practice_repetitions > practice_repetition_thresh) {
       // end the loop
+      current_trial = 0
       practice_repetitions = 1
       practice_feedback_text +=
         '</p><p class = block-text>For the rest of the experiment, on some proportion of trials a blue or orange star will appear around the shape. If the star is blue, it is a "stop signal". When a blue star appears please try your best to stop your response and press nothing on that trial.</p><p class = block-text>The star will appear around the same time or shortly after the shape appears. Because of this, you will not always be able to successfully stop when a blue star appears. However, if you continue to try very hard to stop when a blue star appears, you will be able to stop sometimes but not always.</p><p class = block-text>If an orange star appears, respond as you normally would by pressing the correct key. </p><p class = block-text><strong>Please balance the requirement to respond quickly and accurately to the shapes while trying very hard to stop to the blue stop signal.</strong></p><p class = block-text>Press <strong>Enter</strong> to continue'
@@ -558,8 +568,10 @@ for (i = 0; i < practice_block_len; i++) {
     timing_post_trial: 0,
     on_finish: function(data) {
       jsPsych.data.addDataToLastTrial({
-        exp_stage: "practice"
+        exp_stage: "practice",
+        trial_num: current_trial
       })
+      current_trial += 1
     }
   }
   practice_trials.push(stop_signal_block)
@@ -609,8 +621,7 @@ var practice_node = {
         missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
       practice_repetition_thresh) {
       // end the loop
-      practice_repetitions = 1
-        // end the loop
+      current_trial = 0
       practice_feedback_text +=
         '</p><p class = block-text>Done with practice. We will now begin the ' + 
         numblocks +
@@ -691,6 +702,10 @@ for (var b = 0; b < numblocks; b++) {
       on_finish: function(data) {
         updateSSD(data)
         test_block_data.push(data)
+        jsPsych.data.addDataToLastTrial({
+          trial_num: current_trial
+        })
+        current_trial += 1
       }
     }
     stop_signal_exp_block.push(stop_signal_block)

@@ -266,6 +266,8 @@ var wait_block = {
 }
 keep_track_experiment.push(prompt_block)
 keep_track_experiment.push(wait_block)
+
+// set up practice blocks
 for (i = 0; i < block.length; i++) {
 	stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
 	data = {
@@ -296,10 +298,7 @@ for (i = 0; i < block.length; i++) {
 }
 var response_block = {
 	type: 'survey-text',
-	questions: [
-		[
-			'<p class = center-block-text>What was the last word in each of the target categories? Please separate your words with a space</p>'
-		]
+	questions: [['<p class = center-block-text>What was the last word in each of the target categories? Please separate your words with a space</p>']
 	],
 	data: {
 		trial_id: 'response',
@@ -356,7 +355,7 @@ for (b = 0; b < blocks.length; b++) {
 	keep_track_experiment.push(prompt_block)
 	keep_track_experiment.push(wait_block)
 	for (i = 0; i < block.length; i++) {
-		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1] + '</div></div>'
+		stim = '<div class = centerbox><div class = keep-track-text>' + block[i][1]+ '</div></div>'
 		data = {
 			trial_id: 'stim',
 			category: block[i][0],
@@ -385,11 +384,7 @@ for (b = 0; b < blocks.length; b++) {
 	}
 	var response_block = {
 		type: 'survey-text',
-		questions: [
-			[
-				'<p class = center-block-text>What was the last word in each of the target categories? Please separate your words with a space</p>'
-			]
-		],
+		questions: [['<p class = center-block-text>What was the last word in each of the target categories? Please separate your words with a space</p>']],
 		data: {
 			trial_id: 'response',
 			exp_stage: 'test',
