@@ -382,7 +382,7 @@ for (var i = 0; i < (base_num_trials + 1); i++) {
 
 //Define control (0-back) block
 var control_trials = []
-for (var i = 0; i < base_num_trials; i++) {
+for (var i = 0; i < base_num_trials*2; i++) {
 	var control_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
