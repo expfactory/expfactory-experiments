@@ -112,6 +112,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 // task specific variables
+var current_trial = 0
 var choices = [37, 40]
 var correct_responses = [
   ["left arrow", 37],
@@ -273,7 +274,11 @@ var feedback_block = {
   timing_stim: 1000,
   timing_response: 1000,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+    	exp_stage: exp_stage,
+    	trial_num: current_trial
+    })
+    current_trial += 1
   }
 }
 
@@ -303,6 +308,7 @@ var start_test_block = {
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function() {
+  	current_trial = 0
     exp_stage = 'test'
   }
 };
@@ -321,7 +327,10 @@ var A_cue = {
   timing_response: 500,
   timing_post_trial: 0,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+    	exp_stage: exp_stage,
+    	trial_num: current_trial
+    })
   }
 };
 
@@ -338,7 +347,10 @@ var other_cue = {
   timing_response: 500,
   timing_post_trial: 0,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+    	exp_stage: exp_stage,
+    	trial_num: current_trial
+    })
   }
 };
 
@@ -355,7 +367,10 @@ var X_probe = {
   timing_response: 1500,
   timing_post_trial: 0,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+    	exp_stage: exp_stage,
+    	trial_num: current_trial
+	})
   }
 };
 
@@ -372,7 +387,10 @@ var other_probe = {
   timing_response: 1500,
   timing_post_trial: 0,
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+    jsPsych.data.addDataToLastTrial({
+    	exp_stage: exp_stage,
+    	trial_num: current_trial
+    })
   }
 };
 
