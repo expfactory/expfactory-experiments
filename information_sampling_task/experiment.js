@@ -18,23 +18,37 @@ function appendTextAfter2(input, search_term, new_text) {
 }
 
 var appendTestData = function() {
-	var clicked_on = ''
+	var color_clicked = ''
+	var correct = false
 	if (color1_index.indexOf(currID, 0) != -1) {
-		clicked_on = colors[0]
-
+		color_clicked = colors[0]
+		trial_id = 'stim'
+		correct = NaN
 	} else if (color2_index.indexOf(currID, 0) != -1) {
-		clicked_on = colors[1]
+		color_clicked = colors[1]
+		trial_id = 'stim'
+		correct = NaN
 	} else if (currID == 26) {
-		clicked_on = largeColors[0]
+		color_clicked = largeColors[0]
+		trial_id = 'choice'
+		if (color_clicked === colors[0]) {
+			correct = true
+		}
 	} else if (currID == 27) {
-		clicked_on = largeColors[1]
+		color_clicked = largeColors[1]
+		trial_id = 'choice'
+		if (color_clicked === colors[0])  {
+			correct = true
+		}
 	}
 	jsPsych.data.addDataToLastTrial({
 		exp_stage: exp_stage,
-		clicked_on: clicked_on,
-		box_id: currID,
+		color_clicked: color_clicked,
 		which_click_in_round: numClicks,
-		correct_response: colors[0]
+		correct_response: colors[0],
+		trial_num: current_trial,
+		correct: correct,
+		trial_id: trial_id
 	})
 }
 
@@ -95,14 +109,18 @@ var getBoard = function(colors, board_type) {
 
 var appendRewardDataDW = function() {
 	jsPsych.data.addDataToLastTrial({
-		reward: reward
+		reward: reward,
+		trial_num: current_trial
 	})
+	current_trial += 1
 }
 
 var appendRewardDataFW = function() {
 	jsPsych.data.addDataToLastTrial({
-		reward: reward
+		reward: reward,
+		trial_num: current_trial
 	})
+	current_trial += 1
 }
 
 
@@ -139,28 +157,29 @@ var resetRound = function() {
 	color1_index = numbersArray.slice(0,13)
 	color2_index = numbersArray.slice(13)
 	largeColors = jsPsych.randomization.shuffle([colors[0],colors[1]])
+	trial_start_time = new Date()
 }
 
 var getRewardFW = function() {
 	global_trial = jsPsych.progress().current_trial_global
-	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).clicked_on
+	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).color_clicked
 	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
 	clickedCards = numbers //set all cards as 'clicked'
 	if (lastAnswer == correctAnswer) {
 		totFWPoints += 100
 		reward = 100
-		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div>'
 	} else if (lastAnswer != correctAnswer) {
 		totFWPoints -= 100
 		reward = -100
-		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div></div>'
 	}
 }
 
 
 var getRewardDW = function() {
 	global_trial = jsPsych.progress().current_trial_global
-	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).clicked_on
+	lastAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).color_clicked
 	correctAnswer = jsPsych.data.getDataByTrialIndex(global_trial - 1).correct_response
 	clicks = clickedCards.length
 	clickedCards = numbers //set all cards as 'clicked'
@@ -170,11 +189,11 @@ var getRewardDW = function() {
 		reward = DWPoints
 		totDWPoints +=  DWPoints
 		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Correct! You have won ' + DWPoints +
-			' points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+			' points!</div></div>'
 	} else if (lastAnswer != correctAnswer) {
 		totDWPoints -= 100
 		reward = -100
-		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		return getBoard(colors,'test') + '<div class = rewardbox><div class = reward-text>Wrong! You have lost 100 points!</div></div>'
 	}
 }
 
@@ -201,14 +220,17 @@ var makeInstructChoice = function(clicked_id) {
 	}
 }
 
-var getReward = function() {
+var getRewardPractice = function() {
 	if (reward === 100) {
-		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div><p class = reward-text>Press <strong>enter</strong> to continue.</div></div>'
+		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div></div>'
 	} else  {
-		 return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div><p class = reward-text>Press <strong>enter</strong> to continue.</p></div>'
+		 return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div></div>'
 	}
 }
 
+var get_post_gap = function() {
+	return Math.max(1000,(13-total_trial_time)*1000)
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -219,6 +241,7 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var exp_stage = ''
+var num_trials = 10
 var reward = 0 //reward value
 var totFWPoints = 0
 var totDWPoints = 0
@@ -226,6 +249,9 @@ var DWPoints = 250
 var FWPoints = 0
 var roundOver = 0
 var numClicks = 0
+var current_trial = 0
+var trial_start_time = 0 // variable to track beginning of trial time
+var total_trial_time = 0 // Variable to track total trial time
 var numCardReward = []
 var colors = jsPsych.randomization.repeat(['green', 'red', 'blue', 'teal', 'yellow', 'orange',
 	'purple', 'brown'
@@ -328,7 +354,7 @@ var start_test_block = {
 	data: {
 		trial_id: "test_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>Each trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>DW </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>FW</strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = block-text>Each trial will look like that. There will be two conditions that affect how your reward will be counted.</p><p class = block-text>In the <strong>Decreasing Win </strong>condition, you will start out at 250 points.  Every box opened until you make your choice deducts 10 points from this total.  So for example, if you open 7 boxes before you make a correct choice, your score for that round would be 180.  An incorrect decision loses 100 points regardless of how many boxes opened.</p><p class = block-text>In the <strong>Fixed Win </strong> condition, you will start out at 0 points.  A correct decision will lead to a gain of 100 points, regardless of the number of boxes opened.  Similarly, an incorrect decision will lead to a loss of 100 points. <br><br> In both conditions try to win as many points as possible. Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 };
@@ -338,11 +364,13 @@ var DW_intro_block = {
 	data: {
 		trial_id: "DW_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>DW</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>Decreasing Win</strong> condition.</p><p class = block-text>Remember, you will start out with 250 points.  Every box opened until you make a correct choice deducts 10 points from this total, after which the remaining will be how much you have gained for the round.  An incorrect decision loses 100 points regardless of number of boxes opened.  Try to win as many points as you can. <br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function() {
-		exp_stage = 'DW'
+		exp_stage = 'Decreasing Win'
+		current_trial = 0
+		trial_start_time = new Date()
 	}
 
 };
@@ -352,11 +380,13 @@ var FW_intro_block = {
 	data: {
 		trial_id: "FW_intro"
 	},
-	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>FW</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision loses 100 points regardless of number of boxes opened.<br><br>Press <strong>enter</strong> to continue.</div>',
+	text: '<div class = centerbox><p class = block-text>You are beginning rounds under the <strong>Fixed Win</strong> condition.</p><p class = block-text>Remember, you will start out with 0 points.  If you make a correct choice, you will gain 100 points.  An incorrect decision loses 100 points regardless of number of boxes opened. Try to win as many points as you can.<br><br>Press <strong>enter</strong> to continue.</div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function() {
-		exp_stage = 'FW'
+		exp_stage = 'Fixed Win'
+		current_trial = 0
+		trial_start_time = new Date()
 	}
 };
 
@@ -368,10 +398,11 @@ var rewardFW_block = {
 	is_html: true,
 	data: {
 		trial_id: "reward",
-		exp_stage: "FW"
+		exp_stage: "Fixed Win"
 	},
-	choices: [13],
-	timing_post_trial: 1000,
+	choices: 'none',
+	timing_response: 2000,
+	timing_post_trial: get_post_gap,
 	on_finish: appendRewardDataFW,
 	response_ends_trial: true,
 };
@@ -382,10 +413,11 @@ var rewardDW_block = {
 	is_html: true,
 	data: {
 		trial_id: "reward",
-		exp_stage: "DW"
+		exp_stage: "Decreasing Win"
 	},
-	choices: [13],
-	timing_post_trial: 1000,
+	choices: 'none',
+	timing_response: 2000,
+	timing_post_trial: get_post_gap,
 	on_finish: appendRewardDataDW,
 	response_ends_trial: true,
 };
@@ -394,13 +426,14 @@ var rewardDW_block = {
 
 var practiceRewardBlock = {
 	type: 'poldrack-single-stim',
-	stimulus: getReward,
+	stimulus: getRewardPractice,
 	is_html: true,
 	data: {
 		trial_id: "reward",
 		exp_stage: "practice"
 	},
-	choices: [13],
+	choices: 'none',
+	timing_response: 2000,
 	timing_post_trial: 1000,
 	response_ends_trial: true,
 	on_finish: function() {
@@ -413,21 +446,33 @@ var practice_block = {
 	button_class: 'select-button',
 	stimulus: instructionsSetup,
 	data: {
-		trial_id: "stim",
-		exp_stage: "practice"
+		trial_id: "choice",
+		exp_stage: "practice",
+		correct_respose: colors[0]
 	},
 	timing_post_trial: 0,
 	response_ends_trial: true,
+	on_finish: function(data) {
+		correct = false
+		if (data.mouse_click === 26) {
+			color = largeColors[0]
+		} else {
+			color = largeColors[1]
+		}
+		if (color === data.correct_response) {
+			correct = true
+		}
+		jsPsych.data.addDataToLastTrial({
+			color_clicked: color,
+			correct: correct
+		})
+	}
 };
 
 var test_block = {
 	type: 'single-stim-button',
 	button_class: 'select-button',
 	stimulus: getRound,
-	data: {
-		trial_id: "stim",
-		exp_stage: "test"
-	},
 	timing_post_trial: 0,
 	on_finish: appendTestData,
 	response_ends_trial: true,
@@ -437,6 +482,7 @@ var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
 		if (roundOver === 1) {
+			total_trial_time = (new Date() - trial_start_time)/1000
 			return false
 		} else if (roundOver === 0) {
 			return true
@@ -465,13 +511,13 @@ information_sampling_task_experiment.push(start_test_block);
 
 if (Math.random() < 0.5) { // do the FW first, then DW
 	information_sampling_task_experiment.push(FW_intro_block);
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardFW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(DW_intro_block);
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardDW_block);
 		information_sampling_task_experiment.push(reset_block);
@@ -479,13 +525,13 @@ if (Math.random() < 0.5) { // do the FW first, then DW
 
 } else  { ////do DW first then FW
 	information_sampling_task_experiment.push(DW_intro_block);
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardDW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(FW_intro_block);
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardFW_block);
 		information_sampling_task_experiment.push(reset_block);
