@@ -105,9 +105,7 @@ var get_current_trial = function() {
 }
 
 var initialize_FB_matrix = function() {
-	return [Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.025, Math
-		.random() * 0.5 + 0.25
-	]
+	return [Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25, Math.random() * 0.5 + 0.25]
 }
 
 //Change phase from practice to test
