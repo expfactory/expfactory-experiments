@@ -130,6 +130,7 @@ var prompt_prefix = '<img class = hierarchicalPrompt src ='
 var postfix = ' </img></div></div>'
 var choices = [74, 75, 76]
 var total_correct = 0 // tracks correct trials
+var current_trial = 0
 
 //generate stims
 //1=red, 2=blue, 3=green, 4=yellow BORDER COLORS
@@ -379,7 +380,8 @@ var flat_stim_block = {
     jsPsych.data.addDataToLastTrial({
       trial_id: "flat_stim",
       exp_stage: "test",
-      correct: correct
+      correct: correct,
+      trial_num: current_trial
     })
   }
 }
@@ -402,7 +404,8 @@ var hierarchical_stim_block = {
     jsPsych.data.addDataToLastTrial({
       trial_id: "hierarchical_stim",
       exp_stage: "test",
-      correct: correct
+      correct: correct,
+      trial_num: current_trial
     })
   }
 }
@@ -412,8 +415,10 @@ var flat_loop_node = {
   timeline: [fixation_block, flat_stim_block, feedback_block],
   loop_function: function(data) {
     if (flat_stims.stimulus.length > 0) {
+      current_trial += 1
       return true;
     } else {
+      current_trial = 0
       return false;
     }
   }
@@ -423,8 +428,10 @@ var hierarchical_loop_node = {
   timeline: [fixation_block, hierarchical_stim_block, feedback_block],
   loop_function: function(data) {
     if (hierarchical_stims.stimulus.length > 0) {
+      current_trial += 1
       return true;
     } else {
+      current_trial = 0
       return false;
     }
   }

@@ -23,7 +23,7 @@ var randomDraw = function(lst) {
 
 var makeTrialList = function(len, stim, data) {
   //choice array: numeric key codes for the numbers 1-4
-  var choice_array = [49, 50, 51, 52]
+  var choice_array = choices
     // 1 is a switch trial: ensure half the trials are switch trials
   var switch_trials = jsPsych.randomization.repeat([0, 1], len / 2)
     //create test array
@@ -75,17 +75,6 @@ var getInstructFeedback = function() {
       '</p></div>'
   }
   
-var appendTestData = function(){
-	global_trial = jsPsych.progress().current_trial_global
-	subjectResponse = jsPsych.data.getDataByTrialIndex(global_trial).key_press
-	correctResponse = jsPsych.data.getDataByTrialIndex(global_trial).correct_response
-	
-	if(subjectResponse == correctResponse){
-	jsPsych.data.addDataToLastTrial({correct: 'TRUE'})
-	} else if(subjectResponse != correctResponse){
-	jsPsych.data.addDataToLastTrial({correct: 'FALSE'})
-	}
-}
 
   /* ************************************ */
   /* Define experimental variables */
@@ -97,6 +86,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var choices = [49, 50, 51, 52]
+var current_trial = 0
 var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
 var task_shapes = ['circle', 'X', 'triangle', 'square']
 var path = '/static/experiments/local_global_shape/images/'
@@ -261,7 +252,10 @@ var start_test_block = {
   },
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+  	current_trial = 0
+  }
 };
 
 /* define practice block */
@@ -276,11 +270,17 @@ var practice_block = {
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
-  choices: [49, 50, 51, 52],
+  choices: choices,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_response: 2000,
-  timing_post_trial: 500
+  timing_post_trial: 500,
+  on_finish: function(data) {
+  	jsPsych.data.addDataToLastTrial({
+  		trial_num: current_trial
+  	})
+  	current_trial += 1
+  }
 }
 
 /* define test block */
@@ -292,10 +292,17 @@ var test_block = {
     exp_stage: "test"
   },
   is_html: true,
-  choices: [49, 50, 51, 52],
+  choices: choices,
   timing_post_trial: 500,
   timing_response: 2000,
-  on_finish: appendTestData,
+  on_finish: function(data) {
+  	correct = data.key_press === data.correct_response
+  	jsPsych.data.addDataToLastTrial({
+  		correct: correct,
+  		trial_num: current_trial
+  	})
+  	current_trial += 1
+  }
 };
 
 /* create experiment definition array */
