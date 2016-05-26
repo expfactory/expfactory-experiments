@@ -308,6 +308,7 @@ var start_control_block = {
 var start_adaptive_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_stage: "adaptive",
 		trial_id: "delay_text"
 	},
 	text: getText,
