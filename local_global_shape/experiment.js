@@ -239,7 +239,7 @@ var start_practice_block = {
   data: {
     trial_id: "practice_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will start with some practice. During practice you will get feedback about whether you responded correctly. You will not get feedback during the rest of the experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -296,7 +296,10 @@ var test_block = {
   timing_post_trial: 500,
   timing_response: 2000,
   on_finish: function(data) {
-  	correct = data.key_press === data.correct_response
+    correct = false
+  	if (data.key_press === data.correct_response) {
+      correct = true
+    }
   	jsPsych.data.addDataToLastTrial({
   		correct: correct,
   		trial_num: current_trial
