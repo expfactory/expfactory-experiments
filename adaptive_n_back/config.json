@@ -29,7 +29,7 @@
                         ], 
         "time":20,
         "reference": "http://www.sciencedirect.com/science/article/pii/S1053811905001424",
-        "notes": "This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is a match or not. Condition records the n for that block of trials. The second reference is not explicitly used.",
+        "notes": "reference for adaptive procedure: http://www.pnas.org/content/105/19/6829.full",
         "publish":"True",
         "experiment_variables": [{
                                  "name":"credit_var",

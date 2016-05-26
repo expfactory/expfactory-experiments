@@ -103,6 +103,7 @@ var update_delay = function() {
 		}
 	}
 	block_acc = 0
+	current_block += 1
 };
 
 var update_target = function() {
@@ -129,9 +130,10 @@ var getStim = function() {
 var getData = function() {
 	return {
 		trial_id: "stim",
-		exp_stage: "test",
+		exp_stage: "adaptive",
 		load: delay,
 		target: target,
+		block_num: current_block
 	}
 }
 
@@ -161,6 +163,7 @@ var delay = 2 // starting delay
 var trials_left = 0 // counter used by adaptive_test_node
 var target_trials = [] // array defining whether each trial in a block is a target trial
 var current_trial = 0
+var current_block = 0  
 var target = ""
 var curr_stim = ''
 var stims = [] //hold stims per block
@@ -305,6 +308,7 @@ var start_control_block = {
 var start_adaptive_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_stage: "adaptive",
 		trial_id: "delay_text"
 	},
 	text: getText,
@@ -382,7 +386,7 @@ for (var i = 0; i < (base_num_trials + 1); i++) {
 
 //Define control (0-back) block
 var control_trials = []
-for (var i = 0; i < base_num_trials; i++) {
+for (var i = 0; i < base_num_trials*2; i++) {
 	var control_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
