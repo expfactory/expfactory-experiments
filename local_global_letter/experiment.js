@@ -300,7 +300,10 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will now start the test. Remember, if the letter is ' +
+    task_colors[0] + ' indicate whether the larger letter is an "H" or "S". If the letter is ' +
+    task_colors[1] +
+    ' indicate whether the smaller letter is an "H" or "S"..</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
@@ -362,7 +365,6 @@ var test_block = {
 var local_global_letter_experiment = [];
 local_global_letter_experiment.push(instruction_node);
 local_global_letter_experiment.push(start_practice_block);
-local_global_letter_experiment.push(practice_block);
 local_global_letter_experiment.push(start_test_block);
 local_global_letter_experiment.push(test_block);
 local_global_letter_experiment.push(attention_node)
