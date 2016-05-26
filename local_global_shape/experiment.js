@@ -296,7 +296,10 @@ var test_block = {
   timing_post_trial: 500,
   timing_response: 2000,
   on_finish: function(data) {
-  	correct = data.key_press === data.correct_response
+    correct = false
+  	if (data.key_press === data.correct_responseP {
+      correct = true
+    }
   	jsPsych.data.addDataToLastTrial({
   		correct: correct,
   		trial_num: current_trial
