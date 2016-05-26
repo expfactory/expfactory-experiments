@@ -137,10 +137,11 @@ var task_colors = jsPsych.randomization.shuffle(['blue', 'black'])
 var global_shapes = ['s','h', 'o']
 var local_shapes = ['s','h','o']
 var path = '/static/experiments/local_global_letter/images/'
-prefix = '<div class = centerbox><img src = "'
-postfix = '"</img></div>'
-stim = []
-data = []
+var prefix = '<div class = centerbox><img src = "'
+var postfix = '"</img></div>'
+var stim = []
+var data = []
+var images = []
 for (c = 0; c < task_colors.length; c++) {
   if (c === 0) {
     condition = 'global'
@@ -155,6 +156,8 @@ for (c = 0; c < task_colors.length; c++) {
     for (l = 0; l < local_shape_length; l++) {
       stim.push(prefix + path + task_colors[c] + '_' + global_shapes[g] + '_of_' + local_shapes[l] +
         '.png' + postfix)
+      images.push(path + task_colors[c] + '_' + global_shapes[g] + '_of_' + local_shapes[l] +
+        '.png')
       data.push({
         condition: condition,
         global_shape: global_shapes[g],
@@ -164,6 +167,7 @@ for (c = 0; c < task_colors.length; c++) {
   }
 }
 
+jsPsych.pluginAPI.preloadImages(images)
 //Set up experiment stimulus order
 var practice_trials = makeTrialList(36, stim, data)  //36
 for (i = 0; i < practice_trials.length; i++) {
@@ -285,7 +289,7 @@ var start_practice_block = {
   data: {
     trial_id: "practice_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will start with some practice. During practice you will get feedback about whether you responded correctly. You will not get feedback during the rest of the experiment.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -340,11 +344,10 @@ var test_block = {
   is_html: true,
   choices: choices,
   timing_post_trial: 500,
-  response_ends_trial: true,
   timing_response: 2000,
   on_finish: function(data) {
   	correct = false
-    if (data.key_press === data.correct_responseP {
+    if (data.key_press === data.correct_response) {
       correct = true
     }
   	jsPsych.data.addDataToLastTrial({
