@@ -365,6 +365,7 @@ var test_block = {
 var local_global_letter_experiment = [];
 local_global_letter_experiment.push(instruction_node);
 local_global_letter_experiment.push(start_practice_block);
+local_global_letter_experiment.push(practice_block);
 local_global_letter_experiment.push(start_test_block);
 local_global_letter_experiment.push(test_block);
 local_global_letter_experiment.push(attention_node)
