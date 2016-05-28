@@ -102,14 +102,14 @@ var credit_var = true
 
 // task specific variables
 var correct_responses = [
-  ['go', 32, 'respond by pressing the spacebar as quickly as possible'],
-  ['nogo', -1, 'not respond']
+  ['go', 32],
+  ['nogo', -1]
 ]
-var stims = jsPsych.randomization.shuffle(["stim1","stim2"])
+var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{
-  stimulus: '<div class = centerbox><div  id = "stim1"></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
@@ -117,7 +117,7 @@ var practice_stimuli = [{
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = centerbox><div id = "stim2"></div></div>',
+  stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
@@ -129,14 +129,14 @@ var practice_stimuli = [{
 
 //set up block stim. test_stim_responses indexed by [block][stim][type]
 var test_stimuli_block = [{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
     trial_id: 'test_block'
   }
 }, {
-  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
@@ -144,21 +144,21 @@ var test_stimuli_block = [{
   }
 },
 {
-  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
     trial_id: 'test_block'
   }
 },{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     condition: correct_responses[0][0],
     trial_id: 'test_block'
   }
 }, {
-  stimulus: '<div class = centerbox><div id = ' + stims[1] + '></div></div>',
+  stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
@@ -226,11 +226,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should <strong>' +
-    correct_responses[0][2] +
-    '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
-    correct_responses[1][2] +
-    '</strong>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <strong> respond by pressing the spacebar as quickly as possible</strong>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <strong> not respond</strong>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -278,11 +274,7 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the <font color="orange">orange</font> square you should <strong>' +
-    correct_responses[0][2] +
-    '</strong>. If you see the <font color="blue">blue</font> square you should <strong>' +
-    correct_responses[1][2] +
-    '</strong>. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <strong> respond by pressing the spacebar as quickly as possible</strong>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <strong> not respond</strong>. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
