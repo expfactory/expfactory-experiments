@@ -303,7 +303,7 @@ var start_test_block = {
   text: '<div class = centerbox><p class = center-block-text>We will now start the test. Remember, if the letter is ' +
     task_colors[0] + ' indicate whether the larger letter is an "H" or "S". If the letter is ' +
     task_colors[1] +
-    ' indicate whether the smaller letter is an "H" or "S"..</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+    ' indicate whether the smaller letter is an "H" or "S".</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
