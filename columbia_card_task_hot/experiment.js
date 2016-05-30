@@ -29,7 +29,8 @@ function assessPerformance() {
 	var avg_rt = sum / rt_array.length || -1
 	var missed_percent = missed_count/experiment_data.length
   	credit_var = (missed_percent < 0.4 && avg_rt > 200)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({"credit_var": credit_var,
+									"performance_var": performance_var})
 }
 
 function deleteText(input, search_term) {
@@ -72,7 +73,7 @@ var getBoard = function(board_type) {
 
 
 var getText = function() {
-	return '<div class = centerbox><p class = block-text>These are the points used for your bonus from three randomly picked trials:  ' +
+	return '<div class = centerbox><p class = block-text>Overall, you earned ' + totalPoints + ' points. These are the points used for your bonus from three randomly picked trials:  ' +
 		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
 		'</p></div>'
 }
@@ -443,7 +444,7 @@ var numLossCards = ""
 var gainAmt = ""
 var lossAmt = ""
 var CCT_timeouts = []
-var numRounds =  27
+var numRounds =  24
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -461,38 +462,20 @@ var prize3 = 0
 // this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
 var paramsArray = [
 	[1, 10, 250],
-	[1, 10, 500],
 	[1, 10, 750],
-	[1, 20, 250],
-	[1, 20, 500],
-	[1, 20, 750],
 	[1, 30, 250],
-	[1, 30, 500],
 	[1, 30, 750],
-	[2, 10, 250],
-	[2, 10, 500],
-	[2, 10, 750],
-	[2, 20, 250],
-	[2, 20, 500],
-	[2, 20, 750],
-	[2, 30, 250],
-	[2, 30, 500],
-	[2, 30, 750],
 	[3, 10, 250],
-	[3, 10, 500],
 	[3, 10, 750],
-	[3, 20, 250],
-	[3, 20, 500],
-	[3, 20, 750],
 	[3, 30, 250],
-	[3, 30, 500],
 	[3, 30, 750]
 ]
+
 var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
 	24, 25, 26, 27, 28, 29, 30, 31, 32
 ]
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
-var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numRound/27)
+var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numRounds/8)
 
 var gameSetup =
 	"<div class = cct-box>"+
@@ -508,7 +491,7 @@ var practiceSetup =
 	getBoard(2)
 
 var practiceSetup2 =
-	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your Point Total for each round and will show you those totals after you finish all 27 rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
+	"<div class = practiceText><div class = block-text2 id = instruct2><strong>Practice 2: </strong> The computer will record your points for each round and will show you the total after you finish all " +_numRounds + " rounds of the game.  This is the second practice round. Please again turn over as many cards as you would like to, given the number of loss cards and the amounts that you can win or lose if you turn over a gain or loss card, as shown below.</div></div>"+
 	"<div class = cct-box2>"+
 	"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 2</div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxMiddle1><div class = center-text gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>"+
 	"<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  onclick = collect() disabled>Next Round</button></div></div>"+
@@ -553,7 +536,7 @@ var instructions_block = {
 	'<p>-You are now going to participate in a card game.  In this game, you will turn over cards to win or lose points which are worth money.</p>'+
 	'<p>-In each game round, you will see 32 cards on the computer screen, face down. You will decide how many of these cards to turn over. Each card is either a gain card or a loss card (there are no neutral cards). You will know how many gain cards and loss cards are in the deck of 32, and how many points you will gain or lose if you turn over a gain or loss card. What you do not know is which of the 32 cards that you see face-down are gain cards and which are loss cards. </p>'+
 	'<p>-You indicate the number of cards (from 0 to 32) you want to turn over by clicking on a small button. Then, cards are randomly chosen to be turned over, one at a time. For each gain card turned over, points are added to your round total and another card is turned over. This continues until a loss card is uncovered or until the number of cards you chose to turn over is reached. The first time a loss card is turned over, the loss points will be subtracted from your current point total and the round is over – even if you indicated that more cards should be turned over. The accumulated total will be your number of points for that round, and you go on to the next round. Each new round starts with a score of 0 points; that means you play each round independently of the other rounds.</p>'+
-	'<p>-You will play a total of 27 rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money.</p>',
+	'<p>-You will play a total of ' + numRounds + ' rounds, three of which will be randomly selected at the end of the session, and you will be paid out for those in real money.</p>',
 	
     '<div class = centerbox><p class = block-text><strong>Unknown Cards:</strong>'+
     '<p> This is what unknown cards looks like.  Turn it over by clicking on it.</p>'+
@@ -734,6 +717,7 @@ var payoutTrial = {
 		trial_id: 'calculate reward'
 	},
 	func: function() {
+		totalPoints = math.sum(roundPointsArray)
 		randomRoundPointsArray = jsPsych.randomization.repeat(roundPointsArray, 1)
 		prize1 = randomRoundPointsArray.pop()
 		prize2 = randomRoundPointsArray.pop()

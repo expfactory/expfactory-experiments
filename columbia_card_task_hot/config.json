@@ -2,7 +2,8 @@
     {
         "name": "Columbia Card Task Hot Version Test",
         "template":"jspsych",
-        "run": ["static/js/jspsych/jspsych.js",
+        "run": ["static/js/math.min.js",
+                "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
