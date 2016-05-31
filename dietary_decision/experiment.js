@@ -73,7 +73,7 @@ var getDecisionStim = function() {
 }
 
 var getDecisionText = function() {
-  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
+  return '<div class = centerbox><p class = "block-text">In the next block of trials you should choose whether you would rather eat the food shown on each trial OR the food shown below. You will select response from "Strong No", "No", "Neutral", "Yes" and "Strong Yes". "No" means that you would rather eat the food below, while "Yes" means you would rather eat the food displayed on that trial.</p><p class = block-text>Take these decisions seriously. Imagine that at the end of the experiment you had to eat the food you chose in one random decision.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div></div><div class = dd_referenceBox><img class = dd_Stim src = ' +
     base_path + reference_stim + ' </img></div>'
 }
 
@@ -100,15 +100,19 @@ var setUpTest = function() {
   var min_distance = 100
   for (var i = 0; i < stims.length; i++) {
     key = random_stims[i]
-    var taste_dist = Math.pow((stim_ratings[key].taste - median_taste), 2)
-    var health_dist = Math.pow((stim_ratings[key].health - median_health), 2)
-    var dist = health_dist + taste_dist
-    if (dist < min_distance) {
-      if (reference_stim !== '') {
-        decision_stims.push(reference_stim)
+    if (stim_ratings[key].taste !== 'NaN' && stim_ratings[key].health !== 'NaN') {
+      var taste_dist = Math.pow((stim_ratings[key].taste - median_taste), 2)
+      var health_dist = Math.pow((stim_ratings[key].health - median_health), 2)
+      var dist = health_dist + taste_dist
+      if (dist < min_distance) {
+        if (reference_stim !== '') {
+          decision_stims.push(reference_stim)
+        }
+        reference_stim = key
+        min_distance = dist
+      } else {
+        decision_stims.push(key)
       }
-      reference_stim = key
-      min_distance = dist
     } else {
       decision_stims.push(key)
     }
@@ -133,7 +137,7 @@ var credit_var = true
 // task specific variables
 var healthy_responses = ['Very_Unhealthy', 'Unhealthy', 'Neutral', 'Healthy', 'Very_Healthy']
 var tasty_responses = ['Very_Bad', 'Bad', 'Neutral', 'Good', 'Very_Good']
-var decision_responses = ['Strong_No', 'No', 'Neutral', 'Yes', 'Very_Yes']
+var decision_responses = ['Strong_No', 'No', 'Neutral', 'Yes', 'Strong_Yes']
 
 var health_response_area = '<div class = dd_response_div>' +
   '<button class = dd_response_button id = Very_Unhealthy>Very Unhealthy</button>' +
@@ -354,8 +358,8 @@ var health_block = {
   stimulus: getHealthStim,
   button_class: 'dd_response_button',
   data: {
-    trial_id: 'stim-health_rating',
-    exp_stage: 'test'
+    trial_id: 'stim',
+    exp_stage: 'health_rating'
   },
   timing_stim: 4000,
   timing_response: 4000,
@@ -382,8 +386,8 @@ var taste_block = {
   stimulus: getTasteStim,
   button_class: 'dd_response_button',
   data: {
-    trial_id: 'stim-taste_rating',
-    exp_stage: 'test'
+    trial_id: 'stim',
+    exp_stage: 'taste_rating'
   },
   timing_stim: 4000,
   timing_response: 4000,
@@ -409,8 +413,8 @@ var decision_block = {
   stimulus: getDecisionStim,
   button_class: 'dd_response_button',
   data: {
-    trial_id: 'stim-decision',
-    exp_stage: 'test'
+    trial_id: 'stim',
+    exp_stage: 'decision'
   },
   timing_stim: 4000,
   timing_response: 4000,
