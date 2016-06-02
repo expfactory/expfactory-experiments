@@ -148,6 +148,7 @@ var credit_var = true
 var choices = [37, 39]
 var curr_data = []
 var stim = ''
+var current_trial = 0
 /* SPECIFY HOW MANY TRIALS YOU WANT FOR FIRST PHASE, and SECOND PHASE.  FP=first(must be divisible by 60), SP=second(must be divisible by 22) */
 var FP_trials = 60;
 var SP_trials = 90;
@@ -362,8 +363,10 @@ for (i = 0; i < 60; i++) {
 			jsPsych.data.addDataToLastTrial({
 				'feedback': data.correct,
 				'correct': correct,
-				'stim_chosen': chosen_stim
+				'stim_chosen': chosen_stim,
+				'trial_num': current_trial
 			})
+			current_trial += 1
 		}
 	};
 	training_trials.push(training_block)
@@ -424,7 +427,10 @@ var SP_block = {
 		trial_id: "second_phase_intro"
 	},
 	text: '<div class = centerbox><p class = block-text>We will now begin Phase 2.</p><p class = block-text> For this phase, you must again choose between pairs of shapes. Press the <strong>right</strong> arrow key to choose the image on the right, and the <strong>left</strong> arrow key to choose the image on the left.</p><p class = block-text>In this phase there will be no visual feedback, but your are still earning points. Your task is still to choose the shape that has the higher probability of being correct to maximize your points. If you are not sure how to respond, use your gut instinct.</p><p class = block-text> Press <strong> Enter </strong> when you are ready.</p></div>',
-	cont_key: [13]
+	cont_key: [13],
+	on_finish: function() {
+		current_trial = 0
+	}
 };
 
 
@@ -447,8 +453,10 @@ var second_phase_trials = {
 		}
 		jsPsych.data.addDataToLastTrial({
 			'correct': correct,
-			'stim_chosen': chosen_stim
+			'stim_chosen': chosen_stim,
+			'trial_num': current_trial
 		})
+		current_trial += 1
 	}
 };
 
