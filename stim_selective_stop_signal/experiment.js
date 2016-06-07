@@ -139,7 +139,7 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
-  if (data.SS_trial_type == 'stop') {
+  if (data.condition == 'stop') {
     if (data.rt == -1 && SSD < 850) {
       SSD = SSD + 50
     } else if (data.rt != -1 && SSD > 0) {
