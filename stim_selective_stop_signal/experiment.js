@@ -208,8 +208,8 @@ var credit_var = true
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stim_selective_stop_signal/images/'
-var images = [prefix + 'circle.png', prefix + 'rhombus.png', prefix + 'Lshape.png', prefix +
-  'triangle.png'
+var images = [prefix + 'rectangle.png', prefix + 'oval.png', prefix + 'trapezoid.png', prefix +
+  'moon.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
 
@@ -232,13 +232,11 @@ var correct_responses = jsPsych.randomization.shuffle([possible_responses[0], po
 ])
 var tab = '&nbsp&nbsp&nbsp&nbsp'
 var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
-  correct_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
-  tab +
+  correct_responses[0][0] + '</li><li><img class = prompt_oval_stim src = ' + images[1] + '></img>' + tab +
   correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
   '&nbsp&nbsp&nbsp' + correct_responses[2][0] +
-  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][
-    0
-  ] + ' </li></ul>'
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
+  ' </li></ul>'
 
 /* Global task variables */
 var current_trial = 0
