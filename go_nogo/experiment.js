@@ -101,7 +101,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var num_go_stim = 9
+var num_go_stim = 9 //per one no-go stim
 var correct_responses = [
   ['go', 32],
   ['nogo', -1]

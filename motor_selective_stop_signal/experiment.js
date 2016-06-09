@@ -220,7 +220,7 @@ var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0
   tab +
   possible_responses[0][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
   '&nbsp&nbsp&nbsp' + possible_responses[1][0] +
-  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + possible_responses[0][0] + ' </li></ul>'
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + possible_responses[1][0] + ' </li></ul>'
 
 /* Global task variables */
 var current_trial = 0
@@ -237,7 +237,7 @@ var stop_response = possible_responses[0]
 var test_block_data = [] // records the data in the current block to calculate feedback
 var NoSSpractice_block_len = 12
 var practice_block_len = 30
-var test_block_len = 50
+var test_block_len = 60
 var numblocks = 5
 
 /* Define Stims */
@@ -659,7 +659,7 @@ for (b = 0; b < numblocks; b++) {
 	var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_block_len*0.2 / 2, true)
 	var ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_block_len*0.2 / 2, true)
 	var stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go', 'go', 'go'], test_block_len /
-			10, false)
+			5, false)
 	// Loop through each trial within the block
 	for (i = 0; i < test_block_len; i++) {
 		stop_signal_exp_block.push(fixation_block)
