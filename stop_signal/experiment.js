@@ -393,7 +393,6 @@ var fixation_block = {
 		exp_stage: "test"
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
 	timing_response: 500
 }
 
@@ -407,7 +406,6 @@ var prompt_fixation_block = {
 		exp_stage: "practice"
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
 	timing_response: 500,
 	prompt: prompt_text
 }
@@ -660,6 +658,10 @@ var practice_node = {
 		}
 	}
 }
+
+stop_signal_experiment.push(NoSS_practice_node)
+stop_signal_experiment.push(practice_node)
+stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 ss_freq = randomDraw(['high', 'low'])
