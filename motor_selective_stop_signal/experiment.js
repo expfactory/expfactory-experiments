@@ -647,15 +647,18 @@ var practice_node = {
 	}
 }
 
+motor_selective_stop_signal_experiment.push(NoSS_practice_node)
+motor_selective_stop_signal_experiment.push(practice_node)
+motor_selective_stop_signal_experiment.push(practice_feedback_block)
 
 /* Test blocks */
 // Loop through the multiple blocks within each condition
 for (b = 0; b < numblocks; b++) {
 	stop_signal_exp_block = []
-	var go_stims = jsPsych.randomization.repeat(stimuli, test_block_len*.6 / 4, true)
-	var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_block_len*.2 / 2, true)
-	var ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_block_len*.2 / 2, true)
-	var stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'ignore', 'ignore', 'go', 'go', 'go', 'go', 'go', 'go'], test_block_len /
+	var go_stims = jsPsych.randomization.repeat(stimuli, test_block_len*0.6 / 4, true)
+	var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_block_len*0.2 / 2, true)
+	var ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_block_len*0.2 / 2, true)
+	var stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go', 'go', 'go'], test_block_len /
 			10, false)
 	// Loop through each trial within the block
 	for (i = 0; i < test_block_len; i++) {

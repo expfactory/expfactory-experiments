@@ -56,8 +56,8 @@ function assessPerformance() {
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
-var post_trial_gap = function() {
-  gap = Math.floor(Math.random() * 500) + 500
+var get_response_time = function() {
+  gap = 750 + Math.floor(Math.random() * 500) + 250
   return gap;
 }
 
@@ -101,10 +101,12 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
+var num_go_stim = 9
 var correct_responses = [
   ['go', 32],
   ['nogo', -1]
 ]
+
 var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
 var gap = 0
 var current_trial = 0
@@ -129,35 +131,6 @@ var practice_stimuli = [{
 
 //set up block stim. test_stim_responses indexed by [block][stim][type]
 var test_stimuli_block = [{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
-  data: {
-    correct_response: correct_responses[0][1],
-    condition: correct_responses[0][0],
-    trial_id: 'test_block'
-  }
-}, {
-  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
-  data: {
-    correct_response: correct_responses[0][1],
-    condition: correct_responses[0][0],
-    trial_id: 'test_block'
-  }
-},
-{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
-  data: {
-    correct_response: correct_responses[0][1],
-    condition: correct_responses[0][0],
-    trial_id: 'test_block'
-  }
-},{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
-  data: {
-    correct_response: correct_responses[0][1],
-    condition: correct_responses[0][0],
-    trial_id: 'test_block'
-  }
-}, {
   stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
@@ -166,7 +139,16 @@ var test_stimuli_block = [{
   }
 }];
 
-
+for (var i = 0; i < num_go_stim; i++) {
+  test_stimuli_block.push({
+    stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      condition: correct_responses[0][0],
+      trial_id: 'test_block'
+    }
+  })
+}
 
 var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
 var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
@@ -304,11 +286,11 @@ var practice_block = {
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: getFeedback,
   choices: [32],
-  timing_response: 2000,
-  timing_stim: 2000,
+  timing_response: get_response_time,
+  timing_stim: 750,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
-  timing_post_trial: post_trial_gap,
+  timing_post_trial: 250,
   on_finish: appendData
 }
 
@@ -322,12 +304,11 @@ var test_block = {
   },
   is_html: true,
   choices: [32],
-  timing_response: 2000,
-  timing_post_trial: post_trial_gap,
+  timing_stim: 750,
+  timing_response: get_response_time,
+  timing_post_trial: 0,
   on_finish: appendData
 };
-
-
 
 /* create experiment definition array */
 var go_nogo_experiment = [];
