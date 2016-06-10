@@ -141,7 +141,7 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function(data) {
-	if (data.SS_trial_type == 'stop' && data.correct_response == stop_response[1]) {
+	if (data.condition == 'stop') {
 		if (data.rt == -1 && SSD < 850) {
 			SSD = SSD + 50
 		} else if (data.rt != -1 && SSD > 0) {
@@ -197,36 +197,30 @@ var credit_var = true
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/motor_selective_stop_signal/images/'
-var images = [prefix + 'rectangle.png', prefix + 'oval.png', prefix + 'trapezoid.png', prefix +
-	'moon.png'
+var images = [prefix + 'circle.png', prefix + 'rhombus.png', prefix + 'Lshape.png', prefix +
+  'triangle.png'
 ]
 jsPsych.pluginAPI.preloadImages(images);
-
+images = jsPsych.randomization.shuffle(images)
 /* Stop signal delay in ms */
 var SSD = 250
 var stop_signal =
 	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 /* Instruction Prompt */
-var correct_responses = jsPsych.randomization.shuffle([
+var possible_responses = jsPsych.randomization.shuffle([
 	["M key", 77],
-	["M key", 77],
-	["Z key", 90],
 	["Z key", 90]
 ])
-var possible_responses = [
-	["M key", 77],
-	["Z key", 90]
-]
-var choices = [possible_responses[0][1], possible_responses[1][1]]
+var choices = [77,90]
 
 var tab = '&nbsp&nbsp&nbsp&nbsp'
 var prompt_text = '<ul list-text><li><img class = prompt_stim src = ' + images[0] + '></img>' + tab +
-	correct_responses[0][0] + '</li><li><img class = prompt_oval_stim src = ' + images[1] + '></img>' + tab +
-	correct_responses[1][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
-	'&nbsp&nbsp&nbsp' + correct_responses[2][0] +
-	' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + correct_responses[3][0] +
-	' </li></ul>'
+  possible_responses[0][0] + '</li><li><img class = prompt_stim src = ' + images[1] + '></img>' +
+  tab +
+  possible_responses[0][0] + ' </li><li><img class = prompt_stim src = ' + images[2] + '></img>   ' +
+  '&nbsp&nbsp&nbsp' + possible_responses[1][0] +
+  ' </li><li><img class = prompt_stim src = ' + images[3] + '></img>' + tab + possible_responses[1][0] + ' </li></ul>'
 
 /* Global task variables */
 var current_trial = 0
@@ -239,52 +233,48 @@ var accuracy_thresh = 0.8
 var stop_thresh = 0.2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
-var stop_response = randomDraw(possible_responses)
+var stop_response = possible_responses[0]
 var test_block_data = [] // records the data in the current block to calculate feedback
 var NoSSpractice_block_len = 12
 var practice_block_len = 30
-var test_block_len = 50
-var numblocks = 6
+var test_block_len = 60
+var numblocks = 5
 
 /* Define Stims */
-var stimulus = [{
+var stimuli = [{
 	stimulus: '<div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
 	data: {
-		correct_response: correct_responses[0][1],
+		correct_response: possible_responses[0][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
 	data: {
-		correct_response: correct_responses[1][1],
+		correct_response: possible_responses[0][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
 	data: {
-		correct_response: correct_responses[2][1],
+		correct_response: possible_responses[1][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
 	data: {
-		correct_response: correct_responses[3][1],
+		correct_response: possible_responses[1][1],
 		trial_id: 'stim',
 	}
 }]
 
 var practice_trial_data = '' //global variable to track randomized practice trial data
-var NoSS_practice_list = jsPsych.randomization.repeat(stimulus, NoSSpractice_block_len / 4, true)
-var practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len / 4, true)
+var NoSS_practice_list = jsPsych.randomization.repeat(stimuli, NoSSpractice_block_len / 4, true)
+var practice_list = jsPsych.randomization.repeat(stimuli, practice_block_len / 4, true)
 var practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go',
 	'go', 'go', 'go', 'go'
 ], practice_block_len / 10)
 
-//setup blocks
-var blocks = []
-for (i = 0; i < numblocks; i++) {
-	blocks.push(jsPsych.randomization.repeat(stimulus, test_block_len / 4, true))
-}
+
 
 
 /* ************************************ */
@@ -393,7 +383,6 @@ var fixation_block = {
 		exp_stage: "test"
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
 	timing_response: 500
 }
 
@@ -409,7 +398,6 @@ var prompt_fixation_block = {
 		exp_stage: "practice"
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
 	timing_response: 500,
 	prompt: prompt_text
 }
@@ -515,7 +503,7 @@ var NoSS_practice_node = {
 			return false;
 		} else {
 			//rerandomize stim order
-			NoSS_practice_list = jsPsych.randomization.repeat(stimulus, 3, true)
+			NoSS_practice_list = jsPsych.randomization.repeat(stimuli, 3, true)
 			// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
 			if (average_rt > RT_thresh) {
@@ -626,7 +614,7 @@ var practice_node = {
 			return false;
 		} else {
 			//rerandomize stim and stop_trial order
-			practice_list = jsPsych.randomization.repeat(stimulus, practice_block_len/4, true)
+			practice_list = jsPsych.randomization.repeat(stimuli, practice_block_len/4, true)
 			practice_stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go', 'go', 'go', 'go', 'go'], practice_list.data.length / 10, false)
 				// keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
@@ -657,7 +645,6 @@ var practice_node = {
 	}
 }
 
-
 motor_selective_stop_signal_experiment.push(NoSS_practice_node)
 motor_selective_stop_signal_experiment.push(practice_node)
 motor_selective_stop_signal_experiment.push(practice_feedback_block)
@@ -666,18 +653,38 @@ motor_selective_stop_signal_experiment.push(practice_feedback_block)
 // Loop through the multiple blocks within each condition
 for (b = 0; b < numblocks; b++) {
 	stop_signal_exp_block = []
-	var block = blocks[b]
-	var stop_trials = jsPsych.randomization.repeat(['stop', 'stop', 'stop', 'go', 'go', 'go', 'go', 'go', 'go', 'go'], test_block_len /
-			10, false)
-		// Loop through each trial within the block
+	var go_stims = jsPsych.randomization.repeat(stimuli, test_block_len*0.6 / 4, true)
+	var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_block_len*0.2 / 2, true)
+	var ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_block_len*0.2 / 2, true)
+	var stop_trials = jsPsych.randomization.repeat(['stop', 'ignore', 'go', 'go', 'go'], test_block_len /
+			5, false)
+	// Loop through each trial within the block
 	for (i = 0; i < test_block_len; i++) {
 		stop_signal_exp_block.push(fixation_block)
+
+	    
+	    var stop_trial = stop_trials[i]
+	    var trial_stim = ''
+	    var trial_data = []
+	    if (stop_trials[i] == 'ignore') {
+	    	trial_stim = ignore_stims.stimulus.pop()
+	    	trial_data = ignore_stims.data.pop()
+	    	stop_trial = 'stop'
+	    } else if (stop_trials[i] == 'stop') {
+	    	trial_stim = stop_stims.stimulus.pop()
+	    	trial_data = stop_stims.data.pop()
+	    } else {
+	    	trial_stim = go_stims.stimulus.pop()
+	    	trial_data = go_stims.data.pop()
+	    }
+	    trial_data = $.extend({}, trial_data)
+	    trial_data.condition = stop_trials[i]
 		var stop_signal_block = {
 			type: 'stop-signal',
-			stimulus: block.stimulus[i],
+			stimulus: trial_stim,
 			SS_stimulus: stop_signal,
-			SS_trial_type: stop_trials[i],
-			data: block.data[i],
+			SS_trial_type: stop_trial,
+			data: trial_data,
 			is_html: true,
 			choices: choices,
 			timing_stim: 850,
@@ -687,15 +694,8 @@ for (b = 0; b < numblocks; b++) {
 			timing_post_trial: 0,
 			on_finish: function(data) {
 				updateSSD(data)
-				var condition = "go"
-				if (data.SS_trial_type === "stop" && data.correct_response === stop_response[1]) {
-					condition = "stop"
-				} else if (data.SS_trial_type === "stop" && data.correct_response !== stop_response[1]){
-					condition = "ignore"
-				}
 				jsPsych.data.addDataToLastTrial({
 					exp_stage: "test",
-					condition: condition,
 					stop_response: stop_response[1],
 					trial_num: current_trial
 				})
