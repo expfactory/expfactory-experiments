@@ -222,11 +222,21 @@ var makeInstructChoice = function(clicked_id) {
 }
 
 var getRewardPractice = function() {
+	var text = ''
+	var correct = false
+	var color_clicked = colors[1]
 	if (reward === 100) {
-		return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div></div>'
+		correct = true
+		color_clicked = colors[0]
+		text = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div></div>'
 	} else  {
-		 return getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points! </div></div>'
+		 text = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points.</div></div></div>'
 	}
+	jsPsych.data.addDataToLastTrial({
+		correct: correct,
+		color_clicked: color_clicked
+	})
+	return text
 }
 
 var get_post_gap = function() {
@@ -372,7 +382,6 @@ var DW_intro_block = {
 		current_trial = 0
 		trial_start_time = new Date()
 	}
-
 };
 
 var FW_intro_block = {
@@ -389,8 +398,6 @@ var FW_intro_block = {
 		trial_start_time = new Date()
 	}
 };
-
-
 
 var rewardFW_block = {
 	type: 'poldrack-single-stim',
@@ -422,8 +429,6 @@ var rewardDW_block = {
 	response_ends_trial: true,
 };
 
-
-
 var practiceRewardBlock = {
 	type: 'poldrack-single-stim',
 	stimulus: getRewardPractice,
@@ -451,22 +456,7 @@ var practice_block = {
 		correct_respose: colors[0]
 	},
 	timing_post_trial: 0,
-	response_ends_trial: true,
-	on_finish: function(data) {
-		correct = false
-		if (data.mouse_click === 26) {
-			color = largeColors[0]
-		} else {
-			color = largeColors[1]
-		}
-		if (color === data.correct_response) {
-			correct = true
-		}
-		jsPsych.data.addDataToLastTrial({
-			color_clicked: color,
-			correct: correct
-		})
-	}
+	response_ends_trial: true
 };
 
 var test_block = {
@@ -490,8 +480,6 @@ var test_node = {
 	}
 }
 
-
-
 var reset_block = {
 	type: 'call-function',
 	data: {
@@ -500,7 +488,6 @@ var reset_block = {
 	func: resetRound,
 	timing_post_trial: 0
 }
-
 
 /* create experiment definition array */
 var information_sampling_task_experiment = [];
