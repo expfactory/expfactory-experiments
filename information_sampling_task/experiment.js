@@ -214,7 +214,7 @@ var instructionFunction = function(clicked_id) {
 
 var makeInstructChoice = function(clicked_id) {
 	clickedCards = numbers //set all cards as 'clicked'
-	if (clicked_id == 26) {
+	if (largeColors[['26','27'].indexOf(clicked_id)]==colors[0]) {
 		reward = 100
 	} else if (clicked_id == 27) {
 		reward = -100
