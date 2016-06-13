@@ -230,7 +230,7 @@ var getRewardPractice = function() {
 		color_clicked = colors[0]
 		text = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div></div>'
 	} else  {
-		 text = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Correct! You have won 100 points!</div></div></div>'
+		 text = getBoard(colors, 'instruction') + '<div class = rewardbox><div class = reward-text>Incorrect! You have lost 100 points.</div></div></div>'
 	}
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
