@@ -66,8 +66,8 @@ var getStim = function() {
     gonogo_choice = -1
   }
   //update data
-  curr_data.gonogo_stim = border_i
-  curr_data.choice_stim = number_i
+  curr_data.gonogo_stim = borders[border_i][1]
+  curr_data.choice_stim = inners[number_i]
   curr_data.gonogo_correct_response = gonogo_choice
   curr_data.choice_correct_response = [74, 76][number_i]
   return [stim, stim2]
@@ -173,7 +173,6 @@ var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 2
   700
 ], exp_len / 9))
 var curr_data = {
-    trial_id: '',
     ISI: '',
     gonogo_stim: '',
     choice_stim: '',
