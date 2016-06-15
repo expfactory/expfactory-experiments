@@ -163,15 +163,13 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var practice_len = 27
-var exp_len = 225
+var practice_len = 32
+var exp_len = 200
 var current_trial = 0
 var choices = [74, 75, 76]
-var practice_ISIs = jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500, 700],
-  exp_len / 9)
-var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([5, 50, 100, 150, 200, 300, 400, 500,
-  700
-], exp_len / 9))
+var practice_ISIs = jsPsych.randomization.repeat([50, 150, 300, 800],
+  exp_len / 4)
+var ISIs = practice_ISIs.concat(jsPsych.randomization.repeat([50, 150, 300, 800], exp_len / 4))
 var curr_data = {
     ISI: '',
     gonogo_stim: '',
