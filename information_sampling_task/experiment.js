@@ -239,8 +239,15 @@ var getRewardPractice = function() {
 	return text
 }
 
+var getDWPoints = function() {
+	return "<div class = centerbox><p class = center-text>Total Points: " + totDWPoints + "</p></div>"
+}
+
+var getFWPoints = function() {
+	return "<div class = centerbox><p class = center-text>Total Points: " + totFWPoints + "</p></div>"
+}
 var get_post_gap = function() {
-	return Math.max(1000,(13-total_trial_time)*1000)
+	return Math.max(1000,(17-total_trial_time)*1000)
 }
 
 /* ************************************ */
@@ -329,7 +336,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>In this experiment, you will see small  squares arranged in a 5 by 5 matrix. Initially all the squares will be greyed out, but when you click on a box it will reveal itself to be one of two colors corresponding to two larger squares at the bottom of the screen.<p class = block-text>Your task is to decide which color you think is in the majority.</p></div>',
-		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>It is entirely up to you how many boxes you open before you make your decision.</p><p class = block-text>When you have made your decision, you should touch that larger color square at the bottom of the screen. After you end instructions you will complete a practice trial.</p></div>',
+		'<div class = centerbox><p class = block-text>You can open the boxes at your own rate and you can open as many smaller grey squares as you want before making your choice.</p><p class = block-text>It is entirely up to you how many boxes you open before you make your decision.</p><p class = block-text>When you have made your decision, you should touch that larger color square at the bottom of the screen.After you end instructions you will complete a practice trial.</p></div>',
 	],
 
 
@@ -409,7 +416,7 @@ var rewardFW_block = {
 	},
 	choices: 'none',
 	timing_response: 2000,
-	timing_post_trial: get_post_gap,
+	timing_post_trial: 0,
 	on_finish: appendRewardDataFW,
 	response_ends_trial: true,
 };
@@ -424,7 +431,7 @@ var rewardDW_block = {
 	},
 	choices: 'none',
 	timing_response: 2000,
-	timing_post_trial: get_post_gap,
+	timing_post_trial: 0,
 	on_finish: appendRewardDataDW,
 	response_ends_trial: true,
 };
@@ -445,6 +452,31 @@ var practiceRewardBlock = {
 		clickedCards = []
 	}
 };
+
+var scoreDW_block = {
+	type: 'poldrack-single-stim',
+	stimulus: getDWPoints,
+	is_html: true,
+	data: {
+		trial_id: "total_points",
+		exp_stage: "Decreasing Win"
+	},
+	choices: 'none',
+	timing_response: get_post_gap,
+}
+
+var scoreFW_block = {
+	type: 'poldrack-single-stim',
+	stimulus: getFWPoints,
+	is_html: true,
+	data: {
+		trial_id: "total_points",
+		exp_stage: "Fixed Win"
+	},
+	choices: 'none',
+	timing_response: get_post_gap,
+}
+
 
 var practice_block = {
 	type: 'single-stim-button',
@@ -501,12 +533,14 @@ if (Math.random() < 0.5) { // do the FW first, then DW
 	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardFW_block);
+		information_sampling_task_experiment.push(scoreFW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(DW_intro_block);
 	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardDW_block);
+		information_sampling_task_experiment.push(scoreDW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 
@@ -515,12 +549,14 @@ if (Math.random() < 0.5) { // do the FW first, then DW
 	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardDW_block);
+		information_sampling_task_experiment.push(scoreDW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 	information_sampling_task_experiment.push(FW_intro_block);
 	for (var i = 0; i < num_trials; i++) {
 		information_sampling_task_experiment.push(test_node);
 		information_sampling_task_experiment.push(rewardFW_block);
+		information_sampling_task_experiment.push(scoreFW_block);
 		information_sampling_task_experiment.push(reset_block);
 	}
 }

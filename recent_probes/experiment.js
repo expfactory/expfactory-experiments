@@ -269,14 +269,12 @@ var getPracticeProbe = function() {
 };
 
 var getResponse = function() {
-	if (jQuery.inArray(probe, stims)) {
+	if (jQuery.inArray(probe, stims) != -1) {
 		return 37
 	} else {
 		return 39
 	}
 }
-
-
 
 var resetTrial = function() {
 	current_trial = 0

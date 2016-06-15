@@ -108,3 +108,7 @@
   transform: translateY(-50%);
   color: white;
 }
+
+.center-text {
+  font-size: 40px;
+}
