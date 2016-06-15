@@ -56,7 +56,6 @@ var randomDraw = function(lst) {
 var getStim = function() {
 	var trial_type = trial_types.pop()
 	var probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
-	var probe = probe_i + '_white.png'
 	var target_i = 0
 	var distractor_i = 0
 	if (trial_type.match == "match") {
@@ -240,7 +239,6 @@ var rest_block = {
 	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
-	}
 };
 
 var fixation_block = {
