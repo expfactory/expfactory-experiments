@@ -130,7 +130,8 @@ jsPsych.pluginAPI.preloadImages(shape_stim)
 var practice_len = 24
 var trial_types = jsPsych.randomization.factorial({'match': ['match','non-match'],
 												'condition': ['neutral','incongruent','congruent']},practice_len/6)
-var exp_len = 144
+var exp_len = 288
+var numblocks = 4
 var choices = [90, 77]
 
 /* ************************************ */
@@ -155,7 +156,7 @@ var response_keys =
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take about 8 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 20 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -220,7 +221,7 @@ var start_test_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice. There will be one break half way through.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice. There will be three short breaks throughout the test.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
@@ -297,6 +298,13 @@ var decision_block = {
 	timing_response: 2000,
 	data: getData,
 	timing_post_trial: 0,
+	on_finish: function(data) {
+		correct = false
+		if (data.key_press == data.correct_response) {
+			correct = true
+		}
+		jsPsych.data.addDataToLastTrial({'correct': correct})
+	}
 }
 
 /* create experiment definition array */
@@ -308,16 +316,15 @@ for (var i = 0; i < practice_len; i ++) {
 	shape_matching_experiment.push(mask_block)
 }
 shape_matching_experiment.push(start_test_block)
-for (var i = 0; i < exp_len/2; i ++) {
-	shape_matching_experiment.push(fixation_block)
-	shape_matching_experiment.push(decision_block)
-	shape_matching_experiment.push(mask_block)
-}
-shape_matching_experiment.push(rest_block)
-for (var i = 0; i < exp_len/2; i ++) {
-	shape_matching_experiment.push(fixation_block)
-	shape_matching_experiment.push(decision_block)
-	shape_matching_experiment.push(mask_block)
+for (var b = 0; b < numblocks; b++) {
+	for (var i = 0; i < exp_len/numblocks; i ++) {
+		shape_matching_experiment.push(fixation_block)
+		shape_matching_experiment.push(decision_block)
+		shape_matching_experiment.push(mask_block)
+	}
+	if (b < (numblocks-1)) {
+		shape_matching_experiment.push(rest_block)
+	}
 }
 shape_matching_experiment.push(post_task_block)
 shape_matching_experiment.push(end_block)
