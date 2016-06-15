@@ -147,8 +147,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var practice_len = 20
-var exp_len = 200
+var practice_len = 27
+var exp_len = 225
 var current_trial = 0
 var choices1 = [90,88]
 var choices2 = [78,77]
