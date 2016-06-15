@@ -193,6 +193,7 @@ var reset_block = {
 var practice_block = {
   type: 'poldrack-single-stim',
   stimulus: stim,
+  timing_post_trial: 0,
   timing_stim: 2000,
   timing_response: get_trial_time,
   response_ends_trial: false,
@@ -211,6 +212,7 @@ var test_block = {
   stimulus: stim,
   timing_stim: 2000,
   timing_response: get_trial_time,
+  timing_post_trial: 0,
   response_ends_trial: false,
   is_html: true,
   data: {
