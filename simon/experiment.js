@@ -60,7 +60,7 @@ function assessPerformance() {
 }
 
 var post_trial_gap = function() {
-  gap = Math.floor(Math.random() * 2000) + 1000
+  gap = Math.floor(Math.random() * 500) + 500
   return gap;
 }
 
@@ -99,8 +99,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var stims = jsPsych.randomization.shuffle(['stim1', 'stim2'])
-var correct_responses = [["left arrow", 37],["right arrow", 39]]
+var stims = ['stim1','stim2']
+var correct_responses = jsPsych.randomization.shuffle([["left arrow", 37],["right arrow", 39]])
 var choices = [37, 39]
 var current_trial = 0
 var gap = Math.floor(Math.random() * 2000) + 1000
@@ -138,7 +138,7 @@ var test_stimuli = [{
   key_answer: correct_responses[1][1]
 }];
 
-var practice_trials = jsPsych.randomization.repeat(test_stimuli, 2);
+var practice_trials = jsPsych.randomization.repeat(test_stimuli, 5);
 var test_trials = jsPsych.randomization.repeat(test_stimuli, 25);
 
 
