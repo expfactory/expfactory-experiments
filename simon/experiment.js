@@ -99,40 +99,43 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var stims = ['stim1','stim2']
 var correct_responses = jsPsych.randomization.shuffle([["left arrow", 37],["right arrow", 39]])
 var choices = [37, 39]
 var current_trial = 0
 var gap = Math.floor(Math.random() * 2000) + 1000
 var test_stimuli = [{
-  stimulus: '<div class = centerbox><div class = simon_left id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_left id = stim1></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     stim_side: 'left',
+    stim_color: 'red', 
     condition: 'congruent'
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = centerbox><div class = simon_right id = ' + stims[0] + '></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_right id = stim1></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     stim_side: 'right',
+    stim_color: 'red', 
     condition: 'incongruent'
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = simon_leftbox><div class = simon_left id = ' + stims[1] + '></div></div>',
+  stimulus: '<div class = simon_leftbox><div class = simon_left id = stim2></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     stim_side: 'left',
+    stim_color: 'blue', 
     condition: 'incongruent'
   },
   key_answer: correct_responses[1][1]
 }, {
-  stimulus: '<div class = simon_rightbox><div class = simon_right id = ' + stims[1] + '></div></div>',
+  stimulus: '<div class = simon_rightbox><div class = simon_right id = stim2></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     stim_side: 'right',
+    stim_color: 'blue', 
     condition: 'congruent'
   },
   key_answer: correct_responses[1][1]
@@ -247,19 +250,12 @@ var start_test_block = {
   },
   text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    current_trial = 0
+  }
 };
 
-var reset_block = {
-  type: 'call-function',
-  data: {
-    trial_id: "reset_trial"
-  },
-  func: function() {
-    current_trial = 0
-  },
-  timing_post_trial: 0
-}
 
 /* define practice block */
 var practice_block = {
@@ -274,8 +270,8 @@ var practice_block = {
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
   timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
   choices: choices,
-  timing_response: 1500,
-  timing_stim: 1500,
+  timing_response: 2000,
+  timing_stim: 2000,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
   timing_post_trial: post_trial_gap,
@@ -292,7 +288,7 @@ var test_block = {
   },
   is_html: true,
   choices: choices,
-  timing_response: 1500,
+  timing_response: 2000,
   timing_post_trial: post_trial_gap,
   on_finish: function(data){
   	appendTestData(data)
@@ -304,7 +300,6 @@ var simon_experiment = [];
 simon_experiment.push(instruction_node);
 simon_experiment.push(practice_block);
 simon_experiment.push(attention_node)
-simon_experiment.push(reset_block)
 simon_experiment.push(start_test_block);
 simon_experiment.push(test_block);
 simon_experiment.push(attention_node)
