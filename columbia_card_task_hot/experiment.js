@@ -85,36 +85,48 @@ var appendPayoutData = function(){
 var chooseCard = function(clicked_id) {
 	currID = parseInt(clicked_id)
 	whichClickInRound = whichClickInRound + 1
-	temp = whichLossCards.indexOf(currID, 0)
-	if (clickedGainCards.indexOf(currID, 0) == -1 && clickedLossCards.indexOf(currID, 0) == -1) {
-		if (temp != -1) { // if you click on a loss card
-			clickedLossCards.push(clicked_id)
+	if (lossRounds.indexOf(whichRound) == -1) {
+		if ((cardArray.length - clickedGainCards.length) == numLossCards) {
+			clickedLossCards.push(currID)
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
 			roundPoints = roundPoints - lossAmt
 			lossClicked = true
 			roundOver = 2
-			document.getElementById('current_round').innerHTML = 'Current Round Points: ' + roundPoints;
-			document.getElementById(clicked_id).src =
-				'/static/experiments/columbia_card_task_hot/images/loss.png';
-
-			document.getElementById("NoCardButton").disabled = true;
-			document.getElementById("turnButton").disabled = true;
-			for (i = 1; i < 33; i++) {
-				document.getElementById('' + i + '').disabled = true;
-			}
-			CCT_timeouts.push(setTimeout(function() {
-				turnCards()
-			}, 2000))
-	
-
-		} else if (temp == -1) { // if you click on a gain card
-
-			clickedGainCards.push(clicked_id) //as a string
+		} else { // if you click on a gain card
+			clickedGainCards.push(currID) //as a string
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
 			roundPoints = roundPoints + gainAmt
 		}
+	} else {
+		if (Math.random() < .3) {
+			clickedLossCards.push(currID)
+			index = unclickedCards.indexOf(currID, 0)
+			unclickedCards.splice(index, 1)
+			roundPoints = roundPoints - lossAmt
+			lossClicked = true
+			roundOver = 2
+		} else { // if you click on a gain card
+			clickedGainCards.push(currID) //as a string
+			index = unclickedCards.indexOf(currID, 0)
+			unclickedCards.splice(index, 1)
+			roundPoints = roundPoints + gainAmt
+		}
+	}
+	if (lossClicked == true) {
+		document.getElementById('current_round').innerHTML = 'Current Round Points: ' + roundPoints;
+		document.getElementById(clicked_id).src =
+			'/static/experiments/columbia_card_task_hot/images/loss.png';
+
+		document.getElementById("NoCardButton").disabled = true;
+		document.getElementById("turnButton").disabled = true;
+		for (i = 1; i < 33; i++) {
+			document.getElementById('' + i + '').disabled = true;
+		}
+		CCT_timeouts.push(setTimeout(function() {
+			turnCards()
+		}, 2000))
 	}
 }
 
@@ -131,14 +143,8 @@ var getRound = function() {
 		numLossCards = roundParams[0]
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
-		shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 
-		whichLossCards = [] //this determines which are loss cards at the beginning of each round
-		for (i = 0; i < numLossCards; i++) {
-			whichLossCards.push(shuffledCardArray.pop())
-		}
-		whichGainCards = shuffledCardArray
-		gameState = gameSetup
+		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -148,7 +154,7 @@ var getRound = function() {
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
-		gameState = gameSetup
+		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -156,16 +162,13 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		gameState = appendTextAfter2(gameState, "class = 'CCT-btn "," ' disabled", "select-button' onclick = noCard()")
-		clickedGainCards.sort(function(a, b) {
-			return a - b
-		})
 		for (i = 0; i < clickedGainCards.length; i++) {
 			gameState = appendTextAfter2(gameState, "id = " + "" + clickedGainCards[i] + ""," class = 'card_image' src='/static/experiments/columbia_card_task_hot/images/chosen.png'", " class = 'card_image select-button' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)")
 		}
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
-		gameState = gameSetup
+		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -175,19 +178,21 @@ var getRound = function() {
 		gameState = appendTextAfter(gameState, "endRound()", " disabled")
 		gameState = appendTextAfter(gameState, "noCard()", " disabled")
 		
-
-		clickedGainCards.sort(function(a, b) {
-			return a - b
-		})
-		for (i = 0; i < whichGainCards.length; i++) {
+		clickedCards = clickedGainCards.concat(clickedLossCards)
+		var notClicked = cardArray.filter(function(x) { return (jQuery.inArray(x,clickedCards) == -1)})
+		notClicked = jsPsych.randomization.shuffle(notClicked)
+		var whichLossCards = clickedLossCards.concat(notClicked.slice(0,numLossCards-clickedLossCards.length))
+		var whichGainCards = clickedGainCards.concat(notClicked.slice(numLossCards-clickedLossCards.length))
+		for (var i = 0; i < whichGainCards.length; i++) {
 			gameState = appendTextAfter2(gameState, "id = " + "" + whichGainCards[i] + ""," class = 'card_image' src='/static/experiments/columbia_card_task_hot/images/chosen.png'", " class = 'card_image select-button' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)")
 		}
-		for (i = 0; i < whichLossCards.length; i++) {
+		for (var i = 0; i < whichLossCards.length; i++) {
 			gameState = appendTextAfter2(gameState, "id = " + "" + whichLossCards[i] + ""," class = 'card_image' src='/static/experiments/columbia_card_task_hot/images/loss.png'", " class = 'card_image select-button' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)")
 		}
 		return gameState
 	}
 }
+
 
 var turnCards = function() {
 	/*These two commands are only for practice. In the rest of the experiment the whole
@@ -444,13 +449,15 @@ var numLossCards = ""
 var gainAmt = ""
 var lossAmt = ""
 var CCT_timeouts = []
-var numRounds =  24
+var numWinRounds =  24
+var lossRounds = [1,4,5,7,8,11,16,18,20,21]
+var numRounds = numWinRounds + lossRounds.length
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
 var roundPoints = 0
 var totalPoints = 0
-var roundOver = 0
+var roundOver = 0 //0 at beginning of round, 1 during round, 2 at end of round
 var currTrial = 0
 var instructPoints = 0
 var clickedGainCards = []
@@ -681,7 +688,6 @@ var test_block = {
 	response_ends_trial: true,
 };
 
-
 var test_node = {
 	timeline: [test_block],
 	loop_function: function(data) {
@@ -699,6 +705,7 @@ var test_node = {
 		}
 	}
 }
+
 
 var payout_text = {
 	type: 'poldrack-text',
@@ -730,6 +737,12 @@ var payoutTrial = {
 /* create experiment definition array */
 var columbia_card_task_hot_experiment = [];
 //columbia_card_task_hot_experiment.push(test_img_block);
+
+columbia_card_task_hot_experiment.push(start_test_block);
+for (i = 0; i < numRounds; i++) {
+	columbia_card_task_hot_experiment.push(test_node);
+}
+
 
 columbia_card_task_hot_experiment.push(instruction_node);
 columbia_card_task_hot_experiment.push(practice_block1);
