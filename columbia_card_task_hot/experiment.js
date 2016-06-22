@@ -212,12 +212,12 @@ var getRound = function() {
 		}
 		
 		setTimeout(function() {
-			for (var i = 0; i < lossCardsToTurn.length; i++) {
-				document.getElementById('' + lossCardsToTurn[i] + '').src =
+			for (var k = 0; k < lossCardsToTurn.length; k++) {
+				document.getElementById('' + lossCardsToTurn[k] + '').src =
 				'/static/experiments/columbia_card_task_hot/images/loss.png';
 			}
-			for (var i = 0; i < gainCardsToTurn.length; i++) {
-				document.getElementById('' + gainCardsToTurn[i] + '').src =
+			for (var j = 0; j < gainCardsToTurn.length; j++) {
+				document.getElementById('' + gainCardsToTurn[j] + '').src =
 				'/static/experiments/columbia_card_task_hot/images/chosen.png';
 			}
 			$('#collectButton').prop('disabled', false)
