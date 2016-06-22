@@ -134,7 +134,7 @@ var chooseCard = function(clicked_id) {
 			roundPoints = roundPoints + gainAmt
 		}
 	} else {
-		if (Math.random() < .3) {
+		if (Math.random() < 0.3) {
 			clickedLossCards.push(currID)
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
@@ -151,6 +151,7 @@ var chooseCard = function(clicked_id) {
 }
 
 var getRound = function() {
+	var gameState = gameSetup
 	if (roundOver === 0) { //this is for the start of a round
 		whichClickInRound = 0
 		unclickedCards = cardArray
@@ -164,7 +165,6 @@ var getRound = function() {
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
 
-		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -174,7 +174,6 @@ var getRound = function() {
 		roundOver = 1
 		return gameState
 	} else if (roundOver == 1) { //this is for during the round
-		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -188,7 +187,6 @@ var getRound = function() {
 		return gameState
 	} else if (roundOver == 2) { //this is for end the round
 		roundOver = 3
-		var gameState = gameSetup
 		gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
 		gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
 		gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
@@ -203,7 +201,7 @@ var getRound = function() {
 		notClicked = jsPsych.randomization.shuffle(notClicked)
 		lossCardsToTurn = notClicked.slice(0,numLossCards-clickedLossCards.length)
 		gainCardsToTurn = notClicked.slice(numLossCards-clickedLossCards.length)
-		for (i = 1; i < cardArray.length + 1; i++) {
+		for (var i = 1; i < cardArray.length + 1; i++) {
 			if (clickedGainCards.indexOf(i) != -1 ) {
 				gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='/static/experiments/columbia_card_task_hot/images/chosen.png'", " class = 'card_image select-button' src='/static/experiments/columbia_card_task_hot/images/beforeChosen.png' onclick = chooseCard(this.id)")
 			} else if (clickedLossCards.indexOf(i) != -1 ) {
