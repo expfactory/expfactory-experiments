@@ -134,7 +134,7 @@ var chooseCard = function(clicked_id) {
 			roundPoints = roundPoints + gainAmt
 		}
 	} else {
-		if (Math.random() < 0.3) {
+		if ((clickedGainCards.length+1) == whichLossCards) {
 			clickedLossCards.push(currID)
 			index = unclickedCards.indexOf(currID, 0)
 			unclickedCards.splice(index, 1)
@@ -425,6 +425,7 @@ var lossAmt = ""
 var CCT_timeouts = []
 var numWinRounds =  24
 var lossRounds = [1,4,5,7,8,11,16,18,20,21]
+var riggedLossCards = [2, 4, 1, 9, 5, 12, 15, 8, 2, 3]
 var numRounds = numWinRounds + lossRounds.length
 var lossClicked = false
 var whichClickInRound = 0
@@ -437,6 +438,8 @@ var instructPoints = 0
 var clickedGainCards = []
 var clickedLossCards = []
 var roundPointsArray = [] 
+var whichGainCards = []
+var whichLossCards = []
 var prize1 = 0
 var prize2 = 0
 var prize3 = 0
@@ -600,7 +603,8 @@ var start_test_block = {
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-	whichClickInRound = 0
+		whichClickInRound = 0
+		whichLossCards = [riggedLossCards.shift()]
 	}
 };
 
@@ -673,6 +677,9 @@ var test_node = {
 			whichClickInRound = 0
 			whichRound = whichRound + 1
 			round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
+			if (round_type == 'rigged_loss') {
+				whichLossCards = [riggedLossCards.shift()]
+			}
 			lossClicked = false
 			return false
 		} else {
