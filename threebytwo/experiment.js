@@ -350,7 +350,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the left or right arrow keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
     '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be six different cues indicating three different tasks. Thee cues and tasks are described below:</p>' +
     task_list +
     '<p class = block-text>Practice will start after you end instructions.</p></div>'

@@ -347,6 +347,7 @@ var instructCard = function(clicked_id) {
 }
 
 var instructFunction = function() {
+	$('#instructButton').prop('disabled', true)
 	$('#jspsych-instructions-next').click(function() {
 		for (var i = 0; i < CCT_timeouts.length; i++) {
 			clearTimeout(CCT_timeouts[i]);
@@ -376,6 +377,7 @@ var instructFunction = function() {
 }
 
 var instructFunction2 = function() {
+	$('#instructButton').prop('disabled', true)
 	var tempArray = [3, 5, 6, 7, 9, 10, 11, 12, 19, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26,
 		27, 28, 29, 31, 32
 	]
