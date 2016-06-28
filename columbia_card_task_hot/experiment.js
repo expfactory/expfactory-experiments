@@ -426,9 +426,13 @@ var gainAmt = ""
 var lossAmt = ""
 var CCT_timeouts = []
 var numWinRounds =  24
-var lossRounds = [1,4,5,7,8,11,16,18,20,21]
-var riggedLossCards = [2, 4, 1, 9, 5, 12, 15, 8, 2, 3]
-var numRounds = numWinRounds + lossRounds.length
+var numLossRounds = 4
+var numRounds = numWinRounds + numLossRounds
+var lossRounds = jsPsych.randomization.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28]).slice(0,numLossRounds)
+var riggedLossCards = []
+for (var i = 0; i < numLossRounds; i++) {
+	riggedLossCards.push(math.floor(math.random()*10)+2)
+}
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -459,8 +463,7 @@ var paramsArray = [
 ]
 
 var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-	24, 25, 26, 27, 28, 29, 30, 31, 32
-]
+	24, 25, 26, 27, 28, 29, 30, 31, 32]
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numRounds/8)
 
@@ -677,12 +680,12 @@ var test_node = {
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
-			whichRound = whichRound + 1
 			round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 			if (round_type == 'rigged_loss') {
 				whichLossCards = [riggedLossCards.shift()]
 			}
 			lossClicked = false
+			whichRound = whichRound + 1
 			return false
 		} else {
 			return true
