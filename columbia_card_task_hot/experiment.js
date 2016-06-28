@@ -160,7 +160,7 @@ var getRound = function() {
 		]
 		clickedGainCards = [] //num
 		clickedLossCards = [] //num
-		roundParams = shuffledParamsArray.pop()
+		roundParams = shuffledParamsArray.shift()
 		numLossCards = roundParams[0]
 		gainAmt = roundParams[1]
 		lossAmt = roundParams[2]
@@ -430,9 +430,6 @@ var numLossRounds = 4
 var numRounds = numWinRounds + numLossRounds
 var lossRounds = jsPsych.randomization.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28]).slice(0,numLossRounds)
 var riggedLossCards = []
-for (var i = 0; i < numLossRounds; i++) {
-	riggedLossCards.push(math.floor(math.random()*10)+2)
-}
 var lossClicked = false
 var whichClickInRound = 0
 var whichRound = 1
@@ -465,7 +462,13 @@ var paramsArray = [
 var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
 	24, 25, 26, 27, 28, 29, 30, 31, 32]
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
-var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numRounds/8)
+var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numWinRounds/8)
+for (var i = 0; i < numLossRounds; i++) {
+	riggedLossCards.push(math.floor(math.random()*10)+2)
+	var before = shuffledParamsArray.slice(0,lossRounds[i])
+	var after = shuffledParamsArray.slice(lossRounds[i])
+	shuffledParamsArray = before.concat(insert,after)
+}
 
 var gameSetup =
 	"<div class = cct-box>"+
