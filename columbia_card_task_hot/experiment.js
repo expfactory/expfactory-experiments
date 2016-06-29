@@ -464,7 +464,7 @@ var cardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1)
 var shuffledParamsArray = jsPsych.randomization.repeat(paramsArray, numWinRounds/8)
 for (var i = 0; i < numLossRounds; i++) {
-	riggedLossCards.push(math.floor(math.random()*10)+2)
+	riggedLossCards.push(Math.floor(Math.random()*10)+2)
 	var before = shuffledParamsArray.slice(0,lossRounds[i])
 	var after = shuffledParamsArray.slice(lossRounds[i])
 	var insert = [paramsArray[Math.floor(Math.random()*8)]]
