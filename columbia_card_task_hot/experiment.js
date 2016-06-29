@@ -467,6 +467,7 @@ for (var i = 0; i < numLossRounds; i++) {
 	riggedLossCards.push(math.floor(math.random()*10)+2)
 	var before = shuffledParamsArray.slice(0,lossRounds[i])
 	var after = shuffledParamsArray.slice(lossRounds[i])
+	var insert = [paramsArray[Math.floor(Math.random()*8)]]
 	shuffledParamsArray = before.concat(insert,after)
 }
 
