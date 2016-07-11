@@ -356,7 +356,7 @@ var instructions_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment, you will be presented with 6 letters on each trial. You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to forget the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>.</p><p class = block-text>You will then be presented with a single letter, respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Practice will start after you end the instructions.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment, on each trial you will be presented with 6 letters. You must memorize all 6 letters. </p><p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to <strong>forget</strong> the 3 letters located at either the top or bottom (respectively) of the screen.</p> <p class = block-text> The three remaining letters that you must remember are called your <strong>memory set</strong>. You should remember these three letters while forgetting the other three.</p><p class = block-text>You will then be presented with a single letter. Respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>Please make sure you understand these instructions before continuing. You will see an example trial after you end the instructions.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -384,6 +384,18 @@ var instruction_node = {
 	}
 }
 
+var start_practice_block = {
+	type: 'poldrack-instructions',
+	data: {
+		trial_id: 'instruction'
+	},
+	pages: [
+		'<div class = centerbox><p class = block-text>As you saw, there are three letters at the top of the screen and three letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <strong>forget</strong> the three letters at the top or bottom of the screen, respectively. The other three letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <strong> Left</strong> arrow key if it is in the memory set, and the <strong> Right </strong> arrow key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 1000
+};
 
 var start_test_block = {
 	type: 'poldrack-text',
@@ -512,7 +524,7 @@ var intro_test_block = {
 		trial_id: "intro_test",
 		exp_stage: "test"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, at the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, the cue (TOP or BOT) tells you which letters to <strong>forget</strong>. At the end of the trial respond with the <strong> Left</strong> arrow key if the letter presented is in the memory set, and the <strong> Right </strong> arrow key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: resetTrial,
@@ -538,7 +550,16 @@ var practice_probe_block = {
 /* create experiment definition array */
 var directed_forgetting_experiment = [];
 directed_forgetting_experiment.push(instruction_node);
-for (i = 0; i < 4; i++) {
+// show one practice trial
+directed_forgetting_experiment.push(start_fixation_block);
+directed_forgetting_experiment.push(training_block);
+directed_forgetting_experiment.push(cue_block);
+directed_forgetting_experiment.push(fixation_block);
+directed_forgetting_experiment.push(practice_probe_block);
+directed_forgetting_experiment.push(ITI_fixation_block);
+// start practice
+directed_forgetting_experiment.push(start_practice_block);
+for (i = 0; i < 6; i++) {
 	directed_forgetting_experiment.push(start_fixation_block);
 	directed_forgetting_experiment.push(training_block);
 	directed_forgetting_experiment.push(cue_block);

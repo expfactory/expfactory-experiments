@@ -73,10 +73,14 @@ var record_acc = function(data) {
 	var key = data.key_press
 	if (stim_lower == target_lower && key == 37) {
 		correct = true
-		block_acc += 1
+		if (block_trial >= delay) {
+			block_acc += 1
+		}
 	} else if (stim_lower != target_lower && key == 40) {
 		correct = true
-		block_acc += 1
+		if (block_trial >= delay) {
+			block_acc += 1
+		}
 	} else {
 		correct = false
 	}
@@ -85,12 +89,13 @@ var record_acc = function(data) {
 		stim: curr_stim,
 		trial_num: current_trial
 	})
+	console.log(block_acc)
 	current_trial = current_trial + 1
+	block_trial = block_trial + 1
 };
 
 var update_delay = function() {
-	var total_trials = base_num_trials + delay
-	var mistakes = total_trials - block_acc
+	var mistakes = base_num_trials - block_acc
 	if (delay >= 2) {
 		if (mistakes < 3) {
 			delay += 1
@@ -164,6 +169,7 @@ var trials_left = 0 // counter used by adaptive_test_node
 var target_trials = [] // array defining whether each trial in a block is a target trial
 var current_trial = 0
 var current_block = 0  
+var block_trial = 0
 var target = ""
 var curr_stim = ''
 var stims = [] //hold stims per block
@@ -301,7 +307,7 @@ var start_control_block = {
 	timing_response: 180000,
 	timing_post_trial: 2000,
 	on_finish: function() {
-		target_trials = jsPsych.randomization.repeat(['target','0', '0'], base_num_trials/3).slice(0,base_num_trials)
+		target_trials = jsPsych.randomization.repeat(['target','0', '0'], Math.round(base_num_trials/3)).slice(0,base_num_trials)
 	}
 };
 
@@ -314,6 +320,7 @@ var start_adaptive_block = {
 	text: getText,
 	cont_key: [13],
 	on_finish: function() {
+		block_trial = 0
 		stims = []
 		trials_left = base_num_trials + delay
 		target_trials = []
@@ -322,7 +329,7 @@ var start_adaptive_block = {
 		}
 		var trials_to_add = []
 		for ( var j = 0; j < (trials_left - delay); j++) {
-			if (j < (trials_left/3-1)) {
+			if (j < (Math.round(base_num_trials/3))) {
 				trials_to_add.push('target')
 			} else {
 				trials_to_add.push('0')
@@ -420,7 +427,6 @@ var adaptive_test_node = {
 	}
 }
 	
-
 //Set up experiment
 var adaptive_n_back_experiment = []
 adaptive_n_back_experiment.push(instruction_node);
