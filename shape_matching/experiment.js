@@ -58,32 +58,26 @@ var getStim = function() {
 	var probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
 	var target_i = 0
 	var distractor_i = 0
-	if (trial_type.match == "match") {
-		currData.correct_response = 77
+	if (trial_type[0] == 'S') {
 		target_i = probe_i
-		if (trial_type.condition == "congruent") {
-			distractor_i = target_i
-		} else {
-			distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != target_i}))
-		}
 	} else {
-		currData.correct_response = 90
 		target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))
-		if (trial_type.condition == "congruent") {
-			distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))
-		} else {
-			distractor_i = probe_i
-		}
+	}
+	if (trial_type[1] == 'S') {
+		distractor_i = target_i
+	} else if (trial_type[2] == 'S') {
+		distractor_i = probe_i
+	} else if (trial_type[2] == 'D') {
+		distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return $.inArray(y, [target_i, probe_i]) == -1}))
 	}
 	currData.trial_num = current_trial
-	currData.match = trial_type.match
-	currData.condition = trial_type.condition
+	currData.condition = trial_type
 	currData.probe_id = probe_i
 	currData.target_id = target_i
 	var target = '<div class = leftbox>'+center_prefix+path+target_i+'_green.png'+postfix+'</div>'
 	var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_white.png'+postfix+'</div>'
 	var distractor = ''
-	if (trial_type.condition != 'neutral') {
+	if (distractor_i != 0) {
 		distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_red.png'+postfix+'</div>'
 		currData.distractor_id = distractor_i
 	}
@@ -127,10 +121,12 @@ for (var i = 1; i<11; i++) {
 }
 jsPsych.pluginAPI.preloadImages(shape_stim)
 
-var practice_len = 24
-var trial_types = jsPsych.randomization.factorial({'match': ['match','non-match'],
-												'condition': ['neutral','incongruent','congruent']},practice_len/6)
-var exp_len = 288
+var practice_len = 21
+// Trial types denoted by three letters for the relationship between:
+// probe-target, target-distractor, distractor-probe of the form
+// SDS where "S" = match and "D" = non-match, N = "Neutral"
+var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
+var exp_len = 280
 var numblocks = 4
 var choices = [90, 77]
 
@@ -226,8 +222,7 @@ var start_test_block = {
 	timing_post_trial: 1000,
 	on_finish: function() {
 		exp_stage = 'test'
-		trial_types = jsPsych.randomization.factorial({'match': ['match','non-match'],
-												'condition': ['neutral','incongruent','congruent']},exp_len/6)
+		var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],exp_len/7)
 	}
 };
 
