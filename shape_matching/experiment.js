@@ -261,7 +261,6 @@ var mask_block = {
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 400,
 	timing_post_trial: 500,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
