@@ -222,7 +222,7 @@ var start_test_block = {
 	timing_post_trial: 1000,
 	on_finish: function() {
 		exp_stage = 'test'
-		var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],exp_len/7)
+		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],exp_len/7)
 	}
 };
 
@@ -261,6 +261,7 @@ var mask_block = {
 	data: {
 		trial_id: "mask"
 	},
+	timing_response: 400,
 	timing_post_trial: 500,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
