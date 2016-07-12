@@ -77,7 +77,7 @@ var getStim = function() {
 	var target = '<div class = leftbox>'+center_prefix+path+target_i+'_green.png'+postfix+'</div>'
 	var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_white.png'+postfix+'</div>'
 	var distractor = ''
-	if (distractor_i != 0) {
+	if (distractor_i !== 0) {
 		distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_red.png'+postfix+'</div>'
 		currData.distractor_id = distractor_i
 	}
