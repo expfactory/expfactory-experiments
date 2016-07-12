@@ -107,6 +107,8 @@ var update_delay = function() {
 			delay += 1
 		}
 	}
+	console.log('deley = '+ delay)
+	console.log('mistakes = '+ mistakes)
 	block_acc = 0
 	current_block += 1
 };

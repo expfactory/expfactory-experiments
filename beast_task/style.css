@@ -1,0 +1,555 @@
+.small_letters {
+   height: 6vw;
+   width: 6vw;
+}
+
+.centerbox2 {
+  width: 50vw;
+  height: 60vh;
+  position:absolute;
+  top:40%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.centerbox3 {
+  width: 80vw;
+  height: 15vh;
+  position:absolute;
+  top:12.5%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: none;
+}
+
+/* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
+.fixation {
+  text-align: center;
+  font-size: 100px;
+  position: relative;
+  top: 50%; 
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+/* this is for instructions */
+.letterbox1_test1 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:30%;
+ left:23.55%; //22.7
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //red
+}
+ 
+ 
+.letterbox2_test1 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:30%;
+ left:76.475%; 77.3
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //yellow
+}
+
+.letterbox3_test1 {
+ width:6.625%;
+ height: 20%;
+ position:absolute;
+ top:30%;
+ left:50.15%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //green
+}
+
+.letterbox1_test2 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:23.55%; //22.7
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //red
+}
+ 
+ 
+.letterbox2_test2 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:76.475%; 77.3
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //yellow
+}
+
+.letterbox3_test2 {
+ width:6.625%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:50.15%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //green
+}
+
+.letterbox1_test3 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:70%;
+ left:23.55%; //22.7
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //red
+}
+ 
+ 
+.letterbox2_test3 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:70%;
+ left:76.475%; 77.3
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //yellow
+}
+
+.letterbox3_test3 {
+ width:6.625%;
+ height: 20%;
+ position:absolute;
+ top:70%;
+ left:50.15%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //green
+}
+
+.letterbox1_test4 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:90%;
+ left:23.55%; //22.7
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //red
+}
+ 
+ 
+.letterbox2_test4 {
+ width:46.5%;
+ height: 20%;
+ position:absolute;
+ top:90%;
+ left:76.475%; 77.3
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //yellow
+}
+
+.letterbox3_test4 {
+ width:6.625%;
+ height: 20%;
+ position:absolute;
+ top:90%;
+ left:50.15%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //green
+}
+
+.containerbox_test {
+ width:100%;
+ height: 100%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //black
+}
+/* end of instructions */
+
+/* this is the placements during the experiment*/
+.letterbox1 {
+ width:46.5%;
+ height: 30%;
+ position:absolute;
+ top:50%;
+ left:23.55%; //22.7
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //red
+}
+ 
+ 
+.letterbox2 {
+ width:46.5%;
+ height: 30%;
+ position:absolute;
+ top:50%;
+ left:76.475%; 77.3
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //yellow
+}
+
+.letterbox3 {
+ width:6.625%;
+ height: 30%;
+ position:absolute;
+ top:50%;
+ left:50.15%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //green
+}
+
+
+.containerbox {
+ width:100%;
+ height: 40%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:50%;
+ transform: translate(-50%,-50%);
+ background-color: none; //black
+}
+
+/* end real stuff */
+/* letters1 and letters2 control the difficulty level (spacing) for flankers (i.e., harder = closer together, easier = further apart), 
+letters3 is the center image */
+.letters3_test {
+   display: block;
+   float:right;
+   position: relative;
+   width: 100%;
+   height: 100%;
+   padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
+   padding-top: 0%;
+   padding-left: 0%;
+   padding-right: 0.4%; .375
+   margin-top: 0%;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+
+.letters1_test {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 7px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_test {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 7px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters3 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 100%;
+   height: 100%;
+   padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
+   padding-top: 0%;
+   padding-left: 0%;
+   padding-right: 0.4%; .375
+   margin-top: 0%;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_11 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 7px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_11 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 7px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_10 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 14px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_10 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 14px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_9 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 21px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_9 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 21px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_8 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 28px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_8 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 28px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_7 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 35px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_7 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 35px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_6 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 42px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_6 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 42px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_5 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 49px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_5 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 49px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_4 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 56px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_4 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 56px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_3 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 63px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_3 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 63px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_2 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 70px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_2 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 70px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters1_1 {
+   display: block;
+   float:right;
+   position: relative;
+   width: 13.875%; //14.75
+   height: 100%;
+   padding-right: 77px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
+
+.letters2_1 {
+   display: block;
+   float:left;
+   position: relative;
+   width: 13.875%; //14.5
+   height: 100%;
+   padding-left: 77px;
+   overflow:none;
+   color: #fff;
+   background-color: none;
+}
