@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Reward Learning",
+        "template":"jspsych",
+        "run": ["static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/plugins/jspsych-call-function.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css",
+                "list.js"
+               ],
+        "exp_id": "reward_learning",
+        "cognitive_atlas_task_id": "",
+        "contributors": [
+        								 "G. Elliott Wimmer",
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",                         
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":15,
+        "reference":"http://science.sciencemag.org/content/338/6104/270",
+        "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID()"}
+                       }
+    
+   }
+]
