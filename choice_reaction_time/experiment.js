@@ -143,7 +143,7 @@ var test_stimuli_block = [{
 }];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, pracitce_len/2);
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_len/2);
 var test_trials = []
 for (var b = 0; b < num_blocks; b++) {
   test_trials.push(jsPsych.randomization.repeat(test_stimuli_block, block_len/2));
@@ -312,27 +312,30 @@ var practice_block = {
 }
 
 /* define test block */
-var test_block = {
-  type: 'poldrack-single-stim',
-  timeline: getTestTrials,
-  is_html: true,
-  data: {
-    trial_id: 'stim',
-    exp_stage: 'test'
-  },
-  choices: choices,
-  timing_response: 2000,
-  timing_post_trial: post_trial_gap,
-  on_finish: function(data) {
-    appendData()
-    correct = false
-    if (data.key_press === data.correct_response) {
-      correct = true
-    }
-    jsPsych.data.addDataToLastTrial({correct: correct})
-  }
-};
-
+var test_blocks = []
+for (var b = 0; b < num_blocks; b++) {
+	var test_block = {
+	  type: 'poldrack-single-stim',
+	  timeline: test_trials[b],
+	  is_html: true,
+	  data: {
+	    trial_id: 'stim',
+	    exp_stage: 'test'
+	  },
+	  choices: choices,
+	  timing_response: 2000,
+	  timing_post_trial: post_trial_gap,
+	  on_finish: function(data) {
+	    appendData()
+	    correct = false
+	    if (data.key_press === data.correct_response) {
+	      correct = true
+	    }
+	    jsPsych.data.addDataToLastTrial({correct: correct})
+	  }
+	};
+	test_blocks.push(test_block)
+}
 
 /* create experiment definition array */
 var choice_reaction_time_experiment = [];
@@ -341,7 +344,7 @@ choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);
 for (var b = 0; b < num_blocks; b++) {
-  choice_reaction_time_experiment.push(test_block);
+  choice_reaction_time_experiment.push(test_blocks[b]);
   choice_reaction_time_expeirment.push(rest_block);
 }
 choice_reaction_time_experiment.push(attention_node)
