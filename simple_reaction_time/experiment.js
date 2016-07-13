@@ -46,7 +46,7 @@ var get_trial_time = function() {
     gap = 4500
   }
   if (flag_curr_trial == 1){
-  gap = 3000
+  gap = 5000
   return gap
   }else{
   return gap;
@@ -94,7 +94,7 @@ var appendData = function() {
 		fast_rt_flags +=1
 	}
 	
-	if(fast_rt_flags > 4 && curr_rt < 125 && curr_rt != -1){
+	if(fast_rt_flags >= flag_thresh && curr_rt < 125 && curr_rt != -1){
 		flag_curr_trial = 1
 	}
 	
@@ -124,6 +124,7 @@ var gap = 0
 var current_trial = 0
 var stim = '<div class = shapebox><div id = cross></div></div>'
 var fast_rt_flags = 0;
+var flag_thresh = 5
 var curr_rt = ''
 var fast_rt_message = '<div class = centerbox><p class = block-text>We have detected a number of trials where the reaction time was implausibly fast.  Please make sure that you hit the spacebar <strong> once</strong>, as quickly as possible <strong>only when the large X appears</strong></p></div>'
 var flag_curr_trial = 0;
@@ -163,7 +164,7 @@ var wait_block = {
     exp_id: 'simple_reaction_time'
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = block-text>Take a break!  Press <strong> enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Take a break!  Press <strong> enter</strong> to continue the task.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
 };

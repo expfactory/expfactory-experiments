@@ -265,12 +265,20 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: 'choice_reaction_time', trial_id: 'practice_intro'},
+  data: {exp_id: 'choice_reaction_time', trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer receive feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
 
+var start_test_block2 = {
+  type: 'poldrack-text',
+  timing_response: 60000,
+  data: {exp_id: 'choice_reaction_time', trial_id: 'test_intro'},
+  text: '<div class = centerbox><p class = block-text>We will now begin a test block. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 1000
+};
 
 /* define practice block */
 var practice_block = {
@@ -304,7 +312,7 @@ var test_block = {
   },
   choices: choices,
   timing_response: 2000,
-  timing_post_trial: post_trial_gap,
+  timing_post_trial: post_trial_gap, 
   on_finish: function(data) {
     appendData()
     correct = false
@@ -321,8 +329,13 @@ var choice_reaction_time_experiment = [];
 choice_reaction_time_experiment.push(instruction_node);
 choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
+
 choice_reaction_time_experiment.push(start_test_block);
 choice_reaction_time_experiment.push(test_block);
+for(var i = 0; i < 2; i++){
+choice_reaction_time_experiment.push(start_test_block2);
+choice_reaction_time_experiment.push(test_block);
+}
 choice_reaction_time_experiment.push(attention_node)
 choice_reaction_time_experiment.push(post_task_block)
 choice_reaction_time_experiment.push(end_block)
