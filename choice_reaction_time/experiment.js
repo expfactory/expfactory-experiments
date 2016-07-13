@@ -255,7 +255,7 @@ var rest_block = {
     trial_id: "rest"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = shift-center-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -345,7 +345,7 @@ choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);
 for (var b = 0; b < num_blocks; b++) {
   choice_reaction_time_experiment.push(test_blocks[b]);
-  choice_reaction_time_expeirment.push(rest_block);
+  choice_reaction_time_experiment.push(rest_block);
 }
 choice_reaction_time_experiment.push(attention_node)
 choice_reaction_time_experiment.push(post_task_block)

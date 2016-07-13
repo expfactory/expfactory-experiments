@@ -161,7 +161,7 @@ var rest_block = {
     trial_id: "rest"
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = shift-center-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
