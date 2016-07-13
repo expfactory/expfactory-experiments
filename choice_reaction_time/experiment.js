@@ -69,6 +69,10 @@ var post_trial_gap = function() {
   return gap;
 }
 
+var getTestTrials = function() {
+  return test_trials.pop()
+}
+
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
   jsPsych.data.addDataToLastTrial({
@@ -88,7 +92,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var exp_len = 100
+var num_blocks = 3
+var block_len = 50
 var practice_len = 20
 var gap = 0
 var current_trial = 0
@@ -138,9 +143,11 @@ var test_stimuli_block = [{
 }];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
-
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_len/2);
+var test_trials = []
+for (var b = 0; b < num_blocks; b++) {
+  test_trials.push(jsPsych.randomization.repeat(test_stimuli_block, block_len/2));
+}
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -177,7 +184,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This task will take about 5 minutes. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This task will take about 8 minutes. Press <strong>enter</strong> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -242,6 +249,17 @@ var end_block = {
   on_finish: assessPerformance
 };
 
+var rest_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "rest"
+  },
+  timing_response: 180000,
+  text: '<div class = centerbox><p class = center-block-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 1000
+};
+
 var reset_block = {
   type: 'call-function',
   data: {
@@ -266,7 +284,7 @@ var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
   data: {exp_id: 'choice_reaction_time', trial_id: 'practice_intro'},
-  text: '<div class = centerbox><p class = block-text>We will now begin the first test block. You will no longer receive feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>We will now begin the test. You will no longer receive feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key. There will be two breaks. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
 };
@@ -294,27 +312,30 @@ var practice_block = {
 }
 
 /* define test block */
-var test_block = {
-  type: 'poldrack-single-stim',
-  timeline: test_trials,
-  is_html: true,
-  data: {
-    trial_id: 'stim',
-    exp_stage: 'test'
-  },
-  choices: choices,
-  timing_response: 2000,
-  timing_post_trial: post_trial_gap,
-  on_finish: function(data) {
-    appendData()
-    correct = false
-    if (data.key_press === data.correct_response) {
-      correct = true
-    }
-    jsPsych.data.addDataToLastTrial({correct: correct})
-  }
-};
-
+var test_blocks = []
+for (var b = 0; b < num_blocks; b++) {
+	var test_block = {
+	  type: 'poldrack-single-stim',
+	  timeline: test_trials[b],
+	  is_html: true,
+	  data: {
+	    trial_id: 'stim',
+	    exp_stage: 'test'
+	  },
+	  choices: choices,
+	  timing_response: 2000,
+	  timing_post_trial: post_trial_gap,
+	  on_finish: function(data) {
+	    appendData()
+	    correct = false
+	    if (data.key_press === data.correct_response) {
+	      correct = true
+	    }
+	    jsPsych.data.addDataToLastTrial({correct: correct})
+	  }
+	};
+	test_blocks.push(test_block)
+}
 
 /* create experiment definition array */
 var choice_reaction_time_experiment = [];
@@ -322,7 +343,10 @@ choice_reaction_time_experiment.push(instruction_node);
 choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);
-choice_reaction_time_experiment.push(test_block);
+for (var b = 0; b < num_blocks; b++) {
+  choice_reaction_time_experiment.push(test_blocks[b]);
+  choice_reaction_time_experiment.push(rest_block);
+}
 choice_reaction_time_experiment.push(attention_node)
 choice_reaction_time_experiment.push(post_task_block)
 choice_reaction_time_experiment.push(end_block)
