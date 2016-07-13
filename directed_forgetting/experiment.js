@@ -72,19 +72,18 @@ var getTestFeedback = function() {
 	var start_cut = global_trial - data_length
 	
 	//below are counters to see if the subject is treating this task as a directed remembering as opposed to a directed forgetting task
-	var neg_respond_remember_total = 0
-	var pos_respond_remember_total = 0
+	var respond_remember_total = 0
 	var neg_respond_remember = 0
 	var pos_respond_remember = 0
 	
 	for(var b =0; b < data_length; b++){
 		if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'neg'){
-		neg_respond_remember_total += 1
+		respond_remember_total += 1
 			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '37'){
 			neg_respond_remember += 1
 			}
 		}else if (jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'pos'){
-		pos_respond_remember_total += 1
+		respond_remember_total += 1
 			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '39'){
 			pos_respond_remember_total += 1
 			}
@@ -92,13 +91,13 @@ var getTestFeedback = function() {
 	}
 	
 	var directed_remembering_total = neg_respond_remember + pos_respond_remember
-	var directed_remembering_percent = directed_remembering_total / pos_respond_remember_total + neg_respond_remember_total
+	var directed_remembering_percent = directed_remembering_total / respond_remember_total 
 
 	
 	if (directed_remembering_percent >= .75){
 	test_feedback_text = 'According to the pattern of your responses, we believe that you are treating this task as a directed remembering task.  Please remember that <strong>this is a directed forgetting task</strong>.</p>'+
-						 '<p class = block-text>When you are presented with a cue (i.e., TOP), you should <strong> forget the top letters</strong> and <strong>remember the bottom letters.</strong></p>'+
-						 '<p class = block-text>When you are presented with a cue (i.e., BOT), you should <strong> forget the bottom letters</strong> and <strong>remember the top letters.</strong></p>'+
+						 '<p class = block-text>When you are presented with the cue TOP, you should <strong> forget the top letters</strong> and <strong>remember the bottom letters.</strong></p>'+
+						 '<p class = block-text>When you are presented with the cue BOT, you should <strong> forget the bottom letters</strong> and <strong>remember the top letters.</strong></p>'+
 						 '<p class = block-text>Press the <strong>left</strong> arrow key if the probe letter <strong> is in the memory set</strong>, and the <strong>right</strong> if it is <strong>not in the memory set</strong>.</p>'+
 						 '<p class = block-text>Press enter to continue.'		
 	} else {
