@@ -85,7 +85,7 @@ var getSelectiveFeedback = function(){
 		}
 	}
 	var ignoreRespond_percent = ignoreRespond / numIgnore
-	if (ignoreRespond_percent <= .6){
+	if (ignoreRespond_percent <= selective_threshold){
       	practice_feedback_text =
           '<p class = block-text> You have been stopping to both the blue and orange stars.  Please make sure to <strong>stop your response only when the blue star appears.</strong></p><p class = block-text>Press <strong>enter</strong> to view block feedback.'
   	} else {
@@ -159,7 +159,7 @@ var getTestFeedback = function() {
           '</p><p class = block-text><strong>Remember to try and withhold your response when you see a blue stop signal.</strong>' 
   } else if (StopCorrect_percent > (0.5+stop_thresh) || stopAverage > 0.55){
     test_feedback_text +=
-      '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
+      '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a blue star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
   }
 
   return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
@@ -234,6 +234,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
+
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stim_selective_stop_signal/images/'
@@ -273,6 +274,7 @@ var rtMedians = []
 var stopAccMeans =[]
 var RT_thresh = 1000
 var rt_diff_thresh = 75
+var selective_threshold = 0.6;
 var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
@@ -704,17 +706,12 @@ var practice_node = {
           '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
       }
       
-      if (ignoreRespond_percent >= .4){
-      	selective_feedback_text +=
-          '</p><p class = block-text>You have been stopping to both the blue and orange stars.  Please make sure to <strong>stop your response only when the blue star appears.</strong>'
-      
-      }
       if (StopCorrect_percent < 0.8){
         practice_feedback_text +=
           '</p><p class = block-text><strong>Remember to try and withhold your response when you see a blue stop signal.</strong>' 
       } else if (StopCorrect_percent > 0.2){
         practice_feedback_text +=
-          '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
+          '</p><p class = block-text><strong>Remember, do not slow your responses to the shape to see if a blue star will appear before you respond.  Please respond to each shape as quickly and as accurately as possible.</strong>'
       }
       practice_feedback_text += '</p><p class = block-text>Press <strong>Enter</strong> to continue'
       return true;
