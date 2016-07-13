@@ -69,6 +69,10 @@ var post_trial_gap = function() {
   return gap;
 }
 
+var getTestTrials = function() {
+  return test_trials.pop()
+}
+
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
   jsPsych.data.addDataToLastTrial({
@@ -88,7 +92,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // task specific variables
-var exp_len = 150
+var num_blocks = 3
+var block_len = 50
 var practice_len = 20
 var gap = 0
 var current_trial = 0
@@ -138,9 +143,11 @@ var test_stimuli_block = [{
 }];
 
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 25);
-
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, pracitce_len/2);
+var test_trials = []
+for (var b = 0; b < num_blocks; b++) {
+  test_trials.push(jsPsych.randomization.repeat(test_stimuli_block, block_len/2));
+}
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -242,6 +249,17 @@ var end_block = {
   on_finish: assessPerformance
 };
 
+var rest_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "rest"
+  },
+  timing_response: 180000,
+  text: '<div class = centerbox><p class = shift-center-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 1000
+};
+
 var reset_block = {
   type: 'call-function',
   data: {
@@ -296,7 +314,7 @@ var practice_block = {
 /* define test block */
 var test_block = {
   type: 'poldrack-single-stim',
-  timeline: test_trials,
+  timeline: getTestTrials,
   is_html: true,
   data: {
     trial_id: 'stim',
@@ -322,7 +340,10 @@ choice_reaction_time_experiment.push(instruction_node);
 choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
 choice_reaction_time_experiment.push(start_test_block);
-choice_reaction_time_experiment.push(test_block);
+for (var b = 0; b < num_blocks; b++) {
+  choice_reaction_time_experiment.push(test_block);
+  choice_reaction_time_expeirment.push(rest_block);
+}
 choice_reaction_time_experiment.push(attention_node)
 choice_reaction_time_experiment.push(post_task_block)
 choice_reaction_time_experiment.push(end_block)

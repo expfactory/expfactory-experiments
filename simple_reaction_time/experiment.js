@@ -70,7 +70,8 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var practice_len = 5
-var experiment_len = 150
+var num_blocks = 3
+var block_len = 50
 var gap = 0
 var current_trial = 0
 var stim = '<div class = shapebox><div id = cross></div></div>'
@@ -154,7 +155,16 @@ var instruction_node = {
   }
 }
 
-
+var rest_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "rest"
+  },
+  timing_response: 180000,
+  text: '<div class = centerbox><p class = shift-center-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 1000
+};
 
 var start_practice_block = {
   type: 'poldrack-text',
@@ -233,8 +243,11 @@ for (var i = 0; i < practice_len; i++) {
 }
 simple_reaction_time_experiment.push(reset_block)
 simple_reaction_time_experiment.push(start_test_block);
-for (var i = 0; i < experiment_len; i++) {
-  simple_reaction_time_experiment.push(test_block);
+for (var i = 0; i < num_blocks; i++) {
+  for (var j = 0; j < block_len; j++) {
+    simple_reaction_time_experiment.push(test_block);
+  }
+  simple_reaction_time_experiment.push(rest_block)
 }
 simple_reaction_time_experiment.push(post_task_block)
 simple_reaction_time_experiment.push(end_block);
