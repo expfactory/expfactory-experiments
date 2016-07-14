@@ -63,6 +63,36 @@ function assessPerformance() {
 
 }
 
+var getSelectiveFeedback = function(){
+	var global_trial = jsPsych.progress().current_trial_global
+	if(jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'practice'){
+		var data_length = 60
+	}else if (jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'test'){
+		var data_length = 120
+	}
+	var start_cut = global_trial - data_length
+	var numIgnore = 0
+	var ignoreRespond = 0
+	for (var i = 0; i < data_length; i++){
+		if(jsPsych.data.getDataByTrialIndex(start_cut + i).correct_response == ignore_response[1]){
+			numIgnore = numIgnore + 1
+			if(jsPsych.data.getDataByTrialIndex(start_cut + i).rt != -1){
+				ignoreRespond = ignoreRespond + 1
+			}
+		}
+	}
+	var ignoreRespond_percent = ignoreRespond / numIgnore
+	if (ignoreRespond_percent <= motor_threshold){
+      	selective_feedback_text =
+          '<p class = block-text> You have been stopping to both the Z and M keys.  Please make sure to <strong>stop your response only when the star appears and you were going to hit the '+ stop_response[0]+'.</strong></p><p class = block-text>Press <strong>enter</strong> to view block feedback.'
+  	} else {
+  		selective_feedback_text =
+          '<p class = block-text>Press<strong> enter </strong>to view block feedback.'
+    }
+  	return '<div class = centerbox>' + selective_feedback_text + '</p></div>'
+}
+		
+
 var randomDraw = function(lst) {
 	var index = Math.floor(Math.random() * (lst.length))
 	return lst[index]
@@ -204,6 +234,7 @@ jsPsych.pluginAPI.preloadImages(images);
 images = jsPsych.randomization.shuffle(images)
 /* Stop signal delay in ms */
 var SSD = 250
+var motor_threshold = .60
 var stop_signal =
 	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
@@ -234,6 +265,7 @@ var stop_thresh = 0.2
 var practice_repetitions = 1
 var practice_repetition_thresh = 5
 var stop_response = possible_responses[0]
+var ignore_response = possible_responses[1]
 var test_block_data = [] // records the data in the current block to calculate feedback
 var NoSSpractice_block_len = 12
 var practice_block_len = 30
@@ -430,6 +462,17 @@ var test_feedback_block = {
 	}
 };
 
+var selective_feedback_text = ''
+var selective_feedback_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "feedback",
+    exp_stage: "practice"
+  },
+  timing_response: 180000,
+  cont_key: [13],
+  text: getSelectiveFeedback
+};
 
 
 /* ************************************ */
@@ -562,7 +605,7 @@ for (i = 0; i < practice_block_len; i++) {
 	}
 	practice_trials.push(stop_signal_block)
 }
-
+practice_trials.push(selective_feedback_block)
 
 /* Practice node continues repeating until the subject reaches certain criteria */
 var practice_node = {
@@ -711,6 +754,7 @@ for (b = 0; b < numblocks; b++) {
 	if ($.inArray(b, [0, 2, 3]) != -1) {
 		motor_selective_stop_signal_experiment.push(attention_node)
 	}
+	motor_selective_stop_signal_experiment.push(selective_feedback_block)
 	motor_selective_stop_signal_experiment.push(test_feedback_block)
 }
 

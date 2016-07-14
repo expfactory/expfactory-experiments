@@ -72,7 +72,11 @@ var getPracticeFeedback = function() {
 }
 var getSelectiveFeedback = function(){
 	var global_trial = jsPsych.progress().current_trial_global
-	var data_length = 60
+	if(jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'practice'){
+		var data_length = 60
+	}else if (jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'test'){
+		var data_length = 100
+	}
 	var start_cut = global_trial - data_length
 	var numIgnore = 0
 	var ignoreRespond = 0
@@ -86,13 +90,13 @@ var getSelectiveFeedback = function(){
 	}
 	var ignoreRespond_percent = ignoreRespond / numIgnore
 	if (ignoreRespond_percent <= selective_threshold){
-      	practice_feedback_text =
+      	selective_feedback_text =
           '<p class = block-text> You have been stopping to both the blue and orange stars.  Please make sure to <strong>stop your response only when the blue star appears.</strong></p><p class = block-text>Press <strong>enter</strong> to view block feedback.'
   	} else {
-  		practice_feedback_text =
+  		selective_feedback_text =
           '<p class = block-text>Press<strong> enter </strong>to view block feedback.'
     }
-  	return '<div class = centerbox>' + practice_feedback_text + '</p></div>'
+  	return '<div class = centerbox>' + selective_feedback_text + '</p></div>'
 }
 		
 	
