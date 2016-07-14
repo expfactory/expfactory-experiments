@@ -154,7 +154,7 @@ for (var c = 0; c < colors.length; c++) {
             stim: stims[s],
             orientation: orientation_data[orientations[o] - 1],
             border: color_data[colors[c] - 1],
-            exp_stage: "test",
+            exp_stage: "flat_test",
             correct_response: random_correct.pop()
           }
         })
@@ -170,7 +170,7 @@ for (var c = 0; c < colors.length; c++) {
           data: {
             stim: stims[s + (stims.length / 2)],
             orientation: orientation_data[orientations[o] - 1],
-            exp_stage: "test",
+            exp_stage: "hierarchical_test",
             border: color_data[colors[c] - 1],
             correct_response: correct_response
           }

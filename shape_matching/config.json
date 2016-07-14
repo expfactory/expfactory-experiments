@@ -21,8 +21,8 @@
         "contributors": [
                          "Ian Eisenberg"
                         ], 
-        "time":8,
-        "reference": "http://psycnet.apa.org/journals/xge/133/1/101/",
+        "time":20,
+        "reference": "http://psycnet.apa.org/psycarticles/2013-29647-001",
         "publish":"True",
         "experiment_variables": [{
                                  "name":"credit_var",
