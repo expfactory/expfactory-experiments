@@ -71,11 +71,12 @@ var getPracticeFeedback = function() {
   return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
 }
 var getSelectiveFeedback = function(){
+	var data_length = 0
 	var global_trial = jsPsych.progress().current_trial_global
 	if(jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'practice'){
-		var data_length = 60
+		data_length = 60
 	}else if (jsPsych.data.getDataByTrialIndex(global_trial - 5).exp_stage == 'test'){
-		var data_length = 100
+		data_length = 100
 	}
 	var start_cut = global_trial - data_length
 	var numIgnore = 0
@@ -679,7 +680,7 @@ var practice_node = {
     var StopCorrect_percent = successful_stops / stop_length
     practice_feedback_text = "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-blue star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
     if ((average_rt < RT_thresh && GoCorrect_percent > accuracy_thresh && missed_responses <
-        missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8) || practice_repetitions >
+        missed_response_thresh && StopCorrect_percent > 0.2 && StopCorrect_percent < 0.8 && ignoreRespond_percent > selective_threshold) || practice_repetitions >
       practice_repetition_thresh) {
       // end the loop
       current_trial = 0
