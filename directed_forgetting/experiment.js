@@ -94,7 +94,7 @@ var getTestFeedback = function() {
 	var directed_remembering_percent = directed_remembering_total / respond_remember_total 
 
 	
-	if (directed_remembering_percent >= .75){
+	if (directed_remembering_percent >= 0.75){
 	test_feedback_text = 'According to the pattern of your responses, we believe that you are treating this task as a directed remembering task.  Please remember that <strong>this is a directed forgetting task</strong>.</p>'+
 						 '<p class = block-text>When you are presented with the cue TOP, you should <strong> forget the top letters</strong> and <strong>remember the bottom letters.</strong></p>'+
 						 '<p class = block-text>When you are presented with the cue BOT, you should <strong> forget the bottom letters</strong> and <strong>remember the top letters.</strong></p>'+
