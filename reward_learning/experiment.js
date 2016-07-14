@@ -10,26 +10,28 @@ var getSubjnum = function () {
 	var subjnum = Number(subjstring);
 	var stimArray = picArray[subjnum];
 	var subjcode = subjcodeArray[subjnum];
+	var listerrortext = [];
 	if (typeof stimArray == "undefined") {
 		stimArray = picArray[0];
-		var listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + subjnum + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>"
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + subjnum + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>";
 	} else {
-		var listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text><strong>" + subjnum + "</strong>, with codeword <strong>" + subjcode + "</strong> found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>"
-	};
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text><strong>" + subjnum + "</strong>, with codeword <strong>" + subjcode + "</strong> found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>";
+	}
 	jsPsych.pluginAPI.preloadImages(stimArray);
-	answers = genLearnphasestims(stimArray)
+	answers = genLearnphasestims(stimArray);
 	return listerrortext
 };
 
 
 var getSubjreport = function () {
+	var listerrortext = [];		
 	if (typeof stimArray == "undefined") {
-		stimArray = picArray[0];
-		var listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + numtemp + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>"
+		stimArray = picArray[0];	
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + numtemp + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>";
 	} else {
 		stimArray = picArray(subjnum);
-		var listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text>" + numtemp + " found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>"
-	};
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text>" + numtemp + " found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>";
+	}
 	return listerrortext
 };
 
@@ -94,13 +96,13 @@ var genITIs = function () {
 	var ititemp = [];
 	for(var i = 0; i < Learn_trials; i++){
 		ititemp.push( Math.floor(Math.random() * 1500) + 250 );		
-		};
+		}
   var itilist = [];
 	var itistim = [];
 	var itiresp = [];
-	for(var i = 0; i < Learn_trials; i++){
-		itistim.push(ititemp[i]),
-		itiresp.push(ititemp[i])
+	for(var j = 0; j < Learn_trials; j++){
+		itistim.push(ititemp[i]);
+		itiresp.push(ititemp[i]);
 	}
 	return {
 	  itilist: itilist,
@@ -216,7 +218,7 @@ var getPrevresponse = function() {
 		return getYes	
 	} else if (keypress == 40 ) {
 		return getNo
-	};
+	}
 };
 
 
@@ -295,7 +297,7 @@ var genLearnphasestims = function (stimArray) {
 			optimal_response: stims[i][2]
 		}
 		learnPhaseStims.push(list_stim)
-	};
+	}
 	learnPhaseStimsComplete = jsPsych.randomization.repeat(learnPhaseStims, eachRepNum, true);
 	var answers = genResponses(learnPhaseStimsComplete)
 	return answers
@@ -406,7 +408,6 @@ var learning_phase_feedback = {
 	response_ends_trial: false,
 	stimulus: getPrevresponse,
 	is_html: true,
-	choices: 'none',
 	data: {
 			trial_id: "feedback",
 			exp_stage: "learn"
@@ -421,10 +422,8 @@ var learning_phase_itis = {
 	type: 'poldrack-single-stim',
 	choices: 'none',
 	response_ends_trial: false,
-	type: 'poldrack-single-stim',
 	stimulus: "<div class = containerbox><div class = centerbox><div class = fixwhite>+</div></div></div>",
 	is_html: true,
-	choices: 'none',
 	data: {
 			trial_id: "fixation_white",
 			exp_stage: "learn"
