@@ -86,6 +86,7 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stroop','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('ten_item_personality','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('test_task','web','.');"
+    - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('test_task2','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('theories_of_willpower','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('threebytwo','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('time_perspective','web','.');"
