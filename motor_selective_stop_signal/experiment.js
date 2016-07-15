@@ -237,7 +237,7 @@ jsPsych.pluginAPI.preloadImages(images);
 images = jsPsych.randomization.shuffle(images)
 /* Stop signal delay in ms */
 var SSD = 250
-var motor_threshold = .60
+var motor_threshold = 0.6
 var stop_signal =
 	'<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 

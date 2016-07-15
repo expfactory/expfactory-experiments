@@ -68,9 +68,10 @@ var getInstructFeedback = function() {
 
 var getTestFeedback = function() {
 	var global_trial = jsPsych.progress().current_trial_global
-	var data_length = 144
+	var data_length = num_trials * 6
 	var start_cut = global_trial - data_length
-	
+	var test_feedback_text = ''
+
 	//below are counters to see if the subject is treating this task as a directed remembering as opposed to a directed forgetting task
 	var respond_remember_total = 0
 	var neg_respond_remember = 0
@@ -80,12 +81,12 @@ var getTestFeedback = function() {
 		if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'neg'){
 		respond_remember_total += 1
 			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '37'){
-			neg_respond_remember += 1
+				neg_respond_remember += 1
 			}
 		}else if (jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'pos'){
-		respond_remember_total += 1
+			respond_remember_total += 1
 			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '39'){
-			pos_respond_remember_total += 1
+				pos_respond_remember += 1
 			}
 		}
 	}
@@ -634,7 +635,6 @@ var practice_probe_block = {
 	on_finish: appendPracticeProbeData,
 };
 
-var test_feedback_text =''
 var test_feedback_block = {
 	type: 'poldrack-text',
 	data: {
