@@ -27,32 +27,6 @@ function assessPerformance() {
   jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
-var get_trial_time = function() {
-  // ref: https://gist.github.com/nicolashery/5885280
-  function randomExponential(rate, randomUniform) {
-    // http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
-    rate = rate || 1;
-
-    // Allow to pass a random uniform value or function
-    // Default to Math.random()
-    var U = randomUniform;
-    if (typeof randomUniform === 'function') U = randomUniform();
-    if (!U) U = Math.random();
-
-    return -Math.log(U) / rate;
-  }
-  gap = randomExponential(1)*1000
-  if (gap > 4500) {
-    gap = 4500
-  }
-  if (flag_curr_trial == 1){
-  gap = 5000
-  return gap
-  }else{
-  return gap;
-  }
-}
-
 var get_trial_time_practice = function() {
   // ref: https://gist.github.com/nicolashery/5885280
   function randomExponential(rate, randomUniform) {
@@ -73,36 +47,65 @@ var get_trial_time_practice = function() {
   }
   return gap + 2000
 }
-var getGap = function(){
-	return gap
+
+var get_trial_time = function() {
+  // ref: https://gist.github.com/nicolashery/5885280
+  function randomExponential(rate, randomUniform) {
+    // http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
+    rate = rate || 1;
+
+    // Allow to pass a random uniform value or function
+    // Default to Math.random()
+    var U = randomUniform;
+    if (typeof randomUniform === 'function') U = randomUniform();
+    if (!U) U = Math.random();
+
+    return -Math.log(U) / rate;
+  }
+  gap = randomExponential(1)*1000
+  if (gap > 4500) {
+    gap = 4500
+  }
+  if (flag_curr_trial == 1){
+    gap = 10000
+    fast_rt_flags = 0
+  }
+  return gap
+}
+
+var get_message_time = function(){
+	if (flag_curr_trial == 1) {
+    return 9000
+  }
+  else {
+    return -1
+  }
 }
 
 var get_message = function(){
-	if(flag_curr_trial == 1){
+  var fast_rt_message = '<div class = centerbox><p class = block-text>We have detected a number of trials where the reaction time was implausibly fast.  Please make sure that you hit the spacebar <strong> once</strong>, as quickly as possible <strong>only after the large X appears</strong>.</p></div>'
+	if (flag_curr_trial == 1){
 		return fast_rt_message
-	}else{
+	} else{
 		return '<div class = centerbox></div>'
 	}	
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
-var appendData = function() {
-	var global_trial = jsPsych.progress().current_trial_global
-	curr_rt = jsPsych.data.getDataByTrialIndex(global_trial).rt
-	
+var appendData = function(data) {
+	var curr_rt = data.rt	
 	if(curr_rt < 125 && curr_rt != -1){
 		fast_rt_flags +=1
 	}
 	
-	if(fast_rt_flags >= flag_thresh && curr_rt < 125 && curr_rt != -1){
+	if(fast_rt_flags >= flag_thresh){
 		flag_curr_trial = 1
 	}
-	
 	
 	jsPsych.data.addDataToLastTrial({
     	trial_num: current_trial
  	})
-  	current_trial = current_trial + 1
+  current_trial = current_trial + 1
 }
 
 var getInstructFeedback = function() {
@@ -126,8 +129,6 @@ var current_trial = 0
 var stim = '<div class = shapebox><div id = cross></div></div>'
 var fast_rt_flags = 0;
 var flag_thresh = 5
-var curr_rt = ''
-var fast_rt_message = '<div class = centerbox><p class = block-text>We have detected a number of trials where the reaction time was implausibly fast.  Please make sure that you hit the spacebar <strong> once</strong>, as quickly as possible <strong>only when the large X appears</strong></p></div>'
 var flag_curr_trial = 0;
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -158,7 +159,7 @@ var end_block = {
   on_finish: assessPerformance
 };
 
-var wait_block = {
+var rest_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "end",
@@ -168,6 +169,10 @@ var wait_block = {
   text: '<div class = centerbox><p class = block-text>Take a break!  Press <strong> enter</strong> to continue the task.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
+  on_finish: function() {
+    flag_curr_trial = 0
+    fast_rt_flags = 0
+  }
 };
 
 
@@ -251,21 +256,13 @@ var start_test_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = block-text>We will now start the test. Respond to the "X" as quickly as possible by pressing the spacebar. There will be two breaks. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function() {
+    current_trial = 0
+    fast_rt_flags = 0
+  }
 };
 
-var reset_block = {
-  type: 'call-function',
-  data: {
-    trial_id: "reset_trial"
-  },
-  func: function() {
-    current_trial = 0
-    flag_curr_trial = 0
-    fast_rt_flags = 0
-  },
-  timing_post_trial: 0
-}
 
 /* define practice block */
 var practice_block = {
@@ -281,7 +278,9 @@ var practice_block = {
     exp_stage: "practice"
   },
   choices: [32],
-  on_finish: appendData,
+  on_finish: function(data) {
+    appendData(data)
+  }
 };
 
 /* define test block */
@@ -298,23 +297,26 @@ var test_block1 = {
     exp_stage: "test"
   },
   choices: [32],
-  on_finish: appendData,
+  on_finish: function(data) {
+    appendData(data)
+  }
 };
 
 var test_block2 = {
   type: 'poldrack-single-stim',
   stimulus: get_message,
-  timing_stim: get_trial_time,
-  timing_response: getGap,
+  timing_stim: get_message_time,
+  timing_response: get_trial_time,
   timing_post_trial: 0,
   response_ends_trial: false,
+  choices: 'none',
   is_html: true,
   data: {
-    trial_id: "stim",
-    exp_stage: "test-gap-message"
+    trial_id: "gap-message",
+    exp_stage: "test"
   },
   on_finish: function(){
-  flag_curr_trial = 0;
+    flag_curr_trial = 0;
   }
 };
 
@@ -326,16 +328,14 @@ simple_reaction_time_experiment.push(start_practice_block);
 for (var i = 0; i < practice_len; i++) {
   simple_reaction_time_experiment.push(practice_block);
 }
-simple_reaction_time_experiment.push(reset_block)
 simple_reaction_time_experiment.push(start_test_block);
 
 for(var b = 0; b < 3; b++){
-	for (var i = 0; i < experiment_len; i++) {
+	for (var i = 0; i < block_len; i++) {
     	simple_reaction_time_experiment.push(test_block1);
     	simple_reaction_time_experiment.push(test_block2);
 	}
-	simple_reaction_time_experiment.push(wait_block)
-	simple_reaction_time_experiment.push(reset_block)
+	simple_reaction_time_experiment.push(rest_block)
 }
 
 simple_reaction_time_experiment.push(post_task_block)
