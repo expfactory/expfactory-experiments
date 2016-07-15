@@ -16,7 +16,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "test_task2",
+        "exp_id": "test_task_always_fail",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
         "contributors": [
                          "Ian Eisenberg",

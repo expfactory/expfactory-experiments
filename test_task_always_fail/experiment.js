@@ -112,7 +112,7 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: 'end',
-    exp_id: 'test_task2'
+    exp_id: 'test_task_always_fail'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
@@ -138,9 +138,9 @@ var test_block = {
 }
 
 /* create experiment definition array */
-var test_task2_experiment = [];
+var test_task_always_fail_experiment = [];
 for (var i = 0; i < experiment_len; i++) {
-  test_task2_experiment.push(test_block);
+  test_task_always_fail_experiment.push(test_block);
 }
-test_task2_experiment.push(add_data)
-test_task2_experiment.push(end_block)
+test_task_always_fail_experiment.push(add_data)
+test_task_always_fail_experiment.push(end_block)
