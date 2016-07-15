@@ -32,5 +32,5 @@ align-items: center; /* align vertical */
 }
 
 .responded {
-  visibility: visible;
+  visibility: hidden;
 }

@@ -283,7 +283,7 @@ var start_practice_block = {
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 60000,
-  data: {exp_id: 'choice_reaction_time', trial_id: 'practice_intro'},
+  data: {exp_id: 'choice_reaction_time', trial_id: 'test_intro'},
   text: '<div class = centerbox><p class = block-text>We will now begin the test. You will no longer receive feedback about your responses.</p><p class = block-text>If you see the <font color="orange">orange</font> square you should press the <strong>' + correct_responses[0][0] + '</strong> key. If you see the <font color="blue">blue</font> square you should press the <strong>' + correct_responses[1][0] + '</strong> key. There will be two breaks. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000
@@ -312,6 +312,7 @@ var practice_block = {
 }
 
 /* define test block */
+
 var test_blocks = []
 for (var b = 0; b < num_blocks; b++) {
 	var test_block = {
@@ -342,6 +343,7 @@ var choice_reaction_time_experiment = [];
 choice_reaction_time_experiment.push(instruction_node);
 choice_reaction_time_experiment.push(practice_block);
 choice_reaction_time_experiment.push(reset_block)
+
 choice_reaction_time_experiment.push(start_test_block);
 for (var b = 0; b < num_blocks; b++) {
   choice_reaction_time_experiment.push(test_blocks[b]);

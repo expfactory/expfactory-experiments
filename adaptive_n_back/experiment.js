@@ -66,6 +66,7 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
+
 //Calculates whether the last trial was correct and records the accuracy in data object
 var record_acc = function(data) {
 	var target_lower = data.target.toLowerCase()
@@ -89,7 +90,6 @@ var record_acc = function(data) {
 		stim: curr_stim,
 		trial_num: current_trial
 	})
-	console.log(block_acc)
 	current_trial = current_trial + 1
 	block_trial = block_trial + 1
 };
@@ -337,6 +337,7 @@ var start_adaptive_block = {
 		}
 		trials_to_add = jsPsych.randomization.shuffle(trials_to_add)
 		target_trials = target_trials.concat(trials_to_add)
+		block_acc = 0;
 	}
 };
 
@@ -437,8 +438,7 @@ if (control_before === 0) {
 	adaptive_n_back_experiment.push(start_control_block)
 	adaptive_n_back_experiment = adaptive_n_back_experiment.concat(control_trials)
 }
-
-for (var b = 0; b < num_blocks; b++) {
+for (var b = 0; b < num_blocks; b++) { 
 	adaptive_n_back_experiment.push(start_adaptive_block)
 	adaptive_n_back_experiment.push(adaptive_test_node)
 	if ($.inArray(b, [4, 7, 15]) != -1) {
