@@ -84,9 +84,9 @@ var getAlert = function() {
     rewarded_feature + '</strong>!</div></div>'
 }
 var getStim = function() {
-  var colors = jsPsych.randomization.shuffle(stim_att.colors)
-  var shapes = jsPsych.randomization.shuffle(stim_att.shapes)
-  var patterns = jsPsych.randomization.shuffle(stim_att.patterns)
+  var colors = jsPsych.randomization.shuffle(stim_att.color)
+  var shapes = jsPsych.randomization.shuffle(stim_att.shape)
+  var patterns = jsPsych.randomization.shuffle(stim_att.pattern)
   stim_htmls = []
   stims = []
   for (var i = 0; i < 3; i++) {
@@ -157,14 +157,14 @@ var recorded_shift_type = 'stay'
 
 // stim variables
 var stim_att = {
-  colors: ['red', 'blue', 'green'],
-  shapes: ['circle', 'square', 'triangle'],
-  patterns: ['dots', 'lines', 'waves']
+  color: ['red', 'blue', 'green'],
+  shape: ['circle', 'square', 'triangle'],
+  pattern: ['dots', 'lines', 'waves']
 }
 var stim_htmls = [] //array of stim html
 var stims = [] //array of stim objects
-var dims = ['colors', 'shapes', 'patterns']
-var features = stim_att.colors.concat(stim_att.shapes).concat(stim_att.patterns)
+var dims = ['color', 'shape', 'pattern']
+var features = stim_att.color.concat(stim_att.shape).concat(stim_att.pattern)
 var path_source = '/static/experiments/shift_task/images/'
 var rewarded_dim = randomDraw(dims)
 var rewarded_feature = randomDraw(stim_att[rewarded_dim])
@@ -172,11 +172,11 @@ var rewarded_feature = randomDraw(stim_att[rewarded_dim])
 //preload images
 var images = []
 for (var c = 0; c < 3; c++) {
-  var color = stim_att.colors[c]
+  var color = stim_att.color[c]
   for (var s = 0; s < 3; s++) {
-    var shape = stim_att.shapes[s]
+    var shape = stim_att.shape[s]
     for (var p = 0; p < 3; p++) {
-      var pattern = stim_att.patterns[p]
+      var pattern = stim_att.pattern[p]
       images.push(path_source + color + '_' + shape + '_' + pattern + '.png')
     }
   }
@@ -390,15 +390,21 @@ var practice_stim_block = {
   on_finish: function(data) {
     var choice = choices.indexOf(data.key_press)
     var choice_stim = -1
+    var correct = false
     if (choice != -1) {
       choice_stim = JSON.stringify(stims[choice])
+      if (stims[choice][rewarded_dim] == rewarded_feature) {
+        correct = true
+      }
     }
+    
     jsPsych.data.addDataToLastTrial({
       trial_id: "stim",
       exp_stage: "practice",
       stims: JSON.stringify(stims),
       choice_stim: choice_stim,
-      choice_position: position_array[choice] || -1
+      choice_position: position_array[choice] || -1,
+      correct: correct
     })
   }
 };
@@ -416,15 +422,20 @@ var stim_block = {
   on_finish: function(data) {
     var choice = choices.indexOf(data.key_press)
     var choice_stim = -1
+    var correct = false
     if (choice != -1) {
       choice_stim = JSON.stringify(stims[choice])
+      if (stims[choice][rewarded_dim] == rewarded_feature) {
+        correct = true
+      }
     }
     jsPsych.data.addDataToLastTrial({
       trial_id: "stim",
       exp_stage: "test",
       stims: JSON.stringify(stims),
       choice_stim: choice_stim,
-      choice_position: position_array[choice] || -1
+      choice_position: position_array[choice] || -1,
+      correct: correct
     })
   }
 };
