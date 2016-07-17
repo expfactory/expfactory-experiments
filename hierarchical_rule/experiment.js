@@ -294,7 +294,7 @@ var instruct_text_array2 = ['<div class = centerbox><p class = "block-text">You 
 for (var i = 0; i < instruct_stims2.length; i++) {
   instruct_text_array2.push(instruct_stims2[i] + '<div class = instructionBox><p class = center-block-text>Please familiarize yourself with the stimulus shown on this page.</p></div>')
 }
-instruct_text_array2.push('<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli you just saw. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions.</p></div>')
+instruct_text_array2.push('<div class = centerbox><p class = "block-text">Make sure you are familiar with the stimuli you just saw. Remember, respond to the stimuli by pressing J, K, or L. You will get a bonus based on your performance so try your best!</p><p class = "block-text">The experiment will start right after you end the instructions. There will be rest breaks throughout the experiment.</p></div>')
 
 var instructions_block2 = {
   type: 'poldrack-instructions',
@@ -410,9 +410,33 @@ var hierarchical_stim_block = {
   }
 }
 
+//conditional rest every 90 trials
+var rest_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "rest"
+  },
+  timing_response: 180000,
+  text: '<div class = centerbox><p class = center-block-text>Take a break! Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: [13],
+  timing_post_trial: 1000
+};
+
+var rest_node = {
+    timeline: [rest_block],
+    conditional_function: function(){
+        if(current_trial%90 == 0 && current_trial != 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
 // loop nodes instead of creating a huge array with three blocks for all trials
 var flat_loop_node = {
-  timeline: [fixation_block, flat_stim_block, feedback_block],
+  timeline: [fixation_block, flat_stim_block, feedback_block, rest_node],
   loop_function: function(data) {
     if (flat_stims.stimulus.length > 0) {
       current_trial += 1
@@ -425,7 +449,7 @@ var flat_loop_node = {
 }
 
 var hierarchical_loop_node = {
-  timeline: [fixation_block, hierarchical_stim_block, feedback_block],
+  timeline: [fixation_block, hierarchical_stim_block, feedback_block, rest_node],
   loop_function: function(data) {
     if (hierarchical_stims.stimulus.length > 0) {
       current_trial += 1
