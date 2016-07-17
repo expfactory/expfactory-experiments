@@ -79,7 +79,7 @@ var getTestFeedback = function() {
 	
 	for(var b =0; b < data_length; b++){
 		if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).probe_type == 'neg'){
-		respond_remember_total += 1
+			respond_remember_total += 1
 			if(jsPsych.data.getDataByTrialIndex(start_cut + b - 1).key_press == '37'){
 				neg_respond_remember += 1
 			}
@@ -305,8 +305,8 @@ var credit_var = true
 // task specific variables
 var choices = [37, 39]
 var exp_stage = 'practice'
+var practice_length = 8
 var num_trials = 24
-var pos_neg_num_trials = num_trials / 2
 var num_runs = 3 
 var experimentLength = num_trials * num_runs
 var current_trial = 0
@@ -321,7 +321,7 @@ var preceeding1stims = []
 var preceeding2stims = []
 var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
-var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, 1)
+var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length/2)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting/images/'
 var fileType = '.png'
@@ -661,7 +661,7 @@ directed_forgetting_experiment.push(practice_probe_block);
 directed_forgetting_experiment.push(ITI_fixation_block);
 // start practice
 directed_forgetting_experiment.push(start_practice_block);
-for (i = 0; i < 6; i++) {
+for (i = 0; i < (practice_length-1); i++) {
 	directed_forgetting_experiment.push(start_fixation_block);
 	directed_forgetting_experiment.push(training_block);
 	directed_forgetting_experiment.push(cue_block);
