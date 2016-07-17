@@ -45,14 +45,15 @@ function assessPerformance() {
 		sum += rt_array[j]
 	}
 	var avg_rt = sum / rt_array.length || -1
-		//calculate whether response distribution is okay
+	var missed_percent = missed_count/experiment_data.length
+	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
 		if (choice_counts[key] > trial_count * 0.85) {
 			responses_ok = false
 		}
 	})
-	credit_var = (avg_rt > 200) && responses_ok
+	credit_var = (missed_percent < 0.4 && (avg_rt > 200) && responses_ok)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
