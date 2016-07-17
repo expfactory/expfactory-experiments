@@ -515,7 +515,9 @@ var round_over_block = {
 		}
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
-			caught_blue: caught_blue
+			caught_blue: caught_blue,
+			weather: weather,
+			release: release
 		})
 	},
 };
