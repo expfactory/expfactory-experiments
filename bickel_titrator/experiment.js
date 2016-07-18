@@ -288,7 +288,7 @@ var test_block = {
     var choice_i = choices.indexOf(data.key_press)
     if (displayed_amounts[choice_i] == original_delayed) {
       choice = 'larger_later'
-      bonus_list.push({'amount': delayed_amount, 'delay': curr_delay_in_daysl})
+      bonus_list.push({'amount': delayed_amount, 'delay': curr_delay_in_days})
     } else {
       choice = 'smaller_sooner'
       bonus_list.push({'amount': immediate_amount, 'delay': 0})
