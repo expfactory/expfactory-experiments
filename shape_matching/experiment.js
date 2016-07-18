@@ -60,8 +60,10 @@ var getStim = function() {
 	var distractor_i = 0
 	if (trial_type[0] == 'S') {
 		target_i = probe_i
+		currData.correct_response = 77
 	} else {
 		target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))
+		currData.correct_response = 90
 	}
 	if (trial_type[1] == 'S') {
 		distractor_i = target_i
@@ -119,7 +121,7 @@ for (var i = 1; i<11; i++) {
 		shape_stim.push(path + i + '_' + colors[c] + '.png')
 	}
 }
-jsPsych.pluginAPI.preloadImages(shape_stim)
+jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
 
 var practice_len = 21
 // Trial types denoted by three letters for the relationship between:
