@@ -335,7 +335,7 @@ var performance_var = 0
 // task specific variables
 var exp_stage = 'practice'
 var num_practice_rounds = 2
-var num_rounds = 20
+var num_rounds = 30
 var red_fish_num = 0
 var total_fish_num = 0
 var start_fish_num = 0
@@ -509,7 +509,9 @@ var round_over_block = {
 		}
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
-			caught_blue: caught_blue
+			caught_blue: caught_blue,
+			weather: weather,
+			release: release
 		})
 	}
 };
