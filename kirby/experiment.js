@@ -21,6 +21,11 @@ var getInstructFeedback = function() {
     '</p></div>'
 }
 
+var randomDraw = function(lst) {
+  var index = Math.floor(Math.random() * (lst.length))
+  return lst[index]
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -31,6 +36,8 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var bonus_list = [] //keeps track of choices for bonus
+
 //hard coded options in the amounts and order specified in Kirby and Marakovic (1996)
 var options = {
   small_amt: [54, 55, 19, 31, 14, 47, 15, 25, 78, 40, 11, 67, 34, 27, 69, 49, 80, 24, 33, 28, 34,
@@ -59,9 +66,9 @@ data_prop = []
 
 for (var i = 0; i < options.small_amt.length; i++) {
   data_prop.push({
-    small_amt: options.small_amt[i],
-    large_amt: options.large_amt[i],
-    later_del: options.later_del[i]
+    small_amount: options.small_amt[i],
+    large_amount: options.large_amt[i],
+    later_delay: options.later_del[i]
   });
 }
 
@@ -205,8 +212,10 @@ var test_block = {
     var choice = false;
     if (data.key_press == 80) {
       choice = 'larger_later';
+      bonus_list.push({'amount': data.large_amount, 'delay': data.later_delay})
     } else if (data.key_press == 81) {
       choice = 'smaller_sooner';
+      bonus_list.push({'amount': data.small_amount, 'delay': 0})
     }
     jsPsych.data.addDataToLastTrial({
       choice: choice
@@ -223,7 +232,11 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: function() {
+    var bonus = randomDraw(bonus_list)
+    jsPsych.data.addDataToLastTrial({'performance_var': JSON.stringify(bonus)})
+  }
 };
 
 

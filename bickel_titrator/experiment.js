@@ -22,46 +22,41 @@ var getInstructFeedback = function() {
 }
 
 function assessPerformance() {
-	/* Function to calculate the "credit_var", which is a boolean used to
-	credit individual experiments in expfactory. */
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	var missed_count = 0
-	var trial_count = 0
-	var rt_array = []
-	var rt = 0
-		//record choices participants made
-	var choice_counts = {}
-	choice_counts[-1] = 0
-	for (var k = 0; k < choices.length; k++) {
+  /* Function to calculate the "credit_var", which is a boolean used to
+  credit individual experiments in expfactory. */
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+    //record choices participants made
+  var choice_counts = {}
+  choice_counts[-1] = 0
+  for (var k = 0; k < choices.length; k++) {
     choice_counts[choices[k]] = 0
   }
-	for (var i = 0; i < experiment_data.length; i++) {
-		trial_count += 1
-		rt = experiment_data[i].rt
-		key = experiment_data[i].key_press
-		choice_counts[key] += 1
-		if (rt == -1) {
-			missed_count += 1
-		} else {
-			rt_array.push(rt)
-		}
-	}
-	//calculate average rt
-	var sum = 0
-	for (var j = 0; j < rt_array.length; j++) {
-		sum += rt_array[j]
-	}
-	var avg_rt = sum / rt_array.length || -1
-		//calculate whether response distribution is okay
-	var responses_ok = true
-	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
-			responses_ok = false
-		}
-	})
-	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+  for (var i = 0; i < experiment_data.length; i++) {
+    trial_count += 1
+    rt = experiment_data[i].rt
+    key = experiment_data[i].key_press
+    choice_counts[key] += 1
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
+    }
+  }
+  //calculate average rt
+  var sum = 0
+  for (var j = 0; j < rt_array.length; j++) {
+    sum += rt_array[j]
+  }
+  var avg_rt = sum / rt_array.length || -1
+  var missed_percent = missed_count/trial_count
+  credit_var = (missed_percent < 0.4 && avg_rt > 200)
+  var bonus = randomDraw(bonus_list)
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var,
+                  "performance_var": JSON.stringify(bonus)})
 }
 
 var getStim = function() {
@@ -70,24 +65,26 @@ var getStim = function() {
   var immediate_display = immediate_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
   var delayed_display = delayed_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
   if (Math.random() < 0.5) {
-    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_display +
-      ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_display +
-      ' in ' + curr_delay + '</p></div>'
+    left_amt = immediate_display
+    right_amt = delayed_display
+    left_del = 'immediately'
+    right_del = curr_delay
     displayed_amounts = [immediate_amount, delayed_amount] // in order from left to right
   } else {
-    immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' +
-      immediate_display + ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_display +
-      ' in ' + curr_delay + '</div></div>'
+    left_amt = delayed_display
+    right_amt = immediate_display
+    left_del = curr_delay
+    right_del = 'immediately'
     displayed_amounts = [delayed_amount, immediate_amount] // in order from left to right
   }
-  return immediate_stim + delayed_stim
+
+  var stim = "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$" + left_amt + "<br>" + left_del + "</font></center></div><div id = 'option'><center><font color='green'>$" + right_amt + "<br>" + right_del + "</font></center></div></div></div></div>"
+  return stim
 }
 
 
 var updateAmount = function(choice) {
-  if (choice == 'delayed') {
+  if (choice == 'larger_later') {
     immediate_amount += step
   } else {
     immediate_amount -= step
@@ -100,7 +97,7 @@ var updateDelay = function() {
   immediate_amount = original_immediate
   delayed_amount = original_delayed
   curr_delay = delays.shift()
-  curr_delay_in_minutes = convertToMins(curr_delay)
+  curr_delay_in_days = convertToDays(curr_delay)
 }
 
 var post_trial_gap = function() {
@@ -113,7 +110,7 @@ var post_trial_gap = function() {
 
 }
 
-var convertToMins = function(time) {
+var convertToDays = function(time) {
   switch (time) {
     case '1 day':
       return 1
@@ -139,6 +136,11 @@ var convertToMins = function(time) {
   }
 }
 
+var randomDraw = function(lst) {
+  var index = Math.floor(Math.random() * (lst.length))
+  return lst[index]
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -149,19 +151,21 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
+var bonus_list = []
 var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 months', '1 year',
   '5 years', '25 years'
 ])
 var magnitudes = jsPsych.randomization.shuffle([10, 1000, 1000000])
-var choices = [37, 39]
+var choices = [81, 80]
 var curr_delay = delays.shift()
-var curr_delay_in_minutes = convertToMins(curr_delay)
+var curr_delay_in_days = convertToDays(curr_delay)
 var original_immediate = 0
 var original_delayed = 0
 var immediate_amount = 0
 var delayed_amount = 0
 var displayed_amounts = []
 var step = 250
+
   /* ************************************ */
   /* Set up jsPsych blocks */
   /* ************************************ */
@@ -212,7 +216,7 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected. We will start after you end the instructions.</p></div>',
   ],
   allow_keys: false,
   data: {
@@ -286,15 +290,17 @@ var test_block = {
     var choice;
     var choice_i = choices.indexOf(data.key_press)
     if (displayed_amounts[choice_i] == original_delayed) {
-      choice = 'delayed'
+      choice = 'larger_later'
+      bonus_list.push({'amount': delayed_amount, 'delay': curr_delay_in_days})
     } else {
-      choice = 'immediate'
+      choice = 'smaller_sooner'
+      bonus_list.push({'amount': immediate_amount, 'delay': 0})
     }
     jsPsych.data.addDataToLastTrial({
-      'sooner_amount': immediate_amount,
-      'later_amount': delayed_amount,
+      'smaller_amount': immediate_amount,
+      'larger_amount': delayed_amount,
       'sooner_time_days': 0,
-      'later_time_days': curr_delay_in_minutes,
+      'later_time_days': curr_delay_in_days,
       'choice': choice
     })
     updateAmount(choice)
