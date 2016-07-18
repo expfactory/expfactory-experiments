@@ -65,19 +65,21 @@ var getStim = function() {
   var immediate_display = immediate_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
   var delayed_display = delayed_amount.toFixed([2]).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',')
   if (Math.random() < 0.5) {
-    immediate_stim = '<div class = bickel_leftBox><div class = center-text> $' + immediate_display +
-      ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_rightBox><div class = center-text> $' + delayed_display +
-      ' in ' + curr_delay + '</p></div>'
+    left_amt = immediate_display
+    right_amt = delayed_display
+    left_del = 'immediately'
+    right_del = curr_delay
     displayed_amounts = [immediate_amount, delayed_amount] // in order from left to right
   } else {
-    immediate_stim = '<div class = bickel_rightBox><div class = center-text> $' +
-      immediate_display + ' immediately</div></div>'
-    delayed_stim = '<div class = bickel_leftBox><div class = center-text> $' + delayed_display +
-      ' in ' + curr_delay + '</div></div>'
+    left_amt = delayed_display
+    right_amt = immediate_display
+    left_del = curr_delay
+    right_del = 'immediately'
     displayed_amounts = [delayed_amount, immediate_amount] // in order from left to right
   }
-  return immediate_stim + delayed_stim
+
+  var stim = "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$" + left_amt + "<br>" + left_del + "</font></center></div><div id = 'option'><center><font color='green'>$" + right_amt + "<br>" + right_del + "</font></center></div></div></div></div>"
+  return stim
 }
 
 
@@ -154,7 +156,7 @@ var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 mon
   '5 years', '25 years'
 ])
 var magnitudes = jsPsych.randomization.shuffle([10, 1000, 1000000])
-var choices = [37, 39]
+var choices = [81, 80]
 var curr_delay = delays.shift()
 var curr_delay_in_days = convertToDays(curr_delay)
 var original_immediate = 0
@@ -163,6 +165,7 @@ var immediate_amount = 0
 var delayed_amount = 0
 var displayed_amounts = []
 var step = 250
+
   /* ************************************ */
   /* Set up jsPsych blocks */
   /* ************************************ */
@@ -213,7 +216,7 @@ var feedback_instruct_block = {
 var instructions_block = {
   type: 'poldrack-instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing the left or right arrow key to indicate your choice.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose.</p><p class = block-text>We will start after instructions end.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will be presented with two amounts of money to choose between. These amounts will be available at different time points. Your job is to indicate which option you would prefer by pressing <strong>"q"</strong> for the left option and <strong>"p"</strong> for the right option.</p><p class = block-text>You should indicate your <strong>true</strong> preference because at the end of the experiment a random trial will be chosen and you will receive a bonus payment proportional to the option you selected at the time point you chose. We will start after you end the instructions.</p></div>',
   ],
   allow_keys: false,
   data: {
