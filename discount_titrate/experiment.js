@@ -352,8 +352,8 @@ var test_block = {
 };
 
 var end_block = {
-	type: 'poldrack-text'
-,	timing_response: 180000,
+	type: 'poldrack-text',
+	timing_response: 180000,
 	data: {
 		trial_id: "end",
 		exp_id: 'discount_titrate'
