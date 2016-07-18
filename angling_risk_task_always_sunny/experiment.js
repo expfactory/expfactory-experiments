@@ -516,6 +516,16 @@ var round_over_block = {
 	}
 };
 
+var update_performance_var_block = {
+	type: 'call-function',
+	data: {
+		trial_id: 'update_performance_var'
+	},
+	on_finish: function() {
+		total_points += tournament_bank
+	}
+}
+
 var ask_fish_block = {
 	type: 'survey-text',
 	on_finish: function() {
@@ -725,7 +735,6 @@ for (b = 0; b < blocks.length; b++) {
 			weather = data.weather
 			release = data.release
 			start_fish_num = data.start_fish_num
-			total_points += tournament_bank
 			tournament_bank = 0
 			round_num = 0
 		}
@@ -738,6 +747,7 @@ for (b = 0; b < blocks.length; b++) {
 	if ($.inArray(b, [0, 2]) != -1) {
 		angling_risk_task_always_sunny_experiment.push(attention_node)
 	}
+	angling_risk_task_always_sunny_experiment.push(update_performance_var_block)
 }
 angling_risk_task_always_sunny_experiment.push(post_task_block)
 angling_risk_task_always_sunny_experiment.push(end_block)
