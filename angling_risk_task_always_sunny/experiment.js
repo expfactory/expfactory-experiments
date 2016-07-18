@@ -521,7 +521,7 @@ var update_performance_var_block = {
 	data: {
 		trial_id: 'update_performance_var'
 	},
-	on_finish: function() {
+	func: function() {
 		total_points += tournament_bank
 	}
 }
