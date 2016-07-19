@@ -13,24 +13,24 @@ var getSubjnum = function () {
 	var listerrortext = [];
 	if (typeof stimArray == "undefined") {
 		stimArray = picArray[0];
-		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + subjnum + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>";
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + subjnum + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>"
 	} else {
-		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text><strong>" + subjnum + "</strong>, with codeword <strong>" + subjcode + "</strong> found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>";
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text><strong>" + subjnum + "</strong>, with codeword <strong>" + subjcode + "</strong> found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>"
 	}
 	jsPsych.pluginAPI.preloadImages(stimArray);
-	answers = genLearnphasestims(stimArray);
+	answers = genLearnphasestims(stimArray)
 	return listerrortext
 };
 
 
 var getSubjreport = function () {
-	var listerrortext = [];		
+	var listerrortext = [];
 	if (typeof stimArray == "undefined") {
-		stimArray = picArray[0];	
-		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + numtemp + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>";
+		stimArray = picArray[0];
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:red'>Participant number </p><p class = block-text>" + numtemp + " not found!  </p><p class = block-text>Please <strong>quit</strong> and check the participant number!!</p></div></div>"
 	} else {
 		stimArray = picArray(subjnum);
-		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text>" + numtemp + " found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>";
+		listerrortext = "<div class = centerbox><p class = block-text><div style='color:black'>Participant number </p><p class = block-text>" + numtemp + " found!  </p><p class = block-text>Press <strong>enter</strong> to continue.</p></div></div>"
 	}
 	return listerrortext
 };
@@ -96,13 +96,13 @@ var genITIs = function () {
 	var ititemp = [];
 	for(var i = 0; i < Learn_trials; i++){
 		ititemp.push( Math.floor(Math.random() * 1500) + 250 );		
-		}
+		};
   var itilist = [];
 	var itistim = [];
 	var itiresp = [];
 	for(var j = 0; j < Learn_trials; j++){
-		itistim.push(ititemp[i]);
-		itiresp.push(ititemp[i]);
+		itistim.push(ititemp[j]);
+		itiresp.push(ititemp[j]);
 	}
 	return {
 	  itilist: itilist,
@@ -390,9 +390,9 @@ var learning_phase_trials = {
 	key_answer: getResponse,
 	choices: choices,
 	show_stim_with_feedback: false,
-	correct_text: "<div class = containerbox><div class = centerbox><div class = center-text></div></div></div>",
-  incorrect_text: "<div class = containerbox><div class = centerbox><div class = center-text></div></div></div>",
-	timeout_message: "<div class = containerbox><div class = centerbox><div class = center-text></div></div></div>",	
+	correct_text: "<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text></div></div></div>",
+  incorrect_text: "<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text></div></div></div>",
+	timeout_message: "<div class = containerbox><div class = centerbox><div style='color:red'; class = center-text></div></div></div>",	
 	timing_stim: 1500,
 	timing_response: 1500,
 	timing_feedback_duration: 1000,
