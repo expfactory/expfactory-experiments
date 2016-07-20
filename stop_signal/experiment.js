@@ -111,7 +111,7 @@ var getTestFeedback = function() {
 	stopAccMeans.push(StopCorrect_percent)
 	var stopAverage = math.mean(stopAccMeans)
 
-	test_feedback_text = "<br>In 20 seconds, this page will expire and the computer will automatically advance you to the next page.  Please take this time to read your feedback and to take a short break!"
+	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Press <strong>enter</strong> to continue after you read the feedback."
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -430,8 +430,8 @@ var test_feedback_block = {
 		trial_id: "feedback",
 		exp_stage: "test"
 	},
-	timing_response: 20000,
-	cont_key: 'none',
+	timing_response: 180000,
+	cont_key: [13],
 	text: getTestFeedback,
 	on_finish: function() {
 		test_block_data = []
