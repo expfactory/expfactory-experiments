@@ -198,9 +198,8 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a red box, press the ' +
-    correct_responses[0][0] + '. If you see a blue box, press the ' + correct_responses[1][0] +
-    '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
+    '<div class = centerbox><p class = block-text>On each trial of this experiment a red or blue box will appear. If you see a <font color="red">red</font> box, press the ' +
+    correct_responses[0][0] + '. If you see a <font color="blue">blue</font> box, press the ' + correct_responses[1][0] + '.</p><p class = block-text>We will start with practice where you will get feedback about whether you responded correctly. We will begin after you end the instructions.</p></div>',
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -248,7 +247,7 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting test. You will no longer get feedback after your responses. Remember, if you see a <font color="red">red</font> box, press the ' + correct_responses[0][0] + '. If you see a <font color="blue">blue</font> box, press the ' + correct_responses[1][0] + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function() {
@@ -268,7 +267,7 @@ var practice_block = {
   },
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-  timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
+  timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
   choices: choices,
   timing_response: 2000,
   timing_stim: 2000,

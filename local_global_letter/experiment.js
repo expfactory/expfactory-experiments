@@ -322,7 +322,7 @@ var practice_block = {
   },
   correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
   incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-  timeout_message: '<div class = centerbox><div class = center-text>Response faster!</div></div>',
+  timeout_message: '<div class = centerbox><div class = center-text>Respond faster!</div></div>',
   choices: choices,
   timing_feedback_duration: 1000,
   show_stim_with_feedback: false,
