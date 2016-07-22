@@ -256,8 +256,7 @@ var feedback_instruct_block = {
     trial_id: "instruction"
   },
   text: getInstructFeedback,
-  timing_post_trial: 0,
-  timing_response: 180000
+  timing_post_trial: 0
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instruct_text_array = ['<div class = centerbox><p class = "block-text">In this experiment stimuli will come up one at a time. You should respond to them by pressing the J, K or L keys, after which you will receive feedback about whether you were right or not. If you were correct you will get points which contribute to your bonus payment.</p><p class = "block-text">Your should try to get as many trials correct as possible. There are 18 stimuli in this experiment. Press next to go through the 18 stimuli you will be responding to.</p></div>']

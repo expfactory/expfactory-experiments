@@ -274,8 +274,7 @@ var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
   text: getInstructFeedback,
-  timing_post_trial: 0,
-  timing_response: 180000,
+  timing_post_trial: 0
   data: {
     exp_id: "ravens"
   }
