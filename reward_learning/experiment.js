@@ -87,7 +87,7 @@ var getITIdurresp = function() {
 
 
 var getITI = function() {
-	gap = ( Math.floor(Math.random() * 1500) + 250 )
+	gap = ( Math.floor(Math.random() * 5000) + 500 )
 	return gap
 }
 
@@ -95,7 +95,7 @@ var getITI = function() {
 var genITIs = function () {
 	var ititemp = [];
 	for(var i = 0; i < Learn_trials; i++){
-		ititemp.push( Math.floor(Math.random() * 1500) + 250 );		
+		ititemp.push( Math.floor(Math.random() * 5000) + 500 );
 		};
   var itilist = [];
 	var itistim = [];
@@ -118,21 +118,21 @@ var feedbacknoise = jsPsych.randomization.repeat([0.01, -0.01, 0.02, -0.02, 0.03
 		
 
 var genResponses = function(stimuli) {
-	var answers_stim1 = jsPsych.randomization.repeat([38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+	var answers_stim1 = jsPsych.randomization.repeat([38, 38, 38, 38, 40],
 		eachRepNum / 10);
-	var answers_stim2 = jsPsych.randomization.repeat([40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+	var answers_stim2 = jsPsych.randomization.repeat([40, 40, 40, 40, 38],
 		eachRepNum / 10);
-	var answers_stim3 = jsPsych.randomization.repeat([38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+	var answers_stim3 = jsPsych.randomization.repeat([38, 38, 38, 38, 40],
 		eachRepNum / 10);
-	var answers_stim4 = jsPsych.randomization.repeat([40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+	var answers_stim4 = jsPsych.randomization.repeat([40, 40, 40, 40, 38],
 		eachRepNum / 10);
-	var answers_stim5 = jsPsych.randomization.repeat([38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+	var answers_stim5 = jsPsych.randomization.repeat([38, 38, 38, 38, 40],
 		eachRepNum / 10);
-	var answers_stim6 = jsPsych.randomization.repeat([40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+	var answers_stim6 = jsPsych.randomization.repeat([40, 40, 40, 40, 38],
 		eachRepNum / 10);
-	var answers_stim7 = jsPsych.randomization.repeat([38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+	var answers_stim7 = jsPsych.randomization.repeat([38, 38, 38, 38, 40],
 		eachRepNum / 10);
-	var answers_stim8 = jsPsych.randomization.repeat([40, 40, 40, 40, 40, 40, 40, 40, 40, 40],
+	var answers_stim8 = jsPsych.randomization.repeat([40, 40, 40, 40, 38],
 		eachRepNum / 10);
 	
 	var count1 = 0;
@@ -152,51 +152,97 @@ var genResponses = function(stimuli) {
 	
 		if (stimuli.data[i].condition === 'stim1') {
 			answers.push(answers_stim1[count1]);
-			yesnumb = 0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[0]) {
+				yesnumb = 0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				nonumb = 0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+				yesnumb = -0.05 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+			}
 			count1 = count1 + 1;
 		} else if (stimuli.data[i].condition === 'stim2') {
 			answers.push(answers_stim2[count2]);
-			yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[1]) {
+				yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				yesnumb = 0.00 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			}
 			count2 = count2 + 1;
 		} else if (stimuli.data[i].condition === 'stim3') {
 			answers.push(answers_stim3[count3]);
-			yesnumb = 0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[0]) {
+				yesnumb = 0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				nonumb = 0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+				yesnumb = -0.05 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+			}
 			count3 = count3 + 1;
 		} else if (stimuli.data[i].condition === 'stim4') {
 			answers.push(answers_stim4[count4]);
-			yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[1]) {
+				yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				yesnumb = 0.00 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			}
 			count4 = count4 + 1;
 		} else if (stimuli.data[i].condition === 'stim5') {
 			answers.push(answers_stim5[count5]);
-			yesnumb = 0.45 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[0]) {
+				yesnumb = 0.45 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				nonumb = 0.45 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+				yesnumb = -0.05 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+			}
 			count5 = count5 + 1;
 		} else if (stimuli.data[i].condition === 'stim6') {
 			answers.push(answers_stim6[count6]);
-			yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[1]) {
+				yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				yesnumb = 0.00 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			}
 			count6 = count6 + 1;
 		} else if (stimuli.data[i].condition === 'stim7') {
 			answers.push(answers_stim7[count7]);
-			yesnumb = 0.45 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[0]) {
+				yesnumb = 0.45 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.05 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				nonumb = 0.45 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+				yesnumb = -0.05 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+			}
 			count7 = count7 + 1;
 		} else {
 			answers.push(answers_stim8[count8]);
-			yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
-			nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			if (answers[i] == choices[1]) {
+				yesnumb = -0.25 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = 0.00 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			} else {
+				yesnumb = 0.00 + feedbacknoise[i]; yesnumb = yesnumb.toFixed(2);
+				nonumb = -0.25 + feedbacknoise[i]; nonumb = nonumb.toFixed(2);
+			}
 			count8 = count8 + 1;
 		}
-		if (stimuli.data[i].optimal_response == choices[0]) {
-			yesfdbk.push("<div class = containerbox><div class = centerbox><div style='color:#64FF64'; class = center-text>+" + yesnumb + "!</div></div></div>");
+		if (answers[i] == choices[0] & stimuli.data[i].optimal_response == choices[0]) {
+			yesfdbk.push("<div class = containerbox><div class = centerbox><div style='color:#00C200'; class = center-text>" + yesnumb + "!</div></div></div>");
 			nofdbk.push("<div class = containerbox><div class = centerbox><div style='color:#FF0000'; class = center-text>" + nonumb + "!</div></div></div>");
-		} else {
+		} else if (answers[i] == choices[1] & stimuli.data[i].optimal_response == choices[0]) {
 			yesfdbk.push("<div class = containerbox><div class = centerbox><div style='color:#FF0000'; class = center-text>" + yesnumb + "!</div></div></div>");
-			nofdbk.push("<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text>" + nonumb + "!</div></div></div>");
+			nofdbk.push("<div class = containerbox><div class = centerbox><div style='color:#00C200'; class = center-text>" + nonumb + "!</div></div></div>");
+		} else if (answers[i] == choices[1] & stimuli.data[i].optimal_response == choices[1]) {
+			yesfdbk.push("<div class = containerbox><div class = centerbox><div style='color:#FF0000'; class = center-text>" + yesnumb + "!</div></div></div>");
+			nofdbk.push("<div class = containerbox><div class = centerbox><div style='color:grey'; class = center-text>" + nonumb + "!</div></div></div>");
+	  } else if (answers[i] == choices[0] & stimuli.data[i].optimal_response == choices[1]) {
+			yesfdbk.push("<div class = containerbox><div class = centerbox><div style='color:grey'; class = center-text>" + yesnumb + "!</div></div></div>");
+			nofdbk.push("<div class = containerbox><div class = centerbox><div style='color:#FF0000'; class = center-text>" + nonumb + "!</div></div></div>");
 		}
 	}
 	return {
@@ -235,43 +281,6 @@ var Learn_trials = 40;
 var eachRepNum = 5;
 
 
-// load pre-rated individualized stims
-// jsPsych.pluginAPI.preloadImages(stimArray)
-
-// var stims = [['stim1', stimArray[0], choices[0]],
-// 			['stim2', stimArray[1], choices[1]],
-// 			['stim3', stimArray[2], choices[0]],
-// 			['stim4', stimArray[3], choices[1]],
-// 			['stim5', stimArray[4], choices[0]],
-// 			['stim6', stimArray[5], choices[1]],
-// 			['stim7', stimArray[6], choices[0]],
-// 			['stim8', stimArray[7], choices[1]],
-// 			['Yes', stimArray[8], 101],
-// 			['No', stimArray[9], 102]]
-
-// var optionstims = [['Yes', stimArray[8]],			
-// 			['No', stimArray[9]]]
-
-
-
-
-/* learning phase stims, randomized */
-// learnPhaseStims = [];
-// 	for (var i = 0; i<8; i++) {
-// 		var list_stim = {}
-// 		list_stim.image = "<div class = containerbox><div class = decision-up><img src='" + stims[8][1] +
-// 			"'></img></div><div class = centerbox><input type = 'image' class = 'picture_size' src='" + stims[i][1] + 
-// 			"'></div><div class = decision-down><img src='" + stims[9][1] +
-// 			"'></img></div></div>"
-// 		list_stim.data = {
-// 			trial_id: 'stim',
-// 			exp_stage: 'learning',
-// 			condition: stims[i][0],
-// 			optimal_response: stims[i][2]
-// 		}
-// 		learnPhaseStims.push(list_stim)
-// 	};
-
 var genLearnphasestims = function (stimArray) {
 	var stims = [['stim1', stimArray[0], choices[0]],
 				['stim2', stimArray[1], choices[1]],
@@ -303,8 +312,6 @@ var genLearnphasestims = function (stimArray) {
 	return answers
 };
 
-// var learnPhaseStimsComplete = jsPsych.randomization.repeat(learnPhaseStims, eachRepNum, true);
-// var answers = genResponses(learnPhaseStimsComplete)
 var curr_data = ''
 
 
@@ -333,8 +340,8 @@ var post_task_block = {
    data: {
        trial_id: "post task questions"
    },
-   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   questions: ['<p class = center-block-text style = "font-size: 20px">On a scale of 1 (easy) - 10 (very difficult), rate how difficult the session was today.</p>',
+              '<p class = center-block-text style = "font-size: 20px">On a scale of 1 (awake) - 10 (very tired), rate how tired you felt during the session today.</p>'],
    rows: [15, 15],
    columns: [60,60]
 };
@@ -343,7 +350,7 @@ var post_task_block = {
 
 // introduction
 var feedback_instruct_text =
-	'Welcome back to the experiment! Press <strong>enter</strong> to begin.'
+	'Welcome back to the experiment! This part will take about 5 minutes. Press <strong>enter</strong> to review the instructions.'
 var learning_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -376,7 +383,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = containerbox><div class = centerbox><p class = block-text>Today you will continue learning about lucky and unlucky scenes.  As a reminder, you will see each scene with a "Yes" option above and "No" option below.  For each scene, you must choose one option by using the <strong>up</strong> or <strong>down</strong> arrow key.</p><p class = block-text>Each scene has a different chance of being "lucky". Your task is to maximize your winnings ($) by betting "Yes" on lucky shapes and betting "No" on unlucky shapes.</p></div></div>',
+		'<div class = containerbox><div class = centerbox><p class = block-text>Today you will continue learning about the lucky and unlucky scenes from the first session.  As a reminder, you will see each scene with a "Yes" option above and "No" option below.  For each scene, you must choose one option by using the <strong>up</strong> or <strong>down</strong> arrow key.</p><p class = block-text>Each scene has a different chance of being "lucky". Your task is to maximize your winnings ($) by betting "Yes" on lucky scenes and betting "No" on unlucky scenes.</p></div></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -392,7 +399,7 @@ var learning_phase_trials = {
 	show_stim_with_feedback: false,
 	correct_text: "<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text></div></div></div>",
   incorrect_text: "<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text></div></div></div>",
-	timeout_message: "<div class = containerbox><div class = centerbox><div style='color:red'; class = center-text></div></div></div>",	
+	timeout_message: "<div class = containerbox><div class = centerbox><div style='color:white'; class = center-text></div></div></div>",	
 	timing_stim: 1500,
 	timing_response: 1500,
 	timing_feedback_duration: 1000,
@@ -479,12 +486,14 @@ var end_block = {
 var reward_learning_experiment = [];
 reward_learning_experiment.push(pre_task_block);
 reward_learning_experiment.push(learning_participantexists);
-// reward_learning_experiment.push(learning_instruct_block);
+reward_learning_experiment.push(learning_instruct_block);
+reward_learning_experiment.push(instructions_block);
 reward_learning_experiment.push(learning_phase_start);
-for(var i = 0; i<3; i++){
+for(var i = 0; i<Learn_trials; i++){
 	reward_learning_experiment.push(learning_phase_itis);
 	reward_learning_experiment.push(learning_phase_prefix);
 	reward_learning_experiment.push(learning_phase_trials);
 	reward_learning_experiment.push(learning_phase_feedback);
 }
+reward_learning_experiment.push(post_task_block);
 reward_learning_experiment.push(end_block);
