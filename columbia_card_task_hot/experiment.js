@@ -600,7 +600,8 @@ var end_block = {
 	},
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+  	on_finish: assessPerformance
 };
 
 var start_test_block = {
@@ -721,7 +722,6 @@ var payoutTrial = {
 		prize2 = randomRoundPointsArray.pop()
 		prize3 = randomRoundPointsArray.pop()
 		performance_var = prize1 + prize2 + prize3
-		jsPsych.data.addDataToLastTrial({"performance_var": performance_var})
 	}
 };
 
