@@ -685,12 +685,12 @@ var test_node = {
 			roundOver = 0
 			roundPoints = 0
 			whichClickInRound = 0
+			whichRound = whichRound + 1
 			round_type = lossRounds.indexOf(whichRound)==-1 ? 'rigged_win' : 'rigged_loss'
 			if (round_type == 'rigged_loss') {
 				whichLossCards = [riggedLossCards.shift()]
 			}
 			lossClicked = false
-			whichRound = whichRound + 1
 			return false
 		} else {
 			return true
