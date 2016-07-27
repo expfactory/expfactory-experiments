@@ -77,7 +77,7 @@ var getBoard = function(board_type) {
 var getText = function() {
 	return '<div class = centerbox><p class = block-text>Overall, you earned ' + totalPoints + ' points. These are the points used for your bonus from three randomly picked trials:  ' +
 		'<ul list-text><li>' + prize1 + '</li><li>' + prize2 + '</li><li>' + prize3 + '</li></ul>' +
-		'</p></div>'
+		'</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 }
 
 var turnOneCard = function(whichCard, win) {
