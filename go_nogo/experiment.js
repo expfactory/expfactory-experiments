@@ -46,7 +46,6 @@ function assessPerformance() {
 	if (rt_array.length !== 0) {
 		avg_rt = math.median(rt_array)
 	} 
-	var avg_rt = sum / rt_array.length || -1
 	credit_var = (avg_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
