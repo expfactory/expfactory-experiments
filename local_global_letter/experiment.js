@@ -43,12 +43,11 @@ function assessPerformance() {
 		}
 	}
 	//calculate average rt
-	var sum = 0
-	for (var j = 0; j < rt_array.length; j++) {
-		sum += rt_array[j]
-	}
-	var avg_rt = sum / rt_array.length || -1
-		//calculate whether response distribution is okay
+	var avg_rt = -1
+	if (rt_array.length !== 0) {
+		avg_rt = math.median(rt_array)
+	} 
+	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
 		if (choice_counts[key] > trial_count * 0.85) {
