@@ -8,12 +8,14 @@ function assessPerformance() {
   var rt_array = []
   var rt = 0
   for (var i = 0; i < experiment_data.length; i++) {
-    trial_count += 1
-    rt = experiment_data[i].rt
-    if (rt == -1) {
-      missed_count += 1
-    } else {
-      rt_array.push(rt)
+    if (experiment_data[i].possible_responses != 'none') {
+      trial_count += 1
+      rt = experiment_data[i].rt
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
     }
   }
   //calculate average rt
