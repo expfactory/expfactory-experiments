@@ -618,7 +618,7 @@ var start_test_block = {
 		trial_id: "test_intro"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments. There will be four tournaments, each with 20 rounds of fishing.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Done with practice! We will now start the test tournaments. There will be four tournaments, each with 30 rounds of fishing.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
