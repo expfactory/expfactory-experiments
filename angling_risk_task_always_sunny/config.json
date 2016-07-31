@@ -3,6 +3,7 @@
         "name": "Angling Risk Task - always Sunny",
         "template":"jspsych",
         "run": [
+                "static/js/math.min.js",
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",

@@ -1,7 +1,8 @@
 [
     {
         "name": "Information Sampling Task",
-        "run": ["static/js/jspsych/jspsych.js",
+        "run": [
+        "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
@@ -10,8 +11,8 @@
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/utils/poldrack_utils.js",
-		          "experiment.js",
-   		       "static/css/jspsych.css",
+		        "experiment.js",
+   		        "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
