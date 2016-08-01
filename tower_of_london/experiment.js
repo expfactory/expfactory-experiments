@@ -184,7 +184,7 @@ var getInstructFeedback = function() {
 // generic task variables
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = 0
+var credit_var = true
 
 // task specific variables
 var correct = false
