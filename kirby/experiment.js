@@ -26,6 +26,45 @@ var randomDraw = function(lst) {
   return lst[index]
 }
 
+function assessPerformance() {
+  /* Function to calculate the "credit_var", which is a boolean used to
+  credit individual experiments in expfactory. */
+  var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+  var missed_count = 0
+  var trial_count = 0
+  var rt_array = []
+  var rt = 0
+    //record choices participants made
+  var choice_counts = {}
+  choice_counts[-1] = 0
+  for (var k = 0; k < choices.length; k++) {
+    choice_counts[choices[k]] = 0
+  }
+  for (var i = 0; i < experiment_data.length; i++) {
+    if (experiment_data[i].possible_responses != 'none') {
+      trial_count += 1
+      rt = experiment_data[i].rt
+      key = experiment_data[i].key_press
+      choice_counts[key] += 1
+      if (rt == -1) {
+        missed_count += 1
+      } else {
+        rt_array.push(rt)
+      }
+   }
+  }
+  //calculate average rt
+  var avg_rt = -1
+  if (rt_array.length !== 0) {
+      avg_rt = math.median(rt_array)
+  } 
+  var missed_percent = missed_count/trial_count
+  credit_var = (missed_percent < 0.4 && avg_rt > 200)
+  var bonus = randomDraw(bonus_list)
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var,
+                  "performance_var": JSON.stringify(bonus)})
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -34,10 +73,11 @@ var run_attention_checks = false
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
+var choices = [81, 80]
 var bonus_list = [] //keeps track of choices for bonus
-
 //hard coded options in the amounts and order specified in Kirby and Marakovic (1996)
 var options = {
   small_amt: [54, 55, 19, 31, 14, 47, 15, 25, 78, 40, 11, 67, 34, 27, 69, 49, 80, 24, 33, 28, 34,
@@ -182,7 +222,7 @@ var practice_block = {
   },
   stimulus: "<div class = centerbox id='container'><p class = center-block-text>Please select the option that you would prefer pressing <strong>'q'</strong> for left <strong>'p'</strong> for right:</p><div class='table'><div class='row'><div id = 'option'><center><font color='green'>$20<br>today</font></center></div><div id = 'option'><center><font color='green'>$25<br>5 days</font></center></div></div></div></div>",
   is_html: true,
-  choices: [80,81],
+  choices: choices,
   response_ends_trial: true, 
 };
 
@@ -205,7 +245,7 @@ var test_block = {
   },
   timeline: trials,
   is_html: true,
-  choices: [80,81],
+  choices: choices,
   response_ends_trial: true,
   //used new feature to include choice info in recorded data
   on_finish: function(data) {
@@ -233,10 +273,7 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
-  on_finish: function() {
-    var bonus = randomDraw(bonus_list)
-    jsPsych.data.addDataToLastTrial({'performance_var': JSON.stringify(bonus)})
-  }
+  on_finish: assessPerformance
 };
 
 
