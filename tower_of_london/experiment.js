@@ -1,6 +1,36 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function assessPerformance() {
+  /* Function to calculate the "credit_var", which is a boolean used to
+  credit individual experiments in expfactory.
+   */
+  var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button');
+  var missed_count = 0;
+  var trial_count = 0;
+  var rt_array = [];
+  var rt = 0;
+  var avg_rt = -1;
+  //record choices participants made
+  for (var i = 0; i < experiment_data.length; i++) {
+    trial_count += 1
+    rt = experiment_data[i].rt
+    if (rt == -1) {
+      missed_count += 1
+    } else {
+      rt_array.push(rt)
+    }
+  }
+  //calculate average rt
+  if (rt_array.length !== 0) {
+    avg_rt = math.median(rt_array)
+  } else {
+    avg_rt = -1
+  }
+  credit_var = (avg_rt > 100)
+  jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+}
+
 var getStim = function() {
   var ref_board = makeBoard('your_board', curr_placement, 'ref')
   var target_board = makeBoard('peg_board', problems[problem_i])
@@ -154,6 +184,7 @@ var getInstructFeedback = function() {
 // generic task variables
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
+var credit_var = true
 
 // task specific variables
 var correct = false
@@ -278,7 +309,8 @@ var end_block = {
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
-  timing_post_trial: 0
+  timing_post_trial: 0,
+  on_finish: assessPerformance
 };
 
 var feedback_instruct_text =

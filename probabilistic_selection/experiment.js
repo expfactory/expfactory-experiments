@@ -63,7 +63,6 @@ function assessPerformance() {
 	})
 	var missed_percent = missed_count/trial_count
 	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -471,7 +470,7 @@ var end_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Finished with this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	in_finish: assessPerformance
+	on_finish: assessPerformance
 };
 
 

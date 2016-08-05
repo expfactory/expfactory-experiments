@@ -51,7 +51,7 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > trial_count * 0.9) {
 			responses_ok = false
 		}
 	})
@@ -285,7 +285,7 @@ var fixation_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
-  choices: choices,
+  choices: 'none',
   data: {
     trial_id: "fixation",
   },

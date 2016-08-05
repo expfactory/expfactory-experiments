@@ -31,7 +31,7 @@ function assessPerformance() {
 		choice_counts[choices[k]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if (experiment_data[i].trial_id == 'probe') {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
