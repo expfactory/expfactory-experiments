@@ -109,7 +109,7 @@ var test_stimuli = [{
     correct_response: correct_responses[0][1],
     stim_side: 'left',
     stim_color: 'red', 
-    condition: 'congruent'
+    condition: correct_responses[0][1] == 37 ? 'congruent' : 'incongruent'
   },
   key_answer: correct_responses[0][1]
 }, {
@@ -118,25 +118,25 @@ var test_stimuli = [{
     correct_response: correct_responses[0][1],
     stim_side: 'right',
     stim_color: 'red', 
-    condition: 'incongruent'
+    condition: correct_responses[0][1] == 37 ? 'incongruent' : 'congruent'
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = simon_leftbox><div class = simon_left id = stim2></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_left id = stim2></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     stim_side: 'left',
     stim_color: 'blue', 
-    condition: 'incongruent'
+    condition: correct_responses[0][1] == 37 ? 'incongruent' : 'congruent'
   },
   key_answer: correct_responses[1][1]
 }, {
-  stimulus: '<div class = simon_rightbox><div class = simon_right id = stim2></div></div>',
+  stimulus: '<div class = centerbox><div class = simon_right id = stim2></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     stim_side: 'right',
     stim_color: 'blue', 
-    condition: 'congruent'
+    condition: correct_responses[0][1] == 37 ? 'congruent' : 'incongruent'
   },
   key_answer: correct_responses[1][1]
 }];
