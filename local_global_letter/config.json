@@ -29,6 +29,7 @@
                         ], 
         "time":8,
         "reference": "http://www.sciencedirect.com/science/article/pii/S001002859990734X",
+        "notes": "Task reference: http://link.springer.com/article/10.3758/BF03198264#page-1",
         "publish":"True",
         "experiment_variables": [{
                                  "name":"credit_var",

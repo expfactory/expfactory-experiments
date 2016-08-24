@@ -309,7 +309,8 @@ var start_control_block = {
 	timing_response: 180000,
 	timing_post_trial: 2000,
 	on_finish: function() {
-		target_trials = jsPsych.randomization.repeat(['target','0', '0'], Math.round(base_num_trials/3)).slice(0,base_num_trials)
+		target_trials = jsPsych.randomization.repeat(['target','0', '0'], Math.round(base_num_trials*2/3)).slice(0,base_num_trials)
+		target = 't'
 	}
 };
 
