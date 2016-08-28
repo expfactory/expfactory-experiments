@@ -266,7 +266,7 @@ for (var b = 0; b < block_num; b++) {
 	}
 	letter_memory_experiment.push(response_block)
 	if ($.inArray(b, [2, 4, 11]) != -1) {
-		lettery_memory_experiment.push(attention_node)
+		letter_memory_experiment.push(attention_node)
 	}
 }
 
