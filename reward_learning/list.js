@@ -808,4 +808,14 @@ picArray[386] = ["static/experiments/test_task/images/23.png",
 subjcodeArray[386] = "breakfast";
 
 
+picArray[387] = ["static/experiments/test_task/images/32.png",
+  "static/experiments/test_task/images/4.png",
+  "static/experiments/test_task/images/6.png",
+  "static/experiments/test_task/images/12.png",
+  "static/experiments/test_task/images/36.png",
+  "static/experiments/test_task/images/10.png",
+  "static/experiments/test_task/images/1.png",
+  "static/experiments/test_task/images/37.png",
+];
+subjcodeArray[387] = "yosemite";
 
