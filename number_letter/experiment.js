@@ -261,7 +261,7 @@ for (i = 0; i < rotate_block_len; i++) {
     	var correct = false
     	var condition = 'oddeven'
     	var correct_response = 0
-    	if (data.stim_place == "bottomleft" | data.stim_place == "bottomright") {
+    	if (data.stim_place === "bottomleft" | data.stim_place === "bottomright") {
     		condition = 'consonantvowel'
 	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) === -1) {
 	    		correct_response = correct_responses[2][1]
