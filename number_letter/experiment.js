@@ -138,7 +138,7 @@ var instruction_node = {
   /* This function defines stopping criteria */
   loop_function: function(data) {
     for (i = 0; i < data.length; i++) {
-      if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
+      if ((data[i].trial_type === 'poldrack-instructions') && (data[i].rt !== -1)) {
         rt = data[i].rt
         sumInstructTime = sumInstructTime + rt
       }
@@ -199,7 +199,7 @@ for (i = 0; i < half_block_len; i++) {
     	else {
     		correct_response = correct_responses[1][1]
     	}
-    	if (data.key_press == correct_response) {
+    	if (data.key_press === correct_response) {
     		correct = true
     	}
     	jsPsych.data.addDataToLastTrial({correct: correct, correct_response: correct_response})
@@ -233,7 +233,7 @@ for (i = 0; i < half_block_len; i++) {
     	else {
     		correct_response = correct_responses[3][1]
     	}
-    	if (data.key_press == correct_response) {
+    	if (data.key_press === correct_response) {
     		correct = true
     	}
     	jsPsych.data.addDataToLastTrial({correct: correct, correct_response: correct_response})
@@ -270,14 +270,14 @@ for (i = 0; i < rotate_block_len; i++) {
 	    		correct_response = correct_responses[3][1]
 	    	}
 	    } else {
-	    	if (data.trial_id[1] % 2 == 0) {
+	    	if (data.trial_id[1] % 2 === 0) {
     			correct_response = correct_responses[0][1]
     	}
 	    	else {
 	    		correct_response = correct_responses[1][1]
 	    	}
 	    }
-    	if (data.key_press == correct_response) {
+    	if (data.key_press === correct_response) {
     		correct = true
     	}
     	jsPsych.data.addDataToLastTrial({correct: correct, 
