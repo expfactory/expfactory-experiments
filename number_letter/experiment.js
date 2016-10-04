@@ -192,11 +192,12 @@ for (i = 0; i < half_block_len; i++) {
     response_ends_trial: true,
     on_finish: function(data) {
     	var correct = false
-    	if (data.stim_id[1] % 2 == 0) {
-    		var correct_response = correct_responses[0][1]
+    	var correct_response = 0
+    	if (data.stim_id[1] % 2 === 0) {
+    		correct_response = correct_responses[0][1]
     	}
     	else {
-    		var correct_response = correct_responses[1][1]
+    		correct_response = correct_responses[1][1]
     	}
     	if (data.key_press == correct_response) {
     		correct = true
@@ -225,11 +226,12 @@ for (i = 0; i < half_block_len; i++) {
     response_ends_trial: true,
     on_finish: function(data) {
     	var correct = false
-    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) == -1) {
-    		var correct_response = correct_responses[2][1]
+    	var correct_response = 0
+    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) === -1) {
+    		correct_response = correct_responses[2][1]
     	}
     	else {
-    		var correct_response = correct_responses[3][1]
+    		correct_response = correct_responses[3][1]
     	}
     	if (data.key_press == correct_response) {
     		correct = true
@@ -258,20 +260,21 @@ for (i = 0; i < rotate_block_len; i++) {
     on_finish: function(data) {
     	var correct = false
     	var condition = 'oddeven'
+    	var correct_response = 0
     	if (data.stim_place == "bottomleft" | data.stim_place == "bottomright") {
     		condition = 'consonantvowel'
-	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) == -1) {
-	    		var correct_response = correct_responses[2][1]
+	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) === -1) {
+	    		correct_response = correct_responses[2][1]
 	    	}
 	    	else {
-	    		var correct_response = correct_responses[3][1]
+	    		correct_response = correct_responses[3][1]
 	    	}
 	    } else {
 	    	if (data.trial_id[1] % 2 == 0) {
-    		var correct_response = correct_responses[0][1]
+    			correct_response = correct_responses[0][1]
     	}
 	    	else {
-	    		var correct_response = correct_responses[1][1]
+	    		correct_response = correct_responses[1][1]
 	    	}
 	    }
     	if (data.key_press == correct_response) {
