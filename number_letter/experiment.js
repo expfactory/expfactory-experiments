@@ -47,7 +47,8 @@ var getRotateStim = function() {
       break
   }
   place = (place + 1) % 4
-  return [stim_place, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + getStim() +
+  stim_id = getStim()
+  return [stim_place, stim_id, '<div class = numlet-' + stim_place + '><p class = numlet-text>' + stim_id+
     '</p></div><div class = vertical-line></div><div class = horizontal-line></div>'
   ]
 }
@@ -62,10 +63,14 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
-var correct_responses = jsPsych.randomization.repeat([
-  ["left arrow", 90],
-  ["right arrow", 77]
-], 1)
+var correct_responses = jsPsych.randomization.shuffle([
+  ["M", 90],
+  ["Z", 77]
+]).concat(jsPsych.randomization.shuffle([
+  ["M", 90],
+  ["Z", 77]
+]))
+
 var evens = [2, 4, 6, 8]
 var odds = [3, 5, 7, 9]
 var numbers = [evens, odds]
@@ -121,9 +126,7 @@ var instructions_block = {
     trial_id: 'instruction'
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p></div>',
-    '<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the "Z" and "M" keys: "Z" for odd, "M" for even.</p></div>',
-    '<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the same keys: "Z" for consonant, "M" for vowel.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the "Z" and "M" keys: <strong>"' + correct_responses[0][0] + '" for odd, "' + correct_responses[1][0] + '" for even.</strong></p><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the same keys: <strong>"' + correct_responses[2][0] + '" for consonant, "' + correct_responses[3][0] + '" for vowel.</strong></p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -180,13 +183,26 @@ for (i = 0; i < half_block_len; i++) {
     choices: choices,
     data: {
       trial_id: 'stim',
-      exp_stage: 'test',
+      exp_stage: 'top',
       stim_place: stim[0],
       stim_id: stim[1],
-      'condition': 'top_oddeven'
+      condition: 'oddeven'
     },
     timing_post_trial: 0,
-    response_ends_trial: true
+    response_ends_trial: true,
+    on_finish: function(data) {
+    	var correct = false
+    	if (data.stim_id[1] % 2 == 0) {
+    		var correct_response = correct_responses[0][1]
+    	}
+    	else {
+    		var correct_response = correct_responses[1][1]
+    	}
+    	if (data.key_press == correct_response) {
+    		correct = true
+    	}
+    	jsPsych.data.addDataToLastTrial({correct: correct, correct_response: correct_response})
+    }
   }
   number_letter_experiment.push(top_block)
   number_letter_experiment.push(gap_block)
@@ -200,13 +216,26 @@ for (i = 0; i < half_block_len; i++) {
     choices: choices,
     data: {
       trial_id: 'stim',
-      exp_stage: 'test',
+      exp_stage: 'bottom',
       stim_place: stim[0],
       stim_id: stim[1],
-      'condition': 'bottom_consonantvowel'
+      condition: 'consonantvowel'
     },
     timing_post_trial: 0,
-    response_ends_trial: true
+    response_ends_trial: true,
+    on_finish: function(data) {
+    	var correct = false
+    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) == -1) {
+    		var correct_response = correct_responses[2][1]
+    	}
+    	else {
+    		var correct_response = correct_responses[3][1]
+    	}
+    	if (data.key_press == correct_response) {
+    		correct = true
+    	}
+    	jsPsych.data.addDataToLastTrial({correct: correct, correct_response: correct_response})
+    }
   }
   number_letter_experiment.push(bottom_block)
   number_letter_experiment.push(gap_block)
@@ -220,13 +249,38 @@ for (i = 0; i < rotate_block_len; i++) {
     choices: choices,
     data: {
       trial_id: 'stim',
-      exp_stage: 'test',
+      exp_stage: 'rotate_switch',
       stim_place: stim[0],
-      stim_id: stim[1],
-      'condition': 'rotate_switch'
+      stim_id: stim[1]
     },
     timing_post_trial: 0,
-    response_ends_trial: true
+    response_ends_trial: true,
+    on_finish: function(data) {
+    	var correct = false
+    	var condition = 'oddeven'
+    	if (data.stim_place == "bottomleft" | data.stim_place == "bottomright") {
+    		condition = 'consonantvowel'
+	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) == -1) {
+	    		var correct_response = correct_responses[2][1]
+	    	}
+	    	else {
+	    		var correct_response = correct_responses[3][1]
+	    	}
+	    } else {
+	    	if (data.trial_id[1] % 2 == 0) {
+    		var correct_response = correct_responses[0][1]
+    	}
+	    	else {
+	    		var correct_response = correct_responses[1][1]
+	    	}
+	    }
+    	if (data.key_press == correct_response) {
+    		correct = true
+    	}
+    	jsPsych.data.addDataToLastTrial({correct: correct, 
+    									correct_response: correct_response,
+    									condition: condition})
+    }
   }
   number_letter_experiment.push(rotate_block)
   number_letter_experiment.push(gap_block)
