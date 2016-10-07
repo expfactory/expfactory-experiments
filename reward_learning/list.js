@@ -832,14 +832,14 @@ picArray[388] = ["static/experiments/test_task/images/10.png",
 subjcodeArray[388] = "ovid";
 
 
-picArray[389] = ["static/experiments/test_task/images/31.png",
-  "static/experiments/test_task/images/16.png",
-  "static/experiments/test_task/images/2.png",
-  "static/experiments/test_task/images/12.png",
-  "static/experiments/test_task/images/27.png",
-  "static/experiments/test_task/images/34.png",
-  "static/experiments/test_task/images/37.png",
-  "static/experiments/test_task/images/28.png",
+picArray[389] = ["static/experiments/test_task/images/27.png",
+  "static/experiments/test_task/images/32.png",
+  "static/experiments/test_task/images/3.png",
+  "static/experiments/test_task/images/19.png",
+  "static/experiments/test_task/images/25.png",
+  "static/experiments/test_task/images/8.png",
+  "static/experiments/test_task/images/24.png",
+  "static/experiments/test_task/images/29.png",
 ];
 subjcodeArray[389] = "joshuatree";
 
