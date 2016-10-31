@@ -963,3 +963,36 @@ picArray[406] = ["/static/experiments/test_task/images/9.png",
 ];
 subjcodeArray[406] = "juxtapose";
 
+
+picArray[251] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/2.png",
+  "/static/experiments/test_task/images/35.png",
+  "/static/experiments/test_task/images/25.png",
+  "/static/experiments/test_task/images/14.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/8.png",
+subjcodeArray[] = "panda";
+
+
+picArray[412] = ["/static/experiments/test_task/images/32.png",
+  "/static/experiments/test_task/images/16.png",
+  "/static/experiments/test_task/images/30.png",
+  "/static/experiments/test_task/images/18.png",
+  "/static/experiments/test_task/images/28.png",
+  "/static/experiments/test_task/images/7.png",
+  "/static/experiments/test_task/images/35.png",
+  "/static/experiments/test_task/images/37.png",
+subjcodeArray[] = "yourrandomword";
+
+
+picArray[360] = ["/static/experiments/test_task/images/20.png",
+  "/static/experiments/test_task/images/37.png",
+  "/static/experiments/test_task/images/36.png",
+  "/static/experiments/test_task/images/19.png",
+  "/static/experiments/test_task/images/28.png",
+  "/static/experiments/test_task/images/27.png",
+  "/static/experiments/test_task/images/2.png",
+  "/static/experiments/test_task/images/9.png",
+subjcodeArray[] = "lucy";
+
