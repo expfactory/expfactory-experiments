@@ -972,7 +972,7 @@ picArray[251] = ["/static/experiments/test_task/images/22.png",
   "/static/experiments/test_task/images/14.png",
   "/static/experiments/test_task/images/24.png",
   "/static/experiments/test_task/images/8.png",
-subjcodeArray[] = "panda";
+subjcodeArray[251] = "panda";
 
 
 picArray[412] = ["/static/experiments/test_task/images/32.png",
@@ -983,7 +983,7 @@ picArray[412] = ["/static/experiments/test_task/images/32.png",
   "/static/experiments/test_task/images/7.png",
   "/static/experiments/test_task/images/35.png",
   "/static/experiments/test_task/images/37.png",
-subjcodeArray[] = "yourrandomword";
+subjcodeArray[412] = "yourrandomword";
 
 
 picArray[360] = ["/static/experiments/test_task/images/20.png",
@@ -994,5 +994,5 @@ picArray[360] = ["/static/experiments/test_task/images/20.png",
   "/static/experiments/test_task/images/27.png",
   "/static/experiments/test_task/images/2.png",
   "/static/experiments/test_task/images/9.png",
-subjcodeArray[] = "lucy";
+subjcodeArray[360] = "lucy";
 
