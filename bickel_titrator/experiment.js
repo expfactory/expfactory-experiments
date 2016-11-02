@@ -159,8 +159,8 @@ var delays = jsPsych.randomization.shuffle(['1 day', '1 week', '1 month', '6 mon
 ])
 var magnitudes = jsPsych.randomization.shuffle([10, 1000, 1000000])
 var choices = [81, 80]
-var curr_delay = delays.shift()
-var curr_delay_in_days = convertToDays(curr_delay)
+var curr_delay = 0
+var curr_delay_in_days = 0
 var original_immediate = 0
 var original_delayed = 0
 var immediate_amount = 0

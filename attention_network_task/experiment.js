@@ -73,11 +73,6 @@ var post_trial_gap = function() {
 	return 3500 - jsPsych.data.getData()[curr_trial - 1].block_duration - jsPsych.data.getData()[curr_trial - 4].block_duration
 }
 
-var get_RT = function() {
-	var curr_trial = jsPsych.progress().current_trial_global
-	return jsPsych.data.getData()[curr_trial].rt
-}
-
 var getInstructFeedback = function() {
 	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
 		'</p></div>'
