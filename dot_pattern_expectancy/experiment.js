@@ -79,20 +79,20 @@ var getFeedback = function() {
   var condition = curr_data.condition
   var response = curr_data.key_press
   var feedback_text = ''
-  var correct = -1
-  if (response == -1) {
-    feedback_text =  '<div class = centerbox><div class = center-text>Respond Faster!</p></div>'
-  } else if (condition == "AX" && response == 37) {
+  var correct = false
+  var correct_response = choices[1]
+  if (condition == "AX") {
+    correct_response = choices[0]
+  }
+  if (response == correct_response) {
+    correct = true
     feedback_text =  '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>'
-    correct = true
-  } else if (condition != "AX" && response == 40) {
-    feedback_text = '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>'
-    correct = true
+  } else if (response == -1) {
+    feedback_text =  '<div class = centerbox><div class = center-text>Respond Faster!</p></div>'
   } else {
     feedback_text = '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>'
-    correct = false
   }
-  jsPsych.data.addDataToLastTrial({'correct': correct})
+  jsPsych.data.addDataToLastTrial({'correct': correct, 'correct_response': correct_response})
   return feedback_text
 }
 

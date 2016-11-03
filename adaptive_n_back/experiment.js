@@ -164,6 +164,7 @@ var credit_var = true //default to true
 var letters = 'bBdDgGtTvV'.split("")
 var num_blocks = 20 // number of adaptive blocks
 var base_num_trials = 20 // total num_trials = base + load 
+var control_num_trials = 42
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
@@ -309,7 +310,8 @@ var start_control_block = {
 	timing_response: 180000,
 	timing_post_trial: 2000,
 	on_finish: function() {
-		target_trials = jsPsych.randomization.repeat(['target','0', '0'], Math.round(base_num_trials/3)).slice(0,base_num_trials)
+		target_trials = jsPsych.randomization.repeat(['target','0', '0'], Math.round(control_num_trials/3)).slice(0,control_num_trials)
+		target = 't'
 	}
 };
 
@@ -396,7 +398,7 @@ for (var i = 0; i < (base_num_trials + 1); i++) {
 
 //Define control (0-back) block
 var control_trials = []
-for (var i = 0; i < base_num_trials*2; i++) {
+for (var i = 0; i < control_num_trials; i++) {
 	var control_block = {
 		type: 'poldrack-single-stim',
 		is_html: true,
