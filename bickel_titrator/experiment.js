@@ -122,7 +122,7 @@ var convertToDays = function(time) {
     case '1 month':
       return 30
       break;
-    case '60 months':
+    case '6 months':
       return 180
       break;
     case '1 year':
