@@ -64,11 +64,11 @@ var instructTimeThresh = 0 ///in seconds
 
 // task specific variables
 var correct_responses = jsPsych.randomization.shuffle([
-  ["M", 90],
-  ["Z", 77]
+  ["M", 77],
+  ["Z", 90]
 ]).concat(jsPsych.randomization.shuffle([
-  ["M", 90],
-  ["Z", 77]
+  ["M", 77],
+  ["Z", 90]
 ]))
 
 var evens = [2, 4, 6, 8]
@@ -194,10 +194,10 @@ for (i = 0; i < half_block_len; i++) {
     	var correct = false
     	var correct_response = 0
     	if (data.stim_id[1] % 2 === 0) {
-    		correct_response = correct_responses[0][1]
+    		correct_response = correct_responses[1][1]
     	}
     	else {
-    		correct_response = correct_responses[1][1]
+    		correct_response = correct_responses[0][1]
     	}
     	if (data.key_press === correct_response) {
     		correct = true
@@ -271,10 +271,10 @@ for (i = 0; i < rotate_block_len; i++) {
 	    	}
 	    } else {
 	    	if (data.trial_id[1] % 2 === 0) {
-    			correct_response = correct_responses[0][1]
+    			correct_response = correct_responses[1][1]
     	}
 	    	else {
-	    		correct_response = correct_responses[1][1]
+	    		correct_response = correct_responses[0][1]
 	    	}
 	    }
     	if (data.key_press === correct_response) {
