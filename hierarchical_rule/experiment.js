@@ -164,6 +164,7 @@ for (var c = 0; c < colors.length; c++) {
             orientation: orientation_data[orientations[o] - 1],
             border: color_data[colors[c] - 1],
             exp_stage: "flat_test",
+            trial_id: "flat_stim",
             correct_response: random_correct.pop()
           }
         })
@@ -180,6 +181,7 @@ for (var c = 0; c < colors.length; c++) {
             stim: stims[s + (stims.length / 2)],
             orientation: orientation_data[orientations[o] - 1],
             exp_stage: "hierarchical_test",
+            trial_id: "hierarchical_stim",
             border: color_data[colors[c] - 1],
             correct_response: correct_response
           }
@@ -387,8 +389,6 @@ var flat_stim_block = {
   		correct = true
   	}
     jsPsych.data.addDataToLastTrial({
-      trial_id: "flat_stim",
-      exp_stage: "test",
       correct: correct,
       trial_num: current_trial
     })
@@ -411,8 +411,6 @@ var hierarchical_stim_block = {
   		correct = true
   	}
     jsPsych.data.addDataToLastTrial({
-      trial_id: "hierarchical_stim",
-      exp_stage: "test",
       correct: correct,
       trial_num: current_trial
     })
