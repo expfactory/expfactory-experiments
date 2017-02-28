@@ -227,7 +227,7 @@ for (i = 0; i < half_block_len; i++) {
     on_finish: function(data) {
     	var correct = false
     	var correct_response = 0
-    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) === -1) {
+    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[0].toLowerCase()) === -1) {
     		correct_response = correct_responses[2][1]
     	}
     	else {
@@ -242,6 +242,7 @@ for (i = 0; i < half_block_len; i++) {
   number_letter_experiment.push(bottom_block)
   number_letter_experiment.push(gap_block)
 }
+
 for (i = 0; i < rotate_block_len; i++) {
   stim = getRotateStim()
   var rotate_block = {
@@ -263,14 +264,16 @@ for (i = 0; i < rotate_block_len; i++) {
     	var correct_response = 0
     	if (data.stim_place === "bottomleft" | data.stim_place === "bottomright") {
     		condition = 'consonantvowel'
-	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[1].toLowerCase()) === -1) {
+    		// if consonant
+	    	if (['a', 'e', 'i', 'o', 'u'].indexOf(data.stim_id[0].toLowerCase()) === -1) {
 	    		correct_response = correct_responses[2][1]
 	    	}
+	    	// if vowel
 	    	else {
 	    		correct_response = correct_responses[3][1]
 	    	}
 	    } else {
-	    	if (data.trial_id[1] % 2 === 0) {
+	    	if (data.stim_id[1] % 2 === 0) {
     			correct_response = correct_responses[1][1]
     	}
 	    	else {
