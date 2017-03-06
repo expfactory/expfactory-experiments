@@ -1094,5 +1094,3 @@ picArray[527] = ["/static/experiments/test_task/images/14.png",
 	"/static/experiments/test_task/images/102.png"
 ];
 subjcodeArray[527] = "bowie";
-
-
