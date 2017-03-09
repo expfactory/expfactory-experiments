@@ -295,3 +295,50 @@ picArray[493] = ["/static/experiments/test_task/images/14.png",
 	"/static/experiments/test_task/images/102.png"
 ];  
 subjcodeArray[493] = "sushi";
+
+
+picArray[124] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[124] = "puppy";
+
+
+picArray[540] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[540] = "stella";
+
+
+picArray[541] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[541] = "bimini";
+
+
+
+
+
