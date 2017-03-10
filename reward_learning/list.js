@@ -342,3 +342,87 @@ subjcodeArray[541] = "bimini";
 
 
 
+picArray[542] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[542] = "dog";
+
+
+picArray[22] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[22] = "bridge";
+
+
+picArray[544] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[544] = "retriever";
+
+
+picArray[507] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[507] = "samira";
+
+
+picArray[545] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[545] = "honeybee";
+
+
+picArray[161] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[161] = "ninja";
+
+
