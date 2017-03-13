@@ -356,7 +356,7 @@ picArray[542] = ["/static/experiments/test_task/images/22.png",
 subjcodeArray[542] = "dog";
 
 
-picArray[22] = ["/static/experiments/test_task/images/22.png",
+picArray[922] = ["/static/experiments/test_task/images/22.png",
   "/static/experiments/test_task/images/24.png",
   "/static/experiments/test_task/images/34.png",
   "/static/experiments/test_task/images/10.png",
@@ -367,7 +367,7 @@ picArray[22] = ["/static/experiments/test_task/images/22.png",
   "/static/experiments/test_task/images/101.png",
   "/static/experiments/test_task/images/102.png"
 ];  
-subjcodeArray[22] = "bridge";
+subjcodeArray[922] = "bridge";
 
 
 picArray[544] = ["/static/experiments/test_task/images/22.png",
