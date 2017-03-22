@@ -426,3 +426,47 @@ picArray[161] = ["/static/experiments/test_task/images/22.png",
 subjcodeArray[161] = "ninja";
 
 
+picArray[986] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[986] = "ink";
+
+
+picArray[550] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[550] = "poltroon";
+
+
+picArray[502] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[502] = "baseball";
+
+
+
+
