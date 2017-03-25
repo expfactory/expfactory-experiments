@@ -468,5 +468,33 @@ picArray[502] = ["/static/experiments/test_task/images/22.png",
 subjcodeArray[502] = "baseball";
 
 
+picArray[552] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[552] = "noword";
+
+
+picArray[553] = ["/static/experiments/test_task/images/22.png",
+  "/static/experiments/test_task/images/24.png",
+  "/static/experiments/test_task/images/34.png",
+  "/static/experiments/test_task/images/10.png",
+  "/static/experiments/test_task/images/17.png",
+  "/static/experiments/test_task/images/26.png",
+  "/static/experiments/test_task/images/21.png",
+  "/static/experiments/test_task/images/29.png",
+  "/static/experiments/test_task/images/101.png",
+  "/static/experiments/test_task/images/102.png"
+];  
+subjcodeArray[553] = "letters";
+
+
 
 
