@@ -4,14 +4,14 @@
 
 var makePracticeTrialList = function() {
 	var filenames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-	var path = '/static/experiments/network_traversal/images/'
+	var path = '/static/experiments/network_traversal_2/images/'
 	var prefix = '<div class = shapebox><img class = stim src = '
 	var postfix = '></img></div>'
 
 	trial_list = []
 	for (i = 0; i < filenames.length; i++) {
-		var tmp_obj = {}
-		var stim_name = filenames[i]
+		tmp_obj = {}
+		stim_name = filenames[i]
 		tmp_obj.stimulus = prefix + path + stim_name + '.png' + postfix
 
 		tmp_data2 = {
@@ -30,7 +30,7 @@ var makePracticeTrialList = function() {
 
 var makePractice2TrialList = function() {
 	var filenames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
-	var path = '/static/experiments/network_traversal/images/compare/'
+	var path = '/static/experiments/network_traversal_2/images/compare/'
 	var prefix = '<div class = shapebox2><img class = stim src = '
 	var postfix = '></img></div>'
 
@@ -39,8 +39,8 @@ var makePractice2TrialList = function() {
 
 	trial_list = []
 	for (i = 0; i < filenames.length; i++) {
-		var tmp_obj = {}
-		var stim_name = filenames[i]
+		tmp_obj = {}
+		stim_name = filenames[i]
 		tmp_obj.stimulus = prefix + path + stim_name + '_compare' + '.png' + postfix
 
 		if (left_resp.includes(i)) {
@@ -74,21 +74,21 @@ var makeExposureTrialList = function() {
 	var randomized_stim_names = jsPsych.randomization.repeat(stim_names, 1)
 	
 	var walk = ['10', '12', '11', '13_rot', '14', '0', '3', '2', '1', '4', '5', '8', '6', '9', '7_rot', '6', '5', '4', '1', '2', '3_rot', '0', '14', '11', '13_rot', '12', '10', '9', '8', '7', '6', '5', '7', '8', '9', '10', '12', '11', '13', '14', '0_rot', '2', '3', '4_rot', '1', '4', '3', '2_rot', '1_rot', '0', '14', '13_rot', '12', '11_rot', '10', '9_rot', '6', '8', '5', '7', '5', '8', '7', '6_rot', '9_rot', '10', '11', '12', '13_rot', '14_rot', '0', '2', '3', '4', '1', '3', '1', '0', '2', '4', '5_rot', '7', '8', '6', '9', '10', '13', '14', '11', '12', '10', '13', '11', '12', '14', '0', '1', '3', '2', '4', '5', '7', '8', '9_rot', '6', '5', '6', '7', '8', '9', '10', '13', '12', '11_rot', '14', '0', '1', '3', '4', '2', '0', '14', '11', '13', '12', '10', '9', '6', '8', '7_rot', '5', '4', '2', '1', '3', '1_rot', '2', '4_rot', '3', '0', '14', '13', '12', '11', '10', '9', '6', '8', '7_rot', '5', '4', '1', '2', '3', '0', '14', '12_rot', '13', '11', '10', '9', '8', '7', '5', '6', '9', '7', '8', '6', '5', '4', '1', '3', '2', '0', '14', '12', '13', '11', '10', '12', '11', '10', '13', '14', '0', '2_rot', '3', '1', '4', '5', '8', '6', '9', '7', '6', '7', '8', '9', '10_rot', '12', '13', '11', '14', '0', '2', '3', '1', '4', '5', '6_rot', '9', '10', '11', '12', '13', '14', '0_rot', '3', '1', '2', '4', '5', '7', '8', '7', '6', '8', '9', '10', '12', '11', '13', '14', '0', '2', '1', '3', '4', '5', '7_rot', '9', '8', '6', '5', '4_rot', '3', '2_rot', '1_rot', '0', '14', '13', '10', '11', '12', '11', '13', '12', '14', '0', '1', '2', '3_rot', '4_rot', '5', '8_rot', '7', '6_rot', '9', '10', '13', '11', '14', '12', '10', '9', '8', '7', '6', '5', '4', '2_rot', '1', '3', '0', '2_rot', '1', '0', '3', '4', '5_rot', '8', '7', '6', '9', '10', '12', '11', '13', '14', '11_rot', '10', '9', '7', '8', '6', '5', '4', '1', '3', '2', '0', '14_rot', '13', '12', '10_rot', '9', '7', '8', '6', '5', '4', '1', '3', '2', '0_rot', '14', '11', '12_rot', '13', '10', '9', '6', '8', '7', '5', '4', '3', '2', '1_rot', '0', '14', '13', '12', '11_rot', '12_rot', '10', '13', '11', '14', '0', '2_rot', '3', '1', '4_rot', '5', '8', '7', '9', '6', '8', '6', '5_rot', '7', '9', '10', '11', '13', '12', '14_rot', '0', '3', '4', '1', '2', '1', '3_rot', '4', '2', '0', '14', '13_rot', '12', '11', '10', '9_rot', '6', '5', '8', '7', '6', '8', '7', '9', '10', '12', '11', '13', '14', '0', '3_rot', '2', '1', '4', '5', '7', '9', '10', '12', '11', '13', '14', '0', '1', '3', '2', '4', '5', '8_rot', '6', '7', '6', '9', '8', '5', '4_rot', '1', '2', '3', '0', '14', '13', '11', '12_rot', '10', '13', '14', '12', '11', '10', '9_rot', '8', '7', '6_rot', '5', '4_rot', '2', '0', '3_rot', '1', '4', '1', '3', '2', '0', '14', '11', '12', '13', '10', '9', '8', '6_rot', '7', '5_rot', '7', '5', '8', '6', '9', '10_rot', '12', '11', '13_rot', '14', '0', '2', '1_rot', '3', '4_rot', '3', '1', '2', '0', '14', '12', '13', '11', '10_rot', '9', '7', '6', '8', '5', '4_rot', '1', '3', '0_rot', '2', '4', '5', '8', '7_rot', '6', '9', '10', '12', '11', '14', '13', '11', '12', '10', '13', '14_rot', '0', '2', '1_rot', '3', '4', '5', '6', '7', '9', '8', '5_rot', '4', '3', '2', '1', '0', '14_rot', '11', '12', '13', '10', '9_rot', '6', '8', '7', '8', '5', '6', '7', '9', '10', '11', '13', '12', '14', '0', '2', '3', '4', '1', '3', '2', '0', '1', '4', '5', '6', '8', '7', '9_rot', '10_rot', '13', '12', '14_rot', '11', '12', '13', '11', '14_rot', '0', '2_rot', '1', '3', '4', '5_rot', '7', '6', '8', '9', '10', '9', '6', '7', '8', '5', '4', '2', '1', '3', '0', '14', '11', '13', '12', '10', '12', '14', '0', '2', '3', '1', '4', '5', '8_rot', '7', '6', '9', '10', '11', '13_rot', '11_rot', '14', '13', '12', '10', '9', '8_rot', '6', '7', '5', '4', '1', '0', '3', '2', '4', '3', '1', '2', '0', '14', '13', '11_rot', '12_rot', '10_rot', '9', '8', '7', '5', '6', '9', '7', '6', '8', '5', '4', '3', '2', '1', '0', '14', '13', '10', '12', '11', '12', '14', '0', '1', '2', '3', '4', '5', '6_rot', '8_rot', '7', '9', '10', '11', '13', '12', '14', '11', '13', '10', '9', '8_rot', '6', '7', '5', '4', '1', '2', '3_rot', '0', '3', '1', '4', '2', '0', '14', '12', '11', '13', '10', '9_rot', '6', '7', '8', '5', '6', '9', '10_rot', '11', '13', '12', '14', '0_rot', '3', '1', '2', '4', '5', '8', '7', '6', '5', '7', '8', '9', '10', '13', '11', '12', '14', '0', '1', '3', '2', '4', '3', '1', '0_rot', '2', '4', '5', '7_rot', '8', '6_rot', '9', '10', '13', '12', '11', '14', '13_rot', '10', '9', '6', '7', '8', '5', '4', '2_rot', '1', '3', '0', '14', '11', '12', '13', '11', '14', '12', '10', '9', '7', '6', '8', '5', '4', '3', '1', '0', '2', '1_rot', '2', '0', '3', '4_rot', '5', '7', '8', '6_rot', '9', '10', '12', '13_rot', '14_rot', '11', '10', '9', '7_rot', '8_rot', '6', '5', '4', '1_rot', '3', '2', '0', '14', '11_rot', '13_rot', '12', '11', '13_rot', '14', '12', '10', '9', '8', '7', '6', '5', '4', '3', '1_rot', '0_rot', '2', '0', '2', '3', '1', '4', '5', '8', '6', '7', '9', '10', '12', '11_rot', '14', '13', '11', '14', '13_rot', '12_rot', '10_rot', '9', '8', '7', '6', '5_rot', '4', '1', '0', '2', '3_rot', '4', '5_rot', '7', '8_rot', '6', '9', '10', '12', '11', '13', '14', '0', '1', '2', '3_rot', '4_rot', '2', '3', '1', '0', '14', '11', '13', '12', '10', '9', '7_rot', '6', '5_rot', '8', '9', '8_rot', '6_rot', '7', '5', '4', '3_rot', '1_rot', '2', '0', '14', '12', '11', '10', '13', '12', '13', '11', '14', '0', '1', '3', '2', '4', '5', '7_rot', '8_rot', '6', '9', '10', '11', '13', '10', '12', '14', '0', '3', '1', '2', '4_rot', '5_rot', '7', '6', '9', '8', '5', '7', '8_rot', '6', '9', '10_rot', '12', '11', '13', '14', '0', '3_rot', '4', '1', '2', '4', '5', '6', '7', '8_rot', '9', '10', '13', '12', '11', '14_rot', '0', '2', '1', '3', '0', '1_rot', '3', '2', '4', '5', '6', '7', '8', '9', '10', '13', '11', '14', '12', '14', '12_rot', '13', '11_rot', '10', '9_rot', '6', '7', '8_rot', '5', '4', '1', '0', '2_rot', '3', '4', '1', '3', '2', '0', '14_rot', '12', '13', '11', '10_rot', '9', '8', '7', '6', '5', '7', '9_rot', '8_rot', '6', '5', '4', '2', '1', '3', '0', '14', '13_rot', '11', '10', '12', '13', '14', '11', '12', '10', '9', '8', '6', '7', '5', '4', '2', '1', '0', '3', '0', '2', '3', '1', '4', '5', '7', '8', '6_rot', '9', '10_rot', '11', '13', '12', '14', '11', '14', '13', '12', '10', '9', '7_rot', '8', '6', '5', '4_rot', '1', '0', '2', '3', '2', '4', '3', '1', '0', '14', '12', '11', '13_rot', '10', '9', '8', '6', '5', '7', '5', '6', '7', '8', '9', '10', '13', '12', '11_rot', '14', '0', '2', '1_rot', '4', '3', '0_rot', '3_rot', '1', '2_rot', '4', '5', '8', '7', '6', '9', '10', '13', '12', '14', '11_rot', '12', '10', '13_rot', '11_rot', '14', '0', '2', '1_rot', '3', '4', '5', '8', '7', '6', '9_rot', '8', '9', '7', '6', '5', '4', '3', '1', '2', '0', '14', '13_rot', '10', '11', '12', '14', '13', '11', '12', '10_rot', '9', '6', '7', '8', '5', '4_rot', '2', '3', '1_rot', '0', '3_rot', '2', '0', '1', '4', '5', '8', '6', '7', '9', '10', '12', '13', '14_rot', '11', '10', '12', '11', '13', '14', '0', '2_rot', '1_rot', '3_rot', '4', '5', '6', '9', '7', '8', '9', '6', '7', '8_rot', '5', '4', '3', '1_rot', '2', '0', '14_rot', '13', '12', '10', '11', '10', '9', '8', '7', '6', '5', '4', '3_rot', '2', '1', '0', '14', '13', '12', '11', '10', '13', '12', '11', '14', '0', '3', '2', '1_rot', '4_rot', '5', '6_rot', '9', '7_rot', '8', '7', '6', '9', '8_rot', '5', '4', '1', '3', '2', '0', '14', '11', '10', '12', '13_rot', '12', '14', '11', '13_rot', '10', '9_rot', '8', '6', '7', '5', '4', '2', '3', '0', '1_rot', '3', '0', '2', '1_rot', '4', '5', '7', '6', '8', '9', '10', '12', '14', '13', '11', '13', '14', '11', '12', '10', '9', '8', '7', '6', '5', '4', '3', '1_rot', '2', '0', '1', '2', '0_rot', '3', '4', '5', '8', '6', '7', '9_rot', '10', '12_rot', '14', '13', '11', '12', '11', '14', '13_rot', '10', '9', '7_rot', '8', '6_rot', '5_rot', '4_rot', '2', '1', '0_rot', '3', '0', '2', '1', '3', '4_rot', '5', '6', '7', '8', '9', '10', '12', '14', '13_rot', '11_rot', '13', '11', '12_rot', '10', '9', '7', '6', '8', '5', '4', '3', '2', '1', '0', '14_rot', '11', '13', '10_rot', '12', '14', '0', '3_rot', '2', '1', '4', '5', '8', '9_rot', '6', '7', '6', '5', '4', '1', '2_rot', '3', '0', '14', '12', '13_rot', '11', '10', '9', '8', '7', '6', '8', '9', '10', '11', '13_rot', '12', '14_rot', '0', '3', '2_rot', '1', '4', '5_rot', '7', '8', '7', '9', '6', '5', '4', '3', '2', '1', '0', '14', '11', '10', '13', '12', '10', '11_rot', '12', '13', '14', '0_rot', '1', '2', '3', '4', '5', '7', '6', '9', '8', '6', '8', '9_rot', '7', '5', '4', '2_rot', '3', '1', '0', '14', '12', '11', '13', '10']
-	var path = '/static/experiments/network_traversal/images/'
+	var path = '/static/experiments/network_traversal_2/images/'
 	var prefix = '<div class = shapebox><img class = stim src = '
 	var postfix = '></img></div>'
 
 	trial_list = []
 	for (i = 0; i < walk.length; i++) {
-		var tmp_obj = {}
+		tmp_obj = {}
 
 		if ((walk[i].length === 1) || (walk[i].charAt(1) === '_')) {
-			var stim_num = Number(walk[i].charAt(0))
+			stim_num = Number(walk[i].charAt(0))
 		} else {
-			var stim_num = Number(walk[i].slice(0, 2))
+			stim_num = Number(walk[i].slice(0, 2))
 			}
 
-		var mapped_stim_num = randomized_stim_names[stim_num]
+		mapped_stim_num = randomized_stim_names[stim_num]
 
 		if (walk[i].includes('rot')) {
 			tmp_obj.stimulus = prefix + path + mapped_stim_num + '_rot' + '.png' + postfix
@@ -126,14 +126,14 @@ var makeExposureTrialList = function() {
 	seg_trial_list = []
 	var seg_walk = ['9', '7', '9', '8', '5', '7', '6', '5', '6', '9', '7', '9', '10', '9', '10', '11', '12', '13', '14', '0', '3', '2', '1', '4', '5', '8', '6', '7', '9', '10', '9', '8', '5', '4', '2', '1', '4', '5', '4', '5', '7', '9', '8', '9', '7', '5', '6', '8', '7', '9', '10', '11', '12', '13', '14', '0', '3', '2', '1', '4', '1', '3', '0', '2', '0', '1', '3', '1', '3', '2', '1', '3', '4', '3', '1', '4', '5', '7', '8', '6', '9', '10', '12', '13', '11', '14', '0', '2', '1', '3', '0', '14', '13', '10', '9', '10', '11', '12', '10', '13', '10', '13', '12', '13', '12', '11', '14', '0', '1', '2', '3', '4', '5', '7', '8', '6', '9', '10', '13', '12', '11', '10', '13', '10', '9', '10', '9', '6', '7', '8', '9', '8', '9', '10', '11', '12', '13', '14', '11', '10', '9', '6', '8', '7', '5', '4', '1', '0', '2', '3', '0', '2', '1', '3', '4', '2', '3', '0', '1', '3', '1', '4', '5', '6', '5', '8', '5', '7', '6', '9', '10', '12', '11', '13', '14', '0', '3', '1', '4', '2', '1', '2', '4', '1', '0', '14', '13', '10', '13', '14', '13', '12', '11', '14', '0', '1', '0', '3', '2', '4', '5', '6', '8', '7', '9', '10', '11', '14', '12', '13', '14', '11', '12', '14', '0', '2', '0', '3', '1', '3', '0', '2', '1', '3', '4', '3', '0', '14', '12', '11', '13', '10', '9', '7', '8', '6', '5', '4', '1', '2', '3', '4', '3', '0', '3', '0', '14', '11', '14', '11', '10', '9', '7', '5', '7', '9', '7', '6', '8', '5', '4', '3', '1', '2', '0', '14', '12', '13', '11', '10', '9', '8', '5', '6', '5', '7', '9', '10', '13', '12', '11', '12', '10', '11', '13', '14', '0', '3', '2', '1', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '10', '13', '14', '12', '13', '10', '13', '10', '12', '10', '13', '12', '13', '12', '14', '11', '10', '9', '6', '7', '8', '5', '4', '1', '2', '3', '0', '14', '13', '12', '11', '14', '13', '11', '10', '9', '8', '6', '9', '10', '9', '8', '7', '5', '8', '9', '7', '6', '8', '5', '4', '2', '3', '1', '0', '14', '13', '12', '11', '10', '9', '8', '7', '5', '7', '8', '7', '5', '8', '7', '9', '7', '5', '8', '9', '6', '7', '8', '9', '10', '12', '11', '13', '14', '0', '3', '2', '1', '4', '5', '6', '5', '8', '5', '4', '1', '2', '3', '2', '3', '4', '1', '0', '14', '11', '10', '13', '12', '11', '14', '0', '3', '2', '1', '4', '5', '6', '9', '7', '8', '9', '10', '12', '14', '11', '10', '9', '6', '9', '6', '7', '8', '5', '6', '7', '8', '9', '10', '13', '12', '11', '14', '0', '1', '2', '3', '4', '5', '7', '6', '9', '7', '9', '10', '9', '10', '11', '12', '14', '0', '1', '2', '3', '1', '3', '4', '5', '8', '6', '7', '9', '10', '11', '13', '12', '14', '0', '3', '1', '2', '4', '3', '1', '2', '3', '2', '1', '4', '5', '4', '1', '3', '4', '2', '3', '2', '3', '1', '0', '14', '12', '13', '11', '10', '9', '6', '7', '8', '5', '4', '1', '0', '14', '0', '14', '12', '10', '12', '11', '13', '14', '12', '11', '14', '0', '2', '4', '5', '7', '8', '6', '9', '10', '11', '13', '12', '14', '0', '3', '1', '3', '4', '5', '7', '9', '10', '9', '10', '12', '10', '12', '11', '12', '13', '12', '11', '10', '13', '12', '14', '0', '3', '1', '2', '4', '5', '8', '9', '6', '7', '6', '7', '9', '10', '12', '11', '10', '9', '10', '9', '10', '13', '12', '11', '13', '10', '13', '11', '12', '14', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 	for (i = 0; i < seg_walk.length; i++) {
-		var tmp_obj = {}
+		tmp_obj = {}
 
 		if (seg_walk[i].length === 1) {
-			var stim_num = Number(walk[i].charAt(0))
+			stim_num = Number(seg_walk[i].charAt(0))
 		} else {
-			var stim_num = Number(walk[i].slice(0, 2))
+			stim_num = Number(seg_walk[i].slice(0, 2))
 			}
-		var mapped_stim_num = randomized_stim_names[stim_num]
+		mapped_stim_num = randomized_stim_names[stim_num]
 
 		tmp_obj.stimulus = prefix + path + mapped_stim_num + '.png' + postfix
 		mapped_stim_name = mapped_stim_num
@@ -166,7 +166,7 @@ var makeExposureTrialList = function() {
 	prefix = '<div style="width:830px; height:200px; overflow:auto; position:absolute; top:50%; left:65%; margin-right:-50%; transform: translate(-50%,-50%)"><div style="width: 2000px; height: 90px;">'
 	img_prefix = '<img src='
 	img_suffix = ' />'
-	path = '/static/experiments/network_traversal/images/'
+	path = '/static/experiments/network_traversal_2/images/'
 	suffix = '</div></div>'
 
 	for (i = 0; i < oddmanout_stim.length; i++) {
@@ -175,7 +175,7 @@ var makeExposureTrialList = function() {
 	}
 
 	for (i = 0; i < oddmanout_stim.length; i++) {
-		var tmp_obj = {}
+		tmp_obj = {}
 		stim_list = []
 		stim_html = prefix
 		for (j = 0; j < 3; j++) {
@@ -223,7 +223,7 @@ var current_practice_trial = 0
 var current_trial = 0
 
 // Preload stim
-var path = '/static/experiments/network_traversal/images/'
+var path = '/static/experiments/network_traversal_2/images/'
 var images = []
 for (i = 1; i < 16; i++) {
 	images.push(path + i + '.png')
@@ -231,7 +231,7 @@ for (i = 1; i < 16; i++) {
 for (j = 1; j < 16; j++) {
 	images.push(path + j + '_rot' + '.png')
 } 
-var path = '/static/experiments/network_traversal/images/compare/'
+var path = '/static/experiments/network_traversal_2/images/compare/'
 for (i = 1; i < 16; i++) {
 	images.push(path + i + '_compare.png')
 }
@@ -305,8 +305,8 @@ var instruction_node = {
 	}
 }
 
-network_traversal_experiment = []
-network_traversal_experiment.push(instruction_node)
+network_traversal_2_experiment = []
+network_traversal_2_experiment.push(instruction_node)
 
 
 var practice1_block = {
@@ -316,7 +316,7 @@ var practice1_block = {
 	choices: 'none',
 	data: {
 		trial_id: "practice1",
-		exp_id: "network_traversal"
+		exp_id: "network_traversal_2"
 	},
 	timing_response: 5000,
 	timing_post_trial: 0,
@@ -327,7 +327,7 @@ var practice1_block = {
 		current_practice_trial += 1
 	}
 }
-network_traversal_experiment.push(practice1_block)
+network_traversal_2_experiment.push(practice1_block)
 
 var instructions2_block = {
 	type: 'poldrack-instructions',
@@ -342,7 +342,7 @@ var instructions2_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-network_traversal_experiment.push(instructions2_block)
+network_traversal_2_experiment.push(instructions2_block)
 
 var get_practice2_trial_stim = function() {
 	practice2_trial_data = practice2_trials.data.pop()
@@ -356,7 +356,7 @@ for (i = 0; i < practice2_trials.length; i++) {
 		key_answer: practice2_trials[i].key_answer,
 		data: {
 			trial_id: 'practice2_trial',
-			exp_id: 'network_traversal'
+			exp_id: 'network_traversal_2'
 		},
 		choices: [77, 90],
 		correct_text: '<div class = shapebox3><div style="color:green"; class = center-text>Correct!</div></div>',
@@ -368,7 +368,7 @@ for (i = 0; i < practice2_trials.length; i++) {
 		timing_post_trial: 0,
 		force_correct_button_press: true
 	}
-	network_traversal_experiment.push(practice2_trial)
+	network_traversal_2_experiment.push(practice2_trial)
 }
 
 
@@ -387,7 +387,7 @@ var exposure_instructions_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-network_traversal_experiment.push(exposure_instructions_block)
+network_traversal_2_experiment.push(exposure_instructions_block)
 
 
 var exposure_instructions_block2 = {
@@ -404,15 +404,15 @@ var exposure_instructions_block2 = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-network_traversal_experiment.push(exposure_instructions_block2)
+network_traversal_2_experiment.push(exposure_instructions_block2)
 
 
 var return_incorrect_audio = function() {
-	return '/static/experiments/network_traversal/sounds/1000_incorrect.mp3'
+	return '/static/experiments/network_traversal_2/sounds/1000_incorrect.mp3'
 }
 
 var return_timedout_audio = function() {
-	return '/static/experiments/network_traversal/sounds/500_timedout.mp3'
+	return '/static/experiments/network_traversal_2/sounds/500_timedout.mp3'
 }
 
 var get_stim_timing = function() {
@@ -437,21 +437,21 @@ for (i = 0; i < exposure_trials.length; i++) {
 		type: 'poldrack-text',
 		data: {
 			trial_id: "start_break",
-	    	exp_id: 'network_traversal'
+	    	exp_id: 'network_traversal_2'
 		},
 		timing_response: 60000,
 		timing_stim: 60000,
-		cont_key: [13], //'none'
-		response_ends_trial: true, //false
+		cont_key: 'none',
+		response_ends_trial: false, 
 		text: '<div class = centerbox><p class = center-block-text>This is a 1 minute break!</p></div>',
 		timing_post_trial: 0
 	}
 
-	var end_break = {
+	var close_break = {
 		type: 'poldrack-text',
 		data: {
-			trial_id: "end_break",
-	    	exp_id: 'network_traversal'
+			trial_id: "close_break",
+	    	exp_id: 'network_traversal_2'
 		},
 		text: '<div class = centerbox><p class = center-block-text>Press <strong>enter</strong> to continue the experiment.</p></div>',
 		cont_key: [13],
@@ -466,7 +466,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		key_answer: exposure_trials[i].key_answer,
 		data: {
 			trial_id: "test_block",
-			exp_id: "network_traversal"
+			exp_id: "network_traversal_2"
 		},
 		timing_response: 1250,
 		response_ends_trial: true,
@@ -513,7 +513,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		choices: [37, 39],
 		data: {
 			trial_id: "test_block",
-			exp_id: "network_traversal"
+			exp_id: "network_traversal_2"
 		},
 		timing_response: get_stim_timing,
 		timing_post_trial: 0,
@@ -522,9 +522,9 @@ for (i = 0; i < exposure_trials.length; i++) {
 
 
 	var if_break = {
-		timeline: [start_break, end_break],
+		timeline: [start_break, close_break],
 		conditional_function: function() {
-			if ((current_trial != 0) & (current_trial % 240 === 0)) {
+			if ((current_trial !== 0) & (current_trial % 240 === 0) & (current_trial != 1439)) {
 				return true
 			} else {
 				return false
@@ -560,7 +560,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 	var exposure_trial = {
 		timeline: [stim_pres, if_incorrect, if_timedout, post_audio, if_break]
 	}
-	network_traversal_experiment.push(exposure_trial)
+	network_traversal_2_experiment.push(exposure_trial)
 }
 
 
@@ -571,14 +571,14 @@ var segmentation_instructions = {
 	},
 	pages: [
 		'<div class = centerbox><p class = block-text>Congrats! Well done.</p>' +
-		'<p class = block-text>Now, you’ll see a sequence of the same images, but none of them will be rotated. Your job is to press the <strong>spacebar</strong> at times in the sequence that you feel are natural breaking points. If you’re not sure, go with your gut feeling. Try to make your responses as quickly and accurately as possible.</p>' +
+		'<p class = block-text>Now, you’ll see a sequence of the same images, but none of them will be rotated. Your job is to press the <strong>spacebar</strong> at times in the sequence that you feel are <strong>natural breaking points</strong>. If you’re not sure, go with your gut feeling. Try to make your responses as quickly and accurately as possible.</p>' +
 		'<p class = block-text>Press <strong>End Instructions</strong> to begin.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 }
-network_traversal_experiment.push(segmentation_instructions)
+network_traversal_2_experiment.push(segmentation_instructions)
 
 current_seg_trial = 0
 var segmentation_block = {
@@ -588,7 +588,7 @@ var segmentation_block = {
 	choices: [32],
 	data: {
 		trial_id: "segmentation_block",
-		exp_id: "network_traversal"
+		exp_id: "network_traversal_2"
 	},
 	timing_response: 1500,
 	timing_post_trial: 0,
@@ -599,7 +599,7 @@ var segmentation_block = {
 		current_seg_trial += 1
 	}
 }
-network_traversal_experiment.push(segmentation_block)
+network_traversal_2_experiment.push(segmentation_block)
 
 
 var oddmanout_instructions = {
@@ -616,7 +616,7 @@ var oddmanout_instructions = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 }
-network_traversal_experiment.push(oddmanout_instructions)
+network_traversal_2_experiment.push(oddmanout_instructions)
 
 
 current_oddmanout_trial = 0
@@ -629,7 +629,7 @@ for (i = 0; i < oddmanout_trials.length; i++) {
 		choices: [49, 50, 51],
 		data: {
 			trial_id: "oddmanout_block",
-			exp_id: "network_traversal"
+			exp_id: "network_traversal_2"
 		},
 		timing_response: -1,
 		timing_post_trial: 500,
@@ -646,9 +646,10 @@ for (i = 0; i < oddmanout_trials.length; i++) {
 				trial_num: current_oddmanout_trial
 			})
 			current_oddmanout_trial += 1
+			credit_var = 1
 		}
 	}
-	network_traversal_experiment.push(oddmanout_block)
+	network_traversal_2_experiment.push(oddmanout_block)
 }
 
 
@@ -656,31 +657,33 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "end",
-    exp_id: 'network_traversal'
+    exp_id: 'network_traversal_2'
   },
   timing_response: 180000,
-  text: '<div class = centerbox><p class = center-block-text>Great job!</p><p class = center-block-text>Press <strong>enter</strong> to continue to an exit survey.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Great job!</p><p class = center-block-text>Press <strong>enter</strong> to continue to an exit survey (<strong>note</strong>: your answers on the survey will NOT affect your payment, so please answer as honestly as you can).</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
-network_traversal_experiment.push(end_block)
+network_traversal_2_experiment.push(end_block)
 
 
 var post_task_block = {
    type: 'survey-text',
    data: {
        trial_id: "post task questions",
-       exp_id: 'network_traversal'
+       exp_id: 'network_traversal_2'
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in the main experiment.</p>',
    			  '<p class = center-block-text style = "font-size: 20px">Have you ever participated in an experiment similar to this? If so, please explain.</p>',
-   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you had during the main rotation experiment.</p>',
-   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you had during the portion in which you pressed the spacebar.</p>',
-   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you had during the portion in which you pressed the spacebar.</p>',
+   			  '<p class = center-block-text style = "font-size: 20px">How on-task were you, overall, throughout the experiment? (please rate from 1 to 7, where 1 is not on-task at all and 7 is completely on-task).</p>',
+   			  '<p class = center-block-text style = "font-size: 20px">How much did you pay attention to the images in the main part of the experiment where you decided whether the images were rotated? (please rate from 1 to 7, where 1 is hardly payed attention and 7 is payed close attention throughout the entirety).</p>',
+   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the main rotation experiment.</p>',
+   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the portion in which you pressed the spacebar.</p>',
+   			  '<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the portion in which you chose the image that did not belong.</p>',
    			  '<p class = center-block-text style = "font-size: 20px">What do you think this experiment was testing?</p>',
    			  '<p class = center-block-text style = "font-size: 20px">Do you have any feedback for us?</p>',			  
               '<p class = center-block-text style = "font-size: 20px">Do you have any other comments, questions, or concerns?</p>'],
    rows: [15, 15],
    columns: [60,60]
 }
-network_traversal_experiment.push(post_task_block)
+network_traversal_2_experiment.push(post_task_block)
