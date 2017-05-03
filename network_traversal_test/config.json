@@ -17,7 +17,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "network_traversal_2",
+        "exp_id": "network_traversal_test",
         "cognitive_atlas_task_id": "asdf",
         "contributors": [
                          "Jon Walters"
@@ -35,9 +35,8 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('network_traversal_2')"}
+                                        "on_trial_finish": "addID('network_traversal_test')"}
                        }
     
    }
 ]
-
