@@ -287,6 +287,22 @@ var instructions_block = {
 
 var instruction_node = {
 	timeline: [feedback_instruct_block, instructions_block],
+	loop_function: function(data) {
+		for (i = 0; i < data.length; i++) {
+			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
+				rt = data[i].rt
+				sumInstructTime = sumInstructTime + rt
+			}
+		}
+		if (sumInstructTime <= instructTimeThresh * 1000) {
+			feedback_instruct_text =
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+			return true
+		} else if (sumInstructTime > instructTimeThresh * 1000) {
+			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			return false
+		}
+	}
 }
 
 network_traversal_test_experiment = []
