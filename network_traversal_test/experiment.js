@@ -43,7 +43,7 @@ var makePractice2TrialList = function() {
 		stim_name = filenames[i]
 		tmp_obj.stimulus = prefix + path + stim_name + '_compare' + '.png' + postfix
 
-		if (left_resp.includes(i)) {
+		if (left_resp.indexOf(i) !== -1) {
 			tmp_data2 = {
 				trial_id: 'stim',
 				stim_id: stim_name,
@@ -289,7 +289,7 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, instructions_block],
 }
 
-network_traversal_test_experiment = []
+var network_traversal_test_experiment = []
 network_traversal_test_experiment.push(instruction_node)
 
 
