@@ -5,7 +5,6 @@ This task differs in that the subject only has to respond on target trials, rath
 a match or not
 */
 
-// Comment for tests
 
 /* ************************************ */
 /* Define helper functions */

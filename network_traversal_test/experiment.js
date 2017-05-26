@@ -90,7 +90,7 @@ var makeExposureTrialList = function() {
 
 		mapped_stim_num = randomized_stim_names[stim_num]
 
-		if (walk[i].includes('rot')) {
+		if (walk[i].indexOf('rot') !== -1) {
 			tmp_obj.stimulus = prefix + path + mapped_stim_num + '_rot' + '.png' + postfix
 			mapped_stim_name = mapped_stim_num + '_rot'
 		} else {
@@ -98,7 +98,7 @@ var makeExposureTrialList = function() {
 			mapped_stim_name = mapped_stim_num
 		}
 
-		if (walk[i].includes('rot')) {
+		if (walk[i].indexOf('rot') !== -1) {
 			tmp_data2 = {
 				walk_node: walk[i],
 				trial_id: 'stim',
