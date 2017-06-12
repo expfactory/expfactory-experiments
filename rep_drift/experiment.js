@@ -51,7 +51,7 @@ var createStims = function(numStims,numIterations){
 	var numberArray = []
 	for (i = lowEnd; i<numStims+1; i++){
 		num_zeros = 4 - i.toString().length
-		if (num_zeros == 0) {
+		if (num_zeros === 0) {
 			numberArray.push(i)
 		}else if (num_zeros == 1) {
 			numberArray.push('0' +i)
@@ -81,7 +81,7 @@ var pressSubmit = function(current_submit){
 		
 		WTP_length = WTP.length
 		
-		if((WTP_length < 5) && (parseFloat(WTP) < WTP_high_end + .01) && (parseFloat(WTP) >= 0)){
+		if((WTP_length < 5) && (parseFloat(WTP) < WTP_high_end + 0.01) && (parseFloat(WTP) >= 0)){
 			
 			hitKey(81)
   		
@@ -100,7 +100,7 @@ var pressSubmit = function(current_submit){
 		ethnicity = document.getElementById('demo_ethnicity').value
 		gender = document.getElementById('demo_gender').value
 		
-		if((Number.isInteger(parseFloat(age)) == true) && (Number.isInteger(parseFloat(race)) == true) && (Number.isInteger(parseFloat(ethnicity)) == true) && (Number.isInteger(parseFloat(gender)) == true)){
+		if((Number.isInteger(parseFloat(age)) === true) && (Number.isInteger(parseFloat(race)) === true) && (Number.isInteger(parseFloat(ethnicity)) === true) && (Number.isInteger(parseFloat(gender)) === true)){
 			hitKey(81)
 		}else{
 			alert("One or more questions has not been answered.  Please answer all questions before you submit.")
@@ -262,7 +262,7 @@ var ratingSplit = function(){
 	for (var xx = 0; xx< numStims; xx++){
 		if (Number.isInteger(a.subset(math.index(xx, 1))) == 1){ 
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '.0_' + a.subset(math.index(xx, 0)))
-		} else if (Number.isInteger(a.subset(math.index(xx, 1))) == 0){
+		} else if (Number.isInteger(a.subset(math.index(xx, 1))) === 0){
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '_' + a.subset(math.index(xx, 0))) 
 		}
 	}
@@ -279,7 +279,7 @@ var createBlockStims = function(){
 	for(var i = 0; i < numStims/2; i++){
 		temp = Math.round((Math.random() * 1));
 		
-		if (temp%2 == 0){
+		if (temp%2 === 0){
 			stim1temp = sorted_value_array[i * 2]
 			stim1_val = ''
 			stim1_stim = ''
@@ -287,42 +287,42 @@ var createBlockStims = function(){
 				stim1_val += stim1temp[x]
 			}
 			
-			for(var x = stim1temp.indexOf('_') + 1; x < stim1temp.length; x++){
-				stim1_stim += stim1temp[x]
+			for(var y = stim1temp.indexOf('_') + 1; y < stim1temp.length; y++){
+				stim1_stim += stim1temp[y]
 			}
 		
 			stim2temp = sorted_value_array[i * 2 + 1]
 			stim2_val = ''
 			stim2_stim = ''
-			for(var x = 0; x < stim2temp.indexOf('_'); x++){
-				stim2_val += stim2temp[x]
+			for(var z = 0; z < stim2temp.indexOf('_'); z++){
+				stim2_val += stim2temp[z]
 			}
 			
-			for(var x = stim2temp.indexOf('_') + 1; x < stim2temp.length; x++){
-				stim2_stim += stim2temp[x]
+			for(var c = stim2temp.indexOf('_') + 1; c < stim2temp.length; c++){
+				stim2_stim += stim2temp[c]
 			}
-		} else if (temp%2 != 0){
+		} else if (temp%2 !== 0){
 			stim1temp = sorted_value_array[i * 2 + 1]
 			stim1_val = ''
 			stim1_stim = ''
-			for(var x = 0; x < stim1temp.indexOf('_'); x++){
-				stim1_val += stim1temp[x]
+			for(var d = 0; d < stim1temp.indexOf('_'); d++){
+				stim1_val += stim1temp[d]
 			}
 			
-			for(var x = stim1temp.indexOf('_') + 1; x < stim1temp.length; x++){
-				stim1_stim += stim1temp[x]
+			for(var e = stim1temp.indexOf('_') + 1; e < stim1temp.length; e++){
+				stim1_stim += stim1temp[e]
 			}
 		
 		
 			stim2temp = sorted_value_array[i * 2]
 			stim2_val = ''
 			stim2_stim = ''
-			for(var x = 0; x < stim2temp.indexOf('_'); x++){
-				stim2_val += stim2temp[x]
+			for(var f = 0; f < stim2temp.indexOf('_'); f++){
+				stim2_val += stim2temp[f]
 			}
 			
-			for(var x = stim2temp.indexOf('_') + 1; x < stim2temp.length; x++){
-				stim2_stim += stim2temp[x]
+			for(var g = stim2temp.indexOf('_') + 1; g < stim2temp.length; g++){
+				stim2_stim += stim2temp[g]
 			}
 			
 		}
@@ -395,7 +395,7 @@ function getAllIndexesList(arr,val){
 	all_indexes = []
 	for(var i = 0; i < arr.length; i++){
 		indexes = getAllIndexes(arr[i],val)
-		if (indexes.length != 0){
+		if (indexes.length !== 0){
 			indexes.push(i)
 			all_indexes.push(indexes)
 		}
@@ -433,9 +433,9 @@ var appendData = function(){
 	
 		var which_chosen = jsPsych.data.getDataByTrialIndex(curr_trial).key_press
 		if (which_chosen == 37){
-			var chosen_stim = stim1
+			var chosen_stim_temp = stim1
 		} else if (which_chosen == 39){
-			var chosen_stim = stim2
+			var chosen_stim_temp = stim2
 		}
 		
 		jsPsych.data.addDataToLastTrial({
@@ -448,7 +448,7 @@ var appendData = function(){
 			prime_trial_type: trial_type,
 			current_block_trial: current_prime_trial,
 			current_block: current_prime_block,
-			chosen_stim: chosen_stim
+			chosen_stim: chosen_stim_temp
 			
 		})
 		
