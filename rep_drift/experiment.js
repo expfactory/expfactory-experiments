@@ -515,7 +515,7 @@ document.addEventListener("keydown", function(e){
 var subject_ID = 472
 
 var numStims = 60 // 60, 10
-var rating_length = 60 //120, 20;
+var rating_length = 4 //120, 20;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
 var manipulation_length = numStims * 2
 var numRepetitions = numIterrating
