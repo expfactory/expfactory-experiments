@@ -25,6 +25,8 @@ var getFeedbackText = function(){
 }
 
 /*
+editing here to force circle build to start again
+
 
 '<div class = textbox><input type ="text" value = "" id = "post_question_' + temp +'"></div>'+
 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'post_question_'+ temp +'\').value)"/></div>' +
