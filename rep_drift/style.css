@@ -1,0 +1,356 @@
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid grey;
+    border-radius: 10px;
+    
+    /*required for proper track sizing in FF*/
+    width: 100%;
+}
+
+
+input[type=number] {
+  height:100%;
+  width: 100%;
+  border: solid 2px grey;
+  border-radius: 10px;
+  font-size: 32px;
+}
+
+input[type=text] {
+  height:50%;
+  width: 100%;
+  border: solid 1px grey;
+  border-radius: 10px;
+  font-size: 32px;
+}
+
+
+input[type=submit] {
+  height:100%;
+  width: 50%;
+  border: solid 2px grey;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+img.center {
+  height: 400px;
+  width: 400px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
+
+img.force {
+  height: 400px;
+  width: 400px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
+.selected{
+  border:solid 15px green; 
+}
+
+
+img.prime {
+  height: 400px;
+  width: 400px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+  opacity: .35;
+}
+
+
+div.questions {
+    background-color: black;
+    color: white;
+    margin: 20px 0 20px 0;
+    padding: 20px;
+}
+
+div.demo_text {
+    position: relative;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 7.5%;
+    height:10%;
+}
+
+
+.textbox {
+ width: 100%;
+ height: 75%;
+ position:absolute;
+ top:60%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background: black;
+ background-color: black;
+}
+
+.centerbox {
+ width: 50vw;
+ height: 70vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background: black;
+ background-color: black;
+}
+
+
+.practice_rating_text {
+width:80%;
+height: 20%;
+position:absolute;
+top:10%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+
+.sliderbox {
+width:50%;
+height: 20%;
+position:absolute;
+top:80%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+.labelbox {
+width:50%;
+height: 20%;
+position:absolute;
+top:20%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+.rangebox {
+width:15%;
+height: 20%;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+.rangebox_left {
+width: 5%;
+height: 20%;
+position:absolute;
+top:50%;
+left:38.5%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+.valuebox {
+width:50%;
+height: 20%;
+position:absolute;
+top:70%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+.submitbox {
+width:50%;
+height: 20%;
+position:absolute;
+top:82.5%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+
+.auctionbox {
+width: 60%;
+height: 65%;
+position:absolute;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+
+.buttonbox {
+width: 60%;
+height: 10%;
+position:absolute;
+top:90%;
+left:50%;
+transform: translate(-50%,-50%);
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+.inner {
+display: inline-block;
+padding: 20px;
+padding-top: 0%;
+}
+
+.likert_btn {
+background-color: gray;
+border-color: black;
+font-size: 20px;
+border-radius: 15px;
+}
+
+
+.decision-left {
+ width: 60%;
+ height: 65%;
+ position:absolute;
+ top:50%;
+ left:25%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: black;
+ text-align: center;
+}
+
+/*values are 30% for both left right width and height*/
+
+
+.decision-right {
+ height: 65%;
+ width: 60%;
+ position:absolute;
+ top:50%;
+ left:75%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: black;
+ text-align: center;
+}
+
+
+/* Text based classes */
+/* Used for general instructions */
+.block-text {
+ width:100%;
+ height 100vw;
+ text-align: justify;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 22px;
+ line-height: 120%;
+ position: relative;
+ top: 15%;
+ 
+}
+
+/* As above but centeblack instead of justified. Good for instructions with few lines */
+.center-block-text {
+ width:100%;
+ height 100vw;
+ text-align: center;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 26px;
+ line-height: 120%;
+}
+
+.center-block-text2 {
+ width:100%;
+ height 100vw;
+ text-align: center;
+ font-size: 26px;
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-text {
+ text-align:center;
+ font-size: 26px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+.center-text2 {
+ text-align:center;
+ font-size: 18px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+
+/* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
+.fixation {
+ text-align: center;
+ font-size: 150px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
