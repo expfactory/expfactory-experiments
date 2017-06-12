@@ -17,7 +17,7 @@ var getFeedbackText = function(){
 		feedback_text = 'Thanks for completing this phase. We will move on to the next phase.</font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
 	}else if (current_prime_block < numBlocks - 1){
 		var temp = current_prime_block + 1
-		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen.</font></p><p class = center-text><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
+		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen and by placing your fingers on the <strong> left and right arrow keys</strong>.</font></p><p class = center-text><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
 
 	}
 	
@@ -98,8 +98,11 @@ var pressSubmit = function(current_submit){
 		ethnicity = document.getElementById('demo_ethnicity').value
 		gender = document.getElementById('demo_gender').value
 		
-		
-		hitKey(81)		
+		if((Number.isInteger(parseFloat(age)) == true) && (Number.isInteger(parseFloat(race)) == true) && (Number.isInteger(parseFloat(ethnicity)) == true) && (Number.isInteger(parseFloat(gender)) == true)){
+			hitKey(81)
+		}else{
+			alert("One or more questions has not been answered.  Please answer all questions before you submit.")
+		}
 		
 	}
 	
@@ -509,13 +512,13 @@ document.addEventListener("keydown", function(e){
 /* ************************************ */
 var subject_ID = 472
 
-var numStims = 4 // 60, 10
-var rating_length = 4 //120, 20;
+var numStims = 60 // 60, 10
+var rating_length = 60 //120, 20;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
 var manipulation_length = numStims * 2
 var numRepetitions = numIterrating
 var WTP_high_end = 3
-var numBlocks = 2
+var numBlocks = 5
 var num_mask_stims = 15
 var current_state = "practice"
 
@@ -532,12 +535,17 @@ var fileTypeBMP = ".bmp'></img>"
 var fileTypePNG = ".png'></img>"
 var fileTypeJPG = ".jpg'></img>"
 
-var post_questions = ['1) Did you notice anything about the experiment?',
-				 '2) During the phase where you had to make choices between food items, did you notice anything about the white noise video?',
-				 '3) Did you notice that there were pictures within the masks that were presented very briefly?  If so, were you able to clearly see the object?',
-				 '4) Did you notice that sometimes, the briefly presented pictures were the same as one of the two choices, and that sometimes, it was neither of the two choices?',
-				 '5) Do you have any thoughts, comments, or concerns about the task?'
-				 ]
+
+var post_questions = [
+					  '1) Did you notice anything about the experiment?',
+					  '2) During the phases where you had to submit how much you were willing to pay for each food item, did you use any strategies? If so, please explain.',
+					  '3) During the phase where you had to make choices between food items, did you use any strategies to help you make your decision? If so, please explain.',
+				 	  '4) During the phase where you had to make choices between food items, did you notice anything about the white noise video?',
+				 	  '5) Did you notice that there were pictures within the masks that were presented very briefly?  If so, were you able to clearly see the object?',
+				 	  '6) Did you notice that sometimes, the briefly presented pictures were the same as one of the two choices, and that sometimes, it was neither of the two choices?',
+				 	  '7) Do you have any thoughts, comments, or concerns about the task?'
+				 	 ]
+	
 				 
 var post_questionNum = 0	
 
@@ -803,7 +811,7 @@ var priming_intro = {
 		'<p class = block-text><font color = "white">For as long as the fixation point, and the white noise video are up on the screen, please keep your eyes fixated on the center of both the fixation and the white noise video. No response required during fixation and white noise video.</font></p>'+
 		'<p class = block-text><font color = "white">When the two food pictures come up, please choose which food item you prefer over the other by <strong>pressing the right arrow key</strong> to choose the food item on the right, and <strong>left arrow key</strong> to choose the food item on left. A green box will highlight your choice.</font></p>'+
 		'<p class = block-text><font color = "white">For each of these trials, please respond as <strong>QUICKLY </strong>and as truthfully as possible. You will have 2.5 seconds to make your choice before the trial will end, please try to make your choice before this.</font></p>'+
-		'<p class = block-text><font color = "white">We will start with a practice trial.  This practice trial will move quickly, so pay attention.  Start with your eyes in the center of the computer screen.</font></p>'+
+		'<p class = block-text><font color = "white">We will start with a practice trial.  This practice trial will move quickly, so pay attention.  Start with your eyes in the center of the computer screen, and with your fingers on the <strong>left</strong> and <strong>right arrow keys</strong>.</font></p>'+
 		'<p class = block-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
 
 		'</div></div>',
@@ -896,7 +904,7 @@ var priming_start = {
 		'<p class = block-text><font color = "white">While the fixation and the white noise video are up on the screen, please keep your eyes fixated in the center of both items. No response required during fixation and white noise video.</font></p>'+
 		'<p class = block-text><font color = "white">When the food pictures come up, please choose which food you prefer over the other by<strong> pressing the right arrow key </strong>to choose the image on the right, and the <strong>left arrow </strong>key to choose the image on the left.  A green box will highlight your choice.</font></p>'+
 		'<p class = block-text><font color = "white">Please choose which food you prefer, as <strong>QUICKLY </strong>and as truthfully as possible.  You will have 2.5 seconds to make your choice before the trial will end, please try to make your choice before this.</font></p>'+
-		'<p class = block-text><font color = "white">We will now start the next phase.  Please get ready by fixating your eyes at the center of the screen.</font></p>'+
+		'<p class = block-text><font color = "white">We will now start the next phase.  Please get ready by fixating your eyes at the center of the screen, and by placing your fingers on the <strong>left and right arrow keys</strong>.</font></p>'+
 		'<p class = block-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
 
 
@@ -1015,7 +1023,7 @@ for (x = 0; x<manipulation_length; x++){ //manipulation_length
 	type: 'poldrack-single-stim',
 	stimulus: getMaskStim,
 	is_html: true,
-	choices: [13],
+	choices: 'none',
 	data: {
 		exp_id: "rep_drift",
 		"trial_id": "mask_before"
@@ -1031,7 +1039,7 @@ for (x = 0; x<manipulation_length; x++){ //manipulation_length
 	type: 'poldrack-single-stim',
 	stimulus: getPrimeStim,
 	is_html: true,
-	choices: [13],
+	choices: 'none',
 	data: {
 		exp_id: "rep_drift",
 		"trial_id": "prime"
@@ -1047,7 +1055,7 @@ for (x = 0; x<manipulation_length; x++){ //manipulation_length
 	type: 'poldrack-single-stim',
 	stimulus: getMaskStim,
 	is_html: true,
-	choices: [13],
+	choices: 'none',
 	data: {
 		exp_id: "rep_drift",
 		"trial_id": "mask_after"
@@ -1196,7 +1204,6 @@ var post_questionnaire_node = {
 /* ************************************ */
 
 var rep_drift_experiment = []
-
 
 
 
