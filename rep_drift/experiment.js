@@ -95,7 +95,7 @@ var pressSubmit = function(current_submit){
   					alert("Inputted answer is too high.  Please ensure that you are answering in the range $0 to $3, inclusive. The format should be (#.##)  The period is allowed.")
   				} else if (parseFloat(WTP) < 0){
   					alert("Inputted answer is too low.  Please ensure that you are answering in the range $0 to $3, inclusive.  The format should be (#.##)  The period is allowed.")
-  				} else if (WTP == ""){
+  				} else if (WTP === ""){
 					alert("No answer inputted.  Please input an answer, using only numbers in the forat (#.##).  The period is allowed.  Please ensure that you are answering in the range $0 to $3, inclusive." )				
   				}
   			
@@ -286,9 +286,9 @@ var ratingSplit = function(){
 			
 	sorted_value_array =[]
 	for (var xx = 0; xx< numStims; xx++){
-		if (Number.isInteger(a.subset(math.index(xx, 1))) == true){ 
+		if (Number.isInteger(a.subset(math.index(xx, 1))) === true){ 
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '.00_' + a.subset(math.index(xx, 0)))
-		} else if (Number.isInteger(a.subset(math.index(xx, 1))) == false){
+		} else if (Number.isInteger(a.subset(math.index(xx, 1))) === false){
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '_' + a.subset(math.index(xx, 0))) 
 		}
 	}
@@ -458,10 +458,12 @@ var appendData = function(){
 	} else if (trial_id == "forced_choice") {
 	
 		var which_chosen = jsPsych.data.getDataByTrialIndex(curr_trial).key_press
+		var chosen_stim_temp = ""
+		
 		if (which_chosen == 37){
-			var chosen_stim_temp = stim1
+			chosen_stim_temp = stim1
 		} else if (which_chosen == 39){
-			var chosen_stim_temp = stim2
+			chosen_stim_temp = stim2
 		}
 		
 		jsPsych.data.addDataToLastTrial({
