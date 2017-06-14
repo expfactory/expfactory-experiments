@@ -84,14 +84,33 @@ var pressSubmit = function(current_submit){
 		if((WTP_length < 5) && (parseFloat(WTP) < WTP_high_end + 0.01) && (parseFloat(WTP) >= 0)){
 			
 			hitKey(81)
+			console.log('here1')
   		
-  		} else if(WTP_length > 4){
-  			alert("Wrong format.  Your answer is too long.  Please ensure that you are using only numbers, in the format (#.##)  The period is allowed.")
-  		} else if (parseFloat(WTP) > WTP_high_end){
-  			alert("Inputted answer is too high.  Please ensure that you are answering in the range $0 to $3, inclusive. The format should be (#.##)  The period is allowed.")
-  		} else if (parseFloat(WTP) < 0){
-  			alert("Inputted answer is too low.  Please ensure that you are answering in the range $0 to $3, inclusive.  The format should be (#.##)  The period is allowed.")
-  		}
+  		} else {
+  			submitPress += 1
+  			if(submitPress <= submitPressMax){
+  				if(WTP_length > 4){
+  					alert("Wrong format.  Your answer is too long.  Please ensure that you are using only numbers, in the format (#.##)  The period is allowed.")
+  				} else if (parseFloat(WTP) > WTP_high_end){
+  					alert("Inputted answer is too high.  Please ensure that you are answering in the range $0 to $3, inclusive. The format should be (#.##)  The period is allowed.")
+  				} else if (parseFloat(WTP) < 0){
+  					alert("Inputted answer is too low.  Please ensure that you are answering in the range $0 to $3, inclusive.  The format should be (#.##)  The period is allowed.")
+  				} else if (WTP == ""){
+					alert("No answer inputted.  Please input an answer, using only numbers in the forat (#.##).  The period is allowed.  Please ensure that you are answering in the range $0 to $3, inclusive." )				
+  				}
+  			
+  			
+  			}else if(submitPress > submitPressMax){
+  				hitKey(81)
+  				console.log('here2')
+  			
+  			}
+  		
+  		} 
+  		
+  		
+  		
+  		
 	
 	} else if(current_submit.id == "demo_block"){
 		
@@ -103,7 +122,14 @@ var pressSubmit = function(current_submit){
 		if((Number.isInteger(parseFloat(age)) === true) && (Number.isInteger(parseFloat(race)) === true) && (Number.isInteger(parseFloat(ethnicity)) === true) && (Number.isInteger(parseFloat(gender)) === true)){
 			hitKey(81)
 		}else{
-			alert("One or more questions has not been answered.  Please answer all questions before you submit.")
+			submitPress += 1
+			if(submitPress <= submitPressMax){
+				alert("One or more questions has not been answered.  Please answer all questions before you submit.")
+			
+			}else if(submitPress > submitPressMax){
+				hitKey(81)
+			
+			}
 		}
 		
 	}
@@ -260,9 +286,9 @@ var ratingSplit = function(){
 			
 	sorted_value_array =[]
 	for (var xx = 0; xx< numStims; xx++){
-		if (Number.isInteger(a.subset(math.index(xx, 1))) == 1){ 
-			sorted_value_array.push(a.subset(math.index(xx, 1)) + '.0_' + a.subset(math.index(xx, 0)))
-		} else if (Number.isInteger(a.subset(math.index(xx, 1))) === 0){
+		if (Number.isInteger(a.subset(math.index(xx, 1))) == true){ 
+			sorted_value_array.push(a.subset(math.index(xx, 1)) + '.00_' + a.subset(math.index(xx, 0)))
+		} else if (Number.isInteger(a.subset(math.index(xx, 1))) == false){
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '_' + a.subset(math.index(xx, 0))) 
 		}
 	}
@@ -515,7 +541,7 @@ document.addEventListener("keydown", function(e){
 var subject_ID = 472
 
 var numStims = 60 // 60, 10
-var rating_length = 4 //120, 20;
+var rating_length = 60 //120, 20;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
 var manipulation_length = numStims * 2
 var numRepetitions = numIterrating
@@ -523,6 +549,8 @@ var WTP_high_end = 3
 var numBlocks = 5
 var num_mask_stims = 15
 var current_state = "practice"
+var submitPress = 0
+var submitPressMax = 5
 
 
 
@@ -948,7 +976,10 @@ var practice_rating_block = {
 	timing_stim: -1,
 	timing_response: -1,
 	response_ends_trial: true,
-	on_finish: appendData
+	on_finish: appendData,
+	on_start: function(){
+	submitPress = 0
+	}
 };
 
 
@@ -993,7 +1024,10 @@ for (x=0;x<rating_length;x++){ //rating_length
 	timing_stim: -1,
 	timing_response: -1,
 	response_ends_trial: true,
-	on_finish: appendData
+	on_finish: appendData,
+	on_start: function(){
+	submitPress = 0
+	}
 	};
 
 first_rating_trials.push(rating_block)
@@ -1158,7 +1192,10 @@ for (x=0;x< rating_length;x++){ //same as first rating?? should be once, because
 	timing_stim: -1,
 	timing_response: -1,
 	response_ends_trial: true,
-	on_finish: appendData
+	on_finish: appendData,
+	on_start: function(){
+	submitPress = 0
+	}
 	};
 
 second_rating_trials.push(rating_block)
