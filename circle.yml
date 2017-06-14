@@ -12,7 +12,6 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import validate_experiment_directories; validate_experiment_directories('.')"
     - sudo docker run -it -v $(pwd):/lint hyzual/jshint --config /lint/.jshint_config .
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import validate_experiment_tag; validate_experiment_tag('.')"
-    - $HOME/miniconda2/bin/python -c "from expfactory.tests import validate_circle_yml; validate_circle_yml('.')"
 
 dependencies:
   pre:
