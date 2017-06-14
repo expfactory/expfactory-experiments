@@ -1,6 +1,6 @@
 [
     {
-        "name": "fluency_drift",
+        "name": "Rep Drift",
         "template":"jspsych",
         "run": [
 
