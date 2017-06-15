@@ -14,14 +14,14 @@ function addID() {
 
 var getFeedbackText = function(){
 	if (current_prime_block == numBlocks - 1){
-		feedback_text = 'Thanks for completing this phase. We will move on to the next phase.</font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
+		feedback_text = 'Thanks for completing this phase. We will move on to the next phase.</font></p><p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font>'
 	}else if (current_prime_block < numBlocks - 1){
 		var temp = current_prime_block + 1
-		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen and by placing your fingers on the <strong> left and right arrow keys</strong>.</font></p><p class = center-text><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
+		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen and by placing your fingers on the <strong> left and right arrow keys</strong>.</font></p><p class = center-textJamie><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font>'
 
 	}
 	
-	return '<div class = bigbox><div class = centerbox><p class = center-text><font color="white">' + feedback_text + '</p></div></div>'
+	return '<div class = bigbox><div class = centerbox><p class = center-textJamie><font color="white">' + feedback_text + '</p></div></div>'
 }
 
 /*
@@ -716,8 +716,8 @@ var end_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-text><font color="white">Thanks for completing this task!</font></p>'+
-		  '<p class = center-text><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie><font color="white">Thanks for completing this task!</font></p>'+
+		  '<p class = center-textJamie><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -731,8 +731,8 @@ var welcome_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-text><font color="white">Welcome to the task!</font></p>'+
-		  '<p class = center-text><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie><font color="white">Welcome to the task!</font></p>'+
+		  '<p class = center-textJamie><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -746,8 +746,8 @@ var instructions_intro = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-			'<p class = center-text><font color = "white">We will now begin with instructions for the task.</font></p>'+
-			'<p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+		
+			'<p class = center-textJamie><font color = "white">We will now begin with instructions for the task.</font></p>'+
+			'<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+		
 	
 		 '</div></div>',
 	cont_key: [13],
@@ -793,8 +793,8 @@ var fixation_block = {
 var rating_intro = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox><div class = centerbox>'+
-		'<p class = center-text><font color = "white">We will begin the auction. </font></p>'+
-		'<p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
+		'<p class = center-textJamie><font color = "white">We will begin the auction. </font></p>'+
+		'<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
 		'</div></div>',
 	is_html: true,
 	choices: [13],
@@ -992,8 +992,8 @@ var post_exp_questionnaire_intro = {
         },
         timing_response: -1,
         text: '<div class = bigbox><div class = centerbox>'+
-        '<p class = center-text><font color = "white">We will now start the post-experiment questionnaire.</font></p>'+
-        '<p class = center-text><font color = "white">Press <strong>enter</strong> to begin.</font></p>'+
+        '<p class = center-textJamie><font color = "white">We will now start the post-experiment questionnaire.</font></p>'+
+        '<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to begin.</font></p>'+
         '</div></div>',
         cont_key: [13],
         timing_post_trial: 0,
