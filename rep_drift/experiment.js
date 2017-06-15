@@ -552,7 +552,7 @@ var numBlocks = 5
 var num_mask_stims = 15
 var current_state = "practice"
 var submitPress = 0
-var submitPressMax = 5
+var submitPressMax = 50
 
 
 
