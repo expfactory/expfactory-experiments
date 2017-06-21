@@ -563,9 +563,8 @@ var forceTypeRight = "<img id = 'image_right' class = force src='/static/experim
 
 
 var pathSource = "/static/experiments/rep_drift/images/stim_numbered/"
-var fileTypeBMP = ".bmp'></img>"
+var fileTypeBMP = ".png'></img>"
 var fileTypePNG = ".png'></img>"
-var fileTypeJPG = ".jpg'></img>"
 
 
 var post_questions = [
@@ -686,16 +685,11 @@ var images = []
 for(var i=0;i<preloadStimNumbered.length;i++){
 	images.push(pathSource + preloadStimNumbered[i] + ".bmp")
 }
-jsPsych.pluginAPI.preloadImages(images);
 
-
-var images = []
 for(var i=0;i<preloadControlNonFood.length;i++){
 	images.push("/static/experiments/rep_drift/images/control_non_food/" + preloadControlNonFood[i] + ".bmp")
 }
-jsPsych.pluginAPI.preloadImages(images);
 
-var images = []
 for(var i=0; i < num_mask_stims; i++){
 	images.push("/static/experiments/rep_drift/images/fluency_mask_no_border/mask_" + i + ".png")
 }
