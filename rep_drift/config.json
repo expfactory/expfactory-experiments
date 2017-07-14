@@ -17,7 +17,6 @@
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css",
-                "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js",
                 "https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.3/math.js"
                 
                 
