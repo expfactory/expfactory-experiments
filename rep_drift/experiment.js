@@ -14,24 +14,16 @@ function addID() {
 
 var getFeedbackText = function(){
 	if (current_prime_block == numBlocks - 1){
-		feedback_text = 'Thanks for completing this phase. We will move on to the next phase.</font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
+		feedback_text = 'Thanks for completing this phase. We will move on to the next phase.</font></p><p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font>'
 	}else if (current_prime_block < numBlocks - 1){
 		var temp = current_prime_block + 1
-		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen and by placing your fingers on the <strong> left and right arrow keys</strong>.</font></p><p class = center-text><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font>'
+		feedback_text = 'We will begin another round shortly.  Please get ready for the next round by fixating your eyes at the center of the screen and by placing your fingers on the <strong> left and right arrow keys</strong>.</font></p><p class = center-textJamie><font color = "white">You have completed '+temp+ ' out of '+numBlocks+ ' blocks of trials. </font></p><p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font>'
 
 	}
 	
-	return '<div class = bigbox><div class = centerbox><p class = center-text><font color="white">' + feedback_text + '</p></div></div>'
+	return '<div class = bigbox><div class = centerbox><p class = center-textJamie><font color="white">' + feedback_text + '</p></div></div>'
 }
 
-/*
-editing here to force circle build to start again
-
-
-'<div class = textbox><input type ="text" value = "" id = "post_question_' + temp +'"></div>'+
-'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'post_question_'+ temp +'\').value)"/></div>' +
-
-*/
 
 var getQuestions = function(){
 	post_questionNum += 1
@@ -84,7 +76,6 @@ var pressSubmit = function(current_submit){
 		if((WTP_length < 5) && (parseFloat(WTP) < WTP_high_end + 0.01) && (parseFloat(WTP) >= 0)){
 			
 			hitKey(81)
-			console.log('here1')
   		
   		} else {
   			submitPress += 1
@@ -102,15 +93,11 @@ var pressSubmit = function(current_submit){
   			
   			}else if(submitPress > submitPressMax){
   				hitKey(81)
-  				console.log('here2')
   			
   			}
   		
   		} 
-  		
-  		
-  		
-  		
+  		  		
 	
 	} else if(current_submit.id == "demo_block"){
 		
@@ -179,51 +166,76 @@ var getMaskStim = function(){
 var getForcedChoiceStim = function(){
 	if(current_state == "test"){
 		if (which_side == "left"){
-			stim1 = stim
-			stim2 = stim_partner
-			stim1_WTP = stim_WTP
-			stim2_WTP = stim_partner_WTP
+			stimLeft = stim1
+			stimRight = stim2
+			stimLeft_WTP = stim1_WTP
+			stimRight_WTP = stim2_WTP
+			stimLeft_bWTP = stim1_binned_WTP
+			stimRight_bWTP = stim2_binned_WTP
 	
 		}else if (which_side == "right"){
-			stim1 = stim_partner
-			stim2 = stim
-			stim1_WTP = stim_partner_WTP
-			stim2_WTP = stim_WTP
+			stimLeft = stim2
+			stimRight = stim1
+			stimLeft_WTP = stim2_WTP
+			stimRight_WTP = stim1_WTP
+			stimLeft_bWTP = stim2_binned_WTP
+			stimRight_bWTP = stim1_binned_WTP
 		}
-	
-	
-		return forcedChoiceBoard1 + stim1 +fileTypeBMP +'</div>'+
-		   forcedChoiceBoard2 + stim2 + fileTypeBMP + '</div></div>'
-	}else if(current_state == "practice"){
-		stim1 = "WheatThins"
-		stim2 = "MrsFields"
 		
-		return practiceForcedChoiceBoard1 + "demo/" + stim1 +fileTypeBMP +'</div>'+
-		   forcedChoiceBoard2 + "demo/" + stim2 + fileTypeBMP + '</div></div>'
+	
+		return forcedChoiceBoard1 + stimLeft +fileTypeBMP +'</div>'+
+		   forcedChoiceBoard2 + stimRight + fileTypeBMP + '</div></div>'
+	}else if(current_state == "practice"){
+		stimLeft = "WheatThins"
+		stimRight = "MrsFields"
+		stimLeft_WTP = "practice"
+		stimRight_WTP = "practice"
+		stimLeft_bWTP = "practice"
+		stimRight_bWTP = "practice"
+		
+		return practiceForcedChoiceBoard1 + "demo/" + stimLeft +fileTypeBMP +'</div>'+
+		   forcedChoiceBoard2 + "demo/" + stimRight + fileTypeBMP + '</div></div>'
 		
 	}
 }
 
+
+
+
 var getPrimeStim = function(){
 	if(current_state == "test"){
-		stim = stims.stim.pop()
-		stim_partner = stims.stim_partner.pop()
-		trial_type = stims.trial_type.pop()
-		binned_WTP = stims.binned_WTP.pop()
-		stim_WTP = stims.stim_WTP.pop()
-		stim_partner_WTP = stims.stim_partner_WTP.pop()
-		which_side = stims.which_side.pop()
 	
-		if (trial_type == "prime"){
-			prime = stim
+		temp = Math.floor((Math.random() * 2))
 		
+		object1 = stims[0].pop()
+		object2 = stims[1].pop()
+		
+		stim1 = object1.stim
+		stim2 = object2.stim
+		
+		stim1_trial_type = object1.trial_type
+		stim2_trial_type = object2.trial_type
+		
+		stim1_binned_WTP = object1.binned_WTP
+		stim2_binned_WTP = object2.binned_WTP
+		
+		stim1_WTP = object1.stim_WTP
+		stim2_WTP = object2.stim_WTP
+		
+		which_side = whichSideArray.pop()
+		prime_type = whichPrimeArray.pop()
+		
+		
+	
+		if (prime_type == "prime"){
+			prime = stim1
 			return primingBoard1 + "stim_numbered/" + prime + fileTypeBMP + primingBoard2
-		} else if(trial_type == "control"){
-			num_digits = binned_WTP.toString().length
+		} else if(prime_type == "control"){
+			num_digits = stim2_binned_WTP.toString().length
 			if(num_digits == 1){
-				prime = "000" + binned_WTP 
+				prime = "000" + stim2_binned_WTP 
 			} else if (num_digits == 2){
-				prime = "00" + binned_WTP
+				prime = "00" + stim2_binned_WTP
 			}		
 		
 			return primingBoard1 + "control_non_food/" + prime + fileTypeBMP + primingBoard2
@@ -232,6 +244,7 @@ var getPrimeStim = function(){
 		prime = "Ruffles"
 		return practicePrimingBoard1 + "stim_numbered/demo/" + prime + fileTypeBMP + primingBoard2
 	}
+	
 }
 
 var getFixation = function(){
@@ -289,7 +302,22 @@ var ratingSplit = function(){
 		if (Number.isInteger(a.subset(math.index(xx, 1))) === true){ 
 			sorted_value_array.push(a.subset(math.index(xx, 1)) + '.00_' + a.subset(math.index(xx, 0)))
 		} else if (Number.isInteger(a.subset(math.index(xx, 1))) === false){
-			sorted_value_array.push(a.subset(math.index(xx, 1)) + '_' + a.subset(math.index(xx, 0))) 
+			
+			
+			var temp_name = a.subset(math.index(xx, 1)).toString()
+			var num_length = temp_name.length
+			var period = temp_name.indexOf('.')
+			var num_spaces = num_length - period
+			
+			if(num_spaces > 2){
+			
+				sorted_value_array.push(a.subset(math.index(xx, 1)) + '_' + a.subset(math.index(xx, 0))) 
+			}else if(num_spaces < 3){
+				sorted_value_array.push(a.subset(math.index(xx, 1)) + '0_' + a.subset(math.index(xx, 0))) 
+			
+			}
+			
+			
 		}
 	}
 	sorted_value_array.sort()
@@ -301,11 +329,24 @@ var ratingSplit = function(){
 }
 
 var createBlockStims = function(){
-	var temp_stims = []
+	var prime_stims = []
+	var control_stims = []
+	all_stims = []
+	var temp_num_array = jsPsych.randomization.repeat([1,2],numStims/4)
+	
+	
+	var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
+	var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
+	
+	
+	
+	
 	for(var i = 0; i < numStims/2; i++){
-		temp = Math.round((Math.random() * 1));
+		temp = temp_num_array.pop()
+
 		
 		if (temp%2 === 0){
+			
 			stim1temp = sorted_value_array[i * 2]
 			stim1_val = ''
 			stim1_stim = ''
@@ -328,6 +369,7 @@ var createBlockStims = function(){
 				stim2_stim += stim2temp[c]
 			}
 		} else if (temp%2 !== 0){
+		
 			stim1temp = sorted_value_array[i * 2 + 1]
 			stim1_val = ''
 			stim1_stim = ''
@@ -355,58 +397,50 @@ var createBlockStims = function(){
 		
 			stim1 = { 
 				stim_WTP: stim1_val,
-				stim_partner_WTP: stim2_val,
 				trial_type: "prime",
 				stim: stim1_stim,
-				which_side: "left",
-				stim_partner: stim2_stim,
 				binned_WTP: i + 1
 				}
 		
 			stim2 = {
 				stim_WTP: stim2_val,
-				stim_partner_WTP: stim1_val,
 				trial_type: "control",
 				stim: stim2_stim,
-				which_side: "right",
-				stim_partner: stim1_stim,
 				binned_WTP: i + 1
-				}
-					
-			stim3 = { 
-				stim_WTP: stim1_val,
-				stim_partner_WTP: stim2_val,
-				trial_type: "prime",
-				stim: stim1_stim,
-				which_side: "right",
-				stim_partner: stim2_stim,
-				binned_WTP: i + 1
-				}
-					
-			stim4 = {
-				stim_WTP: stim2_val,
-				stim_partner_WTP: stim1_val,
-				trial_type: "control",
-				stim: stim2_stim,
-				which_side: "left",
-				stim_partner: stim1_stim,
-				binned_WTP: i + 1
-				}
+				}					
 			
 	
-	temp_stims.push(stim1)
-	temp_stims.push(stim2)
-	temp_stims.push(stim3)
-	temp_stims.push(stim4)
+	prime_stims.push(stim1)
+	control_stims.push(stim2)
 		
 	}
 	
+	prime_stims = jsPsych.randomization.repeat(prime_stims,1)
+	control_stims = jsPsych.randomization.repeat(control_stims,1)
 	
-	temp_stims = jsPsych.randomization.repeat(temp_stims, 1 , true)
-	return temp_stims
+	all_stims.push(prime_stims)
+	all_stims.push(control_stims)
+	
+	stims = randomizeBlockStims()
+	return stims
 
 }
 
+function randomizeBlockStims(){
+	temp_stims_array = []
+	prime_stims = jsPsych.randomization.repeat(all_stims[0],1)
+	control_stims = jsPsych.randomization.repeat(all_stims[1],1)
+	
+	whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
+	whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
+	
+	temp_stims_array.push(prime_stims)
+	temp_stims_array.push(control_stims)
+	
+	return temp_stims_array
+
+
+}
 
 function getAllIndexes(arr, val) {
     var indexes = [], i = -1;
@@ -445,7 +479,8 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			mask: mask,
 			current_block_trial: current_prime_trial,
-			current_block: current_prime_block
+			current_block: current_prime_block,
+			current_exp_stage: current_state
 		})
 	
 	} else if ((trial_id == "rating_block") || (trial_id == "second_rating_block")){
@@ -453,30 +488,42 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			stim: stim,
 			stim_WTP: WTP,
+			current_exp_stage: current_state
 		})
 	
 	} else if (trial_id == "forced_choice") {
 	
 		var which_chosen = jsPsych.data.getDataByTrialIndex(curr_trial).key_press
 		var chosen_stim_temp = ""
+		var chosen_WTP = ""
+		var chosen_bWTP = ""
 		
 		if (which_chosen == 37){
-			chosen_stim_temp = stim1
+			chosen_stim_temp = stimLeft
+			chosen_WTP = stimLeft_WTP
+			chosen_bWTP = stimLeft_bWTP
 		} else if (which_chosen == 39){
-			chosen_stim_temp = stim2
+			chosen_stim_temp = stimRight
+			chosen_WTP = stimRight_WTP
+			chosen_bWTP = stimRight_bWTP
 		}
 		
 		jsPsych.data.addDataToLastTrial({
 			mask: mask,
-			stim_left: stim1,
-			stim_right: stim2,
-			stim_left_WTP: stim1_WTP,
-			stim_right_WTP: stim2_WTP,
-			binned_WTP: binned_WTP,
-			prime_trial_type: trial_type,
+			stim_left: stimLeft,
+			stim_right: stimRight,
+			stim_left_WTP: stimLeft_WTP,
+			stim_right_WTP: stimRight_WTP,
+			stim_left_binned_WTP: stimLeft_bWTP,
+			stim_right_binned_WTP: stimRight_bWTP,
+			prime_stim: prime,
+			prime_trial_type: prime_type,
 			current_block_trial: current_prime_trial,
 			current_block: current_prime_block,
-			chosen_stim: chosen_stim_temp
+			chosen_stim: chosen_stim_temp,
+			chosen_WTP: chosen_WTP,
+			chosen_binned_WTP: chosen_bWTP,
+			current_exp_stage: current_state
 			
 		})
 		
@@ -486,16 +533,18 @@ var appendData = function(){
 	} else if (trial_id == "prime"){
 	
 		jsPsych.data.addDataToLastTrial({
-			prime: prime,
-			prime_trial_type: trial_type,
+			prime_stim: prime,
+			prime_trial_type: prime_type,
 			current_block_trial: current_prime_trial,
-			current_block: current_prime_block
+			current_block: current_prime_block,
+			current_exp_stage: current_state
 		})
 	
 	} else if( trial_id == "post_questionnaire_block"){
 		jsPsych.data.addDataToLastTrial({
 			current_answer: post_question_current_answer,
-			current_question: post_questions[post_questionNum -1]
+			current_question: post_questions[post_questionNum -1],
+			current_exp_stage: current_state
 		})
 	} else if(trial_id == "demographic_block"){
 		jsPsych.data.addDataToLastTrial({
@@ -503,6 +552,7 @@ var appendData = function(){
 			gender: gender,
 			race: race,
 			ethnicity: ethnicity,
+			current_exp_stage: current_state
 			
 		})
 	
@@ -545,14 +595,15 @@ var subject_ID = 472
 var numStims = 60 // 60, 10
 var rating_length = 60 //120, 20;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
-var manipulation_length = numStims * 2
+var manipulation_length = numStims / 2 
 var numRepetitions = numIterrating
 var WTP_high_end = 3
-var numBlocks = 5
+var numBlocks = 18
 var num_mask_stims = 15
 var current_state = "practice"
 var submitPress = 0
 var submitPressMax = 50
+
 
 
 
@@ -563,10 +614,10 @@ var forceTypeRight = "<img id = 'image_right' class = force src='/static/experim
 
 
 var pathSource = "/static/experiments/rep_drift/images/stim_numbered/"
-var fileTypeBMP = ".bmp'></img>"
+var fileTypeBMP = ".png'></img>"
 var fileTypePNG = ".png'></img>"
-var fileTypeJPG = ".jpg'></img>"
-
+var bmp = ".png"
+var png = ".png"
 
 var post_questions = [
 					  '1) Did you notice anything about the experiment?',
@@ -589,24 +640,38 @@ var stims = []
 var a = ""
 var b = ""
 var stim = ""
-var stim_partner = ""
+//var stim_partner = ""
 var prime = ""
-var trial_type = ""
-var binned_WTP = ""
-var average_WTP = ""
-var which_side = ""
+//var trial_type = ""
+//var binned_WTP = ""
+//var average_WTP = ""
+//var which_side = ""
 var WTP = ""
 var WTP_length  = ""
 var current_prime_trial = "practice_choice"
 var current_prime_block = "practice_choice"
-var stim1_WTP = ""
-var stim2_WTP = ""
+//var stim1_WTP = ""
+//var stim2_WTP = ""
 var forcedButtonTracker = []
 var post_question_current_answer = ''
 var age = ""
 var race = ""
 var ethnicity = ""
 var gender = ""
+
+var stim1 = ""
+var stim2 = ""		
+var stim1_trial_type = ""
+var stim2_trial_type = ""		
+var stim1_binned_WTP = ""
+var stim2_binned_WTP = ""		
+var stim1_WTP = ""
+var stim2_WTP = ""		
+var which_side = ""
+var prime_type = ""
+var all_stims = ""
+var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
+var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
 
 ///////////////////////////////////////////////////////
 
@@ -677,27 +742,42 @@ var maskingBoard2 = fileTypePNG+"</div></div>"
 ///////////////////////////////////////////////////////
 
 
-
 var preloadStimNumbered = createStims(numStims, 1)
 var preloadControlNonFood = createStims(30, 1)
 
  	
 var images = []
+
+
 for(var i=0;i<preloadStimNumbered.length;i++){
-	images.push(pathSource + preloadStimNumbered[i] + ".bmp")
+	images.push(pathSource + preloadStimNumbered[i] + bmp)
 }
-jsPsych.pluginAPI.preloadImages(images);
 
+var practice_stims =[
+"ApplePie",
+"Cheese_PeanutButterCrackers", 
+"CornPops",
+"Lindt_small",
+"luckycharms",
+"MrsFields",
+"Ruffles",
+"WheatThins"
+]
 
-var images = []
+for(var i = 0; i<practice_stims.length; i++){
+	images.push(pathSource + "demo/" + practice_stims[i] + bmp)
+
+}
 for(var i=0;i<preloadControlNonFood.length;i++){
-	images.push("/static/experiments/rep_drift/images/control_non_food/" + preloadControlNonFood[i] + ".bmp")
+	images.push("/static/experiments/rep_drift/images/control_non_food/" + preloadControlNonFood[i] + bmp)
 }
-jsPsych.pluginAPI.preloadImages(images);
 
-var images = []
+
+
+
+
 for(var i=0; i < num_mask_stims; i++){
-	images.push("/static/experiments/rep_drift/images/fluency_mask_no_border/mask_" + i + ".png")
+	images.push("/static/experiments/rep_drift/images/fluency_mask_no_border/mask_" + i + png)
 }
 jsPsych.pluginAPI.preloadImages(images);
 
@@ -712,12 +792,12 @@ var stimArray = createStims(numStims,numIterrating)
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "end"
+		trial_id: "end",
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-text><font color="white">Thanks for completing this task!</font></p>'+
-		  '<p class = center-text><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie><font color="white">Thanks for completing this task!</font></p>'+
+		  '<p class = center-textJamie><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -727,12 +807,13 @@ var end_block = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "welcome"
+		trial_id: "welcome",
+		current_exp_stage: current_state
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-text><font color="white">Welcome to the task!</font></p>'+
-		  '<p class = center-text><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie><font color="white">Welcome to the task!</font></p>'+
+		  '<p class = center-textJamie><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -742,12 +823,13 @@ var welcome_block = {
 var instructions_intro = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "instructions"
+		trial_id: "instructions",
+		current_exp_stage: current_state
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-			'<p class = center-text><font color = "white">We will now begin with instructions for the task.</font></p>'+
-			'<p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+		
+			'<p class = center-textJamie><font color = "white">We will now begin with instructions for the task.</font></p>'+
+			'<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+		
 	
 		 '</div></div>',
 	cont_key: [13],
@@ -758,7 +840,8 @@ var instructions_intro = {
 var instructions_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "instructions"
+		trial_id: "instructions",
+		current_exp_stage: current_state
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
@@ -782,7 +865,7 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		trial_id: "fixation"
+		trial_id: "fixation",
 	},
 	timing_post_trial: 0,
 	timing_stim: 500,
@@ -793,14 +876,15 @@ var fixation_block = {
 var rating_intro = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox><div class = centerbox>'+
-		'<p class = center-text><font color = "white">We will begin the auction. </font></p>'+
-		'<p class = center-text><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
+		'<p class = center-textJamie><font color = "white">We will begin the auction. </font></p>'+
+		'<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to continue.</font></p>'+
 		'</div></div>',
 	is_html: true,
 	choices: [13],
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "rating_intro"
+		"trial_id": "rating_intro",
+		current_exp_stage: current_state
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -825,7 +909,7 @@ var second_rating_instructions = {
 	choices: [13],
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "second_rating_intro"
+		"trial_id": "second_rating_intro",
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -852,7 +936,8 @@ var priming_intro = {
 	choices: [13],
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "priming_intro"
+		"trial_id": "priming_intro",
+		current_exp_stage: current_state
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -917,7 +1002,8 @@ var demographic_block = {
 	choices: [81], 
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "demographic_block"
+		"trial_id": "demographic_block",
+		current_exp_stage: current_state
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -946,7 +1032,8 @@ var priming_start = {
 	choices: [13],
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "priming_intro"
+		"trial_id": "priming_start",
+		current_exp_stage: current_state
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -972,7 +1059,8 @@ var practice_rating_block = {
 	choices: [81], //48,49,50,51,52
 	data: {
 		exp_id: "rep_drift",
-		"trial_id": "practice_rating_block"
+		"trial_id": "practice_rating_block",
+		current_exp_stage: current_state
 	},
 	timing_post_trial: 0,
 	timing_stim: -1,
@@ -992,8 +1080,8 @@ var post_exp_questionnaire_intro = {
         },
         timing_response: -1,
         text: '<div class = bigbox><div class = centerbox>'+
-        '<p class = center-text><font color = "white">We will now start the post-experiment questionnaire.</font></p>'+
-        '<p class = center-text><font color = "white">Press <strong>enter</strong> to begin.</font></p>'+
+        '<p class = center-textJamie><font color = "white">We will now start the post-experiment questionnaire.</font></p>'+
+        '<p class = center-textJamie><font color = "white">Press <strong>enter</strong> to begin.</font></p>'+
         '</div></div>',
         cont_key: [13],
         timing_post_trial: 0,
@@ -1148,7 +1236,7 @@ var fluencyManipulationTrials = {
 		stimArray = createStims(numStims,numIterrating)
 		current_prime_trial = 0
 		current_prime_block += 1
-		stims = createBlockStims()
+		stims = randomizeBlockStims()
 		if(current_prime_block == numBlocks){
 			return false
 		}else if (current_prime_block < numBlocks){
