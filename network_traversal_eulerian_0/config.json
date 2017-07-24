@@ -1,6 +1,6 @@
 [
     {
-        "name": "Images Experiment",
+        "name": "Network Traversal Eulerian",
         "template": "jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
