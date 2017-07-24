@@ -1,6 +1,6 @@
 [
     {
-        "name": "Images Experiment",
+        "name": "Network Traversal Random",
         "template": "jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
