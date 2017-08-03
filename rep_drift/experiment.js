@@ -63,13 +63,11 @@ var createStims = function(numStims,numIterations){
 var pressSubmit = function(current_submit){
 	if(current_submit.id == "question_text_area"){
 		post_question_current_answer = current_submit.value
-		console.log(post_question_current_answer)
 		
 		hitKey(81)
 	
 	} else if (current_submit.id == "WTP_text"){
 		WTP = current_submit.value	
-		console.log(WTP)			
 		
 		WTP_length = WTP.length
 		
@@ -87,7 +85,7 @@ var pressSubmit = function(current_submit){
   				} else if (parseFloat(WTP) < 0){
   					alert("Inputted answer is too low.  Please ensure that you are answering in the range $0 to $3, inclusive.  The format should be (#.##)  The period is allowed.")
   				} else if (WTP === ""){
-					alert("No answer inputted.  Please input an answer, using only numbers in the forat (#.##).  The period is allowed.  Please ensure that you are answering in the range $0 to $3, inclusive." )				
+					alert("No answer inputted.  Please input an answer, using only numbers in the format (#.##).  The period is allowed.  Please ensure that you are answering in the range $0 to $3, inclusive." )				
   				}
   			
   			
@@ -223,7 +221,6 @@ var filler_control_count = 0
 
 var getPrimeStim = function(){
 	if(current_state == "test"){	
-		console.log('here')
 		stim1 = stims.stim[priming_trial_count]
 		stim1_stim_type = stims.stim_type[priming_trial_count]
 		stim1_binned_WTP = stims.binned_WTP[priming_trial_count]
@@ -253,7 +250,6 @@ var getPrimeStim = function(){
 		if (prime_type == "prime"){
 			prime = stim1
 			priming_trial_count += 1
-			console.log(prime)
 			return primingBoard1 + "stim_numbered/" + prime + fileTypeBMP + primingBoard2
 		} else if(prime_type == "control"){
 			num_digits = stim2_binned_WTP.toString().length
@@ -263,7 +259,6 @@ var getPrimeStim = function(){
 				prime = "00" + stim2_binned_WTP
 			}		
 			priming_trial_count += 1
-			console.log(prime)
 			return primingBoard1 + "control_non_food/" + prime + fileTypeBMP + primingBoard2
 		}		
 		
@@ -559,6 +554,7 @@ var appendData = function(){
 		var chosen_WTP = ""
 		var chosen_bWTP = ""
 		var chosen_stim_type = ""
+		var value_diff = Math.abs(parseFloat(stimLeft_WTP) - parseFloat(stimRight_WTP))
 		
 		if (which_chosen == 37){
 			chosen_stim_temp = stimLeft
@@ -590,7 +586,8 @@ var appendData = function(){
 			chosen_WTP: chosen_WTP,
 			chosen_binned_WTP: chosen_bWTP,
 			chosen_stim_type: chosen_stim_type,
-			current_exp_stage: current_state
+			current_exp_stage: current_state,
+			value_diff: value_diff
 			
 		})
 		
@@ -624,11 +621,7 @@ var appendData = function(){
 		})
 	
 	}
-	
-	
-	
-	
-	//currTrial += 1
+
 }
 
 
@@ -659,13 +652,13 @@ document.addEventListener("keydown", function(e){
 /* ************************************ */
 var subject_ID = 472
 
-var numStims = 2 // 60
-var rating_length = 2 //60;
+var numStims = 60 // 60
+var rating_length = numStims //60;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
 var manipulation_length = numStims * 2
 var numRepetitions = numIterrating
 var WTP_high_end = 3
-var numBlocks = 2 //18
+var numBlocks = 5 //18
 var num_mask_stims = 15
 var current_state = "practice"
 var submitPress = 0
@@ -766,7 +759,7 @@ var ratingBoard2 = fileTypeBMP+"</div>"+
 	
 		'</div></div>'
 		
-		
+		/*
 		'<div class = submitbox>'+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(1)"/>'+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(2)"/>'+
@@ -776,7 +769,7 @@ var ratingBoard2 = fileTypeBMP+"</div>"+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(6)"/>'+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(7)"/>'+
 		'</div></div>'
-
+		*/
 
 
 /////////////////////////////////////////////////////// 	
@@ -1250,8 +1243,8 @@ for (x = 0; x<manipulation_length; x++){ //manipulation_length
 		"trial_id": "prime"
 		},
 	timing_post_trial: 0,
-	timing_stim: 520,
-	timing_response: 520,
+	timing_stim: 20,
+	timing_response: 20,
 	response_ends_trial: false,
 	on_finish: appendData
 	};
