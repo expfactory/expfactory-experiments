@@ -327,7 +327,173 @@ var ratingSplit = function(){
 	return stims
 	
 }
+var createBlockStims = function(){
+	var prime_stims = []
+	var control_stims = []
+	all_stims = []
+	var temp_num_array = jsPsych.randomization.repeat([1,2],numStims/4)
+	
+	
+	var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
+	var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
+	
+	
+	
+	
+	for(var i = 0; i < numStims/2; i++){
+		temp = temp_num_array.pop()
 
+		
+		if (temp%2 === 0){
+			
+			stim1temp = sorted_value_array[i * 2]
+			stim1_val = ''
+			stim1_stim = ''
+			for(var x = 0; x < stim1temp.indexOf('_'); x++){
+				stim1_val += stim1temp[x]
+			}
+			
+			for(var y = stim1temp.indexOf('_') + 1; y < stim1temp.length; y++){
+				stim1_stim += stim1temp[y]
+			}
+		
+			stim2temp = sorted_value_array[i * 2 + 1]
+			stim2_val = ''
+			stim2_stim = ''
+			for(var z = 0; z < stim2temp.indexOf('_'); z++){
+				stim2_val += stim2temp[z]
+			}
+			
+			for(var c = stim2temp.indexOf('_') + 1; c < stim2temp.length; c++){
+				stim2_stim += stim2temp[c]
+			}
+		} else if (temp%2 !== 0){
+		
+			stim1temp = sorted_value_array[i * 2 + 1]
+			stim1_val = ''
+			stim1_stim = ''
+			for(var d = 0; d < stim1temp.indexOf('_'); d++){
+				stim1_val += stim1temp[d]
+			}
+			
+			for(var e = stim1temp.indexOf('_') + 1; e < stim1temp.length; e++){
+				stim1_stim += stim1temp[e]
+			}
+		
+		
+			stim2temp = sorted_value_array[i * 2]
+			stim2_val = ''
+			stim2_stim = ''
+			for(var f = 0; f < stim2temp.indexOf('_'); f++){
+				stim2_val += stim2temp[f]
+			}
+			
+			for(var g = stim2temp.indexOf('_') + 1; g < stim2temp.length; g++){
+				stim2_stim += stim2temp[g]
+			}
+			
+		}
+		
+			stim1_1 = { 
+				stim_WTP: stim1_val,
+				trial_type: "prime",
+				stim: stim1_stim,
+				binned_WTP: i + 1,
+				prime_type: "prime",
+				which_side: "left"
+				}
+		
+			stim2_1 = {
+				stim_WTP: stim2_val,
+				trial_type: "control",
+				stim: stim2_stim,
+				binned_WTP: i + 1,
+				prime_type: "prime",
+				which_side: "right"
+				}		
+				
+			stim3_1 = { 
+				stim_WTP: stim1_val,
+				trial_type: "prime",
+				stim: stim1_stim,
+				binned_WTP: i + 1,
+				prime_type: "control",
+				which_side: "right"
+				
+				}
+		
+			stim4_1 = {
+				stim_WTP: stim2_val,
+				trial_type: "control",
+				stim: stim2_stim,
+				binned_WTP: i + 1,
+				prime_type: "control",
+				which_side: "left"
+				}			
+			
+			
+			
+			
+			
+			stim1_2= { 
+				stim_WTP: stim1_val,
+				trial_type: "prime",
+				stim: stim1_stim,
+				binned_WTP: i + 1,
+				prime_type: "prime",
+				which_side: "right"
+				}
+		
+			stim2_2 = {
+				stim_WTP: stim2_val,
+				trial_type: "control",
+				stim: stim2_stim,
+				binned_WTP: i + 1,
+				prime_type: "prime",
+				which_side: "left"
+				}		
+				
+			stim3_2 = { 
+				stim_WTP: stim1_val,
+				trial_type: "prime",
+				stim: stim1_stim,
+				binned_WTP: i + 1,
+				prime_type: "control",
+				which_side: "left"
+				
+				}
+		
+			stim4_2 = {
+				stim_WTP: stim2_val,
+				trial_type: "control",
+				stim: stim2_stim,
+				binned_WTP: i + 1,
+				prime_type: "control",
+				which_side: "right"
+				}			
+	
+	prime_stims.push(stim1_1)
+	prime_stims.push(stim3_1)
+	prime_stims.push(stim1_2)
+	prime_stims.push(stim3_2)
+	control_stims.push(stim2_1)
+	control_stims.push(stim4_1)
+	control_stims.push(stim2_2)
+	control_stims.push(stim4_2)
+		
+	}
+	
+	prime_stims = jsPsych.randomization.repeat(prime_stims,1)
+	control_stims = jsPsych.randomization.repeat(control_stims,1)
+	
+	all_stims.push(prime_stims)
+	all_stims.push(control_stims)
+	
+	stims = randomizeBlockStims()
+	return stims
+
+}
+/*
 var createBlockStims = function(){
 	var prime_stims = []
 	var control_stims = []
@@ -426,6 +592,7 @@ var createBlockStims = function(){
 
 }
 
+*/
 function randomizeBlockStims(){
 	temp_stims_array = []
 	prime_stims = jsPsych.randomization.repeat(all_stims[0],1)
@@ -437,6 +604,7 @@ function randomizeBlockStims(){
 	temp_stims_array.push(prime_stims)
 	temp_stims_array.push(control_stims)
 	
+	filler_stims = temp_stims_array
 	return temp_stims_array
 
 
@@ -672,6 +840,7 @@ var prime_type = ""
 var all_stims = ""
 var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
 var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
+var filler_stims = ""
 
 ///////////////////////////////////////////////////////
 
