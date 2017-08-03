@@ -698,6 +698,18 @@ var ratingBoard2 = fileTypeBMP+"</div>"+
 		'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'WTP_text\'))"/></div>'+
 	
 		'</div></div>'
+		
+		
+		'<div class = submitbox>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(1)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(2)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(3)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(4)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(5)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(6)"/>'+
+			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(7)"/>'+
+		'</div>'+
+
 
 
 /////////////////////////////////////////////////////// 	
