@@ -213,8 +213,8 @@ var getPrimeStim = function(){
 		stim1 = object1.stim
 		stim2 = object2.stim
 		
-		stim1_trial_type = object1.trial_type
-		stim2_trial_type = object2.trial_type
+		stim1_stim_type = object1.stim_type
+		stim2_stim_type = object2.stim_type
 		
 		stim1_binned_WTP = object1.binned_WTP
 		stim2_binned_WTP = object2.binned_WTP
@@ -396,7 +396,7 @@ var createBlockStims = function(){
 		
 			stim1_1 = { 
 				stim_WTP: stim1_val,
-				trial_type: "prime",
+				stim_type: "prime",
 				stim: stim1_stim,
 				binned_WTP: i + 1,
 				prime_type: "prime",
@@ -405,7 +405,7 @@ var createBlockStims = function(){
 		
 			stim2_1 = {
 				stim_WTP: stim2_val,
-				trial_type: "control",
+				stim_type: "control",
 				stim: stim2_stim,
 				binned_WTP: i + 1,
 				prime_type: "prime",
@@ -414,7 +414,7 @@ var createBlockStims = function(){
 				
 			stim3_1 = { 
 				stim_WTP: stim1_val,
-				trial_type: "prime",
+				stim_type: "prime",
 				stim: stim1_stim,
 				binned_WTP: i + 1,
 				prime_type: "control",
@@ -424,7 +424,7 @@ var createBlockStims = function(){
 		
 			stim4_1 = {
 				stim_WTP: stim2_val,
-				trial_type: "control",
+				stim_type: "control",
 				stim: stim2_stim,
 				binned_WTP: i + 1,
 				prime_type: "control",
@@ -437,7 +437,7 @@ var createBlockStims = function(){
 			
 			stim1_2= { 
 				stim_WTP: stim1_val,
-				trial_type: "prime",
+				stim_type: "prime",
 				stim: stim1_stim,
 				binned_WTP: i + 1,
 				prime_type: "prime",
@@ -446,7 +446,7 @@ var createBlockStims = function(){
 		
 			stim2_2 = {
 				stim_WTP: stim2_val,
-				trial_type: "control",
+				stim_type: "control",
 				stim: stim2_stim,
 				binned_WTP: i + 1,
 				prime_type: "prime",
@@ -455,7 +455,7 @@ var createBlockStims = function(){
 				
 			stim3_2 = { 
 				stim_WTP: stim1_val,
-				trial_type: "prime",
+				stim_type: "prime",
 				stim: stim1_stim,
 				binned_WTP: i + 1,
 				prime_type: "control",
@@ -465,7 +465,7 @@ var createBlockStims = function(){
 		
 			stim4_2 = {
 				stim_WTP: stim2_val,
-				trial_type: "control",
+				stim_type: "control",
 				stim: stim2_stim,
 				binned_WTP: i + 1,
 				prime_type: "control",
@@ -493,6 +493,7 @@ var createBlockStims = function(){
 	return stims
 
 }
+
 /*
 var createBlockStims = function(){
 	var prime_stims = []
@@ -593,6 +594,7 @@ var createBlockStims = function(){
 }
 
 */
+
 function randomizeBlockStims(){
 	temp_stims_array = []
 	prime_stims = jsPsych.randomization.repeat(all_stims[0],1)
@@ -760,13 +762,13 @@ document.addEventListener("keydown", function(e){
 /* ************************************ */
 var subject_ID = 472
 
-var numStims = 60 // 60, 10
-var rating_length = 60 //120, 20;
+var numStims = 4 // 60
+var rating_length = 4 //60;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
 var manipulation_length = numStims / 2 
 var numRepetitions = numIterrating
 var WTP_high_end = 3
-var numBlocks = 18
+var numBlocks = 2 //18
 var num_mask_stims = 15
 var current_state = "practice"
 var submitPress = 0
@@ -829,8 +831,8 @@ var gender = ""
 
 var stim1 = ""
 var stim2 = ""		
-var stim1_trial_type = ""
-var stim2_trial_type = ""		
+var stim1_stim_type = ""
+var stim2_stim_type = ""		
 var stim1_binned_WTP = ""
 var stim2_binned_WTP = ""		
 var stim1_WTP = ""
@@ -877,7 +879,7 @@ var ratingBoard2 = fileTypeBMP+"</div>"+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(5)"/>'+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(6)"/>'+
 			'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(7)"/>'+
-		'</div>'+
+		'</div></div>'
 
 
 
