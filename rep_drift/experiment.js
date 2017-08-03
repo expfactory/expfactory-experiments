@@ -149,6 +149,12 @@ var getRatingStim = function(){
 	return ratingBoard1 + stim + ratingBoard2
 }
 
+var getSecondRatingStim = function(){	
+	stim = rate_stims.stim.pop()
+	rating_stim_type = rate_stims.stim_type.pop()
+	
+	return ratingBoard1 + stim + ratingBoard2
+}
 
 var getMaskStim = function(){
 
@@ -168,18 +174,28 @@ var getForcedChoiceStim = function(){
 		if (which_side == "left"){
 			stimLeft = stim1
 			stimRight = stim2
+			
 			stimLeft_WTP = stim1_WTP
 			stimRight_WTP = stim2_WTP
+			
 			stimLeft_bWTP = stim1_binned_WTP
 			stimRight_bWTP = stim2_binned_WTP
+			
+			stimLeft_stim_type = stim1_stim_type
+			stimRight_stim_type = stim2_stim_type
 	
 		}else if (which_side == "right"){
 			stimLeft = stim2
 			stimRight = stim1
+			
 			stimLeft_WTP = stim2_WTP
 			stimRight_WTP = stim1_WTP
+			
 			stimLeft_bWTP = stim2_binned_WTP
 			stimRight_bWTP = stim1_binned_WTP
+			
+			stimLeft_stim_type = stim2_stim_type
+			stimRight_stim_type = stim1_stim_type
 		}
 		
 	
@@ -201,34 +217,43 @@ var getForcedChoiceStim = function(){
 
 
 
+var priming_trial_count = 0
+var filler_prime_count = 0
+var filler_control_count = 0
 
 var getPrimeStim = function(){
-	if(current_state == "test"){
-	
-		temp = Math.floor((Math.random() * 2))
+	if(current_state == "test"){	
+		console.log('here')
+		stim1 = stims.stim[priming_trial_count]
+		stim1_stim_type = stims.stim_type[priming_trial_count]
+		stim1_binned_WTP = stims.binned_WTP[priming_trial_count]
+		stim1_WTP = stims.stim_WTP[priming_trial_count]
 		
-		object1 = stims[0].pop()
-		object2 = stims[1].pop()
 		
-		stim1 = object1.stim
-		stim2 = object2.stim
+		which_side = stims.which_side[priming_trial_count]
+		prime_type = stims.prime_type[priming_trial_count]		
 		
-		stim1_stim_type = object1.stim_type
-		stim2_stim_type = object2.stim_type
+		if (stim1_stim_type == "prime"){
+			stim2 = filler_controls.stim[filler_control_count]
+			stim2_stim_type = filler_controls.stim_type[filler_control_count]
+			stim2_binned_WTP = filler_controls.binned_WTP[filler_control_count]
+			stim2_WTP = filler_controls.stim_WTP[filler_control_count]
+			filler_control_count += 1
 		
-		stim1_binned_WTP = object1.binned_WTP
-		stim2_binned_WTP = object2.binned_WTP
-		
-		stim1_WTP = object1.stim_WTP
-		stim2_WTP = object2.stim_WTP
-		
-		which_side = whichSideArray.pop()
-		prime_type = whichPrimeArray.pop()
-		
+		}else if (stim1_stim_type == "control"){
+			stim2 = filler_primes.stim[filler_prime_count]
+			stim2_stim_type = filler_primes.stim_type[filler_prime_count]
+			stim2_binned_WTP = filler_primes.binned_WTP[filler_prime_count]
+			stim2_WTP = filler_primes.stim_WTP[filler_prime_count]
+			filler_prime_count += 1
+
+		}
 		
 	
 		if (prime_type == "prime"){
 			prime = stim1
+			priming_trial_count += 1
+			console.log(prime)
 			return primingBoard1 + "stim_numbered/" + prime + fileTypeBMP + primingBoard2
 		} else if(prime_type == "control"){
 			num_digits = stim2_binned_WTP.toString().length
@@ -237,14 +262,15 @@ var getPrimeStim = function(){
 			} else if (num_digits == 2){
 				prime = "00" + stim2_binned_WTP
 			}		
-		
+			priming_trial_count += 1
+			console.log(prime)
 			return primingBoard1 + "control_non_food/" + prime + fileTypeBMP + primingBoard2
 		}		
+		
 	} else if(current_state == "practice"){
 		prime = "Ruffles"
 		return practicePrimingBoard1 + "stim_numbered/demo/" + prime + fileTypeBMP + primingBoard2
 	}
-	
 }
 
 var getFixation = function(){
@@ -328,17 +354,10 @@ var ratingSplit = function(){
 	
 }
 var createBlockStims = function(){
-	var prime_stims = []
-	var control_stims = []
+	prime_stims = []
+	control_stims = []
 	all_stims = []
 	var temp_num_array = jsPsych.randomization.repeat([1,2],numStims/4)
-	
-	
-	var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
-	var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
-	
-	
-	
 	
 	for(var i = 0; i < numStims/2; i++){
 		temp = temp_num_array.pop()
@@ -402,39 +421,7 @@ var createBlockStims = function(){
 				prime_type: "prime",
 				which_side: "left"
 				}
-		
-			stim2_1 = {
-				stim_WTP: stim2_val,
-				stim_type: "control",
-				stim: stim2_stim,
-				binned_WTP: i + 1,
-				prime_type: "prime",
-				which_side: "right"
-				}		
 				
-			stim3_1 = { 
-				stim_WTP: stim1_val,
-				stim_type: "prime",
-				stim: stim1_stim,
-				binned_WTP: i + 1,
-				prime_type: "control",
-				which_side: "right"
-				
-				}
-		
-			stim4_1 = {
-				stim_WTP: stim2_val,
-				stim_type: "control",
-				stim: stim2_stim,
-				binned_WTP: i + 1,
-				prime_type: "control",
-				which_side: "left"
-				}			
-			
-			
-			
-			
-			
 			stim1_2= { 
 				stim_WTP: stim1_val,
 				stim_type: "prime",
@@ -443,27 +430,19 @@ var createBlockStims = function(){
 				prime_type: "prime",
 				which_side: "right"
 				}
-		
-			stim2_2 = {
+				
+						
+			stim2_1 = {
 				stim_WTP: stim2_val,
 				stim_type: "control",
 				stim: stim2_stim,
 				binned_WTP: i + 1,
-				prime_type: "prime",
-				which_side: "left"
-				}		
-				
-			stim3_2 = { 
-				stim_WTP: stim1_val,
-				stim_type: "prime",
-				stim: stim1_stim,
-				binned_WTP: i + 1,
 				prime_type: "control",
 				which_side: "left"
-				
-				}
+				}			
 		
-			stim4_2 = {
+				
+			stim2_2 = {
 				stim_WTP: stim2_val,
 				stim_type: "control",
 				stim: stim2_stim,
@@ -472,145 +451,48 @@ var createBlockStims = function(){
 				which_side: "right"
 				}			
 	
+	all_stims.push(stim1_1)
+	all_stims.push(stim1_2)
+	all_stims.push(stim2_1)
+	all_stims.push(stim2_2)
+	
+	rate_stims.push(stim1_1)
+	rate_stims.push(stim2_1)
+	
 	prime_stims.push(stim1_1)
-	prime_stims.push(stim3_1)
-	prime_stims.push(stim1_2)
-	prime_stims.push(stim3_2)
+	prime_stims.push(stim1_2)	
+	
 	control_stims.push(stim2_1)
-	control_stims.push(stim4_1)
 	control_stims.push(stim2_2)
-	control_stims.push(stim4_2)
 		
 	}
 	
-	prime_stims = jsPsych.randomization.repeat(prime_stims,1)
-	control_stims = jsPsych.randomization.repeat(control_stims,1)
+	block_stims = jsPsych.randomization.repeat(all_stims, true, 1)
 	
-	all_stims.push(prime_stims)
-	all_stims.push(control_stims)
+	filler_primes = jsPsych.randomization.repeat(prime_stims, true,1)
+	filler_controls = jsPsych.randomization.repeat(control_stims,true,1)
 	
-	stims = randomizeBlockStims()
-	return stims
+	rate_stims = jsPsych.randomization.repeat(rate_stims,true,1)
+	
+	return block_stims
 
 }
 
-/*
-var createBlockStims = function(){
-	var prime_stims = []
-	var control_stims = []
-	all_stims = []
-	var temp_num_array = jsPsych.randomization.repeat([1,2],numStims/4)
-	
-	
-	var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
-	var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
-	
-	
-	
-	
-	for(var i = 0; i < numStims/2; i++){
-		temp = temp_num_array.pop()
-
-		
-		if (temp%2 === 0){
-			
-			stim1temp = sorted_value_array[i * 2]
-			stim1_val = ''
-			stim1_stim = ''
-			for(var x = 0; x < stim1temp.indexOf('_'); x++){
-				stim1_val += stim1temp[x]
-			}
-			
-			for(var y = stim1temp.indexOf('_') + 1; y < stim1temp.length; y++){
-				stim1_stim += stim1temp[y]
-			}
-		
-			stim2temp = sorted_value_array[i * 2 + 1]
-			stim2_val = ''
-			stim2_stim = ''
-			for(var z = 0; z < stim2temp.indexOf('_'); z++){
-				stim2_val += stim2temp[z]
-			}
-			
-			for(var c = stim2temp.indexOf('_') + 1; c < stim2temp.length; c++){
-				stim2_stim += stim2temp[c]
-			}
-		} else if (temp%2 !== 0){
-		
-			stim1temp = sorted_value_array[i * 2 + 1]
-			stim1_val = ''
-			stim1_stim = ''
-			for(var d = 0; d < stim1temp.indexOf('_'); d++){
-				stim1_val += stim1temp[d]
-			}
-			
-			for(var e = stim1temp.indexOf('_') + 1; e < stim1temp.length; e++){
-				stim1_stim += stim1temp[e]
-			}
-		
-		
-			stim2temp = sorted_value_array[i * 2]
-			stim2_val = ''
-			stim2_stim = ''
-			for(var f = 0; f < stim2temp.indexOf('_'); f++){
-				stim2_val += stim2temp[f]
-			}
-			
-			for(var g = stim2temp.indexOf('_') + 1; g < stim2temp.length; g++){
-				stim2_stim += stim2temp[g]
-			}
-			
-		}
-		
-			stim1 = { 
-				stim_WTP: stim1_val,
-				trial_type: "prime",
-				stim: stim1_stim,
-				binned_WTP: i + 1
-				}
-		
-			stim2 = {
-				stim_WTP: stim2_val,
-				trial_type: "control",
-				stim: stim2_stim,
-				binned_WTP: i + 1
-				}					
-			
-	
-	prime_stims.push(stim1)
-	control_stims.push(stim2)
-		
-	}
-	
-	prime_stims = jsPsych.randomization.repeat(prime_stims,1)
-	control_stims = jsPsych.randomization.repeat(control_stims,1)
-	
-	all_stims.push(prime_stims)
-	all_stims.push(control_stims)
-	
-	stims = randomizeBlockStims()
-	return stims
-
-}
-
-*/
 
 function randomizeBlockStims(){
-	temp_stims_array = []
-	prime_stims = jsPsych.randomization.repeat(all_stims[0],1)
-	control_stims = jsPsych.randomization.repeat(all_stims[1],1)
+	priming_trial_count = 0
+	filler_prime_count = 0
+	filler_control_count = 0
 	
-	whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
-	whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
+	block_stims = jsPsych.randomization.repeat(all_stims, true, 1)
 	
-	temp_stims_array.push(prime_stims)
-	temp_stims_array.push(control_stims)
+	filler_primes = jsPsych.randomization.repeat(prime_stims, true,1)
+	filler_controls = jsPsych.randomization.repeat(control_stims,true,1)
 	
-	filler_stims = temp_stims_array
-	return temp_stims_array
-
+	return block_stims
 
 }
+
 
 function getAllIndexes(arr, val) {
     var indexes = [], i = -1;
@@ -653,12 +535,21 @@ var appendData = function(){
 			current_exp_stage: current_state
 		})
 	
-	} else if ((trial_id == "rating_block") || (trial_id == "second_rating_block")){
+	} else if (trial_id == "rating_block"){
 		
 		jsPsych.data.addDataToLastTrial({
 			stim: stim,
 			stim_WTP: WTP,
 			current_exp_stage: current_state
+		})
+	
+	} else if (trial_id == "second_rating_block"){
+		
+		jsPsych.data.addDataToLastTrial({
+			stim: stim,
+			stim_WTP: WTP,
+			current_exp_stage: current_state,
+			rating_stim_type: rating_stim_type
 		})
 	
 	} else if (trial_id == "forced_choice") {
@@ -667,15 +558,18 @@ var appendData = function(){
 		var chosen_stim_temp = ""
 		var chosen_WTP = ""
 		var chosen_bWTP = ""
+		var chosen_stim_type = ""
 		
 		if (which_chosen == 37){
 			chosen_stim_temp = stimLeft
 			chosen_WTP = stimLeft_WTP
 			chosen_bWTP = stimLeft_bWTP
+			chosen_stim_type = stimLeft_stim_type
 		} else if (which_chosen == 39){
 			chosen_stim_temp = stimRight
 			chosen_WTP = stimRight_WTP
 			chosen_bWTP = stimRight_bWTP
+			chosen_stim_type = stimRight_stim_type
 		}
 		
 		jsPsych.data.addDataToLastTrial({
@@ -686,6 +580,8 @@ var appendData = function(){
 			stim_right_WTP: stimRight_WTP,
 			stim_left_binned_WTP: stimLeft_bWTP,
 			stim_right_binned_WTP: stimRight_bWTP,
+			stim_left_stim_type: stimLeft_stim_type,
+			stim_right_stim_type: stimRight_stim_type,
 			prime_stim: prime,
 			prime_trial_type: prime_type,
 			current_block_trial: current_prime_trial,
@@ -693,6 +589,7 @@ var appendData = function(){
 			chosen_stim: chosen_stim_temp,
 			chosen_WTP: chosen_WTP,
 			chosen_binned_WTP: chosen_bWTP,
+			chosen_stim_type: chosen_stim_type,
 			current_exp_stage: current_state
 			
 		})
@@ -762,10 +659,10 @@ document.addEventListener("keydown", function(e){
 /* ************************************ */
 var subject_ID = 472
 
-var numStims = 4 // 60
-var rating_length = 4 //60;
+var numStims = 2 // 60
+var rating_length = 2 //60;
 var numIterrating = rating_length / numStims; // number of times stimuli is repeated during rating phases
-var manipulation_length = numStims / 2 
+var manipulation_length = numStims * 2
 var numRepetitions = numIterrating
 var WTP_high_end = 3
 var numBlocks = 2 //18
@@ -806,22 +703,18 @@ var post_questionNum = 0
 var high_low_sorted = []
 var stimArrayRating = []
 var stimPlacementArray = []
+var rate_stims = []
 var stims = []
 var a = ""
 var b = ""
 var stim = ""
-//var stim_partner = ""
+
 var prime = ""
-//var trial_type = ""
-//var binned_WTP = ""
-//var average_WTP = ""
-//var which_side = ""
+
 var WTP = ""
 var WTP_length  = ""
 var current_prime_trial = "practice_choice"
 var current_prime_block = "practice_choice"
-//var stim1_WTP = ""
-//var stim2_WTP = ""
 var forcedButtonTracker = []
 var post_question_current_answer = ''
 var age = ""
@@ -840,9 +733,12 @@ var stim2_WTP = ""
 var which_side = ""
 var prime_type = ""
 var all_stims = ""
-var whichSideArray = jsPsych.randomization.repeat(['right','left'],numStims/4)
-var whichPrimeArray = jsPsych.randomization.repeat(['prime','control'], numStims/4)
-var filler_stims = ""
+var filler_primes = ""
+var filler_controls = ""
+var stimLeft_stim_type = ""
+var stimRight_stim_type = ""
+var prime_stims = ""
+var control_stims = ""
 
 ///////////////////////////////////////////////////////
 
@@ -1354,8 +1250,8 @@ for (x = 0; x<manipulation_length; x++){ //manipulation_length
 		"trial_id": "prime"
 		},
 	timing_post_trial: 0,
-	timing_stim: 20,
-	timing_response: 20,
+	timing_stim: 520,
+	timing_response: 520,
 	response_ends_trial: false,
 	on_finish: appendData
 	};
@@ -1454,7 +1350,7 @@ for (x=0;x< rating_length;x++){ //same as first rating?? should be once, because
 
 	var rating_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getRatingStim,
+	stimulus: getSecondRatingStim,
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
