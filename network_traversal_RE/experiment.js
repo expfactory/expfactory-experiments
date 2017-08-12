@@ -5,7 +5,7 @@
 
 
 // random assignment to counterbalanced conditions
-var exp_conditions = ['random','eulerian';
+var exp_conditions = ['random','eulerian'];
 var other_conditions = [0, 1] //for condition-specific sequence, segmentation sequence, and key press condition
 
 var condition = jsPsych.randomization.sample(exp_conditions, 1, false);
@@ -21,7 +21,7 @@ jsPsych.data.addProperties({keypress_condition: key_condition});
 // random assignment of images to nodes
 var stim_names = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 var randomized_stim_names = jsPsych.randomization.repeat(stim_names, 1)
-var path = '/static/experiments/network_traversal_RE/images/'
+var path = '/static/experiments/network_traversal_re/images/'
 var prefix = '<div class = shapebox><img class = stim src = '
 var postfix = '></img></div>'
 var node_names = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
@@ -444,8 +444,8 @@ var instruction_node = {
 	timeline: [feedback_instruct_block, instructions_block],
 }
 
-var network_traversal_RE_experiment = []
-network_traversal_RE_experiment.push(instruction_node)
+var network_traversal_re_experiment = []
+network_traversal_re_experiment.push(instruction_node)
 
 
 var practice1_block = {
@@ -455,7 +455,7 @@ var practice1_block = {
 	choices: 'none',
 	data: {
 		trial_id: "practice1",
-		exp_id: "network_traversal_RE"
+		exp_id: "network_traversal_re"
 	},
 	timing_response: 5000,
 	timing_post_trial: 0,
@@ -466,7 +466,7 @@ var practice1_block = {
 		current_practice_trial += 1
 	}
 }
-network_traversal_RE_experiment.push(practice1_block)
+network_traversal_re_experiment.push(practice1_block)
 
 var instructions2_block = {
 	type: 'poldrack-instructions',
@@ -481,7 +481,7 @@ var instructions2_block = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 };
-network_traversal_RE_experiment.push(instructions2_block)
+network_traversal_re_experiment.push(instructions2_block)
 
 
 for (i = 0; i < practice2_trials.length; i++) {
@@ -492,7 +492,7 @@ for (i = 0; i < practice2_trials.length; i++) {
 		key_answer: practice2_trials[i].key_answer,
 		data: {
 			trial_id: 'practice2_trial',
-			exp_id: 'network_traversal_RE'
+			exp_id: 'network_traversal_re'
 		},
 		choices: [77, 90],
 		correct_text: '<div class = shapebox3><div style="color:green"; class = center-text>Correct!</div></div>',
@@ -520,7 +520,7 @@ for (i = 0; i < practice2_trials.length; i++) {
 	var practice2_trial_full = {
 		timeline: [practice2_trial, repeat_practice2, repeat_practice2, repeat_practice2]
 	}
-	network_traversal_RE_experiment.push(practice2_trial_full)
+	network_traversal_re_experiment.push(practice2_trial_full)
 }
 
 if (key_condition === 0) {
@@ -563,16 +563,16 @@ if (key_condition === 0) {
 	};
 }
 
-network_traversal_RE_experiment.push(exposure_instructions_block)
+network_traversal_re_experiment.push(exposure_instructions_block)
 
 
 
 var return_incorrect_audio = function() {
-	return '/static/experiments/network_traversal_RE/sounds/1000_incorrect.mp3'
+	return '/static/experiments/network_traversal_re/sounds/1000_incorrect.mp3'
 }
 
 var return_timedout_audio = function() {
-	return '/static/experiments/network_traversal_RE/sounds/500_timedout.mp3'
+	return '/static/experiments/network_traversal_re/sounds/500_timedout.mp3'
 }
 
 var get_stim_timing = function() {
@@ -599,7 +599,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		type: 'poldrack-text',
 		data: {
 			trial_id: "start_break",
-	    	exp_id: 'network_traversal_RE'
+	    	exp_id: 'network_traversal_re'
 		},
 		timing_response: 60000,
 		timing_stim: 60000,
@@ -613,7 +613,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		type: 'poldrack-text',
 		data: {
 			trial_id: "close_break",
-	    	exp_id: 'network_traversal_RE'
+	    	exp_id: 'network_traversal_re'
 		},
 		text: '<div class = centerbox><p class = center-block-text>Press <strong>enter</strong> to continue the experiment.</p></div>',
 		cont_key: [13],
@@ -628,7 +628,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		key_answer: exposure_trials[i].key_answer,
 		data: {
 			trial_id: "exposure_trial",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		timing_response: 1250,
 		response_ends_trial: true,
@@ -679,7 +679,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		choices: [37, 39],
 		data: {
 			trial_id: "feedback_incorrect",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		prompt: exposure_trials[i].stimulus,
 		timing_post_trial: 0,
@@ -696,7 +696,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		choices: [37, 39],
 		data: {
 			trial_id: "feedback_timed_out",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		prompt: exposure_trials[i].stimulus,
 		timing_post_trial: 0,
@@ -714,7 +714,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 		choices: [37, 39],
 		data: {
 			trial_id: "exposure_trial_secondDisplay",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		timing_response: get_stim_timing,
 		timing_post_trial: 0,
@@ -761,7 +761,7 @@ for (i = 0; i < exposure_trials.length; i++) {
 	var exposure_trial = {
 		timeline: [stim_pres, if_incorrect, if_timedout, post_audio, if_break]
 	}
-	network_traversal_RE_experiment.push(exposure_trial)
+	network_traversal_re_experiment.push(exposure_trial)
 }
 
 
@@ -779,7 +779,7 @@ var segmentation_instructions = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 }
-network_traversal_RE_experiment.push(segmentation_instructions)
+network_traversal_re_experiment.push(segmentation_instructions)
 
 
 // Create segmentation trials
@@ -789,7 +789,7 @@ for (i = 0; i < segmentation_trials.length; i++) {
 		type: 'poldrack-text',
 		data: {
 			trial_id: "start_seg_break",
-	    	exp_id: 'network_traversal_RE'
+	    	exp_id: 'network_traversal_re'
 		},
 		timing_response: 60000,
 		timing_stim: 60000,
@@ -803,7 +803,7 @@ for (i = 0; i < segmentation_trials.length; i++) {
 		type: 'poldrack-text',
 		data: {
 			trial_id: "close_seg_break",
-	    	exp_id: 'network_traversal_RE'
+	    	exp_id: 'network_traversal_re'
 		},
 		text: '<div class = centerbox><p class = center-block-text>Press <strong>enter</strong> to continue the experiment.</p></div>',
 		cont_key: [13],
@@ -818,7 +818,7 @@ for (i = 0; i < segmentation_trials.length; i++) {
 		key_answer: [32],
 		data: {
 			trial_id: "seg_stim_pres",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		timing_response: 1500,
 		response_ends_trial: false,
@@ -856,7 +856,7 @@ for (i = 0; i < segmentation_trials.length; i++) {
 	var seg_trial = {
 		timeline: [seg_stim_pres, if_seg_break]
 	}
-	network_traversal_RE_experiment.push(seg_trial)
+	network_traversal_re_experiment.push(seg_trial)
 }
 
 
@@ -875,7 +875,7 @@ var oddmanout_instructions = {
 	show_clickable_nav: true,
 	timing_post_trial: 1000
 }
-network_traversal_RE_experiment.push(oddmanout_instructions)
+network_traversal_re_experiment.push(oddmanout_instructions)
 
 // Create oddman out trials
 current_oddmanout_trial = 0
@@ -888,7 +888,7 @@ for (i = 0; i < oddmanout_trials.length; i++) {
 		choices: [49, 50, 51],
 		data: {
 			trial_id: "oddmanout_block",
-			exp_id: "network_traversal_RE"
+			exp_id: "network_traversal_re"
 		},
 		timing_response: -1,
 		timing_post_trial: 500,
@@ -908,7 +908,7 @@ for (i = 0; i < oddmanout_trials.length; i++) {
 			current_oddmanout_trial += 1
 		}
 	}
-	network_traversal_RE_experiment.push(oddmanout_block)
+	network_traversal_re_experiment.push(oddmanout_block)
 }
 
 
@@ -916,21 +916,21 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "end",
-    exp_id: 'network_traversal_RE'
+    exp_id: 'network_traversal_re'
   },
   timing_response: 180000,
   text: '<div class = centerbox><p class = center-block-text>Great job!</p><p class = center-block-text>Press <strong>enter</strong> to continue to an exit survey (<strong>note</strong>: your answers on the survey will NOT affect your payment, so please answer as honestly as you can).</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
-network_traversal_RE_experiment.push(end_block)
+network_traversal_re_experiment.push(end_block)
 
 var bonus
 var post_task_block = {
 	type: 'survey-text',
 	data: {
 		trial_id: "post task questions",
-		exp_id: 'network_traversal_RE'
+		exp_id: 'network_traversal_re'
 	},
 	questions: ['<p class = center-block-text style = "font-size: 20px">What is your age? (in years)</p>',
 				'<p class = center-block-text style = "font-size: 20px">What is your sex? (male or female)</p>',
@@ -965,4 +965,4 @@ var post_task_block = {
 		})
 	}
 }
-network_traversal_RE_experiment.push(post_task_block)
+network_traversal_re_experiment.push(post_task_block)
