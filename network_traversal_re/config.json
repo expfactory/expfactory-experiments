@@ -1,6 +1,6 @@
 [
     {
-        "name": "Images Experiment",
+        "name": "Images Experiment (re)",
         "template": "jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
