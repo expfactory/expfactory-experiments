@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cue Control Food",
+        "name": "Object Rating",
         "template":"jspsych",
         "run": [
 
