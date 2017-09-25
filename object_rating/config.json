@@ -12,11 +12,12 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js", 
-                "experiment.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
-                "style.css"
+                "style.css",
+                "neutral_pics.js",
+                "experiment.js"
                 
                 
                ],

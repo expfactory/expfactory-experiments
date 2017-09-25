@@ -77,7 +77,8 @@ img.force {
 }
 
 .selected{
-  border:solid 15px green; 
+  border:solid 2px green; 
+  color: green;
 }
 
 
@@ -163,9 +164,7 @@ background-color: black;
 text-align: center;
 }
 
-.selected{
-  border:solid 15px green; 
-}
+
 
 
 .center_picture_box {
@@ -182,7 +181,7 @@ text-align: center;
 
 
 .buttonbox {
-width: 60%;
+width: 80%;
 height: 10%;
 position:absolute;
 top:90%;
