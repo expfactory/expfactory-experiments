@@ -70,6 +70,7 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('network_traversal_eulerian_0','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('network_traversal_hamiltonian_0','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('number_letter','web','.');"
+    - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('object_rating','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('perceptual_metacognition','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('plus_minus','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('probabilistic_selection','web','.');"
