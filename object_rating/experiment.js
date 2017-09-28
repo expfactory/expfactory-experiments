@@ -89,7 +89,7 @@ document.addEventListener("keydown", function(e){
     }
     
     
-    if ((keynum == 49) || (keynum == 50) || (keynum == 51) || (keynum == 52) || (keynum == 53)){
+    if ((keynum == 49) || (keynum == 50)){
 		if ((gameState == "rating") || (gameState == "practice_rating")){
 			keyTracker.push(keynum)
 			if((keynum == 49) && (keyTracker.length == 1)){
@@ -98,18 +98,6 @@ document.addEventListener("keydown", function(e){
 				hitKey(87)
 			}else if((keynum == 50) && (keyTracker.length == 1)){
 				$('#button2').addClass('selected');
-				pressedKey = keynum
-				hitKey(87)
-			}else if((keynum == 51) && (keyTracker.length == 1)){
-				$('#button3').addClass('selected');
-				pressedKey = keynum
-				hitKey(87)
-			}else if((keynum == 52) && (keyTracker.length == 1)){
-				$('#button4').addClass('selected');
-				pressedKey = keynum
-				hitKey(87)
-			}else if((keynum == 53) && (keyTracker.length == 1)){
-				$('#button5').addClass('selected');
 				pressedKey = keynum
 				hitKey(87)
 			}
@@ -182,9 +170,6 @@ var ratingBoard3 =
 		'<div class = buttonbox>'+
 			'<div class = inner><button type="submit" id = "button1" class="likert_btn" onClick="return false;" >1</button></div>'+
 			'<div class = inner><button type="submit" id = "button2" class="likert_btn" onClick="return false;" >2</button></div>'+
-			'<div class = inner><button type="submit" id = "button3" class="likert_btn" onClick="return false;" >3</button></div>'+
-			'<div class = inner><button type="submit" id = "button4" class="likert_btn" onClick="return false;" >4</button></div>'+
-			'<div class = inner><button type="submit" id = "button5" class="likert_btn" onClick="return false;" >5</button></div>'+
 		'</div>'+	
 	'</div>'
 	
