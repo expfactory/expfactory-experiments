@@ -234,6 +234,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 
 var practice_len = 24 // 24 must be divisible by 12
