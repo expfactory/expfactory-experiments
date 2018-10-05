@@ -396,7 +396,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
 var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','stop'],1)
-var possible_responses = jsPsych.randomization.repeat([['M Key', 77],['Z Key', 90]],1)
+var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 							 
 var letters = 'BDGTV'.split("")
@@ -893,6 +893,7 @@ var testNode = {
 /* ************************************ */
 
 var go_nogo_with_n_back_experiment = []
+go_nogo_with_n_back_experiment.push(attention_node);
 
 //go_nogo_with_n_back_experiment.push(instruction_node);
 //go_nogo_with_n_back_experiment.push(practice1);
