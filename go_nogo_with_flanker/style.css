@@ -127,7 +127,7 @@ img.center {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-125%,-50%);
+  transform: translate(-110%,-50%);
   background-color: none;
 }
 
@@ -138,7 +138,7 @@ img.center {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-87.5%,-50%);
+  transform: translate(-80%,-50%);
   background-color: none;
 }
 
@@ -149,7 +149,7 @@ img.center {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-12.5%,-50%);
+  transform: translate(-20%,-50%);
   background-color: none;
 }
 
@@ -160,7 +160,7 @@ img.center {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(25%,-50%);
+  transform: translate(10%,-50%);
   background-color: none;
 }
 
