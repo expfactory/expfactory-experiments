@@ -1,0 +1,95 @@
+/*******************************************************/
+/************  THIS IS FOR TRAINING SETS   *************/
+/*******************************************************/
+
+.forgetStim {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+}
+
+.instructBox {
+	width: 80vw;
+	height: 10vw;
+	position:absolute;
+	top:10%;
+	left:50%; 
+	margin-right: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.topLeft {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%; 
+margin-right:0%;
+transform: translate(-125%,-115%);
+}
+
+.topRight {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(25%,-115%);
+}
+
+.topMiddle {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-115%);
+}
+
+.bottomLeft {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-125%,15%);
+}
+
+.bottomRight {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(25%,15%);
+}
+
+
+.bottomMiddle {
+width: 20vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,15%);
+}
+
+.bottombox {
+width: 40vw;
+height: 20vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,15%);
+}
