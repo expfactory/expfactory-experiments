@@ -241,6 +241,8 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
+
 
 // task specific variables
 // Set up variables for stimuli
@@ -256,6 +258,8 @@ var practice_thresh = 3 // 3 blocks of 28 trials
 var SSD = 250
 var maxSSD = 850
 var minSSD = 0 
+var maxStopCorrect = 0.70
+var minStopCorrect = 0.30
 
  
 var possible_responses = [['F Key', 70],['H Key', 72]]
@@ -288,23 +292,23 @@ var prompt_text = '<ul list-text>'+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  data: {
+    trial_id: "attention_check"
+  },
+  timing_response: 180000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
 
-var test_img_block = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = cue-text><font size = "10" color = "blue">3</font></div></div></div></div>'+
-			  stop_boards[0][0] + 
-				preFileType + 'stopSignal' + fileTypePNG + 
-			   stop_boards[0][1],
-	is_html: true,
-	choices: [32],
-	data: {
-		trial_id: "fixation",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 
 
 //Set up post task questionnaire
@@ -476,7 +480,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_response: 500, //500
-		timing_post_trial: 0
+		timing_post_trial: 0,
+		prompt: prompt_text
 	}
 	
 	var practice_block = {
@@ -496,6 +501,7 @@ for (i = 0; i < practice_len; i++) {
 		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: appendData,
+		prompt: prompt_text,
 		on_start: function(){
 			stoppingTracker = []
 			stoppingTimeTracker = []
@@ -513,7 +519,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		timing_stim: 500,
 		timing_response: 500,
-		response_ends_trial: false, 
+		response_ends_trial: false,
 
 	};
 	practiceTrials.push(fixation_block)
@@ -530,35 +536,61 @@ var practiceNode = {
 		stims = createTrialTypes(practice_len)
 		current_trial = 0
 	
-		var sum_rt = 0
-		var sum_responses = 0
-		var correct = 0
 		var total_trials = 0
+		var sum_responses = 0
+		var total_sum_rt = 0
+		
+		var go_trials = 0
+		var go_correct = 0
+		var go_rt = 0
+		var sum_go_responses = 0
+		
+		var stop_trials = 0
+		var stop_correct = 0
+		var stop_rt = 0
+		var sum_stop_responses = 0
+		
 	
 		for (var i = 0; i < data.length; i++){
 			if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'go')){
 				total_trials+=1
+				go_trials+=1
 				if (data[i].rt != -1){
-					sum_rt += data[i].rt
-					sum_responses += 1
+					total_sum_rt += data[i].rt
+					go_rt += data[i].rt
+					sum_go_responses += 1
 					if (data[i].key_press == data[i].correct_response){
-						correct += 1
+						go_correct += 1
 		
 					}
 				}
 		
+			} else if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'stop')){
+				total_trials+=1
+				stop_trials+=1
+				if (data[i].rt != -1){
+					total_sum_rt += data[i].rt
+					stop_rt += data[i].rt
+					sum_stop_responses += 1
+					if (data[i].key_press == -1){
+						stop_correct += 1
+		
+					}
+				}
+			
 			}
 	
 		}
 	
-		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
-		var ave_rt = sum_rt / sum_responses
+		var accuracy = go_correct / go_trials
+		var missed_responses = (go_trials - sum_go_responses) / go_trials
+		var ave_rt = go_rt / sum_go_responses
+		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
 
-		if (accuracy > accuracy_thresh){
+		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrect) && (stop_correct > minStopCorrect)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
@@ -570,6 +602,16 @@ var practiceNode = {
 			if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+			
+			if (stop_correct > maxStopCorrect){
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			
+			}
+			
+			if (stop_correct < minStopCorrect){
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			
 			}
 		
 			if (practiceCount == practice_thresh){
@@ -641,30 +683,56 @@ var testNode = {
 	stims = createTrialTypes(numTrialsPerBlock)
 	current_trial = 0
 	
-	var sum_rt = 0
-		var sum_responses = 0
-		var correct = 0
-		var total_trials = 0
+	var total_trials = 0
+	var sum_responses = 0
+	var total_sum_rt = 0
 	
-		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'go')){
-				total_trials+=1
-				if (data[i].rt != -1){
-					sum_rt += data[i].rt
-					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+	var go_trials = 0
+	var go_correct = 0
+	var go_rt = 0
+	var sum_go_responses = 0
+	
+	var stop_trials = 0
+	var stop_correct = 0
+	var stop_rt = 0
+	var sum_stop_responses = 0
+	
+
+	for (var i = 0; i < data.length; i++){
+		if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'go')){
+			total_trials+=1
+			go_trials+=1
+			if (data[i].rt != -1){
+				total_sum_rt += data[i].rt
+				go_rt += data[i].rt
+				sum_go_responses += 1
+				if (data[i].key_press == data[i].correct_response){
+					go_correct += 1
+	
 				}
-		
 			}
 	
-		}
+		} else if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'stop')){
+			total_trials+=1
+			stop_trials+=1
+			if (data[i].rt != -1){
+				total_sum_rt += data[i].rt
+				stop_rt += data[i].rt
+				sum_stop_responses += 1
+				if (data[i].key_press == -1){
+					stop_correct += 1
 	
-		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
-		var ave_rt = sum_rt / sum_responses
+				}
+			}
+		
+		}
+
+	}
+
+	var accuracy = go_correct / go_trials
+	var missed_responses = (go_trials - sum_go_responses) / go_trials
+	var ave_rt = go_rt / sum_go_responses
+	var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
@@ -678,6 +746,16 @@ var testNode = {
 		if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+		
+		if (stop_correct > maxStopCorrect){
+			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+		
+		}
+		
+		if (stop_correct < minStopCorrect){
+			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+		
 		}
 	
 		if (testCount == numTestBlocks){

@@ -384,6 +384,8 @@ var missed_thresh = 0.10
 var SSD = 250
 var maxSSD = 850
 var minSSD = 0 
+var maxStopCorrect = 0.70
+var minStopCorrect = 0.30
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 

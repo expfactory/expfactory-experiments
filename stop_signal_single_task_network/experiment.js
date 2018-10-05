@@ -255,7 +255,7 @@ var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
 var accuracy_thresh = 0.80;
 
-vvar maxStopCorrect = 0.70
+var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
 
 

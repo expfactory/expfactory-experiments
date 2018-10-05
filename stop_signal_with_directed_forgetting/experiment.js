@@ -1137,7 +1137,7 @@ var testNode = {
 /* create experiment definition array */
 stop_signal_with_directed_forgetting_experiment = []
 
-//stop_signal_with_directed_forgetting_experiment.push(test_img_block)
+//stop_signal_with_directed_forgetting_experiment.push(attn_node)
 
 //stop_signal_with_directed_forgetting_experiment.push(instruction_node)
 
