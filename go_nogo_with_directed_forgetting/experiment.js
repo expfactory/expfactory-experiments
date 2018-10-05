@@ -1030,6 +1030,8 @@ var testNode = {
 
 /* create experiment definition array */
 var go_nogo_with_directed_forgetting_experiment = [];
+go_nogo_with_directed_forgetting_experiment.push(attention_node);
+
 //go_nogo_with_directed_forgetting_experiment.push(test_img_block);
 //go_nogo_with_directed_forgetting_experiment.push(instruction_node);
 //go_nogo_with_directed_forgetting_experiment.push(practice1);
