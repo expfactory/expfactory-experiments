@@ -372,7 +372,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
-
+var run_attention_checks = true
 var practice_len = 15 // 24 must be divisible by 15
 var exp_len = 45 //324 must be divisible by 15
 var numTrialsPerBlock = 15 // 45 or 60, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
@@ -434,21 +434,23 @@ var stims = createTrialTypes(practice_len, delay)
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  data: {
+    trial_id: "attention_check"
+  },
+  timing_response: 180000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
 
-var test_img_block = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox><div class = centerbox><div class = fixation><font color="white">Magnitude</font></div></div></div>',
-	is_html: true,
-	choices: [32],
-	data: {
-		trial_id: "fixation",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-	};
-
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
 var practice1 = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox>'+
