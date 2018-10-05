@@ -254,7 +254,7 @@ var credit_var = 0
 var run_attention_checks = true
 
 var practice_len = 15 // 24 must be divisible by 
-var exp_len = 45 //320 must be divisible by 60
+var exp_len = 30 //320 must be divisible by 60
 var numTrialsPerBlock = 15 // 60, must be divisible by 60
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
