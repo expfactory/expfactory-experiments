@@ -251,11 +251,11 @@ var current_trial = 0
 
 
 var rt_thresh = 1000;
-var missed_response_thresh = 0.15;
+var missed_response_thresh = 0.10;
 var accuracy_thresh = 0.80;
 
-var stop_signal_respond_lower_thresh = 0.30
-var stop_signal_respond_upper_thresh = 0.70
+vvar maxStopCorrect = 0.70
+var minStopCorrect = 0.30
 
 
 var stop_signal_conditions = ['go','go','stop']
@@ -761,42 +761,49 @@ var practiceStopNode = {
 			return false;
 		
 		}
-		if (aveShapeRespondCorrect < accuracy_thresh) {
-			feedback_text +=
-				'</p><p class = block-text>Your accuracy too low. Remember:<br>' +
-				prompt_text_list
 		
-			if (average_rt > rt_thresh) {
-				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-			}
-			if (missed_responses > missed_response_thresh){
-				if(aveShapeRespondCorrect < accuracy_thresh){
-					feedback_text +=
-					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
-							
-				
-				} else {
-					feedback_text +=
-					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
-					prompt_text_list
-				}
-			}
-			
-			if (stop_signal_respond > stop_signal_respond_lower_thresh) {
-				feedback_text +=
-				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if (stop_signal_respond < stop_signal_respond_lower_thresh) {
-				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-				
-			}
-			feedback_text += '</p><p class = block-text>Redoing this practice.'
-			return true	
-		} else {
+		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond < maxStopCorrect) && (stop_signal_respond > minStopCorrect)){
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
+		
+		} else {
+			if (aveShapeRespondCorrect < accuracy_thresh) {
+				feedback_text +=
+					'</p><p class = block-text>Your accuracy too low. Remember:<br>' +
+					prompt_text_list
+		
+				if (average_rt > rt_thresh) {
+					feedback_text +=
+					'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+				}
+				if (missed_responses > missed_response_thresh){
+					if(aveShapeRespondCorrect < accuracy_thresh){
+						feedback_text +=
+						'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
+							
+				
+					} else {
+						feedback_text +=
+						'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
+						prompt_text_list
+					}
+				}
+			
+			
+				if (stop_signal_respond > maxStopCorrect){
+					'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			
+				}
+			
+				if (stop_signal_respond < minStopCorrect){
+					'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			
+				}
+			
+				feedback_text += '</p><p class = block-text>Redoing this practice.'
+				return true	
+			}
 		}
 	}
 }
@@ -924,12 +931,14 @@ var testNode = {
 				}
 			}
 			
-			if (stop_signal_respond > stop_signal_respond_lower_thresh) {
-				feedback_text +=
-				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if (stop_signal_respond < stop_signal_respond_lower_thresh) {
-				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+			if (stop_signal_respond > maxStopCorrect){
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			
+			}
+			
+			if (stop_signal_respond < minStopCorrect){
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			
 			}
 			
 			
