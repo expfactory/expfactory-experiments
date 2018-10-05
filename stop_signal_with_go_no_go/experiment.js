@@ -251,7 +251,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
-
+var run_attention_checks = true
 
 var practice_len = 15 // 24 must be divisible by 
 var exp_len = 45 //320 must be divisible by 60
@@ -331,6 +331,7 @@ var exp_phase = "practice2"
 /*        Set up jsPsych blocks         */
 /* ************************************ */
 // Set up attention check node
+var run_attention_checks = true
 var attention_check_block = {
   type: 'attention-check',
   data: {
