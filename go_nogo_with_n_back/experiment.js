@@ -905,9 +905,8 @@ var testNode = {
 /* ************************************ */
 
 var go_nogo_with_n_back_experiment = []
-go_nogo_with_n_back_experiment.push(attention_node);
 
-//go_nogo_with_n_back_experiment.push(instruction_node);
+go_nogo_with_n_back_experiment.push(instruction_node);
 //go_nogo_with_n_back_experiment.push(practice1);
 //go_nogo_with_n_back_experiment.push(practice2);
 
