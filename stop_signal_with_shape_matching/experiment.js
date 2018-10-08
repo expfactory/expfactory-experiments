@@ -811,7 +811,7 @@ var testNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "testtrial") && (data[i].stop_signal_condition == 'go')){
+			if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'go')){
 				total_trials+=1
 				go_trials+=1
 				if (data[i].rt != -1){
