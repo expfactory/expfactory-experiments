@@ -699,7 +699,7 @@ var testNode = {
 	
 
 	for (var i = 0; i < data.length; i++){
-		if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'go')){
+		if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'go')){
 			total_trials+=1
 			go_trials+=1
 			if (data[i].rt != -1){
@@ -712,7 +712,7 @@ var testNode = {
 				}
 			}
 	
-		} else if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'stop')){
+		} else if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'stop')){
 			total_trials+=1
 			stop_trials+=1
 			if (data[i].rt != -1){
@@ -779,7 +779,7 @@ stop_signal_with_flanker_experiment = []
 
 //stop_signal_with_flanker_experiment.push(instruction_node)
 
-stop_signal_with_flanker_experiment.push(practiceNode)
+//stop_signal_with_flanker_experiment.push(practiceNode)
 
 stop_signal_with_flanker_experiment.push(start_test_block)
 
