@@ -267,6 +267,7 @@ var appendData = function(){
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
+var run_attention_checks = true
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0

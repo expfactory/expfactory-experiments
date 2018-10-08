@@ -293,6 +293,7 @@ var appendData = function(){
 /*    Define Experimental Variables     */
 /* ************************************ */
 // generic task variables
+var run_attention_checks = true
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
@@ -332,14 +333,12 @@ var prompt_text_list = '<ul list-text>'+
 						'<li>Match the current letter to the letter that appeared some number of trials ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
-					    '<li>Do not respond if you see a star!</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Match the current letter to the letter that appeared 1 trial ago</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they match, press the '+possible_responses[0][0]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they mismatch, press the '+possible_responses[1][0]+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if you see a star!</p>' +
 				  '</div>'
 
 var current_trial = 0
@@ -356,21 +355,6 @@ var stims = createTrialTypes(practice_len, delay)
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
-var end_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "end"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0,
-	on_finish: function(){
-		assessPerformance()
-		evalAttentionChecks()
-    }
-};
-
 // Set up attention check node
 var attention_check_block = {
 	type: 'attention-check',
@@ -388,6 +372,21 @@ var attention_node = {
 		return run_attention_checks
 	}
 }
+
+var end_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "end"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	cont_key: [13],
+	timing_post_trial: 0,
+	on_finish: function(){
+		assessPerformance()
+		evalAttentionChecks()
+    }
+};
 
 //Set up post task questionnaire
 var post_task_block = {
@@ -426,9 +425,9 @@ var instructions_block = {
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the center letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
-			'<p class = block-text>Ignore the letters not in the center, focus only on the center letter.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 		'</div>',
+		/*
 		'<div class = centerbox>'+
 			'<p class = block-text>For example, if your delay for the block was 2, and the letters you received for the first 4 trials were V, B, v, and V, you would respond, no match, no match, match, and no match.</p> '+
 			'<p class = block-text>The first letter in that sequence, V, DOES NOT have a preceding trial to match with, so press the '+possible_responses[1][0]+' on those trials.</p> '+
@@ -436,6 +435,7 @@ var instructions_block = {
 			'<p class = block-text>The third letter in that sequence, v, DOES match the letter from 2 trials, V, so you would respond match.</p>'+
 			'<p class = block-text>The fourth letter in that sequence, V, DOES NOT match the letter from 2 trials ago, B, so you would respond no match.</p>'+
 		'</div>',
+		*/
 		'<div class = centerbox>' + 
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for this practice round is 1</i>. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -790,4 +790,5 @@ n_back_single_task_network_experiment.push(start_test_block);
 n_back_single_task_network_experiment.push(testNode);
 n_back_single_task_network_experiment.push(feedback_block);
 
+n_back_single_task_network_experiment.push(post_task_block);
 n_back_single_task_network_experiment.push(end_block);

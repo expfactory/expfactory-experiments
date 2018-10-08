@@ -3,7 +3,7 @@
         "name": "N-Back",
         "template":"jspsych",
         "run": [
-
+				"static/js/math.min.js",
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
