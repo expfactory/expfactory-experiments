@@ -101,13 +101,13 @@ var getTestFeedback = function() {
 
 	
 	if (directed_remembering_percent >= 0.75){
-	test_feedback_text = 'According to the pattern of your responses, we believe that you are treating this task as a directed remembering task.  Please remember that <strong>this is a directed forgetting task</strong>.</p>'+
-						 '<p class = block-text>When you are presented with the cue TOP, you should <strong> forget the top letters</strong> and <strong>remember the bottom letters.</strong></p>'+
-						 '<p class = block-text>When you are presented with the cue BOT, you should <strong> forget the bottom letters</strong> and <strong>remember the top letters.</strong></p>'+
-						 '<p class = block-text>Press the <strong>left</strong> arrow key if the probe letter <strong> is in the memory set</strong>, and the <strong>right</strong> if it is <strong>not in the memory set</strong>.</p>'+
+	test_feedback_text = 'According to the pattern of your responses, we believe that you are treating this task as a directed remembering task.  Please remember that <i>this is a directed forgetting task</i>.</p>'+
+						 '<p class = block-text>When you are presented with the cue TOP, you should <i> forget the top letters</i> and <i>remember the bottom letters.</i></p>'+
+						 '<p class = block-text>When you are presented with the cue BOT, you should <i> forget the bottom letters</i> and <i>remember the top letters.</i></p>'+
+						 '<p class = block-text>Press the <i>left</i> arrow key if the probe letter <i> is in the memory set</i>, and the <i>right</i> if it is <i>not in the memory set</i>.</p>'+
 						 '<p class = block-text>Press enter to continue.'		
 	} else {
-	test_feedback_text = 'Press <strong> enter </strong>to continue'
+	test_feedback_text = 'Press <i> enter </i>to continue'
 	}
 		
   	return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
@@ -185,27 +185,21 @@ var getTrainingSet = function() {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
 		}).slice(0,6)
 	}
-	return '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
-		'<div class = topLeft><img class = forgetStim src ="' + pathSource + stims[0] + fileType +
-		'"></img></div>' +
-		'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stims[1] + fileType +
-		'"></img></div>' +
-		'<div class = topRight><img class = forgetStim src ="' + pathSource + stims[2] + fileType +
-		'"></img></div>' +
-		'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stims[3] + fileType +
-		'"></img></div>' +
-		'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stims[4] + fileType +
-		'"></img></div>' +
-		'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stims[5] + fileType +
-		'"></img></div>'
+	return task_boards[0]+stims[0]+
+		   task_boards[1]+stims[1]+
+		   task_boards[2]+stims[2]+
+		   task_boards[3]+stims[3]+
+		   task_boards[4]+stims[4]+
+		   task_boards[5]+stims[5]+
+		   task_boards[6]
 };
 
 //returns a cue pseudorandomly, either TOP or BOT
 var getCue = function() {
 	var temp = Math.floor(Math.random() * 2)
 	cue = cueArray[temp]
-	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + cue + fileType +
-		'"></img></div>'
+
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
@@ -234,8 +228,8 @@ var getProbe = function() {
 		})
 		probe = newArray.pop()
 	}
-	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-		'"></img></div>'
+		
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
 };
 
 var getPracticeProbe = function() {
@@ -263,8 +257,7 @@ var getPracticeProbe = function() {
 		})
 		probe = newArray.pop()
 	}
-	return '<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-		'"></img></div>'
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
 };
 
 var getResponse = function() {
@@ -331,7 +324,7 @@ var probes = ['pos', 'pos', 'neg', 'con']
 var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
 var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length/2)
 var stimFix = ['fixation']
-var pathSource = '/static/experiments/directed_forgetting/images/'
+var pathSource = '/static/experiments/directed_forgetting_single_task_network/images/'
 var fileType = '.png'
 var images = []
 for (var i = 0; i < stimArray.length; i++) {
@@ -342,12 +335,15 @@ images.push(pathSource + 'BOT.png')
 	//preload images
 jsPsych.pluginAPI.preloadImages(images)
 
+var task_boards = [['<div class = bigbox><div class = topLeft><div class = fixation>'],['</div></div><div class = topMiddle><div class = fixation>'],['</div></div><div class = topRight><div class = fixation>'],['</div></div><div class = bottomLeft><div class = fixation>'],['</div></div><div class = bottomMiddle><div class = fixation>'],['</div></div><div class = bottomRight><div class = fixation>'],['</div></div></div>']]
+
+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
 var test_img_block1 = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = instructBox><p class = block-text>This is what a trial will look like.  The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.  After these letters disappear, a cue will be presented.  If the cue presented is <strong>TOP</strong>, then you should <strong> forget the letters A, B, and C</strong> and remember D, E, and F.  If the cue presented is <strong>BOT</strong>, then you should <strong> forget D, E, and F </strong> and remember A, B, and C.    Press <strong> enter</strong> to continue.</div>'+
+	stimulus: '<div class = instructBox><p class = block-text>This is what a trial will look like.  The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.  After these letters disappear, a cue will be presented.  If the cue presented is <i>TOP</i>, then you should <i> forget the letters A, B, and C</i> and remember D, E, and F.  If the cue presented is <i>BOT</i>, then you should <i> forget D, E, and F </i> and remember A, B, and C.    Press <i> enter</i> to continue.</div>'+
 		'<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>' +
 		'<div class = topLeft><img class = forgetStim src ="' + pathSource + stimArray[0] + fileType +
 		'"></img></div>' +
@@ -374,7 +370,7 @@ var test_img_block1 = {
 
 var test_img_block2 = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = center-block-text>We will present you with 1 example.  Press <strong> enter</strong> to begin.</p></div>',
+	stimulus: '<div class = centerbox><p class = center-block-text>We will present you with 1 example.  Press <i> enter</i> to begin.</p></div>',
 	is_html: true,
 	choices: [13],
 	data: {
@@ -423,7 +419,7 @@ var end_block = {
 		exp_id: 'directed_forgetting'
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -435,7 +431,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -458,13 +454,13 @@ var instructions_block = {
 			'6 letters. You must memorize all 6 letters. </p>'+
 		
 			'<p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, '+
-			'either <strong>TOP</strong> or <strong>BOT</strong>. This will instruct you to <strong>forget</strong> the '+
+			'either <i>TOP</i> or <i>BOT</i>. This will instruct you to <i>forget</i> the '+
 			'3 letters located at either the top or bottom (respectively) of the screen.</p>'+
 		
 			'<p class = block-text>'+
-			'The three remaining letters that you must remember are called your <strong>memory set</strong>. You should remember '+
+			'The three remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
 			'these three letters while forgetting the other three.</p><p class = block-text>You will then be presented with a single '+
-			'letter. Respond with the <strong> M</strong> key if it is in the memory set, and the <strong> Z </strong> '+
+			'letter. Respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> '+
 			'key if it was not in the memory set.</p>'+
 		
 			'<p class = block-text>Please make sure you understand these instructions before continuing. You will see an example trial after you end the instructions.</p>'+
@@ -490,10 +486,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -505,7 +501,7 @@ var start_practice_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>As you saw, there are three letters at the top of the screen and three letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <strong>forget</strong> the three letters at the top or bottom of the screen, respectively. The other three letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <strong> M</strong> key if it is in the memory set, and the <strong> Z </strong> key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
+		'<div class = centerbox><p class = block-text>As you saw, there are three letters at the top of the screen and three letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <i>forget</i> the three letters at the top or bottom of the screen, respectively. The other three letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -519,7 +515,7 @@ var start_test_block = {
 		trial_id: "test_intro",
 		exp_stage: "test"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now start a test run. Press <strong>enter</strong> to begin.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now start a test run. Press <i>enter</i> to begin.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: resetTrial,
@@ -641,7 +637,7 @@ var intro_test_block = {
 		trial_id: "intro_test",
 		exp_stage: "test"
 	},
-	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, the cue (TOP or BOT) tells you which letters to <strong>forget</strong>. At the end of the trial respond with the <strong> M</strong> key if the letter presented is in the memory set, and the <strong> Z </strong> key if it is not in the memory set.</p><p class = block-text> Press <strong>Enter</strong> to begin the experiment.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now begin the experiment.  For these trials, you will no longer get feedback.</p><p class = block-text> Remember, the cue (TOP or BOT) tells you which letters to <i>forget</i>. At the end of the trial respond with the <i> M</i> key if the letter presented is in the memory set, and the <i> Z </i> key if it is not in the memory set.</p><p class = block-text> Press <i>Enter</i> to begin the experiment.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: resetTrial,
@@ -676,7 +672,7 @@ var test_feedback_block = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -741,7 +737,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
