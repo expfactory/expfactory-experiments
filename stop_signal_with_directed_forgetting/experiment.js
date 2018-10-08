@@ -362,6 +362,9 @@ var accuracy_thresh = 0.80
 var missed_thresh = 0.30
 var practice_thresh = 3 // 3 blocks of 28 trials
 
+var maxStopCorrect = 0.70
+var minStopCorrect = 0.30
+
 var SSD = 250
 var maxSSD = 850
 var minSSD = 0 
