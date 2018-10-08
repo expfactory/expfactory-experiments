@@ -396,6 +396,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 
 var practice_len = 32 // 32
@@ -966,6 +967,8 @@ var testNode = {
 /* ************************************ */
 
 var predictive_task_switching_with_two_by_two_experiment = []
+predictive_task_switching_with_two_by_two_experiment.push(attention_node);
+
 //predictive_task_switching_with_two_by_two_experiment.push(instruction_node);
 //predictive_task_switching_with_two_by_two_experiment.push(practice1);
 //predictive_task_switching_with_two_by_two_experiment.push(practice2);
