@@ -337,6 +337,17 @@ jsPsych.pluginAPI.preloadImages(images)
 
 var task_boards = [['<div class = bigbox><div class = topLeft><div class = fixation>'],['</div></div><div class = topMiddle><div class = fixation>'],['</div></div><div class = topRight><div class = fixation>'],['</div></div><div class = bottomLeft><div class = fixation>'],['</div></div><div class = bottomMiddle><div class = fixation>'],['</div></div><div class = bottomRight><div class = fixation>'],['</div></div></div>']]
 
+var prompt_text_list = '<ul list-text>'+
+						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+
+						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
+						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
+					   '</ul>'
+
+var prompt_text = '<div class = prompt_box>'+
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (single letter) was in the memory set.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: ' + possible_responses[0][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
+				  '</div>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -650,13 +661,14 @@ var practice_probe_block = {
 	key_answer: getResponse,
 	choices: choices,
 	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '<div class = bottombox><div class = center-text>Correct!</div></div>',
-	incorrect_text: '<div class = bottombox><div class = center-text>Incorrect</div></div>',
-	timeout_message: '<div class = bottombox><div class = center-text>Respond Faster!</div></div>',
+	correct_text: '<div class = bottombox><div class = center-text>Correct!</div></div>' + prompt_text,
+	incorrect_text: '<div class = bottombox><div class = center-text>Incorrect</div></div>' + prompt_text,
+	timeout_message: '<div class = bottombox><div class = center-text>Respond Faster!</div></div>' + prompt_text,
 	timing_stim: [2000],
 	timing_response: [2000],
 	timing_feedback_duration: 750,
 	is_html: true,
+	prompt: prompt_text,
 	on_finish: appendPracticeProbeData,
 };
 
@@ -694,12 +706,105 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < (practice_length-1); i++) {
-	practiceTrials.push(start_fixation_block);
-	practiceTrials.push(training_block);
-	practiceTrials.push(cue_block);
-	practiceTrials.push(fixation_block);
+	var practice_start_fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "practice_fixation"
+		},
+		timing_post_trial: 0,
+		timing_stim: 1000,
+		timing_response: 1000,
+		prompt: prompt_text,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+				exp_stage: exp_stage,
+				trial_num: current_trial
+			})
+		}
+	}
+
+	var practice_fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "practice_fixation"
+		},
+		timing_post_trial: 0,
+		timing_stim: 3000,
+		prompt: prompt_text,
+		timing_response: 3000,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+				exp_stage: exp_stage,
+				trial_num: current_trial
+			})
+		}
+	}
+
+	var practice_ITI_fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		is_html: true,
+		choices: choices,
+		data: {
+			trial_id: "practice_ITI_fixation"
+		},
+		timing_post_trial: 0,
+		timing_stim: 4000,
+		prompt: prompt_text,
+		timing_response: 4000,
+		on_finish: function() {
+			jsPsych.data.addDataToLastTrial({
+				exp_stage: exp_stage,
+				trial_num: current_trial
+			})
+			current_trial = current_trial + 1
+		}
+	}
+
+	var practice_training_block = {
+		type: 'poldrack-single-stim',
+		stimulus: getTrainingSet,
+		is_html: true,
+		data: {
+			trial_id: "practice_stim"
+		},
+		choices: 'none',
+		prompt: prompt_text,
+		timing_post_trial: 0,
+		timing_stim: 2500,
+		timing_response: 2500,
+		on_finish: appendTestData,
+	};
+
+
+
+	var practice_cue_block = {
+		type: 'poldrack-single-stim',
+		stimulus: getCue,
+		is_html: true,
+		data: {
+			trial_id: "practice_cue",
+			exp_stage: "test"
+		},
+		choices: false,
+		prompt: prompt_text,
+		timing_post_trial: 0,
+		timing_stim: 1000,
+		timing_response: 1000,
+		on_finish: appendCueData,
+	};
+	practiceTrials.push(practice_start_fixation_block);
+	practiceTrials.push(practice_training_block);
+	practiceTrials.push(practice_cue_block);
+	practiceTrials.push(practice_fixation_block);
 	practiceTrials.push(practice_probe_block);
-	practiceTrials.push(ITI_fixation_block);
+	practiceTrials.push(practice_ITI_fixation_block);
 }
 
 

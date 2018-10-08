@@ -110,28 +110,28 @@ var correct_responses = jsPsych.randomization.repeat([
 	["right arrow", 39]
 ], 1)
 var test_stimuli = [{
-	image: '<div class = centerbox><div class = flanker-text>ffhff</div></div>',
+	image: '<div class = centerbox><div class = flanker-text>FFHFF</div></div>',
 	data: {
 		correct_response: 72,
 		condition: 'incompatible',
 		trial_id: 'stim'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>hhfhh</div></div>',
+	image: '<div class = centerbox><div class = flanker-text>HHFHH</div></div>',
 	data: {
 		correct_response: 70,
 		condition: 'incompatible',
 		trial_id: 'stim'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>hhhhh</div></div>',
+	image: '<div class = centerbox><div class = flanker-text>HHHHH</div></div>',
 	data: {
 		correct_response: 72,
 		condition: 'compatible',
 		trial_id: 'stim'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>fffff</div></div>',
+	image: '<div class = centerbox><div class = flanker-text>FFFFF</div></div>',
 	data: {
 		correct_response: 70,
 		condition: 'compatible',
@@ -154,7 +154,18 @@ for (i = 0; i < test_trials.data.length; i++) {
 	test_response_array.push(test_trials.data[i].correct_response)
 }
 
+var prompt_text_list = '<ul list-text>'+
+						'<li>Indicate the identity of the <i> center </i> letter.</li>' +
+						'<li>Press the H key, if H.</li>' +
+					    '<li>Press the F key, if F.</li>' +
+					  '</ul>'
 
+var prompt_text = '<div class = prompt_box>'+
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Indicate the identity of the <i> center </i> letter.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the H key, if H.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the F key, if F.</p>' +
+				  '</div>'
+				  
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -204,7 +215,7 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of f's and h's. For instance, you might see 'fffff' or 'hhfhh'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'ffhff' you would press the 'h' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
+		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <strong>middle</strong> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
 	],
 	allow_keys: false,
 	data: {
@@ -266,8 +277,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	choices: 'none',
-	timing_stim: 500,
-	timing_response: 500,
+	timing_stim: 1000, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
+	timing_response: 1000,
 	timing_post_trial: 0,
 	on_finish: changeData,
 };
@@ -294,27 +305,45 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
-	practiceTrials.push(fixation_block)
+	var fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+		is_html: true,
+		data: {
+			trial_id: "fixation"
+		},
+		choices: 'none',
+		timing_stim: 1000, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
+		timing_response: 1000,
+		timing_post_trial: 0,
+		on_finish: changeData,
+		prompt: prompt_text
+	};
 	var practice_block = {
 		type: 'poldrack-categorize',
 		stimulus: practice_trials.image[i],
 		is_html: true,
 		key_answer: practice_response_array[i],
-		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-		timeout_message: '<div class = centerbox><div class = flanker-text>Respond faster</div></div>',
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
+		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		choices: [70, 72],
 		data: practice_trials.data[i],
-		timing_feedback_duration: 1000,
+		feedback_duration: 1000,
+		timing_stim: 1000,
 		show_stim_with_feedback: false,
+		response_ends_trial: false,
 		timing_response: 1500,
-		timing_post_trial: 500,
+		timing_post_trial: 0,
+		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: "practice"
 			})
 		}
 	}
+	
+	practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_block)
 }
 
@@ -401,15 +430,17 @@ for (i = 0; i < exp_len; i++) {
 		stimulus: test_trials.image[i],
 		is_html: true,
 		key_answer: test_response_array[i],
-		correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</div></div>',
-		incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</div></div>',
-		timeout_message: '<div class = centerbox><div class = flanker-text>Respond faster!</div></div>',
+		correct_text: '<div class = centerbox></div>',
+		incorrect_text: '<div class = centerbox></div>',
+		timeout_message: '<div class = centerbox></div>',
 		choices: [70, 72],
 		data: test_trials.data[i],
-		timing_feedback_duration: 1000,
+		feedback_duration: 0,
 		timing_response: 1500,
+		timing_stim: 1000,
+		response_ends_trial: false,
 		show_stim_with_feedback: false,
-		timing_post_trial: 500,
+		timing_post_trial: 0,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: "test"
