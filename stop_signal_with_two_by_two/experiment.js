@@ -200,15 +200,14 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
+  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				 '<div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
 var getStim = function() {
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = "center-text" style=color:' + curr_stim.color +
-    ';>' + curr_stim.number + '</div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				  '<div class = lowerbox><div class = "center-text" style=color:' + curr_stim.color + ';>' + curr_stim.number + '</div></div>'
   return stim_html
 }
 
@@ -933,6 +932,7 @@ var testNode = {
 
 /* create experiment definition array */
 var stop_signal_with_two_by_two_experiment = [];
+
 stop_signal_with_two_by_two_experiment.push(practiceNode);
 stop_signal_with_two_by_two_experiment.push(feedback_block);
 
