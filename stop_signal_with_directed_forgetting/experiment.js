@@ -708,7 +708,7 @@ var rest_block = {
 
 var start_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+	stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 	is_html: true,
 	choices: 'none',
 	data: {
@@ -724,7 +724,7 @@ var start_fixation_block = {
 
 var fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+	stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 	is_html: true,
 	choices: 'none',
 	data: {
@@ -737,7 +737,7 @@ var fixation_block = {
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+	stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	data: {
@@ -830,7 +830,7 @@ practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
 	var practice_start_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
 		choices: 'none',
 		data: {
@@ -847,7 +847,7 @@ for (i = 0; i < practice_len; i++) {
 
 	var practice_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
 		choices: 'none',
 		data: {
@@ -861,7 +861,7 @@ for (i = 0; i < practice_len; i++) {
 
 	var practice_ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:red">+</span></div></div>',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {

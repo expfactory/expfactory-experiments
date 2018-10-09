@@ -1,7 +1,6 @@
 /*******************************************************/
 /***********    Network Default CSS Styles    **********/
 /*******************************************************/
-
 .display_stage {
     position: fixed;
     background: gray;
@@ -117,97 +116,84 @@ img.center {
 }
 
 /*******************************************************/
-/************  THIS IS FOR TRAINING SETS   *************/
+/***********  Directed Forgetting CSS Styles  **********/
 /*******************************************************/
 
-.forgetStim {
-  height: auto;
-  width: auto\9; /* ie8 */
-  position: absolute;  
-  top: 0;  
-  bottom: 0;  
-  left: 0;  
-  right: 0;  
-  margin: auto;  
-}
-
-.instructBox {
-	width: 80vw;
-	height: 10vw;
-	position:absolute;
-	top:10%;
-	left:50%; 
-	margin-right: 50%;
-	transform: translate(-50%,-50%);
+.lettersBox {
+ width: 70vw;
+ height: 50%;
+ position:absolute;
+ top:50%;
+ left:50%; 
+ margin-right: 0%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ font-size: 24px;
 }
 
 .topLeft {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%; 
 margin-right:0%;
-transform: translate(-125%,-115%);
+transform: translate(-200%,-150%);
+background-color: none;
 }
 
 .topRight {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(25%,-115%);
+transform: translate(100%,-150%);
+background-color: none;
 }
 
 .topMiddle {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(-50%,-115%);
+transform: translate(-50%,-150%);
+background-color: none;
 }
 
 .bottomLeft {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(-125%,15%);
+transform: translate(-200%,50%);
+background-color: none;
 }
 
 .bottomRight {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(25%,15%);
+transform: translate(100%,50%);
+background-color: none;
 }
 
 
 .bottomMiddle {
-width: 20vw;
-height: 20vw;
+width: 5vw;
+height: 5vw;
 position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(-50%,15%);
-}
-
-.bottombox {
-width: 40vw;
-height: 20vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(-50%,15%);
+transform: translate(-50%,50%);
+background-color: none;
 }
