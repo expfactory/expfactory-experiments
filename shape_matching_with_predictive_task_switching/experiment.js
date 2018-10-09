@@ -103,14 +103,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var distractor_i = 0
 	if (shape_matching_condition[0] == 'S') {
 		target_i = probe_i
-		if (predictive_dimension == 'match'){
+		if (predictive_dimension == 'the same'){
 			correct_response = possible_responses[0][1]
 		} else  {
 			correct_response = possible_responses[1][1]		
 		}
 	} else {
 		target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))				
-		if (predictive_dimension == 'match'){
+		if (predictive_dimension == 'the same'){
 			correct_response = possible_responses[1][1]
 		} else  {
 			correct_response = possible_responses[0][1]		
@@ -156,14 +156,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 		var distractor_i = 0
 		if (shape_matching_condition[0] == 'S') {
 			target_i = probe_i
-			if (predictive_dimension == 'match'){
+			if (predictive_dimension == 'the same'){
 				correct_response = possible_responses[0][1]
 			} else  {
 				correct_response = possible_responses[1][1]		
 			}
 		} else {
 			target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))				
-			if (predictive_dimension == 'match'){
+			if (predictive_dimension == 'the same'){
 				correct_response = possible_responses[1][1]
 			} else  {
 				correct_response = possible_responses[0][1]		
@@ -286,8 +286,8 @@ var practice_thresh = 3 // 3 blocks of 28 trials
 
 var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
-var predictive_dimensions_list = jsPsych.randomization.repeat([['match', 'match', 'mismatch','mismatch'],
-							 ['mismatch','mismatch', 'match', 'match' ]],1)
+var predictive_dimensions_list = jsPsych.randomization.repeat([['the same', 'the same', 'different','different'],
+							 ['different','different', 'the same', 'the same' ]],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
@@ -464,17 +464,17 @@ var instructions_block = {
 			'<p class = block-text>In this experiment, across trials you will see shapes moving clockwise on the screen in 4 quadrants. '+
 			'On every trial, one quadrant will have a  white shape on the right and a green shape on the left.</p> '+
 		
-			'<p class = block-text>You will be asked if the green shape matches or mismatches the white shape, depending on which quadrant '+
+			'<p class = block-text>You will be asked if the green shape is the same or different than the white shape, depending on which quadrant '+
 			'the shapes are in.</p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[0]+'es</i>. Press the <i>'+possible_responses[0][0]+
-			'  </i>if they <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they <i>'+predictive_dimensions[2]+'</i>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes are <i>'+predictive_dimensions[0]+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they are <i>'+predictive_dimensions[2]+'</i>.</p>'+
 	
-			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[2]+'es.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' </i> if they <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
-			' </i> if they <i>'+predictive_dimensions[0]+'</i>.</p>'+
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes are <i>'+predictive_dimensions[2]+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they are <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they are <i>'+predictive_dimensions[0]+'</i>.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
@@ -536,12 +536,12 @@ var start_test_block = {
 			'<p class = block-text>Please judge if the green shape matches or mismatches the white shape, depending on which quadrant '+
 			'the shapes are in.</p>'+
 	
-			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[0]+'es</i>. Press the <i>'+possible_responses[0][0]+
-			'  </i>if they <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they <i>'+predictive_dimensions[2]+'</i>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes are <i>'+predictive_dimensions[0]+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they are <i>'+predictive_dimensions[2]+'</i>.</p>'+
 	
-			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[2]+'es.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' </i> if they <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
-			' </i> if they <i>'+predictive_dimensions[0]+'</i>.</p>'+
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes are <i>'+predictive_dimensions[2]+'es.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they are <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they are <i>'+predictive_dimensions[0]+'</i>.</p>'+
 	
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
