@@ -389,7 +389,7 @@ var practice1 = {
 				'<div class = instructBox>'+
 					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The shapes are in the bottom of the screen, so you must respond whether the green and white shapes '+predictive_dimensions[2]+'es. If they '+predictive_dimensions[2]+', press '+possible_responses[0][0]+'.  If they '+predictive_dimensions[0]+', press '+possible_responses[1][0]+'.</p>'+
 					'<p class = block-text style="font-size:24px;">If the shapes were on the top of the screen, respond whether the green and white shapes '+predictive_dimensions[0]+'. If they '+predictive_dimensions[0]+'es, press '+possible_responses[0][0]+'.  If they '+predictive_dimensions[2]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">During practice and test trials, the shapes will move clockwise from trial to trial.  <strong>Ignore the red shape!</strong></p>'+
+					'<p class = block-text style="font-size:24px;">During practice and test trials, the shapes will move clockwise from trial to trial.  <i>Ignore the red shape!</i></p>'+
 					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
 				'</div>'+
 				
@@ -424,7 +424,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -441,7 +441,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -469,12 +469,12 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <strong>'+predictive_dimensions[0]+'es</strong>. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they <strong>'+predictive_dimensions[0]+'</strong>, and the <strong>'+possible_responses[1][0]+'  </strong>if they <strong>'+predictive_dimensions[2]+'</strong>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[0]+'es</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they <i>'+predictive_dimensions[2]+'</i>.</p>'+
 	
-			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <strong>'+predictive_dimensions[2]+'es.</strong>'+
-			' Press the <strong>'+possible_responses[0][0]+' </strong> if they <strong>'+predictive_dimensions[2]+'</strong>, and the <strong>'+possible_responses[1][0]+
-			' </strong> if they <strong>'+predictive_dimensions[0]+'</strong>.</p>'+
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[2]+'es.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they <i>'+predictive_dimensions[0]+'</i>.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
@@ -499,10 +499,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -515,7 +515,7 @@ var end_block = {
     	exp_id: 'shape_matching_with_predictive_task_switching'
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -536,12 +536,12 @@ var start_test_block = {
 			'<p class = block-text>Please judge if the green shape matches or mismatches the white shape, depending on which quadrant '+
 			'the shapes are in.</p>'+
 	
-			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <strong>'+predictive_dimensions[0]+'es</strong>. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they <strong>'+predictive_dimensions[0]+'</strong>, and the <strong>'+possible_responses[1][0]+'  </strong>if they <strong>'+predictive_dimensions[2]+'</strong>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[0]+'es</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they <i>'+predictive_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they <i>'+predictive_dimensions[2]+'</i>.</p>'+
 	
-			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <strong>'+predictive_dimensions[2]+'es.</strong>'+
-			' Press the <strong>'+possible_responses[0][0]+' </strong> if they <strong>'+predictive_dimensions[2]+'</strong>, and the <strong>'+possible_responses[1][0]+
-			' </strong> if they <strong>'+predictive_dimensions[0]+'</strong>.</p>'+
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes <i>'+predictive_dimensions[2]+'es.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they <i>'+predictive_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they <i>'+predictive_dimensions[0]+'</i>.</p>'+
 	
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
@@ -561,7 +561,7 @@ var rest_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -659,7 +659,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -779,7 +779,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -808,6 +808,7 @@ var testNode = {
 
 /* create experiment definition array */
 shape_matching_with_predictive_task_switching_experiment = []
+
 //shape_matching_with_predictive_task_switching_experiment.push(instruction_node)
 //shape_matching_with_predictive_task_switching_experiment.push(practice1)
 

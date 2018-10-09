@@ -1,6 +1,6 @@
 .display_stage {
  position: fixed;
- background: black;
+ background: gray;
  left: 5vw;
  top: 2vh;
  height: 94vh;
@@ -56,7 +56,7 @@
  left:50%;
  transform: translate(-50%,-50%);
  margin-right:0%;
- background-color: black;
+ background-color: none;
  text-align: center;
 }
 
@@ -69,7 +69,7 @@
  top:0%;
  left:0%;
  margin-right:0%;
- background-color: black;
+ background-color: none;
  text-align: center;
 }
 

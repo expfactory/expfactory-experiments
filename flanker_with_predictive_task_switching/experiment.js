@@ -280,6 +280,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
@@ -323,18 +324,18 @@ var fixation_boards = [['<div class = bigbox><div class = decision-top-left><div
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-				  	'<li>Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</li>' +
+				  	'<li>Top 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[0].dim+'</li>' +
 				  	'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
 					'<li>'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-					'<li>Bottom 2 quadrants: Judge number on '+predictive_dimensions_list[1].dim+'</li>' +
+					'<li>Bottom 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[1].dim+'</li>' +
 					'<li>'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
 					'<li>'+predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
 				  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[0].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge number on '+predictive_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
 /* ************************************ */
@@ -374,9 +375,9 @@ var practice1 = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox>'+
 				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The row of numbers are in the bottom of the screen, so you must judge the <strong>CENTER</strong> number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge the <strong>CENTER</strong> number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">During practice and test trials, the numbers will move clockwise from trial to trial.  <strong>Ignore the numbers not in the center!</strong></p>'+
+					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The row of numbers are in the bottom of the screen, so you must judge the <i>CENTER</i> number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
+					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge the <i>CENTER</i> number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
+					'<p class = block-text style="font-size:24px;">During practice and test trials, the numbers will move clockwise from trial to trial.  <i>Ignore the numbers not in the center!</i></p>'+
 					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
 				'</div>'+
 				
@@ -409,7 +410,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -426,7 +427,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -449,18 +450,18 @@ var instructions_block = {
 			'<p class = block-text>In this experiment, across trials you will see a row of numbers moving clockwise on the screen in 4 quadrants.  '+
 			'On any trial, one quadrant will have a  row of numbers.</p> '+
 		
-			'<p class = block-text>You will be asked to judge the <strong>center number </strong>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
+			'<p class = block-text>You will be asked to judge the <i>center number </i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 		
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>In the top two quadrants, please judge the number based on <strong>'+predictive_dimensions_list[0].dim+'</strong>. Press the <strong>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</strong>, and the <strong>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</strong>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the number based on <strong>'+predictive_dimensions_list[1].dim+'.</strong>'+
-			' Press the <strong>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</strong>, and the <strong>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</strong>.</p>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 		
 			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
 			
@@ -488,10 +489,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -503,7 +504,7 @@ var end_block = {
 		trial_id: "end",
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -521,15 +522,15 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>Please judge the <strong>center number</strong> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
+			'<p class = block-text>Please judge the <i>center number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 	
-			'<p class = block-text>In the top two quadrants, please judge the center number based on <strong>'+predictive_dimensions_list[0].dim+'</strong>. Press the <strong>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</strong>, and the <strong>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</strong>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the center number based on <strong>'+predictive_dimensions_list[1].dim+'.</strong>'+
-			' Press the <strong>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</strong>, and the <strong>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</strong>.</p>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 	
 			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
 	
@@ -548,7 +549,7 @@ var rest_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -632,7 +633,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -736,7 +737,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -765,6 +766,10 @@ var testNode = {
 
 /* create experiment definition array */
 flanker_with_predictive_task_switching_experiment = []
+flanker_with_predictive_task_switching_experiment.push(attention_node)
+flanker_with_predictive_task_switching_experiment.push(post_task_block)
+flanker_with_predictive_task_switching_experiment.push(end_block)
+
 
 //flanker_with_predictive_task_switching_experiment.push(test_img_block)
 //flanker_with_predictive_task_switching_experiment.push(instruction_node)

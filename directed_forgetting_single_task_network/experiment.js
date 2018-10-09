@@ -581,12 +581,13 @@ var practice_probe_block = {
 	key_answer: getResponse,
 	choices: choices,
 	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Ccorrect!</font></div></div>' + prompt_text,
+	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 	timing_stim: [2000],
 	timing_response: [2000],
 	timing_feedback_duration: 750,
+	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
 	on_finish: appendPracticeProbeData,
@@ -917,8 +918,8 @@ directed_forgetting_single_task_network_experiment.push(practice_probe_block);
 directed_forgetting_single_task_network_experiment.push(ITI_fixation_block);
 */
 
-//directed_forgetting_single_task_network_experiment.push(practiceNode)
-//directed_forgetting_single_task_network_experiment.push(feedback_block)
+directed_forgetting_single_task_network_experiment.push(practiceNode)
+directed_forgetting_single_task_network_experiment.push(feedback_block)
 
 directed_forgetting_single_task_network_experiment.push(intro_test_block)
 directed_forgetting_single_task_network_experiment.push(testNode)

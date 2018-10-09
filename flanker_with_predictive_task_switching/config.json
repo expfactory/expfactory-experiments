@@ -10,6 +10,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/utils/poldrack_utils.js",
                 "experiment.js",
@@ -20,9 +21,9 @@
         "exp_id": "flanker_with_predictive_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
-                         "Jamie Li",
-                         "Ian Eisenberg",
                          "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":20,
@@ -37,7 +38,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('flanker_with_predictive_task_switching')"}
                        }
     
    }
