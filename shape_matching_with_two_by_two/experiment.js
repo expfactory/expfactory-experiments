@@ -376,13 +376,13 @@ var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
 var task_list = '<ul>'+
-					'<li><strong>Same</strong> or <strong>Equal</strong>: ' + possible_responses[0][0] + ' if shapes are the same and ' + possible_responses[1][0] + ' if not.</li>'+
-					'<li><strong>Different</strong> or <strong>Distinct</strong>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
+					'<li><i>Same</i> or <i>Equal</i>: ' + possible_responses[0][0] + ' if shapes are the same and ' + possible_responses[1][0] + ' if not.</li>'+
+					'<li><i>Different</i> or <i>Distinct</i>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
 				'</ul>'
 
 var prompt_task_list = '<ul>'+
-					   	'<li><strong>Same</strong> or <strong>Equal</strong>: ' + possible_responses[0][0] + ' if shapes are the same and ' + possible_responses[1][0] + ' if not.</li>'+
-					   	'<li><strong>Different</strong> or <strong>Distinct</strong>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
+					   	'<li><i>Same</i> or <i>Equal</i>: ' + possible_responses[0][0] + ' if shapes are the same and ' + possible_responses[1][0] + ' if not.</li>'+
+					   	'<li><i>Different</i> or <i>Distinct</i>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
 					   '</ul>'
 
 
@@ -425,7 +425,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take about 24 minutes. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 24 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -451,11 +451,11 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>If you see the cue, <i>same</i> or <i>equal</i>, please judge whether the two shapes are the same. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they are the same, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>If you see the cue, <i>same</i> or <i>equal</i>, please judge whether the two shapes are the same. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are the same, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 	
-			'<p class = block-text>If you see the cue, <i>different</i> or <i>distinct</i>, please judge whether the two shapes are different. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they are different, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>If you see the cue, <i>different</i> or <i>distinct</i>, please judge whether the two shapes are different. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are different, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
@@ -480,11 +480,11 @@ var instruction_node = {
     }
     if (sumInstructTime <= instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
       return true
     } else if (sumInstructTime > instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Done with instructions. Press <strong>enter</strong> to continue.'
+        'Done with instructions. Press <i>enter</i> to continue.'
       return false
     }
   }
@@ -495,7 +495,7 @@ var end_block = {
     trial_id: "end",
     exp_id: 'shape_matching_with_two_by_two'
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
   on_finish: function(){
@@ -509,7 +509,7 @@ var start_practice_block = {
   data: {
     trial_id: "practice_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Starting with some practice. </p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting with some practice. </p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13]
 };
 
@@ -518,7 +518,7 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
   on_finish: function() {
     current_trial = 0
     stims = testStims
@@ -538,11 +538,11 @@ var start_test_block = {
 			
 			'<p class = block-text>Please judge if the green shape is the same or different than the white shape, depending on the cue.</p>'+
 	
-			'<p class = block-text>If you see the cue, <i>same</i> or <i>equal</i>, please judge whether the two shapes are the same. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they are the same, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>If you see the cue, <i>same</i> or <i>equal</i>, please judge whether the two shapes are the same. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are the same, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 	
-			'<p class = block-text>If you see the cue, <i>different</i> or <i>distinct</i>, please judge whether the two shapes are different. Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if they are different, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>If you see the cue, <i>different</i> or <i>distinct</i>, please judge whether the two shapes are different. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are different, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
@@ -608,7 +608,7 @@ var cue_block = {
   }
 };
 
-var feedback_text = 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+var feedback_text = 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -737,7 +737,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -818,7 +818,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){

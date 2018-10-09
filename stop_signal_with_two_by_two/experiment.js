@@ -385,15 +385,15 @@ var current_trial = 0
 var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = '<ul><li><strong>Parity</strong> or <strong>Odd-Even</strong>: Press the ' + response_keys.key_name[
+var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press the ' + response_keys.key_name[
     0] + ' key if even and the ' + response_keys.key_name[1] + ' key if odd.' +
-  '</li><li><strong>Magnitude</strong> or <strong>High-Low</strong>: Press the ' + response_keys.key_name[
+  '</li><li><i>Magnitude</i> or <i>High-Low</i>: Press the ' + response_keys.key_name[
     0] + ' key if the number is greater than 5 and the ' + response_keys.key_name[1] +
   ' key if less than 5.</li></ul>'
 
-var prompt_task_list = '<ul><li><strong>Parity</strong> or <strong>Odd-Even</strong>: ' + response_keys.key_name[0] +
+var prompt_task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
   ' if even and ' + response_keys.key_name[1] + ' if odd.' +
-  '</li><li><strong>Magnitude</strong> or <strong>High-Low</strong>: ' + response_keys.key_name[0] +
+  '</li><li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] +
   ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li></ul>'
 
 
@@ -433,7 +433,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take about 24 minutes. Press <strong>enter</strong> to begin.'
+  'Welcome to the experiment. This experiment will take about 24 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -487,11 +487,11 @@ var instruction_node = {
     }
     if (sumInstructTime <= instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
       return true
     } else if (sumInstructTime > instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Done with instructions. Press <strong>enter</strong> to continue.'
+        'Done with instructions. Press <i>enter</i> to continue.'
       return false
     }
   }
@@ -502,7 +502,7 @@ var end_block = {
     trial_id: "end",
     exp_id: 'stop_signal_with_two_by_two'
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
   on_finish: function(){
@@ -516,7 +516,7 @@ var start_practice_block = {
   data: {
     trial_id: "practice_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Starting with some practice. </p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Starting with some practice. </p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13]
 };
 
@@ -525,7 +525,7 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
   on_finish: function() {
     current_trial = 0
     stims = testStims
@@ -583,7 +583,7 @@ var cue_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -779,7 +779,7 @@ var practiceNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrect) && (stop_correct > minStopCorrect)){
 			feedback_text +=
@@ -896,7 +896,7 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
