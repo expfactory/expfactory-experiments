@@ -23,10 +23,9 @@
         "exp_id": "stop_signal_with_two_by_two",
         "cognitive_atlas_task_id": "trm_566745bbf272a",
         "contributors": [
-                         "Ian Eisenberg",
-                         "Zeynep Enkavi",
-                         "Patrick Bissett",
-                         "Vanessa Sochat",
+                        "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":24,

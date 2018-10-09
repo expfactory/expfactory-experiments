@@ -371,6 +371,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 
 var practice_len = 16 // 24 must be divisible by 16
@@ -517,8 +518,8 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this task, you will see a row of letters on every trial.</p>'+
-			'<p class = block-text>You will be asked to match the current CENTER letter, to the CENTER letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
+			'<p class = block-text>In this task, you will see a row of 5 letters on every trial.</p>'+
+			'<p class = block-text>You will be asked to match the current <i>center</i> letter, to the <i>center</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the center letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
@@ -572,7 +573,7 @@ var start_test_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now begin the test portion.</p>'+
-			'<p class = block-text>You will be asked to match the current CENTER letter, to the CENTER letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
+			'<p class = block-text>You will be asked to match the current <i>center</i> letter, to the <i>center</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block.</p>'+
 			'<p class = block-text>Ignore the letters not in the center, focus only on the CENTER letter.</p>'+

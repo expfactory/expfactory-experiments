@@ -21,11 +21,9 @@
         "exp_id": "directed_forgetting_with_flanker",
         "cognitive_atlas_task_id": "trm_56674c7c2fa4f",
         "contributors": [
-                         "Jamie Li",
-                         "Ian Eisenberg",
-                         "Zeynep Enkavi",
                          "Patrick Bissett",
-                         "Vanessa Sochat",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":22,
@@ -40,7 +38,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('directed_forgetting_with_flanker')"}
                        }
     
    }

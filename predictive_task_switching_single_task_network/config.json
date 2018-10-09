@@ -21,9 +21,9 @@
         "exp_id": "stop_signal_with_predictive_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
-                         "Jamie Li",
-                         "Ian Eisenberg",
                          "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":20,

@@ -3,7 +3,7 @@
         "name": "N Back with Shape Matching",
         "template":"jspsych",
         "run": [
-
+				"static/js/math.min.js",
                 "static/js/jspsych/jspsych.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
@@ -23,8 +23,9 @@
         "exp_id": "n_back_with_shape_matching",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
-                         "Jamie Li",
                          "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":30,
@@ -40,7 +41,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('n_back_with_shape_matching')"}
                        			} 
     
    }

@@ -266,6 +266,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 
 var practice_len = 20 // 24 must be divisible by 4
@@ -358,7 +359,7 @@ var practice1 = {
 				'<div class = instructBox>'+
 					'<p class = block-text style="font-size:24px;">This is what the first part of the trial will look like.  You will see a cue, either remember or forget.</p>'+
 					'<p class = block-text style="font-size:24px;">If you saw the cue remember, please add the subsequent letter to your memory set.</p>'+
-					'<p class = block-text style="font-size:24px;">If you saw the cue forget, <strong>do not add</strong> the subsequent letter to your memory set.</p>'+
+					'<p class = block-text style="font-size:24px;">If you saw the cue forget, <i>do not add</i> the subsequent letter to your memory set.</p>'+
 					'<p class = block-text style="font-size:24px;">You will be given a delay before you start every block, either 1, 2, or 3. This delay is the number of letters you should keep in your memory set.  So if you have a delay of 2, you should remember the last 2 letters that came after a "remember" cue and continuously update as you see more remember cues.</p>'+
 					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
 				'</div>'+
@@ -407,7 +408,7 @@ var end_block = {
   data: {
     trial_id: "end",
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
   on_finish: function(){
@@ -417,7 +418,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -441,11 +442,11 @@ var instructions_block = {
 			'<p class = block-text style="font-size:20px">If you saw a remember cue, please add the subsequent letter to your memory set (set of letters to remember).</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a forget cue, you should not add the subsequent letter to your memory set.</p>'+
 			'<p class = block-text style="font-size:20px">You will be given a delay for every block of trials, either 1, 2, or 3. This delay tells you how many letters to remember in your memory set. So for example, if your delay was 2, you should remember the last 2 letters that appeared after a remember cue.</p>'+
-			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <strong>Do this only for the letters that come after a "remember" cue!</strong></p>'+
-			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <strong>in your memory set.</strong></p>'+
+			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
+			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <i>in your memory set.</i></p>'+
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t".</p> '+
-			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text style="font-size:20px">We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>',
 		/*
 		'<div class = centerbox>'+
@@ -479,10 +480,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -501,17 +502,17 @@ var start_test_block = {
 			'<p class = block-text style="font-size:20px">If you saw a remember cue, please add the subsequent letter to your memory set (set of letters to remember).</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a forget cue, you should not add the subsequent letter to your memory set.</p>'+
 			'<p class = block-text style="font-size:20px">You will be given a delay for every block of trials, either 1, 2, or 3. This delay tells you how many letters to remember in your memory set. So for example, if your delay was 2, you should remember the last 2 letters that appeared after a remember cue.</p>'+
-			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <strong>Do this only for the letters that come after a "remember" cue!</strong></p>'+
-			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <strong>in your memory set.</strong></p>'+
+			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
+			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <i>in your memory set.</i></p>'+
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t". <strong>You will be given your delay for the block on the following page.</strong></p> '+
+			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t". <i>You will be given your delay for the block on the following page.</i></p> '+
 				
 			'<p class = block-text>Press Enter to continue.</p>'+
 		 '</div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-		feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago <strong>in your memory set</strong>. Press enter to begin."
+		feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago <i>in your memory set</i>. Press enter to begin."
 	}
 };
 
@@ -530,7 +531,7 @@ var fixation_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -629,7 +630,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -729,7 +730,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -748,7 +749,7 @@ var testNode = {
 		} else {
 			delay = delays.pop()
 			stims = createTrialTypes(numTrialsPerBlock, delay)
-			feedback_text += "</p><p class = block-text><strong>For the next round of trials, your delay is "+delay+"</strong>.  Press Enter to continue."
+			feedback_text += "</p><p class = block-text><i>For the next round of trials, your delay is "+delay+"</i>.  Press Enter to continue."
 			return true
 		}
 	

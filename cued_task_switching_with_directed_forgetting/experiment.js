@@ -319,7 +319,7 @@ var appendData = function(){
 
 
 var getFixation = function(){
-	return '<div class = bigbox><div class = centerbox><div class = fixation><span style="color:red">+</span></font></div></div></div>'
+	return '<div class = bigbox><div class = centerbox><div class = fixation><span style="color:white">+</span></font></div></div></div>'
 }
 
 var getTrainingStim = function(){
@@ -361,11 +361,11 @@ var getProbeStim = function(){
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = false
+var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = true
+var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 8
@@ -465,8 +465,8 @@ var practice2 = {
 				'<div class = instructBox>'+
 					'<p class = block-text style="font-size:24px;">After, 6 letters will appear.  Memorize all 6 letters. The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.</p>'+
 					'<p class = block-text style="font-size:24px;">After these letters disappear, another cue will be presented, either TOP or BOT. This cue will instruct you which of the 6 letters to remember or forget, either top or bottom.</p>'+
-					'<p class = block-text style="font-size:24px;">The letters you must remember are called your memory set. </strong></p>'+
-					'<p class = block-text style="font-size:24px;">So if the first cue was forget, and then you get the TOP cue, please forget the top letters A, B, and C.  <strong>Your memory set is D, E, and F!</strong></p>'+
+					'<p class = block-text style="font-size:24px;">The letters you must remember are called your memory set. </i></p>'+
+					'<p class = block-text style="font-size:24px;">So if the first cue was forget, and then you get the TOP cue, please forget the top letters A, B, and C.  <i>Your memory set is D, E, and F!</i></p>'+
 					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
 				'</div>'+
 				'<div class = lettersBox>'+
@@ -512,7 +512,7 @@ var practice3 = {
 }
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -565,7 +565,7 @@ var end_block = {
 		exp_id: 'cued_task_switching_with_directed_forgetting'
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -575,7 +575,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -600,18 +600,18 @@ var instructions_block = {
 						
 			'<p class = block-text>After the 6 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <strong>The other 3 letters, are called your memory set!</strong></p>'+
+			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters, are called your memory set!</i></p>'+
 		
-			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <strong>'+cued_dimensions[0]+'</strong> the cued set.</p>'+
+			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the cued set.</p>'+
 		
-			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <strong>'+cued_dimensions[1]+'</strong> the cued set.</p>'+
+			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <i>'+cued_dimensions[1]+'</i> the cued set.</p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
 			'<p class = block-text>After, you will be presented with a probe (single letter).  Please indicate whether this probe was in your memory set.</p>'+
 		
-			'<p class = block-text>Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if the probe was in the memory set, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
+			'  </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -633,10 +633,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -655,16 +655,16 @@ var start_test_block = {
 						
 			'<p class = block-text>After the 6 letters disappear, you will also see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <strong>The other 3 letters, are called your memory set!</strong></p>'+
+			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters, are called your memory set!</i></p>'+
 		
-			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <strong>'+cued_dimensions[0]+'</strong> the top or bottom letters.</p>'+
+			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the top or bottom letters.</p>'+
 		
-			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <strong>'+cued_dimensions[2]+'</strong> the top or bottom.</p>'+
+			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <i>'+cued_dimensions[2]+'</i> the top or bottom.</p>'+
 		
 			'<p class = block-text>After, you will be presented with a probe (single letter).  Please indicate whether this probe was in your memory set.</p>'+
 		
-			'<p class = block-text>Press the <strong>'+possible_responses[0][0]+
-			'  </strong>if the probe was in the memory set, and the <strong>'+possible_responses[1][0]+'  </strong>if not.</p>'+
+			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
+			'  </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 			
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
@@ -825,7 +825,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -1000,7 +1000,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -1028,6 +1028,7 @@ var testNode = {
 
 /* create experiment definition array */
 var cued_task_switching_with_directed_forgetting_experiment = [];
+
 //cued_task_switching_with_directed_forgetting_experiment.push(instruction_node);
 //cued_task_switching_with_directed_forgetting_experiment.push(practice1);
 //cued_task_switching_with_directed_forgetting_experiment.push(practice2);

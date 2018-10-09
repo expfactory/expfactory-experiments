@@ -24,8 +24,9 @@
         "exp_id": "n_back_single_task_network",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
-                         "Jamie Li",
                          "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":30,

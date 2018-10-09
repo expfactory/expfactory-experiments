@@ -79,7 +79,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Number is red.</font></div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	}
 
 }
@@ -308,6 +308,7 @@ var appendData = function(){
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
@@ -809,6 +810,7 @@ var testNode = {
 
 /* create experiment definition array */
 go_nogo_with_predictive_task_switching_experiment = []
+
 //go_nogo_with_predictive_task_switching_experiment.push(test_img_block)
 //go_nogo_with_predictive_task_switching_experiment.push(instruction_node)
 //go_nogo_with_predictive_task_switching_experiment.push(practice1)

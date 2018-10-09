@@ -21,11 +21,9 @@
         "exp_id": "directed_forgetting_single_task_network",
         "cognitive_atlas_task_id": "trm_56674c7c2fa4f",
         "contributors": [
-                         "Jamie Li",
-                         "Ian Eisenberg",
-                         "Zeynep Enkavi",
                          "Patrick Bissett",
-                         "Vanessa Sochat",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":22,

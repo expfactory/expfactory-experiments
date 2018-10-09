@@ -260,7 +260,7 @@ var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = false
+var credit_var = 0
 
 // task specific variables
 var choices = [77, 90]

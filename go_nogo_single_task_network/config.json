@@ -22,7 +22,9 @@
         "exp_id": "go_nogo_single_task_network",
         "cognitive_atlas_task_id": "tsk_4a57abb949a93",
         "contributors": [
-                         "Patrick Bissett",
+        				 "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
         "time":10,

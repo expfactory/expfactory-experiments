@@ -224,7 +224,7 @@ var run_attention_checks = true
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = true
+var credit_var = 0
 
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
