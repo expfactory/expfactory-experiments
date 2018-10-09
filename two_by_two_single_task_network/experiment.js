@@ -86,7 +86,7 @@ var genStims = function(n) {
   stims = []
   for (var i = 0; i < n; i++) {
     var number = randomDraw('12346789')
-    var color = randomDraw(['orange', 'blue'])
+    var color = randomDraw(['white'])
     var stim = {
       number: parseInt(number),
       color: color
@@ -460,11 +460,11 @@ var practice_block = {
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  correct_text: '<div class = centerbox><div class = center-text>Correct!</p></div><div class = promptbox>' +
+  correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</p></div><div class = promptbox>' +
+  incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  timeout_message: '<div class = centerbox><div class = center-text>Respond Faster!</div></div><div class = promptbox>' +
+  timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
   choices: choices,
   data: {

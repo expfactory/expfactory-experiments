@@ -282,11 +282,11 @@ var appendData = function() {
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
   	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
-			jsPsych.data.addDataToLastTrial({shape_cued_acc: 1})
-		} else {
-			jsPsych.data.addDataToLastTrial({shape_cued_acc: 0})
-		}
+	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+		jsPsych.data.addDataToLastTrial({shape_cued_acc: 1})
+	} else {
+		jsPsych.data.addDataToLastTrial({shape_cued_acc: 0})
+	}
   }
 }
 

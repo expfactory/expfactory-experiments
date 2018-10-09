@@ -136,6 +136,7 @@ var setCTI = function() {
 }
 
 var getCTI = function() {
+console.log('here')
   return CTI
 }
 
@@ -150,7 +151,7 @@ If "switch old", switch to the last task and randomly choose a cue.
 */
 var setStims = function() {
   var tmp;
-  switch (task_switches[current_trial].task_switch) {
+  switch (task_switches[current_trial].task_switch){
     case "stay":
       if (curr_task == "na") {
         tmp = curr_task
@@ -200,15 +201,15 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  var cue_html = '<div class = upperbox><div class = center-text>' + curr_cue + '</div></div>'+
   				 '<div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
 var getStim = function() {
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
-  				  '<div class = lowerbox><div class = "center-text" style=color:' + curr_stim.color + ';>' + curr_stim.number + '</div></div>'
-  return stim_html
+	var stim_html = '<div class = upperbox><div class = center-text>' + curr_cue + '</div></div>'+
+				    '<div class = lowerbox><div class = center-text "style=color:' + curr_stim.color + '">' + curr_stim.number + '</div></div>'
+	return stim_html
 }
 
 var getSSType = function(){
@@ -216,10 +217,8 @@ var getSSType = function(){
 }
 
 var getStopStim = function(){
-	var stim_html = '<div class = lowerbox>'+
-						preFileType + 'stop' + fileTypePNG + 
-					'</div>'
-  return stim_html
+	var stim_html = '<div class = lowerbox>'+ preFileType + 'stop' + fileTypePNG + '</div>'
+    return stim_html
 }
 
 var getSSD = function(){
@@ -577,12 +576,11 @@ var cue_block = {
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function() {
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: exp_stage
-    })
+    jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
     appendData()
   }
 };
+
 
 var feedback_text = 
 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
@@ -607,9 +605,9 @@ var practice_block = {
   stimulus: getStim,
   is_html: true,
   key_answer: getResponse,
-  correct_text: '<div class = centerbox><div style="color:green"; class = center-text>Correct!</p></div><div class = promptbox>' +
+  correct_text: '<div class = centerbox><div class = center-text>Correct!</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
-  incorrect_text: '<div class = centerbox><div style="color:red"; class = center-text>Incorrect</p></div><div class = promptbox>' +
+  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</p></div><div class = promptbox>' +
     prompt_task_list + '</div>',
   timeout_message: '<div class = centerbox><div class = center-text>Too Slow</div></div><div class = promptbox>' +
     prompt_task_list + '</div>',
@@ -647,8 +645,7 @@ var practice_block = {
 	on_finish: function(){
 				getResponse()
 				appendData()
-				}
-	
+	}
 };
 
 var categorize_block = {

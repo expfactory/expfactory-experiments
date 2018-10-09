@@ -41,7 +41,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('threebytwo')"}
+                                        "on_trial_finish": "addID('stop_signal_with_two_by_two')"}
                        }
     
    }
