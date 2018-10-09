@@ -206,7 +206,7 @@ var appendData = function(){
 	}
 	
 	
-	if (exp_phase == "test"){	
+	if ((exp_phase == "test") || (exp_phase == "practice2")){	
 		
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
@@ -233,7 +233,7 @@ var appendData = function(){
 // generic task variables
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = 0
+var credit_var = false
 var run_attention_checks = true
 
 
@@ -303,15 +303,32 @@ var prompt_text = '<div class = prompt_box>'+
 
 
 var stims = createTrialTypes(numTrialsPerBlock)
-var exp_phase = "practice1"
 var exp_phase = "practice2"
-
+var exp_phase = "test"
 
 
 
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  data: {
+    trial_id: "attention_check"
+  },
+  timing_response: 180000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -771,7 +788,7 @@ var practiceStopNode = {
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-					'</p><p class = block-text>Your accuracy too low. Remember:<br>' +
+					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
 					prompt_text_list
 		
 				if (average_rt > rt_thresh) {
@@ -868,11 +885,11 @@ var testNode = {
 		var stop_length = 0
 		
 		for (i = 0; i < data.length; i++) {
-			if (data[i].trial_id == "practice_trial"){
+			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
 			}
 			
-			if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
+			if (data[i].stop_signal_condition == "go"){
 				go_length += 1
 				if (data[i].rt != -1) {
 					num_go_responses += 1
@@ -912,7 +929,7 @@ var testNode = {
 			
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-					'</p><p class = block-text>Your accuracy too low. Remember:<br>' +
+					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
 					prompt_text_list
 			}
 			if (average_rt > rt_thresh) {
@@ -968,8 +985,8 @@ stop_signal_single_task_network_experiment.push(practiceNode);
 stop_signal_single_task_network_experiment.push(feedback_block);
 */
 
-stop_signal_single_task_network_experiment.push(practiceStopNode)
-stop_signal_single_task_network_experiment.push(feedback_block);
+//stop_signal_single_task_network_experiment.push(practiceStopNode)
+//stop_signal_single_task_network_experiment.push(feedback_block);
 
 stop_signal_single_task_network_experiment.push(test_intro);
 stop_signal_single_task_network_experiment.push(testNode);
