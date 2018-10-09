@@ -123,13 +123,14 @@ var getResponse = function() {
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
+var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
 var colors = ['white','red','green']
-var path = '/static/experiments/shape_matching/images/'
+var path = '/static/experiments/shape_matching_single_task_network/images/'
 var center_prefix = '<div class = centerimg><img src = "'
-var mask_prefix = '<div class = "centerimg mask"><img src = "'
+var mask_prefix = '<div class = "centerimg"><img src = "'
 var postfix = '"</img></div>'
 var shape_stim = []
 var exp_stage = 'practice'
@@ -149,17 +150,39 @@ var practice_len = 21
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
 var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
 var exp_len = 280 
-var numblocks = 4
+var numTrialsPerBlock = 21
+var numTestBlocks = exp_len / numTrialsPerBlock
 var choices = [90, 77]
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
 
+var prompt_task_list = '<ul>'+
+					   	'<li>Press the M key if the green and white shapes are the same.</li>'+
+					   	'<li>Press the Z key if not</li>'+
+					   '</ul>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
+// Set up attention check node
+var attention_check_block = {
+	type: 'attention-check',
+	data: {
+		trial_id: "attention_check"
+	},
+	timing_response: 180000,
+	response_ends_trial: true,
+	timing_post_trial: 200
+}
+
+var attention_node = {
+	timeline: [attention_check_block],
+	conditional_function: function() {
+		return run_attention_checks
+	}
+}
 
 //Set up post task questionnaire
 var post_task_block = {
@@ -179,7 +202,7 @@ var response_keys =
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 20 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 20 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -216,10 +239,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -232,7 +255,7 @@ var end_block = {
     	exp_id: 'shape_matching'
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -247,13 +270,13 @@ var start_test_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice. There will be three short breaks throughout the test.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice. There will be three short breaks throughout the test.</p><p class = center-block-text>Press <i>enter</i> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
 		current_trial = 0
 		exp_stage = 'test'
-		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],exp_len/7)
+		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)
 	}
 };
 
@@ -263,7 +286,7 @@ var rest_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -283,7 +306,40 @@ var fixation_block = {
 	},
 }
 
-var mask_block = {
+var practice_fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "fixation"
+	},
+	timing_response: 500,
+	timing_post_trial: 0,
+	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+	},
+}
+
+var practice_mask_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+'</div>' +
+		'<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+'</div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "mask"
+	},
+	timing_response: 400,
+	timing_post_trial: 0,
+	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+	},
+}
+
+var test_mask_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+'</div>' +
 		'<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+'</div>',
@@ -298,6 +354,21 @@ var mask_block = {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
 }
+var practice_timing_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = "leftbox"></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "mask"
+	},
+	timing_response: 500,
+	timing_post_trial: 0,
+	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	on_finish: function() {
+		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
+	},
+}
 
 var practice_block = {
 	type: 'poldrack-categorize',
@@ -306,20 +377,20 @@ var practice_block = {
 	choices: choices,
 	key_answer: getResponse,
 	data: getData,
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
+	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>  <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
+	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div> <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
+	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div> <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
 	timing_response: 2000,
 	timing_feedback: 500,
 	show_stim_with_feedback: true,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
 	on_finish: function(){
 		jsPsych.data.addDataToLastTrial({trial_id: 'practice_trial'})
 	}
 }
 
-var decision_block = {
+var test_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getStim,
 	is_html: true,
@@ -333,9 +404,10 @@ var decision_block = {
 			correct = true
 		}
 		jsPsych.data.addDataToLastTrial({'correct': correct,
-										 trial_id: 'practice_trial'})
+										 trial_id: 'test_trial'})
 	}
 }
+
 
 var feedback_text = 
 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
@@ -360,9 +432,10 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
-	practiceTrials.push(fixation_block)
+	practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(practice_block)
-	practiceTrials.push(mask_block)
+	practiceTrials.push(practice_mask_block)
+	practiceTrials.push(practice_timing_block)
 }
 
 var practiceCount = 0
@@ -408,7 +481,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -429,22 +502,81 @@ var practiceNode = {
 		
 	}
 }
+
+var testTrials = []
+testTrials.push(feedback_block)
+testTrials.push(attention_node)
+for (i = 0; i < numTrialsPerBlock; i++) {
+	testTrials.push(fixation_block)
+	testTrials.push(test_block)
+	testTrials.push(test_mask_block)
+}
+
+var testCount = 0
+var testNode = {
+	timeline: testTrials,
+	loop_function: function(data) {
+		testCount += 1
+		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)
+		current_trial = 0 
+	
+		var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+	
+		for (var i = 0; i < data.length; i++){
+			if (data[i].trial_id == "test_trial"){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+		
+					}
+				}
+		
+			}
+	
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+	
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
+		
+		if (accuracy < accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list
+		}
+		if (missed_responses > missed_thresh){
+			feedback_text +=
+					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+	
+		if (testCount == numTestBlocks){
+			feedback_text +=
+					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+			return false
+		} else {
+		
+			return true
+		}
+		
+	}
+}
 /* create experiment definition array */
 shape_matching_single_task_network_experiment = []
+
 shape_matching_single_task_network_experiment.push(practiceNode)
 shape_matching_single_task_network_experiment.push(attention_node)
 
 shape_matching_single_task_network_experiment.push(start_test_block)
-for (var b = 0; b < numblocks; b++) {
-	for (var i = 0; i < exp_len/numblocks; i ++) {
-		shape_matching_single_task_network_experiment.push(fixation_block)
-		shape_matching_single_task_network_experiment.push(decision_block)
-		shape_matching_single_task_network_experiment.push(mask_block)
-	}
-	if (b < (numblocks-1)) {
-		shape_matching_single_task_network_experiment.push(rest_block)
-		shape_matching_single_task_network_experiment.push(attention_node)
-	}
-}
+shape_matching_single_task_network_experiment.push(testNode)
+
 shape_matching_single_task_network_experiment.push(post_task_block)
 shape_matching_single_task_network_experiment.push(end_block)

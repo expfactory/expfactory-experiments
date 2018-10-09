@@ -1,6 +1,9 @@
+/*******************************************************/
+/***********    Network Default CSS Styles    **********/
+/*******************************************************/
 .display_stage {
     position: fixed;
-    background: black;
+    background: gray;
     left: 5vw;
     top: 2vh;
     height: 94vh;
@@ -102,6 +105,11 @@ img {
   margin-right:-50%;
   transform: translate(-50%,-175%);
 }
+
+/*******************************************************/
+/***********   Flanker and Shape CSS Styles   **********/
+/*******************************************************/
+
 
 .leftbox {
   width: 13vw;

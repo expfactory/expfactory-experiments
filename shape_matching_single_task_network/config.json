@@ -35,7 +35,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('shape_matching')"}
+                                        "on_trial_finish": "addID('shape_matching_single_task_network')"}
                        }
     
    }

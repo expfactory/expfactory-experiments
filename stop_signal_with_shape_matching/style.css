@@ -135,9 +135,15 @@ img.center {
 /*******************************************************/
 /***********    Shape Matching CSS Styles     **********/
 /*******************************************************/
+
+.mask {
+  width: 80%;
+}
+
+
 .leftbox {
-  width: 17vw;
-  height: 17vw;
+  width: 18vw;
+  height: 18vw;
   position:absolute;
   top:50%;
   left:47.5%;
@@ -148,8 +154,8 @@ img.center {
 }
 
 .distractorbox {
-  width: 17vw;
-  height: 17vw;
+  width: 18vw;
+  height: 18vw;
   position:absolute;
   top:50%;
   left:50%;
@@ -159,8 +165,8 @@ img.center {
 }
 
 .rightbox {
-  width: 17vw;
-  height: 17vw;
+  width: 18vw;
+  height: 18vw;
   position:absolute;
   top:50%;
   left:52.5%;
