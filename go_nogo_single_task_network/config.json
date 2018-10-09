@@ -22,10 +22,7 @@
         "exp_id": "go_nogo_single_task_network",
         "cognitive_atlas_task_id": "tsk_4a57abb949a93",
         "contributors": [
-                         "Ian Eisenberg",
-                         "Zeynep Enkavi",
                          "Patrick Bissett",
-                         "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
         "time":10,
@@ -40,7 +37,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('go_nogo')"}
+                                        "on_trial_finish": "addID('go_nogo_single_task_network')"}
                        }
     
    }

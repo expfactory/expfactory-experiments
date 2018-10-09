@@ -78,6 +78,7 @@ var getFeedback = function() {
     return '<div class = centerbox><div class = center-text>Incorrect</div></p></div>'
   }
 }
+
 var getBlockFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
@@ -92,11 +93,11 @@ var getInstructFeedback = function() {
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = false
+var run_attention_checks = true
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
-var credit_var = true
+var credit_var = false
 
 var practice_thresh = 3 // 3 blocks of 15 trials
 var accuracy_thresh = 0.80
@@ -156,6 +157,10 @@ var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
 var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
 
 
+var prompt_text_list = '<ul list-text>'+
+						'<li>'+stims[0][0]+' square: Respond</li>' +
+						'<li>'+stims[1][0]+' square: Do not respond</li>' +
+					  '</ul>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -319,13 +324,14 @@ var practice_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-practiceTrials.push(practiceBlock)
+practiceTrials.push(practice_block)
 
 var practiceCount = 0
 var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
+		practice_index = 0
 		practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
 		test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
 	
@@ -335,7 +341,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "stim"){
+			if ((data[i].trial_id == "practice") && (data[i].condition == "go")){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
