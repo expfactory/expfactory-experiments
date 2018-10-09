@@ -1,6 +1,6 @@
 [
     {
-        "name": "N Back with Cued Task Switching",
+        "name": "N Back with Two by Two",
         "template":"jspsych",
         "run": [
 				"static/js/math.min.js",
