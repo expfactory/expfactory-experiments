@@ -95,7 +95,7 @@ var changeData = function() {
 	/* Define experimental variables */
 	/* ************************************ */
 	// generic task variables
-var run_attention_checks = false
+var run_attention_checks = true
 var attention_check_thresh = 0.45
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -139,10 +139,13 @@ var test_stimuli = [{
 	}
 }];
 
-practice_len = 12 //5
-exp_len = 100 //5
+var practice_len = 12 //5
+var exp_len = 112 //100 in original
+var numTrialsPerBlock = 28
+var numTestBlocks = exp_len / numTrialsPerBlock
+
 var practice_trials = jsPsych.randomization.repeat(test_stimuli, practice_len / 4, true);
-var test_trials = jsPsych.randomization.repeat(test_stimuli, exp_len / 4, true);
+var test_trials = jsPsych.randomization.repeat(test_stimuli, numTrialsPerBlock / 4, true);
 
 var practice_response_array = [];
 for (i = 0; i < practice_trials.data.length; i++) {
@@ -255,7 +258,11 @@ var end_block = {
 	},
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function(){
+		assessPerformance()
+		evalAttentionChecks()
+    }
 };
 
 var start_test_block = {
@@ -305,12 +312,12 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
-	var fixation_block = {
+	var practice_fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
 		is_html: true,
 		data: {
-			trial_id: "fixation"
+			trial_id: "practice_fixation"
 		},
 		choices: 'none',
 		timing_stim: 1000, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
@@ -338,12 +345,13 @@ for (i = 0; i < practice_len; i++) {
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				exp_stage: "practice"
+				exp_stage: "practice",
+				trial_id: "practice_trial"
 			})
 		}
 	}
 	
-	practiceTrials.push(fixation_block)
+	practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(practice_block)
 }
 
@@ -390,6 +398,7 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
+			test_trials = jsPsych.randomization.repeat(test_stimuli, numTrialsPerBlock / 4, true);
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -415,16 +424,26 @@ var practiceNode = {
 		
 	}
 }
-//Set up experiment
-flanker_single_task_network_experiment = []
 
-flanker_single_task_network_experiment.push(practiceNode)
-flanker_single_task_network_experiment.push(attention_node)
-flanker_single_task_network_experiment.push(start_test_block)
 
-/* define test block */
-for (i = 0; i < exp_len; i++) {
-	flanker_single_task_network_experiment.push(fixation_block)
+var testTrials = []
+testTrials.push(feedback_block)
+testTrials.push(attention_node)
+for (i = 0; i < numTrialsPerBlock; i++) {
+	var test_fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+		is_html: true,
+		data: {
+			trial_id: "test_fixation"
+		},
+		choices: 'none',
+		timing_stim: 1000, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
+		timing_response: 1000,
+		timing_post_trial: 0,
+		on_finish: changeData,
+	};
+
 	var test_block = {
 		type: 'poldrack-categorize',
 		stimulus: test_trials.image[i],
@@ -443,12 +462,83 @@ for (i = 0; i < exp_len; i++) {
 		timing_post_trial: 0,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
-				exp_stage: "test"
+				exp_stage: "test",
+				trial_id: "test_trial"
 			})
 		}
 	}
-	flanker_single_task_network_experiment.push(test_block)
+	
+	testTrials.push(test_fixation_block)
+	testTrials.push(test_block)
 }
+
+var testCount = 0
+var testNode = {
+	timeline: testTrials,
+	loop_function: function(data) {
+		testCount += 1
+		test_trials = jsPsych.randomization.repeat(test_stimuli, numTrialsPerBlock / 4, true);
+		current_trial = 0 
+	
+		var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+	
+		for (var i = 0; i < data.length; i++){
+			if (data[i].trial_id == "test_trial"){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+		
+					}
+				}
+		
+			}
+	
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+	
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
+		
+		if (accuracy < accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+		}
+		if (missed_responses > missed_thresh){
+			feedback_text +=
+					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+	
+		if (testCount == numTestBlocks){
+			feedback_text +=
+					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+			return false
+		} else {
+		
+			return true
+		}
+		
+	}
+}
+
+//Set up experiment
+flanker_single_task_network_experiment = []
+
+flanker_single_task_network_experiment.push(practiceNode)
+
+flanker_single_task_network_experiment.push(start_test_block)
+flanker_single_task_network_experiment.push(testNode)
+
 flanker_single_task_network_experiment.push(attention_node)
+
 flanker_single_task_network_experiment.push(post_task_block)
 flanker_single_task_network_experiment.push(end_block)

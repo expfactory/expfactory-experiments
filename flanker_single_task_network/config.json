@@ -12,6 +12,7 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/utils/poldrack_utils.js",
                 "experiment.js",
                 "static/css/jspsych.css",
@@ -21,10 +22,7 @@
         "exp_id": "flanker_single_task_network",
         "cognitive_atlas_task_id": "tsk_4a57abb949a4f",
         "contributors": [
-                         "Ian Eisenberg",
-                         "Zeynep Enkavi",
                          "Patrick Bissett",
-                         "Vanessa Sochat",
                          "Russell Poldrack"
                         ], 
         "time":6.5,
@@ -33,7 +31,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('flanker')"}
+                                        "on_trial_finish": "addID('flanker_single_task_network')"}
                        } 
    }
 ]
