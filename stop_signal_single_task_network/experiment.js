@@ -972,6 +972,7 @@ var testNode = {
 /* ************************************ */
 
 var stop_signal_single_task_network_experiment = []
+
 /*
 stop_signal_single_task_network_experiment.push(instruction_node);
 stop_signal_single_task_network_experiment.push(practice1);
@@ -985,8 +986,8 @@ stop_signal_single_task_network_experiment.push(practiceNode);
 stop_signal_single_task_network_experiment.push(feedback_block);
 */
 
-//stop_signal_single_task_network_experiment.push(practiceStopNode)
-//stop_signal_single_task_network_experiment.push(feedback_block);
+stop_signal_single_task_network_experiment.push(practiceStopNode)
+stop_signal_single_task_network_experiment.push(feedback_block);
 
 stop_signal_single_task_network_experiment.push(test_intro);
 stop_signal_single_task_network_experiment.push(testNode);

@@ -103,7 +103,7 @@ var instructTimeThresh = 0 ///in seconds
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
-
+var choices = [70, 72]
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
 	["left arrow", 37],
