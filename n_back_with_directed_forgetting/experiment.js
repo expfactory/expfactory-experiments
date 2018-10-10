@@ -385,7 +385,7 @@ var practice2 = {
 					'<p class = block-text style="font-size:24px;">This is what the second part of the trial will look like.  You will see a single letter.</p>'+
 					'<p class = block-text style="font-size:24px;">Please respond if the current letter, matches the letter that appeared 2 (delay) trials ago in your memory set!</p>'+
 					'<p class = block-text style="font-size:24px;">Press '+possible_responses[0][0]+' if they match, and '+possible_responses[1][0]+' if they mismatch.</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, your memory set is updated as trials with the "remember" cue come on.  If your set is already 2(delay) long, after the next "remember" cue, please expunge the earlier letter in your memory set and add the new letter to your memory set. Otherwise, at the beginning of each block, where your memory set is less than 2 (delay), add letters until your memory set is 2 (delay) long.</p>'+
+					'<p class = block-text style="font-size:24px;">Remember, your memory set is updated as trials with the "remember" cue come on.  If your set is already 2(delay) long, after the next "remember" cue, please remove the earlier letter in your memory set and add the new letter to your memory set. Otherwise, at the beginning of each block, where your memory set is less than 2 (delay), add letters until your memory set is 2 (delay) long.</p>'+
 					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
 				'</div>'+
 				'<div class =centerbox>'+
@@ -442,7 +442,7 @@ var instructions_block = {
 			'<p class = block-text style="font-size:20px">If you saw a remember cue, please add the subsequent letter to your memory set (set of letters to remember).</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a forget cue, you should not add the subsequent letter to your memory set.</p>'+
 			'<p class = block-text style="font-size:20px">You will be given a delay for every block of trials, either 1, 2, or 3. This delay tells you how many letters to remember in your memory set. So for example, if your delay was 2, you should remember the last 2 letters that appeared after a remember cue.</p>'+
-			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
+			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, remove the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
 			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <i>in your memory set.</i></p>'+
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t".</p> '+
@@ -454,7 +454,7 @@ var instructions_block = {
 			'<p class = block-text style="font-size:20px">The first letter in that sequence, V, DOES NOT have a trial in your memory set to match with, so press the '+possible_responses[1][0]+' on those trials.  However, the cue that came before this letter was remember, so add this letter to your memory set, which now has length of 1, and contains the letter ["V"].</p> '+
 			'<p class = block-text style="font-size:20px">The second letter in that sequence, B, ALSO DOES NOT have a trial 2 ago in your memory set to match with, so press the '+possible_responses[1][0]+' on those trials. However, you should add this letter to your memory set since it came after a "remember" cue.  Your memory set now has length of 2, and contains ["V", "B"].</p>'+
 			'<p class = block-text style="font-size:20px">The third letter in that sequence, v, DOES match the letter from 2 trials in your memory set ["V","B"], V, so you would respond match.  However, this letter came after the forget cue, so you should NOT add this to your memory set.  Your memory set is still ["V" , "B"].</p>'+
-			'<p class = block-text style="font-size:20px">The fourth letter in that sequence, V, DOES match the letter from 2 trials ago in your memory set, V, so you would respond match.  You should add this letter to your memory set, and expunge the earlier letter since you need only keep 2 (delay) letters in your memory set.  Your memory set is now ["B", V"]</p>'+
+			'<p class = block-text style="font-size:20px">The fourth letter in that sequence, V, DOES match the letter from 2 trials ago in your memory set, V, so you would respond match.  You should add this letter to your memory set, and remove the earlier letter since you need only keep 2 (delay) letters in your memory set.  Your memory set is now ["B", V"]</p>'+
 			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'
 		*/
@@ -502,7 +502,7 @@ var start_test_block = {
 			'<p class = block-text style="font-size:20px">If you saw a remember cue, please add the subsequent letter to your memory set (set of letters to remember).</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a forget cue, you should not add the subsequent letter to your memory set.</p>'+
 			'<p class = block-text style="font-size:20px">You will be given a delay for every block of trials, either 1, 2, or 3. This delay tells you how many letters to remember in your memory set. So for example, if your delay was 2, you should remember the last 2 letters that appeared after a remember cue.</p>'+
-			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, expunge the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
+			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, remove the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
 			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter, matches the letter that occurred 2  (delay) trials ago <i>in your memory set.</i></p>'+
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t". <i>You will be given your delay for the block on the following page.</i></p> '+

@@ -158,13 +158,13 @@ for (i = 0; i < test_trials.data.length; i++) {
 }
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Indicate the identity of the <i> center </i> letter.</li>' +
+						'<li>Indicate the identity of the <i> middle </i> letter.</li>' +
 						'<li>Press the H key, if H.</li>' +
 					    '<li>Press the F key, if F.</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Indicate the identity of the <i> center </i> letter.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Indicate the identity of the <i> middle </i> letter.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the H key, if H.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the F key, if F.</p>' +
 				  '</div>'

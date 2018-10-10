@@ -347,8 +347,8 @@ var n_back_conditions = ['match','mismatch']
 var predictive_conditions = [['stay','switch'],
 							 ['switch','stay']]
 
-var predictive_dimensions_list = jsPsych.randomization.repeat([[['1-back',1], ['1-back',1], ['2-back',2], ['2-back',2]],
-							 								   [['2-back',2], ['2-back',2], ['1-back',1], ['1-back',1]]],1)
+var predictive_dimensions_list = [[['1-back',1], ['1-back',1], ['2-back',2], ['2-back',2]],
+							 	  [['2-back',2], ['2-back',2], ['1-back',1], ['1-back',1]]]
 	
 var predictive_dimensions_list_control_trials = jsPsych.randomization.repeat([[['T or t'], ['T or t'], ['non-T or non-t'], ['non-T or non-t']],
 							 								   	   			  [['non-T or non-t'], ['non-T or non-t'], ['T or t'], ['T or t']]],1)					 

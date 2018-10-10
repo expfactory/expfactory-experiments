@@ -281,9 +281,9 @@ var prompt_text_list = '<ul list-text>'+
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please judge if the green and the CENTER white shapes match.</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Match: ' + possible_responses[0][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Mismatch: ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please judge if the green and the <i>middle</i> white shapes are the same.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Same: ' + possible_responses[0][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Different: ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -401,15 +401,15 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment you will see a row of shapes. You will always see 5 white shapes to the right, 1 green shape to the left, and sometimes, 1 red shape overlapping with the green shape.</p> '+
 		
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <strong>CENTER</strong> white shape on the right.</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <i>middle</i> white shape on the right.</p>'+
 		
 		'</div>',
 		
 		'<div class = centerbox>'+
 				
-			'<p class = block-text>If the shapes match, please press the '+possible_responses[0][0]+'.  If the shapes mismatch, press the '+possible_responses[1][0]+'.</p>'+
+			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 		
-			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <strong>CENTER</strong> white shape. Ignore the other white shapes.</p>'+
+			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
 		
 			'<p class = block-text>Sometimes, you will also see a red shape near the green shape.  Ignore this red shape as well.</p>'+
 				
@@ -467,11 +467,11 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <strong>CENTER</strong> white shape on the right..</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <i>middle</i> white shape on the right..</p>'+
 		
-			'<p class = block-text>If the shapes match, please press the '+possible_responses[0][0]+'.  If the shapes mismatch, press the '+possible_responses[0][0]+'.</p>'+
+			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[0][0]+'.</p>'+
 		
-			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <strong>CENTER</strong> white shape. Ignore the other white shapes.</p>'+
+			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
 		
 			'<p class = block-text>Sometimes, you will also see a red shape near the green shape.  Ignore this red shape as well.</p>'+
 	
@@ -585,7 +585,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember, judge if the green shape on the left matches or mismatches the <strong>CENTER</strong> white shape on the right: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: ' + prompt_text_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -684,7 +684,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember, judge if the green shape on the left matches or mismatches the <strong>CENTER</strong> white shape on the right: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: ' + prompt_text_list 
 		}
 		
 		if (missed_responses > missed_thresh){

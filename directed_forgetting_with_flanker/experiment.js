@@ -341,17 +341,17 @@ var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = 
 				   
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Please respond if the probe (center letter) was in the memory set.</li>'+
+						'<li>Please respond if the probe (middle letter) was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
-						'<li>Ignore the letters that are not in the center!</li>' +
+						'<li>Ignore the letters that are not in the middle!</li>' +
 					  '</ul>'
 				  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (center letter) was in the memory set.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (middle letter) was in the memory set.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Ignore the letters that are not in the center!</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Ignore the letters that are not in the middle!</p>' +
 				  '</div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -461,10 +461,10 @@ var practice3 = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox>'+
 				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">After the cue, TOP or BOT disappears, you will be presented with a row of letters like this.  Please respond if the <i>CENTER LETTER</i> was in the memory set.</p>'+
+					'<p class = block-text style="font-size:22px;">After the cue, TOP or BOT disappears, you will be presented with a row of letters like this.  Please respond if the <i>middle letter</i> was in the memory set.</p>'+
 					'<p class = block-text style="font-size:22px;">Ignore the letters not in the center.</p>'+
 					'<p class = block-text style="font-size:22px;">Press '+possible_responses[0][0]+' if the letter was in the memory set, and '+possible_responses[1][0]+' if not.</p>'+
-					'<p class = block-text style="font-size:22px;">In this case, the center letter is B, which was not in the memory set.  The correct answer is the '+possible_responses[1][0]+'.</p>'+
+					'<p class = block-text style="font-size:22px;">In this case, the middle letter is B, which was not in the memory set.  The correct answer is the '+possible_responses[1][0]+'.</p>'+
 					'<p class = block-text style="font-size:22px;">Press enter to start practice.</p>'+
 				'</div>'+
 		
@@ -560,12 +560,12 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>After a short delay, you will be presented with a row of white letters.  Please indicate whether the <i> center letter </i> was in your memory set.</p>'+
+			'<p class = block-text>After a short delay, you will be presented with a row of white letters.  Please indicate whether the <i> middle letter </i> was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
-			'<p class = block-text>Please ignore the letters that are not in the center.</p>'+
+			'<p class = block-text>Please ignore the letters that are not in the middle.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -612,12 +612,12 @@ var start_test_block = {
 			
 			'<p class = block-text>So for example, if you get the cue TOP, please forget the top 3 letters and remember the bottom 3 letters.</p>'+
 		
-			'<p class = block-text>After a short delay, you will be presented with a row of white letters.  Please indicate whether the <i> center letter </i> was in your memory set.</p>'+
+			'<p class = block-text>After a short delay, you will be presented with a row of white letters.  Please indicate whether the <i> middle letter </i> was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 			
-			'<p class = block-text>Please ignore the letters that are not in the center.</p>'+
+			'<p class = block-text>Please ignore the letters that are not in the middle.</p>'+
 					
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',

@@ -286,8 +286,8 @@ var practice_thresh = 3 // 3 blocks of 28 trials
 
 var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
-var predictive_dimensions_list = jsPsych.randomization.repeat([['the same', 'the same', 'different','different'],
-							 ['different','different', 'the same', 'the same' ]],1)
+var predictive_dimensions_list = [['the same', 'the same', 'different','different'],
+							 	  ['different','different', 'the same', 'the same' ]]
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 

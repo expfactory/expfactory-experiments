@@ -253,16 +253,16 @@ var task_boards = [['<div class = bigbox><div class = centerbox><div class = lef
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Indicate the identity of the center letter</li>' +
-						'<li>Press the F key if center letter is F</li>' +
-						'<li>Press the H key if center letter is H</li>' +
+						'<li>Indicate the identity of the middle letter</li>' +
+						'<li>Press the F key if middle letter is F</li>' +
+						'<li>Press the H key if middle letter is H</li>' +
 						'<li>Do not respond if the '+go_no_go_styles[1]+' version of the letters came out!</li>' +
 					   '</ul>'
 					  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Indicate the identity of the center letter</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the F key if center letter is F</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the H key if center letter is H</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Indicate the identity of the middle letter</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the F key if middle letter is F</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the H key if middle letter is H</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the '+go_no_go_styles[1]+' version of the letters came out!</p>' +
 				  '</div>' 	
 /* ************************************ */
@@ -290,8 +290,8 @@ var practice1 = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox>'+
 				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the trial will look like. You will see a row of letters composed of H and F. Please indicate the identity of the center letter.</p>'+
-					'<p class = block-text style="font-size:24px;">In this case, the center letter is F, so the correct answer is the F key.</p>'+
+					'<p class = block-text style="font-size:24px;">This is what the trial will look like. You will see a row of letters composed of H and F. Please indicate the identity of the middle letter.</p>'+
+					'<p class = block-text style="font-size:24px;">In this case, the middle letter is F, so the correct answer is the F key.</p>'+
 					'<p class = block-text style="font-size:24px;">Please ignore the letters that are not in the center, in this case, H.</p>'+
 					'<p class = block-text style="font-size:24px;">Press Enter to continue. You will not be able to go back.</p>'+
 				'</div>'+
@@ -401,9 +401,9 @@ var instructions_block = {
 		"<div class = centerbox>"+
 		"<p class = block-text>In this experiment you will see a row of letters composed of H's and F's.</p> "+
 				
-		"<p class = block-text>Please indicate the identity of the center letter! If the center letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the center letter is H, press the "+possible_responses[1][0]+".</p>"+
+		"<p class = block-text>Please indicate the identity of the letter in the middle. If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
 		
-		"<p class = block-text>Ignore the letters not in the center!</p>"+
+		"<p class = block-text>Ignore the letters not in the middle!</p>"+
 		
 		"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
 						
@@ -461,7 +461,7 @@ var start_test_block = {
 	text: "<div class = centerbox>"+
 			"<p class = block-text>We will now start the test portion</p>"+
 			
-			"<p class = block-text>Please indicate the identity of the center letter! If the center letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the center letter is H, press the "+possible_responses[1][0]+".</p>"+
+			"<p class = block-text>Please indicate the identity of the middle letter! If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
 		
 			"<p class = block-text>Ignore the letters not in the center!</p>"+
 		

@@ -70,7 +70,7 @@ var getInstructFeedback = function() {
 }
 
 var getFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = block-text>' + feedback_text + '</p></div></div>'
 }
 
 var getCategorizeIncorrectText = function(){
@@ -79,7 +79,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text>Incorrect</div></div>' + prompt_text
 	} else {
 	
-		return '<div class = fb_box><div class = center-text>Shape is '+go_no_go_styles[1]+'</div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text>Incorrect</div></div>' + prompt_text
 	}
 
 }
@@ -96,7 +96,7 @@ var getCorrectText = function(){
 	if (go_nogo_condition == "go"){
 		return '<div class = fb_box><div class = center-text>Correct!</div></div>' + prompt_text
 	} else {
-		return '<div class = fb_box><div class = center-text>Shape is '+go_no_go_styles[1]+'</div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text>Incorrect</div></div>' + prompt_text
 	}
 }
 
@@ -457,7 +457,7 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment you will see a red and green shape on the left side of the screen, and a white shape on the right.</p> '+
 		
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, is the same as the white shape on the right.</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left is the same as the white shape on the right.</p>'+
 		
 			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 			

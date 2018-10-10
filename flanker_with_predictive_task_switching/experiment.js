@@ -297,8 +297,8 @@ var practice_thresh = 3 // 3 blocks of 24 trials
 var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
 							 
-var predictive_dimensions_list = jsPsych.randomization.repeat([stim = {dim:'magnitude', values: jsPsych.randomization.repeat(['high','low'],1)},
-								  							   stim = {dim:'parity', values: jsPsych.randomization.repeat(['odd','even'],1)}],1)
+var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
+								  stim = {dim:'parity', values: ['even','odd']}]
 							 	  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
@@ -324,18 +324,18 @@ var fixation_boards = [['<div class = bigbox><div class = decision-top-left><div
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-				  	'<li>Top 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[0].dim+'</li>' +
+				  	'<li>Top 2 quadrants: Judge <i>middle</i> number on '+predictive_dimensions_list[0].dim+'</li>' +
 				  	'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
 					'<li>'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-					'<li>Bottom 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[1].dim+'</li>' +
+					'<li>Bottom 2 quadrants: Judge <i>middle</i> number on '+predictive_dimensions_list[1].dim+'</li>' +
 					'<li>'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
 					'<li>'+predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
 				  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[0].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge <i>middle</i> number on '+predictive_dimensions_list[0].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge <i>center</i> number on '+predictive_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge <i>middle</i> number on '+predictive_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
 /* ************************************ */
@@ -375,8 +375,8 @@ var practice1 = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = bigbox>'+
 				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The row of numbers are in the bottom of the screen, so you must judge the <i>CENTER</i> number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge the <i>CENTER</i> number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
+					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The row of numbers are in the bottom of the screen, so you must judge the <i>middle</i> number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
+					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge the <i>middle</i> number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
 					'<p class = block-text style="font-size:24px;">During practice and test trials, the numbers will move clockwise from trial to trial.  <i>Ignore the numbers not in the center!</i></p>'+
 					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
 				'</div>'+
@@ -450,7 +450,7 @@ var instructions_block = {
 			'<p class = block-text>In this experiment, across trials you will see a row of numbers moving clockwise on the screen in 4 quadrants.  '+
 			'On any trial, one quadrant will have a  row of numbers.</p> '+
 		
-			'<p class = block-text>You will be asked to judge the <i>center number </i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
+			'<p class = block-text>You will be asked to judge the <i>middle number</i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 		
 		'</div>',
@@ -463,7 +463,7 @@ var instructions_block = {
 			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
 			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
+			'<p class = block-text>Please judge only the middle number, you should ignore the other numbers.</p>'+
 			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -522,17 +522,17 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>Please judge the <i>center number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
+			'<p class = block-text>Please judge the <i>middle number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 	
-			'<p class = block-text>In the top two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'<p class = block-text>In the top two quadrants, please judge the middle number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
 			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the middle number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
 			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
 			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 	
-			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
+			'<p class = block-text>Please judge only the middle number, you should ignore the other numbers.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',

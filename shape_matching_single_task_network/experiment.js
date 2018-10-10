@@ -150,7 +150,7 @@ var practice_len = 21
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
 var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
 var exp_len = 280 
-var numTrialsPerBlock = 21
+var numTrialsPerBlock = 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 var choices = [90, 77]
 
@@ -220,7 +220,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the "M" key if they are the same shape and the "Z" key if they are different.</p><p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape - your task is only to respond based on whether the white and green shapes are the same.</p><p class = block-text>We will start with practice after you finish the instructions.</p></div>'
+		'<div class = centerbox><p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the M key if they are the same shape and the Z key if they are different.</p><p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape - your task is only to respond based on whether the white and green shapes are the same.</p><p class = block-text>We will start with practice after you finish the instructions.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -316,7 +316,7 @@ var practice_fixation_block = {
 	},
 	timing_response: 500,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -333,7 +333,7 @@ var practice_mask_block = {
 	},
 	timing_response: 400,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -364,7 +364,7 @@ var practice_timing_block = {
 	},
 	timing_response: 500,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>.',
+	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -377,14 +377,14 @@ var practice_block = {
 	choices: choices,
 	key_answer: getResponse,
 	data: getData,
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>  <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div> <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div> <div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
+	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>  <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
+	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div> <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
+	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div> <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
 	timing_response: 2000,
 	timing_feedback: 500,
 	show_stim_with_feedback: true,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press "M" key if the white and green shapes are the same. Otherwise press the "Z" key.</p></div>',
+	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
 	on_finish: function(){
 		jsPsych.data.addDataToLastTrial({trial_id: 'practice_trial'})
 	}

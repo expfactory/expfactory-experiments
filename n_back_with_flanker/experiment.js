@@ -403,13 +403,13 @@ var letters = 'bBdDgGtTvV'.split("")
 
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Match the current CENTER letter to the CENTER letter that appeared some number of trials ago</li>' +
+						'<li>Match the current middle letter to the middle letter that appeared some number of trials ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Match the current CENTER letter to the CENTER letter that appeared 1 trial ago</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Match the current middle letter to the middle letter that appeared 1 trial ago</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they match, press the '+possible_responses[0][0]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they mismatch, press the '+possible_responses[1][0]+'</p>' +
 				  '</div>'
@@ -463,7 +463,7 @@ var practice1 = {
 	stimulus: '<div class = bigbox>'+
 				'<div class = instructBox>'+
 					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  You will see a row of letters.</p>'+
-					'<p class = block-text style="font-size:24px;">Please remember only the center letter, B, and ignore the letters not in the center, P!</p>'+
+					'<p class = block-text style="font-size:24px;">Please remember only the middle letter, B, and ignore the letters not in the middle, P!</p>'+
 					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
 				'</div>'+
 				'<div class =centerbox>'+
@@ -519,8 +519,8 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a row of 5 letters on every trial.</p>'+
-			'<p class = block-text>You will be asked to match the current <i>center</i> letter, to the <i>center</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if the center letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>You will be asked to match the current <i>middle</i> letter, to the <i>middle</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
+			'<p class = block-text>Press the '+possible_responses[0][0]+' if the middle letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
@@ -573,10 +573,10 @@ var start_test_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now begin the test portion.</p>'+
-			'<p class = block-text>You will be asked to match the current <i>center</i> letter, to the <i>center</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
+			'<p class = block-text>You will be asked to match the current <i>middle</i> letter, to the <i>middle</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block.</p>'+
-			'<p class = block-text>Ignore the letters not in the center, focus only on the CENTER letter.</p>'+
+			'<p class = block-text>Your delay (the number of trials ago which you must match the middle letter to) will change from block to block.</p>'+
+			'<p class = block-text>Ignore the letters not in the center, focus only on the middle letter.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 				
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
@@ -584,7 +584,7 @@ var start_test_block = {
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-		feedback_text = "Your delay for this block is "+delay+". Please match the current center letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
+		feedback_text = "Your delay for this block is "+delay+". Please match the current middle letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
 	}
 };
 

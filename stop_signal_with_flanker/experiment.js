@@ -283,7 +283,7 @@ var stop_boards = ['<div class = starbox>','</div>']
 var stims = createTrialTypes(practice_len)
 
 var prompt_text = '<ul list-text>'+
-					'<li>Indicate the identity of the center letter</li>' +
+					'<li>Indicate the identity of the middle letter</li>' +
 					'<li>Do not respond if you see a star around the letters!</li>' +
 					'<li>Do not slow down your responses to the letter to wait for the star.</li>' +
 				  '</ul>'
@@ -364,13 +364,13 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment you will see a row of letters.</p> '+
 				
-			'<p class = block-text>If the center letter is H, please press the H key.</p>'+
+			'<p class = block-text>If the middle letter is H, please press the H key.</p>'+
 		
-			'<p class = block-text>If the center square is F, please press the F key</p>'+
+			'<p class = block-text>If the middle letter is F, please press the F key</p>'+
 			
 			'<p class = block-text>Respond as quickly and accurately as possible.</p>'+
 			
-			'<p class = block-text>Please ignore the letters not in the center.</p>'+
+			'<p class = block-text>Please ignore the letters not in the middle.</p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
@@ -439,9 +439,9 @@ var start_test_block = {
 			
 			'<p class = block-text>In this experiment you will see a row of letters.</p> '+
 				
-			'<p class = block-text>If the center letter is H, please press the '+possible_responses[1][0]+'.  If the center square is F, press the '+possible_responses[0][0]+'. Respond as quickly and accurately as possible.</p>'+
+			'<p class = block-text>If the middle letter is H, please press the '+possible_responses[1][0]+'.  If the middle letter is F, press the '+possible_responses[0][0]+'. Respond as quickly and accurately as possible.</p>'+
 		
-			'<p class = block-text>Ignore the letters not in the center!</p>'+
+			'<p class = block-text>Ignore the letters not in the middle!</p>'+
 		
 			'<p class = block-text>On some trials, you will see a star appear with or shortly after the letters. Do not respond if you see a star.  Do not slow down your responses to the letter in order to wait for the star.</p>'+
 	
