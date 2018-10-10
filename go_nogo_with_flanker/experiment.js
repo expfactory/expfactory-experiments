@@ -360,7 +360,8 @@ var response_keys =
 	'<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
 
 
-var feedback_text = 'We will start practice. During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
+var feedback_text = 
+'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

@@ -735,13 +735,13 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 2; i++) {
-	var fixation_block = {
+	var practice_fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: "fixation"
+		trial_id: "practice_fixation"
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
@@ -783,7 +783,7 @@ for (i = 0; i < practice_len + 2; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	practiceTrials.push(fixation_block)
+	practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(cue_block)
 	practiceTrials.push(practice_block)
 }
@@ -859,18 +859,17 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 2; i++) {
-	var fixation_block = {
+	var test_fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: "fixation"
+		trial_id: "test_fixation"
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
 	  timing_response: 500,
-	  prompt: prompt_text
 	}
 	
 	var cue_block = {
@@ -900,7 +899,7 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 		response_ends_trial: false,
 		on_finish: appendData
 	}
-	testTrials.push(fixation_block)
+	testTrials.push(test_fixation_block)
 	testTrials.push(cue_block)
 	testTrials.push(test_block)
 }
