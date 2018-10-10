@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictive_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_single_task_network'})
 }
 function evalAttentionChecks() {
   var check_percent = 1
@@ -269,7 +269,7 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/stop_signal_with_predictive_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/predictive_task_switching_single_task_network/images/"
 
 var current_trial = 0
 
@@ -676,9 +676,9 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		type: 'poldrack-single-stim',
 		stimulus: getStim,
 		is_html: true,
-		choices: 'none',
+		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
-			trial_id: "test_fixation"
+			trial_id: "test_trial"
 		},
 		timing_stim: 1000, 
 		timing_response: 2000, 
@@ -754,24 +754,24 @@ var testNode = {
 
 
 /* create experiment definition array */
-stop_signal_with_predictive_task_switching_experiment = []
+predictive_task_switching_single_task_network_experiment = []
 
 
-//stop_signal_with_predictive_task_switching_experiment.push(instruction_node)
+//predictive_task_switching_single_task_network_experiment.push(instruction_node)
 
-//stop_signal_with_predictive_task_switching_experiment.push(practice1)
-//stop_signal_with_predictive_task_switching_experiment.push(practice2)
+//predictive_task_switching_single_task_network_experiment.push(practice1)
+//predictive_task_switching_single_task_network_experiment.push(practice2)
 
-//stop_signal_with_predictive_task_switching_experiment.push(test_img_block)
+//predictive_task_switching_single_task_network_experiment.push(test_img_block)
 
-//stop_signal_with_predictive_task_switching_experiment.push(NoSSPracticeNode)
+//predictive_task_switching_single_task_network_experiment.push(NoSSPracticeNode)
 
-stop_signal_with_predictive_task_switching_experiment.push(practiceNode)
+predictive_task_switching_single_task_network_experiment.push(practiceNode)
 
-stop_signal_with_predictive_task_switching_experiment.push(start_test_block)
+predictive_task_switching_single_task_network_experiment.push(start_test_block)
 
-stop_signal_with_predictive_task_switching_experiment.push(testNode)
+predictive_task_switching_single_task_network_experiment.push(testNode)
 
-stop_signal_with_predictive_task_switching_experiment.push(post_task_block)
+predictive_task_switching_single_task_network_experiment.push(post_task_block)
 
-stop_signal_with_predictive_task_switching_experiment.push(end_block)
+predictive_task_switching_single_task_network_experiment.push(end_block)
