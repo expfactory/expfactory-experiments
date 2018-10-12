@@ -381,7 +381,7 @@ var practice_len = 16 // 20 must be divisible by 16
 var exp_len = 48 //360 must be divisible by 16
 var numTrialsPerBlock = 16 // 60 must be divisible by 16 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 1 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10

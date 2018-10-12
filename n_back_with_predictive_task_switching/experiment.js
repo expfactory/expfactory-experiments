@@ -363,14 +363,14 @@ var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>Top 2 quadrants: match the current letter to the letter that appeared '+predictive_dimensions[0][1]+' trial(s) ago</li>' +
-						'<li>Top 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</li>' +
+						'<li>Bottom 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: match the current letter to the letter that appeared '+predictive_dimensions[0][1]+' trial(s) ago</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they match, press the '+possible_responses[0][0]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they mismatch, press the '+possible_responses[1][0]+'</p>' +
 				  '</div>'
@@ -657,6 +657,7 @@ var controlNode = {
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
+practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 2; i++) {
 	
 	var practice_block = {
@@ -839,16 +840,15 @@ var testNode = {
 var n_back_with_predictive_task_switching_experiment = []
 
 //n_back_with_predictive_task_switching_experiment.push(instruction_node);
-
 n_back_with_predictive_task_switching_experiment.push(practiceNode);
 n_back_with_predictive_task_switching_experiment.push(feedback_block);
-
 
 /*
 if (control_before == 0){
 	n_back_with_predictive_task_switching_experiment.push(start_control_block);
 	n_back_with_predictive_task_switching_experiment.push(controlNode);
-}*/
+}
+*/
 
 n_back_with_predictive_task_switching_experiment.push(start_test_block);
 n_back_with_predictive_task_switching_experiment.push(testNode);
@@ -858,6 +858,7 @@ n_back_with_predictive_task_switching_experiment.push(feedback_block);
 if (control_before == 1){
 	n_back_with_predictive_task_switching_experiment.push(start_control_block);
 	n_back_with_predictive_task_switching_experiment.push(controlNode);
-}*/
+}
+*/
 n_back_with_predictive_task_switching_experiment.push(post_task_block);
 n_back_with_predictive_task_switching_experiment.push(end_block);

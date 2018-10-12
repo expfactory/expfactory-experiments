@@ -323,7 +323,7 @@ var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
 var flanker_conditions = ['congruent_memory','incongruent_memory','incongruent_forget','incongruent_control']
 
-var possible_responses = jsPsych.randomization.repeat([['M Key', 77],['Z Key', 90]],1)
+var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var current_trial = 0	
 

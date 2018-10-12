@@ -331,7 +331,7 @@ var prompt_text_list = '<ul list-text>'+
 						'<li>Respond if the green and white shapes are the same or different!</li>' +
 						'<li>Same: ' + possible_responses[0][0] + '</li>' +
 						'<li>Different: ' + possible_responses[1][0] + '</li>' +
-						'<li>Do not respond if you see a star around the shapes!</li>' +
+						'<li>Do not respond if you see a star around the white shape!</li>' +
 						'<li>Do not slow down your responses to the shape to wait for the star.</li>' +
 					   '</ul>'
 
@@ -339,7 +339,7 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Respond if the green and white shapes are the same or different!</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Same: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Different: ' + possible_responses[1][0] +'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if you see a star around the shapes!</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if you see a star around the white shape</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not slow down your responses to the shape to wait for the star.</p>' +
 				  '</div>'
 /* ************************************ */
@@ -484,7 +484,7 @@ var instructions_block = {
 		
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 			
-			'<p class = block-text>If a star does appear, they will appear only with the white shape.</p>'+
+			'<p class = block-text>If a star does appear, they will appear only around the white shape.</p>'+
 					
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'

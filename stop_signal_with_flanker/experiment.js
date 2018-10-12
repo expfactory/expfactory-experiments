@@ -282,11 +282,11 @@ var stop_boards = ['<div class = starbox>','</div>']
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text = '<ul list-text>'+
+var prompt_text = '<ul list-text><font color=white>'+
 					'<li>Indicate the identity of the middle letter</li>' +
 					'<li>Do not respond if you see a star around the letters!</li>' +
 					'<li>Do not slow down your responses to the letter to wait for the star.</li>' +
-				  '</ul>'
+				  '</font></ul>'
 
 
 /* ************************************ */
@@ -779,7 +779,7 @@ stop_signal_with_flanker_experiment = []
 
 //stop_signal_with_flanker_experiment.push(instruction_node)
 
-//stop_signal_with_flanker_experiment.push(practiceNode)
+stop_signal_with_flanker_experiment.push(practiceNode)
 
 stop_signal_with_flanker_experiment.push(start_test_block)
 

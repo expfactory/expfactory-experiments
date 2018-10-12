@@ -600,7 +600,7 @@ var instructions_block = {
 						
 			'<p class = block-text>After the 6 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters, are called your memory set!</i></p>'+
+			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters are called your memory set!</i></p>'+
 		
 			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the cued set.</p>'+
 		
@@ -655,7 +655,7 @@ var start_test_block = {
 						
 			'<p class = block-text>After the 6 letters disappear, you will also see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters, are called your memory set!</i></p>'+
+			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters are called your memory set!</i></p>'+
 		
 			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the top or bottom letters.</p>'+
 		

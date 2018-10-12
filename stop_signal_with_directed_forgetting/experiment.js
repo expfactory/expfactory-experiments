@@ -97,7 +97,7 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text
 		}
 	}
 }
@@ -682,7 +682,7 @@ var start_test_block = {
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the probe. Do not respond if you see a star.  Do not slow down your probe to the letter in order to wait for the star.</p>'+
+			'<p class = block-text>On some trials, you will see a star appear with or shortly after the probe. Do not respond if you see a star.  Do not slow down your response to the probe (single letter) in order to wait for the star.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',

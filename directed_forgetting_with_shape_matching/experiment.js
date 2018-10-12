@@ -485,7 +485,8 @@ var post_task_block = {
    columns: [60,60]
 };
 
-var feedback_text = 'We will start practice. During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
+var feedback_text = 
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
