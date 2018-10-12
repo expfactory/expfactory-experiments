@@ -1,0 +1,207 @@
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid grey;
+    border-radius: 10px;
+    
+    /*required for proper track sizing in FF*/
+    width: 100%;
+}
+
+
+img.center {
+  /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+}
+
+
+img.force {
+  height: 400px;
+  width: 400px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
+
+img.prime {
+  height: 400px;
+  width: 400px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+  opacity: .35;
+}
+
+
+.textbox {
+ width: 100%;
+ height: 75%;
+ position:absolute;
+ top:60%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background: black;
+ background-color: black;
+}
+
+.centerbox {
+ width: 50vw;
+ height: 70vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background: black;
+ background-color: black;
+}
+
+
+.practice_rating_text {
+width:80%;
+height: 20%;
+position:absolute;
+top:7.5%;
+left:50%;
+margin-right:-50%;
+transform: translate(-50%,-50%);
+background-color: black;
+text-align: center;
+}
+
+
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+
+.center_picture_box {
+width: 65%;
+height: 65%;
+position:absolute;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+.selected{
+  border: 10px solid green;
+  
+}
+
+.unselected{
+	border: 10px solid black;
+}
+
+.buttonbox {
+width: 60%;
+height: 10%;
+position:absolute;
+top:95%;
+left:50%;
+transform: translate(-50%,-50%);
+margin-right:0%;
+background-color: black;
+text-align: center;
+}
+
+.inner {
+display: inline-block;
+padding: 20px;
+padding-top: 0%;
+}
+
+.likert_btn {
+background-color: gray;
+padding: 15px 30px;
+font-size: 25px;
+border-radius: 15px;
+
+}
+
+
+/* Text based classes */
+/* Used for general instructions */
+.block-text {
+ width:100%;
+ height 100vw;
+ text-align: justify;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 22px;
+ line-height: 120%;
+ position: relative;
+ top: 15%;
+ 
+}
+
+/* As above but centeblack instead of justified. Good for instructions with few lines */
+.center-block-text {
+ width:100%;
+ height 100vw;
+ text-align: center;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 26px;
+ line-height: 120%;
+}
+
+.center-block-text2 {
+ width:100%;
+ height 100vw;
+ text-align: center;
+ font-size: 26px;
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-textJamie {
+ text-align:center;
+ font-size: 26px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+
+/* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
+.fixation {
+ text-align: center;
+ font-size: 150px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
