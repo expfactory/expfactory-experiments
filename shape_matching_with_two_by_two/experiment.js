@@ -26,8 +26,8 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	for (var k = 0; k < possible_responses.length; k++) {
-		choice_counts[possible_responses[k][1]] = 0
+	for (var k = 0; k < response_keys.key.length; k++) {
+		choice_counts[response_keys.key[k]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].possible_responses != 'none') {
@@ -372,7 +372,6 @@ var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
 var current_trial = 0
-var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
 var task_list = '<ul>'+
@@ -843,6 +842,7 @@ var testNode = {
 
 /* create experiment definition array */
 var shape_matching_with_two_by_two_experiment = [];
+
 shape_matching_with_two_by_two_experiment.push(practiceNode);
 shape_matching_with_two_by_two_experiment.push(feedback_block);
 

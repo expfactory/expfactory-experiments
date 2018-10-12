@@ -382,7 +382,6 @@ var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
 var current_trial = 0
-var CTI = 0 //cue-target-interval
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
 var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press the ' + response_keys.key_name[

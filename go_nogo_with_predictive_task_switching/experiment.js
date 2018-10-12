@@ -79,7 +79,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text><font size = 20>Number was '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
 	}
 
 }
