@@ -243,7 +243,7 @@ var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	
-	if(response_tracker.length == 0){
+	if(response_tracker.length === 0){
     	subject_response = ""
     }
 	
