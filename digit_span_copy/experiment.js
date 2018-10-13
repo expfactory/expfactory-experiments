@@ -36,15 +36,16 @@ var createGrid = function(){
 	correct_nums = num_array.slice(0,4)
 	incorrect_nums = num_array.slice(4,9)
 	
-	var stims = []
+	var grid_stims = []
 	for (var i = 0; i < numCorrect; i++){
 		correct_num = correct_nums.pop()
 		stim = {
 			stim_num: correct_num,
 			correct: true,
-			category: current_category
+			category: current_category,
+			current_category: current_category
 		}
-		stims.push(stim)
+		grid_stims.push(stim)
 		
 	}
 	
@@ -54,19 +55,22 @@ var createGrid = function(){
 		stim = {
 			stim_num: incorrect_num,
 			correct: false,
-			category: category
+			category: category,
+			current_category: current_category
 		}
-		stims.push(stim)
+		grid_stims.push(stim)
 		
 	}
 	
-	stims = jsPsych.randomization.repeat(stims,1)
-	return stims
-	
+	grid_stims = jsPsych.randomization.repeat(grid_stims,1)	
+	return grid_stims
 }
 
+var setStims = function(){
+	grid_stims = createGrid()
+}
 var getGridStim = function(grid_stims){
-	
+	grid_stims = createGrid()
 	return 	response_grid[0] + grid_stims[0].category + '_' + grid_stims[0].stim_num +
 			response_grid[1] + grid_stims[1].category + '_' + grid_stims[1].stim_num +
 			response_grid[2] + grid_stims[2].category + '_' + grid_stims[2].stim_num +
@@ -76,9 +80,20 @@ var getGridStim = function(grid_stims){
 			response_grid[6] + grid_stims[6].category + '_' + grid_stims[6].stim_num +
 			response_grid[7] + grid_stims[7].category + '_' + grid_stims[7].stim_num +
 			response_grid[8] + grid_stims[8].category + '_' + grid_stims[8].stim_num +
-			response_grid[9],
+			response_grid[9]
 
 }
+<div class = numbox>
+<button id = button_0 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_8.jpg'></img></div></button>
+<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/tree_1.jpg'></img></div></button>
+<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/water_4.jpg'></img></div></button>
+<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/tree_5.jpg'></img></div></button>
+<button id = button_4 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/water_7.jpg'></img></div></button>
+<button id = button_5 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/feet_6.jpg'></img></div></button>
+<button id = button_6 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_3.jpg'></img></div></button>
+<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_9.jpg'></img></div></button>
+<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_2.jpg'></img></div></button>
+<button class = clear_button id = "ClearButton" onclick = "clearResponses()">Clear</button><button class = submit_button id = "SubmitButton" onclick = "submitResponse()">Submit Answer</button></div>
 
 Array.prototype.contains = function(v) {
     for(var i = 0; i < this.length; i++) {
@@ -106,7 +121,7 @@ var clearResponses = function(){
 }
 
 var submitResponse = function(){
-	hitKey(
+	hitKey(possible_responses[0][0])
 }
 
 var hitKey = function(whichKey){
@@ -125,7 +140,7 @@ var appendGridData = function(){
 	var unique_responses = responses.unique()
 	
 	for (var i = 0; i < unique_responses.length; i++){
-		index = unique_responses[1][unique_responses[1].length - 1]
+		index = unique_responses[i][unique_responses[i].length - 1]
 		if (grid_stims[index].correct == true){
 			correct += 1
 		}
@@ -133,11 +148,31 @@ var appendGridData = function(){
 	
 	}
 	
-	return correct
-
+	if (correct == numCorrect){
+		pass_check = true
+	} else {
+		pass_check = false
+	}
+	
+	jsPsych.data.addDataToLastTrial({
+		stim_1: grid_stims[0].category + '_' + grid_stims[0].stim_num,
+		stim_2: grid_stims[1].category + '_' + grid_stims[1].stim_num,
+		stim_3: grid_stims[2].category + '_' + grid_stims[2].stim_num,
+		stim_4: grid_stims[3].category + '_' + grid_stims[3].stim_num,
+		stim_5: grid_stims[4].category + '_' + grid_stims[4].stim_num,
+		stim_6: grid_stims[5].category + '_' + grid_stims[5].stim_num,
+		stim_7: grid_stims[6].category + '_' + grid_stims[6].stim_num,
+		stim_8: grid_stims[7].category + '_' + grid_stims[7].stim_num,
+		stim_9: grid_stims[8].category + '_' + grid_stims[8].stim_num,
+		category: grid_stims[0].current_category,
+		pass_check: pass_check,
+		which_clicked: responses
+	})
+	
+	responses = []
 }
 
-var responses = []
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -159,15 +194,16 @@ var total_time = 0
 var errors = 0
 var error_lim = 3
 var response = []
-setStims()
-var stim_array = getStims()
+var possible_responses = [[13,'Enter']]
+var responses = []
 
-var fileType = ".png'></img>"
+var fileType = ".jpg'></img>"
 var preFileType = "<img class = center src='/static/experiments/digit_span_copy/images/"
 
-
+var grid_stims = []
 var response_grid =
-  [['<div class = numbox>' +      '<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
+  [['<div class = numbox>' +      '<button id = button_0 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
+  [fileType + '</div></button>' + '<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button id = button_4 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
@@ -175,7 +211,6 @@ var response_grid =
   [fileType + '</div></button>' + '<button id = button_6 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
-  [fileType + '</div></button>' + '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + preFileType],
   [fileType + '</div></button>' + '<button class = clear_button id = "ClearButton" onclick = "clearResponses()">Clear</button>' + '<button class = submit_button id = "SubmitButton" onclick = "submitResponse()">Submit Answer</button></div>']]
 
 
@@ -209,7 +244,7 @@ var test_img_block = {
 };
 
 /* define practice and test blocks */
-var setStims_block = {
+var set_stims_block = {
   type: 'call-function',
   data: {
     trial_id: "set_stims"
@@ -222,7 +257,7 @@ var grid_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getGridStim,
 	is_html: true,
-	choices: 'none',
+	choices: [possible_responses[0][0]],
 	data: {
 		trial_id: "visual_check",
 	},
@@ -230,23 +265,29 @@ var grid_block = {
 	timing_stim: 180000,
 	timing_response: 180000,
 	response_ends_trial: true,
-	on_start: createGrid,
 	on_finish: appendGridData,
 };
+
 
 var visualCheckTrials = []
 visualCheckTrials.push(set_stims_block)
 visualCheckTrials.push(grid_block)
 
-
+var numVisualChecks = 0
+var maxVisualChecks = 2
 var visualCheckNode = {
 	timeline: visualCheckTrials,
 	loop_function: function(data) {
-	
+		numVisualChecks += 1
+		if (numVisualChecks == maxVisualChecks){
+			return false
+		} else {
+			return true
+		}
 	
 	}
 }
 
 /* create experiment definition array */
 var digit_span_copy_experiment = [];
-digit_span_copy_experiment.push(test_img_block);
+digit_span_copy_experiment.push(visualCheckNode);
