@@ -1,0 +1,36 @@
+.dd-stim {
+  text-align: center;
+  font-size: 80px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: black;
+  width: 50vw;
+  height: 60vh;
+  top: 50%;
+  left: 50%;
+}
+
+.amtbox {
+  position: absolute;
+  top: 35%;
+  width:100%;
+  z-index: 2
+}
+
+.delbox {
+ position: absolute;
+ top: 60%;
+ width:100%;
+ z-index: 3
+}
+
+.black-centerbox {
+  width: 50vw;
+  height: 60vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background: black;
+}		
