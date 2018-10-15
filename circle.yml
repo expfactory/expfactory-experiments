@@ -39,6 +39,7 @@ test:
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('dietary_decision','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('digit_span','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('dimensional_set_shifting','web','.');"
+    - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('directed_forgetting','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_titrate','web','.');"
     - $HOME/miniconda2/bin/python -c "from expfactory.tests import circle_ci_test; circle_ci_test('dospert_eb','web','.');"
