@@ -66,12 +66,12 @@ for (var i = 0; i < stim_html.length; i++) {
 
 var instructions_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial.</div></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial. Press Enter to continue.</p></div>',
   is_html: true,
   timing_stim: -1, 
   timing_response: -1,
   response_ends_trial: true,
-  choices: [32],
+  choices: [13],
   data: {
     trial_id: "instructions",
   },
@@ -92,7 +92,7 @@ var practice_block = {
 
 var start_test_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>Starting test block. Get Ready!</div></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Starting test block.  Get Ready!</p></div>',
   is_html: true,
   choices: 'none',
   timing_stim: 1500, 
@@ -109,7 +109,7 @@ var start_test_block = {
 
 var end_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text><i>Fin</i></div></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Fin.</p></div>',
   is_html: true,
   choices: [32],
   timing_response: -1,
@@ -127,7 +127,7 @@ var end_block = {
 
 var rest_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>In this next block of trials<br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br>Next run will start in a moment</div></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">In this next block of trials<br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br>Next run will start in a moment</p></div>',
   is_html: true,
   choices: 'none',
   timing_response: 7500,
