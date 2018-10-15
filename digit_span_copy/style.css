@@ -52,14 +52,25 @@
 }
 
 .numbox {
-  width:45vw;
-  height: 45vw;
+  width:65vw;
+  height: 40vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,-50%);
-  background-color: red
+  transform: translate(-50%,-55%);
+  background-color: none
+}
+
+.textbox {
+  width:65vw;
+  height: 6vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-450%);
+  background-color: none
 }
 
 img.center {

@@ -69,8 +69,9 @@ var createGrid = function(){
 var setStims = function(){
 	grid_stims = createGrid()
 }
-var getGridStim = function(grid_stims){
+var getGridStim = function(){
 	grid_stims = createGrid()
+	
 	return 	response_grid[0] + grid_stims[0].category + '_' + grid_stims[0].stim_num +
 			response_grid[1] + grid_stims[1].category + '_' + grid_stims[1].stim_num +
 			response_grid[2] + grid_stims[2].category + '_' + grid_stims[2].stim_num +
@@ -80,20 +81,10 @@ var getGridStim = function(grid_stims){
 			response_grid[6] + grid_stims[6].category + '_' + grid_stims[6].stim_num +
 			response_grid[7] + grid_stims[7].category + '_' + grid_stims[7].stim_num +
 			response_grid[8] + grid_stims[8].category + '_' + grid_stims[8].stim_num +
-			response_grid[9]
+			response_grid[9] +
+			'<div class = textbox><p class = center-text style = "font-size:16px;">Please click on all pictures that contains (a) '+grid_stims[0].current_category+'</p></div>'
 
 }
-<div class = numbox>
-<button id = button_0 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_8.jpg'></img></div></button>
-<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/tree_1.jpg'></img></div></button>
-<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/water_4.jpg'></img></div></button>
-<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/tree_5.jpg'></img></div></button>
-<button id = button_4 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/water_7.jpg'></img></div></button>
-<button id = button_5 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/feet_6.jpg'></img></div></button>
-<button id = button_6 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_3.jpg'></img></div></button>
-<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_9.jpg'></img></div></button>
-<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><img class = center src='/static/experiments/digit_span_copy/images/chair_2.jpg'></img></div></button>
-<button class = clear_button id = "ClearButton" onclick = "clearResponses()">Clear</button><button class = submit_button id = "SubmitButton" onclick = "submitResponse()">Submit Answer</button></div>
 
 Array.prototype.contains = function(v) {
     for(var i = 0; i < this.length; i++) {
@@ -138,9 +129,10 @@ var hitKey = function(whichKey){
 var appendGridData = function(){
 	var correct = 0
 	var unique_responses = responses.unique()
+	console.log(grid_stims.length)
 	
 	for (var i = 0; i < unique_responses.length; i++){
-		index = unique_responses[i][unique_responses[i].length - 1]
+		index = parseInt(unique_responses[i][unique_responses[i].length - 1])
 		if (grid_stims[index].correct == true){
 			correct += 1
 		}
@@ -155,15 +147,15 @@ var appendGridData = function(){
 	}
 	
 	jsPsych.data.addDataToLastTrial({
-		stim_1: grid_stims[0].category + '_' + grid_stims[0].stim_num,
-		stim_2: grid_stims[1].category + '_' + grid_stims[1].stim_num,
-		stim_3: grid_stims[2].category + '_' + grid_stims[2].stim_num,
-		stim_4: grid_stims[3].category + '_' + grid_stims[3].stim_num,
-		stim_5: grid_stims[4].category + '_' + grid_stims[4].stim_num,
-		stim_6: grid_stims[5].category + '_' + grid_stims[5].stim_num,
-		stim_7: grid_stims[6].category + '_' + grid_stims[6].stim_num,
-		stim_8: grid_stims[7].category + '_' + grid_stims[7].stim_num,
-		stim_9: grid_stims[8].category + '_' + grid_stims[8].stim_num,
+		stim_0: grid_stims[0].category + '_' + grid_stims[0].stim_num,
+		stim_1: grid_stims[1].category + '_' + grid_stims[1].stim_num,
+		stim_2: grid_stims[2].category + '_' + grid_stims[2].stim_num,
+		stim_3: grid_stims[3].category + '_' + grid_stims[3].stim_num,
+		stim_4: grid_stims[4].category + '_' + grid_stims[4].stim_num,
+		stim_5: grid_stims[5].category + '_' + grid_stims[5].stim_num,
+		stim_6: grid_stims[6].category + '_' + grid_stims[6].stim_num,
+		stim_7: grid_stims[7].category + '_' + grid_stims[7].stim_num,
+		stim_8: grid_stims[8].category + '_' + grid_stims[8].stim_num,
 		category: grid_stims[0].current_category,
 		pass_check: pass_check,
 		which_clicked: responses
@@ -171,8 +163,6 @@ var appendGridData = function(){
 	
 	responses = []
 }
-
-
 
 /* ************************************ */
 /* Define experimental variables */
