@@ -19,6 +19,7 @@ var get_ITI = function() {
 
 // task specific variables
 var choices = [89, 71]
+var choices = [['N key',78],['M key', 77]]
 var bonus_list = [] //keeps track of choices for bonus
 //hard coded options 
 var options = {
@@ -65,7 +66,7 @@ for (var i = 0; i < stim_html.length; i++) {
 
 var instructions_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>Index:</strong> Accept option on screen (reject $20 today). <br><br><strong>Middle:</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial.</div></div>',
+  stimulus: '<div class = centerbox><div class = center-text>Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial.</div></div>',
   is_html: true,
   timing_stim: -1, 
   timing_response: -1,
@@ -85,13 +86,13 @@ var practice_block = {
   },
   stimulus: '<div class = dd-stim><div class = amtbox style = "color:white">$53.75</div><br><br><div class = delbox style = "color:white">34 days</div></div>',
   is_html: true,
-  choices: choices,
+  choices: [choices[0][1], choices[1][1]],
   response_ends_trial: true, 
 };
 
 var start_test_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>Get ready! <br><br>Stay as still as possible. Do not swallow.</div></div>',
+  stimulus: '<div class = centerbox><div class = center-text>Starting test block. Get Ready!</div></div>',
   is_html: true,
   choices: 'none',
   timing_stim: 1500, 
@@ -126,7 +127,7 @@ var end_block = {
 
 var rest_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><div class = center-text>In this next block of trials<br><strong>Index:</strong> Accept option on screen (reject $20 today). <br><strong>Middle:</strong> Reject option on screen (accept $20 today)<br>Next run will start in a moment</div></div>',
+  stimulus: '<div class = centerbox><div class = center-text>In this next block of trials<br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br>Next run will start in a moment</div></div>',
   is_html: true,
   choices: 'none',
   timing_response: 7500,
@@ -138,10 +139,10 @@ var rest_block = {
 
 //Set up experiment
 var discount_fixed_experiment = []
-test_keys(discount_fixed_experiment,choices)
+//test_keys(discount_fixed_experiment,choices)
 discount_fixed_experiment.push(instructions_block);
 discount_fixed_experiment.push(practice_block);
-setup_fmri_intro(discount_fixed_experiment)
+//setup_fmri_intro(discount_fixed_experiment)
 discount_fixed_experiment.push(start_test_block);
 
 
@@ -157,15 +158,15 @@ for (i = 0; i < stim_index.length; i++) {
   timing_response: get_ITI,  
   data: trials[i].data,
   is_html: true,
-  choices: choices,
+  choices: [choices[0][1], choices[1][1]],
   response_ends_trial: false,
   timing_post_trial: 0,
   on_finish: function(data) {
     var choice = false;
-    if (data.key_press == 89) {
+    if (data.key_press == choices[0][1]) {
       choice = 'larger_later';
       bonus_list.push({'amount': data.large_amount, 'delay': data.later_delay})
-    } else if (data.key_press == 71) {
+    } else if (data.key_press == choices[1][1]) {
       choice = 'smaller_sooner';
       bonus_list.push({'amount': data.small_amount, 'delay': 0})
     }

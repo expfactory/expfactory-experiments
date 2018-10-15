@@ -34,3 +34,14 @@
   transform: translate(-50%,-50%);
   background: black;
 }		
+
+.bigbox {
+  width: 100vw;
+  height: 100vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background: black;
+}
