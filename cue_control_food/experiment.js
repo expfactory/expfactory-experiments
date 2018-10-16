@@ -1,8 +1,6 @@
 /* ************************************ */
 /*       Define Helper Functions        */
 /* ************************************ */
-
-
 function getDisplayElement() {
     $('<div class = display_stage_background></div>').appendTo('body')
     return $('<div class = display_stage></div>').appendTo('body')
@@ -32,15 +30,12 @@ var createStims = function(numStims,numIterations,numZeroes){
 	var stimArray = jsPsych.randomization.repeat(numberArray,numIterations)
 	return stimArray
 }
-
 	
 	
 function createAllStims(numStimsPerCategory, numIterations, numZeroes, nullType){
 	
 	var neutral_stim_array = jsPsych.randomization.repeat(neutral_pics,1)
 	var valued_stim_array = jsPsych.randomization.repeat(valued_pics,1)
-
-
 	
 	var stims = []
 	for(var i = 0; i < numStimsPerCategory/2; i++){
@@ -87,24 +82,6 @@ function createAllStims(numStimsPerCategory, numIterations, numZeroes, nullType)
 	stims = jsPsych.randomization.repeat(stims,1,true)
 	return stims
 }
-	
-
-function getRestText(){
-	if(currBlock == numBlocks - 1){
-		return '<div class = bigbox><div class = centerbox>'+
-		  	  	 '<p class = center-textJamie style="font-size:50px"><font color="white">This phase is over.</font></p>'+
-		 	   '</div></div>'
-	
-	}else if(currBlock < numBlocks - 1){	
-		return '<div class = bigbox><div class = centerbox>'+
-		  	  	 '<p class = center-textJamie style="font-size:50px"><font color="white">Take a break!</font></p>'+
-		      	 '<p class = center-textJamie style="font-size:50px"><font color="white">Task will start in 10 seconds.</font></p>'+
-		 	   '</div></div>'
-	}
-
-}
-
-
 
 
 function getCue(){	
@@ -112,54 +89,33 @@ function getCue(){
 	stim_type = stims.stim_type.pop()
 	current_stim = stims.stim.pop()
 
-	
 	if (whichCue == "null"){
-	
 		return '<div class = bigbox><div class = centerbox><div class = fixation></div></div></div>'
-	
 	} else {
-
 		return '<div class = bigbox><div class = centerbox><div class = fixation><font color="white">'+whichCue+'</font></div></div></div>'
-	
 	}
-
 }
-
 
 
 function getProbe(){
-	
-	
 	if(stim_type == experiment_stim_type){
-	
 		return probeBoard1 + valued_stim_directory + current_stim + "'></img>" + probeBoard2		
 	}else if(stim_type == "neutral"){
-
 		return probeBoard1 + neutral_directory + current_stim + "'></img>" + probeBoard2	
 	}else if (stim_type == "null"){
 		return '<div class = bigbox></div>'
-	}
-	
-	
+	}	
 }
 
 
-
 function getRatingBoard(){	
-	
-	
-		if(stim_type == experiment_stim_type){
-	
-			return ratingBoard1 + valued_stim_directory + current_stim + "'></img>" + ratingBoard2	
-		} else if(stim_type == "neutral"){
-
-			return ratingBoard1 + neutral_directory + current_stim + "'></img>" + ratingBoard2	
-		} else if (stim_type == "null"){
-			
-			return '<div class = bigbox></div>'
-		}
-	
-	
+	if(stim_type == experiment_stim_type){
+		return ratingBoard1 + valued_stim_directory + current_stim + "'></img>" + ratingBoard2	
+	} else if(stim_type == "neutral"){
+		return ratingBoard1 + neutral_directory + current_stim + "'></img>" + ratingBoard2	
+	} else if (stim_type == "null"){
+		return '<div class = bigbox></div>'
+	}	
 }
 
 var hitKey = function(whichKey){
@@ -172,8 +128,6 @@ var hitKey = function(whichKey){
   	e.keyCode = whichKey
   	$(document).trigger(e)
 }
-
-
 
 document.addEventListener("keydown", function(e){
     var keynum;    
@@ -189,16 +143,11 @@ document.addEventListener("keydown", function(e){
     	(keynum == possible_responses[2][1]) || 
     	(keynum == possible_responses[3][1]) || 
     	(keynum == possible_responses[4][1])){
-
-		
 	
 		if (exp_target_phase == 1){
-    
     		response_tracker.push(keynum)
-    	
     	}
     }
-    
     
     if ((keynum == possible_responses[0][1]) && (response_tracker.length == 1)){
     	$('#btn1').removeClass('unselected');
@@ -231,12 +180,7 @@ document.addEventListener("keydown", function(e){
     	hitKey(keynum)
     
     }
-    
-    
-    
 });
-
-
 
 var appendData = function(){
 
@@ -260,28 +204,16 @@ var appendData = function(){
 	response_tracker = []
 	exp_target_phase = 0
 }
-
-var check_finger_counter = 0
-function getCheckFingerStim(){
-	return '<div class = bigbox><div class = centerbox>'+
-		   	'<p class = center-textJamie style="font-size:50px"><font color="white">Press your ' + possible_responses[check_finger_counter][0] + '</font></p>'+
-		   '</div></div>'
-
-
-}
-
-function getChoice(){
-	return [possible_responses[check_finger_counter][1]]
-}
-
-
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
 var subject_ID = 472
 var numStimsPerCategory = 36
 var totalStims = (numStimsPerCategory/2) * 5 // 5 total conditions
-var possible_responses = [['Thumb', 66],['Index Finger',89],['Middle Finger',71],['Ring Finger',82],['Pinky',77]]
+
+//var possible_responses = [['Thumb', 66],['Index Finger',89],['Middle Finger',71],['Ring Finger',82],['Pinky',77]]
+//above are the responses for mri, below are the ones for local computer
+var possible_responses = [['1', 49],['2',50],['3',51],['4',52],['5',53]]
 
 
 
@@ -372,8 +304,8 @@ var end_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Thanks for completing!</font></p>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Thanks for completing!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -386,75 +318,14 @@ var welcome_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Welcome to the task!</font></p>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Welcome to the task!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
 };
 
 
-var experimentor_wait_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "experimentor_wait"
-	},
-	timing_response: -1,
-	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Scanner Setup</font></p>'+
-		  '</div></div>',
-	cont_key: [32],
-	timing_post_trial: 0
-};
-
-var scanner_wait_block_first = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox><div class = centerbox>'+
-		  	  '<p class = center-textJamie style="font-size:50px"><font color="white">Task about to start!</font></p>'+
-		  	  '</div></div>',
-	is_html: true,
-	choices: [84],
-	data: {
-		trial_id: "scanner_wait"
-	},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-
-var scanner_wait_block_second = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox><div class = centerbox>'+
-		  	  '<p class = center-textJamie style="font-size:50px"><font color="white">Task about to start!</font></p>'+
-		  	  '</div></div>',
-	is_html: true,
-	choices: 'none',
-	data: {
-		trial_id: "scanner_wait"
-	},
-	timing_post_trial: 0,
-	timing_stim: 8160,
-	timing_response: 8160,
-	response_ends_trial: false
-};
-
-var scanner_wait_block_third = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox><div class = centerbox>'+
-		  	  '<p class = center-textJamie style="font-size:50px"><font color="white">Get Ready!</font></p>'+
-		  	  '</div></div>',
-	is_html: true,
-	choices: 'none',
-	data: {
-		trial_id: "scanner_wait"
-	},
-	timing_post_trial: 0,
-	timing_stim: 2720,
-	timing_response: 2720,
-	response_ends_trial: false
-};
 
 var instructions_block = {
 	type: 'poldrack-text',
@@ -474,58 +345,26 @@ var instructions_block = {
 	timing_post_trial: 0
 };
 
-
-var scanner_rest_block = {
+var start_test_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getRestText,
+	stimulus: '<div class = bigbox><div class = centerbox>'+
+		  	  '<p class = center-textJamie style="font-size:36px"><font color="white">Starting a test block.  Press enter to continue.</font></p>'+
+		  	  '</div></div>',
 	is_html: true,
 	choices: [13],
 	data: {
-		trial_id: "scanner_rest"
+		trial_id: "scanner_wait"
 	},
 	timing_post_trial: 0,
-	timing_stim: 10000,
-	timing_response: 10000,
+	timing_stim: -1,
+	timing_response: -1,
 	response_ends_trial: true
 };
-
-
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-
-var check_finger_trials = []
-for(var i = 0; i < possible_responses.length; i++){
-	var check_finger_block = {
-	type: 'poldrack-single-stim',
-	stimulus: getCheckFingerStim,
-	is_html: true,
-	choices: getChoice, //'none'
-	data: {
-		trial_id: "cue"
-	},
-	timing_post_trial: 0,
-	timing_stim: -1, 
-	timing_response: -1,
-	response_ends_trial: true,
-	on_finish: function(){
-		check_finger_counter += 1
-		}
-	};
-	
-	check_finger_trials.push(check_finger_block)
-}
-
-var check_finger_node = {
-	timeline: check_finger_trials,
-	loop_function: function(data){
-		return false
-	
-	}
-}
-
-
 var training_trials = []
+training_trials.push(start_test_block)
 for(var i = 0; i < numStimsPerBlock; i++){ //numStims before, should be # of trials per block (40??)
 	
 	var cue_block = {
@@ -579,28 +418,18 @@ for(var i = 0; i < numStimsPerBlock; i++){ //numStims before, should be # of tri
 	training_trials.push(probe_block)
 	training_trials.push(rating_block)
 }
-training_trials.push(scanner_rest_block)
-
-
 
 var training_node = {
 	timeline: training_trials,
 	loop_function: function(data){
 		currBlock += 1
-	
-		if(currBlock == numBlocks){
-			
-			
+		if(currBlock == numBlocks){			
 			return false
-		}else if (currBlock < numBlocks){
-			
-			
+		}else if (currBlock < numBlocks){			
 			return true
 		}
-	
 	}
 }
-
 /* ************************************ */
 /*          Set up Experiment           */
 /* ************************************ */
@@ -609,22 +438,8 @@ var cue_control_food_experiment = []
 
 cue_control_food_experiment.push(welcome_block);
 
-cue_control_food_experiment.push(check_finger_node);
-
 cue_control_food_experiment.push(instructions_block);
-
-cue_control_food_experiment.push(experimentor_wait_block);
-
-cue_control_food_experiment.push(scanner_wait_block_first);
-
-cue_control_food_experiment.push(scanner_wait_block_second);
-
-cue_control_food_experiment.push(scanner_wait_block_third);
 
 cue_control_food_experiment.push(training_node);
 
 cue_control_food_experiment.push(end_block);
-
-
-
-
