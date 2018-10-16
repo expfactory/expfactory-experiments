@@ -281,7 +281,9 @@ var subject_ID = 472
 var numStimsPerCategory = 36
 var totalStims = (numStimsPerCategory/2) * 5 // 5 total conditions
 
-var possible_responses = [['Thumb', 66],['Index Finger',89],['Middle Finger',71],['Ring Finger',82],['Pinky',77]]
+//var possible_responses = [['Thumb', 66],['Index Finger',89],['Middle Finger',71],['Ring Finger',82],['Pinky',77]]
+//above are the responses for mri, below are the ones for local computer
+var possible_responses = [['1', 49],['2',50],['3',51],['4',52],['5',53]]
 
 
 
@@ -368,8 +370,8 @@ var end_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Thanks for completing!</font></p>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Thanks for completing!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -382,8 +384,8 @@ var welcome_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Welcome to the task!</font></p>'+
-		  '<p class = center-textJamie style="font-size:50px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Welcome to the task!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
 		  '</div></div>',
 	cont_key: [13],
 	timing_post_trial: 0
@@ -487,6 +489,21 @@ var scanner_rest_block = {
 	response_ends_trial: true
 };
 
+var start_test_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = bigbox><div class = centerbox>'+
+		  	  '<p class = center-textJamie style="font-size:36px"><font color="white">Starting a test block.  Press enter to continue.</font></p>'+
+		  	  '</div></div>',
+	is_html: true,
+	choices: [13],
+	data: {
+		trial_id: "scanner_wait"
+	},
+	timing_post_trial: 0,
+	timing_stim: -1,
+	timing_response: -1,
+	response_ends_trial: true
+};
 
 /* ************************************ */
 /*        Set up timeline blocks        */
@@ -524,6 +541,7 @@ var check_finger_node = {
 
 
 var training_trials = []
+training_trials.push(start_test_block)
 for(var i = 0; i < numStimsPerBlock; i++){ //numStims before, should be # of trials per block (40??)
 	
 	var cue_block = {
@@ -577,7 +595,7 @@ for(var i = 0; i < numStimsPerBlock; i++){ //numStims before, should be # of tri
 	training_trials.push(probe_block)
 	training_trials.push(rating_block)
 }
-training_trials.push(scanner_rest_block)
+//training_trials.push(scanner_rest_block)
 
 
 
@@ -607,17 +625,17 @@ var cue_control_smoking_experiment = []
 
 cue_control_smoking_experiment.push(welcome_block);
 
-cue_control_smoking_experiment.push(check_finger_node);
+//cue_control_smoking_experiment.push(check_finger_node);
 
 cue_control_smoking_experiment.push(instructions_block);
 
-cue_control_smoking_experiment.push(experimentor_wait_block);
+//cue_control_smoking_experiment.push(experimentor_wait_block);
 
-cue_control_smoking_experiment.push(scanner_wait_block_first);
+//cue_control_smoking_experiment.push(scanner_wait_block_first);
 
-cue_control_smoking_experiment.push(scanner_wait_block_second);
+//cue_control_smoking_experiment.push(scanner_wait_block_second);
 
-cue_control_smoking_experiment.push(scanner_wait_block_third);
+//cue_control_smoking_experiment.push(scanner_wait_block_third);
 
 cue_control_smoking_experiment.push(training_node);
 
