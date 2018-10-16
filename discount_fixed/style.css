@@ -1,0 +1,63 @@
+.display_stage {
+    position: fixed;
+    background: black;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+.display_stage > div, .display_stage > p {
+  color: white;
+}
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-textJamie {
+ text-align:center;
+ font-size: 26px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+.dd-stim {
+  text-align: center;
+  font-size: 80px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: black;
+  width: 50vw;
+  height: 60vh;
+  top: 50%;
+  left: 50%;
+}
+
+.amtbox {
+  position: absolute;
+  top: 35%;
+  width:100%;
+  z-index: 2
+}
+
+.delbox {
+ position: absolute;
+ top: 60%;
+ width:100%;
+ z-index: 3
+}
+
+.black-centerbox {
+  width: 50vw;
+  height: 60vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background: black;
+}		
