@@ -14,6 +14,17 @@
   color: white;
 }
 
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-textJamie {
+ text-align:center;
+ font-size: 26px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
 .dd-stim {
   text-align: center;
   font-size: 80px;

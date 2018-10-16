@@ -66,7 +66,7 @@ for (var i = 0; i < stim_html.length; i++) {
 
 var instructions_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial. Press Enter to continue.</p></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:36px; line-height:80%%;">Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>'+choices[0][0]+':</strong> Accept option on screen (reject $20 today). <br><br><strong>'+choices[1][0]+':</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial. Press Enter to continue.</p></div>',
   is_html: true,
   timing_stim: -1, 
   timing_response: -1,
@@ -92,7 +92,7 @@ var practice_block = {
 
 var start_test_block = {
   type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Starting test block.  Get Ready!</p></div>',
+  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:36px; line-height:80%%;">Starting test block.  Get Ready!</p></div>',
   is_html: true,
   choices: 'none',
   timing_stim: 1500, 
@@ -108,22 +108,38 @@ var start_test_block = {
 };
 
 var end_block = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = centerbox><p class = center-block-text style = "font-size:24px; line-height:80%%;">Fin.</p></div>',
-  is_html: true,
-  choices: [32],
-  timing_response: -1,
-  response_ends_trial: true,
-  data: {
-    trial_id: "end",
-    exp_id: 'discount_fixed'
-  },
-  timing_post_trial: 0,
-  on_finish: function() {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "end"
+	},
+	timing_response: -1,
+	text: '<div class = bigbox><div class = centerbox>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Thanks for completing!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '</div></div>',
+	cont_key: [13],
+	timing_post_trial: 0,
+	on_finish: function() {
     var bonus = randomDraw(bonus_list)
     jsPsych.data.addDataToLastTrial({'bonus': bonus})
   }
 };
+
+var welcome_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: -1,
+	text: '<div class = bigbox><div class = centerbox>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Welcome to the task!</font></p>'+
+		  '<p class = center-textJamie style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+
+		  '</div></div>',
+	cont_key: [13],
+	timing_post_trial: 0
+};
+
+
 
 var rest_block = {
   type: 'poldrack-single-stim',
@@ -140,6 +156,7 @@ var rest_block = {
 //Set up experiment
 var discount_fixed_experiment = []
 //test_keys(discount_fixed_experiment,choices)
+discount_fixed_experiment.push(welcome_block);
 discount_fixed_experiment.push(instructions_block);
 discount_fixed_experiment.push(practice_block);
 //setup_fmri_intro(discount_fixed_experiment)

@@ -10,7 +10,6 @@ function addID() {
   jsPsych.data.addDataToLastTrial({exp_id: 'cue_control_food', subject_ID: subject_ID})
 }
 
-
 var createStims = function(numStims,numIterations,numZeroes){
 	var lowEnd = 1
 	var numberArray = []
@@ -29,8 +28,7 @@ var createStims = function(numStims,numIterations,numZeroes){
 
 	var stimArray = jsPsych.randomization.repeat(numberArray,numIterations)
 	return stimArray
-}
-	
+}	
 	
 function createAllStims(numStimsPerCategory, numIterations, numZeroes, nullType){
 	
