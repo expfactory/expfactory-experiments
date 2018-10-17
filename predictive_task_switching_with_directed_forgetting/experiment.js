@@ -81,10 +81,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
 	
 	var directed_forgetting_trial_type_list = []
-	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/4)
-	var directed_forgetting_trial_types2 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/4)
-	var directed_forgetting_trial_types3 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/4)
-	var directed_forgetting_trial_types4 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/4)
+	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
+	var directed_forgetting_trial_types2 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
+	var directed_forgetting_trial_types3 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
+	var directed_forgetting_trial_types4 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types1)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types2)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types3)
@@ -108,7 +108,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 		cue: cue,
 		probe: probe,
 		correct_response: correct_response
-	
 	}
 	
 	stims.push(first_stim)
@@ -368,8 +367,8 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16
-var exp_len = 320 //320 must be divisible by 16
-var numTrialsPerBlock = 64; // divisible by 64
+var exp_len = 32 //320 must be divisible by 16
+var numTrialsPerBlock = 16; // divisible by 64
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.80

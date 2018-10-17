@@ -92,7 +92,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	}
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
 			
@@ -368,8 +368,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 // new vars
-var practice_len = 16  // must be divisible by 8
-var exp_len = 320 //320 must be divisible by 8
+var practice_len = 16  // must be divisible by 16
+var exp_len = 320 //320 must be divisible by 16
 var numTrialsPerBlock = 64; // divisible by 64
 var numTestBlocks = exp_len / numTrialsPerBlock
 

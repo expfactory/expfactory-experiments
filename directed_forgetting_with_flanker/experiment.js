@@ -82,7 +82,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
@@ -722,7 +722,8 @@ for (i = 0; i < practice_len; i++) {
 		timing_post_trial: 0,
 		is_html: true,
 		on_finish: appendData,
-		prompt: prompt_text
+		prompt: prompt_text,
+		show_stim_with_feedback: false,
 	};
 
 	practiceTrials.push(start_fixation_block)

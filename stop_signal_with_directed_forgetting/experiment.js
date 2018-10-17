@@ -330,18 +330,16 @@ var getTrainingStim = function(){
 		   task_boards[4]+letters[4]+
 		   task_boards[5]+letters[5]+
 		   task_boards[6]
-
 }
 
 var getDirectedCueStim = function(){
 	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'	
-
 }
-
 
 var getProbeStim = function(){
 	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
 }
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */

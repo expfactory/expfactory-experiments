@@ -775,7 +775,7 @@ for (i = 0; i < practice_len + 2; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -894,7 +894,7 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000, //2000
-		timing_response: 1000, //2000
+		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,
 		on_finish: appendData

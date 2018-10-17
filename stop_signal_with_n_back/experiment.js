@@ -373,8 +373,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 var run_attention_checks = true
-var practice_len = 15 // 24 must be divisible by 15
-var exp_len = 45 //324 must be divisible by 15
+var practice_len = 15 // 15 must be divisible by 15
+var exp_len = 45 //300 must be divisible by 15
 var numTrialsPerBlock = 15 // 45 or 60, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials

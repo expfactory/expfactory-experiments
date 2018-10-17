@@ -269,13 +269,13 @@ var credit_var = 0
 var run_attention_checks = true
 
 
-var practice_len = 20 // 24 must be divisible by 4
-var exp_len = 60 //324 must be divisible by 4
-var numTrialsPerBlock = 20 // 54 must be divisible by 4 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var practice_len = 20 // 24 must be divisible by 10
+var exp_len = 60 //324 must be divisible by 10
+var numTrialsPerBlock = 20 // 54 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of practice trials
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
@@ -556,7 +556,7 @@ var feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len + 1; i++) {
+for (i = 0; i < practice_len + 3; i++) {
 	var cue_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getCueStim,
@@ -668,7 +668,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock + 1; i++) {
+for (i = 0; i < numTrialsPerBlock + 3; i++) {
 	var cue_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getCueStim,

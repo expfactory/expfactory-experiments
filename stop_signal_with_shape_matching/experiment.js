@@ -145,7 +145,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/35; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/21; numIterations++){
 		for (var numShapeConds = 0; numShapeConds < shape_matching_trial_types.length; numShapeConds++){
 			for (var stop_signal_nogoConds = 0; stop_signal_nogoConds < stop_signal_trial_types.length; stop_signal_nogoConds++){
 			

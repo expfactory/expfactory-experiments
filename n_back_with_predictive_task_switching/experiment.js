@@ -192,7 +192,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		predictive_dimension = predictive_dimensions[quadIndex - 1][0]
 		delay = predictive_dimensions[quadIndex - 1][1]
 		
-		if ( i == 0){
+		if ( i === 0){
 			n_back_cond = 'N/A'
 			probe = randomDraw(letters)
 			correct_response = possible_responses[1][1]
@@ -328,8 +328,8 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 24
-var exp_len = 120 //320 must be divisible by 20
-var numTrialsPerBlock = 40 // must be divisible by 20
+var exp_len = 120 //320 must be divisible by 10
+var numTrialsPerBlock = 40 // must be divisible by 10
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.80
@@ -343,7 +343,7 @@ var preFileType = "<img class = center src='/static/experiments/n_back_with_pred
 
 
 
-var n_back_conditions = ['match','mismatch']
+var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
 var predictive_conditions = [['stay','switch'],
 							 ['switch','stay']]
 
