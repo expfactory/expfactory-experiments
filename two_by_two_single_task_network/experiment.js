@@ -73,6 +73,10 @@ var getInstructFeedback = function() {
     '</p></div>'
 }
 
+var getFeedback = function() {
+	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+}
+
 // Task Specific Functions
 var getKeys = function(obj) {
   var keys = [];
@@ -231,6 +235,9 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 40
 var test_length = 440
+var numTrialsPerBlock = 40
+var numTestBlocks = test_length / numTrialsPerBlock
+
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -477,7 +484,18 @@ var practice_block = {
   timing_stim: 1000,
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: appendData
+  on_finish: function(data) {
+    appendData()
+    correct_response = getResponse()
+    correct = false
+    if (data.key_press === correct_response) {
+      correct = true
+    }
+    jsPsych.data.addDataToLastTrial({
+      'correct_response': correct_response,
+      'correct': correct
+    })
+  }
 }
 
 var test_block = {
@@ -523,9 +541,112 @@ var gap_block = {
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 };
 
+var feedback_text = 
+'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+var feedback_block = {
+	type: 'poldrack-single-stim',
+	data: {
+		exp_id: "cued_predictive_task_switching",
+		trial_id: "practice-stop-feedback"
+	},
+	choices: [13],
+	stimulus: getFeedback,
+	timing_post_trial: 0,
+	is_html: true,
+	timing_stim: -1,
+	timing_response: -1,
+	response_ends_trial: true, 
+
+};
+
+var practiceTrials = []
+practiceTrials.push(feedback_block)
+practiceTrials.push(instructions_block)
+for (var i = 0; i < practice_length; i++) {
+  practiceTrials.push(setStims_block)
+  practiceTrials.push(fixation_block)
+  practiceTrials.push(cue_block);
+  practiceTrials.push(practice_block);
+  practiceTrials.push(gap_block);
+}
+
+var practiceCount = 0
+var practiceNode = {
+	timeline: practiceTrials,
+	loop_function: function(data) {
+		practiceCount += 1
+		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / 4)
+		practiceStims = genStims(practice_length)
+		current_trial = 0
+	
+		var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+	
+		for (var i = 0; i < data.length; i++){
+			if (data[i].trial_id == "stim"){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+		
+					}
+				}
+		
+			}
+	
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+	
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+
+		if (accuracy > accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
+			testStims = genStims(test_length)
+			task_switches = jsPsych.randomization.repeat(task_switches, test_length / 4)
+			return false
+	
+		} else if (accuracy < accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
+			if (missed_responses > missed_thresh){
+				feedback_text +=
+						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+		
+			if (practiceCount == practice_thresh){
+				feedback_text +=
+					'</p><p class = block-text>Done with this practice.' 
+					testStims = genStims(test_length)
+					task_switches = jsPsych.randomization.repeat(task_switches, test_length / 4)
+					return false
+			}
+			
+			feedback_text +=
+				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
+			
+			return true
+		
+		}
+		
+	}
+}
+
 
 /* create experiment definition array */
 var two_by_two_single_task_network_experiment = [];
+
+two_by_two_single_task_network_experiment.push(practiceNode);
+two_by_two_single_task_network_experiment.push(feedback_block);
+
 two_by_two_single_task_network_experiment.push(instruction_node);
 two_by_two_single_task_network_experiment.push(start_practice_block);
 for (var i = 0; i < practice_length; i++) {

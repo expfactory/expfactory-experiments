@@ -318,7 +318,7 @@ var credit_var = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_two_by_two/images/'
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30

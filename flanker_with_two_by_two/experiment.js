@@ -257,7 +257,7 @@ var credit_var = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/flanker_with_two_by_two/images/'
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.60
 var practice_thresh = 3
 var lowestNumCond = 8

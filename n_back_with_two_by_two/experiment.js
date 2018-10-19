@@ -435,7 +435,7 @@ var exp_len = 40 //320 must be divisible by 20
 var numTrialsPerBlock = 20 // must be divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
 

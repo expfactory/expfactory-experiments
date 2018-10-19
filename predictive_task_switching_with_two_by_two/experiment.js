@@ -405,7 +405,7 @@ var numTrialsPerBlock = 32 // 64 must be divisible by 32
 var numTestBlocks = exp_len / numTrialsPerBlock
 var CTI = 300
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
 

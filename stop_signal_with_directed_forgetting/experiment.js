@@ -713,8 +713,8 @@ var start_fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 1000, //1000
-	timing_response: 1000,
+	timing_stim: 500, //1000
+	timing_response: 500,
 	on_finish: function(){
 		stim = getNextStim()
 	}
@@ -742,8 +742,8 @@ var ITI_fixation_block = {
 		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 4000, //4000
-	timing_response: 4000
+	timing_stim: 1000, //4000
+	timing_response: 1000
 }
 
 var cue_directed_block = {
@@ -835,8 +835,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_stim: 500, //1000
+		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function(){
 			stim = getNextStim()
@@ -867,8 +867,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 4000, //4000
-		timing_response: 4000
+		timing_stim: 1000, //4000
+		timing_response: 1000
 	}
 
 	var practice_cue_directed_block = {
@@ -911,7 +911,7 @@ for (i = 0; i < practice_len; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
+		timing_stim: 1000,
 		timing_response: 1850,
 		response_ends_trial: false,
 		SSD: getSSD,
