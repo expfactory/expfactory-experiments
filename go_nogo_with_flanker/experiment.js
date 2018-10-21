@@ -286,63 +286,6 @@ var attention_node = {
   }
 }
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the trial will look like. You will see a row of letters composed of H and F. Please indicate the identity of the middle letter.</p>'+
-					'<p class = block-text style="font-size:24px;">In this case, the middle letter is F, so the correct answer is the F key.</p>'+
-					'<p class = block-text style="font-size:24px;">Please ignore the letters that are not in the center, in this case, H.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					'<div class = leftbox1>' + preFileType +   go_no_go_styles[0]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = leftbox2>' + preFileType +   go_no_go_styles[0]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = centerimg>' + preFileType +   go_no_go_styles[0]  + '_F'  + fileTypePNG + '</div>'+
-					'<div class = rightbox1>' + preFileType +   go_no_go_styles[0]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = rightbox2>' + preFileType +   go_no_go_styles[0]  + '_H'  + fileTypePNG + '</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">If instead, the '+go_no_go_styles[1]+' version of the letters came out, then do not respond on that trial!</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, respond only if the number is '+go_no_go_styles[0]+', not if the number is '+go_no_go_styles[0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					'<div class = leftbox1>' + preFileType +   go_no_go_styles[1]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = leftbox2>' + preFileType +   go_no_go_styles[1]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = centerimg>' + preFileType +   go_no_go_styles[1]  + '_F'  + fileTypePNG + '</div>'+
-					'<div class = rightbox1>' + preFileType +   go_no_go_styles[1]  + '_H'  + fileTypePNG + '</div>'+
-					'<div class = rightbox2>' + preFileType +   go_no_go_styles[1]  + '_H'  + fileTypePNG + '</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -352,6 +295,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -372,8 +316,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

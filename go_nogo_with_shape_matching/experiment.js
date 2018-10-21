@@ -349,62 +349,6 @@ var attention_node = {
   }
 }
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the trial will look like.  The green and red shapes are on the left, and the white shape is on the right.</p>'+
-					'<p class = block-text style="font-size:24px;">If the green and white shapes are the same, press ' + possible_responses[0][0] + '.  If the green and white shapes are different, press ' + possible_responses[1][0] + '</p>'+
-					'<p class = block-text style="font-size:24px;">In this case, the green and white shapes are the same, so the correct answer is the ' + possible_responses[0][0] + '.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				   
-				   '<div class = leftbox>' + preFileType +  '1_green' + fileTypePNG + 
-				   task_boards[1]+ preFileType +  '2_red' + fileTypePNG + 
-				   task_boards[2]+ preFileType +  '1_white'+ '_' + go_no_go_styles[0] + fileTypePNG + 
-				   '</div>'	+
-				
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">If instead, the '+go_no_go_styles[1]+' version of the white shape came out, then do not respond on that trial!</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, respond only if the white shape is '+go_no_go_styles[0]+', not if the white shape is '+go_no_go_styles[1]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">For example, you would not respond on this trial, because the white shape is '+go_no_go_styles[1]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = leftbox>' + preFileType +  '1_green' + fileTypePNG + 
-				   task_boards[1]+ preFileType +  '2_red' + fileTypePNG + 
-				   task_boards[2]+ preFileType +  '1_white'+ '_' + go_no_go_styles[1] + fileTypePNG + 
-				'</div>'+
-				
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -430,8 +374,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

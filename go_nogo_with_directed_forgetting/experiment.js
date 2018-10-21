@@ -421,144 +421,6 @@ var prompt_text = '<div class = prompt_box>'+
 /* ************************************ */
 // Set up attention check node
 var attention_check_block = {
-  type: 'attention-check',
-  data: {
-    trial_id: "attention_check"
-  },
-  timing_response: 180000,
-  response_ends_trial: true,
-  timing_post_trial: 200
-}
-
-var attention_node = {
-  timeline: [attention_check_block],
-  conditional_function: function() {
-    return run_attention_checks
-  }
-}
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">This is what the first part of the trial will look like.  The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.</p>'+
-					'<p class = block-text style="font-size:22px;">Please remember all 6 letters.</p>'+
-					'<p class = block-text style="font-size:22px;">Press enter to start continue. You will not be able to go back.</p>'+
-				'</div>'+
-				'<div class = lettersBox>'+
-					'<div class = topLeft style="font-size:50px;">A</div>' +
-					'<div class = topMiddle style="font-size:50px;">B</div>' +
-					'<div class = topRight style="font-size:50px;">C</div>' +
-					'<div class = bottomLeft style="font-size:50px;">D</div>' +
-					'<div class = bottomMiddle style="font-size:50px;">E</div>' +
-					'<div class = bottomRight style="font-size:50px;">F</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">This is what the second part of the trial will look like. A cue will be presented, either TOP or BOT.  This cue instructs you which of the 6 letters to forget, either the top 3 or bottom 3 letters.</p>'+
-					'<p class = block-text style="font-size:22px;">If the cue presented is <i>TOP</i>, then you should <i> forget the top letters A, B, and C</i> and remember D, E, and F.</p>'+
-					'<p class = block-text style="font-size:22px;">If the cue presented is <i>BOT</i>, then you should <i> forget the bottom letters D, E, and F </i> and remember A, B, and C.</p>'+
-					'<p class = block-text style="font-size:22px;">The letters that you must remember, are called your memory set. </i></p>'+
-					'<p class = block-text style="font-size:22px;">In this case, the cue is TOP, so forget the top 3 letters, A, B, and C. <i>Your memory set is D, E, and F!</i></p>'+
-					'<p class = block-text style="font-size:22px;">Press enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				
-				'<div class = centerbox><div class = flanker-text>TOP</div></div>'+
-				
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-
-var practice3 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">After the cue, TOP or BOT disappears, you will be presented with a single letter like this.  Please respond if the letter was in the memory set.</p>'+
-					'<p class = block-text style="font-size:22px;">Press '+possible_responses[0][0]+' if the letter was in the memory set, and '+possible_responses[1][0]+' if not.</p>'+
-					'<p class = block-text style="font-size:22px;">In this case, the center letter is B, which was not in the memory set.  The correct answer is the '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:22px;">Press enter to start practice.</p>'+
-				'</div>'+
-		
-				'<div class = centerbox>'+
-					'<div class = gng_number>'+ preFileType + go_no_go_styles[0]+ '_B' + fileTypePNG + '</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice4 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">On some trials, the probe will come like this.  This is the '+go_no_go_styles[1]+' version of the probe.</p>'+
-					'<p class = block-text style="font-size:22px;">If you see a '+go_no_go_styles[1]+' probe instead of a '+go_no_go_styles[0]+' probe, please make <i> no response on that trial</i>.</p>'+
-					'<p class = block-text style="font-size:22px;">Press enter to start practice.</p>'+
-				'</div>'+
-		
-				'<div class = centerbox>'+
-					'<div class = gng_number>'+ preFileType + go_no_go_styles[1] + '_B' + fileTypePNG + '</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var feedback_text = 'We will start practice. During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
-var feedback_block = {
-	type: 'poldrack-single-stim',
-	data: {
-		exp_id: "go_nogo_with_predictive_task_switching",
-		trial_id: "feedback_block"
-	},
-	choices: [13],
-	stimulus: getFeedback,
-	timing_post_trial: 0,
-	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true, 
-
-};
-// Set up attention check node
-var attention_check_block = {
 	type: 'attention-check',
 	data: {
 		trial_id: "attention_check"
@@ -584,6 +446,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -614,8 +477,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
@@ -1077,13 +939,6 @@ var testNode = {
 /* create experiment definition array */
 var go_nogo_with_directed_forgetting_experiment = [];
 go_nogo_with_directed_forgetting_experiment.push(attention_node);
-
-//go_nogo_with_directed_forgetting_experiment.push(test_img_block);
-//go_nogo_with_directed_forgetting_experiment.push(instruction_node);
-//go_nogo_with_directed_forgetting_experiment.push(practice1);
-//go_nogo_with_directed_forgetting_experiment.push(practice2);
-//go_nogo_with_directed_forgetting_experiment.push(practice3);
-//go_nogo_with_directed_forgetting_experiment.push(practice4);
 
 go_nogo_with_directed_forgetting_experiment.push(practiceNode);
 go_nogo_with_directed_forgetting_experiment.push(feedback_block);

@@ -388,58 +388,7 @@ var attention_node = {
     return run_attention_checks
   }
 }
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the first part of the trial will look like.  The number is at a bottom quadrant, so please judge the number on '+predictive_dimensions_list[1].dim+'</p>'+
-					'<p class = block-text style="font-size:24px;">If the number is '+predictive_dimensions_list[1].values[0]+', press ' + possible_responses[0][0] + '.  If the number is '+predictive_dimensions_list[1].values[1]+', press ' + possible_responses[1][0] + '</p>'+
-					'<p class = block-text style="font-size:24px;">On every trial, the number will move in a clockwise fashion.</p>'+
-					'<p class = block-text style="font-size:24px;">If instead, the number was on a top quadrant, please judge the number on '+predictive_dimensions_list[0].dim+'. If the number is '+predictive_dimensions_list[0].values[0]+', press ' + possible_responses[1][0] + '.  If the number is '+predictive_dimensions_list[0].values[1]+', press ' + possible_responses[1][0] + '</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left>'+
-					'<div class = centerbox><div class = gng_number>' + preFileType +   go_no_go_styles[0]  + '_1' + fileTypePNG + '</div></div>'+
-				'</div>'+
-				
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
 
-
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">If instead, the '+go_no_go_styles[1]+' version of the number came out, then do not respond on that trial!</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, respond only if the number is '+go_no_go_styles[0]+', not if the number is '+go_no_go_styles[0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left>'+
-					'<div class = centerbox><div class = gng_number>' + preFileType +   go_no_go_styles[1]  + '_1' + fileTypePNG + '</div></div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
 
 //Set up post task questionnaire
 var post_task_block = {
@@ -450,6 +399,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -465,8 +415,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

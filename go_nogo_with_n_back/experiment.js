@@ -453,56 +453,6 @@ var attention_node = {
   }
 }
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the trial will look like. You will see a letter. Please remember this letter, and respond if it matches the delayed letter.</p>'+
-					'<p class = block-text style="font-size:24px;">Press the '+possible_responses[0][0]+' if the current and delayed letters match, and the '+possible_responses[1][0]+' if not.</p>'+
-					'<p class = block-text style="font-size:24px;">At the beginning of each block of trials, depending on delay, you will not have anything to match the current letter to.  For these trials, press the '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					'<div class = gng_number>' + preFileType +   go_no_go_styles[0]  + '_uppercase_V'  + fileTypePNG + '</div>'+
-				'</div>'+
-				
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">If instead, the '+go_no_go_styles[1]+' version of the letter came out, then do not respond on that trial!</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, respond only if the number is '+go_no_go_styles[0]+', not if the number is '+go_no_go_styles[1]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">You must still commit this letter to memory, even if you are not responding on this trial.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					'<div class = gng_number>' + preFileType +   go_no_go_styles[1]  + '_uppercase_V'  + fileTypePNG + '</div>'+
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -528,7 +478,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 var feedback_instruct_text =
@@ -657,8 +608,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
