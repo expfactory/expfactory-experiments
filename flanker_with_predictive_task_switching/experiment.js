@@ -368,43 +368,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
-};
-
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The row of numbers are in the bottom of the screen, so you must judge the <i>middle</i> number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge the <i>middle</i> number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">During practice and test trials, the numbers will move clockwise from trial to trial.  <i>Ignore the numbers not in the center!</i></p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left>'+
-					'<div class = centerbox><div class = flanker-text>33633</div></div>' +
-				'</div>' +
-			'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-//Set up post task questionnaire
-var post_task_block = {
-   type: 'survey-text',
-   data: {
-       trial_id: "post_task_questions"
-   },
-   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
-   rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -420,8 +384,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

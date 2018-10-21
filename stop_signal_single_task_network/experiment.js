@@ -335,7 +335,7 @@ var end_block = {
 		exp_id: "stop_signal_single_task_network",
 		trial_id: "end"
 	},
-	timing_response: -1,
+	timing_response: 180000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Thanks for completing this task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -354,7 +354,7 @@ var welcome_block = {
 		exp_id: "stop_signal_single_task_network",
 		trial_id: "welcome"
 	},
-	timing_response: -1,
+	timing_response: 180000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -471,8 +471,7 @@ var practice_intro = {
 		"trial_id": "stop_intro_phase1"
 	},
 	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true
 };
 
@@ -487,8 +486,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
@@ -512,8 +510,7 @@ var test_intro = {
 		"trial_id": "test_intro"
 	},
 	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true,
 	on_finish: function(){
 		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimuli.'
@@ -532,8 +529,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
@@ -547,6 +543,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 /********************************************/

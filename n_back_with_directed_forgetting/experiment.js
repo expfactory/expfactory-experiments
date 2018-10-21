@@ -350,58 +350,9 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
-	
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the first part of the trial will look like.  You will see a cue, either remember or forget.</p>'+
-					'<p class = block-text style="font-size:24px;">If you saw the cue remember, please add the subsequent letter to your memory set.</p>'+
-					'<p class = block-text style="font-size:24px;">If you saw the cue forget, <i>do not add</i> the subsequent letter to your memory set.</p>'+
-					'<p class = block-text style="font-size:24px;">You will be given a delay before you start every block, either 1, 2, or 3. This delay is the number of letters you should keep in your memory set.  So if you have a delay of 2, you should remember the last 2 letters that came after a "remember" cue and continuously update as you see more remember cues.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
-				'</div>'+
-				'<div class =centerbox>'+
-					'<div class = flanker-text>remember</div>' +
-				'</div></div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the second part of the trial will look like.  You will see a single letter.</p>'+
-					'<p class = block-text style="font-size:24px;">Please respond if the current letter, matches the letter that appeared 2 (delay) trials ago in your memory set!</p>'+
-					'<p class = block-text style="font-size:24px;">Press '+possible_responses[0][0]+' if they match, and '+possible_responses[1][0]+' if they mismatch.</p>'+
-					'<p class = block-text style="font-size:24px;">Remember, your memory set is updated as trials with the "remember" cue come on.  If your set is already 2(delay) long, after the next "remember" cue, please remove the earlier letter in your memory set and add the new letter to your memory set. Otherwise, at the beginning of each block, where your memory set is less than 2 (delay), add letters until your memory set is 2 (delay) long.</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
-				'</div>'+
-				'<div class =centerbox>'+
-					'<div class = flanker-text>B</div>' +
-				'</div></div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
 
 var end_block = {
   type: 'poldrack-text',
@@ -542,8 +493,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

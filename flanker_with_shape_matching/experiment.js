@@ -317,48 +317,6 @@ var post_task_block = {
    columns: [60,60],
    timing_response: 360000
 };
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the trial will look like.  You will see a row of shapes; you will always see 5 white shapes, 1 green shape, and sometimes, 1 red shape. Please judge whether the green and <strong>CENTER</strong> white shape match or mismatch!</p>'+
-					'<p class = block-text style="font-size:24px;">If they match, press the ' + possible_responses[0][0] + '.</p>'+
-					'<p class = block-text style="font-size:24px;">If they mismatch, press the ' + possible_responses[1][0] + '.</p>'+
-					'<p class = block-text style="font-size:24px;"><strong>Ignore the white shapes not in the center, and the red shape if it appears!</strong></p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = leftbox>'+ preFileType + '3_green' + fileTypePNG + '</div>' +
-				'<div class = distractorbox>'+ preFileType + '2_red' + fileTypePNG + '</div>' +
-				'<div class = rightbox1>'+ preFileType + '1_white' + fileTypePNG + '</div>' +
-				'<div class = rightbox2>'+ preFileType + '1_white' + fileTypePNG + '</div>' +
-				'<div class = rightbox_center>'+ preFileType + '3_white' + fileTypePNG + '</div>' +
-				'<div class = rightbox3>'+ preFileType + '1_white' + fileTypePNG + '</div>' +
-				'<div class = rightbox4>'+ preFileType + '1_white' + fileTypePNG + '</div>' +
-			'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-//Set up post task questionnaire
-var post_task_block = {
-   type: 'survey-text',
-   data: {
-       trial_id: "post_task_questions"
-   },
-   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
-   rows: [15, 15],
-   columns: [60,60],
-   timing_response: 360000
-};
 
 
 var feedback_text = 

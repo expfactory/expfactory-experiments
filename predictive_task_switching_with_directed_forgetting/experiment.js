@@ -444,99 +444,6 @@ var prompt_text = '<div class = prompt_box>'+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-var test_img_block = {
-	type: 'poldrack-single-stim',
-	stimulus:'<div class = bigbox><div class = decision-top-left>'+ 
-			'<div class = centerbox><div class = fixation><span style="color:black">+</span></div></div>' +
-			'<div class = topLeft><div class = fixation>A</div></div>' +
-			'<div class = topMiddle><div class = fixation>B</div></div>' +
-			'<div class = topRight><div class = fixation>C</div></div>' +
-			'<div class = bottomLeft><div class = fixation>D</div></div>' +
-			'<div class = bottomMiddle><div class = fixation>E</div></div>' +
-			'<div class = bottomRight><div class = fixation>F</div></div>'+
-			'</div></div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "instruction_images"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the first part of the trial will look like.  All 6 letters are in a lower quadrant. The letters A, B, and C are on the top portion, while the letters D, E, and F are on the bottom portion.  Please memorize all 6 letters.</p>'+
-					'<p class = block-text style="font-size:24px;">After these letters disappear, a cue will be presented, either TOP or BOT. This cue will instruct you which of the 6 letters to remember or forget, either top or bottom.</p>'+
-					'<p class = block-text style="font-size:24px;">Upper 2 quadrants: '+predictive_dimensions[0]+' the cued location</p>'+
-					'<p class = block-text style="font-size:24px;">Lower 2 quadrants: '+predictive_dimensions[2]+' the cued location</p>'+
-					'<p class = block-text style="font-size:24px;">The letters you must remember are called your memory set. </i></p>'+
-					'<p class = block-text style="font-size:24px;">For example, if you are in a quadrant where you need to forget AND you get the cue TOP, please forget A, B, and C. <i> Your memory set would be D, E, and F!</i></p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
-				'</div>'+
-				'<div class = decision-bottom-left><div class = lettersBox>'+
-					'<div class = topLeft style="font-size:50px;">A</div>' +
-					'<div class = topMiddle style="font-size:50px;">B</div>' +
-					'<div class = topRight style="font-size:50px;">C</div>' +
-					'<div class = bottomLeft style="font-size:50px;">D</div>' +
-					'<div class = bottomMiddle style="font-size:50px;">E</div>' +
-					'<div class = bottomRight style="font-size:50px;">F</div>'+
-				'</div></div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">After the cue, TOP or BOT disappears, you will be presented with a probe (single letter)  like this.  Please respond if the probe  was in the memory set.</p>'+
-					'<p class = block-text style="font-size:24px;">Press '+possible_responses[0][0]+' if the probe was in the memory set, and '+possible_responses[1][0]+' if not.</p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
-				'</div>'+
-		
-				'<div class = decision-bottom-left><div class = centerbox><div class = fixation>B</div></div></div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-
-var feedback_text = 'We will start practice. During practice, you will receive a prompt which shows you the answers.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
-var feedback_block = {
-	type: 'poldrack-single-stim',
-	data: {
-		exp_id: "shape_matching_with_predictive_task_switching",
-		trial_id: "feedback_block"
-	},
-	choices: [13],
-	stimulus: getFeedback,
-	timing_post_trial: 0,
-	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true, 
-
-};
 // Set up attention check node
 var attention_check_block = {
 	type: 'attention-check',
@@ -564,6 +471,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -594,8 +502,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

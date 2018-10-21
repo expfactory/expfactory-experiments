@@ -396,24 +396,6 @@ var end_block = {
   }
 };
 
-// Set up attention check node
-var attention_check_block = {
-	type: 'attention-check',
-	data: {
-		trial_id: "attention_check"
-	},
-	timing_response: 180000,
-	response_ends_trial: true,
-	timing_post_trial: 200
-}
-
-var attention_node = {
-	timeline: [attention_check_block],
-	conditional_function: function() {
-		return run_attention_checks
-	}
-}
-
 var feedback_text = 
 	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {

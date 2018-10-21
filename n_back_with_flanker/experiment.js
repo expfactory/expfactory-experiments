@@ -455,31 +455,10 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  You will see a row of letters.</p>'+
-					'<p class = block-text style="font-size:24px;">Please remember only the middle letter, B, and ignore the letters not in the middle, P!</p>'+
-					'<p class = block-text style="font-size:24px;">Press Enter to continue.</p>'+
-				'</div>'+
-				'<div class =centerbox>'+
-					'<div class = flanker-text>PPBPP</div>' +
-				'</div></div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
 
 var end_block = {
   type: 'poldrack-text',
@@ -633,8 +612,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

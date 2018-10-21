@@ -509,76 +509,9 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
-
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the first part of the trial will look like.  The cue, <i> right</i>, is on the bottom left of the screen. </p>'+
-					'<p class = block-text style="font-size:24px;">After the cue disappears you will see 2 numbers appear, one on the right and one on the left.  The cue will instruct which number to judge!</p>'+
-					'<p class = block-text style="font-size:24px;">Since the cue was <i> right</i>, please judge the upcoming right number!</p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to continue.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left><div class = centerbox>'+
-					'<div class = cue-text>right</div>'+
-				'</div></div>' +
-			'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what the second part of the trial will look like.  The numbers are in the bottom of the screen. Since the cue you saw was <i> right</i>, please judge the right number on '+predictive_dimensions_list[1].dim+'. If '+predictive_dimensions_list[1].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[1].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">If the numbers were on the top of the screen, please judge right number on '+predictive_dimensions_list[0].dim+'. If '+predictive_dimensions_list[0].values[0]+', press '+possible_responses[0][0]+'.  If '+predictive_dimensions_list[0].values[1]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">During practice and test trials, the numbers will move clockwise from trial to trial.  <i>Please judge the cued number based on magnitude or parity, depending on if you were on the top or bottom quadrants!</i></p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left><div class = centerbox>'+
-					'<div class = left-text>9</div>'+
-					'<div class = right-text>2</div>'+
-				'</div></div>' +
-			'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-var end_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "end",
-    	exp_id: 'cued_with_predictive_task_switching'
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 0,
-	on_finish: function(){
-		assessPerformance()
-		evalAttentionChecks()
-    }
-};
-
 
 var feedback_instruct_text =
 	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
@@ -717,8 +650,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

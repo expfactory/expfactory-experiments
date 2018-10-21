@@ -332,68 +332,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
-};
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">This is what the first part of the trial will look like.  The number 3 is on the bottom left, so you would judge based on <i>'+predictive_dimensions_list[1].dim+'</i>.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>' + possible_responses[1][0] + ' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Press enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left><div class = centerbox><div class = cue-text><font size = "10">3</font></div></div></div>'+
-				
-				'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">This is what the second part of the trial may look like.  On this trial, a star appeared around the number.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">If a star appears, no matter which quadrant you are in, please try your best <i>not to respond</i> on that trial.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Do not slow down your responses to the number in order to wait for the star.  Continue to respond as quickly and as accurately as possible to the number and try your best not to respond, if a star appears.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Press enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left><div class = centerbox><div class = cue-text><font size = "10">3</font></div></div></div>'+
-					stop_boards[3][0] + 
-					preFileType + 'stopSignal' + fileTypePNG + 
-					stop_boards[3][1] +
-				'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-
-
-//Set up post task questionnaire
-var post_task_block = {
-   type: 'survey-text',
-   data: {
-       trial_id: "post_task_questions"
-   },
-   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
-   rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -409,8 +348,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };

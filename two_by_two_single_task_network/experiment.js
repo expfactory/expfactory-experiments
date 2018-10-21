@@ -330,6 +330,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
+   timing_response: 360000,
    columns: [60,60]
 };
 
@@ -401,6 +402,7 @@ var end_block = {
 
 var start_practice_block = {
   type: 'poldrack-text',
+  timing_response: 180000,
   data: {
     trial_id: "practice_intro"
   },
@@ -414,6 +416,7 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   cont_key: [13],
+  timing_response: 180000,
   text: '<div class = centerbox>'+
 			'<p class = block-text>Finished with practice.  You will no longer receive the rule prompt during trials.</p>'+
 			'<p class = block-text>Test will be exactly like practice.  You will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
@@ -452,8 +455,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
