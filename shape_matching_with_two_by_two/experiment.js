@@ -424,7 +424,7 @@ var post_task_block = {
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
    columns: [60,60],
-   timing_response: 360000,
+   timing_response: 360000
 };
 
 /* define static blocks */

@@ -383,33 +383,6 @@ var post_task_block = {
    timing_response: 360000
 };
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px;">This is what a trial will look like.  The shapes are in the bottom of the screen, so you must respond whether the green and white shapes '+predictive_dimensions[2]+'es. If they '+predictive_dimensions[2]+', press '+possible_responses[0][0]+'.  If they '+predictive_dimensions[0]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">If the shapes were on the top of the screen, respond whether the green and white shapes '+predictive_dimensions[0]+'. If they '+predictive_dimensions[0]+'es, press '+possible_responses[0][0]+'.  If they '+predictive_dimensions[2]+', press '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px;">During practice and test trials, the shapes will move clockwise from trial to trial.  <i>Ignore the red shape!</i></p>'+
-					'<p class = block-text style="font-size:24px;">Press enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = decision-bottom-left>'+
-					'<div class = leftbox>'+ preFileType + '1_green' + fileTypePNG + '</div>' +
-					'<div class = distractorbox>'+ preFileType + '2_red' + fileTypePNG + '</div>' +
-					'<div class = rightbox>'+ preFileType + '1_white' + fileTypePNG + '</div>' +
-				'</div>' +
-			'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -419,7 +392,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 
@@ -434,8 +408,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
