@@ -380,7 +380,7 @@ var numTrialsPerBlock = 16 // 32 must be divisible by 16 and we need to have a m
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)

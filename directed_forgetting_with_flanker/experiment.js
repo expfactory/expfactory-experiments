@@ -300,6 +300,28 @@ var getProbeStim = function(){
 
 }
 
+var getCategorizeFeedback = function(){
+	curr_trial = jsPsych.progress().current_trial_global - 2
+	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	console.log(trial_id)
+	if (trial_id == 'practice_trial'){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+	
+		}
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -312,11 +334,11 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 16
-var exp_len = 320 //320 must be divisible by 16
-var numTrialsPerBlock = 64; // divisible by 64
+var exp_len = 32 //320 must be divisible by 16
+var numTrialsPerBlock = 16; // divisible by 64
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 16 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
@@ -642,8 +664,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_stim: 500, //1000
+		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function(){
 			stim = getNextStim()
@@ -673,8 +695,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 4000, //4000
-		timing_response: 4000,
+		timing_stim: 1000, //4000
+		timing_response: 1000,
 		prompt: prompt_text
 	}
 
@@ -713,12 +735,12 @@ for (i = 0; i < practice_len; i++) {
 		key_answer: getResponse,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
-		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
+		correct_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+		incorrect_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		timeout_message: '', //'<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 		timing_stim: 2000, //2000
 		timing_response: 2000,
-		timing_feedback_duration: 500,
+		timing_feedback_duration: 0,
 		timing_post_trial: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -726,12 +748,27 @@ for (i = 0; i < practice_len; i++) {
 		show_stim_with_feedback: false,
 	};
 
+	var categorize_block = {
+		type: 'poldrack-single-stim',
+		data: {
+			trial_id: "practice-stop-feedback"
+		},
+		choices: 'none',
+		stimulus: getCategorizeFeedback,
+		timing_post_trial: 0,
+		is_html: true,
+		timing_stim: 500,
+		timing_response: 500,
+		response_ends_trial: false, 
+
+	  };
 	practiceTrials.push(start_fixation_block)
 	practiceTrials.push(training_block)
 	practiceTrials.push(cue_directed_block)
 	practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_probe_block)
 	practiceTrials.push(ITI_fixation_block)
+	practiceTrials.push(categorize_block)
 }
 
 var practiceCount = 0
@@ -817,8 +854,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_stim: 500, //1000
+		timing_response: 500,
 		on_finish: function(){
 			stim = getNextStim()
 		}
@@ -846,8 +883,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 4000, //4000
-		timing_response: 4000
+		timing_stim: 1000, //4000
+		timing_response: 1000
 	}
 
 	var cue_directed_block = {

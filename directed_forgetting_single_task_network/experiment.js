@@ -74,6 +74,27 @@ var getTestFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text>' + test_feedback_text + '</p></div></div>'
 }
 
+var getCategorizeFeedback = function(){
+	curr_trial = jsPsych.progress().current_trial_global - 2
+	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	console.log(trial_id)
+	if (trial_id == 'probe'){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+	
+		}
+}
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 
@@ -463,8 +484,8 @@ var start_fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 1000,
-	timing_response: 1000,
+	timing_stim: 500,
+	timing_response: 500,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -501,8 +522,8 @@ var ITI_fixation_block = {
 		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 4000,
-	timing_response: 4000,
+	timing_stim: 1000,
+	timing_response: 1000,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -581,12 +602,12 @@ var practice_probe_block = {
 	key_answer: getResponse,
 	choices: choices,
 	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
+	correct_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
+	incorrect_text:  '', //'<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
+	timeout_message: '', //'<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 	timing_stim: [2000],
 	timing_response: [2000],
-	timing_feedback_duration: 750,
+	timing_feedback_duration: 0,
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -640,8 +661,8 @@ for (i = 0; i < (practice_length-1); i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000,
-		timing_response: 1000,
+		timing_stim: 500,
+		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
@@ -680,9 +701,9 @@ for (i = 0; i < (practice_length-1); i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 4000,
+		timing_stim: 1000,
 		prompt: prompt_text,
-		timing_response: 4000,
+		timing_response: 1000,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
@@ -715,7 +736,6 @@ for (i = 0; i < (practice_length-1); i++) {
 		is_html: true,
 		data: {
 			trial_id: "practice_cue",
-			exp_stage: "test"
 		},
 		choices: false,
 		prompt: prompt_text,
@@ -724,12 +744,29 @@ for (i = 0; i < (practice_length-1); i++) {
 		timing_response: 1000,
 		on_finish: appendCueData,
 	};
+	
+	var categorize_block = {
+		type: 'poldrack-single-stim',
+		data: {
+			trial_id: "practice-stop-feedback"
+		},
+		choices: 'none',
+		stimulus: getCategorizeFeedback,
+		timing_post_trial: 0,
+		is_html: true,
+		timing_stim: 500,
+		timing_response: 500,
+		response_ends_trial: false, 
+
+	};
+	
 	practiceTrials.push(practice_start_fixation_block);
 	practiceTrials.push(practice_training_block);
 	practiceTrials.push(practice_cue_block);
 	practiceTrials.push(practice_fixation_block);
 	practiceTrials.push(practice_probe_block);
 	practiceTrials.push(practice_ITI_fixation_block);
+	practiceTrials.push(categorize_block);
 }
 
 

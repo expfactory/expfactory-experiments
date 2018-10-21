@@ -74,7 +74,7 @@ var getFeedback = function() {
 }
 
 var getCategorizeFeedback = function(){
-	curr_trial = jsPsych.progress().current_trial_global - 1
+	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
@@ -356,15 +356,15 @@ var exp_len = 24 //378 must be divisible by 12
 var numTrialsPerBlock = 12; // 63 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
-var missed_thresh = 0.30
+var accuracy_thresh = 0.70
+var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
 
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -774,29 +774,6 @@ var training_block = {
 };
 
 
-var practice_probe_block = {
-	type: 'stop-signal',
-	stimulus: getProbeStim,
-	SS_stimulus: getStopStim,
-	stop_signal_condition: getSSType, //getSSType,
-	data: {
-		"trial_id": "practice_trial"
-	},
-	is_html: true,
-	choices: [possible_responses[0][1],possible_responses[1][1]],
-	timing_stim: 850,
-	timing_response: 1850,
-	response_ends_trial: false,
-	SSD: getSSD,
-	timing_SS: 500,
-	timing_post_trial: 0,
-	on_finish: appendData,
-	on_start: function(){
-		stoppingTracker = []
-		stoppingTimeTracker = []
-	}
-}
-
 var test_probe_block = {
 	type: 'stop-signal',
 	stimulus: getProbeStim,
@@ -807,8 +784,8 @@ var test_probe_block = {
 	},
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
-	timing_stim: 850,
-	timing_response: 1850,
+	timing_stim: 1000,
+	timing_response: 2000,
 	response_ends_trial: false,
 	SSD: getSSD,
 	timing_SS: 500,
@@ -912,7 +889,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 1850,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -944,8 +921,8 @@ for (i = 0; i < practice_len; i++) {
 	practiceTrials.push(practice_cue_directed_block)
 	practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(practice_probe_block)
-	practiceTrials.push(categorize_block)
 	practiceTrials.push(practice_ITI_fixation_block)
+	practiceTrials.push(categorize_block)
 }
 
 var practiceCount = 0

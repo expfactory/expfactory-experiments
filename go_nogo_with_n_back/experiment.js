@@ -382,7 +382,7 @@ var numTrialsPerBlock = 25 // 50 must be divisible by 10 and we need to have a m
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
@@ -740,7 +740,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		correct_text: getCorrectText,
 		incorrect_text: getCategorizeIncorrectText,
 		timeout_message: getTimeoutText,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -748,7 +748,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	//practiceTrials.push(fixation_block)
+	practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_block)
 }
 
@@ -834,12 +834,13 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
-		timing_post_trial: 500,
+		timing_post_trial: 0,
 		response_ends_trial: false,
 		on_finish: appendData
 	}
+	testTrials.push(fixation_block)
 	testTrials.push(test_block)
 }
 

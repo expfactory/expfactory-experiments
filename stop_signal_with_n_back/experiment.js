@@ -379,10 +379,10 @@ var numTrialsPerBlock = 15 // 45 or 60, must be divisible by 15 and we need to h
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30

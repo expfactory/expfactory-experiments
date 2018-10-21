@@ -199,12 +199,11 @@ var getMask = function(){
 	return task_boards[0]+ preFileType + 'mask' + fileTypePNG +
 		   task_boards[1]+ 
 		   task_boards[2]+ preFileType + 'mask' + fileTypePNG +
-		   task_boards[3]+ preFileType + 'mask' + fileTypePNG +
-		   task_boards[4]+ preFileType + 'mask' + fileTypePNG +
+		   task_boards[3]+ preFileType + 'mask' + fileTypePNG + 
+		   task_boards[4]+ preFileType + 'mask' + fileTypePNG + '<div class = centerbox><div class = fixation>+</div></div>' +
 		   task_boards[5]+ preFileType + 'mask' + fileTypePNG +
 		   task_boards[6]+ preFileType + 'mask' + fileTypePNG +	
 		   task_boards[7]
-
 
 }
 
@@ -315,7 +314,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 var practice1 = {
 	type: 'poldrack-single-stim',
@@ -495,7 +495,17 @@ var rest_block = {
 	timing_post_trial: 1000
 };
 
-
+var fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "practice_fixation"
+	},
+	timing_response: 500, //500
+	timing_post_trial: 0,
+}
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
@@ -528,7 +538,7 @@ for (i = 0; i < practice_len; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -635,7 +645,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

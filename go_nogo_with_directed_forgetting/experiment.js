@@ -73,6 +73,36 @@ var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
+var getCategorizeFeedback = function(){
+	curr_trial = jsPsych.progress().current_trial_global - 2
+	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	console.log(trial_id)
+	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition != 'stop')){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+	
+		}
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'stop')){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Letter is '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
+		}
+	}
+}
+
+
 var getCategorizeIncorrectText = function(){
 	if (go_nogo_condition == 'go'){
 	
@@ -336,13 +366,13 @@ var credit_var = true
 
 // new vars
 var practice_len = 20  // must be divisible by 20  [5 (go,go,go,go,stop) vs 4 (pos,pos,con,neg)]
-var exp_len = 320 //320 must be divisible by 20
+var exp_len = 40 //320 must be divisible by 20
 var numTrialsPerBlock = 20; // 60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
@@ -707,8 +737,8 @@ var start_fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 1000, //1000
-	timing_response: 1000,
+	timing_stim: 500, //1000
+	timing_response: 500,
 	on_finish: function(){
 		stim = getNextStim()
 	}
@@ -736,8 +766,8 @@ var ITI_fixation_block = {
 		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 4000, //4000
-	timing_response: 4000
+	timing_stim: 1000, //4000
+	timing_response: 1000
 }
 
 var cue_directed_block = {
@@ -797,8 +827,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_stim: 500, //1000
+		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function(){
 			stim = getNextStim()
@@ -829,8 +859,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 4000, //4000
-		timing_response: 4000
+		timing_stim: 1000, //4000
+		timing_response: 1000
 	}
 
 	var practice_cue_directed_block = {
@@ -868,23 +898,39 @@ for (i = 0; i < practice_len; i++) {
 		key_answer: getResponse,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		correct_text: getCorrectText,
-		incorrect_text: getCategorizeIncorrectText,
-		timeout_message: getTimeoutText,
+		correct_text: '',
+		incorrect_text: '',
+		timeout_message: '',
 		timing_stim: 2000, //2000
 		timing_response: 2000,
 		prompt: prompt_text,
-		timing_feedback_duration: 500,
+		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
 		timing_post_trial: 0
 	};
+	
+	var categorize_block = {
+		type: 'poldrack-single-stim',
+		data: {
+			trial_id: "practice-stop-feedback"
+		},
+		choices: 'none',
+		stimulus: getCategorizeFeedback,
+		timing_post_trial: 0,
+		is_html: true,
+		timing_stim: 500,
+		timing_response: 500,
+		response_ends_trial: false, 
+
+	  };
 	practiceTrials.push(practice_start_fixation_block)
 	practiceTrials.push(practice_training_block)
 	practiceTrials.push(practice_cue_directed_block)
 	practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(practice_probe_block)
 	practiceTrials.push(practice_ITI_fixation_block)
+	practiceTrials.push(categorize_block)
 }
 
 var practiceCount = 0

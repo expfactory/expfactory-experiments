@@ -173,7 +173,7 @@ img {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%,100%);
+  transform: translate(-50%,-175%);
 }
 
 

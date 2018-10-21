@@ -225,9 +225,10 @@ var getMask = function(){
 	probe_color = stim.probe_color
 	
 	return mask_boards[0]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
 		   mask_boards[1]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
 		   mask_boards[2]
-
 
 }
 
@@ -286,7 +287,7 @@ var exp_len = 70 //350 must be divisible by 35
 var numTrialsPerBlock = 35; // 70 divisible by 35
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 2 // 3 blocks of 28 trials
  
@@ -413,7 +414,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 var feedback_text = 
@@ -547,6 +549,18 @@ var rest_block = {
 	timing_post_trial: 1000
 };
 
+var fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "fixation"
+	},
+	timing_post_trial: 0,
+	timing_stim: 500, //3000
+	timing_response: 500
+}
 
 
 var practiceTrials = []
@@ -580,7 +594,7 @@ for (i = 0; i < practice_len; i++) {
 		correct_text: getCorrectText,
 		incorrect_text: getCategorizeIncorrectText,
 		timeout_message: getTimeoutText,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -687,7 +701,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

@@ -251,12 +251,12 @@ var exp_len = 24 //378 must be divisible by 12
 var numTrialsPerBlock = 12; // 63 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
-var missed_thresh = 0.30
+var accuracy_thresh = 0.70
+var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
@@ -495,7 +495,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 1850,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -660,7 +660,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 1850,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,

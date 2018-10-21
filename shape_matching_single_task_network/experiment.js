@@ -159,8 +159,9 @@ var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
 
 var prompt_task_list = '<ul>'+
-					   	'<li>Press the M key if the green and white shapes are the same.</li>'+
-					   	'<li>Press the Z key if not</li>'+
+						'<li>Respond if green and white shapes are the same or different</li>'+
+					   	'<li>Same: M key</li>'+
+					   	'<li>Different: Z key</li>'+
 					   '</ul>'
 
 /* ************************************ */
@@ -193,7 +194,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 /* define static blocks */
@@ -305,6 +307,7 @@ var fixation_block = {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
 }
+//	'<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 
 var practice_fixation_block = {
 	type: 'poldrack-single-stim',
@@ -316,7 +319,7 @@ var practice_fixation_block = {
 	},
 	timing_response: 500,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
+	prompt: prompt_task_list,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -324,16 +327,18 @@ var practice_fixation_block = {
 
 var practice_mask_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+'</div>' +
-		'<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+'</div>',
+	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+
+			  '<div class = centerbox><div class = fixation>+</div></div>' + '</div>' +
+			  '<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+
+			  '<div class = centerbox><div class = fixation>+</div></div>' + '</div>',
 	is_html: true,
 	choices: 'none',
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 400,
+	timing_response: 500,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
+	prompt: prompt_task_list,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -341,15 +346,17 @@ var practice_mask_block = {
 
 var test_mask_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+'</div>' +
-		'<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+'</div>',
+	stimulus: '<div class = "leftbox">'+mask_prefix+path+'mask.png'+postfix+
+			  '<div class = centerbox><div class = fixation>+</div></div>' + '</div>' +
+			  '<div class = "rightbox">'+mask_prefix+path+'mask.png'+postfix+
+			  '<div class = centerbox><div class = fixation>+</div></div>' + '</div>',
 	is_html: true,
 	choices: 'none',
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 400,
-	timing_post_trial: 500,
+	timing_response: 500,
+	timing_post_trial: 0,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
@@ -377,14 +384,15 @@ var practice_block = {
 	choices: choices,
 	key_answer: getResponse,
 	data: getData,
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>  <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div> <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div> <div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
+	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_task_list,
+	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_task_list,
+	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_task_list,
 	timing_response: 2000,
+	timing_stim: 1000,
 	timing_feedback: 500,
-	show_stim_with_feedback: true,
+	show_stim_with_feedback: false,
 	timing_post_trial: 0,
-	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>',
+	prompt: prompt_task_list,
 	on_finish: function(){
 		jsPsych.data.addDataToLastTrial({trial_id: 'practice_trial'})
 	}
@@ -396,6 +404,7 @@ var test_block = {
 	is_html: true,
 	choices: choices,
 	timing_response: 2000,
+	timing_stim: 1000,
 	data: getData,
 	timing_post_trial: 0,
 	on_finish: function(data) {
@@ -432,10 +441,10 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
-	practiceTrials.push(practice_fixation_block)
-	practiceTrials.push(practice_block)
+	//practiceTrials.push(practice_fixation_block)
 	practiceTrials.push(practice_mask_block)
-	practiceTrials.push(practice_timing_block)
+	practiceTrials.push(practice_block)
+	//practiceTrials.push(practice_timing_block)
 }
 
 var practiceCount = 0
@@ -507,9 +516,9 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) {
-	testTrials.push(fixation_block)
-	testTrials.push(test_block)
+	//testTrials.push(fixation_block)
 	testTrials.push(test_mask_block)
+	testTrials.push(test_block)
 }
 
 var testCount = 0

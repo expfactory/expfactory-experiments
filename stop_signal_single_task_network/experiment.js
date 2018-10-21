@@ -246,7 +246,7 @@ var practice_thresh = 3 // 3 blocks of 12 trials
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 var current_trial = 0
 
@@ -566,8 +566,8 @@ for (i = 0; i < practice_len; i++) {
 			"trial_id": "practice_no_stop_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[2][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		on_finish: appendData,
 		timing_post_trial: 0,
 		response_ends_trial: false,
@@ -666,7 +666,6 @@ var practiceStopTrials = []
 practiceStopTrials.push(feedback_block)
 practiceStopTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
-	practiceStopTrials.push(prompt_fixation_block)
 	var practice_block = {
 		type: 'stop-signal',
 		stimulus: getStim,
@@ -678,8 +677,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -707,6 +706,7 @@ for (i = 0; i < practice_len; i++) {
 
 	};
 
+	practiceStopTrials.push(prompt_fixation_block)
 	practiceStopTrials.push(practice_block)
 	practiceStopTrials.push(categorize_block)
 
@@ -833,7 +833,7 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) {
-	testTrials.push(fixation_block)
+
 	var test_block = {
 		type: 'stop-signal',
 		stimulus: getStim,
@@ -846,8 +846,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -858,7 +858,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			stoppingTimeTracker = []
 		}
 	}
-	
+	testTrials.push(fixation_block)
 	testTrials.push(test_block)
 }
 

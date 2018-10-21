@@ -349,11 +349,11 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 var upper_stop_success_bound = 0.70
 var lower_stop_success_bound = 0.30
 
-var accuracy_thresh = 0.80
-var missed_thresh = 0.30 // must it be higher than standard 10% since stopping is part of task??
+var accuracy_thresh = 0.70
+var missed_thresh = 0.10 
 var practice_thresh = 2 // 3 blocks of 24 trials
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 
 var predictive_conditions = [['switch','stay'],
@@ -771,8 +771,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -926,8 +926,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,

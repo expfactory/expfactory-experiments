@@ -260,14 +260,14 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 var current_trial = 0
 
 
 var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
-var accuracy_thresh = 0.80;
+var accuracy_thresh = 0.70;
 
 var stop_signal_respond_lower_thresh = 0.30
 var stop_signal_respond_upper_thresh = 0.70
@@ -696,7 +696,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
 		timing_stim: 1000,
-		timing_response: 1850,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -870,7 +870,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
 		timing_stim: 1000,
-		timing_response: 1850,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,

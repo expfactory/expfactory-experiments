@@ -327,12 +327,12 @@ var credit_var = 0
 var run_attention_checks = true
 
 
-var practice_len = 20 // 24
-var exp_len = 120 //320 must be divisible by 10
-var numTrialsPerBlock = 40 // must be divisible by 10
+var practice_len = 20 // 20
+var exp_len = 60 //320 must be divisible by 10
+var numTrialsPerBlock = 20 // must be divisible by 10
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
 var practice_thresh = 3 // 3 blocks of 24 trials

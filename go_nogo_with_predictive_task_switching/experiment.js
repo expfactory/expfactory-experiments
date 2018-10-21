@@ -317,8 +317,8 @@ var exp_len = 40 //320 must be divisible by 20
 var numTrialsPerBlock = 20; //  60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
-var missed_thresh = 0.30 // must it be higher than standard 10% since stopping is part of task??
+var accuracy_thresh = 0.70
+var missed_thresh = 0.10 // must it be higher than standard 10% since stopping is part of task??
 var practice_thresh = 3 // 3 blocks of 24 trials
  
 
@@ -628,7 +628,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
 		incorrect_text: getCategorizeIncorrectText,
 		timeout_message: getTimeoutText,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -735,7 +735,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

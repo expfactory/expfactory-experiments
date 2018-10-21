@@ -221,15 +221,6 @@ var getStim = function(){
 }
 		
 var getMask = function(){
-	
-	return mask_boards[whichQuadrant - 1][0]+ preFileType + 'mask' + fileTypePNG + 
-		   mask_boards[whichQuadrant - 1][1]+ preFileType + 'mask' + fileTypePNG + 
-		   mask_boards[whichQuadrant - 1][2]
-
-
-}
-
-var getFixation = function(){
 	stim = stims.shift()
 	predictive_condition = stim.predictive_condition
 	predictive_dimension = stim.predictive_dimension
@@ -239,12 +230,20 @@ var getFixation = function(){
 	distractor = stim.distractor
 	correct_response = stim.correct_response
 	whichQuadrant = stim.whichQuad
-	console.log(correct_response)
+	
+	return mask_boards[whichQuadrant - 1][0]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
+		   mask_boards[whichQuadrant - 1][1]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
+		   mask_boards[whichQuadrant - 1][2]
+}
+
+
+var getFixation = function(){
 	
 	return fixation_boards[whichQuadrant - 1]
-
-
 }
+
 
 var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
@@ -279,7 +278,7 @@ var exp_len = 56 //336 must be divisible by 28
 var numTrialsPerBlock = 28; // divisible by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
  
@@ -336,18 +335,18 @@ var fixation_boards = [['<div class = bigbox><div class = decision-top-left><div
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Top 2 quadrants: Answer if the green and white shapes '+predictive_dimensions[0]+'es</li>' +
+						'<li>Top 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[0]+'</li>' +
 						'<li>'+predictive_dimensions[0] +': ' + possible_responses[0][0] + '</li>' +
 						'<li>'+predictive_dimensions[2] +': ' + possible_responses[1][0] + '</li>' +
-						'<li>Bottom 2 quadrants: Answer if the green and white shapes '+predictive_dimensions[2]+'es</li>' +
+						'<li>Bottom 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[2]+'</li>' +
 						'<li>'+predictive_dimensions[2] +': ' + possible_responses[0][0] + '</li>' +
 						'<li>'+predictive_dimensions[0] +': ' + possible_responses[1][0] + '</li>' +
 					  '</ul>'
 				  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Answer if the green and white shapes '+predictive_dimensions[0]+'es</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[0]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions[0] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[2] +': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Answer if the green and white shapes '+predictive_dimensions[2]+'es</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[2]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions[2] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[0] +': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
 /* ************************************ */
@@ -380,7 +379,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 var practice1 = {
@@ -572,19 +572,6 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < 10; i++) { //practice_len + 1
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getFixation,
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "practice_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0,
-		prompt: prompt_text
-	}
-	
 	var mask_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getMask,
@@ -612,7 +599,7 @@ for (i = 0; i < 10; i++) { //practice_len + 1
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -620,7 +607,6 @@ for (i = 0; i < 10; i++) { //practice_len + 1
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	practiceTrials.push(fixation_block)
 	practiceTrials.push(mask_block)
 	practiceTrials.push(practice_block)
 }
@@ -699,18 +685,6 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 1; i++) {
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getFixation,
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "test_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0
-	}
-	
 	var mask_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getMask,
@@ -734,13 +708,12 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,
 		on_finish: appendData
 	}
-	testTrials.push(fixation_block)
 	testTrials.push(mask_block)
 	testTrials.push(test_block)
 }

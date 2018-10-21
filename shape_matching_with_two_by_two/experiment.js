@@ -196,9 +196,13 @@ var setStims = function() {
 var getCue = function() {
   var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
   				 '<div class = lowerbox>'+ 
-					'<div class = leftbox>' + preFileType + 'mask' + fileTypePNG + '</div>' +
+					'<div class = leftbox>' + preFileType + 'mask' + fileTypePNG + 
+					'<div class = centerbox><div class = fixation>+</div></div>' +
+					'</div>' +
 					'<div class = distractorbox>' + '' + '</div>' +
-					'<div class = rightbox>' + preFileType + 'mask' + fileTypePNG + '</div>' +
+					'<div class = rightbox>' + preFileType + 'mask' + fileTypePNG + 
+					'<div class = centerbox><div class = fixation>+</div></div>' +
+					'</div>' +
 				'</div>'
   return cue_html
 }
@@ -306,7 +310,7 @@ var credit_var = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/shape_matching_with_two_by_two/images/'
 var accuracy_thresh = 0.70
-var missed_thresh = 0.60
+var missed_thresh = 0.10
 var practice_thresh = 3
 var lowestNumCond = 28
 var CTI = 300
@@ -419,7 +423,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000,
 };
 
 /* define static blocks */
@@ -509,7 +514,8 @@ var start_practice_block = {
     trial_id: "practice_intro"
   },
   text: '<div class = centerbox><p class = center-block-text>Starting with some practice. </p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
-  cont_key: [13]
+  cont_key: [13],
+  timing_response: 180000
 };
 
 var start_test_block = {
@@ -523,7 +529,8 @@ var start_test_block = {
     stims = testStims
     task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
   },
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  timing_response: 180000
 }
 
 var start_test_block = {
@@ -568,44 +575,6 @@ var setStims_block = {
   timing_post_trial: 0
 }
 
-var fixation_block = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: "fixation"
-  },
-  timing_post_trial: 0,
-  timing_stim: 500,
-  timing_response: 500,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function() {
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: exp_stage
-    })
-  }
-}
-
-var cue_block = {
-  type: 'poldrack-single-stim',
-  stimulus: getCue,
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: 'cue'
-  },
-  timing_response: getCTI,
-  timing_stim: getCTI,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function() {
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: exp_stage
-    })
-    appendData()
-  }
-};
 
 var feedback_text = 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
@@ -618,8 +587,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
@@ -638,7 +606,7 @@ var practice_block = {
     trial_id: 'practice_trial',
     exp_stage: "practice"
   },
-  timing_feedback_duration: 1000,
+  timing_feedback_duration: 500,
   show_stim_with_feedback: false,
   timing_response: 2000,
   timing_stim: 1000,
@@ -675,30 +643,61 @@ var test_block = {
   }
 }
 
-var gap_block = {
-  type: 'poldrack-single-stim',
-  stimulus: ' ',
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: 'gap',
-    exp_stage: 'practice'
-  },
-  timing_response: 500,
-  timing_stim: 0,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-};
-
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (var i = 0; i < practice_length; i++) {
+	var practice_fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div>'+
+				'<div class = lowerbox>'+ 
+					'<div class = leftbox>' + 
+					'<div class = centerbox><div class = fixation>+</div></div>' +
+					'</div>' +
+					'<div class = distractorbox>' + '' + '</div>' +
+					'<div class = rightbox>' + 
+					'<div class = centerbox><div class = fixation>+</div></div>' +
+					'</div>' +
+				'</div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var practice_cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+		appendData()
+	  }
+	};
   practiceTrials.push(setStims_block)
-  practiceTrials.push(fixation_block)
-  practiceTrials.push(cue_block);
+  practiceTrials.push(practice_fixation_block)
+  practiceTrials.push(practice_cue_block);
   practiceTrials.push(practice_block);
-  practiceTrials.push(gap_block);
 }
 
 var practiceCount = 0
@@ -775,11 +774,46 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (var i = 0; i < numTrialsPerBlock; i++) {
+	var fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+		appendData()
+	  }
+	};
   testTrials.push(setStims_block)
   testTrials.push(fixation_block)
   testTrials.push(cue_block);
   testTrials.push(test_block);
-  testTrials.push(gap_block);
 }
 
 var testCount = 0

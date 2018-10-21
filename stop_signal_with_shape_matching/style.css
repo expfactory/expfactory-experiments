@@ -113,7 +113,7 @@ img.center {
   left: 0;  
   right: 0;  
   margin: auto;  
-  max-height: 65%;
+  max-height: 100%;
 }
 
 /*******************************************************/
@@ -127,7 +127,7 @@ img.center {
   top:50%;
   left:52.5%;
   margin-right:-50%;
-  transform: translate(-17.5%,-50%);
+  transform: translate(-15%,-50%);
   background-color: none;
 }
 

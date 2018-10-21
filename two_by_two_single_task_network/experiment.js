@@ -233,10 +233,16 @@ var credit_var = 0
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
-var practice_length = 40
-var test_length = 440
-var numTrialsPerBlock = 40
+var practice_length = 8 // must be divisible by 4
+var test_length = 16 // must be divisible by 4
+var numTrialsPerBlock = 8
 var numTestBlocks = test_length / numTrialsPerBlock
+
+var practice_thresh = 3 // 3 blocks of 16 trials
+var rt_thresh = 1000;
+var missed_response_thresh = 0.10;
+var accuracy_thresh = 0.70;
+
 
 
 //set up block stim. correct_responses indexed by [block][stim][type]
@@ -270,7 +276,7 @@ for (var t = 0; t < task_switch_types.length; t++) {
 }
 var task_switches = jsPsych.randomization.repeat(task_switches, practice_length / 4)
 var practiceStims = genStims(practice_length)
-var testStims = genStims(test_length)
+var testStims = genStims(numTrialsPerBlock)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -347,7 +353,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
+    '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
     '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. Thee cues and tasks are described below:</p>' +
     task_list +
     '<p class = block-text>Practice will start after you end instructions.</p></div>'
@@ -387,7 +393,10 @@ var end_block = {
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_response: 180000,
-  on_finish: assessPerformance
+  on_finish: function(){
+  	assessPerformance()
+  	evalAttentionChecks()
+  	}
 };
 
 var start_practice_block = {
@@ -404,11 +413,18 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
+  cont_key: [13],
+  text: '<div class = centerbox>'+
+			'<p class = block-text>Finished with practice.  You will no longer receive the rule prompt during trials.</p>'+
+			'<p class = block-text>Test will be exactly like practice.  You will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
+			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. Thee cues and tasks are described below:</p>' +
+			task_list +
+			'<p class = block-text>Press enter to continue.</p>' +
+		'</div>',
   on_finish: function() {
     current_trial = 0
-    stims = testStims
-    task_switches = jsPsych.randomization.repeat(task_switches, test_length /4)
+    feedback_text = 
+	'Starting a test block. Press enter to continue.'
   },
   timing_post_trial: 1000
 }
@@ -423,123 +439,6 @@ var setStims_block = {
   timing_post_trial: 0
 }
 
-var fixation_block = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: "fixation"
-  },
-  timing_post_trial: 0,
-  timing_stim: 500,
-  timing_response: 500,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function() {
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: exp_stage
-    })
-  }
-}
-
-var cue_block = {
-  type: 'poldrack-single-stim',
-  stimulus: getCue,
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: 'cue'
-  },
-  timing_response: getCTI,
-  timing_stim: getCTI,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function() {
-    jsPsych.data.addDataToLastTrial({
-      exp_stage: exp_stage
-    })
-    appendData()
-  }
-};
-
-var practice_block = {
-  type: 'poldrack-categorize',
-  stimulus: getStim,
-  is_html: true,
-  key_answer: getResponse,
-  correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  choices: choices,
-  data: {
-    trial_id: 'stim',
-    exp_stage: "practice"
-  },
-  timing_feedback_duration: 1000,
-  show_stim_with_feedback: false,
-  timing_response: 2000,
-  timing_stim: 1000,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function(data) {
-    appendData()
-    correct_response = getResponse()
-    correct = false
-    if (data.key_press === correct_response) {
-      correct = true
-    }
-    jsPsych.data.addDataToLastTrial({
-      'correct_response': correct_response,
-      'correct': correct
-    })
-  }
-}
-
-var test_block = {
-  type: 'poldrack-single-stim',
-  stimulus: getStim,
-  is_html: true,
-  key_answer: getResponse,
-  choices: choices,
-  data: {
-    trial_id: 'stim',
-    exp_stage: 'test'
-  },
-  timing_post_trial: 0,
-  timing_response: 2000,
-  timing_stim: 1000,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: function(data) {
-    appendData()
-    correct_response = getResponse()
-    correct = false
-    if (data.key_press === correct_response) {
-      correct = true
-    }
-    jsPsych.data.addDataToLastTrial({
-      'correct_response': correct_response,
-      'correct': correct
-    })
-  }
-}
-
-var gap_block = {
-  type: 'poldrack-single-stim',
-  stimulus: ' ',
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: 'gap',
-    exp_stage: 'practice'
-  },
-  timing_response: 500,
-  timing_stim: 0,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-};
 
 var feedback_text = 
 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
@@ -563,11 +462,85 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (var i = 0; i < practice_length; i++) {
+  var practice_fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var practice_cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+		appendData()
+	  }
+	};
+	
+	var practice_block = {
+	  type: 'poldrack-categorize',
+	  stimulus: getStim,
+	  is_html: true,
+	  key_answer: getResponse,
+	  correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
+		prompt_task_list + '</div>',
+	  incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
+		prompt_task_list + '</div>',
+	  timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
+		prompt_task_list + '</div>',
+	  choices: choices,
+	  data: {
+		trial_id: 'stim',
+		exp_stage: "practice"
+	  },
+	  timing_feedback_duration: 1000,
+	  show_stim_with_feedback: false,
+	  timing_response: 2000,
+	  timing_stim: 1000,
+	  timing_post_trial: 0,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function(data) {
+		appendData()
+		correct_response = getResponse()
+		correct = false
+		if (data.key_press === correct_response) {
+		  correct = true
+		}
+		jsPsych.data.addDataToLastTrial({
+		  'correct_response': correct_response,
+		  'correct': correct
+		})
+	  }
+	}
+
   practiceTrials.push(setStims_block)
-  practiceTrials.push(fixation_block)
-  practiceTrials.push(cue_block);
+  practiceTrials.push(practice_fixation_block)
+  practiceTrials.push(practice_cue_block);
   practiceTrials.push(practice_block);
-  practiceTrials.push(gap_block);
 }
 
 var practiceCount = 0
@@ -576,7 +549,7 @@ var practiceNode = {
 	loop_function: function(data) {
 		practiceCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / 4)
-		practiceStims = genStims(practice_length)
+		stims = genStims(practice_length)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -610,8 +583,9 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			testStims = genStims(test_length)
-			task_switches = jsPsych.randomization.repeat(task_switches, test_length / 4)
+			
+			task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+			stims = genStims(numTrialsPerBlock)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -625,8 +599,9 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					testStims = genStims(test_length)
-					task_switches = jsPsych.randomization.repeat(task_switches, test_length / 4)
+					
+					task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+					stims = genStims(numTrialsPerBlock)
 					return false
 			}
 			
@@ -641,29 +616,145 @@ var practiceNode = {
 }
 
 
+var testTrials = []
+testTrials.push(feedback_block)
+testTrials.push(attention_node)
+for (i = 0; i < numTrialsPerBlock; i++) {
+	var fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+		appendData()
+	  }
+	};
+
+
+	var test_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getStim,
+	  is_html: true,
+	  key_answer: getResponse,
+	  choices: choices,
+	  data: {
+		trial_id: 'stim',
+		exp_stage: 'test'
+	  },
+	  timing_post_trial: 0,
+	  timing_response: 2000,
+	  timing_stim: 1000,
+	  on_finish: function(data) {
+		appendData()
+		correct_response = getResponse()
+		correct = false
+		if (data.key_press === correct_response) {
+		  correct = true
+		}
+		jsPsych.data.addDataToLastTrial({
+		  'correct_response': correct_response,
+		  'correct': correct
+		})
+	  }
+	}
+	
+  testTrials.push(setStims_block)
+  testTrials.push(fixation_block)
+  testTrials.push(cue_block);
+  testTrials.push(test_block);
+}
+
+var testCount = 0
+var testNode = {
+	timeline: testTrials,
+	loop_function: function(data) {
+	testCount += 1
+	current_trial = 0
+	task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+	stims = genStims(numTrialsPerBlock)
+	
+	var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+
+		for (var i = 0; i < data.length; i++){
+			if (data[i].trial_id == "stim"){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+					}
+				}
+			} 
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+	
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
+		
+		if (accuracy < accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
+		}
+		if (missed_responses > missed_response_thresh){
+			feedback_text +=
+					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+	
+		if (testCount == numTestBlocks){
+			feedback_text +=
+					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+			return false
+		} else {
+			return true
+		}
+	
+	}
+}
+
 /* create experiment definition array */
 var two_by_two_single_task_network_experiment = [];
 
 two_by_two_single_task_network_experiment.push(practiceNode);
 two_by_two_single_task_network_experiment.push(feedback_block);
 
-two_by_two_single_task_network_experiment.push(instruction_node);
-two_by_two_single_task_network_experiment.push(start_practice_block);
-for (var i = 0; i < practice_length; i++) {
-  two_by_two_single_task_network_experiment.push(setStims_block)
-  two_by_two_single_task_network_experiment.push(fixation_block)
-  two_by_two_single_task_network_experiment.push(cue_block);
-  two_by_two_single_task_network_experiment.push(practice_block);
-  two_by_two_single_task_network_experiment.push(gap_block);
-}
-two_by_two_single_task_network_experiment.push(attention_node)
 two_by_two_single_task_network_experiment.push(start_test_block)
-for (var i = 0; i < test_length; i++) {
-  two_by_two_single_task_network_experiment.push(setStims_block)
-  two_by_two_single_task_network_experiment.push(fixation_block)
-  two_by_two_single_task_network_experiment.push(cue_block);
-  two_by_two_single_task_network_experiment.push(test_block);
-}
-two_by_two_single_task_network_experiment.push(attention_node)
+two_by_two_single_task_network_experiment.push(testNode);
+two_by_two_single_task_network_experiment.push(feedback_block);
+
 two_by_two_single_task_network_experiment.push(post_task_block)
 two_by_two_single_task_network_experiment.push(end_block)

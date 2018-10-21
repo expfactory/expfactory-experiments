@@ -94,7 +94,26 @@ img {
   transform: translate(-50%,-175%);
 }
 
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 100%;
+}
 
+.fixation {
+ text-align: center;
+ font-size: 50px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
 
 
 /*******************************************************/

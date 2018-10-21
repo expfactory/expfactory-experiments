@@ -72,10 +72,10 @@ var practice_index = 0
 var getFeedback = function() {
   if (practice_trials[practice_index].key_answer == -1) {
     practice_index += 1
-    return '<div class = centerbox><div class = center-text>Correct!</div></div>'
+    return '<div class = centerbox><div class = center-text>Correct!</div></div>' + prompt_text_list
   } else {
     practice_index += 1
-    return '<div class = centerbox><div class = center-text>Incorrect</div></p></div>'
+    return '<div class = centerbox><div class = center-text>Incorrect</div></p></div>'  + prompt_text_list
   }
 }
 
@@ -157,6 +157,11 @@ var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5);
 var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
 
 
+
+var numTrialsPerBlock = 70
+var numTestBlocks = test_trials.length / numTrialsPerBlock
+
+
 var prompt_text_list = '<ul list-text>'+
 						'<li>'+stims[0][0]+' square: Respond</li>' +
 						'<li>'+stims[1][0]+' square: Do not respond</li>' +
@@ -165,7 +170,24 @@ var prompt_text_list = '<ul list-text>'+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
-<i>
+// Set up attention check node
+var attention_check_block = {
+  type: 'attention-check',
+  data: {
+    trial_id: "attention_check"
+  },
+  timing_response: 180000,
+  response_ends_trial: true,
+  timing_post_trial: 200
+}
+
+var attention_node = {
+  timeline: [attention_check_block],
+  conditional_function: function() {
+    return run_attention_checks
+  }
+}
+
 
 //Set up post task questionnaire
 var post_task_block = {
@@ -181,7 +203,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This task will take around 10 minutes. Press <strong>enter</i> to begin.'
+  'Welcome to the experiment. This task will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -199,7 +221,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <strong> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <strong> not respond</i>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <i> not respond</i>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -218,11 +240,11 @@ var instruction_node = {
     }
     if (sumInstructTime <= instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</i> to continue.'
+        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
       return true
     } else if (sumInstructTime > instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Done with instructions. Press <strong>enter</i> to continue.'
+        'Done with instructions. Press <i>enter</i> to continue.'
       return false
     }
   }
@@ -235,7 +257,7 @@ var end_block = {
     trial_id: "end",
     exp_id: 'go_nogo'
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</i> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function(){
@@ -250,9 +272,14 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <strong> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <strong> not respond</i>. Press <strong>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
   cont_key: [13],
-  timing_post_trial: 1000
+  timing_post_trial: 1000,
+  on_finish: function(){
+  feedback_text = 
+	'Starting a test block.  Press enter to continue.'
+  
+  }
 };
 
 var reset_block = {
@@ -267,7 +294,7 @@ var reset_block = {
 }
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -297,18 +324,69 @@ var practice_block = {
   incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
   timeout_message: getFeedback,
   choices: [32],
-  timing_response: get_response_time,
-  timing_stim: 750,
-  timing_feedback_duration: 1000,
+  timing_response: 2000,
+  timing_stim: 1000,
+  timing_feedback_duration: 500,
   show_stim_with_feedback: false,
-  timing_post_trial: 250,
+  timing_post_trial: 0,
   on_finish: appendData
 }
+
+var fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "fixation",
+	},
+	timing_post_trial: 0,
+	timing_stim: 500,
+	timing_response: 500
+};
+
+var prompt_fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "prompt_fixation",
+	},
+	timing_post_trial: 0,
+	timing_stim: 500,
+	timing_response: 500,
+	prompt: prompt_text_list
+};
+
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-practiceTrials.push(practice_block)
+for (var i = 0; i < practice_trials.length; i ++){
+
+	var practice_block = {
+	  type: 'poldrack-categorize',
+	  stimulus: practice_trials[i].stimulus,
+	  is_html: true,
+	  data: practice_trials[i].data,
+	  key_answer: practice_trials[i].data.correct_response,
+	  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
+	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
+	  timeout_message: getFeedback,
+	  choices: [32],
+	  timing_response: 2000,
+	  timing_stim: 1000,
+	  timing_feedback_duration: 500,
+	  show_stim_with_feedback: false,
+	  timing_post_trial: 0,
+	  on_finish: appendData,
+	  prompt: prompt_text_list
+	}
+	
+	practiceTrials.push(prompt_fixation_block)
+	practiceTrials.push(practice_block)
+}
 
 var practiceCount = 0
 var practiceNode = {
@@ -345,7 +423,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -388,11 +466,96 @@ var test_block = {
   },
   is_html: true,
   choices: [32],
-  timing_stim: 750,
-  timing_response: get_response_time,
+  timing_stim: 1000,
+  timing_response: 2000,
   timing_post_trial: 0,
   on_finish: appendData
 };
+
+var testTrials = []
+testTrials.push(feedback_block)
+testTrials.push(attention_node)
+for (var i = 0; i < numTrialsPerBlock; i ++){
+	
+	var test_block = {
+		type: 'poldrack-single-stim',
+		stimulus: test_trials.pop().stimulus,
+		is_html: true,
+		choices: [32],
+		data: test_trials.pop().data,
+		timing_post_trial: 0,
+		timing_stim: 1000,
+		timing_response: 2000,
+		on_finish: appendData
+	};
+	testTrials.push(fixation_block)
+	testTrials.push(test_block)
+}
+
+var testCount = 0
+var testNode = {
+	timeline: testTrials,
+	loop_function: function(data){
+		testCount += 1
+		test_index = 0
+	
+		var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+	
+		for (var i = 0; i < data.length; i++){
+			if ((data[i].trial_id == "test_block") && (data[i].condition == "go")){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+		
+					}
+				}
+		
+			}
+	
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+	
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text>You have completed " +testCount+ " out of " +numTestBlocks+ " blocks of trials."
+
+		if (testCount > numTestBlocks){
+			feedback_text +=
+					'</p><p class = block-text>Done with this test. Press Enter to continue.' 
+			return false
+	
+		} else {
+			if (accuracy < accuracy_thresh){
+			feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					
+			}
+			
+			if (missed_responses > missed_thresh){
+				feedback_text +=
+						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+		
+			
+			feedback_text +=
+				'</p><p class = block-text>Press Enter to continue.' 
+			
+			return true
+		
+		}
+	
+	}
+	
+}
 
 /* create experiment definition array */
 var go_nogo_single_task_network_experiment = [];
@@ -403,10 +566,8 @@ var go_nogo_single_task_network_experiment = [];
 go_nogo_single_task_network_experiment.push(practiceNode)
 go_nogo_single_task_network_experiment.push(feedback_block)
 
-go_nogo_single_task_network_experiment.push(attention_node)
-go_nogo_single_task_network_experiment.push(reset_block)
 go_nogo_single_task_network_experiment.push(start_test_block);
-go_nogo_single_task_network_experiment.push(test_block);
-go_nogo_single_task_network_experiment.push(attention_node)
+go_nogo_single_task_network_experiment.push(testNode);
+
 go_nogo_single_task_network_experiment.push(post_task_block)
 go_nogo_single_task_network_experiment.push(end_block)

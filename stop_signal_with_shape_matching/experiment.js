@@ -220,10 +220,10 @@ var getMask = function(){
 	correct_response = stim.correct_response
 	
 	return mask_boards[0]+ preFileType + 'mask' + fileTypePNG + 
+	       '<div class = centerbox><div class = fixation>+</div></div>' +
 		   mask_boards[1]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
 		   mask_boards[2]
-
-
 }
 
 
@@ -292,12 +292,12 @@ var exp_len = 42 //378 must be divisible by 21
 var numTrialsPerBlock = 21; // 63 divisible by 21
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 
 var maxStopCorrect = 0.70
@@ -363,60 +363,6 @@ var attention_node = {
   }
 }
 
-
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">This is what the first part of the trial will look like.  There are the green and red shapes on the left, and 1 white shape on the right.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">The green and white shapes are different, so you would respond with the '+possible_responses[1][0]+'.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Ignore the red shape!</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Press enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = leftbox>'+preFileType+'7_green'+fileTypePNG+'</div>' +
-				'<div class = rightbox>'+preFileType+'2_white'+fileTypePNG+'</div>' +
-				'<div class = distractorbox>'+preFileType+'2_red'+fileTypePNG+'</div>' +
-				
-				'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">This is what the second part of the trial may look like.  On this trial, a star appeared around the white shape.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">If a star appears, (only white shapes may have stars, not green or red shapes) , please try your best <strong>not to respond</strong> on that trial.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Do not slow down your responses in order to wait for the star.  Continue to respond as quickly and as accurately as possible and try your best not to respond, if a star appears.</p>'+
-					'<p class = block-text style="font-size:24px; line-height:100%;">Press enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = leftbox>'+ preFileType +'7_green'+fileTypePNG+'</div>' +
-				'<div class = starbox>'+ preFileType +'stopSignal'+fileTypePNG+'</div>' +
-				'<div class = rightbox>'+ preFileType +'2_white'+fileTypePNG+'</div>' +
-				
-				'<div class = distractorbox>'+preFileType+'2_red'+fileTypePNG+'</div>'+
-				'</div>',				
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction",
-		},
-	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true
-};
-
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -426,7 +372,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 
@@ -561,7 +508,7 @@ var start_test_block = {
 		feedback_text = "We will now start the test portion. Press enter to begin."
 	}
 };
-
+ 
 var rest_block = {
 	type: 'poldrack-text',
 	data: {
@@ -604,8 +551,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,
@@ -771,8 +718,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 1850,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500,

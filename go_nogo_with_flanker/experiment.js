@@ -228,8 +228,8 @@ var exp_len = 40 //350 must be divisible by 10
 var numTrialsPerBlock = 20; // 70 divisible by 10
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
-var missed_thresh = 0.30
+var accuracy_thresh = 0.70
+var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
  
 var possible_responses = [['F key', 70],['H key', 72]]
@@ -488,6 +488,20 @@ var rest_block = {
 };
 
 
+var fixation_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
+	is_html: true,
+	choices: 'none',
+	data: {
+		trial_id: "fixation"
+	},
+	timing_post_trial: 0,
+	timing_stim: 500, //3000
+	timing_response: 500
+}
+
+
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
@@ -505,7 +519,7 @@ for (i = 0; i < practice_len; i++) {
 		correct_text: getCorrectText,
 		incorrect_text: getCategorizeIncorrectText,
 		timeout_message: getTimeoutText,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback: 500, //500
 		show_stim_with_feedback: false,
@@ -513,6 +527,7 @@ for (i = 0; i < practice_len; i++) {
 		on_finish: appendData,
 		prompt: prompt_text,
 	}
+	practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_block)
 }
 
@@ -598,12 +613,13 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
-		timing_post_trial: 500,
+		timing_post_trial: 0,
 		response_ends_trial: false,
 		on_finish: appendData
 	}
+	testTrials.push(fixation_block)
 	testTrials.push(test_block)
 }
 

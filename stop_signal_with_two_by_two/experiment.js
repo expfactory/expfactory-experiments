@@ -102,7 +102,7 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' 
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>'
 		}
 	}
 }
@@ -335,7 +335,7 @@ var numTrialsPerBlock = 12
 var numTestBlocks = test_length / numTrialsPerBlock
 
 var SSD = 250
-var maxSSD = 850
+var maxSSD = 1000
 var minSSD = 0 
 
 //set up block stim. correct_responses indexed by [block][stim][type]
@@ -600,31 +600,6 @@ var feedback_block = {
 };
 
 var practice_block = {
-  type: 'poldrack-categorize',
-  stimulus: getStim,
-  is_html: true,
-  key_answer: getResponse,
-  correct_text: '<div class = centerbox><div class = center-text>Correct!</p></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</p></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  timeout_message: '<div class = centerbox><div class = center-text>Too Slow</div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-  choices: choices,
-  data: {
-    trial_id: 'practice_with_stop',
-    exp_stage: "practice"
-  },
-  timing_feedback_duration: 1000,
-  show_stim_with_feedback: false,
-  timing_response: 2000,
-  timing_stim: 1000,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: appendData
-}
-
-var practice_block = {
 	type: 'stop-signal',
 	stimulus: getStim,
 	SS_stimulus: getStopStim,
@@ -675,7 +650,6 @@ var test_block = {
   timing_post_trial: 0,
   timing_response: 2000,
   timing_stim: 1000,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function(data) {
     appendData()
     correct_response = getResponse()
@@ -690,31 +664,53 @@ var test_block = {
   }
 }
 
-var gap_block = {
-  type: 'poldrack-single-stim',
-  stimulus: ' ',
-  is_html: true,
-  choices: 'none',
-  data: {
-    trial_id: 'gap',
-    exp_stage: 'practice'
-  },
-  timing_response: 500,
-  timing_stim: 0,
-  timing_post_trial: 0,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-};
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (var i = 0; i < practice_length; i++) {
+  var practice_fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var practice_cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+		appendData()
+	  }
+	};
+	
   practiceTrials.push(setStims_block)
-  practiceTrials.push(fixation_block)
-  practiceTrials.push(cue_block);
+  practiceTrials.push(practice_fixation_block)
+  practiceTrials.push(practice_cue_block);
   practiceTrials.push(practice_block);
   practiceTrials.push(categorize_block);
-  practiceTrials.push(gap_block);
 }
 
 var practiceCount = 0
@@ -827,11 +823,45 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (var i = 0; i < numTrialsPerBlock; i++) {
+  var fixation_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: "fixation"
+	  },
+	  timing_post_trial: 0,
+	  timing_stim: 500,
+	  timing_response: 500,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({
+		  exp_stage: exp_stage
+		})
+	  }
+	}
+
+	var cue_block = {
+	  type: 'poldrack-single-stim',
+	  stimulus: getCue,
+	  is_html: true,
+	  choices: 'none',
+	  data: {
+		trial_id: 'cue'
+	  },
+	  timing_response: getCTI,
+	  timing_stim: getCTI,
+	  timing_post_trial: 0,
+	  on_finish: function() {
+		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})
+		appendData()
+	  }
+	};
+	
   testTrials.push(setStims_block)
   testTrials.push(fixation_block)
   testTrials.push(cue_block);
   testTrials.push(test_block);
-  testTrials.push(gap_block);
 }
 
 var testCount = 0
