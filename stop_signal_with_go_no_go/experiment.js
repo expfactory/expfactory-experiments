@@ -349,109 +349,13 @@ var attention_node = {
   }
 }
 
-var practice1 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">This is what a trial will look like.  You will see a shape in the center.</p>'+
-					'<p class = block-text style="font-size:22px;">Please respond to the shape.  If the shape is a '+shapes[0]+' or a '+shapes[1]+', press the '+possible_responses[0][0]+'.</p>'+
-					'<p class = block-text style="font-size:22px;">If the shape is a '+shapes[2]+' or a '+shapes[3]+', press the '+possible_responses[2][0]+'.</p>'+
-					'<p class = block-text style="font-size:22px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				'<div class =centerbox>'+
-					preFileType + pathSource + go_no_go_styles[0] + '_square' + fileType + postFileType +
-				'</div>'+
-			  '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice2 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">On some trials, a star will appear around the shape.  The star will appear with, or shortly after the letter appears.</p>'+
-					'<p class = block-text style="font-size:22px;">If you see a star, please make <i> no response </i> on that trial.</p>'+
-					'<p class = block-text style="font-size:22px;">Do not slow down your responses to the shapes in order to wait for the star.  Continue to respond as quickly and accurately as possible to the shape.</p>'+
-					'<p class = block-text style="font-size:22px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					preFileType + pathSource + go_no_go_styles[0] + '_square' + fileType + postFileType +
-					preFileType + pathSource + 'stopSignal' + fileType + postFileType +
-			   '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice3 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">If instead, the '+go_no_go_styles[1]+' version of the shape came out, then also do not respond on that trial!</p>'+
-					'<p class = block-text style="font-size:22px;">Remember, respond only if the shape is '+go_no_go_styles[0]+', not if the shape is '+go_no_go_styles[1]+'.</p>'+
-					'<p class = block-text style="font-size:22px;">Press Enter to continue. You will not be able to go back.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					preFileType + pathSource + go_no_go_styles[1] + '_square' + fileType + postFileType +
-			   '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
-var practice4 = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = bigbox>'+
-				'<div class = instructBox>'+
-					'<p class = block-text style="font-size:22px;">On some trials, you will see both a star and a '+go_no_go_styles[1]+' shape.</p>'+
-					'<p class = block-text style="font-size:22px;">On these trials, also make no response.</p>'+
-					'<p class = block-text style="font-size:22px;">Press Enter to start practice.</p>'+
-				'</div>'+
-				
-				'<div class = centerbox>'+
-					preFileType + pathSource + go_no_go_styles[1] + '_square' + fileType + postFileType +
-					preFileType + pathSource + 'stopSignal' + fileType + postFileType +
-			   '</div>',
-	is_html: true,
-	choices: [13],
-	data: {
-		trial_id: "visual_instruction"
-	},
-	timing_post_trial: 0,
-	timing_stim: 300000,
-	timing_response: 300000,
-	response_ends_trial: true,
-}
-
 var end_block = {
 	type: 'poldrack-text',
 	data: {
 		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "end"
 	},
-	timing_response: -1,
+	timing_response: 180000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Thanks for completing this task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -470,7 +374,7 @@ var welcome_block = {
 		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "welcome"
 	},
-	timing_response: -1,
+	timing_response: 180000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -596,28 +500,9 @@ var practice_intro = {
 		"trial_id": "stop_intro_phase1"
 	},
 	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true
 };
-
-var feedback_text = 'We will start practice. During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
-var feedback_block = {
-	type: 'poldrack-single-stim',
-	data: {
-		exp_id: "stop_signal_with_n_back",
-		trial_id: "practice-no-stop-feedback"
-	},
-	choices: [13],
-	stimulus: getFeedback,
-	timing_post_trial: 0,
-	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
-	response_ends_trial: true, 
-
-};
-
 
 var test_intro = {
 	type: 'poldrack-single-stim',
@@ -638,8 +523,7 @@ var test_intro = {
 		"trial_id": "test_intro"
 	},
 	timing_post_trial: 0,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true,
 	on_finish: function(){
 		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimuli.'
@@ -658,8 +542,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: -1,
-	timing_response: -1,
+	timing_response: 180000,
 	response_ends_trial: true, 
 
 };
@@ -673,7 +556,8 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 /********************************************/
 /*				Set up nodes				*/
@@ -1006,19 +890,6 @@ var testNode = {
 /* ************************************ */
 
 var stop_signal_with_go_no_go_experiment = []
-/*
-stop_signal_with_go_no_go_experiment.push(instruction_node);
-stop_signal_with_go_no_go_experiment.push(practice1);
-stop_signal_with_go_no_go_experiment.push(practice2);
-stop_signal_with_go_no_go_experiment.push(practice3);
-stop_signal_with_go_no_go_experiment.push(practice4);
-
-
-stop_signal_with_go_no_go_experiment.push(practice_intro);
-stop_signal_with_go_no_go_experiment.push(practiceNode);
-stop_signal_with_go_no_go_experiment.push(feedback_block);
-*/
-
 stop_signal_with_go_no_go_experiment.push(practiceStopNode)
 stop_signal_with_go_no_go_experiment.push(feedback_block);
 
