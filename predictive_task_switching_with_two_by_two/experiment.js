@@ -419,11 +419,10 @@ var numbers_list = [[6,8],[7,9],[2,4],[1,3]]
 var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
 							 
-var predictive_dimensions_list = jsPsych.randomization.repeat([stim = {dim:'magnitude', values: jsPsych.randomization.repeat(['high','low'],1)},
-								  							   stim = {dim:'parity', values: jsPsych.randomization.repeat(['odd','even'],1)}],1)
 
-var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['low','high']},
-								  stim = {dim:'parity', values: ['odd','even']}]
+
+var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
+								  stim = {dim:'parity', values: ['even','odd']}]
 
 							 	  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -434,12 +433,12 @@ var curr_tasks = jsPsych.randomization.repeat(['right','left'],1)
 var tasks = {
   left: {
     task: 'Left',
-    cues: ['left', 'sinistral'],
+    cues: ['left', 'first'],
     delay: 1
   },
   right: {
     task: 'Right',
-    cues: ['right', 'dextral'],
+    cues: ['right', 'second'],
     delay: 2
   }
 }
@@ -453,8 +452,8 @@ var prompt_text_list = '<ul list-text>'+
 						'<li>Bottom 2 quadrants: Judge cued number on '+predictive_dimensions_list[1].dim+'</li>' +
 						'<li>'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
 						'<li>'+predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
-						'<li>Cue was <i>right</i> or <i>dextral</i>, judge right number</li>' +
-						'<li>Cue was <i>left</i> or <i>sinistral</i>, judge left number</li>' +
+						'<li>Cue was <i>left</i> or <i>first</i>, judge left number</li>' +
+						'<li>Cue was <i>right</i> or <i>second</i>, judge right number</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
@@ -462,8 +461,8 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge cued number on '+predictive_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>right</i> or <i>dextral</i>, judge right number</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>left</i> or <i>sinistral</i>, judge left number</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>left</i> or <i>first</i>, judge left number</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>right</i> or <i>second</i>, judge right number</p>' +
 				  '</div>' 
 
 /* ************************************ */
@@ -534,14 +533,14 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment, across trials you will see a cue, either <i>right</i>, <i>dextral</i>, <i>left</i>, or <i>sinistral</i>, followed by 2 numbers moving clockwise on the screen in 4 quadrants.  '+
+			'<p class = block-text>In this experiment, across trials you will see a cue, either <i>left</i>, <i>first</i>, <i>right</i>, or <i>second</i>, followed by 2 numbers moving clockwise on the screen in 4 quadrants.  '+
 			'On any trial, one quadrant will have a cue, followed by 2 numbers.</p> '+
 		
 			'<p class = block-text>The cue will instruct you which of the following 2 numbers, you must make a judgement on.</p>'+
 			
-			'<p class = block-text>If you see the cue, <i>right</i> or <i>dextral</i>, please judge the upcoming right number.</p>'+
+			'<p class = block-text>If you see the cue, <i>left</i> or <i>first</i>, please judge the upcoming left number.</p>'+
 			
-			'<p class = block-text>If you saw the cue, <i>left</i> or <i>sinistral</i>, please judge the upcoming left number.</p>'+
+			'<p class = block-text>If you saw the cue, <i>right</i> or <i>second</i>, please judge the upcoming right number.</p>'+
 			
 		
 		'</div>',
@@ -601,7 +600,7 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>You will see a cue, either <i>right</i>, <i>dextral</i>, <i>left</i>, or <i>sinistral</i>, which will instruct you to judge the upcoming <i>right</i> or <i>left</i> number.</p>'+
+			'<p class = block-text>You will see a cue, either <i>left</i>, <i>first</i>, <i>right</i>, or <i>second</i>, which will instruct you to judge the upcoming <i>right</i> or <i>left</i> number.</p>'+
 			
 			'<p class = block-text>Please judge the <i>cued number </i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the cues and numbers are in.</p>'+

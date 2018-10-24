@@ -104,7 +104,7 @@ var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 
 // task specific variables
-var num_go_stim = 9 //per one no-go stim
+var num_go_stim = 4 //per one no-go stim
 var correct_responses = [
   ['go', 32],
   ['nogo', -1]
@@ -153,8 +153,8 @@ for (var i = 0; i < num_go_stim; i++) {
   })
 }
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 10); 
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 70);   
 
 
 

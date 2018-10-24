@@ -91,17 +91,19 @@ var getStim = function() {
 		distractor_i = probe_i
 	} else if (trial_type[2] == 'D') {
 		distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return $.inArray(y, [target_i, probe_i]) == -1}))
+	} else if (trial_type[2] == 'N'){
+		distractor_i = 'none'
 	}
 	currData.trial_num = current_trial
 	currData.condition = trial_type
 	currData.probe_id = probe_i
 	currData.target_id = target_i
+	currData.distractor_id = distractor_i
 	var target = '<div class = leftbox>'+center_prefix+path+target_i+'_green.png'+postfix+'</div>'
 	var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_white.png'+postfix+'</div>'
 	var distractor = ''
-	if (distractor_i !== 0) {
+	if (distractor_i != 'none') {
 		distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_red.png'+postfix+'</div>'
-		currData.distractor_id = distractor_i
 	}
 	current_trial += 1
 	var stim = target  + probe + distractor
@@ -144,7 +146,7 @@ for (var i = 1; i<11; i++) {
 }
 jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
 
-var practice_len = 21 
+var practice_len = 21
 // Trial types denoted by three letters for the relationship between:
 // probe-target, target-distractor, distractor-probe of the form
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
@@ -384,9 +386,9 @@ var practice_block = {
 	choices: choices,
 	key_answer: getResponse,
 	data: getData,
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_task_list,
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_task_list,
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_task_list,
+	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 	timing_response: 2000,
 	timing_stim: 1000,
 	timing_feedback: 500,

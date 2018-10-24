@@ -33,6 +33,10 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -51,7 +55,20 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+	
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -65,7 +82,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -983,12 +1001,18 @@ stop_signal_single_task_network_experiment.push(practiceNode);
 stop_signal_single_task_network_experiment.push(feedback_block);
 */
 
+stop_signal_single_task_network_experiment.push(visualCheckNode);
+
 stop_signal_single_task_network_experiment.push(practiceStopNode)
 stop_signal_single_task_network_experiment.push(feedback_block);
+
+stop_signal_single_task_network_experiment.push(visualCheckNode);
 
 stop_signal_single_task_network_experiment.push(test_intro);
 stop_signal_single_task_network_experiment.push(testNode);
 stop_signal_single_task_network_experiment.push(feedback_block);
+
+stop_signal_single_task_network_experiment.push(visualCheckNode);
 
 stop_signal_single_task_network_experiment.push(post_task_block);
 stop_signal_single_task_network_experiment.push(end_block);
