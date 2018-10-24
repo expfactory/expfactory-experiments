@@ -33,10 +33,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
 	var object_recognition_correct = 0
 	var object_recognition_count = 0
 	var object_recognition_rt = 0
 	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -55,7 +58,7 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		
+		//
 		if (experiment_data[i].trial_id == "object_recognition_network"){
 			object_recognition_count += 1
 			if (experiment_data[i].pass_check == true){
@@ -63,7 +66,7 @@ function assessPerformance() {
 				object_recognition_rt += experiment_data[i].rt
 			}
 		}
-	
+		//
 	}
 	
 	var object_correct = object_recognition_correct / object_recognition_count
@@ -83,7 +86,6 @@ function assessPerformance() {
 	})
 	var missed_percent = missed_count/trial_count
 	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
-	credit_var = (object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
