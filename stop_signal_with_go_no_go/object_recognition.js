@@ -159,7 +159,7 @@ var instructTimeThresh = 0 ///in seconds
 var responses = []
 
 var fileTypeObject = ".jpg'></img>"
-var prefileTypeObjectObject = "<img class = center src='/static/experiments/stop_signal_single_with_go_no_go/object_recognition_images/"
+var prefileTypeObjectObject = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/object_recognition_images/"
 
 var grid_stims = []
 var response_grid =

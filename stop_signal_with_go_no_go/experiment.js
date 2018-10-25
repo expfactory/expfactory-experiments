@@ -910,7 +910,6 @@ var testNode = {
 /* ************************************ */
 
 var stop_signal_with_go_no_go_experiment = []
-stop_signal_with_go_no_go_experiment.push(visualCheckNode)
 
 stop_signal_with_go_no_go_experiment.push(practiceStopNode)
 stop_signal_with_go_no_go_experiment.push(feedback_block);
