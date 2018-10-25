@@ -1003,8 +1003,6 @@ stop_signal_single_task_network_experiment.push(practiceNode);
 stop_signal_single_task_network_experiment.push(feedback_block);
 */
 
-stop_signal_single_task_network_experiment.push(visualCheckNode);
-
 stop_signal_single_task_network_experiment.push(practiceStopNode)
 stop_signal_single_task_network_experiment.push(feedback_block);
 
