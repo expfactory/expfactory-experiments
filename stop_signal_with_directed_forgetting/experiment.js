@@ -28,6 +28,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,7 +53,21 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -60,7 +81,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -352,8 +373,8 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 24 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 24 //378 must be divisible by 12
-var numTrialsPerBlock = 12; // 63 divisible by 12
+var exp_len = 180 //378 must be divisible by 12
+var numTrialsPerBlock = 36; // 63 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -1037,24 +1058,14 @@ var testNode = {
 /* create experiment definition array */
 stop_signal_with_directed_forgetting_experiment = []
 
-//stop_signal_with_directed_forgetting_experiment.push(attn_node)
-
-//stop_signal_with_directed_forgetting_experiment.push(instruction_node)
-
-//stop_signal_with_directed_forgetting_experiment.push(practice1)
-
-//stop_signal_with_directed_forgetting_experiment.push(practice2)
-
-//stop_signal_with_directed_forgetting_experiment.push(practice3)
-
-//stop_signal_with_directed_forgetting_experiment.push(practice4)
-
 stop_signal_with_directed_forgetting_experiment.push(practiceNode)
 
-stop_signal_with_directed_forgetting_experiment.push(start_test_block)
+stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 
+stop_signal_with_directed_forgetting_experiment.push(start_test_block)
 stop_signal_with_directed_forgetting_experiment.push(testNode)
 
-stop_signal_with_directed_forgetting_experiment.push(post_task_block)
+stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 
+stop_signal_with_directed_forgetting_experiment.push(post_task_block)
 stop_signal_with_directed_forgetting_experiment.push(end_block)
