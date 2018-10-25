@@ -908,6 +908,7 @@ stop_signal_with_n_back_experiment.push(visualCheckNode);
 
 stop_signal_with_n_back_experiment.push(start_test_block);
 stop_signal_with_n_back_experiment.push(testNode);
+stop_signal_with_n_back_experiment.push(feedback_block);
 
 stop_signal_with_n_back_experiment.push(visualCheckNode);
 

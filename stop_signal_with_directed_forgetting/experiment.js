@@ -1059,11 +1059,14 @@ var testNode = {
 stop_signal_with_directed_forgetting_experiment = []
 
 stop_signal_with_directed_forgetting_experiment.push(practiceNode)
+stop_signal_with_directed_forgetting_experiment.push(feedback_block)
 
 stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 
 stop_signal_with_directed_forgetting_experiment.push(start_test_block)
 stop_signal_with_directed_forgetting_experiment.push(testNode)
+stop_signal_with_directed_forgetting_experiment.push(feedback_block)
+
 
 stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 
