@@ -449,7 +449,7 @@ var instructions_block = {
 		
 		"<div class = centerbox>"+
 			"<p class = block-text>On trials where you see both a star and a "+go_no_go_styles[1]+" shape, make no response on that trial.</p>"+
-			"<p class = block-text>You must respond if you a star does not appear, and if the shapes are "+go_no_go_styles[0]+".</p>"+
+			"<p class = block-text>You must respond if a star does not appear, and if the shapes are "+go_no_go_styles[0]+".</p>"+
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules.  <i> This will be removed for test</i>.</p>'+
 		"</div>",
 	],
@@ -892,7 +892,7 @@ var testNode = {
 			if (stop_signal_respond > stop_signal_respond_lower_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if (stop_signal_respond < stop_signal_respond_lower_thresh) {
+			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt <= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}

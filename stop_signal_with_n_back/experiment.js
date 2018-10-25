@@ -111,20 +111,12 @@ var getCategorizeFeedback = function(){
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
-		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
-			
-			
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
-			
-			
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
-	
-		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
-			
-			
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
-	
 		}
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
@@ -157,13 +149,10 @@ var createControlTypes = function(numTrialsPerBlock){
 			
 				stims.push(stim)
 			}
-			
 		}
 	}
-
 	
 	stims = jsPsych.randomization.repeat(stims,1)
-	
 	stim_len = stims.length
 	
 	new_stims = []
@@ -179,8 +168,6 @@ var createControlTypes = function(numTrialsPerBlock){
 			correct_response = possible_responses[0][1]
 		}		
 		
-		
-			
 		stim = {
 			n_back_condition: n_back_condition,
 			stop_signal_condition: stop_signal_condition,
@@ -192,7 +179,6 @@ var createControlTypes = function(numTrialsPerBlock){
 		}
 	
 	return new_stims
-	
 }
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
@@ -234,7 +220,6 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 				stop_signal_condition = stop_signal_conditions[numstop_signalConds]
 				n_back_condition = n_back_conditions[numNBackConds]
 				
-				
 				stim = {
 					stop_signal_condition: stop_signal_condition,
 					n_back_condition: n_back_condition
@@ -242,9 +227,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			
 				stims.push(stim)
 			}
-			
 		}
-	
 	}
 	
 	stims = jsPsych.randomization.repeat(stims,1)
@@ -273,7 +256,6 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			} else if (n_back_condition == "mismatch"){
 				probe = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [new_stims[i - delay].probe.toLowerCase(), new_stims[i - delay].probe.toUpperCase()]) == -1}))
 				correct_response = possible_responses[1][1]
-		
 			}			
 		}
 		
@@ -284,7 +266,6 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			correct_response: correct_response,
 			delay: delay
 		}
-		
 		new_stims.push(stim)
 	}
 	return new_stims
@@ -342,7 +323,6 @@ var appendData = function(){
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	current_trial+=1
 	
-	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
 	} else if (trial_id == 'test_trial'){
@@ -369,7 +349,6 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 0,
 		})
-	
 	}
 	
 	if (trial_id == 'test_trial'){
@@ -380,9 +359,7 @@ var appendData = function(){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD-=50
 		}
-	}
-				
-	 
+	} 
 }
 
 /* ************************************ */
@@ -530,7 +507,7 @@ var instructions_block = {
 		*/
 		'<div class = centerbox>' + 
 			'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear with, or shortly after the letter appears.</p>'+
-			'<p class = block-text>If you see a star, please try your best to make no response on that trial. You must still commit the letter to memory, however.</p>'+
+			'<p class = block-text>If you see a star, please try your best to make no response on that trial. You should still remember the letter, however.</p>'+
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for this practice round is 1</i>. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -576,7 +553,7 @@ var start_test_block = {
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block.</p>'+
-			'<p class = block-text>Do not respond if you see a star!  You must still commit the letter to memory</p>'+
+			'<p class = block-text>Do not respond if you see a star!  You must still remember the letter</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 				
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
@@ -674,11 +651,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		SSD: getSSD,
 		timing_SS: 500,
 		timing_post_trial: 0,
-		on_finish: appendData,
-		on_start: function(){
-			stoppingTracker = []
-			stoppingTimeTracker = []
-		}
+		on_finish: appendData
 	}
 	controlTrials.push(control_block)
 }
@@ -721,11 +694,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timing_SS: 500,
 		timing_post_trial: 0,
 		on_finish: appendData,
-		prompt: prompt_text,
-		on_start: function(){
-			stoppingTracker = []
-			stoppingTimeTracker = []
-		}
+		prompt: prompt_text
 	}
 	
 	var categorize_block = {
@@ -822,17 +791,21 @@ testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 3; i++) {
 	
 	var test_block = {
-		type: 'poldrack-single-stim',
+		type: 'stop-signal',
 		stimulus: getStim,
-		is_html: true,
+		SS_stimulus: getStopStim,
+		SS_trial_type: getSSType, //getSSType,
 		data: {
-			"trial_id": "test_trial",
+			"trial_id": "test_trial"
 		},
+		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
-		timing_response: 2000, //2000
-		timing_post_trial: 0,
+		timing_stim: 1000,
+		timing_response: 2000,
 		response_ends_trial: false,
+		SSD: getSSD,
+		timing_SS: 500,
+		timing_post_trial: 0,
 		on_finish: appendData
 	}
 	testTrials.push(test_block)

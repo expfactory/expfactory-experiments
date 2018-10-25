@@ -34,6 +34,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -52,7 +59,21 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -66,7 +87,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -377,8 +398,8 @@ var credit_var = 0
 
 
 var practice_len = 25 // 25 must be divisible by 25
-var exp_len = 75 //300 must be divisible by 25
-var numTrialsPerBlock = 25 // 50 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var exp_len = 300 //300 must be divisible by 25
+var numTrialsPerBlock = 50 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
 
@@ -582,18 +603,6 @@ var start_test_block = {
 	}
 };
 
-var fixation_block = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
-	is_html: true,
-	choices: 'none',
-	data: {
-		trial_id: "practice_fixation"
-	},
-	timing_response: 500, //500
-	timing_post_trial: 0,
-}
-
 
 
 var feedback_text = 
@@ -640,6 +649,7 @@ var control_before = Math.round(Math.random()) //0 control comes before test, 1,
 var controlTrials = []
 controlTrials.push(feedback_block)
 for (i = 0; i < numTrialsPerBlock; i++) {
+
 	var control_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getControlStim,
@@ -677,6 +687,18 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 3; i++) {
+	var fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "practice_fixation"
+		},
+		timing_response: 500, //500
+		timing_post_trial: 0,
+		prompt: prompt_text
+	}
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -775,6 +797,17 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 3; i++) {
+	var fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "practice_fixation"
+		},
+		timing_response: 500, //500
+		timing_post_trial: 0
+	}
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
@@ -857,28 +890,16 @@ var testNode = {
 
 var go_nogo_with_n_back_experiment = []
 
-//go_nogo_with_n_back_experiment.push(instruction_node);
-//go_nogo_with_n_back_experiment.push(practice1);
-//go_nogo_with_n_back_experiment.push(practice2);
-
 go_nogo_with_n_back_experiment.push(practiceNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
 
-/*
-if (control_before == 0){
-	go_nogo_with_n_back_experiment.push(start_control_block);
-	go_nogo_with_n_back_experiment.push(controlNode);
-}*/
+go_nogo_with_n_back_experiment.push(visualCheckNode);
 
 go_nogo_with_n_back_experiment.push(start_test_block);
 go_nogo_with_n_back_experiment.push(testNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
 
-/*
-if (control_before == 1){
-	go_nogo_with_n_back_experiment.push(start_control_block);
-	go_nogo_with_n_back_experiment.push(controlNode);
-}*/
+go_nogo_with_n_back_experiment.push(visualCheckNode);
 
 go_nogo_with_n_back_experiment.push(post_task_block);
 go_nogo_with_n_back_experiment.push(end_block);
