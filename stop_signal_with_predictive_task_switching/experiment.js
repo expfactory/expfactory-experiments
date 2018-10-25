@@ -27,6 +27,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -45,7 +51,21 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -59,7 +79,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -342,16 +362,16 @@ var credit_var = 0
 var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 12 // 24  must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 24 //324 must be divisible by 12
-var numTrialsPerBlock = 12; //  60 divisible by 12
+var practice_len = 24 // 24  must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
+var exp_len = 240 //324 must be divisible by 12
+var numTrialsPerBlock = 48; //  60 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 var upper_stop_success_bound = 0.70
 var lower_stop_success_bound = 0.30
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10 
-var practice_thresh = 2 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 24 trials
 var SSD = 250
 var maxSSD = 1000
 var minSSD = 0 
@@ -978,21 +998,16 @@ var testNode = {
 /* create experiment definition array */
 stop_signal_with_predictive_task_switching_experiment = []
 
-//stop_signal_with_predictive_task_switching_experiment.push(instruction_node)
-
-//stop_signal_with_predictive_task_switching_experiment.push(practice1)
-//stop_signal_with_predictive_task_switching_experiment.push(practice2)
-
-//stop_signal_with_predictive_task_switching_experiment.push(test_img_block)
-
-//stop_signal_with_predictive_task_switching_experiment.push(NoSSPracticeNode)
-
 stop_signal_with_predictive_task_switching_experiment.push(practiceNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
+
+stop_signal_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 stop_signal_with_predictive_task_switching_experiment.push(start_test_block)
-
 stop_signal_with_predictive_task_switching_experiment.push(testNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
+
+stop_signal_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 stop_signal_with_predictive_task_switching_experiment.push(post_task_block)
-
 stop_signal_with_predictive_task_switching_experiment.push(end_block)
