@@ -822,7 +822,6 @@ var practiceNode = {
 	loop_function: function(data){
 		practiceCount += 1
 		current_trial = 0
-		stims = createTrialTypes(practice_len)
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -876,7 +875,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len)
 			return true
 		
 		}

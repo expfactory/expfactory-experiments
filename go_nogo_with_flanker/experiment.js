@@ -28,6 +28,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,7 +52,21 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -60,7 +80,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -224,8 +244,8 @@ var credit_var = 0
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 20 // must be divisible by 20, [5 (go,go,go,go,stop) by 4 (flanker conditions)]
-var exp_len = 40 //350 must be divisible by 10
-var numTrialsPerBlock = 20; // 70 divisible by 10
+var exp_len = 240 //350 must be divisible by 10
+var numTrialsPerBlock = 48; // 70 divisible by 10
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -431,25 +451,25 @@ var rest_block = {
 };
 
 
-var fixation_block = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
-	is_html: true,
-	choices: 'none',
-	data: {
-		trial_id: "fixation"
-	},
-	timing_post_trial: 0,
-	timing_stim: 500, //3000
-	timing_response: 500
-}
-
-
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
+	var fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "fixation"
+		},
+		timing_post_trial: 0,
+		timing_stim: 500, //3000
+		timing_response: 500,
+		prompt: prompt_text,
+	}
+
 	var practice_block = {
 		type: 'poldrack-categorize',
 		stimulus: getStim,
@@ -480,7 +500,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		stims = createTrialTypes(practice_len)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -534,7 +553,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len)
 			return true
 		
 		}
@@ -548,6 +567,19 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) {
+	var fixation_block = {
+		type: 'poldrack-single-stim',
+		stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
+		is_html: true,
+		choices: 'none',
+		data: {
+			trial_id: "fixation"
+		},
+		timing_post_trial: 0,
+		timing_stim: 500, //3000
+		timing_response: 500
+	}
+	
 	var test_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getStim,
@@ -630,17 +662,16 @@ var testNode = {
 /* create experiment definition array */
 go_nogo_with_flanker_experiment = []
 
-//go_nogo_with_flanker_experiment.push(test_img_block)
-//go_nogo_with_flanker_experiment.push(instruction_node)
-//go_nogo_with_flanker_experiment.push(practice1)
-//go_nogo_with_flanker_experiment.push(practice2)
-
 go_nogo_with_flanker_experiment.push(practiceNode)
 go_nogo_with_flanker_experiment.push(feedback_block)
+
+go_nogo_with_flanker_experiment.push(visualCheckNode)
 
 go_nogo_with_flanker_experiment.push(start_test_block)
 go_nogo_with_flanker_experiment.push(testNode)
 go_nogo_with_flanker_experiment.push(feedback_block)
+
+go_nogo_with_flanker_experiment.push(visualCheckNode)
 
 go_nogo_with_flanker_experiment.push(post_task_block)
 go_nogo_with_flanker_experiment.push(end_block)
