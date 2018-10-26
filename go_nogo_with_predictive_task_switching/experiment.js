@@ -28,6 +28,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,6 +52,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -60,7 +76,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -313,8 +329,8 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 20 // 20  must be divisible by 20 [5 (go go go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 40 //320 must be divisible by 20
-var numTrialsPerBlock = 20; //  60 divisible by 20
+var exp_len = 300 //320 must be divisible by 20
+var numTrialsPerBlock = 60; //  60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -595,7 +611,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		stims = createTrialTypes(practice_len)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -649,7 +664,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len)
 			return true
 		
 		}
@@ -758,17 +773,16 @@ var testNode = {
 /* create experiment definition array */
 go_nogo_with_predictive_task_switching_experiment = []
 
-//go_nogo_with_predictive_task_switching_experiment.push(test_img_block)
-//go_nogo_with_predictive_task_switching_experiment.push(instruction_node)
-//go_nogo_with_predictive_task_switching_experiment.push(practice1)
-//go_nogo_with_predictive_task_switching_experiment.push(practice2)
-
 go_nogo_with_predictive_task_switching_experiment.push(practiceNode)
 go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
+
+go_nogo_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 go_nogo_with_predictive_task_switching_experiment.push(start_test_block)
 go_nogo_with_predictive_task_switching_experiment.push(testNode)
 go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
+
+go_nogo_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 go_nogo_with_predictive_task_switching_experiment.push(post_task_block)
 go_nogo_with_predictive_task_switching_experiment.push(end_block)

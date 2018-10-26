@@ -34,6 +34,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -52,6 +59,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -66,7 +83,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -270,8 +287,8 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 24 must be divisible by 10
-var exp_len = 60 //324 must be divisible by 10
-var numTrialsPerBlock = 20 // 54 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var exp_len = 240 //324 must be divisible by 10
+var numTrialsPerBlock = 40 // 54 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of practice trials
 
@@ -551,7 +568,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		stims = createTrialTypes(practice_len, delay)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -607,7 +623,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len, delay)
 			return true
 		
 		}
@@ -713,19 +729,16 @@ var testNode = {
 
 var n_back_with_directed_forgetting_experiment = []
 
-//n_back_with_directed_forgetting_experiment.push(instruction_node);
-
-//n_back_with_directed_forgetting_experiment.push(practice1);
-
-//n_back_with_directed_forgetting_experiment.push(practice2);
-
 n_back_with_directed_forgetting_experiment.push(practiceNode);
 n_back_with_directed_forgetting_experiment.push(feedback_block);
-n_back_with_directed_forgetting_experiment.push(feedback_block);
+
+n_back_with_directed_forgetting_experiment.push(visualCheckNode);
 
 n_back_with_directed_forgetting_experiment.push(start_test_block);
 n_back_with_directed_forgetting_experiment.push(testNode);
 n_back_with_directed_forgetting_experiment.push(feedback_block);
+
+n_back_with_directed_forgetting_experiment.push(visualCheckNode);
 
 n_back_with_directed_forgetting_experiment.push(post_task_block);
 n_back_with_directed_forgetting_experiment.push(end_block);

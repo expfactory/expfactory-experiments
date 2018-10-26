@@ -84,3 +84,15 @@ img.center {
   margin: auto;  
   max-height: 65%;
 }
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 100%;
+}
