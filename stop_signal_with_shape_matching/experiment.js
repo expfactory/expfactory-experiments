@@ -610,7 +610,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		stims = createTrialTypes(practice_len)
 		current_trial = 0
 	
 		var total_trials = 0
@@ -701,7 +700,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len)
 			return true
 		
 		}
