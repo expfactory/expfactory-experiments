@@ -848,7 +848,6 @@ var practiceNode = {
 	loop_function: function(data){
 		practiceCount += 1
 		current_trial = 0
-		stims = createTrialTypes(practice_len)
 	
 		var total_trials = 0
 		var sum_responses = 0
@@ -939,6 +938,7 @@ var practiceNode = {
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
+			stims = createTrialTypes(practice_len)
 			return true
 		
 		}
@@ -1066,7 +1066,6 @@ stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 stop_signal_with_directed_forgetting_experiment.push(start_test_block)
 stop_signal_with_directed_forgetting_experiment.push(testNode)
 stop_signal_with_directed_forgetting_experiment.push(feedback_block)
-
 
 stop_signal_with_directed_forgetting_experiment.push(visualCheckNode)
 
