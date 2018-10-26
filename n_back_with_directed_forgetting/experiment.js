@@ -285,7 +285,6 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 var run_attention_checks = true
 
-
 var practice_len = 20 // 24 must be divisible by 10
 var exp_len = 240 //324 must be divisible by 10
 var numTrialsPerBlock = 40 // 54 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
@@ -296,7 +295,6 @@ var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
-
 var delay = 1
 
 var pathSource = "/static/experiments/n_back_with_directed_forgetting/images/"
@@ -312,17 +310,16 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 var letters = 'bBdDgGtTvV'.split("")
 							 
 
-
-
 var prompt_text_list = '<ul list-text>'+
-						'<li>Press the '+possible_responses[0][0]+' if the current letter matches the letter, '+delay+' trial ago in your memory set.</li>' +
+						'<li>Match the current letter to the letter that appeared '+delay+' trial(s) ago.</li>' +
+						'<li>Press the '+possible_responses[0][0]+' if the letters match.</li>' +
 						'<li>Press the '+possible_responses[1][0]+'. if they mismatch.</li>' +
 					  '</ul>'
 					  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the '+possible_responses[0][0]+' if the current letter matches the remember letter, '+delay+' trials ago.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Match the current letter to the letter that appeared '+delay+' trial(s) ago.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the '+possible_responses[0][0]+' if the letters match.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the '+possible_responses[1][0]+'. if they mismatch.</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Your delay is 1.</p>' +
 				  '</div>'
 				  
 var current_trial = 0
