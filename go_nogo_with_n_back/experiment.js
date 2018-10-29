@@ -747,9 +747,7 @@ var practiceNode = {
 		
 					}
 				}
-		
 			}
-	
 		}
 	
 		var accuracy = correct / total_trials
@@ -759,27 +757,27 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
-		if (accuracy > accuracy_thresh){
+		if (practiceCount == practice_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			stims = createTrialTypes(numTrialsPerBlock, delay)
+				'</p><p class = block-text>Done with this practice.' 
 			delay = delays.pop()
+			stims = createTrialTypes(numTrialsPerBlock, delay)
+			return false
+		}
+			
+		if (accuracy >= accuracy_thresh){
+			feedback_text +=
+				'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
+			delay = delays.pop()
+			stims = createTrialTypes(numTrialsPerBlock, delay)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+				'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 				feedback_text +=
-						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
-			}
-		
-			if (practiceCount == practice_thresh){
-				feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-					stims = createTrialTypes(numTrialsPerBlock, delay)
-					delay = delays.pop()
-					return false
+					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 			
 			feedback_text +=
