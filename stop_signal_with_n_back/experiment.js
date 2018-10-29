@@ -724,56 +724,88 @@ var practiceNode = {
 		stims = createTrialTypes(practice_len, delay)
 		current_trial = 0
 	
-		var sum_rt = 0
-		var sum_responses = 0
-		var correct = 0
 		var total_trials = 0
-	
-		for (var i = 0; i < data.length; i++){
+		
+		var sum_stop_rt = 0;
+		var sum_go_rt = 0;
+		
+		var sumGo_correct = 0;
+		var sumStop_correct = 0;
+		
+		var num_go_responses = 0;
+		var num_stop_responses = 0;
+		
+		var go_length = 0;
+		var stop_length = 0
+		
+		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "practice_trial"){
-				total_trials+=1
-				if (data[i].rt != -1){
-					sum_rt += data[i].rt
-					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
-				}
-		
+				total_trials += 1
 			}
-	
+			
+			if (data[i].stop_signal_condition == "go"){
+				go_length += 1
+				if (data[i].rt != -1) {
+					num_go_responses += 1
+					sum_go_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
+				}				
+			} else if (data[i].stop_signal_condition == "stop") {
+				stop_length += 1
+				if (data[i].rt != -1){
+					num_stop_responses += 1
+					sum_stop_rt += data[i].rt
+				} else if (data[i].rt == -1){
+					sumStop_correct += 1
+				}				
+			} 
 		}
-	
-		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
-		var ave_rt = sum_rt / sum_responses
+
+		var average_rt = sum_go_rt / num_go_responses;
+		var missed_responses = (go_length - num_go_responses) / go_length
+		var aveLetterRespondCorrect = sumGo_correct / go_length 
+		var stop_signal_respond = num_stop_responses / stop_length
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</strong>"
 
-		if (accuracy > accuracy_thresh){
+		if (practiceCount == practice_thresh){
+				feedback_text +=
+					'</p><p class = block-text>Done with this practice.' 
+					delay = delays.pop()
+					stims = createTrialTypes(numTrialsPerBlock, delay)
+					return false
+		}
+		
+		if ((aveLetterRespondCorrect > accuracy_thresh) && (stop_signal_respond > minStopCorrect) && (stop_signal_respond < maxStopCorrect)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			delay = delays.pop()
 			stims = createTrialTypes(numTrialsPerBlock, delay)
 			return false
 	
-		} else if (accuracy < accuracy_thresh){
+		} else {
+			
+			if (aveLetterRespondCorrect < accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+			}
+			
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
-		
-			if (practiceCount == practice_thresh){
-				feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-					delay = delays.pop()
-					stims = createTrialTypes(numTrialsPerBlock, delay)
-					return false
+			
+			if (stop_signal_respond > maxStopCorrect){
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			}
+		
+			if (stop_signal_respond < minStopCorrect){
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			}
+		
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
@@ -818,39 +850,69 @@ var testNode = {
 	testCount += 1
 	current_trial = 0
 	
-	var sum_rt = 0
-		var sum_responses = 0
-		var correct = 0
-		var total_trials = 0
-
-		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == "go")){
-				total_trials+=1
-				if (data[i].rt != -1){
-					sum_rt += data[i].rt
-					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
+	var total_trials = 0
+		
+		var sum_stop_rt = 0;
+		var sum_go_rt = 0;
+		
+		var sumGo_correct = 0;
+		var sumStop_correct = 0;
+		
+		var num_go_responses = 0;
+		var num_stop_responses = 0;
+		
+		var go_length = 0;
+		var stop_length = 0
+		
+		for (i = 0; i < data.length; i++) {
+			if (data[i].trial_id == "test_trial"){
+				total_trials += 1
+			}
+			
+			if (data[i].stop_signal_condition == "go"){
+				go_length += 1
+				if (data[i].rt != -1) {
+					num_go_responses += 1
+					sum_go_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
 					}
-				}
+				}				
+			} else if (data[i].stop_signal_condition == "stop") {
+				stop_length += 1
+				if (data[i].rt != -1){
+					num_stop_responses += 1
+					sum_stop_rt += data[i].rt
+				} else if (data[i].rt == -1){
+					sumStop_correct += 1
+				}				
 			} 
 		}
-	
-		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
-		var ave_rt = sum_rt / sum_responses
+
+		var average_rt = sum_go_rt / num_go_responses;
+		var missed_responses = (go_length - num_go_responses) / go_length
+		var aveLetterRespondCorrect = sumGo_correct / go_length 
+		var stop_signal_respond = num_stop_responses / stop_length
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
-		if (accuracy < accuracy_thresh){
+		if (aveLetterRespondCorrect < accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
 		}
 		if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+		
+		if (stop_signal_respond > maxStopCorrect){
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			}
+		
+		if (stop_signal_respond < minStopCorrect){
+			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 		}
 	
 		if (testCount == numTestBlocks){

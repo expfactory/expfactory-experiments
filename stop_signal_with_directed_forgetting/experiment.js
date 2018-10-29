@@ -371,9 +371,9 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 12 // 24 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 180 //378 must be divisible by 12
-var numTrialsPerBlock = 36; // 63 divisible by 12
+var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
+var exp_len = 180 //180 must be divisible by 12
+var numTrialsPerBlock = 36; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -718,7 +718,7 @@ var test_probe_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < 9; i++) { //practice_len
+for (i = 0; i < practice_len; i++) { 
 	var practice_start_fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
@@ -902,6 +902,13 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for go trials: " + Math.round(accuracy * 100)+ "%</i>"
 		
+		if (practiceCount == practice_thresh){
+			feedback_text +=
+				'</p><p class = block-text>Done with this practice.' 
+				stims = createTrialTypes(numTrialsPerBlock)
+				return false
+		}
+			
 		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrect) && (stop_acc > minStopCorrect)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
@@ -928,13 +935,6 @@ var practiceNode = {
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			
 			}
-		
-			if (practiceCount == practice_thresh){
-				feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-					stims = createTrialTypes(numTrialsPerBlock)
-					return false
-			}
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
@@ -953,7 +953,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < 3; i++) { //numTrialsPerBlock
+for (i = 0; i < numTrialsPerBlock; i++) { 
 	testTrials.push(start_fixation_block)
 	testTrials.push(training_block)
 	testTrials.push(cue_directed_block)
