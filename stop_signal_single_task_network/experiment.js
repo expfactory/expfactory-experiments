@@ -805,40 +805,42 @@ var practiceStopNode = {
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
-					prompt_text_list
-		
-				if (average_rt > rt_thresh) {
-					feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-				}
-				if (missed_responses > missed_response_thresh){
-					if(aveShapeRespondCorrect < accuracy_thresh){
-						feedback_text +=
-						'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
-							
-				
-					} else {
-						feedback_text +=
-						'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
-						prompt_text_list
-					}
-				}
-			
-			
-				if (stop_signal_respond > maxStopCorrect){
-					'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
-			
-				}
-			
-				if (stop_signal_respond < minStopCorrect){
-					'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
-			
-				}
-			
-				feedback_text += '</p><p class = block-text>Redoing this practice.'
-				return true	
+				'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+				prompt_text_list
 			}
+			if (average_rt > rt_thresh) {
+				feedback_text +=
+				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+			}
+			if (missed_responses > missed_response_thresh){
+				if(aveShapeRespondCorrect < accuracy_thresh){
+					feedback_text +=
+					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
+						
+			
+				} else {
+					feedback_text +=
+					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
+					prompt_text_list
+				}
+			}
+			
+			
+			if (stop_signal_respond > maxStopCorrect){
+				feedback_text +=
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+		
+			}
+		
+			if (stop_signal_respond < minStopCorrect){
+				feedback_text +=
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+		
+			}
+			
+			feedback_text += '</p><p class = block-text>Redoing this practice.'
+			return true	
+			
 		}
 	}
 }
