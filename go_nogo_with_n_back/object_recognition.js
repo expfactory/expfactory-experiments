@@ -218,7 +218,7 @@ var visualCheckNode = {
 	loop_function: function(data) {
 		numVisualChecks += 1
 		if (numVisualChecks == maxVisualChecks){
-			numVisualChecks
+			numVisualChecks = 0
 			return false
 		} else {
 			return true
