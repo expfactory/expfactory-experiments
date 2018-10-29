@@ -831,7 +831,6 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 	testCount += 1
-	stims = createTrialTypes(numTrialsPerBlock, delay)
 	current_trial = 0
 	
 	var sum_rt = 0
@@ -875,6 +874,7 @@ var testNode = {
 			return false
 		} else {
 			delay = delays.pop()
+			stims = createTrialTypes(numTrialsPerBlock, delay)
 			feedback_text += "</p><p class = block-text><i>For the next round of trials, your delay is "+delay+"</i>.  Press Enter to continue."
 			return true
 		}
