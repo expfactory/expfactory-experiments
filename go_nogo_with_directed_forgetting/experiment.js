@@ -97,7 +97,6 @@ var getFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition != 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
@@ -109,8 +108,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
-			
-			
+			console.log('here')			
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
@@ -774,16 +772,12 @@ for (i = 0; i < practice_len; i++) {
 		timing_stim: 2500, //2500
 		timing_response: 2500
 	};
-
+	
 	var practice_probe_block = {
-		type: 'poldrack-categorize',
+		type: 'poldrack-single-stim',
 		stimulus: getProbeStim,
-		key_answer: getResponse,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		correct_text: '',
-		incorrect_text: '',
-		timeout_message: '',
 		timing_stim: 2000, //2000
 		timing_response: 2000,
 		prompt: prompt_text,
@@ -792,7 +786,7 @@ for (i = 0; i < practice_len; i++) {
 		on_finish: appendData,
 		timing_post_trial: 0
 	};
-	
+	  
 	var categorize_block = {
 		type: 'poldrack-single-stim',
 		data: {

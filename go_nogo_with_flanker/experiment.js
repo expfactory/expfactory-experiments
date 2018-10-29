@@ -637,7 +637,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember, judge if the green shape on the left matches or mismatches the <i>CENTER</i> white shape on the right: <br>' + prompt_text_list
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
 		}
 		
 		if (missed_responses > missed_thresh){
