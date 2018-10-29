@@ -675,7 +675,7 @@ var NoSSPracticeNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -821,7 +821,7 @@ var practiceNode = {
 		var stop_success_percentage = stop_succeed / total_stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=

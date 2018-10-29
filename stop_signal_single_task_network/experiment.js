@@ -627,7 +627,7 @@ var practiceNode = {
 		console.log('num response = '+ num_responses)
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy: " + Math.round(averageGo_correct * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(averageGo_correct * 100)+ "%</i>"
 
 		if ((averageGo_correct >= accuracy_thresh)||(practiceCount == 3)){
 			if (average_rt > rt_thresh) {
@@ -788,7 +788,7 @@ var practiceStopNode = {
 		
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for non-starred trials: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
 
 		if (practiceStopCount == 3) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'

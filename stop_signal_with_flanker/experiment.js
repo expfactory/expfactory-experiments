@@ -610,17 +610,26 @@ var practiceNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</strong>"
 
+		if (practiceCount == practice_thresh){
+			feedback_text +=
+				'</p><p class = block-text>Done with this practice.' 
+				stims = createTrialTypes(numTrialsPerBlock)
+				return false
+		}
+		
 		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrect) && (stop_correct > minStopCorrect)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
 			return false
 	
-		} else if (accuracy < accuracy_thresh){
+		} else {
+			if (accuracy < accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text 
+			}
 			if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -636,12 +645,6 @@ var practiceNode = {
 			
 			}
 		
-			if (practiceCount == practice_thresh){
-				feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-					stims = createTrialTypes(numTrialsPerBlock)
-					return false
-			}
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
@@ -757,7 +760,7 @@ var testNode = {
 	var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</strong>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
