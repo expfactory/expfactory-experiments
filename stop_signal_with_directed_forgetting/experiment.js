@@ -97,7 +97,6 @@ var getFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
@@ -719,7 +718,7 @@ var test_probe_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len; i++) {
+for (i = 0; i < practice_len; i++) { 
 	var practice_start_fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
@@ -846,6 +845,7 @@ var practiceCount = 0
 var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
+		stims = createTrialTypes(numTrialsPerBlock)
 		practiceCount += 1
 		current_trial = 0
 	
@@ -885,11 +885,10 @@ var practiceNode = {
 					total_sum_rt += data[i].rt
 					stop_rt += data[i].rt
 					sum_stop_responses += 1
-					if (data[i].key_press == -1){
-						stop_correct += 1
-		
-					}
+				} else if (data[i].key_press == -1){
+					stop_correct += 1
 				}
+				
 			
 			}
 	
@@ -902,11 +901,12 @@ var practiceNode = {
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for go trials: " + Math.round(accuracy * 100)+ "%</i>"
-
-		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrect) && (stop_correct > minStopCorrect)){
+		
+		if (accuracy > accuracy_thresh && stop_acc < maxStopCorrect && stop_acc > minStopCorrect){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
+			console.log('here1')
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -932,6 +932,7 @@ var practiceNode = {
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
 					stims = createTrialTypes(numTrialsPerBlock)
+					console.log('here2')
 					return false
 			}
 			
@@ -939,6 +940,7 @@ var practiceNode = {
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
 			stims = createTrialTypes(practice_len)
+			console.log('here3')
 			return true
 		
 		}
@@ -1019,7 +1021,7 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for go trials: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){

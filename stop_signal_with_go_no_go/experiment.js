@@ -759,7 +759,7 @@ var practiceStopNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock; i++) {
+for (i = 0; i < numTrialsPerBlock; i++) { 
 	testTrials.push(fixation_block)
 	var test_block = {
 		type: 'stop-signal',
