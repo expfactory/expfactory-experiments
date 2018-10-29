@@ -718,7 +718,7 @@ var test_probe_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len; i++) { 
+for (i = 0; i < 9; i++) { //practice_len
 	var practice_start_fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
@@ -866,8 +866,8 @@ var practiceNode = {
 	
 		for (var i = 0; i < data.length; i++){
 			if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'go')){
-				total_trials+=1
-				go_trials+=1
+				total_trials +=1
+				go_trials +=1
 				if (data[i].rt != -1){
 					total_sum_rt += data[i].rt
 					go_rt += data[i].rt
@@ -879,8 +879,8 @@ var practiceNode = {
 				}
 		
 			} else if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'stop')){
-				total_trials+=1
-				stop_trials+=1
+				total_trials +=1
+				stop_trials +=1
 				if (data[i].rt != -1){
 					total_sum_rt += data[i].rt
 					stop_rt += data[i].rt
@@ -902,16 +902,17 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for go trials: " + Math.round(accuracy * 100)+ "%</i>"
 		
-		if (accuracy > accuracy_thresh && stop_acc < maxStopCorrect && stop_acc > minStopCorrect){
+		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrect) && (stop_acc > minStopCorrect)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
-			console.log('here1')
 			return false
 	
-		} else if (accuracy < accuracy_thresh){
-			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+		} else {
+			if (accuracy < accuracy_thresh) {
+				feedback_text +=
+						'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+			}
 					
 			if (missed_responses > missed_thresh){
 				feedback_text +=
@@ -932,7 +933,6 @@ var practiceNode = {
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
 					stims = createTrialTypes(numTrialsPerBlock)
-					console.log('here2')
 					return false
 			}
 			
@@ -940,10 +940,11 @@ var practiceNode = {
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
 			stims = createTrialTypes(practice_len)
-			console.log('here3')
 			return true
 		
 		}
+		
+		
 	
 	}
 	
@@ -952,7 +953,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock; i++) {
+for (i = 0; i < 3; i++) { //numTrialsPerBlock
 	testTrials.push(start_fixation_block)
 	testTrials.push(training_block)
 	testTrials.push(cue_directed_block)

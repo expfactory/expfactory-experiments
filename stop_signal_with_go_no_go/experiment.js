@@ -700,9 +700,7 @@ var practiceStopNode = {
 		
 		var stop_signal_respond = num_stop_responses / stop_length
 		var gng_respond = num_gng_responses / go_no_go_length
-		
-		
-		
+			
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for non-starred trials: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
@@ -711,17 +709,25 @@ var practiceStopNode = {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
-		
 		}
-		if (aveShapeRespondCorrect < accuracy_thresh) {
-			feedback_text +=
-				'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
-				prompt_text_list
 		
+		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond > stop_signal_respond_lower_thresh) && (stop_signal_respond < stop_signal_respond_upper_thresh)){
+			feedback_text += '</p><p class = block-text>Done with this practice.'
+			exp_phase = "test"
+			return false;
+		
+		} else {
+			if (aveShapeRespondCorrect < accuracy_thresh) {
+				feedback_text +=
+					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+					prompt_text_list
+			}
+			
 			if (average_rt > rt_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
+			
 			if (missed_responses > missed_response_thresh){
 				if(aveShapeRespondCorrect < accuracy_thresh){
 					feedback_text +=
@@ -735,20 +741,17 @@ var practiceStopNode = {
 				}
 			}
 			
-			if (stop_signal_respond > stop_signal_respond_lower_thresh) {
+			if (stop_signal_respond < stop_signal_respond_lower_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if (stop_signal_respond < stop_signal_respond_lower_thresh) {
+			} else if (stop_signal_respond > stop_signal_respond_upper_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 				
 			}
+			
 			feedback_text += '</p><p class = block-text>Redoing this practice.'
 			return true	
-		} else {
-			feedback_text += '</p><p class = block-text>Done with this practice.'
-			exp_phase = "test"
-			return false;
 		}
 	}
 }
