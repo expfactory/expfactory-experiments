@@ -109,7 +109,6 @@ var getFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
