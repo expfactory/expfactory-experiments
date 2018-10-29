@@ -1008,14 +1008,12 @@ var testNode = {
 					total_sum_rt += data[i].rt
 					stop_rt += data[i].rt
 					sum_stop_responses += 1
-					if (data[i].key_press == -1){
-						stop_correct += 1
-		
-					}
 				}
-			
-			}
+				if (data[i].key_press == -1){
+					stop_correct += 1
 	
+				}			
+			}
 		}
 	
 		var accuracy = go_correct / go_trials

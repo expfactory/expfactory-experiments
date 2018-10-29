@@ -741,13 +741,12 @@ var practiceStopNode = {
 				}
 			}
 			
-			if (stop_signal_respond < stop_signal_respond_lower_thresh) {
+			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if (stop_signal_respond > stop_signal_respond_upper_thresh) {
+			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt <= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-				
 			}
 			
 			feedback_text += '</p><p class = block-text>Redoing this practice.'
@@ -892,7 +891,7 @@ var testNode = {
 				}
 			}
 			
-			if (stop_signal_respond > stop_signal_respond_lower_thresh) {
+			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
 			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt <= rt_thresh)) {
