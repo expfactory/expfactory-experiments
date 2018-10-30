@@ -286,7 +286,6 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 }
 
 
-
 var getStim = function(){	
 	stim = stims.shift()
 	n_back_condition = stim.n_back_condition

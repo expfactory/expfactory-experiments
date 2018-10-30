@@ -159,11 +159,11 @@ var instructTimeThresh = 0 ///in seconds
 var responses = []
 
 var fileTypeObject = ".jpg'></img>"
-var prefileTypeObjectObject = "<img class = center src='/static/experiments/go_nogo_with_shape_matching/object_recognition_images/"
+var prefileTypeObjectObject = "<img class = center_grid src='/static/experiments/go_nogo_with_shape_matching/object_recognition_images/"
 
 var grid_stims = []
 var response_grid =
-  [['<div class = numbox>' +      '<button id = button_0 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + prefileTypeObjectObject],
+  [['<div class = numbox>' +      		'<button id = button_0 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + prefileTypeObjectObject],
   [fileTypeObject + '</div></button>' + '<button id = button_1 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + prefileTypeObjectObject],
   [fileTypeObject + '</div></button>' + '<button id = button_2 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + prefileTypeObjectObject],
   [fileTypeObject + '</div></button>' + '<button id = button_3 class = "square num-button" onclick = "recordClick(this)"><div class = content>' + prefileTypeObjectObject],

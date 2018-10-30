@@ -777,11 +777,6 @@ var testNode = {
 
 var n_back_single_task_network_experiment = []
 
-//n_back_single_task_network_experiment.push(instruction_node);
-
-//n_back_single_task_network_experiment.push(practice1);
-//n_back_single_task_network_experiment.push(practice2);
-
 n_back_single_task_network_experiment.push(practiceNode);
 n_back_single_task_network_experiment.push(feedback_block);
 

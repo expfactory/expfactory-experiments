@@ -394,11 +394,11 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>On some trials, a star will appear around the probe.  The star will appear with, or shortly after the probe appears.</p>'+
+			'<p class = block-text>On some trials, a star will appear around the letters.  The star will appear with, or shortly after the letters appears.</p>'+
 			
 			'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 		
-			'<p class = block-text>Please do not slow down your responses to the probe in order to wait for the star.  Continue to respond as quickly and accurately as possible to the probe.</p>'+
+			'<p class = block-text>Please do not slow down your responses to the middle letter in order to wait for the star.  Continue to respond as quickly and accurately as possible to the middle letter.</p>'+
 					
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>',

@@ -898,9 +898,6 @@ var testNode = {
 /* ************************************ */
 
 var predictive_task_switching_with_two_by_two_experiment = []
-//predictive_task_switching_with_two_by_two_experiment.push(instruction_node);
-//predictive_task_switching_with_two_by_two_experiment.push(practice1);
-//predictive_task_switching_with_two_by_two_experiment.push(practice2);
 
 predictive_task_switching_with_two_by_two_experiment.push(practiceNode);
 predictive_task_switching_with_two_by_two_experiment.push(feedback_block);

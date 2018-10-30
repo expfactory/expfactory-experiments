@@ -415,17 +415,17 @@ var stop_signal_boards = ['<div class = bigbox><div class = starbox>','</div></d
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+
+						'<li>Please respond if the probe was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
-						'<li>Do not respond if a star appears around the probe (single letter)!</li>' +
+						'<li>Do not respond if a star appears around the probe!</li>' +
 					   '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (single letter) was in the memory set.</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe was in the memory set.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears around the probe (single letter)!</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears around the probe!</p>' +
 				  '</div>'
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -591,12 +591,12 @@ var start_test_block = {
 		
 			'<p class = block-text>So for example, if you get the cue TOP, please forget the top 3 letters and remember the bottom 3 letters.</p>'+
 		
-			'<p class = block-text>After a short delay, you will be presented with a probe - a single letter.  Please indicate whether this probe was in your memory set.</p>'+
+			'<p class = block-text>After a short delay, you will be presented with a probe.  Please indicate whether this probe was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the probe. Do not respond if you see a star.  Do not slow down your response to the probe (single letter) in order to wait for the star.</p>'+
+			'<p class = block-text>On some trials, you will see a star appear with or shortly after the probe. Do not respond if you see a star.  Do not slow down your response to the probe in order to wait for the star.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',

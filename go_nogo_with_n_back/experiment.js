@@ -887,6 +887,8 @@ var testNode = {
 
 var go_nogo_with_n_back_experiment = []
 
+go_nogo_with_n_back_experiment.push(visualCheckNode);
+
 go_nogo_with_n_back_experiment.push(practiceNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
 

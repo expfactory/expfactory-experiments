@@ -850,27 +850,12 @@ var testNode = {
 
 var n_back_with_shape_matching_experiment = []
 
-//n_back_with_shape_matching_experiment.push(instruction_node);
-//n_back_with_shape_matching_experiment.push(practice1);
-
 n_back_with_shape_matching_experiment.push(practiceNode);
 n_back_with_shape_matching_experiment.push(feedback_block);
-
-/*
-if (control_before == 0){
-	n_back_with_shape_matching_experiment.push(start_control_block);
-	n_back_with_shape_matching_experiment.push(controlNode);
-}*/
 
 n_back_with_shape_matching_experiment.push(start_test_block);
 n_back_with_shape_matching_experiment.push(testNode);
 n_back_with_shape_matching_experiment.push(feedback_block);
-
-/*
-if (control_before == 1){
-	n_back_with_shape_matching_experiment.push(start_control_block);
-	n_back_with_shape_matching_experiment.push(controlNode);
-}*/
 
 n_back_with_shape_matching_experiment.push(post_task_block);
 n_back_with_shape_matching_experiment.push(end_block);

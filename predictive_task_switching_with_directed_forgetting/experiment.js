@@ -186,33 +186,12 @@ var getTrainingSet = function() {
 		}).slice(0,6)
 	}
 	return letters
-		/*
-		'<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>' +
-		'<div class = topLeft><img class = forgetStim src ="' + pathSource + stim[0] + fileType +
-		'"></img></div>' +
-		'<div class = topMiddle><img class = forgetStim src ="' + pathSource + stim[1] + fileType +
-		'"></img></div>' +
-		'<div class = topRight><img class = forgetStim src ="' + pathSource + stim[2] + fileType +
-		'"></img></div>' +
-		'<div class = bottomLeft><img class = forgetStim src ="' + pathSource + stim[3] + fileType +
-		'"></img></div>' +
-		'<div class = bottomMiddle><img class = forgetStim src ="' + pathSource + stim[4] + fileType +
-		'"></img></div>' +
-		'<div class = bottomRight><img class = forgetStim src ="' + pathSource + stim[5] + fileType +
-		'"></img></div>'
-		*/
 };
 
 //returns a cue randomly, either TOP or BOT
 var getCue = function() {
-	
 	cue = directed_cue_array[Math.floor(Math.random() * 2)]
-	
 	return cue
-		/*
-		'<div class = centerbox><img class = forgetStim src ="' + pathSource + cue + fileType +
-		'"></img></div>'
-		*/
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
@@ -267,10 +246,6 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 	}
 	
 	return probe
-		/*
-		'<div class = centerbox><img class = forgetStim src ="' + pathSource + probe + fileType +
-		'"></img></div>'
-		*/
 };
 
 var getCorrectResponse = function(predictive_dimension,cue,probe,letters) {
