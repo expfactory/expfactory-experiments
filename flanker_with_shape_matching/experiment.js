@@ -27,6 +27,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -45,6 +51,15 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -59,7 +74,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -246,9 +261,9 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 28 // must be divisible by 14
-var exp_len = 336 //320 must be divisible by 64
-var numTrialsPerBlock = 84; // divisible by 14
+var practice_len = 14 // must be divisible by 14
+var exp_len = 280 //320 must be divisible by 64
+var numTrialsPerBlock = 56; // divisible by 14
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.80
@@ -676,16 +691,17 @@ var testNode = {
 
 /* create experiment definition array */
 flanker_with_shape_matching_experiment = []
-//flanker_with_shape_matching_experiment.push(test_img_block)
-//flanker_with_shape_matching_experiment.push(instruction_node)
-//flanker_with_shape_matching_experiment.push(practice1)
 
 flanker_with_shape_matching_experiment.push(practiceNode)
 flanker_with_shape_matching_experiment.push(feedback_block)
 
+flanker_with_shape_matching_experiment.push(visualCheckNode)
+
 flanker_with_shape_matching_experiment.push(start_test_block)
 flanker_with_shape_matching_experiment.push(testNode)
 flanker_with_shape_matching_experiment.push(feedback_block)
+
+flanker_with_shape_matching_experiment.push(visualCheckNode)
 
 flanker_with_shape_matching_experiment.push(post_task_block)
 flanker_with_shape_matching_experiment.push(end_block)

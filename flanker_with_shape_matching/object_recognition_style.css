@@ -73,7 +73,7 @@
   background-color: none
 }
 
-img.center {
+img.center_grid {
   height: auto;
   width: auto\9; /* ie8 */
   position: absolute;  
@@ -82,5 +82,4 @@ img.center {
   left: 0;  
   right: 0;  
   margin: auto;  
-  max-height: 65%;
 }
