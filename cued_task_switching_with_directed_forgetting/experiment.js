@@ -28,6 +28,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,6 +52,15 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -60,7 +75,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -93,6 +108,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
+	}
 }
 
 
@@ -156,7 +172,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 		} else if (cued_condition == "stay"){
 			cued_dimension = last_dim
 		}
-		console.log('condition = '+cued_condition+', shape_condition: '+ directed_condition+', cued_dimension: '+cued_dimension)
 		
 		letters = getTrainingSet()
 		cue = getCue()
@@ -392,8 +407,8 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 16
-var exp_len = 32 //320 must be divisible by 16
-var numTrialsPerBlock = 16; // divisible by 64
+var exp_len = 160 //320 must be divisible by 16
+var numTrialsPerBlock = 32; // divisible by 64
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -692,16 +707,12 @@ for (i = 0; i < practice_len + 1; i++) {
 		timing_response: 1000,
 		prompt: prompt_text
 	};
-
+	
 	var practice_probe_block = {
-		type: 'poldrack-categorize',
+		type: 'poldrack-single-stim',
 		stimulus: getProbeStim,
-		key_answer: getResponse,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		correct_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
-		incorrect_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
-		timeout_message: '', //'<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 2000, //2000
 		timing_response: 2000,
 		timing_feedback_duration: 0,
@@ -973,17 +984,16 @@ var testNode = {
 /* create experiment definition array */
 var cued_task_switching_with_directed_forgetting_experiment = [];
 
-//cued_task_switching_with_directed_forgetting_experiment.push(instruction_node);
-//cued_task_switching_with_directed_forgetting_experiment.push(practice1);
-//cued_task_switching_with_directed_forgetting_experiment.push(practice2);
-//cued_task_switching_with_directed_forgetting_experiment.push(practice3);
-
 cued_task_switching_with_directed_forgetting_experiment.push(practiceNode);
 cued_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+
+cued_task_switching_with_directed_forgetting_experiment.push(visualCheckNode);
 
 cued_task_switching_with_directed_forgetting_experiment.push(start_test_block);
 cued_task_switching_with_directed_forgetting_experiment.push(testNode);
 cued_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+
+cued_task_switching_with_directed_forgetting_experiment.push(visualCheckNode);
 
 cued_task_switching_with_directed_forgetting_experiment.push(post_task_block);
 cued_task_switching_with_directed_forgetting_experiment.push(end_block);

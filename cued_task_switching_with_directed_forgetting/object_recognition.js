@@ -159,7 +159,7 @@ var instructTimeThresh = 0 ///in seconds
 var responses = []
 
 var fileTypeObject = ".jpg'></img>"
-var prefileTypeObjectObject = "<img class = center src='/static/experiments/stop_signal_single_task_network/object_recognition_images/"
+var prefileTypeObjectObject = "<img class = center src='/static/experiments/cued_task_switching_with_directed_forgetting/object_recognition_images/"
 
 var grid_stims = []
 var response_grid =
