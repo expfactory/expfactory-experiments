@@ -34,6 +34,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -52,6 +58,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -66,7 +82,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -93,17 +109,13 @@ var randomDraw = function(lst) {
 
 var createControlTypes = function(numTrialsPerBlock){
 	var stims = []
-	var numTrials = numTrialsPerBlock - (numTrialsPerBlock/16)
-	for(var numIterations = 0; numIterations < numTrials/15; numIterations++){ 
+
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){ 
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
 			
 				shape_matching_condition = shape_matching_conditions[numShapeConds]
 				n_back_condition = n_back_conditions[numNBackConds]
-				
-				if ((n_back_condition == 'match') && (shape_matching_condition == 'mismatch_target')){
-					shape_matching_condition = 'mismatch_non_target'
-				}
 				
 				stim = {
 					shape_matching_condition: shape_matching_condition,
@@ -115,12 +127,7 @@ var createControlTypes = function(numTrialsPerBlock){
 			
 		}
 	}
-	
-	stim = {
-		shape_matching_condition: 'match',
-		n_back_condition: 'match'
-		}
-	
+
 	stims.push(stim)
 	stims = jsPsych.randomization.repeat(stims,1)
 	
@@ -141,13 +148,9 @@ var createControlTypes = function(numTrialsPerBlock){
 		
 		if(shape_matching_condition == 'match'){
 			distractor = probe
-		} else if(shape_matching_condition == 'mismatch_target'){
-			distractor = randomDraw(['t','T'])
-		} else if(shape_matching_condition == 'mismatch_non_target'){
+		} else if(shape_matching_condition == 'mismatch'){
 			distractor = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-		}
-		
-		
+		}		
 			
 		stim = {
 			n_back_condition: n_back_condition,
@@ -202,19 +205,13 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	}
 	
 	stims = []
-	
-	numTrials = numTrialsPerBlock - (numTrialsPerBlock/16)
-	
-	for(var numIterations = 0; numIterations < numTrials/15; numIterations++){
+		
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
 			
 				shape_matching_condition = shape_matching_conditions[numShapeConds]
 				n_back_condition = n_back_conditions[numNBackConds]
-				
-				if ((n_back_condition == 'match') && (shape_matching_condition == 'mismatch_target')){
-					shape_matching_condition = 'mismatch_non_target'
-				}
 				
 				stim = {
 					shape_matching_condition: shape_matching_condition,
@@ -223,13 +220,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			
 				stims.push(stim)
 			}
-			
 		}
-		stim = {
-			shape_matching_condition: 'match',
-			n_back_condition: 'match'
-			}
-		stims.push(stim)
 	}
 	
 	stims = jsPsych.randomization.repeat(stims,1)
@@ -258,18 +249,13 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			} else if (n_back_condition == "mismatch"){
 				probe = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [new_stims[i - delay].probe.toLowerCase(), new_stims[i - delay].probe.toUpperCase()]) == -1}))
 				correct_response = possible_responses[1][1]
-		
 			}
 			
 			if (shape_matching_condition == 'match'){
 				distractor = probe
-			} else if (shape_matching_condition == 'mismatch_non_target'){
+			} else if (shape_matching_condition == 'mismatch'){
 				distractor = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [probe.toLowerCase(), probe.toUpperCase()]) == -1}))
-			} else if (shape_matching_condition == 'mismatch_target'){
-				distractor = new_stims[i - delay].probe
 			}
-			
-			
 		}
 		
 		stim = {
@@ -377,11 +363,11 @@ var credit_var = 0
 var run_attention_checks = true
 
 
-var practice_len = 16 // 20 must be divisible by 16
-var exp_len = 48 //360 must be divisible by 16
-var numTrialsPerBlock = 16 // 60 must be divisible by 16 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var practice_len = 20 // 20 must be divisible by 10
+var exp_len = 240 //240 must be divisible by 10
+var numTrialsPerBlock = 40 // 40 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 3 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 10 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -397,7 +383,7 @@ var preFileType = "<img class = center src='/static/experiments/n_back_with_shap
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var shape_matching_conditions = jsPsych.randomization.repeat(['match','mismatch_target','mismatch_non_target'],1)
+var shape_matching_conditions = jsPsych.randomization.repeat(['match','mismatch'],1)
 var shape_matching_conditions_control = jsPsych.randomization.repeat(['match','mismatch'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
@@ -853,9 +839,13 @@ var n_back_with_shape_matching_experiment = []
 n_back_with_shape_matching_experiment.push(practiceNode);
 n_back_with_shape_matching_experiment.push(feedback_block);
 
+n_back_with_shape_matching_experiment.push(visualCheckNode);
+
 n_back_with_shape_matching_experiment.push(start_test_block);
 n_back_with_shape_matching_experiment.push(testNode);
 n_back_with_shape_matching_experiment.push(feedback_block);
+
+n_back_with_shape_matching_experiment.push(visualCheckNode);
 
 n_back_with_shape_matching_experiment.push(post_task_block);
 n_back_with_shape_matching_experiment.push(end_block);

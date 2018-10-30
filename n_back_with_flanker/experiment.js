@@ -34,6 +34,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -52,6 +58,15 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -66,7 +81,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -93,17 +108,12 @@ var randomDraw = function(lst) {
 
 var createControlTypes = function(numTrialsPerBlock){
 	var stims = []
-	var numTrials = numTrialsPerBlock - (numTrialsPerBlock/16)
-	for(var numIterations = 0; numIterations < numTrials/15; numIterations++){ 
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/15; numIterations++){ 
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
 				flanker_condition = flanker_conditions[numFlankerConds]
 				n_back_condition = n_back_conditions[numNBackConds]
-				
-				if ((n_back_condition == 'match') && (flanker_condition == 'incongruent_target')){
-					flanker_condition = 'incongruent_non_target'
-				}
 				
 				stim = {
 					flanker_condition: flanker_condition,
@@ -116,12 +126,7 @@ var createControlTypes = function(numTrialsPerBlock){
 		}
 	}
 	
-	stim = {
-		flanker_condition: 'congruent',
-		n_back_condition: 'match'
-		}
 	
-	stims.push(stim)
 	stims = jsPsych.randomization.repeat(stims,1)
 	
 	stim_len = stims.length
@@ -141,9 +146,7 @@ var createControlTypes = function(numTrialsPerBlock){
 		
 		if(flanker_condition == 'congruent'){
 			flankers = probe
-		} else if(flanker_condition == 'incongruent_target'){
-			flankers = randomDraw(['t','T'])
-		} else if(flanker_condition == 'incongruent_non_target'){
+		} else if(flanker_condition == 'incongruent'){
 			flankers = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
 		}
 		
@@ -201,20 +204,14 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		first_stims.push(first_stim)	
 	}
 	
-	stims = []
-	numTrials = numTrialsPerBlock - (numTrialsPerBlock/16)
-	
-	for(var numIterations = 0; numIterations < numTrials/15; numIterations++){
+	stims = []	
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
 				flanker_condition = flanker_conditions[numFlankerConds]
 				n_back_condition = n_back_conditions[numNBackConds]
-				
-				if ((n_back_condition == 'match') && (flanker_condition == 'incongruent_target')){
-					flanker_condition = 'incongruent_non_target'
-				}
-				
+								
 				stim = {
 					flanker_condition: flanker_condition,
 					n_back_condition: n_back_condition
@@ -222,13 +219,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			
 				stims.push(stim)
 			}
-			
 		}
-		stim = {
-			flanker_condition: 'congruent',
-			n_back_condition: 'match'
-			}
-		stims.push(stim)
 	}
 	
 	stims = jsPsych.randomization.repeat(stims,1)
@@ -262,13 +253,9 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			
 			if (flanker_condition == 'congruent'){
 				flankers = probe
-			} else if (flanker_condition == 'incongruent_non_target'){
+			} else if (flanker_condition == 'incongruent'){
 				flankers = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [probe.toLowerCase(), probe.toUpperCase()]) == -1}))
-			} else if (flanker_condition == 'incongruent_target'){
-				flankers = new_stims[i - delay].probe
-			}
-			
-			
+			}			
 		}
 		
 		stim = {
@@ -373,11 +360,11 @@ var credit_var = 0
 var run_attention_checks = true
 
 
-var practice_len = 16 // 24 must be divisible by 16
-var exp_len = 48 //96 must be divisible by 16
-var numTrialsPerBlock = 16 // 32 must be divisible by 16 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var practice_len = 20 // 20 must be divisible by 10
+var exp_len = 240 //240 must be divisible by 10
+var numTrialsPerBlock = 40 // 40 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 3 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 20 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -393,7 +380,7 @@ var preFileType = "<img class = center src='/static/experiments/n_back_with_flan
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var flanker_conditions = jsPsych.randomization.repeat(['congruent','incongruent_target', 'incongruent_non_target'],1)
+var flanker_conditions = jsPsych.randomization.repeat(['congruent','incongruent'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
@@ -840,29 +827,16 @@ var testNode = {
 
 var n_back_with_flanker_experiment = []
 
-//n_back_with_flanker_experiment.push(instruction_node);
-//n_back_with_flanker_experiment.push(practice1);
-
 n_back_with_flanker_experiment.push(practiceNode);
 n_back_with_flanker_experiment.push(feedback_block);
 
-/*
-if (control_before == 0){
-	n_back_with_flanker_experiment.push(start_control_block);
-	n_back_with_flanker_experiment.push(controlNode);
-}
-*/
+n_back_with_flanker_experiment.push(visualCheckNode);
 
 n_back_with_flanker_experiment.push(start_test_block);
 n_back_with_flanker_experiment.push(testNode);
 n_back_with_flanker_experiment.push(feedback_block);
 
-/*
-if (control_before == 1){
-	n_back_with_flanker_experiment.push(start_control_block);
-	n_back_with_flanker_experiment.push(controlNode);
-}
-*/
+n_back_with_flanker_experiment.push(visualCheckNode);
 
 n_back_with_flanker_experiment.push(post_task_block);
 n_back_with_flanker_experiment.push(end_block);
