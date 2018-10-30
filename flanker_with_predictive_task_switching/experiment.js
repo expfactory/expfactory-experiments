@@ -27,6 +27,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -45,6 +51,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -59,7 +75,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -284,14 +300,14 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 24 // 24
-var exp_len = 320 //320 must be divisible by 8
-var numTrialsPerBlock = 64; //  64 divisible by 8
+var practice_len = 16 // divisible by 8
+var exp_len = 200 //200 must be divisible by 8
+var numTrialsPerBlock = 40; //  40 divisible by 8
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 8 trials
  
 
 var predictive_conditions = [['switch','stay'],
@@ -729,21 +745,17 @@ var testNode = {
 
 /* create experiment definition array */
 flanker_with_predictive_task_switching_experiment = []
-flanker_with_predictive_task_switching_experiment.push(attention_node)
-flanker_with_predictive_task_switching_experiment.push(post_task_block)
-flanker_with_predictive_task_switching_experiment.push(end_block)
-
-
-//flanker_with_predictive_task_switching_experiment.push(test_img_block)
-//flanker_with_predictive_task_switching_experiment.push(instruction_node)
-//flanker_with_predictive_task_switching_experiment.push(practice1)
 
 flanker_with_predictive_task_switching_experiment.push(practiceNode)
 flanker_with_predictive_task_switching_experiment.push(feedback_block)
 
+flanker_with_predictive_task_switching_experiment.push(visualCheckNode)
+
 flanker_with_predictive_task_switching_experiment.push(start_test_block)
 flanker_with_predictive_task_switching_experiment.push(testNode)
 flanker_with_predictive_task_switching_experiment.push(feedback_block)
+
+flanker_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 flanker_with_predictive_task_switching_experiment.push(post_task_block)
 flanker_with_predictive_task_switching_experiment.push(end_block)
