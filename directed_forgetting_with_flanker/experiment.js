@@ -28,6 +28,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -46,6 +52,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -60,7 +76,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -82,7 +98,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
@@ -121,14 +137,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 			forget_set = [letters[3],letters[4],letters[5]]
 		}
 		 
-		 if (flanker_condition == 'congruent_memory'){
+		 if (flanker_condition == 'congruent'){
 			flanking_letter = probe
-		 } else if (flanker_condition == 'incongruent_memory'){
-		 	flanking_letter = randomDraw(memory_set.filter(function(y) {return $.inArray(y, [probe]) == -1}))
-		 } else if (flanker_condition == 'incongruent_forget'){
-			flanking_letter = randomDraw(forget_set)
-		 } else if (flanker_condition == 'incongruent_control'){
-			flanking_letter = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [letters[0],letters[1],letters[2],letters[3],letters[4],letters[5]]) == -1}))
+		 } else if (flanker_condition == 'incongruent'){
+			flanking_letter = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
 		 }
 		
 		
@@ -280,14 +292,11 @@ var getTrainingStim = function(){
 		   task_boards[4]+letters[4]+
 		   task_boards[5]+letters[5]+
 		   task_boards[6]
-
 }
 
 var getDirectedCueStim = function(){
 	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'	
-
 }
-
 
 var getProbeStim = function(){
 	return flanker_boards[0]+ 
@@ -297,7 +306,6 @@ var getProbeStim = function(){
 			flanking_letter+
 			flanking_letter+
 		   flanker_boards[1]	
-
 }
 
 var getCategorizeFeedback = function(){
@@ -320,6 +328,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
+	}
 }
 
 /* ************************************ */
@@ -333,17 +342,17 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 // new vars
-var practice_len = 16  // must be divisible by 16
-var exp_len = 32 //320 must be divisible by 16
-var numTrialsPerBlock = 16; // divisible by 64
+var practice_len = 8  // must be divisible by 8
+var exp_len = 160 //320 must be divisible by 8
+var numTrialsPerBlock = 32; // divisible by 8
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 8 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
-var flanker_conditions = ['congruent_memory','incongruent_memory','incongruent_forget','incongruent_control']
+var flanker_conditions = ['congruent','incongruent']
 
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
@@ -470,7 +479,6 @@ var instructions_block = {
 			'<p class = block-text>The three remaining letters that you must remember are called your <i>memory set</i>. Please forget the letters not in the memory set.</p>'+
 		
 			'<p class = block-text>So for example, if you get the cue <i>TOP</i>, please <i>forget the top 3 letters</i> and remember the bottom 3 letters. <i>The bottom three letters would be your memory set.</i></p>'+
-		
 		'</div>',
 		
 		'<div class = centerbox>'+
@@ -622,14 +630,10 @@ for (i = 0; i < practice_len; i++) {
 	};
 	
 	var practice_probe_block = {
-		type: 'poldrack-categorize',
+		type: 'poldrack-single-stim',
 		stimulus: getProbeStim,
-		key_answer: getResponse,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		correct_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-		incorrect_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
-		timeout_message: '', //'<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 		timing_stim: 2000, //2000
 		timing_response: 2000,
 		timing_feedback_duration: 0,
@@ -639,7 +643,7 @@ for (i = 0; i < practice_len; i++) {
 		prompt: prompt_text,
 		show_stim_with_feedback: false,
 	};
-
+	  
 	var categorize_block = {
 		type: 'poldrack-single-stim',
 		data: {
@@ -896,9 +900,13 @@ var directed_forgetting_with_flanker_experiment = [];
 directed_forgetting_with_flanker_experiment.push(practiceNode);
 directed_forgetting_with_flanker_experiment.push(feedback_block);
 
+directed_forgetting_with_flanker_experiment.push(visualCheckNode);
+
 directed_forgetting_with_flanker_experiment.push(start_test_block);
 directed_forgetting_with_flanker_experiment.push(testNode);
 directed_forgetting_with_flanker_experiment.push(feedback_block);
+
+directed_forgetting_with_flanker_experiment.push(visualCheckNode);
 
 directed_forgetting_with_flanker_experiment.push(post_task_block);
 directed_forgetting_with_flanker_experiment.push(end_block);
