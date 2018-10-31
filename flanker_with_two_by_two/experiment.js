@@ -277,7 +277,7 @@ var credit_var = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/flanker_with_two_by_two/images/'
 var accuracy_thresh = 0.70
-var missed_thresh = 0.60
+var missed_thresh = 0.10
 var practice_thresh = 3
 var lowestNumCond = 8
 var CTI = 300
@@ -286,8 +286,8 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 
 var choices = response_keys.key
 var practice_length = 16
-var test_length = 32
-var numTrialsPerBlock = 16
+var test_length = 240
+var numTrialsPerBlock = 40
 var numTestBlocks = test_length / numTrialsPerBlock
 
 var flanker_styles = ['solid','unfilled']
@@ -808,7 +808,6 @@ var testNode = {
 		} else {
 			return true
 		}
-		
 	}
 }
 

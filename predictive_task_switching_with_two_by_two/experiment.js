@@ -33,6 +33,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -51,7 +57,21 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -65,7 +85,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -400,8 +420,8 @@ var run_attention_checks = true
 
 
 var practice_len = 32 // 32
-var exp_len = 64 //320 must be divisible by 32
-var numTrialsPerBlock = 32 // 64 must be divisible by 32
+var exp_len = 320 //320 must be divisible by 32
+var numTrialsPerBlock = 64 // 64 must be divisible by 32
 var numTestBlocks = exp_len / numTrialsPerBlock
 var CTI = 300
 
@@ -902,9 +922,13 @@ var predictive_task_switching_with_two_by_two_experiment = []
 predictive_task_switching_with_two_by_two_experiment.push(practiceNode);
 predictive_task_switching_with_two_by_two_experiment.push(feedback_block);
 
+predictive_task_switching_with_two_by_two_experiment.push(visualCheckNode);
+
 predictive_task_switching_with_two_by_two_experiment.push(start_test_block);
 predictive_task_switching_with_two_by_two_experiment.push(testNode);
 predictive_task_switching_with_two_by_two_experiment.push(feedback_block);
+
+predictive_task_switching_with_two_by_two_experiment.push(visualCheckNode);
 
 predictive_task_switching_with_two_by_two_experiment.push(post_task_block);
 predictive_task_switching_with_two_by_two_experiment.push(end_block);
