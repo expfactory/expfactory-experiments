@@ -695,7 +695,7 @@ var testNode = {
 
 /* create experiment definition array */
 flanker_with_shape_matching_experiment = []
-/*
+
 flanker_with_shape_matching_experiment.push(practiceNode)
 flanker_with_shape_matching_experiment.push(feedback_block)
 
@@ -704,7 +704,7 @@ flanker_with_shape_matching_experiment.push(visualCheckNode)
 flanker_with_shape_matching_experiment.push(start_test_block)
 flanker_with_shape_matching_experiment.push(testNode)
 flanker_with_shape_matching_experiment.push(feedback_block)
-*/
+
 flanker_with_shape_matching_experiment.push(visualCheckNode)
 
 flanker_with_shape_matching_experiment.push(post_task_block)

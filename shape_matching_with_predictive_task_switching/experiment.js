@@ -300,7 +300,7 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 28 trials
+var practice_thresh = 1 // 3 blocks of 28 trials
  
 
 var predictive_conditions = [['switch','stay'],
@@ -308,8 +308,6 @@ var predictive_conditions = [['switch','stay'],
 var predictive_dimensions_list = [['the same', 'the same', 'different','different'],
 							 	  ['different','different', 'the same', 'the same' ]]
 var possible_responses = [['M Key', 77],['Z Key', 90]]
-
-
 
 
 var fileTypePNG = ".png'></img>"

@@ -247,9 +247,7 @@ var getStim = function(){
 				number +
 				flanking_number +
 				flanking_number +
-		   task_boards[whichQuadrant - 1][1]
-		   		   
-	
+		   task_boards[whichQuadrant - 1][1]		   		   
 }
 
 
@@ -284,12 +282,10 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 1,
 		})
-	
 	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 0,
 		})
-	
 	}
 }
 
@@ -309,7 +305,7 @@ var exp_len = 200 //200 must be divisible by 8
 var numTrialsPerBlock = 40; //  40 divisible by 8
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 8 trials
  

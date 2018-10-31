@@ -24,6 +24,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -40,13 +47,26 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
 		avg_rt = math.median(rt_array)
 	} 
-	credit_var = (avg_rt > 200)
+	credit_var = (avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -154,11 +174,9 @@ for (var i = 0; i < num_go_stim; i++) {
 }
 
 var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 10); 
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 70);   
+var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);   
 
-
-
-var numTrialsPerBlock = 70
+var numTrialsPerBlock = 50
 var numTestBlocks = test_trials.length / numTrialsPerBlock
 
 
@@ -560,14 +578,15 @@ var testNode = {
 /* create experiment definition array */
 var go_nogo_single_task_network_experiment = [];
 
-//go_nogo_single_task_network_experiment.push(instruction_node);
-//go_nogo_single_task_network_experiment.push(practice_block);
-
 go_nogo_single_task_network_experiment.push(practiceNode)
 go_nogo_single_task_network_experiment.push(feedback_block)
 
+go_nogo_single_task_network_experiment.push(visualCheckNode)
+
 go_nogo_single_task_network_experiment.push(start_test_block);
 go_nogo_single_task_network_experiment.push(testNode);
+
+go_nogo_single_task_network_experiment.push(visualCheckNode)
 
 go_nogo_single_task_network_experiment.push(post_task_block)
 go_nogo_single_task_network_experiment.push(end_block)
