@@ -69,6 +69,10 @@ function assessPerformance() {
 		}
 		//
 	}
+	
+	var object_correct = object_recognition_correct / object_recognition_count
+	var object_ave_rt = object_recognition_rt / object_recognition_count
+	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
