@@ -33,6 +33,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -51,6 +57,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -65,7 +81,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -299,9 +315,9 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 15 // 24 must be divisible by 5
-var exp_len = 45 //324 must be divisible by 5
-var numTrialsPerBlock = 15 // 45 or 60, must be divisible by 5 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var practice_len = 15 // must be divisible by 5
+var exp_len = 150 // must be divisible by 5
+var numTrialsPerBlock = 50 // 50, must be divisible by 5 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 15 trials
 
@@ -547,53 +563,6 @@ var feedback_block = {
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-/*
-var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
-
-var controlTrials = []
-controlTrials.push(feedback_block)
-for (i = 0; i < numTrialsPerBlock; i++) {
-	var control_block = {
-		type: 'stop-signal',
-		stimulus: getControlStim,
-		SS_stimulus: getStopStim,
-		SS_trial_type: getSSType, //getSSType,
-		data: {
-			"trial_id": "practice_trial"
-		},
-		is_html: true,
-		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 2000,
-		response_ends_trial: false,
-		SSD: getSSD,
-		timing_SS: 500,
-		timing_post_trial: 0,
-		on_finish: appendData,
-		on_start: function(){
-			stoppingTracker = []
-			stoppingTimeTracker = []
-		}
-	}
-	controlTrials.push(control_block)
-}
-
-var controlCount = 0
-var controlNode = {
-	timeline: controlTrials,
-	loop_function: function(data) {
-		controlCount += 1
-		stims = createTrialTypes(numTrialsPerBlock, delay)
-		current_trial = 0
-	
-		if (controlCount == 1){
-			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
-			return false
-		}
-	}
-}
-*/
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
@@ -619,7 +588,6 @@ for (i = 0; i < practice_len + 3; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	
 	practiceTrials.push(practice_block)
 }
 
@@ -766,7 +734,6 @@ var testNode = {
 			feedback_text += "</p><p class = block-text><i>For the next round of trials, your delay is "+delay+"</i>.  Press Enter to continue."
 			return true
 		}
-	
 	}
 }
 
@@ -780,9 +747,13 @@ var n_back_single_task_network_experiment = []
 n_back_single_task_network_experiment.push(practiceNode);
 n_back_single_task_network_experiment.push(feedback_block);
 
+n_back_single_task_network_experiment.push(visualCheckNode);
+
 n_back_single_task_network_experiment.push(start_test_block);
 n_back_single_task_network_experiment.push(testNode);
 n_back_single_task_network_experiment.push(feedback_block);
+
+n_back_single_task_network_experiment.push(visualCheckNode);
 
 n_back_single_task_network_experiment.push(post_task_block);
 n_back_single_task_network_experiment.push(end_block);

@@ -25,6 +25,12 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	//
+	var object_recognition_correct = 0
+	var object_recognition_count = 0
+	var object_recognition_rt = 0
+	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
+	//
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -43,6 +49,16 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
+		
+		//
+		if (experiment_data[i].trial_id == "object_recognition_network"){
+			object_recognition_count += 1
+			if (experiment_data[i].pass_check == true){
+				object_recognition_correct += 1
+				object_recognition_rt += experiment_data[i].rt
+			}
+		}
+		//
 	}
 	//calculate average rt
 	var avg_rt = -1
@@ -57,7 +73,7 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -81,19 +97,16 @@ var getCategorizeFeedback = function(){
 	if (trial_id == 'probe'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
-			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
-			
 			
 			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
 			
-			
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
-	
 		}
+	}
 }
 
 /* Append gap and current trial to data and then recalculate for next trial*/
@@ -287,9 +300,9 @@ var credit_var = 0
 var choices = [77, 90]
 var exp_stage = 'practice'
 var practice_length = 8
-var num_trials = 24
-var num_runs = 3 
-var practice_thresh = 3 // 3 blocks of 15 trials
+var num_trials = 20
+var num_runs = 4 
+var practice_thresh = 3 // 3 blocks of 8 trials
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var experimentLength = num_trials * num_runs
@@ -941,26 +954,17 @@ var testNode = {
 }
 /* create experiment definition array */
 var directed_forgetting_single_task_network_experiment = [];
-/*
-directed_forgetting_single_task_network_experiment.push(instruction_node);
-
-directed_forgetting_single_task_network_experiment.push(test_img_block1);
-directed_forgetting_single_task_network_experiment.push(test_img_block2);
-// show one practice trial
-directed_forgetting_single_task_network_experiment.push(start_fixation_block);
-directed_forgetting_single_task_network_experiment.push(training_block);
-directed_forgetting_single_task_network_experiment.push(cue_block);
-directed_forgetting_single_task_network_experiment.push(fixation_block);
-directed_forgetting_single_task_network_experiment.push(practice_probe_block);
-directed_forgetting_single_task_network_experiment.push(ITI_fixation_block);
-*/
 
 directed_forgetting_single_task_network_experiment.push(practiceNode)
 directed_forgetting_single_task_network_experiment.push(feedback_block)
 
+directed_forgetting_single_task_network_experiment.push(visualCheckNode)
+
 directed_forgetting_single_task_network_experiment.push(intro_test_block)
 directed_forgetting_single_task_network_experiment.push(testNode)
 directed_forgetting_single_task_network_experiment.push(test_feedback_block)
+
+directed_forgetting_single_task_network_experiment.push(visualCheckNode)
 
 directed_forgetting_single_task_network_experiment.push(post_task_block)
 directed_forgetting_single_task_network_experiment.push(end_block);
