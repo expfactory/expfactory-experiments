@@ -85,7 +85,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -110,94 +111,6 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
-var createControlTypes = function(numTrialsPerBlock){
-	cued_dimension = control_dimensions[Math.floor(Math.random() * 2)][0]
-	cued_condition = 'N/A'
-	n_back_condition = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1).pop()
-	
-	first_stim = {
-		n_back_condition: n_back_condition,
-		cued_dimension: cued_dimension,
-		cued_condition: cued_condition
-	}
-	
-	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){
-		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
-			for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
-			
-				cued_dimension = 'N/A'
-				cued_condition = cued_conditions[numCuedConds]
-				n_back_condition = n_back_conditions[numNBackConds]
-				
-				stim = {
-					cued_dimension: cued_dimension,
-					cued_condition: cued_condition,
-					n_back_condition: n_back_condition
-					}
-			
-				stims.push(stim)
-			}
-			
-		}
-	}
-	
-	stims = jsPsych.randomization.repeat(stims,1)
-	stims.push(first_stim)
-	
-	stim_len = stims.length
-	
-	new_stims = []
-	for (var i = 0; i < stim_len; i++){
-		if(i == 0){
-			stim = stims.pop()
-			n_back_condition = stim.n_back_condition
-			cued_dimension = stim.cued_dimension
-			cued_condition = stim.cued_condition
-
-		} else if (i > 0){
-			stim = stims.pop()
-			n_back_condition = stim.n_back_condition
-			cued_condition = stim.cued_condition
-			
-			last_dim = cued_dimension
-			if (cued_condition == "switch"){
-				cued_dimension = randomDraw(['T or t','non-T or non-t'].filter(function(y) {return $.inArray(y, [last_dim]) == -1}))
-			} else if (cued_condition == "stay"){
-				cued_dimension = last_dim
-			}
-		}
-		
-		if (n_back_condition == 'match'){
-			correct_response = possible_responses[0][1]
-			if (cued_dimension == 'T or t'){
-				probe = randomDraw(['t','T'])
-			} else if (cued_dimension == 'non-T or non-t'){
-				probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-			}
-		} else if (n_back_condition == 'mismatch'){
-			correct_response = possible_responses[1][1]
-			if (cued_dimension == 'T or t'){
-				probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-			} else if (cued_dimension == 'non-T or non-t'){
-				probe = randomDraw(['t','T'])
-			}			
-		}
-			
-		stim = {
-			n_back_condition: n_back_condition,
-			cued_dimension: cued_dimension,
-			cued_condition: cued_condition,
-			probe: probe,
-			correct_response: correct_response,
-		}
-		
-		new_stims.push(stim)	
-		}
-	return new_stims
-	
-}
-
 
 var createTrialTypes = function(numTrialsPerBlock){
 	//cued_dimension = cued_dimensions[Math.floor(Math.random() * 2)][Math.floor(Math.random() * 2)] // current task, 1 or 2 back
@@ -211,7 +124,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	first_stim = {
 		n_back_condition: n_back_condition,
-		//cued_dimension: cued_dimension[0],
 		curr_task: curr_task,
 		curr_cue: curr_cue,
 		cued_condition: cued_condition,
@@ -253,7 +165,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	second_stim = {
 		n_back_condition: n_back_condition,
-		//cued_dimension: cued_dimension[0],
 		curr_task: curr_task,
 		curr_cue: curr_cue,
 		cued_condition: cued_condition,
@@ -360,7 +271,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 var getCueStim = function() {
 	stim = stims.shift()
 	n_back_condition = stim.n_back_condition
-	//cued_dimension = stim.cued_dimension
 	curr_task = stim.curr_task
 	curr_cue = stim.curr_cue
 	cued_switch_condition = stim.cued_switch_condition
@@ -412,7 +322,9 @@ var appendData = function(){
 		
 	jsPsych.data.addDataToLastTrial({
 		n_back_condition: n_back_condition,
-		cued_dimension: cued_dimension,
+		cued_switch_condition: cued_switch_condition,
+		curr_task: curr_task,
+		curr_cue: curr_cue,
 		cued_condition: cued_condition,
 		probe: probe,
 		correct_response: correct_response,
@@ -492,7 +404,6 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
 
-var control_stims = createControlTypes(numTrialsPerBlock)							 
 var stims = createTrialTypes(practice_len)
 
 
@@ -699,57 +610,6 @@ var feedback_block = {
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
-
-var controlTrials = []
-controlTrials.push(feedback_block)
-for (i = 0; i < numTrialsPerBlock + 1; i++) {
-	var cue_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getCueControlStim,
-		is_html: true,
-		data: {
-			trial_id: "control_cue",
-		},
-		choices: false,
-		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000
-	};
-	
-	var control_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getStim,
-		is_html: true,
-		data: {
-			"trial_id": "control_trial",
-		},
-		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
-		timing_response: 2000, //2000
-		timing_post_trial: 0,
-		response_ends_trial: false,
-		on_finish: appendData
-	}
-	controlTrials.push(cue_block)
-	controlTrials.push(control_block)
-}
-
-var controlCount = 0
-var controlNode = {
-	timeline: controlTrials,
-	loop_function: function(data) {
-		controlCount += 1
-		stims = createTrialTypes(numTrialsPerBlock)
-		current_trial = 0
-	
-		if (controlCount == 1){
-			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
-			return false
-		}
-	}
-}
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
