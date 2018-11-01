@@ -85,7 +85,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok)
+	//&& object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -226,8 +227,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var cued_condition_type_list = []
 	var cued_switch_condition_type_list = []
 	for(var i = 0; i < 4; i++){
-		cued_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/16))
-		cued_switch_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/16))
+		cued_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/8))
+		cued_switch_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/8))
 	}
 	
 	
@@ -427,7 +428,7 @@ var CTI = 300
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3  // 3 blocks of 24 trials
 
 var pathSource = "/static/experiments/predictive_task_switching_with_two_by_two/images/"
 var fileTypePNG = ".png'></img>"
@@ -453,13 +454,11 @@ var curr_tasks = jsPsych.randomization.repeat(['right','left'],1)
 var tasks = {
   left: {
     task: 'Left',
-    cues: ['left', 'first'],
-    delay: 1
+    cues: ['left', 'first']
   },
   right: {
     task: 'Right',
-    cues: ['right', 'second'],
-    delay: 2
+    cues: ['right', 'second']
   }
 }
 
@@ -817,8 +816,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
-	  timing_response: 500,
-	  prompt: prompt_text
+	  timing_response: 500
 	}
 	
 	var cue_block = {

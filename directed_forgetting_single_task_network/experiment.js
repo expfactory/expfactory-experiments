@@ -935,7 +935,7 @@ var testNode = {
 	
 			test_feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 			test_feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
-			test_feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
+			test_feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+num_runs+" blocks of trials."
 		
 			if (accuracy < accuracy_thresh){
 				test_feedback_text +=

@@ -401,7 +401,7 @@ var practice_len = 25 // 25 must be divisible by 25
 var exp_len = 300 //300 must be divisible by 25
 var numTrialsPerBlock = 50 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 3 // 3 blocks of 25 trials
+var practice_thresh = 1 // 3 blocks of 25 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -599,7 +599,7 @@ var start_test_block = {
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-		feedback_text = "We will now start the test portion. Press enter to begin."
+		feedback_text = "We will now start the test portion. Your delay for this block of trials is "+delay+".  Press enter to begin."
 	}
 };
 
@@ -886,8 +886,6 @@ var testNode = {
 /* ************************************ */
 
 var go_nogo_with_n_back_experiment = []
-
-go_nogo_with_n_back_experiment.push(visualCheckNode);
 
 go_nogo_with_n_back_experiment.push(practiceNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
