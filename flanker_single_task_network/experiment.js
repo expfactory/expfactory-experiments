@@ -294,7 +294,10 @@ var start_test_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Done with practice. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
 	cont_key: [13],
-	timing_post_trial: 1000
+	timing_post_trial: 1000,
+	on_finish: function(){
+		feedback_text = 'Starting a test block.  Press enter to continue.'
+	}
 };
 
 var fixation_block = {
@@ -463,15 +466,11 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		timing_post_trial: 0,
 		on_finish: changeData,
 	};
-
+	
 	var test_block = {
-		type: 'poldrack-categorize',
+		type: 'poldrack-single-stim',
 		stimulus: test_trials.image[i],
 		is_html: true,
-		key_answer: test_response_array[i],
-		correct_text: '<div class = centerbox></div>',
-		incorrect_text: '<div class = centerbox></div>',
-		timeout_message: '<div class = centerbox></div>',
 		choices: [70, 72],
 		data: test_trials.data[i],
 		feedback_duration: 0,
@@ -486,7 +485,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 				trial_id: "test_trial"
 			})
 		}
-	}
+	};
 	
 	testTrials.push(test_fixation_block)
 	testTrials.push(test_block)

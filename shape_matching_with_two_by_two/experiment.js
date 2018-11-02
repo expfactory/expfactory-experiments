@@ -74,7 +74,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	//&& object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -330,7 +331,7 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/shape_matching_with_two_by_two/images/'
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3
+var practice_thresh = 2 //3
 var lowestNumCond = 28
 var CTI = 300
 // task specific variables
@@ -345,7 +346,7 @@ var choices = response_keys.key
 var practice_length = 28
 var test_length = 560
 var numTrialsPerBlock = 112
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTestBlocks = 2 //test_length / numTrialsPerBlock
 
 var go_no_go_styles = ['solid','unfilled']
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -648,7 +649,6 @@ var test_block = {
   timing_post_trial: 0,
   timing_response: 2000,
   timing_stim: 1000,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function(data) {
     appendData()
     correct = false
@@ -875,7 +875,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
 		}
 		if (missed_responses > missed_thresh){
 			feedback_text +=
