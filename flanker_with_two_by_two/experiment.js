@@ -133,6 +133,7 @@ If "switch old", switch to the last task and randomly choose a cue.
 var setStims = function() {
   var tmp;
   var numbers = [1,2,3,4,6,7,8,9]	
+  console.log(task_switches[current_trial].task_switch, task_switches[current_trial].cue_switch, task_switches[current_trial].flanker_type, 'here1')
   switch (task_switches[current_trial].task_switch) {
     case "stay":
       if (curr_task == "na") {
@@ -250,10 +251,10 @@ var appendData = function() {
     task_switch: task_switch.task_switch,
     cue_switch: task_switch.cue_switch,
     flanker_condition: flanker_condition,
-    flankong_number: flanking_number,
+    flanking_number: flanking_number,
     trial_num: trial_num
   })
-  
+   console.log(task_switch.task_switch, task_switch.cue_switch, flanker_condition, 'here2')
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
   	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).flanker_condition == 'stop')){
@@ -313,12 +314,12 @@ color: {
 var task_switch_types = ["stay", "switch_new"]
 var cue_switch_types = ["stay", "switch"]
 var flanker_types = ["congruent", "incongruent"]
-var task_switches = []
+var task_switches_array = []
 for (var t = 0; t < task_switch_types.length; t++) {
   for (var c = 0; c < cue_switch_types.length; c++) {
   	for (var s = 0; s < flanker_types.length; s++){
   	
-		task_switches.push({
+		task_switches_array.push({
 		  task_switch: task_switch_types[t],
 		  cue_switch: cue_switch_types[c],
 		  flanker_type: flanker_types[s]
@@ -326,9 +327,9 @@ for (var t = 0; t < task_switch_types.length; t++) {
 	}
   }
 }
-var task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+var task_switches = jsPsych.randomization.repeat(task_switches_array, practice_length / lowestNumCond)
 var practiceStims = genStims(practice_length)
-var testStims = genStims(test_length)
+var testStims = genStims(numTrialsPerBlock)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -506,7 +507,7 @@ var start_test_block = {
 		feedback_text = "We will now start the test portion. Press enter to begin."
 		current_trial = 0
 		stims = testStims
-		task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
+		task_switches = jsPsych.randomization.repeat(task_switches_array, numTrialsPerBlock / lowestNumCond)
 	}
 };
 
@@ -642,7 +643,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+		task_switches = jsPsych.randomization.repeat(task_switches_array, practice_length / lowestNumCond)
 		practiceStims = genStims(practice_length)
 		current_trial = 0
 	
@@ -677,8 +678,8 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			testStims = genStims(test_length)
-			task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+			testStims = genStims(numTrialsPerBlock)
+			task_switches = jsPsych.randomization.repeat(task_switches_array, numTrialsPerBlock /lowestNumCond)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -692,8 +693,8 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					testStims = genStims(test_length)
-					task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+					testStims = genStims(numTrialsPerBlock)
+					task_switches = jsPsych.randomization.repeat(task_switches_array, numTrialsPerBlock /lowestNumCond)
 					return false
 			}
 			
@@ -759,8 +760,8 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 		testCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
-		testStims = genStims(test_length)
+		task_switches = jsPsych.randomization.repeat(task_switches_array, numTrialsPerBlock / lowestNumCond)
+		testStims = genStims(numTrialsPerBlock)
 		current_trial = 0
 	
 		var sum_rt = 0

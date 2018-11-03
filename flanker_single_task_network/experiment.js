@@ -359,7 +359,7 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		choices: [70, 72],
 		data: practice_trials.data[i],
-		feedback_duration: 500,
+		timing_feedback_duration: 500,
 		timing_stim: 1000,
 		show_stim_with_feedback: false,
 		response_ends_trial: false,
