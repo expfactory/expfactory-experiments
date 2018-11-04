@@ -181,6 +181,8 @@ var setStims = function() {
   curr_stim = stims[current_trial]
   current_trial = current_trial + 1
   CTI = setCTI()
+  correct_response = getResponse()
+  correct = false
 }
 
 var getCue = function() {
@@ -226,8 +228,11 @@ var getResponse = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
+  var curr_trial = jsPsych.progress().current_trial_global
+  var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
   var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
   var task_switch = task_switches[trial_num]
+  
   jsPsych.data.addDataToLastTrial({
     cue: curr_cue,
     stim_color: curr_stim.color,
@@ -235,8 +240,18 @@ var appendData = function() {
     task: curr_task,
     task_switch: task_switch.task_switch,
     cue_switch: task_switch.cue_switch,
-    trial_num: trial_num
+    trial_num: trial_num,
+    correct_response: correct_response,
   })
+  
+  if ((trial_id == 'practice_stim') || (trial_id == 'test_stim')){
+  	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+  		correct = true
+  		jsPsych.data.addDataToLastTrial({
+		  'correct': correct
+		})
+  	}
+  } 
 }
 
 /* ************************************ */
@@ -260,7 +275,7 @@ var numTestBlocks = test_length / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
-var accuracy_thresh = 0.70;
+var accuracy_thresh = 0.80;
 
 
 
@@ -284,16 +299,16 @@ color: {
 
 var task_switch_types = ["stay", "switch_new"]
 var cue_switch_types = ["stay", "switch"]
-var task_switches = []
+var task_switches_arr = []
 for (var t = 0; t < task_switch_types.length; t++) {
   for (var c = 0; c < cue_switch_types.length; c++) {
-    task_switches.push({
+    task_switches_arr.push({
       task_switch: task_switch_types[t],
       cue_switch: cue_switch_types[c]
     })
   }
 }
-var task_switches = jsPsych.randomization.repeat(task_switches, practice_length / 4)
+var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / 4)
 var practiceStims = genStims(practice_length)
 var testStims = genStims(numTrialsPerBlock)
 var stims = practiceStims
@@ -374,7 +389,7 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
-    '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. Thee cues and tasks are described below:</p>' +
+    '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
     task_list +
     '<p class = block-text>Practice will start after you end instructions.</p></div>'
   ],
@@ -439,7 +454,7 @@ var start_test_block = {
   text: '<div class = centerbox>'+
 			'<p class = block-text>Finished with practice.  You will no longer receive the rule prompt during trials.</p>'+
 			'<p class = block-text>Test will be exactly like practice.  You will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
-			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. Thee cues and tasks are described below:</p>' +
+			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 			task_list +
 			'<p class = block-text>Press enter to continue.</p>' +
 		'</div>',
@@ -489,7 +504,7 @@ for (var i = 0; i < practice_length; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: "fixation"
+		trial_id: "practice_fixation"
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
@@ -508,7 +523,7 @@ for (var i = 0; i < practice_length; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: 'cue'
+		trial_id: 'practice_cue'
 	  },
 	  timing_response: getCTI,
 	  timing_stim: getCTI,
@@ -535,16 +550,18 @@ for (var i = 0; i < practice_length; i++) {
 		prompt_task_list + '</div>',
 	  choices: choices,
 	  data: {
-		trial_id: 'stim',
+		trial_id: 'practice_stim',
 		exp_stage: "practice"
 	  },
-	  timing_feedback_duration: 1000,
+	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: false,
 	  timing_response: 2000,
 	  timing_stim: 1000,
 	  timing_post_trial: 0,
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-	  on_finish: function(data) {
+	  on_finish: appendData
+		/*
+		function(data) {
 		appendData()
 		correct_response = getResponse()
 		correct = false
@@ -555,8 +572,8 @@ for (var i = 0; i < practice_length; i++) {
 		  'correct_response': correct_response,
 		  'correct': correct
 		})
-	  }
-	}
+		*/
+ 	}
 
   practiceTrials.push(setStims_block)
   practiceTrials.push(practice_fixation_block)
@@ -569,7 +586,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / 4)
+		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / 4)
 		stims = genStims(practice_length)
 		current_trial = 0
 	
@@ -579,7 +596,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "stim"){
+			if (data[i].trial_id == "practice_stim"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
@@ -605,7 +622,7 @@ var practiceNode = {
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			
-			task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
 			stims = genStims(numTrialsPerBlock)
 			return false
 	
@@ -621,7 +638,7 @@ var practiceNode = {
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
 					
-					task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
 					stims = genStims(numTrialsPerBlock)
 					return false
 			}
@@ -647,7 +664,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: "fixation"
+		trial_id: "test_fixation"
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
@@ -665,7 +682,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: 'cue'
+		trial_id: 'test_cue'
 	  },
 	  timing_response: getCTI,
 	  timing_stim: getCTI,
@@ -683,16 +700,18 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	  type: 'poldrack-single-stim',
 	  stimulus: getStim,
 	  is_html: true,
-	  key_answer: getResponse,
 	  choices: choices,
 	  data: {
-		trial_id: 'stim',
+		trial_id: 'test_stim',
 		exp_stage: 'test'
 	  },
 	  timing_post_trial: 0,
 	  timing_response: 2000,
 	  timing_stim: 1000,
-	  on_finish: function(data) {
+	  response_ends_trial: false,
+	  on_finish: appendData
+		/*
+		function(data) {
 		appendData()
 		correct_response = getResponse()
 		correct = false
@@ -703,8 +722,9 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		  'correct_response': correct_response,
 		  'correct': correct
 		})
-	  }
-	}
+		*/
+	  
+	 }
 	
   testTrials.push(setStims_block)
   testTrials.push(fixation_block)
@@ -718,7 +738,7 @@ var testNode = {
 	loop_function: function(data) {
 	testCount += 1
 	current_trial = 0
-	task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / 4)
+	task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
 	stims = genStims(numTrialsPerBlock)
 	
 	var sum_rt = 0
@@ -727,7 +747,7 @@ var testNode = {
 		var total_trials = 0
 
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "stim"){
+			if (data[i].trial_id == "test_stim"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt

@@ -149,7 +149,3 @@ img.center {
   margin-right:-50%;
   transform: translate(-125%, 50%);
 }
-
-.responded {
-  visibility: hidden;
-}
