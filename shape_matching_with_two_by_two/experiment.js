@@ -331,7 +331,7 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/shape_matching_with_two_by_two/images/'
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 //3
+var practice_thresh = 3
 var lowestNumCond = 28
 var CTI = 300
 // task specific variables
@@ -346,7 +346,7 @@ var choices = response_keys.key
 var practice_length = 28
 var test_length = 560
 var numTrialsPerBlock = 112
-var numTestBlocks = 2 //test_length / numTrialsPerBlock
+var numTestBlocks = test_length / numTrialsPerBlock
 
 var go_no_go_styles = ['solid','unfilled']
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -373,12 +373,12 @@ color: {
 var task_switch_types = ["stay", "switch_new"]
 var cue_switch_types = ["stay", "switch"]
 var shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
-var task_switches = []
+var task_switches_arr = []
 for (var t = 0; t < task_switch_types.length; t++) {
   for (var c = 0; c < cue_switch_types.length; c++) {
   	for (var s = 0; s < shape_matching_trial_types.length; s++){
   	
-		task_switches.push({
+		task_switches_arr.push({
 		  task_switch: task_switch_types[t],
 		  cue_switch: cue_switch_types[c],
 		  shape_matching_type: shape_matching_trial_types[s]
@@ -386,9 +386,9 @@ for (var t = 0; t < task_switch_types.length; t++) {
 	}
   }
 }
-var task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
 var practiceStims = genStims(practice_length)
-var testStims = genStims(test_length)
+var testStims = genStims(numTrialsPerBlock)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -539,21 +539,6 @@ var start_practice_block = {
 };
 
 var start_test_block = {
-  type: 'poldrack-text',
-  data: {
-    trial_id: "test_intro"
-  },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
-  on_finish: function() {
-    current_trial = 0
-    stims = testStims
-    task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
-  },
-  timing_post_trial: 1000,
-  timing_response: 180000
-}
-
-var start_test_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "instruction"
@@ -581,7 +566,7 @@ var start_test_block = {
 		feedback_text = "We will now start the test portion. Press enter to begin."
 		current_trial = 0
     	stims = testStims
-    	task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
+    	task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
 	}
 };
 
@@ -724,7 +709,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
 		practiceStims = genStims(practice_length)
 		current_trial = 0
 	
@@ -759,8 +744,8 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			testStims = genStims(test_length)
-			task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+			testStims = genStims(numTrialsPerBlock)
+			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -774,8 +759,8 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					testStims = genStims(test_length)
-					task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+					testStims = genStims(numTrialsPerBlock)
+					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
 					return false
 			}
 			
@@ -840,8 +825,8 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 		testCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
-		testStims = genStims(test_length)
+		task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
+		testStims = genStims(numTrialsPerBlock)
 		current_trial = 0
 	
 		var sum_rt = 0
