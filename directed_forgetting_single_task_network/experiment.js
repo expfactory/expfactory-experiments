@@ -25,12 +25,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -49,20 +44,9 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
+
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -77,7 +61,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -303,10 +288,10 @@ var credit_var = 0
 // task specific variables
 var choices = [77, 90]
 var exp_stage = 'practice'
-var practice_length = 8
-var num_trials = 20
-var num_runs = 4 
-var practice_thresh = 3 // 3 blocks of 8 trials
+var practice_length = 4 //8
+var num_trials = 8 //20
+var num_runs = 2 //4 
+var practice_thresh = 1 //3 // 3 blocks of 8 trials
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var experimentLength = num_trials * num_runs
@@ -949,6 +934,7 @@ var testNode = {
 			if (testCount == num_runs){
 				test_feedback_text +=
 						'</p><p class = block-text>Done with this test. Press Enter to continue.'
+				return false
 			}
 		}
 	
@@ -962,13 +948,9 @@ var directed_forgetting_single_task_network_experiment = [];
 directed_forgetting_single_task_network_experiment.push(practiceNode)
 directed_forgetting_single_task_network_experiment.push(feedback_block)
 
-directed_forgetting_single_task_network_experiment.push(visualCheckNode)
-
 directed_forgetting_single_task_network_experiment.push(intro_test_block)
 directed_forgetting_single_task_network_experiment.push(testNode)
 directed_forgetting_single_task_network_experiment.push(test_feedback_block)
-
-directed_forgetting_single_task_network_experiment.push(visualCheckNode)
 
 directed_forgetting_single_task_network_experiment.push(post_task_block)
 directed_forgetting_single_task_network_experiment.push(end_block);

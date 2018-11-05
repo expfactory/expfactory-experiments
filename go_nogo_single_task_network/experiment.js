@@ -119,9 +119,6 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
-var practice_thresh = 3 // 3 blocks of 15 trials
-var accuracy_thresh = 0.80
-var missed_thresh = 0.10
 
 // task specific variables
 var num_go_stim = 4 //per one no-go stim
@@ -173,11 +170,18 @@ for (var i = 0; i < num_go_stim; i++) {
   })
 }
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, 10); 
-var test_trials = jsPsych.randomization.repeat(test_stimuli_block, 50);   
-
+var practice_thresh = 3 // 3 blocks of 15 trials
+var accuracy_thresh = 0.80
+var missed_thresh = 0.10
+var practice_length = 14
+var test_length = 250
 var numTrialsPerBlock = 50
-var numTestBlocks = test_trials.length / numTrialsPerBlock
+var numTestBlocks = test_length / numTrialsPerBlock
+
+var practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
+var test_trials_array = jsPsych.randomization.repeat(test_stimuli_block, test_length / 5);   
+console.log(test_trials_array.length + '_1')
+
 
 
 var prompt_text_list = '<ul list-text>'+
@@ -377,6 +381,7 @@ var prompt_fixation_block = {
 	prompt: prompt_text_list
 };
 
+console.log(test_trials_array.length + '_2')
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
@@ -412,8 +417,7 @@ var practiceNode = {
 	loop_function: function(data){
 		practiceCount += 1
 		practice_index = 0
-		practice_trials = jsPsych.randomization.repeat(practice_stimuli, 5); 
-		test_trials = jsPsych.randomization.repeat(test_stimuli_block, 35);   
+		practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -474,10 +478,13 @@ var practiceNode = {
 	}
 	
 }
+
+console.log(test_trials_array.length + '_3')
+
 /* define test block */
 var test_block = {
   type: 'poldrack-single-stim',
-  timeline: test_trials,
+  timeline: test_trials_array,
   data: {
     trial_id: "stim",
     exp_stage: "test"
@@ -497,10 +504,10 @@ for (var i = 0; i < numTrialsPerBlock; i ++){
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
-		stimulus: test_trials.pop().stimulus,
+		stimulus: test_trials_array.pop().stimulus,
 		is_html: true,
 		choices: [32],
-		data: test_trials.pop().data,
+		data: test_trials_array.pop().data,
 		timing_post_trial: 0,
 		timing_stim: 1000,
 		timing_response: 2000,
@@ -575,18 +582,18 @@ var testNode = {
 	
 }
 
+console.log(test_trials_array.length + '_4')
+
+
 /* create experiment definition array */
 var go_nogo_single_task_network_experiment = [];
 
 go_nogo_single_task_network_experiment.push(practiceNode)
 go_nogo_single_task_network_experiment.push(feedback_block)
 
-go_nogo_single_task_network_experiment.push(visualCheckNode)
-
 go_nogo_single_task_network_experiment.push(start_test_block);
 go_nogo_single_task_network_experiment.push(testNode);
-
-go_nogo_single_task_network_experiment.push(visualCheckNode)
+go_nogo_single_task_network_experiment.push(feedback_block)
 
 go_nogo_single_task_network_experiment.push(post_task_block)
 go_nogo_single_task_network_experiment.push(end_block)

@@ -79,7 +79,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -749,13 +750,9 @@ flanker_with_predictive_task_switching_experiment = []
 flanker_with_predictive_task_switching_experiment.push(practiceNode)
 flanker_with_predictive_task_switching_experiment.push(feedback_block)
 
-flanker_with_predictive_task_switching_experiment.push(visualCheckNode)
-
 flanker_with_predictive_task_switching_experiment.push(start_test_block)
 flanker_with_predictive_task_switching_experiment.push(testNode)
 flanker_with_predictive_task_switching_experiment.push(feedback_block)
-
-flanker_with_predictive_task_switching_experiment.push(visualCheckNode)
 
 flanker_with_predictive_task_switching_experiment.push(post_task_block)
 flanker_with_predictive_task_switching_experiment.push(end_block)

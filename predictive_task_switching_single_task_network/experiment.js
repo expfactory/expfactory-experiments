@@ -27,12 +27,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -51,20 +46,7 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
-	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
-	
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -79,7 +61,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -268,13 +251,13 @@ var run_attention_checks = true
 // Set up variables for stimuli
 var practice_len = 12 // 24  must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
 var exp_len = 96 //324 must be divisible by 12
-var numTrialsPerBlock = 48; //  60 divisible by 12
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTrialsPerBlock = 24 //48; //  60 divisible by 12
+var numTestBlocks = 2 //exp_len / numTrialsPerBlock
 
 
 var accuracy_thresh = 0.80
-var missed_thresh = 0.30 // must it be higher than standard 10% since stopping is part of task??
-var practice_thresh = 3 // 3 blocks of 24 trials
+var missed_thresh = 0.10 // 
+var practice_thresh = 2 //3 // 3 blocks of 24 trials
 
 
 var predictive_conditions = [['switch','stay'],
@@ -717,13 +700,9 @@ predictive_task_switching_single_task_network_experiment = []
 predictive_task_switching_single_task_network_experiment.push(practiceNode)
 predictive_task_switching_single_task_network_experiment.push(feedback_block)
 
-predictive_task_switching_single_task_network_experiment.push(visualCheckNode)
-
 predictive_task_switching_single_task_network_experiment.push(start_test_block)
 predictive_task_switching_single_task_network_experiment.push(testNode)
 predictive_task_switching_single_task_network_experiment.push(feedback_block)
-
-predictive_task_switching_single_task_network_experiment.push(visualCheckNode)
 
 predictive_task_switching_single_task_network_experiment.push(post_task_block)
 predictive_task_switching_single_task_network_experiment.push(end_block)

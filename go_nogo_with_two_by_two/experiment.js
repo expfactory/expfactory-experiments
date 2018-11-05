@@ -24,12 +24,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -48,19 +43,8 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
-	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
+	}
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -75,7 +59,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -95,7 +80,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+		return '<div class = fb_box><div class = center-text><font size = 20>Letter is unfilled.</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	}
 
 }
@@ -322,7 +307,7 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_two_by_two/images/'
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3
+var practice_thresh = 2 //3
 var lowestNumCond = 20
 
 // task specific variables
@@ -330,8 +315,8 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 20
 var test_length = 400
-var numTrialsPerBlock = 80
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTrialsPerBlock = 40 //80
+var numTestBlocks = 2 //test_length / numTrialsPerBlock
 var CTI = 300
 
 var go_no_go_styles = ['solid','unfilled']
@@ -522,11 +507,18 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox>'+
+  			'<p class = center-block-text>Practice completed. Starting test.</p>'+
+  			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
+    		task_list +
+    		'<p class = center-block-text>Do not make a response if the letter is unfilled.</p>'+
+  			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
+  		'</div>',
   on_finish: function() {
     current_trial = 0
     stims = testStims
     task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
+    feedback_text = 'Starting a test block.  Press enter to continue.'
   },
   timing_post_trial: 1000
 }
@@ -597,7 +589,6 @@ var test_block = {
   timing_post_trial: 0,
   timing_response: 2000,
   timing_stim: 1000,
-  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
   on_finish: function(data) {
     appendData()
     correct_response = getResponse()
@@ -623,7 +614,7 @@ for (var i = 0; i < practice_length; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: "fixation"
+		trial_id: "practice_fixation"
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500,
@@ -642,7 +633,7 @@ for (var i = 0; i < practice_length; i++) {
 	  is_html: true,
 	  choices: 'none',
 	  data: {
-		trial_id: 'cue'
+		trial_id: 'practice_cue'
 	  },
 	  timing_response: getCTI,
 	  timing_stim: getCTI,
@@ -696,7 +687,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -838,12 +829,12 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
 		}
 		if (missed_responses > missed_thresh){
 			feedback_text +=
@@ -855,6 +846,8 @@ var testNode = {
 					'</p><p class = block-text>Done with this test. Press Enter to continue.'
 			return false
 		} else {
+			feedback_text +=
+					'</p><p class = block-text>Press Enter to continue.'
 			return true
 		}
 	}
@@ -866,13 +859,9 @@ var go_nogo_with_two_by_two_experiment = [];
 go_nogo_with_two_by_two_experiment.push(practiceNode);
 go_nogo_with_two_by_two_experiment.push(feedback_block);
 
-go_nogo_with_two_by_two_experiment.push(visualCheckNode);
-
 go_nogo_with_two_by_two_experiment.push(start_test_block)
 go_nogo_with_two_by_two_experiment.push(testNode);
 go_nogo_with_two_by_two_experiment.push(feedback_block);
-
-go_nogo_with_two_by_two_experiment.push(visualCheckNode);
 
 go_nogo_with_two_by_two_experiment.push(post_task_block)
 go_nogo_with_two_by_two_experiment.push(end_block)

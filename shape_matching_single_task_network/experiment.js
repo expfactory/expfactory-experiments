@@ -59,7 +59,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -165,19 +166,19 @@ for (var i = 1; i<11; i++) {
 }
 jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
 
-var practice_len = 21
+var practice_len = 14 //21
 // Trial types denoted by three letters for the relationship between:
 // probe-target, target-distractor, distractor-probe of the form
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
 var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
 var exp_len = 245
-var numTrialsPerBlock = 49
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTrialsPerBlock = 14 //49
+var numTestBlocks = 2 //exp_len / numTrialsPerBlock
 var choices = [90, 77]
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 2 //3 // 3 blocks of 24 trials
 
 var prompt_task_list = '<ul>'+
 						'<li>Respond if green and white shapes are the same or different</li>'+
@@ -300,6 +301,7 @@ var start_test_block = {
 		current_trial = 0
 		exp_stage = 'test'
 		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)
+		feedback_text = "We will now start the test portion. Press enter to begin."
 	}
 };
 
@@ -410,7 +412,7 @@ var practice_block = {
 	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
 	timing_response: 2000,
 	timing_stim: 1000,
-	timing_feedback: 500,
+	timing_feedback_duration: 500,
 	show_stim_with_feedback: false,
 	timing_post_trial: 0,
 	prompt: prompt_task_list,
@@ -604,13 +606,9 @@ shape_matching_single_task_network_experiment = []
 shape_matching_single_task_network_experiment.push(practiceNode)
 shape_matching_single_task_network_experiment.push(feedback_block)
 
-shape_matching_single_task_network_experiment.push(visualCheckNode)
-
 shape_matching_single_task_network_experiment.push(start_test_block)
 shape_matching_single_task_network_experiment.push(testNode)
 shape_matching_single_task_network_experiment.push(feedback_block)
-
-shape_matching_single_task_network_experiment.push(visualCheckNode)
 
 shape_matching_single_task_network_experiment.push(post_task_block)
 shape_matching_single_task_network_experiment.push(end_block)

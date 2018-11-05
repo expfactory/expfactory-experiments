@@ -75,7 +75,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -555,13 +556,9 @@ flanker_single_task_network_experiment = []
 flanker_single_task_network_experiment.push(practiceNode)
 flanker_single_task_network_experiment.push(feedback_block)
 
-flanker_single_task_network_experiment.push(visualCheckNode)
-
 flanker_single_task_network_experiment.push(start_test_block)
 flanker_single_task_network_experiment.push(testNode)
 flanker_single_task_network_experiment.push(feedback_block)
-
-flanker_single_task_network_experiment.push(visualCheckNode)
 
 flanker_single_task_network_experiment.push(post_task_block)
 flanker_single_task_network_experiment.push(end_block)
