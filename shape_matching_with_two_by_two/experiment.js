@@ -23,12 +23,8 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -36,7 +32,7 @@ function assessPerformance() {
 		choice_counts[response_keys.key[k]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if (experiment_data[i].trial_id == 'test_trial') {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -46,20 +42,13 @@ function assessPerformance() {
 			} else {
 				rt_array.push(rt)
 			}
-		}
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
+			
+			if (key == experiment_data[i].correct_response)
+				correct += 1
 			}
 		}
-		//
+
 	}
-	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -74,8 +63,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-	//&& object_correct > object_recognition_threshold && object_ave_rt > 200
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -884,13 +873,9 @@ var shape_matching_with_two_by_two_experiment = [];
 shape_matching_with_two_by_two_experiment.push(practiceNode);
 shape_matching_with_two_by_two_experiment.push(feedback_block);
 
-shape_matching_with_two_by_two_experiment.push(visualCheckNode);
-
 shape_matching_with_two_by_two_experiment.push(start_test_block)
 shape_matching_with_two_by_two_experiment.push(testNode);
 shape_matching_with_two_by_two_experiment.push(feedback_block);
-
-shape_matching_with_two_by_two_experiment.push(visualCheckNode);
 
 shape_matching_with_two_by_two_experiment.push(post_task_block)
 shape_matching_with_two_by_two_experiment.push(end_block)
