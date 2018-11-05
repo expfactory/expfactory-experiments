@@ -24,13 +24,6 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
-	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -47,26 +40,13 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
-	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
-	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
 		avg_rt = math.median(rt_array)
 	} 
-	credit_var = (avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (avg_rt > 200)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -88,13 +68,10 @@ var appendData = function(data) {
   current_trial = current_trial + 1
 }
 
-var practice_index = 0
 var getFeedback = function() {
-  if (practice_trials[practice_index].key_answer == -1) {
-    practice_index += 1
+  if (stim.key_answer == -1) {
     return '<div class = centerbox><div class = center-text>Correct!</div></div>' + prompt_text_list
   } else {
-    practice_index += 1
     return '<div class = centerbox><div class = center-text>Incorrect</div></p></div>'  + prompt_text_list
   }
 }
@@ -108,6 +85,21 @@ var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
     '</p></div>'
 }
+
+var getStim = function(){
+	stim = block_stims.pop()
+	return stim.stimulus
+}
+
+var getData = function(){
+	stim_data = stim.data
+	return stim_data
+}
+
+var getCorrectResponse = function(){
+	return stim_data.correct_response
+}
+
 
 /* ************************************ */
 /* Define experimental variables */
@@ -170,17 +162,16 @@ for (var i = 0; i < num_go_stim; i++) {
   })
 }
 
-var practice_thresh = 3 // 3 blocks of 15 trials
+var practice_thresh = 1 //3 // 3 blocks of 15 trials
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_length = 14
+var practice_length = 8 //14
 var test_length = 250
-var numTrialsPerBlock = 50
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTrialsPerBlock = 10//50
+var numTestBlocks = 2 //test_length / numTrialsPerBlock
 
-var practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
-var test_trials_array = jsPsych.randomization.repeat(test_stimuli_block, test_length / 5);   
-console.log(test_trials_array.length + '_1')
+var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
+
 
 
 
@@ -333,27 +324,6 @@ var feedback_block = {
 
 };
 
-/* define practice block */
-var practice_block = {
-  type: 'poldrack-categorize',
-  timeline: practice_trials,
-  is_html: true,
-  data: {
-    trial_id: "stim",
-    exp_stage: "practice"
-  },
-  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
-  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
-  timeout_message: getFeedback,
-  choices: [32],
-  timing_response: 2000,
-  timing_stim: 1000,
-  timing_feedback_duration: 500,
-  show_stim_with_feedback: false,
-  timing_post_trial: 0,
-  on_finish: appendData
-}
-
 var fixation_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
@@ -381,19 +351,18 @@ var prompt_fixation_block = {
 	prompt: prompt_text_list
 };
 
-console.log(test_trials_array.length + '_2')
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (var i = 0; i < practice_trials.length; i ++){
+for (var i = 0; i < practice_length; i ++){
 
 	var practice_block = {
 	  type: 'poldrack-categorize',
-	  stimulus: practice_trials[i].stimulus,
+	  stimulus: getStim,
 	  is_html: true,
-	  data: practice_trials[i].data,
-	  key_answer: practice_trials[i].data.correct_response,
+	  data: getData,
+	  key_answer: getCorrectResponse,
 	  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
 	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 	  timeout_message: getFeedback,
@@ -445,11 +414,12 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -464,13 +434,14 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					
+					block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
 					return false
 			}
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, practice_length / 2);
 			return true
 		
 		}
@@ -479,23 +450,6 @@ var practiceNode = {
 	
 }
 
-console.log(test_trials_array.length + '_3')
-
-/* define test block */
-var test_block = {
-  type: 'poldrack-single-stim',
-  timeline: test_trials_array,
-  data: {
-    trial_id: "stim",
-    exp_stage: "test"
-  },
-  is_html: true,
-  choices: [32],
-  timing_stim: 1000,
-  timing_response: 2000,
-  timing_post_trial: 0,
-  on_finish: appendData
-};
 
 var testTrials = []
 testTrials.push(feedback_block)
@@ -504,10 +458,10 @@ for (var i = 0; i < numTrialsPerBlock; i ++){
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
-		stimulus: test_trials_array.pop().stimulus,
+		stimulus: getStim,
 		is_html: true,
 		choices: [32],
-		data: test_trials_array.pop().data,
+		data: getData,
 		timing_post_trial: 0,
 		timing_stim: 1000,
 		timing_response: 2000,
@@ -516,6 +470,8 @@ for (var i = 0; i < numTrialsPerBlock; i ++){
 	testTrials.push(fixation_block)
 	testTrials.push(test_block)
 }
+
+
 
 var testCount = 0
 var testNode = {
@@ -544,16 +500,16 @@ var testNode = {
 			}
 	
 		}
-	
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed " +testCount+ " out of " +numTestBlocks+ " blocks of trials."
 
-		if (testCount > numTestBlocks){
+		if (testCount >= numTestBlocks){
+			
 			feedback_text +=
 					'</p><p class = block-text>Done with this test. Press Enter to continue.' 
 			return false
@@ -573,7 +529,7 @@ var testNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Press Enter to continue.' 
-			
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
 			return true
 		
 		}
@@ -581,8 +537,6 @@ var testNode = {
 	}
 	
 }
-
-console.log(test_trials_array.length + '_4')
 
 
 /* create experiment definition array */

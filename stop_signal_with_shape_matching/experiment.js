@@ -397,7 +397,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -413,7 +413,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -475,10 +475,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -490,7 +490,7 @@ var end_block = {
 		trial_id: "end",
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -516,7 +516,11 @@ var start_test_block = {
 				
 			'<p class = block-text>On some trials, a red shape will overlap the green shape. Ignore this red shape, your job is to match the green shape to the white shape.</p>'+
 		
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the shapes. Do not respond if you see a star.  Do not slow down your responses to the shapes in order to wait for the star.</p>'+
+			'<p class = block-text>On some trials, you will see a star appear with or shortly after the shapes. Do not respond if you see a star.</p>
+			
+			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+			
+			'<p class = block-text>Do not slow down your responses to the shapes in order to wait for the star.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+ 
 		 '</div>',
@@ -533,7 +537,7 @@ var rest_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -661,7 +665,7 @@ var practiceNode = {
 	
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		if (practiceCount == practice_thresh){
 			feedback_text +=
 				'</p><p class = block-text>Done with this practice.' 
@@ -809,7 +813,7 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){

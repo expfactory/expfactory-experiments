@@ -484,7 +484,7 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, is the same as the white on the right.</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left is the same as the white on the right.</p>'+
 		
 			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 		

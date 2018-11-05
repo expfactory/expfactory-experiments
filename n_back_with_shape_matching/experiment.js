@@ -494,7 +494,7 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a white letter with an overlapping red letter on every trial.</p>'+
-			'<p class = block-text>You will be asked to match the current WHITE letter, to the WHITE letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
+			'<p class = block-text>You will be asked to match the current white letter to the white letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the white letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Ignore the red letter, focus only on the white letter.</p>'+
@@ -598,7 +598,7 @@ var fixation_block = {
 
 
 
-var feedback_text = 'We will start practice. Your delay for this practice round is 1. <br><br>During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!</i> Press <i>enter</i> to begin.'
+var feedback_text = 'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -658,8 +658,8 @@ var controlNode = {
 }
 
 var practiceTrials = []
-practiceTrials.push(instructions_block)
 practiceTrials.push(feedback_block)
+practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 3; i++) {
 	
 	var practice_block = {

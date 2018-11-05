@@ -507,6 +507,7 @@ var instructions_block = {
 		'<div class = centerbox>' + 
 			'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear with, or shortly after the letter appears.</p>'+
 			'<p class = block-text>If you see a star, please try your best to make no response on that trial. You should still remember the letter, however.</p>'+
+			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for this practice round is 1</i>. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'

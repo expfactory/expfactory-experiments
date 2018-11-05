@@ -480,7 +480,7 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a letter moving clockwise through the screen on every trial.</p>'+
-			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
+			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
 			'<p class = block-text>When in the top two quadrants, do a '+predictive_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[0][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>When in the bottom two quadrants, do a '+predictive_dimensions[2][0]+'.   Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter matches the letter 1 or 2 trials ago, and the '+possible_responses[1][0]+' if they mismatch.</p> '+
@@ -554,7 +554,7 @@ var start_test_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
-			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
+			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
 			'<p class = block-text>When in the top two quadrants, do a '+predictive_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[0][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>When in the bottom two quadrants, do a '+predictive_dimensions[2][0]+'.   Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter matches the letter 1 or 2 trials ago, and the '+possible_responses[1][0]+' if they mismatch.</p> '+

@@ -524,7 +524,6 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			
 			'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
@@ -540,6 +539,7 @@ var instructions_block = {
 			"<p class = block-text>For the example on the next page, we will refer to it as a "+go_no_go_styles[0]+"_letter or "+go_no_go_styles[1]+"_letter</p>"+
 		"</div>",
 		
+		/*
 		'<div class = centerbox>'+
 			'<p class = block-text>For example, if your delay for the block was 2, and the letters you received for the first 4 trials were '+go_no_go_styles[0]+'_V, '+go_no_go_styles[0]+'_B, '+go_no_go_styles[1]+'_v, and '+go_no_go_styles[0]+'_V, you would respond, no match, no match, no response, and no match.</p> '+
 			'<p class = block-text>The first letter in that sequence, V, DOES NOT have a preceding trial to match with, so press the '+possible_responses[1][0]+' on those trials.</p> '+
@@ -548,7 +548,7 @@ var instructions_block = {
 			'<p class = block-text>The fourth letter in that sequence, V, DOES NOT match the letter from 2 trials ago, B, so you would respond no match.</p>'+
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for practice is 1</i>. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+	
 		'</div>',
-		
+		*/
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

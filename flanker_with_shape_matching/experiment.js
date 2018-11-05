@@ -339,7 +339,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 30 minutes. Press <strong>enter</strong> to begin.'
+'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -356,7 +356,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -378,7 +378,7 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment you will see a row of shapes. You will always see 5 white shapes to the right, 1 green shape to the left, and sometimes, 1 red shape overlapping with the green shape.</p> '+
 		
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <i>middle</i> white shape on the right.</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left matches the <i>middle</i> white shape on the right.</p>'+
 		
 		'</div>',
 		
@@ -386,7 +386,7 @@ var instructions_block = {
 				
 			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 		
-			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
+			'<p class = block-text>You will always see multiple white shapes. Please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
 		
 			'<p class = block-text>Sometimes, you will also see a red shape near the green shape.  Ignore this red shape as well.</p>'+
 				
@@ -410,10 +410,10 @@ var instruction_node = {
 		}
 		if (sumInstructTime <= instructTimeThresh * 1000) {
 			feedback_instruct_text =
-				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+				'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <i>enter</i> to continue.'
 			return true
 		} else if (sumInstructTime > instructTimeThresh * 1000) {
-			feedback_instruct_text = 'Done with instructions. Press <strong>enter</strong> to continue.'
+			feedback_instruct_text = 'Done with instructions. Press <i>enter</i> to continue.'
 			return false
 		}
 	}
@@ -426,7 +426,7 @@ var end_block = {
     	exp_id: 'flanker_with_shape_matching'
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
@@ -444,11 +444,11 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>You will be asked to judge whether the green shape on the left, matches the <i>middle</i> white shape on the right..</p>'+
+			'<p class = block-text>You will be asked to judge whether the green shape on the left matches the <i>middle</i> white shape on the right..</p>'+
 		
-			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[0][0]+'.</p>'+
+			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 		
-			'<p class = block-text>You will always see multiple white shapes, please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
+			'<p class = block-text>You will always see multiple white shapes. Please match the green shape only to the <i>middle</i> white shape. Ignore the other white shapes.</p>'+
 		
 			'<p class = block-text>Sometimes, you will also see a red shape near the green shape.  Ignore this red shape as well.</p>'+
 	
@@ -467,7 +467,7 @@ var rest_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <strong>enter</strong> to continue the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
 };
@@ -562,7 +562,7 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -666,7 +666,7 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</strong>"
+		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){

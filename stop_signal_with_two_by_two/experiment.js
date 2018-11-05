@@ -471,18 +471,18 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox>'+
-    	'<p class = block-text>In this experiment you will have to respond to a sequence of colored numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is orange or blue. Each trial will start with a cue telling you which task to do on that trial.</p>'+
+    	'<p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
     '</div>',
     
     '<div class = centerbox>'+
-    	'<p class = block-text>The cue before the number will be a word indicating the task. There will be six different cues indicating three different tasks. Thee cues and tasks are described below:</p>' +
+    	'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
     	task_list +
     '</div>',
     
     '<div class = centerbox>' + 
 		'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear with, or shortly after the letter appears.</p>'+
 		
-		'<p class = block-text>If you see a star appear, please try your best to make no response on that trial. You must still commit the letter to memory, however.</p>'+
+		'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 	
 		'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 							
@@ -540,13 +540,20 @@ var start_practice_block = {
   cont_key: [13]
 };
 
+
 var start_test_block = {
   type: 'poldrack-text',
   timing_response: 180000,
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = center-block-text>Practice completed. Starting test.</p><p class = center-block-text>Press <i>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox>'+
+  			'<p class = center-block-text>Practice completed. Starting test.</p>'+
+  			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
+    		task_list +
+    		'<p class = center-block-text>Do not make a response if a star appears.</p>'+
+  			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
+  		'</div>',
   on_finish: function() {
     current_trial = 0
     stims = testStims

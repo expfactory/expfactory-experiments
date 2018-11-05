@@ -435,7 +435,7 @@ var instructions_block = {
 			
 			'<p class = block-text>If you see a star appear, please try your best to withhold your response on that trial.</p>'+
 			
-			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 								

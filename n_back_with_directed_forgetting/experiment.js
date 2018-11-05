@@ -406,13 +406,16 @@ var instructions_block = {
 			'<p class = block-text style="font-size:20px">In this task, you will see a cue, either remember or forget, followed by a letter on every trial.</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a remember cue, please add the subsequent letter to your memory set (set of letters to remember).</p>'+
 			'<p class = block-text style="font-size:20px">If you saw a forget cue, you should not add the subsequent letter to your memory set.</p>'+
+		'</div>',	
+		
+		'<div class = centerbox>'+
 			'<p class = block-text style="font-size:20px">You will be given a delay for every block of trials, either 1, 2, or 3. This delay tells you how many letters to remember in your memory set. So for example, if your delay was 2, you should remember the last 2 letters that appeared after a remember cue.</p>'+
 			'<p class = block-text style="font-size:20px">Once your memory set is 1, 2, or 3 long, depending on delay, remove the earlier letters to add new letters. <i>Do this only for the letters that come after a "remember" cue!</i></p>'+
 			'<p class = block-text style="font-size:20px">Upon the presentation of the letter on every trial, please respond whether the current letter matches the letter that occurred 2  (delay) trials ago <i>in your memory set.</i></p>'+
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text style="font-size:20px">We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
-		'</div>',
+		'</div>'
 		/*
 		'<div class = centerbox>'+
 			'<p class = block-text style="font-size:20px">For example, if your delay for the block was 2, and the cues that you received were remember, remember, forget, and remember, and the letters you received following each of those cues were V, B, v, and V, you would respond, no match, no match, match, and match.</p> '+

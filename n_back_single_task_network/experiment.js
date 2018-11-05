@@ -443,7 +443,7 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if the center letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 		'</div>',
@@ -508,7 +508,7 @@ var start_test_block = {
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-		feedback_text = "Your delay for this block is "+delay+". Please match the current center letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
+		feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
 	}
 };
 
@@ -519,8 +519,8 @@ var start_control_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>For this block of trials, you do not have to match letters.  Instead, indicate whether the current CENTER letter is a T (or t).</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current CENTER letter was a T (or t) and the '+possible_responses[1][0]+' if not.</p> '+
+			'<p class = block-text>For this block of trials, you do not have to match letters.  Instead, indicate whether the current letter is a T (or t).</p>'+
+			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter was a T (or t) and the '+possible_responses[1][0]+' if not.</p> '+
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
 	cont_key: [13],
