@@ -18,34 +18,38 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
+	/* Function to calculate the "credit_var", which is a boolean used to
+	credit individual experiments in expfactory. */
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	
+	var accuracy = 0
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	for (var k = 0; k < response_keys.key.length; k++) {
-		choice_counts[response_keys.key[k]] = 0
-	}
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
 			trial_count += 1
-			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
 			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+			
+			if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					accuracy += 1
+				}
+			} else if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
+			} else if ((experiment_data[i].go_no_go_condition == 'stop')&& (experiment_data[i].rt == -1)){
+				accuracy += 1
 			}
 		}
-	
 	}
-	
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -58,11 +62,12 @@ function assessPerformance() {
 			responses_ok = false
 		}
 	})
+	var accuracy = correct / trial_count
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-	// && object_correct > object_recognition_threshold && object_ave_rt > 200
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
+
 
 var randomDraw = function(lst) {
   var index = Math.floor(Math.random() * (lst.length))
@@ -667,7 +672,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "practice_trial"){
+			if ((data[i].trial_id == "practice_trial") && (data[i].go_no_go_condition == 'go')){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt

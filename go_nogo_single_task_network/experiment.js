@@ -29,15 +29,21 @@ function assessPerformance() {
 	choice_counts[-1] = 0
 	choice_counts[32] = 0
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if ((experiment_data[i].trial_id == 'test_block') || (experiment_data[i].trial_id == 'practice')) {
 			trial_count += 1
-			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
 			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+			
+			if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					accuracy += 1
+				}
+			} else if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
+			} else if ((experiment_data[i].condition == 'nogo')&& (experiment_data[i].rt == -1)){
+				accuracy += 1
 			}
 		}
 	}
@@ -46,7 +52,16 @@ function assessPerformance() {
 	if (rt_array.length !== 0) {
 		avg_rt = math.median(rt_array)
 	} 
-	credit_var = (avg_rt > 200)
+	//calculate whether response distribution is okay
+	var responses_ok = true
+	Object.keys(choice_counts).forEach(function(key, index) {
+		if (choice_counts[key] > trial_count * 0.85) {
+			responses_ok = false
+		}
+	})
+	var accuracy = correct / trial_count
+	var missed_percent = missed_count/trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 

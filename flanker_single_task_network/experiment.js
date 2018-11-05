@@ -27,6 +27,8 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[70] = 0
+	choice_counts[72] = 0
 	for (var k = 0; k < choices.length; k++) {
 		choice_counts[choices[k]] = 0
 	}
@@ -492,7 +494,7 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "test_trial"){
+			if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt

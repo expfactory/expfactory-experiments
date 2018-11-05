@@ -30,11 +30,13 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var k = 0; k < choices.length; k++) {
     choice_counts[choices[k]] = 0
   }
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].trial_id == 'test_trial') {
+		if ((experiment_data[i].trial_id == 'test_stim') || (experiment_data[i].trial_id == 'practice_stim')) {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
