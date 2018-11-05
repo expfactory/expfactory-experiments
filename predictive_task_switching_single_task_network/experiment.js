@@ -503,9 +503,9 @@ for (i = 0; i < practice_len + 1; i++) {
 			"trial_id": "practice_trial"
 		},
 		key_answer: getResponse,
-		correct_text: '<div class = fb_box><div class = center-text><font size =20>Correct!</font></div></div>' + prompt_text,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size =20>Incorrect!</font></div></div>' + prompt_text,
-		timeout_message: '<div class = fb_box><div class = center-text><font size =20>Respond Faster!</font></div></div>' + prompt_text,
+		correct_text: '<div class = fb_box><div class = center-text><font size =20>Correct</font></div></div>' + prompt_text,
+		incorrect_text: '<div class = fb_box><div class = center-text><font size =20>Incorrect</font></div></div>' + prompt_text,
+		timeout_message: '<div class = fb_box><div class = center-text><font size =20>Respond Faster</font></div></div>' + prompt_text,
 		show_stim_with_feedback: false,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
