@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'cued_task_switching_with_directed_forgetting'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'two_by_two_with_directed_forgetting'})
 }
 
 function evalAttentionChecks() {
@@ -28,12 +28,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -52,19 +47,7 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 		}
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
-	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -79,7 +62,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
+	// && object_correct > object_recognition_threshold && object_ave_rt > 200
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -123,12 +107,16 @@ var randomDraw = function(lst) {
 
 
 var createTrialTypes = function(numTrialsPerBlock){
+	var temp_index = Math.floor(Math.random() * 2)
 	
-	cued_dimension = cued_dimensions[Math.floor(Math.random() * 2)]
-	directed_condition = directed_cond_array[Math.floor(Math.random() * 2)]
+	cued_dimension = cued_dimensions[temp_index]
+	task_cue = cues[temp_index][Math.floor(Math.random() * 2)]
+	
+	directed_condition = directed_cond_array[Math.floor(Math.random() * 4)]
 	
 	var stims = []
 	var first_stim = {
+		task_condition: 'N/A',
 		cued_condition: 'N/A',
 		cued_dimension: cued_dimension,
 		directed_condition: directed_condition
@@ -137,21 +125,24 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var stims = []
 	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
-			for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
+			for (var numTaskConds = 0; numTaskConds < task_conditions.length; numTaskConds++){
+				for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
 			
-				cued_dimension = 'N/A'
-				cued_condition = cued_conditions[numCuedConds]
-				directed_condition = directed_cond_array[numDirectedConds]
+					cued_dimension = 'N/A'
+					task_condition = task_conditions[numTaskConds]
+					cued_condition = cued_conditions[numCuedConds]
+					directed_condition = directed_cond_array[numDirectedConds]
 				
-				stim = {
-					cued_dimension: cued_dimension,
-					cued_condition: cued_condition,
-					directed_condition: directed_condition
-					}
+					stim = {
+						cued_dimension: cued_dimension,
+						task_condition: task_condition,
+						cued_condition: cued_condition,
+						directed_condition: directed_condition
+						}
 			
-				stims.push(stim)
+					stims.push(stim)
+				}
 			}
-			
 		}
 	}
 	
@@ -164,17 +155,38 @@ var createTrialTypes = function(numTrialsPerBlock){
 		
 		if (i > 0){
 			last_dim = cued_dimension 
+			last_task_cue = task_cue
 		} 
 		
 		stim = stims.pop()
 		cued_condition = stim.cued_condition
+		task_condition = stim.task_condition
 		directed_condition = stim.directed_condition
 		cued_dimension = stim.cued_dimension
 		
-		if (cued_condition == "switch"){
+		if (task_condition == "switch"){
 			cued_dimension = randomDraw(['forget','remember'].filter(function(y) {return $.inArray(y, [last_dim]) == -1}))
-		} else if (cued_condition == "stay"){
+			if (cued_dimension == 'forget'){
+				temp_index = 1
+				task_cue = randomDraw(cues[temp_index].filter(function(y) {return $.inArray(y, [last_task_cue]) == -1}))
+			} else if (cued_dimension == 'remember'){
+				temp_index = 0
+				task_cue = randomDraw(cues[temp_index].filter(function(y) {return $.inArray(y, [last_task_cue]) == -1}))
+			}
+		} else if (task_condition == "stay"){
 			cued_dimension = last_dim
+			
+			if (cued_condition == "switch"){
+				if (cued_dimension == 'forget'){
+					temp_index = 1
+					task_cue = randomDraw(cues[temp_index].filter(function(y) {return $.inArray(y, [last_task_cue]) == -1}))
+				} else if (cued_dimension == 'remember'){
+					temp_index = 0
+					task_cue = randomDraw(cues[temp_index].filter(function(y) {return $.inArray(y, [last_task_cue]) == -1}))
+				}		
+			} else if (task_condition == "switch"){
+				task_cue = last_task_cue
+			}
 		}
 		
 		letters = getTrainingSet()
@@ -183,13 +195,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 		correct_response = getCorrectResponse(cued_dimension,cue,probe,letters)
 			
 		stim = {
-			cued_condition: cued_condition,
+			task_condition: task_condition,
 			cued_dimension: cued_dimension,
 			directed_condition: directed_condition,
 			letters: letters,
 			cue: cue,
 			probe: probe,
-			correct_response: correct_response
+			correct_response: correct_response,
+			task_cue: task_cue
 			}
 		
 		new_stims.push(stim)
@@ -335,7 +348,7 @@ var appendData = function(){
 	current_trial+=1
 	
 	jsPsych.data.addDataToLastTrial({
-		cued_condition: cued_condition,
+		task_condition: task_condition,
 		cued_dimension: cued_dimension,
 		directed_condition: directed_condition,
 		probe: probe,
@@ -382,15 +395,16 @@ var getDirectedCueStim = function(){
 
 var getSwitchingCueStim = function(){
 	stim = stims.shift()
-	cued_condition = stim.cued_condition
+	task_condition = stim.task_condition
 	cued_dimension = stim.cued_dimension
 	directed_condition = stim.directed_condition
 	probe = stim.probe
 	letters = stim.letters
 	cue = stim.cue
 	correct_response = stim.correct_response
+	task_cue = stim.task_cue
 	
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cued_dimension+'</div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+task_cue+'</div></div></div>'	
 
 }
 
@@ -413,15 +427,19 @@ var credit_var = 0
 var practice_len = 16  // must be divisible by 16
 var exp_len = 160 //320 must be divisible by 16
 var numTrialsPerBlock = 32; // divisible by 64
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTestBlocks = 2 //exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 16 trials
+var practice_thresh = 2 //3 // 3 blocks of 16 trials
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
+var task_conditions = jsPsych.randomization.repeat(['stay','switch'],1)
 var cued_conditions = jsPsych.randomization.repeat(['stay','switch'],1)
+
+var cues = [['retain','remember'],['forget','disregard']]
+
 var cued_dimensions = jsPsych.randomization.repeat(['forget','remember'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
@@ -509,7 +527,7 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-		exp_id: 'cued_task_switching_with_directed_forgetting'
+		exp_id: 'two_by_two_with_directed_forgetting'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -986,18 +1004,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-var cued_task_switching_with_directed_forgetting_experiment = [];
+var two_by_two_with_directed_forgetting_experiment = [];
 
-cued_task_switching_with_directed_forgetting_experiment.push(practiceNode);
-cued_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+two_by_two_with_directed_forgetting_experiment.push(practiceNode);
+two_by_two_with_directed_forgetting_experiment.push(feedback_block);
 
-cued_task_switching_with_directed_forgetting_experiment.push(visualCheckNode);
+two_by_two_with_directed_forgetting_experiment.push(start_test_block);
+two_by_two_with_directed_forgetting_experiment.push(testNode);
+two_by_two_with_directed_forgetting_experiment.push(feedback_block);
 
-cued_task_switching_with_directed_forgetting_experiment.push(start_test_block);
-cued_task_switching_with_directed_forgetting_experiment.push(testNode);
-cued_task_switching_with_directed_forgetting_experiment.push(feedback_block);
-
-cued_task_switching_with_directed_forgetting_experiment.push(visualCheckNode);
-
-cued_task_switching_with_directed_forgetting_experiment.push(post_task_block);
-cued_task_switching_with_directed_forgetting_experiment.push(end_block);
+two_by_two_with_directed_forgetting_experiment.push(post_task_block);
+two_by_two_with_directed_forgetting_experiment.push(end_block);

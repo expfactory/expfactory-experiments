@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cued Task Switching with Directed Forgetting Experiment",
+        "name": "Two by Two with Directed Forgetting Experiment",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
@@ -14,15 +14,12 @@
                  "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                  "static/js/jspsych/plugins/jspsych-survey-text.js",
                  "static/js/utils/poldrack_utils.js",
-                 "object_recognition_style.css",
-                 "object_recognition.js",
-                 "object_recognition_images",
                  "experiment.js",
                  "static/css/jspsych.css",
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "exp_id": "cued_task_switching_with_directed_forgetting",
+        "exp_id": "two_by_two_with_directed_forgetting",
         "cognitive_atlas_task_id": "trm_56674c7c2fa4f",
         "contributors": [
                          "Patrick Bissett",
