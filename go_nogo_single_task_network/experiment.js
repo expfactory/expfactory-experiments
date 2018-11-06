@@ -419,9 +419,7 @@ var practiceNode = {
 		
 					}
 				}
-		
 			}
-	
 		}
 	
 		var accuracy = correct / total_trials
