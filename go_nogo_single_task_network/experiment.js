@@ -24,6 +24,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	var correct = 0
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -38,12 +39,10 @@ function assessPerformance() {
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
-					accuracy += 1
+					correct += 1
 				}
 			} else if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].condition == 'nogo')&& (experiment_data[i].rt == -1)){
-				accuracy += 1
 			}
 		}
 	}
