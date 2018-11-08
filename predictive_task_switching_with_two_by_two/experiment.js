@@ -408,13 +408,13 @@ var run_attention_checks = true
 
 var practice_len = 32 // 32
 var exp_len = 320 //320 must be divisible by 32
-var numTrialsPerBlock = 64 // 64 must be divisible by 32
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTrialsPerBlock = 32 //64 // 64 must be divisible by 32
+var numTestBlocks = 1 //exp_len / numTrialsPerBlock
 var CTI = 300
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3  // 3 blocks of 24 trials
+var practice_thresh = 1 //3  // 3 blocks of 24 trials
 
 var pathSource = "/static/experiments/predictive_task_switching_with_two_by_two/images/"
 var fileTypePNG = ".png'></img>"
