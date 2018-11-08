@@ -55,8 +55,8 @@ function assessPerformance() {
 			if (key == experiment_data[i].correct_response)
 				correct += 1
 			}
-		}
 	}
+	
 
 	//calculate average rt
 	var avg_rt = -1
