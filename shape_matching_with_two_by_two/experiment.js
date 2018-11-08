@@ -30,9 +30,7 @@ function assessPerformance() {
 	choice_counts[-1] = 0
 	choice_counts[77] = 0
 	choice_counts[90] = 0
-	for (var k = 0; k < response_keys.key.length; k++) {
-		choice_counts[response_keys.key[k]] = 0
-	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
 			trial_count += 1

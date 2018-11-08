@@ -320,7 +320,7 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 20
 var test_length = 400
-var numTrialsPerBlock = 40 //80
+var numTrialsPerBlock = 20 //80
 var numTestBlocks = 2 //test_length / numTrialsPerBlock
 var CTI = 300
 

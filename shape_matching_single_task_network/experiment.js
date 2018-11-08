@@ -14,9 +14,7 @@ function assessPerformance() {
 	choice_counts[-1] = 0
 	choice_counts[77] = 0
 	choice_counts[90] = 0
-	for (var k = 0; k < choices.length; k++) {
-		choice_counts[choices[k]] = 0
-	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].possible_responses != 'none') {
 			trial_count += 1

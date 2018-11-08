@@ -29,6 +29,7 @@ function assessPerformance() {
 	var choice_counts = {}
 	choice_counts[-1] = 0
 	choice_counts[32] = 0
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if ((experiment_data[i].trial_id == 'test_block') || (experiment_data[i].trial_id == 'practice')) {
 			trial_count += 1
@@ -58,8 +59,8 @@ function assessPerformance() {
 			responses_ok = false
 		}
 	})
-	var accuracy = correct / trial_count
 	var missed_percent = missed_count/trial_count
+	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }

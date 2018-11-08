@@ -36,9 +36,9 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	for (var k = 0; k < choices.length; k++) {
-    choice_counts[choices[k]] = 0
-  }
+	choice_counts[77] = 0
+	choice_counts[90] = 0
+  
 	for (var i = 0; i < experiment_data.length; i++) {
 		if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 			rt = experiment_data[i].rt
@@ -50,8 +50,8 @@ function assessPerformance() {
 			missed_count += 1
 		}
 	}
-
 	
+		
 	//calculate average rt
   var avg_rt = -1
   if (rt_array.length !== 0) {
