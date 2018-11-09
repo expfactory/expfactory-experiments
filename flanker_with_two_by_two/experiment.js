@@ -244,15 +244,6 @@ var appendData = function() {
     flanking_number: flanking_number,
     trial_num: trial_num
   })
-   console.log(task_switch.task_switch, task_switch.cue_switch, flanker_condition, 'here2')
-  if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-  	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).flanker_condition == 'stop')){
-			jsPsych.data.addDataToLastTrial({gng_stop_acc: 1})
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).flanker_condition == 'stop')){
-			jsPsych.data.addDataToLastTrial({gng_stop_acc: 0})
-		}
-  }
 }
 
 /* ************************************ */
@@ -568,9 +559,9 @@ var test_block = {
   on_finish: function(data) {
     appendData()
     correct_response = getResponse()
-    correct = false
+    correct = 0
     if (data.key_press === correct_response) {
-      correct = true
+      correct = 1
     }
     jsPsych.data.addDataToLastTrial({
       'correct_response': correct_response,
