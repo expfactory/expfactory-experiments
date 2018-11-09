@@ -649,15 +649,18 @@ var categorize_block = {
 };
 
 var test_block = {
-  type: 'poldrack-single-stim',
+  type: 'stop-signal',
   stimulus: getStim,
+  SS_stimulus: getStopStim,
+  SS_trial_type: getSSType, 
   is_html: true,
-  key_answer: getResponse,
   choices: choices,
   data: {
     trial_id: 'test_trial',
     exp_stage: 'test'
   },
+  SSD: getSSD,
+  timing_SS: 500,
   timing_post_trial: 0,
   timing_response: 2000,
   timing_stim: 1000,
@@ -846,13 +849,13 @@ for (var i = 0; i < numTrialsPerBlock; i++) {
 	  timing_stim: 500,
 	  timing_response: 500,
 	  on_finish: function() {
-		jsPsych.data.addDataToLastTrial({
-		  exp_stage: exp_stage
-		})
+		  jsPsych.data.addDataToLastTrial({
+			  exp_stage: exp_stage
+		  })
 	  }
-	}
+  }
 
-	var cue_block = {
+  var cue_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: getCue,
 	  is_html: true,
@@ -963,7 +966,6 @@ var testNode = {
 		} else {
 			return true
 		}
-		
 	}
 }
 

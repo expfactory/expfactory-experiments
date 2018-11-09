@@ -1,6 +1,6 @@
 [
     {
-        "name": "Predictive Task Switching with Two by Two",
+        "name": "Predictable Task Switching with Two by Two",
         "template":"jspsych",
         "run": [
 				"static/js/math.min.js",
@@ -20,7 +20,7 @@
                 
                 
                ],
-        "exp_id": "predictive_task_switching_with_two_by_two",
+        "exp_id": "predictable_task_switching_with_two_by_two",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
         				 "Patrick Bissett",

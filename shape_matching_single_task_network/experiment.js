@@ -27,7 +27,7 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 			
-			if (key == experiment_data[i].correct_response)
+			if (key == experiment_data[i].correct_response){
 				correct += 1
 			}
 		}

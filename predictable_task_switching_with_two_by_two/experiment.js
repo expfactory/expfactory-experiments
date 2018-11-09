@@ -8,7 +8,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_with_two_by_two'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_with_two_by_two'})
 }
 
 function evalAttentionChecks() {
@@ -416,9 +416,9 @@ var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 1 //3  // 3 blocks of 24 trials
 
-var pathSource = "/static/experiments/predictive_task_switching_with_two_by_two/images/"
+var pathSource = "/static/experiments/predictable_task_switching_with_two_by_two/images/"
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/predictive_task_switching_with_two_by_two/images/"
+var preFileType = "<img class = center src='/static/experiments/predictable_task_switching_with_two_by_two/images/"
 
 
 var numbers_list = [[6,8],[7,9],[2,4],[1,3]]
@@ -647,7 +647,7 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "predictive_task_switching_with_two_by_two",
+		exp_id: "predictable_task_switching_with_two_by_two",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],
@@ -710,7 +710,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
@@ -901,14 +901,14 @@ var testNode = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var predictive_task_switching_with_two_by_two_experiment = []
+var predictable_task_switching_with_two_by_two_experiment = []
 
-predictive_task_switching_with_two_by_two_experiment.push(practiceNode);
-predictive_task_switching_with_two_by_two_experiment.push(feedback_block);
+predictable_task_switching_with_two_by_two_experiment.push(practiceNode);
+predictable_task_switching_with_two_by_two_experiment.push(feedback_block);
 
-predictive_task_switching_with_two_by_two_experiment.push(start_test_block);
-predictive_task_switching_with_two_by_two_experiment.push(testNode);
-predictive_task_switching_with_two_by_two_experiment.push(feedback_block);
+predictable_task_switching_with_two_by_two_experiment.push(start_test_block);
+predictable_task_switching_with_two_by_two_experiment.push(testNode);
+predictable_task_switching_with_two_by_two_experiment.push(feedback_block);
 
-predictive_task_switching_with_two_by_two_experiment.push(post_task_block);
-predictive_task_switching_with_two_by_two_experiment.push(end_block);
+predictable_task_switching_with_two_by_two_experiment.push(post_task_block);
+predictable_task_switching_with_two_by_two_experiment.push(end_block);

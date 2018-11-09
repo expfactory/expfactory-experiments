@@ -52,11 +52,12 @@ function assessPerformance() {
 				rt_array.push(rt)
 			}
 			
-			if (key == experiment_data[i].correct_response)
+			if (key == experiment_data[i].correct_response){
 				correct += 1
 			}
 		}
 	}
+	
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -643,7 +644,7 @@ for (i = 0; i < practice_len + 2; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
