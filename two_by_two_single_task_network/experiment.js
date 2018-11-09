@@ -49,7 +49,6 @@ function assessPerformance() {
 				correct += 1
 			}
 		}
-
 	}
 	
 	//calculate average rt
@@ -133,7 +132,7 @@ var setStims = function() {
         cue_i = 1 - cue_i
       }
       break
-    case "switch_new":
+    case "switch":
       cue_i = randomDraw([0, 1])
       if (last_task == "na") {
         tmp = curr_task
@@ -223,7 +222,6 @@ var appendData = function() {
   
   jsPsych.data.addDataToLastTrial({
     cue: curr_cue,
-    stim_color: curr_stim.color,
     stim_number: curr_stim.number,
     task: curr_task,
     task_switch: task_switch.task_switch,
@@ -285,7 +283,7 @@ color: {
   },
 */
 
-var task_switch_types = ["stay", "switch_new"]
+var task_switch_types = ["stay", "switch"]
 var cue_switch_types = ["stay", "switch"]
 var task_switches_arr = []
 for (var t = 0; t < task_switch_types.length; t++) {
@@ -450,6 +448,7 @@ var start_test_block = {
     current_trial = 0
     feedback_text = 
 	'Starting a test block. Press enter to continue.'
+	exp_stage = 'test'
   },
   timing_post_trial: 1000
 }
@@ -538,8 +537,7 @@ for (var i = 0; i < practice_length; i++) {
 		prompt_task_list + '</div>',
 	  choices: choices,
 	  data: {
-		trial_id: 'practice_stim',
-		exp_stage: "practice"
+		trial_id: 'practice_stim'
 	  },
 	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: false,
