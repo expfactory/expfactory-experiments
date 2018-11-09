@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'flanker_with_predictive_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'flanker_with_predictable_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -311,7 +311,7 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/flanker_with_predictive_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/flanker_with_predictable_task_switching/images/"
 
 var current_trial = 0
 
@@ -548,7 +548,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		key_answer: getResponse,
 		data: {
-			exp_id: "flanker_with_predictive_task_switching",
+			exp_id: "flanker_with_predictable_task_switching",
 			trial_id: "practice_trial"
 			},
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
@@ -657,7 +657,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getStim,
 		is_html: true,
 		data: {
-			exp_id: "flanker_with_predictive_task_switching",
+			exp_id: "flanker_with_predictable_task_switching",
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
@@ -733,14 +733,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-flanker_with_predictive_task_switching_experiment = []
+flanker_with_predictable_task_switching_experiment = []
 
-flanker_with_predictive_task_switching_experiment.push(practiceNode)
-flanker_with_predictive_task_switching_experiment.push(feedback_block)
+flanker_with_predictable_task_switching_experiment.push(practiceNode)
+flanker_with_predictable_task_switching_experiment.push(feedback_block)
 
-flanker_with_predictive_task_switching_experiment.push(start_test_block)
-flanker_with_predictive_task_switching_experiment.push(testNode)
-flanker_with_predictive_task_switching_experiment.push(feedback_block)
+flanker_with_predictable_task_switching_experiment.push(start_test_block)
+flanker_with_predictable_task_switching_experiment.push(testNode)
+flanker_with_predictable_task_switching_experiment.push(feedback_block)
 
-flanker_with_predictive_task_switching_experiment.push(post_task_block)
-flanker_with_predictive_task_switching_experiment.push(end_block)
+flanker_with_predictable_task_switching_experiment.push(post_task_block)
+flanker_with_predictable_task_switching_experiment.push(end_block)

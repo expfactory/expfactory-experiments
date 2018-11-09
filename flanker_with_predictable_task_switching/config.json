@@ -1,6 +1,6 @@
 [
     {
-        "name": "Flanker with Predictive Task Switching",
+        "name": "Flanker with Predictable Task Switching",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
@@ -22,7 +22,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "flanker_with_predictive_task_switching",
+        "exp_id": "flanker_with_predictable_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
                          "Patrick Bissett",
