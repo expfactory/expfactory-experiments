@@ -110,7 +110,7 @@ var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 
 var accuracy_thresh = 0.80
-var missed_thresh = 0.10
+var missed_response_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 24 trials
 var choices = [70, 72]
 // task specific variables
@@ -416,7 +416,7 @@ var practiceNode = {
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
-			if (missed_responses > missed_thresh){
+			if (missed_responses > missed_response_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
@@ -494,7 +494,7 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
+			if (data[i].trial_id == 'test_trial') {
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
@@ -521,7 +521,7 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
 		}
-		if (missed_responses > missed_thresh){
+		if (missed_responses > missed_response_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
