@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_with_directed_forgetting'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_with_directed_forgetting'})
 }
 
 function evalAttentionChecks() {
@@ -28,15 +28,18 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	var correct = 0
 
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].trial_id == 'probe') {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')){
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -45,6 +48,10 @@ function assessPerformance() {
 				missed_count += 1
 			} else {
 				rt_array.push(rt)
+			}
+			
+			if (key == experiment_data[i].correct_response){
+				correct += 1
 			}
 		}
 	}
@@ -63,8 +70,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-	// && object_correct > object_recognition_threshold && object_ave_rt > 200
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -459,7 +466,7 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-		exp_id: 'predictive_task_switching_with_directed_forgetting'
+		exp_id: 'predictable_task_switching_with_directed_forgetting'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -923,14 +930,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-var predictive_task_switching_with_directed_forgetting_experiment = [];
+var predictable_task_switching_with_directed_forgetting_experiment = [];
 
-predictive_task_switching_with_directed_forgetting_experiment.push(practiceNode);
-predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictable_task_switching_with_directed_forgetting_experiment.push(practiceNode);
+predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictive_task_switching_with_directed_forgetting_experiment.push(start_test_block);
-predictive_task_switching_with_directed_forgetting_experiment.push(testNode);
-predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictable_task_switching_with_directed_forgetting_experiment.push(start_test_block);
+predictable_task_switching_with_directed_forgetting_experiment.push(testNode);
+predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictive_task_switching_with_directed_forgetting_experiment.push(post_task_block);
-predictive_task_switching_with_directed_forgetting_experiment.push(end_block);
+predictable_task_switching_with_directed_forgetting_experiment.push(post_task_block);
+predictable_task_switching_with_directed_forgetting_experiment.push(end_block);

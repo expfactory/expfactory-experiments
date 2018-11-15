@@ -1,37 +1,39 @@
 [
     {
-        "name": "Predictive Task Switching",
+        "name": "N Back with Predictable Task Switching",
         "template":"jspsych",
         "run": [
-                "static/js/math.min.js",
+				"static/js/math.min.js",
                 "static/js/jspsych/jspsych.js",
-                "static/js/jspsych/plugins/jspsych-text.js",
                 "static/js/jspsych/plugins/jspsych-call-function.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
-                "static/js/jspsych/plugins/jspsych-survey-text.js",
-                "static/js/utils/poldrack_utils.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js", 
                 "object_recognition_style.css",
                 "object_recognition.js",
                 "object_recognition_images",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
-                "style.css"
+                "style.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.3/math.js"
+                
+                
                ],
-        "exp_id": "predictive_task_switching_single_task_network",
-        "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
+        "exp_id": "n_back_with_predictable_task_switching",
+        "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Patrick Bissett",
                          "Jamie Li",
                          "McKenzie Hagen",
                          "Russell Poldrack"
                         ], 
-        "time":20,
-        "reference": "http://psycnet.apa.org/psycarticles/2013-29647-001",
+        "time":30,
+        "reference": "http://psycnet.apa.org/journals/xlm/37/2/392/",
+        "notes": "Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial",
         "publish":"True",
         "experiment_variables": [{
                                  "name":"credit_var",
@@ -42,8 +44,8 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('predictive_task_switching_single_task_network')"}
-                       }
+                                        "on_trial_finish": "addID('n_back_with_predictive_task_switching')"}
+                       			} 
     
    }
 ]

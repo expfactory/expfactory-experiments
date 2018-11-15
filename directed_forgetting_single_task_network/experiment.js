@@ -25,10 +25,13 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	var correct = 0
 	
 	//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var k = 0; k < choices.length; k++) {
 		choice_counts[choices[k]] = 0
 	}
@@ -42,6 +45,10 @@ function assessPerformance() {
 				missed_count += 1
 			} else {
 				rt_array.push(rt)
+			}
+			
+			if (key == experiment_data[i].correct_response){
+				correct += 1
 			}
 		}
 
@@ -61,8 +68,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok)
-	// && object_correct > object_recognition_threshold && object_ave_rt > 200
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 

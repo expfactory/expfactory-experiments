@@ -34,45 +34,34 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0
+
 	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
+	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
-			trial_count += 1
-			rt = experiment_data[i].rt
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
 			}
 		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -87,7 +76,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -179,7 +169,7 @@ var createControlTypes = function(numTrialsPerBlock){
 		
 		if(go_nogo_condition == 'go'){
 			probe_color = go_no_go_styles[0]
-		} else if(go_nogo_condition == 'stop'){
+		} else if(go_nogo_condition == 'nogo''){
 			probe_color = go_no_go_styles[1]
 			correct_response = -1
 		}
@@ -211,7 +201,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		} else {
 			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
 		}
-		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','stop'],1).pop()
+		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo''],1).pop()
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
 		letter_case = randomDraw(['uppercase','lowercase'])
@@ -417,7 +407,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','stop'],1)
+var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','nogo''],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 							 
@@ -890,13 +880,9 @@ var go_nogo_with_n_back_experiment = []
 go_nogo_with_n_back_experiment.push(practiceNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
 
-go_nogo_with_n_back_experiment.push(visualCheckNode);
-
 go_nogo_with_n_back_experiment.push(start_test_block);
 go_nogo_with_n_back_experiment.push(testNode);
 go_nogo_with_n_back_experiment.push(feedback_block);
-
-go_nogo_with_n_back_experiment.push(visualCheckNode);
 
 go_nogo_with_n_back_experiment.push(post_task_block);
 go_nogo_with_n_back_experiment.push(end_block);

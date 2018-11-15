@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_with_predictive_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_with_predictable_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -28,44 +28,33 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
-			trial_count += 1
-			rt = experiment_data[i].rt
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
 			}
 		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
+
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -80,7 +69,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -145,7 +135,7 @@ var getCorrectResponse = function(number, predictive_dimension, go_nogo_conditio
 		correct_response = possible_responses[par_ind][1]
 	}
 	
-	if (go_nogo_condition == "stop"){
+	if (go_nogo_condition == "nogo"){
 		correct_response = -1
 	}
 	
@@ -166,10 +156,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	numbers = [1,2,3,4,6,7,8,9]	
 	
 	var go_nogo_trial_type_list = []
-	var go_nogo_trial_types1 = jsPsych.randomization.repeat(['go','go','go','go','stop'], numTrialsPerBlock/20)
-	var go_nogo_trial_types2 = jsPsych.randomization.repeat(['go','go','go','go','stop'], numTrialsPerBlock/20)
-	var go_nogo_trial_types3 = jsPsych.randomization.repeat(['go','go','go','go','stop'], numTrialsPerBlock/20)
-	var go_nogo_trial_types4 = jsPsych.randomization.repeat(['go','go','go','go','stop'], numTrialsPerBlock/20)
+	var go_nogo_trial_types1 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types2 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types3 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types4 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
 	go_nogo_trial_type_list.push(go_nogo_trial_types1)
 	go_nogo_trial_type_list.push(go_nogo_trial_types2)
 	go_nogo_trial_type_list.push(go_nogo_trial_types3)
@@ -178,7 +168,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
 	
 	number = numbers[Math.floor((Math.random() * 8))]
-	go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','stop'],1).pop()
+	go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1).pop()
 	
 	
 	response_arr = getCorrectResponse(number,predictive_dimension, go_nogo_condition)
@@ -256,7 +246,7 @@ var getStim = function(){
 		number_style = go_no_go_styles[0]
 		console.log('1')
 		
-	} else if (go_nogo_condition == "stop"){
+	} else if (go_nogo_condition == "nogo"){
 		number_style = go_no_go_styles[1]
 		console.log('2')
 	}	
@@ -356,7 +346,7 @@ var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/go_nogo_with_predictive_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/go_nogo_with_predictable_task_switching/images/"
 
 var current_trial = 0
 
@@ -591,7 +581,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		key_answer: getResponse,
 		data: {
-			exp_id: "go_nogo_with_predictive_task_switching",
+			exp_id: "go_nogo_with_predictable_task_switching",
 			trial_id: "practice_trial"
 			},
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
@@ -699,7 +689,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getStim,
 		is_html: true,
 		data: {
-			exp_id: "go_nogo_with_predictive_task_switching",
+			exp_id: "go_nogo_with_predictable_task_switching",
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
@@ -775,18 +765,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-go_nogo_with_predictive_task_switching_experiment = []
+go_nogo_with_predictable_task_switching_experiment = []
 
-go_nogo_with_predictive_task_switching_experiment.push(practiceNode)
-go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
+go_nogo_with_predictable_task_switching_experiment.push(practiceNode)
+go_nogo_with_predictable_task_switching_experiment.push(feedback_block)
 
-go_nogo_with_predictive_task_switching_experiment.push(visualCheckNode)
+go_nogo_with_predictable_task_switching_experiment.push(start_test_block)
+go_nogo_with_predictable_task_switching_experiment.push(testNode)
+go_nogo_with_predictable_task_switching_experiment.push(feedback_block)
 
-go_nogo_with_predictive_task_switching_experiment.push(start_test_block)
-go_nogo_with_predictive_task_switching_experiment.push(testNode)
-go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
-
-go_nogo_with_predictive_task_switching_experiment.push(visualCheckNode)
-
-go_nogo_with_predictive_task_switching_experiment.push(post_task_block)
-go_nogo_with_predictive_task_switching_experiment.push(end_block)
+go_nogo_with_predictable_task_switching_experiment.push(post_task_block)
+go_nogo_with_predictable_task_switching_experiment.push(end_block)

@@ -28,44 +28,33 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
+	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
-			trial_count += 1
-			rt = experiment_data[i].rt
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
 			}
 		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -80,7 +69,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -149,7 +139,7 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 	
 	if (go_nogo_condition == 'go'){
 		probe_color = go_no_go_styles[0]
-	} else if (go_nogo_condition == 'stop'){
+	} else if (go_nogo_condition == 'nogo'){
 		probe_color = go_no_go_styles[1]	
 	
 	}
@@ -157,7 +147,7 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 }
 	 
 var createTrialTypes = function(numTrialsPerBlock){
-	go_nogo_trial_types = ['go','go','go','go','stop']
+	go_nogo_trial_types = ['go','go','go','go','nogo']
 	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 	
 	var stims = []
@@ -215,7 +205,7 @@ var getStim = function(){
 				   task_boards[2]+ preFileType + probe + '_white'+ '_' + probe_color + fileTypePNG + 
 				   task_boards[3]		   
 		}
-	} else if (go_nogo_condition == "stop"){
+	} else if (go_nogo_condition == "nogo"){
 		if ((shape_matching_condition == "SNN") || (shape_matching_condition == "DNN")){
 			return task_boards[0]+ preFileType + target + '_green' + fileTypePNG + 
 				   task_boards[1]+
@@ -740,13 +730,9 @@ go_nogo_with_shape_matching_experiment = []
 go_nogo_with_shape_matching_experiment.push(practiceNode)
 go_nogo_with_shape_matching_experiment.push(feedback_block)
 
-go_nogo_with_shape_matching_experiment.push(visualCheckNode)
-
 go_nogo_with_shape_matching_experiment.push(start_test_block)
 go_nogo_with_shape_matching_experiment.push(testNode)
 go_nogo_with_shape_matching_experiment.push(feedback_block)
-
-go_nogo_with_shape_matching_experiment.push(visualCheckNode)
 
 go_nogo_with_shape_matching_experiment.push(post_task_block)
 go_nogo_with_shape_matching_experiment.push(end_block)

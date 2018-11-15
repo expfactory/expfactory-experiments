@@ -33,43 +33,33 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0 
 	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
+	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
-			trial_count += 1
-			rt = experiment_data[i].rt
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
-			if (rt == -1) {
-				missed_count += 1
-			} else {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')) {
+			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
-			}
-		}
-		
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
 			}
 		}
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -84,7 +74,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -125,7 +116,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text
 		}
 	
-	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_type == 'stop'){
+	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_type == 'nogo'){
 	
 		return '<div class = fb_box><div class = center-text><font size = 20>Shape was '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
 	}
@@ -180,14 +171,14 @@ var getStim = function(){
 		go_no_go_type = stim.go_no_go_type
 		correct_response = stim.correct_response
 		
-		if (go_no_go_type == 'stop'){
+		if (go_no_go_type == 'nogo'){
 			stim_style = go_no_go_styles[1]
 		} else if (go_no_go_type == 'go'){
 			stim_style = go_no_go_styles[0]
 		}
 		
 		
-		if((stop_signal_condition == "stop")||(go_no_go_type == "stop")){
+		if((stop_signal_condition == "stop")||(go_no_go_type == "nogo")){
 			correct_response = -1
 		} 
 	}
@@ -293,7 +284,7 @@ var stop_signal_respond_upper_thresh = 0.70
 
 
 var stop_signal_conditions = ['go','go','stop']
-var go_no_go_types = ['go','go','go','go','stop']
+var go_no_go_types = ['go','go','go','go','nogo']
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 var shapes = ['circle','square','triangle','pentagon']
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
@@ -662,33 +653,32 @@ var practiceStopNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "practice_trial"){
 				total_trials += 1
-			}
-			
-			if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
-				go_length += 1
-				if (data[i].rt != -1) {
-					num_go_responses += 1
-					sum_go_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response) {
-						sumGo_correct += 1
-					}
-				}				
-			} else if (data[i].stop_signal_condition == "stop") {
-				stop_length += 1
-				if (data[i].rt != -1){
-					num_stop_responses += 1
-					sum_stop_rt += data[i].rt
-				} else if (data[i].rt == -1){
-					sumStop_correct += 1
-				}				
-			} else if (data[i].go_no_go_condition == "stop") {
-				go_no_go_length += 1
-				if (data[i].rt != -1){
-					num_gng_responses += 1
-					sum_gng_rt += data[i].rt
-				} else if (data[i].rt == -1){
-					sumGNG_correct += 1
-				}				
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
+					go_length += 1
+					if (data[i].rt != -1) {
+						num_go_responses += 1
+						sum_go_rt += data[i].rt;
+						if (data[i].key_press == data[i].correct_response) {
+							sumGo_correct += 1
+						}
+					}				
+				} else if (data[i].stop_signal_condition == "stop") {
+					stop_length += 1
+					if (data[i].rt != -1){
+						num_stop_responses += 1
+						sum_stop_rt += data[i].rt
+					} else if (data[i].rt == -1){
+						sumStop_correct += 1
+					}				
+				} else if (data[i].go_no_go_condition == "nogo") {
+					go_no_go_length += 1
+					if (data[i].rt != -1){
+						num_gng_responses += 1
+						sum_gng_rt += data[i].rt
+					} else if (data[i].rt == -1){
+						sumGNG_correct += 1
+					}				
+				}
 			}
 		}
 		
@@ -817,35 +807,34 @@ var testNode = {
 		var go_no_go_length = 0
 		
 		for (i = 0; i < data.length; i++) {
-			if (data[i].trial_id == "practice_trial"){
+			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-			}
-			
-			if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
-				go_length += 1
-				if (data[i].rt != -1) {
-					num_go_responses += 1
-					sum_go_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response) {
-						sumGo_correct += 1
-					}
-				}				
-			} else if (data[i].stop_signal_condition == "stop") {
-				stop_length += 1
-				if (data[i].rt != -1){
-					num_stop_responses += 1
-					sum_stop_rt += data[i].rt
-				} else if (data[i].rt == -1){
-					sumStop_correct += 1
-				}				
-			} else if (data[i].go_no_go_condition == "stop") {
-				go_no_go_length += 1
-				if (data[i].rt != -1){
-					num_gng_responses += 1
-					sum_gng_rt += data[i].rt
-				} else if (data[i].rt == -1){
-					sumGNG_correct += 1
-				}				
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
+					go_length += 1
+					if (data[i].rt != -1) {
+						num_go_responses += 1
+						sum_go_rt += data[i].rt;
+						if (data[i].key_press == data[i].correct_response) {
+							sumGo_correct += 1
+						}
+					}				
+				} else if (data[i].stop_signal_condition == "stop") {
+					stop_length += 1
+					if (data[i].rt != -1){
+						num_stop_responses += 1
+						sum_stop_rt += data[i].rt
+					} else if (data[i].rt == -1){
+						sumStop_correct += 1
+					}				
+				} else if (data[i].go_no_go_condition == "nogo") {
+					go_no_go_length += 1
+					if (data[i].rt != -1){
+						num_gng_responses += 1
+						sum_gng_rt += data[i].rt
+					} else if (data[i].rt == -1){
+						sumGNG_correct += 1
+					}				
+				}
 			}
 		}
 		
@@ -915,13 +904,9 @@ var stop_signal_with_go_no_go_experiment = []
 stop_signal_with_go_no_go_experiment.push(practiceStopNode)
 stop_signal_with_go_no_go_experiment.push(feedback_block);
 
-stop_signal_with_go_no_go_experiment.push(visualCheckNode)
-
 stop_signal_with_go_no_go_experiment.push(test_intro);
 stop_signal_with_go_no_go_experiment.push(testNode);
 stop_signal_with_go_no_go_experiment.push(feedback_block);
-
-stop_signal_with_go_no_go_experiment.push(visualCheckNode)
 
 stop_signal_with_go_no_go_experiment.push(post_task_block);
 stop_signal_with_go_no_go_experiment.push(end_block);

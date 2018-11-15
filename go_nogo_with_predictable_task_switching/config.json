@@ -1,6 +1,6 @@
 [
     {
-        "name": "Go No-Go with Predictive Task Switching",
+        "name": "Go No-Go with Predictable Task Switching",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
@@ -14,15 +14,12 @@
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/utils/poldrack_utils.js",
-                "object_recognition_style.css",
-                "object_recognition.js",
-                "object_recognition_images",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "go_nogo_with_predictive_task_switching",
+        "exp_id": "go_nogo_with_predictable_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
                          "Patrick Bissett",

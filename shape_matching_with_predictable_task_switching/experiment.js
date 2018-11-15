@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_with_predictive_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_with_predictable_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -27,20 +27,18 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+	var correct = 0
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[77] = 0
+	choice_counts[90] = 0
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if ((experiment_data[i].trial_id == 'test_trial') || (experiment_data[i].trial_id == 'practice_trial')){
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -50,21 +48,13 @@ function assessPerformance() {
 			} else {
 				rt_array.push(rt)
 			}
-		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
+			
+			if (key == experiment_data[i].correct_response){
+				correct += 1
 			}
-		}
-		//
+		}	
 	}
-	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
+
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -79,7 +69,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -311,8 +302,8 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/shape_matching_with_predictive_task_switching/images/"
-var path = '/static/experiments/shape_matching_with_predictive_task_switching/images/'
+var preFileType = "<img class = center src='/static/experiments/shape_matching_with_predictable_task_switching/images/"
+var path = '/static/experiments/shape_matching_with_predictable_task_switching/images/'
 var colors = ['white','red','green']
 
 var exp_stage = 'practice'
@@ -490,7 +481,7 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-    	exp_id: 'shape_matching_with_predictive_task_switching'
+    	exp_id: 'shape_matching_with_predictable_task_switching'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -555,7 +546,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getMask,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictive_task_switching",
+			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "mask",
 		},
 		choices: 'none',
@@ -668,7 +659,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getMask,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictive_task_switching",
+			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "test_mask",
 		},
 		choices: 'none',
@@ -682,7 +673,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getStim,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictive_task_switching",
+			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
@@ -758,18 +749,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-shape_matching_with_predictive_task_switching_experiment = []
+shape_matching_with_predictable_task_switching_experiment = []
 
-shape_matching_with_predictive_task_switching_experiment.push(practiceNode)
-shape_matching_with_predictive_task_switching_experiment.push(feedback_block)
+shape_matching_with_predictable_task_switching_experiment.push(practiceNode)
+shape_matching_with_predictable_task_switching_experiment.push(feedback_block)
 
-shape_matching_with_predictive_task_switching_experiment.push(visualCheckNode)
+shape_matching_with_predictable_task_switching_experiment.push(start_test_block)
+shape_matching_with_predictable_task_switching_experiment.push(testNode)
+shape_matching_with_predictable_task_switching_experiment.push(feedback_block)
 
-shape_matching_with_predictive_task_switching_experiment.push(start_test_block)
-shape_matching_with_predictive_task_switching_experiment.push(testNode)
-shape_matching_with_predictive_task_switching_experiment.push(feedback_block)
-
-shape_matching_with_predictive_task_switching_experiment.push(visualCheckNode)
-
-shape_matching_with_predictive_task_switching_experiment.push(post_task_block)
-shape_matching_with_predictive_task_switching_experiment.push(end_block)
+shape_matching_with_predictable_task_switching_experiment.push(post_task_block)
+shape_matching_with_predictable_task_switching_experiment.push(end_block)
