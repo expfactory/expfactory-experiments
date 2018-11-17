@@ -45,7 +45,7 @@ function assessPerformance() {
 				}
 			} else if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].go_no_go_condition == 'stop')&& (experiment_data[i].rt == -1)){
+			} else if ((experiment_data[i].go_no_go_condition == 'nogo')&& (experiment_data[i].rt == -1)){
 				correct += 1
 			}
 		}
@@ -159,7 +159,7 @@ var setStims = function() {
         cue_i = 1 - cue_i
       }
       break
-    case "switch_new":
+    case "switch":
       cue_i = randomDraw([0, 1])
       if (last_task == "na") {
         tmp = curr_task
@@ -206,7 +206,7 @@ var getCue = function() {
 
 var getStim = function() {
     
-  if (go_no_go_condition == "stop"){
+  if (go_no_go_condition == "nogo"){
   	stim_style = go_no_go_styles[1]
   } else if (go_no_go_condition == "go"){
     stim_style = go_no_go_styles[0]
@@ -226,13 +226,13 @@ var getResponse = function() {
     case 'color':
       if (curr_stim.color == 'orange') {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -241,13 +241,13 @@ var getResponse = function() {
     case 'magnitude':
       if (curr_stim.number > 5) {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -256,13 +256,13 @@ var getResponse = function() {
     case 'parity':
       if (curr_stim.number % 2 === 0) {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "stop"){
+      	if(go_no_go_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -291,9 +291,9 @@ var appendData = function() {
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
   	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'stop')){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
 			jsPsych.data.addDataToLastTrial({gng_stop_acc: 1})
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'stop')){
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
 			jsPsych.data.addDataToLastTrial({gng_stop_acc: 0})
 		}
   }
@@ -313,7 +313,7 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_two_by_two/images/'
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 //3
+var practice_thresh = 3
 var lowestNumCond = 20
 
 // task specific variables
@@ -321,8 +321,8 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 20
 var test_length = 400
-var numTrialsPerBlock = 20 //80
-var numTestBlocks = 2 //test_length / numTrialsPerBlock
+var numTrialsPerBlock = 80
+var numTestBlocks = test_length / numTrialsPerBlock
 var CTI = 300
 
 var go_no_go_styles = ['solid','unfilled']
@@ -345,15 +345,15 @@ color: {
   },
 */
 
-var task_switch_types = ["stay", "switch_new"]
+var task_switch_types = ["stay", "switch"]
 var cue_switch_types = ["stay", "switch"]
-var go_no_go_types = ["go","go","go","go","stop"]
-var task_switches = []
+var go_no_go_types = ["go","go","go","go","nogo"]
+var task_switches_arr = []
 for (var t = 0; t < task_switch_types.length; t++) {
   for (var c = 0; c < cue_switch_types.length; c++) {
   	for (var s = 0; s < go_no_go_types.length; s++){
   	
-		task_switches.push({
+		task_switches_arr.push({
 		  task_switch: task_switch_types[t],
 		  cue_switch: cue_switch_types[c],
 		  go_no_go_type: go_no_go_types[s]
@@ -361,9 +361,9 @@ for (var t = 0; t < task_switch_types.length; t++) {
 	}
   }
 }
-var task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
 var practiceStims = genStims(practice_length)
-var testStims = genStims(test_length)
+var testStims = genStims(numTrialsPerBlock)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -523,7 +523,7 @@ var start_test_block = {
   on_finish: function() {
     current_trial = 0
     stims = testStims
-    task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
+    task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
     feedback_text = 'Starting a test block.  Press enter to continue.'
   },
   timing_post_trial: 1000
@@ -663,7 +663,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, practice_length / lowestNumCond)
+		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
 		practiceStims = genStims(practice_length)
 		current_trial = 0
 	
@@ -698,8 +698,8 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			testStims = genStims(test_length)
-			task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+			testStims = genStims(numTrialsPerBlock)
+			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -713,8 +713,8 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					testStims = genStims(test_length)
-					task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock /lowestNumCond)
+					testStims = genStims(numTrialsPerBlock)
+					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
 					return false
 			}
 			
@@ -779,8 +779,8 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 		testCount += 1
-		task_switches = jsPsych.randomization.repeat(task_switches, numTrialsPerBlock / lowestNumCond)
-		testStims = genStims(test_length)
+		task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
+		testStims = genStims(numTrialsPerBlock)
 		current_trial = 0
 	
 		var total_trials = 0
@@ -812,7 +812,7 @@ var testNode = {
 					}
 				}
 		
-			} else if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'stop')){
+			} else if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'nogo')){
 				total_trials+=1
 				stop_trials+=1
 				if (data[i].rt != -1){

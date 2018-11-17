@@ -44,6 +44,8 @@ function assessPerformance() {
 				}
 			} else if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
+			} else if ((experiment_data[i].condition == 'nogo')&& (experiment_data[i].rt == -1)){
+				correct += 1
 			}
 		}
 	}
@@ -182,7 +184,7 @@ var accuracy_thresh = 0.80
 var missed_thresh = 0.10
 var practice_length = 8 //14
 var test_length = 250
-var numTrialsPerBlock = 10//50
+var numTrialsPerBlock = 50
 var numTestBlocks = 2 //test_length / numTrialsPerBlock
 
 var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
