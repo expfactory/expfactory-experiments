@@ -189,7 +189,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		}
 	}
 	
-	stims = jsPsych.randomization.repeat(stims,1)
+	//stims = jsPsych.randomization.repeat(stims,1)
 	stims.push(second_stim)
 	stims.push(first_stim)
 	
@@ -309,15 +309,16 @@ var appendData = function(){
 		
 	jsPsych.data.addDataToLastTrial({
 		n_back_condition: n_back_condition,
-		cued_switch_condition: cued_switch_condition,
+		cue_condition: cued_switch_condition,
 		curr_task: curr_task,
 		curr_cue: curr_cue,
-		cued_condition: cued_condition,
+		task_condition: cued_condition,
 		probe: probe,
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
-		current_block: current_block
+		current_block: current_block,
+		CTI: CTI
 	})
 		
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -350,13 +351,13 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 20
-var exp_len = 240 //320 must be divisible by 20
+var exp_len = 240 //240 must be divisible by 20
 var numTrialsPerBlock = 80 // must be divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 20 trials
 
 var CTI = 300
 

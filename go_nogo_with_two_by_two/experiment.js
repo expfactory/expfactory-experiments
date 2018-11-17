@@ -282,10 +282,11 @@ var appendData = function() {
     stim_color: curr_stim.color,
     stim_number: curr_stim.number,
     task: curr_task,
-    task_switch: task_switch.task_switch,
-    cue_switch: task_switch.cue_switch,
+    task_condition: task_switch.task_switch,
+    cue_condition: task_switch.cue_switch,
     go_no_go_condition: go_no_go_condition,
-    trial_num: trial_num
+    trial_num: trial_num,
+    CTI: CTI
   })
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){

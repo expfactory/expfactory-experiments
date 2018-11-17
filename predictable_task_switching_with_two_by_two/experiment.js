@@ -407,7 +407,9 @@ var appendData = function(){
 		right_parity: right_parity,
 		correct_response: correct_response,
 		current_trial: current_trial,
-		current_block: current_block	
+		current_block: current_block,
+		CTI: CTI
+		
 	})
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -441,7 +443,7 @@ var CTI = 300
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3  // 3 blocks of 24 trials
+var practice_thresh = 3  // 3 blocks of 16 trials
 
 var pathSource = "/static/experiments/predictable_task_switching_with_two_by_two/images/"
 var fileTypePNG = ".png'></img>"

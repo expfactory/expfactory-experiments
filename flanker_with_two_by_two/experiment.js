@@ -238,11 +238,12 @@ var appendData = function() {
     stim_color: curr_stim.color,
     stim_number: curr_stim.number,
     task: curr_task,
-    task_switch: task_switch.task_switch,
-    cue_switch: task_switch.cue_switch,
+    task_condition: task_switch.task_switch,
+    cue_condition: task_switch.cue_switch,
     flanker_condition: flanker_condition,
     flanking_number: flanking_number,
-    trial_num: trial_num
+    trial_num: trial_num,
+    CTI: CTI
   })
 }
 

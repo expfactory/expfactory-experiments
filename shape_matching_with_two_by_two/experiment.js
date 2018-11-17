@@ -283,14 +283,15 @@ var appendData = function() {
   jsPsych.data.addDataToLastTrial({
     cue: curr_cue,
     task: curr_task,
-    task_switch: task_switch.task_switch,
-    cue_switch: task_switch.cue_switch,
+    task_condition: task_switch.task_switch,
+    cue_condition: task_switch.cue_switch,
     shape_matching_condition: shape_matching_condition,
     trial_num: trial_num,
     probe: probe,
 	target: target,
 	distractor: distractor,
 	correct_response: correct_response,
+	CTI: CTI
   })
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){

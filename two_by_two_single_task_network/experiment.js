@@ -224,10 +224,11 @@ var appendData = function() {
     cue: curr_cue,
     stim_number: curr_stim.number,
     task: curr_task,
-    task_switch: task_switch.task_switch,
-    cue_switch: task_switch.cue_switch,
+    task_condition: task_switch.task_switch,
+    cue_condition: task_switch.cue_switch,
     trial_num: trial_num,
     correct_response: correct_response,
+    CTI: CTI
   })
   
   if ((trial_id == 'practice_stim') || (trial_id == 'test_stim')){
