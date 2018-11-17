@@ -3,7 +3,6 @@
 /* ************************************ */
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -16,7 +15,7 @@ function assessPerformance() {
 	choice_counts[90] = 0
 	
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
+		if (experiment_data[i].trial_id == 'test_trial') {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press

@@ -21,7 +21,6 @@ function assessPerformance() {
 	credit individual experiments in expfactory. 
 	 */
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -34,7 +33,7 @@ function assessPerformance() {
 	choice_counts[90] = 0
 
 	for (var i = 0; i < experiment_data.length; i++) {
-		if ((experiment_data[i].trial_id == 'test_stim') || (experiment_data[i].trial_id == 'practice_stim')) {
+		if (experiment_data[i].trial_id == 'test_trial') {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -231,7 +230,7 @@ var appendData = function() {
     CTI: CTI
   })
   
-  if ((trial_id == 'practice_stim') || (trial_id == 'test_stim')){
+  if ((trial_id == 'practice_stim') || (trial_id == 'test_trial')){
   	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
   		correct = true
   		jsPsych.data.addDataToLastTrial({
@@ -689,7 +688,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	  is_html: true,
 	  choices: choices,
 	  data: {
-		trial_id: 'test_stim',
+		trial_id: 'test_trial',
 		exp_stage: 'test'
 	  },
 	  timing_post_trial: 0,
@@ -734,7 +733,7 @@ var testNode = {
 		var total_trials = 0
 
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "test_stim"){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt

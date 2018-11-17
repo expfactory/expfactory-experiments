@@ -20,7 +20,7 @@ function evalAttentionChecks() {
 function assessPerformance() {
 	/* Function to calculate the "credit_var", which is a boolean used to
 	credit individual experiments in expfactory. */
-	var data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -35,11 +35,11 @@ function assessPerformance() {
 	for (var k = 0; k < choices.length; k++) {
 		choice_counts[choices[k]] = 0
 	}
-	for (var i = 0; i < data.length; i++) {
-		if (data[i].trial_id == 'probe') {
+	for (var i = 0; i < experiment_data.length; i++) {
+		if (data[i].trial_id == 'test_trial') {
 			trial_count += 1
-			rt = data[i].rt
-			key = data[i].key_press
+			rt = experiment_data[i].rt
+			key = experiment_data[i].key_press
 			choice_counts[key] += 1
 			if (rt == -1) {
 				missed_count += 1
@@ -51,7 +51,6 @@ function assessPerformance() {
 				correct += 1
 			}
 		}
-
 	}
 	
 	
@@ -90,7 +89,7 @@ var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	console.log(trial_id)
-	if (trial_id == 'probe'){
+	if (trial_id == 'practice_trial'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
@@ -580,7 +579,7 @@ var probe_block = {
 	stimulus: getProbe,
 	is_html: true,
 	data: {
-		trial_id: "probe",
+		trial_id: "test_trial",
 		exp_stage: "test"
 	},
 	choices: choices,
@@ -608,17 +607,14 @@ var intro_test_block = {
 
 
 var practice_probe_block = {
-	type: 'poldrack-categorize',
+	type: 'poldrack-single-stim',
 	stimulus: getPracticeProbe,
-	key_answer: getResponse,
 	choices: choices,
-	data: {trial_id: "probe", exp_stage: "practice"},
-	correct_text: '', //'<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
-	incorrect_text:  '', //'<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
-	timeout_message: '', //'<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-	timing_stim: [2000],
-	timing_response: [2000],
-	timing_feedback_duration: 0,
+	data: {trial_id: "practice_trial", 
+		   exp_stage: "practice"
+		   },
+	timing_stim: 2000,
+	timing_response: 2000,
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -705,7 +701,7 @@ for (i = 0; i < (practice_length-1); i++) {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
-		choices: choices,
+		choices: 'none',
 		data: {
 			trial_id: "practice_ITI_fixation"
 		},
@@ -746,7 +742,7 @@ for (i = 0; i < (practice_length-1); i++) {
 		data: {
 			trial_id: "practice_cue",
 		},
-		choices: false,
+		choices: 'none',
 		prompt: prompt_text,
 		timing_post_trial: 0,
 		timing_stim: 1000,
@@ -793,7 +789,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "probe"){
+			if (data[i].trial_id == 'practice_trial'){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
@@ -872,7 +868,7 @@ var testNode = {
 		var pos_respond_remember = 0
 	
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].trial_id == 'probe') {
+			if (data[i].trial_id == 'test_trial') {
 				if(data[i].probe_type == 'neg'){
 					respond_remember_total += 1
 					if(data[i].key_press == choices[0]){
@@ -906,7 +902,7 @@ var testNode = {
 			var total_trials = 0
 	
 			for (var i = 0; i < data.length; i++){
-				if (data[i].trial_id == "probe"){
+				if (data[i].trial_id == "test_trial"){
 					total_trials+=1
 					if (data[i].rt != -1){
 						sum_rt += data[i].rt

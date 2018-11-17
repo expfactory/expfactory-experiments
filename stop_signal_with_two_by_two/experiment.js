@@ -26,7 +26,6 @@ function assessPerformance() {
 	credit individual experiments in expfactory. 
 	 */
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -40,14 +39,25 @@ function assessPerformance() {
 	choice_counts[90] = 0
   
 	for (var i = 0; i < experiment_data.length; i++) {
-		if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
-			rt = experiment_data[i].rt
-			rt_array.push(rt)
-			if (experiment_data[i].key_press == experiment_data[i].correct_response){
-				correct += 1
+		if (experiment_data[i].trial_id == 'test_trial') {
+			if (experiment_data[i].stop_signal_condition == 'go'){
+				trial_count += 1
 			}
-		} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt == -1)){
-			missed_count += 1
+			
+			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
+				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].stop_signal_condition == 'stop') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
+				rt_array.push(rt)
+			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt == -1)){
+				missed_count += 1
+			}
 		}
 	}
 	
@@ -163,7 +173,7 @@ var setStims = function() {
         cue_i = 1 - cue_i
       }
       break
-    case "switch_new":
+    case "switch":
       cue_i = randomDraw([0, 1])
       if (last_task == "na") {
         tmp = curr_task
@@ -359,7 +369,7 @@ color: {
   },
 */
 
-var task_switch_types = ["stay", "switch_new"]
+var task_switch_types = ["stay", "switch"]
 var cue_switch_types = ["stay", "switch"]
 var stop_types = ["go","go","stop"]
 var task_switches = []

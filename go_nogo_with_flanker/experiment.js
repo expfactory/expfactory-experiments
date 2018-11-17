@@ -23,49 +23,43 @@ function evalAttentionChecks() {
 
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
-	experiment_data = experiment_data.concat(jsPsych.data.getTrialsOfType('poldrack-categorize'))
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
-	//
-	var object_recognition_correct = 0
-	var object_recognition_count = 0
-	var object_recognition_rt = 0
-	var object_recognition_threshold = 0.75  // must achieve accuracy higher than 75% to get credit 
-	//
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
+	choice_counts[70] = 0
+	choice_counts[72] = 0
+	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (experiment_data[i].possible_responses != 'none') {
-			trial_count += 1
-			rt = experiment_data[i].rt
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
-			if (rt == -1) {
+		if (experiment_data[i].trial_id == 'test_trial') {
+			if (experiment_data[i].go_no_go_condition == 'go'){
+				trial_count += 1
+			}
+			
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
+				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
+				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					correct += 1
+				}
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else {
+			} else if ((experiment_data[i].go_nogo_condition == 'nogo') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
 				rt_array.push(rt)
 			}
 		}
-		
-		//
-		if (experiment_data[i].trial_id == "object_recognition_network"){
-			object_recognition_count += 1
-			if (experiment_data[i].pass_check == true){
-				object_recognition_correct += 1
-				object_recognition_rt += experiment_data[i].rt
-			}
-		}
-		//
 	}
 	
-	var object_correct = object_recognition_correct / object_recognition_count
-	var object_ave_rt = object_recognition_rt / object_recognition_count
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -80,7 +74,8 @@ function assessPerformance() {
 		}
 	})
 	var missed_percent = missed_count/trial_count
-	credit_var = (missed_percent < 0.4 && avg_rt > 200 && responses_ok && object_correct > object_recognition_threshold && object_ave_rt > 200)
+	var accuracy = correct / trial_count
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -131,7 +126,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 				flanker_condition = flanker_trial_types[numFlankerConds]
 				go_nogo_condition = go_nogo_trial_types[numgo_nogoConds]
 				
-				if (go_nogo_condition == 'stop'){
+				if (go_nogo_condition == 'nogo'){
 					go_no_go_style = go_no_go_styles[1]
 				} else {
 					go_no_go_style = go_no_go_styles[0]
@@ -244,16 +239,16 @@ var credit_var = 0
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 20 // must be divisible by 20, [5 (go,go,go,go,stop) by 4 (flanker conditions)]
-var exp_len = 240 //350 must be divisible by 10
-var numTrialsPerBlock = 48; // 70 divisible by 10
+var exp_len = 240 //240 must be divisible by 20
+var numTrialsPerBlock = 60; // 60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 28 trials
+var practice_thresh = 3 // 3 blocks of 20 trials
  
 var possible_responses = [['F key', 70],['H key', 72]]
-var go_nogo_trial_types = ['go','go','go','go','stop']
+var go_nogo_trial_types = ['go','go','go','go','nogo']
 var flanker_trial_types = ['H_congruent','H_incongruent','F_congruent','F_incongruent']
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 
@@ -665,13 +660,9 @@ go_nogo_with_flanker_experiment = []
 go_nogo_with_flanker_experiment.push(practiceNode)
 go_nogo_with_flanker_experiment.push(feedback_block)
 
-go_nogo_with_flanker_experiment.push(visualCheckNode)
-
 go_nogo_with_flanker_experiment.push(start_test_block)
 go_nogo_with_flanker_experiment.push(testNode)
 go_nogo_with_flanker_experiment.push(feedback_block)
-
-go_nogo_with_flanker_experiment.push(visualCheckNode)
 
 go_nogo_with_flanker_experiment.push(post_task_block)
 go_nogo_with_flanker_experiment.push(end_block)

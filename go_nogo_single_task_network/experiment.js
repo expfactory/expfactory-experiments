@@ -31,21 +31,25 @@ function assessPerformance() {
 	choice_counts[32] = 0
 	
 	for (var i = 0; i < experiment_data.length; i++) {
-		if ((experiment_data[i].trial_id == 'test_block') || (experiment_data[i].trial_id == 'practice')) {
-			trial_count += 1
-			key = experiment_data[i].key_press
-			choice_counts[key] += 1
+		if (experiment_data[i].trial_id == 'test_trial') {
+			
+			if (experiment_data[i].condition == 'go'){
+				trial_count += 1
+			}
 			
 			if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
+				key = experiment_data[i].key_press
+				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
 			} else if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].condition == 'nogo')&& (experiment_data[i].rt == -1)){
-				correct += 1
+			} else if ((experiment_data[i].condition == 'nogo') && (experiment_data[i].rt != -1)){
+				rt = experiment_data[i].rt
+				rt_array.push(rt)
 			}
 		}
 	}
@@ -63,7 +67,7 @@ function assessPerformance() {
 	})
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
-	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
+	credit_var = (missed_percent < 0.25 && avg_rt > 200 && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -164,7 +168,7 @@ var test_stimuli_block = [{
   data: {
     correct_response: correct_responses[1][1],
     condition: correct_responses[1][0],
-    trial_id: 'test_block'
+    trial_id: 'test_trial'
   }
 }];
 
@@ -174,7 +178,7 @@ for (var i = 0; i < num_go_stim; i++) {
     data: {
       correct_response: correct_responses[0][1],
       condition: correct_responses[0][0],
-      trial_id: 'test_block'
+      trial_id: 'test_trial'
     }
   })
 }
@@ -501,7 +505,7 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_block") && (data[i].condition == "go")){
+			if ((data[i].trial_id == "test_trial") && (data[i].condition == "go")){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
