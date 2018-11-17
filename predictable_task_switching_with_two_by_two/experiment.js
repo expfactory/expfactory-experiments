@@ -210,11 +210,37 @@ var createTrialTypes = function(numTrialsPerBlock){
 	numbers_list = [[6,8],[7,9],[2,4],[1,3]]
 	numbers = [1,2,3,4,6,7,8,9]	
 	
+	/*
 	var cued_condition_type_list = []
 	var cued_switch_condition_type_list = []
 	for(var i = 0; i < 4; i++){
 		cued_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/8))
 		cued_switch_condition_type_list.push(jsPsych.randomization.repeat(['switch','stay'], numTrialsPerBlock/8))
+	}
+	*/
+	var all_two_by_two_conditions = []
+		
+	var task_conds = ['switch','stay']
+	var cue_conds = ['switch','stay']
+	
+	for (var z = 0; z < 4; z++){
+		var task_cue_conditions = []
+		for(var i = 0; i < numTrialsPerBlock / 16; i++){
+			for (var x = 0; x < task_conds.length; x++){
+				for (var y = 0; y < cue_conds.length; y++){
+			
+					task_cue_cond = {
+						task_cond: task_conds[x],
+						cue_cond: cue_conds[y]
+			
+					}
+				
+					task_cue_conditions.push(task_cue_cond)
+				}
+			}
+		}
+		task_cue_conditions = jsPsych.randomization.repeat(task_cue_conditions, 1)
+		all_two_by_two_conditions.push(task_cue_conditions)
 	}
 	
 	
@@ -279,8 +305,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 		if (quadIndex == 0){
 			quadIndex = 4
 		}
-		cued_condition = cued_condition_type_list[quadIndex - 1].pop()
-		cued_switch_condition = cued_switch_condition_type_list[quadIndex - 1].pop()
+		var temp_2_cond = all_two_by_two_conditions[quadIndex - 1].pop()    
+		cued_condition = temp_2_cond.task_cond
+		cued_switch_condition = temp_2_cond.cue_cond
 		predictive_dimension = predictive_dimensions[quadIndex - 1]
 		predictive_condition = predictive_cond_array[i%2]
 		
@@ -368,8 +395,8 @@ var appendData = function(){
 		whichQuadrant: quadIndex,
 		predictive_condition: predictive_condition,
 		predictive_dimension: predictive_dimension,
-		cued_condition: cued_condition,
-		cued_switch_condition: cued_switch_condition,
+		task_condition: cued_condition,
+		cue_condition: cued_switch_condition,
 		curr_task: curr_task,
 		curr_cue: curr_cue,
 		left_number: left_number,
@@ -406,15 +433,15 @@ var credit_var = 0
 var run_attention_checks = true
 
 
-var practice_len = 32 // 32
-var exp_len = 320 //320 must be divisible by 32
-var numTrialsPerBlock = 32 //64 // 64 must be divisible by 32
-var numTestBlocks = 1 //exp_len / numTrialsPerBlock
+var practice_len = 16 // must be divisible by 16
+var exp_len = 320 //320 must be divisible by 16
+var numTrialsPerBlock = 64 // 64 must be divisible by 16
+var numTestBlocks = exp_len / numTrialsPerBlock
 var CTI = 300
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 1 //3  // 3 blocks of 24 trials
+var practice_thresh = 3  // 3 blocks of 24 trials
 
 var pathSource = "/static/experiments/predictable_task_switching_with_two_by_two/images/"
 var fileTypePNG = ".png'></img>"
