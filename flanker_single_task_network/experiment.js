@@ -110,7 +110,7 @@ var instructTimeThresh = 0 ///in seconds
 
 var accuracy_thresh = 0.80
 var missed_response_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 12 trials
 var choices = [70, 72]
 // task specific variables
 var correct_responses = jsPsych.randomization.repeat([
@@ -147,9 +147,9 @@ var test_stimuli = [{
 	}
 }];
 
-var practice_len = 12 //5
-var exp_len = 96 //100 in original
-var numTrialsPerBlock = 48
+var practice_len = 12 // must be divisible by 4
+var exp_len = 96 // must be divisible by 4, 100 in original
+var numTrialsPerBlock = 48 //must be divisible by 4
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var practice_trials = jsPsych.randomization.repeat(test_stimuli, practice_len / 4, true);

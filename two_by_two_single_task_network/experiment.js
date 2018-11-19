@@ -230,7 +230,7 @@ var appendData = function() {
     CTI: CTI
   })
   
-  if ((trial_id == 'practice_stim') || (trial_id == 'test_trial')){
+  if ((trial_id == 'practice_trial') || (trial_id == 'test_trial')){
   	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
   		correct = true
   		jsPsych.data.addDataToLastTrial({
@@ -253,9 +253,9 @@ var credit_var = 0
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
-var practice_length = 12 // must be divisible by 4
+var practice_length = 16 // must be divisible by 4
 var test_length = 192 // must be divisible by 4
-var numTrialsPerBlock = 48
+var numTrialsPerBlock = 48 
 var numTestBlocks = test_length / numTrialsPerBlock
 
 var practice_thresh = 3 // 3 blocks of 16 trials
@@ -537,7 +537,7 @@ for (var i = 0; i < practice_length; i++) {
 		prompt_task_list + '</div>',
 	  choices: choices,
 	  data: {
-		trial_id: 'practice_stim'
+		trial_id: 'practice_trial'
 	  },
 	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: false,
@@ -582,7 +582,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "practice_stim"){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
