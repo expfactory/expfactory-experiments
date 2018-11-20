@@ -102,7 +102,7 @@ var getStim = function() {
 		distractor_i = 'none'
 	}
 	currData.trial_num = current_trial
-	currData.condition = trial_type
+	currData.shape_matching_condition = trial_type
 	currData.probe_id = probe_i
 	currData.target_id = target_i
 	currData.distractor_id = distractor_i
@@ -153,19 +153,19 @@ for (var i = 1; i<11; i++) {
 }
 jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
 
-var practice_len = 14 //21
+var practice_len = 14 // must be divisible by 7
 // Trial types denoted by three letters for the relationship between:
 // probe-target, target-distractor, distractor-probe of the form
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
 var trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
 var exp_len = 245
-var numTrialsPerBlock = 14 //49
-var numTestBlocks = 2 //exp_len / numTrialsPerBlock
+var numTrialsPerBlock = 49 //must be divisible by 7
+var numTestBlocks = exp_len / numTrialsPerBlock
 var choices = [90, 77]
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_thresh = 2 //3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 14 trials
 
 var prompt_task_list = '<ul>'+
 						'<li>Respond if green and white shapes are the same or different</li>'+
