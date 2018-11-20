@@ -27,12 +27,14 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	
+	console.log(experiment_data.length)
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -62,7 +64,9 @@ function assessPerformance() {
 			}
 		}
 	}
-	
+	console.log('trial count = ' + trial_count)
+	console.log('correct = ' + correct)
+	console.log('missed_count = ' + missed_count)
 
 	
 	//calculate average rt
@@ -81,6 +85,10 @@ function assessPerformance() {
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	console.log('missed_percent = ' + missed_percent)
+	console.log('avg_rt = ' + avg_rt)
+	console.log('responses_ok = ' + responses_ok)
+	console.log('accuracy = ' + accuracy)
 }
 
 var getFeedback = function() {
@@ -246,8 +254,8 @@ var run_attention_checks = true
 
 
 var practice_len = 24 // 24 must be divisible by 12
-var exp_len = 144 //320 must be divisible by 12
-var numTrialsPerBlock = 48 // 60, must be divisible by 12
+var exp_len = 144 // must be divisible by 12
+var numTrialsPerBlock = 48 // must be divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 12 trials
 
@@ -778,7 +786,7 @@ var practiceStopNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
 
-		if (practiceStopCount == 3) {
+		if (practiceStopCount == practice_thresh) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
@@ -847,8 +855,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		SS_trial_type: getSSType,
 		data: {
 			exp_id: "stop_signal_single_task_network",
-			"trial_id": "stim",
-			"exp_stage": "test_trial",
+			"trial_id": "test_trial"
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
