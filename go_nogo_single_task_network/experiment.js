@@ -33,11 +33,11 @@ function assessPerformance() {
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
 			
-			if (experiment_data[i].condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
-			if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt != -1)){
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 				key = experiment_data[i].key_press
@@ -45,9 +45,9 @@ function assessPerformance() {
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
-			} else if ((experiment_data[i].condition == 'go') && (experiment_data[i].rt == -1)){
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].condition == 'nogo') && (experiment_data[i].rt != -1)){
+			} else if ((experiment_data[i].go_nogo_condition == 'nogo') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 			}
@@ -147,16 +147,16 @@ var practice_stimuli = [{
   stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
   data: {
     correct_response: correct_responses[0][1],
-    condition: correct_responses[0][0],
-    trial_id: 'practice'
+    go_nogo_condition: correct_responses[0][0],
+    trial_id: 'practice_trial'
   },
   key_answer: correct_responses[0][1]
 }, {
   stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: correct_responses[1][0],
-    trial_id: 'practice'
+    go_nogo_condition: correct_responses[1][0],
+    trial_id: 'practice_trial'
   },
   key_answer: correct_responses[1][1]
 }];
@@ -167,7 +167,7 @@ var test_stimuli_block = [{
   stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
   data: {
     correct_response: correct_responses[1][1],
-    condition: correct_responses[1][0],
+    go_nogo_condition: correct_responses[1][0],
     trial_id: 'test_trial'
   }
 }];
@@ -177,19 +177,22 @@ for (var i = 0; i < num_go_stim; i++) {
     stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
     data: {
       correct_response: correct_responses[0][1],
-      condition: correct_responses[0][0],
+      go_nogo_condition: correct_responses[0][0],
       trial_id: 'test_trial'
     }
   })
 }
 
-var practice_thresh = 1 //3 // 3 blocks of 15 trials
+
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_length = 8 //14
+
+var practice_length = 10
+var practice_thresh = 3 // 3 blocks of 10 trials
+
 var test_length = 250
-var numTrialsPerBlock = 50
-var numTestBlocks = 2 //test_length / numTrialsPerBlock
+var numTrialsPerBlock = 50 // must be divisible by 5
+var numTestBlocks = test_length / numTrialsPerBlock
 
 var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
 
@@ -217,7 +220,7 @@ var attention_check_block = {
 
 var attention_node = {
   timeline: [attention_check_block],
-  conditional_function: function() {
+  go_nogo_conditional_function: function() {
     return run_attention_checks
   }
 }
@@ -415,7 +418,7 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice") && (data[i].condition == "go")){
+			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == "go")){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
@@ -505,7 +508,7 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].condition == "go")){
+			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == "go")){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
