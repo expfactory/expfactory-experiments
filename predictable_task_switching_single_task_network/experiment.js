@@ -253,15 +253,15 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 12 // 24  must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 96 //324 must be divisible by 12
-var numTrialsPerBlock = 24 //48; //  60 divisible by 12
-var numTestBlocks = 2 //exp_len / numTrialsPerBlock
+var practice_len =  16  //divisible by 4,  2 (switch or stay) by 2 (mag or parity)]
+var exp_len = 96 // must be divisible by 4
+var numTrialsPerBlock = 48; //  divisible by 4
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 
 var accuracy_thresh = 0.80
-var missed_thresh = 0.10 // 
-var practice_thresh = 2 //3 // 3 blocks of 24 trials
+var missed_thresh = 0.10 
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 
 var predictive_conditions = [['switch','stay'],
@@ -515,7 +515,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		response_ends_trial: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
