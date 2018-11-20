@@ -25,7 +25,7 @@ function assessPerformance() {
 	/* Function to calculate the "credit_var", which is a boolean used to
 	credit individual experiments in expfactory. 
 	 */
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -342,7 +342,7 @@ var CTI = 300
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
-var practice_length = 12
+var practice_length = 24
 var test_length = 240
 var numTrialsPerBlock = 48 //48 must be divisible by 12
 var numTestBlocks = test_length / numTrialsPerBlock
@@ -552,6 +552,7 @@ var start_test_block = {
     current_trial = 0
     stims = testStims
     task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 12)
+    feedback_text = 'Starting a test block.'
   },
   timing_post_trial: 1000
 }
@@ -955,7 +956,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
 		}
 		if (missed_responses > missed_thresh){
 			feedback_text +=
