@@ -214,30 +214,31 @@ var getResponse = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-  var curr_trial = jsPsych.progress().current_trial_global
-  var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-  var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
-  var task_switch = task_switches[trial_num]
-  
-  jsPsych.data.addDataToLastTrial({
-    cue: curr_cue,
-    stim_number: curr_stim.number,
-    task: curr_task,
-    task_condition: task_switch.task_switch,
-    cue_condition: task_switch.cue_switch,
-    trial_num: trial_num,
-    correct_response: correct_response,
-    CTI: CTI
-  })
-  
-  if ((trial_id == 'practice_trial') || (trial_id == 'test_trial')){
-  	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
-  		correct = true
-  		jsPsych.data.addDataToLastTrial({
-		  'correct': correct
+	var curr_trial = jsPsych.progress().current_trial_global
+	var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
+	var task_switch = task_switches[trial_num]
+
+	jsPsych.data.addDataToLastTrial({
+		cue: curr_cue,
+		stim_number: curr_stim.number,
+		task: curr_task,
+		task_condition: task_switch.task_switch,
+		cue_condition: task_switch.cue_switch,
+		trial_num: trial_num,
+		correct_response: correct_response,
+		CTI: CTI
+	})
+
+	if ((trial_id == 'practice_trial') || (trial_id == 'test_trial')){
+	correct_trial = 0
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			correct_trial = 1
+		}
+	jsPsych.data.addDataToLastTrial({
+			  correct_trial: correct_trial
 		})
-  	}
-  } 
+	} 
 }
 
 /* ************************************ */

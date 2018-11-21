@@ -48,7 +48,7 @@ function assessPerformance() {
 				}
 			} else if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].go_nogo_condition == 'nogo') && (experiment_data[i].rt != -1)){
+			} else if ((experiment_data[i].go_no_go_condition == 'nogo') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 			}
@@ -295,11 +295,22 @@ var appendData = function() {
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
   	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
-			jsPsych.data.addDataToLastTrial({gng_stop_acc: 1})
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
-			jsPsych.data.addDataToLastTrial({gng_stop_acc: 0})
-		}
+	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
+		jsPsych.data.addDataToLastTrial({gng_stop_acc: 1})
+	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
+		jsPsych.data.addDataToLastTrial({gng_stop_acc: 0})
+	}
+	
+	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+		jsPsych.data.addDataToLastTrial({
+			correct_trial: 1,
+		})
+
+	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+		jsPsych.data.addDataToLastTrial({
+			correct_trial: 0,
+		})
+	}
   }
 }
 

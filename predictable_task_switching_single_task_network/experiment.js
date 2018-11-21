@@ -234,12 +234,13 @@ var appendData = function(){
 			correct_trial: 1,
 		})
 	
-	} else {
+	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 0,
 		})
 	
 	}
+	
 }
 
 /* ************************************ */

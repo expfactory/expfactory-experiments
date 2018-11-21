@@ -307,8 +307,8 @@ var appendData = function() {
     CTI: CTI
   })
   
-  if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-  	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
+	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
+		jsPsych.data.addDataToLastTrial({correct_response: correct_response})
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD+=50
@@ -316,7 +316,19 @@ var appendData = function() {
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD-=50
 		}
-  }
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 1,
+			})
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 0,
+			})
+		}
+		
+	}   
 }
 
 /* ************************************ */

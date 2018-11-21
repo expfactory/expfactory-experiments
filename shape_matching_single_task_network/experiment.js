@@ -418,11 +418,12 @@ var test_block = {
 	data: getData,
 	timing_post_trial: 0,
 	on_finish: function(data) {
-		correct = false
+		correct_trial = 0
 		if (data.key_press == data.correct_response) {
-			correct = true
+			correct_trial = 1
 		}
-		jsPsych.data.addDataToLastTrial({'correct': correct,
+		
+		jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
 										 trial_id: 'test_trial'})
 	}
 }

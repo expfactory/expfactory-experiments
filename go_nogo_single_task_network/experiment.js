@@ -78,15 +78,24 @@ var get_response_time = function() {
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function(data) {
-  var correct = false
-  if (data.key_press == data.correct_response) {
-    correct = true
-  }
-  jsPsych.data.addDataToLastTrial({
-    trial_num: current_trial,
-    correct: correct
-  })
-  current_trial = current_trial + 1
+	var curr_trial = jsPsych.progress().current_trial_global
+  
+	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+		jsPsych.data.addDataToLastTrial({
+			correct_trial: 1,
+		})
+
+	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+		jsPsych.data.addDataToLastTrial({
+			correct_trial: 0,
+		})
+	}
+	
+	jsPsych.data.addDataToLastTrial({
+		trial_num: current_trial,
+	})
+	
+	current_trial = current_trial + 1
 }
 
 var getFeedback = function() {

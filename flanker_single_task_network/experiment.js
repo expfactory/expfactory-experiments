@@ -354,11 +354,15 @@ for (i = 0; i < practice_len; i++) {
 		timing_response: 2000,
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		on_finish: function() {
-			jsPsych.data.addDataToLastTrial({
-				exp_stage: "practice",
-				trial_id: "practice_trial"
-			})
+		on_finish: function(data) {
+			correct_trial = 0
+			if (data.key_press == data.correct_response) {
+				correct_trial = 1
+			}
+		
+			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
+											 trial_id: 'practice_trial'
+											 })
 		}
 	}
 	
@@ -467,11 +471,15 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		response_ends_trial: false,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
-		on_finish: function() {
-			jsPsych.data.addDataToLastTrial({
-				exp_stage: "test",
-				trial_id: "test_trial"
-			})
+		on_finish: function(data) {
+			correct_trial = 0
+			if (data.key_press == data.correct_response) {
+				correct_trial = 1
+			}
+		
+			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
+											 trial_id: 'test_trial'
+											 })
 		}
 	};
 	
