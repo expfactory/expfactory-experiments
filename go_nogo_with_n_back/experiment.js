@@ -47,7 +47,7 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
@@ -135,68 +135,6 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
-var createControlTypes = function(numTrialsPerBlock){
-	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/25; numIterations++){ 
-		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
-			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_conditions.length; numgo_nogoConds++){
-			
-				go_nogo_condition = go_nogo_conditions[numgo_nogoConds]
-				n_back_condition = n_back_conditions[numNBackConds]
-				
-				stim = {
-					go_nogo_condition: go_nogo_condition,
-					n_back_condition: n_back_condition
-					}
-			
-				stims.push(stim)
-			}
-			
-		}
-	}
-
-	stims = jsPsych.randomization.repeat(stims,1)
-	
-	stim_len = stims.length
-	
-	new_stims = []
-	for (var i = 0; i < stim_len; i++){
-		stim = stims.pop()
-		n_back_condition = stim.n_back_condition
-		go_nogo_condition= stim.go_nogo_condition
-		
-		probe = randomDraw('BDGV'.split("").filter(function(y) {return $.inArray(y, ['T']) == -1}))
-		letter_case = randomDraw(['uppercase','lowercase'])
-		correct_response = possible_responses[1][1]
-		if (n_back_condition == 'match'){
-			probe = randomDraw(['t','T'])
-			correct_response = possible_responses[0][1]
-		}		
-		
-		if(go_nogo_condition == 'go'){
-			probe_color = go_no_go_styles[0]
-		} else if(go_nogo_condition == 'nogo''){
-			probe_color = go_no_go_styles[1]
-			correct_response = -1
-		}
-		
-			
-		stim = {
-			n_back_condition: n_back_condition,
-			go_nogo_condition: go_nogo_condition,
-			probe: probe,
-			correct_response: correct_response,
-			probe_color: probe_color,
-			delay: 0,
-			letter_case: letter_case
-		}
-		
-		new_stims.push(stim)	
-		}
-	
-	return new_stims
-	
-}
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	
@@ -207,7 +145,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		} else {
 			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
 		}
-		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo''],1).pop()
+		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1).pop()
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
 		letter_case = randomDraw(['uppercase','lowercase'])
@@ -397,7 +335,7 @@ var practice_len = 25 // 25 must be divisible by 25
 var exp_len = 300 //300 must be divisible by 25
 var numTrialsPerBlock = 50 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 1 // 3 blocks of 25 trials
+var practice_thresh = 3 // 3 blocks of 25 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -413,7 +351,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','nogo''],1)
+var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 							 
@@ -447,7 +385,6 @@ var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_
 
 
 var stims = createTrialTypes(practice_len, delay)
-var control_stims = createControlTypes(numTrialsPerBlock)
 
 /* ************************************ */
 /*        Set up jsPsych blocks         */
@@ -640,45 +577,6 @@ var start_control_block = {
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
-
-var controlTrials = []
-controlTrials.push(feedback_block)
-for (i = 0; i < numTrialsPerBlock; i++) {
-
-	var control_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getControlStim,
-		is_html: true,
-		data: {
-			"trial_id": "control_trial",
-		},
-		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 2000, //2000
-		timing_response: 2000, //2000
-		timing_post_trial: 0,
-		response_ends_trial: false,
-		on_finish: appendData
-	}
-	controlTrials.push(control_block)
-}
-
-var controlCount = 0
-var controlNode = {
-	timeline: controlTrials,
-	loop_function: function(data) {
-		controlCount += 1
-		stims = createTrialTypes(numTrialsPerBlock, delay)
-		current_trial = 0
-	
-		if (controlCount == 1){
-			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
-			return false
-		}
-	}
-}
-
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
@@ -710,7 +608,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timeout_message: getTimeoutText,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, 
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
