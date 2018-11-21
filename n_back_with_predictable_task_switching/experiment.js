@@ -338,14 +338,14 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 20
-var exp_len = 240 //320 must be divisible by 10
+var exp_len = 240 // must be divisible by 10
 var numTrialsPerBlock = 40 // must be divisible by 10
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 
-var practice_thresh = 3 // 3 blocks of 24 trials
+var practice_thresh = 3 // 3 blocks of 20 trials
 
 var pathSource = "/static/experiments/n_back_with_predictable_task_switching/images/"
 var fileTypePNG = ".png'></img>"
@@ -684,7 +684,7 @@ for (i = 0; i < practice_len + 2; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>'+ prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
