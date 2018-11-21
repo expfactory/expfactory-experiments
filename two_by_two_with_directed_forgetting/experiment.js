@@ -191,7 +191,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 					temp_index = 0
 					task_cue = randomDraw(cues[temp_index].filter(function(y) {return $.inArray(y, [last_task_cue]) == -1}))
 				}		
-			} else if (task_condition == "switch"){
+			} else if (cued_condition == "stay"){
 				task_cue = last_task_cue
 			}
 		}
@@ -203,6 +203,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 			
 		stim = {
 			task_condition: task_condition,
+			cued_condition: cued_condition,
 			cued_dimension: cued_dimension,
 			directed_condition: directed_condition,
 			letters: letters,
@@ -354,15 +355,21 @@ var appendData = function(){
 	
 	current_trial+=1
 	
+	var lastSet_top = letters.slice(0,3)
+	var lastSet_bottom = letters.slice(3)
+	
 	jsPsych.data.addDataToLastTrial({
 		task_condition: task_condition,
+		cue_condition: cued_condition,
+		task_cue: task_cue,
 		cued_dimension: cued_dimension,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		probe: probe,
-		letters: letters,
-		cue: cue,
+		directed_forgetting_cue: cue,
 		correct_response: correct_response,
-		current_trial: current_trial
+		current_trial: current_trial,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom,
 		
 	})
 	
@@ -403,6 +410,7 @@ var getDirectedCueStim = function(){
 var getSwitchingCueStim = function(){
 	stim = stims.shift()
 	task_condition = stim.task_condition
+	cued_condition = stim.cued_condition
 	cued_dimension = stim.cued_dimension
 	directed_condition = stim.directed_condition
 	probe = stim.probe
@@ -432,13 +440,13 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 16
-var exp_len = 160 //320 must be divisible by 16
-var numTrialsPerBlock = 32; // divisible by 64
-var numTestBlocks = 2 //exp_len / numTrialsPerBlock
+var exp_len = 160 // must be divisible by 16
+var numTrialsPerBlock = 32; // divisible by 16
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 //3 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
@@ -452,13 +460,9 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var current_trial = 0	
 
-var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-];
+	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 				 
-
-
 var stims = createTrialTypes(practice_len)
 
 var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topRight style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = fixation>'],['</div></div></div></div>']]
