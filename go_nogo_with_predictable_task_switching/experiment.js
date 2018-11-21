@@ -39,7 +39,7 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
@@ -77,6 +77,20 @@ function assessPerformance() {
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
+	
+	//console.log('trial count = ' + trial_count)
+	
+	//console.log('missed_count = ' + missed_count)
+	//console.log('missed_percent = ' + missed_percent)
+	
+	//console.log('rt_array length = ' + rt_array.length)
+	//console.log('avg_rt = ' + avg_rt)
+	
+	//console.log('responses_ok = ' + responses_ok)
+	
+	//console.log('correct = ' + correct)
+	//console.log('accuracy = ' + accuracy)
+	
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
 }
 
@@ -329,7 +343,7 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 20 // 20  must be divisible by 20 [5 (go go go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 300 //320 must be divisible by 20
+var exp_len = 300 // must be divisible by 20
 var numTrialsPerBlock = 60; //  60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -344,7 +358,7 @@ var predictive_conditions = [['switch','stay'],
 var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
 								  stim = {dim:'parity', values: ['even','odd']}]
 							 	  
-var possible_responses = jsPsych.randomization.repeat([['M Key', 77],['Z Key', 90]],1)
+var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 
@@ -595,7 +609,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		timeout_message: getTimeoutText,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, //500
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
