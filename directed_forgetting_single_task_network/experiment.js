@@ -36,7 +36,7 @@ function assessPerformance() {
 		choice_counts[choices[k]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
-		if (data[i].trial_id == 'test_trial') {
+		if (experiment_data[i].trial_id == 'test_trial') {
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -104,27 +104,6 @@ var getCategorizeFeedback = function(){
 	}
 }
 
-/* Append gap and current trial to data and then recalculate for next trial*/
-
-//this adds the current trial and the stims shown to the data
-var appendTestData = function() {
-	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial,
-		stim_top: stims.slice(0,3),
-		stim_bottom: stims.slice(3),
-		exp_stage: exp_stage
-	})
-};
-
-//this adds the cue shown and trial number to data
-var appendCueData = function() {
-	jsPsych.data.addDataToLastTrial({
-		cue: cue,
-		trial_num: current_trial,
-		exp_stage: exp_stage
-	})
-};
-
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
 var appendProbeData = function(data) {
 	var trialCue = cue
@@ -136,8 +115,10 @@ var appendProbeData = function(data) {
 	var correct = false
 	if (trialCue == 'BOT') {
 		memorySet = lastSet_top
+		forgetSet = lastSet_bottom
 	} else if (trialCue == 'TOP') {
 		memorySet = lastSet_bottom
+		forgetSet = lastSet_top
 	}
 	if (memorySet.indexOf(probe, 0) == -1) {
 		correct_response = choices[1]
@@ -147,13 +128,20 @@ var appendProbeData = function(data) {
 	if (keypress == correct_response) {
 		correct = true
 	}
+	
+	console.log('correct response = '+correct_response)
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
-		probe_type: probeType,
+		directed_forgetting_condition: probeType,
 		trial_num: current_trial,
 		correct_response: correct_response,
-		exp_stage: exp_stage
+		exp_stage: exp_stage,
+		cue: cue,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom,
+		memory_set: memorySet,
+		forget_set: forgetSet
 	})
 };
 
@@ -268,14 +256,6 @@ var getResponse = function() {
 	}
 }
 
-var appendPracticeProbeData = function() {
-	jsPsych.data.addDataToLastTrial({
-		probe_letter: probe,
-		probe_type: probeType,
-		trial_num: current_trial
-	})
-}
-
 var resetTrial = function() {
 	current_trial = 0
 	exp_stage = 'test'
@@ -294,13 +274,13 @@ var credit_var = 0
 // task specific variables
 var choices = [77, 90]
 var exp_stage = 'practice'
-var practice_length = 4 //8
-var num_trials = 8 //20
-var num_runs = 2 //4 
-var practice_thresh = 1 //3 // 3 blocks of 8 trials
+var practice_length = 8
+var numTrialsPerBlock = 20
+var numTestBlocks = 4 
+var practice_thresh = 3 // 3 blocks of 8 trials
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var experimentLength = num_trials * num_runs
+var exp_len = numTrialsPerBlock * numTestBlocks
 var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
@@ -312,8 +292,8 @@ var stims = []
 var preceeding1stims = []
 var preceeding2stims = []
 var probes = ['pos', 'pos', 'neg', 'con']
-var probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
-var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length/2)
+var probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
+var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length / 4)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting_single_task_network/images/'
 var fileType = '.png'
@@ -553,8 +533,7 @@ var training_block = {
 	choices: 'none',
 	timing_post_trial: 0,
 	timing_stim: 2500,
-	timing_response: 2500,
-	on_finish: appendTestData,
+	timing_response: 2500
 };
 
 
@@ -570,8 +549,7 @@ var cue_block = {
 	choices: false,
 	timing_post_trial: 0,
 	timing_stim: 1000,
-	timing_response: 1000,
-	on_finish: appendCueData,
+	timing_response: 1000
 };
 
 var probe_block = {
@@ -587,9 +565,7 @@ var probe_block = {
 	timing_stim: 2000,
 	timing_response: 2000,
 	response_ends_trial: false,
-	on_finish: function(data) {
-		appendProbeData(data)
-	}
+	on_finish: appendProbeData
 };
 
 var intro_test_block = {
@@ -618,7 +594,7 @@ var practice_probe_block = {
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
-	on_finish: appendPracticeProbeData,
+	on_finish: appendProbeData
 };
 
 var feedback_text = 
@@ -656,7 +632,7 @@ var test_feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < (practice_length-1); i++) {
+for (i = 0; i < (practice_length); i++) {
 	var practice_start_fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
@@ -729,8 +705,7 @@ for (i = 0; i < (practice_length-1); i++) {
 		prompt: prompt_text,
 		timing_post_trial: 0,
 		timing_stim: 2500,
-		timing_response: 2500,
-		on_finish: appendTestData,
+		timing_response: 2500
 	};
 
 
@@ -746,8 +721,7 @@ for (i = 0; i < (practice_length-1); i++) {
 		prompt: prompt_text,
 		timing_post_trial: 0,
 		timing_stim: 1000,
-		timing_response: 1000,
-		on_finish: appendCueData,
+		timing_response: 1000
 	};
 	
 	var categorize_block = {
@@ -780,8 +754,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		probeTypeArray = jsPsych.randomization.repeat(probes, experimentLength / 4)
-		practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length/2)
+		practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length / 4)
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -846,7 +819,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(test_feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < num_trials; i++) { //num_trials
+for (i = 0; i < numTrialsPerBlock; i++) { //numTrialsPerBlock
 	testTrials.push(start_fixation_block);
 	testTrials.push(training_block);
 	testTrials.push(cue_block);
@@ -859,6 +832,7 @@ var testCount = 0
 var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
+		probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
 		testCount += 1
 		current_trial = 0 
 		
@@ -923,7 +897,7 @@ var testNode = {
 	
 			test_feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 			test_feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
-			test_feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+num_runs+" blocks of trials."
+			test_feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 			if (accuracy < accuracy_thresh){
 				test_feedback_text +=
@@ -934,7 +908,7 @@ var testNode = {
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 	
-			if (testCount == num_runs){
+			if (testCount == numTestBlocks){
 				test_feedback_text +=
 						'</p><p class = block-text>Done with this test. Press Enter to continue.'
 				return false
