@@ -40,7 +40,7 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
@@ -555,7 +555,7 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: getTimeoutText,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, //500
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
