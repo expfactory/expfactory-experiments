@@ -251,15 +251,19 @@ var appendData = function(){
 	
 	current_trial+=1
 	
+	var lastSet_top = letters.slice(0,3)
+	var lastSet_bottom = letters.slice(3)
+	
 	jsPsych.data.addDataToLastTrial({
 		flanker_condition: flanker_condition,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		probe: probe,
-		letters: letters,
 		cue: cue,
 		flanking_letter: flanking_letter,
 		correct_response: correct_response,
-		current_trial: current_trial
+		current_trial: current_trial,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom
 		
 	})
 }
@@ -305,7 +309,6 @@ var getProbeStim = function(){
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if (trial_id == 'practice_trial'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
@@ -337,13 +340,13 @@ var credit_var = 0
 
 // new vars
 var practice_len = 8  // must be divisible by 8
-var exp_len = 160 //320 must be divisible by 8
-var numTrialsPerBlock = 16 //32; // divisible by 8
-var numTestBlocks = 2 //exp_len / numTrialsPerBlock
+var exp_len = 160 // must be divisible by 8
+var numTrialsPerBlock = 32; // divisible by 8
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 //3 // 3 blocks of 8 trials
+var practice_thresh = 3 // 3 blocks of 8 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
 var flanker_conditions = ['congruent','incongruent']
