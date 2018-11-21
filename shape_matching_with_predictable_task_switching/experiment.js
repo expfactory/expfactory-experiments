@@ -290,7 +290,7 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh =  3 blocks of 28 trials
+var practice_thresh =  3 //blocks of 28 trials
  
 
 var predictive_conditions = [['switch','stay'],

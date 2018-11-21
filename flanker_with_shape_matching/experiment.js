@@ -36,8 +36,9 @@ function assessPerformance() {
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
-		if ((experiment_data[i].trial_id == 'test_trial'){
+		if (experiment_data[i].trial_id == 'test_trial'){
 			trial_count += 1
 			rt = experiment_data[i].rt
 			key = experiment_data[i].key_press
@@ -53,6 +54,7 @@ function assessPerformance() {
 			}
 		}
 	}
+	
 
 	
 	//calculate average rt
@@ -257,13 +259,13 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 14 // must be divisible by 14
-var exp_len = 280 //320 must be divisible by 64
+var exp_len = 280 // must be divisible by 14
 var numTrialsPerBlock = 56; // divisible by 14
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 28 trials
+var practice_thresh = 3 // 3 blocks of 14 trials
  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
@@ -508,7 +510,7 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
