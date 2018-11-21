@@ -27,6 +27,7 @@ function assessPerformance() {
 	var trial_count = 0
 	var rt_array = []
 	var rt = 0
+	var correct = 0
 
 		//record choices participants made
 	var choice_counts = {}
@@ -39,7 +40,7 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
@@ -126,11 +127,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 				flanker_condition = flanker_trial_types[numFlankerConds]
 				go_nogo_condition = go_nogo_trial_types[numgo_nogoConds]
 				
-				if (go_nogo_condition == 'nogo'){
-					go_no_go_style = go_no_go_styles[1]
-				} else {
-					go_no_go_style = go_no_go_styles[0]
-				}
 				
 				if (flanker_condition == 'H_congruent'){
 					central_letter = 'H'
@@ -150,6 +146,12 @@ var createTrialTypes = function(numTrialsPerBlock){
 					correct_response = possible_responses[0][1]
 				}
 				
+				if (go_nogo_condition == 'nogo'){
+					go_no_go_style = go_no_go_styles[1]
+					correct_response = -1
+				} else {
+					go_no_go_style = go_no_go_styles[0]
+				}
 				
 				stim = {
 					go_nogo_condition: go_nogo_condition,
@@ -479,7 +481,7 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: getTimeoutText,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, //500
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,

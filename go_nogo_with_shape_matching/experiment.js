@@ -95,7 +95,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text>Incorrect</div></div>' + prompt_text
 	} else {
 	
-		return '<div class = fb_box><div class = center-text>Letter is '+go_no_go_styles[1]+'</div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text>Shape is '+go_no_go_styles[1]+'</div></div>' + prompt_text
 	}
 
 }
@@ -112,7 +112,7 @@ var getCorrectText = function(){
 	if (go_nogo_condition == "go"){
 		return '<div class = fb_box><div class = center-text>Correct!</div></div>' + prompt_text
 	} else {
-		return '<div class = fb_box><div class = center-text>Letter is '+go_no_go_styles[1]+'</div></div>' + prompt_text
+		return '<div class = fb_box><div class = center-text>Shape is '+go_no_go_styles[1]+'</div></div>' + prompt_text
 	}
 }
 
@@ -147,7 +147,7 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 		probe_color = go_no_go_styles[0]
 	} else if (go_nogo_condition == 'nogo'){
 		probe_color = go_no_go_styles[1]	
-	
+		correct_response = -1
 	}
 	return [probe_i, target_i, distractor_i, correct_response, probe_color]
 }
