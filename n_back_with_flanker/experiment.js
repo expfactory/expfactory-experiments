@@ -102,68 +102,6 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
-var createControlTypes = function(numTrialsPerBlock){
-	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/15; numIterations++){ 
-		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
-			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
-			
-				flanker_condition = flanker_conditions[numFlankerConds]
-				n_back_condition = n_back_conditions[numNBackConds]
-				
-				stim = {
-					flanker_condition: flanker_condition,
-					n_back_condition: n_back_condition
-					}
-			
-				stims.push(stim)
-			}
-			
-		}
-	}
-	
-	
-	stims = jsPsych.randomization.repeat(stims,1)
-	
-	stim_len = stims.length
-	
-	new_stims = []
-	for (var i = 0; i < stim_len; i++){
-		stim = stims.pop()
-		n_back_condition = stim.n_back_condition
-		flanker_condition= stim.flanker_condition
-		
-		probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-		correct_response = possible_responses[1][1]
-		if (n_back_condition == 'match'){
-			probe = randomDraw(['t','T'])
-			correct_response = possible_responses[0][1]
-		}		
-		
-		if(flanker_condition == 'congruent'){
-			flankers = probe
-		} else if(flanker_condition == 'incongruent'){
-			flankers = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-		}
-		
-		
-			
-		stim = {
-			n_back_condition: n_back_condition,
-			flanker_condition: flanker_condition,
-			probe: probe,
-			correct_response: correct_response,
-			flankers: flankers,
-			delay: 0
-		}
-		
-		new_stims.push(stim)	
-		}
-	
-	return new_stims
-	
-}
-
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	first_stims = []
 	for (var i = 0; i < 3; i++){
@@ -404,7 +342,6 @@ var current_block = 0
 
 var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
 
-var control_stims = createControlTypes(numTrialsPerBlock)
 var stims = createTrialTypes(practice_len, delay)
 
 /* ************************************ */
@@ -603,43 +540,6 @@ var feedback_block = {
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
-
-var controlTrials = []
-controlTrials.push(feedback_block)
-for (i = 0; i < numTrialsPerBlock; i++) {
-	var control_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getControlStim,
-		is_html: true,
-		data: {
-			"trial_id": "control_trial"
-		},
-		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
-		timing_response: 1000, //2000
-		timing_post_trial: 0,
-		response_ends_trial: false,
-		on_finish: appendData
-	}
-	controlTrials.push(control_block)
-}
-
-var controlCount = 0
-var controlNode = {
-	timeline: controlTrials,
-	loop_function: function(data) {
-		controlCount += 1
-		current_trial = 0
-	
-		if (controlCount == 1){
-			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
-			return false
-		}
-	}
-}
-
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
@@ -659,7 +559,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, 
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
