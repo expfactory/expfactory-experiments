@@ -129,7 +129,6 @@ var appendProbeData = function(data) {
 		correct = true
 	}
 	
-	console.log('correct response = '+correct_response)
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,

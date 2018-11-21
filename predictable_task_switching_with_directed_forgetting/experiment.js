@@ -310,16 +310,22 @@ var appendData = function(){
 	
 	current_trial+=1
 	
+	var lastSet_top = letters.slice(0,3)
+	var lastSet_bottom = letters.slice(3)
+	
 	jsPsych.data.addDataToLastTrial({
 		predictive_condition: predictive_condition,
 		predictive_dimension: predictive_dimension,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		probe: probe,
-		letters: letters,
 		cue: cue,
 		correct_response: correct_response,
 		whichQuadrant: whichQuadrant,
-		current_trial: current_trial
+		current_trial: current_trial,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom,
+		memory_set: memorySet,
+		forget_set: forgetSet
 		
 	})
 }
@@ -376,13 +382,13 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16
-var exp_len = 160 //320 must be divisible by 16
-var numTrialsPerBlock = 32; // divisible by 64
-var numTestBlocks = 2 //exp_len / numTrialsPerBlock
+var exp_len = 160 // must be divisible by 16
+var numTrialsPerBlock = 32; // divisible by 16
+var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.70
 var missed_thresh = 0.10
-var practice_thresh = 2 //3 // 3 blocks of 16 trials
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
