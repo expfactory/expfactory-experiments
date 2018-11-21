@@ -99,59 +99,6 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
-var createControlTypes = function(numTrialsPerBlock){
-	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/15; numIterations++){ 
-		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
-			for (var numstop_signalConds = 0; numstop_signalConds < stop_signal_conditions.length; numstop_signalConds++){
-			
-				stop_signal_condition = stop_signal_conditions[numstop_signalConds]
-				n_back_condition = n_back_conditions[numNBackConds]
-				
-				stim = {
-					stop_signal_condition: stop_signal_condition,
-					n_back_condition: n_back_condition
-					}
-			
-				stims.push(stim)
-			}
-			
-		}
-	}
-
-	
-	stims = jsPsych.randomization.repeat(stims,1)
-	
-	stim_len = stims.length
-	
-	new_stims = []
-	for (var i = 0; i < stim_len; i++){
-		stim = stims.pop()
-		n_back_condition = stim.n_back_condition
-		stop_signal_condition= stim.stop_signal_condition
-		
-		probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-		correct_response = possible_responses[1][1]
-		if (n_back_condition == 'match'){
-			probe = randomDraw(['t','T'])
-			correct_response = possible_responses[0][1]
-		}		
-		
-		
-			
-		stim = {
-			n_back_condition: n_back_condition,
-			stop_signal_condition: stop_signal_condition,
-			probe: probe,
-			correct_response: correct_response,
-		}
-		
-		new_stims.push(stim)	
-		}
-	
-	return new_stims
-	
-}
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	first_stims = []
@@ -248,18 +195,6 @@ var getStim = function(){
 		   task_boards[1]
 }
 
-var getControlStim = function(){	
-	stim = control_stims.shift()
-	n_back_condition = stim.n_back_condition
-	probe = stim.probe
-	correct_response = stim.correct_response
-		
-	return task_boards[0]+ 
-			probe+
-		   task_boards[1]
-}
-
-
 var getResponse =  function(){
 	return correct_response
 }
@@ -316,7 +251,6 @@ var practice_thresh = 3 // 3 blocks of 15 trials
 
 var accuracy_thresh = 0.80
 var missed_thresh = 0.10
-var SSD = 250
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
@@ -325,12 +259,9 @@ var delay = 1
 var pathSource = "/static/experiments/n_back_single_task_network/images/"
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/n_back_single_task_network/images/"
-var stop_stim = '<div class = bigbox><div class = starbox>' + preFileType + 'stopSignal' + fileTypePNG + '</div></div>'
-
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var stop_signal_conditions = ['go','go','stop']
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
@@ -358,7 +289,6 @@ var current_block = 0
 
 var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
 
-var control_stims = createControlTypes(numTrialsPerBlock)
 var stims = createTrialTypes(practice_len, delay)
 
 /* ************************************ */
@@ -575,7 +505,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
