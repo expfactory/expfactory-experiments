@@ -122,7 +122,6 @@ If "switch old", switch to the last task and randomly choose a cue.
 var setStims = function() {
   var tmp;
   var numbers = [1,2,3,4,6,7,8,9]	
-  console.log(task_switches[current_trial].task_switch, task_switches[current_trial].cue_switch, task_switches[current_trial].flanker_type, 'here1')
   switch (task_switches[current_trial].task_switch) {
     case "stay":
       if (curr_task == "na") {
@@ -538,7 +537,18 @@ var practice_block = {
   timing_stim: 1000,
   timing_post_trial: 0,
   prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-  on_finish: appendData
+  on_finish: function(data) {
+    appendData()
+    correct_response = getResponse()
+    correct_trial = 0
+    if (data.key_press === correct_response) {
+      correct_trial = 1
+    }
+    jsPsych.data.addDataToLastTrial({
+      'correct_response': correct_response,
+      'correct_trial': correct_trial
+    })
+  }
 }
 
 
@@ -559,13 +569,13 @@ var test_block = {
   on_finish: function(data) {
     appendData()
     correct_response = getResponse()
-    correct = 0
+    correct_trial = 0
     if (data.key_press === correct_response) {
-      correct = 1
+      correct_trial = 1
     }
     jsPsych.data.addDataToLastTrial({
       'correct_response': correct_response,
-      'correct': correct
+      'correct_trial': correct_trial
     })
   }
 }

@@ -275,32 +275,44 @@ var getPTDC = function(shape_matching_condition,curr_task){
 
 /* Append gap and current trial to data and then recalculate for next trial*/
 var appendData = function() {
-  var curr_trial = jsPsych.progress().current_trial_global
-  var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-  var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
-  var task_switch = task_switches[trial_num]
-  jsPsych.data.addDataToLastTrial({
-    cue: curr_cue,
-    task: curr_task,
-    task_condition: task_switch.task_switch,
-    cue_condition: task_switch.cue_switch,
-    shape_matching_condition: shape_matching_condition,
-    trial_num: trial_num,
-    probe: probe,
-	target: target,
-	distractor: distractor,
-	correct_response: correct_response,
-	CTI: CTI
-  })
+	var curr_trial = jsPsych.progress().current_trial_global
+	var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
+	var task_switch = task_switches[trial_num]
+	jsPsych.data.addDataToLastTrial({
+		cue: curr_cue,
+		task: curr_task,
+		task_condition: task_switch.task_switch,
+		cue_condition: task_switch.cue_switch,
+		shape_matching_condition: shape_matching_condition,
+		trial_num: trial_num,
+		probe: probe,
+		target: target,
+		distractor: distractor,
+		correct_response: correct_response,
+		CTI: CTI
+	})
   
-  if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-  	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
-		jsPsych.data.addDataToLastTrial({shape_cued_acc: 1})
-	} else {
-		jsPsych.data.addDataToLastTrial({shape_cued_acc: 0})
+	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
+		jsPsych.data.addDataToLastTrial({correct_response: correct_response})
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			jsPsych.data.addDataToLastTrial({shape_cued_acc: 1})
+		} else {
+			jsPsych.data.addDataToLastTrial({shape_cued_acc: 0})
+		}
+
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 1,
+			})
+
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 0,
+			})
+
+		}
 	}
-  }
 }
 
 var getCTI = function(){
