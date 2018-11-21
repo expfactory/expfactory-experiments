@@ -41,7 +41,7 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
@@ -307,16 +307,20 @@ var appendData = function(){
 	
 	current_trial+=1
 	
+	var lastSet_top = letters.slice(0,3)
+	var lastSet_bottom = letters.slice(3)
+	
 	jsPsych.data.addDataToLastTrial({
 		go_nogo_condition: go_nogo_condition,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		probe: probe,
 		probe_color: probe_color,
-		letters: letters,
 		cue: cue,
 		correct_response: correct_response,
 		current_trial: current_trial,
-		current_block: current_block
+		current_block: current_block,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom
 		
 	})
 	
@@ -379,9 +383,9 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // new vars
-var practice_len = 20  // must be divisible by 20  [5 (go,go,go,go,stop) vs 4 (pos,pos,con,neg)]
-var exp_len = 180 //320 must be divisible by 20
-var numTrialsPerBlock = 20; // 60 divisible by 20
+var practice_len = 20  // must be divisible by 20  [5 (go,go,go,go,nogo) vs 4 (pos,pos,con,neg)]
+var exp_len = 180 //must be divisible by 20
+var numTrialsPerBlock =  20 //divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -401,7 +405,6 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_dir
 							 
 var current_trial = 0	
 
-var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
