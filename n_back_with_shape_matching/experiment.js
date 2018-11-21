@@ -358,7 +358,7 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 20 must be divisible by 10
-var exp_len = 240 //240 must be divisible by 10
+var exp_len = 240 // must be divisible by 10
 var numTrialsPerBlock = 40 // 40 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 10 trials
@@ -666,7 +666,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //2000
 		timing_response: 2000,
-		timing_feedback: 500, //500
+		timing_feedback_duration: 500, 
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
