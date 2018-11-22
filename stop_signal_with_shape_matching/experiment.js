@@ -22,7 +22,7 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -40,7 +40,7 @@ function assessPerformance() {
 	}
 	
 	for (var i = 0; i < experiment_data.length; i++) {
-		if ((experiment_data[i].trial_id == 'test_trial') {
+		if (experiment_data[i].trial_id == 'test_trial') {
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -280,7 +280,7 @@ var appendData = function(){
 	
 	}
 	
-	if (trial_id == 'test_trial'){
+	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD+=50
@@ -303,8 +303,8 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 21 // must be divisible by 21, [3 (go,go,stop) by 7 (shape matching conditions)]
-var exp_len = 420 //378 must be divisible by 21
-var numTrialsPerBlock = 84; // 63 divisible by 21
+var exp_len = 420 // must be divisible by 21
+var numTrialsPerBlock = 84; // divisible by 21
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.70
@@ -512,7 +512,7 @@ var start_test_block = {
 				
 			'<p class = block-text>On some trials, a red shape will overlap the green shape. Ignore this red shape, your job is to match the green shape to the white shape.</p>'+
 		
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the shapes. Do not respond if you see a star.</p>
+			'<p class = block-text>On some trials, you will see a star appear with or shortly after the shapes. Do not respond if you see a star.</p>'+
 			
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			
