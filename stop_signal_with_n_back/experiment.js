@@ -126,53 +126,6 @@ var randomDraw = function(lst) {
 	return lst[index]
 };
 
-var createControlTypes = function(numTrialsPerBlock){
-	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/15; numIterations++){ 
-		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
-			for (var numstop_signalConds = 0; numstop_signalConds < stop_signal_conditions.length; numstop_signalConds++){
-			
-				stop_signal_condition = stop_signal_conditions[numstop_signalConds]
-				n_back_condition = n_back_conditions[numNBackConds]
-				
-				stim = {
-					stop_signal_condition: stop_signal_condition,
-					n_back_condition: n_back_condition
-					}
-			
-				stims.push(stim)
-			}
-		}
-	}
-	
-	stims = jsPsych.randomization.repeat(stims,1)
-	stim_len = stims.length
-	
-	new_stims = []
-	for (var i = 0; i < stim_len; i++){
-		stim = stims.pop()
-		n_back_condition = stim.n_back_condition
-		stop_signal_condition= stim.stop_signal_condition
-		
-		probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-		correct_response = possible_responses[1][1]
-		if (n_back_condition == 'match'){
-			probe = randomDraw(['t','T'])
-			correct_response = possible_responses[0][1]
-		}		
-		
-		stim = {
-			n_back_condition: n_back_condition,
-			stop_signal_condition: stop_signal_condition,
-			probe: probe,
-			correct_response: correct_response,
-		}
-		
-		new_stims.push(stim)	
-		}
-	
-	return new_stims
-}
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	first_stims = []
@@ -252,6 +205,9 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			}			
 		}
 		
+		if (stop_signal_condition == 'stop'){
+			correct_response = -1
+		}
 		stim = {
 			n_back_condition: n_back_condition,
 			stop_signal_condition: stop_signal_condition,
@@ -288,18 +244,6 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 	
-		
-	return task_boards[0]+ 
-			probe+
-		   task_boards[1]
-}
-
-var getControlStim = function(){	
-	stim = control_stims.shift()
-	n_back_condition = stim.n_back_condition
-	stop_signal_condition = stim.stop_signal_condition
-	probe = stim.probe
-	correct_response = stim.correct_response
 		
 	return task_boards[0]+ 
 			probe+
@@ -365,11 +309,11 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 var run_attention_checks = true
-var practice_len = 15 // 15 must be divisible by 15
+var practice_len = 30 // 15 must be divisible by 15
 var exp_len = 270 //270 must be divisible by 15
-var numTrialsPerBlock = 45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
-var numTestBlocks = exp_len / numTrialsPerBlock
-var practice_thresh = 3 // 3 blocks of 16 trials
+var numTrialsPerBlock = 15 //45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var numTestBlocks = 3 //exp_len / numTrialsPerBlock
+var practice_thresh = 1 //3 // 3 blocks of 16 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -422,7 +366,6 @@ var current_block = 0
 var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
 var stop_signal_boards = ['<div class = bigbox><div class = starbox>','</div></div>']
 
-var control_stims = createControlTypes(numTrialsPerBlock)
 var stims = createTrialTypes(practice_len, delay)
 
 /* ************************************ */
@@ -625,49 +568,6 @@ var post_task_block = {
 /* ************************************ */
 /*        Set up timeline blocks        */
 /* ************************************ */
-var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
-
-var controlTrials = []
-controlTrials.push(feedback_block)
-for (i = 0; i < numTrialsPerBlock; i++) {
-	var control_block = {
-		type: 'stop-signal',
-		stimulus: getControlStim,
-		SS_stimulus: getStopStim,
-		SS_trial_type: getSSType, //getSSType,
-		data: {
-			"trial_id": "practice_trial"
-		},
-		is_html: true,
-		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 850,
-		timing_response: 2000,
-		response_ends_trial: false,
-		SSD: getSSD,
-		timing_SS: 500,
-		timing_post_trial: 0,
-		on_finish: appendData
-	}
-	controlTrials.push(control_block)
-}
-
-var controlCount = 0
-var controlNode = {
-	timeline: controlTrials,
-	loop_function: function(data) {
-		controlCount += 1
-		stims = createTrialTypes(numTrialsPerBlock, delay)
-		current_trial = 0
-	
-		if (controlCount == 1){
-			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
-			return false
-		}
-	}
-}
-
-
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)

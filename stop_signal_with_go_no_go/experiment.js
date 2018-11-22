@@ -45,11 +45,11 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
-			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_no_go_condition == 'go')){
+			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go')){
 				trial_count += 1
 			}
 			
-			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt != -1)){
+			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 				key = experiment_data[i].key_press
@@ -58,16 +58,10 @@ function assessPerformance() {
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
-			} else if ((experiment_data[i].stop_signal_condition == 'stop') && (experiment_data[i].rt != -1)){
+			} else if (((experiment_data[i].go_nogo_condition == 'nogo') || (experiment_data[i].stop_signal_condition == 'stop')) && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-			} else if ((experiment_data[i].go_no_go_condition == 'nogo') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-			} else if ((experiment_data[i].go_no_go_condition == 'nogo') && (experiment_data[i].stop_signal_condition == 'stop') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
+			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
 			}
 		}
@@ -105,33 +99,60 @@ var getInstructFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
-	if ((trial_id == 'practice_trial') && ((jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go') ||(jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_type == 'go'))){
-		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
-			
-			
+	
+	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
-			
-			
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
-	
-		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
-			
-			
-			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
-	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star + Shape was unfilled.</font></div></div>' + prompt_text
 		}
+	
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
+		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text
 		}
 	
-	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_type == 'nogo'){
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Shape was '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
+		}
+	} else if ((trial_id == 'practice_trial') && ((jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go'))){
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){			
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+		}  else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+		}
+		
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		}else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+		}else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+		}
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Shape was '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go')){
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
+		}else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
+		}else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
+		}
+	
 	}
 }
 
@@ -170,31 +191,22 @@ var getStopStim = function(){
 
 var getStim = function(){
 
-	if(exp_phase == "practice1"){
-		stim = stims.pop()
-		shape = stim.stim
-		correct_response = stim.correct_response
-		go_no_go_type = "practice_no_go"
-		stop_signal_condition = "practice_no_stop"
-		
-	} else if ((exp_phase == "test") || (exp_phase == "practice2")){
-		stim = stims.pop()
-		shape = stim.stim
-		stop_signal_condition = stim.stop_signal_condition
-		go_no_go_type = stim.go_no_go_type
-		correct_response = stim.correct_response
-		
-		if (go_no_go_type == 'nogo'){
-			stim_style = go_no_go_styles[1]
-		} else if (go_no_go_type == 'go'){
-			stim_style = go_no_go_styles[0]
-		}
-		
-		
-		if((stop_signal_condition == "stop")||(go_no_go_type == "nogo")){
-			correct_response = -1
-		} 
+	stim = stims.pop()
+	shape = stim.stim
+	stop_signal_condition = stim.stop_signal_condition
+	go_no_go_type = stim.go_no_go_type
+	correct_response = stim.correct_response
+	
+	if (go_no_go_type == 'nogo'){
+		stim_style = go_no_go_styles[1]
+	} else if (go_no_go_type == 'go'){
+		stim_style = go_no_go_styles[0]
 	}
+	
+	
+	if((stop_signal_condition == "stop")||(go_no_go_type == "nogo")){
+		correct_response = -1
+	} 
 	
 	stim = {
 		image: '<centerbox>'+preFileType + pathSource + stim_style + '_' + shape + fileType + postFileType+'</div>',
@@ -225,9 +237,7 @@ var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	current_trial+=1
 
-	if (exp_phase == "practice1"){
-		currBlock = practiceCount
-	} else if (exp_phase == "practice2"){
+	if (exp_phase == "practice2"){
 		currBlock = practiceStopCount
 	} else if (exp_phase == "test"){
 		currBlock = testCount
@@ -241,7 +251,7 @@ var appendData = function(){
 			current_block: currBlock,
 			current_trial: current_trial,
 			stop_signal_condition: stimData.stop_signal_condition,
-			go_no_go_condition: stimData.go_no_go_type
+			go_nogo_condition: stimData.go_no_go_type
 		})
 	}
 	
@@ -355,8 +365,7 @@ var prompt_text = '<div class = prompt_box>'+
 
 
 
-var stims = createTrialTypes(numTrialsPerBlock)
-var exp_phase = "practice1"
+var stims = createTrialTypes(practice_len)
 var exp_phase = "practice2"
 
 
@@ -677,7 +686,7 @@ var practiceStopNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "practice_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
@@ -694,7 +703,7 @@ var practiceStopNode = {
 					} else if (data[i].rt == -1){
 						sumStop_correct += 1
 					}				
-				} else if (data[i].go_no_go_condition == "nogo") {
+				} else if (data[i].go_nogo_condition == "nogo") {
 					go_no_go_length += 1
 					if (data[i].rt != -1){
 						num_gng_responses += 1
@@ -718,7 +727,7 @@ var practiceStopNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
 
-		if (practiceStopCount == 3) {
+		if (practiceStopCount == practice_thresh) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
@@ -757,12 +766,13 @@ var practiceStopNode = {
 			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt <= rt_thresh)) {
+			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt >= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
 			
 			feedback_text += '</p><p class = block-text>Redoing this practice.'
+			stims = createTrialTypes(practice_len)
 			return true	
 		}
 	}
@@ -831,7 +841,7 @@ var testNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_no_go_condition == "go")){
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
@@ -848,7 +858,7 @@ var testNode = {
 					} else if (data[i].rt == -1){
 						sumStop_correct += 1
 					}				
-				} else if (data[i].go_no_go_condition == "nogo") {
+				} else if (data[i].go_nogo_condition == "nogo") {
 					go_no_go_length += 1
 					if (data[i].rt != -1){
 						num_gng_responses += 1
@@ -904,7 +914,7 @@ var testNode = {
 			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
 				feedback_text +=
 				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt <= rt_thresh)) {
+			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt >= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
