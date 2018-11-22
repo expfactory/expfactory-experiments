@@ -22,7 +22,7 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -291,37 +291,41 @@ var appendData = function(){
 	
 	current_trial+=1
 	
+	var lastSet_top = letters.slice(0,3)
+	var lastSet_bottom = letters.slice(3)
+	
 	jsPsych.data.addDataToLastTrial({
 		stop_signal_condition: stop_signal_condition,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		probe: probe,
-		letters: letters,
 		cue: cue,
 		correct_response: correct_response,
 		current_trial: current_trial,
-		current_block: current_block
+		current_block: current_block,
+		top_stim: lastSet_top,
+		bottom_stim: lastSet_bottom
 		
 	})
 	
-	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
-		jsPsych.data.addDataToLastTrial({
-			correct_trial: 1,
-		})
 	
-	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
-		jsPsych.data.addDataToLastTrial({
-			correct_trial: 0,
-		})
-	
-	}
-	
-	if (trial_id == 'test_trial'){
+	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD+=50
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD-=50
+		}
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 1,
+			})
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 0,
+			})
 		}
 	}
 }

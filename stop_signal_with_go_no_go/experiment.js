@@ -27,7 +27,7 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -246,7 +246,7 @@ var appendData = function(){
 	}
 	
 	
-	if (exp_phase == "test"){	
+	if ((exp_phase == "test") || (exp_phase == "practice2")){	
 		
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
@@ -263,6 +263,18 @@ var appendData = function(){
 			jsPsych.data.addDataToLastTrial({go_acc: 0})
 		}
 		
+	
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 1,
+			})
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 0,
+			})
+	
+		}
 	}
 	
 }
@@ -597,8 +609,7 @@ for (i = 0; i < practice_len; i++) {
 		SS_stimulus: getStopStim,
 		SS_trial_type: getSSType,
 		data: {
-			exp_id: "stop_signal_with_go_no_go",
-			"trial_id": "practice_trial",
+			trial_id: "practice_trial"
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
@@ -771,9 +782,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		SS_stimulus: getStopStim,
 		SS_trial_type: getSSType,
 		data: {
-			exp_id: "stop_signal_with_go_no_go",
-			"trial_id": "stim",
-			"exp_stage": "test_trial",
+			trial_id: "test_trial"
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],

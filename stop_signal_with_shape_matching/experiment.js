@@ -268,17 +268,6 @@ var appendData = function(){
 		
 	})
 	
-	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
-		jsPsych.data.addDataToLastTrial({
-			correct_trial: 1,
-		})
-	
-	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
-		jsPsych.data.addDataToLastTrial({
-			correct_trial: 0,
-		})
-	
-	}
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
@@ -287,6 +276,17 @@ var appendData = function(){
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD-=50
+		}
+		
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 1,
+			})
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
+			jsPsych.data.addDataToLastTrial({
+				correct_trial: 0,
+			})
 		}
 	}
 }
