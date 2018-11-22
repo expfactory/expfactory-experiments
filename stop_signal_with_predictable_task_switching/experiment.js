@@ -21,7 +21,7 @@ function evalAttentionChecks() {
 }
 
 function assessPerformance() {
-	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
+	var experiment_data = jsPsych.data.getTrialsOfType('stop-signal')
 	var missed_count = 0
 	var trial_count = 0
 	var rt_array = []
@@ -111,7 +111,7 @@ var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	console.log(trial_id)
-	if ((trial_id == 'practice_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
+	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition != 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
 			
@@ -127,7 +127,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
-	} else if ((trial_id == 'practice_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
@@ -304,7 +304,7 @@ var appendData = function(){
 	current_trial+=1
 	
 	
-	if ((trial_id == 'practice_trial') || (trial_id == 'practice_with_stop')){
+	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
 	} else if (trial_id == 'test_trial'){
 		current_block = testCount
@@ -337,7 +337,7 @@ var appendData = function(){
 	
 	}
 	
-	if (trial_id == 'test_trial'){
+	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
 		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD+=50
@@ -358,10 +358,11 @@ var credit_var = 0
 var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 24 // 24  must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 240 //324 must be divisible by 12
-var numTrialsPerBlock = 48; //  60 divisible by 12
+var practice_len = 24 // must be divisible by 12 [3 (go go stop), by 2 (switch or stay) by 2 (mag or parity)]
+var exp_len = 240 // must be divisible by 12
+var numTrialsPerBlock = 48; // divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
+
 var upper_stop_success_bound = 0.70
 var lower_stop_success_bound = 0.30
 
