@@ -4,6 +4,7 @@
 function addID() {
   jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_single_task_network'})
 }
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {

@@ -39,7 +39,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('predictive_task_switching_single_task_network')"}
+                                        "on_trial_finish": "addID('predictable_task_switching_single_task_network')"}
                        }
     
    }

@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_single_task_network'})
+}
+
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('poldrack-single-stim')
 	var missed_count = 0

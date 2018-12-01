@@ -13,10 +13,8 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js", 
-                "jspsych-poldrack-single-audio.js",
                 "experiment.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-stop-signal.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-stop-signal-audio.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
@@ -43,7 +41,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID()"}
+                                        "on_trial_finish": "addID('stop_signal_with_go_no_go')"}
                        			} 
     
    }

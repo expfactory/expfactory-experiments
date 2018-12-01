@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_with_two_by_two'})
+}
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {

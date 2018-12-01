@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_single_task_network'})
+}
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {

@@ -39,7 +39,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('shape_matching_with_predictive_task_switching')"}
+                                        "on_trial_finish": "addID('shape_matching_with_predictable_task_switching')"}
                        }
     
    }

@@ -18,9 +18,9 @@
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
-                "style.css"
+                "object_recognition_style.css"
                ],
-        "exp_id": "object_recognition_network",
+        "exp_id": "object_recognition",
         "cognitive_atlas_task_id": "tsk_4a57abb949a0d",
         "contributors": [
                          "Ian Eisenberg",
@@ -35,7 +35,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('digit_span')"}
+                                        "on_trial_finish": "addID('object_recognition')"}
                        }
    }
 ]

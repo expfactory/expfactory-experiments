@@ -1,6 +1,10 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function addID() {
+  jsPsych.data.addDataToLastTrial({exp_id: 'two_by_two_single_task_network'})
+}
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -15,6 +19,8 @@ function evalAttentionChecks() {
   }
   return check_percent
 }
+
+
 
 function assessPerformance() {
 	/* Function to calculate the "credit_var", which is a boolean used to
@@ -410,7 +416,6 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "end",
-    exp_id: 'threebytwo_copy'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
@@ -470,7 +475,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "cued_predictive_task_switching",
 		trial_id: "practice-stop-feedback"
 	},
 	choices: [13],
