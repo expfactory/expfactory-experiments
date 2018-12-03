@@ -510,7 +510,6 @@ var feedback_text = 'Welcome to the experiment. This experiment will take less t
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "cued_predictive_task_switching",
 		trial_id: "practice-stop-feedback"
 	},
 	choices: [13],
