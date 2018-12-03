@@ -383,7 +383,6 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: "end",
-    exp_id: 'stop_signal_with_two_by_two'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],
@@ -524,7 +523,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "n_back_with_flanker",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],

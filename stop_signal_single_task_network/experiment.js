@@ -359,7 +359,6 @@ var attention_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -378,7 +377,6 @@ var end_block = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -406,7 +404,6 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "instruction"
 	},
 	pages:[
@@ -462,7 +459,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "fixation",
 	},
 	timing_post_trial: 0,
@@ -476,7 +472,6 @@ var prompt_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "prompt_fixation",
 	},
 	timing_post_trial: 0,
@@ -494,8 +489,7 @@ var practice_intro = {
 	is_html: true,
 	choices: [13],
 	data: {
-		exp_id: "stop_signal_single_task_network",
-		"trial_id": "stop_intro_phase1"
+		trial_id: "stop_intro_phase1"
 	},
 	timing_post_trial: 0,
 	timing_response: 180000,
@@ -506,7 +500,6 @@ var feedback_text = 'We will start practice. During practice, you will receive a
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "stop_signal_with_n_back",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],
@@ -533,8 +526,7 @@ var test_intro = {
 	is_html: true,
 	choices: [13],
 	data: {
-		exp_id: "stop_signal_single_task_network",
-		"trial_id": "test_intro"
+		trial_id: "test_intro"
 	},
 	timing_post_trial: 0,
 	timing_response: 180000,
@@ -549,7 +541,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "stop_signal_single_task_network",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],
@@ -586,8 +577,7 @@ for (i = 0; i < practice_len; i++) {
 		SS_stimulus: getStopStim,
 		SS_trial_type: getSSType,
 		data: {
-			exp_id: "stop_signal_single_task_network",
-			"trial_id": "practice_trial",
+			trial_id: "practice_trial",
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
@@ -755,8 +745,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		SS_stimulus: getStopStim,
 		SS_trial_type: getSSType,
 		data: {
-			exp_id: "stop_signal_single_task_network",
-			"trial_id": "test_trial"
+			trial_id: "test_trial"
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],

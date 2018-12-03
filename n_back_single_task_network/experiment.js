@@ -470,7 +470,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "n_back_single_task_network",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],

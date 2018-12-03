@@ -484,7 +484,6 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-		exp_id: 'predictable_task_switching_with_directed_forgetting'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',

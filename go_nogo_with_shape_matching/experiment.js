@@ -383,7 +383,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "go_nogo_with_shape_matching",
 		trial_id: "feedback_block"
 	},
 	choices: [13],
@@ -459,7 +458,6 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-    	exp_id: 'go_nogo_with_shape_matching'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -547,7 +545,6 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		key_answer: getResponse,
 		data: {
-			exp_id: "shape_matching_with_cued_task_switching",
 			trial_id: "practice_trial"
 			},
 		correct_text: getCorrectText,

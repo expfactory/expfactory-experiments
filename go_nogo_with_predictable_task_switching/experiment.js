@@ -601,7 +601,6 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		key_answer: getResponse,
 		data: {
-			exp_id: "go_nogo_with_predictable_task_switching",
 			trial_id: "practice_trial"
 			},
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
@@ -709,7 +708,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getStim,
 		is_html: true,
 		data: {
-			exp_id: "go_nogo_with_predictable_task_switching",
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],

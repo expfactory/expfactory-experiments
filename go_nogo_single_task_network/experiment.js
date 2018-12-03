@@ -306,7 +306,6 @@ var end_block = {
   timing_response: 180000,
   data: {
     trial_id: "end",
-    exp_id: 'go_nogo'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
@@ -349,7 +348,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "n_back_single_task_network",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],

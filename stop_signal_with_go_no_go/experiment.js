@@ -396,7 +396,6 @@ var attention_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -415,7 +414,6 @@ var end_block = {
 var welcome_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "welcome"
 	},
 	timing_response: 180000,
@@ -443,7 +441,6 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "instruction"
 	},
 	pages:[
@@ -508,7 +505,6 @@ var fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "fixation",
 	},
 	timing_post_trial: 0,
@@ -522,7 +518,6 @@ var prompt_fixation_block = {
 	is_html: true,
 	choices: 'none',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "prompt_fixation",
 	},
 	timing_post_trial: 0,
@@ -540,7 +535,6 @@ var practice_intro = {
 	is_html: true,
 	choices: [13],
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		"trial_id": "stop_intro_phase1"
 	},
 	timing_post_trial: 0,
@@ -563,7 +557,6 @@ var test_intro = {
 	is_html: true,
 	choices: [13],
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		"trial_id": "test_intro"
 	},
 	timing_post_trial: 0,
@@ -579,7 +572,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "stop_signal_with_go_no_go",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],

@@ -411,7 +411,6 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-    	exp_id: 'go_nogo_with_predictive_task_switching'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -543,7 +542,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "go_nogo_with_n_back",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],

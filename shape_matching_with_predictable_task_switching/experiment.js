@@ -491,7 +491,6 @@ var end_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "end",
-    	exp_id: 'shape_matching_with_predictable_task_switching'
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
@@ -556,7 +555,6 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getMask,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "mask",
 		},
 		choices: 'none',
@@ -669,7 +667,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getMask,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "test_mask",
 		},
 		choices: 'none',
@@ -683,7 +680,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getStim,
 		is_html: true,
 		data: {
-			exp_id: "shape_matching_with_predictable_task_switching",
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],

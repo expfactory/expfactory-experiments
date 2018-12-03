@@ -496,7 +496,6 @@ var feedback_text =
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
-		exp_id: "n_back_with_directed_forgetting",
 		trial_id: "practice-no-stop-feedback"
 	},
 	choices: [13],
