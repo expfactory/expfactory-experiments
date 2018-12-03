@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'cue_control_smoking_practice', subject_ID: subject_ID})
+  jsPsych.data.addDataToLastTrial({exp_id: 'cue_control_smoking_practice'})
 }
 
 
