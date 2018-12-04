@@ -7,17 +7,15 @@ jobs:
         steps:
         - checkout
         - run:
-            command: /usr/bin/jshint  --config /lint/.jshint_config .
-              
-            
-            
-            
+            name: jshint
+            command: |
+              /usr/bin/jshint  --config /lint/.jshint_config .
+                          
     build:
         docker:
             - image: continuumio/miniconda
         steps:
         - checkout
-             
         - run:
             name: test
             command: |
