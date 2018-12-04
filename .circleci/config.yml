@@ -172,4 +172,11 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_with_two_by_two','web','.');"
+              workflows:
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - jshint
+      - build
 
