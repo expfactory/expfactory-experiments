@@ -132,6 +132,12 @@ jobs:
               python -c "from expfactory.views import generate_experiment_web; generate_experiment_web('web','.')"
 
 
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food_practice','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food_pre_rating','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_smoking','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_smoking_practice','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_smoking_pre_rating','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_go_no_go','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_n_back','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_directed_forgetting','.');"
