@@ -1,6 +1,16 @@
 version: 2 
     
-jobs:                     
+jobs:
+    jshint: 
+        docker: 
+            - image: hyzual/jshint
+        steps:
+        - checkout
+        - run:
+            name: jshint
+            command: |
+              /usr/bin/jshint  --config /lint/.jshint_config .
+                          
     build:
         docker:
             - image: continuumio/miniconda
@@ -22,7 +32,6 @@ jobs:
               pip install git+git://github.com/expfactory/expfactory-python.git
               pip install cognitiveatlas
               python -c "from expfactory.tests import validate_experiment_directories; validate_experiment_directories('.')"
-              sudo docker run -it -v $(pwd):/lint hyzual/jshint --config /lint/.jshint_config .
               python -c "from expfactory.tests import validate_experiment_tag; validate_experiment_tag('.')"
               python -c "from expfactory.tests import validate_circle_yml; validate_circle_yml('.')"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('adaptive_n_back','web','.');"
@@ -163,5 +172,4 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_two_by_two','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_two_by_two','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_with_two_by_two','.');"
-
 
