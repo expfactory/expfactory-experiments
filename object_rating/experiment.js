@@ -197,6 +197,7 @@ var stims = jsPsych.randomization.repeat(neutral_pics,1)
 var end_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_id: "object_rating",
 		trial_id: "end"
 	},
 	timing_response: -1,

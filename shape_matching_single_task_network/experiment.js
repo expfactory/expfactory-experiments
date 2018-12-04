@@ -184,6 +184,7 @@ var prompt_task_list = '<ul>'+
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
+		exp_id: "shape_matching_single_task_network",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,

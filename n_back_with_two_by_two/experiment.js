@@ -443,6 +443,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
+       exp_id: "n_back_with_two_by_two",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',

@@ -149,6 +149,7 @@ var answers = [2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
 var post_task_block = {
    type: 'survey-text',
    data: {
+       exp_id: "tower_of_london_imagine",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',

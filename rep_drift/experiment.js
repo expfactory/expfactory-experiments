@@ -864,6 +864,7 @@ var stimArray = createStims(numStims,numIterrating)
 var end_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_id: "rep_drift",
 		trial_id: "end",
 	},
 	timing_response: -1,

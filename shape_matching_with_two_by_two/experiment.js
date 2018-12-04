@@ -522,6 +522,7 @@ var instruction_node = {
 var end_block = {
   type: 'poldrack-text',
   data: {
+    exp_id: "shape_matching_with_two_by_two",
     trial_id: "end",
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',

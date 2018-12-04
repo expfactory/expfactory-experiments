@@ -318,6 +318,7 @@ var prompt_text = '<div class = prompt_box>'+
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
+		exp_id: "predictable_task_switching_single_task_network",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,

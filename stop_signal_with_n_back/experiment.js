@@ -392,6 +392,7 @@ var attention_node = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_id: "stop_signal_with_n_back",
 		trial_id: "end",
 	},
 	timing_response: 180000,

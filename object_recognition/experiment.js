@@ -190,6 +190,7 @@ var object_responses = [[13,'Enter']]
 var set_stims_block = {
   type: 'call-function',
   data: {
+    exp_id: "object_recognition",
     trial_id: "set_stims"
   },
   func: setStims,

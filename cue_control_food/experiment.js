@@ -368,6 +368,7 @@ var stims = createAllStims(numStimsPerCategory,numIterations,3,mainNullType) // 
 var end_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_id: "cue_control_food",
 		trial_id: "end"
 	},
 	timing_response: -1,

@@ -379,6 +379,7 @@ var run_attention_checks = true
 var attention_check_block = {
   type: 'attention-check',
   data: {
+    exp_id: "stop_signal_with_go_no_go",
     trial_id: "attention_check"
   },
   timing_response: 180000,

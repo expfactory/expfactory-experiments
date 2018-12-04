@@ -62,6 +62,7 @@ for (var i = 0; i < num_trials; i++) {
 var post_task_block = {
    type: 'survey-text',
    data: {
+       exp_id: "random_number_generation",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
