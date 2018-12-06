@@ -129,7 +129,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		directed_condition: directed_condition
 	}
 	
-	var stims = []
+	stims = []
 	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numTaskConds = 0; numTaskConds < task_conditions.length; numTaskConds++){

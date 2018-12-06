@@ -889,7 +889,7 @@ var testNode = {
 			var correct = 0
 			var total_trials = 0
 	
-			for (var i = 0; i < data.length; i++){
+			for (i = 0; i < data.length; i++){
 				if (data[i].trial_id == "test_trial"){
 					total_trials+=1
 					if (data[i].rt != -1){

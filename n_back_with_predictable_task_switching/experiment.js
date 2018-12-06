@@ -121,11 +121,11 @@ var createControlTypes = function(numTrialsPerBlock){
 	var stims = []
 	for (var i = 0; i < numTrialsPerBlock + 1; i++){
 		quadIndex = whichQuadStart%4
-		if (quadIndex == 0){
+		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		
-		if (i == 0){
+		if (i === 0){
 			predictive_condition = 'N/A'
 			n_back_cond = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1).pop()
 			predictive_dimension = predictive_dimensions[quadIndex - 1][0]
@@ -193,7 +193,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	for (var i = 0; i < numTrialsPerBlock + 2; i++){
 		quadIndex = whichQuadStart%4
-		if (quadIndex == 0){
+		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		

@@ -439,7 +439,6 @@ var end_block = {
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
-	timing_response: 180000,
 	on_finish: function(){
   	assessPerformance()
   	evalAttentionChecks()

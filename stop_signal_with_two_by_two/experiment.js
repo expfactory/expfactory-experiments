@@ -829,11 +829,13 @@ var practiceNode = {
 			}
 			
 			if (stop_correct > maxStopCorrect){
+				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			
 			}
 			
 			if (stop_correct < minStopCorrect){
+				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			
 			}
@@ -975,10 +977,12 @@ var testNode = {
 		}
 		
 		if (stop_correct > maxStopCorrect){
+			feedback_text +=
 			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 		}
 		
 		if (stop_correct < minStopCorrect){
+			feedback_text +=
 			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 		}
 	

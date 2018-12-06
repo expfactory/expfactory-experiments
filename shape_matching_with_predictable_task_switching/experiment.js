@@ -156,14 +156,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 	for (var i = 0; i < numTrialsPerBlock; i++){
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
-		if (quadIndex == 0){
+		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		shape_matching_condition = shape_matching_trial_type_list[quadIndex - 1].pop()
 		predictive_dimension = predictive_dimensions[quadIndex - 1]
-		var probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
-		var target_i = 0
-		var distractor_i = 0
+		probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
+		target_i = 0
+		distractor_i = 0
 		if (shape_matching_condition[0] == 'S') {
 			target_i = probe_i
 			if (predictive_dimension == 'the same'){

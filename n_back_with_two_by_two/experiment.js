@@ -178,7 +178,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 						cued_condition: cued_condition,
 						n_back_condition: n_back_condition,
 						curr_task: curr_task,
-						cued_switch_condition
+						cued_switch_condition: cued_switch_condition
 						}
 			
 					stims.push(stim)

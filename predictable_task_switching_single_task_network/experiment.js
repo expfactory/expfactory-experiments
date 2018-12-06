@@ -87,14 +87,14 @@ var randomDraw = function(lst) {
 
 var getCorrectResponse = function(number, predictive_dimension){
 	if (number > 5){
-		var magnitude = 'high'
+		magnitude = 'high'
 	} else if (number < 5){
 		magnitude = 'low'
 	}
 
-	if (number%2 == 0){
-		var parity = 'even'
-	} else if (number%2 != 0) {
+	if (number%2 === 0){
+		parity = 'even'
+	} else if (number%2 !== 0) {
 		parity = 'odd'
 	}
 	
@@ -153,7 +153,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	for (var i = 0; i < numTrialsPerBlock; i++){
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
-		if (quadIndex == 0){
+		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		predictive_dimension = predictive_dimensions[quadIndex - 1]

@@ -242,7 +242,8 @@ var getProbe = function(directed_cond, letters, cue) {
 
 var getCorrectResponse = function(cue,probe,letters,stop_signal_condition) {
 	if (stop_signal_condition == 'stop'){
-		return correct_response = -1
+		correct_response = -1
+		return correct_response 
 	}
 	
 	if (cue == 'TOP') {
