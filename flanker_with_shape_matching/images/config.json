@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Stroop",
+        "template":"jspsych",
+        "run": [
+                "static/js/jspsych/jspsych.js",
+                "static/js/jspsych/plugins/jspsych-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/utils/poldrack_utils.js",
+                "experiment.js",
+                "static/css/jspsych.css",
+                "static/css/default_style.css",
+                "style.css"
+               ],
+        "exp_id": "stroop",
+        "cognitive_atlas_task_id": "tsk_4a57abb949e27",
+        "contributors": [
+                         "Ian Eisenberg",
+                         "Zeynep Enkavi",
+                         "Patrick Bissett",
+                         "Vanessa Sochat",
+                         "Russell Poldrack"
+                        ], 
+        "time":8,
+        "reference": "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410",
+        "notes": "Conditions refers to congruency on each trial",
+        "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID('stroop')"}
+                       }
+    
+   }
+]
+

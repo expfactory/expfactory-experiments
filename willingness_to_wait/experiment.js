@@ -135,6 +135,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
+       exp_id: "willingness_to_wait",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -159,7 +160,6 @@ var end_block = {
   type: 'poldrack-text',
   data: {
     trial_id: 'end',
-    exp_id: 'willingness_to_wait'
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: [13],

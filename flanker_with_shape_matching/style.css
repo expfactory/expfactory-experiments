@@ -1,0 +1,191 @@
+/*******************************************************/
+/***********    Network Default CSS Styles    **********/
+/*******************************************************/
+.display_stage {
+    position: fixed;
+    background: gray;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+.display_stage > div, .display_stage > p {
+  color: white;
+}
+
+
+.cue-text {
+	text-align: center;
+	font-size: 50px;
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+
+.instructBox {
+ width: 80vw;
+ height: 10vw;
+ position:absolute;
+ top:10%;
+ left:50%; 
+ margin-right: 0%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ font-size: 24px;
+}
+
+.prompt_box {
+ width: 75%;
+ height: 20%;
+ position:absolute;
+ top:10%;
+ left:20%;
+ transform: translate(-50%,-45%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+
+.picture_box {
+ width: 60%;
+ height: 60%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ text-align: center;
+}
+
+
+.fixation {
+ text-align: center;
+ font-size: auto;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: none;
+text-align: center;
+}
+
+
+.mask {
+  width: 80%;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+.fb_box {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-175%);
+}
+
+/*******************************************************/
+/***********   Flanker and Shape CSS Styles   **********/
+/*******************************************************/
+
+
+.leftbox {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-282.5%,-50%);
+  z-index: 2;
+  background-color: none;
+}
+
+.distractorbox {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-287.5%,-57%);
+  background-color: none;
+}
+
+.rightbox_center {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(32.5%,-50%);
+  background-color: none;
+}
+
+.rightbox1 {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-117.5%,-50%);
+  background-color: none;
+}
+
+.rightbox2 {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-42.5%,-50%);
+  background-color: none;
+}
+
+.rightbox3 {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(107.5%,-50%);
+  background-color: none;
+}
+
+.rightbox4 {
+  width: 13vw;
+  height: 13vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(182.5%,-50%);
+  background-color: none;
+}
+

@@ -1,8 +1,6 @@
 [
     {
         "name": "Willingness to Wait",
-        "exp_id": "willingness_to_wait",
-        "cognitive_atlas_task_id": "trm_569989ef8cff4",
         "template":"jspsych",
         "run": [
                 "static/js/jspsych/jspsych.js",
@@ -18,6 +16,8 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
+        "exp_id": "willingness_to_wait",
+        "cognitive_atlas_task_id": "trm_569989ef8cff4",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",

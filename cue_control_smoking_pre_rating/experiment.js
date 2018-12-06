@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'cue_control_smoking_pre_rating', subject_ID: subject_ID})
+  jsPsych.data.addDataToLastTrial({exp_id: 'cue_control_smoking_pre_rating'})
 }
 
 
@@ -214,6 +214,7 @@ var stims = createStims(numStimsPerCategory,numIterations,3) // last input is fo
 var end_block = {
 	type: 'poldrack-text',
 	data: {
+		exp_id: "cue_control_smoking_pre_rating",
 		trial_id: "end"
 	},
 	timing_response: -1,
