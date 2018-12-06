@@ -35,7 +35,7 @@ var createStims = function(numStims,numIterations,numZeroes){
 		stimArray.push(stim2)
 	}
 
-	var stimArray = jsPsych.randomization.repeat(stimArray, numIterations, true)
+	stimArray = jsPsych.randomization.repeat(stimArray, numIterations, true)
 	return stimArray
 }
 
@@ -68,7 +68,7 @@ var appendData = function(){
 	//curr_trial = jsPsych.progress().current_trial_global
 	//trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	
-	if(response_tracker.length == 0){
+	if(response_tracker.length === 0){
     	stim_rating = ""
     }
     

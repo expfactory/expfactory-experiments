@@ -34,7 +34,7 @@ var createGrid = function(){
 		
 	}
 	
-	for (var i = 0; i < numIncorrect; i++){
+	for (i = 0; i < numIncorrect; i++){
 		incorrect_num = incorrect_nums.pop()
 		category = randomDraw(categories[which_set].filter(function(y) {return $.inArray(y, [current_category]) == -1}))
 		stim = {
@@ -118,7 +118,7 @@ var appendGridData = function(){
 	
 	for (var i = 0; i < unique_responses.length; i++){
 		index = parseInt(unique_responses[i][unique_responses[i].length - 1])
-		if (grid_stims[index].correct == true){
+		if (grid_stims[index].correct === true){
 			correct += 1
 		}
 	}

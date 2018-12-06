@@ -182,7 +182,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	stim_len = stims.length
 	
 	new_stims = []
-	for (var i = 0; i < stim_len; i++){
+	for (i = 0; i < stim_len; i++){
 		if (i < 3){
 			stim = stims.shift()
 			n_back_condition = stim.n_back_condition

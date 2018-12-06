@@ -149,7 +149,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	for (var i = 0; i < numTrialsPerBlock; i++){
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
-		if (quadIndex == 0){
+		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		directed_condition = directed_forgetting_trial_type_list[quadIndex - 1].pop()

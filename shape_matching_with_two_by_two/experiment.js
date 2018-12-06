@@ -222,15 +222,16 @@ var getCue = function() {
 
 
 var getStim = function(){
+	var stim_html = ''
 	if ((shape_matching_condition == "SNN") || (shape_matching_condition == "DNN")){
-		var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
+		stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
 						'<div class = lowerbox>'+ 
 							'<div class = leftbox>' + preFileType + target + '_green' + fileTypePNG + '</div>' +
 							'<div class = distractorbox>' + '' + '</div>' +
 							'<div class = rightbox>' + preFileType + probe + '_white' + fileTypePNG + '</div>' +
 						'</div>'
 	} else {
-		var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
+		stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
 						'<div class = lowerbox>'+ 
 							'<div class = leftbox>' + preFileType + target + '_green' + fileTypePNG + '</div>' +
 							'<div class = distractorbox>' + preFileType + distractor + '_red' + fileTypePNG + '</div>' +
