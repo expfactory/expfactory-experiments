@@ -1,6 +1,6 @@
 [
     {
-        "name": "N-Back",
+        "name": "N-Back Single Task Network",
         "template":"jspsych",
         "run": [
 				"static/js/math.min.js",

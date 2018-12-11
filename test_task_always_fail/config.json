@@ -1,6 +1,6 @@
 [
     {
-        "name": "Test Task",
+        "name": "Test Task Always Fail",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",

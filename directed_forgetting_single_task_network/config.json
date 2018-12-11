@@ -1,6 +1,6 @@
 [
     {
-        "name": "Directed Forgetting Experiment",
+        "name": "Directed Forgetting Single Task Network",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
