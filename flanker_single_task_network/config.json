@@ -1,6 +1,6 @@
 [
     {
-        "name": "Flanker Task",
+        "name": "Flanker Task Single Task Network",
         "template":"jspsych",
         "run": [
         		"static/js/math.min.js",

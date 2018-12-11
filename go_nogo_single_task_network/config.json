@@ -1,6 +1,6 @@
 [
     {
-        "name": "Go-Nogo Task",
+        "name": "Go-Nogo Task Single Task Network",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",

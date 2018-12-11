@@ -1,6 +1,6 @@
 [
     {
-        "name": "The two by two task",
+        "name": "Stop Signal with Two by Two",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
