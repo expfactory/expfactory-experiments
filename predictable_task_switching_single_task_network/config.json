@@ -1,6 +1,6 @@
 [
     {
-        "name": "Predictable Task Switching",
+        "name": "Predictable Task Switching Single Task Network",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
