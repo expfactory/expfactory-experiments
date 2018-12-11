@@ -1,6 +1,6 @@
 [
     {
-        "name": "The two by two task",
+        "name": "The Two by Two Single Task Network",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",

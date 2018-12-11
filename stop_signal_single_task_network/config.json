@@ -1,6 +1,6 @@
 [
     {
-        "name": "Stop Signal Task",
+        "name": "Stop Signal Single Task Network",
         "template":"jspsych",
         "run": [
         		"static/js/math.min.js",
