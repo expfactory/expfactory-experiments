@@ -99,7 +99,12 @@ document.addEventListener("keydown", function(e){
     	keynum = e.which;
     }
     if (keynum == 13){
-		hitKey(81)
+    	if ((keyTracker.length === 0) && (game_state == 'questions')){
+    		alert('Please choose a response')
+    	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
+    		hitKey(81)
+    	}
+		
     }
 });
 
@@ -140,6 +145,7 @@ var sub_made_conditional_response = -1 // -1 if unapplicable, 0 if not and appli
 var keyTracker = []
 var buttonPressed = 'N/A'
 var buttonPressedText = 'N/A'
+var game_state = 'start'
 /* ************************************************ */
 /*        Questions and responses for Survey        */
 /* ************************************************ */
@@ -345,26 +351,9 @@ var welcome_block = {
 };
 
 var instructions_block = {
-	type: 'poldrack-instructions',
-	data: {
-		trial_id: "instruction"
-	},
-	pages:[
-		'<div class = centerbox>'+
-			'<p class = block-text style="font-size:36px"><font color="white">Please answer the following questions regarding your eating.</font></p>' +
-			'<p class = block-text style="font-size:36px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>'+
-			'<p class = block-text style="font-size:36px"><font color="white">You will not be able to go back, so please carefully read and understand each question before you move on.</font></p>'+
-		'</div>',		
-	],
-	allow_keys: false,
-	show_clickable_nav: true,
-	timing_post_trial: 0,
-};
-
-var instructions_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "welcome"
+		trial_id: "instruction"
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
@@ -375,7 +364,10 @@ var instructions_block = {
 			'<p class = block-text style="font-size:28px"><font color="white">Press enter to begin the survey.</font></p>'+
 		  '</div>',
 	cont_key: [13],
-	timing_post_trial: 0
+	timing_post_trial: 0,
+	on_finish: function(){
+		game_state = 'questions'
+	}
 };
 
 post_questionnaire_trials = []
