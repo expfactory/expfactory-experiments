@@ -394,6 +394,7 @@ for(var x = 0; x < survey_questions.length; x++){
 var post_questionnaire_node = {
 	timeline: post_questionnaire_trials,
 	loop_function: function(data){
+		game_state = 'end'
 	}
 }
 
