@@ -118,7 +118,7 @@ var appendData = function(){
 	
 	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
 		sub_made_conditional_response = 1
-	} else if ((buttonPressedText == 'No') && (question_type == 'Conditional')){
+	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
 		sub_made_conditional_response = 0
 	}
 	
