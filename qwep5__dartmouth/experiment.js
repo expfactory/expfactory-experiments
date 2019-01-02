@@ -118,7 +118,7 @@ var appendData = function(){
 	
 	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
 		sub_made_conditional_response = 1
-	} else if ((buttonPressedText == 'No') && (question_type == 'Conditional')){
+	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
 		sub_made_conditional_response = 0
 	}
 	
@@ -186,11 +186,11 @@ var button_text = [[['Yes','No'],2],
 				   [['Yes','No'], 2],
 				   [['Less than 1 episode per week','1 episode per week','2-3 episodes per week','4-7 episodes per week','8-13 episodes per week','14 or more episodes per week'],6],
 				   [['Yes','No'], 2],
-				   [['Less than 1 time per week','1 time per week','2-3 times per week','4-7 times per week','8-13 times per week','14 or more times per week'],6],
+				   [['Less than 1 time per week','1 time per week','2-3 times per week','4-5 times per week','6-7 times per week','8 or more times per week'],6],
 				   [['Yes','No'], 2],
-				   [['Less than 1 time per week','1 time per week','2-3 times per week','4-7 times per week','8-13 times per week','14 or more times per week'],6],
+				   [['Less than 1 time per week','1 time per week','2-3 times per week','4-5 times per week','6-7 times per week','8 or more times per week'],6],
 				   [['Yes','No'], 2],
-				   [['Less than 1 day per week','1 day per week','2-3 day per week','4-7 day per week','8-13 day per week','14 or more day per week'],6],
+				   [['Less than 1 day per week','1 day per week','2 days per week','3 days per week','4-5 days per week','More than 5 days per week'],6],
 				   [['Yes','No'], 2],
 				   [['Less than 1 time per week','1 time per week','2-3 times per week','4-7 times per week','8-13 times per week','14 or more times per week'],6],
 				   [['Yes','No'], 2],
@@ -198,14 +198,14 @@ var button_text = [[['Yes','No'],2],
 				   
 var question_types =   [['Fatal'],
 					   ['Fatal'],
-					   ['Fatal'],
+					   ['neither'], //'Fatal'
 					   ['neither'],
 					   ['neither'],
 					   ['neither'],
 					   ['neither'],
 					   ['neither'],
 					   ['neither'],
-					   ['Fatal'],
+					   ['neither'], //'Fatal'
 					   ['Conditional'],
 					   ['neither'],
 					   ['Conditional'],
@@ -221,14 +221,14 @@ var question_types =   [['Fatal'],
 
 var fatal_responses = [['No'],
 					   ['No'],
-					   ['Less than 1 episode per week'],
+					   ['none'], //'Less than 1 episode per week'
 					   ['none'],
 					   ['none'],
 					   ['none'],
 					   ['none'],
 					   ['none'],
 					   ['none'],
-					   ['Not at all','Slightly','Moderately'],
+					   ['none'], // 'Not at all','Slightly','Moderately'
 					   ['none'],
 					   ['none'],
 					   ['none'],
@@ -394,6 +394,7 @@ for(var x = 0; x < survey_questions.length; x++){
 var post_questionnaire_node = {
 	timeline: post_questionnaire_trials,
 	loop_function: function(data){
+		game_state = 'end'
 	}
 }
 
