@@ -112,7 +112,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 	//probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
-	predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
 	
 	var directed_forgetting_trial_type_list = []
 	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
@@ -129,7 +128,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	letters = getTrainingSet()
 	cue = getCue()
-	probe = getProbe(directed_condition,letters,cue, predictive_dimension)
+	probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+	probe = probe_info[0]
+	memorySet = probe_info[1]
+	forgetSet = probe_info[2]
 	correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
 	
 	var stims = []
@@ -141,7 +143,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 		letters: letters,
 		cue: cue,
 		probe: probe,
-		correct_response: correct_response
+		correct_response: correct_response,
+		memorySet: memorySet,
+		forgetSet: forgetSet
 	}
 	
 	stims.push(first_stim)
@@ -157,7 +161,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 		
 		letters = getTrainingSet()
 		cue = getCue()
-		probe = getProbe(directed_condition,letters,cue, predictive_dimension)
+		probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+		probe = probe_info[0]
+		memorySet = probe_info[1]
+		forgetSet = probe_info[2]
 		correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
 		
 		var stim = {
@@ -168,7 +175,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 			letters: letters,
 			cue: cue,
 			probe: probe,
-			correct_response: correct_response
+			correct_response: correct_response,
+			memorySet: memorySet,
+			forgetSet: forgetSet
 		}
 		
 		stims.push(stim)
@@ -232,6 +241,13 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 			})
 			probe = newArray.pop()
 		}
+		if (lastCue == 'BOT') {
+			memorySet = lastSet_top
+			forgetSet = lastSet_bottom
+		} else if (lastCue == 'TOP') {
+			memorySet = lastSet_bottom
+			forgetSet = lastSet_top
+		}
 	} else if (predictive_dimension == 'remember'){
 		if (directed_cond== 'pos') {
 			if (lastCue == 'BOT') {
@@ -254,11 +270,20 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 			})
 			probe = newArray.pop()
 		}
-	
+		
+		if (lastCue == 'BOT') {
+			memorySet = lastSet_bottom
+			forgetSet = lastSet_top
+		} else if (lastCue == 'TOP') {
+			memorySet = lastSet_top
+			forgetSet = lastSet_bottom
+		}
+		
 	}
 	
-	return probe
+	return [probe,memorySet,forgetSet]
 };
+
 
 var getCorrectResponse = function(predictive_dimension,cue,probe,letters) {
 	if (predictive_dimension == 'remember'){
@@ -373,6 +398,8 @@ var getStartFix = function(){
 	cue = stim.cue
 	correct_response = stim.correct_response
 	whichQuadrant = stim.whichQuad	
+	memorySet = stim.memorySet
+	forgetSet = stim.forgetSet
 	
 	return center_boards[whichQuadrant - 1][0] + '<span style="color:white">+</span>' + center_boards[whichQuadrant - 1][1]	
 
@@ -408,6 +435,8 @@ var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
 var predictive_dimensions_list = [['forget', 'forget', 'remember','remember'],
 							 ['remember','remember', 'forget', 'forget' ]]
+
+var predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
 							 
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var current_trial = 0	

@@ -122,6 +122,7 @@ var getInstructFeedback = function() {
 
 var getStim = function(){
 	stim = block_stims.pop()
+	correct_response = stim.data.correct_response
 	return stim.stimulus
 }
 
