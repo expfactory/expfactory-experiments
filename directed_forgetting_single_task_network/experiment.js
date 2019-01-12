@@ -110,6 +110,7 @@ var getCategorizeFeedback = function(){
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
 var appendProbeData = function(data) {
+	var curr_trial = jsPsych.progress().current_trial_global
 	var trialCue = cue
 	var lastSet_top = stims.slice(0,3)
 	var lastSet_bottom = stims.slice(3)
@@ -288,7 +289,7 @@ var credit_var = 0
 // task specific variables
 var choices = [77, 90]
 var exp_stage = 'practice'
-var practice_length = 8
+var practice_length = 8 
 var numTrialsPerBlock = 20
 var numTestBlocks = 4 
 var practice_thresh = 3 // 3 blocks of 8 trials
