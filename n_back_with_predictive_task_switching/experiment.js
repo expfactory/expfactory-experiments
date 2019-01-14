@@ -8,7 +8,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'n_back_with_predictable_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'n_back_with_predictive_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -347,9 +347,9 @@ var missed_thresh = 0.10
 
 var practice_thresh = 3 // 3 blocks of 20 trials
 
-var pathSource = "/static/experiments/n_back_with_predictable_task_switching/images/"
+var pathSource = "/static/experiments/n_back_with_predictive_task_switching/images/"
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/n_back_with_predictable_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/n_back_with_predictive_task_switching/images/"
 
 
 
@@ -424,7 +424,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "n_back_with_predictable_task_switching",
+       exp_id: "n_back_with_predictive_task_switching",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -449,7 +449,7 @@ var end_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take about 8 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -574,7 +574,7 @@ var fixation_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will take about 8 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -846,14 +846,14 @@ var testNode = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var n_back_with_predictable_task_switching_experiment = []
+var n_back_with_predictive_task_switching_experiment = []
 
-n_back_with_predictable_task_switching_experiment.push(practiceNode);
-n_back_with_predictable_task_switching_experiment.push(feedback_block);
+n_back_with_predictive_task_switching_experiment.push(practiceNode);
+n_back_with_predictive_task_switching_experiment.push(feedback_block);
 
-n_back_with_predictable_task_switching_experiment.push(start_test_block);
-n_back_with_predictable_task_switching_experiment.push(testNode);
-n_back_with_predictable_task_switching_experiment.push(feedback_block);
+n_back_with_predictive_task_switching_experiment.push(start_test_block);
+n_back_with_predictive_task_switching_experiment.push(testNode);
+n_back_with_predictive_task_switching_experiment.push(feedback_block);
 
-n_back_with_predictable_task_switching_experiment.push(post_task_block);
-n_back_with_predictable_task_switching_experiment.push(end_block);
+n_back_with_predictive_task_switching_experiment.push(post_task_block);
+n_back_with_predictive_task_switching_experiment.push(end_block);

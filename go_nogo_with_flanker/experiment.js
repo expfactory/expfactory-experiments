@@ -323,7 +323,7 @@ var response_keys =
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

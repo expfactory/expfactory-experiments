@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_with_directed_forgetting'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_with_directed_forgetting'})
 }
 
 function evalAttentionChecks() {
@@ -112,7 +112,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 	//probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
-	predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
 	
 	var directed_forgetting_trial_type_list = []
 	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
@@ -129,7 +128,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	letters = getTrainingSet()
 	cue = getCue()
-	probe = getProbe(directed_condition,letters,cue, predictive_dimension)
+	probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+	probe = probe_info[0]
+	memorySet = probe_info[1]
+	forgetSet = probe_info[2]
 	correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
 	
 	var stims = []
@@ -141,7 +143,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 		letters: letters,
 		cue: cue,
 		probe: probe,
-		correct_response: correct_response
+		correct_response: correct_response,
+		memorySet: memorySet,
+		forgetSet: forgetSet
 	}
 	
 	stims.push(first_stim)
@@ -157,7 +161,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 		
 		letters = getTrainingSet()
 		cue = getCue()
-		probe = getProbe(directed_condition,letters,cue, predictive_dimension)
+		probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+		probe = probe_info[0]
+		memorySet = probe_info[1]
+		forgetSet = probe_info[2]
 		correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
 		
 		var stim = {
@@ -168,7 +175,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 			letters: letters,
 			cue: cue,
 			probe: probe,
-			correct_response: correct_response
+			correct_response: correct_response,
+			memorySet: memorySet,
+			forgetSet: forgetSet
 		}
 		
 		stims.push(stim)
@@ -232,6 +241,13 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 			})
 			probe = newArray.pop()
 		}
+		if (lastCue == 'BOT') {
+			memorySet = lastSet_top
+			forgetSet = lastSet_bottom
+		} else if (lastCue == 'TOP') {
+			memorySet = lastSet_bottom
+			forgetSet = lastSet_top
+		}
 	} else if (predictive_dimension == 'remember'){
 		if (directed_cond== 'pos') {
 			if (lastCue == 'BOT') {
@@ -254,11 +270,20 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 			})
 			probe = newArray.pop()
 		}
-	
+		
+		if (lastCue == 'BOT') {
+			memorySet = lastSet_bottom
+			forgetSet = lastSet_top
+		} else if (lastCue == 'TOP') {
+			memorySet = lastSet_top
+			forgetSet = lastSet_bottom
+		}
+		
 	}
 	
-	return probe
+	return [probe,memorySet,forgetSet]
 };
+
 
 var getCorrectResponse = function(predictive_dimension,cue,probe,letters) {
 	if (predictive_dimension == 'remember'){
@@ -373,6 +398,8 @@ var getStartFix = function(){
 	cue = stim.cue
 	correct_response = stim.correct_response
 	whichQuadrant = stim.whichQuad	
+	memorySet = stim.memorySet
+	forgetSet = stim.forgetSet
 	
 	return center_boards[whichQuadrant - 1][0] + '<span style="color:white">+</span>' + center_boards[whichQuadrant - 1][1]	
 
@@ -408,6 +435,8 @@ var predictive_conditions = [['switch','stay'],
 							 ['stay','switch']]
 var predictive_dimensions_list = [['forget', 'forget', 'remember','remember'],
 							 ['remember','remember', 'forget', 'forget' ]]
+
+var predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
 							 
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var current_trial = 0	
@@ -471,7 +500,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "predictable_task_switching_with_directed_forgetting",
+       exp_id: "predictive_task_switching_with_directed_forgetting",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -497,7 +526,7 @@ var end_block = {
 };
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -513,7 +542,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -533,7 +562,7 @@ var instructions_block = {
 	pages: [		
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment, you will be presented with 6 letters, all of which you must memorize.'+
-			'These 6 letters will move clockwise from quadrant to quadrant across trials.</p> '+
+			' These 6 letters will move clockwise from quadrant to quadrant across trials.</p> '+
 				
 			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the 6 letters are in. For now, remember all 6 letters.</p>'+
 		
@@ -948,14 +977,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-var predictable_task_switching_with_directed_forgetting_experiment = [];
+var predictive_task_switching_with_directed_forgetting_experiment = [];
 
-predictable_task_switching_with_directed_forgetting_experiment.push(practiceNode);
-predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(practiceNode);
+predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictable_task_switching_with_directed_forgetting_experiment.push(start_test_block);
-predictable_task_switching_with_directed_forgetting_experiment.push(testNode);
-predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(start_test_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(testNode);
+predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictable_task_switching_with_directed_forgetting_experiment.push(post_task_block);
-predictable_task_switching_with_directed_forgetting_experiment.push(end_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(post_task_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(end_block);

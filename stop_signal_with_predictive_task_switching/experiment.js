@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictable_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictive_task_switching'})
 }
 function evalAttentionChecks() {
   var check_percent = 1
@@ -457,7 +457,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -888,14 +888,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-stop_signal_with_predictable_task_switching_experiment = []
+stop_signal_with_predictive_task_switching_experiment = []
 
-stop_signal_with_predictable_task_switching_experiment.push(practiceNode)
-stop_signal_with_predictable_task_switching_experiment.push(feedback_block)
+stop_signal_with_predictive_task_switching_experiment.push(practiceNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
 
-stop_signal_with_predictable_task_switching_experiment.push(start_test_block)
-stop_signal_with_predictable_task_switching_experiment.push(testNode)
-stop_signal_with_predictable_task_switching_experiment.push(feedback_block)
+stop_signal_with_predictive_task_switching_experiment.push(start_test_block)
+stop_signal_with_predictive_task_switching_experiment.push(testNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
 
-stop_signal_with_predictable_task_switching_experiment.push(post_task_block)
-stop_signal_with_predictable_task_switching_experiment.push(end_block)
+stop_signal_with_predictive_task_switching_experiment.push(post_task_block)
+stop_signal_with_predictive_task_switching_experiment.push(end_block)

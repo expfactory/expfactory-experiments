@@ -110,6 +110,7 @@ var getCategorizeFeedback = function(){
 
 //this adds the probe shown, trial number, and whether it was a correct trial to the data
 var appendProbeData = function(data) {
+	var curr_trial = jsPsych.progress().current_trial_global
 	var trialCue = cue
 	var lastSet_top = stims.slice(0,3)
 	var lastSet_bottom = stims.slice(3)
@@ -288,7 +289,7 @@ var credit_var = 0
 // task specific variables
 var choices = [77, 90]
 var exp_stage = 'practice'
-var practice_length = 8
+var practice_length = 8 
 var numTrialsPerBlock = 20
 var numTestBlocks = 4 
 var practice_thresh = 3 // 3 blocks of 8 trials
@@ -386,7 +387,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This task will take around 14 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -612,7 +613,7 @@ var practice_probe_block = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 14 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
