@@ -1,6 +1,6 @@
 [
     {
-        "name": "Flanker with Predictable Task Switching",
+        "name": "Shape Matching with Predictive Task Switching",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
@@ -11,15 +11,15 @@
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
-                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
                 "static/js/utils/poldrack_utils.js",
                 "experiment.js",
                 "static/css/jspsych.css",
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "flanker_with_predictable_task_switching",
+        "exp_id": "shape_matching_with_predictive_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
                          "Patrick Bissett",
@@ -39,7 +39,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('flanker_with_predictable_task_switching')"}
+                                        "on_trial_finish": "addID('shape_matching_with_predictive_task_switching')"}
                        }
     
    }

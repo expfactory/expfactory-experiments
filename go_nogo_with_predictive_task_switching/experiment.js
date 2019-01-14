@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_with_predictable_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'go_nogo_with_predictive_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -366,7 +366,7 @@ var go_no_go_styles = ['solid','unfilled'] //has dashed as well
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/go_nogo_with_predictable_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/go_nogo_with_predictive_task_switching/images/"
 
 var current_trial = 0
 
@@ -424,7 +424,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "go_nogo_with_predictable_task_switching",
+       exp_id: "go_nogo_with_predictive_task_switching",
        trial_id: "post_task_questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -784,14 +784,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-go_nogo_with_predictable_task_switching_experiment = []
+go_nogo_with_predictive_task_switching_experiment = []
 
-go_nogo_with_predictable_task_switching_experiment.push(practiceNode)
-go_nogo_with_predictable_task_switching_experiment.push(feedback_block)
+go_nogo_with_predictive_task_switching_experiment.push(practiceNode)
+go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
 
-go_nogo_with_predictable_task_switching_experiment.push(start_test_block)
-go_nogo_with_predictable_task_switching_experiment.push(testNode)
-go_nogo_with_predictable_task_switching_experiment.push(feedback_block)
+go_nogo_with_predictive_task_switching_experiment.push(start_test_block)
+go_nogo_with_predictive_task_switching_experiment.push(testNode)
+go_nogo_with_predictive_task_switching_experiment.push(feedback_block)
 
-go_nogo_with_predictable_task_switching_experiment.push(post_task_block)
-go_nogo_with_predictable_task_switching_experiment.push(end_block)
+go_nogo_with_predictive_task_switching_experiment.push(post_task_block)
+go_nogo_with_predictive_task_switching_experiment.push(end_block)

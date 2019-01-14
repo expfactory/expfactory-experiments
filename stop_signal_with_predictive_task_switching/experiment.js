@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictable_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictive_task_switching'})
 }
 function evalAttentionChecks() {
   var check_percent = 1
@@ -888,14 +888,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-stop_signal_with_predictable_task_switching_experiment = []
+stop_signal_with_predictive_task_switching_experiment = []
 
-stop_signal_with_predictable_task_switching_experiment.push(practiceNode)
-stop_signal_with_predictable_task_switching_experiment.push(feedback_block)
+stop_signal_with_predictive_task_switching_experiment.push(practiceNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
 
-stop_signal_with_predictable_task_switching_experiment.push(start_test_block)
-stop_signal_with_predictable_task_switching_experiment.push(testNode)
-stop_signal_with_predictable_task_switching_experiment.push(feedback_block)
+stop_signal_with_predictive_task_switching_experiment.push(start_test_block)
+stop_signal_with_predictive_task_switching_experiment.push(testNode)
+stop_signal_with_predictive_task_switching_experiment.push(feedback_block)
 
-stop_signal_with_predictable_task_switching_experiment.push(post_task_block)
-stop_signal_with_predictable_task_switching_experiment.push(end_block)
+stop_signal_with_predictive_task_switching_experiment.push(post_task_block)
+stop_signal_with_predictive_task_switching_experiment.push(end_block)

@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_single_task_network'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_single_task_network'})
 }
 
 function evalAttentionChecks() {
@@ -278,7 +278,7 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/predictable_task_switching_single_task_network/images/"
+var preFileType = "<img class = center src='/static/experiments/predictive_task_switching_single_task_network/images/"
 
 var current_trial = 0
 
@@ -318,7 +318,7 @@ var prompt_text = '<div class = prompt_box>'+
 var attention_check_block = {
 	type: 'attention-check',
 	data: {
-		exp_id: "predictable_task_switching_single_task_network",
+		exp_id: "predictive_task_switching_single_task_network",
 		trial_id: "attention_check"
 	},
 	timing_response: 180000,
@@ -702,14 +702,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-predictable_task_switching_single_task_network_experiment = []
+predictive_task_switching_single_task_network_experiment = []
 
-predictable_task_switching_single_task_network_experiment.push(practiceNode)
-predictable_task_switching_single_task_network_experiment.push(feedback_block)
+predictive_task_switching_single_task_network_experiment.push(practiceNode)
+predictive_task_switching_single_task_network_experiment.push(feedback_block)
 
-predictable_task_switching_single_task_network_experiment.push(start_test_block)
-predictable_task_switching_single_task_network_experiment.push(testNode)
-predictable_task_switching_single_task_network_experiment.push(feedback_block)
+predictive_task_switching_single_task_network_experiment.push(start_test_block)
+predictive_task_switching_single_task_network_experiment.push(testNode)
+predictive_task_switching_single_task_network_experiment.push(feedback_block)
 
-predictable_task_switching_single_task_network_experiment.push(post_task_block)
-predictable_task_switching_single_task_network_experiment.push(end_block)
+predictive_task_switching_single_task_network_experiment.push(post_task_block)
+predictive_task_switching_single_task_network_experiment.push(end_block)

@@ -1,6 +1,6 @@
 [
     {
-        "name": "Predictable Task Switching with Directed Forgetting Experiment",
+        "name": "Predictive Task Switching with Directed Forgetting Experiment",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
@@ -19,7 +19,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "exp_id": "predictable_task_switching_with_directed_forgetting",
+        "exp_id": "predictive_task_switching_with_directed_forgetting",
         "cognitive_atlas_task_id": "trm_56674c7c2fa4f",
         "contributors": [ 
         				 "Patrick Bissett",
@@ -39,7 +39,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('predictable_task_switching_with_directed_forgetting')"}
+                                        "on_trial_finish": "addID('predictive_task_switching_with_directed_forgetting')"}
                        }
     
    }

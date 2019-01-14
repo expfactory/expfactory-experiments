@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'predictable_task_switching_with_directed_forgetting'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'predictive_task_switching_with_directed_forgetting'})
 }
 
 function evalAttentionChecks() {
@@ -500,7 +500,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "predictable_task_switching_with_directed_forgetting",
+       exp_id: "predictive_task_switching_with_directed_forgetting",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -562,7 +562,7 @@ var instructions_block = {
 	pages: [		
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment, you will be presented with 6 letters, all of which you must memorize.'+
-			'These 6 letters will move clockwise from quadrant to quadrant across trials.</p> '+
+			' These 6 letters will move clockwise from quadrant to quadrant across trials.</p> '+
 				
 			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the 6 letters are in. For now, remember all 6 letters.</p>'+
 		
@@ -977,14 +977,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-var predictable_task_switching_with_directed_forgetting_experiment = [];
+var predictive_task_switching_with_directed_forgetting_experiment = [];
 
-predictable_task_switching_with_directed_forgetting_experiment.push(practiceNode);
-predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(practiceNode);
+predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictable_task_switching_with_directed_forgetting_experiment.push(start_test_block);
-predictable_task_switching_with_directed_forgetting_experiment.push(testNode);
-predictable_task_switching_with_directed_forgetting_experiment.push(feedback_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(start_test_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(testNode);
+predictive_task_switching_with_directed_forgetting_experiment.push(feedback_block);
 
-predictable_task_switching_with_directed_forgetting_experiment.push(post_task_block);
-predictable_task_switching_with_directed_forgetting_experiment.push(end_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(post_task_block);
+predictive_task_switching_with_directed_forgetting_experiment.push(end_block);
