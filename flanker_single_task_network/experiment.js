@@ -217,7 +217,7 @@ var post_task_block = {
 };
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 4 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -307,7 +307,7 @@ var fixation_block = {
 };
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will around 4 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
