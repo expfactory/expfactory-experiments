@@ -110,7 +110,7 @@ var permute = function(input) {
         for (var i = 0; i < input.length; i++) {
             var ch = input.splice(i, 1)[0];
             usedChars.push(ch);
-            if (input.length == 0) {
+            if (input.length === 0) {
                 permArr.push(usedChars.slice());
             }
             main();
@@ -263,7 +263,8 @@ var getPracticeTrials = function() {
 	var practice = []
 	var trials = jsPsych.randomization.repeat(stimuli, practice_len/4)
 	for (i=0; i<trials.length; i++) {
-		trials[i]['key_answer'] = trials[i].data.correct_response
+		//trials[i]['key_answer'] = trials[i].data.correct_response
+		trials[i].key_answer = trials[i].data.correct_response
 	}
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -314,9 +315,9 @@ var images = [prefix + 'circle.png', prefix + 'Lshape.png', prefix + 'rhombus.pn
 ]
 var permutations = permute([0,1,2,3])
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-//var permutation_index = randomDraw([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24])
-var unique_expfactory_id = window.location.pathname.split('/')[3]
-var permutation_index = unique_expfactory_id.charCodeAt() % 25
+var permutation_index = randomDraw([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24])
+//var unique_expfactory_id = window.location.pathname.split('/')[3]
+//var permutation_index = unique_expfactory_id.charCodeAt() % 25
 var permutation = permutations[permutation_index]
 // permutation = 0 // Change value if you have to restart the task
 
@@ -332,8 +333,8 @@ var stop_signal =
 
 /* Instruction Prompt */
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-//var choice_order = randomDraw([0,1]) // Change value if you have to restart the task
-var choice_order = unique_expfactory_id.charCodeAt() % 2
+var choice_order = randomDraw([0,1]) // Change value if you have to restart the task
+//var choice_order = unique_expfactory_id.charCodeAt() % 2
 
 var possible_responses = [
 	["index finger", 37],
@@ -348,14 +349,11 @@ if (choice_order == 1) {
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 
 var prompt_text = '<ul list-text>' + 
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + 
-					images[0] + '></img>' + possible_responses[0][0] + '</div></li>' +
-					'</li><li><div class = prompt_container><img class = prompt_stim src = ' +
-					images[1] + '></img>'  + possible_responses[0][0] + '</div></li>' +
-					' </li><li><div class = prompt_container><img class = prompt_stim src = ' 
-					+ images[2] + '></img>' + possible_responses[1][0] + '</div></li>' +
-					' </li><li><div class = prompt_container><img class = prompt_stim src = ' +
-					images[3] + '></img>' + possible_responses[1][0] + '</div></li></ul>'
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + possible_responses[0][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + possible_responses[0][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + possible_responses[1][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + possible_responses[1][0] + '</div></li>'+
+					'</ul>'
 	
 /* Global task variables */
 var current_trial = 0
@@ -417,7 +415,7 @@ var practice_stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), pract
 var practice_ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), practice_stop_len*0.2 / 2)
 for (var i=0; i<practice_stim_index.length; i++) {
 	var stim = {}
-	if (practice_stim_index[i] == 0) {
+	if (practice_stim_index[i] === 0) {
 		stim.stim = jQuery.extend({}, practice_go_stims.shift())
 		stim.type = 'go'
 	} else if (practice_stim_index[i] == 1) {
@@ -429,13 +427,13 @@ for (var i=0; i<practice_stim_index.length; i++) {
 	}
 	practice_stims.push(stim)
 	// refill if necessary
-	if (practice_go_stims.length == 0) {
+	if (practice_go_stims.length === 0) {
 		practice_go_stims = jsPsych.randomization.repeat(stimuli, practice_stop_len*0.6 / 4)
 	} 
-	if (practice_stop_stims.length == 0) {
+	if (practice_stop_stims.length === 0) {
 		practice_stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), practice_stop_len*0.2 / 2)
 	} 
-	if (practice_ignore_stims.length == 0) {
+	if (practice_ignore_stims.length === 0) {
 		practice_ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), practice_stop_len*0.2 / 2)
 	} 
 }
@@ -449,7 +447,7 @@ var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_len*0.2 /
 var ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_len*0.2 / 2)
 for (var i=0; i<stim_index.length; i++) {
 	var stim = {}
-	if (stim_index[i] == 0) {
+	if (stim_index[i] === 0) {
 		stim.stim = jQuery.extend({}, go_stims.shift())
 		stim.type = 'go'
 	} else if (stim_index[i] == 1) {
@@ -461,13 +459,13 @@ for (var i=0; i<stim_index.length; i++) {
 	}
 	test_stims.push(stim)
 	// refill if necessary
-	if (go_stims.length == 0) {
+	if (go_stims.length === 0) {
 		go_stims = jsPsych.randomization.repeat(stimuli, test_len*0.6 / 4)
 	} 
-	if (stop_stims.length == 0) {
+	if (stop_stims.length === 0) {
 		stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_len*0.2 / 2)
 	} 
-	if (ignore_stims.length == 0) {
+	if (ignore_stims.length === 0) {
 		ignore_stims = jsPsych.randomization.repeat(stimuli.slice(2,4), test_len*0.2 / 2)
 	} 
 }
@@ -655,13 +653,13 @@ var practice_loop = {
     for (var i = 0; i < data.length; i++) {
       if (data[i].trial_id == 'stim') {
         total_trials+=1
-        if (data[i].correct == true) {
+        if (data[i].correct === true) {
           correct_trials+=1
         }
       }
     }
     console.log('Practice Block Accuracy: ', correct_trials/total_trials)
-    if (correct_trials/total_trials > .75 || practice_repeats == 3) {
+    if (correct_trials/total_trials > 0.75 || practice_repeats == 3) {
     	current_trial = 0
       return false
     } else {
