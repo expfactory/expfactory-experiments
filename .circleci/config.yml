@@ -10,7 +10,7 @@ jobs:
         - run:
             name: jshint
             command: |
-              /usr/bin/jshint  --config ./jshint_config .
+              /usr/bin/jshint  --config ~/project/jshint_config .
                           
     build:
         docker:
