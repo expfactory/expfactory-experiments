@@ -4,6 +4,7 @@ jobs:
     jshint: 
         docker: 
             - image: hyzual/jshint
+        working_directory: ~/project
         steps:
         - checkout
         - run:
