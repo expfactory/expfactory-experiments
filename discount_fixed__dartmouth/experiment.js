@@ -386,7 +386,7 @@ for (x = 0; x < test_stim_index.length; x++) {
 	};
 
 	discount_fixed__dartmouth_experiment.push(test_block)
-	if ((x%60 == 0) && (x > 0)) {
+	if ((x%60 === 0) && (x > 0)) {
 		discount_fixed__dartmouth_experiment.push(rest_block)
 		discount_fixed__dartmouth_experiment.push(attention_node)
 	}
