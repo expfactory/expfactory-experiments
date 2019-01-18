@@ -266,8 +266,7 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 		
-	return task_boards[whichQuadrant - 1][0] + probe
-		   task_boards[whichQuadrant - 1][1]
+	return task_boards[whichQuadrant - 1][0] + probe + task_boards[whichQuadrant - 1][1]
 	
 }
 
@@ -280,8 +279,7 @@ var getControlStim = function(){
 	probe = stim.probe
 	correct_response = stim.correct_response
 		
-	return task_boards[whichQuadrant - 1][0] + probe
-		   task_boards[whichQuadrant - 1][1]
+	return task_boards[whichQuadrant - 1][0] + probe + task_boards[whichQuadrant - 1][1]
 	
 }
 

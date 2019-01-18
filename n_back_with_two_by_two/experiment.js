@@ -286,8 +286,7 @@ var getCueControlStim = function(){
 	probe = stim.probe
 	correct_response = stim.correct_response
 
-	return task_boards[0] + cued_dimension
-		   task_boards[1]
+	return task_boards[0] + cued_dimension + task_boards[1]
 }
 
 var getResponse =  function(){

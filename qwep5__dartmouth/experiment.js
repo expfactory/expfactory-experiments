@@ -28,7 +28,7 @@ var getQuestions = function(){
 	skip_question = 1
 	do_not_skip_question = 180000
 	
-	if ((sub_made_fatal_response == 0) && (sub_made_conditional_response == -1)){
+	if ((sub_made_fatal_response === 0) && (sub_made_conditional_response == -1)){
 		whichTime = do_not_skip_question
 	}
 	
@@ -38,7 +38,7 @@ var getQuestions = function(){
 	if (sub_made_conditional_response == 1){
 		sub_made_conditional_response = -1
 		whichTime = do_not_skip_question
-	} else if (sub_made_conditional_response == 0){
+	} else if (sub_made_conditional_response === 0){
 		sub_made_conditional_response = -1
 		whichTime = skip_question
 	}

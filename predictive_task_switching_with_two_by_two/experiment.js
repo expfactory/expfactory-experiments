@@ -300,7 +300,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	stims.push(first_stim)
 	
 
-	for (i = 0; i < numTrialsPerBlock; i++){
+	for (var ii = 0; ii < numTrialsPerBlock; ii++){
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
 		if (quadIndex === 0){
@@ -310,7 +310,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		cued_condition = temp_2_cond.task_cond
 		cued_switch_condition = temp_2_cond.cue_cond
 		predictive_dimension = predictive_dimensions[quadIndex - 1]
-		predictive_condition = predictive_cond_array[i%2]
+		predictive_condition = predictive_cond_array[ii%2]
 		
 		last_task = curr_task
 		if (cued_condition == "switch"){ // if switch tasks, pick a random cue and switch to other task

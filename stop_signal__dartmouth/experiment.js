@@ -240,7 +240,7 @@ var getPracticepractice_trials = function() {
 	var practice = []
 	var practice_trials = jsPsych.randomization.repeat(stims, practice_len/4)
 	for (i=0; i<practice_trials.length; i++) {
-		practice_trials[i]['key_answer'] = practice_trials[i].data.correct_response
+		practice_trials[i].key_answer = practice_trials[i].data.correct_response
 	}
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -381,19 +381,19 @@ var practice_go_stims = jsPsych.randomization.repeat(stims, practice_len*0.6 / 4
 var practice_stop_stims = jsPsych.randomization.repeat(stims, practice_len*0.4 / 4)
 for (var i=0; i<practice_stim_index.length; i++) {
 	var stim = {}
-	if (practice_stim_index[i] == 0) {
+	if (practice_stim_index[i] === 0) {
 		stim = jQuery.extend({},practice_go_stims.shift())
-		stim['SS_trial_type'] = 'go'
+		stim.SS_trial_type = 'go'
 	} else {
 		stim = jQuery.extend({},practice_stop_stims.shift())
-		stim['SS_trial_type'] = 'stop'
+		stim.SS_trial_type = 'stop'
 	} 
 	practice_trials.push(stim)
 	// refill if necessary
-	if (practice_go_stims.length == 0) {
+	if (practice_go_stims.length === 0) {
 		practice_go_stims = jsPsych.randomization.repeat(stims, practice_len*0.6 / 4)
 	} 
-	if (practice_stop_stims.length == 0) {
+	if (practice_stop_stims.length === 0) {
 		practice_stop_stims = jsPsych.randomization.repeat(stims, practice_len*0.4 / 4)
 	} 
 }
@@ -414,17 +414,17 @@ for (var i=0; i<test_stim_index.length; i++) {
 	var stim = {}
 	if (test_stim_index[i] == 0) {
 		stim = jQuery.extend({},test_go_stims.shift())
-		stim['SS_trial_type'] = 'go'
+		stim.SS_trial_type = 'go'
 	} else {
 		stim = jQuery.extend({},test_stop_stims.shift())
-		stim['SS_trial_type'] = 'stop'
+		stim.SS_trial_type = 'stop'
 	} 
 	test_trials.push(stim)
 	// refill if necessary
-	if (test_go_stims.length == 0) {
+	if (test_go_stims.length === 0) {
 		test_go_stims = jsPsych.randomization.repeat(stims, exp_len*0.6 / 4)
 	} 
-	if (test_stop_stims.length == 0) {
+	if (test_stop_stims.length === 0) {
 		test_stop_stims = jsPsych.randomization.repeat(stims, exp_len*0.4 / 4)
 	} 
 }
@@ -613,12 +613,12 @@ var practice_loop = {
     for (var i = 0; i < data.length; i++) {
       if (data[i].trial_id == 'stim') {
         total_practice_trials+=1
-        if (data[i].correct == true) {
+        if (data[i].correct === true) {
           correct_practice_trials+=1
         }
       }
     }
-    if (correct_practice_trials/total_practice_trials > .75 || practice_repeats == 3) {
+    if (correct_practice_trials/total_practice_trials > 0.75 || practice_repeats == 3) {
     	current_trial = 0
       return false
     } else {
