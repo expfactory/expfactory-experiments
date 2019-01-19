@@ -879,7 +879,6 @@ var practiceNode = {
 
 var testTrials = []
 testTrials.push(feedback_block)
-testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) {
 	testTrials.push(start_fixation_block)
 	testTrials.push(training_block)
@@ -955,9 +954,11 @@ var go_nogo_with_directed_forgetting_experiment = [];
 go_nogo_with_directed_forgetting_experiment.push(practiceNode);
 go_nogo_with_directed_forgetting_experiment.push(feedback_block);
 
+go_nogo_with_directed_forgetting_experiment.push(attention_node)
 go_nogo_with_directed_forgetting_experiment.push(start_test_block);
 go_nogo_with_directed_forgetting_experiment.push(testNode);
 go_nogo_with_directed_forgetting_experiment.push(feedback_block);
+go_nogo_with_directed_forgetting_experiment.push(attention_node)
 
 go_nogo_with_directed_forgetting_experiment.push(post_task_block);
 go_nogo_with_directed_forgetting_experiment.push(end_block);
