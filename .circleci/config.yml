@@ -128,7 +128,8 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('willingness_to_wait','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('writing_task','web','.');"
               python -c "from expfactory.views import generate_experiment_web; generate_experiment_web('web','.')"
-
+                
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('test_attn_check','web','.');"  
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('object_recognition','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food_practice','web','.');"

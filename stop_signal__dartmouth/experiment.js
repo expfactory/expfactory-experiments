@@ -316,14 +316,11 @@ for (var i=0; i<4; i++) {
 
 
 var prompt_text = '<ul list-text>' + 
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + 
-					images[0] + '></img>' + correct_responses[0][0] + '</div></li>' +
-					'</li><li><div class = prompt_container><img class = prompt_stim src = ' +
-					images[1] + '></img>'  + correct_responses[1][0] + '</div></li>' +
-					' </li><li><div class = prompt_container><img class = prompt_stim src = ' 
-					+ images[2] + '></img>' + correct_responses[2][0] + '</div></li>' +
-					' </li><li><div class = prompt_container><img class = prompt_stim src = ' +
-					images[3] + '></img>' + correct_responses[3][0] + '</div></li></ul>'
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + correct_responses[0][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + correct_responses[1][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + correct_responses[2][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + correct_responses[3][0] + '</div></li>' +
+				  '</ul>'
 
 /* Global task variables */
 var current_trial = 0
@@ -412,7 +409,7 @@ var test_go_stims = jsPsych.randomization.repeat(stims, exp_len*0.6 / 4)
 var test_stop_stims = jsPsych.randomization.repeat(stims, exp_len*0.4 / 4)
 for (var i=0; i<test_stim_index.length; i++) {
 	var stim = {}
-	if (test_stim_index[i] == 0) {
+	if (test_stim_index[i] === 0) {
 		stim = jQuery.extend({},test_go_stims.shift())
 		stim.SS_trial_type = 'go'
 	} else {
