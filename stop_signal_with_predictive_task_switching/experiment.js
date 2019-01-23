@@ -4,6 +4,7 @@
 function addID() {
   jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_predictive_task_switching'})
 }
+
 function evalAttentionChecks() {
   var check_percent = 1
   if (run_attention_checks) {
@@ -385,7 +386,7 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/stop_signal_with_predictable_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/stop_signal_with_predictive_task_switching/images/"
 
 var current_trial = 0
 
@@ -445,7 +446,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "stop_signal_with_predictable_task_switching",
+       exp_id: "stop_signal_with_predictive_task_switching",
        trial_id: "post_task_questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',

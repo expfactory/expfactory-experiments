@@ -4,12 +4,13 @@ jobs:
     jshint: 
         docker: 
             - image: hyzual/jshint
+        working_directory: ~/project
         steps:
         - checkout
         - run:
             name: jshint
             command: |
-              /usr/bin/jshint  --config /lint/.jshint_config .
+              /usr/bin/jshint  --config ./.jshint_config .
                           
     build:
         docker:
@@ -32,7 +33,7 @@ jobs:
               pip install git+git://github.com/expfactory/expfactory-python.git
               pip install cognitiveatlas
               python -c "from expfactory.tests import validate_experiment_directories; validate_experiment_directories('.')"
-              python -c "from expfactory.tests import validate_experiment_tag; validate_experiment_tag('.')"
+              # python -c "from expfactory.tests import validate_experiment_tag; validate_experiment_tag('.')"
               python -c "from expfactory.tests import validate_circle_yml; validate_circle_yml('.')"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('adaptive_n_back','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('angling_risk_task','web','.');"
@@ -141,38 +142,42 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_directed_forgetting','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_flanker','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_shape_matching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_predictable_task_switching','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_predictive_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_n_back','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_directed_forgetting','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_flanker','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_shape_matching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_predictable_task_switching','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_predictive_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_directed_forgetting','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_flanker','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_shape_matching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_predictable_task_switching','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_predictive_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('directed_forgetting_with_flanker','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('directed_forgetting_with_shape_matching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('two_by_two_with_directed_forgetting','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_with_directed_forgetting','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictive_task_switching_with_directed_forgetting','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_shape_matching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_predictable_task_switching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('shape_matching_with_predictable_task_switching','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_predictive_task_switching','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('shape_matching_with_predictive_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('directed_forgetting_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('shape_matching_single_task_network','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_single_task_network','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictive_task_switching_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('two_by_two_single_task_network','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('go_nogo_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('shape_matching_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_two_by_two','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_two_by_two','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_with_two_by_two','web','.');"
-              workflows:
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictive_task_switching_with_two_by_two','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop_signal__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__dartmouth','web','.');"
 workflows:
   version: 2
   build_and_test:
