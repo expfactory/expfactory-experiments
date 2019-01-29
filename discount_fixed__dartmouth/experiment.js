@@ -127,7 +127,9 @@ practice_trials = []
 for (var i = 0; i < practice_stim_html.length; i++) { 
   practice_trials.push({
     stimulus: practice_stim_html[i],
-    data: practice_data_prop[i]
+    data: practice_data_prop[i],
+    trial_id: "practice_trial",
+    exp_stage: "practice"
   });
 }
 
@@ -167,7 +169,10 @@ test_trials = []
 for (var i = 0; i < test_stim_html.length; i++) { 
   test_trials.push({
 	stimulus: test_stim_html[i],
-	data: test_data_prop[i]
+	data: test_data_prop[i],
+	trial_id: "test_trial",
+    exp_stage: "test"
+	
   });
 }
 
@@ -320,10 +325,6 @@ discount_fixed__dartmouth_experiment.push(start_practice_block);
 for (i = 0; i < practice_options.small_amt.length; i++) {
   var practice_block = {
   type: 'poldrack-single-stim',
-  data: {
-    trial_id: "practice_trial",
-    exp_stage: "practice"
-  },
   stimulus: practice_trials[i].stimulus,
   timing_stim: 4000,
   timing_response: practice_get_ITI,  
@@ -358,10 +359,6 @@ discount_fixed__dartmouth_experiment.push(start_test_block);
 for (x = 0; x < test_stim_index.length; x++) {
 	var test_block = {
 		type: 'poldrack-single-stim',
-		data: {
-		trial_id: "test_trial",
-		exp_stage: "test"
-		},
 		stimulus: test_trials[x].stimulus,
 		timing_stim: 4000,
 		timing_response: test_get_ITI,  
