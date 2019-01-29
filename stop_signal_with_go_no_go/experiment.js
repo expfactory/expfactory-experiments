@@ -321,7 +321,7 @@ var stop_signal_respond_upper_thresh = 0.70
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
-var shapes = ['circle','square','triangle','pentagon']
+var shapes = jsPsych.randomization.repeat(['circle','square','triangle','pentagon'],1)
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
 var totalShapesUsed = 4
