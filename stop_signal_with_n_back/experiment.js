@@ -311,9 +311,9 @@ var credit_var = 0
 var run_attention_checks = true
 var practice_len = 30 // 15 must be divisible by 15
 var exp_len = 270 //270 must be divisible by 15
-var numTrialsPerBlock = 15 //45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
-var numTestBlocks = 3 //exp_len / numTrialsPerBlock
-var practice_thresh = 1 //3 // 3 blocks of 16 trials
+var numTrialsPerBlock = 45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var numTestBlocks = exp_len / numTrialsPerBlock
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10

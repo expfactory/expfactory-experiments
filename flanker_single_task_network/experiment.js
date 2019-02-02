@@ -126,28 +126,36 @@ var test_stimuli = [{
 	data: {
 		correct_response: 72,
 		condition: 'incompatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'F',
+		center_letter: 'H'
 	}
 }, {
 	image: '<div class = centerbox><div class = flanker-text>HHFHH</div></div>',
 	data: {
 		correct_response: 70,
 		condition: 'incompatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'H',
+		center_letter: 'F'
 	}
 }, {
 	image: '<div class = centerbox><div class = flanker-text>HHHHH</div></div>',
 	data: {
 		correct_response: 72,
 		condition: 'compatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'H',
+		center_letter: 'H'
 	}
 }, {
 	image: '<div class = centerbox><div class = flanker-text>FFFFF</div></div>',
 	data: {
 		correct_response: 70,
 		condition: 'compatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'F',
+		center_letter: 'F'
 	}
 }];
 
@@ -232,7 +240,7 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
+		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each response you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
 	],
 	allow_keys: false,
 	data: {

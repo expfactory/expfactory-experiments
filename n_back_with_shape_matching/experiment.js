@@ -60,8 +60,7 @@ function assessPerformance() {
 			}
 		}
 	}
-	
-	
+		
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -267,6 +266,7 @@ var appendData = function(){
 		n_back_condition: n_back_condition,
 		shape_matching_condition: shape_matching_condition,
 		probe: probe,
+		distractor: distractor,
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,

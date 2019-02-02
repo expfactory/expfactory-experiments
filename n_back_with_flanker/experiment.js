@@ -263,6 +263,7 @@ var appendData = function(){
 		n_back_condition: n_back_condition,
 		flanker_condition: flanker_condition,
 		probe: probe,
+		flankers: flankers,
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
@@ -419,6 +420,7 @@ var instructions_block = {
 			'<p class = block-text>In this task, you will see a row of 5 letters on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current <i>middle</i> letter, to the <i>middle</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the middle letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>The letters that are not in the middle do not matter, please try to ignore them.</p> '+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+

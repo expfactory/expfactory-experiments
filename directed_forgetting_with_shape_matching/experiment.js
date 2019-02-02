@@ -179,11 +179,10 @@ var getTrainingSet = function() {
 
 //returns a cue randomly, either TOP or BOT
 var getCue = function() {
-	
 	cue = directed_cue_array[Math.floor(Math.random() * 2)]
-	
 	return cue
 };
+
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
 var getProbe = function(directed_cond, letters, cue) {

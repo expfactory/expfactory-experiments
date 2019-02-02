@@ -144,10 +144,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 					correct_response = possible_responses[0][1]
 				}
 			
-				if (flanker_condition == 'congruent'){
-					flanker_letter = center_letter
-				} else {
-					flanker_letter = randomDraw(['H','F'].filter(function(y) {return $.inArray(y, [center_letter]) == -1}))
+				if ((flanker_condition == 'H_congruent') || (flanker_condition == 'F_incongruent')){
+					flanker_letter = 'H'
+				} else if ((flanker_condition == 'F_congruent') || (flanker_condition == 'H_incongruent')){
+					flanker_letter = 'F'
 				}
 			
 			

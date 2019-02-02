@@ -154,7 +154,8 @@ var correct_responses = [
   ['nogo', -1]
 ]
 
-var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
+//var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
+var stims = [["solid", "stim1"],["outline","stim2"]]
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{

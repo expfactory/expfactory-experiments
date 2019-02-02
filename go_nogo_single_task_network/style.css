@@ -128,8 +128,11 @@ img.center {
 #stim1 {
 	width: 15vw;
 	height: 15vw;
-	background: orange;
+	background: black;
 	position: absolute;
+	border-style: solid;
+  	border-width: thick;
+  	border-color: black;
     top:50%;
     left:50%;
     margin-right:-50%;
@@ -139,8 +142,11 @@ img.center {
 #stim2 {
 	width: 15vw;
 	height: 15vw;
-	background: DodgerBlue;
+	background: none;
 	position: absolute;
+	border-style: solid;
+  	border-width: thick;
+  	border-color: black;
     top:50%;
     left:50%;
     margin-right:-50%;

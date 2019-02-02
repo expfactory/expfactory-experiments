@@ -188,7 +188,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		}
 	}
 	
-	//stims = jsPsych.randomization.repeat(stims,1)
+	stims = jsPsych.randomization.repeat(stims,1)
 	stims.push(second_stim)
 	stims.push(first_stim)
 	
