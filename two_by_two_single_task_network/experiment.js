@@ -128,6 +128,11 @@ If "switch old", switch to the last task and randomly choose a cue.
 var setStims = function() {
   var tmp;
   switch (task_switches[current_trial].task_switch) {
+    case "na":
+      tmp = curr_task
+      curr_task = randomDraw(getKeys(tasks))
+      cue_i = randomDraw([0, 1])
+      break
     case "stay":
       if (curr_task == "na") {
         tmp = curr_task
@@ -302,8 +307,9 @@ for (var t = 0; t < task_switch_types.length; t++) {
   }
 }
 var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / 4)
-var practiceStims = genStims(practice_length)
-var testStims = genStims(numTrialsPerBlock)
+task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
+var practiceStims = genStims(practice_length + 1)
+var testStims = genStims(numTrialsPerBlock + 1)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -579,7 +585,8 @@ var practiceNode = {
 	loop_function: function(data) {
 		practiceCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / 4)
-		stims = genStims(practice_length)
+		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
+		stims = genStims(practice_length + 1)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -615,7 +622,8 @@ var practiceNode = {
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			
 			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
-			stims = genStims(numTrialsPerBlock)
+			task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
+			stims = genStims(numTrialsPerBlock + 1)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -631,7 +639,8 @@ var practiceNode = {
 					'</p><p class = block-text>Done with this practice.' 
 					
 					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
-					stims = genStims(numTrialsPerBlock)
+					task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
+					stims = genStims(numTrialsPerBlock + 1)
 					return false
 			}
 			
@@ -731,7 +740,8 @@ var testNode = {
 	testCount += 1
 	current_trial = 0
 	task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
-	stims = genStims(numTrialsPerBlock)
+	task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
+	stims = genStims(numTrialsPerBlock + 1)
 	
 	var sum_rt = 0
 		var sum_responses = 0

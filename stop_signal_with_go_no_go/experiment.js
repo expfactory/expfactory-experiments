@@ -321,7 +321,7 @@ var stop_signal_respond_upper_thresh = 0.70
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
 var go_no_go_styles = ['solid','unfilled'] //has dashed as well
-var shapes = jsPsych.randomization.repeat(['circle','square','triangle','pentagon'],1)
+var shapes = jsPsych.randomization.repeat(['circle','circle','square','square'],1)
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
 var totalShapesUsed = 4
@@ -347,18 +347,14 @@ jsPsych.pluginAPI.preloadImages(images);
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>' + shapes[0] + ': ' + possible_responses[0][0] + '</li>' +
-						'<li>' + shapes[1] + ': ' + possible_responses[0][0] + '</li>' +
 						'<li>' + shapes[2] + ': ' + possible_responses[2][0] + '</li>' +
-						'<li>' + shapes[3] + ': ' + possible_responses[2][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +
 						'<li>Do not respond if the shape is '+go_no_go_styles[1]+'!</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[0] + ': ' + possible_responses[0][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[1] + ': ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[2] + ': ' + possible_responses[2][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[3] + ': ' + possible_responses[2][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears!</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if the shape is '+go_no_go_styles[1]+'!</p>' +
 				  '</div>'
@@ -448,8 +444,8 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
 			'<p class = block-text>Only one response is correct for each shape.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[0]+' or a '+shapes[1]+', press the '+possible_responses[0][0]+'.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[2]+' or a '+shapes[3]+', press the '+possible_responses[2][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[0]+', press the '+possible_responses[0][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[2]+', press the '+possible_responses[2][0]+'.</p>'+
 			'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 		'</div>',
 		
@@ -465,7 +461,7 @@ var instructions_block = {
 		'</div>',
 		
 		"<div class = centerbox>"+
-			"<p class = block-text>Additionally, on most trials, the shapes will be "+go_no_go_styles[0]+".  Sometimes, the shapes will be "+go_no_go_styles[1]+".</p>"+
+			"<p class = block-text>Sometimes, the shapes will be "+go_no_go_styles[0]+".  Other times, the shapes will be "+go_no_go_styles[1]+".</p>"+
 			"<p class = block-text>If the shapes are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
 		"</div>",
 		
