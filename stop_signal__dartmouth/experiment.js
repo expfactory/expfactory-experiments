@@ -145,7 +145,7 @@ var getPracticeFeedback = function() {
 	var GoCorrect_percent = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 
-	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break!"
+	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll Down)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for practice trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -206,7 +206,7 @@ var getTestFeedback = function() {
 	stopAccMeans.push(StopCorrect_percent)
 	var stopAverage = math.mean(stopAccMeans)
 
-	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break!"
+	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break!  (Scroll Down)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -296,16 +296,16 @@ var stop_signal =
 
 /* Instruction Prompt */
 var possible_responses = [
-	["Left Arrow", 37],
-	["Down Arrow", 40]
+	["right index finger (left arrow)", 37],
+	["right middle finger (down arrow)", 40]
 ]
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 var response_permutations = [[0,0,1,1], [0,1,0,1], [0,1,1,0],
 							[1,1,0,0], [1,0,1,0], [1,0,0,1]]
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-//var permutation_index = randomDraw([0,1,2,3,4,5])
-var unique_expfactory_id = window.location.pathname.split('/')[3]
-var permutation_index = unique_expfactory_id.charCodeAt() % 6
+var permutation_index = randomDraw([0,1,2,3,4,5])
+//var unique_expfactory_id = window.location.pathname.split('/')[3]
+//var permutation_index = unique_expfactory_id.charCodeAt() % 6
 
 var permutation = response_permutations[permutation_index]
 // permutation = 0 // Change value if you have to restart the task
@@ -316,10 +316,10 @@ for (var i=0; i<4; i++) {
 
 
 var prompt_text = '<ul list-text>' + 
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + correct_responses[0][0] + '</div></li>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + correct_responses[1][0] + '</div></li>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + correct_responses[2][0] + '</div></li>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + correct_responses[3][0] + '</div></li>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + correct_responses[0][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + correct_responses[1][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + correct_responses[2][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + correct_responses[3][0] + '</div></li><br><br>' +
 				  '</ul>'
 
 /* Global task variables */
@@ -457,7 +457,7 @@ var attention_node = {
 var start_practice_stop_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = instructbox>'+
-				'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
+				'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll Down): ' + prompt_text + '</p>' +
 			
 				'<p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
@@ -487,7 +487,7 @@ var start_practice_stop_block = {
 var start_test_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = instructbox>'+
-				'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
+				'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll Down):' + prompt_text + '</p>' +
 			
 				'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
