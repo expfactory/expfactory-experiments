@@ -303,9 +303,9 @@ var choices = [possible_responses[0][1], possible_responses[1][1]]
 var response_permutations = [[0,0,1,1], [0,1,0,1], [0,1,1,0],
 							[1,1,0,0], [1,0,1,0], [1,0,0,1]]
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-var permutation_index = randomDraw([0,1,2,3,4,5])
-//var unique_expfactory_id = window.location.pathname.split('/')[3]
-//var permutation_index = unique_expfactory_id.charCodeAt() % 6
+//var permutation_index = randomDraw([0,1,2,3,4,5])
+var unique_expfactory_id = window.location.pathname.split('/')[3]
+var permutation_index = unique_expfactory_id.charCodeAt() % 6
 
 var permutation = response_permutations[permutation_index]
 // permutation = 0 // Change value if you have to restart the task
