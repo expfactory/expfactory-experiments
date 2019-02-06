@@ -158,6 +158,11 @@ If "switch old", switch to the last task and randomly choose a cue.
 var setStims = function() {
   var tmp;
   switch (task_switches[current_trial].task_switch) {
+  	case "na":
+      tmp = curr_task
+      curr_task = randomDraw(getKeys(tasks))
+      cue_i = randomDraw([0, 1])
+      break
     case "stay":
       if (curr_task == "na") {
         tmp = curr_task
@@ -381,8 +386,9 @@ for (var t = 0; t < task_switch_types.length; t++) {
   }
 }
 var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
-var practiceStims = genStims(practice_length)
-var testStims = genStims(numTrialsPerBlock)
+task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+var practiceStims = genStims(practice_length + 1)
+var testStims = genStims(numTrialsPerBlock + 1)
 var stims = practiceStims
 var curr_task = randomDraw(getKeys(tasks))
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -392,15 +398,14 @@ var curr_stim = 'na' //object that holds the current stim, set by setStims()
 var current_trial = 0
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press the ' + response_keys.key_name[
-    0] + ' key if even and the ' + response_keys.key_name[1] + ' key if odd.' +
-  '</li><li><i>Magnitude</i> or <i>High-Low</i>: Press the ' + response_keys.key_name[
-    0] + ' key if the number is greater than 5 and the ' + response_keys.key_name[1] +
-  ' key if less than 5.</li></ul>'
+var task_list = 	   '<ul>'+
+					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
+					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
+					   '</ul>'
 
 var prompt_task_list = '<ul>'+
-					   	'<li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] + ' if even and ' + response_keys.key_name[1] + ' if odd.</li>'+
-					   	'<li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] + ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li>'+
+					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
+					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
 					   	'<li>Do not respond if the letter is unfilled!</li>'+
 					   '</ul>'
 
@@ -443,7 +448,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take around 19 minutes. Press <i>enter</i> to begin.'
+  'Welcome to the experiment. This experiment will take around 25 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -462,7 +467,7 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox>'+
-    	'<p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
+    	'<p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
     '</div>',
     
     '<div class = centerbox>'+
@@ -543,6 +548,7 @@ var start_test_block = {
     current_trial = 0
     stims = testStims
     task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
+    task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
     feedback_text = 'Starting a test block.  Press enter to continue.'
   },
   timing_post_trial: 1000
@@ -560,7 +566,7 @@ var setStims_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take around 19 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will take around 25 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -631,7 +637,7 @@ var test_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (var i = 0; i < practice_length; i++) {
+for (var i = 0; i < practice_length + 1; i++) {
   var practice_fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
@@ -682,7 +688,8 @@ var practiceNode = {
 	loop_function: function(data) {
 		practiceCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
-		practiceStims = genStims(practice_length)
+		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+		practiceStims = genStims(practice_length + 1)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -716,8 +723,9 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			testStims = genStims(numTrialsPerBlock)
+			testStims = genStims(numTrialsPerBlock + 1)
 			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
+			task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -731,8 +739,9 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					testStims = genStims(numTrialsPerBlock)
+					testStims = genStims(numTrialsPerBlock + 1)
 					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
+					task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
 					return false
 			}
 			
@@ -749,7 +758,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (var i = 0; i < numTrialsPerBlock; i++) {
+for (var i = 0; i < numTrialsPerBlock + 1; i++) {
   var fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
@@ -798,7 +807,8 @@ var testNode = {
 	loop_function: function(data) {
 		testCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
-		testStims = genStims(numTrialsPerBlock)
+		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+		testStims = genStims(numTrialsPerBlock + 1)
 		current_trial = 0
 	
 		var total_trials = 0
