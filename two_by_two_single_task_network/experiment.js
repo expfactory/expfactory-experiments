@@ -496,7 +496,7 @@ var feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (var i = 0; i < practice_length; i++) {
+for (var i = 0; i < practice_length + 1; i++) {
   var practice_fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
@@ -658,7 +658,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock; i++) {
+for (i = 0; i < numTrialsPerBlock + 1; i++) {
 	var fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',

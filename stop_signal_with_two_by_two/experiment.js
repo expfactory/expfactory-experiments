@@ -409,16 +409,16 @@ var curr_stim = 'na' //object that holds the current stim, set by setStims()
 var current_trial = 0
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press the ' + response_keys.key_name[
-    0] + ' key if even and the ' + response_keys.key_name[1] + ' key if odd.' +
-  '</li><li><i>Magnitude</i> or <i>High-Low</i>: Press the ' + response_keys.key_name[
-    0] + ' key if the number is greater than 5 and the ' + response_keys.key_name[1] +
-  ' key if less than 5.</li></ul>'
+var task_list = '<ul><li><i>Odd-Even</i> or <i>Parity</i>: Press the ' + response_keys.key_name[
+    1] + ' key if odd and the ' + response_keys.key_name[0] + ' key if even.' +
+  '</li><li><i>High-Low</i> or <i>Magnitude</i>: Press the ' + response_keys.key_name[
+    1] + ' key if the number is less than 5 and the ' + response_keys.key_name[0] +
+  ' key if greater than 5.</li></ul>'
 
-var prompt_task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
-  ' if even and ' + response_keys.key_name[1] + ' if odd.' +
-  '</li><li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] +
-  ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li></ul>'
+var prompt_task_list = '<ul><li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] +
+  ' if odd and ' + response_keys.key_name[0] + ' if even.' +
+  '</li><li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] +
+  ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li></ul>'
 
 
 
@@ -478,7 +478,7 @@ var instructions_block = {
   },
   pages: [
     '<div class = centerbox>'+
-    	'<p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>For instance, on some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
+    	'<p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>'+
     '</div>',
     
     '<div class = centerbox>'+
