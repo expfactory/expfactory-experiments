@@ -396,7 +396,7 @@ var practice_thresh = 3 // 3 blocks of 16 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
 var go_nogo_conditions = ['go','go','go','go','nogo']
-var go_no_go_styles = ['solid','unfilled'] //has dashed as well
+var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var fileTypePNG = ".png"
 var preFileType = "<img class = center src='"
 
