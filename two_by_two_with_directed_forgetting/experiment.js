@@ -570,9 +570,9 @@ var instructions_block = {
 	},
 	pages: [		
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with a cue, either remember or forget. This cue instructs what kind of task you will be doing for that trial.</p> '+
+			'<p class = block-text>In this experiment you will be presented with a cue, either remember(or retain) or forget(or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
 		
-			'<p class = block-text>After the remember or forget cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>After the remember(or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
 						
 			'<p class = block-text>After the 6 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
