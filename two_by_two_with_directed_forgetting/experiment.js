@@ -392,18 +392,18 @@ var getFixation = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+letters[0]+
+	return task_boards[0]+preFileType+letters[0]+fileTypePNG+
 		   task_boards[1]+
-		   task_boards[2]+letters[1]+
-		   task_boards[3]+letters[2]+
+		   task_boards[2]+preFileType+letters[1]+fileTypePNG+
+		   task_boards[3]+preFileType+letters[2]+fileTypePNG+
 		   task_boards[4]+
-		   task_boards[5]+letters[3]+
+		   task_boards[5]+preFileType+letters[3]+fileTypePNG+
 		   task_boards[6]
 
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + cue + fileTypePNG +'</div></div></div>'	
 
 }
 
@@ -419,12 +419,12 @@ var getSwitchingCueStim = function(){
 	correct_response = stim.correct_response
 	task_cue = stim.task_cue
 	
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+task_cue+'</div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + task_cue + fileTypePNG +'</div></div></div>'	
 
 }
 
 var getProbeStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG +'</div></div></div>'	
 
 }
 
@@ -460,6 +460,9 @@ var cued_dimensions = jsPsych.randomization.repeat(['forget','remember'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var current_trial = 0	
+
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/two_by_two_with_directed_forgetting/images/"
 
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
