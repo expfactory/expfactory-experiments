@@ -1,7 +1,6 @@
 /*******************************************************/
 /***********    Network Default CSS Styles    **********/
 /*******************************************************/
-
 .display_stage {
     position: fixed;
     background: gray;
@@ -68,16 +67,14 @@
  -webkit-transform: translateY(-50%);
 }
 
-
-.distractor_text {
-  width: 10%;
-  height: 10%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: none;
-  text-align: center;
-  transform: translate(-70%, -70%);
+.cue-text {
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 .bigbox {
