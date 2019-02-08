@@ -469,7 +469,7 @@ var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'
 				 
 var stims = createTrialTypes(practice_len)
 
-var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topRight style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = fixation>'],['</div></div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topRight style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = cue-text>'],['</div></div></div></div>']]
 				   
 
 var prompt_text_list = '<ul list-text>'+

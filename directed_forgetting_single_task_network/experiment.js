@@ -112,8 +112,8 @@ var getCategorizeFeedback = function(){
 var appendProbeData = function(data) {
 	var curr_trial = jsPsych.progress().current_trial_global
 	var trialCue = cue
-	var lastSet_top = stims.slice(0,3)
-	var lastSet_bottom = stims.slice(3)
+	var lastSet_top = stims.slice(0,numLetters/2)
+	var lastSet_bottom = stims.slice(numLetters/2)
 	var keypress = data.key_press
 	var memorySet = ''
 	var correct_response = ''
@@ -166,25 +166,25 @@ var getTrainingSet = function() {
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial < 1) {
-		stims = trainingArray.slice(0,6)
+		stims = trainingArray.slice(0,numLetters)
 	} else if (current_trial == 1) {
 		preceeding1stims = stims.slice()
 		stims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	} else {
 		preceeding2stims = preceeding1stims.slice()
 		preceeding1stims = stims.slice()
 		stims = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	}
-	return task_boards[0]+stims[0]+
-		   task_boards[1]+stims[1]+
-		   task_boards[2]+stims[2]+
-		   task_boards[3]+stims[3]+
-		   task_boards[4]+stims[4]+
-		   task_boards[5]+stims[5]+
+	return task_boards[0]+ preFileType + stims[0] + fileTypePNG +
+		   task_boards[1]+
+		   task_boards[2]+ preFileType + stims[1] + fileTypePNG +
+		   task_boards[3]+ preFileType + stims[2] + fileTypePNG +
+		   task_boards[4]+
+		   task_boards[5]+ preFileType + stims[3] + fileTypePNG +
 		   task_boards[6]
 };
 
@@ -193,7 +193,7 @@ var getCue = function() {
 	var temp = Math.floor(Math.random() * 2)
 	cue = cueArray[temp]
 	
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + cue + fileTypePNG + '</div></div></div>'
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
@@ -201,69 +201,69 @@ var getProbe = function() {
 	probeType = probeTypeArray.pop()
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
-	var lastSet_top = stims.slice(0,3)
-	var lastSet_bottom = stims.slice(3)
+	var lastSet_top = stims.slice(0,numLetters/2)
+	var lastSet_bottom = stims.slice(numLetters/2)
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (probeType == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (probeType == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
-				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] &&
+					y != lastSet_bottom[0] && y != lastSet_bottom[1])
 		})
 		probe = newArray.pop()
 	}
 		
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
 };
 
 var getPracticeProbe = function() {
 	probeType = practiceProbeTypeArray.pop()
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
-	var lastSet_top = stims.slice(0,3)
-	var lastSet_bottom = stims.slice(3)
+	var lastSet_top = stims.slice(0,numLetters/2)
+	var lastSet_bottom = stims.slice(numLetters/2)
 	if (probeType == 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (probeType == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (probeType == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
-				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] &&
+					y != lastSet_bottom[0] && y != lastSet_bottom[1])
 		})
 		probe = newArray.pop()
 	}
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
 };
 
 var getResponse = function() {
 	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, stims.slice(3)) != -1) {
+		if (jQuery.inArray(probe, stims.slice(numLetters/2)) != -1) {
 			return choices[0]
 		} else {
 			return choices[1]
 		}
 
 	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, stims.slice(0,3)) != -1) {
+		if (jQuery.inArray(probe, stims.slice(0,numLetters/2)) != -1) {
 			return choices[0]
 		} else {
 			return choices[1]
@@ -300,6 +300,7 @@ var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
+var numLetters = 4
 var cueArray = ['TOP', 'BOT']
 var probe = ''
 var cue = ''
@@ -312,6 +313,9 @@ var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_lengt
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting_single_task_network/images/'
 var fileType = '.png'
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/directed_forgetting_single_task_network/images/"
+
 var images = []
 for (var i = 0; i < stimArray.length; i++) {
 	images.push(pathSource + stimArray[i] + fileType)
@@ -321,7 +325,7 @@ images.push(pathSource + 'BOT.png')
 	//preload images
 jsPsych.pluginAPI.preloadImages(images)
 
-var task_boards = [['<div class = bigbox><div class = topLeft><div class = fixation>'],['</div></div><div class = topMiddle><div class = fixation>'],['</div></div><div class = topRight><div class = fixation>'],['</div></div><div class = bottomLeft><div class = fixation>'],['</div></div><div class = bottomMiddle><div class = fixation>'],['</div></div><div class = bottomRight><div class = fixation>'],['</div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div>']]
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+
