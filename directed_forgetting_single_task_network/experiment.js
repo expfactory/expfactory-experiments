@@ -411,13 +411,13 @@ var instructions_block = {
 	pages: [
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment, on each trial you will be presented with '+
-			'6 letters. You must memorize all 6 letters. </p>'+
+			''+numLetters+' letters. You must memorize all '+numLetters+' letters. </p>'+
 		
-			'<p class = block-text>After the presentation of 6 letters, there will be a short delay. You will then be presented with a cue, '+
+			'<p class = block-text>After the presentation of '+numLetters+' letters, there will be a short delay. You will then be presented with a cue, '+
 			'either <i>TOP</i> or <i>BOT</i>. This will instruct you to <i>forget</i> the '+
-			'3 letters located at either the top or bottom (respectively) of the screen.</p>' + 
+			''+numLetters/2+' letters located at either the top or bottom (respectively) of the screen.</p>' + 
 			
-			'<p class = block-text>So if you get the cue <i>TOP</i>, please <i>forget</i> the top three letters.</p>'+
+			'<p class = block-text>So if you get the cue <i>TOP</i>, please <i>forget</i> the top '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>'+
 			'The three remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
@@ -461,7 +461,7 @@ var start_practice_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>As you saw, there are three letters at the top of the screen and three letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <i>forget</i> the three letters at the top or bottom of the screen, respectively. The other three letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
+		'<div class = centerbox><p class = block-text>As you saw, there are '+numLetters/2+' letters at the top of the screen and '+numLetters/2+' letters on the bottom of the screen. After a delay, the cue (TOP or BOT) tells you whether to <i>forget</i> the '+numLetters/2+' letters at the top or bottom of the screen, respectively. The other '+numLetters/2+' letters are your memory set.</p><p class = block-text>After the cue, you are shown a letter and respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> key if it was not in the memory set.</p><p class = block-text>We will now start with a number of practice trials.</p></div>',
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

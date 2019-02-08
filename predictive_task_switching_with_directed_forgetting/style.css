@@ -1,7 +1,6 @@
 /*******************************************************/
 /***********    Network Default CSS Styles    **********/
 /*******************************************************/
-
 .display_stage {
     position: fixed;
     background: gray;
@@ -18,62 +17,7 @@
   color: white;
 }
 
-.instructBox {
- width: 80vw;
- height: 10vw;
- position:absolute;
- top:10%;
- left:50%; 
- margin-right: 0%;
- transform: translate(-50%,-50%);
- background-color: none;
- font-size: 24px;
-}
-
-.prompt_box {
- width: 75%;
- height: 20%;
- position:absolute;
- top:50%;
- left:50%;
- transform: translate(-50%,-45%);
- margin-right:0%;
- background-color: none;
- text-align: center;
-}
-
-.fixation {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
-}
-
-.cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
-}
-
-.bigbox {
-width:100%;
-margin: auto; 
-min-height: 100%;
-position:absolute;
-top:0%;
-left:0%;
-margin-right:0%;
-background-color: none;
-text-align: center;
-}
-
-
-.cue-text {
+.flanker-text {
 	text-align: center;
 	font-size: 50px;
 	position: relative;
@@ -102,6 +46,83 @@ text-align: center;
  margin-right:0%;
  background-color: none;
  text-align: center;
+}
+
+
+.fixation {
+ text-align: center;
+ font-size: 50px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+.cue-text {
+ text-align: center;
+ font-size: 50px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+.cue-text {
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: none;
+text-align: center;
+}
+
+.instructBox {
+ width: 80vw;
+ height: 10vw;
+ position:absolute;
+ top:10%;
+ left:50%; 
+ margin-right: 0%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ font-size: 24px;
+}
+
+.prompt_box {
+ width: 75%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-45%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
 }
 
 /*******************************************************/
@@ -185,17 +206,6 @@ left:50%;
 margin-right:0%;
 transform: translate(-50%,50%);
 background-color: none;
-}
-
-.forgetStim {
-  height: auto;
-  width: auto\9; /* ie8 */
-  position: absolute;  
-  top: 0;  
-  bottom: 0;  
-  left: 0;  
-  right: 0;  
-  margin: auto;  
 }
 
 /*******************************************************/
