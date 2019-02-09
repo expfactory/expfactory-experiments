@@ -124,11 +124,11 @@ var createTrialTypes = function(numTrialsPerBlock){
 		probe = getProbe(directed_condition, letters, cue)
 		correct_response = getCorrectResponse(cue, probe, letters)
 		if (cue == 'TOP'){
-			memory_set = [letters[3],letters[4],letters[5]]
-			forget_set = [letters[0],letters[1],letters[2]]
+			memory_set = [letters[2],letters[3]]
+			forget_set = [letters[0],letters[1]]
 		} else if (cue == 'BOT'){
-			memory_set = [letters[0],letters[1],letters[2]]
-			forget_set = [letters[3],letters[4],letters[5]]
+			memory_set = [letters[0],letters[1]]
+			forget_set = [letters[2],letters[3]]
 		}
 		 
 		 if (flanker_condition == 'congruent'){
@@ -163,18 +163,18 @@ var getTrainingSet = function() {
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial < 1) {
-		letters = trainingArray.slice(0,6)
+		letters = trainingArray.slice(0,numLetters)
 	} else if (current_trial == 1) {
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	} else {
 		preceeding2stims = preceeding1stims.slice()
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	}
 	return letters
 };
@@ -191,24 +191,24 @@ var getCue = function() {
 var getProbe = function(directed_cond, letters, cue) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	if (directed_cond== 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
-				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] &&
+					y != lastSet_bottom[0] && y != lastSet_bottom[1])
 		})
 		probe = newArray.pop()
 	}
@@ -219,13 +219,13 @@ var getProbe = function(directed_cond, letters, cue) {
 
 var getCorrectResponse = function(cue,probe,letters) {
 	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, letters.slice(3)) != -1) {
+		if (jQuery.inArray(probe, letters.slice(numLetters/2)) != -1) {
 			return possible_responses[0][1]
 		} else {
 			return possible_responses[1][1]
 		}
 	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, letters.slice(0,3)) != -1) {
+		if (jQuery.inArray(probe, letters.slice(0,numLetters/2)) != -1) {
 			return possible_responses[0][1]
 		} else {
 			return possible_responses[1][1]
@@ -251,8 +251,8 @@ var appendData = function(){
 	
 	current_trial+=1
 	
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	
 	jsPsych.data.addDataToLastTrial({
 		flanker_condition: flanker_condition,
@@ -295,27 +295,26 @@ var getNextStim = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+letters[0]+
-		   task_boards[1]+letters[1]+
-		   task_boards[2]+letters[2]+
-		   task_boards[3]+letters[3]+
-		   task_boards[4]+letters[4]+
-		   task_boards[5]+letters[5]+
+	return task_boards[0] + preFileType + letters[0] + fileTypePNG +
+		   task_boards[1]+
+		   task_boards[2] + preFileType + letters[1] + fileTypePNG +
+		   task_boards[3] + preFileType + letters[2] + fileTypePNG +
+		   task_boards[4]+
+		   task_boards[5] + preFileType + letters[3] + fileTypePNG +
 		   task_boards[6]
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG + '</font></div></div></div>'	
 }
 
 var getProbeStim = function(){
-	return flanker_boards[0]+ 
-			flanking_letter+
-			flanking_letter+
-			probe+
-			flanking_letter+
-			flanking_letter+
-		   flanker_boards[1]	
+		   
+	return flanker_boards[0]+ preFileType + flanking_letter + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flanking_letter + fileTypePNG +
+		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flanking_letter + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flanking_letter + fileTypePNG
 }
 
 var getCategorizeFeedback = function(){
@@ -362,6 +361,7 @@ var practice_thresh = 3 // 3 blocks of 8 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
 var flanker_conditions = ['congruent','incongruent']
+var numLetters = 4
 
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
@@ -371,14 +371,16 @@ var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
-				 
+	
+var fileTypePNG = '.png"></img>'
+var preFileType = '<img class = center src="/static/experiments/directed_forgetting_with_flanker/images/'			 
 
 
 var stims = createTrialTypes(practice_len)
 
-var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topRight style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = fixation>'],['</div></div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topRight style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = cue-text>'],['</div></div></div></div>']]
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['</div></div></div>']]				
-				   
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>Please respond if the probe (middle letter) was in the memory set.</li>'+
@@ -443,7 +445,7 @@ var end_block = {
   }
 };
 
-var feedback_text = 'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
+var feedback_text = 'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -460,7 +462,7 @@ var feedback_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -479,14 +481,14 @@ var instructions_block = {
 	},
 	pages: [		
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with 6 letters on each trial. 3 will be at the top, and 3 on the bottom. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. '+numLetters/2+' will be at the top, and '+numLetters/2+' on the bottom. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>. '+
-			'This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen.</p>'+
+			'This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen.</p>'+
 			
-			'<p class = block-text>The three remaining letters that you must remember are called your <i>memory set</i>. Please forget the letters not in the memory set.</p>'+
+			'<p class = block-text>The '+numLetters/2+' remaining letters that you must remember are called your <i>memory set</i>. Please forget the letters not in the memory set.</p>'+
 		
-			'<p class = block-text>So for example, if you get the cue <i>TOP</i>, please <i>forget the top 3 letters</i> and remember the bottom 3 letters. <i>The bottom three letters would be your memory set.</i></p>'+
+			'<p class = block-text>So for example, if you get the cue <i>TOP</i>, please <i>forget the top '+numLetters/2+' letters</i> and remember the bottom '+numLetters/2+' letters. <i>The bottom '+numLetters/2+' letters would be your memory set.</i></p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
@@ -533,14 +535,14 @@ var start_test_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>This test will be exactly like practice. You will be presented with 6 letters on each trial. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>This test will be exactly like practice. You will be presented with '+numLetters+' letters on each trial. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>.</p>'+
 		
-			'<p class = block-text>This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen. '+
-			'The three remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
+			'<p class = block-text>This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen. '+
+			'The '+numLetters/2+' remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
 			
-			'<p class = block-text>So for example, if you get the cue TOP, please forget the top 3 letters and remember the bottom 3 letters.</p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please forget the top '+numLetters/2+' letters and remember the bottom '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>After a short delay, you will be presented with a row of white letters.  Please indicate whether the <i> middle letter </i> was in your memory set.</p>'+
 		
