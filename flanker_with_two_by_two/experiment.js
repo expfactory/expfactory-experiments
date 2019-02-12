@@ -182,16 +182,23 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
+  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
+var task_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
+
+
 var getStim = function() {
 
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-		'</div></div><div class = lowerbox><div class = flanker-text>'+flanking_number+flanking_number+curr_stim.number+flanking_number+flanking_number+'</div></div>'
-		
+ var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				  '<div class = lowerbox>'+
+					'<div class = flankerLeft_2><div class = cue-text>' + preFileType + flanking_number + fileTypePNG + '</div></div>'+
+					'<div class = flankerLeft_1><div class = cue-text>' + preFileType + flanking_number + fileTypePNG + '</div></div>'+
+					'<div class = flankerMiddle><div class = cue-text>' + preFileType + curr_stim.number + fileTypePNG + '</div></div>'+
+					'<div class = flankerRight_1><div class = cue-text>' + preFileType + flanking_number + fileTypePNG + '</div></div>'+
+					'<div class = flankerRight_2><div class = cue-text>' + preFileType + flanking_number + fileTypePNG + '</div></div>'+
+				  '</div>'
   return stim_html
 }
 
@@ -236,6 +243,7 @@ var appendData = function() {
   var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
   var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
   var task_switch = task_switches[trial_num]
+ 
   jsPsych.data.addDataToLastTrial({
     cue: curr_cue,
     stim_color: curr_stim.color,
@@ -246,7 +254,8 @@ var appendData = function() {
     flanker_condition: flanker_condition,
     flanking_number: flanking_number,
     trial_num: trial_num,
-    CTI: CTI
+    CTI: CTI,
+    current_trial: current_trial
   })
 }
 
@@ -276,7 +285,7 @@ var test_length = 240
 var numTrialsPerBlock = 40
 var numTestBlocks = test_length / numTrialsPerBlock
 
-var flanker_styles = ['solid','unfilled']
+var flanker_styles = ['solid','outlined']
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -295,7 +304,7 @@ color: {
     cues: ['Color', 'Orange-Blue']
   },
 */
-
+var current_trial = 0
 var task_switch_types = ["stay", "switch_new"]
 var cue_switch_types = ["stay", "switch"]
 var flanker_types = ["congruent", "incongruent"]
@@ -321,7 +330,6 @@ var last_task = 'na' //object that holds the last task, set by setStims()
 var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
-var current_trial = 0
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
 var task_list = '<ul>'+
@@ -374,7 +382,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take around 12 minutes. Press <i>enter</i> to begin.'
+  'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   data: {
@@ -476,11 +484,11 @@ var start_test_block = {
 			
 			'<p class = block-text>Please judge the <i>center number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on the cue.</p>'+
 	
-			'<p class = block-text>If you see the cue, <i>magnitude</i> or <i>high-low</i>, please judge the number based on whether it is lower or higher than 5. Press the <i>'+response_keys.key[0]+
-				'</i> if high, and the <i>'+response_keys.key[1]+'</i> if low.</p>'+
+			'<p class = block-text>If you see the cue, <i>magnitude</i> or <i>high-low</i>, please judge the number based on whether it is lower or higher than 5. Press the <i>'+response_keys.key_name[0]+' key</i>' +
+				'</i> if high, and the <i>'+response_keys.key_name[1]+' key</i> if low.</p>'+
 		
-			'<p class = block-text>If you see the cue, <i>parity</i> or <i>odd-even</i>, please judge the number based on whether it is odd or even. Press the <i>'+response_keys.key[0]+
-				'</i> if even, and the <i>'+response_keys.key[1]+'</i> if odd.</p>'+
+			'<p class = block-text>If you see the cue, <i>parity</i> or <i>odd-even</i>, please judge the number based on whether it is odd or even. Press the <i>'+response_keys.key_name[0]+' key</i>' +
+				'</i> if even, and the <i>'+response_keys.key_name[1]+' key</i> if odd.</p>'+
 		
 			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
 	
@@ -506,7 +514,7 @@ var setStims_block = {
   timing_post_trial: 0
 }
 
-var feedback_text = 'Welcome to the experiment. This experiment will take around 12 minutes. Press <i>enter</i> to begin.'
+var feedback_text = 'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -545,12 +553,14 @@ var practice_block = {
     appendData()
     correct_response = getResponse()
     correct_trial = 0
+    current_block = practiceCount
     if (data.key_press === correct_response) {
       correct_trial = 1
     }
     jsPsych.data.addDataToLastTrial({
-      'correct_response': correct_response,
-      'correct_trial': correct_trial
+      correct_response: correct_response,
+      correct_trial: correct_trial,
+      current_block: current_block
     })
   }
 }
@@ -577,9 +587,11 @@ var test_block = {
     if (data.key_press === correct_response) {
       correct_trial = 1
     }
+    current_block = testCount
     jsPsych.data.addDataToLastTrial({
-      'correct_response': correct_response,
-      'correct_trial': correct_trial
+      correct_response: correct_response,
+      correct_trial: correct_trial,
+      current_block: current_block
     })
   }
 }

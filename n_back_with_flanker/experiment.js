@@ -216,13 +216,11 @@ var getStim = function(){
 	delay = stim.delay
 	flankers = stim.flankers
 		
-	return task_boards[0]+ 
-			flankers+
-			flankers+
-			probe+
-			flankers+
-			flankers+
-		   task_boards[1]
+	return flanker_boards[0]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flankers + fileTypePNG
 }
 
 var getControlStim = function(){	
@@ -233,13 +231,12 @@ var getControlStim = function(){
 	correct_response = stim.correct_response
 	flankers = stim.flankers
 	control_delay = stim.delay		
-	return task_boards[0]+ 
-			flankers+
-			flankers+
-			probe+
-			flankers+
-			flankers+
-		   task_boards[1]
+		   
+	return flanker_boards[0]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flankers + fileTypePNG
 }
 
 
@@ -340,8 +337,7 @@ var current_block = 0
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */
-
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
 var stims = createTrialTypes(practice_len, delay)
 
@@ -397,7 +393,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 10 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -522,7 +518,7 @@ var fixation_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take about 10 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

@@ -262,6 +262,7 @@ var appendData = function(){
 		flanking_letter: flanking_letter,
 		correct_response: correct_response,
 		current_trial: current_trial,
+		current_block: current_block,
 		top_stim: lastSet_top,
 		bottom_stim: lastSet_bottom
 		
@@ -445,7 +446,8 @@ var end_block = {
   }
 };
 
-var feedback_text = 'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
+var feedback_text = 
+	'Welcome to the experiment. This experiment will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -462,7 +464,7 @@ var feedback_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {

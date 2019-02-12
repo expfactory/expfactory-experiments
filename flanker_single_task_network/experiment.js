@@ -338,7 +338,7 @@ var fixation_block = {
 };
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will around 5 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 5 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -393,9 +393,12 @@ for (i = 0; i < practice_len; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
+			current_block = practiceCount
 		
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
-											 trial_id: 'practice_trial'
+											 trial_id: 'practice_trial',
+											 current_block: current_block,
+											 current_trial: i
 											 })
 		}
 	}
@@ -510,9 +513,13 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
-		
+			
+			current_block = testCount
+			
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
-											 trial_id: 'test_trial'
+											 trial_id: 'test_trial',
+											 current_block: current_block,
+											 current_trial: i
 											 })
 		}
 	};

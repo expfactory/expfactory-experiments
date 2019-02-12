@@ -337,7 +337,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 12 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -353,7 +353,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take around 12 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {

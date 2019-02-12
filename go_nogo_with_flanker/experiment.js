@@ -252,7 +252,7 @@ var practice_thresh = 3 // 3 blocks of 20 trials
 var possible_responses = [['F key', 70],['H key', 72]]
 var go_nogo_trial_types = ['go','go','go','go','nogo']
 var flanker_trial_types = ['H_congruent','H_incongruent','F_congruent','F_incongruent']
-var go_no_go_styles = ['solid','unfilled'] //has dashed as well
+var go_no_go_styles = ['solid','outlined'] //has dashed as well
 
 
 
@@ -262,9 +262,7 @@ var current_block = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_flanker/images/'
 
-
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = leftbox1 style="background-color:'],['"></div><div class = leftbox2 style="background-color:'],['"></div><div class = centerimg style="background-color:'],['"></div><div class = rightbox1 style="background-color:'],['"></div><div class = rightbox2 style="background-color:'],['"></div></div></div>']]
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = leftbox1>'],['</div><div class = leftbox2>'],['</div><div class = centerimg>'],['</div><div class = rightbox1>'],['</div><div class = rightbox2>'],['</div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
 
 var stims = createTrialTypes(practice_len)
@@ -323,7 +321,7 @@ var response_keys =
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -339,7 +337,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {

@@ -378,7 +378,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This task will take around 10 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -417,7 +417,7 @@ var instructions_block = {
 			'<p class = block-text>In this experiment, across trials you will see a row of numbers moving clockwise on the screen in 4 quadrants.  '+
 			'On any trial, one quadrant will have a  row of numbers.</p> '+
 		
-			'<p class = block-text>You will be asked to judge the <i>middle number</i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
+			'<p class = block-text>You will be asked to judge the <i>middle number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 		
 		'</div>',
