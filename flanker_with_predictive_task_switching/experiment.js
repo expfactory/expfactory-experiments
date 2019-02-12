@@ -229,13 +229,12 @@ var getResponse = function() {
 
 var getStim = function(){
 	
-	return task_boards[whichQuadrant - 1][0] + 
-				flanking_number +
-				flanking_number +
-				number +
-				flanking_number +
-				flanking_number +
-		   task_boards[whichQuadrant - 1][1]		   		   
+	return task_boards[whichQuadrant - 1][0] + preFileType + flanking_number + fileTypePNG + 
+		   task_boards[whichQuadrant - 1][1] + preFileType + flanking_number + fileTypePNG + 
+		   task_boards[whichQuadrant - 1][2] + preFileType + number + fileTypePNG + 
+		   task_boards[whichQuadrant - 1][3] + preFileType + flanking_number + fileTypePNG + 
+		   task_boards[whichQuadrant - 1][4] + preFileType + flanking_number + fileTypePNG + 
+		   task_boards[whichQuadrant - 1][5]		   		   
 }
 
 
@@ -314,10 +313,10 @@ var preFileType = "<img class = center src='/static/experiments/flanker_with_pre
 
 var current_trial = 0
 
-var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = flanker-text>'],['<div></div><div></div>']],
-				   [['<div class = bigbox><div class = decision-top-right><div class = centerbox><div class = flanker-text>'],['<div></div><div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-right><div class = centerbox><div class = flanker-text>'],['<div></div><div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-left><div class = centerbox><div class = flanker-text>'],['<div></div><div></div>']]]
+var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']],
+				   [['<div class = bigbox><div class = decision-top-right><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-bottom-right><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']],
+				   [['<div class = bigbox><div class = decision-bottom-left><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']]]
 				   
 var fixation_boards = [['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = fixation>+</div></div></div></div>'],
 					   ['<div class = bigbox><div class = decision-top-right><div class = centerbox><div class = fixation>+</div></div></div></div>'],

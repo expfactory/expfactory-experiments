@@ -121,8 +121,17 @@ var correct_responses = jsPsych.randomization.repeat([
 	["left arrow", 37],
 	["right arrow", 39]
 ], 1)
+
+var fileTypePNG = '.png"></img>'
+var preFileType = '<img class = center src="/static/experiments/flanker_single_task_network/images/'
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
+
 var test_stimuli = [{
-	image: '<div class = centerbox><div class = flanker-text>FFHFF</div></div>',
+	image: flanker_boards[0]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 72,
 		condition: 'incompatible',
@@ -131,7 +140,11 @@ var test_stimuli = [{
 		center_letter: 'H'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>HHFHH</div></div>',
+	image: flanker_boards[0]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 70,
 		condition: 'incompatible',
@@ -140,7 +153,11 @@ var test_stimuli = [{
 		center_letter: 'F'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>HHHHH</div></div>',
+	image: flanker_boards[0]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 72,
 		condition: 'compatible',
@@ -149,7 +166,11 @@ var test_stimuli = [{
 		center_letter: 'H'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>FFFFF</div></div>',
+	image: flanker_boards[0]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 70,
 		condition: 'compatible',
@@ -176,6 +197,8 @@ var test_response_array = [];
 for (i = 0; i < test_trials.data.length; i++) {
 	test_response_array.push(test_trials.data[i].correct_response)
 }
+
+
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>Indicate the identity of the <i> middle </i> letter.</li>' +

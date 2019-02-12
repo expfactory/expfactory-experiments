@@ -193,12 +193,12 @@ var getStim = function(){
 	flanker_letter = stim.flanker_letter
 	center_letter = stim.center_letter
 	
-	return  task_boards[0] + flanker_letter +
-		 	flanker_letter +
-		 	center_letter +
-		 	flanker_letter +
-		 	flanker_letter +
-		 	task_boards[1] 
+		 	
+	return flanker_boards[0]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[2]+ preFileType + center_letter + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flanker_letter + fileTypePNG
 }
 
 
@@ -285,13 +285,8 @@ var current_block = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_flanker/images/'
 
-
-
-
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]
-
-var stop_boards = ['<div class = starbox>','</div>']
-		   
+var stop_boards = ['<div class = bigbox><div class = centerbox><div class = starbox>','</div></div></div>']	   
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 		
 
 var stims = createTrialTypes(practice_len)

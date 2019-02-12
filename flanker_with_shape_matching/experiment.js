@@ -286,14 +286,8 @@ var current_block = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/flanker_with_shape_matching/images/'
 
-
-
-
-var task_boards = [['<div class = bigbox><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox1>'],['</div><div class = rightbox2>'],['</div><div class = rightbox_center>'],['</div><div class = rightbox3>'],['</div><div class = rightbox4>'],['</div></div>']]
+var task_boards = [['<div class = bigbox><div class = centerbox><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox1>'],['</div><div class = rightbox2>'],['</div><div class = rightbox_center>'],['</div><div class = rightbox3>'],['</div><div class = rightbox4>'],['</div></div></div>']]
 				   
-		
-
-
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
