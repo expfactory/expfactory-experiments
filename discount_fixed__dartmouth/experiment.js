@@ -210,7 +210,7 @@ var instructions_block = {
 			
 			'<p class = block-text>Choosing one rejects the other.</p>'+
 			
-			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept 20$ today, press the down arrow key.</p>'+
+			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
@@ -229,7 +229,7 @@ var start_test_block = {
 			
 				'<p class = block-text>Choosing one rejects the other.</p>'+
 			
-				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept 20$ today, press the down arrow key.</p>'+
+				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
   			'</div>',
   is_html: true,
   choices: [13],
@@ -268,7 +268,7 @@ var rest_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox>'+
   				'<p class = block-text>Take a short break! Press enter to begin.</p>'+
-  				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept 20$ today, press the down arrow key.</p>'+
+  				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
   			'</div>',
   is_html: true,
   choices: [13],

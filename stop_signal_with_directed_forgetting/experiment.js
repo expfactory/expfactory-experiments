@@ -186,18 +186,18 @@ var getTrainingSet = function() {
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial < 1) {
-		letters = trainingArray.slice(0,6)
+		letters = trainingArray.slice(0,numLetters)
 	} else if (current_trial == 1) {
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	} else {
 		preceeding2stims = preceeding1stims.slice()
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	}
 	return letters
 };
@@ -214,24 +214,24 @@ var getCue = function() {
 var getProbe = function(directed_cond, letters, cue) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	if (directed_cond== 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
-				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] && 
+					y != lastSet_bottom[0] && y != lastSet_bottom[1])
 		})
 		probe = newArray.pop()
 	}
@@ -292,8 +292,8 @@ var appendData = function(){
 	
 	current_trial+=1
 	
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	
 	jsPsych.data.addDataToLastTrial({
 		stop_signal_condition: stop_signal_condition,
@@ -344,21 +344,21 @@ var getNextStim = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+letters[0]+
-		   task_boards[1]+letters[1]+
-		   task_boards[2]+letters[2]+
-		   task_boards[3]+letters[3]+
-		   task_boards[4]+letters[4]+
-		   task_boards[5]+letters[5]+
+	return task_boards[0]+ preFileType + letters[0] + fileTypePNG +
+		   task_boards[1]+
+		   task_boards[2]+ preFileType + letters[1] + fileTypePNG +
+		   task_boards[3]+ preFileType + letters[2] + fileTypePNG +
+		   task_boards[4]+
+		   task_boards[5]+ preFileType + letters[3] + fileTypePNG +
 		   task_boards[6]
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
 }
 
 var getProbeStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+probe+'</font></div></div></div>'
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + probe + fileTypePNG +'</font></div></div></div>'
 }
 
 /* ************************************ */
@@ -380,6 +380,7 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
+var numLetters = 4
 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
@@ -407,7 +408,7 @@ var preFileType = '<img class = center src="/static/experiments/stop_signal_with
 
 
 
-var task_boards = [['<div class = bigbox><div class = topLeft><div class = fixation>'],['</div></div><div class = topMiddle><div class = fixation>'],['</div></div><div class = topRight><div class = fixation>'],['</div></div><div class = bottomLeft><div class = fixation>'],['</div></div><div class = bottomMiddle><div class = fixation>'],['</div></div><div class = bottomRight><div class = fixation>'],['</div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div>']]
 
 var stop_signal_boards = ['<div class = bigbox><div class = starbox>','</div></div>']
 		   
@@ -501,19 +502,19 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with 6 letters on each trial. 3 will be at the top, and 3 on the bottom. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. '+numLetters/2+' will be at the top, and '+numLetters/2+' on the bottom. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>. '+
-			'This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen.</p>'+
+			'This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen.</p>'+
 			
-			'<p class = block-text>The three remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
+			'<p class = block-text>The '+numLetters/2+' remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
 		
-			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top 3 letters</i> and remember the bottom 3 letters. <i>The bottom three letters would be your MEMORY SET.</i></p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top '+numLetters/2+' letters</i> and remember the bottom '+numLetters/2+' letters. <i>The bottom '+numLetters/2+' letters would be your MEMORY SET.</i></p>'+
 		
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top 3 letters</i> and remember the bottom 3 letters. <i>The bottom three letters would be your MEMORY SET.</i></p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top '+numLetters/2+' letters</i> and remember the bottom '+numLetters/2+' letters. <i>The bottom '+numLetters/2+' letters would be your MEMORY SET.</i></p>'+
 		
 			'<p class = block-text>After a short delay, you will be presented with a probe - a single letter.  Please indicate whether this probe was in your memory set.</p>'+
 		
@@ -587,13 +588,13 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>In this experiment you will be presented with 6 letters on each trial. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>. '+
-			'This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen. '+
-			'The three remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
+			'This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen. '+
+			'The '+numLetters/2+' remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
 		
-			'<p class = block-text>So for example, if you get the cue TOP, please forget the top 3 letters and remember the bottom 3 letters.</p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please forget the top '+numLetters/2+' letters and remember the bottom '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>After a short delay, you will be presented with a probe.  Please indicate whether this probe was in your memory set.</p>'+
 		

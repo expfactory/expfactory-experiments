@@ -60,8 +60,7 @@ function assessPerformance() {
 			}
 		}
 	}
-	
-	
+		
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
@@ -267,6 +266,7 @@ var appendData = function(){
 		n_back_condition: n_back_condition,
 		shape_matching_condition: shape_matching_condition,
 		probe: probe,
+		distractor: distractor,
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
@@ -402,7 +402,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take about 8 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -527,7 +527,7 @@ var fixation_block = {
 
 
 
-var feedback_text = 'Welcome to the experiment. This experiment will take about 8 minutes. Press <i>enter</i> to begin.'
+var feedback_text = 'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

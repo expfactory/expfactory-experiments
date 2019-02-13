@@ -144,10 +144,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 					correct_response = possible_responses[0][1]
 				}
 			
-				if (flanker_condition == 'congruent'){
-					flanker_letter = center_letter
-				} else {
-					flanker_letter = randomDraw(['H','F'].filter(function(y) {return $.inArray(y, [center_letter]) == -1}))
+				if ((flanker_condition == 'H_congruent') || (flanker_condition == 'F_incongruent')){
+					flanker_letter = 'H'
+				} else if ((flanker_condition == 'F_congruent') || (flanker_condition == 'H_incongruent')){
+					flanker_letter = 'F'
 				}
 			
 			
@@ -193,12 +193,12 @@ var getStim = function(){
 	flanker_letter = stim.flanker_letter
 	center_letter = stim.center_letter
 	
-	return  task_boards[0] + flanker_letter +
-		 	flanker_letter +
-		 	center_letter +
-		 	flanker_letter +
-		 	flanker_letter +
-		 	task_boards[1] 
+		 	
+	return flanker_boards[0]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[2]+ preFileType + center_letter + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flanker_letter + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flanker_letter + fileTypePNG
 }
 
 
@@ -285,13 +285,8 @@ var current_block = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_flanker/images/'
 
-
-
-
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]
-
-var stop_boards = ['<div class = starbox>','</div>']
-		   
+var stop_boards = ['<div class = bigbox><div class = centerbox><div class = starbox>','</div></div></div>']	   
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 		
 
 var stims = createTrialTypes(practice_len)
@@ -341,7 +336,7 @@ var post_task_block = {
 
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -357,7 +352,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {

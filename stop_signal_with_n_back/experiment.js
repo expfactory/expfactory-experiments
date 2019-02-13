@@ -311,9 +311,9 @@ var credit_var = 0
 var run_attention_checks = true
 var practice_len = 30 // 15 must be divisible by 15
 var exp_len = 270 //270 must be divisible by 15
-var numTrialsPerBlock = 15 //45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
-var numTestBlocks = 3 //exp_len / numTrialsPerBlock
-var practice_thresh = 1 //3 // 3 blocks of 16 trials
+var numTrialsPerBlock = 45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var numTestBlocks = exp_len / numTrialsPerBlock
+var practice_thresh = 3 // 3 blocks of 16 trials
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
@@ -407,7 +407,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take less than 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -491,7 +491,7 @@ var start_test_block = {
 			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block.</p>'+
-			'<p class = block-text>Do not respond if you see a star!  You must still remember the letter</p>'+
+			'<p class = block-text>Do not respond if you see a star!  You must still remember the letter.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 				
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
@@ -537,7 +537,7 @@ var fixation_block = {
 
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take about 9 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

@@ -121,33 +121,62 @@ var correct_responses = jsPsych.randomization.repeat([
 	["left arrow", 37],
 	["right arrow", 39]
 ], 1)
+
+var fileTypePNG = '.png"></img>'
+var preFileType = '<img class = center src="/static/experiments/flanker_single_task_network/images/'
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
+
 var test_stimuli = [{
-	image: '<div class = centerbox><div class = flanker-text>FFHFF</div></div>',
+	image: flanker_boards[0]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 72,
 		condition: 'incompatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'F',
+		center_letter: 'H'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>HHFHH</div></div>',
+	image: flanker_boards[0]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 70,
 		condition: 'incompatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'H',
+		center_letter: 'F'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>HHHHH</div></div>',
+	image: flanker_boards[0]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'H' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 72,
 		condition: 'compatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'H',
+		center_letter: 'H'
 	}
 }, {
-	image: '<div class = centerbox><div class = flanker-text>FFFFF</div></div>',
+	image: flanker_boards[0]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[1]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[2]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[3]+ preFileType + 'F' + fileTypePNG +
+		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 70,
 		condition: 'compatible',
-		trial_id: 'stim'
+		trial_id: 'stim',
+		flanker: 'F',
+		center_letter: 'F'
 	}
 }];
 
@@ -168,6 +197,8 @@ var test_response_array = [];
 for (i = 0; i < test_trials.data.length; i++) {
 	test_response_array.push(test_trials.data[i].correct_response)
 }
+
+
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>Indicate the identity of the <i> middle </i> letter.</li>' +
@@ -217,7 +248,7 @@ var post_task_block = {
 };
 /* define static blocks */
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take around 4 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 5 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	cont_key: [13],
@@ -232,7 +263,7 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each respond you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
+		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each response you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
 	],
 	allow_keys: false,
 	data: {
@@ -307,7 +338,7 @@ var fixation_block = {
 };
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will around 4 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 5 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -362,9 +393,12 @@ for (i = 0; i < practice_len; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
+			current_block = practiceCount
 		
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
-											 trial_id: 'practice_trial'
+											 trial_id: 'practice_trial',
+											 current_block: current_block,
+											 current_trial: i
 											 })
 		}
 	}
@@ -479,9 +513,13 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
-		
+			
+			current_block = testCount
+			
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
-											 trial_id: 'test_trial'
+											 trial_id: 'test_trial',
+											 current_block: current_block,
+											 current_trial: i
 											 })
 		}
 	};

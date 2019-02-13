@@ -179,11 +179,10 @@ var getTrainingSet = function() {
 
 //returns a cue randomly, either TOP or BOT
 var getCue = function() {
-	
 	cue = directed_cue_array[Math.floor(Math.random() * 2)]
-	
 	return cue
 };
+
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
 var getProbe = function(directed_cond, letters, cue) {
@@ -425,7 +424,7 @@ var end_block = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -441,7 +440,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This task will take around 27 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This task will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {

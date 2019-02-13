@@ -287,7 +287,7 @@ var minStopCorrect = 0.30
 
 
 var stop_signal_conditions = ['go','go','stop']
-var shapes = ['circle','square','triangle','pentagon']
+var shapes = ['circle','circle','square','square']
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
 var totalShapesUsed = 4
@@ -313,17 +313,13 @@ jsPsych.pluginAPI.preloadImages(images);
 
 var prompt_text_list = '<ul list-text>'+
 						'<li>' + shapes[0] + ': ' + possible_responses[0][0] + '</li>' +
-						'<li>' + shapes[1] + ': ' + possible_responses[0][0] + '</li>' +
 						'<li>' + shapes[2] + ': ' + possible_responses[2][0] + '</li>' +
-						'<li>' + shapes[3] + ': ' + possible_responses[2][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[0] + ': ' + possible_responses[0][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[1] + ': ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[2] + ': ' + possible_responses[2][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[3] + ': ' + possible_responses[2][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears!</p>' +
 				  '</div>'
 
@@ -390,7 +386,7 @@ var welcome_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take about 6 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -411,8 +407,8 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
 			'<p class = block-text>Only one response is correct for each shape.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[0]+' or a '+shapes[1]+', press the '+possible_responses[0][0]+'.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[2]+' or a '+shapes[3]+', press the '+possible_responses[2][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[0]+', press the '+possible_responses[0][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[2]+', press the '+possible_responses[2][0]+'.</p>'+
 			'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 		'</div>',
 		
@@ -421,7 +417,7 @@ var instructions_block = {
 			
 			'<p class = block-text>If you see a star appear, please try your best to withhold your response on that trial.</p>'+
 			
-			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 				
@@ -538,7 +534,7 @@ var test_intro = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take about 6 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take about 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {

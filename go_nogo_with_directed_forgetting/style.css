@@ -1,7 +1,6 @@
 /*******************************************************/
 /***********    Network Default CSS Styles    **********/
 /*******************************************************/
-
 .display_stage {
     position: fixed;
     background: gray;
@@ -68,6 +67,16 @@
  -webkit-transform: translateY(-50%);
 }
 
+.cue-text {
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
 .bigbox {
 width:100%;
 margin: auto; 
@@ -97,7 +106,7 @@ text-align: center;
  height: 20%;
  position:absolute;
  top:10%;
- left:17.5%;
+ left:20%;
  transform: translate(-50%,-45%);
  margin-right:0%;
  background-color: none;
@@ -198,7 +207,6 @@ margin-right:0%;
 transform: translate(-50%,50%);
 background-color: none;
 }
-
 /*******************************************************/
 /***********        Go-Nogo CSS Styles        **********/
 /*******************************************************/

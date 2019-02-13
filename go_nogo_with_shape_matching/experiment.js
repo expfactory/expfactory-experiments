@@ -309,7 +309,7 @@ var practice_thresh = 3 // 3 blocks of 28 trials
  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
-var go_no_go_styles = ['unfilled','solid'] //has dashed as well
+var go_no_go_styles = ['solid','outlined'] //has dashed as well
 
 var current_trial = 0
 var current_block = 0

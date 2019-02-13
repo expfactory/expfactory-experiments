@@ -216,13 +216,11 @@ var getStim = function(){
 	delay = stim.delay
 	flankers = stim.flankers
 		
-	return task_boards[0]+ 
-			flankers+
-			flankers+
-			probe+
-			flankers+
-			flankers+
-		   task_boards[1]
+	return flanker_boards[0]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flankers + fileTypePNG
 }
 
 var getControlStim = function(){	
@@ -233,13 +231,12 @@ var getControlStim = function(){
 	correct_response = stim.correct_response
 	flankers = stim.flankers
 	control_delay = stim.delay		
-	return task_boards[0]+ 
-			flankers+
-			flankers+
-			probe+
-			flankers+
-			flankers+
-		   task_boards[1]
+		   
+	return flanker_boards[0]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[1]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
+		   flanker_boards[3]+ preFileType + flankers + fileTypePNG +
+		   flanker_boards[4]+ preFileType + flankers + fileTypePNG
 }
 
 
@@ -263,6 +260,7 @@ var appendData = function(){
 		n_back_condition: n_back_condition,
 		flanker_condition: flanker_condition,
 		probe: probe,
+		flankers: flankers,
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
@@ -339,8 +337,7 @@ var current_block = 0
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */
-
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
+var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
 var stims = createTrialTypes(practice_len, delay)
 
@@ -396,7 +393,7 @@ var end_block = {
 
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take less than 30 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -419,6 +416,7 @@ var instructions_block = {
 			'<p class = block-text>In this task, you will see a row of 5 letters on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current <i>middle</i> letter, to the <i>middle</i> letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the middle letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>The letters that are not in the middle do not matter, please try to ignore them.</p> '+
 			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
@@ -520,7 +518,7 @@ var fixation_block = {
 
 
 var feedback_text = 
-'Welcome to the experiment. This experiment will take about 8 minutes. Press <strong>enter</strong> to begin.'
+	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
