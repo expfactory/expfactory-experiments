@@ -155,7 +155,7 @@ var correct_responses = [
 ]
 
 //var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
-var stims = [["solid", "stim1"],["outline","stim2"]]
+var stims = [["solid", "stim1"],["outlined","stim2"]]
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{
@@ -257,7 +257,7 @@ var post_task_block = {
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This task will take around 15 minutes. Press <i>enter</i> to begin.'
+  'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -275,7 +275,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <i> not respond</i>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -325,7 +325,7 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the <font color="' + stims[0][0] + '">' + stims[0][0] + '</font> square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the <font color="' + stims[1][0] + '">' + stims[1][0] + '</font> square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the ' + stims[1][0] + '">' + stims[1][0] + ' square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function(){

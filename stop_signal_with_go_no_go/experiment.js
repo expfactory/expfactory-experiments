@@ -160,9 +160,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var unique_combos = 60
 	
 	var stims = []
-	for (var i = 0; i < go_no_go_types.length; i++){
-		for (var x = 0; x < stop_signal_conditions.length; x++){
-			for (var j = 0; j < totalShapesUsed; j++){
+	for (var j = 0; j < totalShapesUsed; j++){
+		for (var i = 0; i < go_no_go_types.length; i++){
+			for (var x = 0; x < stop_signal_conditions.length; x++){
 				stim = {
 					stim: shapes[j],
 					correct_response: possible_responses[j][1],
@@ -172,11 +172,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 				}
 			
 				stims.push(stim)
-			}	
-		
+			}
 		}
-	
 	}
+	
 	
 	var iteration = numTrialsPerBlock/unique_combos
 	
@@ -423,7 +422,7 @@ var welcome_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take about 15 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -565,7 +564,7 @@ var test_intro = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take about 15 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
