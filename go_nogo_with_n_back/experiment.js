@@ -353,7 +353,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
 var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
-var go_no_go_styles = ['solid','unfilled'] //has dashed as well
+var go_no_go_styles = ['solid','outlined'] //has dashed as well
 							 
 var letters = 'BDGTV'.split("")
 							 
@@ -380,8 +380,7 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = cue-text><font size = "10" color = "'],['">'],['</font><div></div><div>']]				
-var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number>','</div></div></div>']				
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']				
 
 
 var stims = createTrialTypes(practice_len, delay)

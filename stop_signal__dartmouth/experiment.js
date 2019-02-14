@@ -285,9 +285,7 @@ var practice_repeats = 0
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stop_signal__dartmouth/images/'
-var images = [prefix + 'moon.png', prefix + 'oval.png', prefix + 'rectangle.png', prefix +
-	'trapezoid.png'
-]
+var images = jsPsych.randomization.repeat([prefix + 'moon.png', prefix + 'oval.png', prefix + 'rectangle.png', prefix +'trapezoid.png'],1)
 jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
@@ -295,31 +293,19 @@ var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 /* Instruction Prompt */
-var possible_responses = [
+var possible_responses = jsPsych.randomization.repeat([
 	["right index finger (left arrow)", 37],
 	["right middle finger (down arrow)", 40]
-]
+],1)
 var choices = [possible_responses[0][1], possible_responses[1][1]]
-var response_permutations = [[0,0,1,1], [0,1,0,1], [0,1,1,0],
-							[1,1,0,0], [1,0,1,0], [1,0,0,1]]
-//commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-//var permutation_index = randomDraw([0,1,2,3,4,5])
-var unique_expfactory_id = window.location.pathname.split('/')[3]
-var permutation_index = unique_expfactory_id.charCodeAt() % 6
 
-var permutation = response_permutations[permutation_index]
-// permutation = 0 // Change value if you have to restart the task
-var correct_responses = []
-for (var i=0; i<4; i++) {
-	correct_responses.push(possible_responses[permutation[i]])
-}
 
 
 var prompt_text = '<ul list-text>' + 
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + correct_responses[0][0] + '</div></li><br><br>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + correct_responses[1][0] + '</div></li><br><br>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + correct_responses[2][0] + '</div></li><br><br>' +
-					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + correct_responses[3][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[0] + '></img>' + possible_responses[0][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[1] + '></img>' + possible_responses[0][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[2] + '></img>' + possible_responses[1][0] + '</div></li><br><br>' +
+					'<li><div class = prompt_container><img class = prompt_stim src = ' + images[3] + '></img>' + possible_responses[1][0] + '</div></li><br><br>' +
 				  '</ul>'
 
 /* Global task variables */
@@ -348,25 +334,25 @@ var test_block_data = []
 var stims = [{
 	stimulus: '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
 	data: {
-		correct_response: correct_responses[0][1],
+		correct_response: possible_responses[0][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[1] + '></img></div>',
 	data: {
-		correct_response: correct_responses[1][1],
+		correct_response: possible_responses[0][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[2] + '></img></div>',
 	data: {
-		correct_response: correct_responses[2][1],
+		correct_response: possible_responses[1][1],
 		trial_id: 'stim',
 	}
 }, {
 	stimulus: '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[3] + '></img></div>',
 	data: {
-		correct_response: correct_responses[3][1],
+		correct_response: possible_responses[1][1],
 		trial_id: 'stim',
 	}
 }]

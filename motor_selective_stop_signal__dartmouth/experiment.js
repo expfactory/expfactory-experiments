@@ -310,20 +310,9 @@ var practice_repeats = 0
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/'
-var images = [prefix + 'circle.png', prefix + 'Lshape.png', prefix + 'rhombus.png', prefix +
-	'triangle.png'
-]
-var permutations = permute([0,1,2,3])
-//commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-//var permutation_index = randomDraw([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24])
-var unique_expfactory_id = window.location.pathname.split('/')[3]
-var permutation_index = unique_expfactory_id.charCodeAt() % 25
-var permutation = permutations[permutation_index]
-// permutation = 0 // Change value if you have to restart the task
+var images = jsPsych.randomization.repeat([prefix + 'circle.png', prefix + 'Lshape.png', prefix + 'rhombus.png', prefix + 'triangle.png'],1)
 
-
-images = [images[permutation[0]], images[permutation[1]], 
-		images[permutation[2]], images[permutation[3]]]
+images = [images[0], images[1], images[2], images[3]]
 jsPsych.pluginAPI.preloadImages(images);
 
 /* Stop signal delay in ms */

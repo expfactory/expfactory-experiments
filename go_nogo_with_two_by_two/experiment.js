@@ -93,7 +93,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Letter is unfilled.</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+		return '<div class = fb_box><div class = center-text><font size = 20>Letter is '+go_no_go_styles[1]+'.</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	}
 
 }
@@ -212,8 +212,8 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
+  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				 '<div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
@@ -225,8 +225,8 @@ var getStim = function() {
     stim_style = go_no_go_styles[0]
   }
     
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-		'</div></div><div class = lowerbox>'+ preFileType + stim_style + '_' + curr_stim.number + fileTypePNG + '</div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
+  				  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType + stim_style + '_' + curr_stim.number + fileTypePNG + '</div></div></div>'
 		
   return stim_html
 }
@@ -349,7 +349,7 @@ var numTrialsPerBlock = 80
 var numTestBlocks = test_length / numTrialsPerBlock
 var CTI = 300
 
-var go_no_go_styles = ['solid','unfilled']
+var go_no_go_styles = ['solid','outlined']
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -406,7 +406,7 @@ var task_list = 	   '<ul>'+
 var prompt_task_list = '<ul>'+
 					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
-					   	'<li>Do not respond if the letter is unfilled!</li>'+
+					   	'<li>Do not respond if the letter is '+go_no_go_styles[1]+'!</li>'+
 					   '</ul>'
 
 
@@ -476,7 +476,7 @@ var instructions_block = {
     '</div>',
     
     '<div class = centerbox>' + 
-		'<p class = block-text>On some trials, the letter will be unfilled instead of solid.  If the letter is unfilled, do not make a response on that trial.</p>'+
+		'<p class = block-text>On some trials, the letter will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the letter is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
 									
 		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 	'</div>'
@@ -541,7 +541,7 @@ var start_test_block = {
   			'<p class = center-block-text>Practice completed. Starting test.</p>'+
   			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
     		task_list +
-    		'<p class = center-block-text>Do not make a response if the letter is unfilled.</p>'+
+    		'<p class = center-block-text>Do not make a response if the letter is '+go_no_go_styles[1]+'.</p>'+
   			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
   		'</div>',
   on_finish: function() {
