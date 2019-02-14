@@ -318,13 +318,13 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_shape_matching/images/'
 
 
+var task_boards = [['<div class = bigbox><div class = centerbox><div class = leftbox><div class = cue-text>'],['</div></div><div class = distractorbox><div class = cue-text>'],['</div></div><div class = rightbox><div class = cue-text>'],['</div></div></div></div>']]
+var task_boards = [['<div class = centerbox><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div>']]
 
 
-var task_boards = [['<div class = bigbox><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div>']]
-				
+var mask_boards = [['<div class = bigbox><div class = centerbox><div class = leftbox><div class = cue-text>'],['</div></div><div class = distractorbox><div class = cue-text>'],['</div></div><div class = rightbox><div class = cue-text>'],['</div></div></div></div>']]
+var mask_boards = [['<div class = centerbox><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div>']]
 
-var mask_boards = [['<div class = bigbox><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div>']]				   
-		
 
 
 var stims = createTrialTypes(practice_len)

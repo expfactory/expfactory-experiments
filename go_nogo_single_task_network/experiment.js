@@ -159,7 +159,7 @@ var stims = [["solid", "stim1"],["outlined","stim2"]]
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{
-  stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
+  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
   data: {
     correct_response: correct_responses[0][1],
     go_nogo_condition: correct_responses[0][0],
@@ -167,7 +167,7 @@ var practice_stimuli = [{
   },
   key_answer: correct_responses[0][1]
 }, {
-  stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
+  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div id = ' + stims[1][1] + '></div></div></div></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     go_nogo_condition: correct_responses[1][0],
@@ -179,7 +179,7 @@ var practice_stimuli = [{
 
 //set up block stim. test_stim_responses indexed by [block][stim][type]
 var test_stimuli_block = [{
-  stimulus: '<div class = centerbox><div id = ' + stims[1][1] + '></div></div>',
+  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div id = ' + stims[1][1] + '></div></div></div></div></div>',
   data: {
     correct_response: correct_responses[1][1],
     go_nogo_condition: correct_responses[1][0],
@@ -189,7 +189,7 @@ var test_stimuli_block = [{
 
 for (var i = 0; i < num_go_stim; i++) {
   test_stimuli_block.push({
-    stimulus: '<div class = centerbox><div  id = ' + stims[0][1] + '></div></div>',
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
     data: {
       correct_response: correct_responses[0][1],
       go_nogo_condition: correct_responses[0][0],

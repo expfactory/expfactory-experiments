@@ -60,12 +60,13 @@
 }
 
 .cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 .bigbox {
@@ -114,4 +115,34 @@ img.center {
   right: 0;  
   margin: auto;  
   max-height: 65%;
+}
+
+/*******************************************************/
+/***********   Go-Nogo & N-back CSS Styles    **********/
+/*******************************************************/
+
+.gng_number {
+width: 5vw;
+height: 5vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
+}
+
+/*******************************************************/
+/***********      Stop Signal CSS Styles      **********/
+/*******************************************************/
+
+.starbox {
+width: 35vw;
+height: 35vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
 }

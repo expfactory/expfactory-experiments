@@ -512,6 +512,17 @@ var instructions_block = {
 			'<p class = block-text style="font-size:28px"><font color="white">Press enter to begin the survey.</font></p>'+
 		  '</div>',
 	cont_key: [13],
+	timing_post_trial: 0
+};
+
+var update_state_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "update_state"
+	},
+	timing_response: 1,
+	text: '<div class = bigbox></div>',
+	cont_key: [13],
 	timing_post_trial: 0,
 	on_finish: function(){
 		game_state = 'questions'
@@ -556,6 +567,8 @@ var alcohol_drugs_survey__dartmouth_experiment = []
 alcohol_drugs_survey__dartmouth_experiment.push(welcome_block);
 
 alcohol_drugs_survey__dartmouth_experiment.push(instructions_block);
+
+alcohol_drugs_survey__dartmouth_experiment.push(update_state_block);
 
 alcohol_drugs_survey__dartmouth_experiment.push(post_questionnaire_node);
 

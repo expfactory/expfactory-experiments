@@ -60,12 +60,13 @@
 }
 
 .cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 .bigbox {
@@ -119,13 +120,14 @@ img.center {
 /*******************************************************/
 /************    Predictive CSS Styles     *************/
 /*******************************************************/
+
 .decision-top-left {
  width: 40vw;
  height: 40vh;
  position:absolute;
- top:25%;
- left:25%;
- transform: translate(-50%,-50%);
+ top:50%;
+ left:50%;
+ transform: translate(-100%,-100%);
  margin-right: -50%;
  background-color: none;
  text-align: center;
@@ -135,9 +137,9 @@ img.center {
  width: 40vw;
  height: 40vh;
  position:absolute;
- top:75%;
- left:25%;
- transform: translate(-50%,-50%);
+ top:50%;
+ left:50%;
+ transform: translate(-100%, 0%);
  margin-right: -50%;
  background-color: none;
  text-align: center;
@@ -147,9 +149,9 @@ img.center {
  height: 40vh;
  width: 40vw;
  position:absolute;
- top:25%;
- left:75%;
- transform: translate(-50%,-50%);
+ top:50%;
+ left:50%;
+ transform: translate(0%,-100%);
  margin-right: -50%;
  background-color: none;
  text-align: center;
@@ -159,10 +161,25 @@ img.center {
  height: 40vh;
  width: 40vw;
  position:absolute;
- top:75%;
- left:75%;
- transform: translate(-50%,-50%);
+ top:50%;
+ left:50%;
+ transform: translate(0%,0%);
  margin-right: -50%;
  background-color: none;
  text-align: center;
+}
+
+/*******************************************************/
+/***********   Go-Nogo & N-back CSS Styles    **********/
+/*******************************************************/
+
+.gng_number {
+width: 5vw;
+height: 5vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
 }

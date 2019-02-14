@@ -185,7 +185,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 
 
 var getStopStim = function(){
-	return preFileType + pathSource + 'stopSignal' + fileType + postFileType
+	return '<div class = bigbox><div class = centerbox><div class = starbox>' + preFileType + 'stopSignal' + fileTypePNG + '</div></div></div>'
 }
 
 var getStim = function(){
@@ -208,7 +208,7 @@ var getStim = function(){
 	} 
 	
 	stim = {
-		image: '<centerbox>'+preFileType + pathSource + stim_style + '_' + shape + fileType + postFileType+'</div>',
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType + stim_style + '_' + shape + fileTypePNG + '</div></div></div></div>',
 		data: { 
 			stim: shape,
 			stim_style: stim_style,
@@ -333,6 +333,10 @@ var postFileType = "'></img>"
 var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
 var fileType = ".png"
 var preFileType = "<img class = center src='"
+
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/images/"
+
 
 
 
