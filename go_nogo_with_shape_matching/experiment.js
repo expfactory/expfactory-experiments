@@ -380,7 +380,7 @@ var post_task_block = {
 };
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take about 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -396,7 +396,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take about 30 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 30 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -424,7 +424,7 @@ var instructions_block = {
 			
 			'<p class = block-text>Ignore the red shape on the left. Your task is to only to respond based on whether the green and white shapes are the same.</p>'+
 		
-			'<p class = block-text>On most trials, the white shape will be unfilled.  On some trials, the white shape will be solid.  If the white shape is solid, please make no response on that trial.</p>'+
+			'<p class = block-text>On most trials, the white shape will be '+go_no_go_styles[1]+'.  On some trials, the white shape will be '+go_no_go_styles[0]+'.  If the white shape is '+go_no_go_styles[0]+', please make no response on that trial.</p>'+
 				
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'

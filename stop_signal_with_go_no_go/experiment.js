@@ -105,7 +105,7 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>There was a star + Shape was unfilled.</font></div></div>' + prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star + Shape was '+go_no_go_styles[1]+'.</font></div></div>' + prompt_text
 		}
 	
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
@@ -319,7 +319,7 @@ var stop_signal_respond_upper_thresh = 0.70
 
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
-var go_no_go_styles = ['solid','unfilled'] //has dashed as well
+var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var shapes = jsPsych.randomization.repeat(['circle','circle','square','square'],1)
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
