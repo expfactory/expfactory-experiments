@@ -144,6 +144,7 @@ var getPracticeFeedback = function() {
 	}
 	var GoCorrect_percent = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
+	
 
 	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll Down)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for practice trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
@@ -293,10 +294,10 @@ var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 /* Instruction Prompt */
-var possible_responses = jsPsych.randomization.repeat([
+var possible_responses = [
 	["right index finger (left arrow)", 37],
 	["right middle finger (down arrow)", 40]
-],1)
+]
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 
 

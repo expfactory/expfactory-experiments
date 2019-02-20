@@ -322,19 +322,13 @@ var stop_signal =
 
 /* Instruction Prompt */
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-var choice_order = randomDraw([0,1]) // Change value if you have to restart the task
 //var choice_order = unique_expfactory_id.charCodeAt() % 2
 
 var possible_responses = [
 	["right index finger (left arrow)", 37],
 	["right middle finger (down arrow)", 40]
 ]
-if (choice_order == 1) {
-	possible_responses = [
-		["right middle finger (down arrow)", 40],
-		["right index finger (left arrow)", 37]
-	]
-}
+
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 
 var prompt_text = '<ul list-text>' + 
@@ -354,8 +348,8 @@ var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
 var motor_thresh = 0.6
-var stop_response = possible_responses[0]
-var ignore_response = possible_responses[1]
+var stop_response = possible_responses[Math.round(Math.random( ))]
+var ignore_response = possible_responses[randomDraw([0,1].filter(function(y) {return $.inArray(y, [stop_response]) == -1}))]
 var practice_len = 20
 
 var test_block_data = [] // records the data in the current block to calculate feedback
@@ -706,7 +700,8 @@ for (b = 0; b < num_practice_blocks; b++) {
 					exp_stage: "practice_stop",
 					stop_response: stop_response[1],
 					trial_num: current_trial,
-					correct: correct
+					correct: correct,
+					trial_id: 'practice_trial_with_stop',
 				})
 				current_trial += 1
 				test_block_data.push(data)

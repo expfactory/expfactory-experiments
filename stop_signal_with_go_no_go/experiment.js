@@ -338,8 +338,6 @@ var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/images/"
 
 
-
-
 var images = []
 for(i=0;i<shapes.length;i++){
 	images.push(pathSource + shapes[i] + '.png')
