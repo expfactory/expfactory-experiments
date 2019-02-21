@@ -116,6 +116,11 @@ img.center {
   max-height: 65%;
 }
 
+img {
+  height: 100%;
+  width: 100%;
+}
+
 /*******************************************************/
 /***********   Stop-Signal & 2x2 CSS Styles   **********/
 /*******************************************************/
@@ -127,7 +132,7 @@ img.center {
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -75%);
   background-color: none;
 }
 
@@ -139,6 +144,17 @@ img.center {
   left:50%;
   margin-right:-50%;
   transform: translate(-50%, -25%);
+  background-color: none;
+}
+
+.starbox {
+  width:55vw;
+  height: 55vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -50%);
   background-color: none;
 }
 

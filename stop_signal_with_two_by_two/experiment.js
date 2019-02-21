@@ -148,7 +148,6 @@ var setCTI = function() {
 }
 
 var getCTI = function() {
-console.log('here')
   return CTI
 }
 
@@ -179,6 +178,7 @@ var setStims = function() {
       }
       break
     case "switch":
+      task_switches[current_trial].cue_switch = "switch"
       cue_i = randomDraw([0, 1])
       if (last_task == "na") {
         tmp = curr_task
@@ -196,6 +196,7 @@ var setStims = function() {
       break
     case "switch_old":
       cue_i = randomDraw([0, 1])
+      task_switches[current_trial].cue_switch = "switch"
       if (last_task == "na") {
         tmp = curr_task
         curr_task = randomDraw(getKeys(tasks).filter(function(x) {
@@ -234,7 +235,7 @@ var getSSType = function(){
 }
 
 var getStopStim = function(){
-	var stim_html = '<div class = lowerbox>'+ preFileType + 'stop' + fileTypePNG + '</div>'
+	var stim_html = '<div class = starbox>'+ preFileType + 'stop' + fileTypePNG + '</div>'
     return stim_html
 }
 
@@ -300,6 +301,12 @@ var appendData = function() {
   var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
   var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
   var task_switch = task_switches[trial_num]
+  console.log('trial id = '+trial_id)
+  if (trial_id == "practice_trial"){
+		currBlock = practiceCount
+  } else if (trial_id == "test_trial"){
+		currBlock = testCount
+  }
   jsPsych.data.addDataToLastTrial({
     cue: curr_cue,
     stim_color: curr_stim.color,
@@ -308,7 +315,8 @@ var appendData = function() {
     task_condition: task_switch.task_switch,
     cue_condition: task_switch.cue_switch,
     stop_signal_condition: stop_signal_condition,
-    trial_num: trial_num,
+    current_trial: current_trial,
+    current_block: currBlock,
     CTI: CTI
   })
   
@@ -413,6 +421,7 @@ var curr_cue = 'na' //object that holds the current cue, set by setStims()
 var cue_i = randomDraw([0, 1]) //index for one of two cues of the current task
 var curr_stim = 'na' //object that holds the current stim, set by setStims()
 var current_trial = 0
+var currBlock = 0
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
 var task_list = 	   '<ul>'+
