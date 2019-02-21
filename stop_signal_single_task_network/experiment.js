@@ -178,7 +178,7 @@ var getStim = function(){
 	}
 	
 	stim = {
-		image: '<centerbox>'+preFileType + pathSource + 'solid_' + shape + fileType + postFileType+'</div>',
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType + 'solid_' + shape + fileTypePNG + '</div>',
 		data: { 
 			stim: shape,
 			stop_signal_condition: stop_signal_condition,
@@ -301,7 +301,8 @@ var pathSource = "/static/experiments/stop_signal_single_task_network/images/"
 var fileType = ".png"
 var preFileType = "<img class = center src='"
 
-
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/stop_signal_single_task_network/images/"
 
 var images = []
 for(i=0;i<shapes.length;i++){
