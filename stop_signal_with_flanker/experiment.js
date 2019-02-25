@@ -180,7 +180,7 @@ function getSSType(){
 
 var getStopStim = function(){
 	return stop_boards[0] + 
-		   	preFileType + 'stopSignal' + fileTypePNG + 
+		   	preFileTypeStar + 'stopSignal' + fileTypePNG + 
 		   stop_boards[1] 
 }
 
@@ -284,6 +284,7 @@ var current_block = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_flanker/images/'
+var preFileTypeStar = '<img class = star src="/static/experiments/stop_signal_with_flanker/images/'
 
 var stop_boards = ['<div class = bigbox><div class = centerbox><div class = starbox>','</div></div></div>']	   
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
