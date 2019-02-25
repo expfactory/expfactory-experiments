@@ -125,6 +125,10 @@ img.center {
   max-height: 65%;
 }
 
+img.star {
+  height: 100%;
+  width: 100%;
+}
 
 .starbox {
   width:10vw;
@@ -137,6 +141,17 @@ img.center {
   background-color: none;
 }
 
+
+.starbox {
+  width:40vw;
+  height: 40vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -50%);
+  background-color: none;
+}
 /*******************************************************/
 /***********        Flanker CSS Styles        **********/
 /*******************************************************/
