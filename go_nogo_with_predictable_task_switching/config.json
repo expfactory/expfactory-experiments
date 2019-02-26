@@ -19,7 +19,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "go_nogo_with_predictive_task_switching",
+        "exp_id": "go_nogo_with_predictable_task_switching",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
                          "Patrick Bissett",
@@ -39,7 +39,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('go_nogo_with_predictive_task_switching')"}
+                                        "on_trial_finish": "addID('go_nogo_with_predictable_task_switching')"}
                        }
     
    }
