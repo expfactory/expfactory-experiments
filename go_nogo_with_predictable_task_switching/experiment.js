@@ -384,7 +384,7 @@ var task_boards = [[['<div class = bigbox><div class = centerbox><div class = de
 var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>Do not respond if the number is ' + go_no_go_styles[1] + '!</li>' +
+						'<li>Do not respond if the number is ' + go_no_go_styles[1] + ' in black!</li>' +
 						'<li>Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</li>' +
 						'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
 						'<li>'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
@@ -394,7 +394,7 @@ var prompt_text_list = '<ul list-text>'+
 					  '</ul>'
 					  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the number is ' + go_no_go_styles[1] + '!</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the number is ' + go_no_go_styles[1] + ' in black!</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
@@ -490,7 +490,7 @@ var instructions_block = {
 			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
 			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + '.</p>'+
+			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + ' in black.</p>'+
 			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'
@@ -559,7 +559,7 @@ var start_test_block = {
 			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
 			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 	
-			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + '.</p>'+
+			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + ' in black.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
@@ -580,8 +580,6 @@ var rest_block = {
 	cont_key: [13],
 	timing_post_trial: 1000
 };
-
-
 
 var practiceTrials = []
 practiceTrials.push(feedback_block)
@@ -645,14 +643,10 @@ var practiceNode = {
 					sum_responses += 1
 					if (data[i].key_press == data[i].correct_response){
 						correct += 1
-		
 					}
 				}
-		
 			}
-	
 		}
-	
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
@@ -748,14 +742,10 @@ var testNode = {
 					sum_responses += 1
 					if (data[i].key_press == data[i].correct_response){
 						correct += 1
-		
 					}
 				}
-		
 			}
-	
 		}
-	
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
@@ -782,11 +772,8 @@ var testNode = {
 		
 			return true
 		}
-	
 	}
 }
-
-
 
 /* create experiment definition array */
 go_nogo_with_predictable_task_switching_experiment = []

@@ -148,14 +148,14 @@ img {
 }
 
 .starbox {
-  width:55vw;
-  height: 55vw;
+  width:45vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%, -50%);
   background-color: none;
+  padding-top: 100%;
 }
 
 .promptbox {

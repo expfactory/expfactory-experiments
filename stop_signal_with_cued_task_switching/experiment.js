@@ -652,7 +652,7 @@ var practice_block = {
 	type: 'stop-signal',
 	stimulus: getStim,
 	SS_stimulus: getStopStim,
-	SS_trial_type: getSSType, 
+	SS_trial_type: 'stop', //getSSType, 
 	data: {
 		"trial_id": "practice_trial"
 	},
