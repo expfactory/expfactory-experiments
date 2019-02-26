@@ -20,7 +20,7 @@
                 
                 
                ],
-        "exp_id": "flanker_with_cued_task_switching",
+        "exp_id": "n_back_with_cued_task_switching",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Patrick Bissett",
