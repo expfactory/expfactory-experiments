@@ -118,6 +118,41 @@ img.center {
 }
 
 /*******************************************************/
+/***********          2x2 CSS Styles          **********/
+/*******************************************************/
+.upperbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -75%);
+  background-color: none;
+}
+
+.lowerbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -25%);
+  background-color: none;
+}
+
+.promptbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-125%, 50%);
+}
+
+/*******************************************************/
 /***********        Flanker CSS Styles        **********/
 /*******************************************************/
 
@@ -128,7 +163,7 @@ position:absolute;
 top:50%;
 left:50%; 
 margin-right:0%;
-transform: translate(-150%,-50%);
+transform: translate(-200%,-50%);
 background-color: none;
 }
 
@@ -139,7 +174,7 @@ position:absolute;
 top:50%;
 left:50%; 
 margin-right:0%;
-transform: translate(-100%,-50%);
+transform: translate(-125%,-50%);
 background-color: none;
 }
 
@@ -161,7 +196,7 @@ position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(0%,-50%);
+transform: translate(25%,-50%);
 background-color: none;
 }
 
@@ -172,7 +207,6 @@ position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(50%,-50%);
+transform: translate(100%,-50%);
 background-color: none;
 }
-

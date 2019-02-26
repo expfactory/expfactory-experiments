@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Cued Task Switching Single Task Network",
+        "template":"jspsych",
+        "run": [
+                 "static/js/math.min.js",
+                 "static/js/jspsych/jspsych.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+                 "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+                 "static/js/jspsych/plugins/jspsych-call-function.js",
+                 "static/js/jspsych/plugins/jspsych-survey-text.js",
+                 "static/js/utils/poldrack_utils.js",
+                 "experiment.js",
+                 "static/css/jspsych.css",
+                 "static/css/default_style.css",
+                 "style.css"
+               ],
+        "exp_id": "cued_task_switching_single_task_network",
+        "cognitive_atlas_task_id": "trm_566745bbf272a",
+        "contributors": [
+                         "Patrick Bissett",
+                         "Jamie Li",
+                         "McKenzie Hagen",
+                         "Russell Poldrack"
+                        ], 
+        "time":24,
+        "reference": "http://www.ncbi.nlm.nih.gov/pubmed/21299334",
+        "publish":"True",
+        "experiment_variables": [{
+                                 "name":"credit_var",
+                                 "type":"credit",
+                                 "datatype": "boolean",
+                                 "description":"True if avg_rt > 200"
+                                  }],
+        "deployment_variables":{"jspsych_init":
+                                        {"fullscreen": true,
+                                        "display_element": "getDisplayElement",
+                                        "on_trial_finish": "addID('cued_task_switching_single_task_network')"}
+                       }
+    
+   }
+]

@@ -60,8 +60,8 @@
 }
 
 .cue-text {
-  width:20vw;
-  height: 20vh;
+  width:100vw;
+  height: 100vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -97,8 +97,8 @@ text-align: center;
  width: 75%;
  height: 20%;
  position:absolute;
- top:10%;
- left:20%;
+ top:50%;
+ left:50%;
  transform: translate(-50%,-45%);
  margin-right:0%;
  background-color: none;
@@ -118,34 +118,64 @@ img.center {
 }
 
 /*******************************************************/
-/***********        Flanker CSS Styles        **********/
+/************    Predictive CSS Styles     *************/
 /*******************************************************/
 
-.flankerLeft_2 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%; 
-margin-right:0%;
-transform: translate(-150%,-50%);
-background-color: none;
+.decision-top-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-100%,-100%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
 }
 
-.flankerLeft_1 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%; 
-margin-right:0%;
-transform: translate(-100%,-50%);
-background-color: none;
+.decision-bottom-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-100%, 0%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
 }
 
-.flankerMiddle {
-width: 5vw;
-height: 5vw;
+.decision-top-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(0%,-100%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-bottom-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(0%,0%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+/*******************************************************/
+/***********   Go-Nogo & N-back CSS Styles    **********/
+/*******************************************************/
+
+.gng_number {
+width: 15vw;
+height: 15vw;
 position:absolute;
 top:50%;
 left:50%;
@@ -153,26 +183,3 @@ margin-right:0%;
 transform: translate(-50%,-50%);
 background-color: none;
 }
-
-.flankerRight_1 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(0%,-50%);
-background-color: none;
-}
-
-.flankerRight_2 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(50%,-50%);
-background-color: none;
-}
-

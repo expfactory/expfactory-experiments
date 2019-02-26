@@ -118,61 +118,38 @@ img.center {
 }
 
 /*******************************************************/
-/***********        Flanker CSS Styles        **********/
+/***********   Stop-Signal & 2x2 CSS Styles   **********/
 /*******************************************************/
 
-.flankerLeft_2 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%; 
-margin-right:0%;
-transform: translate(-150%,-50%);
-background-color: none;
+.upperbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -75%);
+  background-color: none;
 }
 
-.flankerLeft_1 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%; 
-margin-right:0%;
-transform: translate(-100%,-50%);
-background-color: none;
+.lowerbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -25%);
+  background-color: none;
 }
 
-.flankerMiddle {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(-50%,-50%);
-background-color: none;
-}
-
-.flankerRight_1 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(0%,-50%);
-background-color: none;
-}
-
-.flankerRight_2 {
-width: 5vw;
-height: 5vw;
-position:absolute;
-top:50%;
-left:50%;
-margin-right:0%;
-transform: translate(50%,-50%);
-background-color: none;
+.promptbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-125%, 50%);
 }
 
