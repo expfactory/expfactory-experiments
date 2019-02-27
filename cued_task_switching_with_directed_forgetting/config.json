@@ -1,6 +1,6 @@
 [
     {
-        "name": "Two by Two with Directed Forgetting Experiment",
+        "name": "Cued with Directed Forgetting Experiment",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",

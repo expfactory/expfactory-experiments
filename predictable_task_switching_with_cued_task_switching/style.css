@@ -172,7 +172,7 @@ text-align: center;
 /*******************************************************/
 
 .left-text {
- width: 10%;
+  width: 10%;
   height: 10%;
   position: absolute;
   top: 50%;
@@ -186,7 +186,7 @@ text-align: center;
 
 
 .right-text {
- width: 10%;
+  width: 10%;
   height: 10%;
   position: absolute;
   top: 50%;
