@@ -137,6 +137,40 @@ var getSSD = function() {
 	return SSD
 }
 
+var getCategorizeFeedback = function(){
+	curr_trial = jsPsych.progress().current_trial_global - 1
+	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'go')){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).correct === true){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).correct === false) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'
+	
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
+			
+			
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>'
+	
+		}
+	} else if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'stop')){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>'
+		}
+	} else if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'ignore')){
+		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
+			return '<div class = fb_box><div class = center-text><font size = 20>Please respond to the shape if you were going to respond with your '+ignore_response+'!</font></div></div>'
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).correct === true){			
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
+		}
+	}	
+}
+
 /* After each test block let the subject know their average RT and accuracy. If they succeed or fail on too many stop signal practice_trials, give them a reminder */
 var getPracticeFeedback = function() {
 	var data = test_block_data
@@ -273,9 +307,9 @@ var getPracticeTrials = function() {
 		choices: choices,
 		timing_stim: 850,
 		timing_response: 1850,
-		correct_text: '<div class = feedbackbox><div style="color:#4FE829"; class = center-text>Correct!</p></div>',
-		incorrect_text: '<div class = feedbackbox><div style="color:red"; class = center-text>Incorrect</p></div>',
-		timeout_message: '<div class = feedbackbox><div class = center-text>Too Slow</div></div>',
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Too Slow</font></div></div>',
 		show_stim_with_feedback: false,
 		timing_feedback_duration: 500,
 		timing_post_trial: 250,
@@ -474,66 +508,64 @@ var attention_node = {
   }
 }
 
-/* define static blocks  */
 var start_practice_stop_block = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = instructbox>'+
-				'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + ' (Scroll Down)</p>' +
+	type: 'poldrack-instructions',
+	data: {
+		trial_id: "practice_stop_instructions"
+	},
+	pages:[
+		'<div class = instructbox>'+
+			'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
 			
-				'<p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
-			
-				'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</strong></p>'+
+			'<p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
+		'</div>',
+		
+		'<div class = instructbox>'+
+			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</strong></p>'+
 				
-				'<p class = block-text><strong>If the star appears and you were going to respond with your ' + ignore_response[0] + ', you can ignore the star and respond to the shape.</strong></p>'+
+			'<p class = block-text><strong>If the star appears and you were going to respond with your ' + ignore_response[0] + ', you can ignore the star and respond to the shape.</strong></p>'+
 							
-				'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response[0] + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response[0] + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 			
-				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
+			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 			 
-				'<p class = block-text>Press enter to begin practice.</p>' +
-			'</div>',	
-  is_html: true,
-  choices: [13],
-  response_ends_trial: true,
-  timing_stim: 180000, 
-  timing_response: 180000,
-  data: {
-    trial_id: "test_start_block"
-  },
-  timing_post_trial: 500,
-  on_finish: function() {
+		'</div>',		
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 500,
+	on_finish: function() {
   	exp_stage = 'practice_stop'
     current_trial = 0
   }
 };
 
 var start_test_block = {
-  type: 'poldrack-single-stim',
-  stimulus: '<div class = instructbox>'+
-				'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + ' (Scroll Down)</p>' +
+	type: 'poldrack-instructions',
+	data: {
+		trial_id: "test_instructions"
+	},
+	pages:[
+		'<div class = instructbox>'+
+			'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
 			
-				'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
-			
-				'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</p>'+
+			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
+		'</div>',
+		
+		'<div class = instructbox>'+
+			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</p>'+
 				
 				'<p class = block-text>If the star appears and you were going to respond with your ' + ignore_response[0] + ', you can ignore the star and respond to the shape.</p>'+
 							
 				'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response[0] + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 				
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
-			 
-				'<p class = block-text>Press enter to begin test.</p>'+
-			'</div>',	
-  is_html: true,
-  choices: [13],
-  response_ends_trial: true,
-  timing_stim: 180000, 
-  timing_response: 180000,
-  data: {
-    trial_id: "test_start_block"
-  },
-  timing_post_trial: 500,
-  on_finish: function() {
+		'</div>',		
+	],
+	allow_keys: false,
+	show_clickable_nav: true,
+	timing_post_trial: 500,
+	on_finish: function() {
   	exp_stage = 'test'
     current_trial = 0
   }
@@ -575,11 +607,11 @@ var practice_feedback_block = {
   }
 };
 
- var end_block = {
+var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = center-text><i>Fin</i></div></div>',
+	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
 	is_html: true,
-	choices: [32],
+	choices: [13],
 	timing_response: 180000,
 	response_ends_trial: true,
 	data: {
@@ -603,6 +635,20 @@ var post_task_block = {
    rows: [15, 15],
    timing_response: 360000,
    columns: [60,60]
+};
+
+var welcome_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Welcome to the experiment. This experiment will take about 15 minutes.</p>'+
+	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
+	'</div>',
+	cont_key: [13],
+	timing_post_trial: 0
 };
 
 var instructions_block = {
@@ -656,6 +702,8 @@ var practice_loop = {
 /* Set up experiment */
 /* ************************************ */
 var motor_selective_stop_signal__dartmouth_experiment = []
+
+motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
 motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
 motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
 
@@ -702,6 +750,7 @@ for (b = 0; b < num_practice_blocks; b++) {
 					trial_num: current_trial,
 					correct: correct,
 					trial_id: 'practice_trial_with_stop',
+					stop_signal_condition: stop_trial
 				})
 				current_trial += 1
 				test_block_data.push(data)
@@ -709,7 +758,23 @@ for (b = 0; b < num_practice_blocks; b++) {
               '\nCorrect Response? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay)
 			}
 		}
+		
+		var categorize_block = {
+			type: 'poldrack-single-stim',
+			data: {
+				trial_id: "practice-stop-feedback"
+			},
+			choices: 'none',
+			stimulus: getCategorizeFeedback,
+			timing_post_trial: 0,
+			is_html: true,
+			timing_stim: 500,
+			timing_response: 500,
+			response_ends_trial: false, 
+
+		};
 		stop_signal_exp_block.push(stop_signal_block)
+		stop_signal_exp_block.push(categorize_block)
 	}
 
 	motor_selective_stop_signal__dartmouth_experiment = motor_selective_stop_signal__dartmouth_experiment.concat(

@@ -14,6 +14,28 @@
   color: white;
 }
 
+.fb_box_left {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-100%,-175%);
+  background-color: none;
+}
+
+.fb_box_right {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(0%,-175%);
+  background-color: none;
+}
+
 .dd-stim {
 	text-align: center;
 	font-size: 80px;
