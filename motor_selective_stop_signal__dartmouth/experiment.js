@@ -607,7 +607,7 @@ var practice_feedback_block = {
   }
 };
 
- var end_block = {
+var end_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
 	is_html: true,

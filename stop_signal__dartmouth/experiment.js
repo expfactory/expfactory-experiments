@@ -548,7 +548,7 @@ var start_test_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
 	is_html: true,
-	choices: [32],
+	choices: [13],
 	timing_response: 180000,
 	response_ends_trial: true,
 	data: {

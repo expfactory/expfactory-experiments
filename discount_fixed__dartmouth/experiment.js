@@ -286,9 +286,9 @@ var rest_block = {
 
 var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = center-text><i>Fin</i></div></div>',
+	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
 	is_html: true,
-	choices: [32],
+	choices: [13],
 	timing_response: 180000,
 	response_ends_trial: true,
 	data: {
@@ -333,6 +333,7 @@ for (i = 0; i < practice_options.small_amt.length; i++) {
   choices: choices,
   response_ends_trial: false,
   timing_post_trial: 0,
+  prompt: '<div class = fb_box><p class = center-text style = "font-size: 16px">left arrow key = option on screen ||  right arrow key = $20 today</p></div>',
   on_finish: function(data) {
   	
     var choice = false;
@@ -367,6 +368,7 @@ for (x = 0; x < test_stim_index.length; x++) {
 		choices: [choices[0][1], choices[1][1]],
 		response_ends_trial: false,
 		timing_post_trial: 0,
+		prompt: '<div class = fb_box><p class = center-text style = "font-size: 16px">Left Arrow Key = Option on screen || Right Arrow Key = $20 today</p></div>',
 		on_finish: function(data) {
 			var choice = false;
 			if (data.key_press == choices[0][1]) {
