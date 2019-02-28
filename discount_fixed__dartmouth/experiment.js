@@ -208,7 +208,7 @@ var instructions_block = {
 			
 			'<p class = block-text>You will choose between <strong>$20 today</strong> or the <strong>presented option</strong>.</p>'+
 			
-			'<p class = block-text>Choosing one rejects the other.</p>'+
+			'<p class = block-text>Choosing one option will reject the other.</p>'+
 			
 			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 		'</div>'		
@@ -227,7 +227,7 @@ var start_test_block = {
 			
 				'<p class = block-text>You will choose between <strong>$20 today</strong> or the <strong>presented option</strong>.</p>'+
 			
-				'<p class = block-text>Choosing one rejects the other.</p>'+
+				'<p class = block-text>Choosing one option will reject the other.</p>'+
 			
 				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
   			'</div>',
@@ -262,6 +262,20 @@ var start_practice_block = {
   on_finish: function() {
     current_trial = 0
   }
+};
+
+var welcome_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Welcome to the experiment. This experiment will take about 15 minutes.</p>'+
+	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
+	'</div>',
+	cont_key: [13],
+	timing_post_trial: 0
 };
 
 var rest_block = {
@@ -318,6 +332,7 @@ var post_task_block = {
 
 //Set up experiment
 var discount_fixed__dartmouth_experiment = []
+discount_fixed__dartmouth_experiment.push(welcome_block);
 discount_fixed__dartmouth_experiment.push(instructions_block);
 
 // practice portion
@@ -333,7 +348,8 @@ for (i = 0; i < practice_options.small_amt.length; i++) {
   choices: choices,
   response_ends_trial: false,
   timing_post_trial: 0,
-  prompt: '<div class = fb_box><p class = center-text style = "font-size: 16px">left arrow key = option on screen ||  right arrow key = $20 today</p></div>',
+  prompt: '<div class = fb_box_left><p class = center-text style = "font-size: 20px">left arrow key = option on screen</p></div>'+
+  		  '<div class = fb_box_right><p class = center-text style = "font-size: 20px">down arrow key = $20 today</p></div>',
   on_finish: function(data) {
   	
     var choice = false;
@@ -368,7 +384,8 @@ for (x = 0; x < test_stim_index.length; x++) {
 		choices: [choices[0][1], choices[1][1]],
 		response_ends_trial: false,
 		timing_post_trial: 0,
-		prompt: '<div class = fb_box><p class = center-text style = "font-size: 16px">Left Arrow Key = Option on screen || Right Arrow Key = $20 today</p></div>',
+		prompt: '<div class = fb_box_left><p class = center-text style = "font-size: 20px">left arrow key = option on screen</p></div>'+
+  		  		'<div class = fb_box_right><p class = center-text style = "font-size: 20px">down arrow key = $20 today</p></div>',
 		on_finish: function(data) {
 			var choice = false;
 			if (data.key_press == choices[0][1]) {
