@@ -808,9 +808,7 @@ var practiceNode = {
 		
 					}
 				}
-		
 			}
-	
 		}
 	
 		var accuracy = correct / total_trials
@@ -980,12 +978,9 @@ var testNode = {
 					sum_responses += 1
 					if (data[i].key_press == data[i].correct_response){
 						correct += 1
-		
 					}
 				}
-		
 			}
-	
 		}
 	
 		var accuracy = correct / total_trials
@@ -1011,10 +1006,8 @@ var testNode = {
 					'</p><p class = block-text>Done with this test. Press Enter to continue.'
 			return false
 		} else {
-		
 			return true
 		}
-	
 	}
 }
 
