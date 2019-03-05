@@ -189,10 +189,13 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 	
-		
-	return task_boards[0]+ 
-			probe+
-		   task_boards[1]
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
+	return task_boards[0]+ preFileType  + letter_case + '_' + probe + fileTypePNG + task_boards[1]	
 }
 
 var getResponse =  function(){
@@ -217,7 +220,8 @@ var appendData = function(){
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
-		current_block: current_block
+		current_block: current_block,
+		letter_case: letter_case
 	})
 		
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -287,7 +291,7 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']		
 
 var stims = createTrialTypes(practice_len, delay)
 

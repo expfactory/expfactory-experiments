@@ -185,15 +185,14 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
+  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				 '<div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
 var getStim = function() {
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = "center-text" style=color:' + curr_stim.color +
-    ';>' + curr_stim.number + '</div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+    			  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType + curr_stim.number + fileTypePNG + '</div></div></div>'
   return stim_html
 }
 
@@ -277,7 +276,8 @@ var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
 var accuracy_thresh = 0.80;
 
-
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/cued_task_switching_single_task_network/images/"
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {

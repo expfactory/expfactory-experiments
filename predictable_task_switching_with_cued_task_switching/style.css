@@ -60,12 +60,13 @@
 }
 
 .cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 
@@ -114,6 +115,18 @@ text-align: center;
  margin-right:0%;
  background-color: none;
  text-align: center;
+}
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
 }
 
 /*******************************************************/
@@ -172,30 +185,24 @@ text-align: center;
 /*******************************************************/
 
 .left-text {
-  width: 10%;
-  height: 10%;
+  width: 5vw;
+  height: 5vw;
   position: absolute;
   top: 50%;
   left: 50%;
   background-color: none;
-  text-align: center;
   transform: translate(-125%, -50%);
-  font-size: 50px;
-  padding-top: 4%;
 }
 
 
 .right-text {
-  width: 10%;
-  height: 10%;
+  width: 5vw;
+  height: 5vw;
   position: absolute;
   top: 50%;
   left: 50%;
   background-color: none;
-  text-align: center;
   transform: translate(25%, -50%);
-  font-size: 50px;
-  padding-top: 4%;
 }
 
 .upperbox {

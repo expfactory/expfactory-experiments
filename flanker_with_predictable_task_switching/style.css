@@ -182,7 +182,7 @@ position:absolute;
 top:50%;
 left:50%; 
 margin-right:0%;
-transform: translate(-200%,-50%);
+transform: translate(-150%,-50%);
 background-color: none;
 }
 
@@ -193,7 +193,7 @@ position:absolute;
 top:50%;
 left:50%; 
 margin-right:0%;
-transform: translate(-125%,-50%);
+transform: translate(-100%,-50%);
 background-color: none;
 }
 
@@ -215,7 +215,7 @@ position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(25%,-50%);
+transform: translate(0%,-50%);
 background-color: none;
 }
 
@@ -226,6 +226,6 @@ position:absolute;
 top:50%;
 left:50%;
 margin-right:0%;
-transform: translate(100%,-50%);
+transform: translate(50%,-50%);
 background-color: none;
 }

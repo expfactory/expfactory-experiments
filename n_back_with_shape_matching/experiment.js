@@ -215,12 +215,24 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 	distractor = stim.distractor
+	
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
+	if (distractor == distractor.toUpperCase()) {
+	 letter_case_distractor = 'uppercase'
+	} else if (distractor == distractor.toLowerCase()) {
+	 letter_case_distractor = 'lowercase'
+	}
 		
 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text><font color="red">'+distractor+'</font></div>'+
+			'<div class = distractor-text><div class = cue-text>'+preFileType  + letter_case_distractor + '_' + distractor + fileTypePNG+'</div></div>'+
 	
-			'<div class = cue-text>'+probe+'</div>'+
+			'<div class = gng_number><div class = cue-text>'+preFileType  + letter_case + '_' + probe + fileTypePNG+'</div>'+
 		   
 		   '</div></div>'
 	

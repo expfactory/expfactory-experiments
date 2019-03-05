@@ -266,6 +266,12 @@ var getCueStim = function() {
 	correct_response = stim.correct_response
 	delay = stim.delay
 	
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
   var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
     '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
@@ -273,8 +279,8 @@ var getCueStim = function() {
 
 var getStim = function() {
 
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-		'</div></div><div class = lowerbox><div class = flanker-text>'+ probe +'</div></div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType  + letter_case + '_' + probe + fileTypePNG +'</div></div></div>'
 		
   return stim_html
 }
@@ -414,8 +420,7 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = fixation>'],['</div></div></div>']]
-
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']		
 
 
 /* ************************************ */

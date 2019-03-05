@@ -197,7 +197,7 @@ var getFixation = function(){
 var getStim = function(){
 	
 	return task_boards[whichQuadrant - 1][0] + 
-				number +
+				preFileType + number + fileTypePNG +
 		   task_boards[whichQuadrant - 1][1]
 }
 
