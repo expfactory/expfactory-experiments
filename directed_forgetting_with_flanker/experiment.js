@@ -306,7 +306,7 @@ var getTrainingStim = function(){
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG + '</font></div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
 }
 
 var getProbeStim = function(){
@@ -576,7 +576,7 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
+		timing_stim: 500, //500
 		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function(){
@@ -607,7 +607,7 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
+		timing_stim: 1000, //1000
 		timing_response: 1000,
 		prompt: prompt_text
 	}
@@ -665,7 +665,7 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getCategorizeFeedback,
 		timing_post_trial: 0,
 		is_html: true,
-		timing_stim: 500,
+		timing_stim: 500, //500
 		timing_response: 500,
 		response_ends_trial: false, 
 
@@ -762,7 +762,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
+		timing_stim: 500, //500
 		timing_response: 500,
 		on_finish: function(){
 			stim = getNextStim()
@@ -791,7 +791,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
+		timing_stim: 1000, //1000
 		timing_response: 1000
 	}
 
@@ -833,7 +833,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 2000, //2000
-		timing_response: 2000,
+		timing_response: 1,
 		response_ends_trial: false,
 		on_finish: appendData
 	};

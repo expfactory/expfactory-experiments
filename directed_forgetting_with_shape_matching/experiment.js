@@ -161,18 +161,18 @@ var getTrainingSet = function() {
 	preceeding2stims = []
 	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	if (current_trial < 1) {
-		letters = trainingArray.slice(0,6)
+		letters = trainingArray.slice(0,numLetters)
 	} else if (current_trial == 1) {
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	} else {
 		preceeding2stims = preceeding1stims.slice()
 		preceeding1stims = letters.slice()
 		letters = trainingArray.filter(function(y) {
 			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,6)
+		}).slice(0,numLetters)
 	}
 	return letters
 };
@@ -188,24 +188,24 @@ var getCue = function() {
 var getProbe = function(directed_cond, letters, cue) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	if (directed_cond== 'pos') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'neg') {
 		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * 3)]
+			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * 3)]
+			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
 	} else if (directed_cond == 'con') {
 		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] && y != lastSet_top[2] && y !=
-				lastSet_bottom[0] && y != lastSet_bottom[1] && y != lastSet_bottom[2])
+			return (y != lastSet_top[0] && y != lastSet_top[1] &&
+				    y != lastSet_bottom[0] && y != lastSet_bottom[1])
 		})
 		probe = newArray.pop()
 	}
@@ -216,13 +216,13 @@ var getProbe = function(directed_cond, letters, cue) {
 
 var getCorrectResponse = function(cue,probe,letters) {
 	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, letters.slice(3)) != -1) {
+		if (jQuery.inArray(probe, letters.slice(numLetters/2)) != -1) {
 			return possible_responses[0][1]
 		} else {
 			return possible_responses[1][1]
 		}
 	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, letters.slice(0,3)) != -1) {
+		if (jQuery.inArray(probe, letters.slice(0,numLetters/2)) != -1) {
 			return possible_responses[0][1]
 		} else {
 			return possible_responses[1][1]
@@ -248,8 +248,8 @@ var appendData = function(){
 	
 	current_trial+=1
 	
-	var lastSet_top = letters.slice(0,3)
-	var lastSet_bottom = letters.slice(3)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	
 	jsPsych.data.addDataToLastTrial({
 		shape_matching_condition: shape_matching_condition,
@@ -292,18 +292,18 @@ var getNextStim = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+letters[0]+
-		   task_boards[1]+letters[1]+
-		   task_boards[2]+letters[2]+
-		   task_boards[3]+letters[3]+
-		   task_boards[4]+letters[4]+
-		   task_boards[5]+letters[5]+
+	return task_boards[0] + preFileType + letters[0] + fileTypePNG +
+		   task_boards[1]+
+		   task_boards[2] + preFileType + letters[1] + fileTypePNG +
+		   task_boards[3] + preFileType + letters[2] + fileTypePNG +
+		   task_boards[4]+
+		   task_boards[5] + preFileType + letters[3] + fileTypePNG +
 		   task_boards[6]
 
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+cue+'</font></div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
 
 }
 
@@ -311,9 +311,9 @@ var getDirectedCueStim = function(){
 var getProbeStim = function(){
 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text><font color="red" size="10">'+distractor+'</font></div>'+
+			'<div class = distractor-text>'+ preFileType + distractor + fileTypePNG +'</div>'+
 	
-			'<div class = cue-text><font size="10">'+probe+'</font></div>'+
+			'<div class = cue-text>'+ preFileType + probe + fileTypePNG +'</div>'+
 		   
 		   '</div></div>'	
 		   
@@ -342,6 +342,8 @@ var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 8 trials
 
+var numLetters = 4
+
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
 var shape_matching_conditions = ['match','mismatch']
@@ -355,11 +357,14 @@ var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 				 
+var fileTypePNG = '.png"></img>'
+var preFileType = '<img class = center src="/static/experiments/directed_forgetting_with_shape_matching/images/'	
 
 
 var stims = createTrialTypes(practice_len)
 
 var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topRight style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = fixation>'],['</div></div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div></div>']]
 				   
 
 var prompt_text_list = '<ul list-text>'+
@@ -554,7 +559,7 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
+		timing_stim: 500, //500
 		timing_response: 500,
 		prompt: prompt_text,
 		on_finish: function(){
@@ -585,7 +590,7 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
+		timing_stim: 1000, //1000
 		timing_response: 1000,
 		prompt: prompt_text
 	}
@@ -643,7 +648,7 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getCategorizeFeedback,
 		timing_post_trial: 0,
 		is_html: true,
-		timing_stim: 500,
+		timing_stim: 500, //500
 		timing_response: 500,
 		response_ends_trial: false, 
 
@@ -740,7 +745,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
+		timing_stim: 500, //500
 		timing_response: 500,
 		on_finish: function(){
 			stim = getNextStim()
@@ -769,7 +774,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
+		timing_stim: 1000, //1000
 		timing_response: 1000
 	}
 
@@ -783,7 +788,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000
+		timing_response: 1000 //1000
 	};
 
 
@@ -797,7 +802,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: 'none',
 		timing_post_trial: 0,
 		timing_stim: 2500, //2500
-		timing_response: 2500
+		timing_response: 2500 //2500
 	};
 
 
@@ -811,7 +816,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 2000, //2000
-		timing_response: 2000,
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};

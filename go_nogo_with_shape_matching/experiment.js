@@ -551,8 +551,8 @@ for (i = 0; i < practice_len; i++) {
 		correct_text: getCorrectText,
 		incorrect_text: getCategorizeIncorrectText,
 		timeout_message: getTimeoutText,
-		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		timing_feedback_duration: 500, //500
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -657,7 +657,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

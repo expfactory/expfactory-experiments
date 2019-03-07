@@ -671,8 +671,8 @@ for (i = 0; i < practice_len + 1; i++) {
 			trial_id: "practice_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
-		timing_response: 500,
+		timing_stim: 500, //500
+		timing_response: 500, //500
 		prompt: prompt_text
 	}
 
@@ -686,7 +686,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		timing_post_trial: 0,
 		timing_stim: 3000, //3000
-		timing_response: 3000,
+		timing_response: 3000, //3000
 		prompt: prompt_text
 	}
 
@@ -699,8 +699,8 @@ for (i = 0; i < practice_len + 1; i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
-		timing_response: 1000,
+		timing_stim: 1000, //1000
+		timing_response: 1000, //1000
 		prompt: prompt_text
 	}
 
@@ -713,8 +713,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500,
-		timing_response: 2500,
+		timing_stim: 2500, //2500
+		timing_response: 2500, //2500
 		prompt: prompt_text
 	};
 	
@@ -728,7 +728,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_response: 1000, //1000
 		prompt: prompt_text
 	};
 
@@ -742,7 +742,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000,
+		timing_response: 1000, //1000
 		prompt: prompt_text
 	};
 	
@@ -752,7 +752,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 2000, //2000
-		timing_response: 2000,
+		timing_response: 2000, //2000
 		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -769,8 +769,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getCategorizeFeedback,
 		timing_post_trial: 0,
 		is_html: true,
-		timing_stim: 500,
-		timing_response: 500,
+		timing_stim: 500, //500
+		timing_response: 500, //500
 		response_ends_trial: false, 
 
 	};
@@ -864,8 +864,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			trial_id: "test_start_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500, //1000
-		timing_response: 500
+		timing_stim: 500, //500
+		timing_response: 500 //500
 	}
 
 	var fixation_block = {
@@ -878,7 +878,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		timing_post_trial: 0,
 		timing_stim: 3000, //3000
-		timing_response: 3000
+		timing_response: 3000 //3000
 	}
 
 	var ITI_fixation_block = {
@@ -890,8 +890,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			trial_id: "test_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000, //4000
-		timing_response: 1000
+		timing_stim: 1000, //1000
+		timing_response: 1000 //1000
 	}
 
 	var training_block = {
@@ -903,8 +903,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500,
-		timing_response: 2500
+		timing_stim: 2500, //2500
+		timing_response: 2500 //2500
 	};
 	
 	var cue_directed_block = {
@@ -917,7 +917,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000
+		timing_response: 1000 //1000
 	};
 
 	var cue_switching_block = {
@@ -930,7 +930,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000
+		timing_response: 1000 //1000
 	};
 	
 	var probe_block = {
@@ -942,8 +942,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
-		timing_stim: 2000,
-		timing_response: 2000,
+		timing_stim: 2000, //2000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};

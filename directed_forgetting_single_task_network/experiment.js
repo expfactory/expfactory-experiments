@@ -493,8 +493,8 @@ var start_fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
-	timing_response: 500,
+	timing_stim: 500, //500
+	timing_response: 500, //500
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -512,8 +512,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 3000,
-	timing_response: 3000,
+	timing_stim: 3000, //3000
+	timing_response: 3000, //3000
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -531,8 +531,8 @@ var ITI_fixation_block = {
 		trial_id: "ITI_fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 1000,
-	timing_response: 1000,
+	timing_stim: 1000, //1000
+	timing_response: 1000, //1000
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -551,8 +551,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2500,
-	timing_response: 2500
+	timing_stim: 2500, //2500
+	timing_response: 2500 //2500
 };
 
 
@@ -567,8 +567,8 @@ var cue_block = {
 	},
 	choices: false,
 	timing_post_trial: 0,
-	timing_stim: 1000,
-	timing_response: 1000
+	timing_stim: 1000, //1000
+	timing_response: 1000 //1000
 };
 
 var probe_block = {
@@ -581,8 +581,8 @@ var probe_block = {
 	},
 	choices: choices,
 	timing_post_trial: 0,
-	timing_stim: 2000,
-	timing_response: 2000,
+	timing_stim: 2000, //2000
+	timing_response: 2000, //2000
 	response_ends_trial: false,
 	on_finish: appendProbeData
 };
@@ -608,8 +608,8 @@ var practice_probe_block = {
 	data: {trial_id: "practice_trial", 
 		   exp_stage: "practice"
 		   },
-	timing_stim: 2000,
-	timing_response: 2000,
+	timing_stim: 2000, //2000
+	timing_response: 2000, //2000
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -661,8 +661,8 @@ for (i = 0; i < (practice_length); i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 500,
-		timing_response: 500,
+		timing_stim: 500, //500
+		timing_response: 500, //500
 		prompt: prompt_text,
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
@@ -681,9 +681,9 @@ for (i = 0; i < (practice_length); i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000,
+		timing_stim: 3000, //3000
 		prompt: prompt_text,
-		timing_response: 3000,
+		timing_response: 3000, //3000
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
@@ -701,9 +701,9 @@ for (i = 0; i < (practice_length); i++) {
 			trial_id: "practice_ITI_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 1000,
+		timing_stim: 1000, //1000
 		prompt: prompt_text,
-		timing_response: 1000,
+		timing_response: 1000, //1000
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
@@ -723,8 +723,8 @@ for (i = 0; i < (practice_length); i++) {
 		choices: 'none',
 		prompt: prompt_text,
 		timing_post_trial: 0,
-		timing_stim: 2500,
-		timing_response: 2500
+		timing_stim: 2500, //2500
+		timing_response: 2500 //2500
 	};
 
 
@@ -739,8 +739,8 @@ for (i = 0; i < (practice_length); i++) {
 		choices: 'none',
 		prompt: prompt_text,
 		timing_post_trial: 0,
-		timing_stim: 1000,
-		timing_response: 1000
+		timing_stim: 1000, //1000
+		timing_response: 1000 //1000
 	};
 	
 	var categorize_block = {
@@ -752,8 +752,8 @@ for (i = 0; i < (practice_length); i++) {
 		stimulus: getCategorizeFeedback,
 		timing_post_trial: 0,
 		is_html: true,
-		timing_stim: 500,
-		timing_response: 500,
+		timing_stim: 500, //500
+		timing_response: 500, //500
 		response_ends_trial: false, 
 
 	};

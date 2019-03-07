@@ -516,9 +516,9 @@ for (i = 0; i < practice_len + 1; i++) {
 		show_stim_with_feedback: false,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000,
-		timing_response: 2000,
-		timing_feedback_duration: 500,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
+		timing_feedback_duration: 500, //500
 		response_ends_trial: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
@@ -628,8 +628,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		data: {
 			trial_id: "test_trial"
 		},
-		timing_stim: 1000, 
-		timing_response: 2000, 
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		on_finish: appendData
 	}
