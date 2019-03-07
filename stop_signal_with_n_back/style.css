@@ -60,12 +60,13 @@
 }
 
 .cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 .bigbox {
@@ -128,4 +129,16 @@ img.center {
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
+}
+
+
+.gng_number {
+width: 5vw;
+height: 5vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
 }

@@ -245,9 +245,13 @@ var getStim = function(){
 	delay = stim.delay
 	
 		
-	return task_boards[0]+ 
-			probe+
-		   task_boards[1]
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+		   
+	return task_boards[0]+ preFileType  + letter_case + '_' + probe + fileTypePNG + task_boards[1]	
 }
 
 
@@ -364,6 +368,8 @@ var current_block = 0
 /* ************************************ */
 
 var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
+
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']	
 var stop_signal_boards = ['<div class = bigbox><div class = starbox>','</div></div>']
 
 var stims = createTrialTypes(practice_len, delay)
@@ -583,10 +589,10 @@ for (i = 0; i < practice_len + 3; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 1, //2000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 1, //500
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		prompt: prompt_text
@@ -602,7 +608,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timing_post_trial: 0,
 		is_html: true,
 		timing_stim: 500,
-		timing_response: 1, //500
+		timing_response: 500, //500
 		response_ends_trial: false, 
 
 	};
@@ -729,10 +735,10 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 1, //2000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 1, //500
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData
 	}
