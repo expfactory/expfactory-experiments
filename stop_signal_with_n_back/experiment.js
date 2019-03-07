@@ -583,10 +583,10 @@ for (i = 0; i < practice_len + 3; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 2000,
+		timing_response: 1, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 1, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		prompt: prompt_text
@@ -602,7 +602,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		timing_post_trial: 0,
 		is_html: true,
 		timing_stim: 500,
-		timing_response: 500,
+		timing_response: 1, //500
 		response_ends_trial: false, 
 
 	};
@@ -729,10 +729,10 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 2000,
+		timing_response: 1, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 1, //500
 		timing_post_trial: 0,
 		on_finish: appendData
 	}
