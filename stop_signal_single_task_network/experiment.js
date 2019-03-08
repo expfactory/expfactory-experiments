@@ -460,8 +460,8 @@ var fixation_block = {
 		trial_id: "fixation",
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
-	timing_response: 500
+	timing_stim: 500, //500
+	timing_response: 500 //500
 };
 
 var prompt_fixation_block = {
@@ -473,8 +473,8 @@ var prompt_fixation_block = {
 		trial_id: "prompt_fixation",
 	},
 	timing_post_trial: 0,
-	timing_stim: 500,
-	timing_response: 500,
+	timing_stim: 500, //500
+	timing_response: 500, //500
 	prompt: prompt_text
 };
 
@@ -579,11 +579,11 @@ for (i = 0; i < practice_len; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
-		timing_stim: 1000,
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		prompt: prompt_text,
@@ -602,8 +602,8 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getCategorizeFeedback,
 		timing_post_trial: 0,
 		is_html: true,
-		timing_stim: 500,
-		timing_response: 500,
+		timing_stim: 500, //500
+		timing_response: 500, //500
 		response_ends_trial: false, 
 
 	};
@@ -747,11 +747,11 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1], possible_responses[2][1]],
-		timing_stim: 1000,
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		on_start: function(){

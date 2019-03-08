@@ -289,7 +289,7 @@ var getStopStim = function(){
 var getStim = function(){
 	
 	return task_boards[whichQuadrant - 1][0] + 
-				number +
+				preFileType + number + fileTypePNG +
 		   task_boards[whichQuadrant - 1][1]
 		   		   
 	
@@ -390,10 +390,10 @@ var preFileType = "<img class = center src='/static/experiments/stop_signal_with
 
 var current_trial = 0
 
-var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = cue-text><font size = "10">'],['</font></div></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-right><div class = centerbox><div class = cue-text><font size = "10">'],['</font></div></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-right><div class = centerbox><div class = cue-text><font size = "10">'],['</font></div></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-left><div class = centerbox><div class = cue-text><font size = "10">'],['</font></div></div></div></div>']]]
+var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-top-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-bottom-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-bottom-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
 
 var stop_boards = [[['<div class = decision-top-left>'],['</div>']],
 				   [['<div class = decision-top-right>'],['</div>']],
@@ -635,10 +635,10 @@ for (i = 0; i < practice_len + 1; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 2000,
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		prompt: prompt_text,
@@ -658,7 +658,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		timing_post_trial: 0,
 		is_html: true,
 		timing_stim: 500,
-		timing_response: 500,
+		timing_response: 500, //500
 		response_ends_trial: false, 
 
 	  };
@@ -788,11 +788,11 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000,
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
-		timing_SS: 500,
+		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
 		on_start: function(){

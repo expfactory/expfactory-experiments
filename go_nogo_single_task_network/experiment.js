@@ -389,7 +389,6 @@ var prompt_fixation_block = {
 	prompt: prompt_text_list
 };
 
-
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
@@ -405,8 +404,8 @@ for (var i = 0; i < practice_length; i ++){
 	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
 	  timeout_message: getFeedback,
 	  choices: [32],
-	  timing_response: 2000,
-	  timing_stim: 1000,
+	  timing_response: 2000, //2000
+	  timing_stim: 1000, //1000
 	  timing_feedback_duration: 500,
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 0,
@@ -424,7 +423,7 @@ var practiceNode = {
 	loop_function: function(data){
 		practiceCount += 1
 		practice_index = 0
-		practice_trials = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
+		block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -477,7 +476,6 @@ var practiceNode = {
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
-			block_stims = jsPsych.randomization.repeat(test_stimuli_block, practice_length / 2);
 			return true
 		
 		}
@@ -499,8 +497,8 @@ for (var i = 0; i < numTrialsPerBlock; i ++){
 		choices: [32],
 		data: getData,
 		timing_post_trial: 0,
-		timing_stim: 1000,
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		on_finish: appendData
 	};
 	testTrials.push(fixation_block)

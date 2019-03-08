@@ -161,11 +161,10 @@ var getStim = function(){
 	return task_boards[whichQuadrant - 1][0] + 
 		   	'<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>' +
 		   	'<div class = lowerbox>' +
-				'<div class = left-text>'+left_number+'</div>'+
-				'<div class = right-text>'+right_number+'</div>'+
+				'<div class = left-text><div class = cue-text>' + preFileType + left_number + fileTypePNG + '</div></div>'+
+				'<div class = right-text><div class = cue-text>'+ preFileType + right_number + fileTypePNG + '</div></div>'+
 		    '</div>'+
 		   task_boards[whichQuadrant - 1][1]
-	
 }
 
 var getCorrectResponse = function(number, predictive_dimension){
@@ -724,8 +723,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		trial_id: "fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  prompt: prompt_text
 	}
 	
@@ -737,8 +736,8 @@ for (i = 0; i < practice_len + 1; i++) {
 			"trial_id": "practice_cue_block",
 		},
 		choices: 'none',
-		timing_stim: getCTI,
-		timing_response: getCTI,
+		timing_stim: getCTI, //getCTI
+		timing_response: getCTI, //getCTI
 		timing_post_trial: 0,
 		response_ends_trial: false,
 		prompt: prompt_text
@@ -756,8 +755,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -849,8 +848,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		trial_id: "fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500
+	  timing_stim: 500, //500
+	  timing_response: 500 //500
 	}
 	
 	var cue_block = {
@@ -861,8 +860,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			"trial_id": "test_cue_block",
 		},
 		choices: 'none',
-		timing_stim: getCTI,
-		timing_response: getCTI,
+		timing_stim: getCTI, //getCTI
+		timing_response: getCTI, //getCTI
 		timing_post_trial: 0,
 		response_ends_trial: false,
 	}
@@ -875,7 +874,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

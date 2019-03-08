@@ -226,7 +226,7 @@ var getCue = function() {
 
 var getStim = function() {
 	var stim_html = '<div class = upperbox><div class = center-text>' + curr_cue + '</div></div>'+
-				    '<div class = lowerbox><div class = center-text "style=color:' + curr_stim.color + '">' + curr_stim.number + '</div></div>'
+				    '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType + curr_stim.number + fileTypePNG + '</div></div></div>'
 	return stim_html
 }
 
@@ -235,7 +235,7 @@ var getSSType = function(){
 }
 
 var getStopStim = function(){
-	var stim_html = '<div class = starbox>'+ preFileType + 'stop' + fileTypePNG + '</div>'
+	var stim_html = '<div class = starbox>'+ preFileTypeStar + 'stop' + fileTypePNG + '</div>'
     return stim_html
 }
 
@@ -356,6 +356,8 @@ var credit_var = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_cued_task_switching/images/'
+var preFileTypeStar = '<img class = star src="/static/experiments/stop_signal_with_cued_task_switching/images/'
+
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var maxStopCorrect = 0.70
@@ -652,17 +654,17 @@ var practice_block = {
 	type: 'stop-signal',
 	stimulus: getStim,
 	SS_stimulus: getStopStim,
-	SS_trial_type: 'stop', //getSSType, 
+	SS_trial_type: getSSType, 
 	data: {
 		"trial_id": "practice_trial"
 	},
 	is_html: true,
 	choices: choices,
-	timing_stim: 1000,
-	timing_response: 2000,
+	timing_stim: 1000, //1000
+	timing_response: 2000, //2000
 	response_ends_trial: false,
 	SSD: getSSD,
-	timing_SS: 500,
+	timing_SS: 500, //500
 	timing_post_trial: 0,
 	prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	on_finish: function(){
@@ -680,9 +682,9 @@ var categorize_block = {
 	stimulus: getCategorizeFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_stim: 500,
+	timing_stim: 500, //500
  	prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-	timing_response: 500,
+	timing_response: 1, //500
 	response_ends_trial: false, 
 };
 
@@ -698,10 +700,10 @@ var test_block = {
     exp_stage: 'test'
   },
   SSD: getSSD,
-  timing_SS: 500,
+  timing_SS: 500, //500
   timing_post_trial: 0,
-  timing_response: 2000,
-  timing_stim: 1000,
+  timing_response: 2000, //2000
+  timing_stim: 1000, //1000
   on_finish: function(data) {
     appendData()
     correct_response = getResponse()
@@ -730,8 +732,8 @@ for (var i = 0; i < practice_length + 1; i++) {
 		trial_id: "fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
@@ -748,8 +750,8 @@ for (var i = 0; i < practice_length + 1; i++) {
 	  data: {
 		trial_id: 'cue'
 	  },
-	  timing_response: getCTI,
-	  timing_stim: getCTI,
+	  timing_response: getCTI, //getCTI
+	  timing_stim: getCTI, //getCTI
 	  timing_post_trial: 0,
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: function() {
@@ -889,8 +891,8 @@ for (var i = 0; i < numTrialsPerBlock + 1; i++) {
 		trial_id: "fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  on_finish: function() {
 		  jsPsych.data.addDataToLastTrial({
 			  exp_stage: exp_stage
@@ -906,8 +908,8 @@ for (var i = 0; i < numTrialsPerBlock + 1; i++) {
 	  data: {
 		trial_id: 'cue'
 	  },
-	  timing_response: getCTI,
-	  timing_stim: getCTI,
+	  timing_response: getCTI, //getCTI
+	  timing_stim: getCTI, //getCTI
 	  timing_post_trial: 0,
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({exp_stage: exp_stage})

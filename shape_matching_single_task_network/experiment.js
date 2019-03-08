@@ -315,7 +315,7 @@ var fixation_block = {
 	data: {
 		trial_id: "fixation"
 	},
-	timing_response: 500,
+	timing_response: 500, //500
 	timing_post_trial: 0,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
@@ -331,7 +331,7 @@ var practice_fixation_block = {
 	data: {
 		trial_id: "fixation"
 	},
-	timing_response: 500,
+	timing_response: 500, //500
 	timing_post_trial: 0,
 	prompt: prompt_task_list,
 	on_finish: function() {
@@ -350,7 +350,7 @@ var practice_mask_block = {
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 500,
+	timing_response: 500, //500
 	timing_post_trial: 0,
 	prompt: prompt_task_list,
 	on_finish: function() {
@@ -369,7 +369,7 @@ var test_mask_block = {
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 500,
+	timing_response: 500, //500
 	timing_post_trial: 0,
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
@@ -383,7 +383,7 @@ var practice_timing_block = {
 	data: {
 		trial_id: "mask"
 	},
-	timing_response: 500,
+	timing_response: 500, //500
 	timing_post_trial: 0,
 	prompt: '<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 	on_finish: function() {
@@ -401,9 +401,9 @@ var practice_block = {
 	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
 	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
 	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
-	timing_response: 2000,
-	timing_stim: 1000,
-	timing_feedback_duration: 500,
+	timing_response: 2000, //2000
+	timing_stim: 1000,  //1000
+	timing_feedback_duration: 500, //500
 	show_stim_with_feedback: false,
 	timing_post_trial: 0,
 	prompt: prompt_task_list,
@@ -417,8 +417,8 @@ var test_block = {
 	stimulus: getStim,
 	is_html: true,
 	choices: choices,
-	timing_response: 2000,
-	timing_stim: 1000,
+	timing_response: 2000, //2000
+	timing_stim: 1000, //1000
 	data: getData,
 	timing_post_trial: 0,
 	on_finish: function(data) {

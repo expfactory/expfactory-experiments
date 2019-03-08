@@ -365,8 +365,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		choices: 'none',
-		timing_stim: 500, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
-		timing_response: 500,
+		timing_stim: 500, //500 
+		timing_response: 500, //500
 		timing_post_trial: 0,
 		on_finish: changeData,
 		prompt: prompt_text
@@ -381,11 +381,11 @@ for (i = 0; i < practice_len; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		choices: [70, 72],
 		data: practice_trials.data[i],
-		timing_feedback_duration: 500,
-		timing_stim: 1000,
+		timing_feedback_duration: 500, //500
+		timing_stim: 1000, //1000
 		show_stim_with_feedback: false,
 		response_ends_trial: false,
-		timing_response: 2000,
+		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		prompt: prompt_text,
 		on_finish: function(data) {
@@ -490,8 +490,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_fixation"
 		},
 		choices: 'none',
-		timing_stim: 500, //500 was 500, but changed to 1000 because I took out timing post trial for practice and test trials
-		timing_response: 500,
+		timing_stim: 500, //500 
+		timing_response: 500, //500
 		timing_post_trial: 0,
 		on_finish: changeData,
 	};
@@ -503,8 +503,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [70, 72],
 		data: test_trials.data[i],
 		feedback_duration: 0,
-		timing_response: 2000,
-		timing_stim: 1000,
+		timing_response: 2000, //2000
+		timing_stim: 1000, //1000
 		response_ends_trial: false,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,

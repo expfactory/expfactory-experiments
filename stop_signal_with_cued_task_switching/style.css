@@ -116,9 +116,31 @@ img.center {
   max-height: 65%;
 }
 
-img {
+
+img.star {
   height: 100%;
   width: 100%;
+}
+
+.gng_number {
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: none;
+  transform: translate(-50%, -50%);
+}
+
+.cue-text {
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: none;
 }
 
 /*******************************************************/
@@ -148,14 +170,13 @@ img {
 }
 
 .starbox {
-  width:45vw;
+  width:40vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%, -50%);
   background-color: none;
-  padding-top: 100%;
 }
 
 .promptbox {

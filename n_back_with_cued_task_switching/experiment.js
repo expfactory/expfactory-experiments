@@ -266,6 +266,12 @@ var getCueStim = function() {
 	correct_response = stim.correct_response
 	delay = stim.delay
 	
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
   var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
     '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
@@ -273,8 +279,8 @@ var getCueStim = function() {
 
 var getStim = function() {
 
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-		'</div></div><div class = lowerbox><div class = flanker-text>'+ probe +'</div></div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType  + letter_case + '_' + probe + fileTypePNG +'</div></div></div>'
 		
   return stim_html
 }
@@ -414,8 +420,7 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = fixation>'],['</div></div></div>']]
-
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']		
 
 
 /* ************************************ */
@@ -611,8 +616,8 @@ for (i = 0; i < practice_len + 2; i++) {
 		trial_id: "practice_fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  prompt: prompt_text
 	}
 	
@@ -625,8 +630,8 @@ for (i = 0; i < practice_len + 2; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: getCTI, //1000
-		timing_response: getCTI,
+		timing_stim: getCTI, //getCTI
+		timing_response: getCTI, //getCTI
 		prompt: prompt_text
 	};
 	
@@ -642,8 +647,8 @@ for (i = 0; i < practice_len + 2; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -735,8 +740,8 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 		trial_id: "test_fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	}
 	
 	var cue_block = {
@@ -748,8 +753,8 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: getCTI, //1000
-		timing_response: getCTI
+		timing_stim: getCTI, //getCTI
+		timing_response: getCTI //getCTI
 	};
 	
 	var test_block = {
@@ -760,7 +765,7 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

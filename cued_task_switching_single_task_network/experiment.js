@@ -185,15 +185,14 @@ var setStims = function() {
 }
 
 var getCue = function() {
-  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = fixation>+</div></div>'
+  var cue_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+  				 '<div class = lowerbox><div class = fixation>+</div></div>'
   return cue_html
 }
 
 var getStim = function() {
-  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue +
-    '</div></div><div class = lowerbox><div class = "center-text" style=color:' + curr_stim.color +
-    ';>' + curr_stim.number + '</div>'
+  var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
+    			  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType + curr_stim.number + fileTypePNG + '</div></div></div>'
   return stim_html
 }
 
@@ -277,7 +276,8 @@ var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
 var accuracy_thresh = 0.80;
 
-
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/cued_task_switching_single_task_network/images/"
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -508,8 +508,8 @@ for (var i = 0; i < practice_length + 1; i++) {
 		trial_id: "practice_fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
@@ -526,8 +526,8 @@ for (var i = 0; i < practice_length + 1; i++) {
 	  data: {
 		trial_id: 'practice_cue'
 	  },
-	  timing_response: getCTI,
-	  timing_stim: getCTI,
+	  timing_response: getCTI, //getCTI
+	  timing_stim: getCTI,  //getCTI
 	  timing_post_trial: 0,
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: function() {
@@ -553,10 +553,10 @@ for (var i = 0; i < practice_length + 1; i++) {
 	  data: {
 		trial_id: 'practice_trial'
 	  },
-	  timing_feedback_duration: 500,
+	  timing_feedback_duration: 1, //500
 	  show_stim_with_feedback: false,
-	  timing_response: 2000,
-	  timing_stim: 1000,
+	  timing_response: 2000, //2000
+	  timing_stim: 1000, //1000
 	  timing_post_trial: 0,
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: appendData
@@ -670,8 +670,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		trial_id: "test_fixation"
 	  },
 	  timing_post_trial: 0,
-	  timing_stim: 500,
-	  timing_response: 500,
+	  timing_stim: 500, //500
+	  timing_response: 500, //500
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 		  exp_stage: exp_stage
@@ -687,8 +687,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 	  data: {
 		trial_id: 'test_cue'
 	  },
-	  timing_response: getCTI,
-	  timing_stim: getCTI,
+	  timing_response: getCTI, //getCTI
+	  timing_stim: getCTI, //getCTI
 	  timing_post_trial: 0,
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
@@ -709,8 +709,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		exp_stage: 'test'
 	  },
 	  timing_post_trial: 0,
-	  timing_response: 2000,
-	  timing_stim: 1000,
+	  timing_response: 2000, //2000
+	  timing_stim: 1000, //1000
 	  response_ends_trial: false,
 	  on_finish: appendData
 		/*

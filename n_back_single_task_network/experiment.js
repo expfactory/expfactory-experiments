@@ -189,10 +189,13 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 	
-		
-	return task_boards[0]+ 
-			probe+
-		   task_boards[1]
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
+	return task_boards[0]+ preFileType  + letter_case + '_' + probe + fileTypePNG + task_boards[1]	
 }
 
 var getResponse =  function(){
@@ -217,7 +220,8 @@ var appendData = function(){
 		correct_response: correct_response,
 		delay: delay,
 		current_trial: current_trial,
-		current_block: current_block
+		current_block: current_block,
+		letter_case: letter_case
 	})
 		
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -287,7 +291,7 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['<div></div><div>']]	
+var task_boards = ['<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>','</div></div></div></div>']		
 
 var stims = createTrialTypes(practice_len, delay)
 
@@ -503,8 +507,8 @@ for (i = 0; i < practice_len + 3; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
-		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -596,7 +600,7 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

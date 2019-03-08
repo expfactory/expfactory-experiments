@@ -265,8 +265,13 @@ var getStim = function(){
 	probe = stim.probe
 	correct_response = stim.correct_response
 	delay = stim.delay
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
 		
-	return task_boards[whichQuadrant - 1][0] + probe + task_boards[whichQuadrant - 1][1]
+	return task_boards[whichQuadrant - 1][0] + preFileType  + letter_case + '_' + probe + fileTypePNG + task_boards[whichQuadrant - 1][1]
 	
 }
 
@@ -390,10 +395,10 @@ var current_block = 0
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = fixation>'],['</div></div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right><div class = centerbox><div class = fixation>'],['</div></div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = centerbox><div class = fixation>'],['</div></div></div><div class = decision-bottom-left></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = centerbox><div class = fixation>'],['</div></div></div></div>']]]
+var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
 
 
 
@@ -679,9 +684,9 @@ for (i = 0; i < practice_len + 2; i++) {
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'+ prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'+ prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>'+ prompt_text,
-		timing_stim: 1000, //2000
-		timing_response: 2000,
-		timing_feedback_duration: 500,
+		timing_stim: 1000, 
+		timing_response: 2000, //2000
+		timing_feedback_duration: 500, //500
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
@@ -771,7 +776,7 @@ for (i = 0; i < numTrialsPerBlock + 2; i++) {
 			"trial_id": "test_trial",
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
-		timing_stim: 1000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,

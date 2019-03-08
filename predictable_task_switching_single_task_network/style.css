@@ -71,15 +71,6 @@ img.center {
   transform: translate(-50%,-175%);
 }
 
-.cue-text {
-	text-align: center;
-	font-size: 50px;
-	position: relative;
-    top: 50%; 
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-}
-
 .instructBox {
  width: 80vw;
  height: 10vw;
@@ -112,6 +103,18 @@ img.center {
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
+}
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
 }
 
 /*******************************************************/
