@@ -174,10 +174,12 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('flanker_with_cued_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('n_back_with_cued_task_switching','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('predictable_task_switching_with_cued_task_switching','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth_baseline','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__dartmouth','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop_signal__dartmouth','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth_baseline','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__dartmouth','web','.');"
 workflows:
   version: 2
