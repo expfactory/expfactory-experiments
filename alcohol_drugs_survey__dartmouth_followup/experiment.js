@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'alcohol_drugs_survey__dartmouth'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'alcohol_drugs_survey__dartmouth_followup'})
 }
 var conditional_length_counter = 0
 var getQuestions = function(){
@@ -146,8 +146,8 @@ var appendData = function(){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/alcohol_drugs_survey__dartmouth/images/"
-var pathSource = "/static/experiments/alcohol_drugs_survey__dartmouth/images/"
+var preFileType = "<img class = center src='/static/experiments/alcohol_drugs_survey__dartmouth_followup/images/"
+var pathSource = "/static/experiments/alcohol_drugs_survey__dartmouth_followup/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 
@@ -398,43 +398,43 @@ var conditional_lengths =    [[6],
 					    	 ['neither']]
 
 //Names of items that be written on data
-var item_names_dartmouth = ['alc_drugs_1',
-							'alc_drugs_2',
-							'alc_drugs_3',
-							'alc_drugs_4',
-							'alc_drugs_5',
-							'alc_drugs_6',
-							'alc_drugs_7',
-							'alc_drugs_8',
-							'alc_drugs_9',
-							'alc_drugs_10',
-							'alc_drugs_11',
-							'alc_drugs_12',
-							'alc_drugs_13',
-							'alc_drugs_14',
-							'alc_drugs_15',
-							'alc_drugs_16',
-							'alc_drugs_17',
-							'alc_drugs_18',
-							'alc_drugs_19',
-							'alc_drugs_20',
-							'alc_drugs_21',
-							'alc_drugs_22',
-							'alc_drugs_23',
-							'alc_drugs_24',
-							'alc_drugs_25',
-							'alc_drugs_26',
-							'alc_drugs_27',
-							'alc_drugs_28',
-							'alc_drugs_29',
-							'alc_drugs_30',
-							'alc_drugs_31',
-							'alc_drugs_32',
-							'alc_drugs_33',
-							'alc_drugs_34',
-							'alc_drugs_35',
-							'alc_drugs_36',
-							'alc_drugs_37']
+var item_names_dartmouth = ['alc_drugs_1_fu',
+							'alc_drugs_2_fu',
+							'alc_drugs_3_fu',
+							'alc_drugs_4_fu',
+							'alc_drugs_5_fu',
+							'alc_drugs_6_fu',
+							'alc_drugs_7_fu',
+							'alc_drugs_8_fu',
+							'alc_drugs_9_fu',
+							'alc_drugs_10_fu',
+							'alc_drugs_11_fu',
+							'alc_drugs_12_fu',
+							'alc_drugs_13_fu',
+							'alc_drugs_14_fu',
+							'alc_drugs_15_fu',
+							'alc_drugs_16_fu',
+							'alc_drugs_17_fu',
+							'alc_drugs_18_fu',
+							'alc_drugs_19_fu',
+							'alc_drugs_20_fu',
+							'alc_drugs_21_fu',
+							'alc_drugs_22_fu',
+							'alc_drugs_23_fu',
+							'alc_drugs_24_fu',
+							'alc_drugs_25_fu',
+							'alc_drugs_26_fu',
+							'alc_drugs_27_fu',
+							'alc_drugs_28_fu',
+							'alc_drugs_29_fu',
+							'alc_drugs_30_fu',
+							'alc_drugs_31_fu',
+							'alc_drugs_32_fu',
+							'alc_drugs_33_fu',
+							'alc_drugs_34_fu',
+							'alc_drugs_35_fu',
+							'alc_drugs_36_fu',
+							'alc_drugs_37_fu']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -472,7 +472,7 @@ var textBoard2 =
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "alcohol_drugs_survey__dartmouth",
+		exp_id: "alcohol_drugs_survey__dartmouth_followup",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -537,7 +537,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "alcohol_drugs_survey__dartmouth",
+		exp_id: "alcohol_drugs_survey__dartmouth_followup",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -562,14 +562,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var alcohol_drugs_survey__dartmouth_experiment = []
+var alcohol_drugs_survey__dartmouth_followup_experiment = []
 
-alcohol_drugs_survey__dartmouth_experiment.push(welcome_block);
+alcohol_drugs_survey__dartmouth_followup_experiment.push(welcome_block);
 
-alcohol_drugs_survey__dartmouth_experiment.push(instructions_block);
+alcohol_drugs_survey__dartmouth_followup_experiment.push(instructions_block);
 
-alcohol_drugs_survey__dartmouth_experiment.push(update_state_block);
+alcohol_drugs_survey__dartmouth_followup_experiment.push(update_state_block);
 
-alcohol_drugs_survey__dartmouth_experiment.push(post_questionnaire_node);
+alcohol_drugs_survey__dartmouth_followup_experiment.push(post_questionnaire_node);
 
-alcohol_drugs_survey__dartmouth_experiment.push(end_block);
+alcohol_drugs_survey__dartmouth_followup_experiment.push(end_block);

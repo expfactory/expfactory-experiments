@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'qwep5__dartmouth'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'qwep5__dartmouth_followup'})
 }
 
 var getQuestions = function(){
@@ -137,8 +137,8 @@ var appendData = function(){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/qwep5__dartmouth/images/"
-var pathSource = "/static/experiments/qwep5__dartmouth/images/"
+var preFileType = "<img class = center src='/static/experiments/qwep5__dartmouth_followup/images/"
+var pathSource = "/static/experiments/qwep5__dartmouth_followup/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 // -1 if unapplicable, 0 if not and applicable, 1 if yes and applicable
@@ -265,28 +265,28 @@ var conditional_responses = [['none'],
 						     ['Yes'],
 						     ['none']]
 
-var item_names_dartmouth = ['qewp8_bl',
-							'qewp9_bl',
-							'qewp10_bl',
-							'qewp_11_header_bl',
-							'qewp11a_bl',
-							'qewp11b_bl',
-							'qewp11c_bl',
-							'qewp11d_bl',
-							'qewp11e_bl',
-							'qewp13_bl',
-							'qewp14_bl',
-							'qewp14a_bl',
-							'qewp15_bl',
-							'qewp15a_bl',
-							'qewp16_bl',
-							'qewp16a_bl',
-							'qewp17_bl',
-							'qewp17a_bl',
-							'qewp18_bl',
-							'qewp18a_bl',
-							'qewp19_bl',
-							'qewp19a_bl']
+var item_names_dartmouth = ['qwep8_fu',
+							'qwep9_fu',
+							'qwep10_fu',
+							'qwep_11_header_fu',
+							'qwep11a_fu',
+							'qwep11b_fu',
+							'qwep11c_fu',
+							'qwep11d_fu',
+							'qwep11e_fu',
+							'qwep13_fu',
+							'qwep14_fu',
+							'qwep14a_fu',
+							'qwep15_fu',
+							'qwep15a_fu',
+							'qwep16_fu',
+							'qwep16a_fu',
+							'qwep17_fu',
+							'qwep17a_fu',
+							'qwep18_fu',
+							'qwep18a_fu',
+							'qwep19_fu',
+							'qwep19a_fu']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -324,7 +324,7 @@ var textBoard2 =
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "qwep5__dartmouth",
+		exp_id: "qwep5__dartmouth_followup",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -389,7 +389,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "qwep5__dartmouth",
+		exp_id: "qwep5__dartmouth_followup",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -414,14 +414,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var qwep5__dartmouth_experiment = []
+var qwep5__dartmouth_followup_experiment = []
 
-qwep5__dartmouth_experiment.push(welcome_block);
+qwep5__dartmouth_followup_experiment.push(welcome_block);
 
-qwep5__dartmouth_experiment.push(instructions_block);
+qwep5__dartmouth_followup_experiment.push(instructions_block);
 
-qwep5__dartmouth_experiment.push(update_state_block);
+qwep5__dartmouth_followup_experiment.push(update_state_block);
 
-qwep5__dartmouth_experiment.push(post_questionnaire_node);
+qwep5__dartmouth_followup_experiment.push(post_questionnaire_node);
 
-qwep5__dartmouth_experiment.push(end_block);
+qwep5__dartmouth_followup_experiment.push(end_block);
