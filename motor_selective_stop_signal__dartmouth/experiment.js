@@ -213,7 +213,7 @@ var getPracticeFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of practice trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
+		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text + '<br>'
 	}
 	
 	test_feedback_text +=
@@ -274,7 +274,7 @@ var getTestFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
+		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text + '<br>'
 	}
 	
 	if (stop_length > 0){
@@ -517,7 +517,7 @@ var start_practice_stop_block = {
 		'<div class = instructbox>'+
 			'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
 			
-			'<p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
+			'<br><p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 		'</div>',
 		
 		'<div class = instructbox>'+
@@ -549,7 +549,7 @@ var start_test_block = {
 		'<div class = instructbox>'+
 			'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
 			
-			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
+			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 		'</div>',
 		
 		'<div class = instructbox>'+
@@ -609,7 +609,7 @@ var practice_feedback_block = {
 
 var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
+	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 36px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
 	is_html: true,
 	choices: [13],
 	timing_response: 180000,
@@ -660,7 +660,7 @@ var instructions_block = {
 		'<div class = instructbox>'+
 			'<p class = block-text>In this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button.</p>' +
 			
-			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
+			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
 			'<p class = block-text> The correct keys are as follows (scroll down): ' + prompt_text + '</p>'+
 		'</div>'		

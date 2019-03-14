@@ -300,7 +300,7 @@ var rest_block = {
 
 var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = center-text>Thanks for completing the experiment! Press <i>enter</i> to continue.</div></div>',
+	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 36px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
 	is_html: true,
 	choices: [13],
 	timing_response: 180000,
