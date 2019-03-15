@@ -167,7 +167,6 @@ var ratingSubmit = function(myRange){
 
 function updateTextInput(val) {
 	document.getElementById('textInput').value=val; 
-	ageInputId
 }
 
 function toggleOpacitySlider(element){
