@@ -181,6 +181,7 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qwep5__dartmouth_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('pre_scan_smoking_abstinence_self_report','web','.');"
 workflows:
   version: 2
   build_and_test:
