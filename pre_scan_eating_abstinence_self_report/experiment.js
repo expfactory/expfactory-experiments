@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'pre_scan_smoking_abstinence_self_report'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'pre_scan_eating_abstinence_self_report'})
 }
 var conditional_length_counter = 0
 var getQuestions = function(){
@@ -57,6 +57,8 @@ var getQuestions = function(){
 		return buttonBoard1 + survey_question + sliderBoard
 	} else if (question_format == 'checkbox'){
 		return buttonBoard1 + survey_question + checkbox
+	} else if (question_format == 'textfield'){
+		return buttonBoard1 + survey_question + textBoard
 	}
 }
 
@@ -108,7 +110,7 @@ var pressCheckbox = function(current_submit){
 	} else if ((document.getElementById("myCheck1").checked == true) && (document.getElementById("myCheck2").checked == false)){
 		checked_item = 'Yes' //checked_item = document.getElementById("check1text").innerHTML
 	} else if ((document.getElementById("myCheck1").checked == false) && (document.getElementById("myCheck2").checked == true)){
-		checked_item = 'No' //checked_item = document.getElementById("check2text").innerHTML
+		checked_item = 'No'  //checked_item = document.getElementById("check2text").innerHTML
 	}
 }
 
@@ -141,7 +143,6 @@ var appendData = function(){
 	}
 	
 	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
-		console.log('here')
 		sub_made_conditional_response = 1
 		conditional_length_index = conditional_length
 	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
@@ -171,6 +172,10 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			current_answer: craving,
 		})
+	} else if (question_format == 'textfield'){
+		jsPsych.data.addDataToLastTrial({
+			current_answer: text_answer,
+		})
 	}
 	
 	keyTracker = []
@@ -181,15 +186,12 @@ var appendData = function(){
 var submitTime = function(current_submit){
 	if(current_submit.id == "time_box"){
 		time_answer = current_submit.value
-		console.log(time_answer)
 		hitKey(81)
 	}
 }
 
 var ratingSubmit = function(myRange){
 	craving = myRange.value
-	
-	console.log(craving)
 	hitKey(81)
 }
 
@@ -201,11 +203,20 @@ function toggleOpacitySlider(element){
 	element.classList.remove('slider-clear');
 }
 
+function submitText(current_submit){
+	if(current_submit.id == "text_area"){
+		text_answer = current_submit.value
+		console.log(text_answer)
+		hitKey(81)
+	}
+
+}
+
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/pre_scan_smoking_abstinence_self_report/images/"
-var pathSource = "/static/experiments/pre_scan_smoking_abstinence_self_report/images/"
+var preFileType = "<img class = center src='/static/experiments/pre_scan_eating_abstinence_self_report/images/"
+var pathSource = "/static/experiments/pre_scan_eating_abstinence_self_report/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 
@@ -219,167 +230,47 @@ var game_state = 'start'
 /* ************************************************ */
 
 //Questions to be presented
-var survey_questions = ['On the next few pages, you will see some products.  Please indicate which of the following products you have used <u>in the last 24 hours</u> (choose yes to all that apply)',
-					    'Cigarette',
-					    'Cigar, cigarillo or small cigar like Swisher Sweets or Black and Mild',
-					    'E-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)',
-					    'Smokeless tobacco, chew, or Snus',
-					    'Pipe tobacco',
-					    'Hookah',
-					    'Blunts (i.e., cannabis smoked in a hollowed-out cigar)',
-					    'Nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a cigarette?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a cigar, cigarillo or little cigar like Swisher Sweets or Black and Mild?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use an e-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use smokeless tobacco, chew, or Snus?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke pipe tobacco?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke hookah?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a blunt?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
-					    'Please put a mark on the line to show how much you are craving a cigarette right now, paying attention to the descriptions at the end of the line.']
+var survey_questions = ['When did you last eat?',
+					    'What did you last eat?',
+					    'Please put a mark on the line to show how hungry you are right now, paying attention to the descriptions at the end of the line.']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
-var button_text = [[['Continue'],1],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['time'],1],
-				   [['slider'],1]]
+var button_text = [[['Time'],1],
+				   [['Textfield'],2],
+				   [['Slider'],2]]
 
 //Conditional questions control the presence of a set of following questions. 
 //Fatal questions end the survey, if a sub makes a particular response
 //questions that are 'neither' are not conditional or fatal
 var question_types =   [['neither'],
 					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
 					    ['neither']]	
 
 //does the question require radio, checkbox, textfield, numeric, slider, or time?  Numeric and textfield has not been coded					    
-var question_formats = [['radio'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['time'],
-					    ['slider']]			   
+var question_formats = [['time'],
+					   ['textfield'],
+					   ['slider']]			   
 
 //If a subject chooses this response, end survey.  If not, continue survey
 var fatal_responses =  [['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
-					    ['none'],
 					    ['none'],
 					    ['none']]
 
 //If a subject chooses this response, show the next question.  If not, skip next question					   
 var conditional_responses = [['neither'],
 					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
 //these are the number of questions to skip						     
 var conditional_lengths =    [['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither']]
+					    	 ['neither'],
+					    	 ['neither']]
 
 //Names of items that be written on data
-var item_names_dartmouth = ['pre_scan_smoking_abstinence_1',
-							'pre_scan_smoking_abstinence_2',
-							'pre_scan_smoking_abstinence_3',
-							'pre_scan_smoking_abstinence_4',
-							'pre_scan_smoking_abstinence_5',
-							'pre_scan_smoking_abstinence_6',
-							'pre_scan_smoking_abstinence_7',
-							'pre_scan_smoking_abstinence_8',
-							'pre_scan_smoking_abstinence_9',
-							'pre_scan_smoking_abstinence_10',
-							'pre_scan_smoking_abstinence_11',
-							'pre_scan_smoking_abstinence_12',
-							'pre_scan_smoking_abstinence_13',
-							'pre_scan_smoking_abstinence_14',
-							'pre_scan_smoking_abstinence_15',
-							'pre_scan_smoking_abstinence_16',
-							'pre_scan_smoking_abstinence_17',
-							'pre_scan_smoking_abstinence_18',]
+var item_names_dartmouth = ['pre_scan_eating_abstinence_1',
+							'pre_scan_eating_abstinence_2',
+							'pre_scan_eating_abstinence_3']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -423,12 +314,10 @@ var textBoard2 =
 	'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'question_text_area\'))"/></div>' +
 	'</div></div>'
 	
-	
-
 
 var textBoard = '<div class = textbox>'+
-					 '<textarea id="text_area" cols="10" rows="1" value=""></textarea>'+
-					 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'text_area\'))"/></div>' +
+					 '<textarea id="text_area" cols="100" rows="10" value=""></textarea>'+
+					 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="submitText(document.getElementById(\'text_area\'))"/></div>' +
 				'</div></div>'
 	
 var timeBoard = '<div class = textbox>'+
@@ -436,23 +325,9 @@ var timeBoard = '<div class = textbox>'+
 					 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="submitTime(document.getElementById(\'time_box\'))"/></div>' +
 				'</div></div>'	
 					 
-var sliderBoard = '<div class = textbox>'+
-		  		  	'<input type="range" step="1" min="0" max="100" value="50" class="slider" id="myRange" onchange="updateTextInput(this.value);>'+
-		  		  	'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="ratingSubmit(document.getElementById(\'myRange\'))"/></div>' +
-		  		  '</div>' +
-		  		  '<input type="text" id="textInput" value="">' +
-				  '<div id="number_box">'+
-  				  	'<div><font color="white">No <br>Craving</font></div>'+
-  					'<div><font color="white"></font></div>'+
-  					'<div><font color="white"></font></div>'+
-  					'<div><font color="white">Strong Craving</font></div>'+
-		    	  '</div>'
-		    	  
-		    	  
 var sliderBoard = '<div class = slide_big_box>'+
-
 					  '<div class = slidecontainer>'+
-						'<input type="range" class="slider slider-clear" name="ageInputName" id="ageInputId" value="50" min="0" max="100" onclick="toggleOpacitySlider(this)" oninput="ageOutputId.value = ageInputId.value">'+
+					  	'<input type="range" class="slider slider-clear" name="ageInputName" id="ageInputId" value="50" min="0" max="100" onclick="toggleOpacitySlider(this)" oninput="ageOutputId.value = ageInputId.value">'+
 					  '</div>' +
 					  
 					  '<div class = slider_number_box>'+	
@@ -464,13 +339,11 @@ var sliderBoard = '<div class = slide_big_box>'+
 					  '</div>'+
 					  
 					  '<div id="number_box">'+
-						'<div><font color="white">No <br>Craving</font></div>'+
+						'<div><font color="white">Not at all hungry</font></div>'+
 						'<div><font color="white"></font></div>'+
 						'<div><font color="white"></font></div>'+
-						'<div><font color="white">Strong Craving</font></div>'+
+						'<div><font color="white">Extremely hungry</font></div>'+
 					  '</div>'+
-					  
-					  
 				'</div>'
 
 /* ************************************ */
@@ -479,7 +352,7 @@ var sliderBoard = '<div class = slide_big_box>'+
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "pre_scan_smoking_abstinence_self_report",
+		exp_id: "pre_scan_eating_abstinence_self_report",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -546,7 +419,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "pre_scan_smoking_abstinence_self_report",
+		exp_id: "pre_scan_eating_abstinence_self_report",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -571,14 +444,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var pre_scan_smoking_abstinence_self_report_experiment = []
+var pre_scan_eating_abstinence_self_report_experiment = []
 
-pre_scan_smoking_abstinence_self_report_experiment.push(welcome_block);
+pre_scan_eating_abstinence_self_report_experiment.push(welcome_block);
 
-pre_scan_smoking_abstinence_self_report_experiment.push(instructions_block);
+pre_scan_eating_abstinence_self_report_experiment.push(instructions_block);
 
-pre_scan_smoking_abstinence_self_report_experiment.push(update_state_block);
+pre_scan_eating_abstinence_self_report_experiment.push(update_state_block);
 
-pre_scan_smoking_abstinence_self_report_experiment.push(post_questionnaire_node);
+pre_scan_eating_abstinence_self_report_experiment.push(post_questionnaire_node);
 
-pre_scan_smoking_abstinence_self_report_experiment.push(end_block);
+pre_scan_eating_abstinence_self_report_experiment.push(end_block);
