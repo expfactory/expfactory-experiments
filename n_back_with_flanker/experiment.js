@@ -215,12 +215,25 @@ var getStim = function(){
 	correct_response = stim.correct_response
 	delay = stim.delay
 	flankers = stim.flankers
+	
+	if (probe == probe.toUpperCase()) {
+	 letter_case = 'uppercase'
+	} else if (probe == probe.toLowerCase()) {
+	 letter_case = 'lowercase'
+	}
+	
+	if (flankers == flankers.toUpperCase()) {
+	 letter_case_flankers = 'uppercase'
+	} else if (flankers == flankers.toLowerCase()) {
+	 letter_case_flankers = 'lowercase'
+	}
+	
 		
-	return flanker_boards[0]+ preFileType + flankers + fileTypePNG +
-		   flanker_boards[1]+ preFileType + flankers + fileTypePNG +
-		   flanker_boards[2]+ preFileType + probe + fileTypePNG +
-		   flanker_boards[3]+ preFileType + flankers + fileTypePNG +
-		   flanker_boards[4]+ preFileType + flankers + fileTypePNG
+	return flanker_boards[0]+ preFileType + letter_case_flankers + '_' + flankers.toUpperCase() + fileTypePNG +
+		   flanker_boards[1]+ preFileType + letter_case_flankers + '_' + flankers.toUpperCase() + fileTypePNG +
+		   flanker_boards[2]+ preFileType + letter_case + '_' + probe.toUpperCase() + fileTypePNG +
+		   flanker_boards[3]+ preFileType + letter_case_flankers + '_' + flankers.toUpperCase() + fileTypePNG +
+		   flanker_boards[4]+ preFileType + letter_case_flankers + '_' + flankers.toUpperCase() + fileTypePNG
 }
 
 var getControlStim = function(){	

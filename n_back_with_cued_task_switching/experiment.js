@@ -280,7 +280,7 @@ var getCueStim = function() {
 var getStim = function() {
 
   var stim_html = '<div class = upperbox><div class = "center-text" >' + curr_cue + '</div></div>'+
-  				  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType  + letter_case + '_' + probe + fileTypePNG +'</div></div></div>'
+  				  '<div class = lowerbox><div class = gng_number><div class = cue-text>'+ preFileType  + letter_case + '_' + probe.toUpperCase() + fileTypePNG +'</div></div></div>'
 		
   return stim_html
 }
