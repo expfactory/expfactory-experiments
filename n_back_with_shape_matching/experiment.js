@@ -230,9 +230,9 @@ var getStim = function(){
 		
 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text><div class = cue-text>'+preFileType  + 'red_' + letter_case_distractor + '_' + distractor + fileTypePNG+'</div></div>'+
+			'<div class = distractor-text><div class = cue-text>'+preFileType  + 'red_' + letter_case_distractor + '_' + distractor.toUpperCase() + fileTypePNG+'</div></div>'+
 	
-			'<div class = gng_number><div class = cue-text>'+preFileType  + letter_case + '_' + probe + fileTypePNG+'</div>'+
+			'<div class = gng_number><div class = cue-text>'+preFileType  + letter_case + '_' + probe.toUpperCase() + fileTypePNG+'</div>'+
 		   
 		   '</div></div>'
 	

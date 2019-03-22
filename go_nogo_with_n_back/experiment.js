@@ -274,7 +274,7 @@ var getStim = function(){
 	delay = stim.delay
 	letter_case = stim.letter_case
 		
-	return task_boards[0]+ preFileType + probe_color + '_' + letter_case + '_' + probe + fileTypePNG + task_boards[1]
+	return task_boards[0]+ preFileType + probe_color + '_' + letter_case + '_' + probe.toUpperCase() + fileTypePNG + task_boards[1]
 	
 }
 
