@@ -207,7 +207,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 var getStim = function(){	
 	console.log(probe)
 		   
-	return task_boards[0]+ preFileType + letter_case + '_' + probe + fileTypePNG + task_boards[1]
+	return task_boards[0]+ preFileType + letter_case + '_' + probe.toUpperCase() + fileTypePNG + task_boards[1]
 	
 }
 
