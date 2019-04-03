@@ -553,7 +553,7 @@ for (var i = 0; i < practice_length + 1; i++) {
 	  data: {
 		trial_id: 'practice_trial'
 	  },
-	  timing_feedback_duration: 1, //500
+	  timing_feedback_duration: 500, //500
 	  show_stim_with_feedback: false,
 	  timing_response: 2000, //2000
 	  timing_stim: 1000, //1000

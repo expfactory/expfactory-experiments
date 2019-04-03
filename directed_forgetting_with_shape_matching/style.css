@@ -105,6 +105,16 @@ text-align: center;
  text-align: center;
 }
 
+.gng_number {
+width: 5vw;
+height: 5vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
+}
 
 /*******************************************************/
 /***********  Directed Forgetting CSS Styles  **********/
@@ -203,4 +213,14 @@ background-color: none;
   background-color: none;
   text-align: center;
   transform: translate(-70%, -70%);
+}
+
+.distractor-text {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-70%,-70%);
 }

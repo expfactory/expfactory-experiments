@@ -205,7 +205,7 @@ var getMask = function(){
 	distractor = stim.distractor
 	flankers = stim.flankers
 	
-		console.log('shape condition = '+shape_matching_condition+', flanker_condition: '+ flanker_condition+', correct_response: '+correct_response+', probe: '+probe+', target: '+target+', distractor: '+distractor+', flankers: '+flankers)
+	//console.log('shape condition = '+shape_matching_condition+', flanker_condition: '+ flanker_condition+', correct_response: '+correct_response+', probe: '+probe+', target: '+target+', distractor: '+distractor+', flankers: '+flankers)
 
 	
 	return task_boards[0]+ preFileType + 'mask' + fileTypePNG +

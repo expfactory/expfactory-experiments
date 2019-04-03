@@ -264,11 +264,9 @@ var getResponse = function() {
 var getStim = function(){
 	if (go_nogo_condition == "go"){
 		number_style = go_no_go_styles[0]
-		console.log('1')
 		
 	} else if (go_nogo_condition == "nogo"){
 		number_style = go_no_go_styles[1]
-		console.log('2')
 	}	
 	
 	return task_boards[whichQuadrant - 1][0] + preFileType +  number_style  + '_' + number + fileTypePNG + task_boards[whichQuadrant - 1][1]  		   
