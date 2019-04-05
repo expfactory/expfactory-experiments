@@ -247,7 +247,8 @@ var survey_questions = ['On the next few pages, you will see some products.  Ple
 					    'at what time did you last....<br><br> smoke a blunt?',
 					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
 					    'at what time did you last....<br><br> use nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
-					    'Please put a mark on the line to show how much you are craving a cigarette right now, paying attention to the descriptions at the end of the line.']
+					    'Please put a mark on the line to show how much you are craving a cigarette right now, paying attention to the descriptions at the end of the line.',
+					    'What time zone are you currently in? <br><br>(scroll down to see all options, if necessary)']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
@@ -268,7 +269,8 @@ var button_text = [[['Continue'],1],
 				   [['time'],1],
 				   [['Yes','No'],2],
 				   [['time'],1],
-				   [['slider'],1]]
+				   [['slider'],1],
+				   [['Eastern time', 'Central time', 'Mountain time', 'Pacific time', 'Alaska time', 'Hawaii time', 'Anywhere on Earth', 'Samoa Standard Time', 'Atlantic Standard Time', 'Chamorro Standard Time', 'Wake Time'],11]]
 
 //Conditional questions control the presence of a set of following questions. 
 //Fatal questions end the survey, if a sub makes a particular response
@@ -290,6 +292,7 @@ var question_types =   [['neither'],
 					    ['neither'],
 					    ['Conditional'],
 					    ['neither'],
+					    ['neither'],
 					    ['neither']]	
 
 //does the question require radio, checkbox, textfield, numeric, slider, or time?  Numeric and textfield has not been coded					    
@@ -310,10 +313,12 @@ var question_formats = [['radio'],
 					    ['time'],
 					    ['checkbox'],
 					    ['time'],
-					    ['slider']]			   
+					    ['slider'],
+					    ['radio']]			   
 
 //If a subject chooses this response, end survey.  If not, continue survey
 var fatal_responses =  [['none'],
+					    ['none'],
 					    ['none'],
 					    ['none'],
 					    ['none'],
@@ -350,6 +355,7 @@ var conditional_responses = [['neither'],
 					    	 ['neither'],
 					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
 //these are the number of questions to skip.  If integer, leave as integer.  Otherwise, put 'neither'	     
@@ -369,6 +375,7 @@ var conditional_lengths =    [['neither'],
 					    	  [1],
 					    	  ['neither'],
 					    	  [1],
+					    	  ['neither'],
 					    	  ['neither'],
 					    	  ['neither']]
 
@@ -390,7 +397,8 @@ var item_names_dartmouth = ['pre_scan_smoking_abstinence_1',
 							'pre_scan_smoking_abstinence_15',
 							'pre_scan_smoking_abstinence_16',
 							'pre_scan_smoking_abstinence_17',
-							'pre_scan_smoking_abstinence_18',]
+							'pre_scan_smoking_abstinence_18',
+							'pre_scan_smoking_abstinence_19',]
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
