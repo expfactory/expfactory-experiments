@@ -316,10 +316,6 @@ var getProbeStim = function(){
 			'<div class = cue-text><div class = gng_number>'+ preFileType + probe + fileTypePNG +'</div>'+
 		   
 		   '</div></div>'	
-		   
-	
-	
-
 }
 
 /* ************************************ */
