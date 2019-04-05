@@ -358,7 +358,7 @@ var conditional_responses = [['Yes'],
 					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
-//these are the number of questions to skip						     
+//these are the number of questions to skip.  If integer, leave as integer.  Otherwise, put 'neither'				     
 var conditional_lengths =    [[6],
 					    	 ['neither'],
 					    	 ['neither'],
