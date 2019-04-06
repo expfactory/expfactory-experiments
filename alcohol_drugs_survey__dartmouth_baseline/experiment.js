@@ -178,7 +178,7 @@ var survey_questions = ['Have you ever smoked tobacco cigarettes?',
 					    'How often during the last year have you been unable to remember what happened the night before because you had been drinking?',
 					    'Have you or someone else been injured as a result of your drinking?',
 					    'Has a relative or friend or a doctor or another health worker been concerned about your drinking or suggested you cut down?',
-					    'Have you used any cannabis (marjuana) over the past 6 months?',
+					    'Have you used any cannabis (marijuana) over the past 6 months?',
 					    'How often do you use cannabis?',
 					    'How many hours were you ‘stoned’ on a typical day when you had been using cannabis?',
 					    'How often during the past six months did you find that you were not able to stop using cannabis once you had started?',
@@ -358,7 +358,7 @@ var conditional_responses = [['Yes'],
 					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
-//these are the number of questions to skip						     
+//these are the number of questions to skip.  If integer, leave as integer.  Otherwise, put 'neither'				     
 var conditional_lengths =    [[6],
 					    	 ['neither'],
 					    	 ['neither'],

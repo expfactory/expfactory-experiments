@@ -86,7 +86,6 @@ var getFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 2
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if (trial_id == 'practice_trial'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
@@ -574,9 +573,9 @@ var instructions_block = {
 	},
 	pages: [		
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with a cue, either remember(or retain) or forget(or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
+			'<p class = block-text>In this experiment you will be presented with a cue, either remember (or retain) or forget (or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
 		
-			'<p class = block-text>After the remember(or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
 						
 			'<p class = block-text>After the 6 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
@@ -629,9 +628,9 @@ var start_test_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>You will be presented with a cue, either remember(or retain) or forget(or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
+			'<p class = block-text>You will be presented with a cue, either remember (or retain) or forget (or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
 		
-			'<p class = block-text>After the remember(or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
 						
 			'<p class = block-text>After the 6 letters disappear, you will also see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		

@@ -103,7 +103,6 @@ var getInstructFeedback = function() {
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	console.log(trial_id)
 	if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
@@ -153,7 +152,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 
 
 var getStopStim = function(){
-	return preFileType + pathSource + 'stopSignal' + fileType + postFileType
+	return preFileType  + 'stopSignal' + fileTypePNG
 }
 
 var getStim = function(){
@@ -178,7 +177,7 @@ var getStim = function(){
 	}
 	
 	stim = {
-		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType + 'solid_' + shape + fileTypePNG + '</div>',
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
 		data: { 
 			stim: shape,
 			stop_signal_condition: stop_signal_condition,

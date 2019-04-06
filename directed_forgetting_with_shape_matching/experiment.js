@@ -303,7 +303,7 @@ var getTrainingStim = function(){
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
+	return '<div class = bigbox><div class = centerbox><div class = cue-text><div class = gng_number>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
 
 }
 
@@ -311,15 +311,11 @@ var getDirectedCueStim = function(){
 var getProbeStim = function(){
 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text>'+ preFileType + distractor + fileTypePNG +'</div>'+
+			'<div class = distractor-text><div class = gng_number>'+ preFileType + 'red_' + distractor + fileTypePNG +'</div>'+
 	
-			'<div class = cue-text>'+ preFileType + probe + fileTypePNG +'</div>'+
+			'<div class = cue-text><div class = gng_number>'+ preFileType + probe + fileTypePNG +'</div>'+
 		   
 		   '</div></div>'	
-		   
-	
-	
-
 }
 
 /* ************************************ */
@@ -464,14 +460,14 @@ var instructions_block = {
 	},
 	pages: [		
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with 6 letters on each trial. 3 will be at the top, and 3 on the bottom. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. '+numLetters/2+' will be at the top, and '+numLetters/2+' on the bottom. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>. '+
-			'This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen.</p>'+
+			'This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen.</p>'+
 			
-			'<p class = block-text>The three remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
+			'<p class = block-text>The '+numLetters/2+' remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
 		
-			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top 3 letters</i> and remember the bottom 3 letters. <i>The bottom three letters would be your MEMORY SET.</i></p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top '+numLetters/2+' letters</i> and remember the bottom '+numLetters/2+' letters. <i>The bottom '+numLetters/2+' letters would be your MEMORY SET.</i></p>'+
 		
 		'</div>',
 		
@@ -519,14 +515,14 @@ var start_test_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>This test will be exactly like practice. You will be presented with 6 letters on each trial. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>This test will be exactly like practice. You will be presented with '+numLetters+' letters on each trial. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>.</p>'+
 		
-			'<p class = block-text>This will instruct you to <i>FORGET</i> the 3 letters located at either the top or bottom (respectively) of the screen. '+
-			'The three remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
+			'<p class = block-text>This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen. '+
+			'The '+numLetters/2+' remaining letters that you must remember are called your <i>MEMORY SET</i>. Please forget the letters not in the memory set.</p>'+
 			
-			'<p class = block-text>So for example, if you get the cue TOP, please forget the top 3 letters and remember the bottom 3 letters.</p>'+
+			'<p class = block-text>So for example, if you get the cue TOP, please forget the top '+numLetters/2+' letters and remember the bottom '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>After a short delay, you will be presented with a probe - a single white letter.  Please indicate whether this probe was in your memory set.</p>'+
 		

@@ -105,10 +105,16 @@ var pressCheckbox = function(current_submit){
 	keyTracker.push(current_submit)
 	if ((document.getElementById("myCheck1").checked === true) && (document.getElementById("myCheck2").checked === true)){
 		alert('Please choose one response')
+		keyTracker = []
 	} else if ((document.getElementById("myCheck1").checked === true) && (document.getElementById("myCheck2").checked === false)){
 		checked_item = 'Yes' //checked_item = document.getElementById("check1text").innerHTML
+		buttonPressedText = 'Yes'
 	} else if ((document.getElementById("myCheck1").checked === false) && (document.getElementById("myCheck2").checked === true)){
 		checked_item = 'No' //checked_item = document.getElementById("check2text").innerHTML
+		buttonPressedText = 'No'
+	} else if ((document.getElementById("myCheck1").checked === false) && (document.getElementById("myCheck2").checked === false)){
+		alert('Please choose a response')
+		keyTracker = []
 	}
 }
 
@@ -135,16 +141,17 @@ document.addEventListener("keydown", function(e){
 var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
-	
-	if ((fatal_response.indexOf(buttonPressedText) != -1) && (question_type == 'Fatal')){
+	console.log('here1')
+	if ((fatal_response.indexOf(buttonPressedText) != -1) && (question_type[0] == 'Fatal')){
 		sub_made_fatal_response = 1
 	}
 	
-	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
-		console.log('here')
+	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type[0] == 'Conditional')){
+		console.log('here2')
 		sub_made_conditional_response = 1
 		conditional_length_index = conditional_length
-	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
+	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type[0] == 'Conditional')){
+		console.log('here3')
 		sub_made_conditional_response = 0
 		conditional_length_index = conditional_length
 	}
@@ -176,6 +183,9 @@ var appendData = function(){
 	keyTracker = []
 	buttonPressed = 'N/A'
     buttonPressedText = 'N/A'
+    checked_item = 'N/A'
+    time_answer = 'N/A'
+    craving = 'N/A'
 }
 
 var submitTime = function(current_submit){
@@ -214,69 +224,73 @@ var keyTracker = []
 var buttonPressed = 'N/A'
 var buttonPressedText = 'N/A'
 var game_state = 'start'
+var time_answer = 'N/A'
 /* ************************************************ */
 /*        Questions and responses for Survey        */
 /* ************************************************ */
 
 //Questions to be presented
 var survey_questions = ['On the next few pages, you will see some products.  Please indicate which of the following products you have used <u>in the last 24 hours</u> (choose yes to all that apply)',
-					    'Cigarette',
-					    'Cigar, cigarillo or small cigar like Swisher Sweets or Black and Mild',
-					    'E-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)',
-					    'Smokeless tobacco, chew, or Snus',
-					    'Pipe tobacco',
-					    'Hookah',
-					    'Blunts (i.e., cannabis smoked in a hollowed-out cigar)',
-					    'Nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a cigarette?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a cigar, cigarillo or little cigar like Swisher Sweets or Black and Mild?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use an e-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use smokeless tobacco, chew, or Snus?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke pipe tobacco?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke hookah?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> smoke a blunt?',
-					    'For any products that you used <u>in the last 24 hours</u>, at what time did you last....<br><br> use nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
-					    'Please put a mark on the line to show how much you are craving a cigarette right now, paying attention to the descriptions at the end of the line.']
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Cigarette?',
+					    'at what time did you last....<br><br> smoke a cigarette?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Cigar, cigarillo or small cigar like Swisher Sweets or Black and Mild?',
+					    'at what time did you last....<br><br> smoke a cigar, cigarillo or little cigar like Swisher Sweets or Black and Mild?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> E-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)?',
+					    'at what time did you last....<br><br> use an e-cigarette, vape pen, or e-hookah (e.g., Juul, Suorin, Phix)?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Smokeless tobacco, chew, or Snus?',
+					    'at what time did you last....<br><br> use smokeless tobacco, chew, or Snus?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Pipe tobacco?',
+					    'at what time did you last....<br><br> smoke pipe tobacco?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Hookah?',
+					    'at what time did you last....<br><br> smoke hookah?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Blunts (i.e., cannabis smoked in a hollowed-out cigar)?',
+					    'at what time did you last....<br><br> smoke a blunt?',
+					    'In the last 24 hours, have you used any of the following product[s]: <br><br> Nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
+					    'at what time did you last....<br><br> use nicotine gum, patch, lozenge, nasal spray, or nicotine inhaler?',
+					    'Please put a mark on the line to show how much you are craving a cigarette right now, paying attention to the descriptions at the end of the line.',
+					    'What time zone are you currently in? <br><br>(scroll down to see all options, if necessary)']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
 var button_text = [[['Continue'],1],
 				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
-				   [['Yes','No'],2],
+				   [['time'],1],
 				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
+				   [['Yes','No'],2],
 				   [['time'],1],
-				   [['time'],1],
-				   [['slider'],1]]
+				   [['slider'],1],
+				   [['Eastern time', 'Central time', 'Mountain time', 'Pacific time', 'Alaska time', 'Hawaii time', 'Anywhere on Earth', 'Samoa Standard Time', 'Atlantic Standard Time', 'Chamorro Standard Time', 'Wake Time'],11]]
 
 //Conditional questions control the presence of a set of following questions. 
 //Fatal questions end the survey, if a sub makes a particular response
-//questions that are 'neither' are not conditional or fatal
+//questions that are 'neither' are not Conditional or Fatal
 var question_types =   [['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
-					    ['neither'],
+					    ['Conditional'],
 					    ['neither'],
 					    ['neither'],
 					    ['neither']]	
@@ -284,25 +298,27 @@ var question_types =   [['neither'],
 //does the question require radio, checkbox, textfield, numeric, slider, or time?  Numeric and textfield has not been coded					    
 var question_formats = [['radio'],
 					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
-					    ['checkbox'],
+					    ['time'],
 					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
+					    ['checkbox'],
 					    ['time'],
-					    ['time'],
-					    ['slider']]			   
+					    ['slider'],
+					    ['radio']]			   
 
 //If a subject chooses this response, end survey.  If not, continue survey
 var fatal_responses =  [['none'],
+					    ['none'],
 					    ['none'],
 					    ['none'],
 					    ['none'],
@@ -323,40 +339,42 @@ var fatal_responses =  [['none'],
 
 //If a subject chooses this response, show the next question.  If not, skip next question					   
 var conditional_responses = [['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
-					    	 ['neither'],
+					    	 ['Yes'],
 					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
-//these are the number of questions to skip						     
+//these are the number of questions to skip.  If integer, leave as integer.  Otherwise, put 'neither'	     
 var conditional_lengths =    [['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
-					    	  ['neither'],
+					    	  [1],
 					    	  ['neither'],
 					    	  ['neither'],
 					    	  ['neither']]
@@ -379,7 +397,8 @@ var item_names_dartmouth = ['pre_scan_smoking_abstinence_1',
 							'pre_scan_smoking_abstinence_15',
 							'pre_scan_smoking_abstinence_16',
 							'pre_scan_smoking_abstinence_17',
-							'pre_scan_smoking_abstinence_18',]
+							'pre_scan_smoking_abstinence_18',
+							'pre_scan_smoking_abstinence_19',]
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */

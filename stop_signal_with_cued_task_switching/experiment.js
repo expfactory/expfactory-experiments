@@ -301,7 +301,6 @@ var appendData = function() {
   var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
   var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
   var task_switch = task_switches[trial_num]
-  console.log('trial id = '+trial_id)
   if (trial_id == "practice_trial"){
 		currBlock = practiceCount
   } else if (trial_id == "test_trial"){

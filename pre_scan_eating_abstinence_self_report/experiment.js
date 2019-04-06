@@ -232,45 +232,53 @@ var game_state = 'start'
 //Questions to be presented
 var survey_questions = ['When did you last eat?',
 					    'What did you last eat?',
-					    'Please put a mark on the line to show how hungry you are right now, paying attention to the descriptions at the end of the line.']
+					    'Please put a mark on the line to show how hungry you are right now, paying attention to the descriptions at the end of the line.',
+					    'What time zone are you currently in?']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
 var button_text = [[['Time'],1],
 				   [['Textfield'],2],
-				   [['Slider'],2]]
+				   [['Slider'],2],
+				   [['Eastern time', 'Central time', 'Mountain time', 'Pacific time', 'Alaska time', 'Hawaii time', 'Anywhere on Earth', 'Samoa Standard Time', 'Atlantic Standard Time', 'Chamorro Standard Time', 'Wake Time'],11]]
 
 //Conditional questions control the presence of a set of following questions. 
 //Fatal questions end the survey, if a sub makes a particular response
 //questions that are 'neither' are not conditional or fatal
 var question_types =   [['neither'],
 					    ['neither'],
+					    ['neither'],
 					    ['neither']]	
 
 //does the question require radio, checkbox, textfield, numeric, slider, or time?  Numeric and textfield has not been coded					    
 var question_formats = [['time'],
 					   ['textfield'],
-					   ['slider']]			   
+					   ['slider'],
+					   ['radio']]			   
 
 //If a subject chooses this response, end survey.  If not, continue survey
 var fatal_responses =  [['none'],
+					    ['none'],
 					    ['none'],
 					    ['none']]
 
 //If a subject chooses this response, show the next question.  If not, skip next question					   
 var conditional_responses = [['neither'],
 					    	 ['neither'],
+					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
 //these are the number of questions to skip						     
 var conditional_lengths =    [['neither'],
+					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither']]
 
 //Names of items that be written on data
 var item_names_dartmouth = ['pre_scan_eating_abstinence_1',
 							'pre_scan_eating_abstinence_2',
-							'pre_scan_eating_abstinence_3']
+							'pre_scan_eating_abstinence_3',
+							'pre_scan_eating_abstinence_4']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
