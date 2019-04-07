@@ -393,7 +393,7 @@ var instructions_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco usage.</font></p>' +
+			'<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your eating.</font></p>' +
 			'<p class = block-text style="font-size:28px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>'+
 			'<p class = block-text style="font-size:28px"><font color="white">For questions that have a submit button, click the submit button to move onto the next question.</font></p>'+
 			'<p class = block-text style="font-size:28px"><font color="white">You will not be able to go back, so please carefully read and understand each question before you move on.</font></p>'+
