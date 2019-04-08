@@ -683,7 +683,7 @@ var categorize_block = {
 	is_html: true,
 	timing_stim: 500, //500
  	prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
-	timing_response: 1, //500
+	timing_response: 500, //500
 	response_ends_trial: false, 
 };
 
