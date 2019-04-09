@@ -303,18 +303,16 @@ var getTrainingStim = function(){
 }
 
 var getDirectedCueStim = function(){
-	return '<div class = bigbox><div class = centerbox><div class = cue-text><div class = gng_number>'+ preFileType + cue + fileTypePNG +'</font></div></div></div>'	
-
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + cue + fileTypePNG + '</div></div></div>'	
 }
 
 
 var getProbeStim = function(){
 	return '<div class = bigbox><div class = centerbox>'+
+		
+		   	'<div class = distractor-text><div class = cue-text>'+preFileType  + 'red_' + distractor + fileTypePNG+'</div></div>'+
 	
-			'<div class = distractor-text><div class = gng_number>'+ preFileType + 'red_' + distractor + fileTypePNG +'</div>'+
-	
-			'<div class = cue-text><div class = gng_number>'+ preFileType + probe + fileTypePNG +'</div>'+
-		   
+		   	'<div class = gng_number><div class = cue-text>'+preFileType + probe + fileTypePNG+'</div>'+
 		   '</div></div>'	
 }
 
@@ -359,8 +357,7 @@ var preFileType = '<img class = center src="/static/experiments/directed_forgett
 
 var stims = createTrialTypes(practice_len)
 
-var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = topRight style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = fixation>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = fixation>'],['</div></div></div></div>']]
-var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div></div>']]
+var task_boards = [['<div class = bigbox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div>']]
 				   
 
 var prompt_text_list = '<ul list-text>'+

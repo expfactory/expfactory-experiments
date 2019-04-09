@@ -59,9 +59,10 @@
  -webkit-transform: translateY(-50%);
 }
 
+
 .cue-text {
   width:20vw;
-  height: 20vw;
+  height: 20vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -116,10 +117,21 @@ transform: translate(-50%,-50%);
 background-color: none;
 }
 
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
 /*******************************************************/
 /***********  Directed Forgetting CSS Styles  **********/
 /*******************************************************/
-
 
 .lettersBox {
  width: 70vw;
@@ -205,22 +217,12 @@ background-color: none;
 /*******************************************************/
 
 .distractor-text {
-  width: 10%;
-  height: 10%;
+  width: 5vw;
+  height: 5vw;
   position: absolute;
   top: 50%;
   left: 50%;
+  margin-right:0%;
   background-color: none;
-  text-align: center;
   transform: translate(-70%, -70%);
-}
-
-.distractor-text {
-  width:20vw;
-  height: 20vw;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-100%,-100%);
 }
