@@ -479,6 +479,9 @@ var instructions_block = {
     
     '<div class = centerbox>' + 
 		'<p class = block-text>On some trials, the letter will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the letter is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
+		
+		"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
+		"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
 									
 		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 	'</div>'

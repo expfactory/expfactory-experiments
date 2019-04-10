@@ -363,7 +363,10 @@ var instructions_block = {
 		
 		"<p class = block-text>Ignore the letters not in the middle!</p>"+
 		
-		"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+		"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+		
+		"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+		"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 						
 		"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
 		"</div>",
@@ -422,7 +425,7 @@ var start_test_block = {
 		
 			"<p class = block-text>Ignore the letters not in the center!</p>"+
 		
-			"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
 	
 			"<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>"+
 		 "</div>",

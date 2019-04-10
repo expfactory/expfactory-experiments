@@ -490,6 +490,9 @@ var instructions_block = {
 		
 			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + ' in black.</p>'+
 			
+			"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
+			"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
+			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'
 	],

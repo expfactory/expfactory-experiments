@@ -465,10 +465,10 @@ var instructions_block = {
 		'</div>',
 			
 		"<div class = centerbox>"+
-			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".</p>"+
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".</p>"+
 			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
-			"<p class = block-text>We will show you what a letter will look like if it is "+go_no_go_styles[0]+" or "+go_no_go_styles[1]+".</p>"+
-			"<p class = block-text>For the example on the next page, we will refer to it as a "+go_no_go_styles[0]+"_letter or "+go_no_go_styles[1]+"_letter</p>"+
+			"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 		"</div>",
 		
 		/*
