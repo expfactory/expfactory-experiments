@@ -465,8 +465,8 @@ var instructions_block = {
 		'</div>',
 			
 		"<div class = centerbox>"+
-			"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".</p>"+
-			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".</p>"+
+			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
 			"<p class = block-text>We will show you what a letter will look like if it is "+go_no_go_styles[0]+" or "+go_no_go_styles[1]+".</p>"+
 			"<p class = block-text>For the example on the next page, we will refer to it as a "+go_no_go_styles[0]+"_letter or "+go_no_go_styles[1]+"_letter</p>"+
 		"</div>",
@@ -666,7 +666,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-				'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
