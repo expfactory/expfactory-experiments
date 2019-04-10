@@ -419,8 +419,12 @@ var instructions_block = {
 			'<p class = block-text>So if you get the cue <i>TOP</i>, please <i>forget</i> the top '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>'+
-			'The three remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
-			'these three letters while forgetting the other three.</p><p class = block-text>You will then be presented with a single '+
+				'The '+numLetters/2+' remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
+				'these '+numLetters/2+' letters while forgetting the other '+numLetters/2+'.</p>'+
+		'</div>',
+		
+		'<div class = centerbox>'+
+			'<p class = block-text>You will then be presented with a single '+
 			'letter. Respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> '+
 			'key if it was not in the memory set.</p>'+
 				
