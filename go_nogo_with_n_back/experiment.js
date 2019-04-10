@@ -376,6 +376,22 @@ var prompt_text = '<div class = prompt_box>'+
 
 var current_trial = 0
 var current_block = 0
+
+//PRE LOAD IMAGES HERE
+var lettersPreload = ['B','D','G','T','V']
+var casePreload = ['uppercase','lowercase']
+
+var pathSource = "/static/experiments/go_nogo_with_n_back/images/"
+var images = []
+for(i=0;i<lettersPreload.length;i++){
+	for(x=0;x<casePreload.length;x++){
+		for(y=0;y<go_no_go_styles.length;y++){
+			images.push(pathSource + go_no_go_styles[y] + '_' + casePreload[x] + '_' + lettersPreload[i] + '.png')
+		}
+	}
+}
+jsPsych.pluginAPI.preloadImages(images);
+
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */

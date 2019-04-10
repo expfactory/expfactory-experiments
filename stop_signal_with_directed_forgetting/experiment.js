@@ -432,6 +432,16 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears around the probe!</p>' +
 				  '</div>'
+				  
+var pathSource = "/static/experiments/stop_signal_with_directed_forgetting/images/"
+var images = []
+for(i=0;i<stimArray.length;i++){
+	images.push(pathSource + stimArray[i] + '.png')
+}
+images.push(pathSource + 'stopSignal.png')
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'BOT.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

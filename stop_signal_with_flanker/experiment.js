@@ -301,7 +301,12 @@ var prompt_text = '<ul list-text><font color=white>'+
 					'<li>Do not slow down your responses to the letter to wait for the star.</li>' +
 				  '</font></ul>'
 
-
+var pathSource = "/static/experiments/stop_signal_with_flanker/images/"
+var images = []
+images.push(pathSource + 'F' + '.png')
+images.push(pathSource + 'H' + '.png')
+images.push(pathSource + 'stopSignal.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

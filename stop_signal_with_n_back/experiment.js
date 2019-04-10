@@ -366,6 +366,15 @@ var prompt_text = '<div class = prompt_box>'+
 
 var current_trial = 0
 var current_block = 0
+
+var letters_preload = ['uppercase_B','uppercase_D','uppercase_G','uppercase_T','uppercase_V','lowercase_B','lowercase_D','lowercase_G','lowercase_T','lowercase_V',
+						'remember','forget','stopSignal']
+var pathSource = "/static/experiments/stop_signal_with_n_back/images/"
+var images = []
+for(i=0;i<letters_preload.length;i++){
+	images.push(pathSource + letters_preload[i] + '.png')
+}
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */

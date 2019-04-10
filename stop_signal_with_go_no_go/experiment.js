@@ -333,17 +333,19 @@ var possible_responses = [['Z key', 90], ['Z key', 90], ['M key', 77], ['M key',
 
 
 var postFileType = "'></img>"
-var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
 var fileType = ".png"
 var preFileType = "<img class = center src='"
 
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/images/"
 
-
+var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
 var images = []
 for(i=0;i<shapes.length;i++){
-	images.push(pathSource + shapes[i] + '.png')
+	for(x=0; x<go_no_go_styles.length;x++){
+	
+	images.push(pathSource + go_no_go_styles[x] + '_' + shapes[i] + '.png')
+	}
 }
 jsPsych.pluginAPI.preloadImages(images);
 

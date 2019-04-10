@@ -353,12 +353,12 @@ var getNextStim = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+preFileType+letters[0]+fileTypePNG+
+	return task_boards[0]+preFileType+'solid_'+letters[0]+fileTypePNG+
 		   task_boards[1]+
-		   task_boards[2]+preFileType+letters[1]+fileTypePNG+
-		   task_boards[3]+preFileType+letters[2]+fileTypePNG+
+		   task_boards[2]+preFileType+'solid_'+letters[1]+fileTypePNG+
+		   task_boards[3]+preFileType+'solid_'+letters[2]+fileTypePNG+
 		   task_boards[4]+
-		   task_boards[5]+preFileType+letters[3]+fileTypePNG+
+		   task_boards[5]+preFileType+'solid_'+letters[3]+fileTypePNG+
 		   task_boards[6]
 
 }
@@ -435,6 +435,21 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if probe is '+go_no_go_styles[1]+', only respond if '+go_no_go_styles[0]+'!</p>' +
 				  '</div>'
+				  
+				  
+//PRE LOAD IMAGES HERE
+
+var pathSource = "/static/experiments/go_nogo_with_directed_forgetting/images/"
+var images = []
+for(i=0;i<stimArray.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[y] + '_' + lettersPreload[i] + '.png')
+		
+	}	
+}
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'BOT.png')
+jsPsych.pluginAPI.preloadImages(images);
 				  
 /* ************************************ */
 /* Set up jsPsych blocks */

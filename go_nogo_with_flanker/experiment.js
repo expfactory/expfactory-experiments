@@ -280,6 +280,20 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the H key if middle letter is H</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the '+go_no_go_styles[1]+' version of the letters came out!</p>' +
 				  '</div>' 	
+				  
+				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/go_nogo_with_flanker/images/"
+var lettersPreload = ['F','H']
+var images = []
+for(i=0;i<lettersPreload.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[x] + '_' + lettersPreload[i] + '.png')
+		
+	}	
+}
+
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

@@ -360,6 +360,22 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if you see a star around the white shape</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not slow down your responses to the shape to wait for the star.</p>' +
 				  '</div>'
+				  
+				  
+var numbersPreload = ['1','2','3','4','5','6','7','8','9']
+var colorsPreload = ['white','green','red']
+var pathSource = "/static/experiments/stop_signal_with_shape_matching/images/"
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	for (x=0;x<colorsPreload.length;x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] +'.png')
+	}
+}
+
+images.push(pathSource + 'stopSignal.png')
+images.push(pathSource + 'mask.png')
+images.push(pathSource + 'BOT.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
