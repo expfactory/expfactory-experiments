@@ -634,14 +634,14 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
 				}
 			}
 		}
@@ -660,7 +660,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -733,14 +733,14 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
 				}
 			}
 		}

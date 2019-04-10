@@ -679,15 +679,15 @@ var practiceStopNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "practice_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+				if (data[i].stop_signal_condition == "go"){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
 						sum_go_rt += data[i].rt;
-						if (data[i].key_press == data[i].correct_response) {
-							sumGo_correct += 1
-						}
-					}				
+					}
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
 				} else if (data[i].stop_signal_condition == "stop") {
 					stop_length += 1
 					if (data[i].rt != -1){
@@ -834,15 +834,15 @@ var testNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+				if (data[i].stop_signal_condition == "go"){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
 						sum_go_rt += data[i].rt;
-						if (data[i].key_press == data[i].correct_response) {
-							sumGo_correct += 1
-						}
-					}				
+					}
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
 				} else if (data[i].stop_signal_condition == "stop") {
 					stop_length += 1
 					if (data[i].rt != -1){

@@ -700,19 +700,17 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_no_go_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
 				}
-		
-			}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
 	
+				}
+			}
 		}
 	
 		var accuracy = correct / total_trials
@@ -732,7 +730,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -829,34 +827,19 @@ var testNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				go_trials+=1
 				if (data[i].rt != -1){
 					total_sum_rt += data[i].rt
 					go_rt += data[i].rt
 					sum_go_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						go_correct += 1
-		
-					}
 				}
-		
-			} else if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'nogo')){
-				total_trials+=1
-				stop_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					stop_rt += data[i].rt
-					sum_stop_responses += 1
-					if (data[i].key_press == -1){
-						stop_correct += 1
-		
-					}
-				}
-			
-			}
+				if (data[i].key_press == data[i].correct_response){
+					go_correct += 1
 	
+				}
+			} 
 		}
 	
 		var accuracy = go_correct / go_trials
