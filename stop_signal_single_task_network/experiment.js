@@ -284,6 +284,9 @@ var accuracy_thresh = 0.80;
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
 
+var maxStopCorrectPractice = 1
+var minStopCorrectPractice = 0
+
 
 var stop_signal_conditions = ['go','go','stop']
 var shapes = ['circle','circle','square','square']
@@ -681,7 +684,7 @@ var practiceStopNode = {
 		
 		}
 		
-		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond < maxStopCorrect) && (stop_signal_respond > minStopCorrect)){
+		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond < maxStopCorrectPractice) && (stop_signal_respond > minStopCorrectPractice)){
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
@@ -689,7 +692,7 @@ var practiceStopNode = {
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-				'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy. Remember:<br>' +
 				prompt_text_list
 			}
 			if (average_rt > rt_thresh) {
@@ -710,12 +713,12 @@ var practiceStopNode = {
 			}
 			
 			
-			if (stop_signal_respond > maxStopCorrect){
+			if (stop_signal_respond === maxStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			}
 		
-			if (stop_signal_respond < minStopCorrect){
+			if (stop_signal_respond === minStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 		
@@ -727,7 +730,6 @@ var practiceStopNode = {
 		}
 	}
 }
-
 
 
 

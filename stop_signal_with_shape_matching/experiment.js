@@ -317,6 +317,9 @@ var minSSD = 0
 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
+
+var maxStopCorrectPractice = 1
+var minStopCorrectPractice = 0
  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
@@ -670,7 +673,7 @@ var practiceNode = {
 				return false
 		}
 		
-		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrect) && (stop_acc > minStopCorrect)){
+		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrectPractice) && (stop_acc > minStopCorrectPractice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
@@ -680,7 +683,7 @@ var practiceNode = {
 		
 			if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			}
 		
 			if (missed_responses > missed_thresh){
@@ -688,12 +691,12 @@ var practiceNode = {
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 		
-			if (stop_acc > maxStopCorrect){
+			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			}
 		
-			if (stop_acc < minStopCorrect){
+			if (stop_acc === minStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			}

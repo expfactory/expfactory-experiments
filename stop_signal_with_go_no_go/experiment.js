@@ -316,6 +316,9 @@ var accuracy_thresh = 0.70;
 var stop_signal_respond_lower_thresh = 0.30
 var stop_signal_respond_upper_thresh = 0.70
 
+var stop_signal_respond_lower_thresh_practice = 0
+var stop_signal_respond_upper_thresh_practice = 1
+
 
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
@@ -723,7 +726,7 @@ var practiceStopNode = {
 			return false;
 		}
 		
-		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond > stop_signal_respond_lower_thresh) && (stop_signal_respond < stop_signal_respond_upper_thresh)){
+		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond > stop_signal_respond_lower_thresh_practice) && (stop_signal_respond < stop_signal_respond_upper_thresh_practice)){
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
@@ -731,7 +734,7 @@ var practiceStopNode = {
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy. Remember:<br>' +
 					prompt_text_list
 			}
 			
@@ -753,10 +756,10 @@ var practiceStopNode = {
 				}
 			}
 			
-			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
+			if (stop_signal_respond == stop_signal_respond_upper_thresh_practice) {
 				feedback_text +=
-				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt >= rt_thresh)) {
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			} else if ((stop_signal_respond === stop_signal_respond_lower_thresh_practice) && (average_rt >= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
