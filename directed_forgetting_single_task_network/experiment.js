@@ -315,14 +315,6 @@ var fileType = '.png'
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/directed_forgetting_single_task_network/images/"
 
-var images = []
-for (var i = 0; i < stimArray.length; i++) {
-	images.push(pathSource + stimArray[i] + fileType)
-}
-images.push(pathSource + 'TOP.png')
-images.push(pathSource + 'BOT.png')
-	//preload images
-jsPsych.pluginAPI.preloadImages(images)
 
 var task_boards = [['<div class = bigbox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div>']]
 
@@ -337,6 +329,18 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: M key</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: Z key</p>' +
 				  '</div>'
+				  
+				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/directed_forgetting_single_task_network/images/"
+var images = []
+
+for(i = 0; i < stimArray.length; i++){
+	images.push(pathSource + stimArray[i] + '.png')
+}
+images.push(pathSource + 'BOT.png')
+images.push(pathSource + 'TOP.png')
+jsPsych.pluginAPI.preloadImages(images);
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -419,8 +423,12 @@ var instructions_block = {
 			'<p class = block-text>So if you get the cue <i>TOP</i>, please <i>forget</i> the top '+numLetters/2+' letters.</p>'+
 		
 			'<p class = block-text>'+
-			'The three remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
-			'these three letters while forgetting the other three.</p><p class = block-text>You will then be presented with a single '+
+				'The '+numLetters/2+' remaining letters that you must remember are called your <i>memory set</i>. You should remember '+
+				'these '+numLetters/2+' letters while forgetting the other '+numLetters/2+'.</p>'+
+		'</div>',
+		
+		'<div class = centerbox>'+
+			'<p class = block-text>You will then be presented with a single '+
 			'letter. Respond with the <i> M</i> key if it is in the memory set, and the <i> Z </i> '+
 			'key if it was not in the memory set.</p>'+
 				
@@ -809,7 +817,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 					
 			if (missed_responses > missed_thresh){
 				feedback_text +=

@@ -280,6 +280,20 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Press the H key if middle letter is H</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the '+go_no_go_styles[1]+' version of the letters came out!</p>' +
 				  '</div>' 	
+				  
+				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/go_nogo_with_flanker/images/"
+var lettersPreload = ['F','H']
+var images = []
+for(i=0;i<lettersPreload.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[x] + '_' + lettersPreload[i] + '.png')
+		
+	}	
+}
+
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -363,7 +377,10 @@ var instructions_block = {
 		
 		"<p class = block-text>Ignore the letters not in the middle!</p>"+
 		
-		"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+		"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+		
+		"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+		"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 						
 		"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
 		"</div>",
@@ -422,7 +439,7 @@ var start_test_block = {
 		
 			"<p class = block-text>Ignore the letters not in the center!</p>"+
 		
-			"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
 	
 			"<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>"+
 		 "</div>",
@@ -502,15 +519,15 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}
@@ -532,7 +549,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -606,15 +623,15 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}

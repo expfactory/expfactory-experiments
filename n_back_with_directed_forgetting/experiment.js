@@ -320,6 +320,21 @@ var prompt_text = '<div class = prompt_box>'+
 				  
 var current_trial = 0
 var current_block = 0
+
+//PRE LOAD IMAGES HERE
+var lettersPreload = ['B','D','G','T','V']
+var casePreload = ['lowercase','uppercase']
+var pathSource = "/static/experiments/n_back_with_directed_forgetting/images/"
+var images = []
+
+for(i = 0; i < lettersPreload.length; i++){
+	for (y = 0; y < casePreload.length; y++){
+		images.push(pathSource + casePreload[y] + '_' + lettersPreload[i] + '.png')
+	}
+}
+images.push(pathSource + 'forget.png')
+images.push(pathSource + 'remember.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */
@@ -608,7 +623,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'

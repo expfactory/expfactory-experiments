@@ -376,6 +376,22 @@ var prompt_text = '<div class = prompt_box>'+
 
 var current_trial = 0
 var current_block = 0
+
+//PRE LOAD IMAGES HERE
+var lettersPreload = ['B','D','G','T','V']
+var casePreload = ['uppercase','lowercase']
+
+var pathSource = "/static/experiments/go_nogo_with_n_back/images/"
+var images = []
+for(i=0;i<lettersPreload.length;i++){
+	for(x=0;x<casePreload.length;x++){
+		for(y=0;y<go_no_go_styles.length;y++){
+			images.push(pathSource + go_no_go_styles[y] + '_' + casePreload[x] + '_' + lettersPreload[i] + '.png')
+		}
+	}
+}
+jsPsych.pluginAPI.preloadImages(images);
+
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */
@@ -465,10 +481,10 @@ var instructions_block = {
 		'</div>',
 			
 		"<div class = centerbox>"+
-			"<p class = block-text>On most trials, the letters will be "+go_no_go_styles[0]+".  Sometimes, the letters will be "+go_no_go_styles[1]+".</p>"+
-			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
-			"<p class = block-text>We will show you what a letter will look like if it is "+go_no_go_styles[0]+" or "+go_no_go_styles[1]+".</p>"+
-			"<p class = block-text>For the example on the next page, we will refer to it as a "+go_no_go_styles[0]+"_letter or "+go_no_go_styles[1]+"_letter</p>"+
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".</p>"+
+			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
+			"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 		"</div>",
 		
 		/*
@@ -629,15 +645,15 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 			}
 		}
@@ -666,7 +682,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-				'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -729,14 +745,14 @@ var testNode = {
 		var total_trials = 0
 
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
 				}
 			} 
 		}

@@ -353,12 +353,12 @@ var getNextStim = function(){
 }
 
 var getTrainingStim = function(){
-	return task_boards[0]+preFileType+letters[0]+fileTypePNG+
+	return task_boards[0]+preFileType+'solid_'+letters[0]+fileTypePNG+
 		   task_boards[1]+
-		   task_boards[2]+preFileType+letters[1]+fileTypePNG+
-		   task_boards[3]+preFileType+letters[2]+fileTypePNG+
+		   task_boards[2]+preFileType+'solid_'+letters[1]+fileTypePNG+
+		   task_boards[3]+preFileType+'solid_'+letters[2]+fileTypePNG+
 		   task_boards[4]+
-		   task_boards[5]+preFileType+letters[3]+fileTypePNG+
+		   task_boards[5]+preFileType+'solid_'+letters[3]+fileTypePNG+
 		   task_boards[6]
 
 }
@@ -435,6 +435,21 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if probe is '+go_no_go_styles[1]+', only respond if '+go_no_go_styles[0]+'!</p>' +
 				  '</div>'
+				  
+				  
+//PRE LOAD IMAGES HERE
+
+var pathSource = "/static/experiments/go_nogo_with_directed_forgetting/images/"
+var images = []
+for(i=0;i<stimArray.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[y] + '_' + lettersPreload[i] + '.png')
+		
+	}	
+}
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'BOT.png')
+jsPsych.pluginAPI.preloadImages(images);
 				  
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -546,6 +561,9 @@ var instructions_block = {
 			'<p class = block-text>On some trials, the probe will be '+go_no_go_styles[1]+', instead of '+go_no_go_styles[0]+'.</p>'+
 			
 			'<p class = block-text>If the letter is '+go_no_go_styles[1]+', please do not respond on that trial!</p>'+
+			
+			"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>',
@@ -824,15 +842,15 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}
@@ -854,7 +872,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 					
 			if (missed_responses > missed_thresh){
 				feedback_text +=
@@ -904,15 +922,15 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}

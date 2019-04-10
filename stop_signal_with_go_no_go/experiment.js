@@ -316,6 +316,9 @@ var accuracy_thresh = 0.70;
 var stop_signal_respond_lower_thresh = 0.30
 var stop_signal_respond_upper_thresh = 0.70
 
+var stop_signal_respond_lower_thresh_practice = 0
+var stop_signal_respond_upper_thresh_practice = 1
+
 
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
@@ -330,17 +333,19 @@ var possible_responses = [['Z key', 90], ['Z key', 90], ['M key', 77], ['M key',
 
 
 var postFileType = "'></img>"
-var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
 var fileType = ".png"
 var preFileType = "<img class = center src='"
 
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/images/"
 
-
+var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
 var images = []
 for(i=0;i<shapes.length;i++){
-	images.push(pathSource + shapes[i] + '.png')
+	for(x=0; x<go_no_go_styles.length;x++){
+	
+	images.push(pathSource + go_no_go_styles[x] + '_' + shapes[i] + '.png')
+	}
 }
 jsPsych.pluginAPI.preloadImages(images);
 
@@ -676,15 +681,15 @@ var practiceStopNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "practice_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+				if (data[i].stop_signal_condition == "go"){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
 						sum_go_rt += data[i].rt;
-						if (data[i].key_press == data[i].correct_response) {
-							sumGo_correct += 1
-						}
-					}				
+					}
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
 				} else if (data[i].stop_signal_condition == "stop") {
 					stop_length += 1
 					if (data[i].rt != -1){
@@ -723,7 +728,7 @@ var practiceStopNode = {
 			return false;
 		}
 		
-		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond > stop_signal_respond_lower_thresh) && (stop_signal_respond < stop_signal_respond_upper_thresh)){
+		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond > stop_signal_respond_lower_thresh_practice) && (stop_signal_respond < stop_signal_respond_upper_thresh_practice)){
 			feedback_text += '</p><p class = block-text>Done with this practice.'
 			exp_phase = "test"
 			return false;
@@ -731,7 +736,7 @@ var practiceStopNode = {
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
 				feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy. Remember:<br>' +
 					prompt_text_list
 			}
 			
@@ -753,10 +758,10 @@ var practiceStopNode = {
 				}
 			}
 			
-			if (stop_signal_respond > stop_signal_respond_upper_thresh) {
+			if (stop_signal_respond == stop_signal_respond_upper_thresh_practice) {
 				feedback_text +=
-				'</p><p class = block-text>Please stop your response if you see a star.'
-			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt >= rt_thresh)) {
+				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+			} else if ((stop_signal_respond === stop_signal_respond_lower_thresh_practice) && (average_rt >= rt_thresh)) {
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
@@ -831,15 +836,15 @@ var testNode = {
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+				if (data[i].stop_signal_condition == "go"){
 					go_length += 1
 					if (data[i].rt != -1) {
 						num_go_responses += 1
 						sum_go_rt += data[i].rt;
-						if (data[i].key_press == data[i].correct_response) {
-							sumGo_correct += 1
-						}
-					}				
+					}
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
 				} else if (data[i].stop_signal_condition == "stop") {
 					stop_length += 1
 					if (data[i].rt != -1){

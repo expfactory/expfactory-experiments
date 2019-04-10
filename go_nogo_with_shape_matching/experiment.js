@@ -344,6 +344,25 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if shape on right is '+ go_no_go_styles[1]+', only respond if '+ go_no_go_styles[0]+'</p>' +
   				  '</div>' 	
 
+
+//PRE LOAD IMAGES HERE
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var colorsPreload = ['green','red']
+var pathSource = "/static/experiments/go_nogo_with_shape_matching/images/"
+var images = []
+for(i = 0; i < numbersPreload.length; i++){
+	for (x = 0; x <colorsPreload.length; x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] + '.png')
+	}
+}
+
+for(i = 0; i < numbersPreload.length; i++){
+	for (y = 0; y < go_no_go_styles.length; y++){
+		images.push(pathSource + numbersPreload[i] + '_' + 'white' + '_' + go_no_go_styles[y] + '.png')
+	}
+}
+images.push(pathSource + 'mask.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -424,7 +443,7 @@ var instructions_block = {
 			
 			'<p class = block-text>Ignore the red shape on the left. Your task is to only to respond based on whether the green and white shapes are the same.</p>'+
 		
-			'<p class = block-text>On most trials, the white shape will be '+go_no_go_styles[1]+'.  On some trials, the white shape will be '+go_no_go_styles[0]+'.  If the white shape is '+go_no_go_styles[0]+', please make no response on that trial.</p>'+
+			'<p class = block-text>On some trials, the white shape will be '+go_no_go_styles[1]+'.  On some trials, the white shape will be '+go_no_go_styles[0]+'.  If the white shape is '+go_no_go_styles[0]+', please make no response on that trial.</p>'+
 				
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'
@@ -577,15 +596,15 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}
@@ -607,7 +626,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember, judge if the green shape on the left matches or mismatches the <i>CENTER</i> white shape on the right: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -681,15 +700,15 @@ var testNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_nogo_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
+				}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
+	
 				}
 		
 			}
@@ -706,7 +725,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember, judge if the green shape on the left matches or mismatches the <i>CENTER</i> white shape on the right: <br>' + prompt_text_list
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
 		}
 		
 		if (missed_responses > missed_thresh){

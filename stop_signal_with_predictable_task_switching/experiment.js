@@ -366,6 +366,9 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 var upper_stop_success_bound = 0.70
 var lower_stop_success_bound = 0.30
 
+var upper_stop_success_bound_practice = 1
+var lower_stop_success_bound_practice = 0
+
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10 
 var practice_thresh = 3 // 3 blocks of 24 trials
@@ -420,6 +423,18 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Bottom 2 quadrants: Judge number on '+predictive_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>'
+				  
+				  
+//PRE LOAD IMAGES HERE
+var numbersPreload = ['1','2','3','4','6','7','8','9']
+var pathSource = "/static/experiments/stop_signal_with_predictable_task_switching/images/"
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
+images.push(pathSource + 'stopSignal.png')
+jsPsych.pluginAPI.preloadImages(images);
+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -717,22 +732,24 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
-		if (accuracy > accuracy_thresh){
+		if ((accuracy > accuracy_thresh) && (stop_success_percentage < upper_stop_success_bound) && (stop_success_percentage > lower_stop_success_bound)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
 			return false
 	
-		} else if (accuracy < accuracy_thresh){
+		} else {
+			if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+			}
 			
-			if (stop_success_percentage > upper_stop_success_bound){
+			if (stop_success_percentage === upper_stop_success_bound){
 			feedback_text +=
 					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly as possible without sacrificing accuracy.'
 			}
 			
-			if (stop_success_percentage < lower_stop_success_bound){
+			if (stop_success_percentage === lower_stop_success_bound){
 			feedback_text +=
 					'</p><p class = block-text>You have been responding on trials where there are stars. If a star appears, try your best not to make a response on that trial.'
 			}

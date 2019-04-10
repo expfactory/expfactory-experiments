@@ -359,8 +359,12 @@ var preFileTypeStar = '<img class = star src="/static/experiments/stop_signal_wi
 
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10
+
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
+
+var maxStopCorrectPractice = 1
+var minStopCorrectPractice = 0
 
 var practice_thresh = 3 // 3 blocks of 12 
 var CTI = 300
@@ -436,7 +440,16 @@ var prompt_task_list = '<ul>'+
 					   	'<li>Do not respond if there is a star!</li>'+
 					   '</ul>'
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/stop_signal_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
 
+images.push(pathSource + 'stop.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -830,7 +843,7 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
-		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrect) && (stop_correct > minStopCorrect)){
+		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrectPractice) && (stop_correct > minStopCorrectPractice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			testStims = genStims(numTrialsPerBlock + 1)
@@ -838,21 +851,23 @@ var practiceNode = {
 			task_switches.unshift({task_switch: 'na', cue_switch: 'na', stop_type: jsPsych.randomization.repeat(["go","go","stop"],1).pop()})
 			return false
 	
-		} else if (accuracy < accuracy_thresh){
+		} else {
+			if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
+			}
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 			
-			if (stop_correct > maxStopCorrect){
+			if (stop_correct === maxStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			
 			}
 			
-			if (stop_correct < minStopCorrect){
+			if (stop_correct === minStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			

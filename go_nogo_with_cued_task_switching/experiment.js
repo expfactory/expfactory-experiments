@@ -411,8 +411,18 @@ var prompt_task_list = '<ul>'+
 					   	'<li>Do not respond if the letter is '+go_no_go_styles[1]+'!</li>'+
 					   '</ul>'
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/go_nogo_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
 
+for(i=0;i<numbersPreload.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[x] + '_' + numbersPreload[i] + '.png')
+	}
+}
 
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -479,6 +489,9 @@ var instructions_block = {
     
     '<div class = centerbox>' + 
 		'<p class = block-text>On some trials, the letter will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the letter is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
+		
+		"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
+		"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
 									
 		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 	'</div>'
@@ -700,19 +713,17 @@ var practiceNode = {
 		var total_trials = 0
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].go_no_go_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
 					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
 				}
-		
-			}
+				if (data[i].key_press == data[i].correct_response){
+					correct += 1
 	
+				}
+			}
 		}
 	
 		var accuracy = correct / total_trials
@@ -732,7 +743,7 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -829,34 +840,19 @@ var testNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				go_trials+=1
 				if (data[i].rt != -1){
 					total_sum_rt += data[i].rt
 					go_rt += data[i].rt
 					sum_go_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						go_correct += 1
-		
-					}
 				}
-		
-			} else if ((data[i].trial_id == "test_trial") && (data[i].go_no_go_condition == 'nogo')){
-				total_trials+=1
-				stop_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					stop_rt += data[i].rt
-					sum_stop_responses += 1
-					if (data[i].key_press == -1){
-						stop_correct += 1
-		
-					}
-				}
-			
-			}
+				if (data[i].key_press == data[i].correct_response){
+					go_correct += 1
 	
+				}
+			} 
 		}
 	
 		var accuracy = go_correct / go_trials

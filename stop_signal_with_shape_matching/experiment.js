@@ -317,6 +317,9 @@ var minSSD = 0
 
 var maxStopCorrect = 0.70
 var minStopCorrect = 0.30
+
+var maxStopCorrectPractice = 1
+var minStopCorrectPractice = 0
  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
@@ -357,6 +360,21 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if you see a star around the white shape</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not slow down your responses to the shape to wait for the star.</p>' +
 				  '</div>'
+				  
+				  
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var colorsPreload = ['white','green','red']
+var pathSource = "/static/experiments/stop_signal_with_shape_matching/images/"
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	for (x=0;x<colorsPreload.length;x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] +'.png')
+	}
+}
+
+images.push(pathSource + 'stopSignal.png')
+images.push(pathSource + 'mask.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -670,7 +688,7 @@ var practiceNode = {
 				return false
 		}
 		
-		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrect) && (stop_acc > minStopCorrect)){
+		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrectPractice) && (stop_acc > minStopCorrectPractice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
@@ -680,7 +698,7 @@ var practiceNode = {
 		
 			if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			}
 		
 			if (missed_responses > missed_thresh){
@@ -688,12 +706,12 @@ var practiceNode = {
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 		
-			if (stop_acc > maxStopCorrect){
+			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			}
 		
-			if (stop_acc < minStopCorrect){
+			if (stop_acc === minStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			}
