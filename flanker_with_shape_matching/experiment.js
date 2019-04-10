@@ -300,6 +300,21 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Same: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Different: ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
+				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/flanker_with_shape_matching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var colorsPreload = ['red','white','green']
+var images = []
+
+for(i = 0; i < numbersPreload.length; i++){
+	for(x = 0; x < colorsPreload.length; x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] + '.png')
+	}
+}
+
+images.push(pathSource + 'mask.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

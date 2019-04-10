@@ -347,6 +347,16 @@ var prompt_task_list = '<ul>'+
 					   '</ul>'
 
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/flanker_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
+
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
+
+jsPsych.pluginAPI.preloadImages(images);
 
 /* ************************************ */
 /* Set up jsPsych blocks */

@@ -334,7 +334,15 @@ var prompt_task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_k
   ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li></ul>'
 
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/cued_task_switching_single_task_network/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
 
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

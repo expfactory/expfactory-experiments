@@ -212,6 +212,12 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Press the F key, if F.</p>' +
 				  '</div>'
 				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/flanker_single_task_network/images/"
+var images = []
+images.push(pathSource + 'F.png')
+images.push(pathSource + 'H.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

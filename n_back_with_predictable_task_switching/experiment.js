@@ -391,6 +391,19 @@ var prompt_text = '<div class = prompt_box>'+
 
 var current_trial = 0
 var current_block = 0
+
+//PRE LOAD IMAGES HERE
+var lettersPreload = ['B','D','G','T','V']
+var casePreload = ['lowercase','uppercase']
+var pathSource = "/static/experiments/n_back_with_predictable_task_switching/images/"
+var images = []
+
+for(i = 0; i < lettersPreload.length; i++){
+	for (y = 0; y < casePreload.length; y++){
+		images.push(pathSource + casePreload[y] + '_' + lettersPreload[i] + '.png')
+	}
+}
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */

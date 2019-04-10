@@ -341,6 +341,17 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge <i>middle</i> number on '+predictive_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
+				  
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/flanker_with_predictable_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9']
+var images = []
+
+for(i = 0; i < numbersPreload.length; i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
+
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

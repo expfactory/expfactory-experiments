@@ -488,6 +488,22 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 	
 				  
+
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/cued_task_switching_with_directed_forgetting/images/"
+var images = []
+
+for(i = 0; i < stimArray.length; i++){
+	images.push(pathSource + stimArray[i] + '.png')
+}
+
+images.push(pathSource + 'BOT.png')
+images.push(pathSource + 'TOP.png')
+images.push(pathSource + 'remember.png')
+images.push(pathSource + 'retain.png')
+images.push(pathSource + 'forget.png')
+images.push(pathSource + 'disregard.png')
+jsPsych.pluginAPI.preloadImages(images);				  
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

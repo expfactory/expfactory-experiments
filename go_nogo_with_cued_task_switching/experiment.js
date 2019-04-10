@@ -411,8 +411,18 @@ var prompt_task_list = '<ul>'+
 					   	'<li>Do not respond if the letter is '+go_no_go_styles[1]+'!</li>'+
 					   '</ul>'
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/go_nogo_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
 
+for(i=0;i<numbersPreload.length;i++){
+	for(x=0;x<go_no_go_styles.length;x++){
+		images.push(pathSource + go_no_go_styles[x] + '_' + numbersPreload[i] + '.png')
+	}
+}
 
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

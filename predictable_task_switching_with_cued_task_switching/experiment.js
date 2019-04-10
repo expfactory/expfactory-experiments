@@ -500,6 +500,17 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>right</i> or <i>second</i>, judge right number</p>' +
 				  '</div>' 
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/predictable_task_switching_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
+
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
+
+jsPsych.pluginAPI.preloadImages(images);
+
 /* ************************************ */
 /*          Define Game Boards          */
 /* ************************************ */

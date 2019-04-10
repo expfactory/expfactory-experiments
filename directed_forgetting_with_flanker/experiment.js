@@ -368,7 +368,6 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var current_trial = 0	
 
-var current_trial = 0
 var stimArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
@@ -396,6 +395,18 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Ignore the letters that are not in the middle!</p>' +
 				  '</div>'
+				  
+
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/directed_forgetting_with_flanker/images/"
+var images = []
+
+for(i = 0; i < stimArray.length; i++){
+	images.push(pathSource + stimArray[i] + '.png')
+}
+images.push(pathSource + 'BOT.png')
+images.push(pathSource + 'TOP.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

@@ -362,7 +362,7 @@ var prompt_text = '<div class = prompt_box>'+
 				  '</div>'
 				  
 				  
-var numbersPreload = ['1','2','3','4','5','6','7','8','9']
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
 var colorsPreload = ['white','green','red']
 var pathSource = "/static/experiments/stop_signal_with_shape_matching/images/"
 var images = []
@@ -374,7 +374,6 @@ for(i=0;i<numbersPreload.length;i++){
 
 images.push(pathSource + 'stopSignal.png')
 images.push(pathSource + 'mask.png')
-images.push(pathSource + 'BOT.png')
 jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */

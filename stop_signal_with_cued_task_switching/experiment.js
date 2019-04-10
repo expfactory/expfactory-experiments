@@ -440,7 +440,16 @@ var prompt_task_list = '<ul>'+
 					   	'<li>Do not respond if there is a star!</li>'+
 					   '</ul>'
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/stop_signal_with_cued_task_switching/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	images.push(pathSource + numbersPreload[i] + '.png')
+}
 
+images.push(pathSource + 'stop.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

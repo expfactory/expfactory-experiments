@@ -177,6 +177,20 @@ var prompt_task_list = '<ul>'+
 					   	'<li>Different: Z key</li>'+
 					   '</ul>'
 
+//PRE LOAD IMAGES HERE
+var pathSource = "/static/experiments/shape_matching_single_task_network/images/"
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var colorsPreload = ['white','green','red']
+var images = []
+for(i=0;i<numbersPreload.length;i++){
+	for (x=0;x<colorsPreload.length;x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] +'.png')
+	}
+}
+
+images.push(pathSource + 'mask.png')
+jsPsych.pluginAPI.preloadImages(images);
+
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */

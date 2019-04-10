@@ -344,6 +344,25 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if shape on right is '+ go_no_go_styles[1]+', only respond if '+ go_no_go_styles[0]+'</p>' +
   				  '</div>' 	
 
+
+//PRE LOAD IMAGES HERE
+var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var colorsPreload = ['green','red']
+var pathSource = "/static/experiments/go_nogo_with_shape_matching/images/"
+var images = []
+for(i = 0; i < numbersPreload.length; i++){
+	for (x = 0; x <colorsPreload.length; x++){
+		images.push(pathSource + numbersPreload[i] + '_' + colorsPreload[x] + '.png')
+	}
+}
+
+for(i = 0; i < numbersPreload.length; i++){
+	for (y = 0; y < go_no_go_styles.length; y++){
+		images.push(pathSource + numbersPreload[i] + '_' + 'white' + '_' + go_no_go_styles[y] + '.png')
+	}
+}
+images.push(pathSource + 'mask.png')
+jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
