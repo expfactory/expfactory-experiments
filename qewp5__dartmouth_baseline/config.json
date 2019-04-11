@@ -1,6 +1,6 @@
 [
     {
-        "name": "QWEP-5 Dartmouth Baseline",
+        "name": "QEWP-5 Dartmouth Baseline",
         "template":"jspsych",
         "run": [
 
@@ -20,7 +20,7 @@
                 
                 
                ],
-        "exp_id": "qwep5__dartmouth_baseline",
+        "exp_id": "qewp5__dartmouth_baseline",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Jamie Li",
