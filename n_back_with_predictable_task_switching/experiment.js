@@ -408,10 +408,10 @@ jsPsych.pluginAPI.preloadImages(images);
 /*          Define Game Boards          */
 /* ************************************ */
 
-var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = centerbox><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
+var task_boards = [[['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = gng_number><div class = cue-text>'],['</div></div></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
 
 
 

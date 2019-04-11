@@ -87,8 +87,8 @@ text-align: center;
  width: 75%;
  height: 20%;
  position:absolute;
- top:10%;
- left:20%;
+ top:50%;
+ left:50%;
  transform: translate(-50%,-45%);
  margin-right:0%;
  background-color: none;
@@ -121,6 +121,17 @@ img.center {
 /*******************************************************/
 /***********      Predictive CSS Styles       **********/
 /*******************************************************/
+.quad_box {
+ width: 85vw;
+ height: 85vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
 
 
 .decision-top-left {

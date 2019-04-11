@@ -368,15 +368,11 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_pre
 
 var current_trial = 0
 
-var task_boards = [[['<div class = bigbox><div class = decision-top-left><div class = centerbox>'],['</div></div></div>']],
-				   [['<div class = bigbox><div class = decision-top-right><div class = centerbox>'],['</div></div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-right><div class = centerbox>'],['</div></div></div>']],
-				   [['<div class = bigbox><div class = decision-bottom-left><div class = centerbox>'],['</div></div></div>']]]
 				   
-var task_boards = [[['<div class = bigbox><div class = centerbox><div class = decision-top-left><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
-				   [['<div class = bigbox><div class = centerbox><div class = decision-top-right><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
-				   [['<div class = bigbox><div class = centerbox><div class = decision-bottom-right><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
-				   [['<div class = bigbox><div class = centerbox><div class = decision-bottom-left><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
+var task_boards = [[['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-right><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-right><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-left><div class = gng_number><div class = cue-text>'],['</div></div></div></div></div>']]]
 
 
 var stims = createTrialTypes(practice_len)
