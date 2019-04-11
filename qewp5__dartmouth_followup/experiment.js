@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'qwep5__dartmouth_followup'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'qewp5__dartmouth_followup'})
 }
 
 var getQuestions = function(){
@@ -137,8 +137,8 @@ var appendData = function(){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/qwep5__dartmouth_followup/images/"
-var pathSource = "/static/experiments/qwep5__dartmouth_followup/images/"
+var preFileType = "<img class = center src='/static/experiments/qewp5__dartmouth_followup/images/"
+var pathSource = "/static/experiments/qewp5__dartmouth_followup/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 // -1 if unapplicable, 0 if not and applicable, 1 if yes and applicable
@@ -324,7 +324,7 @@ var textBoard2 =
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "qwep5__dartmouth_followup",
+		exp_id: "qewp5__dartmouth_followup",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -389,7 +389,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "qwep5__dartmouth_followup",
+		exp_id: "qewp5__dartmouth_followup",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -414,14 +414,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var qwep5__dartmouth_followup_experiment = []
+var qewp5__dartmouth_followup_experiment = []
 
-qwep5__dartmouth_followup_experiment.push(welcome_block);
+qewp5__dartmouth_followup_experiment.push(welcome_block);
 
-qwep5__dartmouth_followup_experiment.push(instructions_block);
+qewp5__dartmouth_followup_experiment.push(instructions_block);
 
-qwep5__dartmouth_followup_experiment.push(update_state_block);
+qewp5__dartmouth_followup_experiment.push(update_state_block);
 
-qwep5__dartmouth_followup_experiment.push(post_questionnaire_node);
+qewp5__dartmouth_followup_experiment.push(post_questionnaire_node);
 
-qwep5__dartmouth_followup_experiment.push(end_block);
+qewp5__dartmouth_followup_experiment.push(end_block);
