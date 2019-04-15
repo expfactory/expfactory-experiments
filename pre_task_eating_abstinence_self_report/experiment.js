@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'pre_scan_eating_abstinence_self_report'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'pre_task_eating_abstinence_self_report'})
 }
 var conditional_length_counter = 0
 var getQuestions = function(){
@@ -215,8 +215,8 @@ function submitText(current_submit){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/pre_scan_eating_abstinence_self_report/images/"
-var pathSource = "/static/experiments/pre_scan_eating_abstinence_self_report/images/"
+var preFileType = "<img class = center src='/static/experiments/pre_task_eating_abstinence_self_report/images/"
+var pathSource = "/static/experiments/pre_task_eating_abstinence_self_report/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 
@@ -360,7 +360,7 @@ var sliderBoard = '<div class = slide_big_box>'+
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "pre_scan_eating_abstinence_self_report",
+		exp_id: "pre_task_eating_abstinence_self_report",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -427,7 +427,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "pre_scan_eating_abstinence_self_report",
+		exp_id: "pre_task_eating_abstinence_self_report",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -452,14 +452,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var pre_scan_eating_abstinence_self_report_experiment = []
+var pre_task_eating_abstinence_self_report_experiment = []
 
-pre_scan_eating_abstinence_self_report_experiment.push(welcome_block);
+pre_task_eating_abstinence_self_report_experiment.push(welcome_block);
 
-pre_scan_eating_abstinence_self_report_experiment.push(instructions_block);
+pre_task_eating_abstinence_self_report_experiment.push(instructions_block);
 
-pre_scan_eating_abstinence_self_report_experiment.push(update_state_block);
+pre_task_eating_abstinence_self_report_experiment.push(update_state_block);
 
-pre_scan_eating_abstinence_self_report_experiment.push(post_questionnaire_node);
+pre_task_eating_abstinence_self_report_experiment.push(post_questionnaire_node);
 
-pre_scan_eating_abstinence_self_report_experiment.push(end_block);
+pre_task_eating_abstinence_self_report_experiment.push(end_block);
