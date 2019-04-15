@@ -1,6 +1,6 @@
 [
     {
-        "name": "Pre-Scan Eating Abstinence Self-Report",
+        "name": "Post-Task Eating Abstinence Self-Report",
         "template":"jspsych",
         "run": [
 
@@ -20,7 +20,7 @@
                 
                 
                ],
-        "exp_id": "pre_scan_eating_abstinence_self_report",
+        "exp_id": "post_task_eating_abstinence_self_report",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Jamie Li",
