@@ -377,6 +377,7 @@ var preFileType = '<img class = center src="/static/experiments/directed_forgett
 
 
 var stims = createTrialTypes(practice_len)
+var stims = createTrialTypes(numTrialsPerBlock)
 
 var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topRight style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = cue-text>'],['</div></div></div></div>']]
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['</div></div></div>']]				
@@ -659,7 +660,6 @@ for (i = 0; i < practice_len; i++) {
 		data: {trial_id: "practice_trial"},
 		timing_stim: 2000, //2000
 		timing_response: 2000,
-		timing_feedback_duration: 0,
 		timing_post_trial: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -816,7 +816,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: false,
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 1000
+		timing_response: 1000 //1000
 	};
 
 
@@ -830,7 +830,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: 'none',
 		timing_post_trial: 0,
 		timing_stim: 2500, //2500
-		timing_response: 2500
+		timing_response: 2500 //2500
 	};
 
 
@@ -844,7 +844,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 2000, //2000
-		timing_response: 1,
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};
