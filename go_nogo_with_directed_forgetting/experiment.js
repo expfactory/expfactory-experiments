@@ -443,7 +443,7 @@ var pathSource = "/static/experiments/go_nogo_with_directed_forgetting/images/"
 var images = []
 for(i=0;i<stimArray.length;i++){
 	for(x=0;x<go_no_go_styles.length;x++){
-		images.push(pathSource + go_no_go_styles[y] + '_' + lettersPreload[i] + '.png')
+		images.push(pathSource + go_no_go_styles[x] + '_' + stimArray[i] + '.png')
 		
 	}	
 }
@@ -800,7 +800,6 @@ for (i = 0; i < practice_len; i++) {
 		timing_stim: 2000,
 		timing_response: 2000,  //2000
 		prompt: prompt_text,
-		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
 		timing_post_trial: 0
