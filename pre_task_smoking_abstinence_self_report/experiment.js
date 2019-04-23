@@ -63,14 +63,11 @@ var getQuestions = function(){
 
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
-	var temp1 = '</div>'
-	var buttonBoard2 = temp1
-	buttonBoard2 += '<div class = buttonbox>'
+	var buttonBoard2 = '<div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
 		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
-	buttonBoard2 += temp1
-	buttonBoard2 += temp1
+	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
 
@@ -404,11 +401,10 @@ var item_names_dartmouth = ['pre_scan_smoking_abstinence_1',
 /*       Set up HTML for Survey         */
 /* ************************************ */
 var buttonBoard1 = 
-	'<div class = bigbox><div class = centerbox>'+
+	'<div class = bigbox><div class = survey_area>'+
 	'<p class = center-block-text><font color = "white">'
 	
-var buttonBoard2 = 
-	    '</div>'+
+var buttonBoard2 = '</font></p>'+
 		
 		'<div class = buttonbox>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn1" onClick="pressSubmit(this.id)"/>1</button></div>'+
@@ -417,9 +413,10 @@ var buttonBoard2 =
 			'<div class = inner><button class="likert_btn unselected" id="btn4" onClick="pressSubmit(this.id)"/>4</button></div>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn5" onClick="pressSubmit(this.id)"/>5</button></div>'+
 		'</div>'+	
-	'</div>'
+	'</div>'+
+'</div>'
 	
-var checkbox = '</div>'+
+var checkbox = '</font></p>'+
 		
 		'<div class = check_box_name>'+
 			'<div class = inner><p id="check1text" style="font-size:24px;">Yes</p></div>'+
@@ -431,45 +428,32 @@ var checkbox = '</div>'+
 			'<div class = inner><input class = "check_box" type="checkbox" id="myCheck2" onClick="pressCheckbox(this.id)"></div>'+
 		'</div>'+	
 	'</div>'
-
-var textBoard1 = 
-	'<div class = bigbox><div class = centerbox>'+
-	'<p class = center-block-text><font color = "white">' 
-	
-var textBoard2 = 
-	'</font></p>'+
-	'<div class = textbox><textarea id="question_text_area" cols="110" rows="20" value=""></textarea>'+
-	'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'question_text_area\'))"/></div>' +
-	'</div></div>'
-	
 	
 
 
-var textBoard = '<div class = textbox>'+
+var textBoard = '</font></p>'+
+				'<div class = textbox>'+
 					 '<textarea id="text_area" cols="10" rows="1" value=""></textarea>'+
-					 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'text_area\'))"/></div>' +
+				'</div>' +
+				
+				'<div class = submit_box>'+
+					'<input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'text_area\'))"/>'+
+				'</div>' +
 				'</div></div>'
 	
-var timeBoard = '<div class = textbox>'+
-					 '<input style="font-size:36px;" type="time" id="time_box" name="appt" min="0:00" max="24:00" required>'+
-					 '<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="submitTime(document.getElementById(\'time_box\'))"/></div>' +
+var timeBoard = '</font></p>'+
+				'<div class = textbox>'+
+					 '<input type="time" style="font-size:36px;" id="time_box" name="appt" min="0:00" max="24:00" required>'+
+				'</div>'+
+				'<div class = submit_box>'+
+					 '<input type="submit" value="Submit" data-inline="true" onClick="submitTime(document.getElementById(\'time_box\'))"/>'+
+				'</div>' +
 				'</div></div>'	
 					 
-var sliderBoard = '<div class = textbox>'+
-		  		  	'<input type="range" step="1" min="0" max="100" value="50" class="slider" id="myRange" onchange="updateTextInput(this.value);>'+
-		  		  	'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="ratingSubmit(document.getElementById(\'myRange\'))"/></div>' +
-		  		  '</div>' +
-		  		  '<input type="text" id="textInput" value="">' +
-				  '<div id="number_box">'+
-  				  	'<div><font color="white">No <br>Craving</font></div>'+
-  					'<div><font color="white"></font></div>'+
-  					'<div><font color="white"></font></div>'+
-  					'<div><font color="white">Strong Craving</font></div>'+
-		    	  '</div>'
-		    	  
-		    	  
-var sliderBoard = '<div class = slide_big_box>'+
 
+		    	  
+var sliderBoard =  '</font></p>'+
+				'<div class = slide_big_box>'+
 					  '<div class = slidecontainer>'+
 						'<input type="range" class="slider slider-clear" name="ageInputName" id="ageInputId" value="50" min="0" max="100" onclick="toggleOpacitySlider(this)" oninput="ageOutputId.value = ageInputId.value">'+
 					  '</div>' +
@@ -478,19 +462,20 @@ var sliderBoard = '<div class = slide_big_box>'+
 						'<output name="ageOutputName" id="ageOutputId" style="font-size:36px">N/A</output>' + 
 					  '</div>'+
 					  
-					  '<div class = submitbox>'+
+					  '<div class = submit_box>'+
 						'<input type="submit" value="Submit" data-inline="true" onClick="ratingSubmit(document.getElementById(\'ageInputId\'))"/>'+
 					  '</div>'+
 					  
+					  '<div class = number_boxes>'+
 					  '<div id="number_box">'+
 						'<div><font color="white">No <br>Craving</font></div>'+
 						'<div><font color="white"></font></div>'+
 						'<div><font color="white"></font></div>'+
 						'<div><font color="white">Strong Craving</font></div>'+
 					  '</div>'+
-					  
-					  
-				'</div>'
+					  '</div>'+
+				'</div>' +
+				'</div></div>'	
 
 /* ************************************ */
 /*        Set up jsPsych blocks         */

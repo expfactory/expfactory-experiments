@@ -157,7 +157,7 @@ var getPracticeFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of practice trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text
+		test_feedback_text += '</p><p class = block-text>We are going to try practice again to see if we can achieve an accuracy of 80% or higher. Remember, the correct keys are as follows: ' + prompt_text
 	}
 	
 	test_feedback_text +=

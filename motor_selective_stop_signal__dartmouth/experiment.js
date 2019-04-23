@@ -160,11 +160,11 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>Stop to the star.</font></div></div>'
 		}
 	} else if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'ignore')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Please respond to the shape if you were going to respond with your '+ignore_response+'!</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>Ignore the star and continue responding.</font></div></div>'
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).correct === true){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
 		}
@@ -202,7 +202,7 @@ var getPracticeFeedback = function() {
 	var GoCorrect_percent = sum_correct / go_length;
 	var missed_responses = (go_length - num_responses) / go_length
 
-	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll Down)"
+	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll Down if needed)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for practice trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -213,7 +213,7 @@ var getPracticeFeedback = function() {
 			'</p><p class = block-text><strong>We have detected a number of practice trials that required a response, where no response was made.  Please ensure that you are responding to each shape, unless a star appears.</strong>'
 	}
 	if (GoCorrect_percent < accuracy_thresh) {
-		test_feedback_text += '</p><p class = block-text>Your accuracy is too low. Remember, the correct keys are as follows: ' + prompt_text + '<br>'
+		test_feedback_text += '</p><p class = block-text>We are going to try practice again to see if we can achieve an accuracy of 80% or higher. Remember, the correct keys are as follows: ' + prompt_text + '<br>'
 	}
 	
 	test_feedback_text +=
@@ -263,7 +263,7 @@ var getTestFeedback = function() {
 	stopAccMeans.push(StopCorrect_percent)
 	var stopAverage = math.mean(stopAccMeans)
 
-	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Remember, do not respond if a star appears and if you were going to respond with your " + stop_response[0] + ". (Scroll Down)"
+	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Remember, do not respond if a star appears and if you were going to respond with your " + stop_response[0] + ". (Scroll Down if needed.)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -344,9 +344,35 @@ var practice_repeats = 0
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/'
-var images = jsPsych.randomization.repeat([prefix + 'circle.png', prefix + 'Lshape.png', prefix + 'rhombus.png', prefix + 'triangle.png'],1)
 
-images = [images[0], images[1], images[2], images[3]]
+// ***** REMOVE THE COMMENT - upcomming line should be active 
+//var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
+var unique_expfactory_id = window.location.pathname.split('/')[3]
+var images_order = 23 //unique_expfactory_id.charCodeAt() % 24 
+var permArr = [],
+  usedChars = [];
+
+var shapes_temp = ['circle.png','Lshape.png','rhombus.png','triangle.png']
+function permute(input) {
+  var i, ch;
+  for (i = 0; i < input.length; i++) {
+    ch = input.splice(i, 1)[0];
+    usedChars.push(ch);
+    if (input.length == 0) {
+      permArr.push(usedChars.slice());
+    }
+    permute(input);
+    input.splice(i, 0, ch);
+    usedChars.pop();
+  }
+  return permArr
+};
+
+var images_temp = permute(shapes_temp)[images_order]
+var images = [prefix + images_temp[0], prefix + images_temp[1], prefix + images_temp[2], prefix + images_temp[3]]
+
+
+//images = [images[0], images[1], images[2], images[3]]
 jsPsych.pluginAPI.preloadImages(images);
 
 /* Stop signal delay in ms */
@@ -356,12 +382,29 @@ var stop_signal =
 
 /* Instruction Prompt */
 //commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
+
+
+// ***** REMOVE THE COMMENT - upcomming line should be active 
 //var choice_order = unique_expfactory_id.charCodeAt() % 2
 
-var possible_responses = [
-	["right index finger (left arrow)", 37],
-	["right middle finger (down arrow)", 40]
+var choice_order = 0 //unique_expfactory_id.charCodeAt() % 2   //Math.round(Math.random())
+
+var possible_responses_1 = [
+	["left arrow", 37],
+	["down arrow", 40]
 ]
+
+var possible_responses_2 = [
+	["down arrow", 40],
+	["left arrow", 37]
+]
+
+var possible_responses = []
+if (choice_order == 1){
+	possible_responses = possible_responses_1
+} else {
+	possible_responses = possible_responses_2
+}
 
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 
@@ -382,9 +425,8 @@ var missed_response_thresh = 0.1
 var accuracy_thresh = 0.8
 var stop_thresh = 0.2
 var motor_thresh = 0.6
-var stop_index = Math.round(Math.random())
-var stop_response = possible_responses[stop_index]
-var ignore_response = possible_responses[randomDraw([0,1].filter(function(y) {return $.inArray(y, [stop_index]) == -1}))]
+var stop_response = possible_responses[0][0]
+var ignore_response = possible_responses[1][0]
 var practice_len = 20
 
 var test_block_data = [] // records the data in the current block to calculate feedback
@@ -522,11 +564,11 @@ var start_practice_stop_block = {
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</strong></p>'+
+			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with your ' + stop_response + ', you should not respond to the shape.</strong></p>'+
 				
-			'<p class = block-text><strong>If the star appears and you were going to respond with your ' + ignore_response[0] + ', you can ignore the star and respond to the shape.</strong></p>'+
+			'<p class = block-text><strong>If the star appears and you were going to respond with your ' + ignore_response + ', you can ignore the star and respond to the shape.</strong></p>'+
 							
-			'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response[0] + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 			
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 			 
@@ -554,11 +596,11 @@ var start_test_block = {
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with your ' + stop_response[0] + ', you should not respond to the shape.</p>'+
+			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with your ' + stop_response + ', you should not respond to the shape.</p>'+
 				
-				'<p class = block-text>If the star appears and you were going to respond with your ' + ignore_response[0] + ', you can ignore the star and respond to the shape.</p>'+
+				'<p class = block-text>If the star appears and you were going to respond with your ' + ignore_response + ', you can ignore the star and respond to the shape.</p>'+
 							
-				'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response[0] + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+				'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 				
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 		'</div>',		
@@ -663,7 +705,7 @@ var instructions_block = {
 			
 			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
-			'<p class = block-text> The correct keys are as follows (scroll down): ' + prompt_text + '</p>'+
+			'<p class = block-text> The correct keys are as follows (scroll down if needed): ' + prompt_text + '</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
