@@ -185,6 +185,9 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('pre_task_eating_abstinence_self_report','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('post_task_smoking_abstinence_self_report','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('post_task_eating_abstinence_self_report','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('smoking_followup_survey__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('eating_followup_survey__dartmouth','web','.');"
+              
 workflows:
   version: 2
   build_and_test:
