@@ -230,7 +230,7 @@ var game_state = 'start'
 var survey_questions = ['When did you last eat?',
 					    'What did you last eat?',
 					    'Please use the slider below (click anywhere on the white line to see and drag the blue slider) to show how hungry you are right now, paying attention to the descriptions at the end of the line.',
-					    'What time zone are you currently in?']
+					    'What time zone are you currently in? <br><br>(scroll down to see all options, if necessary)']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
