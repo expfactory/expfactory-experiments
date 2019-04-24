@@ -48,7 +48,7 @@ var getQuestions = function(){
 			}
 	}
 	
-	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)'){
+	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - <strong>scroll down to see all 8 options, if necessary</strong>)'){
 		return buttonBoard1 + survey_question + checkbox
 	}else {
 		return buttonBoard1 + survey_question + buttonBoard2
@@ -104,7 +104,7 @@ document.addEventListener("keydown", function(e){
     	keynum = e.which;
     }
     if (keynum == 13){
-    	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)'){
+    	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - <strong>scroll down to see all 8 options, if necessary</strong>)'){
     		buttonPressedText = []
     		if (document.getElementById("myCheck1").checked === true){
     			buttonPressedText.push(document.getElementById("myCheck1").value)
@@ -193,7 +193,7 @@ var survey_questions = ['Have you ever smoked tobacco cigarettes?',
 					    'Do you now smoke cigarettes every day, some days or not at all?',
 					    'On average, how many cigarettes do you now smoke a day (1 pack = 20 cigarettes)?',
 					    'How soon after you wake up do you smoke your first cigarette?',
-					    'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)',
+					    'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - <strong>scroll down to see all 8 options, if necessary</strong>)',
 					    'How often do you have a drink containing alcohol?',
 					    'How many drinks containing alcohol do you have on a typical day when you are drinking?',
 					    'How often do you have six or more drinks on one occasion?',
