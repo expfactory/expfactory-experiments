@@ -164,7 +164,7 @@ var getCategorizeFeedback = function(){
 		}
 	} else if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'ignore')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Ignore the star and continue responding.</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>Ignore the star.</font></div></div>'
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).correct === true){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
 		}
@@ -428,6 +428,7 @@ var motor_thresh = 0.6
 var stop_response = possible_responses[0][0]
 var ignore_response = possible_responses[1][0]
 var practice_len = 20
+var correct_response = ""
 
 var test_block_data = [] // records the data in the current block to calculate feedback
 
@@ -564,11 +565,11 @@ var start_practice_stop_block = {
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with your ' + stop_response + ', you should not respond to the shape.</strong></p>'+
+			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</strong></p>'+
 				
-			'<p class = block-text><strong>If the star appears and you were going to respond with your ' + ignore_response + ', you can ignore the star and respond to the shape.</strong></p>'+
+			'<p class = block-text><strong>If the star appears and you were going to respond with the ' + ignore_response + ' key, you can ignore the star and respond to the shape.</strong></p>'+
 							
-			'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears and if you were going to respond with the ' + stop_response + ' key, if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 			
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 			 
@@ -596,11 +597,11 @@ var start_test_block = {
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with your ' + stop_response + ', you should not respond to the shape.</p>'+
+			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</p>'+
 				
-				'<p class = block-text>If the star appears and you were going to respond with your ' + ignore_response + ', you can ignore the star and respond to the shape.</p>'+
+				'<p class = block-text>If the star appears and you were going to respond with the ' + ignore_response + ' key, you can ignore the star and respond to the shape.</p>'+
 							
-				'<p class = block-text>If the star appears and if you were going to respond with your ' + stop_response + ', if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+				'<p class = block-text>If the star appears and if you were going to respond with the ' + stop_response + ' key, if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
 				
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 		'</div>',		
@@ -782,6 +783,7 @@ for (b = 0; b < num_practice_blocks; b++) {
 	    if (current_stim.type == 'go') {
 	    	stop_trial = 'go'
 	    }
+	    
 		var stop_signal_block = {
 			type: 'stop-signal',
 			stimulus: trial_stim,
@@ -797,22 +799,27 @@ for (b = 0; b < num_practice_blocks; b++) {
 			timing_post_trial: 0,
 			on_finish: function(data) {
 				correct = false
+				if (data.condition == 'stop'){
+					data.correct_response = -1
+				}
 				if (data.key_press == data.correct_response) {
 					correct = true
 				}
 				updateSSD(data)
 				jsPsych.data.addDataToLastTrial({
 					exp_stage: "practice_stop",
-					stop_response: stop_response[1],
+					stop_response: stop_response,
+					ignore_response: ignore_response,
 					trial_num: current_trial,
 					correct: correct,
 					trial_id: 'practice_trial_with_stop',
-					stop_signal_condition: stop_trial
+					stop_signal_condition: stop_trial,
+					correct_response: data.correct_response
 				})
 				current_trial += 1
 				test_block_data.push(data)
 				console.log('Trial: ' + current_trial +
-              '\nCorrect Response? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay)
+              '\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}
 		
@@ -873,21 +880,26 @@ for (b = 0; b < num_test_blocks; b++) {
 			timing_post_trial: 0,
 			on_finish: function(data) {
 				correct = false
+				if (data.condition == 'stop'){
+					data.correct_response = -1
+				}
 				if (data.key_press == data.correct_response) {
 					correct = true
 				}
 				updateSSD(data)
 				jsPsych.data.addDataToLastTrial({
 					exp_stage: "test",
-					stop_response: stop_response[1],
+					stop_response: stop_response,
+					ignore_response: ignore_response,
 					trial_num: current_trial,
 					trial_id: 'test_trial',
-					correct: correct
+					correct: correct,
+					correct_response: data.correct_response
 				})
 				current_trial += 1
 				test_block_data.push(data)
 				console.log('Trial: ' + current_trial +
-              '\nCorrect Response? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay)
+              '\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}
 		stop_signal_exp_block.push(stop_signal_block)

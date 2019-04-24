@@ -325,7 +325,36 @@ var practice_repeats = 0
 // task specific variables
 // Define and load images
 var prefix = '/static/experiments/stop_signal__dartmouth/images/'
-var images = jsPsych.randomization.repeat([prefix + 'moon.png', prefix + 'oval.png', prefix + 'rectangle.png', prefix +'trapezoid.png'],1)
+
+// ***** REMOVE THE COMMENT - upcomming line should be active 
+//var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
+var unique_expfactory_id = window.location.pathname.split('/')[3]
+var images_order = 23 //unique_expfactory_id.charCodeAt() % 24 
+var permArr = [],
+  usedChars = [];
+  
+var shapes_temp = ['moon.png','oval.png','rectangle.png','trapezoid.png']
+function permute(input) {
+  var i, ch;
+  for (i = 0; i < input.length; i++) {
+    ch = input.splice(i, 1)[0];
+    usedChars.push(ch);
+    if (input.length == 0) {
+      permArr.push(usedChars.slice());
+    }
+    permute(input);
+    input.splice(i, 0, ch);
+    usedChars.pop();
+  }
+  return permArr
+};
+
+var images_temp = permute(shapes_temp)[images_order]
+var images = [prefix + images_temp[0], prefix + images_temp[1], prefix + images_temp[2], prefix + images_temp[3]]
+
+
+//images = [images[0], images[1], images[2], images[3]]
+
 jsPsych.pluginAPI.preloadImages(images);
 /* Stop signal delay in ms */
 var SSD = 250
