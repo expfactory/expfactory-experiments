@@ -64,13 +64,14 @@ var getQuestions = function(){
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
 	var buttonBoard2 = '</font></p><div class = buttonbox>'
-	var buttonBoard2 = '<div class = buttonbox>'
+	buttonBoard2 = '<div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
 		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
 	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
+	
 
 var hitKey = function(whichKey){
 	e = jQuery.Event("keydown");

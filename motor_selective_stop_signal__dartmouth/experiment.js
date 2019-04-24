@@ -358,7 +358,7 @@ function permute(input) {
   for (i = 0; i < input.length; i++) {
     ch = input.splice(i, 1)[0];
     usedChars.push(ch);
-    if (input.length == 0) {
+    if (input.length === 0) {
       permArr.push(usedChars.slice());
     }
     permute(input);
@@ -366,7 +366,7 @@ function permute(input) {
     usedChars.pop();
   }
   return permArr
-};
+}
 
 var images_temp = permute(shapes_temp)[images_order]
 var images = [prefix + images_temp[0], prefix + images_temp[1], prefix + images_temp[2], prefix + images_temp[3]]
