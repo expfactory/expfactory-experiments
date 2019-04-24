@@ -348,7 +348,7 @@ var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
-var images_order = 23 //unique_expfactory_id.charCodeAt() % 24 
+var images_order = unique_expfactory_id.charCodeAt() % 24 
 var permArr = [],
   usedChars = [];
 
@@ -387,7 +387,7 @@ var stop_signal =
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var choice_order = unique_expfactory_id.charCodeAt() % 2
 
-var choice_order = 0 //unique_expfactory_id.charCodeAt() % 2   //Math.round(Math.random())
+var choice_order = unique_expfactory_id.charCodeAt() % 2   //Math.round(Math.random())
 
 var possible_responses_1 = [
 	["left arrow", 37],

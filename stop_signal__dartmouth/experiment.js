@@ -329,7 +329,7 @@ var prefix = '/static/experiments/stop_signal__dartmouth/images/'
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
-var images_order = 23 //unique_expfactory_id.charCodeAt() % 24 
+var images_order = unique_expfactory_id.charCodeAt() % 24 
 var permArr = [],
   usedChars = [];
   
@@ -339,7 +339,7 @@ function permute(input) {
   for (i = 0; i < input.length; i++) {
     ch = input.splice(i, 1)[0];
     usedChars.push(ch);
-    if (input.length == 0) {
+    if (input.length === 0) {
       permArr.push(usedChars.slice());
     }
     permute(input);
@@ -347,7 +347,7 @@ function permute(input) {
     usedChars.pop();
   }
   return permArr
-};
+}
 
 var images_temp = permute(shapes_temp)[images_order]
 var images = [prefix + images_temp[0], prefix + images_temp[1], prefix + images_temp[2], prefix + images_temp[3]]
