@@ -211,6 +211,8 @@ var instructions_block = {
 			'<p class = block-text>Choosing one option will reject the other.</p>'+
 			
 			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
+			
+			'<p class = block-text>These trials are on a timer, so you must respond before the timer ends or you will have missed that trial!</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
@@ -230,6 +232,8 @@ var start_test_block = {
 				'<p class = block-text>Choosing one option will reject the other.</p>'+
 			
 				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
+				
+				'<p class = block-text>These trials are on a timer, so you must respond before the timer ends or you will have missed that trial!</p>'+
   			'</div>',
   is_html: true,
   choices: [13],
@@ -278,10 +282,24 @@ var welcome_block = {
 	timing_post_trial: 0
 };
 
+var attn_check_start_test = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Press<i> enter</i> to continue to the task.</p>'+
+	'</div>',
+	cont_key: [13],
+	timing_post_trial: 0
+};
+
+
 var rest_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox>'+
-  				'<p class = block-text>Take a short break! Press enter to begin.</p>'+
+  				'<p class = block-text>Take a short break - the task will begin again in 3 minutes! Press enter to begin the task now.</p>'+
   				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
   			'</div>',
   is_html: true,
@@ -300,7 +318,7 @@ var rest_block = {
 
 var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 36px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
+	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 28px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
 	is_html: true,
 	choices: [13],
 	timing_response: 180000,
@@ -373,7 +391,7 @@ for (i = 0; i < practice_options.small_amt.length; i++) {
 // test portion
 discount_fixed__dartmouth_experiment.push(start_test_block);
 
-for (x = 0; x < test_stim_index.length; x++) {
+for (x = 0; x < test_stim_index.length; x++) {	
 	var test_block = {
 		type: 'poldrack-single-stim',
 		stimulus: test_trials[x].stimulus,
@@ -405,6 +423,7 @@ for (x = 0; x < test_stim_index.length; x++) {
 	if ((x%60 === 0) && (x > 0)) {
 		discount_fixed__dartmouth_experiment.push(rest_block)
 		discount_fixed__dartmouth_experiment.push(attention_node)
+		discount_fixed__dartmouth_experiment.push(attn_check_start_test)
 	}
 }
 discount_fixed__dartmouth_experiment.push(post_task_block);
