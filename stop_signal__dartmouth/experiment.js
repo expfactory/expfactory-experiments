@@ -334,8 +334,8 @@ var stop_signal =
 
 /* Instruction Prompt */
 var possible_responses = [
-	["right index finger (left arrow)", 37],
-	["right middle finger (down arrow)", 40]
+	["left arrow", 37],
+	["down arrow", 40]
 ]
 var choices = [possible_responses[0][1], possible_responses[1][1]]
 
@@ -546,7 +546,7 @@ var start_test_block = {
 
  var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 36px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
+	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 28px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
 	is_html: true,
 	choices: [13],
 	timing_response: 180000,
@@ -606,6 +606,20 @@ var welcome_block = {
 	cont_key: [13],
 	timing_post_trial: 0
 };
+
+var attn_check_start_test = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Press<i> enter</i> to continue to the task.</p>'+
+	'</div>',
+	cont_key: [13],
+	timing_post_trial: 0
+};
+
 
 /* set up feedback blocks */
 var test_feedback_block = {
@@ -674,6 +688,7 @@ var practice_loop = {
 /* ************************************ */
 
 var stop_signal__dartmouth_experiment = []
+
 stop_signal__dartmouth_experiment.push(welcome_block);
 stop_signal__dartmouth_experiment.push(instructions_block);
 stop_signal__dartmouth_experiment.push(practice_loop);
@@ -747,7 +762,6 @@ stop_signal__dartmouth_experiment.push(start_test_block)
 /* Test blocks */
 // Loop through each trial within the block
 for (x = 0; x < test_num_blocks; x++) {
-	stop_signal__dartmouth_experiment.push(attention_node)
 	var stop_signal_block = {
 		type: 'stop-signal',
 		timeline: test_blocks[x], 
@@ -779,6 +793,8 @@ for (x = 0; x < test_num_blocks; x++) {
 	stop_signal__dartmouth_experiment.push(stop_signal_block)
 	if ((x+1)<test_num_blocks) {
 		stop_signal__dartmouth_experiment.push(test_feedback_block)
+		stop_signal__dartmouth_experiment.push(attention_node)
+		stop_signal__dartmouth_experiment.push(attn_check_start_test)
 	}
 }
 

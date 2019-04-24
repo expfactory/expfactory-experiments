@@ -19,6 +19,17 @@
   color: green;
 }
 
+.survey_area {
+ width: 75vw;
+ height: 75vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+
+}
 
 img.center {
   height: 500px;
@@ -64,6 +75,7 @@ left:50%;
 transform: translate(-50%,-50%);
 margin-right:0%;
 text-align: center;
+background-color: none;
 }
 
 .inner {

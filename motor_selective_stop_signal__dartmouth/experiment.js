@@ -652,7 +652,7 @@ var practice_feedback_block = {
 
 var end_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 36px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
+	stimulus: '<div class = centerbox><p class = center-text style = "font-size: 28px"> Thanks for completing the experiment! <br><br>Press <i>enter</i> to continue.</p></div>',
 	is_html: true,
 	choices: [13],
 	timing_response: 180000,
@@ -693,6 +693,20 @@ var welcome_block = {
 	cont_key: [13],
 	timing_post_trial: 0
 };
+
+var attn_check_start_test = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "welcome"
+	},
+	timing_response: 180000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Press<i> enter</i> to continue to the task.</p>'+
+	'</div>',
+	cont_key: [13],
+	timing_post_trial: 0
+};
+
 
 var instructions_block = {
 	type: 'poldrack-instructions',
@@ -834,7 +848,6 @@ for (b = 0; b < num_test_blocks; b++) {
 	stop_signal_exp_block = []
 
 	// Loop through each trial within the block
-	motor_selective_stop_signal__dartmouth_experiment.push(attention_node)
 	for (i = 0; i < test_block_len; i++) {
 		var current_stim = test_stims.shift()
 		var trial_stim = current_stim.stim.stimulus
@@ -884,6 +897,8 @@ for (b = 0; b < num_test_blocks; b++) {
 		stop_signal_exp_block)
 	if ((b+1)<num_test_blocks) {
 		motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
+		motor_selective_stop_signal__dartmouth_experiment.push(attention_node)
+		motor_selective_stop_signal__dartmouth_experiment.push(attn_check_start_test)
 	}
 }
 

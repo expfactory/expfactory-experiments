@@ -65,7 +65,7 @@ var getQuestions = function(){
 
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
-	var buttonBoard2 = '<div class = buttonbox>'
+	var buttonBoard2 = '</font></p><div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
 		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
@@ -229,7 +229,7 @@ var game_state = 'start'
 //Questions to be presented
 var survey_questions = ['When did you last eat?',
 					    'What did you last eat?',
-					    'Please put a mark on the line to show how hungry you are right now, paying attention to the descriptions at the end of the line.',
+					    'Please use the slider below (click anywhere on the white line to see and drag the blue slider) to show how hungry you are right now, paying attention to the descriptions at the end of the line.',
 					    'What time zone are you currently in? <br><br>(scroll down to see all options, if necessary)']
 
 //response options for radio buttons

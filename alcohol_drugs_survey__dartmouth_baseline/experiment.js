@@ -48,20 +48,27 @@ var getQuestions = function(){
 			}
 	}
 	
-	return buttonBoard1 + survey_question + buttonBoard2
+	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)'){
+		return buttonBoard1 + survey_question + checkbox
+	}else {
+		return buttonBoard1 + survey_question + buttonBoard2
+	}
 }
 
 
+var pressCheckbox = function(current_submit){
+	checked_item = current_submit
+	keyTracker.push(current_submit)
+	
+}
+
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
-	var temp1 = '</div>'
-	var buttonBoard2 = temp1
-	buttonBoard2 += '<div class = buttonbox>'
+	var buttonBoard2 = '</font></p><div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
 		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
-	buttonBoard2 += temp1
-	buttonBoard2 += temp1
+	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
 
@@ -105,11 +112,38 @@ document.addEventListener("keydown", function(e){
     	keynum = e.which;
     }
     if (keynum == 13){
-    	if ((keyTracker.length === 0) && (game_state == 'questions')){
+    	if (survey_question == 'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)'){
+    		buttonPressedText = []
+    		if (document.getElementById("myCheck1").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck1").value)
+    		}
+    		if (document.getElementById("myCheck2").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck2").value)
+    		}
+    		if (document.getElementById("myCheck3").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck3").value)
+    		} 
+    		if (document.getElementById("myCheck4").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck4").value)
+    		} 
+    		if (document.getElementById("myCheck5").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck5").value)
+    		} 
+    		if (document.getElementById("myCheck6").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck6").value)
+    		} 
+    		if (document.getElementById("myCheck7").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck7").value)
+    		}
+    		if (document.getElementById("myCheck8").checked === true){
+    			buttonPressedText.push(document.getElementById("myCheck8").value)
+    		}
+    		hitKey(81)
+    	} else if ((keyTracker.length === 0) && (game_state == 'questions')){
     		alert('Please choose a response')
     	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
     		hitKey(81)
-    	}
+    	} 
 		
     }
 });
@@ -123,7 +157,6 @@ var appendData = function(){
 	}
 	
 	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
-		console.log('here')
 		sub_made_conditional_response = 1
 		conditional_length_index = conditional_length
 	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
@@ -167,7 +200,7 @@ var survey_questions = ['Have you ever smoked tobacco cigarettes?',
 					    'Do you now smoke cigarettes every day, some days or not at all?',
 					    'On average, how many cigarettes do you now smoke a day (1 pack = 20 cigarettes)?',
 					    'How soon after you wake up do you smoke your first cigarette?',
-					    'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used (check all that apply)?',
+					    'In the past 30 days, what tobacco products OTHER THAN cigarettes have you used? <br>(check all that apply - scroll down to see all options, if necessary)',
 					    'How often do you have a drink containing alcohol?',
 					    'How many drinks containing alcohol do you have on a typical day when you are drinking?',
 					    'How often do you have six or more drinks on one occasion?',
@@ -440,11 +473,10 @@ var item_names_dartmouth = ['alc_drugs_1_bl',
 /*       Set up HTML for Survey         */
 /* ************************************ */
 var buttonBoard1 = 
-	'<div class = bigbox><div class = centerbox>'+
+	'<div class = bigbox><div class = survey_area>'+
 	'<p class = center-block-text><font color = "white">'
 	
-var buttonBoard2 = 
-	    '</div>'+
+var buttonBoard2 = '</font></p>'+
 		
 		'<div class = buttonbox>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn1" onClick="pressSubmit(this.id)"/>1</button></div>'+
@@ -453,19 +485,34 @@ var buttonBoard2 =
 			'<div class = inner><button class="likert_btn unselected" id="btn4" onClick="pressSubmit(this.id)"/>4</button></div>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn5" onClick="pressSubmit(this.id)"/>5</button></div>'+
 		'</div>'+	
-	'</div>'
+	'</div>'+
+'</div>'
 
-var textBoard1 = 
-	'<div class = bigbox><div class = centerbox>'+
-	'<p class = center-block-text><font color = "white">' 
+
+var checkbox = '</font></p>'+
+		
+		'<div class = check_box_name>'+
+			'<div class = inner><p id="check1text" style="font-size:24px; color:white;">Chewing tobacco (dip)</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck1" value="Chewing tobacco (dip)" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check2text" style="font-size:24px; color:white;">Cigars</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck2" value="Cigars" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check3text" style="font-size:24px; color:white;">Pipe</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck3" value="Pipe" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check4text" style="font-size:24px; color:white;">Tobacco for your nose (snuff)</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck4" value="Tobacco for your nose (snuff)" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check5text" style="font-size:24px; color:white;">E-cigarettes</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck5" value="E-cigarettes" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check6text" style="font-size:24px; color:white;">E-hookah or vape pens</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck6" value="E-hookah or vape pens" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check7text" style="font-size:24px; color:white;">Cigarillos or little cigars</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck7" value="Cigarillos or little cigars" onClick="pressCheckbox(this.id)"></div><br>'+
+			'<div class = inner><p id="check8text" style="font-size:24px; color:white;">Do not know</p>'+
+				'<input class = "check_box" type="checkbox" id="myCheck8" value="Do not know" onClick="pressCheckbox(this.id)"></div><br>'+
+		'</div>'+
+		
+	'</div>'
 	
-var textBoard2 = 
-	'</font></p>'+
-	'<div class = textbox><textarea id="question_text_area" cols="110" rows="20" value=""></textarea>'+
-	'<div class = submitbox><input type="submit" value="Submit" data-inline="true" onClick="pressSubmit(document.getElementById(\'question_text_area\'))"/></div>' +
-	'</div></div>'
-	
-	
+		
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
@@ -505,7 +552,7 @@ var instructions_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco, alcohol and drug habits.</font></p>' +
+			'<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco, alcohol and drug use.</font></p>' +
 			'<p class = block-text style="font-size:28px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>'+
 			'<p class = block-text style="font-size:28px"><font color="white">You will not be able to go back, so please carefully read and understand each question before you move on.</font></p>'+
 			'<p class = block-text style="font-size:28px"><font color="white">Each question will disappear after 3 minutes if you do not respond.  Please answer each question by the time limit.</font></p>'+

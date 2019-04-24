@@ -54,14 +54,11 @@ var getQuestions = function(){
 
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
-	var temp1 = '</div>'
-	var buttonBoard2 = temp1
-	buttonBoard2 += '<div class = buttonbox>'
+	var buttonBoard2 = '</font></p><div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
 		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
-	buttonBoard2 += temp1
-	buttonBoard2 += temp1
+	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
 
@@ -90,7 +87,6 @@ var pressSubmit = function(current_submit){
 		}
 		$('#'+buttonPressed).addClass('selected');
 	}
-	
 }
 
 var getTime = function(){
@@ -440,11 +436,10 @@ var item_names_dartmouth = ['alc_drugs_1_fu',
 /*       Set up HTML for Survey         */
 /* ************************************ */
 var buttonBoard1 = 
-	'<div class = bigbox><div class = centerbox>'+
+	'<div class = bigbox><div class = survey_area>'+
 	'<p class = center-block-text><font color = "white">'
 	
-var buttonBoard2 = 
-	    '</div>'+
+var buttonBoard2 = '</font></p>'+
 		
 		'<div class = buttonbox>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn1" onClick="pressSubmit(this.id)"/>1</button></div>'+
@@ -453,7 +448,8 @@ var buttonBoard2 =
 			'<div class = inner><button class="likert_btn unselected" id="btn4" onClick="pressSubmit(this.id)"/>4</button></div>'+
 			'<div class = inner><button class="likert_btn unselected" id="btn5" onClick="pressSubmit(this.id)"/>5</button></div>'+
 		'</div>'+	
-	'</div>'
+	'</div>'+
+'</div>'
 
 var textBoard1 = 
 	'<div class = bigbox><div class = centerbox>'+
