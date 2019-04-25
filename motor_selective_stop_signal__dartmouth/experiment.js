@@ -817,8 +817,8 @@ for (b = 0; b < num_practice_blocks; b++) {
 				})
 				current_trial += 1
 				test_block_data.push(data)
-				console.log('Trial: ' + current_trial +
-              '\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
+				//console.log('Trial: ' + current_trial +
+              //'\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}
 		
@@ -897,8 +897,8 @@ for (b = 0; b < num_test_blocks; b++) {
 				})
 				current_trial += 1
 				test_block_data.push(data)
-				console.log('Trial: ' + current_trial +
-              '\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
+				//console.log('Trial: ' + current_trial +
+              //'\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}
 		stop_signal_exp_block.push(stop_signal_block)
