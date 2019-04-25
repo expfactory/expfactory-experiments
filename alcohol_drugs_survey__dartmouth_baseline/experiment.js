@@ -550,7 +550,7 @@ var instructions_block = {
 	data: {
 		trial_id: "instruction"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = centerbox>'+
 			'<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco, alcohol and drug use.</font></p>' +
 			'<p class = block-text style="font-size:28px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>'+
