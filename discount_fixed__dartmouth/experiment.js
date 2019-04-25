@@ -227,7 +227,7 @@ var instructions_block = {
 			
 			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 			
-			'<p class = block-text>These trials are on a timer, so you must respond before the timer ends or you will have missed that trial!</p>'+
+			'<p class = block-text>These trials are on a timer - a few seconds per trial. Please respond before the timer ends or you will have missed that trial! Responding will not end the trial, only the timer will.</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
@@ -248,7 +248,7 @@ var start_test_block = {
 			
 				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 				
-				'<p class = block-text>These trials are on a timer - a few seconds per trial. Please respond before the timer ends or you will have missed that trial!</p>'+
+				'<p class = block-text>These trials are on a timer - a few seconds per trial. Please respond before the timer ends or you will have missed that trial! Responding will not end the trial, only the timer will.</p>'+
   			'</div>',
   is_html: true,
   choices: [13],
@@ -350,6 +350,19 @@ var end_block = {
     }
 };
 
+var delay_trial_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '',
+	is_html: true,
+	choices: [13],
+	timing_response: 1000,
+	response_ends_trial: false,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0,
+};
+
 //Set up post task questionnaire
 var post_task_block = {
    type: 'survey-text',
@@ -370,6 +383,7 @@ discount_fixed__dartmouth_experiment.push(instructions_block);
 
 // practice portion
 discount_fixed__dartmouth_experiment.push(start_practice_block);
+discount_fixed__dartmouth_experiment.push(delay_trial_block);
 for (i = 0; i < practice_options.small_amt.length; i++) {
   var practice_block = {
   type: 'poldrack-single-stim',
@@ -405,6 +419,7 @@ for (i = 0; i < practice_options.small_amt.length; i++) {
 
 // test portion
 discount_fixed__dartmouth_experiment.push(start_test_block);
+discount_fixed__dartmouth_experiment.push(delay_trial_block);
 
 for (x = 0; x < test_stim_index.length; x++) {	
 	var test_block = {

@@ -350,7 +350,13 @@ var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
+
 var images_order = unique_expfactory_id.charCodeAt() % 24 
+// ***** REMOVE THE COMMENT - upcomming line should be active 
+var choice_order = unique_expfactory_id.charCodeAt() % 2 
+
+
+
 var permArr = [],
   usedChars = [];
 
@@ -382,12 +388,6 @@ var SSD = 250
 var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
-/* Instruction Prompt */
-//commented line below - new permutation_index is defined by expfactory unique id (keeps responses consistent across batteries)
-
-
-// ***** REMOVE THE COMMENT - upcomming line should be active 
-var choice_order = unique_expfactory_id.charCodeAt() % 2 
 
 var possible_responses_1 = [
 	["left arrow", 37],
@@ -565,12 +565,10 @@ var start_practice_stop_block = {
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</strong></p>'+
+			'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</strong> If you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 				
 			'<p class = block-text><strong>If the star appears and you were going to respond with the ' + ignore_response + ' key, you can ignore the star and respond to the shape.</strong></p>'+
-							
-			'<p class = block-text>If the star appears and if you were going to respond with the ' + stop_response + ' key, if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
-			
+										
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 			 
 		'</div>',		
@@ -591,18 +589,16 @@ var start_test_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
-			'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
+			'<p class = block-text>We will now begin the test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button:' + prompt_text + '</p>' +
 			
 			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 		'</div>',
 		
 		'<div class = instructbox>'+
-			'<p class = block-text>On some trials, a red star will appear.  If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</p>'+
+				'<p class = block-text>On some trials, a red star will appear.  <strong>If the red star appears, and if you were going to respond with the ' + stop_response + ' key, you should not respond to the shape.</strong>  If you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 				
 				'<p class = block-text>If the star appears and you were going to respond with the ' + ignore_response + ' key, you can ignore the star and respond to the shape.</p>'+
-							
-				'<p class = block-text>If the star appears and if you were going to respond with the ' + stop_response + ' key, if you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
-				
+											
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 		'</div>',		
 	],
@@ -728,6 +724,18 @@ var instructions_block = {
 	timing_post_trial: 500,
 };
 
+var delay_trial_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '',
+	is_html: true,
+	choices: [13],
+	timing_response: 1000,
+	response_ends_trial: false,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0,
+};
 
 // set up practice trials
 var practice_trials = getPracticeTrials()
@@ -763,9 +771,11 @@ var motor_selective_stop_signal__dartmouth_experiment = []
 
 motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
 motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
+motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
 
 motor_selective_stop_signal__dartmouth_experiment.push(start_practice_stop_block)
+motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 
 /* Test blocks */
 // Loop through the multiple blocks within each condition
@@ -844,11 +854,13 @@ for (b = 0; b < num_practice_blocks; b++) {
 		stop_signal_exp_block)
 	if ((b+1)<num_practice_blocks) {
 			motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
+			motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 	}
 
 }
 
 motor_selective_stop_signal__dartmouth_experiment.push(start_test_block)
+motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 
 for (b = 0; b < num_test_blocks; b++) {
 	stop_signal_exp_block = []
@@ -910,6 +922,7 @@ for (b = 0; b < num_test_blocks; b++) {
 		motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
 		motor_selective_stop_signal__dartmouth_experiment.push(attention_node)
 		motor_selective_stop_signal__dartmouth_experiment.push(attn_check_start_test)
+		motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 	}
 }
 
