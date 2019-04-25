@@ -160,13 +160,15 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Stop to the star.</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>Stop to this star.</font></div></div>'
 		}
 	} else if ((trial_id == 'practice_trial_with_stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).condition == 'ignore')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Ignore the star.</font></div></div>'
+			return '<div class = fb_box><div class = center-text><font size = 20>Ignore this star.</font></div></div>'
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).correct === true){			
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
+		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).correct !== true){			
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'
 		}
 	}	
 }
@@ -385,9 +387,7 @@ var stop_signal =
 
 
 // ***** REMOVE THE COMMENT - upcomming line should be active 
-//var choice_order = unique_expfactory_id.charCodeAt() % 2
-
-var choice_order = unique_expfactory_id.charCodeAt() % 2   //Math.round(Math.random())
+var choice_order = unique_expfactory_id.charCodeAt() % 2 
 
 var possible_responses_1 = [
 	["left arrow", 37],
@@ -813,7 +813,6 @@ for (b = 0; b < num_practice_blocks; b++) {
 					trial_num: current_trial,
 					correct: correct,
 					trial_id: 'practice_trial_with_stop',
-					stop_signal_condition: stop_trial,
 					correct_response: data.correct_response
 				})
 				current_trial += 1

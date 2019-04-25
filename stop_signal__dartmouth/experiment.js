@@ -561,7 +561,6 @@ var start_test_block = {
 		
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 		 
-			'<p class = block-text>Press enter to begin test.</p>'+
 		'</div>',	
 	],
 	allow_keys: false,
