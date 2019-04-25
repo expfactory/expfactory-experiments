@@ -253,8 +253,8 @@ var start_test_block = {
   is_html: true,
   choices: [13],
   response_ends_trial: true,
-  timing_stim: 180000, 
-  timing_response: 180000,
+  timing_stim: -1, 
+  timing_response: -1,
   data: {
     trial_id: "test_start_block"
   },
