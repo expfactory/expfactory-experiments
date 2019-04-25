@@ -146,7 +146,7 @@ var getPracticeFeedback = function() {
 	var missed_responses = (go_length - num_responses) / go_length
 	
 
-	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll Down)"
+	test_feedback_text = "<br>Done with a practice block. Please take this time to read your feedback and to take a short break! (Scroll down, if needed)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for practice trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -207,7 +207,7 @@ var getTestFeedback = function() {
 	stopAccMeans.push(StopCorrect_percent)
 	var stopAverage = math.mean(stopAccMeans)
 
-	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break!  (Scroll Down)"
+	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break!  (Scroll down, if needed)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -516,7 +516,7 @@ var start_practice_stop_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
-			'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll Down): ' + prompt_text + '</p>' +
+			'<p class = block-text>We will now begin the second practice.  You will see the same shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll down, if needed): ' + prompt_text + '</p>' +
 			
 			'<p class = block-text>As with the last practice, you should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
@@ -525,7 +525,7 @@ var start_practice_stop_block = {
 		'<div class = instructbox>'+		
 			'<p class = block-text>On some trials, a red star will appear.  When the red star appears, you should not respond to the shape.</p>'+
 			
-				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 			 
@@ -548,7 +548,7 @@ var start_test_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
-			'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll Down):' + prompt_text + '</p>' +
+			'<p class = block-text>We will now begin test.  As a reminder, in this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button  (Scroll down, if needed):' + prompt_text + '</p>' +
 		
 			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
@@ -557,11 +557,10 @@ var start_test_block = {
 		'<div class = instructbox>'+		
 			'<p class = block-text>On some trials, a red star will appear.  When the red star appears, you should not respond to the shape.</p>'+
 			
-			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always</p>'+
+			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
 		 
-			'<p class = block-text>Press enter to begin test.</p>'+
 		'</div>',	
 	],
 	allow_keys: false,
@@ -614,7 +613,7 @@ var instructions_block = {
 			
 			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
-			'<p class = block-text> The correct keys are as follows (scroll down): ' + prompt_text + '</p>'+
+			'<p class = block-text> The correct keys are as follows (Scroll down, if needed): ' + prompt_text + '</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
@@ -666,6 +665,19 @@ var test_feedback_block = {
   on_finish: function() {
   	test_block_data = []
   }
+};
+
+var delay_trial_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '',
+	is_html: true,
+	choices: [13],
+	timing_response: 1000,
+	response_ends_trial: false,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0,
 };
 
 /* set up feedback blocks */
@@ -720,6 +732,7 @@ var stop_signal__dartmouth_experiment = []
 
 stop_signal__dartmouth_experiment.push(welcome_block);
 stop_signal__dartmouth_experiment.push(instructions_block);
+stop_signal__dartmouth_experiment.push(delay_trial_block)
 stop_signal__dartmouth_experiment.push(practice_loop);
 
 stop_signal__dartmouth_experiment.push(start_practice_stop_block)
@@ -727,6 +740,7 @@ stop_signal__dartmouth_experiment.push(start_practice_stop_block)
 /* Test blocks */
 // Loop through each trial within the block
 var practiceStopTrials = []
+practiceStopTrials.push(delay_trial_block)
 for (i = 0; i < practice_block_len; i++) {
 	var stop_signal_block = {
 		type: 'stop-signal',
@@ -788,6 +802,7 @@ var practiceStopNode = {
 
 stop_signal__dartmouth_experiment.push(practiceStopNode)
 stop_signal__dartmouth_experiment.push(start_test_block)
+stop_signal__dartmouth_experiment.push(delay_trial_block)
 /* Test blocks */
 // Loop through each trial within the block
 for (x = 0; x < test_num_blocks; x++) {
@@ -824,6 +839,7 @@ for (x = 0; x < test_num_blocks; x++) {
 		stop_signal__dartmouth_experiment.push(test_feedback_block)
 		stop_signal__dartmouth_experiment.push(attention_node)
 		stop_signal__dartmouth_experiment.push(attn_check_start_test)
+		stop_signal__dartmouth_experiment.push(delay_trial_block)
 	}
 }
 
