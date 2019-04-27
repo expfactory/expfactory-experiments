@@ -67,7 +67,7 @@ var createButtonBoard2 = function(numButtons,buttonText){
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
 	var buttonBoard2 = '</font></p><div class = buttonbox>'
 	for (var i = 1; i < numButtons + 1; i++){
-		buttonBoard2 += '<div class = inner><button class="likert_btn unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
+		buttonBoard2 += '<div class = inner><button class="likert_btn selected unselected" id="btn'+i+'" onClick="pressSubmit(this.id)" >'+buttonText[i-1]+'</button></div>'
 	}
 	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
@@ -87,7 +87,6 @@ var hitKey = function(whichKey){
 var pressSubmit = function(current_submit){
 	buttonPressed = current_submit
 	buttonPressedText = document.getElementById(current_submit).innerHTML
-	console.log('buttonPressedText = ' + buttonPressedText)
 	keyTracker.push(buttonPressed)
 	if (keyTracker.length === 1){
 		$('#'+buttonPressed).addClass('selected');
@@ -98,6 +97,7 @@ var pressSubmit = function(current_submit){
 		$('#'+buttonPressed).addClass('selected');
 	}
 }
+
 
 var pressCheckbox = function(current_submit){
 	checked_item = current_submit

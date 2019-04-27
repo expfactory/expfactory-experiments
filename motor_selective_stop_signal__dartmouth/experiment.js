@@ -42,7 +42,7 @@ function assessPerformance() {
 	var rt = 0
 	var correct = 0
 	
-	console.log(experiment_data.length)
+	//console.log(experiment_data.length)
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -72,9 +72,9 @@ function assessPerformance() {
 			}
 		}
 	}
-	console.log('trial count = ' + trial_count)
-	console.log('correct = ' + correct)
-	console.log('missed_count = ' + missed_count)
+	//console.log('trial count = ' + trial_count)
+	//console.log('correct = ' + correct)
+	//console.log('missed_count = ' + missed_count)
 
 	//calculate average rt
 	var avg_rt = -1
@@ -92,10 +92,10 @@ function assessPerformance() {
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
-	console.log('missed_percent = ' + missed_percent)
-	console.log('avg_rt = ' + avg_rt)
-	console.log('responses_ok = ' + responses_ok)
-	console.log('accuracy = ' + accuracy)
+	//console.log('missed_percent = ' + missed_percent)
+	//console.log('avg_rt = ' + avg_rt)
+	//console.log('responses_ok = ' + responses_ok)
+	//console.log('accuracy = ' + accuracy)
 }
 
 var randomDraw = function(lst) {
@@ -322,7 +322,7 @@ var getPracticeTrials = function() {
 			})
 			current_trial += 1
 			test_block_data.push(data)
-			console.log('Trial: ' + current_trial +
+			//console.log('Trial: ' + current_trial +
               '\nCorrect Response? ' + data.correct + ', RT: ' + data.rt)
 		}
 	}
@@ -774,7 +774,7 @@ var practice_loop = {
         }
       }
     }
-    console.log('Practice Block Accuracy: ', correct_trials/total_trials)
+    //console.log('Practice Block Accuracy: ', correct_trials/total_trials)
     if (correct_trials/total_trials > 0.75 || practice_repeats == 3) {
     	current_trial = 0
       return false
@@ -791,6 +791,7 @@ var practice_loop = {
 var motor_selective_stop_signal__dartmouth_experiment = []
 
 motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
+
 motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
 motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
@@ -849,7 +850,7 @@ for (b = 0; b < num_practice_blocks; b++) {
 				})
 				current_trial += 1
 				test_block_data.push(data)
-				//console.log('Trial: ' + current_trial +
+				////console.log('Trial: ' + current_trial +
               //'\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}
@@ -931,7 +932,7 @@ for (b = 0; b < num_test_blocks; b++) {
 				})
 				current_trial += 1
 				test_block_data.push(data)
-				//console.log('Trial: ' + current_trial +
+				////console.log('Trial: ' + current_trial +
               //'\nCorrect? ' + correct + ', RT: ' + data.rt + ', SSD: ' + data.SS_delay + ',correct_response: ' + data.correct_response)
 			}
 		}

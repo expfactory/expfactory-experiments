@@ -19,6 +19,16 @@
   color: green;
 }
 
+.unselected{
+  border:solid 2px white; 
+  color: white;
+}
+
+.unselected:focus{
+  border:solid 2px green; 
+  color: green;
+}
+
 
 img.center {
   height: 500px;

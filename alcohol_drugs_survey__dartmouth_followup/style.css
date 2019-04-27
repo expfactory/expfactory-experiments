@@ -19,6 +19,16 @@
   color: green;
 }
 
+.unselected{
+  border:solid 2px white; 
+  color: white;
+}
+
+.unselected:focus{
+  border:solid 2px green; 
+  color: green;
+}
+
 .survey_area {
  width: 75vw;
  height: 75vh;
