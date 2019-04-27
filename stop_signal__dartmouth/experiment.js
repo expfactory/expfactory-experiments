@@ -753,7 +753,6 @@ var practice_loop = {
 var stop_signal__dartmouth_experiment = []
 
 stop_signal__dartmouth_experiment.push(welcome_block);
-stop_signal__dartmouth_experiment.push(star_practice_block)
 
 stop_signal__dartmouth_experiment.push(instructions_block);
 stop_signal__dartmouth_experiment.push(delay_trial_block)

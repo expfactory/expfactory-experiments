@@ -71,6 +71,7 @@ var createButtonBoard2 = function(numButtons,buttonText){
 	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
+	
 
 var hitKey = function(whichKey){
 	e = jQuery.Event("keydown");
