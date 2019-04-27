@@ -791,6 +791,7 @@ var practice_loop = {
 var motor_selective_stop_signal__dartmouth_experiment = []
 
 motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
+
 motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
 motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
