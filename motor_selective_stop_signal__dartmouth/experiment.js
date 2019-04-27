@@ -323,7 +323,7 @@ var getPracticeTrials = function() {
 			current_trial += 1
 			test_block_data.push(data)
 			//console.log('Trial: ' + current_trial +
-              '\nCorrect Response? ' + data.correct + ', RT: ' + data.rt)
+              //'\nCorrect Response? ' + data.correct + ', RT: ' + data.rt)
 		}
 	}
 	practice.push(practice_block)
