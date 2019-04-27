@@ -352,6 +352,8 @@ function permute(input) {
 var images_temp = permute(shapes_temp)[images_order]
 var images = [prefix + images_temp[0], prefix + images_temp[1], prefix + images_temp[2], prefix + images_temp[3]]
 
+var screen_resolution = screen.width + "x" + screen.height
+
 
 //images = [images[0], images[1], images[2], images[3]]
 
@@ -528,6 +530,8 @@ var start_practice_stop_block = {
 				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			
 				'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
+				
+				'<p class = block-text>On the next page, you will see an example of what the red star around the shape will look like. Please carefully understand the instructions before you move on as you will not be able to go back.</p>'+
 			 
 		'</div>',	
 	],
@@ -609,6 +613,8 @@ var instructions_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
+			'<p class = block-text>Your screen resolution is: '+screen_resolution+'.  If your screen resolution is or below 1024x640, please zoom out to around 75%</p>' +
+			
 			'<p class = block-text>In this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button.</p>' +
 			
 			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
@@ -626,7 +632,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the experiment. This experiment will take about 10 minutes.</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -666,6 +672,22 @@ var test_feedback_block = {
   	test_block_data = []
   }
 };
+
+var star_practice_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<p class = block-text style = "font-color: white">This is what a trial will look like if a red star appears around the shape.  If you cannot see the red star around the shape, please zoom out.  Press <strong> enter </strong> to continue to practice.</p>' +
+			  '<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'+
+			  '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+	is_html: true,
+	choices: [13],
+	timing_response: 180000,
+	response_ends_trial: true,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0
+};
+
 
 var delay_trial_block = {
 	type: 'poldrack-single-stim',
@@ -731,11 +753,14 @@ var practice_loop = {
 var stop_signal__dartmouth_experiment = []
 
 stop_signal__dartmouth_experiment.push(welcome_block);
+stop_signal__dartmouth_experiment.push(star_practice_block)
+
 stop_signal__dartmouth_experiment.push(instructions_block);
 stop_signal__dartmouth_experiment.push(delay_trial_block)
 stop_signal__dartmouth_experiment.push(practice_loop);
 
 stop_signal__dartmouth_experiment.push(start_practice_stop_block)
+stop_signal__dartmouth_experiment.push(star_practice_block)
 
 /* Test blocks */
 // Loop through each trial within the block
@@ -754,7 +779,6 @@ for (i = 0; i < practice_block_len; i++) {
 		timing_SS: 500,
 		timing_post_trial: 0,
 		SS_trial_type: getSSTrialType,
-		prompt: '<div class = centerbox><div class = fixation>+</div></div>',
 		on_finish: function(data) {
 			correct = false
 			if (data.key_press == correct_response) {
@@ -817,7 +841,6 @@ for (x = 0; x < test_num_blocks; x++) {
 		SSD: getSSD,
 		timing_SS: 500,
 		timing_post_trial: 0,
-		prompt: '<div class = centerbox><div class = fixation>+</div></div>',
 		on_finish: function(data) {
 			correct = false
 			if (data.key_press == data.correct_response) {

@@ -272,10 +272,10 @@ var conditional_lengths =    [['neither'],
 					    	 ['neither']]
 
 //Names of items that be written on data
-var item_names_dartmouth = ['pre_scan_eating_abstinence_1',
-							'pre_scan_eating_abstinence_2',
-							'pre_scan_eating_abstinence_3',
-							'pre_scan_eating_abstinence_4']
+var item_names_dartmouth = ['pre_task_eating_abstinence_1',
+							'pre_task_eating_abstinence_2',
+							'pre_task_eating_abstinence_3',
+							'pre_task_eating_abstinence_4']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -381,7 +381,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Welcome to this survey!</font></p>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+

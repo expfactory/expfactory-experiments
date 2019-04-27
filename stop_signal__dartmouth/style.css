@@ -24,6 +24,17 @@
   transform: translate(-50%,-50%);
 }
 
+.stims_box {
+  width:40vw;
+  height: 40vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  background-color: none;
+}
+
 .ss_text {
 	text-align: center;
 	font-size: 60px;
@@ -104,7 +115,7 @@
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
-  background: black;
+  background-color: none;
   z-index: 1;
 }
 

@@ -227,7 +227,7 @@ var instructions_block = {
 			
 			'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 			
-			'<p class = block-text>These trials are on a timer - a few seconds per trial. Please respond before the timer ends or you will have missed that trial! Responding will not end the trial, only the timer will.</p>'+
+			'<p class = block-text>These trials will disappear after a few seconds. Please respond before the trial ends or you will have missed that trial! Responding will not end the trial, each trial will stay on for its specified time.</p>'+
 		'</div>'		
 	],
 	allow_keys: false,
@@ -248,7 +248,7 @@ var start_test_block = {
 			
 				'<p class = block-text>If you want the option on the screen, please press the left arrow key. If you want to accept $20 today, press the down arrow key.</p>'+
 				
-				'<p class = block-text>These trials are on a timer - a few seconds per trial. Please respond before the timer ends or you will have missed that trial! Responding will not end the trial, only the timer will.</p>'+
+				'<p class = block-text>These trials will disappear after a few seconds. Please respond before the trial ends or you will have missed that trial! Responding will not end the trial, each trial will stay on for its specified time.</p>'+
   			'</div>',
   is_html: true,
   choices: [13],
@@ -288,7 +288,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the experiment. This experiment will take about 15 minutes.</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+

@@ -373,7 +373,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Welcome to this survey!</font></p>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+

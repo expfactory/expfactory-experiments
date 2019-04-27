@@ -265,7 +265,7 @@ var getTestFeedback = function() {
 	stopAccMeans.push(StopCorrect_percent)
 	var stopAverage = math.mean(stopAccMeans)
 
-	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Remember, do not respond if a star appears and if you were going to respond with your " + stop_response[0] + ". (Scroll Down if needed.)"
+	test_feedback_text = "<br>Done with a test block. Please take this time to read your feedback and to take a short break! Remember, do not respond if a star appears and if you were going to respond with your " + stop_response + ". (Scroll Down if needed.)"
 	test_feedback_text += "</p><p class = block-text><strong>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for non-star trials: " + Math.round(GoCorrect_percent * 100)+ "%</strong>" 
 	if (average_rt > RT_thresh || rt_diff > rt_diff_thresh) {
 		test_feedback_text +=
@@ -355,7 +355,7 @@ var images_order = unique_expfactory_id.charCodeAt() % 24
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 var choice_order = unique_expfactory_id.charCodeAt() % 2 
 
-
+var screen_resolution = screen.width + "x" + screen.height
 
 var permArr = [],
   usedChars = [];
@@ -552,6 +552,22 @@ var attention_node = {
   }
 }
 
+
+var star_practice_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<p class = block-text style = "font-color: white">This is what a trial will look like if a red star appears around the shape.  If you cannot see the red star around the shape, please zoom out.  Press <strong> enter </strong> to continue to practice.</p>' +
+			  '<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'+
+			  '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+	is_html: true,
+	choices: [13],
+	timing_response: 180000,
+	response_ends_trial: true,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0
+};
+
 var start_practice_stop_block = {
 	type: 'poldrack-instructions',
 	data: {
@@ -570,8 +586,11 @@ var start_practice_stop_block = {
 			'<p class = block-text><strong>If the star appears and you were going to respond with the ' + ignore_response + ' key, you can ignore the star and respond to the shape.</strong></p>'+
 										
 			'<p class = block-text>Please do not slow down your responses to the shapes in order to wait for the red star.  Continue to respond as quickly and as accurately as possible.</p>'+
+			
+			'<p class = block-text>On the next page, you will see an example of what the red star around the shape will look like. Please carefully understand the instructions before you move on as you will not be able to go back.</p>'+
 			 
-		'</div>',		
+		'</div>',	
+
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -682,7 +701,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the experiment. This experiment will take about 15 minutes.</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -712,12 +731,14 @@ var instructions_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
+			'<p class = block-text>Your screen resolution is: '+screen_resolution+'.  If your screen resolution is or below 1024x640, please zoom out to around 75%</p>' +
+
 			'<p class = block-text>In this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button.</p>' +
 			
 			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
 			
 			'<p class = block-text> The correct keys are as follows (scroll down if needed): ' + prompt_text + '</p>'+
-		'</div>'		
+		'</div>',	
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -775,6 +796,7 @@ motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
 
 motor_selective_stop_signal__dartmouth_experiment.push(start_practice_stop_block)
+motor_selective_stop_signal__dartmouth_experiment.push(star_practice_block);
 motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
 
 /* Test blocks */
