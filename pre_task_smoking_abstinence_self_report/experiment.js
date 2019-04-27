@@ -378,25 +378,25 @@ var conditional_lengths =    [['neither'],
 					    	  ['neither']]
 
 //Names of items that be written on data
-var item_names_dartmouth = ['pre_scan_smoking_abstinence_1',
-							'pre_scan_smoking_abstinence_2',
-							'pre_scan_smoking_abstinence_3',
-							'pre_scan_smoking_abstinence_4',
-							'pre_scan_smoking_abstinence_5',
-							'pre_scan_smoking_abstinence_6',
-							'pre_scan_smoking_abstinence_7',
-							'pre_scan_smoking_abstinence_8',
-							'pre_scan_smoking_abstinence_9',
-							'pre_scan_smoking_abstinence_10',
-							'pre_scan_smoking_abstinence_11',
-							'pre_scan_smoking_abstinence_12',
-							'pre_scan_smoking_abstinence_13',
-							'pre_scan_smoking_abstinence_14',
-							'pre_scan_smoking_abstinence_15',
-							'pre_scan_smoking_abstinence_16',
-							'pre_scan_smoking_abstinence_17',
-							'pre_scan_smoking_abstinence_18',
-							'pre_scan_smoking_abstinence_19',]
+var item_names_dartmouth = ['pre_task_smoking_abstinence_1',
+							'pre_task_smoking_abstinence_2',
+							'pre_task_smoking_abstinence_3',
+							'pre_task_smoking_abstinence_4',
+							'pre_task_smoking_abstinence_5',
+							'pre_task_smoking_abstinence_6',
+							'pre_task_smoking_abstinence_7',
+							'pre_task_smoking_abstinence_8',
+							'pre_task_smoking_abstinence_9',
+							'pre_task_smoking_abstinence_10',
+							'pre_task_smoking_abstinence_11',
+							'pre_task_smoking_abstinence_12',
+							'pre_task_smoking_abstinence_13',
+							'pre_task_smoking_abstinence_14',
+							'pre_task_smoking_abstinence_15',
+							'pre_task_smoking_abstinence_16',
+							'pre_task_smoking_abstinence_17',
+							'pre_task_smoking_abstinence_18',
+							'pre_task_smoking_abstinence_19',]
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -501,7 +501,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Welcome to this survey!</font></p>'+
 		  '<p class = center-text2 style="font-size:36px"><font color="white">Press<strong> enter</strong> to continue.</font></p>'+

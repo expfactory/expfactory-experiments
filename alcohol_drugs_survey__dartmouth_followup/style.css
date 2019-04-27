@@ -67,14 +67,15 @@ text-align: center;
 
 
 .buttonbox {
-width: 80%;
+width: 100%;
 height: 10%;
 position:absolute;
-top:60%;
+top:90%;
 left:50%;
 transform: translate(-50%,-50%);
 margin-right:0%;
 text-align: center;
+background-color: none;
 }
 
 .inner {

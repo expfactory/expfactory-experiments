@@ -44,13 +44,26 @@
 }
 
 .slider_number_box {
-
+ width: 10vw;
+ height: 10vh;
+ position:absolute;
+ top:40%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background-color: none;
 
 }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
-  background-color: none;
+ width: 55vw;
+ height: 8vh;
+ position:absolute;
+ top:10%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background-color: none;
 }
 
 .slider {
