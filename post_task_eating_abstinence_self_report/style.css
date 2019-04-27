@@ -19,6 +19,16 @@
   color: green;
 }
 
+.unselected{
+  border:solid 2px white; 
+  color: white;
+}
+
+.unselected:focus{
+  border:solid 2px green; 
+  color: green;
+}
+
 .slide_big_box {
  width: 50vw;
  height: 50vh;
@@ -267,4 +277,5 @@ border-radius: 15px;
  -webkit-transform: translateY(-50%);
  transform: translateY(-50%);
 }
+
 
