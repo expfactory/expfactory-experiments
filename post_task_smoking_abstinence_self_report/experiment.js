@@ -102,7 +102,7 @@ var pressCheckbox = function(current_submit){
 	checked_item = current_submit
 	keyTracker.push(current_submit)
 	if ((document.getElementById("myCheck1").checked === true) && (document.getElementById("myCheck2").checked === true)){
-		alert('Please choose one response')
+		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose one response')
 		keyTracker = []
 	} else if ((document.getElementById("myCheck1").checked === true) && (document.getElementById("myCheck2").checked === false)){
 		checked_item = 'Yes' //checked_item = document.getElementById("check1text").innerHTML
@@ -111,7 +111,7 @@ var pressCheckbox = function(current_submit){
 		checked_item = 'No' //checked_item = document.getElementById("check2text").innerHTML
 		buttonPressedText = 'No'
 	} else if ((document.getElementById("myCheck1").checked === false) && (document.getElementById("myCheck2").checked === false)){
-		alert('Please choose a response')
+		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose a response')
 		keyTracker = []
 	}
 }
@@ -129,7 +129,7 @@ document.addEventListener("keydown", function(e){
     }
     if (keynum == 13){
     	if ((keyTracker.length === 0) && (game_state == 'questions')){
-    		alert('Please choose a response')
+    		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose a response')
     	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
     		hitKey(81)
     	}
