@@ -736,8 +736,6 @@ var instructions_block = {
 	},
 	pages:[
 		'<div class = instructbox>'+
-			'<p class = block-text>Your screen resolution is: '+screen_resolution+'.  If your screen resolution is or below 1024x640, please zoom out to around 75%</p>' +
-
 			'<p class = block-text>In this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button.</p>' +
 			
 			'<br><p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
