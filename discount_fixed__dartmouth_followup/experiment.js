@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'discount_fixed__dartmouth'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'discount_fixed__dartmouth_followup'})
 }
 
 practice_ITIs = [0,0.136,0.136,0.612]
@@ -135,7 +135,7 @@ for (var i = 0; i < practice_stim_html.length; i++) {
 /////////////////////////////////hard coded options for test
 var unique_expfactory_id = window.location.pathname.split('/')[3]
 var trial_order = unique_expfactory_id.charCodeAt() % 4
-
+trial_order = trial_order % 2
 var test_ITIs_list = [[0.816,0.068,0.136,0.408,0.0,0.476,0.408,0.068,0.0,1.7,0.204,0.544,0.544,0.68,0.476,0.272,0.272,0.68,0.68,0.748,0.068,0.0,0.408,0.068,1.7,0.408,0.748,0.544,0.136,0.204,0.136,0.068,0.068,0.408,0.34,0.748,0.272,1.496,1.088,0.068,0.612,1.156,0.068,0.272,0.544,0.34,0.68,0.544,0.476,0.476,0.816,0.0,0.544,0.204,0.34,2.244,0.0,0.068,0.204,0.408,0.068,0.272,0.136,0.068,0.952,0.884,0.068,1.768,1.02,0.068,0.136,0.136,0.612,0.816,0.068,0.068,0.068,0.34,0.0,1.156,0.408,0.136,0.0,0.0,0.612,1.632,0.34,0.068,0.204,1.36,0.136,0.816,0.476,0.068,1.02,1.088,1.292,0.068,0.612,0.0,0.34,0.068,0.884,0.544,0.204,0.408,0.408,0.34,0.612,0.612,0.204,0.34,0.34,2.38,0.068,0.272,2.516,0.204,0.68,0.544],
 			 	      [0.136,0.816,0.476,0.068,1.02,1.088,1.292,0.068,0.612,0.0,0.34,0.068,0.884,0.544,0.204,0.408,0.408,0.34,0.612,0.612,0.204,0.34,0.34,2.38,0.068,0.272,2.516,0.204,0.68,0.544,0.816,0.068,0.136,0.408,0.0,0.476,0.408,0.068,0.0,1.7,0.204,0.544,0.544,0.68,0.476,0.272,0.272,0.68,0.68,0.748,0.068,0.0,0.408,0.068,1.7,0.408,0.748,0.544,0.136,0.204,0.136,0.068,0.068,0.408,0.34,0.748,0.272,1.496,1.088,0.068,0.612,1.156,0.068,0.272,0.544,0.34,0.68,0.544,0.476,0.476,0.816,0.0,0.544,0.204,0.34,2.244,0.0,0.068,0.204,0.408,0.068,0.272,0.136,0.068,0.952,0.884,0.068,1.768,1.02,0.068,0.136,0.136,0.612,0.816,0.068,0.068,0.068,0.34,0.0,1.156,0.408,0.136,0.0,0.0,0.612,1.632,0.34,0.068,0.204,1.36],
 			 	      [0.068,0.272,0.136,0.068,0.952,0.884,0.068,1.768,1.02,0.068,0.136,0.136,0.612,0.816,0.068,0.068,0.068,0.34,0.0,1.156,0.408,0.136,0.0,0.0,0.612,1.632,0.34,0.068,0.204,1.36,0.136,0.816,0.476,0.068,1.02,1.088,1.292,0.068,0.612,0.0,0.34,0.068,0.884,0.544,0.204,0.408,0.408,0.34,0.612,0.612,0.204,0.34,0.34,2.38,0.068,0.272,2.516,0.204,0.68,0.544,0.816,0.068,0.136,0.408,0.0,0.476,0.408,0.068,0.0,1.7,0.204,0.544,0.544,0.68,0.476,0.272,0.272,0.68,0.68,0.748,0.068,0.0,0.408,0.068,1.7,0.408,0.748,0.544,0.136,0.204,0.136,0.068,0.068,0.408,0.34,0.748,0.272,1.496,1.088,0.068,0.612,1.156,0.068,0.272,0.544,0.34,0.68,0.544,0.476,0.476,0.816,0.0,0.544,0.204,0.34,2.244,0.0,0.068,0.204,0.408],
@@ -377,13 +377,13 @@ var post_task_block = {
 };
 
 //Set up experiment
-var discount_fixed__dartmouth_experiment = []
-discount_fixed__dartmouth_experiment.push(welcome_block);
-discount_fixed__dartmouth_experiment.push(instructions_block);
+var discount_fixed__dartmouth_followup_experiment = []
+discount_fixed__dartmouth_followup_experiment.push(welcome_block);
+discount_fixed__dartmouth_followup_experiment.push(instructions_block);
 
 // practice portion
-discount_fixed__dartmouth_experiment.push(start_practice_block);
-discount_fixed__dartmouth_experiment.push(delay_trial_block);
+discount_fixed__dartmouth_followup_experiment.push(start_practice_block);
+discount_fixed__dartmouth_followup_experiment.push(delay_trial_block);
 for (i = 0; i < practice_options.small_amt.length; i++) {
   var practice_block = {
   type: 'poldrack-single-stim',
@@ -413,13 +413,13 @@ for (i = 0; i < practice_options.small_amt.length; i++) {
   }
 };
 
-  discount_fixed__dartmouth_experiment.push(practice_block)
+  discount_fixed__dartmouth_followup_experiment.push(practice_block)
 }
 
 
 // test portion
-discount_fixed__dartmouth_experiment.push(start_test_block);
-discount_fixed__dartmouth_experiment.push(delay_trial_block);
+discount_fixed__dartmouth_followup_experiment.push(start_test_block);
+discount_fixed__dartmouth_followup_experiment.push(delay_trial_block);
 
 for (x = 0; x < test_stim_index.length; x++) {	
 	var test_block = {
@@ -449,12 +449,12 @@ for (x = 0; x < test_stim_index.length; x++) {
 		}
 	};
 
-	discount_fixed__dartmouth_experiment.push(test_block)
+	discount_fixed__dartmouth_followup_experiment.push(test_block)
 	if ((x%60 === 0) && (x > 0)) {
-		discount_fixed__dartmouth_experiment.push(rest_block)
-		discount_fixed__dartmouth_experiment.push(attention_node)
-		discount_fixed__dartmouth_experiment.push(attn_check_start_test)
+		discount_fixed__dartmouth_followup_experiment.push(rest_block)
+		discount_fixed__dartmouth_followup_experiment.push(attention_node)
+		discount_fixed__dartmouth_followup_experiment.push(attn_check_start_test)
 	}
 }
-discount_fixed__dartmouth_experiment.push(post_task_block);
-discount_fixed__dartmouth_experiment.push(end_block);
+discount_fixed__dartmouth_followup_experiment.push(post_task_block);
+discount_fixed__dartmouth_followup_experiment.push(end_block);

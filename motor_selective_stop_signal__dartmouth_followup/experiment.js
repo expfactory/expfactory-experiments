@@ -2,11 +2,11 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'motor_selective_stop_signal__dartmouth'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'motor_selective_stop_signal__dartmouth_followup'})
 }
 
 var practice_ITIs = [0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6]
-var test_ITIs = [0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.1,0.0,0.1,0.2,0.0,0.0,0.5,0.1,0.5,0.2,0.0,0.1,0.4,0.2,0.0,0.1,0.7,0.0,0.7,0.2,0.0,0.1,0.2,0.0,0.2,0.5,0.0,0.1,0.2,0.1,0.0,0.3,0.2,0.4,0.0,0.4,0.1,0.0,0.0,0.0,0.1,0.3,0.1,0.2,0.2,0.1,0.0,0.3,0.3,0.0,0.0,0.2,0.1,0.0,0.9,0.4,0.0,0.2,0.6,0.2,0.0,0.0,0.3,0.0,0.1,0.1,0.0,0.1,0.0,0.2,0.0,0.1,0.2,0.0,0.0,0.6,0.0,1.2,0.1,0.1,0.1,0.2,0.3,0.1,0.0,0.0,0.8,0.2,0.1,0.0,1.0,0.7,0.3,0.1,0.3,0.1,0.0,0.2,0.1,0.4,0.0,0.0,0.2,0.0,0.3,0.0,0.1,0.0,0.3,0.3,0.1,0.1,0.0,0.2,0.0,0.2,0.4,0.2,0.1,0.0,0.3,0.0,0.0,0.1,0.0,0.4,0.1,0.2,0.1,0.0,0.0,0.0,0.0,0.1,1.1,0.3,0.5,0.5,0.4,0.2,0.0,0.1,0.2,0.8,0.1,0.0,0.1,0.1,0.1,0.1,0.1,0.0,0.1,0.2,0.1,0.6,0.3,0.5,0.0,0.0,0.6,0.1,0.0,0.0,0.0,0.1,0.4,0.5,0.0,0.5,0.0,0.1,0.1,0.3,0.0,0.0,0.0,0.1,0.4,0.1,0.0,0.1,0.1,0.6,0.2,0.1,0.4,0.0,0.0,0.0,0.2,0.1,0.0,0.1,0.2,0.1,0.0,0.0,0.1,0.1,0.1,0.7,0.0,0.1,0.0,0.2,0.1,0.3,0.3,0.0,0.0,0.5,0.1,0.0,0.2,0.0,0.1,0.0,0.0,0.0]
+
 
 var practice_get_ITI = function() {
   return 2250 + practice_ITIs.shift()*1000
@@ -345,15 +345,17 @@ var run_attention_checks = true
 var practice_repeats = 0
 // task specific variables
 // Define and load images
-var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/'
+var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth_followup/images/'
 
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
 
-var images_order = unique_expfactory_id.charCodeAt() % 24 
 // ***** REMOVE THE COMMENT - upcomming line should be active 
+var images_order = unique_expfactory_id.charCodeAt() % 24 
 var choice_order = unique_expfactory_id.charCodeAt() % 2 
+var trial_order = unique_expfactory_id.charCodeAt() % 4
+trial_order = trial_order % 2
 
 var screen_resolution = screen.width + "x" + screen.height
 
@@ -389,7 +391,7 @@ var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/motor_selective_stop_signal__dartmouth/images/"
+var preFileType = "<img class = center src='/static/experiments/motor_selective_stop_signal__dartmouth_followup/images/"
 var stop_signal = '<div class = coverbox></div><div class = picture_box>'+ preFileType  + 'stopSignal' + fileTypePNG + '</div>'
 
 
@@ -471,6 +473,15 @@ var stimuli = [{
 	}
 }]
 
+// set up ITI's
+
+var ITIs_list = [[0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.1,0.0,0.1,0.2,0.0,0.0,0.5,0.1,0.5,0.2,0.0,0.1,0.4,0.2,0.0,0.1,0.7,0.0,0.7,0.2,0.0,0.1,0.2,0.0,0.2,0.5,0.0,0.1,0.2,0.1,0.0,0.3,0.2,0.4,0.0,0.4,0.1,0.0,0.0,0.0,0.1,0.3,0.1,0.2,0.2,0.1,0.0,0.3,0.3,0.0,0.0,0.2,0.1,0.0,0.9,0.4,0.0,0.2,0.6,0.2,0.0,0.0,0.3,0.0,0.1,0.1,0.0,0.1,0.0,0.2,0.0,0.1,0.2,0.0,0.0,0.6,0.0,1.2,0.1,0.1,0.1,0.2,0.3,0.1,0.0,0.0,0.8,0.2,0.1,0.0,1.0,0.7,0.3,0.1,0.3,0.1,0.0,0.2,0.1,0.4,0.0,0.0,0.2,0.0,0.3,0.0,0.1,0.0,0.3,0.3,0.1,0.1,0.0,0.2,0.0,0.2,0.4,0.2,0.1,0.0,0.3,0.0,0.0,0.1,0.0,0.4,0.1,0.2,0.1,0.0,0.0,0.0,0.0,0.1,1.1,0.3,0.5,0.5,0.4,0.2,0.0,0.1,0.2,0.8,0.1,0.0,0.1,0.1,0.1,0.1,0.1,0.0,0.1,0.2,0.1,0.6,0.3,0.5,0.0,0.0,0.6,0.1,0.0,0.0,0.0,0.1,0.4,0.5,0.0,0.5,0.0,0.1,0.1,0.3,0.0,0.0,0.0,0.1,0.4,0.1,0.0,0.1,0.1,0.6,0.2,0.1,0.4,0.0,0.0,0.0,0.2,0.1,0.0,0.1,0.2,0.1,0.0,0.0,0.1,0.1,0.1,0.7,0.0,0.1,0.0,0.2,0.1,0.3,0.3,0.0,0.0,0.5,0.1,0.0,0.2,0.0,0.1,0.0,0.0,0.0],
+				 [0.0,0.0,0.6,0.1,0.0,0.0,0.0,0.1,0.4,0.5,0.0,0.5,0.0,0.1,0.1,0.3,0.0,0.0,0.0,0.1,0.4,0.1,0.0,0.1,0.1,0.6,0.2,0.1,0.4,0.0,0.0,0.0,0.2,0.1,0.0,0.1,0.2,0.1,0.0,0.0,0.1,0.1,0.1,0.7,0.0,0.1,0.0,0.2,0.1,0.3,0.3,0.0,0.0,0.5,0.1,0.0,0.2,0.0,0.1,0.0,0.0,0.0,0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.1,0.0,0.1,0.2,0.0,0.0,0.5,0.1,0.5,0.2,0.0,0.1,0.4,0.2,0.0,0.1,0.7,0.0,0.7,0.2,0.0,0.1,0.2,0.0,0.2,0.5,0.0,0.1,0.2,0.1,0.0,0.3,0.2,0.4,0.0,0.4,0.1,0.0,0.0,0.0,0.1,0.3,0.1,0.2,0.2,0.1,0.0,0.3,0.3,0.0,0.0,0.2,0.1,0.0,0.9,0.4,0.0,0.2,0.6,0.2,0.0,0.0,0.3,0.0,0.1,0.1,0.0,0.1,0.0,0.2,0.0,0.1,0.2,0.0,0.0,0.6,0.0,1.2,0.1,0.1,0.1,0.2,0.3,0.1,0.0,0.0,0.8,0.2,0.1,0.0,1.0,0.7,0.3,0.1,0.3,0.1,0.0,0.2,0.1,0.4,0.0,0.0,0.2,0.0,0.3,0.0,0.1,0.0,0.3,0.3,0.1,0.1,0.0,0.2,0.0,0.2,0.4,0.2,0.1,0.0,0.3,0.0,0.0,0.1,0.0,0.4,0.1,0.2,0.1,0.0,0.0,0.0,0.0,0.1,1.1,0.3,0.5,0.5,0.4,0.2,0.0,0.1,0.2,0.8,0.1,0.0,0.1,0.1,0.1,0.1,0.1,0.0,0.1,0.2,0.1,0.6,0.3,0.5],
+				 [0.1,0.0,0.2,0.1,0.4,0.0,0.0,0.2,0.0,0.3,0.0,0.1,0.0,0.3,0.3,0.1,0.1,0.0,0.2,0.0,0.2,0.4,0.2,0.1,0.0,0.3,0.0,0.0,0.1,0.0,0.4,0.1,0.2,0.1,0.0,0.0,0.0,0.0,0.1,1.1,0.3,0.5,0.5,0.4,0.2,0.0,0.1,0.2,0.8,0.1,0.0,0.1,0.1,0.1,0.1,0.1,0.0,0.1,0.2,0.1,0.6,0.3,0.5,0.0,0.0,0.6,0.1,0.0,0.0,0.0,0.1,0.4,0.5,0.0,0.5,0.0,0.1,0.1,0.3,0.0,0.0,0.0,0.1,0.4,0.1,0.0,0.1,0.1,0.6,0.2,0.1,0.4,0.0,0.0,0.0,0.2,0.1,0.0,0.1,0.2,0.1,0.0,0.0,0.1,0.1,0.1,0.7,0.0,0.1,0.0,0.2,0.1,0.3,0.3,0.0,0.0,0.5,0.1,0.0,0.2,0.0,0.1,0.0,0.0,0.0,0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.1,0.0,0.1,0.2,0.0,0.0,0.5,0.1,0.5,0.2,0.0,0.1,0.4,0.2,0.0,0.1,0.7,0.0,0.7,0.2,0.0,0.1,0.2,0.0,0.2,0.5,0.0,0.1,0.2,0.1,0.0,0.3,0.2,0.4,0.0,0.4,0.1,0.0,0.0,0.0,0.1,0.3,0.1,0.2,0.2,0.1,0.0,0.3,0.3,0.0,0.0,0.2,0.1,0.0,0.9,0.4,0.0,0.2,0.6,0.2,0.0,0.0,0.3,0.0,0.1,0.1,0.0,0.1,0.0,0.2,0.0,0.1,0.2,0.0,0.0,0.6,0.0,1.2,0.1,0.1,0.1,0.2,0.3,0.1,0.0,0.0,0.8,0.2,0.1,0.0,1.0,0.7,0.3,0.1,0.3],
+				 [0.4,0.0,0.4,0.1,0.0,0.0,0.0,0.1,0.3,0.1,0.2,0.2,0.1,0.0,0.3,0.3,0.0,0.0,0.2,0.1,0.0,0.9,0.4,0.0,0.2,0.6,0.2,0.0,0.0,0.3,0.0,0.1,0.1,0.0,0.1,0.0,0.2,0.0,0.1,0.2,0.0,0.0,0.6,0.0,1.2,0.1,0.1,0.1,0.2,0.3,0.1,0.0,0.0,0.8,0.2,0.1,0.0,1.0,0.7,0.3,0.1,0.3,0.1,0.0,0.2,0.1,0.4,0.0,0.0,0.2,0.0,0.3,0.0,0.1,0.0,0.3,0.3,0.1,0.1,0.0,0.2,0.0,0.2,0.4,0.2,0.1,0.0,0.3,0.0,0.0,0.1,0.0,0.4,0.1,0.2,0.1,0.0,0.0,0.0,0.0,0.1,1.1,0.3,0.5,0.5,0.4,0.2,0.0,0.1,0.2,0.8,0.1,0.0,0.1,0.1,0.1,0.1,0.1,0.0,0.1,0.2,0.1,0.6,0.3,0.5,0.0,0.0,0.6,0.1,0.0,0.0,0.0,0.1,0.4,0.5,0.0,0.5,0.0,0.1,0.1,0.3,0.0,0.0,0.0,0.1,0.4,0.1,0.0,0.1,0.1,0.6,0.2,0.1,0.4,0.0,0.0,0.0,0.2,0.1,0.0,0.1,0.2,0.1,0.0,0.0,0.1,0.1,0.1,0.7,0.0,0.1,0.0,0.2,0.1,0.3,0.3,0.0,0.0,0.5,0.1,0.0,0.2,0.0,0.1,0.0,0.0,0.0,0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.1,0.0,0.1,0.2,0.0,0.0,0.5,0.1,0.5,0.2,0.0,0.1,0.4,0.2,0.0,0.1,0.7,0.0,0.7,0.2,0.0,0.1,0.2,0.0,0.2,0.5,0.0,0.1,0.2,0.1,0.0,0.3,0.2]]
+
+var test_ITIs = ITIs_list[trial_order]
+
 // set up stim order based on optimized trial sequence PRACTICE STOP
 var practice_stim_index = [0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,
 						   1,0,2,1,0,1,0,0,2,0,2,2,0,2,0,0,1,2,0,0,1,0,0,1,0,0,0,0,0,2]
@@ -505,7 +516,12 @@ for (var i=0; i<practice_stim_index.length; i++) {
 
 
 // set up stim order based on optimized trial sequence
-var stim_index = [0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,0,1,2,0,2,0,0,0,1,0,1,0,2,2,0,0,2,1,0,0,1,2,0,2,0,2,0,2,0,0,0,1,2,0,0,0,0,0,2,0,1,0,1,2,0,0,2,0,1,0,0,0,0,2,1,2,0,0,0,2,1,0,1,0,2,0,0,0,0,2,1,0,0,0,0,2,2,0,1,2,0,1,0,0,0,0,1,1,0,1,0,1,0,0,2,0,2,0,1,0,0,1,0,2,1,1,0,0,0,0,2,0,2,1,0,0,2,0,0,0,0,0,2,2,0,2,1,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,2,0,0,1,0,0,0,0,0,2,0,1,0,0,1,0,0,0,1,0,1,2,0,0,0,0,2,0,0,1,0,2,0,1,0,0,0,0,0,2,0,0,0,1,1,2,0,0,0,2,1,0,0,0,0,0,2,2,2,0,0,0,1,1,1,0,0,0,0,1,1]
+var stim_index_list = [[0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,0,1,2,0,2,0,0,0,1,0,1,0,2,2,0,0,2,1,0,0,1,2,0,2,0,2,0,2,0,0,0,1,2,0,0,0,0,0,2,0,1,0,1,2,0,0,2,0,1,0,0,0,0,2,1,2,0,0,0,2,1,0,1,0,2,0,0,0,0,2,1,0,0,0,0,2,2,0,1,2,0,1,0,0,0,0,1,1,0,1,0,1,0,0,2,0,2,0,1,0,0,1,0,2,1,1,0,0,0,0,2,0,2,1,0,0,2,0,0,0,0,0,2,2,0,2,1,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,2,0,0,1,0,0,0,0,0,2,0,1,0,0,1,0,0,0,1,0,1,2,0,0,0,0,2,0,0,1,0,2,0,1,0,0,0,0,0,2,0,0,0,1,1,2,0,0,0,2,1,0,0,0,0,0,2,2,2,0,0,0,1,1,1,0,0,0,0,1,1],
+					   [2,0,1,0,0,1,0,0,0,1,0,1,2,0,0,0,0,2,0,0,1,0,2,0,1,0,0,0,0,0,2,0,0,0,1,1,2,0,0,0,2,1,0,0,0,0,0,2,2,2,0,0,0,1,1,1,0,0,0,0,1,1,0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,0,1,2,0,2,0,0,0,1,0,1,0,2,2,0,0,2,1,0,0,1,2,0,2,0,2,0,2,0,0,0,1,2,0,0,0,0,0,2,0,1,0,1,2,0,0,2,0,1,0,0,0,0,2,1,2,0,0,0,2,1,0,1,0,2,0,0,0,0,2,1,0,0,0,0,2,2,0,1,2,0,1,0,0,0,0,1,1,0,1,0,1,0,0,2,0,2,0,1,0,0,1,0,2,1,1,0,0,0,0,2,0,2,1,0,0,2,0,0,0,0,0,2,2,0,2,1,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,2,0,0,1,0,0,0,0,0],
+					   [0,0,2,0,2,0,1,0,0,1,0,2,1,1,0,0,0,0,2,0,2,1,0,0,2,0,0,0,0,0,2,2,0,2,1,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,2,0,0,1,0,0,0,0,0,2,0,1,0,0,1,0,0,0,1,0,1,2,0,0,0,0,2,0,0,1,0,2,0,1,0,0,0,0,0,2,0,0,0,1,1,2,0,0,0,2,1,0,0,0,0,0,2,2,2,0,0,0,1,1,1,0,0,0,0,1,1,0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,0,1,2,0,2,0,0,0,1,0,1,0,2,2,0,0,2,1,0,0,1,2,0,2,0,2,0,2,0,0,0,1,2,0,0,0,0,0,2,0,1,0,1,2,0,0,2,0,1,0,0,0,0,2,1,2,0,0,0,2,1,0,1,0,2,0,0,0,0,2,1,0,0,0,0,2,2,0,1,2,0,1,0,0,0,0,1,1,0,1,0,1],
+					   [0,1,2,0,0,0,0,0,2,0,1,0,1,2,0,0,2,0,1,0,0,0,0,2,1,2,0,0,0,2,1,0,1,0,2,0,0,0,0,2,1,0,0,0,0,2,2,0,1,2,0,1,0,0,0,0,1,1,0,1,0,1,0,0,2,0,2,0,1,0,0,1,0,2,1,1,0,0,0,0,2,0,2,1,0,0,2,0,0,0,0,0,2,2,0,2,1,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,2,0,0,1,0,0,0,0,0,2,0,1,0,0,1,0,0,0,1,0,1,2,0,0,0,0,2,0,0,1,0,2,0,1,0,0,0,0,0,2,0,0,0,1,1,2,0,0,0,2,1,0,0,0,0,0,2,2,2,0,0,0,1,1,1,0,0,0,0,1,1,0,0,2,1,0,1,0,0,2,2,2,2,0,0,0,1,1,2,0,0,1,0,0,1,0,0,0,0,0,2,0,0,0,0,1,2,0,2,0,0,0,1,0,1,0,2,2,0,0,2,1,0,0,1,2,0,2,0,2,0,2,0,0]]
+
+var stim_index = stim_index_list[trial_order]
 var test_stims = []
 var go_stims = jsPsych.randomization.repeat(stimuli, test_len*0.6 / 4)
 var stop_stims = jsPsych.randomization.repeat(stimuli.slice(0,2), test_len*0.2 / 2)
@@ -791,17 +807,17 @@ var practice_loop = {
 /* ************************************ */
 /* Set up experiment */
 /* ************************************ */
-var motor_selective_stop_signal__dartmouth_experiment = []
+var motor_selective_stop_signal__dartmouth_followup_experiment = []
 
-motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(welcome_block);
 
-motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
-motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(instructions_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(practice_loop);
 
-motor_selective_stop_signal__dartmouth_experiment.push(start_practice_stop_block)
-motor_selective_stop_signal__dartmouth_experiment.push(star_practice_block);
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(start_practice_stop_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(star_practice_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 
 /* Test blocks */
 // Loop through the multiple blocks within each condition
@@ -876,17 +892,17 @@ for (b = 0; b < num_practice_blocks; b++) {
 		stop_signal_exp_block.push(categorize_block)
 	}
 
-	motor_selective_stop_signal__dartmouth_experiment = motor_selective_stop_signal__dartmouth_experiment.concat(
+	motor_selective_stop_signal__dartmouth_followup_experiment = motor_selective_stop_signal__dartmouth_followup_experiment.concat(
 		stop_signal_exp_block)
 	if ((b+1)<num_practice_blocks) {
-			motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
-			motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+			motor_selective_stop_signal__dartmouth_followup_experiment.push(test_feedback_block)
+			motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 	}
 
 }
 
-motor_selective_stop_signal__dartmouth_experiment.push(start_test_block)
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(start_test_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 
 for (b = 0; b < num_test_blocks; b++) {
 	stop_signal_exp_block = []
@@ -942,15 +958,15 @@ for (b = 0; b < num_test_blocks; b++) {
 		stop_signal_exp_block.push(stop_signal_block)
 	}
 
-	motor_selective_stop_signal__dartmouth_experiment = motor_selective_stop_signal__dartmouth_experiment.concat(
+	motor_selective_stop_signal__dartmouth_followup_experiment = motor_selective_stop_signal__dartmouth_followup_experiment.concat(
 		stop_signal_exp_block)
 	if ((b+1)<num_test_blocks) {
-		motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
-		motor_selective_stop_signal__dartmouth_experiment.push(attention_node)
-		motor_selective_stop_signal__dartmouth_experiment.push(attn_check_start_test)
-		motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(test_feedback_block)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(attention_node)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(attn_check_start_test)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 	}
 }
 
-motor_selective_stop_signal__dartmouth_experiment.push(post_task_block)
-motor_selective_stop_signal__dartmouth_experiment.push(end_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(post_task_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(end_block)
