@@ -177,6 +177,8 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__dartmouth_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__dartmouth','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__dartmouth_baseline','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__dartmouth_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop_signal__dartmouth','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__dartmouth_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__dartmouth_followup','web','.');"
