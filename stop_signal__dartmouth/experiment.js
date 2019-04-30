@@ -363,6 +363,12 @@ var SSD = 250
 var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = stim src='/static/experiments/stop_signal__dartmouth/images/"
+var stop_signal = '<div class = coverbox></div><div class = shapebox>'+ preFileType  + 'stopSignal' + fileTypePNG + '</div>'
+
+
+
 /* Instruction Prompt */
 var possible_responses = [
 	["left arrow", 37],
@@ -612,9 +618,7 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages:[
-		'<div class = instructbox>'+
-			'<p class = block-text>Your screen resolution is: '+screen_resolution+'.  If your screen resolution is or below 1024x640, please zoom out to around 75%</p>' +
-			
+		'<div class = instructbox>'+			
 			'<p class = block-text>In this task you will see shapes displayed on the screen one at a time and should respond by pressing the corresponding button.</p>' +
 			
 			'<p class = block-text>You should respond to the shapes as quickly as you can, without sacrificing accuracy.</p>'+
@@ -671,21 +675,6 @@ var test_feedback_block = {
   on_finish: function() {
   	test_block_data = []
   }
-};
-
-var star_practice_block = {
-	type: 'poldrack-single-stim',
-	stimulus: '<p class = block-text style = "font-color: white">This is what a trial will look like if a red star appears around the shape.  If you cannot see the red star around the shape, please zoom out.  Press <strong> enter </strong> to continue to practice.</p>' +
-			  '<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'+
-			  '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
-	is_html: true,
-	choices: [13],
-	timing_response: 180000,
-	response_ends_trial: true,
-	data: {
-		trial_id: "end",
-	},
-	timing_post_trial: 0
 };
 
 
@@ -745,6 +734,42 @@ var practice_loop = {
     }
   }
 };
+
+
+var fileTypePNG = ".png'></img>"
+var preFileType = "<img class = center src='/static/experiments/stop_signal__dartmouth/images/"
+var stop_signal = '<div class = coverbox></div><div class = picture_box>'+ preFileType  + 'stopSignal' + fileTypePNG + '</div>'
+
+var star_practice_block = {
+	type: 'poldrack-single-stim',
+	stimulus: '<p class = block-text style = "font-color: white; font-size: 20px;">This is what a trial will look like if a red star appears around the shape.  If you cannot see the red star around the shape, please zoom out.  Press <strong> enter </strong> to continue to practice.</p>' +
+			  stop_signal +
+			  '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>',
+	is_html: true,
+	choices: [13],
+	timing_response: -1,
+	response_ends_trial: true,
+	data: {
+		trial_id: "end",
+	},
+	timing_post_trial: 0
+};
+
+
+var stop_signal_block_test_img = {
+	type: 'stop-signal',
+	stimulus: '<div class = coverbox></div><div class = shapebox><img class = stim src = ' + images[0] + '></img></div>', 
+	SS_stimulus: stop_signal,
+	is_html: true,
+	choices: choices,
+	timing_stim: -1,
+	timing_response: -1,
+	SSD: getSSD,
+	timing_SS: -1,
+	timing_post_trial: 0,
+	SS_trial_type: 'stop',
+	response_ends_trial: true
+}
 
 /* ************************************ */
 /* Set up experiment */

@@ -14,6 +14,30 @@
   color: white;
 }
 
+.picture_box {
+ width: 45vw;
+ height: 45vw;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 90%;
+}
+
 .fb_box {
   width:35vw;
   height: 40vh;
@@ -60,14 +84,15 @@
 }
 
 .shapebox {
-  width: 25vw;
-  height: 25vw;
+  width: 20vw;
+  height: 20vw;
   position: absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
   z-index: 3;
+  background-color: none;
 }
 
 
@@ -79,7 +104,8 @@
     bottom: 0;  
     left: 0;  
     right: 0;  
-    margin: auto;  
+    margin: auto; 
+    max-height: 90%;
 }
 
 .prompt_stim {
