@@ -1,6 +1,6 @@
 [
     {
-        "name": "Discount Fixed Dartmouth",
+        "name": "Discount Fixed Dartmouth Follow-up",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
@@ -19,7 +19,7 @@
                  "style.css"
                  
                ],
-        "exp_id": "discount_fixed__dartmouth",
+        "exp_id": "discount_fixed__dartmouth_followup",
         "cognitive_atlas_task_id": "tsk_4a57abb949e98",
         "contributors": [
                          "Zeynep Enkavi",
