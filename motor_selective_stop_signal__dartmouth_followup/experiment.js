@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'motor_selective_stop_signal__dartmouth'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'motor_selective_stop_signal__dartmouth_followup'})
 }
 
 var practice_ITIs = [0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6,0.0,0.0,0.1,0.3,0.7,0.0,0.1,0.3,0.0,0.1,0.3,0.2,0.1,0.4,0.3,0.5,0.3,0.2,0.5,0.3,0.1,0.0,0.4,0.0,0.1,0.0,0.1,0.1,0.0,0.6]
@@ -345,16 +345,17 @@ var run_attention_checks = true
 var practice_repeats = 0
 // task specific variables
 // Define and load images
-var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth/images/'
+var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth_followup/images/'
 
 // ***** REMOVE THE COMMENT - upcomming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
 
 // ***** REMOVE THE COMMENT - upcomming line should be active 
-var images_order = 2 //unique_expfactory_id.charCodeAt() % 24 
-var choice_order = 2 //unique_expfactory_id.charCodeAt() % 2 
-var trial_order = 2 //unique_expfactory_id.charCodeAt() % 4
+var images_order = unique_expfactory_id.charCodeAt() % 24 
+var choice_order = unique_expfactory_id.charCodeAt() % 2 
+var trial_order = unique_expfactory_id.charCodeAt() % 4
+trial_order = trial_order % 2
 
 var screen_resolution = screen.width + "x" + screen.height
 
@@ -390,7 +391,7 @@ var stop_signal =
 	'<div class = coverbox></div><div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/motor_selective_stop_signal__dartmouth/images/"
+var preFileType = "<img class = center src='/static/experiments/motor_selective_stop_signal__dartmouth_followup/images/"
 var stop_signal = '<div class = coverbox></div><div class = picture_box>'+ preFileType  + 'stopSignal' + fileTypePNG + '</div>'
 
 
@@ -806,17 +807,17 @@ var practice_loop = {
 /* ************************************ */
 /* Set up experiment */
 /* ************************************ */
-var motor_selective_stop_signal__dartmouth_experiment = []
+var motor_selective_stop_signal__dartmouth_followup_experiment = []
 
-motor_selective_stop_signal__dartmouth_experiment.push(welcome_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(welcome_block);
 
-motor_selective_stop_signal__dartmouth_experiment.push(instructions_block);
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
-motor_selective_stop_signal__dartmouth_experiment.push(practice_loop);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(instructions_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(practice_loop);
 
-motor_selective_stop_signal__dartmouth_experiment.push(start_practice_stop_block)
-motor_selective_stop_signal__dartmouth_experiment.push(star_practice_block);
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(start_practice_stop_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(star_practice_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 
 /* Test blocks */
 // Loop through the multiple blocks within each condition
@@ -891,17 +892,17 @@ for (b = 0; b < num_practice_blocks; b++) {
 		stop_signal_exp_block.push(categorize_block)
 	}
 
-	motor_selective_stop_signal__dartmouth_experiment = motor_selective_stop_signal__dartmouth_experiment.concat(
+	motor_selective_stop_signal__dartmouth_followup_experiment = motor_selective_stop_signal__dartmouth_followup_experiment.concat(
 		stop_signal_exp_block)
 	if ((b+1)<num_practice_blocks) {
-			motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
-			motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+			motor_selective_stop_signal__dartmouth_followup_experiment.push(test_feedback_block)
+			motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 	}
 
 }
 
-motor_selective_stop_signal__dartmouth_experiment.push(start_test_block)
-motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+motor_selective_stop_signal__dartmouth_followup_experiment.push(start_test_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 
 for (b = 0; b < num_test_blocks; b++) {
 	stop_signal_exp_block = []
@@ -957,15 +958,15 @@ for (b = 0; b < num_test_blocks; b++) {
 		stop_signal_exp_block.push(stop_signal_block)
 	}
 
-	motor_selective_stop_signal__dartmouth_experiment = motor_selective_stop_signal__dartmouth_experiment.concat(
+	motor_selective_stop_signal__dartmouth_followup_experiment = motor_selective_stop_signal__dartmouth_followup_experiment.concat(
 		stop_signal_exp_block)
 	if ((b+1)<num_test_blocks) {
-		motor_selective_stop_signal__dartmouth_experiment.push(test_feedback_block)
-		motor_selective_stop_signal__dartmouth_experiment.push(attention_node)
-		motor_selective_stop_signal__dartmouth_experiment.push(attn_check_start_test)
-		motor_selective_stop_signal__dartmouth_experiment.push(delay_trial_block);
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(test_feedback_block)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(attention_node)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(attn_check_start_test)
+		motor_selective_stop_signal__dartmouth_followup_experiment.push(delay_trial_block);
 	}
 }
 
-motor_selective_stop_signal__dartmouth_experiment.push(post_task_block)
-motor_selective_stop_signal__dartmouth_experiment.push(end_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(post_task_block)
+motor_selective_stop_signal__dartmouth_followup_experiment.push(end_block)

@@ -1,6 +1,6 @@
 [
     {
-        "name": "Stop-Signal Dartmouth",
+        "name": "Stop-Signal Dartmouth Follow-up",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
@@ -20,7 +20,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "stop_signal__dartmouth",
+        "exp_id": "stop_signal__dartmouth_followup",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Ian Eisenberg",
