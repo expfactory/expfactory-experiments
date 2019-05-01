@@ -150,7 +150,7 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		current_question: survey_question,
 		response_options: buttonText,
-		item_name: item_name
+		question_id: item_name
 	})
 	
 	if (question_format == 'radio'){

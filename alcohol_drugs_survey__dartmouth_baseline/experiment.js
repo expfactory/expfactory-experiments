@@ -168,7 +168,7 @@ var appendData = function(){
 		current_answer: buttonPressedText,
 		current_question: survey_question,
 		response_options: buttonText,
-		item_name: item_name
+		question_id: item_name
 	})
 	
 	keyTracker = []
