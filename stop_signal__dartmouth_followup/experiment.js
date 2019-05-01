@@ -886,6 +886,10 @@ for (x = 0; x < test_num_blocks; x++) {
 		timing_post_trial: 0,
 		on_finish: function(data) {
 			correct = false
+			if (data.SS_trial_type == 'stop'){
+				data.correct_response = -1
+			}
+			
 			if (data.key_press == data.correct_response) {
 				correct = true
 			}
@@ -894,7 +898,8 @@ for (x = 0; x < test_num_blocks; x++) {
 				exp_stage: 'test',
 				trial_num: current_trial,
 				correct: correct,
-				trial_id: 'test_trial'
+				trial_id: 'test_trial',
+				condition: data.SS_trial_type
 			})
 			current_trial += 1
 			test_block_data.push(data)
