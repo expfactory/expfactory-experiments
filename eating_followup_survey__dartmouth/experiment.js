@@ -148,30 +148,30 @@ var appendData = function(){
 	}
 	
 	jsPsych.data.addDataToLastTrial({
-		current_question: survey_question,
-		response_options: buttonText,
-		item_name: item_name
+		text: survey_question,
+		options: buttonText,
+		question_id: item_name
 	})
 	
 	if (question_format == 'radio'){
 		jsPsych.data.addDataToLastTrial({
-			current_answer: buttonPressedText
+			response: buttonPressedText
 		})
 	} else if (question_format == 'checkbox'){
 		jsPsych.data.addDataToLastTrial({
-			current_answer: checked_item,
+			response: checked_item,
 		})
 	} else if (question_format == 'time'){
 		jsPsych.data.addDataToLastTrial({
-			current_answer: time_answer,
+			response: time_answer,
 		})
 	} else if (question_format == 'slider'){
 		jsPsych.data.addDataToLastTrial({
-			current_answer: craving,
+			response: craving,
 		})
 	} else if (question_format == 'textfield'){
 		jsPsych.data.addDataToLastTrial({
-			current_answer: text_answer,
+			response: text_answer,
 		})
 	}
 	
