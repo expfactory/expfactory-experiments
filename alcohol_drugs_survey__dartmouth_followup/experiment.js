@@ -158,9 +158,9 @@ var appendData = function(){
 	}
 	
 	jsPsych.data.addDataToLastTrial({
-		current_answer: buttonPressedText,
-		current_question: survey_question,
-		response_options: buttonText,
+		response: buttonPressedText,
+		text: survey_question,
+		options: buttonText,
 		question_id: item_name
 	})
 	
