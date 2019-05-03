@@ -100,7 +100,7 @@ document.addEventListener("keydown", function(e){
     }
     if (keynum == 13){
     	if ((keyTracker.length === 0) && (game_state == 'questions')){
-    		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose a response')
+    		alert('Please choose a response.  Resume full-screen if you are taken out.')
     	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
     		hitKey(81)
     	}
