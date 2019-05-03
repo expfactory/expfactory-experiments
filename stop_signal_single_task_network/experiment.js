@@ -517,8 +517,8 @@ var test_intro = {
 	stimulus: '<div class = centerbox>'+
 				'<p class = block-text>We will now begin the test portion.</p>'+
 				'<p class = block-text>You will see a shape on every trial. Please respond to each shape as quickly and accurately as possible!</p>'+
-				'<p class = block-text>If the shape is a '+shapes[0]+' or a '+shapes[1]+', press the '+possible_responses[0][0]+'.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[2]+' or a '+shapes[3]+', press the '+possible_responses[2][0]+'.</p>'+
+				'<p class = block-text>If the shape is a '+shapes[0]+', press the '+possible_responses[0][0]+'.</p>'+
+				'<p class = block-text>If the shape is a '+shapes[2]+', press the '+possible_responses[2][0]+'.</p>'+
 				'<p class = block-text>Do not respond if you see a star</p>'+
 				'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 			 '</div>',

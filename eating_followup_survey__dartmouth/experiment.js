@@ -123,13 +123,14 @@ document.addEventListener("keydown", function(e){
     	keynum = e.which;
     }
     if (keynum == 13){
-    	if ((keyTracker.length === 0) && (game_state == 'questions')){
-    		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose a response')
-    	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
+    	if ((keyTracker.length === 0) && (game_state == 'questions') && (question_format != 'textfield')){
+    		alert('Please choose a response.  Resume full-screen if you are taken out.')
+    	} else  if  ((keyTracker.length > 0) && (game_state == 'questions') && (question_format != 'textfield')){
     		hitKey(81)
     	}
     }
 });
+
 
 var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global

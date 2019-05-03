@@ -123,9 +123,9 @@ document.addEventListener("keydown", function(e){
     	keynum = e.which;
     }
     if (keynum == 13){
-    	if ((keyTracker.length === 0) && (game_state == 'questions')){
-    		alert('Please choose a response.  Resume full-screen if you are taken out.')('Please choose a response')
-    	} else  if  ((keyTracker.length > 0) && (game_state == 'questions')){
+    	if ((keyTracker.length === 0) && (game_state == 'questions') && (question_format != 'textfield')){
+    		alert('Please choose a response.  Resume full-screen if you are taken out.')
+    	} else  if  ((keyTracker.length > 0) && (game_state == 'questions') && (question_format != 'textfield')){
     		hitKey(81)
     	}
     }
@@ -228,14 +228,12 @@ var game_state = 'start'
 
 //Questions to be presented
 var survey_questions = ['In the past month, have you taken medication for psychiatric reasons (including stimulants and mood stabilizers)?',
-					    'In the past month, have you used nicotine replacement therapy (NRT), such as a patch, gum, lozenge, nasal spray, or inhaler?',
 					    'Is there anything that happened during the four-week period that influenced the quality of the information you were able to provide or your ability to participate in the study? If so, please describe.',
 					    'Please share any other comments you would like to share about the study.']
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
 var button_text = [[['Yes','No'],2],
-				   [['Yes','No'],2],
 				   [['Textfield'],1],
 				   [['Textfield'],1]]
 
@@ -243,37 +241,31 @@ var button_text = [[['Yes','No'],2],
 //Fatal questions end the survey, if a sub makes a particular response
 //questions that are 'neither' are not conditional or fatal
 var question_types =   [['neither'],
-						['neither'],
 					    ['neither'],
 					    ['neither']]	
 
 //does the question require radio, checkbox, textfield, numeric, slider, or time?  Numeric and textfield has not been coded					    
 var question_formats = [['radio'],
-					    ['radio'],
 					    ['textfield'],
 					    ['textfield']]			   
 
 //If a subject chooses this response, end survey.  If not, continue survey
 var fatal_responses =  [['none'],
 					    ['none'],
-					    ['none'],
 					    ['none']]
 
 //If a subject chooses this response, show the next question.  If not, skip next question					   
 var conditional_responses = [['neither'],
-					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
 //these are the number of questions to skip						     
 var conditional_lengths =    [['neither'],
 					    	 ['neither'],
-					    	 ['neither'],
 					    	 ['neither']]
 
 //Names of items that be written on data
 var item_names_dartmouth = ['medication_psych_fu',
-							'nrt_fu',
 							'data_influence',
 							'comments']
 							
