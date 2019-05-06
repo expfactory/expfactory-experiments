@@ -134,7 +134,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 72,
-		condition: 'incompatible',
+		flanker_condition: 'incongruent',
 		trial_id: 'stim',
 		flanker: 'F',
 		center_letter: 'H'
@@ -147,7 +147,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 70,
-		condition: 'incompatible',
+		flanker_condition: 'incongruent',
 		trial_id: 'stim',
 		flanker: 'H',
 		center_letter: 'F'
@@ -160,7 +160,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 72,
-		condition: 'compatible',
+		flanker_condition: 'congruent',
 		trial_id: 'stim',
 		flanker: 'H',
 		center_letter: 'H'
@@ -173,7 +173,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 70,
-		condition: 'compatible',
+		flanker_condition: 'congruent',
 		trial_id: 'stim',
 		flanker: 'F',
 		center_letter: 'F'
