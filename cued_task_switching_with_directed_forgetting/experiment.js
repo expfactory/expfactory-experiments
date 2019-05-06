@@ -455,8 +455,8 @@ var task_conditions = jsPsych.randomization.repeat(['stay','switch'],1)
 var cued_conditions = jsPsych.randomization.repeat(['stay','switch'],1)
 
 var cues = [['retain','remember'],['forget','disregard']]
+var cued_dimensions = ['remember','forget']
 
-var cued_dimensions = jsPsych.randomization.repeat(['forget','remember'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var current_trial = 0	
