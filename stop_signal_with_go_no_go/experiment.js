@@ -223,9 +223,9 @@ var getStim = function(){
 
 
 function getSSD(){
-	if (go_nogo_condition == 'go'){
+	if (go_no_go_type == 'go'){
 		return SSD_go
-	} else if (go_nogo_condition == 'nogo'){
+	} else if (go_no_go_type == 'nogo'){
 		return SSD_nogo
 	}
 }
@@ -254,7 +254,7 @@ var appendData = function(){
 			current_block: currBlock,
 			current_trial: current_trial,
 			stop_signal_condition: stimData.stop_signal_condition,
-			go_nogo_condition: stimData.go_no_go_type
+			go_nogo_condition: stimData.go_no_go_type,
 			SSD_nogo: SSD_nogo,
 			SSD_go: SSD_go
 		})
