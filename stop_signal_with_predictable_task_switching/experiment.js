@@ -270,9 +270,9 @@ var getFixation = function(){
 }
 
 function getSSD(){
-	if (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch'){
+	if (predictive_condition == 'switch'){
 		return SSD_switch
-	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay'){
+	} else if (predictive_condition == 'stay'){
 		return SSD_stay
 	}
 }
