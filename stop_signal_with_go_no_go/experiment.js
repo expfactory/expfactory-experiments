@@ -223,7 +223,11 @@ var getStim = function(){
 
 
 function getSSD(){
-	return SSD
+	if (go_nogo_condition == 'go'){
+		return SSD_go
+	} else if (go_nogo_condition == 'nogo'){
+		return SSD_nogo
+	}
 }
 
 function getSSType(){
@@ -251,18 +255,28 @@ var appendData = function(){
 			current_trial: current_trial,
 			stop_signal_condition: stimData.stop_signal_condition,
 			go_nogo_condition: stimData.go_no_go_type
+			SSD_nogo: SSD_nogo,
+			SSD_go: SSD_go
 		})
 	}
 	
 	
 	if ((exp_phase == "test") || (exp_phase == "practice2")){	
 		
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_go < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_go+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_go > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_go-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_nogo < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_nogo+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_nogo > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_nogo-=50
 		}
 		
 	
@@ -303,7 +317,8 @@ var numTrialsPerBlock = 60 // 60, must be divisible by 60
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
-var SSD = 250
+var SSD_nogo = 250
+var SSD_go = 250
 var maxSSD = 1000
 var minSSD = 0 
 var current_trial = 0
