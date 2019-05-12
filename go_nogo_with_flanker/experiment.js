@@ -517,6 +517,9 @@ var practiceNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		
+		var total_go_trials = 0
+		var missed_response = 0
 	
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "practice_trial"){
@@ -527,7 +530,13 @@ var practiceNode = {
 				}
 				if (data[i].key_press == data[i].correct_response){
 					correct += 1
-	
+				}
+				
+				if (data[i].go_nogo_condition == 'go'){
+					total_go_trials += 1
+					if (data[i].rt == -1){
+						missed_response += 1
+					}
 				}
 		
 			}
@@ -535,7 +544,7 @@ var practiceNode = {
 		}
 	
 		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
+		var missed_responses = missed_response / total_go_trials
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"

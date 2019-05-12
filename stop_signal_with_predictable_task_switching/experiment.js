@@ -270,7 +270,11 @@ var getFixation = function(){
 }
 
 function getSSD(){
-	return SSD
+	if (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch'){
+		return SSD_switch
+	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay'){
+		return SSD_stay
+	}
 }
 
 function getSSType(){
@@ -321,18 +325,27 @@ var appendData = function(){
 		parity: parity,
 		current_trial: current_trial,
 		current_block: current_block,
-		SSD: SSD
+		SSD_stay: SSD_stay,
+		SSD_switch: SSD_switch
 		
 	})
 	
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_stay+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_stay-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_switch+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_switch-=50
 		}
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -372,7 +385,9 @@ var lower_stop_success_bound_practice = 0
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10 
 var practice_thresh = 3 // 3 blocks of 24 trials
-var SSD = 250
+var SSD_switch = 250
+var SSD_stay = 250
+
 var maxSSD = 1000
 var minSSD = 0 
 

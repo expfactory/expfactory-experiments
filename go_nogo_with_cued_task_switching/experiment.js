@@ -38,11 +38,11 @@ function assessPerformance() {
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
 			
-			if (experiment_data[i].go_no_go_condition == 'go'){
+			if (experiment_data[i].go_nogo_condition == 'go'){
 				trial_count += 1
 			}
 			
-			if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt != -1)){
+			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 				key = experiment_data[i].key_press
@@ -50,9 +50,9 @@ function assessPerformance() {
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
-			} else if ((experiment_data[i].go_no_go_condition == 'go') && (experiment_data[i].rt == -1)){
+			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
 				missed_count += 1
-			} else if ((experiment_data[i].go_no_go_condition == 'nogo') && (experiment_data[i].rt != -1)){
+			} else if ((experiment_data[i].go_nogo_condition == 'nogo') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
 			}
@@ -88,7 +88,7 @@ var getInstructFeedback = function() {
 }
 
 var getCategorizeIncorrectText = function(){
-	if (go_no_go_condition == 'go'){
+	if (go_nogo_condition == 'go'){
 	
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
@@ -99,7 +99,7 @@ var getCategorizeIncorrectText = function(){
 }
 
 var getTimeoutText = function(){
-	if (go_no_go_condition == "go"){
+	if (go_nogo_condition == "go"){
 		return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
 		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
@@ -107,7 +107,7 @@ var getTimeoutText = function(){
 }
 
 var getCategorizeCorrectText = function(){
-	if (go_no_go_condition == "go"){
+	if (go_nogo_condition == "go"){
 		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
@@ -208,7 +208,7 @@ var setStims = function() {
   }
   curr_cue = tasks[curr_task].cues[cue_i]
   curr_stim = stims[current_trial]
-  go_no_go_condition = task_switches[current_trial].go_no_go_type
+  go_nogo_condition = task_switches[current_trial].go_no_go_type
   current_trial = current_trial + 1
   CTI = setCTI()
 }
@@ -221,9 +221,9 @@ var getCue = function() {
 
 var getStim = function() {
     
-  if (go_no_go_condition == "nogo"){
+  if (go_nogo_condition == "nogo"){
   	stim_style = go_no_go_styles[1]
-  } else if (go_no_go_condition == "go"){
+  } else if (go_nogo_condition == "go"){
     stim_style = go_no_go_styles[0]
   }
     
@@ -241,13 +241,13 @@ var getResponse = function() {
     case 'color':
       if (curr_stim.color == 'orange') {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -256,13 +256,13 @@ var getResponse = function() {
     case 'magnitude':
       if (curr_stim.number > 5) {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -271,13 +271,13 @@ var getResponse = function() {
     case 'parity':
       if (curr_stim.number % 2 === 0) {
       	correct_response = response_keys.key[0]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
       } else {
       	correct_response = response_keys.key[1]
-      	if(go_no_go_condition == "nogo"){
+      	if(go_nogo_condition == "nogo"){
 			correct_response = -1
 		}
         return correct_response
@@ -299,16 +299,16 @@ var appendData = function() {
     task: curr_task,
     task_condition: task_switch.task_switch,
     cue_condition: task_switch.cue_switch,
-    go_no_go_condition: go_no_go_condition,
+    go_nogo_condition: go_nogo_condition,
     trial_num: trial_num,
     CTI: CTI
   })
   
   if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
   	jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
+	if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
 		jsPsych.data.addDataToLastTrial({gng_stop_acc: 1})
-	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_no_go_condition == 'nogo')){
+	} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
 		jsPsych.data.addDataToLastTrial({gng_stop_acc: 0})
 	}
 	
@@ -711,9 +711,13 @@ var practiceNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		
+		var total_go_trials = 0
+		var missed_response = 0
+		
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "practice_trial"){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
@@ -723,11 +727,20 @@ var practiceNode = {
 					correct += 1
 	
 				}
+				
+				if (data[i].go_nogo_condition == 'go'){
+					total_go_trials += 1
+					if (data[i].rt == -1){
+						missed_response += 1
+					}
+				}
+		
 			}
+	
 		}
 	
 		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
+		var missed_responses = missed_response / total_go_trials
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
@@ -824,41 +837,41 @@ var testNode = {
 		testStims = genStims(numTrialsPerBlock + 1)
 		current_trial = 0
 	
-		var total_trials = 0
+		var sum_rt = 0
 		var sum_responses = 0
-		var total_sum_rt = 0
+		var correct = 0
+		var total_trials = 0
 		
-		var go_trials = 0
-		var go_correct = 0
-		var go_rt = 0
-		var sum_go_responses = 0
-		
-		var stop_trials = 0
-		var stop_correct = 0
-		var stop_rt = 0
-		var sum_stop_responses = 0
+		var total_go_trials = 0
+		var missed_response = 0
 		
 	
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
-				go_trials+=1
 				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					go_rt += data[i].rt
-					sum_go_responses += 1
+					sum_rt += data[i].rt
+					sum_responses += 1
 				}
 				if (data[i].key_press == data[i].correct_response){
-					go_correct += 1
+					correct += 1
 	
 				}
-			} 
+				
+				if (data[i].go_nogo_condition == 'go'){
+					total_go_trials += 1
+					if (data[i].rt == -1){
+						missed_response += 1
+					}
+				}
+		
+			}
+	
 		}
 	
-		var accuracy = go_correct / go_trials
-		var missed_responses = (go_trials - sum_go_responses) / go_trials
-		var ave_rt = go_rt / sum_go_responses
-		var stop_acc = stop_correct / stop_trials
+		var accuracy = correct / total_trials
+		var missed_responses = missed_response / total_go_trials
+		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
