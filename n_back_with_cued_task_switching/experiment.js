@@ -126,6 +126,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	if (cued_condition == "switch"){ // if switch tasks, pick a random cue and switch to other task
 		curr_task = randomDraw(['one_back','two_back'].filter(function(y) {return $.inArray(y, [last_task]) == -1}))
 		curr_cue = tasks[curr_task].cues[Math.floor(Math.random() * 2)]
+		cued_switch_condition = 'switch'
 	} else if (cued_condition == "stay"){ // if stay tasks, if cued_switch condition is switch, then switch to other cue, stay if not.
 		if (cued_switch_condition == 'switch'){
 		last_cue = curr_cue
