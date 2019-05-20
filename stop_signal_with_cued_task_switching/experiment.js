@@ -77,7 +77,11 @@ function assessPerformance() {
 	var accuracy = correct / trial_count
 	var missed_percent = missed_count/trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var randomDraw = function(lst) {

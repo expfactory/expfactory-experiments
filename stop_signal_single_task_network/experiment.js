@@ -64,9 +64,6 @@ function assessPerformance() {
 			}
 		}
 	}
-	console.log('trial count = ' + trial_count)
-	console.log('correct = ' + correct)
-	console.log('missed_count = ' + missed_count)
 
 	
 	//calculate average rt
@@ -84,11 +81,11 @@ function assessPerformance() {
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
-	console.log('missed_percent = ' + missed_percent)
-	console.log('avg_rt = ' + avg_rt)
-	console.log('responses_ok = ' + responses_ok)
-	console.log('accuracy = ' + accuracy)
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var getFeedback = function() {
