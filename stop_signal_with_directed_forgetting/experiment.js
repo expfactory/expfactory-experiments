@@ -155,7 +155,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		letters = getTrainingSet()
 		cue = getCue()
 		probe = getProbe(directed_condition, letters, cue)
-		correct_response = getCorrectResponse(cue, probe, letters, stop_signal_condition)
+		correct_response = getCorrectResponse(directed_condition, stop_signal_condition)
 		 if (stop_signal_condition == 'go'){
 			probe_color = 'green'
 		 } else {
@@ -240,25 +240,19 @@ var getProbe = function(directed_cond, letters, cue) {
 	return probe
 };
 
-var getCorrectResponse = function(cue,probe,letters,stop_signal_condition) {
+var getCorrectResponse = function(directed_condition,stop_signal_condition) {
 	if (stop_signal_condition == 'stop'){
 		correct_response = -1
 		return correct_response 
 	}
 	
-	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, letters.slice(3)) != -1) {
-			return possible_responses[0][1]
-		} else {
-			return possible_responses[1][1]
-		}
-	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, letters.slice(0,3)) != -1) {
-			return possible_responses[0][1]
-		} else {
-			return possible_responses[1][1]
-		}
-	}	
+	if (directed_condition == 'pos') {
+		return possible_responses[0][1]
+	} else if (directed_condition == 'neg') {
+		return possible_responses[1][1]
+	} else if (directed_condition == 'con') {
+		return possible_responses[1][1]
+	}
 	
 		
 }

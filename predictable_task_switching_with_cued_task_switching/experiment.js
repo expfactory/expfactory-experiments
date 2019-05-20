@@ -354,7 +354,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		}
 		
 		stim = {
-			whichQuadrant: quadIndex,
+			whichQuadrant: whichQuadrant,
 			predictive_condition: predictive_condition,
 			predictive_dimension: predictive_dimension,
 			cued_condition: cued_condition,
