@@ -37,30 +37,30 @@ function assessPerformance() {
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			trial_count += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].go_nogo_condition == 'go'){
-				trial_count += 1
-			}
-			
-			if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
-			} else if ((experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
-				missed_count += 1
-			} else if ((experiment_data[i].go_nogo_condition == 'nogo') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
+				if (experiment_data[i].key_press == -1){
+					missed_count += 1
+				}
+				if (experiment_data[i].key_press != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				}
+			} else if (experiment_data[i].go_nogo_condition == 'nogo'){
+				if (experiment_data[i].key_press == -1){
+					correct += 1
+				}
 			}
-		}
+		}	
 	}
-	
-
 	
 	//calculate average rt
 	var avg_rt = -1

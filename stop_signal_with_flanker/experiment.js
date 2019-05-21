@@ -28,18 +28,22 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	choice_counts[77] = 0
-	choice_counts[90] = 0
+	choice_counts[70] = 0
+	choice_counts[72] = 0
 	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -47,8 +51,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -69,7 +71,7 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})

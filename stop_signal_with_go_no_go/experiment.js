@@ -33,6 +33,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0 
+	var acc_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -43,30 +44,48 @@ function assessPerformance() {
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			trial_count += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go')){
-				trial_count += 1
-			}
-			
-			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
+				acc_trials += 1
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
 				
-				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					if (experiment_data[i].key_press == experiment_data[i].correct_response){
+						correct += 1
+					}
+				} else if (experiment_data[i].rt == -1){
+					missed_count += 1
+				}
+			} else if ((experiment_data[i].stop_signal_condition == 'stop') && (experiment_data[i].go_nogo_condition == 'nogo')){
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				}
+			
+			} else if (experiment_data[i].go_nogo_condition == 'nogo'){
+				acc_trials += 1
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				
+				} else if (experiment_data[i].rt == -1){
 					correct += 1
 				}
-			} else if (((experiment_data[i].go_nogo_condition == 'nogo') || (experiment_data[i].stop_signal_condition == 'stop')) && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
-				missed_count += 1
+			
+			} else if (experiment_data[i].stop_signal_condition == 'stop'){
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				}
 			}
 		}
 	}
-	
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -80,8 +99,8 @@ function assessPerformance() {
 			responses_ok = false
 		}
 	})
-	var missed_percent = missed_count/trial_count
-	var accuracy = correct / trial_count
+	var missed_percent = missed_count/acc_trials
+	var accuracy = correct / acc_trials
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
 	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
 									 final_missed_percent: missed_percent,
