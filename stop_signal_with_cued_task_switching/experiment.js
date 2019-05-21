@@ -31,6 +31,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 
 		//record choices participants made
 	var choice_counts = {}
@@ -40,6 +41,9 @@ function assessPerformance() {
   
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -47,8 +51,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -70,14 +72,18 @@ function assessPerformance() {
 		//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})
 	var accuracy = correct / trial_count
 	var missed_percent = missed_count/trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var randomDraw = function(lst) {
@@ -239,8 +245,14 @@ var getStopStim = function(){
     return stim_html
 }
 
-var getSSD = function(){
-	return SSD
+function getSSD(){
+	var trial_num = current_trial - 1 //current_trial has already been updated with setStims, so subtract one to record data
+    var task_switch = task_switches[trial_num]
+	if (task_switch.task_switch == 'switch'){
+		return SSD_switch
+	} else if (task_switch.task_switch == 'stay'){
+		return SSD_stay
+	}
 }
 
 //Returns the key corresponding to the correct response for the current
@@ -316,17 +328,27 @@ var appendData = function() {
     stop_signal_condition: stop_signal_condition,
     current_trial: current_trial,
     current_block: currBlock,
-    CTI: CTI
+    CTI: CTI,
+    SSD_stay: SSD_stay,
+    SSD_switch: SSD_switch
   })
   
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
 		jsPsych.data.addDataToLastTrial({correct_response: correct_response})
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).task_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_stay+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).task_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_stay-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).task_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_switch+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).task_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_switch-=50
 		}
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -377,7 +399,8 @@ var test_length = 240
 var numTrialsPerBlock = 48 //48 must be divisible by 12
 var numTestBlocks = test_length / numTrialsPerBlock
 
-var SSD = 250
+var SSD_stay = 250
+var SSD_switch = 250
 var maxSSD = 1000
 var minSSD = 0 
 
@@ -843,7 +866,7 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
-		if ((accuracy > accuracy_thresh) && (stop_correct < maxStopCorrectPractice) && (stop_correct > minStopCorrectPractice)){
+		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrectPractice) && (stop_acc > minStopCorrectPractice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			testStims = genStims(numTrialsPerBlock + 1)
@@ -861,13 +884,13 @@ var practiceNode = {
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 			
-			if (stop_correct === maxStopCorrectPractice){
+			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 			
 			}
 			
-			if (stop_correct === minStopCorrectPractice){
+			if (stop_acc === minStopCorrectPractice){
 				feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			
@@ -1011,12 +1034,12 @@ var testNode = {
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
 		
-		if (stop_correct > maxStopCorrect){
+		if (stop_acc > maxStopCorrect){
 			feedback_text +=
 			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
 		}
 		
-		if (stop_correct < minStopCorrect){
+		if (stop_acc < minStopCorrect){
 			feedback_text +=
 			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 		}

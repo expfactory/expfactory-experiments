@@ -28,6 +28,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 
 		//record choices participants made
 	var choice_counts = {}
@@ -40,6 +41,9 @@ function assessPerformance() {
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -47,8 +51,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -70,14 +72,18 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var getInstructFeedback = function() {
@@ -270,7 +276,11 @@ var getFixation = function(){
 }
 
 function getSSD(){
-	return SSD
+	if (predictive_condition == 'switch'){
+		return SSD_switch
+	} else if (predictive_condition == 'stay'){
+		return SSD_stay
+	}
 }
 
 function getSSType(){
@@ -321,18 +331,27 @@ var appendData = function(){
 		parity: parity,
 		current_trial: current_trial,
 		current_block: current_block,
-		SSD: SSD
+		SSD_stay: SSD_stay,
+		SSD_switch: SSD_switch
 		
 	})
 	
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_stay+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_stay-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_switch+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_switch-=50
 		}
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -372,7 +391,9 @@ var lower_stop_success_bound_practice = 0
 var accuracy_thresh = 0.70
 var missed_thresh = 0.10 
 var practice_thresh = 3 // 3 blocks of 24 trials
-var SSD = 250
+var SSD_switch = 250
+var SSD_stay = 250
+
 var maxSSD = 1000
 var minSSD = 0 
 

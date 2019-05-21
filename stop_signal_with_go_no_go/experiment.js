@@ -33,6 +33,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0 
+	var acc_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -43,30 +44,48 @@ function assessPerformance() {
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
+	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			trial_count += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go')){
-				trial_count += 1
-			}
-			
-			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
+				acc_trials += 1
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
 				
-				if (experiment_data[i].key_press == experiment_data[i].correct_response){
+					if (experiment_data[i].key_press == experiment_data[i].correct_response){
+						correct += 1
+					}
+				} else if (experiment_data[i].rt == -1){
+					missed_count += 1
+				}
+			} else if ((experiment_data[i].stop_signal_condition == 'stop') && (experiment_data[i].go_nogo_condition == 'nogo')){
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				}
+			
+			} else if (experiment_data[i].go_nogo_condition == 'nogo'){
+				acc_trials += 1
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				
+				} else if (experiment_data[i].rt == -1){
 					correct += 1
 				}
-			} else if (((experiment_data[i].go_nogo_condition == 'nogo') || (experiment_data[i].stop_signal_condition == 'stop')) && (experiment_data[i].rt != -1)){
-				rt = experiment_data[i].rt
-				rt_array.push(rt)
-			} else if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].go_nogo_condition == 'go') && (experiment_data[i].rt == -1)){
-				missed_count += 1
+			
+			} else if (experiment_data[i].stop_signal_condition == 'stop'){
+				if (experiment_data[i].rt != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
+				}
 			}
 		}
 	}
-	
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -80,10 +99,14 @@ function assessPerformance() {
 			responses_ok = false
 		}
 	})
-	var missed_percent = missed_count/trial_count
-	var accuracy = correct / trial_count
+	var missed_percent = missed_count/acc_trials
+	var accuracy = correct / acc_trials
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 
@@ -223,7 +246,11 @@ var getStim = function(){
 
 
 function getSSD(){
-	return SSD
+	if (go_no_go_type == 'go'){
+		return SSD_go
+	} else if (go_no_go_type == 'nogo'){
+		return SSD_nogo
+	}
 }
 
 function getSSType(){
@@ -250,19 +277,29 @@ var appendData = function(){
 			current_block: currBlock,
 			current_trial: current_trial,
 			stop_signal_condition: stimData.stop_signal_condition,
-			go_nogo_condition: stimData.go_no_go_type
+			go_nogo_condition: stimData.go_no_go_type,
+			SSD_nogo: SSD_nogo,
+			SSD_go: SSD_go
 		})
 	}
 	
 	
 	if ((exp_phase == "test") || (exp_phase == "practice2")){	
 		
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_go < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_go+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_go > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_go-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_nogo < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_nogo+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_nogo > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_nogo-=50
 		}
 		
 	
@@ -303,7 +340,8 @@ var numTrialsPerBlock = 60 // 60, must be divisible by 60
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
-var SSD = 250
+var SSD_nogo = 250
+var SSD_go = 250
 var maxSSD = 1000
 var minSSD = 0 
 var current_trial = 0
@@ -662,61 +700,71 @@ var practiceStopNode = {
 		
 		var total_trials = 0
 		
-		var sum_stop_rt = 0;
-		var sum_go_rt = 0;
-		var sum_gng_rt = 0;
+		var SS_gng_go_trials = 0
+		var SS_gng_go_respond = 0
+		var SS_gng_go_rt = 0
+		var SS_gng_go_correct = 0
 		
-		var sumGo_correct = 0;
-		var sumStop_correct = 0;
-		var sumGNG_correct = 0;
+		var SS_gng_stop_trials = 0
+		var SS_gng_stop_respond = 0
+		var SS_gng_stop_rt = 0
 		
-		var num_go_responses = 0;
-		var num_stop_responses = 0;
-		var num_gng_responses = 0;
+		var SS_stop_trials = 0
+		var SS_stop_respond = 0
+		var SS_stop_rt = 0
+		var SS_stop_no_respond = 0
 		
-		var go_length = 0;
-		var stop_length = 0
-		var go_no_go_length = 0
+		var gng_stop_trials = 0
+		var gng_stop_respond = 0
+		var gng_stop_respond_rt = 0
+		var gng_stop_no_respond = 0
 		
 		for (i = 0; i < data.length; i++) {
-			if (data[i].trial_id == "practice_trial"){
+			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-				if (data[i].stop_signal_condition == "go"){
-					go_length += 1
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+					SS_gng_go_trials += 1
 					if (data[i].rt != -1) {
-						num_go_responses += 1
-						sum_go_rt += data[i].rt;
+						SS_gng_go_respond += 1
+						SS_gng_go_rt += data[i].rt;
 					}
 					if (data[i].key_press == data[i].correct_response) {
-						sumGo_correct += 1
+						SS_gng_go_correct += 1
+					}
+				} else if ((data[i].stop_signal_condition == "stop") && (data[i].go_nogo_condition == "nogo")){
+					SS_gng_stop_trials += 1
+					if (data[i].rt != -1) {
+						SS_gng_stop_respond += 1
+						SS_gng_stop_rt += data[i].rt;
 					}
 				} else if (data[i].stop_signal_condition == "stop") {
-					stop_length += 1
+					SS_stop_trials += 1
 					if (data[i].rt != -1){
-						num_stop_responses += 1
-						sum_stop_rt += data[i].rt
+						SS_stop_respond += 1
+						SS_stop_rt += data[i].rt
 					} else if (data[i].rt == -1){
-						sumStop_correct += 1
+						SS_stop_no_respond += 1
 					}				
 				} else if (data[i].go_nogo_condition == "nogo") {
-					go_no_go_length += 1
+					gng_stop_trials += 1
 					if (data[i].rt != -1){
-						num_gng_responses += 1
-						sum_gng_rt += data[i].rt
+						gng_stop_respond += 1
+						gng_stop_respond_rt += data[i].rt
 					} else if (data[i].rt == -1){
-						sumGNG_correct += 1
+						gng_stop_no_respond += 1
 					}				
 				}
 			}
 		}
 		
-		var average_rt = sum_go_rt / num_go_responses;
-		var missed_responses = (go_length - num_go_responses) / go_length
 		
-		var aveShapeRespondCorrect = sumGo_correct / go_length 
+		var average_rt = SS_gng_go_rt / SS_gng_go_respond;
+		var missed_responses = (SS_gng_go_trials - SS_gng_go_respond) / SS_gng_go_trials
 		
-		var stop_signal_respond = num_stop_responses / stop_length
-		var gng_respond = num_gng_responses / go_no_go_length
+		var aveShapeRespondCorrect = SS_gng_go_correct / SS_gng_go_trials 
+		
+		var stop_signal_respond = (SS_gng_stop_respond + SS_stop_respond) / (SS_stop_trials + SS_gng_stop_trials)
+		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)
 			
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
@@ -817,61 +865,71 @@ var testNode = {
 		
 		var total_trials = 0
 		
-		var sum_stop_rt = 0;
-		var sum_go_rt = 0;
-		var sum_gng_rt = 0;
+		var SS_gng_go_trials = 0
+		var SS_gng_go_respond = 0
+		var SS_gng_go_rt = 0
+		var SS_gng_go_correct = 0
 		
-		var sumGo_correct = 0;
-		var sumStop_correct = 0;
-		var sumGNG_correct = 0;
+		var SS_gng_stop_trials = 0
+		var SS_gng_stop_respond = 0
+		var SS_gng_stop_rt = 0
 		
-		var num_go_responses = 0;
-		var num_stop_responses = 0;
-		var num_gng_responses = 0;
+		var SS_stop_trials = 0
+		var SS_stop_respond = 0
+		var SS_stop_rt = 0
+		var SS_stop_no_respond = 0
 		
-		var go_length = 0;
-		var stop_length = 0
-		var go_no_go_length = 0
+		var gng_stop_trials = 0
+		var gng_stop_respond = 0
+		var gng_stop_respond_rt = 0
+		var gng_stop_no_respond = 0
 		
 		for (i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
-				if (data[i].stop_signal_condition == "go"){
-					go_length += 1
+				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
+					SS_gng_go_trials += 1
 					if (data[i].rt != -1) {
-						num_go_responses += 1
-						sum_go_rt += data[i].rt;
+						SS_gng_go_respond += 1
+						SS_gng_go_rt += data[i].rt;
 					}
 					if (data[i].key_press == data[i].correct_response) {
-						sumGo_correct += 1
+						SS_gng_go_correct += 1
+					}
+				} else if ((data[i].stop_signal_condition == "stop") && (data[i].go_nogo_condition == "nogo")){
+					SS_gng_stop_trials += 1
+					if (data[i].rt != -1) {
+						SS_gng_stop_respond += 1
+						SS_gng_stop_rt += data[i].rt;
 					}
 				} else if (data[i].stop_signal_condition == "stop") {
-					stop_length += 1
+					SS_stop_trials += 1
 					if (data[i].rt != -1){
-						num_stop_responses += 1
-						sum_stop_rt += data[i].rt
+						SS_stop_respond += 1
+						SS_stop_rt += data[i].rt
 					} else if (data[i].rt == -1){
-						sumStop_correct += 1
+						SS_stop_no_respond += 1
 					}				
 				} else if (data[i].go_nogo_condition == "nogo") {
-					go_no_go_length += 1
+					gng_stop_trials += 1
 					if (data[i].rt != -1){
-						num_gng_responses += 1
-						sum_gng_rt += data[i].rt
+						gng_stop_respond += 1
+						gng_stop_respond_rt += data[i].rt
 					} else if (data[i].rt == -1){
-						sumGNG_correct += 1
+						gng_stop_no_respond += 1
 					}				
 				}
 			}
 		}
 		
-		var average_rt = sum_go_rt / num_go_responses;
-		var missed_responses = (go_length - num_go_responses) / go_length
 		
-		var aveShapeRespondCorrect = sumGo_correct / go_length 
+		var average_rt = SS_gng_go_rt / SS_gng_go_respond;
+		var missed_responses = (SS_gng_go_trials - SS_gng_go_respond) / SS_gng_go_trials
 		
-		var stop_signal_respond = num_stop_responses / stop_length
-		var gng_respond = num_gng_responses / go_no_go_length
+		var aveShapeRespondCorrect = SS_gng_go_correct / SS_gng_go_trials 
+		
+		var stop_signal_respond = (SS_gng_stop_respond + SS_stop_respond) / (SS_stop_trials + SS_gng_stop_trials)
+		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)
 		
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"

@@ -28,6 +28,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -41,6 +42,9 @@ function assessPerformance() {
 	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -48,8 +52,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -71,14 +73,18 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 
@@ -193,7 +199,13 @@ var createTrialTypes = function(numTrialsPerBlock){
 }
 
 function getSSD(){
-	return SSD
+	if ((shape_matching_condition == "SNN") || (shape_matching_condition == "DNN")){
+		return SSD_neutral
+	} else if ((shape_matching_condition == "SSS") || (shape_matching_condition == "DSD")){
+		return SSD_same
+	} else if ((shape_matching_condition == "DDD") || (shape_matching_condition == "DDS") || (shape_matching_condition == "SDD")){
+		return SSD_diff
+	}
 }
 
 function getSSType(){
@@ -264,18 +276,36 @@ var appendData = function(){
 		
 		current_trial: current_trial,
 		current_block: current_block,
-		SSD: SSD
+		SSD_same: SSD_same,
+		SSD_diff: SSD_diff,
+		SSD_neutral: SSD_neutral
 		
 	})
 	
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_same < maxSSD) && ((shape_matching_condition == 'SSS') || (shape_matching_condition == 'DSD'))){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_same+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_same > minSSD) && ((shape_matching_condition == 'SSS') || (shape_matching_condition == 'DSD'))){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_same-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_diff < maxSSD) && ((shape_matching_condition == 'DDD') || (shape_matching_condition == 'DDS')|| (shape_matching_condition == 'SDD'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_diff+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_diff > minSSD) && ((shape_matching_condition == 'DDD') || (shape_matching_condition == 'DDS')|| (shape_matching_condition == 'SDD'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_diff-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_neutral < maxSSD) && ((shape_matching_condition == 'DNN') || (shape_matching_condition == 'SNN'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_neutral+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_neutral > minSSD) && ((shape_matching_condition == 'DNN') || (shape_matching_condition == 'SNN'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_neutral-=50
 		}
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -311,7 +341,10 @@ var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 
-var SSD = 250
+//the following three SSDs are for the relationship of the distractor to the target
+var SSD_same = 250
+var SSD_diff = 250
+var SSD_neutral = 250
 var maxSSD = 1000
 var minSSD = 0 
 

@@ -68,7 +68,11 @@ function assessPerformance() {
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var getInstructFeedback = function() {
@@ -134,7 +138,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 72,
-		condition: 'incompatible',
+		flanker_condition: 'incongruent',
 		trial_id: 'stim',
 		flanker: 'F',
 		center_letter: 'H'
@@ -147,7 +151,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 70,
-		condition: 'incompatible',
+		flanker_condition: 'incongruent',
 		trial_id: 'stim',
 		flanker: 'H',
 		center_letter: 'F'
@@ -160,7 +164,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'H' + fileTypePNG,
 	data: {
 		correct_response: 72,
-		condition: 'compatible',
+		flanker_condition: 'congruent',
 		trial_id: 'stim',
 		flanker: 'H',
 		center_letter: 'H'
@@ -173,7 +177,7 @@ var test_stimuli = [{
 		   flanker_boards[4]+ preFileType + 'F' + fileTypePNG,
 	data: {
 		correct_response: 70,
-		condition: 'compatible',
+		flanker_condition: 'congruent',
 		trial_id: 'stim',
 		flanker: 'F',
 		center_letter: 'F'

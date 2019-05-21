@@ -73,7 +73,11 @@ function assessPerformance() {
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 
@@ -126,6 +130,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	if (cued_condition == "switch"){ // if switch tasks, pick a random cue and switch to other task
 		curr_task = randomDraw(['one_back','two_back'].filter(function(y) {return $.inArray(y, [last_task]) == -1}))
 		curr_cue = tasks[curr_task].cues[Math.floor(Math.random() * 2)]
+		cued_switch_condition = 'switch'
 	} else if (cued_condition == "stay"){ // if stay tasks, if cued_switch condition is switch, then switch to other cue, stay if not.
 		if (cued_switch_condition == 'switch'){
 		last_cue = curr_cue

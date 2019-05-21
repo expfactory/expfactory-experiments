@@ -28,6 +28,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
@@ -41,6 +42,10 @@ function assessPerformance() {
 	
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
+			
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -48,8 +53,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -71,14 +74,18 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 var getInstructFeedback = function() {
@@ -155,7 +162,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		letters = getTrainingSet()
 		cue = getCue()
 		probe = getProbe(directed_condition, letters, cue)
-		correct_response = getCorrectResponse(cue, probe, letters, stop_signal_condition)
+		correct_response = getCorrectResponse(directed_condition, stop_signal_condition)
 		 if (stop_signal_condition == 'go'){
 			probe_color = 'green'
 		 } else {
@@ -240,25 +247,19 @@ var getProbe = function(directed_cond, letters, cue) {
 	return probe
 };
 
-var getCorrectResponse = function(cue,probe,letters,stop_signal_condition) {
+var getCorrectResponse = function(directed_condition,stop_signal_condition) {
 	if (stop_signal_condition == 'stop'){
 		correct_response = -1
 		return correct_response 
 	}
 	
-	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, letters.slice(3)) != -1) {
-			return possible_responses[0][1]
-		} else {
-			return possible_responses[1][1]
-		}
-	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, letters.slice(0,3)) != -1) {
-			return possible_responses[0][1]
-		} else {
-			return possible_responses[1][1]
-		}
-	}	
+	if (directed_condition == 'pos') {
+		return possible_responses[0][1]
+	} else if (directed_condition == 'neg') {
+		return possible_responses[1][1]
+	} else if (directed_condition == 'con') {
+		return possible_responses[1][1]
+	}
 	
 		
 }

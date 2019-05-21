@@ -28,18 +28,22 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+	var all_trials = 0
 	
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	choice_counts[77] = 0
-	choice_counts[90] = 0
+	choice_counts[70] = 0
+	choice_counts[72] = 0
 	
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
 	for (var i = 0; i < experiment_data.length; i++) {
 		if (experiment_data[i].trial_id == 'test_trial') {
+			all_trials += 1
+			key = experiment_data[i].key_press
+			choice_counts[key] += 1
 			if (experiment_data[i].stop_signal_condition == 'go'){
 				trial_count += 1
 			}
@@ -47,8 +51,6 @@ function assessPerformance() {
 			if ((experiment_data[i].stop_signal_condition == 'go') && (experiment_data[i].rt != -1)){
 				rt = experiment_data[i].rt
 				rt_array.push(rt)
-				key = experiment_data[i].key_press
-				choice_counts[key] += 1
 				if (experiment_data[i].key_press == experiment_data[i].correct_response){
 					correct += 1
 				}
@@ -69,14 +71,18 @@ function assessPerformance() {
 	//calculate whether response distribution is okay
 	var responses_ok = true
 	Object.keys(choice_counts).forEach(function(key, index) {
-		if (choice_counts[key] > trial_count * 0.85) {
+		if (choice_counts[key] > all_trials * 0.85) {
 			responses_ok = false
 		}
 	})
 	var missed_percent = missed_count/trial_count
 	var accuracy = correct / trial_count
 	credit_var = (missed_percent < 0.25 && avg_rt > 200 && responses_ok && accuracy > 0.60)
-	jsPsych.data.addDataToLastTrial({"credit_var": credit_var})
+	jsPsych.data.addDataToLastTrial({final_credit_var: credit_var,
+									 final_missed_percent: missed_percent,
+									 final_avg_rt: avg_rt,
+									 final_responses_ok: responses_ok,
+									 final_accuracy: accuracy})
 }
 
 
@@ -170,7 +176,11 @@ var createTrialTypes = function(numTrialsPerBlock){
 }
 
 function getSSD(){
-	return SSD
+	if ((flanker_condition == 'H_congruent') || (flanker_condition == 'F_congruent')){
+		return SSD_congruent
+	} else if ((flanker_condition == 'H_incongruent') || (flanker_condition == 'F_incongruent')){
+		return SSD_incongruent
+	}
 }
 
 function getSSType(){
@@ -222,17 +232,26 @@ var appendData = function(){
 		center_letter: center_letter,
 		current_block: current_block,
 		current_trial: current_trial,
-		SSD: SSD
+		SSD_congruent: SSD_congruent,
+		SSD_incongruent: SSD_incongruent
 	})
 	
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD < maxSSD)){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_congruent < maxSSD) && ((flanker_condition == 'H_congruent') || (flanker_condition == 'F_congruent'))){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
-			SSD+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD > minSSD)){
+			SSD_congruent+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_congruent > minSSD) && ((flanker_condition == 'H_congruent') || (flanker_condition == 'F_congruent'))){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
-			SSD-=50
+			SSD_congruent-=50
+		}
+		
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_incongruent < maxSSD) && ((flanker_condition == 'H_incongruent') || (flanker_condition == 'F_incongruent'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 1})
+			SSD_incongruent+=50
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_incongruent > minSSD) && ((flanker_condition == 'H_incongruent') || (flanker_condition == 'F_incongruent'))){
+			jsPsych.data.addDataToLastTrial({stop_acc: 0})
+			SSD_incongruent-=50
 		}
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -269,7 +288,8 @@ var accuracy_thresh = 0.70
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 12 trials
 
-var SSD = 250
+var SSD_congruent = 250
+var SSD_incongruent = 250
 var maxSSD = 1000
 var minSSD = 0 
 var maxStopCorrect = 0.70
