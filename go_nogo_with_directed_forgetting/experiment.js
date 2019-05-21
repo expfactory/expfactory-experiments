@@ -59,6 +59,9 @@ function assessPerformance() {
 			} else if (experiment_data[i].go_nogo_condition == 'nogo'){
 				if (experiment_data[i].key_press == -1){
 					correct += 1
+				} else if (experiment_data[i].key_press != -1){
+					rt = experiment_data[i].rt
+					rt_array.push(rt)
 				}
 			}
 		}	
