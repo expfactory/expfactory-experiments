@@ -358,7 +358,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		}
 		
 		stim = {
-			whichQuadrant: whichQuadrant,
+			whichQuadrant: quadIndex,
 			predictive_condition: predictive_condition,
 			predictive_dimension: predictive_dimension,
 			cued_condition: cued_condition,
@@ -397,7 +397,7 @@ var appendData = function(){
 	}
 		
 	jsPsych.data.addDataToLastTrial({
-		whichQuadrant: quadIndex,
+		whichQuadrant: whichQuadrant,
 		predictive_condition: predictive_condition,
 		predictive_dimension: predictive_dimension,
 		task_condition: cued_condition,
@@ -537,7 +537,7 @@ var attention_check_block = {
   data: {
     trial_id: "attention_check"
   },
-  timing_response: 180000,
+  timing_response:  180000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -559,7 +559,7 @@ var post_task_block = {
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   timing_response: 360000,
+   timing_response:  360000,
    columns: [60,60]
 };
 
@@ -568,7 +568,7 @@ var end_block = {
 	data: {
 		trial_id: "end",
 	},
-	timing_response: 180000,
+	timing_response:  180000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
@@ -589,7 +589,7 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 180000
+	timing_response:  180000
 };
 
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
@@ -663,7 +663,7 @@ var start_test_block = {
 	data: {
 		trial_id: "instruction"
 	},
-	timing_response: 180000,
+	timing_response:  180000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
@@ -698,7 +698,7 @@ var fixation_block = {
 	data: {
 		trial_id: "practice_fixation"
 	},
-	timing_response: 500, //500
+	timing_response:  500, //500
 	timing_post_trial: 0,
 }
 
@@ -716,7 +716,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_response: 180000,
+	timing_response:  180000,
 	response_ends_trial: true, 
 
 };
@@ -739,7 +739,7 @@ for (i = 0; i < practice_len + 1; i++) {
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500, //500
-	  timing_response: 500, //500
+	  timing_response:  500, //500
 	  prompt: prompt_text
 	}
 	
@@ -752,7 +752,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		choices: 'none',
 		timing_stim: getCTI, //getCTI
-		timing_response: getCTI, //getCTI
+		timing_response:  getCTI, //getCTI
 		timing_post_trial: 0,
 		response_ends_trial: false,
 		prompt: prompt_text
@@ -771,7 +771,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //1000
-		timing_response: 2000, //2000
+		timing_response:  2000, //2000
 		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
@@ -864,7 +864,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 	  },
 	  timing_post_trial: 0,
 	  timing_stim: 500, //500
-	  timing_response: 500 //500
+	  timing_response:  500 //500
 	}
 	
 	var cue_block = {
@@ -876,7 +876,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: 'none',
 		timing_stim: getCTI, //getCTI
-		timing_response: getCTI, //getCTI
+		timing_response:  getCTI, //getCTI
 		timing_post_trial: 0,
 		response_ends_trial: false,
 	}
@@ -890,7 +890,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000, //1000
-		timing_response: 2000, //2000
+		timing_response:  2000, //2000
 		timing_post_trial: 0,
 		response_ends_trial: false,
 		on_finish: appendData
