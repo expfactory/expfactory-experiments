@@ -131,7 +131,7 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>There was a star + Shape was '+go_no_go_styles[1]+'.</font></div></div>' + prompt_text
 		}
 	
-	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
@@ -139,14 +139,14 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text
 		}
 	
-	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo')){
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'nogo') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go')){
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
 			return '<div class = fb_box><div class = center-text><font size = 20>Shape was '+go_no_go_styles[1]+'</font></div></div>' + prompt_text
 		}
-	} else if ((trial_id == 'practice_trial') && ((jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go'))){
+	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'go') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
@@ -156,7 +156,9 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 		}
 		
-	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
+	}
+	/*
+	 else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).go_nogo_condition == 'go')){
 		
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
@@ -177,18 +179,19 @@ var getCategorizeFeedback = function(){
 		}
 	
 	}
+	*/
 }
 
 var createTrialTypes = function(numTrialsPerBlock){
-	var unique_combos = 60
+	var unique_combos = 30
 	
 	var stims = []
 	for (var j = 0; j < totalShapesUsed; j++){
 		for (var i = 0; i < go_no_go_types.length; i++){
 			for (var x = 0; x < stop_signal_conditions.length; x++){
 				stim = {
-					stim: shapes[j],
-					correct_response: possible_responses[j][1],
+					stim: shapes[j][0],
+					correct_response: possible_responses[j][0][1],
 					stop_signal_condition: stop_signal_conditions[x],
 					go_no_go_type: go_no_go_types[i]
 			
@@ -334,9 +337,9 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 var run_attention_checks = true
 
-var practice_len = 15 // 15 must be divisible by 60
-var exp_len = 300 //300 must be divisible by 60
-var numTrialsPerBlock = 60 // 60, must be divisible by 60
+var practice_len = 30 // 30 must be divisible by 30
+var exp_len = 300 //300 must be divisible by 30
+var numTrialsPerBlock = 60 // 60, must be divisible by 30
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
@@ -361,13 +364,13 @@ var stop_signal_respond_upper_thresh_practice = 1
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
-var shapes = jsPsych.randomization.repeat(['circle','circle','square','square'],1)
+var shapes = jsPsych.randomization.repeat([['circle','circle'],['square','square']],1)
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
-var totalShapesUsed = 4
+var totalShapesUsed = 2
 
 
-var possible_responses = [['Z key', 90], ['Z key', 90], ['M key', 77], ['M key', 77]]
+var possible_responses = [[['Z key', 90], ['Z key', 90]], [['M key', 77], ['M key', 77]]]
 
 
 var postFileType = "'></img>"
@@ -390,15 +393,15 @@ jsPsych.pluginAPI.preloadImages(images);
 
 
 var prompt_text_list = '<ul list-text>'+
-						'<li>' + shapes[0] + ': ' + possible_responses[0][0] + '</li>' +
-						'<li>' + shapes[2] + ': ' + possible_responses[2][0] + '</li>' +
+						'<li>' + shapes[0][0] + ': ' + possible_responses[0][0][0] + '</li>' +
+						'<li>' + shapes[1][0] + ': ' + possible_responses[1][0][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +
 						'<li>Do not respond if the shape is '+go_no_go_styles[1]+'!</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[0] + ': ' + possible_responses[0][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[2] + ': ' + possible_responses[2][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[0][0] + ': ' + possible_responses[0][0][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[1][0] + ': ' + possible_responses[1][0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears!</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if the shape is '+go_no_go_styles[1]+'!</p>' +
 				  '</div>'
@@ -488,8 +491,8 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
 			'<p class = block-text>Only one response is correct for each shape.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[0]+', press the '+possible_responses[0][0]+'.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[2]+', press the '+possible_responses[2][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'.</p>'+
+			'<p class = block-text>If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
 			'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 		'</div>',
 		
@@ -570,7 +573,7 @@ var prompt_fixation_block = {
 
 var practice_intro = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = block-text>We will now start the practice for the experiment.<br><br>For these trials, you must press the <i>'+possible_responses[0][0]+'</i>, '+ ' or <i>'+possible_responses[2][0]+ ' </i>depending on the shape of the stimulus.  Make sure to respond as quickly and accurately as possible to the shape. <br><br> The responses for each shape are as follows: ' +
+	stimulus: '<div class = centerbox><p class = block-text>We will now start the practice for the experiment.<br><br>For these trials, you must press the <i>'+possible_responses[0][0][0]+'</i>, '+ ' or <i>'+possible_responses[1][0][0]+ ' </i>depending on the shape of the stimulus.  Make sure to respond as quickly and accurately as possible to the shape. <br><br> The responses for each shape are as follows: ' +
 		prompt_text +
 		'</p><p class = block-text>Remember these rules before you proceed.</p><p class = block-text>Press <i> enter</i> to begin.</p></div>',
 	is_html: true,
@@ -588,8 +591,8 @@ var test_intro = {
 	stimulus: '<div class = centerbox>'+
 				'<p class = block-text>We will now begin the test portion.</p>'+
 				'<p class = block-text>You will see a shape on every trial. Please respond to each shape as quickly and accurately as possible!</p>'+
-				'<p class = block-text>If the shape is a '+shapes[0]+' or a '+shapes[1]+', press the '+possible_responses[0][0]+'.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[2]+' or a '+shapes[3]+', press the '+possible_responses[2][0]+'.</p>'+
+				'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'.</p>'+
+				'<p class = block-text>If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
 				'<p class = block-text>Do not respond if you see a star</p>'+
 				'<p class = block-text>Do not respond if the shape is '+go_no_go_styles[1]+'</p>'+
 				'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
@@ -654,7 +657,7 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_trial"
 		},
 		is_html: true,
-		choices: [possible_responses[0][1], possible_responses[2][1]],
+		choices: [possible_responses[0][1][1], possible_responses[1][1][1]],
 		timing_stim: 1000,
 		timing_response: 2000, //2000
 		response_ends_trial: false,
@@ -720,7 +723,7 @@ var practiceStopNode = {
 		var gng_stop_no_respond = 0
 		
 		for (i = 0; i < data.length; i++) {
-			if (data[i].trial_id == "test_trial"){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials += 1
 				if ((data[i].stop_signal_condition == "go") && (data[i].go_nogo_condition == "go")){
 					SS_gng_go_trials += 1
@@ -838,7 +841,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_trial"
 		},
 		is_html: true,
-		choices: [possible_responses[0][1], possible_responses[2][1]],
+		choices: [possible_responses[0][1][1], possible_responses[1][1][1]],
 		timing_stim: 1000,
 		timing_response: 2000, //2000
 		response_ends_trial: false,
