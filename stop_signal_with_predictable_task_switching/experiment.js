@@ -753,7 +753,7 @@ var practiceNode = {
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
-		if ((accuracy > accuracy_thresh) && (stop_success_percentage < upper_stop_success_bound) && (stop_success_percentage > lower_stop_success_bound)){
+		if ((accuracy > accuracy_thresh) && (stop_success_percentage < upper_stop_success_bound_practice) && (stop_success_percentage > lower_stop_success_bound_practice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			stims = createTrialTypes(numTrialsPerBlock)
@@ -765,12 +765,12 @@ var practiceNode = {
 					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
 			}
 			
-			if (stop_success_percentage === upper_stop_success_bound){
+			if (stop_success_percentage === upper_stop_success_bound_practice){
 			feedback_text +=
 					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly as possible without sacrificing accuracy.'
 			}
 			
-			if (stop_success_percentage === lower_stop_success_bound){
+			if (stop_success_percentage === lower_stop_success_bound_practice){
 			feedback_text +=
 					'</p><p class = block-text>You have been responding on trials where there are stars. If a star appears, try your best not to make a response on that trial.'
 			}

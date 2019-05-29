@@ -587,7 +587,7 @@ var instructions_block = {
 			'<p class = block-text>In this experiment, you will be presented with '+numLetters+' letters, all of which you must memorize.'+
 			' These '+numLetters+' letters will move clockwise from quadrant to quadrant across trials.</p> '+
 				
-			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the 6 letters are in. For now, remember all '+numLetters+' letters.</p>'+
+			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the letters are in. For now, remember all '+numLetters+' letters.</p>'+
 		
 			'<p class = block-text>After the '+numLetters+' letters disappear, you will receive a cue either TOP or BOT.  This cue states which of the '+numLetters+' letters you should forget or remember, either the top or bottom '+numLetters/2+' letters.</p>'+
 		
@@ -641,21 +641,26 @@ var start_test_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the '+numLetters+' letters are in.</p>'+
+	
+			'<p class = block-text>In this experiment, you will be presented with '+numLetters+' letters, all of which you must memorize.'+
+			' These '+numLetters+' letters will move clockwise from quadrant to quadrant across trials.</p> '+
+				
+			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the letters are in. For now, remember all '+numLetters+' letters.</p>'+
 		
-			'<p class = block-text>You will also be presented with a cue after the '+numLetters+' letters.  This cue states which of the '+numLetters+' letters you should forget or remember. '+
-			'If you get a TOP cue, please remember or forget the top '+numLetters/2+' letters.  If you get a BOT cue, please remember or forget the bottom '+numLetters/2+' letters.  '+
-			'<i>The '+numLetters/2+' remaining letters are called your memory set.</i></p>'+
+			'<p class = block-text>After the '+numLetters+' letters disappear, you will receive a cue either TOP or BOT.  This cue states which of the '+numLetters+' letters you should forget or remember, either the top or bottom '+numLetters/2+' letters.</p>'+
 		
-			'<p class = block-text>After, you will be presented with a probe.  Please indicate whether this probe was in your memory set.</p>'+
+			'<p class = block-text>When in the upper two quadrants, please  <i>'+predictive_dimensions[0]+'</i> the cued set.</p>'+
 		
-			'<p class = block-text>When in the top two quadrants, please  <i>'+predictive_dimensions[0]+'</i> the cued set. Press the <i>'+possible_responses[0][0]+
-			'  </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
-		
-			'<p class = block-text>When in the bottom two quadrants, please  <i>'+predictive_dimensions[2]+'</i> the cued set. Press the <i>'+possible_responses[0][0]+
-			' </i> if the probe was in the memory set, and the <i>'+possible_responses[1][0]+' </i> if not.</p>'+
+			'<p class = block-text>When in the lower two quadrants, please  <i>'+predictive_dimensions[2]+'</i> the cued set.</p>'+
+			
+			'<p class = block-text>The '+numLetters/2+' letters that you need to remember are called your memory set.</p>'+
+			
+			'<p class = block-text>After, you will be presented with a probe (single letter).  Please indicate whether this probe was in your memory set.</p>'+
+				
+			'<p class = block-text>Press the <i>' + possible_responses[0][0] + '</i> if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 			
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
+			
 		 '</div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
