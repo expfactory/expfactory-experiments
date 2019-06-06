@@ -429,17 +429,17 @@ for (x = 0; x < test_stim_index.length; x++) {
 		timing_response: test_get_ITI,  
 		data: test_trials[x].data,
 		is_html: true,
-		choices: [choices[0][1], choices[1][1]],
+		choices: choices,
 		response_ends_trial: false,
 		timing_post_trial: 0,
 		prompt: '<div class = fb_box_left><p class = center-text style = "font-size: 20px">left arrow key = option on screen</p></div>'+
   		  		'<div class = fb_box_right><p class = center-text style = "font-size: 20px">down arrow key = $20 today</p></div>',
 		on_finish: function(data) {
 			var choice = false;
-			if (data.key_press == choices[0][1]) {
+			if (data.key_press == 37) {
 			  choice = 'larger_later';
 			  bonus_list.push({'amount': data.large_amount, 'delay': data.later_delay})
-			} else if (data.key_press == choices[1][1]) {
+			} else if (data.key_press == 40) {
 			  choice = 'smaller_sooner';
 			  bonus_list.push({'amount': data.small_amount, 'delay': 0})
 			}
