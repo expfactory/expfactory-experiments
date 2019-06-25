@@ -234,9 +234,9 @@ var getStim = function(){
 		
 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text><div class = cue-text>'+preFileType  + 'red_' + letter_case_distractor + '_' + distractor.toUpperCase() + fileTypePNG+'</div></div>'+
+			'<div class = distractor-text><div class = cue-text>'+preFileTypeDistractor  + 'red_' + letter_case_distractor + '_' + distractor.toUpperCase() + fileTypePNG+'</div></div>'+
 	
-			'<div class = gng_number><div class = cue-text>'+preFileType  + letter_case + '_' + probe.toUpperCase() + fileTypePNG+'</div>'+
+			'<div class = gng_number><div class = cue-text>'+preFileType  + letter_case + '_' + probe.toUpperCase() + fileTypePNG+'</div></div>'+
 		   
 		   '</div></div>'
 	
@@ -330,6 +330,7 @@ var delay = 1
 var pathSource = "/static/experiments/n_back_with_shape_matching/images/"
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/n_back_with_shape_matching/images/"
+var preFileTypeDistractor = "<img class = distractor src='/static/experiments/n_back_with_shape_matching/images/"
 
 
 
@@ -622,6 +623,7 @@ var practiceNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		var mismatch_press = 0
 	
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "practice_trial"){
@@ -634,6 +636,10 @@ var practiceNode = {
 		
 					}
 				}
+				
+				if (data[i].key_press == possible_responses[1][1]){
+					mismatch_press += 1
+				}
 		
 			}
 	
@@ -642,6 +648,7 @@ var practiceNode = {
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
+		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
@@ -654,11 +661,14 @@ var practiceNode = {
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
-			feedback_text +=
-					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+			
+			if (mismatch_press_percentage >= 0.90){
+				feedback_text +=
+						'</p><p class = block-text>Please do not simply press the "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press the "'+possible_responses[0][0]+'" when they occur.'
 			}
 		
 			if (practiceCount == practice_thresh){
@@ -670,7 +680,10 @@ var practiceNode = {
 			}
 			
 			feedback_text +=
-				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
+			
+			feedback_text +=
+				'</p><p class = block-text>Press Enter to continue.' 
 			
 			return true
 		
@@ -712,6 +725,7 @@ var testNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		var mismatch_press = 0
 
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "test_trial"){
@@ -723,12 +737,17 @@ var testNode = {
 						correct += 1
 					}
 				}
+				
+				if (data[i].key_press == possible_responses[1][1]){
+					mismatch_press += 1
+				}
 			} 
 		}
 	
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
+		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
@@ -741,6 +760,11 @@ var testNode = {
 		if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+		
+		if (mismatch_press_percentage >= 0.90){
+			feedback_text +=
+					'</p><p class = block-text>Please do not simply press the "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press the "'+possible_responses[0][0]+'" when they occur.'
 		}
 	
 		if (testCount == numTestBlocks){
