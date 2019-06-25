@@ -527,9 +527,7 @@ var instructions_block = {
 		
 		'</div>',
 		
-		'<div class = centerbox>'+
-			'<p class = block-text>So for example, if you get the cue TOP, please <i>forget the top '+numLetters/2+' letters</i> and remember the bottom '+numLetters/2+' letters. <i>The bottom '+numLetters/2+' letters would be your MEMORY SET.</i></p>'+
-		
+		'<div class = centerbox>'+		
 			'<p class = block-text>After a short delay, you will be presented with a probe - a single letter.  Please indicate whether this probe was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
