@@ -510,7 +510,7 @@ var start_test_block = {
 		
 			'<p class = block-text>If the shapes are the same, please press the '+possible_responses[0][0]+'.  If the shapes are different, press the '+possible_responses[1][0]+'.</p>'+
 		
-			'<p class = block-text>Please only respond if the shape on the right is ' + go_no_go_styles[0] + ', not if it is ' + go_no_go_styles[1] +'.</p>'+
+			'<p class = block-text>Please only respond if the white shape on the right is ' + go_no_go_styles[0] + ', not if it is ' + go_no_go_styles[1] +'.</p>'+
 		
 			'<p class = block-text>Ignore the red shape on the left.</p>'+
 	
