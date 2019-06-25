@@ -160,6 +160,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 	stims.push(first_stim)
 	stim_len = stims.length	
 	
+	used_letters = []
+	
 	var new_stims = []
 	for(var i = 0; i < stim_len; i++){
 		
@@ -200,7 +202,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 			}
 		}
 		
-		letters = getTrainingSet()
+		letters = getTrainingSet(used_letters,numLetters)
 		cue = getCue()
 		probe = getProbe(directed_condition,letters,cue, cued_dimension)
 		correct_response = getCorrectResponse(cued_dimension,cue,probe,letters)
@@ -216,8 +218,11 @@ var createTrialTypes = function(numTrialsPerBlock){
 			correct_response: correct_response,
 			task_cue: task_cue
 			}
+			
 		
 		new_stims.push(stim)
+		
+		used_letters = used_letters.concat(letters)
 		
 
 	}
@@ -226,24 +231,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		letters = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
 	return letters
 };
 
@@ -660,7 +655,7 @@ var start_test_block = {
 		
 			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the top or bottom letters.</p>'+
 		
-			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <i>'+cued_dimensions[2]+'</i> the top or bottom.</p>'+
+			'<p class = block-text>If you see the cue, '+cued_dimensions[1]+', please  <i>'+cued_dimensions[1]+'</i> the top or bottom.</p>'+
 		
 			'<p class = block-text>After, you will be presented with a probe (single letter).  Please indicate whether this probe was in your memory set.</p>'+
 		
