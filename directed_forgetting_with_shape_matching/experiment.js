@@ -172,15 +172,6 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 		new_stims.push(stim)
 		
-		console.log('letters = ' + letters)
-		console.log('used_letters = ' + used_letters)
-		console.log('used_letters_8 = ' + used_letters.slice(-numLetters*2))
-		console.log('shape_matching_condition = ' + shape_matching_condition)
-		console.log('directed_condition = ' + directed_condition)
-		console.log('probe = ' + probe)
-		console.log('cue = ' + cue)
-		console.log('')
-		
 		used_letters = used_letters.concat(letters)
 				
 	}
