@@ -848,10 +848,10 @@ var practiceNode = {
 						total_sum_rt += data[i].rt
 						stop_rt += data[i].rt
 						sum_stop_responses += 1
-						if (data[i].key_press == -1){
-							stop_correct += 1
-		
-						}
+					}
+					if (data[i].rt == -1){
+						stop_correct += 1
+	
 					}
 				}
 			}
@@ -861,7 +861,11 @@ var practiceNode = {
 		var missed_responses = (go_trials - sum_go_responses) / go_trials
 		var ave_rt = go_rt / sum_go_responses
 		var stop_acc = stop_correct / stop_trials
-	
+		
+		console.log('stop_acc = ' + stop_acc)
+		console.log('stop_correct = ' + stop_correct)
+		console.log('stop_trials = ' + stop_trials)
+			
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
@@ -1005,10 +1009,10 @@ var testNode = {
 						total_sum_rt += data[i].rt
 						stop_rt += data[i].rt
 						sum_stop_responses += 1
-						if (data[i].key_press == -1){
-							stop_correct += 1
-		
-						}
+					}
+					if (data[i].rt == -1){
+						stop_correct += 1
+	
 					}
 				}
 			}
