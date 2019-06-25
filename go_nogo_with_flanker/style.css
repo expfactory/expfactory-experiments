@@ -117,6 +117,18 @@ img.center {
   max-height: 65%;
 }
 
+img.distractor {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 45%;
+}
+
 
 /*******************************************************/
 /***********        Flanker CSS Styles        **********/

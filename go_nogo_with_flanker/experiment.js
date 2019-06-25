@@ -192,14 +192,28 @@ var getStim = function(){
 	go_no_go_style = stim.go_no_go_style
 	central_letter = stim.central_letter
 	flankers = stim.flankers
-	correct_response = stim.correct_response	
+	correct_response = stim.correct_response
 	
-	return  task_boards[0] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
-		 	task_boards[1] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
-		 	task_boards[2] + preFileType + go_no_go_style + '_'+ central_letter + fileTypePNG +
-		 	task_boards[3] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
-		 	task_boards[4] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
-		 	task_boards[5] 
+	if (go_nogo_condition == 'nogo'){
+		return  task_boards[0] + preFileTypeDistractor + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[1] + preFileTypeDistractor + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[2] + preFileTypeDistractor + go_no_go_style + '_'+ central_letter + fileTypePNG +
+				task_boards[3] + preFileTypeDistractor + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[4] + preFileTypeDistractor + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[5]
+	
+	} else if (go_nogo_condition == 'go'){
+		return  task_boards[0] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[1] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[2] + preFileType + go_no_go_style + '_'+ central_letter + fileTypePNG +
+				task_boards[3] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[4] + preFileType + go_no_go_style + '_'+ flankers + fileTypePNG +
+				task_boards[5]
+	
+	
+	}
+	
+		
 }
 
 
@@ -269,6 +283,8 @@ var current_block = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_flanker/images/'
+var preFileTypeDistractor = '<img class = distractor src="/static/experiments/go_nogo_with_flanker/images/'
+
 
 var task_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
@@ -387,8 +403,8 @@ var instructions_block = {
 		
 		"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
 		
-		"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
-		"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+		"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+		"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 						
 		"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
 		"</div>",
@@ -565,8 +581,7 @@ var practiceNode = {
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
-			feedback_text +=
-					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+		
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
@@ -578,9 +593,11 @@ var practiceNode = {
 					stims = createTrialTypes(numTrialsPerBlock)
 					return false
 			}
-			
 			feedback_text +=
-				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+					
+			feedback_text +=
+				'</p><p class = block-text>Press Enter to continue.' 
 			stims = createTrialTypes(practice_len)
 			return true
 		
