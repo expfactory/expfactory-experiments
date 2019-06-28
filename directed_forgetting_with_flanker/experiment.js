@@ -120,13 +120,13 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var used_letters = []
 		
 	for (var i = 0; i < new_len; i++){
-		stim = stims.shift()
-		flanker_condition = stim.flanker_condition
-		directed_condition = stim.directed_condition		
+		var temp_stim = stims.shift()
+		var temp_flanker_condition = temp_stim.flanker_condition
+		var temp_directed_condition = temp_stim.directed_condition		
 				
 		var letters = getTrainingSet(used_letters,numLetters)
 		var cue = getCue()
-		var probe = getProbe(directed_condition, letters, cue)
+		var probe = getProbe(temp_directed_condition, letters, cue)
 		var correct_response = getCorrectResponse(cue, probe, letters)
 		if (cue == 'TOP'){
 			memory_set = [letters[2],letters[3]]
@@ -136,16 +136,16 @@ var createTrialTypes = function(numTrialsPerBlock){
 			forget_set = [letters[2],letters[3]]
 		}
 		 
-		 if (flanker_condition == 'congruent'){
+		 if (temp_flanker_condition == 'congruent'){
 			flanking_letter = probe
-		 } else if (flanker_condition == 'incongruent'){
+		 } else if (temp_flanker_condition == 'incongruent'){
 			flanking_letter = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
 		 }
 		
 		
-		stim = {
-			flanker_condition: flanker_condition,
-			directed_condition: directed_condition,
+		var new_stim = {
+			flanker_condition: temp_flanker_condition,
+			directed_condition: temp_directed_condition,
 			letters: letters,
 			cue: cue,
 			probe: probe,
@@ -153,7 +153,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 			correct_response: correct_response
 			}
 	
-		new_stims.push(stim)
+		new_stims.push(new_stim)
 		
 
 		used_letters = used_letters.concat(letters)

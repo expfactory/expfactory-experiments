@@ -123,13 +123,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
-			
-				var shape_matching_condition = shape_matching_conditions[numShapeConds]
-				var directed_condition = directed_cond_array[numDirectedConds]
 				
 				var stim = {
-					shape_matching_condition: shape_matching_condition,
-					directed_condition: directed_condition
+					shape_matching_condition: shape_matching_conditions[numShapeConds],
+					directed_condition: directed_cond_array[numDirectedConds]
 				}
 				
 				stims.push(stim)
@@ -145,8 +142,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 	var used_letters = []
 	for (var i = 0; i < previous_len; i ++){
 		var temp_stim = stims.pop()
-		shape_matching_condition = temp_stim.shape_matching_condition
-		directed_condition = temp_stim.directed_condition
+		var shape_matching_condition = temp_stim.shape_matching_condition
+		var directed_condition = temp_stim.directed_condition
 		
 	
 		var letters = getTrainingSet(used_letters,numLetters)
