@@ -147,12 +147,6 @@ var appendProbeData = function(data) {
 		forget_set: forgetSet
 	})
 	
-	console.log('data save - directed_condition = ' + directed_condition)
-	console.log('data save - letters = ' + lastSet_top + lastSet_bottom)
-	console.log('data save - cue = ' + cue)
-	console.log('data save - probe = ' + probe)
-	console.log('data save - correct_response = ' + correct_response)
-	console.log("")
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
 		jsPsych.data.addDataToLastTrial({
@@ -230,14 +224,6 @@ var getLettersHTML = function(){
 	cue = stim.cue,
 	probe = stim.probe,
 	correct_response = stim.correct_response
-	
-	console.log('directed_condition = ' + directed_condition)
-	console.log('letters = ' + letters)
-	console.log('cue = ' + cue)
-	console.log('probe = ' + probe)
-	console.log('correct_response = ' + correct_response)
-	console.log("")
-	
 	
 	
 	return task_boards[0]+ preFileType + letters[0] + fileTypePNG +
