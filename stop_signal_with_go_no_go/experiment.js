@@ -768,6 +768,7 @@ var practiceStopNode = {
 		
 		var aveShapeRespondCorrect = SS_gng_go_correct / SS_gng_go_trials 
 		
+		
 		var stop_signal_respond = (SS_gng_stop_respond + SS_stop_respond) / (SS_stop_trials + SS_gng_stop_trials)
 		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)
 			

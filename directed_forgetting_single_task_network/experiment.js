@@ -115,11 +115,11 @@ var getCategorizeFeedback = function(){
 var appendProbeData = function(data) {
 	var curr_trial = jsPsych.progress().current_trial_global
 	var trialCue = cue
-	var lastSet_top = stims.slice(0,numLetters/2)
-	var lastSet_bottom = stims.slice(numLetters/2)
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
 	var keypress = data.key_press
 	var memorySet = ''
-	var correct_response = ''
+	var forgetSet = ''
 	var correct = false
 	if (trialCue == 'BOT') {
 		memorySet = lastSet_top
@@ -128,11 +128,7 @@ var appendProbeData = function(data) {
 		memorySet = lastSet_bottom
 		forgetSet = lastSet_top
 	}
-	if (memorySet.indexOf(probe, 0) == -1) {
-		correct_response = choices[1]
-	} else if (memorySet.indexOf(probe, 0) != -1) {
-		correct_response = choices[0]
-	}
+	
 	if (keypress == correct_response) {
 		correct = true
 	}
@@ -140,7 +136,7 @@ var appendProbeData = function(data) {
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
-		directed_forgetting_condition: probeType,
+		directed_condition: directed_condition,
 		trial_num: current_trial,
 		correct_response: correct_response,
 		exp_stage: exp_stage,
@@ -150,6 +146,13 @@ var appendProbeData = function(data) {
 		memory_set: memorySet,
 		forget_set: forgetSet
 	})
+	
+	console.log('data save - directed_condition = ' + directed_condition)
+	console.log('data save - letters = ' + lastSet_top + lastSet_bottom)
+	console.log('data save - cue = ' + cue)
+	console.log('data save - probe = ' + probe)
+	console.log('data save - correct_response = ' + correct_response)
+	console.log("")
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
 		jsPsych.data.addDataToLastTrial({
@@ -164,31 +167,15 @@ var appendProbeData = function(data) {
 };
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		stims = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = stims.slice()
-		stims = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = stims.slice()
-		stims = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
-	return task_boards[0]+ preFileType + stims[0] + fileTypePNG +
-		   task_boards[1]+
-		   task_boards[2]+ preFileType + stims[1] + fileTypePNG +
-		   task_boards[3]+ preFileType + stims[2] + fileTypePNG +
-		   task_boards[4]+
-		   task_boards[5]+ preFileType + stims[3] + fileTypePNG +
-		   task_boards[6]
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
+	return letters
 };
 
 //returns a cue pseudorandomly, either TOP or BOT
@@ -196,29 +183,27 @@ var getCue = function() {
 	var temp = Math.floor(Math.random() * 2)
 	cue = cueArray[temp]
 	
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + cue + fileTypePNG + '</div></div></div>'
+	return cue
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
-var getProbe = function() {
-	probeType = probeTypeArray.pop()
+var getProbe = function(letters,directed_condition,cue) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	var lastCue = cue
-	var lastSet_top = stims.slice(0,numLetters/2)
-	var lastSet_bottom = stims.slice(numLetters/2)
-	if (probeType == 'pos') {
-		if (lastCue == 'BOT') {
+	var lastSet_top = letters.slice(0,numLetters/2)
+	var lastSet_bottom = letters.slice(numLetters/2)
+	if (directed_condition == 'pos') {
+		if (cue == 'BOT') {
 			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
-		} else if (lastCue == 'TOP') {
+		} else if (cue == 'TOP') {
 			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
-	} else if (probeType == 'neg') {
-		if (lastCue == 'BOT') {
+	} else if (directed_condition == 'neg') {
+		if (cue == 'BOT') {
 			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
-		} else if (lastCue == 'TOP') {
+		} else if (cue == 'TOP') {
 			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
-	} else if (probeType == 'con') {
+	} else if (directed_condition == 'con') {
 		newArray = trainingArray.filter(function(y) {
 			return (y != lastSet_top[0] && y != lastSet_top[1] &&
 					y != lastSet_bottom[0] && y != lastSet_bottom[1])
@@ -226,57 +211,91 @@ var getProbe = function() {
 		probe = newArray.pop()
 	}
 		
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
+	return probe
+	//'<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
 };
 
-var getPracticeProbe = function() {
-	probeType = practiceProbeTypeArray.pop()
-	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	var lastCue = cue
-	var lastSet_top = stims.slice(0,numLetters/2)
-	var lastSet_bottom = stims.slice(numLetters/2)
+var getCueHTML = function(){
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + cue + fileTypePNG + '</div></div></div>'
+}
+
+var getProbeHTML = function(){
+	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
+}
+
+var getLettersHTML = function(){
+	stim = stims.pop()
+	directed_condition = stim.directed_condition
+	letters = stim.letters
+	cue = stim.cue,
+	probe = stim.probe,
+	correct_response = stim.correct_response
+	
+	console.log('directed_condition = ' + directed_condition)
+	console.log('letters = ' + letters)
+	console.log('cue = ' + cue)
+	console.log('probe = ' + probe)
+	console.log('correct_response = ' + correct_response)
+	console.log("")
+	
+	
+	
+	return task_boards[0]+ preFileType + letters[0] + fileTypePNG +
+		   task_boards[1]+
+		   task_boards[2]+ preFileType + letters[1] + fileTypePNG +
+		   task_boards[3]+ preFileType + letters[2] + fileTypePNG +
+		   task_boards[4]+
+		   task_boards[5]+ preFileType + letters[3] + fileTypePNG +
+		   task_boards[6]
+}
+
+var getCorrectResponse = function(probeType){
+	
 	if (probeType == 'pos') {
-		if (lastCue == 'BOT') {
-			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
-		} else if (lastCue == 'TOP') {
-			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
-		}
+		return choices[0]
 	} else if (probeType == 'neg') {
-		if (lastCue == 'BOT') {
-			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
-		} else if (lastCue == 'TOP') {
-			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
-		}
+		return choices[1]
 	} else if (probeType == 'con') {
-		newArray = trainingArray.filter(function(y) {
-			return (y != lastSet_top[0] && y != lastSet_top[1] &&
-					y != lastSet_bottom[0] && y != lastSet_bottom[1])
-		})
-		probe = newArray.pop()
-	}
-	return '<div class = bigbox><div class = centerbox><div class = cue-text>' + preFileType + probe + fileTypePNG + '</div></div></div>'
-};
-
-var getResponse = function() {
-	if (cue == 'TOP') {
-		if (jQuery.inArray(probe, stims.slice(numLetters/2)) != -1) {
-			return choices[0]
-		} else {
-			return choices[1]
-		}
-
-	} else if (cue == 'BOT') {
-		if (jQuery.inArray(probe, stims.slice(0,numLetters/2)) != -1) {
-			return choices[0]
-		} else {
-			return choices[1]
-		}
+		return choices[1]
 	}
 }
+
 
 var resetTrial = function() {
 	current_trial = 0
 	exp_stage = 'test'
+}
+
+
+var createTrialTypes = function (numTrialsPerBlock,numLetters){
+	var probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
+	var used_letters = []
+	var stims = []
+	
+	for (var i = 0; i < numTrialsPerBlock; i++){
+		var directed_condition = probeTypeArray.pop()
+		var letters = getTrainingSet(used_letters,numLetters)
+		var cue = getCue()
+		var probe = getProbe(letters,directed_condition,cue)
+		var correct_response = getCorrectResponse(directed_condition)
+		
+		stim = {
+			directed_condition:directed_condition,
+			letters: letters,
+			cue: cue,
+			probe: probe,
+			correct_response: correct_response
+			}
+		stims.push(stim)
+		
+		used_letters = used_letters.concat(letters)
+		 
+	
+	
+	}
+	
+	return stims
+	
 }
 
 /* ************************************ */
@@ -311,8 +330,6 @@ var stims = []
 var preceeding1stims = []
 var preceeding2stims = []
 var probes = ['pos', 'pos', 'neg', 'con']
-var probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
-var practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length / 4)
 var stimFix = ['fixation']
 var pathSource = '/static/experiments/directed_forgetting_single_task_network/images/'
 var fileType = '.png'
@@ -345,6 +362,8 @@ for(i = 0; i < stimArray.length; i++){
 images.push(pathSource + 'BOT.png')
 images.push(pathSource + 'TOP.png')
 jsPsych.pluginAPI.preloadImages(images);
+
+var stims = createTrialTypes(practice_length,numLetters)
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -555,7 +574,7 @@ var ITI_fixation_block = {
 
 var training_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getTrainingSet,
+	stimulus: getLettersHTML,
 	is_html: true,
 	data: {
 		trial_id: "stim"
@@ -570,7 +589,7 @@ var training_block = {
 
 var cue_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getCue,
+	stimulus: getCueHTML,
 	is_html: true,
 	data: {
 		trial_id: "cue",
@@ -584,7 +603,7 @@ var cue_block = {
 
 var probe_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getProbe,
+	stimulus: getProbeHTML,
 	is_html: true,
 	data: {
 		trial_id: "test_trial",
@@ -614,7 +633,7 @@ var intro_test_block = {
 
 var practice_probe_block = {
 	type: 'poldrack-single-stim',
-	stimulus: getPracticeProbe,
+	stimulus: getProbeHTML,
 	choices: choices,
 	data: {trial_id: "practice_trial", 
 		   exp_stage: "practice"
@@ -726,7 +745,7 @@ for (i = 0; i < (practice_length); i++) {
 
 	var practice_training_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getTrainingSet,
+		stimulus: getLettersHTML,
 		is_html: true,
 		data: {
 			trial_id: "practice_stim"
@@ -742,7 +761,7 @@ for (i = 0; i < (practice_length); i++) {
 
 	var practice_cue_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getCue,
+		stimulus: getCueHTML,
 		is_html: true,
 		data: {
 			trial_id: "practice_cue",
@@ -784,7 +803,7 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		practiceProbeTypeArray = jsPsych.randomization.repeat(probes, practice_length / 4)
+		stims = createTrialTypes(practice_length,numLetters)
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -817,6 +836,7 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
+			stims = createTrialTypes(numTrialsPerBlock,numLetters)
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -831,7 +851,7 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					
+					stims = createTrialTypes(numTrialsPerBlock,numLetters)
 					return false
 			}
 			
@@ -862,7 +882,7 @@ var testCount = 0
 var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
-		probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
+		stims = createTrialTypes(numTrialsPerBlock,numLetters)
 		testCount += 1
 		current_trial = 0 
 		
