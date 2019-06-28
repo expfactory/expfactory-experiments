@@ -157,7 +157,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 			distractor = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
 		 }
 		
-		stim = {
+		var new_stim = {
 			shape_matching_condition: shape_matching_condition,
 			directed_condition: directed_condition,
 			letters: letters,
@@ -167,7 +167,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 			correct_response: correct_response
 			}
 	
-		new_stims.push(stim)
+		new_stims.push(new_stim)
 		
 		used_letters = used_letters.concat(letters)
 				

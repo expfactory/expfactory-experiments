@@ -221,8 +221,8 @@ var getLettersHTML = function(){
 	stim = stims.pop()
 	directed_condition = stim.directed_condition
 	letters = stim.letters
-	cue = stim.cue,
-	probe = stim.probe,
+	cue = stim.cue
+	probe = stim.probe
 	correct_response = stim.correct_response
 	
 	
