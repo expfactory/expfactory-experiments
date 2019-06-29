@@ -123,61 +123,71 @@ var createTrialTypes = function(numTrialsPerBlock){
 	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
-			
-				shape_matching_condition = shape_matching_conditions[numShapeConds]
-				directed_condition = directed_cond_array[numDirectedConds]
 				
-				letters = getTrainingSet()
-				cue = getCue()
-				probe = getProbe(directed_condition, letters, cue)
-				correct_response = getCorrectResponse(cue, probe, letters)
-				 if (shape_matching_condition == 'match'){
-				 	distractor = probe
-				 } else {
-				 	distractor = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
-				 }
+				var stim = {
+					shape_matching_condition: shape_matching_conditions[numShapeConds],
+					directed_condition: directed_cond_array[numDirectedConds]
+				}
 				
-				stim = {
-					shape_matching_condition: shape_matching_condition,
-					directed_condition: directed_condition,
-					letters: letters,
-					cue: cue,
-					probe: probe,
-					distractor: distractor,
-					correct_response: correct_response
-					}
-			
 				stims.push(stim)
+				
 			}
-			
 		}
 	}
 	
 	stims = jsPsych.randomization.repeat(stims,1)
-	return stims
+	
+	var new_stims = []
+	var previous_len = stims.length
+	var used_letters = []
+	for (var i = 0; i < previous_len; i ++){
+		var temp_stim = stims.pop()
+		var shape_matching_condition = temp_stim.shape_matching_condition
+		var directed_condition = temp_stim.directed_condition
+		
+	
+		var letters = getTrainingSet(used_letters,numLetters)
+		var cue = getCue()
+		var probe = getProbe(directed_condition, letters, cue)
+		var correct_response = getCorrectResponse(cue, probe, letters)
+		var distractor = ''
+		 if (shape_matching_condition == 'match'){
+			distractor = probe
+		 } else {
+			distractor = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
+		 }
+		
+		var new_stim = {
+			shape_matching_condition: shape_matching_condition,
+			directed_condition: directed_condition,
+			letters: letters,
+			cue: cue,
+			probe: probe,
+			distractor: distractor,
+			correct_response: correct_response
+			}
+	
+		new_stims.push(new_stim)
+		
+		used_letters = used_letters.concat(letters)
+				
+	}
+			
+	
+	return new_stims
 		
 }
 
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		letters = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
 	return letters
 };
 

@@ -112,7 +112,6 @@ var getCategorizeFeedback = function(){
 			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
-			console.log('here')			
 			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
@@ -182,16 +181,17 @@ var createTrialTypes = function(numTrialsPerBlock){
 	stims = jsPsych.randomization.repeat(stims,1)
 	new_len = stims.length
 	new_stims = []
+	var used_letters = []
 	
 	for (var i = 0; i < new_len; i++){
 		stim = stims.shift()
 		go_nogo_condition = stim.go_nogo_condition
 		directed_condition = stim.directed_condition
 
-		letters = getTrainingSet()
-		cue = getCue()
-		probe = getProbe(directed_condition, letters, cue)
-		correct_response = getCorrectResponse(cue, probe, letters, go_nogo_condition)
+		var letters = getTrainingSet(used_letters,numLetters)
+		var cue = getCue()
+		var probe = getProbe(directed_condition, letters, cue)
+		var correct_response = getCorrectResponse(cue, probe, letters, go_nogo_condition)
 		 if (go_nogo_condition == 'go'){
 			probe_color = go_no_go_styles[0]
 		 } else {
@@ -209,34 +209,27 @@ var createTrialTypes = function(numTrialsPerBlock){
 			}
 	
 		new_stims.push(stim)
+		used_letters = used_letters.concat(letters)
 		
 	}	
+	
 	return new_stims
 		
 }
 
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		letters = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
 	return letters
 };
+
 
 //returns a cue randomly, either TOP or BOT
 var getCue = function() {

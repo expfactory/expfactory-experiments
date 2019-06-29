@@ -115,6 +115,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	//probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
+	var used_letters = []
 	
 	var directed_forgetting_trial_type_list = []
 	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
@@ -129,13 +130,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 	directed_condition =  jsPsych.randomization.repeat(directed_cond_array, 1).pop()
 	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
 	
-	letters = getTrainingSet()
+	letters = getTrainingSet(used_letters,numLetters)
 	cue = getCue()
 	probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
 	probe = probe_info[0]
 	memorySet = probe_info[1]
 	forgetSet = probe_info[2]
 	correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
+	used_letters = used_letters.concat(letters)
 	
 	var stims = []
 	var first_stim = {
@@ -162,7 +164,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		directed_condition = directed_forgetting_trial_type_list[quadIndex - 1].pop()
 		predictive_dimension = predictive_dimensions[quadIndex - 1]
 		
-		letters = getTrainingSet()
+		letters = getTrainingSet(used_letters,numLetters)
 		cue = getCue()
 		probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
 		probe = probe_info[0]
@@ -184,6 +186,9 @@ var createTrialTypes = function(numTrialsPerBlock){
 		}
 		
 		stims.push(stim)
+		
+		
+		used_letters = used_letters.concat(letters)
 	}
 	
 	return stims
@@ -191,24 +196,14 @@ var createTrialTypes = function(numTrialsPerBlock){
 
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		letters = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
 	return letters
 };
 

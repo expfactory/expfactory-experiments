@@ -828,41 +828,44 @@ var practiceNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'go')){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
-				go_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					go_rt += data[i].rt
-					sum_go_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						go_correct += 1
+				if (data[i].stop_signal_condition == 'go'){
+					go_trials+=1
+					if (data[i].rt != -1){
+						total_sum_rt += data[i].rt
+						go_rt += data[i].rt
+						sum_go_responses += 1
+						if (data[i].key_press == data[i].correct_response){
+							go_correct += 1
 		
+						}
 					}
-				}
 		
-			} else if ((data[i].trial_id == "practice_trial") && (data[i].stop_signal_condition == 'stop')){
-				total_trials+=1
-				stop_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					stop_rt += data[i].rt
-					sum_stop_responses += 1
-					if (data[i].key_press == -1){
+				} else if (data[i].stop_signal_condition == 'stop'){
+					stop_trials+=1
+					if (data[i].rt != -1){
+						total_sum_rt += data[i].rt
+						stop_rt += data[i].rt
+						sum_stop_responses += 1
+					}
+					if (data[i].rt == -1){
 						stop_correct += 1
-		
+	
 					}
 				}
-			
 			}
-	
 		}
 	
 		var accuracy = go_correct / go_trials
 		var missed_responses = (go_trials - sum_go_responses) / go_trials
 		var ave_rt = go_rt / sum_go_responses
 		var stop_acc = stop_correct / stop_trials
-	
+		
+		console.log('stop_acc = ' + stop_acc)
+		console.log('stop_correct = ' + stop_correct)
+		console.log('stop_trials = ' + stop_trials)
+			
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
@@ -986,34 +989,33 @@ var testNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'go')){
+			if (data[i].trial_id == "test_trial"){
 				total_trials+=1
-				go_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					go_rt += data[i].rt
-					sum_go_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						go_correct += 1
+				if (data[i].stop_signal_condition == 'go'){
+					go_trials+=1
+					if (data[i].rt != -1){
+						total_sum_rt += data[i].rt
+						go_rt += data[i].rt
+						sum_go_responses += 1
+						if (data[i].key_press == data[i].correct_response){
+							go_correct += 1
 		
+						}
 					}
-				}
 		
-			} else if ((data[i].trial_id == "test_trial") && (data[i].stop_signal_condition == 'stop')){
-				total_trials+=1
-				stop_trials+=1
-				if (data[i].rt != -1){
-					total_sum_rt += data[i].rt
-					stop_rt += data[i].rt
-					sum_stop_responses += 1
-					if (data[i].key_press == -1){
+				} else if (data[i].stop_signal_condition == 'stop'){
+					stop_trials+=1
+					if (data[i].rt != -1){
+						total_sum_rt += data[i].rt
+						stop_rt += data[i].rt
+						sum_stop_responses += 1
+					}
+					if (data[i].rt == -1){
 						stop_correct += 1
-		
+	
 					}
 				}
-			
 			}
-	
 		}
 	
 		var accuracy = go_correct / go_trials

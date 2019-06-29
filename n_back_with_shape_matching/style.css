@@ -107,6 +107,18 @@ img.center {
   max-height: 65%;
 }
 
+img.distractor {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 45%;
+}
+
 /*******************************************************/
 /***********    Shape Matching CSS Styles     **********/
 /*******************************************************/
@@ -119,7 +131,7 @@ img.center {
   left: 50%;
   margin-right:0%;
   background-color: none;
-  transform: translate(-70%, -70%);
+  transform: translate(-70%, -70%); /* 70,70 */
 }
 
 .gng_number {

@@ -495,7 +495,7 @@ var instructions_block = {
 			'<p class = block-text>When in the bottom two quadrants, do a '+predictive_dimensions[2][0]+'.   Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter matches the letter 1 or 2 trials ago, and the '+possible_responses[1][0]+' if they mismatch.</p> '+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
-			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>',
 		/*
 		'<div class = centerbox>'+
@@ -725,6 +725,7 @@ var practiceNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		var mismatch_press = 0
 	
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "practice_trial"){
@@ -737,6 +738,10 @@ var practiceNode = {
 		
 					}
 				}
+				
+				if (data[i].key_press == possible_responses[1][1]){
+					mismatch_press += 1
+				}
 		
 			}
 	
@@ -745,6 +750,7 @@ var practiceNode = {
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
+		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
@@ -756,11 +762,14 @@ var practiceNode = {
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
-			feedback_text +=
-					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+			
+			if (mismatch_press_percentage >= 0.90){
+				feedback_text +=
+						'</p><p class = block-text>Please do not simply press the "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press the "'+possible_responses[0][0]+'" when they occur.'
 			}
 		
 			if (practiceCount == practice_thresh){
@@ -771,7 +780,10 @@ var practiceNode = {
 			}
 			
 			feedback_text +=
-				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+			
+			feedback_text +=
+				'</p><p class = block-text>Press Enter to continue.' 
 			
 			return true
 		
@@ -814,6 +826,7 @@ var testNode = {
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
+		var mismatch_press = 0
 	
 		for (var i = 0; i < data.length; i++){
 			if (data[i].trial_id == "test_trial"){
@@ -826,6 +839,10 @@ var testNode = {
 		
 					}
 				}
+				
+				if (data[i].key_press == possible_responses[1][1]){
+					mismatch_press += 1
+				}
 		
 			}
 	
@@ -834,6 +851,7 @@ var testNode = {
 		var accuracy = correct / total_trials
 		var missed_responses = (total_trials - sum_responses) / total_trials
 		var ave_rt = sum_rt / sum_responses
+		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
 		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
@@ -846,6 +864,11 @@ var testNode = {
 		if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+		}
+		
+		if (mismatch_press_percentage >= 0.90){
+			feedback_text +=
+					'</p><p class = block-text>Please do not simply press the "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press the "'+possible_responses[0][0]+'" when they occur.'
 		}
 	
 		if (testCount == numTestBlocks){

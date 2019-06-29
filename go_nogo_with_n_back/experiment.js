@@ -491,8 +491,8 @@ var instructions_block = {
 		"<div class = centerbox>"+
 			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".</p>"+
 			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
-			"<p class = block-text>A "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
-			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 		"</div>",
 		
 		/*

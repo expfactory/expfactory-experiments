@@ -365,6 +365,8 @@ var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','nogo']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var shapes = jsPsych.randomization.repeat([['circle','circle'],['square','square']],1)
+var shapes = [['circle','circle'],['square','square']]
+
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
 var totalShapesUsed = 2
@@ -765,6 +767,7 @@ var practiceStopNode = {
 		var missed_responses = (SS_gng_go_trials - SS_gng_go_respond) / SS_gng_go_trials
 		
 		var aveShapeRespondCorrect = SS_gng_go_correct / SS_gng_go_trials 
+		
 		
 		var stop_signal_respond = (SS_gng_stop_respond + SS_stop_respond) / (SS_stop_trials + SS_gng_stop_trials)
 		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)

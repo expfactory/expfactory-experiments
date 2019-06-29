@@ -100,10 +100,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
-				flanker_condition = flanker_conditions[numFlankerConds]
-				directed_condition = directed_cond_array[numDirectedConds]
+				var flanker_condition = flanker_conditions[numFlankerConds]
+				var directed_condition = directed_cond_array[numDirectedConds]
 				
-				stim = {
+				var stim = {
 					flanker_condition: flanker_condition,
 					directed_condition: directed_condition
 				}
@@ -114,19 +114,20 @@ var createTrialTypes = function(numTrialsPerBlock){
 	}
 		
 	stims = jsPsych.randomization.repeat(stims,1)
-	new_len = stims.length
-	new_stims = []
+	var new_len = stims.length
+	var new_stims = []
 	
+	var used_letters = []
+		
 	for (var i = 0; i < new_len; i++){
-		stim = stims.shift()
-		flanker_condition = stim.flanker_condition
-		directed_condition = stim.directed_condition		
+		var temp_stim = stims.shift()
+		var temp_flanker_condition = temp_stim.flanker_condition
+		var temp_directed_condition = temp_stim.directed_condition		
 				
-				
-		letters = getTrainingSet()
-		cue = getCue()
-		probe = getProbe(directed_condition, letters, cue)
-		correct_response = getCorrectResponse(cue, probe, letters)
+		var letters = getTrainingSet(used_letters,numLetters)
+		var cue = getCue()
+		var probe = getProbe(temp_directed_condition, letters, cue)
+		var correct_response = getCorrectResponse(cue, probe, letters)
 		if (cue == 'TOP'){
 			memory_set = [letters[2],letters[3]]
 			forget_set = [letters[0],letters[1]]
@@ -135,16 +136,16 @@ var createTrialTypes = function(numTrialsPerBlock){
 			forget_set = [letters[2],letters[3]]
 		}
 		 
-		 if (flanker_condition == 'congruent'){
+		 if (temp_flanker_condition == 'congruent'){
 			flanking_letter = probe
-		 } else if (flanker_condition == 'incongruent'){
+		 } else if (temp_flanker_condition == 'incongruent'){
 			flanking_letter = randomDraw(stimArray.filter(function(y) {return $.inArray(y, [probe]) == -1}))
 		 }
 		
 		
-		stim = {
-			flanker_condition: flanker_condition,
-			directed_condition: directed_condition,
+		var new_stim = {
+			flanker_condition: temp_flanker_condition,
+			directed_condition: temp_directed_condition,
 			letters: letters,
 			cue: cue,
 			probe: probe,
@@ -152,36 +153,29 @@ var createTrialTypes = function(numTrialsPerBlock){
 			correct_response: correct_response
 			}
 	
-		new_stims.push(stim)
+		new_stims.push(new_stim)
+		
+
+		used_letters = used_letters.concat(letters)
+		
 	}
 			
-		
-	return new_stims
-		
+	return new_stims	
 }
 
 
 //this is an algorithm to choose the training set based on rules of the game (training sets are composed of any letter not presented in the last two training sets)
-var getTrainingSet = function() {
-	preceeding1stims = []
-	preceeding2stims = []
-	trainingArray = jsPsych.randomization.repeat(stimArray, 1);
-	if (current_trial < 1) {
-		letters = trainingArray.slice(0,numLetters)
-	} else if (current_trial == 1) {
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims) == -1)
-		}).slice(0,numLetters)
-	} else {
-		preceeding2stims = preceeding1stims.slice()
-		preceeding1stims = letters.slice()
-		letters = trainingArray.filter(function(y) {
-			return (jQuery.inArray(y, preceeding1stims.concat(preceeding2stims)) == -1)
-		}).slice(0,numLetters)
-	}
+var getTrainingSet = function(used_letters, numLetters) {
+	
+	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
+	var letters = trainingArray.filter(function(y) {
+		
+		return (jQuery.inArray(y, used_letters.slice(-numLetters*2)) == -1)
+	}).slice(0,numLetters)
+	
 	return letters
 };
+
 
 //returns a cue randomly, either TOP or BOT
 var getCue = function() {
@@ -190,6 +184,7 @@ var getCue = function() {
 	
 	return cue
 };
+
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
 var getProbe = function(directed_cond, letters, cue) {
@@ -381,7 +376,6 @@ var preFileType = '<img class = center src="/static/experiments/directed_forgett
 
 
 var stims = createTrialTypes(practice_len)
-var stims = createTrialTypes(numTrialsPerBlock)
 
 var task_boards = [['<div class = bigbox><div class = lettersBox><div class = topLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = topRight style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomLeft style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomMiddle style="font-size:50px;"><div class = cue-text>'],['</div></div><div class = bottomRight style="font-size:50px;"><div class = cue-text>'],['</div></div></div></div>']]
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['</div></div></div>']]				

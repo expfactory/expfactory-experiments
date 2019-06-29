@@ -303,7 +303,7 @@ var start_test_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice. There will be three short breaks throughout the test.</p><p class = center-block-text>Press <i>enter</i> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice, press Z if the green and white shapes are different and press M if they are the same.  Ignore the red shape. </p><p class = center-block-text>Press <i>enter</i> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
@@ -418,7 +418,7 @@ var practice_block = {
 	data: getData,
 	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
 	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
+	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_task_list,
 	timing_response: 2000, //2000
 	timing_stim: 1000,  //1000
 	timing_feedback_duration: 500, //500

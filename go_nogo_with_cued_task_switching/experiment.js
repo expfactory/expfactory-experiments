@@ -727,7 +727,7 @@ var practiceNode = {
 		
 	
 		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "test_trial"){
+			if (data[i].trial_id == "practice_trial"){
 				total_trials+=1
 				if (data[i].rt != -1){
 					sum_rt += data[i].rt
