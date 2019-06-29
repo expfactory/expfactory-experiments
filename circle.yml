@@ -196,16 +196,10 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('test_browser_chrome','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__stanford_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('alcohol_drugs_survey__stanford_followup','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__stanford_baseline','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__stanford_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('eating_followup_survey__stanford','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop_signal__stanford_baseline','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop_signal__stanford_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__stanford_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__stanford_followup','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('smoking_followup_survey__stanford','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__stanford_baseline','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__stanford_followup','web','.');"
               
 workflows:
   version: 2
