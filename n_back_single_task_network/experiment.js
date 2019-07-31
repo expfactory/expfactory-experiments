@@ -257,7 +257,8 @@ var numTrialsPerBlock = 50 // 50, must be divisible by 5 and we need to have a m
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 15 trials
 
-var accuracy_thresh = 0.80
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
@@ -576,7 +577,6 @@ var practiceNode = {
 		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -590,6 +590,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 			
 			if (mismatch_press_percentage >= 0.90){
 				feedback_text +=
@@ -675,7 +680,6 @@ var testNode = {
 		var mismatch_press_percentage = mismatch_press / total_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -686,6 +690,11 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 		
 		if (mismatch_press_percentage >= 0.90){
 				feedback_text +=
@@ -694,7 +703,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			delay = delays.pop()
