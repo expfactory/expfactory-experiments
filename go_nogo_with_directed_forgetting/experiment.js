@@ -386,19 +386,20 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // new vars
-var practice_len = 20  // must be divisible by 20  [5 (go,go,go,go,nogo) vs 4 (pos,pos,con,neg)]
-var exp_len = 180 //must be divisible by 20
-var numTrialsPerBlock =  20 //divisible by 20
+var practice_len = 28  // must be divisible by 20  [5 (go,go,go,go,nogo) vs 4 (pos,pos,con,neg)] // 7/31: changed to by 28 [7(6go:1nogo)x4(2pos,1con,1neg)]
+var exp_len = 252 //must be divisible by 20 // by 28
+var numTrialsPerBlock =  28 //divisible by 20 // by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 16 trials
 var numLetters = 4
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
-var go_nogo_conditions = ['go','go','go','go','nogo']
+var go_nogo_conditions = ['go','go','go','go','go','go','nogo']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var fileTypePNG = ".png"
 var preFileType = "<img class = center src='"
@@ -873,7 +874,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -889,6 +889,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 		
 			if (practiceCount == practice_thresh){
 				feedback_text +=
@@ -964,7 +969,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -976,10 +980,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		

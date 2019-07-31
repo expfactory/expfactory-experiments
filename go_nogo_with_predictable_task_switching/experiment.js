@@ -170,10 +170,10 @@ var createTrialTypes = function(numTrialsPerBlock){
 	numbers = [1,2,3,4,6,7,8,9]	
 	
 	var go_nogo_trial_type_list = []
-	var go_nogo_trial_types1 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
-	var go_nogo_trial_types2 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
-	var go_nogo_trial_types3 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
-	var go_nogo_trial_types4 = jsPsych.randomization.repeat(['go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types1 = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types2 = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types3 = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'], numTrialsPerBlock/20)
+	var go_nogo_trial_types4 = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'], numTrialsPerBlock/20)
 	go_nogo_trial_type_list.push(go_nogo_trial_types1)
 	go_nogo_trial_type_list.push(go_nogo_trial_types2)
 	go_nogo_trial_type_list.push(go_nogo_trial_types3)
@@ -182,7 +182,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
 	
 	number = numbers[Math.floor((Math.random() * 8))]
-	go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1).pop()
+	go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop()
 	
 	
 	response_arr = getCorrectResponse(number,predictive_dimension, go_nogo_condition)
@@ -334,12 +334,13 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 20 // 20  must be divisible by 20 [5 (go go go go stop), by 2 (switch or stay) by 2 (mag or parity)]
-var exp_len = 300 // must be divisible by 20
-var numTrialsPerBlock = 60; //  60 divisible by 20
+var practice_len = 28 // 20  must be divisible by 20 [5 (go go go go stop), by 2 (switch or stay) by 2 (mag or parity)] // 7/31: new ratio 6go:1nogo
+var exp_len = 420 // must be divisible by 20
+var numTrialsPerBlock = 84; //  60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10 // must it be higher than standard 10% since stopping is part of task??
 var practice_thresh = 3 // 3 blocks of 24 trials
  
@@ -664,7 +665,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -679,6 +679,11 @@ var practiceNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 		
 			if (practiceCount == practice_thresh){
 				feedback_text +=
@@ -773,7 +778,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -785,10 +789,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		
