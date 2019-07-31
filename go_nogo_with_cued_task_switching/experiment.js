@@ -347,7 +347,8 @@ var credit_var = 0
 
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/go_nogo_with_cued_task_switching/images/'
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3
 var lowestNumCond = 20
@@ -356,10 +357,10 @@ var lowestNumCond = 20
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 20
-var test_length = 400
-var numTrialsPerBlock = 80
+var test_length = 385 /*a multiple of 77*/
+var numTrialsPerBlock = 77 /*7/31: So that it'll be a multiple of the new 6:1 ratio of go:nogo trials*/
 var numTestBlocks = test_length / numTrialsPerBlock
-var CTI = 300
+var CTI = 150
 
 var go_no_go_styles = ['solid','outlined']
 
@@ -383,7 +384,7 @@ color: {
 
 var task_switch_types = ["stay", "switch"]
 var cue_switch_types = ["stay", "switch"]
-var go_no_go_types = ["go","go","go","go","nogo"]
+var go_no_go_types = ["go","go","go","go","go","go","nogo"] /*7/31: changed from 4:1 to 6:1 go's:nogo's*/
 var task_switches_arr = []
 for (var t = 0; t < task_switch_types.length; t++) {
   for (var c = 0; c < cue_switch_types.length; c++) {
@@ -398,7 +399,7 @@ for (var t = 0; t < task_switch_types.length; t++) {
   }
 }
 var task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
-task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
 var practiceStims = genStims(practice_length + 1)
 var testStims = genStims(numTrialsPerBlock + 1)
 var stims = practiceStims
@@ -573,7 +574,7 @@ var start_test_block = {
     current_trial = 0
     stims = testStims
     task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
-    task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+    task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
     feedback_text = 'Starting a test block.  Press enter to continue.'
   },
   timing_post_trial: 1000
@@ -713,7 +714,7 @@ var practiceNode = {
 	loop_function: function(data) {
 		practiceCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, practice_length / lowestNumCond)
-		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
 		practiceStims = genStims(practice_length + 1)
 		current_trial = 0
 	
@@ -754,14 +755,13 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
 			testStims = genStims(numTrialsPerBlock + 1)
 			task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
-			task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+			task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -770,14 +770,18 @@ var practiceNode = {
 			if (missed_responses > missed_thresh){
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
-			}
+      }
+      if (ave_rt > rt_thresh) {
+        feedback_text += 
+            '</p><p class = block-text>You have been responding too slowly.'
+      }
 		
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
 					testStims = genStims(numTrialsPerBlock + 1)
 					task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock /lowestNumCond)
-					task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+					task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
 					return false
 			}
 			
@@ -843,7 +847,7 @@ var testNode = {
 	loop_function: function(data) {
 		testCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / lowestNumCond)
-		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","nogo"],1).pop()})
+		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
 		testStims = genStims(numTrialsPerBlock + 1)
 		current_trial = 0
 	
@@ -884,7 +888,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that required a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -895,10 +898,14 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+    if (ave_rt > rt_thresh) {
+      feedback_text += 
+          '</p><p class = block-text>You have been responding too slowly.'
+    }
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			feedback_text +=

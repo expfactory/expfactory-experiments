@@ -379,7 +379,8 @@ var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_cued_task_switching/images/'
 var preFileTypeStar = '<img class = star src="/static/experiments/stop_signal_with_cued_task_switching/images/'
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 
 var maxStopCorrect = 0.70
@@ -389,7 +390,7 @@ var maxStopCorrectPractice = 1
 var minStopCorrectPractice = 0
 
 var practice_thresh = 3 // 3 blocks of 12 
-var CTI = 300
+var CTI = 150
 
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
@@ -399,8 +400,8 @@ var test_length = 240
 var numTrialsPerBlock = 48 //48 must be divisible by 12
 var numTestBlocks = test_length / numTrialsPerBlock
 
-var SSD_stay = 250
-var SSD_switch = 250
+var SSD_stay = 350
+var SSD_switch = 350
 var maxSSD = 1000
 var minSSD = 0 
 
@@ -867,7 +868,6 @@ var practiceNode = {
 		console.log('stop_trials = ' + stop_trials)
 			
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if ((accuracy > accuracy_thresh) && (stop_acc < maxStopCorrectPractice) && (stop_acc > minStopCorrectPractice)){
 			feedback_text +=
@@ -886,6 +886,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+      if (ave_rt > rt_thresh) {
+        feedback_text += 
+            '</p><p class = block-text>You have been responding too slowly.'
+      }
 			
 			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
@@ -1024,7 +1029,6 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -1035,6 +1039,11 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+    if (ave_rt > rt_thresh) {
+      feedback_text += 
+          '</p><p class = block-text>You have been responding too slowly.'
+    }
 		
 		if (stop_acc > maxStopCorrect){
 			feedback_text +=
@@ -1048,7 +1057,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			return true
