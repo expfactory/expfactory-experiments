@@ -371,7 +371,8 @@ var exp_len = 180 //180 must be divisible by 12
 var numTrialsPerBlock = 36; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 var numLetters = 4
@@ -382,7 +383,7 @@ var minStopCorrect = 0.30
 var maxStopCorrectPractice = 1
 var minStopCorrectPractice = 0
 
-var SSD = 250
+var SSD = 350
 var maxSSD = 1000
 var minSSD = 0 
  
@@ -910,7 +911,6 @@ var practiceNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		
 		if (practiceCount == practice_thresh){
 			feedback_text +=
@@ -935,6 +935,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 			
 			if (stop_correct === maxStopCorrectPractice){
 				feedback_text +=
@@ -1032,7 +1037,6 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -1044,6 +1048,11 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 		
 		if (stop_correct > maxStopCorrect){
 			feedback_text +=
@@ -1059,7 +1068,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		
