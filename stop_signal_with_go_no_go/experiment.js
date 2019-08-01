@@ -337,14 +337,14 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 var run_attention_checks = true
 
-var practice_len = 30 // 30 must be divisible by 30
-var exp_len = 300 //300 must be divisible by 30
-var numTrialsPerBlock = 60 // 60, must be divisible by 30
+var practice_len = 42 // 30 must be divisible by 30 // 7/31: new ratio is 6go:1nogo -> 7x3(stop_signal_condition)x2(go_no_go_styles)=42
+var exp_len = 420 //300 must be divisible by 30
+var numTrialsPerBlock = 84 // 60, must be divisible by 30
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 16 trials
 
-var SSD_nogo = 250
-var SSD_go = 250
+var SSD_nogo = 350
+var SSD_go = 350
 var maxSSD = 1000
 var minSSD = 0 
 var current_trial = 0
@@ -352,7 +352,7 @@ var current_trial = 0
 
 var rt_thresh = 1000;
 var missed_response_thresh = 0.10;
-var accuracy_thresh = 0.70;
+var accuracy_thresh = 0.75;
 
 var stop_signal_respond_lower_thresh = 0.30
 var stop_signal_respond_upper_thresh = 0.70
@@ -362,7 +362,7 @@ var stop_signal_respond_upper_thresh_practice = 1
 
 
 var stop_signal_conditions = ['go','go','stop']
-var go_no_go_types = ['go','go','go','go','nogo']
+var go_no_go_types = ['go','go','go','go','go','go','nogo']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var shapes = jsPsych.randomization.repeat([['circle','circle'],['square','square']],1)
 var shapes = [['circle','circle'],['square','square']]
@@ -774,7 +774,6 @@ var practiceStopNode = {
 			
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
 
 		if (practiceStopCount == practice_thresh) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
@@ -939,11 +938,10 @@ var testNode = {
 		
 
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy for trials that require a response: " + Math.round(aveShapeRespondCorrect * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (testCount == numTestBlocks) {
-			feedback_text += '</p><p class = block-text>Done with this test.'
+			feedback_text += '</p><p class = block-text>Done with this test.<br>If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			
 			return false;
 		} else {
