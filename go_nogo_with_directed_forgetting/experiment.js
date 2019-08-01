@@ -386,9 +386,9 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = true
 
 // new vars
-var practice_len = 28  // must be divisible by 20  [5 (go,go,go,go,nogo) vs 4 (pos,pos,con,neg)] // 7/31: changed to by 28 [7(6go:1nogo)x4(2pos,1con,1neg)]
-var exp_len = 252 //must be divisible by 20 // by 28
-var numTrialsPerBlock =  28 //divisible by 20 // by 28
+var practice_len = 28  //7/31: changed to by 28 [7(6go:1nogo)x4(2pos,1con,1neg)]
+var exp_len = 168 //must be divisible by 28
+var numTrialsPerBlock =  28 //divisible by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
