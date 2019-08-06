@@ -298,7 +298,7 @@ var credit_var = 0
 var choices = [77, 90]
 var exp_stage = 'practice'
 var practice_length = 8 
-var numTrialsPerBlock = 20
+var numTrialsPerBlock = 48
 var numTestBlocks = 4 
 var practice_thresh = 3 // 3 blocks of 8 trials
 var accuracy_thresh = 0.75
@@ -529,8 +529,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 3000, //3000
-	timing_response: 3000, //3000
+	timing_stim: 2000, //2000
+	timing_response: 2000, //2000
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
@@ -568,8 +568,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2500, //2500
-	timing_response: 2500 //2500
+	timing_stim: 2000, //2000
+	timing_response: 2000 //2000
 };
 
 
@@ -598,8 +598,8 @@ var probe_block = {
 	},
 	choices: choices,
 	timing_post_trial: 0,
-	timing_stim: 2000, //2000
-	timing_response: 2000, //2000
+	timing_stim: 1000, //1000
+	timing_response: 2000, //1000
 	response_ends_trial: false,
 	on_finish: appendProbeData
 };
@@ -625,8 +625,8 @@ var practice_probe_block = {
 	data: {trial_id: "practice_trial", 
 		   exp_stage: "practice"
 		   },
-	timing_stim: 2000, //2000
-	timing_response: 2000, //2000
+	timing_stim: 1000, //1000
+	timing_response: 2000, //1000
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -698,9 +698,9 @@ for (i = 0; i < (practice_length); i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
+		timing_stim: 2000, //2000
 		prompt: prompt_text,
-		timing_response: 3000, //3000
+		timing_response: 2000, //2000
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
@@ -740,8 +740,8 @@ for (i = 0; i < (practice_length); i++) {
 		choices: 'none',
 		prompt: prompt_text,
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 

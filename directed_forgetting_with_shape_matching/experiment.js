@@ -342,7 +342,7 @@ var credit_var = 0
 
 // new vars
 var practice_len = 8  // must be divisible by 8
-var exp_len = 160 // must be divisible by 8
+var exp_len = 192 // must be divisible by 8
 var numTrialsPerBlock = 32; // divisible by 64
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -596,8 +596,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000,
+		timing_stim: 2000, //2000
+		timing_response: 2000,
 		prompt: prompt_text
 	}
 
@@ -635,12 +635,12 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "practice_six_letters"
+			trial_id: "practice_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500,
+		timing_stim: 2000, //2000
+		timing_response: 2000,
 		prompt: prompt_text
 	};
 	
@@ -650,7 +650,7 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getProbeStim,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_feedback_duration: 0,
 		timing_post_trial: 0,
@@ -785,8 +785,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000
+		timing_stim: 2000, //2000
+		timing_response: 2000
 	}
 
 	var ITI_fixation_block = {
@@ -821,12 +821,12 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "test_six_letters"
+			trial_id: "test_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 
@@ -839,7 +839,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData

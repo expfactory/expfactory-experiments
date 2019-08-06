@@ -419,8 +419,8 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16
-var exp_len = 160 // must be divisible by 16
-var numTrialsPerBlock = 32; // divisible by 16
+var exp_len = 240 // must be divisible by 16
+var numTrialsPerBlock = 48; // divisible by 16
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
@@ -693,8 +693,8 @@ for (i = 0; i < practice_len + 1; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000, //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000, //2000
 		prompt: prompt_text
 	}
 
@@ -721,8 +721,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500, //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000, //2000
 		prompt: prompt_text
 	};
 
@@ -748,7 +748,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getProbeStim,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_feedback_duration: 0,
 		is_html: true,
@@ -880,8 +880,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			trial_id: "test_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000 //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	}
 
 	var ITI_fixation_block = {
@@ -906,8 +906,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 
@@ -934,7 +934,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData

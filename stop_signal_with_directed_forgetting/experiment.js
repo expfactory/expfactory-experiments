@@ -367,7 +367,7 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 180 //180 must be divisible by 12
+var exp_len = 216 //180 must be divisible by 12
 var numTrialsPerBlock = 36; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -656,8 +656,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 3000, //3000
-	timing_response: 3000 //3000
+	timing_stim: 2000, //2000
+	timing_response: 2000 //2000
 }
 
 var ITI_fixation_block = {
@@ -696,8 +696,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2500, //2500
-	timing_response: 2500 //2500
+	timing_stim: 2000, //2000
+	timing_response: 2000 //2000
 };
 
 
@@ -757,8 +757,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 3000, //3000
-		timing_response: 3000 //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	}
 
 	var practice_ITI_fixation_block = {
@@ -800,8 +800,8 @@ for (i = 0; i < practice_len; i++) {
 		choices: 'none',
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 

@@ -387,7 +387,7 @@ var credit_var = true
 
 // new vars
 var practice_len = 28  //7/31: changed to by 28 [7(6go:1nogo)x4(2pos,1con,1neg)]
-var exp_len = 168 //must be divisible by 28
+var exp_len = 224 //must be divisible by 28
 var numTrialsPerBlock =  28 //divisible by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -656,8 +656,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 3000, 
-	timing_response: 3000 //3000
+	timing_stim: 2000, 
+	timing_response: 2000 //2000
 }
 
 var ITI_fixation_block = {
@@ -696,8 +696,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2500, 
-	timing_response: 2500 //2500
+	timing_stim: 2000, 
+	timing_response: 2000 //2000
 };
 
 
@@ -710,7 +710,7 @@ var probe_block = {
 	},
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	timing_post_trial: 0,
-	timing_stim: 2000, 
+	timing_stim: 1000, 
 	timing_response: 2000, //2000
 	response_ends_trial: false,
 	on_finish: appendData
@@ -748,8 +748,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 3000, 
-		timing_response: 3000 //3000
+		timing_stim: 2000, 
+		timing_response: 2000 //2000
 	}
 
 	var practice_ITI_fixation_block = {
@@ -791,8 +791,8 @@ for (i = 0; i < practice_len; i++) {
 		choices: 'none',
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 2500, 
-		timing_response: 2500 //2500
+		timing_stim: 2000, 
+		timing_response: 2000 //2000
 	};
 	
 	var practice_probe_block = {
@@ -800,7 +800,7 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getProbeStim,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		timing_stim: 2000,
+		timing_stim: 1000,
 		timing_response: 2000,  //2000
 		prompt: prompt_text,
 		is_html: true,
