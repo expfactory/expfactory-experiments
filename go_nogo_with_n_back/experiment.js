@@ -340,8 +340,8 @@ var credit_var = 0
 
 
 var practice_len = 28 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
-var exp_len = 336 //300 must be divisible by 25
-var numTrialsPerBlock = 56 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var exp_len = 350 //300 must be divisible by 25
+var numTrialsPerBlock = 70 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
 

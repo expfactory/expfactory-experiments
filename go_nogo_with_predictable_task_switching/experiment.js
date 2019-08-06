@@ -335,8 +335,8 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 28 // 20  must be divisible by 20 [5 (go go go go stop), by 2 (switch or stay) by 2 (mag or parity)] // 7/31: new ratio 6go:1nogo
-var exp_len = 420 // must be divisible by 20
-var numTrialsPerBlock = 84; //  60 divisible by 20
+var exp_len = 280 // must be divisible by 20
+var numTrialsPerBlock = 56; //  60 divisible by 20
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75

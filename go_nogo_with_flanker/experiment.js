@@ -263,8 +263,8 @@ var credit_var = 0
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 28 // must be divisible by 20, [5 (go,go,go,go,stop) by 4 (flanker conditions)]  // 7/31: changed to by 28 [7(6go:1nogo)x4(2con:2inc)]
-var exp_len = 336 //240 must be divisible by 20 // by 28
-var numTrialsPerBlock = 84; // 60 divisible by 20 // by 28
+var exp_len = 280 //240 must be divisible by 20 // by 28
+var numTrialsPerBlock = 56; // 60 divisible by 20 // by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75

@@ -211,11 +211,11 @@ var accuracy_thresh = 0.75
 var rt_thresh = 1000
 var missed_thresh = 0.10
 
-var practice_length = 10
+var practice_length = 14
 var practice_thresh = 3 // 3 blocks of 10 trials
 
-var test_length = 350 //keeping # of no_go trials at 50 -> new ratio 6:1 makes total of 350 trials
-var numTrialsPerBlock = 70 // must be divisible by 5 (7/31: new ratio go:nogo is 6:1 -> divisible by 7)
+var test_length = 245 //keeping # of no_go trials at 50 -> new ratio 6:1 makes total of 350 trials
+var numTrialsPerBlock = 49 // must be divisible by 5 (7/31: new ratio go:nogo is 6:1 -> divisible by 7)
 var numTestBlocks = test_length / numTrialsPerBlock
 
 var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 

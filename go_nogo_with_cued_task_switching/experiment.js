@@ -356,9 +356,9 @@ var lowestNumCond = 20
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
-var practice_length = 20
-var test_length = 385 /*a multiple of 77*/
-var numTrialsPerBlock = 77 /*7/31: So that it'll be a multiple of the new 6:1 ratio of go:nogo trials*/
+var practice_length = 28
+var test_length = 560 /*a multiple of 77*/
+var numTrialsPerBlock = 112 /*7/31: So that it'll be a multiple of the new 6:1 ratio of go:nogo trials*/
 var numTestBlocks = test_length / numTrialsPerBlock
 var CTI = 150
 
