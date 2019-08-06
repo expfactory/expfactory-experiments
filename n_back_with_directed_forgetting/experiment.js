@@ -549,7 +549,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
+		timing_stim: 150, //1000
 		timing_response: 1000,
 		prompt: prompt_text
 	};
@@ -674,7 +674,7 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
+		timing_stim: 150, //1000
 		timing_response: 1000
 	};
 	
