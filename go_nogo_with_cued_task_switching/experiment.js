@@ -103,7 +103,7 @@ var getCategorizeIncorrectText = function(){
 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Letter is '+go_no_go_styles[1]+'.</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+		return '<div class = fb_box><div class = center-text><font size = 20>number is '+go_no_go_styles[1]+'.</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
 	}
 
 }
@@ -419,7 +419,7 @@ var task_list = 	   '<ul>'+
 var prompt_task_list = '<ul>'+
 					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
-					   	'<li>Do not respond if the letter is '+go_no_go_styles[1]+'!</li>'+
+					   	'<li>Do not respond if the number is '+go_no_go_styles[1]+'!</li>'+
 					   '</ul>'
 
 //PRE LOAD IMAGES HERE
@@ -499,7 +499,7 @@ var instructions_block = {
     '</div>',
     
     '<div class = centerbox>' + 
-		'<p class = block-text>On some trials, the letter will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the letter is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
+		'<p class = block-text>On some trials, the number will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the number is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
 		
 		"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
 		"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
@@ -567,7 +567,7 @@ var start_test_block = {
   			'<p class = center-block-text>Practice completed. Starting test.</p>'+
   			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
     		task_list +
-    		'<p class = center-block-text>Do not make a response if the letter is '+go_no_go_styles[1]+'.</p>'+
+    		'<p class = center-block-text>Do not make a response if the number is '+go_no_go_styles[1]+'.</p>'+
   			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
   		'</div>',
   on_finish: function() {
