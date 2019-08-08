@@ -367,11 +367,12 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 180 //180 must be divisible by 12
+var exp_len = 216 //180 must be divisible by 12
 var numTrialsPerBlock = 36; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
 var numLetters = 4
@@ -382,7 +383,7 @@ var minStopCorrect = 0.30
 var maxStopCorrectPractice = 1
 var minStopCorrectPractice = 0
 
-var SSD = 250
+var SSD = 350
 var maxSSD = 1000
 var minSSD = 0 
  
@@ -655,8 +656,8 @@ var fixation_block = {
 		trial_id: "fixation"
 	},
 	timing_post_trial: 0,
-	timing_stim: 3000, //3000
-	timing_response: 3000 //3000
+	timing_stim: 2000, //2000
+	timing_response: 2000 //2000
 }
 
 var ITI_fixation_block = {
@@ -695,8 +696,8 @@ var training_block = {
 	},
 	choices: 'none',
 	timing_post_trial: 0,
-	timing_stim: 2500, //2500
-	timing_response: 2500 //2500
+	timing_stim: 2000, //2000
+	timing_response: 2000 //2000
 };
 
 
@@ -756,8 +757,8 @@ for (i = 0; i < practice_len; i++) {
 		},
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 3000, //3000
-		timing_response: 3000 //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	}
 
 	var practice_ITI_fixation_block = {
@@ -799,8 +800,8 @@ for (i = 0; i < practice_len; i++) {
 		choices: 'none',
 		timing_post_trial: 0,
 		prompt: prompt_text,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 
@@ -910,7 +911,6 @@ var practiceNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		
 		if (practiceCount == practice_thresh){
 			feedback_text +=
@@ -935,6 +935,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 			
 			if (stop_correct === maxStopCorrectPractice){
 				feedback_text +=
@@ -1032,7 +1037,6 @@ var testNode = {
 		var stop_acc = stop_correct / stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -1044,6 +1048,11 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 		
 		if (stop_correct > maxStopCorrect){
 			feedback_text +=
@@ -1059,7 +1068,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		

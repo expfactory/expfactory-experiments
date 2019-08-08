@@ -439,11 +439,12 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 16
-var exp_len = 160 // must be divisible by 16
+var exp_len = 192 // must be divisible by 16
 var numTrialsPerBlock = 32; // divisible by 16
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 16 trials
 var numLetters = 4
@@ -590,11 +591,11 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment you will be presented with a cue, either remember (or retain) or forget (or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
 		
-			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 4 letters. You must memorize all 4 letters.</p> '+
 						
-			'<p class = block-text>After the 6 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
+			'<p class = block-text>After the 4 letters disappear, you will see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 3 letters. <i>The other 3 letters are called your memory set!</i></p>'+
+			'<p class = block-text>For example, if the first cue was forget and the second cue was TOP, please forget the top 2 letters. <i>The other 2 letters are called your memory set!</i></p>'+
 		
 			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the cued set.</p>'+
 		
@@ -645,13 +646,13 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>You will be presented with a cue, either remember (or retain) or forget (or disregard). This cue instructs what kind of task you will be doing for that trial.</p> '+
 		
-			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 6 letters. You must memorize all 6 letters.</p> '+
+			'<p class = block-text>After the remember (or retain) or forget (or disregard) cue disappears, you will be presented with 4 letters. You must memorize all 4 letters.</p> '+
 						
-			'<p class = block-text>After the 6 letters disappear, you will also see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
+			'<p class = block-text>After the 4 letters disappear, you will also see another cue, either TOP or BOT. This instructs you which letters you should remember or forget, either the top or bottom letters.</p>'+
 		
-			'<p class = block-text>For example, if the first cue was disregard and the second cue was TOP, please forget the top 3 letters. <i>The bottom 3 letters are called your memory set!</i></p>'+
+			'<p class = block-text>For example, if the first cue was disregard and the second cue was TOP, please forget the top 2 letters. <i>The bottom 2 letters are called your memory set!</i></p>'+
 			
-			'<p class = block-text>Alternatively, if the first cue was retain and the second cue was TOP, please remember the top 3 letters. <i>The top 3 letters are called your memory set!</i></p>'+
+			'<p class = block-text>Alternatively, if the first cue was retain and the second cue was TOP, please remember the top 2 letters. <i>The top 2 letters are called your memory set!</i></p>'+
 		
 			'<p class = block-text>If you see the cue, '+cued_dimensions[0]+', please  <i>'+cued_dimensions[0]+'</i> the top or bottom letters.</p>'+
 		
@@ -699,8 +700,8 @@ for (i = 0; i < practice_len + 1; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000, //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000, //2000
 		prompt: prompt_text
 	}
 
@@ -723,12 +724,12 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "practice_six_letters"
+			trial_id: "practice_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500, //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000, //2000
 		prompt: prompt_text
 	};
 	
@@ -755,8 +756,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000, //1000
+		timing_stim: 150, //1000
+		timing_response: 150, //1000
 		prompt: prompt_text
 	};
 	
@@ -765,8 +766,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		stimulus: getProbeStim,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		timing_stim: 2000, //2000
-		timing_response: 2000, //2000
+		timing_stim: 1000, //1000
+		timing_response: 2000, //1000
 		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -788,8 +789,8 @@ for (i = 0; i < practice_len + 1; i++) {
 		response_ends_trial: false, 
 
 	};
-	practiceTrials.push(cue_switching_block)
 	practiceTrials.push(start_fixation_block)
+	practiceTrials.push(cue_switching_block)
 	practiceTrials.push(training_block)
 	practiceTrials.push(cue_directed_block)
 	practiceTrials.push(fixation_block)
@@ -830,7 +831,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -846,7 +846,12 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
-		
+
+	      	if (ave_rt > rt_thresh) {
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
+
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
@@ -891,8 +896,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 			trial_id: "test_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000 //3000
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	}
 
 	var ITI_fixation_block = {
@@ -913,12 +918,12 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "test_six_letters"
+			trial_id: "test_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 	
 	var cue_directed_block = {
@@ -943,8 +948,8 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: 1000, //1000
-		timing_response: 1000 //1000
+		timing_stim: 150, //1000
+		timing_response: 150 //1000
 	};
 	
 	var probe_block = {
@@ -956,14 +961,14 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
-		timing_stim: 2000, //2000
-		timing_response: 2000, //2000
+		timing_stim: 1000, //1000
+		timing_response: 2000, //1000
 		response_ends_trial: false,
 		on_finish: appendData
 	};
 	
-	testTrials.push(cue_switching_block)
 	testTrials.push(start_fixation_block)
+	testTrials.push(cue_switching_block)
 	testTrials.push(training_block)
 	testTrials.push(cue_directed_block)
 	testTrials.push(fixation_block)
@@ -1002,7 +1007,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -1014,10 +1018,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh) {
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			return true

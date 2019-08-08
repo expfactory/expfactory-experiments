@@ -153,7 +153,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		} else {
 			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
 		}
-		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1).pop()
+		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop()
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
 		letter_case = randomDraw(['uppercase','lowercase'])
@@ -339,13 +339,14 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 25 // 25 must be divisible by 25
-var exp_len = 300 //300 must be divisible by 25
-var numTrialsPerBlock = 50 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
+var practice_len = 28 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
+var exp_len = 350 //300 must be divisible by 25
+var numTrialsPerBlock = 70 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
@@ -359,7 +360,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','nogo'],1)
+var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 							 
@@ -682,7 +683,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (practiceCount == practice_thresh){
 			feedback_text +=
@@ -706,6 +706,11 @@ var practiceNode = {
 				feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
@@ -792,7 +797,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -803,10 +807,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			delay = delays.pop()

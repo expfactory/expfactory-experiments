@@ -351,11 +351,12 @@ var credit_var = 0
 
 // new vars
 var practice_len = 8  // must be divisible by 8
-var exp_len = 160 // must be divisible by 8
+var exp_len = 192 // must be divisible by 8
 var numTrialsPerBlock = 32; // divisible by 8
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 8 trials
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
@@ -603,8 +604,8 @@ for (i = 0; i < practice_len; i++) {
 			trial_id: "practice_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000,
+		timing_stim: 2000, //2000
+		timing_response: 2000,
 		prompt: prompt_text
 	}
 
@@ -642,12 +643,12 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "practice_six_letters"
+			trial_id: "practice_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500,
+		timing_stim: 2000, //2000
+		timing_response: 2000,
 		prompt: prompt_text
 	};
 	
@@ -656,7 +657,7 @@ for (i = 0; i < practice_len; i++) {
 		stimulus: getProbeStim,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000,
 		timing_post_trial: 0,
 		is_html: true,
@@ -722,7 +723,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -738,6 +738,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 		
 			if (practiceCount == practice_thresh){
 				feedback_text +=
@@ -787,8 +792,8 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			trial_id: "test_fixation"
 		},
 		timing_post_trial: 0,
-		timing_stim: 3000, //3000
-		timing_response: 3000
+		timing_stim: 2000, //2000
+		timing_response: 2000
 	}
 
 	var ITI_fixation_block = {
@@ -823,12 +828,12 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		stimulus: getTrainingStim,
 		is_html: true,
 		data: {
-			trial_id: "test_six_letters"
+			trial_id: "test_four_letters"
 		},
 		choices: 'none',
 		timing_post_trial: 0,
-		timing_stim: 2500, //2500
-		timing_response: 2500 //2500
+		timing_stim: 2000, //2000
+		timing_response: 2000 //2000
 	};
 
 
@@ -841,7 +846,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		},
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
-		timing_stim: 2000, //2000
+		timing_stim: 1000, //2000
 		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
@@ -889,7 +894,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -901,10 +905,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		

@@ -161,7 +161,7 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 }
 	 
 var createTrialTypes = function(numTrialsPerBlock){
-	go_nogo_trial_types = ['go','go','go','go','nogo']
+	go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
 	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 	
 	var stims = []
@@ -306,12 +306,13 @@ var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 35 // must be divisible by 35, [5 (go,go,go,go,stop) by 7 (shape matching conditions)]
-var exp_len = 700 //must be divisible by 35
-var numTrialsPerBlock = 140; // divisible by 35
+var practice_len = 49 // 7/31: new ratio is 6go:1nogo
+var exp_len = 686 //must be divisible by 49
+var numTrialsPerBlock = 98; // divisible by 49
 var numTestBlocks = exp_len / numTrialsPerBlock
 
-var accuracy_thresh = 0.70
+var accuracy_thresh = 0.75
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 28 trials
  
@@ -634,7 +635,6 @@ var practiceNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
@@ -649,6 +649,11 @@ var practiceNode = {
 				feedback_text +=
 						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
+
+	      	if (ave_rt > rt_thresh){
+	        	feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
 		
 			if (practiceCount == practice_thresh){
 				feedback_text +=
@@ -748,7 +753,6 @@ var testNode = {
 		var ave_rt = sum_rt / sum_responses
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy for trials that require a response: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){
@@ -760,10 +764,15 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 		}
+
+      	if (ave_rt > rt_thresh){
+        	feedback_text += 
+            	'</p><p class = block-text>You have been responding too slowly.'
+      	}
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		
