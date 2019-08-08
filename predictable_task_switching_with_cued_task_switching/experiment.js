@@ -441,8 +441,8 @@ var run_attention_checks = true
 
 
 var practice_len = 16 // must be divisible by 16
-var exp_len = 320 //320 must be divisible by 16
-var numTrialsPerBlock = 64 // 64 must be divisible by 16
+var exp_len = 240 //320 must be divisible by 16
+var numTrialsPerBlock = 48 // 64 must be divisible by 16
 var numTestBlocks = exp_len / numTrialsPerBlock
 var CTI = 150
 
