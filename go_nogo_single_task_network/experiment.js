@@ -315,10 +315,10 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. \
-    If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. \
-    If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>\
-    <p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
+    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
+    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -353,8 +353,8 @@ var end_block = {
   data: {
     trial_id: "end",
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p>\
-  <p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p>'+
+  '<p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function(){
@@ -369,9 +369,9 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer receive feedback about your responses.</p>\
-  <p class = block-text>Remember, if you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. \
-  If you see the ' + stims[1][0] + ' square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer receive feedback about your responses.</p>'+
+  '<p class = block-text>Remember, if you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+  'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function(){
@@ -613,8 +613,8 @@ var testNode = {
 		if (testCount >= numTestBlocks){
 			
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> \
-					If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.' 
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> '+
+					'If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.' 
 			return false
 	
 		} else {
