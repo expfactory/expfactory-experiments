@@ -428,7 +428,7 @@ var stop_boards = [[['<div class = bigbox><div class = quad_box><div class = dec
 var stims = createTrialTypes(practice_len)
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style = "text-align:left;">'+
 						'<li>Do not respond if a star appears!</li>' +
 						'<li>Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</li>' +
 						'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
@@ -546,13 +546,13 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>On some trials, a star will appear around the number.  The star will appear with, or shortly after the number appears.</p>'+
+			'<p class = block-text>On some trials, a star will appear around the number.  The star will appear at the same time, or shortly after, the number appears.</p>'+
 			
 			'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 			
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
-			'<p class = block-text>Please do not slow down your responses to the number in order to wait for the star.  Continue to respond as quickly and accurately as possible to the number.</p>'+
+			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 					
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -612,14 +612,14 @@ var start_test_block = {
 			'<p class = block-text>Please judge the number on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 	
-			'<p class = block-text>In the top two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
 			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the center number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
 			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
 			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
 	
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the number. <i>Do not respond if you see a star.</i>  Do not slow down your responses to the number in order to wait for the star.</p>'+
+			'<p class = block-text>On some trials, you will see a star appear at the same time, or shortly after, the number. <i>Do not respond if you see a star.</i>  Do not slow down your responses in order to wait for the star.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+ 
 		 '</div>',
@@ -894,7 +894,6 @@ var testNode = {
 		var stop_success_percentage = stop_succeed / total_stop_trials
 	
 		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
-		feedback_text += "</p><p class = block-text><i>Average reaction time:  " + Math.round(ave_rt) + " ms. 	Accuracy: " + Math.round(accuracy * 100)+ "%</i>"
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (accuracy < accuracy_thresh){

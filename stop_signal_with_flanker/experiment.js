@@ -316,7 +316,7 @@ var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = 
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text = '<ul list-text><font color=white>'+
+var prompt_text = '<ul style = "text-align:left;"><font color=white>'+
 					'<li>Indicate the identity of the middle letter</li>' +
 					'<li>Do not respond if you see a star around the letters!</li>' +
 					'<li>Do not slow down your responses to the letter to wait for the star.</li>' +
@@ -402,25 +402,25 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will see a row of letters.</p> '+
+			'<p class = center-block-text>In this experiment you will see a row of letters.</p> '+
 				
-			'<p class = block-text>If the middle letter is H, please press the H key.</p>'+
+			'<p class = center-block-text>If the middle letter is H, please press the H key.</p>'+
 		
-			'<p class = block-text>If the middle letter is F, please press the F key</p>'+
+			'<p class = center-block-text>If the middle letter is F, please press the F key.</p>'+
 			
-			'<p class = block-text>Respond as quickly and accurately as possible.</p>'+
+			'<p class = center-block-text>Respond as quickly and accurately as possible.</p>'+
 			
-			'<p class = block-text>Please ignore the letters not in the middle.</p>'+
+			'<p class = center-block-text>Please ignore the letters not in the middle.</p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>On some trials, a star will appear around the letters.  The star will appear with, or shortly after the letters appears.</p>'+
+			'<p class = block-text>On some trials, a star will appear around the letters.  The star will appear with, or shortly after the letters appear.</p>'+
 			
 			'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 			
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
-			'<p class = block-text>Please do not slow down your responses to the middle letter in order to wait for the star.  Continue to respond as quickly and accurately as possible to the middle letter.</p>'+
+			'<p class = block-text>Please do not slow down your response to the middle letter in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 					
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>',
@@ -477,13 +477,9 @@ var start_test_block = {
 	},
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
-			'<p class = block-text>We will now start the test portion</p>'+
+			'<p class = block-text>We will now start the test portion. In this experiment you will see a row of letters. '+
 			
-			'<p class = block-text>In this experiment you will see a row of letters.</p> '+
-				
-			'<p class = block-text>If the middle letter is H, please press the '+possible_responses[1][0]+'.  If the middle letter is F, press the '+possible_responses[0][0]+'. Respond as quickly and accurately as possible.</p>'+
-		
-			'<p class = block-text>Ignore the letters not in the middle!</p>'+
+			'If the middle letter is H, please press the '+possible_responses[1][0]+'.  If the middle letter is F, press the '+possible_responses[0][0]+'. Respond as quickly and accurately as possible. Ignore the letters not in the middle!</p> '+
 		
 			'<p class = block-text>On some trials, you will see a star appear with or shortly after the letters. Do not respond if you see a star.  Do not slow down your responses to the letter in order to wait for the star.</p>'+
 	
@@ -630,7 +626,7 @@ var practiceNode = {
 		var ave_rt = go_rt / sum_go_responses
 		var stop_acc = stop_correct / stop_trials
 	
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue."
 		if (practiceCount == practice_thresh){
 			feedback_text +=
 				'</p><p class = block-text>Done with this practice.' 

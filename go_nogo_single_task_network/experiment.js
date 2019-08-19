@@ -64,7 +64,7 @@ function assessPerformance() {
 	//calculate average rt
 	var avg_rt = -1
 	if (rt_array.length !== 0) {
-		avg_rt = math.median(rt_array)
+		avg_rt = math.median(rt_array) // ???median???
 	} 
 	//calculate whether response distribution is okay
 	var responses_ok = true
@@ -166,7 +166,7 @@ var correct_responses = [
 var stims = [["solid", "stim1"],["outlined","stim2"]]
 var gap = 0
 var current_trial = 0
-var practice_stimuli = [{
+var practice_stimuli = [{ //each {} consists of stimulus, data, and key_answer
   stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
   data: {
     correct_response: correct_responses[0][1],
@@ -193,18 +193,49 @@ var test_stimuli_block = [{
     go_nogo_condition: correct_responses[1][0],
     trial_id: 'test_trial'
   }
-}];
-
-for (var i = 0; i < num_go_stim; i++) {
-  test_stimuli_block.push({
+},{
     stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
     data: {
       correct_response: correct_responses[0][1],
       go_nogo_condition: correct_responses[0][0],
       trial_id: 'test_trial'
     }
-  })
-}
+},{
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      go_nogo_condition: correct_responses[0][0],
+      trial_id: 'test_trial'
+    }
+},{
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      go_nogo_condition: correct_responses[0][0],
+      trial_id: 'test_trial'
+    }
+},{
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      go_nogo_condition: correct_responses[0][0],
+      trial_id: 'test_trial'
+    }
+},{
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      go_nogo_condition: correct_responses[0][0],
+      trial_id: 'test_trial'
+    }
+},{
+    stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+    data: {
+      correct_response: correct_responses[0][1],
+      go_nogo_condition: correct_responses[0][0],
+      trial_id: 'test_trial'
+    }
+}];
 
 
 var accuracy_thresh = 0.75
@@ -284,7 +315,10 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the spacebar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p><p class = block-text>We will begin with practice. You will get feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox><p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
+    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
+    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -319,7 +353,8 @@ var end_block = {
   data: {
     trial_id: "end",
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p>'+
+  '<p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
   cont_key: [13],
   timing_post_trial: 0,
   on_finish: function(){
@@ -334,7 +369,9 @@ var start_test_block = {
   data: {
     trial_id: "test_intro"
   },
-  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer get feedback about your responses.</p><p class = block-text>Remember, if you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. If you see the ' + stims[1][0] + '">' + stims[1][0] + ' square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Practice is over, we will now begin the experiment. You will no longer receive feedback about your responses.</p>'+
+  '<p class = block-text>Remember, if you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+  'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>. Press <i>enter</i> to begin.</p></div>',
   cont_key: [13],
   timing_post_trial: 1000,
   on_finish: function(){
@@ -473,7 +510,7 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -493,7 +530,7 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
+					block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
 					return false
 			}
 			
@@ -576,7 +613,8 @@ var testNode = {
 		if (testCount >= numTestBlocks){
 			
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.' 
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> '+
+					'If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.' 
 			return false
 	
 		} else {
@@ -599,7 +637,7 @@ var testNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Press Enter to continue.' 
-			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 5);
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
 			return true
 		
 		}

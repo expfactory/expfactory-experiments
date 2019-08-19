@@ -383,7 +383,7 @@ var letters = 'bBdDgGtTvV'.split("")
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style = "text-align:left;">'+
 						'<li>Match the current letter to the letter that appeared some number of trials ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
@@ -480,8 +480,8 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
+			'<p class = block-text>Press the '+possible_responses[0][0]+' if the letters match, or the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>Your delay (the number of trials ago to which you must match the current letter) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 		'</div>',
 		/*
@@ -494,7 +494,7 @@ var instructions_block = {
 		'</div>',
 		*/
 		'<div class = centerbox>' + 
-			'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear with, or shortly after the letter appears.</p>'+
+			'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear at the same time, or shortly after, the letter appears.</p>'+
 			'<p class = block-text>If you see a star, please try your best to make no response on that trial. You should still remember the letter, however.</p>'+
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
@@ -540,9 +540,9 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now begin the test portion.</p>'+
 			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block.</p>'+
-			'<p class = block-text>Do not respond if you see a star!  You must still remember the letter.</p>'+
+			'<p class = block-text>Press the '+possible_responses[0][0]+' if they match, or the '+possible_responses[1][0]+' if they mismatch.</p>'+
+			'<p class = block-text>Your delay (the number of trials ago to which you must match the current letter) will change from block to block.</p>'+
+			'<p class = block-text>Do not respond if you see a star! You should remember the letter on that trial, however.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 				
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
@@ -550,11 +550,11 @@ var start_test_block = {
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function(){
-		feedback_text = "Your delay for this block is "+delay+". Please match the current center letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
+		feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago. Press enter to begin."
 	}
 };
 
-var start_control_block = {
+var start_control_block = { //this doesn't seem to be in use (i.e., not push-ed anywhere)
 	type: 'poldrack-text',
 	data: {
 		trial_id: "instruction"
@@ -713,7 +713,7 @@ var practiceNode = {
 		var aveLetterRespondCorrect = sumGo_correct / go_length 
 		var stop_signal_respond = num_stop_responses / stop_length
 	
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue."
 
 		if (practiceCount == practice_thresh){
 				feedback_text +=
@@ -844,7 +844,7 @@ var testNode = {
 		var aveLetterRespondCorrect = sumGo_correct / go_length 
 		var stop_signal_respond = num_stop_responses / stop_length
 	
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break! Press enter to continue."
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (aveLetterRespondCorrect < accuracy_thresh){

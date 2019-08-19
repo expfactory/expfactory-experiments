@@ -518,7 +518,7 @@ var test_intro = {
 				'<p class = block-text>You will see a shape on every trial. Please respond to each shape as quickly and accurately as possible!</p>'+
 				'<p class = block-text>If the shape is a '+shapes[0]+', press the '+possible_responses[0][0]+'.</p>'+
 				'<p class = block-text>If the shape is a '+shapes[2]+', press the '+possible_responses[2][0]+'.</p>'+
-				'<p class = block-text>Do not respond if you see a star</p>'+
+				'<p class = block-text>Do not respond if you see a star.</p>'+
 				'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 			 '</div>',
 	
@@ -531,7 +531,7 @@ var test_intro = {
 	timing_response: 180000,
 	response_ends_trial: true,
 	on_finish: function(){
-		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimuli.'
+		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimulus. Press Enter to begin.'
 	}
 };
 
@@ -673,7 +673,7 @@ var practiceStopNode = {
 		
 		
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue."
 
 		if (practiceStopCount == practice_thresh) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
@@ -718,7 +718,7 @@ var practiceStopNode = {
 		
 			if (stop_signal_respond === minStopCorrectPractice){
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		
 			}
 			
@@ -817,7 +817,7 @@ var testNode = {
 		var stop_signal_respond = num_stop_responses / stop_length
 		
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue."
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (testCount == numTestBlocks) {
@@ -855,7 +855,7 @@ var testNode = {
 		
 			if (stop_signal_respond < minStopCorrect){
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		
 			}
 			

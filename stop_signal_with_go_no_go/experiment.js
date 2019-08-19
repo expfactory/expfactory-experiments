@@ -394,7 +394,7 @@ jsPsych.pluginAPI.preloadImages(images);
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style = "text-align:left;">'+
 						'<li>' + shapes[0][0] + ': ' + possible_responses[0][0][0] + '</li>' +
 						'<li>' + shapes[1][0] + ': ' + possible_responses[1][0][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +
@@ -491,10 +491,8 @@ var instructions_block = {
 	},
 	pages:[
 		'<div class = centerbox>'+
-			'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
-			'<p class = block-text>Only one response is correct for each shape.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'.</p>'+
-			'<p class = block-text>If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
+			'<p class = block-text>In this task you will see shapes appear on the screen one at a time. Only one response is correct for each shape.</p>' +
+			'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'. If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
 			'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 		'</div>',
 		
@@ -593,10 +591,8 @@ var test_intro = {
 	stimulus: '<div class = centerbox>'+
 				'<p class = block-text>We will now begin the test portion.</p>'+
 				'<p class = block-text>You will see a shape on every trial. Please respond to each shape as quickly and accurately as possible!</p>'+
-				'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
-				'<p class = block-text>Do not respond if you see a star</p>'+
-				'<p class = block-text>Do not respond if the shape is '+go_no_go_styles[1]+'</p>'+
+				'<p class = block-text>If the shape is a '+shapes[0][0]+', press the '+possible_responses[0][0][0]+'. If the shape is a '+shapes[1][0]+', press the '+possible_responses[1][0][0]+'.</p>'+
+				'<p class = block-text>Do not respond if you see a star! Do not respond if the shape is '+go_no_go_styles[1]+'!</p>'+
 				'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 			 '</div>',
 	
@@ -609,7 +605,7 @@ var test_intro = {
 	timing_response: 180000,
 	response_ends_trial: true,
 	on_finish: function(){
-		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimuli.'
+		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimulus.'
 	}
 };
 
@@ -773,7 +769,7 @@ var practiceStopNode = {
 		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)
 			
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue."
 
 		if (practiceStopCount == practice_thresh) {
 			feedback_text += '</p><p class = block-text>Done with this practice.'
@@ -937,7 +933,7 @@ var testNode = {
 		var gng_respond = (SS_gng_stop_respond + gng_stop_respond) / (gng_stop_trials + SS_gng_stop_trials)
 		
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue"
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press enter to continue."
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (testCount == numTestBlocks) {
