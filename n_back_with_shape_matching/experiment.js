@@ -608,7 +608,6 @@ for (i = 0; i < practice_len + 3; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	//practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_block)
 }
 

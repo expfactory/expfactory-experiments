@@ -1,3 +1,12 @@
+.fixation {
+ text-align: center;
+ font-size: 60px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
 .display_stage {
     position: fixed;
     background: gray;
@@ -12,16 +21,6 @@
 
 .display_stage > div, .display_stage > p {
   color: white;
-}
-
-.fb_box {
-  width:35vw;
-  height: 20vh;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-175%);;
 }
 
 .picture_box {

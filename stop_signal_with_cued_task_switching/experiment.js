@@ -453,12 +453,12 @@ var current_trial = 0
 var currBlock = 0
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = 	   '<ul>'+
+var task_list = '<ul style = "font-size: 23px">'+
 					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
 					   '</ul>'
 
-var prompt_task_list = '<ul>'+
+var prompt_task_list = '<ul style = "text-align:left; font-size: 23px">'+
 					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
 					   	'<li>Do not respond if there is a star!</li>'+
@@ -543,7 +543,9 @@ var instructions_block = {
 		
 		'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 	
-		'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
+		'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+
+    '<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 							
 		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 	'</div>'
@@ -606,11 +608,11 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   text: '<div class = centerbox>'+
-  			'<p class = center-block-text>Practice completed. Starting test.</p>'+
+  			'<p class = block-text>Practice completed. Starting test.</p>'+
   			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
     		task_list +
-    		'<p class = center-block-text>Do not make a response if a star appears.</p>'+
-  			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
+    		'<p class = block-text>Do not make a response if a star appears.</p>'+
+  			'<p class = block-text>Press <i>enter</i> to begin.</p>'+
   		'</div>',
   on_finish: function() {
     current_trial = 0
@@ -798,8 +800,8 @@ for (var i = 0; i < practice_length + 1; i++) {
 	
   practiceTrials.push(setStims_block)
   practiceTrials.push(practice_fixation_block)
-  practiceTrials.push(practice_cue_block);
-  practiceTrials.push(practice_block);
+  practiceTrials.push(practice_cue_block); //magnitide/high-low or parity/odd-even
+  practiceTrials.push(practice_block); //where the number stim for that trial appears (and getStopStim)
   practiceTrials.push(categorize_block);
 }
 
@@ -964,8 +966,8 @@ for (var i = 0; i < numTrialsPerBlock + 1; i++) {
 	
   testTrials.push(setStims_block)
   testTrials.push(fixation_block)
-  testTrials.push(cue_block);
-  testTrials.push(test_block);
+  testTrials.push(cue_block); //1 of the 4 cues
+  testTrials.push(test_block); //a number (1-9) (and getStopStim)
 }
 
 var testCount = 0

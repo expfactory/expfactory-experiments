@@ -1,6 +1,14 @@
 /*******************************************************/
 /***********    Network Default CSS Styles    **********/
 /*******************************************************/
+.fixation {
+ text-align: center;
+ font-size: 100px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
 
 .display_stage {
     position: fixed;
@@ -90,8 +98,8 @@ img {
 /************    Predictive CSS Styles     *************/
 /*******************************************************/
 .quad_box {
- width: 85vw;
- height: 85vh;
+ width: 95vw; /*increase this and 'height' below will move green-red and white stims up and away from the prompt at center*/
+ height: 95vh;
  position:absolute;
  top:50%;
  left:50%;
@@ -154,8 +162,8 @@ img {
 /*******************************************************/
 
 .leftbox {
-  width: 18vw;
-  height: 18vw;
+  width: 10vw; /*decrease this and 'height' below will decrease size of the green-red stim*/
+  height: 10vw;
   position:absolute;
   top:50%;
   left:47.5%;
@@ -166,8 +174,8 @@ img {
 }
 
 .distractorbox {
-  width: 18vw;
-  height: 18vw;
+  width: 10vw; /*decrease this and 'height' below will decrease size of the distractor stim*/
+  height: 10vw;
   position:absolute;
   top:50%;
   left:50%;
@@ -176,9 +184,9 @@ img {
   background-color: none;
 }
 
-.rightbox {
-  width: 18vw;
-  height: 18vw;
+.rightbox { /*decrease this and 'height' below will decrease size of the white stim*/
+  width: 10vw;
+  height: 10vw;
   position:absolute;
   top:50%;
   left:52.5%;

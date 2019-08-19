@@ -772,13 +772,13 @@ for (i = 0; i < practice_len + 1; i++) {
 
 	};
 	
-	practiceTrials.push(start_fixation_block)
-	practiceTrials.push(training_block)
-	practiceTrials.push(cue_block)
-	practiceTrials.push(fixation_block)
-	practiceTrials.push(practice_probe_block)
-	practiceTrials.push(ITI_fixation_block)
-	practiceTrials.push(categorize_block)
+	practiceTrials.push(start_fixation_block)	//500
+	practiceTrials.push(training_block)			//2000
+	practiceTrials.push(cue_block)				//1000
+	practiceTrials.push(fixation_block)			//2000
+	practiceTrials.push(practice_probe_block)	//1000
+	practiceTrials.push(ITI_fixation_block)		//1000
+	practiceTrials.push(categorize_block)		//500
 }
 
 var practiceCount = 0
@@ -939,12 +939,12 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		response_ends_trial: false,
 		on_finish: appendData
 	};
-	testTrials.push(start_fixation_block)
-	testTrials.push(training_block)
-	testTrials.push(cue_block)
-	testTrials.push(fixation_block)
-	testTrials.push(probe_block)
-	testTrials.push(ITI_fixation_block)
+	testTrials.push(start_fixation_block)//500
+	testTrials.push(training_block)//2000
+	testTrials.push(cue_block)//1000
+	testTrials.push(fixation_block)//2000
+	testTrials.push(probe_block)//1000
+	testTrials.push(ITI_fixation_block)//1000
 }
 
 var testCount = 0

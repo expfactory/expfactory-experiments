@@ -358,9 +358,9 @@ var response_keys = jsPsych.randomization.repeat([{
 }], 1, true)
 var choices = response_keys.key
 var practice_length = 28
-var test_length = 560
+var exp_len = 560
 var numTrialsPerBlock = 112
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var go_no_go_styles = ['solid','unfilled']
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -510,7 +510,7 @@ var instructions_block = {
 			'  </i>if they are different, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
-			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
+			'You should ignore the red shape — your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
 		
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
 		'</div>'
@@ -584,7 +584,7 @@ var start_test_block = {
 			'  </i>if they are different, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
-			'You should ignore the red shape - your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
+			'You should ignore the red shape — your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
 		
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',

@@ -414,7 +414,7 @@ var stop_signal_boards = ['<div class = bigbox><div class = starbox>','</div></d
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style = "text-align:left">'+
 						'<li>Please respond if the probe was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
@@ -510,7 +510,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. '+numLetters/2+' will be at the top, and '+numLetters/2+' on the bottom. You must memorize all '+numLetters+' letters.</p> '+
+			'<p class = block-text>In this experiment you will be presented with '+numLetters+' letters on each trial. There will be '+numLetters/2+' at the top and '+numLetters/2+' on the bottom. You must memorize all '+numLetters+' letters.</p> '+
 				
 			'<p class = block-text>There will be a short delay, then you will see a cue, either <i>TOP</i> or <i>BOT</i>. '+
 			'This will instruct you to <i>FORGET</i> the '+numLetters/2+' letters located at either the top or bottom (respectively) of the screen.</p>'+
@@ -522,7 +522,7 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+		
-			'<p class = block-text>After a short delay, you will be presented with a probe - a single letter.  Please indicate whether this probe was in your memory set.</p>'+
+			'<p class = block-text>After a short delay, you will be presented with a probe — a single letter.  Please indicate whether this probe was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
@@ -535,7 +535,7 @@ var instructions_block = {
 			
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
-			'<p class = block-text>Please do not slow down your responses to the probe in order to wait for the star.  Continue to respond as quickly and accurately as possible to the probe.</p>'+
+			'<p class = block-text>Please do not slow down your response to the probe in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
 					
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>',
@@ -971,12 +971,12 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) { 
-	testTrials.push(start_fixation_block)
-	testTrials.push(training_block)
-	testTrials.push(cue_directed_block)
-	testTrials.push(fixation_block)
-	testTrials.push(test_probe_block)
-	testTrials.push(ITI_fixation_block)
+	testTrials.push(start_fixation_block) //500ms
+	testTrials.push(training_block) //2000
+	testTrials.push(cue_directed_block) //1000
+	testTrials.push(fixation_block) //2000
+	testTrials.push(test_probe_block) //timing_stim= 1000, timing_SS= 500, SSD: getSSD
+	testTrials.push(ITI_fixation_block) //1000
 }
 
 var testCount = 0

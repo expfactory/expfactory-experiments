@@ -172,6 +172,7 @@ var numTestBlocks = exp_len / numTrialsPerBlock
 var choices = [90, 77]
 
 var accuracy_thresh = 0.80
+var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 14 trials
 
@@ -254,9 +255,9 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the M key if they are the same shape and the Z key if they are different.</p>\
-								<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape - your task is only to respond based on whether the white and green shapes are the same.</p>\
-								<p class = block-text>We will start with practice after you finish the instructions.</p></div>'
+		'<div class = centerbox><p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the M key if they are the same shape and the Z key if they are different.</p>'+
+								'<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape - your task is only to respond based on whether the white and green shapes are the same.</p>'+
+								'<p class = block-text>We will start with practice after you finish the instructions.</p></div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,
@@ -305,7 +306,8 @@ var start_test_block = {
 		trial_id: "instruction"
 	},
 	timing_response: 180000,
-	text: '<div class = centerbox><p class = block-text>We will now start the test. Respond exactly like you did during practice, press Z if the green and white shapes are different and press M if they are the same.  Ignore the red shape. </p><p class = block-text>Press <i>enter</i> to begin the test.</p></div>',
+	text: '<div class = centerbox><p class = block-text>We will now start the test. Respond exactly like you did during practice, press Z if the green and white shapes are different and press M if they are the same.  Ignore the red shape. </p>'+
+								 '<p class = block-text>Press <i>enter</i> to begin the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000,
 	on_finish: function() {
@@ -543,6 +545,7 @@ var practiceNode = {
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
 			
 			return true
+		
 		}
 		
 	}
@@ -597,7 +600,6 @@ var testNode = {
 			feedback_text +=
 					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_task_list
 		}
-		
 		if (missed_responses > missed_thresh){
 			feedback_text +=
 					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
