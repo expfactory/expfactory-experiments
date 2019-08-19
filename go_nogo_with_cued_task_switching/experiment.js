@@ -666,7 +666,8 @@ practiceTrials.push(instructions_block)
 for (var i = 0; i < practice_length + 1; i++) {
   var practice_fixation_block = {
 	  type: 'poldrack-single-stim',
-	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div>\
+               <div class = lowerbox><div class = fixation>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {
@@ -801,7 +802,8 @@ testTrials.push(attention_node)
 for (var i = 0; i < numTrialsPerBlock + 1; i++) {
   var fixation_block = {
 	  type: 'poldrack-single-stim',
-	  stimulus: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>',
+	  stimulus: '<div class = upperbox><div class = fixation>+</div></div>\
+               <div class = lowerbox><div class = fixation>+</div></div>',
 	  is_html: true,
 	  choices: 'none',
 	  data: {
@@ -905,7 +907,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br>If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 			feedback_text +=

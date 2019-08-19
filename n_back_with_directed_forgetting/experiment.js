@@ -542,7 +542,7 @@ practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 3; i++) {
 	var cue_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getCueStim,
+		stimulus: getCueStim, //this is "REMEMBER" or "FORGET" stim (getCueStim displays png images of the words).
 		is_html: true,
 		data: {
 			trial_id: "practice_cue",
@@ -556,7 +556,7 @@ for (i = 0; i < practice_len + 3; i++) {
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
-		stimulus: getStim,
+		stimulus: getStim, //this is the probe (i.e. letter) stim
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		key_answer: getResponse,
@@ -667,7 +667,7 @@ testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 3; i++) {
 	var cue_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getCueStim,
+		stimulus: getCueStim, //this is "REMEMBER" or "FORGET" stim (getCueStim displays png images of the words).
 		is_html: true,
 		data: {
 			trial_id: "test_cue",

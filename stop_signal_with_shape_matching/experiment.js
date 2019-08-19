@@ -379,7 +379,7 @@ var stop_boards = ['<div class = starbox>','</div>']
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left'+
 						'<li>Respond if the green and white shapes are the same or different!</li>' +
 						'<li>Same: ' + possible_responses[0][0] + '</li>' +
 						'<li>Different: ' + possible_responses[1][0] + '</li>' +
@@ -482,7 +482,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment you will see a red and green shape on the left side of the screen, and a white shape on the right.</p> '+
+			'<p class = block-text>In this experiment you will see at least a green shape on the left side of the screen, and a white shape on the right side.</p> '+
 		
 			'<p class = block-text>You will be asked to judge whether the green shape on the left is the same as the white shape on the right.</p>'+
 		
@@ -492,7 +492,7 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>On some trials, a star will appear around all of the shapes.  The star will appear with, or shortly after the shapes appear.</p>'+
+			'<p class = block-text>On some trials, a star will appear around all of the shapes.  The star will appear at the same time, or shortly after, the shapes appear.</p>'+
 			
 			'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
 			
@@ -557,7 +557,7 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>In this experiment you will see a red and green shape on the left side of the screen, and a white shape on the right.</p> '+
+			'<p class = block-text>In this experiment you will see at least green shape on the left side of the screen, and a white shape on the right.</p> '+
 		
 			'<p class = block-text>You will be asked to judge whether the green shape on the left is the same the white shape on the right.</p>'+
 		
@@ -565,7 +565,7 @@ var start_test_block = {
 				
 			'<p class = block-text>On some trials, a red shape will overlap the green shape. Ignore this red shape, your job is to match the green shape to the white shape.</p>'+
 		
-			'<p class = block-text>On some trials, you will see a star appear with or shortly after the shapes. Do not respond if you see a star.</p>'+
+			'<p class = block-text>On some trials, you will see a star appear at the same time, or shortly after, the shapes appear. Do not respond if you see a star.</p>'+
 			
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			

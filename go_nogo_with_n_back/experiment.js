@@ -307,6 +307,7 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		n_back_condition: n_back_condition,
 		go_nogo_condition: go_nogo_condition,
+		go_no_go_style: go_no_go_styles, 
 		probe: probe,
 		correct_response: correct_response,
 		delay: delay,

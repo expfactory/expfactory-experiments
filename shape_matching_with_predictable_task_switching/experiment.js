@@ -235,7 +235,7 @@ var getStim = function(){
 }
 		
 var getMask = function(){
-	stim = stims.shift()
+	stim = stims.shift() //stims = [] at initial stage
 	predictive_condition = stim.predictive_condition
 	predictive_dimension = stim.predictive_dimension
 	shape_matching_condition = stim.shape_matching_condition
@@ -344,10 +344,28 @@ var task_boards = [[['<div class = bigbox><div class = quad_box><div class = dec
 				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-bottom-left></div></div></div>']],
 				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div></div></div>']]]
 
-var mask_boards = [[['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-bottom-left></div></div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = leftbox>'],['</div><div class = rightbox>'],['</div></div></div></div>']]]
+var mask_boards = [
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div></div></div>']
+					]
+				  ]
 
 
 var fixation_boards = [['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = fixation>+</div></div></div></div>'],
@@ -368,10 +386,10 @@ var prompt_text_list = '<ul list-text>'+
 					  '</ul>'
 				  
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[0]+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions[0] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[2] +': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[2]+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions[2] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[0] +': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">Top 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[0]+'</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">'+predictive_dimensions[0] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[2] +': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">Bottom 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[2]+'</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">'+predictive_dimensions[2] +': ' + possible_responses[0][0] + ' | '+predictive_dimensions[0] +': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -462,7 +480,7 @@ var instructions_block = {
 			' </i> if they are <i>'+predictive_dimensions[0]+'</i>.</p>'+
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
-			'You should ignore the red shape - your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
+			'You should ignore the red shape — your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
 		'</div>'
@@ -528,7 +546,7 @@ var start_test_block = {
 			' </i> if they are <i>'+predictive_dimensions[0]+'</i>.</p>'+
 	
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
-			'You should ignore the red shape - your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
+			'You should ignore the red shape — your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
