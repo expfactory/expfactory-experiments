@@ -1,4 +1,4 @@
-/* ************************************ */
+ /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
 function addID() {
@@ -332,7 +332,7 @@ var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press the ' + respons
     0] + ' key if the number is greater than 5 and the ' + response_keys.key_name[1] +
   ' key if less than 5.</li></ul>'
 
-var prompt_task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
+var prompt_task_list = '<ul style="text-align:left"><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
   ' if even and ' + response_keys.key_name[1] + ' if odd.' +
   '</li><li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] +
   ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li></ul>'

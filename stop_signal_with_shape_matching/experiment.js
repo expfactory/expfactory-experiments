@@ -379,7 +379,9 @@ var stop_boards = ['<div class = starbox>','</div>']
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul style="text-align:left'+
+
+var prompt_text_list = '<ul style="text-align:left">'+
+
 						'<li>Respond if the green and white shapes are the same or different!</li>' +
 						'<li>Same: ' + possible_responses[0][0] + '</li>' +
 						'<li>Different: ' + possible_responses[1][0] + '</li>' +
@@ -746,7 +748,7 @@ var practiceNode = {
 		
 			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 			}
 		
 			if (stop_acc === minStopCorrectPractice){
@@ -885,7 +887,7 @@ var testNode = {
 		
 		if (stop_acc > maxStopCorrect){
 			feedback_text +=
-			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		
 		}
 		
