@@ -379,7 +379,9 @@ var stop_boards = ['<div class = starbox>','</div>']
 
 var stims = createTrialTypes(practice_len)
 
+
 var prompt_text_list = '<ul style="text-align:left">'+
+
 						'<li>Respond if the green and white shapes are the same or different!</li>' +
 						'<li>Same: ' + possible_responses[0][0] + '</li>' +
 						'<li>Different: ' + possible_responses[1][0] + '</li>' +
