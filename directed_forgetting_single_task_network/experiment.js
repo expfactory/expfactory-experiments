@@ -326,7 +326,7 @@ var preFileType = "<img class = center src='/static/experiments/directed_forgett
 
 var task_boards = [['<div class = bigbox><div class = topLeft><div class = cue-text>'],['</div></div><div class = topMiddle><div class = cue-text>'],['</div></div><div class = topRight><div class = cue-text>'],['</div></div><div class = bottomLeft><div class = cue-text>'],['</div></div><div class = bottomMiddle><div class = cue-text>'],['</div></div><div class = bottomRight><div class = cue-text>'],['</div></div></div>']]
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left">'+
 						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+
 						'<li>In memory set: M key</li>' +
 						'<li>Not in memory set: Z key</li>' +

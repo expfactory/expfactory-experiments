@@ -896,7 +896,7 @@ var practiceNode = {
 			
 			if (stop_acc === maxStopCorrectPractice){
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 			
 			}
 			
@@ -1049,7 +1049,7 @@ var testNode = {
 		
 		if (stop_acc > maxStopCorrect){
 			feedback_text +=
-			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimuli that requires a response.'
+			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		}
 		
 		if (stop_acc < minStopCorrect){
