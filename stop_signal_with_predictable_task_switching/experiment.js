@@ -767,7 +767,7 @@ var practiceNode = {
 			
 			if (stop_success_percentage === upper_stop_success_bound_practice){
 			feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly as possible without sacrificing accuracy.'
+					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly and accurately as possible.'
 			}
 			
 			if (stop_success_percentage === lower_stop_success_bound_practice){

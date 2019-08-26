@@ -163,7 +163,7 @@ var correct_responses = [
 ]
 
 //var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
-var stims = [["solid", "stim1"],["outlined","stim2"]]
+var stims = [["solid", "stim1"],["outlined","stim2"]] //solid and outlined squares used as stimuli for this task are not png files as in some others, but they are defined in style.css
 var gap = 0
 var current_trial = 0
 var practice_stimuli = [{ //each {} consists of stimulus, data, and key_answer
@@ -254,7 +254,7 @@ var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>'+stims[0][0]+' square: Respond</li>' +
 						'<li>'+stims[1][0]+' square: Do not respond</li>' +
 					  '</ul>'

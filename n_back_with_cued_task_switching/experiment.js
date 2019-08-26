@@ -406,7 +406,7 @@ var letters = 'bBdDgGtTvV'.split("")
 var stims = createTrialTypes(practice_len)
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>one-ago or 1-back: match the current letter to the letter that appeared 1 trial ago</li>' +
 						'<li>two-ago or 2-back: match the current letter to the letter that appeared 2 trials ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +

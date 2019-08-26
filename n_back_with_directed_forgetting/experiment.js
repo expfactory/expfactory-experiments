@@ -311,7 +311,7 @@ var possible_responses = [['M Key', 77],['Z Key', 90]]
 var letters = 'bBdDgGtTvV'.split("")
 							 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Match the current letter to the letter that appeared '+delay+' trial(s) ago.</li>' +
 						'<li>Press the '+possible_responses[0][0]+' if the letters match.</li>' +
 						'<li>Press the '+possible_responses[1][0]+'. if they mismatch.</li>' +

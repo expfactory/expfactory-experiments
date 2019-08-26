@@ -372,7 +372,7 @@ var task_boards = [[['<div class = bigbox><div class = quad_box><div class = dec
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Do not respond if the number is ' + go_no_go_styles[1] + ' in black!</li>' +
 						'<li>Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</li>' +
 						'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
@@ -492,8 +492,8 @@ var instructions_block = {
 		
 			'<p class = block-text>Additionally, please only respond if the number is ' + go_no_go_styles[0] + '. Do not respond if the number is ' + go_no_go_styles[1] + ' in black.</p>'+
 			
-			"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
-			"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[0]+" number will be solid white.</p>"+
 			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
 		'</div>'

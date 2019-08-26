@@ -292,7 +292,7 @@ var task_boards = [['<div class = bigbox><div class = centerbox><div class = fla
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate the identity of the middle letter</li>' +
 						'<li>Press the F key if middle letter is F</li>' +
 						'<li>Press the H key if middle letter is H</li>' +

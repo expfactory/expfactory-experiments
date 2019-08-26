@@ -379,7 +379,7 @@ var control_stims = createControlTypes(numTrialsPerBlock)
 var stims = createTrialTypes(practice_len)
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Top 2 quadrants: match the current letter to the letter that appeared '+predictive_dimensions[0][1]+' trial(s) ago</li>' +
 						'<li>Bottom 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +

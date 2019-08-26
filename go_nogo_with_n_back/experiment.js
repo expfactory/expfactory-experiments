@@ -370,7 +370,7 @@ var letters = 'BDGTV'.split("")
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Respond if the current letter matches delayed letter.</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 						'<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +

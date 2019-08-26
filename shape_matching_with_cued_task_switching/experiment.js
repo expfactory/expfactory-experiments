@@ -417,7 +417,7 @@ var task_list = '<ul>'+
 					'<li><i>Different</i> or <i>Distinct</i>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
 				'</ul>'
 
-var prompt_task_list = '<ul>'+
+var prompt_task_list = '<ul style="text-align:left;">'+
 					   	'<li><i>Same</i> or <i>Equal</i>: ' + possible_responses[0][0] + ' if shapes are the same and ' + possible_responses[1][0] + ' if not.</li>'+
 					   	'<li><i>Different</i> or <i>Distinct</i>: ' + possible_responses[0][0] + ' if shapes are different and ' + possible_responses[1][0] + ' if not.</li>'+
 					   '</ul>'

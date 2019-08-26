@@ -467,7 +467,7 @@ var fixation_boards = [[['<div class = bigbox><div class = quad_box><div class =
 					   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-right><div class = fixation>'],['</div></div></div></div>']],
 					   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-left><div class = fixation>'],['</div></div></div></div>']]]
 					 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Upper 2 quadrants: '+predictive_dimensions[0]+' the cued location</li>' +
 						'<li>Lower 2 quadrants: '+predictive_dimensions[2]+' the cued location</li>' +
 						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+

@@ -416,7 +416,7 @@ var task_list = 	   '<ul>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
 					   '</ul>'
 
-var prompt_task_list = '<ul>'+
+var prompt_task_list = '<ul style="text-align:left;">'+
 					   	'<li><i>Odd-Even</i> or <i>Parity</i>: ' + response_keys.key_name[1] + ' if odd and ' + response_keys.key_name[0] + ' if even.</li>'+
 					   	'<li><i>High-Low</i> or <i>Magnitude</i>: ' + response_keys.key_name[1] + ' if <5 and ' + response_keys.key_name[0] + ' if >5.</li>'+
 					   	'<li>Do not respond if the number is '+go_no_go_styles[1]+'!</li>'+
@@ -564,11 +564,11 @@ var start_test_block = {
     trial_id: "test_intro"
   },
   text: '<div class = centerbox>'+
-  			'<p class = center-block-text>Practice completed. Starting test.</p>'+
+  			'<p class = block-text>Practice completed. Starting test.</p>'+
   			'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating 2 different tasks. The cues and tasks are described below:</p>' +
     		task_list +
-    		'<p class = center-block-text>Do not make a response if the number is '+go_no_go_styles[1]+'.</p>'+
-  			'<p class = center-block-text>Press <i>enter</i> to begin.</p>'+
+    		'<p class = block-text>Do not make a response if the number is '+go_no_go_styles[1]+'.</p>'+
+  			'<p class = block-text>Press <i>enter</i> to begin.</p>'+
   		'</div>',
   on_finish: function() {
     current_trial = 0
@@ -837,10 +837,10 @@ for (var i = 0; i < numTrialsPerBlock + 1; i++) {
 		appendData()
 	  }
 	};
-  testTrials.push(setStims_block)
-  testTrials.push(fixation_block)
-  testTrials.push(cue_block);
-  testTrials.push(test_block);
+  testTrials.push(setStims_block) //no straightforward timing_stim to tell this block's duration
+  testTrials.push(fixation_block) //timing_stim = 500
+  testTrials.push(cue_block); //getCTI with CTI set = 150
+  testTrials.push(test_block); //timing_stim = 1000
 }
 
 var testCount = 0

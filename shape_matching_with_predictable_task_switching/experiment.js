@@ -376,7 +376,7 @@ var fixation_boards = [['<div class = bigbox><div class = quad_box><div class = 
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Top 2 quadrants: Answer if the green and white shapes are '+predictive_dimensions[0]+'</li>' +
 						'<li>'+predictive_dimensions[0] +': ' + possible_responses[0][0] + '</li>' +
 						'<li>'+predictive_dimensions[2] +': ' + possible_responses[1][0] + '</li>' +

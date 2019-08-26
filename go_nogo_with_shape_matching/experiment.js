@@ -338,7 +338,7 @@ var mask_boards = [['<div class = centerbox><div class = leftbox>'],['</div><div
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate whether green and white shapes are the same or different</li>' +
 						'<li>same: ' + possible_responses[0][0] + '</li>' +
 						'<li>different: ' + possible_responses[1][0] + '</li>' +

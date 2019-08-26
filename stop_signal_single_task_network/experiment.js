@@ -313,7 +313,7 @@ jsPsych.pluginAPI.preloadImages(images);
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>' + shapes[0] + ': ' + possible_responses[0][0] + '</li>' +
 						'<li>' + shapes[2] + ': ' + possible_responses[2][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +

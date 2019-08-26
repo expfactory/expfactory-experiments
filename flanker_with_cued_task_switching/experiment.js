@@ -345,7 +345,7 @@ var task_list = '<ul>'+
 					'<li>Only judge the center number!</li>'+
 				'</ul>'
 
-var prompt_task_list = '<ul>'+
+var prompt_task_list = '<ul style="text-align:left;">'+
 					   	'<li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] + ' if even and ' + response_keys.key_name[1] + ' if odd.</li>'+
 					   	'<li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] + ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li>'+
 					   	'<li>Only judge the center number!</li>'+

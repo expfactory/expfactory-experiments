@@ -295,7 +295,7 @@ var task_boards = [['<div class = bigbox><div class = centerbox><div class = lef
 				   
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Match: ' + possible_responses[0][0] + '</li>' +
 						'<li>Mismatch: ' + possible_responses[1][0] + '</li>' +
 					  '</ul>'

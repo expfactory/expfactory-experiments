@@ -205,7 +205,7 @@ for (i = 0; i < test_trials.data.length; i++) {
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate the identity of the <i> middle </i> letter.</li>' +
 						'<li>Press the H key, if H.</li>' +
 					    '<li>Press the F key, if F.</li>' +
