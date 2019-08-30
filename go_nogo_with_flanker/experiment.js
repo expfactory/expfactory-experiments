@@ -128,7 +128,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/20; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_trial_types.length*flanker_trial_types.length); numIterations++){ // 28 = 7 go_nogo_trial_types * 4 flanker_trial_types
 		for (var numFlankerConds = 0; numFlankerConds < flanker_trial_types.length; numFlankerConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_trial_types.length; numgo_nogoConds++){
 			
@@ -273,7 +273,7 @@ var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 20 trials
  
 var possible_responses = [['F key', 70],['H key', 72]]
-var go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
+var go_nogo_trial_types = ['go','go','go','go','go','go','nogo'] //To change go:nogo ratio, modify this
 var flanker_trial_types = ['H_congruent','H_incongruent','F_congruent','F_incongruent']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 

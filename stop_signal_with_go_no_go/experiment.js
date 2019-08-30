@@ -183,8 +183,6 @@ var getCategorizeFeedback = function(){
 }
 
 var createTrialTypes = function(numTrialsPerBlock){
-	var unique_combos = 30
-	
 	var stims = []
 	for (var j = 0; j < totalShapesUsed; j++){
 		for (var i = 0; i < go_no_go_types.length; i++){
@@ -362,7 +360,8 @@ var stop_signal_respond_upper_thresh_practice = 1
 
 
 var stop_signal_conditions = ['go','go','stop']
-var go_no_go_types = ['go','go','go','go','go','go','nogo']
+var go_no_go_types = ['go','go','go','go','go','go','nogo'] //make changes here and in unique_combos to change go:no-go ration
+var unique_combos = 42 //7 gng (6go:1no-go) * 3 stop_signal (2stop:1go) * 2 shape (circle:square) = 42	
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var shapes = jsPsych.randomization.repeat([['circle','circle'],['square','square']],1)
 var shapes = [['circle','circle'],['square','square']]

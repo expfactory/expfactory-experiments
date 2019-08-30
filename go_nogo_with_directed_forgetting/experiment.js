@@ -161,7 +161,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/20; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_conditions.length*directed_cond_array.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_conditions.length; numgo_nogoConds++){
 			
@@ -299,8 +299,8 @@ var getResponse = function() {
 
 
 var appendData = function(){
-	curr_trial = jsPsych.progress().current_trial_global
-	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	var curr_trial = jsPsych.progress().current_trial_global
+	var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
@@ -312,7 +312,7 @@ var appendData = function(){
 	
 	var lastSet_top = letters.slice(0,numLetters/2)
 	var lastSet_bottom = letters.slice(numLetters/2)
-	
+
 	jsPsych.data.addDataToLastTrial({
 		go_nogo_condition: go_nogo_condition,
 		directed_forgetting_condition: directed_condition,
@@ -324,7 +324,6 @@ var appendData = function(){
 		current_block: current_block,
 		top_stim: lastSet_top,
 		bottom_stim: lastSet_bottom
-		
 	})
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -399,7 +398,7 @@ var numLetters = 4
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
-var go_nogo_conditions = ['go','go','go','go','go','go','nogo']
+var go_nogo_conditions = ['go','go','go','go','go','go','nogo'] //To change go:nogo ratio, modify this AND also the denominator in numIterations < numTrialsPerBlock/... within var createTrialTypes = function(numTrialsPerBlock)
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var fileTypePNG = ".png"
 var preFileType = "<img class = center src='"

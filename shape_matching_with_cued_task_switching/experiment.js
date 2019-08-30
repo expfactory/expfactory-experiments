@@ -137,10 +137,6 @@ var genStims = function(n) {
 }
 
 //Sets the cue-target-interval for the cue block
-var setCTI = function() {
-  return 300 //randomDraw([100, 900])
-}
-
 var getCTI = function() {
   return CTI
 }
@@ -209,7 +205,7 @@ var setStims = function() {
   distractor = PTDC[2]
   correct_response = PTDC[3] 
   current_trial = current_trial + 1
-  CTI = setCTI()
+  CTI = getCTI()
 }
 
 var getCue = function() {

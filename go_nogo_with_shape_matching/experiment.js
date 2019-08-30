@@ -160,12 +160,11 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 	return [probe_i, target_i, distractor_i, correct_response, probe_color]
 }
 	 
+var go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
+var shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 var createTrialTypes = function(numTrialsPerBlock){
-	go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
-	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
-	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/35; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/49; numIterations++){ //numTrialsPerBlock/49 here is equivalent to totalShapesUsed = 2 in stop_go_nogo, which has outlined and solid
 		for (var numShapeConds = 0; numShapeConds < shape_matching_trial_types.length; numShapeConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_trial_types.length; numgo_nogoConds++){
 			

@@ -153,7 +153,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		} else {
 			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
 		}
-		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop()
+		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop() //To change go:nogo ratio, modify this, "var go_nogo_conditions =", and where there're similar variables.
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
 		letter_case = randomDraw(['uppercase','lowercase'])
@@ -186,7 +186,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/25; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_conditions.length*n_back_conditions.length); numIterations++){ //35 = 7 go_nogo_conditions * 5 n_back_conditions
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < go_nogo_conditions.length; numShapeConds++){
 			
@@ -340,8 +340,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 28 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
-var exp_len = 350 //300 must be divisible by 25
+var practice_len = 35 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
+var exp_len = 420 //300 must be divisible by 25
 var numTrialsPerBlock = 70 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
@@ -352,7 +352,7 @@ var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
-var delay = 1
+var delay = 1 // this is the delay of the practice block.
 
 var pathSource = "/static/experiments/go_nogo_with_n_back/images/"
 var fileTypePNG = ".png'></img>"
@@ -486,8 +486,9 @@ var instructions_block = {
 			'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current and delayed letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
-			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
+			'<p class = block-text>Your delay (the number of trials ago to which you must match the current letter) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
+			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p><br> '+
+			'<p class = block-text>For practice, match the current letter to the letter that appeared 1 trial ago.</p> '+ 
 		'</div>',
 			
 		"<div class = centerbox>"+
@@ -579,7 +580,7 @@ var feedback_block = {
 
 };
 
-var start_control_block = {
+/*var start_control_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "instruction"
@@ -596,7 +597,7 @@ var start_control_block = {
 	on_finish: function(){
 		feedback_text = "We will now start this block. Press enter to begin."
 	}
-};
+};*/
 
 /* ************************************ */
 /*        Set up timeline blocks        */
@@ -604,7 +605,7 @@ var start_control_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len + 3; i++) {
+for (i = 0; i < practice_len; i++) {
 	var fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
@@ -726,7 +727,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock + 3; i++) {
+for (i = 0; i < numTrialsPerBlock; i++) {
 	var fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
