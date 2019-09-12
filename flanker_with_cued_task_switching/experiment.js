@@ -438,6 +438,8 @@ var instructions_block = {
 			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
 		
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
+
+      '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		
 		'</div>'
 	],

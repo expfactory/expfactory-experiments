@@ -120,7 +120,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(directed_cond_array.length*shape_matching_conditions.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
 				
@@ -341,9 +341,9 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 // new vars
-var practice_len = 8  // must be divisible by 8
-var exp_len = 192 // must be divisible by 8
-var numTrialsPerBlock = 32; // divisible by 64
+var practice_len = 24  // must be divisible by 8
+var exp_len = 240 // must be divisible by 8
+var numTrialsPerBlock = 40; // divisible by shape_matching_conditions * directed_cond_array
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
@@ -504,6 +504,8 @@ var instructions_block = {
 			'<p class = block-text>Please ignore the red letter.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -603,7 +605,6 @@ for (i = 0; i < practice_len; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white;">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -651,7 +652,7 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_response: 1000,
 		timing_feedback_duration: 0,
 		timing_post_trial: 0,
 		is_html: true,
@@ -791,7 +792,6 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white;">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -840,7 +840,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 1000, //2000
-		timing_response: 2000, //2000
+		timing_response: 1000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};

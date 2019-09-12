@@ -149,8 +149,8 @@ var getFixation = function(){
 	cued_switch_condition = stim.cued_switch_condition
 	curr_task = stim.curr_task
 	curr_cue = stim.curr_cue
-	predictive_condition = stim.predictive_condition
-	predictive_dimension = stim.predictive_dimension
+	predictable_condition = stim.predictable_condition
+	predictable_dimension = stim.predictable_dimension
 
 		   
 	var fixation_html = task_boards[whichQuadrant - 1][0] +
@@ -171,7 +171,7 @@ var getStim = function(){
 		   task_boards[whichQuadrant - 1][1]
 }
 
-var getCorrectResponse = function(number, predictive_dimension){
+var getCorrectResponse = function(number, predictable_dimension){
 	if (number > 5){
 		magnitude = 'high'
 	} else if (number < 5){
@@ -184,18 +184,18 @@ var getCorrectResponse = function(number, predictive_dimension){
 		parity = 'odd'
 	}
 	
-	par_ind = predictive_dimensions_list[0].values.indexOf(parity)
+	par_ind = predictable_dimensions_list[0].values.indexOf(parity)
 	if (par_ind == -1){
-		par_ind = predictive_dimensions_list[1].values.indexOf(parity)
-		mag_ind = predictive_dimensions_list[0].values.indexOf(magnitude)
+		par_ind = predictable_dimensions_list[1].values.indexOf(parity)
+		mag_ind = predictable_dimensions_list[0].values.indexOf(magnitude)
 	} else {
-		mag_ind = predictive_dimensions_list[1].values.indexOf(magnitude)
+		mag_ind = predictable_dimensions_list[1].values.indexOf(magnitude)
 	}
 	
 	
-	if (predictive_dimension == 'magnitude'){
+	if (predictable_dimension == 'magnitude'){
 		correct_response = possible_responses[mag_ind][1]
-	} else if (predictive_dimension == 'parity'){
+	} else if (predictable_dimension == 'parity'){
 		correct_response = possible_responses[par_ind][1]
 	}
 	
@@ -205,11 +205,11 @@ var getCorrectResponse = function(number, predictive_dimension){
 
 var createTrialTypes = function(numTrialsPerBlock){
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
-	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
-	var predictive_dimensions = [predictive_dimensions_list[0].dim,
-								 predictive_dimensions_list[0].dim,
-								 predictive_dimensions_list[1].dim,
-								 predictive_dimensions_list[1].dim]
+	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
+	var predictable_dimensions = [predictable_dimensions_list[0].dim,
+								 predictable_dimensions_list[0].dim,
+								 predictable_dimensions_list[1].dim,
+								 predictable_dimensions_list[1].dim]
 		
 	numbers_list = [[6,8],[7,9],[2,4],[1,3]]
 	numbers = [1,2,3,4,6,7,8,9]	
@@ -223,13 +223,13 @@ var createTrialTypes = function(numTrialsPerBlock){
 	}
 	*/
 	var all_two_by_two_conditions = []
-		
+	var numbers_list = [[6,8],[7,9],[2,4],[1,3]]	
 	var task_conds = ['switch','stay']
 	var cue_conds = ['switch','stay']
 	
-	for (var z = 0; z < 4; z++){
+	for (var z = 0; z < numbers_list.length; z++){
 		var task_cue_conditions = []
-		for(var i = 0; i < numTrialsPerBlock / 16; i++){
+		for(var i = 0; i < numTrialsPerBlock / (numbers_list.length*task_conds.length*cue_conds.length); i++){
 			for (var x = 0; x < task_conds.length; x++){
 				for (var y = 0; y < cue_conds.length; y++){
 			
@@ -248,7 +248,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	}
 	
 	
-	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
+	predictable_dimension = predictable_dimensions[whichQuadStart - 1]
 	curr_task = jsPsych.randomization.repeat(['left','right'],1).pop()
 	curr_cue = tasks[curr_task].cues[Math.floor((Math.random() * 2))]
 	
@@ -256,8 +256,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 		left_number = numbers[Math.floor((Math.random() * 8))]
 		right_number = randomDraw(numbers.filter(function(y) {return y != left_number}))	
 		
-		left_response_arr = getCorrectResponse(left_number,predictive_dimension)
-		right_response_arr = getCorrectResponse(left_number,predictive_dimension)
+		left_response_arr = getCorrectResponse(left_number,predictable_dimension)
+		right_response_arr = getCorrectResponse(left_number,predictable_dimension)
 		
 		correct_response = left_response_arr[0]
 		
@@ -269,8 +269,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 		right_number = numbers[Math.floor((Math.random() * 8))]
 		left_number = randomDraw(numbers.filter(function(y) {return y != right_number}))
 		
-		left_response_arr = getCorrectResponse(left_number,predictive_dimension)
-		right_response_arr = getCorrectResponse(right_number,predictive_dimension)
+		left_response_arr = getCorrectResponse(left_number,predictable_dimension)
+		right_response_arr = getCorrectResponse(right_number,predictable_dimension)
 		
 		correct_response = right_response_arr[0]
 		
@@ -286,8 +286,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	var first_stim = {
 		whichQuadrant: whichQuadStart,
-		predictive_condition: 'N/A',
-		predictive_dimension: predictive_dimension,
+		predictable_condition: 'N/A',
+		predictable_dimension: predictable_dimension,
 		cued_condition: 'N/A',
 		cued_switch_condition: 'N/A',
 		curr_task: curr_task,
@@ -312,8 +312,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 		var temp_2_cond = all_two_by_two_conditions[quadIndex - 1].pop()    
 		cued_condition = temp_2_cond.task_cond
 		cued_switch_condition = temp_2_cond.cue_cond
-		predictive_dimension = predictive_dimensions[quadIndex - 1]
-		predictive_condition = predictive_cond_array[ii%2]
+		predictable_dimension = predictable_dimensions[quadIndex - 1]
+		predictable_condition = predictable_cond_array[ii%2]
 		
 		last_task = curr_task
 		if (cued_condition == "switch"){ // if switch tasks, pick a random cue and switch to other task
@@ -332,8 +332,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 			left_number = numbers[Math.floor((Math.random() * 8))]
 			right_number = randomDraw(numbers.filter(function(y) {return y != left_number}))	
 		
-			left_response_arr = getCorrectResponse(left_number,predictive_dimension)
-			right_response_arr = getCorrectResponse(right_number,predictive_dimension)
+			left_response_arr = getCorrectResponse(left_number,predictable_dimension)
+			right_response_arr = getCorrectResponse(right_number,predictable_dimension)
 		
 			correct_response = left_response_arr[0]
 		
@@ -346,8 +346,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 			right_number = numbers[Math.floor((Math.random() * 8))]
 			left_number = randomDraw(numbers.filter(function(y) {return y != right_number}))
 		
-			left_response_arr = getCorrectResponse(left_number,predictive_dimension)
-			right_response_arr = getCorrectResponse(right_number,predictive_dimension)
+			left_response_arr = getCorrectResponse(left_number,predictable_dimension)
+			right_response_arr = getCorrectResponse(right_number,predictable_dimension)
 		
 			correct_response = right_response_arr[0]
 		
@@ -359,8 +359,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 		
 		stim = {
 			whichQuadrant: quadIndex,
-			predictive_condition: predictive_condition,
-			predictive_dimension: predictive_dimension,
+			predictable_condition: predictable_condition,
+			predictable_dimension: predictable_dimension,
 			cued_condition: cued_condition,
 			cued_switch_condition: cued_switch_condition,
 			curr_task: curr_task,
@@ -398,8 +398,8 @@ var appendData = function(){
 		
 	jsPsych.data.addDataToLastTrial({
 		whichQuadrant: whichQuadrant,
-		predictive_condition: predictive_condition,
-		predictive_dimension: predictive_dimension,
+		predictable_condition: predictable_condition,
+		predictable_dimension: predictable_dimension,
 		task_condition: cued_condition,
 		cue_condition: cued_switch_condition,
 		curr_task: curr_task,
@@ -458,12 +458,12 @@ var preFileType = "<img class = center src='/static/experiments/predictable_task
 
 var numbers_list = [[6,8],[7,9],[2,4],[1,3]]
 
-var predictive_conditions = [['switch','stay'],
+var predictable_conditions = [['switch','stay'],
 							 ['stay','switch']]
 							 
 
 
-var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
+var predictable_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
 								  stim = {dim:'parity', values: ['even','odd']}]
 
 							 	  
@@ -486,21 +486,21 @@ var tasks = {
 var current_trial = 0
 
 var prompt_text_list = '<ul style="text-align:left;">'+
-						'<li>Top 2 quadrants: Judge cued number on '+predictive_dimensions_list[0].dim+'</li>' +
-						'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
-						'<li>'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-						'<li>Bottom 2 quadrants: Judge cued number on '+predictive_dimensions_list[1].dim+'</li>' +
-						'<li>'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
-						'<li>'+predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
+						'<li>Top 2 quadrants: Judge cued number on '+predictable_dimensions_list[0].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
+						'<li>Bottom 2 quadrants: Judge cued number on '+predictable_dimensions_list[1].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
 						'<li>Cue was <i>left</i> or <i>first</i>, judge left number</li>' +
 						'<li>Cue was <i>right</i> or <i>second</i>, judge right number</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge cued number on '+predictive_dimensions_list[0].dim+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge cued number on '+predictive_dimensions_list[1].dim+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: Judge cued number on '+predictable_dimensions_list[0].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' | ' + predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: Judge cued number on '+predictable_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' | ' + predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>left</i> or <i>first</i>, judge left number</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Cue was <i>right</i> or <i>second</i>, judge right number</p>' +
 				  '</div>' 
@@ -617,18 +617,21 @@ var instructions_block = {
 			'<p class = block-text>You will be asked to judge the <i>cued number </i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the cue and numbers are in.</p>'+
 			
-			'<p class = block-text>In the top two quadrants, please judge the cued number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the cued number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
 			/*In the top two quadrants, please judge the cued number based on magnitude. Press the M Key if high, and the Z Key if low.*/
 
-			'<p class = block-text>In the bottom two quadrants, please judge the cued number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the cued number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>'+
 			/*In the bottom two quadrants, please judge the cued number based on parity. Press the M Key if even, and the Z Key if odd.*/
 			
 			'<p class = block-text>Please judge only the cued number for that trial!</p>'+
-			
+		'</div>',
+		
+		'<div class = centerbox>'+
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -675,12 +678,12 @@ var start_test_block = {
 			'<p class = block-text>Please judge the <i>cued number </i>on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the cues and numbers are in.</p>'+
 			
-			'<p class = block-text>In the top two quadrants, please judge the cued number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the cued number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the cued number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the cued number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>'+
 		
 			'<p class = block-text>Please judge only the cued number for that trial!</p>'+
 	

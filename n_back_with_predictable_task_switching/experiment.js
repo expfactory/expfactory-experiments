@@ -108,15 +108,15 @@ var randomDraw = function(lst) {
 
 var createControlTypes = function(numTrialsPerBlock){
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
-	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
+	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
 	
-	predictive_dimensions = predictive_dimensions_list_control_trials[0]
+	predictable_dimensions = predictable_dimensions_list_control_trials[0]
 	
 	var n_back_trial_type_list = []
-	var n_back_trial_types1 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types2 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types3 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types4 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
+	var n_back_trial_types1 = jsPsych.randomization.repeat(n_back_conditions, numTrialsPerBlock/numConds)
+	var n_back_trial_types2 = jsPsych.randomization.repeat(n_back_conditions, numTrialsPerBlock/numConds)
+	var n_back_trial_types3 = jsPsych.randomization.repeat(n_back_conditions, numTrialsPerBlock/numConds)
+	var n_back_trial_types4 = jsPsych.randomization.repeat(n_back_conditions, numTrialsPerBlock/numConds)
 	n_back_trial_type_list.push(n_back_trial_types1)
 	n_back_trial_type_list.push(n_back_trial_types2)
 	n_back_trial_type_list.push(n_back_trial_types3)
@@ -130,28 +130,28 @@ var createControlTypes = function(numTrialsPerBlock){
 		}
 		
 		if (i === 0){
-			predictive_condition = 'N/A'
-			n_back_cond = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1).pop()
-			predictive_dimension = predictive_dimensions[quadIndex - 1][0]
+			predictable_condition = 'N/A'
+			n_back_cond = jsPsych.randomization.repeat(n_back_conditions,1).pop()
+			predictable_dimension = predictable_dimensions[quadIndex - 1][0]
 		} else if (i > 0){
-			predictive_condition = predictive_cond_array[i%2]	
-			predictive_dimension = predictive_dimensions[quadIndex - 1][0]
+			predictable_condition = predictable_cond_array[i%2]	
+			predictable_dimension = predictable_dimensions[quadIndex - 1][0]
 			n_back_cond = n_back_trial_type_list[quadIndex - 1].pop()
 		}
 		
 		
 		if (n_back_cond == 'match'){
 			correct_response = possible_responses[0][1]
-			if (predictive_dimension == 'T or t'){
+			if (predictable_dimension == 'T or t'){
 				probe = randomDraw(['t','T'])
-			} else if (predictive_dimension == 'non-T or non-t'){
+			} else if (predictable_dimension == 'non-T or non-t'){
 				probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
 			}
 		} else if (n_back_cond == 'mismatch'){
 			correct_response = possible_responses[1][1]
-			if (predictive_dimension == 'T or t'){
+			if (predictable_dimension == 'T or t'){
 				probe = randomDraw('bBdDgGvV'.split("").filter(function(y) {return $.inArray(y, ['t','T']) == -1}))
-			} else if (predictive_dimension == 'non-T or non-t'){
+			} else if (predictable_dimension == 'non-T or non-t'){
 				probe = randomDraw(['t','T'])
 			}			
 		}
@@ -159,8 +159,8 @@ var createControlTypes = function(numTrialsPerBlock){
 		stim = {
 			whichQuad: quadIndex,
 			n_back_condition: n_back_cond,
-			predictive_dimension: predictive_dimension,
-			predictive_condition: predictive_condition,
+			predictable_dimension: predictable_dimension,
+			predictable_condition: predictable_condition,
 			probe: probe,
 			correct_response: correct_response
 		}
@@ -173,60 +173,60 @@ var createControlTypes = function(numTrialsPerBlock){
 
 
 var createTrialTypes = function(numTrialsPerBlock){
-	// 1 or 3 is stay for predictive
-	// 2 or 4 is switch for predictive
+	// 1 or 3 is stay for predictable
+	// 2 or 4 is switch for predictable
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	//1 2
 	//4 3
-	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
+	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
 	
 	var n_back_trial_type_list = []
-	var n_back_trial_types1 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types2 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types3 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
-	var n_back_trial_types4 = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'], numTrialsPerBlock/20)
+	var n_back_trial_types1 = jsPsych.randomization.repeat(n_back_conditions, numConds)
+	var n_back_trial_types2 = jsPsych.randomization.repeat(n_back_conditions, numConds)
+	var n_back_trial_types3 = jsPsych.randomization.repeat(n_back_conditions, numConds)
+	var n_back_trial_types4 = jsPsych.randomization.repeat(n_back_conditions, numConds)
 	n_back_trial_type_list.push(n_back_trial_types1)
 	n_back_trial_type_list.push(n_back_trial_types2)
 	n_back_trial_type_list.push(n_back_trial_types3)
 	n_back_trial_type_list.push(n_back_trial_types4)
 	
-	predictive_dimensions = predictive_dimensions_list[0]
+	predictable_dimensions = predictable_dimensions_list[0]
 
 	
 	stims = []		
 	
-	for (var i = 0; i < numTrialsPerBlock + 2; i++){
+	for (var i = 0; i < numTrialsPerBlock; i++){
 		quadIndex = whichQuadStart%4
 		if (quadIndex === 0){
 			quadIndex = 4
 		}
 		
 		
-		predictive_condition = predictive_cond_array[i%2]	
-		predictive_dimension = predictive_dimensions[quadIndex - 1][0]
-		delay = predictive_dimensions[quadIndex - 1][1]
+		predictable_condition = predictable_cond_array[i%2]	
+		predictable_dimension = predictable_dimensions[quadIndex - 1][0]
+		delay = predictable_dimensions[quadIndex - 1][1]
 		
 		if ( i === 0){
-			n_back_cond = 'N/A'
+			n_back_cond = 'Mismatch'
 			probe = randomDraw(letters)
 			correct_response = possible_responses[1][1]
-			predictive_dimension = 'N/A'
+			predictable_dimension = predictable_dimension //originally 'N/A' here (because for trials =< current delay, there've not enough previous trials yet to match to). However, '1-back' or '2-back' being shown is okay, too.
 		
 		} else if ( i == 1){
-			n_back_cond = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1).pop()
+			n_back_cond = jsPsych.randomization.repeat(n_back_conditions,1).pop()
 			
-			if ((n_back_cond == "match") && (predictive_dimension == '1-back')){
+			if ((n_back_cond == "match") && (predictable_dimension == '1-back')){
 				probe = randomDraw([stims[i - delay].probe.toUpperCase(), stims[i - delay].probe.toLowerCase()])
 				correct_response = possible_responses[0][1]
-			} else if ((n_back_cond == "mismatch") && (predictive_dimension == '1-back')){
+			} else if ((n_back_cond == "mismatch") && (predictable_dimension == '1-back')){
 				probe = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [stims[i - delay].probe.toLowerCase(), stims[i - delay].probe.toUpperCase()]) == -1}))
 				correct_response = possible_responses[1][1]
 			
 			} else if (delay == 2) {
 				probe = randomDraw(letters)
 			    correct_response = possible_responses[1][1]
-			    predictive_dimension = 'N/A'
-			    n_back_cond = 'N/A'
+			    predictable_dimension = predictable_dimension
+			    n_back_cond = 'Mismatch'
 			
 			}
 		
@@ -246,8 +246,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 		stim = {
 			whichQuad: quadIndex,
 			n_back_condition: n_back_cond,
-			predictive_dimension: predictive_dimension,
-			predictive_condition: predictive_condition,
+			predictable_dimension: predictable_dimension,
+			predictable_condition: predictable_condition,
 			probe: probe,
 			correct_response: correct_response,
 			delay: delay
@@ -264,8 +264,8 @@ var getStim = function(){
 	stim = stims.shift()
 	whichQuadrant = stim.whichQuad
 	n_back_condition = stim.n_back_condition
-	predictive_dimension = stim.predictive_dimension
-	predictive_condition = stim.predictive_condition
+	predictable_dimension = stim.predictable_dimension
+	predictable_condition = stim.predictable_condition
 	probe = stim.probe
 	correct_response = stim.correct_response
 	delay = stim.delay
@@ -283,8 +283,8 @@ var getControlStim = function(){
 	stim = control_stims.shift()
 	whichQuadrant = stim.whichQuad
 	n_back_condition = stim.n_back_condition
-	predictive_dimension = stim.predictive_dimension
-	predictive_condition = stim.predictive_condition
+	predictable_dimension = stim.predictable_dimension
+	predictable_condition = stim.predictable_condition
 	probe = stim.probe
 	correct_response = stim.correct_response
 		
@@ -311,8 +311,8 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		whichQuadrant: whichQuadrant,
 		n_back_condition: n_back_condition,
-		predictive_dimension: predictive_dimension,
-		predictive_condition: predictive_condition,
+		predictable_dimension: predictable_dimension,
+		predictable_condition: predictable_condition,
 		probe: probe,
 		correct_response: correct_response,
 		delay: delay,
@@ -362,13 +362,15 @@ var preFileType = "<img class = center src='/static/experiments/n_back_with_pred
 
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
-var predictive_conditions = [['stay','switch'],
+var predictable_conditions = [['stay','switch'],
 							 ['switch','stay']]
 
-var predictive_dimensions_list = [[['1-back',1], ['1-back',1], ['2-back',2], ['2-back',2]],
-							 	  [['2-back',2], ['2-back',2], ['1-back',1], ['1-back',1]]]
-	
-var predictive_dimensions_list_control_trials = jsPsych.randomization.repeat([[['T or t'], ['T or t'], ['non-T or non-t'], ['non-T or non-t']],
+var predictable_dimensions_list = [
+									[['1-back',1], ['1-back',1], ['2-back',2], ['2-back',2]],
+							 	  	[['2-back',2], ['2-back',2], ['1-back',1], ['1-back',1]]
+							 	  ]
+var numConds = n_back_conditions.length*predictable_conditions.length*predictable_dimensions_list.length
+var predictable_dimensions_list_control_trials = jsPsych.randomization.repeat([[['T or t'], ['T or t'], ['non-T or non-t'], ['non-T or non-t']],
 							 								   	   			  [['non-T or non-t'], ['non-T or non-t'], ['T or t'], ['T or t']]],1)					 
 var letters = 'bBdDgGtTvV'.split("")
 							 
@@ -380,15 +382,15 @@ var stims = createTrialTypes(practice_len)
 
 
 var prompt_text_list = '<ul style="text-align:left;">'+
-						'<li>Top 2 quadrants: match the current letter to the letter that appeared '+predictive_dimensions[0][1]+' trial(s) ago</li>' +
-						'<li>Bottom 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</li>' +
+						'<li>Top 2 quadrants: match the current letter to the letter that appeared '+predictable_dimensions[0][1]+' trial(s) ago</li>' +
+						'<li>Bottom 2 quadrants: match the current letter to the letter that occurred '+predictable_dimensions[2][1]+' trial(s) ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: match the current letter to the letter that appeared '+predictive_dimensions[0][1]+' trial(s) ago</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: match the current letter to the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Top 2 quadrants: match the current letter to the letter that appeared '+predictable_dimensions[0][1]+' trial(s) ago</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Bottom 2 quadrants: match the current letter to the letter that occurred '+predictable_dimensions[2][1]+' trial(s) ago</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they match, press the '+possible_responses[0][0]+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">If they mismatch, press the '+possible_responses[1][0]+'</p>' +
 				  '</div>'
@@ -492,11 +494,14 @@ var instructions_block = {
 		'<div class = centerbox>'+
 			'<p class = block-text>In this task, you will see a letter moving clockwise through the screen on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
-			'<p class = block-text>When in the top two quadrants, the rule is '+predictive_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[0][1]+' trial(s) ago.</p> '+
-			'<p class = block-text>When in the bottom two quadrants, the rule is '+predictive_dimensions[2][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago.</p> '+
+			'<p class = block-text>When in the top two quadrants, the rule is '+predictable_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictable_dimensions[0][1]+' trial(s) ago.</p> '+
+			'<p class = block-text>When in the bottom two quadrants, the rule is '+predictable_dimensions[2][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictable_dimensions[2][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter matches the letter 1 or 2 trials ago, and the '+possible_responses[1][0]+' if they mismatch.</p> '+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
+		'</div>',
+		'<div class = centerbox>'+
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 		/*
 		'<div class = centerbox>'+
@@ -546,8 +551,8 @@ var start_control_block = {
 	timing_response: 180000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>For this block of trials, you do not have to match letters.  Instead, indicate whether the current letter is a T (or t) or any other letter other than T (or t) depending on which quadrant the letter is in.</p>'+
-			'<p class = block-text>When in the top two quadrants, respond if the current letter was a '+predictive_dimensions_list_control_trials[0][0]+'. Press the '+possible_responses[0][0]+' if the current letter was a '+predictive_dimensions_list_control_trials[0][0]+' and the '+possible_responses[1][0]+' if not.</p> '+
-			'<p class = block-text>When in the bottom two quadrants, respond if the current letter was a '+predictive_dimensions_list_control_trials[0][2]+'. Press the '+possible_responses[0][0]+' if the current letter was a '+predictive_dimensions_list_control_trials[0][2]+' and the '+possible_responses[1][0]+' if not.</p> '+	
+			'<p class = block-text>When in the top two quadrants, respond if the current letter was a '+predictable_dimensions_list_control_trials[0][0]+'. Press the '+possible_responses[0][0]+' if the current letter was a '+predictable_dimensions_list_control_trials[0][0]+' and the '+possible_responses[1][0]+' if not.</p> '+
+			'<p class = block-text>When in the bottom two quadrants, respond if the current letter was a '+predictable_dimensions_list_control_trials[0][2]+'. Press the '+possible_responses[0][0]+' if the current letter was a '+predictable_dimensions_list_control_trials[0][2]+' and the '+possible_responses[1][0]+' if not.</p> '+	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
 	cont_key: [13],
@@ -566,8 +571,8 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1 or 2 trials ago depending on if the letter was on the top or bottom quadrants.</p> '+
-			'<p class = block-text>When in the top two quadrants, the rule is '+predictive_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[0][1]+' trial(s) ago.</p> '+
-			'<p class = block-text>When in the bottom two quadrants, the rule is '+predictive_dimensions[2][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictive_dimensions[2][1]+' trial(s) ago.</p> '+
+			'<p class = block-text>When in the top two quadrants, the rule is '+predictable_dimensions[0][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictable_dimensions[0][1]+' trial(s) ago.</p> '+
+			'<p class = block-text>When in the bottom two quadrants, the rule is '+predictable_dimensions[2][0]+'. Please respond if the current letter was the same as the letter that occurred '+predictable_dimensions[2][1]+' trial(s) ago.</p> '+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current letter matches the letter 1 or 2 trials ago, and the '+possible_responses[1][0]+' if they mismatch.</p> '+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 	
@@ -687,7 +692,7 @@ var controlNode = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len + 2; i++) {
+for (i = 0; i < practice_len; i++) {
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -799,7 +804,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock + 2; i++) {
+for (i = 0; i < numTrialsPerBlock; i++) {
 	
 	var test_block = {
 		type: 'poldrack-single-stim',

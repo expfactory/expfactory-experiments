@@ -568,6 +568,7 @@ var instructions_block = {
 			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 	],
 	allow_keys: false,
@@ -661,7 +662,6 @@ var fixation_block = {
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	data: {
@@ -710,7 +710,7 @@ var probe_block = {
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	timing_post_trial: 0,
 	timing_stim: 1000, 
-	timing_response: 2000, //2000
+	timing_response: 1000, //2000
 	response_ends_trial: false,
 	on_finish: appendData
 };
@@ -753,7 +753,6 @@ for (i = 0; i < practice_len; i++) {
 
 	var practice_ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -800,7 +799,7 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000,
-		timing_response: 2000,  //2000
+		timing_response: 1000,  //2000
 		prompt: prompt_text,
 		is_html: true,
 		on_finish: appendData,

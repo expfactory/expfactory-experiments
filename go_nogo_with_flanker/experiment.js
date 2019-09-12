@@ -396,18 +396,19 @@ var instructions_block = {
 	},
 	pages: [
 		"<div class = centerbox>"+
-		"<p class = block-text>In this experiment you will see a row of letters composed of H's and F's.</p> "+
-				
-		"<p class = block-text>Please indicate the identity of the letter in the middle. If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
-		
-		"<p class = block-text>Ignore the letters not in the middle!</p>"+
-		
-		"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
-		
-		"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
-		"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
-						
-		"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
+			"<p class = block-text>In this experiment you will see a row of letters composed of H's and F's.</p> "+
+					
+			"<p class = block-text>Please indicate the identity of the letter in the middle. If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
+			
+			"<p class = block-text>Ignore the letters not in the middle!</p>"+
+			
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			
+			"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+							
+			"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		"</div>",
 	],
 	allow_keys: false,

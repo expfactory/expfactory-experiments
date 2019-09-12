@@ -361,10 +361,10 @@ var stop_signal_respond_upper_thresh_practice = 1
 
 var stop_signal_conditions = ['go','go','stop']
 var go_no_go_types = ['go','go','go','go','go','go','nogo'] //make changes here and in unique_combos to change go:no-go ration
-var unique_combos = 42 //7 gng (6go:1no-go) * 3 stop_signal (2stop:1go) * 2 shape (circle:square) = 42	
+var shapes = [['circle','circle'],['square','square']]
+var unique_combos = stop_signal_conditions.length*go_no_go_types.length*shapes.length //7 gng (6go:1no-go) * 3 stop_signal (2stop:1go) * 2 shape (circle:square) = 42	
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var shapes = jsPsych.randomization.repeat([['circle','circle'],['square','square']],1)
-var shapes = [['circle','circle'],['square','square']]
 
 //'hourglass', 'Lshape', 'moon', 'oval', 'rectangle', 'rhombus', 'tear', 'trapezoid'
 var color = "black"
@@ -509,12 +509,13 @@ var instructions_block = {
 		"<div class = centerbox>"+
 			"<p class = block-text>Sometimes, the shapes will be "+go_no_go_styles[0]+".  Other times, the shapes will be "+go_no_go_styles[1]+".</p>"+
 			"<p class = block-text>If the shapes are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			"<p class = block-text>On trials where you see both a star and a "+go_no_go_styles[1]+" shape, make no response on that trial.</p>"+
+			"<p class = block-text>You must respond if a star does not appear, and if the shapes are "+go_no_go_styles[0]+".</p>"+
 		"</div>",
 		
 		"<div class = centerbox>"+
-			"<p class = block-text>On trials where you see both a star and a "+go_no_go_styles[1]+" shape, make no response on that trial.</p>"+
-			"<p class = block-text>You must respond if a star does not appear, and if the shapes are "+go_no_go_styles[0]+".</p>"+
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules.  <i> This will be removed for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		"</div>",
 	],
 	allow_keys: false,

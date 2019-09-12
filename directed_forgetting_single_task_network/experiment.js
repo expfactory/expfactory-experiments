@@ -254,7 +254,7 @@ var resetTrial = function() {
 
 
 var createTrialTypes = function (numTrialsPerBlock,numLetters){
-	var probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
+	var probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / probes.length)
 	var used_letters = []
 	var stims = []
 	
@@ -443,7 +443,7 @@ var instructions_block = {
 			'key if it was not in the memory set.</p>'+
 				
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
-		
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 	],
 	allow_keys: false,
@@ -541,7 +541,6 @@ var fixation_block = {
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 	is_html: true,
 	choices: choices,
 	data: {
@@ -599,7 +598,7 @@ var probe_block = {
 	choices: choices,
 	timing_post_trial: 0,
 	timing_stim: 1000, //1000
-	timing_response: 2000, //1000
+	timing_response: 1000, //1000
 	response_ends_trial: false,
 	on_finish: appendProbeData
 };
@@ -626,7 +625,7 @@ var practice_probe_block = {
 		   exp_stage: "practice"
 		   },
 	timing_stim: 1000, //1000
-	timing_response: 2000, //1000
+	timing_response: 1000, //1000
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -711,7 +710,6 @@ for (i = 0; i < (practice_length); i++) {
 
 	var practice_ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
 		choices: 'none',
 		data: {

@@ -85,33 +85,33 @@ var getInstructFeedback = function() {
   return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
     '</p></div>'
 }
-
-var getCategorizeIncorrectText = function(){
-	if (shape_matching_condition == 'go'){
+//(the following 3 functions are no longer in use)
+// var getCategorizeIncorrectText = function(){
+// 	if (shape_matching_condition == 'go'){
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	} else {
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	} else {
 	
-		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	}
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	}
 
-}
+// }
 
-var getTimeoutText = function(){
-	if (shape_matching_condition == "go"){
-		return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	} else {
-		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	}
-}
+// var getTimeoutText = function(){
+// 	if (shape_matching_condition == "go"){
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	} else {
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	}
+// }
 
-var getCategorizeCorrectText = function(){
-	if (shape_matching_condition == "go"){
-		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	} else {
-		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
-	}
-}
+// var getCategorizeCorrectText = function(){
+// 	if (shape_matching_condition == "go"){
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	} else {
+// 		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + '<div class = promptbox>' + prompt_task_list + '</div>'
+// 	}
+// }
 
 // Task Specific Functions
 var getKeys = function(obj) {
@@ -137,6 +137,10 @@ var genStims = function(n) {
 }
 
 //Sets the cue-target-interval for the cue block
+var setCTI = function() {
+  return CTI
+}
+
 var getCTI = function() {
   return CTI
 }
@@ -205,7 +209,7 @@ var setStims = function() {
   distractor = PTDC[2]
   correct_response = PTDC[3] 
   current_trial = current_trial + 1
-  CTI = getCTI()
+  CTI = setCTI() //setCTI and getCTI both return CTI. They are not made one function only because that would double CTI, resulting in a CTI of 300 instead of 150 in practice_cue_block and cue_block.
 }
 
 var getCue = function() {
@@ -323,9 +327,6 @@ var appendData = function() {
 	}
 }
 
-var getCTI = function(){
-	return CTI
-}
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -507,8 +508,11 @@ var instructions_block = {
 		
 			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
 			'You should ignore the red shape — your task is only to respond based on whether the white and green shapes matches or mismatches.</p>'+
+		'</div>',
 		
+		'<div class = centerbox>'+
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -710,8 +714,8 @@ for (var i = 0; i < practice_length; i++) {
 	  data: {
 		trial_id: 'cue'
 	  },
-	  timing_response: getCTI, //getCTI
-	  timing_stim: getCTI, //getCTI
+	  timing_response: getCTI, 
+	  timing_stim: getCTI, 
 	  timing_post_trial: 0,
 	  prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
 	  on_finish: function() {
@@ -831,8 +835,8 @@ for (var i = 0; i < numTrialsPerBlock; i++) {
 	  data: {
 		trial_id: 'cue'
 	  },
-	  timing_response: getCTI, //getCTI
-	  timing_stim: getCTI, //getCTI
+	  timing_response: getCTI, 
+	  timing_stim: getCTI, 
 	  timing_post_trial: 0,
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({

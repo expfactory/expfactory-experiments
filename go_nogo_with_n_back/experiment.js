@@ -147,11 +147,11 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	first_stims = []
-	for (var i = 0; i < 3; i++){
+	for (var i = 0; i < 3; i++){ //so that if delay for the block is 2, the first two stim will have no match (i.e. not yet 2 stim preceding them to be matched.)
 		if (i < delay){
 			n_back_condition = 'N/A'
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)]
 		}
 		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop() //To change go:nogo ratio, modify this, "var go_nogo_conditions =", and where there're similar variables.
 		probe = randomDraw(letters)
@@ -360,7 +360,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 
 
-var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
+var n_back_conditions = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1)
 var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
@@ -496,6 +496,7 @@ var instructions_block = {
 			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
 			"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
 			"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		"</div>",
 		
 		/*
@@ -605,19 +606,19 @@ var feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len; i++) {
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "practice_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0,
-		prompt: prompt_text
-	}
+for (i = 0; i < practice_len + 3; i++) {
+	// var fixation_block = {
+	// 	type: 'poldrack-single-stim',
+	// 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	// 	is_html: true,
+	// 	choices: 'none',
+	// 	data: {
+	// 		trial_id: "practice_fixation"
+	// 	},
+	// 	timing_response: 500, //500
+	// 	timing_post_trial: 0,
+	// 	prompt: prompt_text
+	// }
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -639,7 +640,10 @@ for (i = 0; i < practice_len; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	practiceTrials.push(fixation_block)
+	// practiceTrials.push(fixation_block) Block removed for, per note by Patrick,
+	// "this is essential an N-back task with the possibility of needing to “no-go” added on 1/7 of trials, 
+	// I think we should mimic the timing of the single task N-back task. Therefore, let’s remove the 500ms fixation period 
+	// rom all practice and main task trials. Trials will each be 2000ms."
 	practiceTrials.push(practice_block)
 }
 
@@ -727,18 +731,18 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock; i++) {
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "practice_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0
-	}
+for (i = 0; i < numTrialsPerBlock + 3; i++) {
+	// var fixation_block = {
+	// 	type: 'poldrack-single-stim',
+	// 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	// 	is_html: true,
+	// 	choices: 'none',
+	// 	data: {
+	// 		trial_id: "practice_fixation"
+	// 	},
+	// 	timing_response: 500, //500
+	// 	timing_post_trial: 0
+	// }
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
@@ -754,7 +758,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		response_ends_trial: false,
 		on_finish: appendData
 	}
-	testTrials.push(fixation_block)
+	// testTrials.push(fixation_block) Block removed for the same reason in practiceNode. 
 	testTrials.push(test_block)
 }
 

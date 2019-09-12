@@ -356,10 +356,13 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
-    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
-    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
-    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox>'+
+	    '<p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
+	    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+	    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
+	    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p>'+
+	    '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
+	'</div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

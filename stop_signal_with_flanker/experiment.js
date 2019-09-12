@@ -134,7 +134,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	flanker_letters = ['H','F']
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/12; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(flanker_trial_types.length*stop_signal_trial_types.length); numIterations++){
 		for (var numFlankerConds = 0; numFlankerConds < flanker_trial_types.length; numFlankerConds++){
 			for (var numstop_signalConds = 0; numstop_signalConds < stop_signal_trial_types.length; numstop_signalConds++){
 			
@@ -421,8 +421,12 @@ var instructions_block = {
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your response to the middle letter in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
-					
+		'</div>',
+		
+		'<div class = centerbox>'+			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 	],
 	allow_keys: false,

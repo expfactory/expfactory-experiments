@@ -310,7 +310,7 @@ var appendData = function() {
     task_condition: task_switch.task_switch,
     cue_condition: task_switch.cue_switch,
     go_nogo_condition: go_nogo_condition,
-    trial_num: trial_num,
+    current_trial: current_trial,
     CTI: CTI
   })
   
@@ -355,8 +355,8 @@ var practice_thresh = 3
 // task specific variables
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
-var practice_len = 56
-var exp_len = 560 /*a multiple of 77*/
+var practice_len = 28 //56
+var exp_len = 112 //a multiple of 28
 var numTrialsPerBlock = 112 /*7/31: So that it'll be a multiple of the new 6:1 ratio of go:nogo trials*/
 var numTestBlocks = exp_len / numTrialsPerBlock
 var CTI = 150
@@ -405,8 +405,8 @@ task_switches.unshift( //.unshift(): add to the beginning of an array
     go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop() //.pop() removes the last element of an array, and returns that element. Note: This method changes the length of an array.
   }
 )
-var practiceStims = genStims(practice_len +1)
-var testStims = genStims(numTrialsPerBlock +1)
+var practiceStims = genStims(practice_len + 1)
+var testStims = genStims(numTrialsPerBlock + 1)
 var stims = practiceStims //genStims returns stims, so stims = practiceStims makes some sense.
 var curr_task = randomDraw(getKeys(tasks)) //tasks is in line 368, a dict containing 2 dicts, which are two tasks each containing 2 cues.
 var last_task = 'na' //object that holds the last task, set by setStims()
@@ -504,12 +504,13 @@ var instructions_block = {
     '</div>',
     
     '<div class = centerbox>' + 
-		'<p class = block-text>On some trials, the number will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the number is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
-		
-		"<p class = block-text>A "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
-		"<p class = block-text>A "+go_no_go_styles[0]+" number will be solid white.</p>"+
-									
-		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+  		'<p class = block-text>On some trials, the number will be '+go_no_go_styles[1]+' instead of '+go_no_go_styles[0]+'.  If the number is '+go_no_go_styles[1]+', do not make a response on that trial.</p>'+
+  		
+  		"<p class = block-text>A(n) "+go_no_go_styles[1]+" number will be grey outlined in black.</p>"+
+  		"<p class = block-text>A(n) "+go_no_go_styles[0]+" number will be solid white.</p>"+
+  									
+  		'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+      '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 	'</div>'
   ],
   allow_keys: false,
@@ -705,7 +706,7 @@ for (var i = 0; i < practice_len + 1; i++) {
 		jsPsych.data.addDataToLastTrial({
 		  exp_stage: exp_stage
 		})
-		appendData()
+		// appendData() no longer in use to remove duplication of outcome data
 	  }
 	};
   practiceTrials.push(setStims_block)
@@ -804,7 +805,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (var i = 0; i < numTrialsPerBlock; i++) {
+for (var i = 0; i < numTrialsPerBlock + 1; i++) {
   var fixation_block = {
 	  type: 'poldrack-single-stim',
 	  stimulus: '<div class = upperbox><div class = fixation>+</div></div>'+
@@ -819,7 +820,7 @@ for (var i = 0; i < numTrialsPerBlock; i++) {
 	  timing_response: 500, //500
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-		  exp_stage: exp_stage
+		  exp_stage: "test"
 		})
 	  }
 	}
@@ -837,9 +838,9 @@ for (var i = 0; i < numTrialsPerBlock; i++) {
 	  timing_post_trial: 0,
 	  on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
-		  exp_stage: exp_stage
+		  exp_stage: "test"
 		})
-		appendData()
+		// appendData()
 	  }
 	};
   testTrials.push(setStims_block) //no straightforward timing_stim to tell this block's duration
@@ -855,7 +856,7 @@ var testNode = {
 		testCount += 1
 		task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / (task_switch_types.length*cue_switch_types.length*go_no_go_types.length))
 		task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(["go","go","go","go","go","go","nogo"],1).pop()})
-		testStims = genStims(numTrialsPerBlock)
+		testStims = genStims(numTrialsPerBlock + 1)
 		current_trial = 0
 	
 		var sum_rt = 0

@@ -167,7 +167,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/20; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(n_back_conditions.length*cued_conditions.length*cued_switch_conditions.length); numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
 				for (var numCuedSwitchConds = 0; numCuedSwitchConds < cued_switch_conditions.length; numCuedSwitchConds++){
@@ -530,6 +530,7 @@ var instructions_block = {
 			'<p class = block-text>The third letter in that sequence, v, DOES match the letter from trials 2 ago, V, so you would respond match.</p>'+
 			'<p class = block-text>The fourth letter in that sequence, V, DOES match the letter from trial 1 ago, v, so you would respond match.</p>'+
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,

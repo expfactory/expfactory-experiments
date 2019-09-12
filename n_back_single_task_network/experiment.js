@@ -110,7 +110,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		if (i < delay){
 			n_back_condition = 'N/A'
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)]
 		}
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
@@ -134,7 +134,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/5; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/n_back_conditions.length; numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			
 			n_back_condition = n_back_conditions[numNBackConds]
@@ -270,7 +270,7 @@ var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/n_back_single_task_network/images/"
 
 
-var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
+var n_back_conditions = jsPsych.randomization.repeat(['mismatch','mismatch','match','mismatch','mismatch'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
@@ -402,6 +402,7 @@ var instructions_block = {
 		*/
 		'<div class = centerbox>' + 
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for this practice round is 1</i>. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
