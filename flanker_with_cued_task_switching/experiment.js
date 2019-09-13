@@ -345,7 +345,7 @@ var task_list = '<ul>'+
 					'<li>Only judge the center number!</li>'+
 				'</ul>'
 
-var prompt_task_list = '<ul>'+
+var prompt_task_list = '<ul style="text-align:left;">'+
 					   	'<li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] + ' if even and ' + response_keys.key_name[1] + ' if odd.</li>'+
 					   	'<li><i>Magnitude</i> or <i>High-Low</i>: ' + response_keys.key_name[0] + ' if >5 and ' + response_keys.key_name[1] + ' if <5.</li>'+
 					   	'<li>Only judge the center number!</li>'+
@@ -438,6 +438,8 @@ var instructions_block = {
 			'<p class = block-text>Please judge only the center number, you should ignore the other numbers.</p>'+
 		
 			'<p class = block-text>We will start practice after you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will not be available for test</i>.</p>'+
+
+      '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		
 		'</div>'
 	],

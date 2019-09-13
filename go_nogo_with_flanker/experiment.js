@@ -128,7 +128,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/20; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_trial_types.length*flanker_trial_types.length); numIterations++){ // 28 = 7 go_nogo_trial_types * 4 flanker_trial_types
 		for (var numFlankerConds = 0; numFlankerConds < flanker_trial_types.length; numFlankerConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_trial_types.length; numgo_nogoConds++){
 			
@@ -273,7 +273,7 @@ var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 20 trials
  
 var possible_responses = [['F key', 70],['H key', 72]]
-var go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
+var go_nogo_trial_types = ['go','go','go','go','go','go','nogo'] //To change go:nogo ratio, modify this
 var flanker_trial_types = ['H_congruent','H_incongruent','F_congruent','F_incongruent']
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 
@@ -292,7 +292,7 @@ var task_boards = [['<div class = bigbox><div class = centerbox><div class = fla
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate the identity of the middle letter</li>' +
 						'<li>Press the F key if middle letter is F</li>' +
 						'<li>Press the H key if middle letter is H</li>' +
@@ -396,18 +396,19 @@ var instructions_block = {
 	},
 	pages: [
 		"<div class = centerbox>"+
-		"<p class = block-text>In this experiment you will see a row of letters composed of H's and F's.</p> "+
-				
-		"<p class = block-text>Please indicate the identity of the letter in the middle. If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
-		
-		"<p class = block-text>Ignore the letters not in the middle!</p>"+
-		
-		"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
-		
-		"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
-		"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
-						
-		"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
+			"<p class = block-text>In this experiment you will see a row of letters composed of H's and F's.</p> "+
+					
+			"<p class = block-text>Please indicate the identity of the letter in the middle. If the middle letter is F, press the "+possible_responses[0][0]+" as quickly as possible.  If the middle letter is H, press the "+possible_responses[1][0]+".</p>"+
+			
+			"<p class = block-text>Ignore the letters not in the middle!</p>"+
+			
+			"<p class = block-text>On some trials, the letters will be "+go_no_go_styles[0]+".  Other times, the letters will be "+go_no_go_styles[1]+".  If the letters are "+go_no_go_styles[1]+", please make no response on that trial.</p>"+
+			
+			"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
+			"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+							
+			"<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>"+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		"</div>",
 	],
 	allow_keys: false,

@@ -205,7 +205,7 @@ for (i = 0; i < test_trials.data.length; i++) {
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate the identity of the <i> middle </i> letter.</li>' +
 						'<li>Press the H key, if H.</li>' +
 					    '<li>Press the F key, if F.</li>' +
@@ -274,7 +274,12 @@ var feedback_instruct_block = {
 var instructions_block = {
 	type: 'poldrack-instructions',
 	pages: [
-		"<div class = centerbox><p class = block-text>In this experiment you will see five letters on the string composed of F's and H's. For instance, you might see 'FFFFF' or 'HHFHH'. Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see 'FFHFF' you would press the 'H' key.</p><p class = block-text>After each response you will get feedback about whether you were correct or not. We will start with a short practice set.</p></div>"
+		'<div class = centerbox>'+
+			'<p class = block-text>In this experiment you will see five letters on the string composed of F\'s and H\'s. For instance, you might see \'FFFFF\' or \'HHFHH\'. '+
+			'Your task is to respond by pressing the key corresponding to the <i>middle</i> letter. So if you see \'FFHFF\' you would press the \'H\' key.</p>'+
+			'<p class = block-text>After each response you will get feedback about whether you were correct or not. We will start with a short practice set.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
+		'</div>'
 	],
 	allow_keys: false,
 	data: {

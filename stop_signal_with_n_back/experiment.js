@@ -135,11 +135,11 @@ var randomDraw = function(lst) {
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	first_stims = []
-	for (var i = 0; i < 3; i++){
+	for (var i = 0; i < 3; i++){ //so that if delay for the block is 2, the first two stim will have no match (i.e. not yet 2 stim preceding them to be matched.)
 		if (i < delay){
 			n_back_condition = 'N/A'
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)]
 		}
 		stop_signal_condition = jsPsych.randomization.repeat(['go','go','stop'],1).pop()
 		probe = randomDraw(letters)
@@ -165,7 +165,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/15; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(n_back_conditions.length*stop_signal_conditions.length); numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numstop_signalConds = 0; numstop_signalConds < stop_signal_conditions.length; numstop_signalConds++){
 			
@@ -196,7 +196,6 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 			probe = stim.probe
 			correct_response = stim.correct_response
 			delay = stim.delay
-			stop_signals = stim.stop_signals
 		} else {
 			stim = stims.shift()
 			n_back_condition = stim.n_back_condition
@@ -209,11 +208,12 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 				probe = randomDraw('bBdDgGtTvV'.split("").filter(function(y) {return $.inArray(y, [new_stims[i - delay].probe.toLowerCase(), new_stims[i - delay].probe.toUpperCase()]) == -1}))
 				correct_response = possible_responses[1][1]
 			}			
+			
+			if (stop_signal_condition == 'stop'){
+				correct_response = -1
+			}
 		}
 		
-		if (stop_signal_condition == 'stop'){
-			correct_response = -1
-		}
 		stim = {
 			n_back_condition: n_back_condition,
 			stop_signal_condition: stop_signal_condition,
@@ -342,7 +342,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 var run_attention_checks = true
-var practice_len = 30 // 15 must be divisible by 15
+var practice_len = 45 // 15 must be divisible by 15
 var exp_len = 270 //270 must be divisible by 15
 var numTrialsPerBlock = 45 // 45, must be divisible by 15 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
@@ -374,7 +374,7 @@ var stop_stim = '<div class = bigbox><div class = starbox>' + preFileType + 'sto
 
 
 
-var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
+var n_back_conditions = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1)
 var stop_signal_conditions = jsPsych.randomization.repeat(['go','go','stop'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
@@ -498,7 +498,11 @@ var instructions_block = {
 			'<p class = block-text>If you see a star, please try your best to make no response on that trial. You should still remember the letter, however.</p>'+
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
+		'</div>',
+		
+		'<div class = centerbox>' + 
 			'<p class = block-text>We will start practice when you finish instructions. <i>Your delay for this practice round is 1</i>. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -667,7 +671,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		stims = createTrialTypes(practice_len, delay)
 		current_trial = 0
 	
 		var total_trials = 0
@@ -760,7 +763,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len, delay)			
 			return true
 		
 		}
@@ -815,7 +818,7 @@ var testNode = {
 		var go_length = 0;
 		var stop_length = 0
 		
-		for (i = 0; i < data.length; i++) {
+		for (var i = 0; i < data.length; i++) {
 			if (data[i].trial_id == "test_trial"){
 				total_trials += 1
 				if (data[i].stop_signal_condition == "go"){

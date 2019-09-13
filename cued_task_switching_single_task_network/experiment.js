@@ -405,7 +405,8 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing the "M" and "Z" keys. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p></div>',
     '<div class = centerbox><p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
     task_list +
-    '<p class = block-text>Practice will start after you end instructions.</p></div>'
+    '<p class = block-text>Practice will start after you end instructions.</p>'+
+    '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) active and in full-screen mode for the whole duration of each task.</p></div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,

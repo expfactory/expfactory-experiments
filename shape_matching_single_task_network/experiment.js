@@ -176,7 +176,7 @@ var rt_thresh = 1000
 var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 14 trials
 
-var prompt_task_list = '<ul><font color="white">'+
+var prompt_task_list = '<ul style="text-align:left;"><font color="white">'+
 						'<li>Respond if green and white shapes are the same or different</li>'+
 					   	'<li>Same: M key</li>'+
 					   	'<li>Different: Z key</li>'+
@@ -255,9 +255,12 @@ var instructions_block = {
 		trial_id: "instruction"
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the M key if they are the same shape and the Z key if they are different.</p>'+
-								'<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape - your task is only to respond based on whether the white and green shapes are the same.</p>'+
-								'<p class = block-text>We will start with practice after you finish the instructions.</p></div>'
+		'<div class = centerbox>'+
+			'<p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press the M key if they are the same shape and the Z key if they are different.</p>'+
+			'<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape — your task is only to respond based on whether the white and green shapes are the same.</p>'+
+			'<p class = block-text>We will start with practice after you finish the instructions.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
+		'</div>'
 	],
 	allow_keys: false,
 	show_clickable_nav: true,

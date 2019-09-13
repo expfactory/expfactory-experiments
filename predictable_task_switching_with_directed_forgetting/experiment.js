@@ -114,36 +114,36 @@ var getCategorizeFeedback = function(){
 var createTrialTypes = function(numTrialsPerBlock){
 	//probeTypeArray = jsPsych.randomization.repeat(probes, numTrialsPerBlock / 4)
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
-	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
+	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
 	var used_letters = []
 	
 	var directed_forgetting_trial_type_list = []
-	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
-	var directed_forgetting_trial_types2 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
-	var directed_forgetting_trial_types3 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
-	var directed_forgetting_trial_types4 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/16)
+	var directed_forgetting_trial_types1 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/numConds)
+	var directed_forgetting_trial_types2 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/numConds)
+	var directed_forgetting_trial_types3 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/numConds)
+	var directed_forgetting_trial_types4 = jsPsych.randomization.repeat(directed_cond_array, numTrialsPerBlock/numConds)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types1)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types2)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types3)
 	directed_forgetting_trial_type_list.push(directed_forgetting_trial_types4)
 	
 	directed_condition =  jsPsych.randomization.repeat(directed_cond_array, 1).pop()
-	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
+	predictable_dimension = predictable_dimensions[whichQuadStart - 1]
 	
 	letters = getTrainingSet(used_letters,numLetters)
 	cue = getCue()
-	probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+	probe_info = getProbe(directed_condition,letters,cue, predictable_dimension)
 	probe = probe_info[0]
 	memorySet = probe_info[1]
 	forgetSet = probe_info[2]
-	correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
+	correct_response = getCorrectResponse(predictable_dimension,cue,probe,letters)
 	used_letters = used_letters.concat(letters)
 	
 	var stims = []
 	var first_stim = {
 		whichQuad: whichQuadStart,
-		predictive_condition: 'N/A',
-		predictive_dimension: predictive_dimension,
+		predictable_condition: 'N/A',
+		predictable_dimension: predictable_dimension,
 		directed_condition: directed_condition,
 		letters: letters,
 		cue: cue,
@@ -162,20 +162,20 @@ var createTrialTypes = function(numTrialsPerBlock){
 			quadIndex = 4
 		}
 		directed_condition = directed_forgetting_trial_type_list[quadIndex - 1].pop()
-		predictive_dimension = predictive_dimensions[quadIndex - 1]
+		predictable_dimension = predictable_dimensions[quadIndex - 1]
 		
 		letters = getTrainingSet(used_letters,numLetters)
 		cue = getCue()
-		probe_info = getProbe(directed_condition,letters,cue, predictive_dimension)
+		probe_info = getProbe(directed_condition,letters,cue, predictable_dimension)
 		probe = probe_info[0]
 		memorySet = probe_info[1]
 		forgetSet = probe_info[2]
-		correct_response = getCorrectResponse(predictive_dimension,cue,probe,letters)
+		correct_response = getCorrectResponse(predictable_dimension,cue,probe,letters)
 		
 		var stim = {
 			whichQuad: quadIndex,
-			predictive_condition:  predictive_cond_array[i%2],
-			predictive_dimension: predictive_dimension,
+			predictable_condition:  predictable_cond_array[i%2],
+			predictable_dimension: predictable_dimension,
 			directed_condition: directed_condition,
 			letters: letters,
 			cue: cue,
@@ -214,12 +214,12 @@ var getCue = function() {
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
-var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
+var getProbe = function(directed_cond, letters, cue, predictable_dimension) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastCue = cue
 	var lastSet_top = letters.slice(0,numLetters/2)
 	var lastSet_bottom = letters.slice(numLetters/2)
-	if (predictive_dimension == 'forget'){
+	if (predictable_dimension == 'forget'){
 		if (directed_cond== 'pos') {
 			if (lastCue == 'BOT') {
 				probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
@@ -246,7 +246,7 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 			memorySet = lastSet_bottom
 			forgetSet = lastSet_top
 		}
-	} else if (predictive_dimension == 'remember'){
+	} else if (predictable_dimension == 'remember'){
 		if (directed_cond== 'pos') {
 			if (lastCue == 'BOT') {
 				probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
@@ -283,8 +283,8 @@ var getProbe = function(directed_cond, letters, cue, predictive_dimension) {
 };
 
 
-var getCorrectResponse = function(predictive_dimension,cue,probe,letters) {
-	if (predictive_dimension == 'remember'){
+var getCorrectResponse = function(predictable_dimension,cue,probe,letters) {
+	if (predictable_dimension == 'remember'){
 		if (cue == 'TOP') {
 			if (jQuery.inArray(probe, letters.slice(0,numLetters/2)) != -1) {
 				return possible_responses[0][1]
@@ -298,7 +298,7 @@ var getCorrectResponse = function(predictive_dimension,cue,probe,letters) {
 				return possible_responses[1][1]
 			}
 		}
-	} else if (predictive_dimension == 'forget'){
+	} else if (predictable_dimension == 'forget'){
 		if (cue == 'TOP') {
 			if (jQuery.inArray(probe, letters.slice(numLetters/2)) != -1) {
 				return possible_responses[0][1]
@@ -337,8 +337,8 @@ var appendData = function(){
 	var lastSet_bottom = letters.slice(numLetters/2)
 	
 	jsPsych.data.addDataToLastTrial({
-		predictive_condition: predictive_condition,
-		predictive_dimension: predictive_dimension,
+		predictable_condition: predictable_condition,
+		predictable_dimension: predictable_dimension,
 		directed_forgetting_condition: directed_condition,
 		probe: probe,
 		cue: cue,
@@ -388,8 +388,8 @@ var getProbeStim = function(){
 
 var getStartFix = function(){
 	stim = stims.shift()
-	predictive_condition = stim.predictive_condition
-	predictive_dimension = stim.predictive_dimension
+	predictable_condition = stim.predictable_condition
+	predictable_dimension = stim.predictable_dimension
 	directed_condition = stim.directed_condition
 	probe = stim.probe
 	letters = stim.letters
@@ -431,12 +431,13 @@ var numLetters = 4
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
-var predictive_conditions = [['switch','stay'],
+var predictable_conditions = [['switch','stay'],
 							 ['stay','switch']]
-var predictive_dimensions_list = [['forget', 'forget', 'remember','remember'],
+	numConds = directed_cond_array.length*directed_cue_array.length*predictable_conditions.length
+var predictable_dimensions_list = [['forget', 'forget', 'remember','remember'],
 							 ['remember','remember', 'forget', 'forget' ]]
 
-var predictive_dimensions = predictive_dimensions_list[Math.floor(Math.random() * 2)]
+var predictable_dimensions = predictable_dimensions_list[Math.floor(Math.random() * 2)]
 var fileTypePNG = ".png'></img>"
 var preFileType = "<img class = center src='/static/experiments/predictable_task_switching_with_directed_forgetting/images/"
 							 
@@ -467,17 +468,17 @@ var fixation_boards = [[['<div class = bigbox><div class = quad_box><div class =
 					   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-right><div class = fixation>'],['</div></div></div></div>']],
 					   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-left><div class = fixation>'],['</div></div></div></div>']]]
 					 
-var prompt_text_list = '<ul list-text>'+
-						'<li>Upper 2 quadrants: '+predictive_dimensions[0]+' the cued location</li>' +
-						'<li>Lower 2 quadrants: '+predictive_dimensions[2]+' the cued location</li>' +
+var prompt_text_list = '<ul style="text-align:left;">'+
+						'<li>Upper 2 quadrants: '+predictable_dimensions[0]+' the cued location</li>' +
+						'<li>Lower 2 quadrants: '+predictable_dimensions[2]+' the cued location</li>' +
 						'<li>Please respond if the probe (single letter) was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Upper 2 quadrants: '+predictive_dimensions[0]+' the cued location</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Lower 2 quadrants: '+predictive_dimensions[2]+' the cued location</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Upper 2 quadrants: '+predictable_dimensions[0]+' the cued location</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Lower 2 quadrants: '+predictable_dimensions[2]+' the cued location</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (single letter) was in the memory set.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
@@ -587,9 +588,9 @@ var instructions_block = {
 		
 			'<p class = block-text>After the '+numLetters+' letters disappear, you will receive a cue either TOP or BOT.  This cue states which of the '+numLetters+' letters you should forget or remember, either the top or bottom '+numLetters/2+' letters.</p>'+
 		
-			'<p class = block-text>When in the upper two quadrants, please  <i>'+predictive_dimensions[0]+'</i> the cued set.</p>'+
+			'<p class = block-text>When in the upper two quadrants, please  <i>'+predictable_dimensions[0]+'</i> the cued set.</p>'+
 		
-			'<p class = block-text>When in the lower two quadrants, please  <i>'+predictive_dimensions[2]+'</i> the cued set.</p>'+
+			'<p class = block-text>When in the lower two quadrants, please  <i>'+predictable_dimensions[2]+'</i> the cued set.</p>'+
 			
 			'<p class = block-text>The '+numLetters/2+' letters that you need to remember are called your memory set.</p>'+
 		'</div>',
@@ -602,6 +603,7 @@ var instructions_block = {
 			'</i> if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -645,9 +647,9 @@ var start_test_block = {
 		
 			'<p class = block-text>After the '+numLetters+' letters disappear, you will receive a cue either TOP or BOT.  This cue states which of the '+numLetters+' letters you should forget or remember, either the top or bottom '+numLetters/2+' letters.</p>'+
 		
-			'<p class = block-text>When in the upper two quadrants, please  <i>'+predictive_dimensions[0]+'</i> the cued set.</p>'+
+			'<p class = block-text>When in the upper two quadrants, please  <i>'+predictable_dimensions[0]+'</i> the cued set.</p>'+
 		
-			'<p class = block-text>When in the lower two quadrants, please  <i>'+predictive_dimensions[2]+'</i> the cued set.</p>'+
+			'<p class = block-text>When in the lower two quadrants, please  <i>'+predictable_dimensions[2]+'</i> the cued set.</p>'+
 			
 			'<p class = block-text>The '+numLetters/2+' letters that you need to remember are called your memory set.</p>'+
 			
@@ -700,7 +702,6 @@ for (i = 0; i < practice_len + 1; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getFixation,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -749,7 +750,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000, //1000
-		timing_response: 2000, //2000
+		timing_response: 1000, //2000
 		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -886,7 +887,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getFixation,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -935,7 +935,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 2000, //2000
+		timing_response: 1000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};

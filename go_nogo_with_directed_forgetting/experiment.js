@@ -161,7 +161,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/20; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_conditions.length*directed_cond_array.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_conditions.length; numgo_nogoConds++){
 			
@@ -299,8 +299,8 @@ var getResponse = function() {
 
 
 var appendData = function(){
-	curr_trial = jsPsych.progress().current_trial_global
-	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	var curr_trial = jsPsych.progress().current_trial_global
+	var trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
@@ -312,7 +312,7 @@ var appendData = function(){
 	
 	var lastSet_top = letters.slice(0,numLetters/2)
 	var lastSet_bottom = letters.slice(numLetters/2)
-	
+
 	jsPsych.data.addDataToLastTrial({
 		go_nogo_condition: go_nogo_condition,
 		directed_forgetting_condition: directed_condition,
@@ -324,7 +324,6 @@ var appendData = function(){
 		current_block: current_block,
 		top_stim: lastSet_top,
 		bottom_stim: lastSet_bottom
-		
 	})
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -399,7 +398,7 @@ var numLetters = 4
 
 var directed_cond_array = ['pos', 'pos', 'neg', 'con']
 var directed_cue_array = ['TOP','BOT']
-var go_nogo_conditions = ['go','go','go','go','go','go','nogo']
+var go_nogo_conditions = ['go','go','go','go','go','go','nogo'] //To change go:nogo ratio, modify this AND also the denominator in numIterations < numTrialsPerBlock/... within var createTrialTypes = function(numTrialsPerBlock)
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
 var fileTypePNG = ".png"
 var preFileType = "<img class = center src='"
@@ -425,7 +424,7 @@ var task_boards = [['<div class = bigbox><div class = lettersBox><div class = to
 var go_nogo_boards = [['<div class = bigbox><div class = centerbox><div class = cue-text><font size = "10" color = "'],['">'],['</font><div></div><div>']]				
 var go_nogo_boards = [['<div class = bigbox><div class = centerbox><div class = cue-text>'],['</div></div></div>']]					   
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Respond if the probe (single letter) was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
@@ -552,7 +551,7 @@ var instructions_block = {
 		'</div>',
 		
 		'<div class = centerbox>'+		
-			'<p class = block-text>After a short delay, you will be presented with a probe - a single letter.  Please indicate whether this probe was in your memory set.</p>'+
+			'<p class = block-text>After a short delay, you will be presented with a probe—a single letter.  Please indicate whether this probe was in your memory set.</p>'+
 		
 			'<p class = block-text>Press the <i>'+possible_responses[0][0]+
 			' </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
@@ -569,6 +568,7 @@ var instructions_block = {
 			"<p class = block-text>A "+go_no_go_styles[0]+" letter will be solid white.</p>"+
 
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 	],
 	allow_keys: false,
@@ -662,7 +662,6 @@ var fixation_block = {
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	data: {
@@ -711,7 +710,7 @@ var probe_block = {
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	timing_post_trial: 0,
 	timing_stim: 1000, 
-	timing_response: 2000, //2000
+	timing_response: 1000, //2000
 	response_ends_trial: false,
 	on_finish: appendData
 };
@@ -754,7 +753,6 @@ for (i = 0; i < practice_len; i++) {
 
 	var practice_ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:none">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -801,7 +799,7 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000,
-		timing_response: 2000,  //2000
+		timing_response: 1000,  //2000
 		prompt: prompt_text,
 		is_html: true,
 		on_finish: appendData,
@@ -915,6 +913,7 @@ var practiceNode = {
 
 var testTrials = []
 testTrials.push(feedback_block)
+testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) {
 	testTrials.push(start_fixation_block)
 	testTrials.push(training_block)
@@ -1005,11 +1004,9 @@ var go_nogo_with_directed_forgetting_experiment = [];
 go_nogo_with_directed_forgetting_experiment.push(practiceNode);
 go_nogo_with_directed_forgetting_experiment.push(feedback_block);
 
-go_nogo_with_directed_forgetting_experiment.push(attention_node)
 go_nogo_with_directed_forgetting_experiment.push(start_test_block);
 go_nogo_with_directed_forgetting_experiment.push(testNode);
 go_nogo_with_directed_forgetting_experiment.push(feedback_block);
-go_nogo_with_directed_forgetting_experiment.push(attention_node)
 
 go_nogo_with_directed_forgetting_experiment.push(post_task_block);
 go_nogo_with_directed_forgetting_experiment.push(end_block);

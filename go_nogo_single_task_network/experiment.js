@@ -107,14 +107,14 @@ var appendData = function(data) {
 		trial_num: current_trial,
 	})
 	
-	current_trial = current_trial + 1
+	current_trial +=1
 }
 
 var getFeedback = function() {
   if (stim.key_answer == -1) {
     return '<div class = centerbox><div class = center-text>Correct!</div></div>' + prompt_text_list
   } else {
-    return '<div class = centerbox><div class = center-text>Incorrect</div></p></div>'  + prompt_text_list
+    return '<div class = centerbox><div class = center-text>The shape was outlined</div></p></div>'  + prompt_text_list
   }
 }
 
@@ -163,18 +163,10 @@ var correct_responses = [
 ]
 
 //var stims = jsPsych.randomization.shuffle([["orange", "stim1"],["blue","stim2"]])
-var stims = [["solid", "stim1"],["outlined","stim2"]]
+var stims = [["solid", "stim1"],["outlined","stim2"]] //solid and outlined squares used as stimuli for this task are not png files as in some others, but they are defined in style.css
 var gap = 0
 var current_trial = 0
-var practice_stimuli = [{ //each {} consists of stimulus, data, and key_answer
-  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
-  data: {
-    correct_response: correct_responses[0][1],
-    go_nogo_condition: correct_responses[0][0],
-    trial_id: 'practice_trial'
-  },
-  key_answer: correct_responses[0][1]
-}, {
+var practice_stimuli = [{ //To change go:nogo ratio, add or remove one or more sub-dictionaries within practice_stimuli and test_stimuli_block
   stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div id = ' + stims[1][1] + '></div></div></div></div></div>',
   data: {
     correct_response: correct_responses[1][1],
@@ -182,7 +174,56 @@ var practice_stimuli = [{ //each {} consists of stimulus, data, and key_answer
     trial_id: 'practice_trial'
   },
   key_answer: correct_responses[1][1]
-}];
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}, {
+	  stimulus: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text><div  id = ' + stims[0][1] + '></div></div></div></div></div>',
+	  data: {
+	    correct_response: correct_responses[0][1],
+	    go_nogo_condition: correct_responses[0][0],
+	    trial_id: 'practice_trial'
+	  },
+	  key_answer: correct_responses[0][1]
+}
+];
 
 
 //set up block stim. test_stim_responses indexed by [block][stim][type]
@@ -242,19 +283,19 @@ var accuracy_thresh = 0.75
 var rt_thresh = 1000
 var missed_thresh = 0.10
 
-var practice_length = 14
-var practice_thresh = 3 // 3 blocks of 10 trials
+var practice_len = 28
+var practice_thresh = 3
 
-var test_length = 245 //keeping # of no_go trials at 50 -> new ratio 6:1 makes total of 350 trials
-var numTrialsPerBlock = 49 // must be divisible by 5 (7/31: new ratio go:nogo is 6:1 -> divisible by 7)
-var numTestBlocks = test_length / numTrialsPerBlock
+var exp_len = 245 //multiple of numTrialsPerBlock
+var numTrialsPerBlock = 49 // multiple of 7 (6go:1nogo)
+var numTestBlocks = exp_len / numTrialsPerBlock
 
-var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
-
-
+var block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_len / practice_stimuli.length); 
 
 
-var prompt_text_list = '<ul list-text>'+
+
+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>'+stims[0][0]+' square: Respond</li>' +
 						'<li>'+stims[1][0]+' square: Do not respond</li>' +
 					  '</ul>'
@@ -315,10 +356,13 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-    '<div class = centerbox><p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
-    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
-    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
-    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p></div>'
+    '<div class = centerbox>'+
+	    '<p class = block-text>In this experiment, ' + stims[0][0] + ' and ' + stims[1][0] + ' squares will appear on the screen. '+
+	    'If you see the ' + stims[0][0] + ' square you should <i> respond by pressing the spacebar as quickly as possible</i>. '+
+	    'If you see the ' + stims[1][0] + ' square you should <i> not respond</i>.</p>'+
+	    '<p class = block-text>We will begin with practice. You will receive feedback telling you if you were correct.</p>'+
+	    '<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
+	'</div>'
   ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -438,7 +482,7 @@ var prompt_fixation_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (var i = 0; i < practice_length; i ++){
+for (var i = 0; i < practice_len; i ++){
 
 	var practice_block = {
 	  type: 'poldrack-categorize',
@@ -447,7 +491,7 @@ for (var i = 0; i < practice_length; i ++){
 	  data: getData,
 	  key_answer: getCorrectResponse,
 	  correct_text: '<div class = centerbox><div class = center-text>Correct!</div></div>',
-	  incorrect_text: '<div class = centerbox><div class = center-text>Incorrect</div></div>',
+	  incorrect_text: '<div class = centerbox><div class = center-text>The shape was outlined</div></div>',
 	  timeout_message: getFeedback,
 	  choices: [32],
 	  timing_response: 2000, //2000
@@ -468,8 +512,8 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		practice_index = 0
-		block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_length / 2); 
+		current_trial = 0
+		block_stims = jsPsych.randomization.repeat(practice_stimuli, practice_len / practice_stimuli.length); 
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -510,7 +554,7 @@ var practiceNode = {
 		if (accuracy > accuracy_thresh){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / test_stimuli_block.length);
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
@@ -530,7 +574,7 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
+					block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / test_stimuli_block.length);
 					return false
 			}
 			
@@ -573,7 +617,7 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data){
 		testCount += 1
-		test_index = 0
+		current_trial = 0
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -637,7 +681,7 @@ var testNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Press Enter to continue.' 
-			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / 7);
+			block_stims = jsPsych.randomization.repeat(test_stimuli_block, numTrialsPerBlock / test_stimuli_block.length);
 			return true
 		
 		}

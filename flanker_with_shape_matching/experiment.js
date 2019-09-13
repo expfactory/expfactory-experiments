@@ -131,7 +131,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/14; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(shape_matching_trial_types.length*flanker_trial_types.length); numIterations++){
 		for (var numShapeConds = 0; numShapeConds < shape_matching_trial_types.length; numShapeConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_trial_types.length; numFlankerConds++){
 			
@@ -295,7 +295,7 @@ var task_boards = [['<div class = bigbox><div class = centerbox><div class = lef
 				   
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Match: ' + possible_responses[0][0] + '</li>' +
 						'<li>Mismatch: ' + possible_responses[1][0] + '</li>' +
 					  '</ul>'
@@ -408,6 +408,8 @@ var instructions_block = {
 			'<p class = block-text>Sometimes, you will also see a red shape near the green shape.  Ignore this red shape as well.</p>'+
 				
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,

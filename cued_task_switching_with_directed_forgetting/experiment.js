@@ -133,7 +133,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 	}
 	
 	stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/16; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(directed_cond_array.length*task_conditions.length*cued_conditions.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numTaskConds = 0; numTaskConds < task_conditions.length; numTaskConds++){
 				for (var numCuedConds = 0; numCuedConds < cued_conditions.length; numCuedConds++){
@@ -439,7 +439,7 @@ var credit_var = 0
 
 // new vars
 var practice_len = 16  // must be divisible by 16
-var exp_len = 192 // must be divisible by 16
+var exp_len = 224 // must be divisible by 16
 var numTrialsPerBlock = 32; // divisible by 16
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -609,6 +609,7 @@ var instructions_block = {
 			'  </i>if the probe was in the memory set, and the <i>'+possible_responses[1][0]+'  </i>if not.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -707,7 +708,6 @@ for (i = 0; i < practice_len + 1; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getFixation,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -767,7 +767,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000, //1000
-		timing_response: 2000, //1000
+		timing_response: 1000, //1000
 		timing_feedback_duration: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -902,7 +902,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: getFixation,
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -962,7 +961,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 1000, //1000
-		timing_response: 2000, //1000
+		timing_response: 1000, //1000
 		response_ends_trial: false,
 		on_finish: appendData
 	};

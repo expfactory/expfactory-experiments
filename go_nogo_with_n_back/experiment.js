@@ -147,13 +147,13 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	first_stims = []
-	for (var i = 0; i < 3; i++){
+	for (var i = 0; i < 3; i++){ //so that if delay for the block is 2, the first two stim will have no match (i.e. not yet 2 stim preceding them to be matched.)
 		if (i < delay){
 			n_back_condition = 'N/A'
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)]
 		}
-		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop()
+		go_nogo_condition = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1).pop() //To change go:nogo ratio, modify this, "var go_nogo_conditions =", and where there're similar variables.
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
 		letter_case = randomDraw(['uppercase','lowercase'])
@@ -186,7 +186,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/25; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(go_nogo_conditions.length*n_back_conditions.length); numIterations++){ //35 = 7 go_nogo_conditions * 5 n_back_conditions
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < go_nogo_conditions.length; numShapeConds++){
 			
@@ -340,8 +340,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 28 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
-var exp_len = 350 //300 must be divisible by 25
+var practice_len = 35 // 25 must be divisible by 25 // 7/31: new ratio 6go:1nogo
+var exp_len = 420 //300 must be divisible by 25
 var numTrialsPerBlock = 70 // 50 must be divisible by 25 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 25 trials
@@ -352,7 +352,7 @@ var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
-var delay = 1
+var delay = 1 // this is the delay of the practice block.
 
 var pathSource = "/static/experiments/go_nogo_with_n_back/images/"
 var fileTypePNG = ".png'></img>"
@@ -360,7 +360,7 @@ var preFileType = "<img class = center src='/static/experiments/go_nogo_with_n_b
 
 
 
-var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
+var n_back_conditions = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1)
 var go_nogo_conditions = jsPsych.randomization.repeat(['go','go','go','go','go','go','nogo'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 var go_no_go_styles = ['solid','outlined'] //has dashed as well
@@ -370,7 +370,7 @@ var letters = 'BDGTV'.split("")
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Respond if the current letter matches delayed letter.</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 						'<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
@@ -486,8 +486,9 @@ var instructions_block = {
 			'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
 			'<p class = block-text>You will be asked to match the current letter, to the letter that appeared either 1, 2, 3 trials ago depending on the delay given to you for that block.</p>'+
 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current and delayed letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
-			'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
-			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
+			'<p class = block-text>Your delay (the number of trials ago to which you must match the current letter) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
+			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p><br> '+
+			'<p class = block-text>For practice, match the current letter to the letter that appeared 1 trial ago.</p> '+ 
 		'</div>',
 			
 		"<div class = centerbox>"+
@@ -495,6 +496,7 @@ var instructions_block = {
 			"<p class = block-text>If the letters are "+go_no_go_styles[1]+", please make no response on that trial. You should still remember the letter, however.</p>"+
 			"<p class = block-text>A(n) "+go_no_go_styles[1]+" letter will be grey outlined in black.</p>"+
 			"<p class = block-text>A(n) "+go_no_go_styles[0]+" letter will be solid white.</p>"+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		"</div>",
 		
 		/*
@@ -579,7 +581,7 @@ var feedback_block = {
 
 };
 
-var start_control_block = {
+/*var start_control_block = {
 	type: 'poldrack-text',
 	data: {
 		trial_id: "instruction"
@@ -596,7 +598,7 @@ var start_control_block = {
 	on_finish: function(){
 		feedback_text = "We will now start this block. Press enter to begin."
 	}
-};
+};*/
 
 /* ************************************ */
 /*        Set up timeline blocks        */
@@ -605,18 +607,18 @@ var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
 for (i = 0; i < practice_len + 3; i++) {
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "practice_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0,
-		prompt: prompt_text
-	}
+	// var fixation_block = {
+	// 	type: 'poldrack-single-stim',
+	// 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	// 	is_html: true,
+	// 	choices: 'none',
+	// 	data: {
+	// 		trial_id: "practice_fixation"
+	// 	},
+	// 	timing_response: 500, //500
+	// 	timing_post_trial: 0,
+	// 	prompt: prompt_text
+	// }
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -638,7 +640,10 @@ for (i = 0; i < practice_len + 3; i++) {
 		on_finish: appendData,
 		prompt: prompt_text
 	}
-	practiceTrials.push(fixation_block)
+	// practiceTrials.push(fixation_block) Block removed for, per note by Patrick,
+	// "this is essential an N-back task with the possibility of needing to “no-go” added on 1/7 of trials, 
+	// I think we should mimic the timing of the single task N-back task. Therefore, let’s remove the 500ms fixation period 
+	// rom all practice and main task trials. Trials will each be 2000ms."
 	practiceTrials.push(practice_block)
 }
 
@@ -727,17 +732,17 @@ var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock + 3; i++) {
-	var fixation_block = {
-		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
-		is_html: true,
-		choices: 'none',
-		data: {
-			trial_id: "practice_fixation"
-		},
-		timing_response: 500, //500
-		timing_post_trial: 0
-	}
+	// var fixation_block = {
+	// 	type: 'poldrack-single-stim',
+	// 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
+	// 	is_html: true,
+	// 	choices: 'none',
+	// 	data: {
+	// 		trial_id: "practice_fixation"
+	// 	},
+	// 	timing_response: 500, //500
+	// 	timing_post_trial: 0
+	// }
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
@@ -753,7 +758,7 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 		response_ends_trial: false,
 		on_finish: appendData
 	}
-	testTrials.push(fixation_block)
+	// testTrials.push(fixation_block) Block removed for the same reason in practiceNode. 
 	testTrials.push(test_block)
 }
 

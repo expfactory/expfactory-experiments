@@ -148,7 +148,7 @@ var randomDraw = function(lst) {
   return lst[index]
 }
 
-var getCorrectResponse = function(number, predictive_dimension, stop_signal_condition){
+var getCorrectResponse = function(number, predictable_dimension, stop_signal_condition){
 	if (number > 5){
 		magnitude = 'high'
 	} else if (number < 5){
@@ -161,18 +161,18 @@ var getCorrectResponse = function(number, predictive_dimension, stop_signal_cond
 		parity = 'odd'
 	}
 	
-	par_ind = predictive_dimensions_list[0].values.indexOf(parity)
+	par_ind = predictable_dimensions_list[0].values.indexOf(parity)
 	if (par_ind == -1){
-		par_ind = predictive_dimensions_list[1].values.indexOf(parity)
-		mag_ind = predictive_dimensions_list[0].values.indexOf(magnitude)
+		par_ind = predictable_dimensions_list[1].values.indexOf(parity)
+		mag_ind = predictable_dimensions_list[0].values.indexOf(magnitude)
 	} else {
-		mag_ind = predictive_dimensions_list[1].values.indexOf(magnitude)
+		mag_ind = predictable_dimensions_list[1].values.indexOf(magnitude)
 	}
 	
 	
-	if (predictive_dimension == 'magnitude'){
+	if (predictable_dimension == 'magnitude'){
 		correct_response = possible_responses[mag_ind][1]
-	} else if (predictive_dimension == 'parity'){
+	} else if (predictable_dimension == 'parity'){
 		correct_response = possible_responses[par_ind][1]
 	}
 	
@@ -187,11 +187,11 @@ var getCorrectResponse = function(number, predictive_dimension, stop_signal_cond
 							 
 var createTrialTypes = function(numTrialsPerBlock){
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
-	var predictive_cond_array = predictive_conditions[whichQuadStart%2]
-	var predictive_dimensions = [predictive_dimensions_list[0].dim,
-								 predictive_dimensions_list[0].dim,
-								 predictive_dimensions_list[1].dim,
-								 predictive_dimensions_list[1].dim]
+	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
+	var predictable_dimensions = [predictable_dimensions_list[0].dim,
+								 predictable_dimensions_list[0].dim,
+								 predictable_dimensions_list[1].dim,
+								 predictable_dimensions_list[1].dim]
 		
 	numbers_list = [[6,8],[7,9],[2,4],[1,3]]
 	numbers = [1,2,3,4,6,7,8,9]	
@@ -206,20 +206,20 @@ var createTrialTypes = function(numTrialsPerBlock){
 	stop_signal_trial_type_list.push(stop_signal_trial_types3)
 	stop_signal_trial_type_list.push(stop_signal_trial_types4)
 	
-	predictive_dimension = predictive_dimensions[whichQuadStart - 1]
+	predictable_dimension = predictable_dimensions[whichQuadStart - 1]
 	
 	number = numbers[Math.floor((Math.random() * 8))]
 	stop_signal_condition = jsPsych.randomization.repeat(['go','go','stop'],1).pop()
 	
 	
-	response_arr = getCorrectResponse(number,predictive_dimension, stop_signal_condition)
+	response_arr = getCorrectResponse(number,predictable_dimension, stop_signal_condition)
 	
 	var stims = []
 	
 	var first_stim = {
 		whichQuadrant: whichQuadStart,
-		predictive_condition: 'N/A',
-		predictive_dimension: predictive_dimension,
+		predictable_condition: 'N/A',
+		predictable_dimension: predictable_dimension,
 		stop_signal_condition: stop_signal_condition,
 		number: number,
 		magnitude: response_arr[1],
@@ -235,15 +235,15 @@ var createTrialTypes = function(numTrialsPerBlock){
 			quadIndex = 4
 		}
 		stop_signal_condition = stop_signal_trial_type_list[quadIndex - 1].pop()
-		predictive_dimension = predictive_dimensions[quadIndex - 1]
+		predictable_dimension = predictable_dimensions[quadIndex - 1]
 		number = numbers[Math.floor((Math.random() * 8))]
 	
-		response_arr = getCorrectResponse(number,predictive_dimension, stop_signal_condition)
+		response_arr = getCorrectResponse(number,predictable_dimension, stop_signal_condition)
 		
 		stim = {
 			whichQuadrant: quadIndex,
-			predictive_condition: predictive_cond_array[i%2],
-			predictive_dimension: predictive_dimension,
+			predictable_condition: predictable_cond_array[i%2],
+			predictable_dimension: predictable_dimension,
 			stop_signal_condition: stop_signal_condition,
 			number: number,
 			magnitude: response_arr[1],
@@ -263,8 +263,8 @@ var createTrialTypes = function(numTrialsPerBlock){
 
 var getFixation = function(){
 	stim = stims.shift()
-	predictive_condition = stim.predictive_condition
-	predictive_dimension = stim.predictive_dimension
+	predictable_condition = stim.predictable_condition
+	predictable_dimension = stim.predictable_dimension
 	stop_signal_condition = stim.stop_signal_condition
 	number = stim.number
 	correct_response = stim.correct_response
@@ -276,9 +276,9 @@ var getFixation = function(){
 }
 
 function getSSD(){
-	if (predictive_condition == 'switch'){
+	if (predictable_condition == 'switch'){
 		return SSD_switch
-	} else if (predictive_condition == 'stay'){
+	} else if (predictable_condition == 'stay'){
 		return SSD_stay
 	}
 }
@@ -321,8 +321,8 @@ var appendData = function(){
 	}
 	
 	jsPsych.data.addDataToLastTrial({
-		predictive_condition: predictive_condition,
-		predictive_dimension: predictive_dimension,
+		predictable_condition: predictable_condition,
+		predictable_dimension: predictable_dimension,
 		stop_signal_condition: stop_signal_condition,
 		number: number,
 		correct_response: correct_response,
@@ -338,18 +338,18 @@ var appendData = function(){
 	
 	
 	if ((trial_id == 'test_trial') || (trial_id == 'practice_trial')){
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictable_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD_stay+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'stay')){
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_stay > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictable_condition == 'stay')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD_stay-=50
 		}
 		
-		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+		if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch < maxSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictable_condition == 'switch')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 1})
 			SSD_switch+=50
-		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictive_condition == 'switch')){
+		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1) && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop') && (SSD_switch > minSSD) && (jsPsych.data.getDataByTrialIndex(curr_trial).predictable_condition == 'switch')){
 			jsPsych.data.addDataToLastTrial({stop_acc: 0})
 			SSD_switch-=50
 		}
@@ -398,10 +398,10 @@ var SSD_stay = 350
 var maxSSD = 1000
 var minSSD = 0 
 
-var predictive_conditions = [['switch','stay'],
+var predictable_conditions = [['switch','stay'],
 							 ['stay','switch']]
 							 
-var predictive_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
+var predictable_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
 								  stim = {dim:'parity', values: ['even','odd']}]
 							 	  
 var possible_responses = [['M Key', 77],['Z Key', 90]]
@@ -430,20 +430,20 @@ var stims = createTrialTypes(practice_len)
 
 var prompt_text_list = '<ul style = "text-align:left;">'+
 						'<li>Do not respond if a star appears!</li>' +
-						'<li>Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</li>' +
-						'<li>'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
-						'<li>'+predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-						'<li>Bottom 2 quadrants: Judge number on '+predictive_dimensions_list[1].dim+'</li>' +
-						'<li>'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
-						'<li>'+predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
+						'<li>Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
+						'<li>Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
 					  '</ul>'
 
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if a star appears!</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Top 2 quadrants: Judge number on '+predictive_dimensions_list[0].dim+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictive_dimensions_list[0].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictive_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Bottom 2 quadrants: Judge number on '+predictive_dimensions_list[1].dim+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictive_dimensions_list[1].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictive_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>'
 				  
 				  
@@ -536,13 +536,12 @@ var instructions_block = {
 			'<p class = block-text>You will be asked to judge the number on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the number are in.</p>'+
 		
-			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>' +
-		
+			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>' +
 		'</div>',
 		
 		'<div class = centerbox>'+
@@ -553,8 +552,12 @@ var instructions_block = {
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
-					
+		'</div>',
+		
+		'<div class = centerbox>'+		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -612,12 +615,12 @@ var start_test_block = {
 			'<p class = block-text>Please judge the number on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
 			'the numbers are in.</p>'+
 	
-			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictive_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictive_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictive_dimensions_list[0].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictive_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictive_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictive_dimensions_list[1].values[1]+'</i>.</p>'+
+			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
+			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>'+
 	
 			'<p class = block-text>On some trials, you will see a star appear at the same time, or shortly after, the number. <i>Do not respond if you see a star.</i>  Do not slow down your responses in order to wait for the star.</p>'+
 	
@@ -767,7 +770,7 @@ var practiceNode = {
 			
 			if (stop_success_percentage === upper_stop_success_bound_practice){
 			feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly as possible without sacrificing accuracy.'
+					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly and accurately as possible.'
 			}
 			
 			if (stop_success_percentage === lower_stop_success_bound_practice){

@@ -113,7 +113,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 		if (i < delay){
 			n_back_condition = 'N/A'
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)]
 		}
 		probe = randomDraw(letters)
 		correct_response = possible_responses[1][1]
@@ -138,7 +138,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 	
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(n_back_conditions.length*directed_forgetting_conditions.length); numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < directed_forgetting_conditions.length; numShapeConds++){
 			
@@ -304,14 +304,14 @@ var preFileType = "<img class = center src='/static/experiments/n_back_with_dire
 
 
 
-var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
+var n_back_conditions = jsPsych.randomization.repeat(['match','mismatch','mismatch','mismatch','mismatch'],1)
 var directed_forgetting_conditions = jsPsych.randomization.repeat(['forget','remember'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
 							 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Match the current letter to the letter that appeared '+delay+' trial(s) ago.</li>' +
 						'<li>Press the '+possible_responses[0][0]+' if the letters match.</li>' +
 						'<li>Press the '+possible_responses[1][0]+'. if they mismatch.</li>' +
@@ -432,6 +432,7 @@ var instructions_block = {
 			'<p class = block-text style="font-size:20px">Press the '+possible_responses[0][0]+' if the letters match, and the '+possible_responses[1][0]+' if they mismatch.</p>'+
 			'<p class = block-text style="font-size:20px">Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text style="font-size:20px">We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 		/*
 		'<div class = centerbox>'+
@@ -674,7 +675,7 @@ for (i = 0; i < numTrialsPerBlock + 3; i++) {
 		},
 		choices: false,
 		timing_post_trial: 0,
-		timing_stim: 150, //1000
+		timing_stim: 1000, //1000
 		timing_response: 1000
 	};
 	

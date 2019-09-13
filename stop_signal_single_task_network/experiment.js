@@ -129,7 +129,7 @@ var getCategorizeFeedback = function(){
 }
 
 var createTrialTypes = function(numTrialsPerBlock){
-	var unique_combos = 12
+	var unique_combos = stop_signal_conditions.length*totalShapesUsed
 	
 	var stims = []
 	for (var x = 0; x < stop_signal_conditions.length; x++){
@@ -313,7 +313,7 @@ jsPsych.pluginAPI.preloadImages(images);
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>' + shapes[0] + ': ' + possible_responses[0][0] + '</li>' +
 						'<li>' + shapes[2] + ': ' + possible_responses[2][0] + '</li>' +
 						'<li>Do not respond if a star appears!</li>' +
@@ -422,8 +422,12 @@ var instructions_block = {
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your responses in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
-				
-			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules.  <i> This will be removed for test</i>.</p>'+					
+		'</div>',
+		
+		'<div class = centerbox>' + 		
+			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the rules before moving on. During practice, you will see a reminder of the rules.  <i> This will be removed for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 		
 	],

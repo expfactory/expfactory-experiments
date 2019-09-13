@@ -107,11 +107,11 @@ var randomDraw = function(lst) {
 
 var createTrialTypes = function(numTrialsPerBlock, delay){
 	first_stims = []
-	for (var i = 0; i < 3; i++){
+	for (var i = 0; i < 3; i++){ // i can now take 0, 1, or 2 as its value. This's because there can be three possible first trials that have no previous match (i.e. delay = 1, 2, or 3).
 		if (i < delay){
-			n_back_condition = 'N/A'
+			n_back_condition = 'N/A' //if this is 'mismatch' (i.e. exactly as one of the two possible n_back_condition), the script will break.
 		} else {
-			n_back_condition = n_back_conditions[Math.floor(Math.random() * 2)]
+			n_back_condition = n_back_conditions[Math.floor(Math.random() * 5)] //No idea why this was originally *2. There're 5 conds/elements in n_back_conditions; so, Math.random() should pick from 0-5
 		}
 		shape_matching_condition = jsPsych.randomization.repeat(['match','mismatch'],1).pop()
 		probe = randomDraw(letters)
@@ -144,7 +144,7 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	stims = []
 		
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/10; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(n_back_conditions.length*shape_matching_conditions.length); numIterations++){
 		for (var numNBackConds = 0; numNBackConds < n_back_conditions.length; numNBackConds++){
 			for (var numShapeConds = 0; numShapeConds < shape_matching_conditions.length; numShapeConds++){
 			
@@ -168,8 +168,8 @@ var createTrialTypes = function(numTrialsPerBlock, delay){
 	
 	new_stims = []
 	for (i = 0; i < stim_len; i++){
-		if (i < 3){
-			stim = stims.shift()
+		if (i < 3){ //meaning only the first_stims
+			stim = stims.shift() //stim. now has the properties from first_stims
 			n_back_condition = stim.n_back_condition
 			shape_matching_condition = stim.shape_matching_condition
 			probe = stim.probe
@@ -242,23 +242,23 @@ var getStim = function(){
 	
 }
 
-var getControlStim = function(){	
-	stim = control_stims.shift()
-	n_back_condition = stim.n_back_condition
-	shape_matching_condition = stim.shape_matching_condition
-	probe = stim.probe
-	correct_response = stim.correct_response
-	distractor = stim.distractor
+// var getControlStim = function(){	
+// 	stim = control_stims.shift()
+// 	n_back_condition = stim.n_back_condition
+// 	shape_matching_condition = stim.shape_matching_condition
+// 	probe = stim.probe
+// 	correct_response = stim.correct_response
+// 	distractor = stim.distractor
 		
-	return '<div class = bigbox><div class = centerbox>'+
+// 	return '<div class = bigbox><div class = centerbox>'+
 	
-			'<div class = distractor-text><font color="red">'+distractor+'</font></div>'+
+// 			'<div class = distractor-text><font color="red">'+distractor+'</font></div>'+
 	
-			'<div class = cue-text>'+probe+'</div>'+
+// 			'<div class = cue-text>'+probe+'</div>'+
 		   
-		   '</div></div>'
+// 		   '</div></div>'
 	
-}
+// }
 
 
 
@@ -315,9 +315,9 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 20 must be divisible by 10
-var exp_len = 240 // must be divisible by 10
+var exp_len = 40 // must be divisible by 10
 var numTrialsPerBlock = 40 // 40 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock //must be a multiple of 3 to have equal # of delays
 var practice_thresh = 3 // 3 blocks of 10 trials
 
 var accuracy_thresh = 0.75
@@ -337,7 +337,7 @@ var preFileTypeDistractor = "<img class = distractor src='/static/experiments/n_
 
 var n_back_conditions = ['match','mismatch','mismatch','mismatch','mismatch']
 var shape_matching_conditions = jsPsych.randomization.repeat(['match','mismatch'],1)
-var shape_matching_conditions_control = jsPsych.randomization.repeat(['match','mismatch'],1)
+//var shape_matching_conditions_control = jsPsych.randomization.repeat(['match','mismatch'],1)
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
@@ -345,7 +345,7 @@ var letters = 'bBdDgGtTvV'.split("")
 
 
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Match the current WHITE letter to the WHITE letter that appeared some number of trials ago</li>' +
 						'<li>If they match, press the '+possible_responses[0][0]+'</li>' +
 					    '<li>If they mismatch, press the '+possible_responses[1][0]+'</li>' +
@@ -466,6 +466,7 @@ var instructions_block = {
 			'<p class = block-text>Ignore the red letter, focus only on the white letter.</p>'+
 			'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 			'<p class = block-text>We will start practice when you finish instructions. Your delay for practice is 1. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 		
 		/*
@@ -532,23 +533,23 @@ var start_test_block = {
 	}
 };
 
-var start_control_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "instruction"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox>'+
-			'<p class = block-text>For this block of trials, you do not have to match letters.  Instead, indicate whether the current WHITE letter is a T (or t).</p>'+
-			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current WHITE letter was a T (or t) and the '+possible_responses[1][0]+' if not.</p> '+
-			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
-		 '</div>',
-	cont_key: [13],
-	timing_post_trial: 1000,
-	on_finish: function(){
-		feedback_text = "We will now start this block. Press enter to begin."
-	}
-};
+// var start_control_block = {
+// 	type: 'poldrack-text',
+// 	data: {
+// 		trial_id: "instruction"
+// 	},
+// 	timing_response: 180000,
+// 	text: '<div class = centerbox>'+
+// 			'<p class = block-text>For this block of trials, you do not have to match letters.  Instead, indicate whether the current WHITE letter is a T (or t).</p>'+
+// 			'<p class = block-text>Press the '+possible_responses[0][0]+' if the current WHITE letter was a T (or t) and the '+possible_responses[1][0]+' if not.</p> '+
+// 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
+// 		 '</div>',
+// 	cont_key: [13],
+// 	timing_post_trial: 1000,
+// 	on_finish: function(){
+// 		feedback_text = "We will now start this block. Press enter to begin."
+// 	}
+// };
 
 var fixation_block = {
 	type: 'poldrack-single-stim',
@@ -586,7 +587,7 @@ var feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len + 3; i++) {
+for (i = 0; i < practice_len; i++) {
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -616,7 +617,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
-		stims = createTrialTypes(practice_len, delay)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -688,7 +688,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Press Enter to continue.' 
-			
+			stims = createTrialTypes(practice_len, delay)
 			return true
 		
 		}
@@ -699,7 +699,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock + 3; i++) {
+for (i = 0; i < numTrialsPerBlock; i++) {
 	
 	var test_block = {
 		type: 'poldrack-single-stim',

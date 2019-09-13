@@ -160,12 +160,11 @@ var getPTD = function(shape_matching_condition, go_nogo_condition){
 	return [probe_i, target_i, distractor_i, correct_response, probe_color]
 }
 	 
+var go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
+var shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
 var createTrialTypes = function(numTrialsPerBlock){
-	go_nogo_trial_types = ['go','go','go','go','go','go','nogo']
-	shape_matching_trial_types = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
-	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/35; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(shape_matching_trial_types.length*go_nogo_trial_types.length); numIterations++){ //numTrialsPerBlock/49 here is equivalent to totalShapesUsed = 2 in stop_go_nogo, which has outlined and solid
 		for (var numShapeConds = 0; numShapeConds < shape_matching_trial_types.length; numShapeConds++){
 			for (var numgo_nogoConds = 0; numgo_nogoConds < go_nogo_trial_types.length; numgo_nogoConds++){
 			
@@ -307,9 +306,9 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 49 // 7/31: new ratio is 6go:1nogo
-var exp_len = 686 //must be divisible by 49
+var exp_len = 490 //must be divisible by 49
 var numTrialsPerBlock = 98; // divisible by 49
-var numTestBlocks = exp_len / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock //5 blocks of 98 agreed on Slack, Aug 5.
 
 var accuracy_thresh = 0.75
 var rt_thresh = 1000
@@ -338,7 +337,7 @@ var mask_boards = [['<div class = centerbox><div class = leftbox>'],['</div><div
 
 var stims = createTrialTypes(practice_len)
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Indicate whether green and white shapes are the same or different</li>' +
 						'<li>same: ' + possible_responses[0][0] + '</li>' +
 						'<li>different: ' + possible_responses[1][0] + '</li>' +
@@ -455,6 +454,8 @@ var instructions_block = {
 			'<p class = block-text>On some trials, the white shape will be '+go_no_go_styles[1]+'.  On some trials, the white shape will be '+go_no_go_styles[0]+'.  If the white shape is '+go_no_go_styles[1]+', please make no response on that trial.</p>'+
 				
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. You will be given a reminder of the rules for practice. <i>This will be removed for test!</i></p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,

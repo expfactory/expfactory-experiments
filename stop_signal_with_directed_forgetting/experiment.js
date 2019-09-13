@@ -133,7 +133,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/12; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(directed_cond_array.length*stop_signal_conditions.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numstop_signalConds = 0; numstop_signalConds < stop_signal_conditions.length; numstop_signalConds++){
 			
@@ -367,8 +367,8 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 216 //180 must be divisible by 12
-var numTrialsPerBlock = 36; // 36 divisible by 12
+var exp_len = 240 //180 must be divisible by 12
+var numTrialsPerBlock = 24; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
@@ -536,8 +536,12 @@ var instructions_block = {
 			'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 		
 			'<p class = block-text>Please do not slow down your response to the probe in order to wait for the star.  Continue to respond as quickly and accurately as possible.</p>'+
-					
+		'</div>',
+    
+    	'<div class = centerbox>' + 			
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>',
 	],
 	allow_keys: false,
@@ -662,7 +666,6 @@ var fixation_block = {
 
 var ITI_fixation_block = {
 	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	data: {
@@ -712,7 +715,7 @@ var test_probe_block = {
 	is_html: true,
 	choices: [possible_responses[0][1],possible_responses[1][1]],
 	timing_stim: 1000,
-	timing_response: 2000, //2000
+	timing_response: 1000, //2000
 	response_ends_trial: false,
 	SSD: getSSD,
 	timing_SS: 500, //500
@@ -763,7 +766,6 @@ for (i = 0; i < practice_len; i++) {
 
 	var practice_ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -816,7 +818,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_stim: 1000,
-		timing_response: 2000, //2000
+		timing_response: 1000, //2000
 		response_ends_trial: false,
 		SSD: getSSD,
 		timing_SS: 500, //500

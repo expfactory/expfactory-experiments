@@ -96,7 +96,7 @@ var randomDraw = function(lst) {
 var createTrialTypes = function(numTrialsPerBlock){
 	
 	var stims = []
-	for(var numIterations = 0; numIterations < numTrialsPerBlock/8; numIterations++){
+	for(var numIterations = 0; numIterations < numTrialsPerBlock/(directed_cond_array.length*flanker_conditions.length); numIterations++){
 		for (var numDirectedConds = 0; numDirectedConds < directed_cond_array.length; numDirectedConds++){
 			for (var numFlankerConds = 0; numFlankerConds < flanker_conditions.length; numFlankerConds++){
 			
@@ -343,7 +343,7 @@ var getCategorizeFeedback = function(){
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
-var run_attention_checks = false
+var run_attention_checks = true
 var attention_check_thresh = 0.65
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
@@ -351,8 +351,8 @@ var credit_var = 0
 
 // new vars
 var practice_len = 8  // must be divisible by 8
-var exp_len = 192 // must be divisible by 8
-var numTrialsPerBlock = 32; // divisible by 8
+var exp_len = 240 // must be divisible by 8
+var numTrialsPerBlock = 40; // divisible by directed_cond_array * flanker_conditions
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
@@ -382,7 +382,7 @@ var task_boards = [['<div class = bigbox><div class = lettersBox><div class = to
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flanker-text>'],['</div></div></div>']]				
 var flanker_boards = [['<div class = bigbox><div class = centerbox><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div>']]					   
 
-var prompt_text_list = '<ul list-text>'+
+var prompt_text_list = '<ul style="text-align:left;">'+
 						'<li>Please respond if the probe (middle letter) was in the memory set.</li>'+
 						'<li>In memory set: ' + possible_responses[0][0] + '</li>' +
 						'<li>Not in memory set: ' + possible_responses[1][0] + '</li>' +
@@ -513,6 +513,8 @@ var instructions_block = {
 			'<p class = block-text>Please ignore the letters that are not in the middle.</p>'+
 		
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
+
+			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
 	allow_keys: false,
@@ -611,7 +613,6 @@ for (i = 0; i < practice_len; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white;">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -658,7 +659,7 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000, //2000
-		timing_response: 2000,
+		timing_response: 1000,
 		timing_post_trial: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -798,7 +799,6 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 
 	var ITI_fixation_block = {
 		type: 'poldrack-single-stim',
-		stimulus: '<div class = centerbox><div class = fixation><span style="color:white;">+</span></div></div>',
 		is_html: true,
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {
@@ -847,7 +847,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 1000, //2000
-		timing_response: 2000, //2000
+		timing_response: 1000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};
