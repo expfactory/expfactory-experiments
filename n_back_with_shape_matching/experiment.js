@@ -315,7 +315,7 @@ var run_attention_checks = true
 
 
 var practice_len = 20 // 20 must be divisible by 10
-var exp_len = 40 // must be divisible by 10
+var exp_len = 240 // must be divisible by 10
 var numTrialsPerBlock = 40 // 40 must be divisible by 10 and we need to have a multiple of 3 blocks (3,6,9) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock //must be a multiple of 3 to have equal # of delays
 var practice_thresh = 3 // 3 blocks of 10 trials
