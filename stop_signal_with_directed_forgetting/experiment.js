@@ -971,7 +971,7 @@ var practiceNode = {
 
 var testTrials = []
 testTrials.push(feedback_block)
-testTrials.push(attention_node)
+// testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) { 
 	testTrials.push(start_fixation_block) //500ms
 	testTrials.push(training_block) //2000

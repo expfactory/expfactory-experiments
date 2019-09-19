@@ -539,7 +539,7 @@ var instructions_block = {
     '</div>',
     
     '<div class = centerbox>' + 
-  		'<p class = block-text>On some trials, a star will appear around the letter.  The star will appear with, or shortly after the letter appears.</p>'+
+  		'<p class = block-text>On some trials, a star will appear around the number.  The star will appear with, or shortly after the number appears.</p>'+
   		
   		'<p class = block-text>If you see a star appear, please try your best to make no response on that trial.</p>'+
   	
