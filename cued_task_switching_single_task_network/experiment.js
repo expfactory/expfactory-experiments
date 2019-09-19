@@ -271,9 +271,9 @@ var credit_var = 0
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 16 // must be divisible by 4
-var test_length = 192 // must be divisible by 4
+var exp_len = 192 // must be divisible by 4
 var numTrialsPerBlock = 48 
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var practice_thresh = 3 // 3 blocks of 16 trials
 var rt_thresh = 1000;
