@@ -354,7 +354,7 @@ var prompt_task_list = '<ul style="text-align:left;">'+
 
 //PRE LOAD IMAGES HERE
 var pathSource = "/static/experiments/flanker_with_cued_task_switching/images/"
-var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var numbersPreload = ['1','2','3','4','6','7','8','9']
 var images = []
 
 for(i=0;i<numbersPreload.length;i++){
