@@ -340,7 +340,7 @@ var prompt_task_list = '<ul style="text-align:left"><li><i>Parity</i> or <i>Odd-
 
 //PRE LOAD IMAGES HERE
 var pathSource = "/static/experiments/cued_task_switching_single_task_network/images/"
-var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var numbersPreload = ['1','2','3','4','6','7','8','9']
 var images = []
 for(i=0;i<numbersPreload.length;i++){
   images.push(pathSource + numbersPreload[i] + '.png')

@@ -425,7 +425,7 @@ var task_boards = [['<div class = bigbox><div class = leftbox>'],['</div><div cl
 
 //PRE LOAD IMAGES HERE
 var pathSource = "/static/experiments/shape_matching_with_cued_task_switching/images/"
-var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
+var numbersPreload = ['1','2','3','4','6','7','8','9']
 var colorsPreload = ['white','green','red']
 var images = []
 
