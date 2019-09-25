@@ -241,9 +241,8 @@ var getSSType = function(){
 }
 
 var getStopStim = function(){
-	return stop_boards[0] + 
-		   	preFileTypeStar + 'stop' + fileTypePNG + 
-		   stop_boards[1] 
+	var stim_html = '<div class = starbox>'+ preFileTypeStar + 'stop' + fileTypePNG + '</div>'
+    return stim_html
 }
 
 function getSSD(){
@@ -379,8 +378,6 @@ var credit_var = 0
 var fileTypePNG = '.png"></img>'
 var preFileType = '<img class = center src="/static/experiments/stop_signal_with_cued_task_switching/images/'
 var preFileTypeStar = '<img class = star src="/static/experiments/stop_signal_with_cued_task_switching/images/'
-
-var stop_boards = ['<div class = bigbox><div class = centerbox><div class = starbox>','</div></div></div>']	 
 
 var accuracy_thresh = 0.75
 var rt_thresh = 1000
