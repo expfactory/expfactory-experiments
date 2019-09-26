@@ -171,6 +171,7 @@ img.star {
 
 .starbox {
   width:40vw;
+  height:40vw;
   position:absolute;
   top:50%;
   left:50%;
