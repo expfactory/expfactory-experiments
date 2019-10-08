@@ -136,7 +136,7 @@ var appendProbeData = function(data) {
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
-		directed_condition: directed_condition,
+		directed_forgetting_condition: directed_condition,
 		trial_num: current_trial,
 		correct_response: correct_response,
 		exp_stage: exp_stage,
