@@ -396,9 +396,9 @@ var CTI = 150
 var response_keys = {key: [77,90], key_name: ["M","Z"]}
 var choices = response_keys.key
 var practice_length = 24
-var test_length = 240
+var exp_len = 240
 var numTrialsPerBlock = 48 //48 must be divisible by 12
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var SSD_stay = 350
 var SSD_switch = 350

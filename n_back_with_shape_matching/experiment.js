@@ -587,7 +587,7 @@ var feedback_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len; i++) {
+for (i = 0; i < practice_len + 3; i++) {
 	
 	var practice_block = {
 		type: 'poldrack-categorize',
@@ -699,7 +699,7 @@ var practiceNode = {
 var testTrials = []
 testTrials.push(feedback_block)
 testTrials.push(attention_node)
-for (i = 0; i < numTrialsPerBlock; i++) {
+for (i = 0; i < numTrialsPerBlock +3; i++) {
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
