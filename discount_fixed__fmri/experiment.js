@@ -69,35 +69,27 @@ var dataPop = function() {
 
 
 /* ************************************ */
-/*    Set up jsPsych timeline           */
+/*    Set up jsPsych blocks           */
 /* ************************************ */
-
-//setup experimenter input 
 var discount_fixed__fmri_experiment = []
-//test_keys(discount_fixed__fmri_experiment,choices)
 
 //get experimenter input to set up variables - scanner_order
-var task_setup_block = {
+var scan_order_setup_block = {
 	type: 'survey-text',
 	data: {
-		trial_id: "task_setup"
+		trial_id: "scan_order_setup"
 	},
 	questions: [
 		[
-			"<p class = center-block-text>Scanner order</p>"
+			"<p class = center-block-text>Scanner order:</p>"
     ]
   ],
   on_finish: function(data) {
     data.scanner_order = parseInt(data.responses.slice(7))
   }
 }
-discount_fixed__fmri_experiment.push(task_setup_block)
 
-
-/* ************************************ */
-/*    Set up jsPsych blocks             */
-/* ************************************ */
-
+// Static blocks
 var instructions_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class = centerbox><div class = center-text>Choose between hypothetical options, <strong>$20 today</strong> or the presented option.<br><br><strong>Index:</strong> Accept option on screen (reject $20 today). <br><br><strong>Middle:</strong> Reject option on screen (accept $20 today)<br><br>We will start with a practice trial.</div></div>',
@@ -171,16 +163,22 @@ var rest_block = {
   timing_post_trial: 1000
 };
 
-//Set up experiment
-//discount_fixed__fmri_experiment.push(instructions_block);
+/* ************************************ */
+/* Set up experiment */
+/* ************************************ */
+
+discount_fixed__fmri_experiment.push(scan_order_setup_block)
+test_keys(discount_fixed__fmri_experiment,choices)
+discount_fixed__fmri_experiment.push(instructions_block);
 discount_fixed__fmri_experiment.push(practice_block);
-//setup_fmri_intro(discount_fixed__fmri_experiment)
-discount_fixed__fmri_experiment.push(start_test_block);
+setup_fmri_intro(discount_fixed__fmri_experiment)
+
 
 /* ************************************ */
 /*    Set up test blocks                */
 /* ************************************ */
-
+discount_fixed__fmri_experiment.push(start_test_block);
+//loops through test trials
 for (i = 0; i < ITIs[1].length; i++) {
   var test_block = {
   type: 'poldrack-single-stim',
