@@ -38,7 +38,7 @@ var stim_index = [
 var practice_repeats = 0
 // task specific variables
 // Define and load images
-var prefix = '/static/experiments/stop_signal/images/'
+var prefix = '/static/experiments/stop_signal__fmri/images/'
 var images = [prefix + 'moon.png', prefix + 'oval.png', prefix + 'rectangle.png', prefix +
 	'trapezoid.png'
 ]
