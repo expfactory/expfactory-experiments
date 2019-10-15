@@ -262,8 +262,8 @@ var permutation_setup_block = {
 		var practice_stims2 = jsPsych.randomization.repeat(stims, practice_len/4);
 		var practice_stims3 = jsPsych.randomization.repeat(stims, practice_len/4);
 		var practice_stims = practice_stims1.concat(practice_stims2).concat(practice_stims3);
-		for (var i = 0; i < practice_stims.length; i++) {
-			practice_stims[i].key_answer = practice_stims[i].data.correct_response
+		for (var j = 0; j < practice_stims.length; j++) {
+			practice_stims[j].key_answer = practice_stims[j].data.correct_response
 		}
 
 		//build up test trials
@@ -272,9 +272,9 @@ var permutation_setup_block = {
 		var trials = [];
 		var scan_order = jsPsych.data.getDataByTrialIndex(0).scan_order
 		var stim_index_subset = stim_index[scan_order]
-		for (var i=0; i<exp_len; i++) {
+		for (var k=0; k<exp_len; k++) {
 			var stim = {}
-			if (stim_index_subset[i] === 0) {
+			if (stim_index_subset[k] === 0) {
 				stim = jQuery.extend({},go_stims.shift())
 				stim.SS_trial_type = 'go'
 			} else {
