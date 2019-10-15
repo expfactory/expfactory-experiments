@@ -49,11 +49,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-<<<<<<< HEAD
                                         "on_trial_finish": "addID('cue_control_smoking__fmri')"}
-=======
-                                        "on_trial_finish": "addID('cue_control_smoking')"}
->>>>>>> 284d29fa027b5f980704751017847894779d4a7f
                        			} 
     
    }

@@ -88,7 +88,7 @@ var create_key_test_block = function(choice_index) {
 			console.log('this choice was popped off: ' + choice)
 			var button = get_finger(choice)
 			var instruct_text = "Please press your " + button
-			if (button == null) {
+			if (button === null) {
 				instruct_text = "Wait for instructions from the experimenter."
 			}
 			return "<div class = centerbox><div style = 'font-size: 50px' class = center-text>" + instruct_text + "</p></div>"
@@ -106,7 +106,7 @@ var create_key_test_block = function(choice_index) {
 	return key_test_block
 }
 
-var test_keys = function(lst,) {
+var test_keys = function(lst) {
 	for (var i=0; i < 2; i++) {
 		lst.push(create_key_test_block(i))
 	}

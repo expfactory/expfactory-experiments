@@ -262,8 +262,8 @@ var permutation_setup_block = {
 		var practice_stims2 = jsPsych.randomization.repeat(stims, practice_len/4);
 		var practice_stims3 = jsPsych.randomization.repeat(stims, practice_len/4);
 		var practice_stims = practice_stims1.concat(practice_stims2).concat(practice_stims3);
-		for (i = 0; i < practice_stims.length; i++) {
-			practice_stims[i]['key_answer'] = practice_stims[i].data.correct_response
+		for (var i = 0; i < practice_stims.length; i++) {
+			practice_stims[i].key_answer = practice_stims[i].data.correct_response
 		}
 
 		//build up test trials
@@ -274,19 +274,19 @@ var permutation_setup_block = {
 		var stim_index_subset = stim_index[scan_order]
 		for (var i=0; i<exp_len; i++) {
 			var stim = {}
-			if (stim_index_subset[i] == 0) {
+			if (stim_index_subset[i] === 0) {
 				stim = jQuery.extend({},go_stims.shift())
-				stim['SS_trial_type'] = 'go'
+				stim.SS_trial_type = 'go'
 			} else {
 				stim = jQuery.extend({},stop_stims.shift())
-				stim['SS_trial_type'] = 'stop'
+				stim.SS_trial_type= 'stop'
 			} 
 			trials.push(stim)
 			// refill if necessary
-			if (go_stims.length == 0) {
+			if (go_stims.length === 0) {
 				go_stims = jsPsych.randomization.repeat(stims, exp_len*0.6 / 4)
 			} 
-			if (stop_stims.length == 0) {
+			if (stop_stims.length === 0) {
 				stop_stims = jsPsych.randomization.repeat(stims, exp_len*0.4 / 4)
 			} 
 		}
@@ -358,8 +358,8 @@ var start_test_block = {
 	images[0] + '></img>' + correct_responses[0][0] + '</div></li>' +
 	'</li><li><div class = prompt_container><img class = prompt_stim src = ' +
 	images[1] + '></img>'  + correct_responses[1][0] + '</div></li>' +
-	' </li><li><div class = prompt_container><img class = prompt_stim src = ' 
-	+ images[2] + '></img>' + correct_responses[2][0] + '</div></li>' +
+	' </li><li><div class = prompt_container><img class = prompt_stim src = ' + 
+	images[2] + '></img>' + correct_responses[2][0] + '</div></li>' +
 	' </li><li><div class = prompt_container><img class = prompt_stim src = ' +
 	images[3] + '></img>' + correct_responses[3][0] + '</div></li></ul>'
 
@@ -400,13 +400,13 @@ var practice_loop = {
     for (var i = 0; i < data.length; i++) {
       if (data[i].trial_id == 'stim') {
         total_trials+=1
-        if (data[i].correct == true) {
+        if (data[i].correct === true) {
           correct_trials+=1
         }
       }
     }
     console.log('Practice Block Accuracy: ', correct_trials/total_trials)
-    if (correct_trials/total_trials > .75 || practice_repeats == 3) {
+    if (correct_trials/total_trials > 0.75 || practice_repeats == 3) {
     	current_trial = 0
       return false
     } else {
@@ -480,7 +480,7 @@ for (i = 0; i < exp_len; i++) {
 		}
 	}
 	stop_signal__fmri_experiment.push(stop_signal_trial)
-	if ((i%42 == 0) && ( i > 0)) {
+	if ((i%42 === 0) && ( i > 0)) {
 		stop_signal__fmri_experiment.push(rest_block)
 		stop_signal__fmri_experiment.push(start_test_block)
 	}

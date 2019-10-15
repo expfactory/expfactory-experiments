@@ -182,10 +182,7 @@ discount_fixed__fmri_experiment.push(start_test_block);
 for (i = 0; i < ITIs[1].length; i++) {
   var test_block = {
   type: 'poldrack-single-stim',
-  data: {
-    trial_id: "stim",
-    exp_stage: "test"
-  },
+ 
   stimulus: function() { //use scan_order and stimPop (an iterator) to get correct stimulus from stim_index array
     var scan_order = jsPsych.data.getDataByTrialIndex(0).scanner_order;
     var index = stim_index[scan_order][stimPop()];
@@ -203,7 +200,9 @@ for (i = 0; i < ITIs[1].length; i++) {
     return {
       small_amount: options.small_amt[index],
       large_amount: options.large_amt[index],
-      later_delay: options.later_del[index]
+      later_delay: options.later_del[index],
+      trial_id: "stim",
+      exp_stage: "test"
     };
   },
   is_html: true,
@@ -226,7 +225,7 @@ for (i = 0; i < ITIs[1].length; i++) {
 };
 
 discount_fixed__fmri_experiment.push(test_block)
-    if ((i%60 == 0) && (i > 0)) {
+    if ((i%60 === 0) && (i > 0)) {
       discount_fixed__fmri_experiment.push(rest_block) //insert rest every 60 trials
   }
 }
