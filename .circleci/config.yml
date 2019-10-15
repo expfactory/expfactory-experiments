@@ -199,7 +199,12 @@ jobs:
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('eating_followup_survey__stanford','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__stanford_baseline','web','.');"
               python -c "from expfactory.tests import circle_ci_test; circle_ci_test('qewp5__stanford_followup','web','.');"
-              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('smoking_followup_survey__stanford','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('rest__fmri','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('stop_signal__fmri','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('motor_selective_stop__fmri','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('discount_fixed__fmri','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food__fmri','web','.');"
+              python -c "from expfactory.tests import circle_ci_test; circle_ci_test('cue_control_food__fmri','web','.');"
               
 workflows:
   version: 2
