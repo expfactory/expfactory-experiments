@@ -1,0 +1,62 @@
+.background {
+  width:100%;
+  margin: auto; 
+  min-height: 100%;
+  position:absolute;
+  top:0%;
+  left:0%;
+  margin-right:0%;
+  background-color: black;
+  text-align: center;
+  }
+
+.center-text {
+  color:white
+  }
+
+.dd-stim {
+  text-align: center;
+  font-size: 80px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: black;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+}
+
+.display_stage_background {
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  z-index: -1;
+}
+
+.display_stage {
+  position: fixed;
+  left: 5vw;
+  top: 2vh;
+  height: 94vh;
+  width: 90vw;
+  background-color: black;
+  box-shadow: 1px 1px 1px black; /* fixes white line */ 
+}
+
+.amtbox {
+  position: absolute;
+  top: 35%;
+  width:100%;
+  z-index: 2
+}
+
+.delbox {
+ position: absolute;
+ top: 60%;
+ width:100%;
+ z-index: 3
+}	
+
+.center-block-text {
+  color:white; 
+}
