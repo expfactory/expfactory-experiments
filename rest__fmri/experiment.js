@@ -177,23 +177,23 @@ var practice_block = {
 
 
 /* create experiment definition array */
-var uh2_video_experiment = [];
+var rest__fmri_experiment = [];
 
 
 
-uh2_video_experiment.push(welcome_block);
+rest__fmri_experiment.push(welcome_block);
 
-uh2_video_experiment.push(experimentor_wait_block);
+rest__fmri_experiment.push(experimentor_wait_block);
 
-uh2_video_experiment.push(scanner_wait_block_first);
+rest__fmri_experiment.push(scanner_wait_block_first);
 
-uh2_video_experiment.push(scanner_wait_block_second);
+rest__fmri_experiment.push(scanner_wait_block_second);
 
-uh2_video_experiment.push(scanner_wait_block_third);
+rest__fmri_experiment.push(scanner_wait_block_third);
 
-uh2_video_experiment.push(practice_block);
+rest__fmri_experiment.push(practice_block);
 
-uh2_video_experiment.push(end_block);
+rest__fmri_experiment.push(end_block);
 
 
 
