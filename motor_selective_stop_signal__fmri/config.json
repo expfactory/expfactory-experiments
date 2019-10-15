@@ -23,8 +23,7 @@
                ],
         "exp_id": "motor_selective_stop_signal__fmri",
         "cognitive_atlas_task_id": "trm_4cacf3fbc503b",
-        "contributors": ["McKenzie Hagen", 
-                        "Henry Jones",
+        "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",

@@ -4,7 +4,6 @@
 
 /* Global task variables */
 var current_trial = 0
-// @McKenzie - the vars below are only used once?
 var rtMedians = []
 var stopAccMeans =[]
 var RT_thresh = 1000

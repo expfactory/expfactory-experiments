@@ -21,16 +21,24 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
+<<<<<<< HEAD
         "exp_id": "stop_signal__fmri",
+=======
+        "exp_id": "stop_signal",
+>>>>>>> 284d29fa027b5f980704751017847894779d4a7f
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Ian Eisenberg",
                          "Zeynep Enkavi",
                          "Patrick Bissett",
                          "Vanessa Sochat",
+<<<<<<< HEAD
                          "Russell Poldrack", 
                          "McKenzie Hagen", 
                          "Henry Jones"
+=======
+                         "Russell Poldrack"
+>>>>>>> 284d29fa027b5f980704751017847894779d4a7f
                         ], 
         "time":30,
         "reference": "http://psycnet.apa.org/journals/xlm/37/2/392/",
@@ -39,7 +47,11 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
+<<<<<<< HEAD
                                         "on_trial_finish": "addID('stop_signal__fmri')"}
+=======
+                                        "on_trial_finish": "addID('stop_signal')"}
+>>>>>>> 284d29fa027b5f980704751017847894779d4a7f
                        }
     
    }
