@@ -297,7 +297,6 @@ var permutation_setup_block = {
 	], on_finish: function(data) { //BUILDS PRACTICE AND TEST TRIALS
 		var permutation_index = parseInt(data.responses.slice(7, 10));
 		var permutations = permute([0,1,2,3])
-		var permutation_index = 0;
 		var permutation = permutations[permutation_index]
 		images = [images[permutation[0]], images[permutation[1]], 
 		images[permutation[2]], images[permutation[3]]]
