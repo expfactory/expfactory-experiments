@@ -19,7 +19,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "uh2_video",
+        "exp_id": "rest__fmri",
         "cognitive_atlas_task_id": "tsk_4a57abb949dc8",
         "contributors": [
         				 "Jamie Li",
@@ -42,7 +42,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('uh2_video')",
+                                        "on_trial_finish": "addID('rest__fmri')",
                                         "on_trial_start": ""}
                        }
    }
