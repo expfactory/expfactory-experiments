@@ -1,6 +1,6 @@
 [
     {
-        "name": "Stop-Signal",
+        "name": "Stop-Signal-fmri",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",

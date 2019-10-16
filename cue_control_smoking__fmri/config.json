@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cue Control Smoking",
+        "name": "Cue-Control-Smoking-fmri",
         "template":"jspsych",
         "run": [
 

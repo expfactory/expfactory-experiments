@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cue Control Food",
+        "name": "Cue-Control-Food-fmri",
         "template":"jspsych",
         "run": [
 
