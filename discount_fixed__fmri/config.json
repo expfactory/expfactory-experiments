@@ -1,6 +1,6 @@
 [
     {
-        "name": "Discount Fixed",
+        "name": "Discount-Fixed-fmri",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",

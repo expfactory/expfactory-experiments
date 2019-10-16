@@ -1,6 +1,6 @@
 [
     {
-        "name": "Motor-Selective-Stop-Signal",
+        "name": "Motor-Selective-Stop-Signal-fmri",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
