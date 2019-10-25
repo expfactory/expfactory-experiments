@@ -480,7 +480,7 @@ for (i = 0; i < exp_len; i++) {
 		}
 	}
 	stop_signal__fmri_experiment.push(stop_signal_trial)
-	if ((i%42 === 0) && ( i > 0)) {
+	if (((i+1)%42 === 0) && ( i > 0)) {
 		stop_signal__fmri_experiment.push(rest_block)
 		stop_signal__fmri_experiment.push(start_test_block)
 	}
