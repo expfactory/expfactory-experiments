@@ -579,7 +579,7 @@ for (i = 0; i < test_len; i++) {
 		}
 	}
 	motor_selective_stop_signal__fmri_experiment.push(stop_signal_block)
-	if ((i%test_block_len === 0) && (i>0)) {
+	if (((i+1)%test_block_len === 0) && (i>0)) {
 		motor_selective_stop_signal__fmri_experiment.push(rest_block)
 	}
 }

@@ -467,8 +467,8 @@ var instructions_block = {
 	},
 	timing_response: -1,
 	text: '<div class = bigbox><div class = centerbox>'+
-			'<p class = block-text style="font-size:36px"><font color = "white">If the cue is, NOW, please think about the immediate consequences of consuming/using the item.</font></p>'+
-			'<p class = block-text style="font-size:36px"><font color = "white">If the cue is, LATER, please think about the long-term consequences of repeatedly consuming/using the item.</font></p>'+
+			'<p class = block-text style="font-size:36px"><font color = "white">If the cue is NOW, please think about the immediate consequences of consuming/using the item.</font></p>'+
+			'<p class = block-text style="font-size:36px"><font color = "white">If the cue is LATER, please think about the long-term consequences of repeatedly consuming/using the item.</font></p>'+
 			'<p class = block-text style="font-size:36px"><font color = "white">After, please indicate how much you currently want to consume/use the item.</font></p>'+
 			'<p class = block-text style="font-size:36px"><font color = "white">1 = very low , 5 = very high</font></p>'+
 			'<p class = block-text style="font-size:36px"><font color = "white">1 = thumb , 5 = pinky</font></p>'+		
