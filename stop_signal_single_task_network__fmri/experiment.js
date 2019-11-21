@@ -99,10 +99,6 @@ var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
-var getInstructFeedback = function() {
-	return '<div class = centerbox><p class = center-block-text>' + feedback_instruct_text +
-		'</p></div>'
-}
 
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
@@ -388,7 +384,7 @@ var instructions_block = {
 				'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
 				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 				'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-				'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for test</i>. </p>'+ 
+				'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 				'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 			'</div>',
 	is_html: true,
@@ -457,7 +453,7 @@ var feedback_block = {
 	timing_post_trial: 0,
 	is_html: true,
 	timing_response: 10000, //10 seconds for feedback
-	response_ends_trial: true, 
+	response_ends_trial: false, 
 
 };
 
@@ -486,8 +482,7 @@ var test_intro = {
 	}
 };
 
-var feedback_text = 
-	'The test will begin shortly.'// Press <i>any button</i> to begin.'
+var feedback_text = 'The test will begin shortly.'// Press <i>any button</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -831,12 +826,12 @@ var stop_signal_single_task_network__fmri_experiment = []
 stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
 test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
-//stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
-//stop_signal_single_task_network__fmri_experiment.push(feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
+stop_signal_single_task_network__fmri_experiment.push(feedback_block);
 
 setup_fmri_intro(stop_signal_single_task_network__fmri_experiment)
 stop_signal_single_task_network__fmri_experiment.push(testNode);
-//stop_signal_single_task_network__fmri_experiment.push(feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(feedback_block);
 
 stop_signal_single_task_network__fmri_experiment.push(end_block);
 
