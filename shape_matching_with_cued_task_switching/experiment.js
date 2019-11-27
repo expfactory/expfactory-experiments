@@ -297,7 +297,7 @@ var appendData = function() {
 		task_condition: task_switch.task_switch,
 		cue_condition: task_switch.cue_switch,
 		shape_matching_condition: shape_matching_condition,
-		trial_num: trial_num,
+		current_trial: trial_num,
 		probe: probe,
 		target: target,
 		distractor: distractor,

@@ -409,6 +409,7 @@ for (i = 0; i < practice_len; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
+			current_trial += 1
 			current_block = practiceCount
 		
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
@@ -533,13 +534,13 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 			if (data.key_press == data.correct_response) {
 				correct_trial = 1
 			}
-			
+			current_trial += 1
 			current_block = testCount
 			
 			jsPsych.data.addDataToLastTrial({correct_trial: correct_trial,
 											 trial_id: 'test_trial',
 											 current_block: current_block,
-											 current_trial: i
+											 current_trial: current_trial
 											 })
 		}
 	};
