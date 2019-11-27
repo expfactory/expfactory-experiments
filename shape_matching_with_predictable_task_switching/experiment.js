@@ -262,17 +262,18 @@ var getFixation = function(){
 var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
+	current_trial += 1
 	
 	jsPsych.data.addDataToLastTrial({
 		predictable_condition: predictable_condition,
 		predictable_dimension: predictable_dimension,
 		shape_matching_condition: shape_matching_condition,
+		current_trial: current_trial,
 		probe: probe,
 		target: target,
 		distractor: distractor,
 		correct_response: correct_response,
-		whichQuadrant: whichQuadrant
-		
+		whichQuadrant: whichQuadrant,
 	})
 	
 	if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == correct_response){
@@ -624,6 +625,7 @@ var practiceNode = {
 	loop_function: function(data){
 		practiceCount += 1
 		stims = createTrialTypes(practice_len)
+		current_trial = 0
 	
 		var sum_rt = 0
 		var sum_responses = 0
@@ -731,6 +733,7 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 	testCount += 1
+	current_trial = 0
 	stims = createTrialTypes(numTrialsPerBlock)
 	console.log('hereherhe')
 	

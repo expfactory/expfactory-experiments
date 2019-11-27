@@ -288,9 +288,9 @@ var response_keys = {key: [77,90], key_name: ["M","Z"]}
 
 var choices = response_keys.key
 var practice_length = 16
-var test_length = 240
+var exp_len = 240
 var numTrialsPerBlock = 40
-var numTestBlocks = test_length / numTrialsPerBlock
+var numTestBlocks = exp_len / numTrialsPerBlock
 
 var flanker_styles = ['solid','outlined']
 
