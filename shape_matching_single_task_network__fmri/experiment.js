@@ -137,10 +137,12 @@ var getStim = function() {
 	currData.target_id = target_i
 	currData.distractor_id = distractor_i
 	var target = '<div class = leftbox>'+center_prefix+path+target_i+'_target.png'+postfix+'</div>'
-	var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_probe.png'+postfix+'</div>' //flip w/ _distractor to make gray
+	var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_probe.png'+postfix+'</div>' //
+	// var probe = '<div class = rightbox>'+center_prefix+path+probe_i+'_distractor.png'+postfix+'</div>' //
 	var distractor = ''
 	if (distractor_i != 'none') {
-		distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_distractor.png'+postfix+'</div>' //flip w/ _probe to make white
+		distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_distractor.png'+postfix+'</div>' // distractor
+		// distractor = '<div class = distractorbox>'+center_prefix+path+distractor_i+'_probe.png'+postfix+'</div>' // distractor
 	}
 	current_trial += 1
 	var stim = target  + probe + distractor
@@ -203,7 +205,7 @@ var missed_thresh = 0.10
 var practice_thresh = 3 // 3 blocks of 14 trials
 
 var prompt_task_list = '<ul style="text-align:left;"><font color="white">'+
-						'<li>Respond if green and white shapes are the same or different</li>'+
+						'<li>Respond if black and gray shapes are the same or different</li>'+
 					   	'<li>Same: middle finger</li>'+
 					   	'<li>Different: index finger</li>'+
 					   '</font></ul>'
@@ -227,15 +229,13 @@ jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 
 /* define static blocks */
-var response_keys =
-	'<ul list-text><li><span class = "large" style = "color:red">WORD</span>: "R key"</li><li><span class = "large" style = "color:blue">WORD</span>: "B key"</li><li><span class = "large" style = "color:green">WORD</span>: "G key"</li></ul>'
 
 
 
 //practice feedback block vars
 var practice_feedback_text = '<div class = centerbox>'+
-		'<p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
-		'<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape — your task is only to respond based on whether the white and green shapes are the same.</p>'+
+		'<p class = block-text>In this experiment you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
+		'<p class = block-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
 		'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 		'</div>'
 var practice_trial_id = "instructions"
@@ -283,8 +283,8 @@ var practice_feedback_block = {
 
 //refresh feedback block vars
 var refresh_feedback_text = '<div class = centerbox>'+
-		'<p class = block-text>In this experiment you will see a white shape on the right of the screen and a green shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
-		'<p class = block-text>On some trials a red shape will also be presented on the left. You should ignore the red shape — your task is only to respond based on whether the white and green shapes are the same.</p>'+
+		'<p class = block-text>In this experiment you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
+		'<p class = block-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
 		'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 		'</div>'
 var refresh_trial_id = "instructions"
@@ -344,23 +344,6 @@ var end_block = {
     }
 };
 
-var start_test_block = {
-	type: 'poldrack-text',
-	data: {
-		trial_id: "instruction"
-	},
-	timing_response: 180000,
-	text: '<div class = centerbox><p class = block-text>We will now start the test. Respond exactly like you did during practice, press Z if the green and white shapes are different and press M if they are the same.  Ignore the red shape. </p>'+
-								 '<p class = block-text>Press <i>enter</i> to begin the test.</p></div>',
-	cont_key: [13],
-	timing_post_trial: 1000,
-	on_finish: function() {
-		current_trial = 0
-		exp_stage = 'test'
-		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)
-		feedback_text = "We will now start the test portion."
-	}
-};
 
 var rest_block = {
 	type: 'poldrack-text',
@@ -389,7 +372,6 @@ var fixation_block = {
 		jsPsych.data.addDataToLastTrial({'exp_stage': exp_stage})
 	},
 }
-//	'<div class = centerbox><p class = block-text>Press M key if the white and green shapes are the same. Otherwise press the Z key.</p></div>.',
 
 var practice_fixation_block = {
 	type: 'poldrack-single-stim',
