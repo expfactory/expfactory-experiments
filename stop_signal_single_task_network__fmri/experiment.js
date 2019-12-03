@@ -95,6 +95,10 @@ function assessPerformance() {
 									 final_accuracy: accuracy})
 }
 
+var getPracticeFeedback = function() {
+	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
+}
+
 var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
@@ -150,6 +154,31 @@ var createTrialTypes = function(numTrialsPerBlock){
 	return stims
 }
 
+//Creates a sufficient refresh block
+var createRefreshTrials = function(numRefreshIterations){
+
+	
+	var stims = []
+	for (var x = 0; x < stop_signal_conditions.length; x++){
+		for (var j = 0; j < 2; j++){ //only grab 1 circle and 1 square per condition, not 2.
+			stim = {
+				stim: shapes[j+1],
+				correct_response: possible_responses[j+1][1],
+				stop_signal_condition: stop_signal_conditions[x]
+			}
+			stims.push(stim)
+		}	
+	}
+	
+	stims = jsPsych.randomization.repeat(stims,numRefreshIterations)
+		while (stims[0].stop_signal_condition == 'stop') { //if first trials is a stop trial, reorder trials.
+			stims = jsPsych.randomization.repeat(stims,numRefreshIterations)
+		}
+	return stims
+}
+
+
+
 
 var getStopStim = function(){
 	return preFileType  + 'stopSignal' + fileTypePNG
@@ -187,6 +216,32 @@ var getStim = function(){
 	stimData = stim.data
 	return stim.image
 }
+
+var getRefreshStim = function(){
+
+	stim = refreshStims.pop()
+	shape = stim.stim
+	stop_signal_condition = stim.stop_signal_condition
+	correct_response = stim.correct_response
+	
+	if(stop_signal_condition == "stop"){
+		correct_response = -1
+	} 
+	
+	stim = {
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
+		data: { 
+			stim: shape,
+			stop_signal_condition: stop_signal_condition,
+			correct_response: correct_response
+			}
+	}
+	stimData = stim.data
+	return stim.image
+}
+
+
+
 
 
 function getSSD(){
@@ -270,6 +325,7 @@ var appendData = function(){
 //fmri variables
 var ITIs_stim = []
 var ITIs_resp = []
+var numRefreshIterations = 1 //run through the whole space of trial types 1 time
 
 
 // generic task variables
@@ -280,8 +336,8 @@ var run_attention_checks = true
 
 
 var practice_len = 24 // 24 must be divisible by 12
-var exp_len = 144 // must be divisible by 12
-var numTrialsPerBlock = 48 // must be divisible by 12
+var exp_len = 216 //192 //=~8:40 //240 = ~10:50 //144 = original ~6:50 // must be divisible by 12 --- if 216, could do 72 numTrialsPerBlock
+var numTrialsPerBlock = 72 //48 // must be divisible by 12 
 var numTestBlocks = exp_len / numTrialsPerBlock
 var practice_thresh = 3 // 3 blocks of 12 trials
 
@@ -342,10 +398,13 @@ var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">' + shapes[2] + ': ' + possible_responses[2][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Do not respond if a star appears!</p>' +
 				  '</div>'
-
+	  
 
 
 var stims = createTrialTypes(numTrialsPerBlock)
+var refreshStims = createRefreshTrials(numRefreshIterations)
+
+
 var exp_phase = "practice2"
 var exp_phase = "test"
 
@@ -360,11 +419,11 @@ var end_block = {
 		exp_id: "stop_signal_single_task_network__fmri",
 		trial_id: "end"
 	},
-	timing_response: 180000,
+	timing_response: 10000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Thanks for completing this task!</p>'+
 	'</div>',
-	cont_key: [13],
+	cont_key: [32],
 	timing_post_trial: 0,
 	on_finish: function(){
   	assessPerformance()
@@ -372,30 +431,108 @@ var end_block = {
 };
 
 
-var instructions_block = {
+// var instructions_block = {
+// 	type: 'poldrack-single-stim',
+// 	stimulus: '<div class = centerbox>'+
+// 				'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+// 				'<p class = block-text>Only one response is correct for each shape.</p>'+
+// 				'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
+// 				'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+// 				//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
+// 				'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
+// 				'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
+// 				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+// 				'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
+// 				'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+// 				'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+// 			'</div>',
+// 	is_html: true,
+// 	choices: [32],
+// 	data: {
+// 		trial_id: "instruction",
+// 	},
+// 	timing_post_trial: 0,
+// 	timing_stim: -1, //until response
+// 	timing_response: -1, //until response
+// 	response_ends_trial: true
+// };
+
+var practice_feedback_text = '<div class = centerbox>'+
+'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = block-text>Only one response is correct for each shape.</p>'+
+'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
+'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
+'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
+'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
+'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
+'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'</div>'
+var practice_trial_id = "instructions"
+var practice_feedback_timing = -1
+var practice_response_ends = true
+
+var getPracticeTrialID = function() {
+	return practice_trial_id
+}
+
+var getPracticeFeedbackTiming = function() {
+	return practice_feedback_timing
+}
+
+var getPracticeResponseEnds = function() {
+	return practice_response_ends
+}
+
+var practice_feedback_block = {
+	type: 'poldrack-single-stim',
+	stimulus: getPracticeFeedback,
+	data: {
+		trial_id: getPracticeTrialID
+	},
+	choices: [32],
+
+	timing_post_trial: 0,
+	is_html: true,
+	timing_response: getPracticeFeedbackTiming, //10 seconds for feedback
+	timing_stim: getPracticeFeedbackTiming,
+	response_ends_trial: getPracticeResponseEnds,
+	on_finish: function() {
+		practice_trial_id = "practice-no-stop-feedback"
+		practice_feedback_timing = 10000
+		practice_response_ends = false
+
+	} 
+
+};
+
+
+var refresh_feedback_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox>'+
-				'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
-				'<p class = block-text>Only one response is correct for each shape.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-				//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-				'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-				'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-				'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-				'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-				'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-			'</div>',
-	is_html: true,
-	choices: [32],
+	'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+	'<p class = block-text>Only one response is correct for each shape.</p>'+
+	'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
+	'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+	//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
+	'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
+	'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
+	'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+	'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
+	'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+	'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+	'</div>',
 	data: {
-		trial_id: "instruction",
+		trial_id: "instructions"
 	},
+	choices: [32],
 	timing_post_trial: 0,
-	timing_stim: -1, //until response
-	timing_response: -1, //until response
-	response_ends_trial: true
+	is_html: true,
+	timing_response: -1, //10 seconds for feedback
+	timing_stim: -1,
+	response_ends_trial: true,
 };
 
 
@@ -442,20 +579,7 @@ var practice_intro = {
 	response_ends_trial: true
 };
 
-var feedback_text = 'We will start practice. During practice, you will receive a prompt to remind you of the rules.  <i>This prompt will be removed for test!' //</i> Press <i>any button</i> to begin.'
-var feedback_block = {
-	type: 'poldrack-single-stim',
-	data: {
-		trial_id: "practice-no-stop-feedback"
-	},
-	choices: [32],
-	stimulus: getFeedback,
-	timing_post_trial: 0,
-	is_html: true,
-	timing_response: 10000, //10 seconds for feedback
-	response_ends_trial: false, 
 
-};
 
 
 var test_intro = {
@@ -483,7 +607,7 @@ var test_intro = {
 };
 
 var feedback_text = 'The test will begin shortly.'// Press <i>any button</i> to begin.'
-var feedback_block = {
+var test_feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
 		trial_id: "practice-no-stop-feedback"
@@ -519,8 +643,8 @@ var SSD_setup_block = {
 
 
 var practiceStopTrials = []
-//practiceStopTrials.push(feedback_block)
-practiceStopTrials.push(instructions_block)
+practiceStopTrials.push(practice_feedback_block)
+//practiceStopTrials.push(instructions_block)
 for (i = 0; i < practice_len; i++) {
 	var practice_block = {
 		type: 'stop-signal',
@@ -540,6 +664,7 @@ for (i = 0; i < practice_len; i++) {
 		timing_post_trial: 0,
 		on_finish: appendData,
 		prompt: prompt_text,
+		fixation_default: true,
 		on_start: function(){
 			stoppingTracker = []
 			stoppingTimeTracker = []
@@ -625,38 +750,38 @@ var practiceStopNode = {
 		
 		
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break." //Press any button to continue."
+		practice_feedback_text = "<br>Please take this time to read your feedback and to take a short break." //Press any button to continue."
 
 		if (practiceStopCount == practice_thresh) {
-			feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
+			practice_feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
 			exp_phase = "test"
 			return false;
 		
 		}
 		
 		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond < maxStopCorrectPractice) && (stop_signal_respond > minStopCorrectPractice)){
-			feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
+			practice_feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
 			exp_phase = "test"
 			return false;
 		
 		} else {
 			if (aveShapeRespondCorrect < accuracy_thresh) {
-				feedback_text +=
+				practice_feedback_text +=
 				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy. Remember:<br>' +
 				prompt_text_list
 			}
 			if (average_rt > rt_thresh) {
-				feedback_text +=
+				practice_feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
 			}
 			if (missed_responses > missed_response_thresh){
 				if(aveShapeRespondCorrect < accuracy_thresh){
-					feedback_text +=
+					practice_feedback_text +=
 					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
 						
 			
 				} else {
-					feedback_text +=
+					practice_feedback_text +=
 					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
 					prompt_text_list
 				}
@@ -664,25 +789,84 @@ var practiceStopNode = {
 			
 			
 			if (stop_signal_respond === maxStopCorrectPractice){
-				feedback_text +=
+				practice_feedback_text +=
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			}
 		
 			if (stop_signal_respond === minStopCorrectPractice){
-				feedback_text +=
+				practice_feedback_text +=
 				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		
 			}
 			
-			feedback_text += '</p><p class = block-text>Redoing this practice.'
+			practice_feedback_text += '</p><p class = block-text>Redoing this practice.'
 			return true	
 			
 		}
 	}
 }
 
-var testTrials = []
-testTrials.push(feedback_block)
+
+
+
+numRefreshTrials = stop_signal_conditions.length*2*numRefreshIterations//stop_signal_conditions.length*totalShapesUsed * numRefreshIterations
+var refreshTrials = []
+refreshTrials.push(refresh_feedback_block)
+for (i = 0; i < numRefreshTrials; i++) {
+
+	var refresh_block = {
+		type: 'stop-signal',
+		stimulus: getRefreshStim,
+		SS_stimulus: getStopStim,
+		SS_trial_type: getSSType,
+		data: {
+			trial_id: "practice_trial"
+		},
+		is_html: true,
+		choices: [possible_responses[0][1], possible_responses[2][1]],
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
+		response_ends_trial: false,
+		SSD: getSSD,
+		timing_SS: 500, //500
+		timing_post_trial: 0,
+		on_finish: appendData,
+		prompt: prompt_text,
+		fixation_default: true,
+		on_start: function(){
+			stoppingTracker = []
+			stoppingTimeTracker = []
+		}
+	}
+	var categorize_block = {
+		type: 'poldrack-single-stim',
+		data: {
+			trial_id: "practice-stop-feedback"
+		},
+		choices: 'none',
+		stimulus: getCategorizeFeedback,
+		timing_post_trial: 0,
+		is_html: true,
+		timing_stim: 500, //500
+		timing_response: 500, //500
+		response_ends_trial: false, 
+
+	};
+
+	refreshTrials.push(practice_fixation_block)
+	refreshTrials.push(refresh_block)
+	refreshTrials.push(categorize_block)
+}
+
+var refreshNode = {
+	timeline: refreshTrials, //[test_feedback_node, testTrials],
+	loop_function: function(data) {
+		return false
+	}
+}
+
+var testTrials0 = []
+// testTrials.push(test_feedback_block)
 for (i = 0; i < numTrialsPerBlock; i++) {
 
 	var test_block = {
@@ -702,6 +886,38 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		timing_SS: 500, //500
 		timing_post_trial: 0,
 		on_finish: appendData,
+		fixation_default: true,
+		on_start: function(){
+			stoppingTracker = []
+			stoppingTimeTracker = []
+		}
+	}
+	testTrials0.push(ITI_fixation_block)
+	testTrials0.push(test_block)
+}
+
+var testTrials = []
+testTrials.push(test_feedback_block)
+for (i = 0; i < numTrialsPerBlock; i++) {
+
+	var test_block = {
+		type: 'stop-signal',
+		stimulus: getStim,
+		SS_stimulus: getStopStim,
+		SS_trial_type: getSSType,
+		data: {
+			trial_id: "test_trial"
+		},
+		is_html: true,
+		choices: [possible_responses[0][1], possible_responses[2][1]],
+		timing_stim: 1000, //1000
+		timing_response: 2000, //2000
+		response_ends_trial: false,
+		SSD: getSSD,
+		timing_SS: 500, //500
+		timing_post_trial: 0,
+		on_finish: appendData,
+		fixation_default: true,
 		on_start: function(){
 			stoppingTracker = []
 			stoppingTimeTracker = []
@@ -710,11 +926,10 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	testTrials.push(ITI_fixation_block)
 	testTrials.push(test_block)
 }
-//testTrials.push(feedback_block)
 
 var testCount = 0
-var testNode = {
-	timeline: testTrials,
+var testNode0 = {
+	timeline: testTrials0, 
 	loop_function: function(data) {
 		current_trial = 0
 		testCount += 1
@@ -767,7 +982,106 @@ var testNode = {
 		var stop_signal_respond = num_stop_responses / stop_length
 		
 
-		feedback_text = "<br>Please take this time to read your feedback and to take a short break. Press any button to continue."
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break."
+		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
+		
+			
+		if (aveShapeRespondCorrect < accuracy_thresh) {
+			feedback_text +=
+				'</p><p class = block-text>Your accuracy is too low. Remember:<br>' +
+				prompt_text_list
+		}
+		if (average_rt > rt_thresh) {
+			feedback_text +=
+			'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+		}
+		if (missed_responses > missed_response_thresh){
+			if(aveShapeRespondCorrect < accuracy_thresh){
+				feedback_text +=
+				'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
+					
+				
+			} else {
+				feedback_text +=
+				'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
+				prompt_text_list
+			}
+		}
+			
+		if (stop_signal_respond > maxStopCorrect){
+			feedback_text +=
+			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
+		}
+		
+		if (stop_signal_respond < minStopCorrect){
+			feedback_text +=
+			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
+		
+		}
+			
+			
+			
+		return false;
+		
+	}
+}
+
+
+var testNode = {
+	timeline: testTrials, //[test_feedback_node, testTrials],
+	loop_function: function(data) {
+		current_trial = 0
+		testCount += 1
+		stims = createTrialTypes(numTrialsPerBlock)
+		
+		var total_trials = 0
+		
+		var sum_stop_rt = 0;
+		var sum_go_rt = 0;
+		
+		var sumGo_correct = 0;
+		var sumStop_correct = 0;
+		
+		var num_go_responses = 0;
+		var num_stop_responses = 0;
+		
+		var go_length = 0;
+		var stop_length = 0
+		
+		for (i = 0; i < data.length; i++) {
+			if (data[i].trial_id == "test_trial"){
+				total_trials += 1
+			}
+			
+			if (data[i].stop_signal_condition == "go"){
+				go_length += 1
+				if (data[i].rt != -1) {
+					num_go_responses += 1
+					sum_go_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response) {
+						sumGo_correct += 1
+					}
+				}				
+			} else if (data[i].stop_signal_condition == "stop") {
+				stop_length += 1
+				if (data[i].rt != -1){
+					num_stop_responses += 1
+					sum_stop_rt += data[i].rt
+				} else if (data[i].rt == -1){
+					sumStop_correct += 1
+				}				
+			}
+		}
+		
+		var average_rt = sum_go_rt / num_go_responses;
+		var missed_responses = (go_length - num_go_responses) / go_length
+		
+		var aveShapeRespondCorrect = sumGo_correct / go_length 
+		
+		var stop_signal_respond = num_stop_responses / stop_length
+		
+
+		feedback_text = "<br>Please take this time to read your feedback and to take a short break."
 		feedback_text += "</p><p class = block-text>You have completed: "+testCount+" out of "+numTestBlocks+" blocks of trials."
 		
 		if (testCount == numTestBlocks) {
@@ -826,12 +1140,18 @@ var stop_signal_single_task_network__fmri_experiment = []
 stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
 test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
+//out of scanner practice
 stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
-stop_signal_single_task_network__fmri_experiment.push(feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
 
+//in scanner practice
+stop_signal_single_task_network__fmri_experiment.push(refreshNode);
+
+//in scanner test
 setup_fmri_intro(stop_signal_single_task_network__fmri_experiment)
+stop_signal_single_task_network__fmri_experiment.push(testNode0);
 stop_signal_single_task_network__fmri_experiment.push(testNode);
-stop_signal_single_task_network__fmri_experiment.push(feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(test_feedback_block);
 
 stop_signal_single_task_network__fmri_experiment.push(end_block);
 
