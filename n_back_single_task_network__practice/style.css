@@ -27,6 +27,8 @@
     -webkit-transform: translateY(-50%);
 }
 
+
+
 .fb_box {
   width:35vw;
   height: 20vh;
@@ -60,12 +62,13 @@
 }
 
 .cue-text {
- text-align: center;
- font-size: 50px;
- position: relative;
- top: 50%; 
- transform: translateY(-50%);
- -webkit-transform: translateY(-50%);
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
 }
 
 .bigbox {
@@ -124,13 +127,20 @@ text-align: center;
   color: white;
 }
 
-ul {
+/* ul {
   list-style-type: none;
   text-align: center;
   display: inline-block;
   font-size: 30px;
   line-height: 120%;
   margin-bottom: 1em;
+  color: white
+} */
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  display: inline-block;
   color: white
 }
 /* ************************* */
@@ -160,96 +170,27 @@ img.center {
 }
 
 /*******************************************************/
-/***********    Shape Matching CSS Styles     **********/
+/***********      Stop Signal CSS Styles      **********/
 /*******************************************************/
-.leftbox {
-  width: 17vw;
-  height: 17vw;
-  position:absolute;
-  top:50%;
-  left:47.5%;
-  margin-right:-50%;
-  transform: translate(-100%,-50%);
-  z-index: 2;
-  background-color: none;
-}
 
-.distractorbox {
-  width: 17vw;
-  height: 17vw;
+.starbox {
+  width: 30vw;
+  height: 30vh;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(-105%,-57%);
-  background-color: none;
-}
-
-.rightbox {
-  width: 17vw;
-  height: 17vw;
-  position:absolute;
-  top:50%;
-  left:52.5%;
-  margin-right:-50%;
-  transform: translate(0%,-50%);
-  background-color: none;
-}
-
-/*******************************************************/
-/***********    Shape Matching CSS Styles     **********/
-/*******************************************************/
-
-.mask {
-  width: 80%;
-}
-
-img {
-  height: 100%;
-  width: 100%;
-}
-
-.fb_box {
-  width:35vw;
-  height: 20vh;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-175%);
+  transform: translate(-50%,-50%);
 }
 
 
-.leftbox {
-  width: 18vw;
-  height: 18vw;
-  position:absolute;
-  top:50%;
-  left:47.5%;
-  margin-right:-50%;
-  transform: translate(-100%,-50%);
-  z-index: 2;
-  background-color: none;
-}
-
-.distractorbox {
-  width: 18vw;
-  height: 18vw;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin-right:-50%;
-  transform: translate(-105%,-57%);
-  background-color: none;
-}
-
-.rightbox {
-  width: 18vw;
-  height: 18vw;
-  position:absolute;
-  top:50%;
-  left:52.5%;
-  margin-right:-50%;
-  transform: translate(0%,-50%);
-  background-color: none;
+.gng_number {
+width: 5vw;
+height: 5vw;
+position:absolute;
+top:50%;
+left:50%;
+margin-right:0%;
+transform: translate(-50%,-50%);
+background-color: none;
 }

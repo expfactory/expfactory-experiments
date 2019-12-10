@@ -319,6 +319,7 @@ var appendData = function(){
 		}
 		
 	}
+	console.log('post-trial SSD: ' + getSSD())
 	
 }
 
@@ -434,6 +435,23 @@ var end_block = {
   }
 };
 
+var practice_end_block = {
+	type: 'poldrack-text',
+	data: {
+		exp_id: "stop_signal_single_task_network__fmri",
+		trial_id: "end"
+	},
+	timing_response: 10000,
+	text: '<div class = centerbox>'+
+	'<p class = center-block-text>Thanks for completing this practice!</p>'+
+	'</div>',
+	cont_key: [32],
+	timing_post_trial: 0,
+	on_finish: function(){
+  	assessPerformance()
+  }
+};
+
 
 // var instructions_block = {
 // 	type: 'poldrack-single-stim',
@@ -462,17 +480,17 @@ var end_block = {
 // };
 
 var practice_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task you will see shapes appear on the screen one at a time. </p>' +
-'<p class = instruct-text>Only one response is correct for each shape.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = block-text>Only one response is correct for each shape.</p>'+
+'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
+'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
 //'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-'<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-'<p class = instruct-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-'<p class = instruct-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
+'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
+'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
+'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -739,8 +757,7 @@ for (i = 0; i < practice_len; i++) {
 		is_html: true,
 		timing_stim: 500, //500
 		timing_response: 500, //500
-		response_ends_trial: false, 
-
+		response_ends_trial: false
 	};
 
 	practiceStopTrials.push(practice_fixation_block)
@@ -1293,22 +1310,22 @@ var stop_signal_single_task_network__fmri_experiment = []
 
 stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
-test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
+// test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
 //out of scanner practice
-// stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
-// stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
+stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
 
 //in scanner practice
-stop_signal_single_task_network__fmri_experiment.push(refreshNode);
-stop_signal_single_task_network__fmri_experiment.push(refresh_feedback_block);
+// stop_signal_single_task_network__fmri_experiment.push(refreshNode);
+// stop_signal_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
 //in scanner test
-setup_fmri_intro(stop_signal_single_task_network__fmri_experiment)
-stop_signal_single_task_network__fmri_experiment.push(testNode0);
-stop_signal_single_task_network__fmri_experiment.push(testNode);
-stop_signal_single_task_network__fmri_experiment.push(test_feedback_block);
+// setup_fmri_intro(stop_signal_single_task_network__fmri_experiment)
+// stop_signal_single_task_network__fmri_experiment.push(testNode0);
+// stop_signal_single_task_network__fmri_experiment.push(testNode);
+// stop_signal_single_task_network__fmri_experiment.push(test_feedback_block);
 
-stop_signal_single_task_network__fmri_experiment.push(end_block);
+stop_signal_single_task_network__fmri_experiment.push(practice_end_block);
 
 
 

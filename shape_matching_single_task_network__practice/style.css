@@ -124,7 +124,7 @@ text-align: center;
   color: white;
 }
 
-ul {
+/* ul {
   list-style-type: none;
   text-align: center;
   display: inline-block;
@@ -132,7 +132,15 @@ ul {
   line-height: 120%;
   margin-bottom: 1em;
   color: white
+} */
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  display: inline-block;
+  color: white
 }
+
 /* ************************* */
 
 .prompt_box {

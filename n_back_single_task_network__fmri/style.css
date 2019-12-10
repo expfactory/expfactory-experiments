@@ -83,7 +83,7 @@ background-color: none;
 text-align: center;
 }
 
-.instructBox {
+/* .instructBox {
  width: 80vw;
  height: 10vw;
  position:absolute;
@@ -93,7 +93,50 @@ text-align: center;
  transform: translate(-50%,-50%);
  background-color: none;
  font-size: 24px;
+} */
+
+/* taken from stop_signal__fmri */
+.instructbox {
+  width: 50vw;
+  height: 60vh;
+  position:absolute;
+  top:45%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
 }
+
+/* .instruct-text {
+  width:100%;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 30px;
+  line-height: 120%;
+  color: white;
+} */
+
+.instruct-text {
+  width:100%;
+  text-align: left;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 35px;
+  line-height: 120%;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 120%;
+  margin-bottom: 1em;
+  color: white
+}
+/* ************************* */
 
 .prompt_box {
  width: 75%;

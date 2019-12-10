@@ -355,6 +355,21 @@ var end_block = {
     }
 };
 
+var practice_end_block = {
+	type: 'poldrack-text',
+	data: {
+		trial_id: "end"
+	},
+	timing_response: 10000,
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this practice!</p></div>',
+	cont_key: [32],
+	timing_post_trial: 0,
+	on_finish: function(){
+		assessPerformance()
+    }
+};
+
+
 
 
 
@@ -386,14 +401,14 @@ var end_block = {
 // };
 
 var practice_feedback_text = '<div class = instructbox>'+
-'<p class = instruct-text>In this task, you will see a letter on every trial.</p>'+
-'<p class = instruct-text>You will be asked to match the current letter to the letter that appeared either 1, 2, or 3 trials ago depending on the delay given to you for that block.</p>'+
-'<p class = instruct-text>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</p>'+
-'<p class = instruct-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
-'<p class = instruct-text>Capitalization does not matter, so "T" matches with "t".</p> '+
-'<p class = instruct-text><i>Your delay for this upcoming practice round is 1</i>.</p> '+
-'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
+'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1, 2, or 3 trials ago depending on the delay given to you for that block.</p>'+
+'<p class = block-text>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</p>'+
+'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
+'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
+'<p class = block-text><i>Your delay for this upcoming practice round is 1</i>.</p> '+
+'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -607,7 +622,7 @@ for (i = 0; i < practice_len + 3; i++) {
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
-		prompt: prompt_text,
+		prompt: prompt_text_list,
 		fixation_default: true
 	}
 	practiceTrials.push(practice_fixation_block)
@@ -902,17 +917,17 @@ var n_back_single_task_network__fmri_experiment = []
 test_keys(n_back_single_task_network__fmri_experiment, [possible_responses[0][1],possible_responses[1][1]])
 
 //out of scanner practice
-// n_back_single_task_network__fmri_experiment.push(practiceNode);
-// n_back_single_task_network__fmri_experiment.push(practice_feedback_block);
+n_back_single_task_network__fmri_experiment.push(practiceNode);
+n_back_single_task_network__fmri_experiment.push(practice_feedback_block);
 
 //in scanner practice
-n_back_single_task_network__fmri_experiment.push(refreshNode);
-n_back_single_task_network__fmri_experiment.push(refresh_feedback_block);
+// n_back_single_task_network__fmri_experiment.push(refreshNode);
+// n_back_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
 //in scanner test
 //n_back_single_task_network__fmri_experiment.push(start_test_block);
-setup_fmri_intro(n_back_single_task_network__fmri_experiment)
-n_back_single_task_network__fmri_experiment.push(testNode);
+// setup_fmri_intro(n_back_single_task_network__fmri_experiment)
+// n_back_single_task_network__fmri_experiment.push(testNode);
 //n_back_single_task_network__fmri_experiment.push(feedback_block);
 
-n_back_single_task_network__fmri_experiment.push(end_block);
+n_back_single_task_network__fmri_experiment.push(practice_end_block);

@@ -374,10 +374,11 @@ jsPsych.pluginAPI.preloadImages(images);
 /* ************************************ */
 
 
-var practice_feedback_text = '<div class = instructbox><p class = instruct-text>In this experiment you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = instruct-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
-'<p class = instruct-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
+var practice_feedback_text = '<div class = instructbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
+'<p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
+'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
-'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -515,6 +516,19 @@ var end_block = {
     }
 };
 
+var practice_end_block = {
+  type: 'poldrack-text',
+  data: {
+    trial_id: "end",
+  },
+  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this practice!</p></div>',
+  cont_key: [13],
+  timing_response: 10000,
+  on_finish: function(){
+    assessPerformance()
+    }
+};
+
 var start_practice_block = {
   type: 'poldrack-text',
   timing_response: 180000,
@@ -590,7 +604,8 @@ for (var i = 0; i < practice_length + 1; i++) {
     timing_post_trial: 0,
     timing_stim: 500, //500
     timing_response: 500, //500
-    prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    // prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    prompt: prompt_task_list,
     on_finish: function() {
     jsPsych.data.addDataToLastTrial({
       exp_stage: exp_stage
@@ -609,7 +624,8 @@ for (var i = 0; i < practice_length + 1; i++) {
     timing_response: getCTI, //getCTI
     timing_stim: getCTI,  //getCTI
     timing_post_trial: 0,
-    prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    // prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    prompt: prompt_task_list,
     on_finish: function() {
     jsPsych.data.addDataToLastTrial({
       exp_stage: exp_stage
@@ -623,12 +639,18 @@ for (var i = 0; i < practice_length + 1; i++) {
     stimulus: getStim,
     is_html: true,
     key_answer: getResponse,
-    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
-    timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
-    prompt_task_list + '</div>',
+    // correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div><div class = promptbox>' +
+    // prompt_task_list + '</div>',
+    // incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div><div class = promptbox>' +
+    // prompt_task_list + '</div>',
+    // timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
+    // prompt_task_list + '</div>',
+    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' +
+    prompt_task_list,
+    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' +
+    prompt_task_list,
+    timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
+    prompt_task_list,
     choices: choices,
     data: {
     trial_id: 'practice_trial'
@@ -638,7 +660,8 @@ for (var i = 0; i < practice_length + 1; i++) {
     timing_response: 2000, //2000
     timing_stim: 1000, //1000
     timing_post_trial: 0,
-    prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    // prompt: '<div class = promptbox>' + prompt_task_list + '</div>',
+    prompt: prompt_task_list,
     on_finish: appendData,
     fixation_default: true,
     fixation_stim: '<div class = upperbox><div class = fixation>+</div></div><div class = lowerbox><div class = fixation>+</div></div>'
@@ -1128,22 +1151,24 @@ var testNode = {
 /* create experiment definition array */
 var cued_task_switching_single_task_network__fmri_experiment = [];
 
-test_keys(cued_task_switching_single_task_network__fmri_experiment, response_keys.key)
+// test_keys(cued_task_switching_single_task_network__fmri_experiment, response_keys.key)
 
 //out of scanner practice
-// cued_task_switching_single_task_network__fmri_experiment.push(practiceNode);
-// cued_task_switching_single_task_network__fmri_experiment.push(practice_feedback_block);
+cued_task_switching_single_task_network__fmri_experiment.push(practiceNode);
+cued_task_switching_single_task_network__fmri_experiment.push(practice_feedback_block);
+cued_task_switching_single_task_network__fmri_experiment.push(practice_end_block)
+
 
 //in scanner practice
-cued_task_switching_single_task_network__fmri_experiment.push(refreshNode);
-cued_task_switching_single_task_network__fmri_experiment.push(refresh_feedback_block);
+// cued_task_switching_single_task_network__fmri_experiment.push(refreshNode);
+// cued_task_switching_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
-//cued_task_switching_single_task_network__fmri_experiment.push(start_test_block)
+// //cued_task_switching_single_task_network__fmri_experiment.push(start_test_block)
 
-//in scanner test
-setup_fmri_intro(cued_task_switching_single_task_network__fmri_experiment)
-cued_task_switching_single_task_network__fmri_experiment.push(testNode0);
-cued_task_switching_single_task_network__fmri_experiment.push(testNode);
-cued_task_switching_single_task_network__fmri_experiment.push(feedback_block);
+// //in scanner test
+// setup_fmri_intro(cued_task_switching_single_task_network__fmri_experiment)
+// cued_task_switching_single_task_network__fmri_experiment.push(testNode0);
+// cued_task_switching_single_task_network__fmri_experiment.push(testNode);
+// cued_task_switching_single_task_network__fmri_experiment.push(feedback_block);
 
-cued_task_switching_single_task_network__fmri_experiment.push(end_block)
+
