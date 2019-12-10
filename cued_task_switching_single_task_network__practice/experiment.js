@@ -380,7 +380,7 @@ var intro_block = {
 		trial_id: "instructions"
 	},
 	choices: [32],
-	stimulus: '<div class = centerbox><p class = center-block-text> Welcome to the experiment.</p></div>',
+	stimulus: '<div class = centerbox><p class = center-block-text> Welcome to the task.</p></div>',
 	timing_post_trial: 0,
 	is_html: true,
 	timing_response: -1,
@@ -389,10 +389,11 @@ var intro_block = {
 };
 
 
-var practice_feedback_text = '<div class = instructbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
+var practice_feedback_text = '<div class = instructbox><p class = block-text>In this task, you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
 '<p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
 '<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
+'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 '<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
@@ -442,7 +443,7 @@ var practice_feedback_block = {
 // task_list +
 // '<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 // '</div>'
-var refresh_feedback_text = '<div class = instructbox><p class = instruct-text>In this experiment you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = instruct-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
+var refresh_feedback_text = '<div class = instructbox><p class = instruct-text>In this task, you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p><p class = instruct-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
 '<p class = instruct-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
 '<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+

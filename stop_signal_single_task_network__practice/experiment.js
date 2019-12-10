@@ -495,7 +495,7 @@ var practice_end_block = {
 // };
 
 var practice_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = block-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = block-text>Only one response is correct for each shape.</p>'+
 '<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
 '<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
@@ -573,7 +573,7 @@ var practice_feedback_block = {
 // };
 
 var refresh_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = instruct-text>Only one response is correct for each shape.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
@@ -1323,7 +1323,7 @@ var testNode = {
 
 var stop_signal_single_task_network__fmri_experiment = []
 
-stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
+// stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
 
 //out of scanner practice

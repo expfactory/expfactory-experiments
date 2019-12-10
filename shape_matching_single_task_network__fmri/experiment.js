@@ -234,7 +234,7 @@ jsPsych.pluginAPI.preloadImages(images);
 
 //practice feedback block vars
 var practice_feedback_text = '<div class = instructbox>'+
-		'<p class = instruct-text>In this experiment you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
+		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
 		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
 		'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 		'</div>'
@@ -288,8 +288,9 @@ var practice_feedback_block = {
 // 		'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 // 		'</div>'
 var refresh_feedback_text = '<div class = instructbox>'+
-		'<p class = instruct-text>In this experiment you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
+		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
 		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
+		'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 		'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 		'</div>'
 var refresh_trial_id = "instructions"

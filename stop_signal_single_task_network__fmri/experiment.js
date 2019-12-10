@@ -462,7 +462,7 @@ var end_block = {
 // };
 
 var practice_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = instruct-text>Only one response is correct for each shape.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
@@ -540,7 +540,7 @@ var practice_feedback_block = {
 // };
 
 var refresh_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task you will see shapes appear on the screen one at a time. </p>' +
+'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = instruct-text>Only one response is correct for each shape.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
 '<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
