@@ -52,8 +52,8 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	choice_counts[77] = 0
-	choice_counts[90] = 0
+	choice_counts[37] = 0
+	choice_counts[39] = 0
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
@@ -293,7 +293,8 @@ var preFileType = "<img class = center src='/static/experiments/n_back_single_ta
 
 
 var n_back_conditions = jsPsych.randomization.repeat(['mismatch','mismatch','match','mismatch','mismatch'],1)
-var possible_responses = [['index finger', 89],['middle finger', 71]]
+// var possible_responses = [['index finger', 89],['middle finger', 71]]
+var possible_responses = [['index finger', 37],['middle finger', 39]]
 							 
 var letters = 'bBdDgGtTvV'.split("")
 							 
@@ -341,6 +342,21 @@ var stims = createTrialTypes(practice_len, delay)
 /* ************************************ */
 
 
+var intro_block = {
+	type: 'poldrack-single-stim',
+	data: {
+		trial_id: "instructions"
+	},
+	choices: [32],
+	stimulus: '<div class = centerbox><p class = center-block-text> Welcome to the experiment.</p></div>',
+	timing_post_trial: 0,
+	is_html: true,
+	timing_response: -1,
+	response_ends_trial: true, 
+
+};
+
+
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -358,16 +374,16 @@ var end_block = {
 var practice_end_block = {
 	type: 'poldrack-text',
 	data: {
-		trial_id: "end"
+	  trial_id: "end",
 	},
-	timing_response: 10000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this practice!</p></div>',
 	cont_key: [32],
-	timing_post_trial: 0,
+	timing_response: 10000,
+	response_ends_trial: true,
 	on_finish: function(){
-		assessPerformance()
-    }
-};
+	  assessPerformance()
+	  }
+  };
 
 
 
@@ -408,7 +424,7 @@ var practice_feedback_text = '<div class = instructbox>'+
 '<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
 '<p class = block-text><i>Your delay for this upcoming practice round is 1</i>.</p> '+
 '<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -433,12 +449,11 @@ var practice_feedback_block = {
 		trial_id: getPracticeTrialID
 	},
 	choices: [32],
-
 	timing_post_trial: 0,
 	is_html: true,
-	timing_response: getPracticeFeedbackTiming, //10 seconds for feedback
-	timing_stim: getPracticeFeedbackTiming,
-	response_ends_trial: getPracticeResponseEnds,
+	timing_response: -1, //10 seconds for feedback
+	timing_stim: -1,
+	response_ends_trial: true,
 	on_finish: function() {
 		practice_trial_id = "practice-no-stop-feedback"
 		practice_feedback_timing = 10000
@@ -613,8 +628,8 @@ for (i = 0; i < practice_len + 3; i++) {
 		data: {
 			trial_id: "practice_trial"
 			},
-		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text_list,
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',// + prompt_text_list,
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',// + prompt_text_list,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list,
 		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
@@ -704,7 +719,8 @@ var practiceNode = {
 			}
 			
 			practice_feedback_text +=
-				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+				+ '</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
 			
 			// practice_feedback_text +=
 			// 	'</p><p class = block-text>Press Enter to continue.' 
@@ -914,12 +930,13 @@ var testNode = {
 var n_back_single_task_network__fmri_experiment = []
 
 
-test_keys(n_back_single_task_network__fmri_experiment, [possible_responses[0][1],possible_responses[1][1]])
+//test_keys(n_back_single_task_network__fmri_experiment, [possible_responses[0][1],possible_responses[1][1]])
 
 //out of scanner practice
+n_back_single_task_network__fmri_experiment.push(intro_block);
 n_back_single_task_network__fmri_experiment.push(practiceNode);
 n_back_single_task_network__fmri_experiment.push(practice_feedback_block);
-
+n_back_single_task_network__fmri_experiment.push(practice_end_block);
 //in scanner practice
 // n_back_single_task_network__fmri_experiment.push(refreshNode);
 // n_back_single_task_network__fmri_experiment.push(refresh_feedback_block);
@@ -930,4 +947,4 @@ n_back_single_task_network__fmri_experiment.push(practice_feedback_block);
 // n_back_single_task_network__fmri_experiment.push(testNode);
 //n_back_single_task_network__fmri_experiment.push(feedback_block);
 
-n_back_single_task_network__fmri_experiment.push(practice_end_block);
+

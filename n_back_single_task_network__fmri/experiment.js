@@ -52,8 +52,8 @@ function assessPerformance() {
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
-	choice_counts[77] = 0
-	choice_counts[90] = 0
+	choice_counts[71] = 0
+	choice_counts[89] = 0
 	for (var k = 0; k < possible_responses.length; k++) {
 		choice_counts[possible_responses[k][1]] = 0
 	}
@@ -714,8 +714,8 @@ for (i = 0; i < practice_len + 3; i++) {
 		data: {
 			trial_id: "practice_trial"
 			},
-		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text_list,
+		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',// + prompt_text_list,
+		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',// + prompt_text_list,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list,
 		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
@@ -911,7 +911,7 @@ n_back_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
 //in scanner test
 //n_back_single_task_network__fmri_experiment.push(start_test_block);
-setup_fmri_intro(n_back_single_task_network__fmri_experiment)
+cni_bore_setup(n_back_single_task_network__fmri_experiment)
 n_back_single_task_network__fmri_experiment.push(testNode);
 //n_back_single_task_network__fmri_experiment.push(feedback_block);
 

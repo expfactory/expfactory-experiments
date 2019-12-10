@@ -856,7 +856,7 @@ var practiceStopNode = {
 		
 			}
 			
-			practice_feedback_text += '</p><p class = block-text>Redoing this practice.'
+			practice_feedback_text += '</p><p class = block-text>Redoing this practice. When you are ready to continue, please press the spacebar.'
 			return true	
 			
 		}
@@ -1303,7 +1303,7 @@ stop_signal_single_task_network__fmri_experiment.push(refreshNode);
 stop_signal_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
 //in scanner test
-setup_fmri_intro(stop_signal_single_task_network__fmri_experiment)
+cni_bore_setup(stop_signal_single_task_network__fmri_experiment)
 stop_signal_single_task_network__fmri_experiment.push(testNode0);
 stop_signal_single_task_network__fmri_experiment.push(testNode);
 stop_signal_single_task_network__fmri_experiment.push(test_feedback_block);

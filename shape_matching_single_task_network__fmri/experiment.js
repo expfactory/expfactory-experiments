@@ -605,7 +605,7 @@ var practiceNode = {
 
 		if (accuracy > accuracy_thresh){
 			practice_feedback_text +=
-					'</p><p class = block-text>Done with this practice. The test will begin shortly.' 
+					'</p><p class = block-text>Done with this practice.' 
 			trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)		
 			return false
 	
@@ -858,7 +858,7 @@ shape_matching_single_task_network__fmri_experiment.push(refresh_feedback_block)
 // shape_matching_single_task_network__fmri_experiment.push(start_test_block);
 
 //in scanner test
-setup_fmri_intro(shape_matching_single_task_network__fmri_experiment)
+cni_bore_setup(shape_matching_single_task_network__fmri_experiment)
 shape_matching_single_task_network__fmri_experiment.push(testNode0);
 shape_matching_single_task_network__fmri_experiment.push(testNode);
 shape_matching_single_task_network__fmri_experiment.push(feedback_block);

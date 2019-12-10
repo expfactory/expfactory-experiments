@@ -117,12 +117,22 @@ text-align: center;
   color: white;
 } */
 
-.instruct-text {
+/* .instruct-text {
   width:100%;
   text-align: left;
   margin: 0 auto;
   margin-bottom: 1em;
   font-size: 35px;
+  line-height: 120%;
+  color: white;
+} */
+
+.instruct-text {
+  width:100%;
+  text-align: left;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 30px;
   line-height: 120%;
   color: white;
 }

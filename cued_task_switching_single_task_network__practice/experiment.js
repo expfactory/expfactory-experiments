@@ -289,7 +289,8 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 // task specific variables
-var response_keys = {key: [89,71], key_name: ["index finger","middle finger"]}
+// var response_keys = {key: [89,71], key_name: ["index finger","middle finger"]}
+var response_keys = {key: [37,39], key_name: ["index finger","middle finger"]}
 var choices = response_keys.key
 var practice_length = 16 // must be divisible by 4
 var refresh_length = 8 //must be divisible by 4
@@ -373,12 +374,26 @@ jsPsych.pluginAPI.preloadImages(images);
 /* Set up jsPsych blocks */
 /* ************************************ */
 
+var intro_block = {
+	type: 'poldrack-single-stim',
+	data: {
+		trial_id: "instructions"
+	},
+	choices: [32],
+	stimulus: '<div class = centerbox><p class = center-block-text> Welcome to the experiment.</p></div>',
+	timing_post_trial: 0,
+	is_html: true,
+	timing_response: -1,
+	response_ends_trial: true, 
+
+};
+
 
 var practice_feedback_text = '<div class = instructbox><p class = block-text>In this experiment you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
 '<p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
 '<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
-'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -406,9 +421,9 @@ var practice_feedback_block = {
 
 	timing_post_trial: 0,
 	is_html: true,
-	timing_response: getPracticeFeedbackTiming, //10 seconds for feedback
-	timing_stim: getPracticeFeedbackTiming,
-	response_ends_trial: getPracticeResponseEnds,
+	timing_response: -1, //10 seconds for feedback
+	timing_stim: -1,
+	response_ends_trial: true,
 	on_finish: function() {
 		practice_trial_id = "practice-no-stop-feedback"
 		practice_feedback_timing = 10000
@@ -522,8 +537,9 @@ var practice_end_block = {
     trial_id: "end",
   },
   text: '<div class = centerbox><p class = center-block-text>Thanks for completing this practice!</p></div>',
-  cont_key: [13],
+  cont_key: [32],
   timing_response: 10000,
+  response_ends_trial: true,
   on_finish: function(){
     assessPerformance()
     }
@@ -645,12 +661,15 @@ for (var i = 0; i < practice_length + 1; i++) {
     // prompt_task_list + '</div>',
     // timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
     // prompt_task_list + '</div>',
-    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' +
-    prompt_task_list,
-    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' +
-    prompt_task_list,
+    // correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' +
+    // prompt_task_list,
+    // incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' +
+    // prompt_task_list,
     timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
     prompt_task_list,
+    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+    // timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>',
     choices: choices,
     data: {
     trial_id: 'practice_trial'
@@ -743,7 +762,7 @@ var practiceNode = {
       }
       
       practice_feedback_text +=
-        '</p><p class = block-text>Redoing this practice.' 
+        '</p><p class = block-text>Redoing this practice. When you are ready to continue, please press the spacebar.' 
       
       return true
     
@@ -1151,19 +1170,19 @@ var testNode = {
 /* create experiment definition array */
 var cued_task_switching_single_task_network__fmri_experiment = [];
 
-// test_keys(cued_task_switching_single_task_network__fmri_experiment, response_keys.key)
+
 
 //out of scanner practice
+cued_task_switching_single_task_network__fmri_experiment.push(intro_block)
 cued_task_switching_single_task_network__fmri_experiment.push(practiceNode);
 cued_task_switching_single_task_network__fmri_experiment.push(practice_feedback_block);
 cued_task_switching_single_task_network__fmri_experiment.push(practice_end_block)
 
+// test_keys(cued_task_switching_single_task_network__fmri_experiment, response_keys.key)
 
 //in scanner practice
 // cued_task_switching_single_task_network__fmri_experiment.push(refreshNode);
 // cued_task_switching_single_task_network__fmri_experiment.push(refresh_feedback_block);
-
-// //cued_task_switching_single_task_network__fmri_experiment.push(start_test_block)
 
 // //in scanner test
 // setup_fmri_intro(cued_task_switching_single_task_network__fmri_experiment)

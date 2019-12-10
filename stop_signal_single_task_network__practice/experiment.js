@@ -372,7 +372,9 @@ var color = "black"
 var totalShapesUsed = 4
 
 
-var possible_responses = [['index finger', 89], ['index finger', 89], ['middle finger', 71], ['middle finger', 71]] //fmri responses - keys: BYGRM = thumb->pinky
+// var possible_responses = [['index finger', 89], ['index finger', 89], ['middle finger', 71], ['middle finger', 71]] //fmri responses - keys: BYGRM = thumb->pinky
+
+var possible_responses = [['index finger', 37], ['index finger', 37], ['middle finger', 39], ['middle finger', 39]] //fmri responses - keys: BYGRM = thumb->pinky
 
 
 var postFileType = "'></img>"
@@ -418,6 +420,22 @@ var exp_phase = "test"
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
+
+
+var intro_block = {
+	type: 'poldrack-single-stim',
+	data: {
+		trial_id: "instructions"
+	},
+	choices: [32],
+	stimulus: '<div class = centerbox><p class = center-block-text> Welcome to the experiment.</p></div>',
+	timing_post_trial: 0,
+	is_html: true,
+	timing_response: -1,
+	response_ends_trial: true, 
+
+};
+
 var end_block = {
 	type: 'poldrack-text',
 	data: {
@@ -438,19 +456,16 @@ var end_block = {
 var practice_end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_single_task_network__fmri",
-		trial_id: "end"
+	  trial_id: "end",
 	},
-	timing_response: 10000,
-	text: '<div class = centerbox>'+
-	'<p class = center-block-text>Thanks for completing this practice!</p>'+
-	'</div>',
+	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this practice!</p></div>',
 	cont_key: [32],
-	timing_post_trial: 0,
+	timing_response: 10000,
+	response_ends_trial: true,
 	on_finish: function(){
-  	assessPerformance()
-  }
-};
+	  assessPerformance()
+	  }
+  };
 
 
 // var instructions_block = {
@@ -490,7 +505,7 @@ var practice_feedback_text = '<div class = instructbox>'+ //'<div class = center
 '<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
 '<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
 '<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -1310,11 +1325,14 @@ var stop_signal_single_task_network__fmri_experiment = []
 
 stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
-// test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
+
 //out of scanner practice
+stop_signal_single_task_network__fmri_experiment.push(intro_block);
 stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
 stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
+stop_signal_single_task_network__fmri_experiment.push(practice_end_block);
 
+// test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
 //in scanner practice
 // stop_signal_single_task_network__fmri_experiment.push(refreshNode);
 // stop_signal_single_task_network__fmri_experiment.push(refresh_feedback_block);
@@ -1325,7 +1343,7 @@ stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
 // stop_signal_single_task_network__fmri_experiment.push(testNode);
 // stop_signal_single_task_network__fmri_experiment.push(test_feedback_block);
 
-stop_signal_single_task_network__fmri_experiment.push(practice_end_block);
+
 
 
 

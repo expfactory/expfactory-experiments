@@ -785,10 +785,8 @@ for (var i = 0; i < refresh_length + 1; i++) {
     // prompt_task_list + '</div>',
     // timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div><div class = promptbox>' +
     // prompt_task_list + '</div>',
-    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' +
-    prompt_task_list,
-    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' +
-    prompt_task_list,
+    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
+    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
     timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
     prompt_task_list,
     choices: choices,
@@ -1141,7 +1139,7 @@ cued_task_switching_single_task_network__fmri_experiment.push(refresh_feedback_b
 //cued_task_switching_single_task_network__fmri_experiment.push(start_test_block)
 
 //in scanner test
-setup_fmri_intro(cued_task_switching_single_task_network__fmri_experiment)
+cni_bore_setup(cued_task_switching_single_task_network__fmri_experiment)
 cued_task_switching_single_task_network__fmri_experiment.push(testNode0);
 cued_task_switching_single_task_network__fmri_experiment.push(testNode);
 cued_task_switching_single_task_network__fmri_experiment.push(feedback_block);
