@@ -1,6 +1,6 @@
 [
     {
-        "name": "N-Back Single Task Network fMRI",
+        "name": "N-Back Single Task Network fMRI Practice",
         "template":"jspsych",
         "run": [
 				"static/js/math.min.js",
@@ -22,7 +22,7 @@
                 
                 
                ],
-        "exp_id": "n_back_single_task_network__fmri",
+        "exp_id": "n_back_single_task_network__practice",
         "cognitive_atlas_task_id": "tsk_4a57abb949e1a",
         "contributors": [
                          "Patrick Bissett",
@@ -43,7 +43,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('n_back_single_task_network__fmri')"}
+                                        "on_trial_finish": "addID('n_back_single_task_network__practice')"}
                        			} 
     
    }

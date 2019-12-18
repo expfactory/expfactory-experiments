@@ -1,6 +1,6 @@
 [
     {
-        "name": "Shape Matching Single Task Network fMRI",
+        "name": "Shape Matching Single Task Network fMRI Practice",
         "template":"jspsych",
         "run": [
                 "static/js/math.min.js",
@@ -20,7 +20,7 @@
                 "static/css/default_style.css",
                 "style.css"
                ],
-        "exp_id": "shape_matching_single_task_network__fmri",
+        "exp_id": "shape_matching_single_task_network__practice",
         "cognitive_atlas_task_id": "trm_4f241ee9c4e37",
         "contributors": [
                          "Patrick Bissett",
@@ -41,7 +41,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('shape_matching_single_task_network__fmri')"}
+                                        "on_trial_finish": "addID('shape_matching_single_task_network__practice')"}
                        }
     
    }

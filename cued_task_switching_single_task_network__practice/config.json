@@ -1,6 +1,6 @@
 [
     {
-        "name": "Cued Task Switching Single Task Network fMRI",
+        "name": "Cued Task Switching Single Task Network fMRI Practice",
         "template":"jspsych",
         "run": [
                  "static/js/math.min.js",
@@ -20,7 +20,7 @@
                  "static/css/default_style.css",
                  "style.css"
                ],
-        "exp_id": "cued_task_switching_single_task_network__fmri",
+        "exp_id": "cued_task_switching_single_task_network__practice",
         "cognitive_atlas_task_id": "trm_566745bbf272a",
         "contributors": [
                          "Patrick Bissett",
@@ -40,7 +40,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('cued_task_switching_single_task_network__fmri')"}
+                                        "on_trial_finish": "addID('cued_task_switching_single_task_network__practice')"}
                        }
     
    }

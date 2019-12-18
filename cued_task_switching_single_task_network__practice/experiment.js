@@ -32,7 +32,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'cued_task_switching_single_task_network__fmri'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'cued_task_switching_single_task_network__practice'})
 }
 
 
@@ -304,7 +304,7 @@ var missed_response_thresh = 0.10;
 var accuracy_thresh = 0.75;
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/cued_task_switching_single_task_network__fmri/images/"
+var preFileType = "<img class = center src='/static/experiments/cued_task_switching_single_task_network__practice/images/"
 
 //set up block stim. correct_responses indexed by [block][stim][type]
 var tasks = {
@@ -362,7 +362,7 @@ var prompt_task_list = '<ul style="text-align:left"><li><i>Parity</i> or <i>Odd-
 
 
 //PRE LOAD IMAGES HERE
-var pathSource = "/static/experiments/cued_task_switching_single_task_network__fmri/images/"
+var pathSource = "/static/experiments/cued_task_switching_single_task_network__practice/images/"
 var numbersPreload = ['1','2','3','4','6','7','8','9']
 var images = []
 for(i=0;i<numbersPreload.length;i++){
@@ -393,7 +393,7 @@ var practice_feedback_text = '<div class = instructbox><p class = block-text>In 
 '<p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
 '<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
-'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 '<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
@@ -1169,15 +1169,15 @@ var testNode = {
 }
 
 /* create experiment definition array */
-var cued_task_switching_single_task_network__fmri_experiment = [];
+var cued_task_switching_single_task_network__practice_experiment = [];
 
 
 
 //out of scanner practice
-cued_task_switching_single_task_network__fmri_experiment.push(intro_block)
-cued_task_switching_single_task_network__fmri_experiment.push(practiceNode);
-cued_task_switching_single_task_network__fmri_experiment.push(practice_feedback_block);
-cued_task_switching_single_task_network__fmri_experiment.push(practice_end_block)
+cued_task_switching_single_task_network__practice_experiment.push(intro_block)
+cued_task_switching_single_task_network__practice_experiment.push(practiceNode);
+cued_task_switching_single_task_network__practice_experiment.push(practice_feedback_block);
+cued_task_switching_single_task_network__practice_experiment.push(practice_end_block)
 
 // test_keys(cued_task_switching_single_task_network__fmri_experiment, response_keys.key)
 

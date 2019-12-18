@@ -34,7 +34,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_single_task_network__fmri'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_single_task_network__practice'})
 }
 
 function assessPerformance() {
@@ -172,7 +172,7 @@ var credit_var = 0
 // task specific variables
 // Set up variables for stimuli
 var type = ['probe','distractor','target']
-var path = '/static/experiments/shape_matching_single_task_network__fmri/images/'
+var path = '/static/experiments/shape_matching_single_task_network__practice/images/'
 var center_prefix = '<div class = centerimg><img src = "'
 var mask_prefix = '<div class = "centerimg"><img src = "'
 var postfix = '"</img></div>'
@@ -212,7 +212,7 @@ var prompt_task_list = '<ul style="text-align:left;"><font color="white">'+
 					   '</font></ul>'
 
 //PRE LOAD IMAGES HERE
-var pathSource = "/static/experiments/shape_matching_single_task_network__fmri/images/"
+var pathSource = "/static/experiments/shape_matching_single_task_network__practice/images/"
 var numbersPreload = ['1','2','3','4','5','6','7','8','9','10']
 var typePreload = ['probe','target','distractor']
 var images = []
@@ -252,7 +252,7 @@ var intro_block = {
 var practice_feedback_text = '<div class = instructbox>'+
 		'<p class = block-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
 		'<p class = block-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
-		'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+		'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 		'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
 		'</div>'
 var practice_trial_id = "instructions"
@@ -872,16 +872,16 @@ var testNode = {
 	}
 }
 /* create experiment definition array */
-var shape_matching_single_task_network__fmri_experiment = [];
+var shape_matching_single_task_network__practice_experiment = [];
 
 
 
 
 //out of scanner practice
-shape_matching_single_task_network__fmri_experiment.push(intro_block);
-shape_matching_single_task_network__fmri_experiment.push(practiceNode);
-shape_matching_single_task_network__fmri_experiment.push(practice_feedback_block);
-shape_matching_single_task_network__fmri_experiment.push(practice_end_block);
+shape_matching_single_task_network__practice_experiment.push(intro_block);
+shape_matching_single_task_network__practice_experiment.push(practiceNode);
+shape_matching_single_task_network__practice_experiment.push(practice_feedback_block);
+shape_matching_single_task_network__practice_experiment.push(practice_end_block);
 
 
 // test_keys(shape_matching_single_task_network__fmri_experiment, choices)

@@ -36,7 +36,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'n_back_single_task_network__fmri'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'n_back_single_task_network__practice'})
 }
 
 
@@ -287,9 +287,9 @@ var delays = jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
 var delay = 1
 
-var pathSource = "/static/experiments/n_back_single_task_network__fmri/images/"
+var pathSource = "/static/experiments/n_back_single_task_network__practice/images/"
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/n_back_single_task_network__fmri/images/"
+var preFileType = "<img class = center src='/static/experiments/n_back_single_task_network__practice/images/"
 
 
 var n_back_conditions = jsPsych.randomization.repeat(['mismatch','mismatch','match','mismatch','mismatch'],1)
@@ -317,7 +317,7 @@ var current_trial = 0
 var current_block = 0
 
 //PRE LOAD IMAGES HERE
-var pathSource = "/static/experiments/n_back_single_task_network__fmri/images/"
+var pathSource = "/static/experiments/n_back_single_task_network__practice/images/"
 var lettersPreload = ['B','D','G','T','V']
 var casePreload = ['lowercase','uppercase']
 var images = []
@@ -927,16 +927,16 @@ var testNode = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var n_back_single_task_network__fmri_experiment = []
+var n_back_single_task_network__practice_experiment = []
 
 
 //test_keys(n_back_single_task_network__fmri_experiment, [possible_responses[0][1],possible_responses[1][1]])
 
 //out of scanner practice
-n_back_single_task_network__fmri_experiment.push(intro_block);
-n_back_single_task_network__fmri_experiment.push(practiceNode);
-n_back_single_task_network__fmri_experiment.push(practice_feedback_block);
-n_back_single_task_network__fmri_experiment.push(practice_end_block);
+n_back_single_task_network__practice_experiment.push(intro_block);
+n_back_single_task_network__practice_experiment.push(practiceNode);
+n_back_single_task_network__practice_experiment.push(practice_feedback_block);
+n_back_single_task_network__practice_experiment.push(practice_end_block);
 //in scanner practice
 // n_back_single_task_network__fmri_experiment.push(refreshNode);
 // n_back_single_task_network__fmri_experiment.push(refresh_feedback_block);

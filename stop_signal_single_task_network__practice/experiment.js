@@ -28,7 +28,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_single_task_network__fmri'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_single_task_network__practice'})
 }
 
 function assessPerformance() {
@@ -378,12 +378,12 @@ var possible_responses = [['index finger', 37], ['index finger', 37], ['middle f
 
 
 var postFileType = "'></img>"
-var pathSource = "/static/experiments/stop_signal_single_task_network__fmri/images/"
+var pathSource = "/static/experiments/stop_signal_single_task_network__practice/images/"
 var fileType = ".png"
 var preFileType = "<img class = center src='"
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/stop_signal_single_task_network__fmri/images/"
+var preFileType = "<img class = center src='/static/experiments/stop_signal_single_task_network__practice/images/"
 
 
 var images = []
@@ -439,7 +439,7 @@ var intro_block = {
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "stop_signal_single_task_network__fmri",
+		exp_id: "stop_signal_single_task_network__practice",
 		trial_id: "end"
 	},
 	timing_response: 10000,
@@ -1321,16 +1321,16 @@ var testNode = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var stop_signal_single_task_network__fmri_experiment = []
+var stop_signal_single_task_network__practice_experiment = []
 
 // stop_signal_single_task_network__fmri_experiment.push(SSD_setup_block) //exp_input
 
 
 //out of scanner practice
-stop_signal_single_task_network__fmri_experiment.push(intro_block);
-stop_signal_single_task_network__fmri_experiment.push(practiceStopNode)
-stop_signal_single_task_network__fmri_experiment.push(practice_feedback_block);
-stop_signal_single_task_network__fmri_experiment.push(practice_end_block);
+stop_signal_single_task_network__practice_experiment.push(intro_block);
+stop_signal_single_task_network__practice_experiment.push(practiceStopNode)
+stop_signal_single_task_network__practice_experiment.push(practice_feedback_block);
+stop_signal_single_task_network__practice_experiment.push(practice_end_block);
 
 // test_keys(stop_signal_single_task_network__fmri_experiment, [possible_responses[0][1], possible_responses[2][1]])
 //in scanner practice
