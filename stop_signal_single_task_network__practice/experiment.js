@@ -3,7 +3,7 @@
 /* ************************************ */
 
 function genITIs() { 
-	mean_iti = .5 //mean and standard deviation of 0.5 secs
+	mean_iti = 0.5 //mean and standard deviation of 0.5 secs
 	min_thresh = 0
 	max_thresh = 4
 

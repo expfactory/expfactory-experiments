@@ -4,7 +4,7 @@
 
 
 function genITIs() { 
-	mean_iti = .5 //mean and standard deviation of 0.5 secs
+	mean_iti = 0.5 //mean and standard deviation of 0.5 secs
 	min_thresh = 0
 	max_thresh = 4
 
@@ -271,7 +271,7 @@ var practice_feedback_block = {
 		practice_trial_id = "practice-no-stop-feedback"
 		practice_feedback_timing = 10000
 		practice_response_ends = false
-		if (ITIs_stim.length==0) { //if ITIs haven't been generated, generate them!
+		if (ITIs_stim.length===0) { //if ITIs haven't been generated, generate them!
 			ITIs_stim = genITIs()
 			ITIs_resp = ITIs_stim.slice(0) //make a copy of ITIs so that timing_stimulus & timing_response are the same
 		}
@@ -326,7 +326,7 @@ var refresh_feedback_block = {
 		refresh_trial_id = "practice-no-stop-feedback"
 		refresh_feedback_timing = 10000
 		refresh_response_ends = false
-		if (ITIs_stim.length==0) { //if ITIs haven't been generated, generate them!
+		if (ITIs_stim.length===0) { //if ITIs haven't been generated, generate them!
 			ITIs_stim = genITIs()
 			ITIs_resp = ITIs_stim.slice(0) //make a copy of ITIs so that timing_stimulus & timing_response are the same
 		}
