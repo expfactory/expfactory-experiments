@@ -719,8 +719,8 @@ var practiceNode = {
 			}
 			
 			practice_feedback_text +=
-				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
-				+ '</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
+				'</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
 			
 			// practice_feedback_text +=
 			// 	'</p><p class = block-text>Press Enter to continue.' 
