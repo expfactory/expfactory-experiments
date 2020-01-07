@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 
-
+//Functions added for in-person sessions
 function genITIs() { 
 	mean_iti = 0.5 //mean and standard deviation of 0.5 secs
 	min_thresh = 0
@@ -31,6 +31,23 @@ function getITI_resp() { //added for fMRI compatibility
 	return currITI
 }
 
+//feedback functions added for in-person version
+var getRefreshFeedback = function() {
+	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+}
+
+var getRefreshTrialID = function() {
+	return refresh_trial_id
+}
+
+var getRefreshFeedbackTiming = function() {
+	return refresh_feedback_timing
+}
+
+var getRefreshResponseEnds = function() {
+	return refresh_response_ends
+}
+//
 
 
 function addID() {
@@ -92,15 +109,6 @@ function assessPerformance() {
 }
 
 
-
-var getPracticeFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
-}
-
-var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
-}
-
 var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
@@ -160,9 +168,6 @@ var getResponse = function() {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
-//fmri variables
-var ITIs_stim = []
-var ITIs_resp = []
 
 // generic task variables
 var sumInstructTime = 0 //ms
@@ -224,69 +229,12 @@ for(i=0;i<numbersPreload.length;i++){
 images.push(pathSource + 'mask.png')
 jsPsych.pluginAPI.preloadImages(images);
 
-/* ************************************ */
-/* Set up jsPsych blocks */
-/* ************************************ */
+//ADDED FOR SCANNING
+//fmri variables
+var ITIs_stim = []
+var ITIs_resp = []
 
-/* define static blocks */
-
-
-
-//practice feedback block vars
-var practice_feedback_text = '<div class = instructbox>'+
-		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
-		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
-		'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-		'</div>'
-var practice_trial_id = "instructions"
-var practice_feedback_timing = -1
-var practice_response_ends = true
-
-var getPracticeTrialID = function() {
-	return practice_trial_id
-}
-
-var getPracticeFeedbackTiming = function() {
-	return practice_feedback_timing
-}
-
-var getPracticeResponseEnds = function() {
-	return practice_response_ends
-}
-
-var practice_feedback_block = {
-	type: 'poldrack-single-stim',
-	stimulus: getPracticeFeedback,
-	data: {
-		trial_id: getPracticeTrialID
-	},
-	choices: [32],
-
-	timing_post_trial: 0,
-	is_html: true,
-	timing_response: getPracticeFeedbackTiming, //10 seconds for feedback
-	timing_stim: getPracticeFeedbackTiming,
-	response_ends_trial: getPracticeResponseEnds,
-	on_finish: function() {
-		practice_trial_id = "practice-no-stop-feedback"
-		practice_feedback_timing = 10000
-		practice_response_ends = false
-		if (ITIs_stim.length===0) { //if ITIs haven't been generated, generate them!
-			ITIs_stim = genITIs()
-			ITIs_resp = ITIs_stim.slice(0) //make a copy of ITIs so that timing_stimulus & timing_response are the same
-		}
-
-	} 
-
-};
-
-
-//refresh feedback block vars
-// var refresh_feedback_text = '<div class = centerbox>'+
-// 		'<p class = block-text>In this experiment you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
-// 		'<p class = block-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
-// 		'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-// 		'</div>'
+//refresh feedback variables
 var refresh_feedback_text = '<div class = instructbox>'+
 		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
 		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
@@ -297,18 +245,11 @@ var refresh_trial_id = "instructions"
 var refresh_feedback_timing = -1
 var refresh_response_ends = true
 
-var getRefreshTrialID = function() {
-	return refresh_trial_id
-}
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
 
-var getRefreshFeedbackTiming = function() {
-	return refresh_feedback_timing
-}
-
-var getRefreshResponseEnds = function() {
-	return refresh_response_ends
-}
-
+/* define static blocks */
 var refresh_feedback_block = {
 	type: 'poldrack-single-stim',
 	stimulus: getRefreshFeedback,
@@ -560,86 +501,6 @@ var feedback_block = {
 
 };
 
-//out of scanner practice blocks
-var practiceTrials = []
-practiceTrials.push(practice_feedback_block)
-for (i = 0; i < practice_len; i++) {
-	practiceTrials.push(practice_fixation_block)
-	practiceTrials.push(practice_mask_block)
-	practiceTrials.push(practice_block)
-}
-
-var practiceCount = 0
-var practiceNode = {
-	timeline: practiceTrials,
-	loop_function: function(data) {
-		practiceCount += 1
-		trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],practice_len/7)
-		current_trial = 0 
-	
-		var sum_rt = 0
-		var sum_responses = 0
-		var correct = 0
-		var total_trials = 0
-	
-		for (var i = 0; i < data.length; i++){
-			if (data[i].trial_id == "practice_trial"){
-				total_trials+=1
-				if (data[i].rt != -1){
-					sum_rt += data[i].rt
-					sum_responses += 1
-					if (data[i].key_press == data[i].correct_response){
-						correct += 1
-		
-					}
-				}
-		
-			}
-	
-		}
-	
-		var accuracy = correct / total_trials
-		var missed_responses = (total_trials - sum_responses) / total_trials
-		var ave_rt = sum_rt / sum_responses
-	
-		practice_feedback_text = "<br>Please take this time to read your feedback and to take a short break!"
-
-		if (accuracy > accuracy_thresh){
-			practice_feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-			trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)		
-			return false
-	
-		} else if (accuracy < accuracy_thresh){
-			practice_feedback_text +=
-					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
-			if (missed_responses > missed_thresh){
-				practice_feedback_text +=
-						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
-			}
-
-	      	if (ave_rt > rt_thresh){
-	        	practice_feedback_text += 
-	            	'</p><p class = block-text>You have been responding too slowly.'
-	      	}
-		
-			if (practiceCount == practice_thresh){
-				practice_feedback_text +=
-					'</p><p class = block-text>Done with this practice.' 
-				trial_types = jsPsych.randomization.repeat(['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN'],numTrialsPerBlock/7)
-				return false
-			}
-			
-			practice_feedback_text +=
-				'</p><p class = block-text>Redoing this practice.' 
-			
-			return true
-		
-		}
-		
-	}
-}
-
 //in scanner practice block
 var refreshTrials = []
 refreshTrials.push(refresh_feedback_block)
@@ -699,6 +560,7 @@ var refreshNode = {
 		}
 		refresh_feedback_text +=
 		'</p><p class = instruct-text>Done with this practice. The test will begin shortly.' 
+		exp_stage = 'test'
 
 		return false
 		
@@ -847,16 +709,10 @@ var shape_matching_single_task_network__fmri_experiment = [];
 
 test_keys(shape_matching_single_task_network__fmri_experiment, choices)
 
-//out of scanner practice
-// shape_matching_single_task_network__fmri_experiment.push(practiceNode);
-// shape_matching_single_task_network__fmri_experiment.push(practice_feedback_block);
-
 //in scanner practice
 shape_matching_single_task_network__fmri_experiment.push(refreshNode);
 shape_matching_single_task_network__fmri_experiment.push(refresh_feedback_block);
 
-
-// shape_matching_single_task_network__fmri_experiment.push(start_test_block);
 
 //in scanner test
 cni_bore_setup(shape_matching_single_task_network__fmri_experiment)
