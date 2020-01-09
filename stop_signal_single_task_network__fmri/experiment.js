@@ -2,6 +2,7 @@
 /*       Define Helper Functions        */
 /* ************************************ */
 
+//Functions added for in-person sessions
 function genITIs() { 
 	mean_iti = 0.5 //mean and standard deviation of 0.5 secs
 	min_thresh = 0
@@ -19,6 +20,34 @@ function genITIs() {
 	}
 	return(iti_array)
 }
+
+function getITI_stim() { //added for fMRI compatibility
+	var currITI = ITIs_stim.shift()
+	return currITI
+}
+
+function getITI_resp() { //added for fMRI compatibility
+	var currITI = ITIs_resp.shift()
+	return currITI
+}
+
+//feedback functions added for in-person version
+var getRefreshFeedback = function() {
+	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+}
+
+var getRefreshTrialID = function() {
+	return refresh_trial_id
+}
+
+var getRefreshFeedbackTiming = function() {
+	return refresh_feedback_timing
+}
+
+var getRefreshResponseEnds = function() {
+	return refresh_response_ends
+}
+//
 
 
 
@@ -95,13 +124,6 @@ function assessPerformance() {
 									 final_accuracy: accuracy})
 }
 
-var getPracticeFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
-}
-
-var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
-}
 
 var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
@@ -175,7 +197,7 @@ var createRefreshTrials = function(numRefreshIterations){
 	}
 	
 	stims = jsPsych.randomization.repeat(stims,numRefreshIterations)
-		while (stims[0].stop_signal_condition == 'stop') { //if first trials is a stop trial, reorder trials.
+		while (stims[0].stop_signal_condition == 'stop') { //if first trial is a stop trial, reorder trials.
 			stims = jsPsych.randomization.repeat(stims,numRefreshIterations)
 		}
 	return stims
@@ -245,9 +267,6 @@ var getRefreshStim = function(){
 }
 
 
-
-
-
 function getSSD(){
 	return SSD
 }
@@ -256,15 +275,7 @@ function getSSType(){
 	return stop_signal_condition
 }
 
-function getITI_stim() { //added for fMRI compatibility
-	var currITI = ITIs_stim.shift()
-	return currITI
-}
 
-function getITI_resp() { //added for fMRI compatibility
-	var currITI = ITIs_resp.shift()
-	return currITI
-}
 
 
 var appendData = function(){
@@ -325,11 +336,6 @@ var appendData = function(){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-
-//fmri variables
-var ITIs_stim = []
-var ITIs_resp = []
-var numRefreshIterations = 1 //run through the whole space of trial types 1 time
 
 
 // generic task variables
@@ -406,13 +412,40 @@ var prompt_text = '<div class = prompt_box>'+
 
 
 var stims = createTrialTypes(numTrialsPerBlock)
-var refreshStims = createRefreshTrials(numRefreshIterations)
+
 
 
 var exp_phase = "practice2"
 var exp_phase = "test"
 
+//ADDED FOR SCANNING
+//fmri variables
+var ITIs_stim = []
+var ITIs_resp = []
+var numRefreshIterations = 1 //run through the whole space of trial types 1 time
+var refreshStims = createRefreshTrials(numRefreshIterations)
 
+//refresh feedback variables
+var refresh_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
+'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
+'<p class = instruct-text>Only one response is correct for each shape.</p>'+
+'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
+'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
+'<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
+'<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
+'<p class = instruct-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
+'<p class = instruct-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
+'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
+'</div>'
+var refresh_trial_id = "instructions"
+var refresh_feedback_timing = -1
+var refresh_response_ends = true
+
+//variables for tracking number of blocks completed
+var practiceCount=0
+var practiceStopCount=0
 
 /* ************************************ */
 /*        Set up jsPsych blocks         */
@@ -435,138 +468,6 @@ var end_block = {
 };
 
 
-// var instructions_block = {
-// 	type: 'poldrack-single-stim',
-// 	stimulus: '<div class = centerbox>'+
-// 				'<p class = block-text>In this task you will see shapes appear on the screen one at a time. </p>' +
-// 				'<p class = block-text>Only one response is correct for each shape.</p>'+
-// 				'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-// 				'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-// 				//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-// 				'<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-// 				'<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-// 				'<p class = block-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-// 				'<p class = block-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-// 				'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-// 				'<p class = block-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-// 			'</div>',
-// 	is_html: true,
-// 	choices: [32],
-// 	data: {
-// 		trial_id: "instruction",
-// 	},
-// 	timing_post_trial: 0,
-// 	timing_stim: -1, //until response
-// 	timing_response: -1, //until response
-// 	response_ends_trial: true
-// };
-
-var practice_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
-'<p class = instruct-text>Only one response is correct for each shape.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-'<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-'<p class = instruct-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-'<p class = instruct-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-'</div>'
-var practice_trial_id = "instructions"
-var practice_feedback_timing = -1
-var practice_response_ends = true
-
-var getPracticeTrialID = function() {
-	return practice_trial_id
-}
-
-var getPracticeFeedbackTiming = function() {
-	return practice_feedback_timing
-}
-
-var getPracticeResponseEnds = function() {
-	return practice_response_ends
-}
-
-var practice_feedback_block = {
-	type: 'poldrack-single-stim',
-	stimulus: getPracticeFeedback,
-	data: {
-		trial_id: getPracticeTrialID
-	},
-	choices: [32],
-
-	timing_post_trial: 0,
-	is_html: true,
-	timing_response: getPracticeFeedbackTiming, //10 seconds for feedback
-	timing_stim: getPracticeFeedbackTiming,
-	response_ends_trial: getPracticeResponseEnds,
-	on_finish: function() {
-		practice_trial_id = "practice-no-stop-feedback"
-		practice_feedback_timing = 10000
-		practice_response_ends = false
-
-	} 
-
-};
-
-
-// var refresh_feedback_block = {
-// 	type: 'poldrack-single-stim',
-// 	stimulus: '<div class = instructbox>'+ //'<div class = centerbox>'+
-// 	'<p class = instruct-text>In this task you will see shapes appear on the screen one at a time. </p>' +
-// 	'<p class = instruct-text>Only one response is correct for each shape.</p>'+
-// 	'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-// 	'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-// 	//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-// 	'<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-// 	'<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-// 	'<p class = instruct-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-// 	'<p class = instruct-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-// 	'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-// 	'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-// 	'</div>',
-// 	data: {
-// 		trial_id: "instructions"
-// 	},
-// 	choices: [32],
-// 	timing_post_trial: 0,
-// 	is_html: true,
-// 	timing_response: -1, //10 seconds for feedback
-// 	timing_stim: -1,
-// 	response_ends_trial: true,
-// };
-
-var refresh_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
-'<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
-'<p class = instruct-text>Only one response is correct for each shape.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-//'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
-'<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+
-'<p class = instruct-text>If the star appears on a trial, and you try your best to withhold your response, you will find that you will be able to stop sometimes but not always.</p>'+
-'<p class = instruct-text>Please do not slow down your responses in order to wait for the star.  You should respond as quickly and accurately as possible to each shape.</p>'+
-'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
-'</div>'
-var refresh_trial_id = "instructions"
-var refresh_feedback_timing = -1
-var refresh_response_ends = true
-
-var getRefreshTrialID = function() {
-	return refresh_trial_id
-}
-
-var getRefreshFeedbackTiming = function() {
-	return refresh_feedback_timing
-}
-
-var getRefreshResponseEnds = function() {
-	return refresh_response_ends
-}
 
 var refresh_feedback_block = {
 	type: 'poldrack-single-stim',
@@ -606,7 +507,7 @@ var ITI_fixation_block = {
 	timing_response: getITI_resp //500
 };
 
-var practice_fixation_block = {
+var refresh_fixation_block = {
 	type: 'poldrack-single-stim',
 	stimulus: '<div class = centerbox><div class = fixation>+</div></div>',
 	is_html: true,
@@ -620,48 +521,6 @@ var practice_fixation_block = {
 	prompt: prompt_text_list
 };
 
-
-var practice_intro = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox><p class = block-text>We will now start the practice for the experiment.<br><br>For these trials, you must press your <i>'+possible_responses[0][0]+'</i>, '+ ' or <i>'+possible_responses[2][0]+ ' </i>depending on the shape of the stimulus.  Make sure to respond as quickly and accurately as possible to the shape. <br><br> The responses for each shape are as follows: ' +
-		prompt_text +
-		'</p><p class = block-text>Remember these rules before you proceed.</p><p class = block-text>Press <i> any button </i> to begin.</p></div>',
-	is_html: true,
-	choices: [32],
-	data: {
-		trial_id: "stop_intro_phase1"
-	},
-	timing_post_trial: 0,
-	timing_response: 180000, 
-	response_ends_trial: true
-};
-
-
-
-
-var test_intro = {
-	type: 'poldrack-single-stim',
-	stimulus: '<div class = centerbox>'+
-				'<p class = block-text>We will now begin the test portion.</p>'+
-				'<p class = block-text>You will see a shape on every trial. Please respond to each shape as quickly and accurately as possible!</p>'+
-				'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-				'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
-				'<p class = block-text>Do not respond if you see a star.</p>'+
-				'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press any button to begin.</p>'+
-			 '</div>',
-	
-	is_html: true,
-	choices: [32],
-	data: {
-		trial_id: "test_intro"
-	},
-	timing_post_trial: 0,
-	timing_response: 180000,
-	response_ends_trial: true,
-	on_finish: function(){
-		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimulus. Press any button to begin.'
-	}
-};
 
 var feedback_text = 'The test will begin shortly.'// Press <i>any button</i> to begin.'
 var test_feedback_block = {
@@ -697,173 +556,6 @@ var SSD_setup_block = {
 		ITIs_resp = ITIs_stim.slice(0) //make a copy of ITIs so that timing_stimulus & timing_response are the same
 	}
 }
-
-
-var practiceStopTrials = []
-practiceStopTrials.push(practice_feedback_block)
-//practiceStopTrials.push(instructions_block)
-for (i = 0; i < practice_len; i++) {
-	var practice_block = {
-		type: 'stop-signal',
-		stimulus: getStim,
-		SS_stimulus: getStopStim,
-		SS_trial_type: getSSType,
-		data: {
-			trial_id: "practice_trial",
-		},
-		is_html: true,
-		choices: [possible_responses[0][1], possible_responses[2][1]],
-		timing_stim: 1000, //1000
-		timing_response: 2000, //2000
-		response_ends_trial: false,
-		SSD: getSSD,
-		timing_SS: 500, //500
-		timing_post_trial: 0,
-		on_finish: appendData,
-		prompt: prompt_text_list,
-		fixation_default: true,
-		on_start: function(){
-			stoppingTracker = []
-			stoppingTimeTracker = []
-		}
-	}
-	
-	var categorize_block = {
-		type: 'poldrack-single-stim',
-		data: {
-			trial_id: "practice-stop-feedback"
-		},
-		choices: 'none',
-		stimulus: getCategorizeFeedback,
-		timing_post_trial: 0,
-		is_html: true,
-		timing_stim: 500, //500
-		timing_response: 500, //500
-		response_ends_trial: false, 
-
-	};
-
-	practiceStopTrials.push(practice_fixation_block)
-	practiceStopTrials.push(practice_block)
-	practiceStopTrials.push(categorize_block)
-
-}
-
-
-var practiceStopCount = 0
-var practiceStopNode = {
-	timeline: practiceStopTrials,
-	loop_function: function(data) {
-		practiceStopCount = practiceStopCount + 1
-		current_trial = 0
-		stims = createTrialTypes(numTrialsPerBlock)
-		
-		var total_trials = 0
-		
-		var sum_stop_rt = 0;
-		var sum_go_rt = 0;
-		
-		var sumGo_correct = 0;
-		var sumStop_correct = 0;
-		
-		var num_go_responses = 0;
-		var num_stop_responses = 0;
-		
-		var go_length = 0;
-		var stop_length = 0
-		
-		for (i = 0; i < data.length; i++) {
-			if (data[i].trial_id == "practice_trial"){
-				total_trials += 1
-			}
-			
-			if (data[i].stop_signal_condition == "go"){
-				go_length += 1
-				if (data[i].rt != -1) {
-					num_go_responses += 1
-					sum_go_rt += data[i].rt;
-					if (data[i].key_press == data[i].correct_response) {
-						sumGo_correct += 1
-					}
-				}				
-			} else if (data[i].stop_signal_condition == "stop") {
-				stop_length += 1
-				if (data[i].rt != -1){
-					num_stop_responses += 1
-					sum_stop_rt += data[i].rt
-				} else if (data[i].rt == -1){
-					sumStop_correct += 1
-				}				
-			} 
-		}
-		
-		var average_rt = sum_go_rt / num_go_responses;
-		var missed_responses = (go_length - num_go_responses) / go_length
-		
-		var aveShapeRespondCorrect = sumGo_correct / go_length 
-		
-		var stop_signal_respond = num_stop_responses / stop_length
-		
-		
-		
-
-		practice_feedback_text = "<br>Please take this time to read your feedback and to take a short break." //Press any button to continue."
-
-		if (practiceStopCount == practice_thresh) {
-			practice_feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
-			exp_phase = "test"
-			return false;
-		
-		}
-		
-		if ((aveShapeRespondCorrect > accuracy_thresh) && (stop_signal_respond < maxStopCorrectPractice) && (stop_signal_respond > minStopCorrectPractice)){
-			practice_feedback_text += '</p><p class = block-text>Done with this practice. The test session will begin shortly.'
-			exp_phase = "test"
-			return false;
-		
-		} else {
-			if (aveShapeRespondCorrect < accuracy_thresh) {
-				practice_feedback_text +=
-				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy. Remember:<br>' +
-				prompt_text_list
-			}
-			if (average_rt > rt_thresh) {
-				practice_feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
-			}
-			if (missed_responses > missed_response_thresh){
-				if(aveShapeRespondCorrect < accuracy_thresh){
-					practice_feedback_text +=
-					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.'
-						
-			
-				} else {
-					practice_feedback_text +=
-					'</p><p class = block-text>We have detected a number of trials that <i>required a response</i>, where no response was made.  Please <i>ensure that you are responding accurately and quickly  </i>to the shapes.<br>' +
-					prompt_text_list
-				}
-			}
-			
-			
-			if (stop_signal_respond === maxStopCorrectPractice){
-				practice_feedback_text +=
-				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
-			}
-		
-			if (stop_signal_respond === minStopCorrectPractice){
-				practice_feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
-		
-			}
-			
-			practice_feedback_text += '</p><p class = block-text>Redoing this practice. When you are ready to continue, please press the spacebar.'
-			return true	
-			
-		}
-	}
-}
-
-
 
 
 numRefreshTrials = stop_signal_conditions.length*2*numRefreshIterations//stop_signal_conditions.length*totalShapesUsed * numRefreshIterations
@@ -910,7 +602,7 @@ for (i = 0; i < numRefreshTrials; i++) {
 
 	};
 
-	refreshTrials.push(practice_fixation_block)
+	refreshTrials.push(refresh_fixation_block)
 	refreshTrials.push(refresh_block)
 	refreshTrials.push(categorize_block)
 }
