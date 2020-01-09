@@ -41,7 +41,7 @@
         "deployment_variables":{"jspsych_init":
                                         {"fullscreen": true,
                                         "display_element": "getDisplayElement",
-                                        "on_trial_finish": "addID('stop_signal_with_go_no_go')"}
+                                        "on_trial_finish": "addID('stop_signal_with_go_nogo')"}
                        			} 
     
    }

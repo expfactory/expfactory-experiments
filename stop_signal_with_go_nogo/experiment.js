@@ -7,7 +7,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_go_no_go'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'stop_signal_with_go_nogo'})
 }
 
 function evalAttentionChecks() {
@@ -379,9 +379,9 @@ var fileType = ".png"
 var preFileType = "<img class = center src='"
 
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_no_go/images/"
+var preFileType = "<img class = center src='/static/experiments/stop_signal_with_go_nogo/images/"
 
-var pathSource = "/static/experiments/stop_signal_with_go_no_go/images/"
+var pathSource = "/static/experiments/stop_signal_with_go_nogo/images/"
 var images = []
 for(i=0;i<shapes.length;i++){
 	for(x=0; x<go_no_go_styles.length;x++){
@@ -423,7 +423,7 @@ var run_attention_checks = true
 var attention_check_block = {
   type: 'attention-check',
   data: {
-    exp_id: "stop_signal_with_go_no_go",
+    exp_id: "stop_signal_with_go_nogo",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -984,14 +984,14 @@ var testNode = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var stop_signal_with_go_no_go_experiment = []
+var stop_signal_with_go_nogo_experiment = []
 
-stop_signal_with_go_no_go_experiment.push(practiceStopNode)
-stop_signal_with_go_no_go_experiment.push(feedback_block);
+stop_signal_with_go_nogo_experiment.push(practiceStopNode)
+stop_signal_with_go_nogo_experiment.push(feedback_block);
 
-stop_signal_with_go_no_go_experiment.push(test_intro);
-stop_signal_with_go_no_go_experiment.push(testNode);
-stop_signal_with_go_no_go_experiment.push(feedback_block);
+stop_signal_with_go_nogo_experiment.push(test_intro);
+stop_signal_with_go_nogo_experiment.push(testNode);
+stop_signal_with_go_nogo_experiment.push(feedback_block);
 
-stop_signal_with_go_no_go_experiment.push(post_task_block);
-stop_signal_with_go_no_go_experiment.push(end_block);
+stop_signal_with_go_nogo_experiment.push(post_task_block);
+stop_signal_with_go_nogo_experiment.push(end_block);
