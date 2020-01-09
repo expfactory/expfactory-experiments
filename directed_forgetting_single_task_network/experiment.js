@@ -136,8 +136,8 @@ var appendProbeData = function(data) {
 	jsPsych.data.addDataToLastTrial({
 		correct: correct,
 		probe_letter: probe,
-		directed_forgetting_condition: directed_condition,
-		trial_num: current_trial,
+		directed_forgetting_condition: directed_forgetting_condition,
+		current_trial: current_trial,
 		correct_response: correct_response,
 		exp_stage: exp_stage,
 		cue: cue,
@@ -181,23 +181,23 @@ var getCue = function() {
 };
 
 // Will pop out a probe type from the entire probeTypeArray and then choose a probe congruent with the probe type
-var getProbe = function(letters,directed_condition,cue) {
+var getProbe = function(letters,directed_forgetting_condition,cue) {
 	var trainingArray = jsPsych.randomization.repeat(stimArray, 1);
 	var lastSet_top = letters.slice(0,numLetters/2)
 	var lastSet_bottom = letters.slice(numLetters/2)
-	if (directed_condition == 'pos') {
+	if (directed_forgetting_condition == 'pos') {
 		if (cue == 'BOT') {
 			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		} else if (cue == 'TOP') {
 			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		}
-	} else if (directed_condition == 'neg') {
+	} else if (directed_forgetting_condition == 'neg') {
 		if (cue == 'BOT') {
 			probe = lastSet_bottom[Math.floor(Math.random() * numLetters/2)]
 		} else if (cue == 'TOP') {
 			probe = lastSet_top[Math.floor(Math.random() * numLetters/2)]
 		}
-	} else if (directed_condition == 'con') {
+	} else if (directed_forgetting_condition == 'con') {
 		newArray = trainingArray.filter(function(y) {
 			return (y != lastSet_top[0] && y != lastSet_top[1] &&
 					y != lastSet_bottom[0] && y != lastSet_bottom[1])
@@ -219,7 +219,7 @@ var getProbeHTML = function(){
 
 var getLettersHTML = function(){
 	stim = stims.pop()
-	directed_condition = stim.directed_condition
+	directed_forgetting_condition = stim.directed_forgetting_condition
 	letters = stim.letters
 	cue = stim.cue
 	probe = stim.probe
@@ -259,14 +259,14 @@ var createTrialTypes = function (numTrialsPerBlock,numLetters){
 	var stims = []
 	
 	for (var i = 0; i < numTrialsPerBlock; i++){
-		var directed_condition = probeTypeArray.pop()
+		var directed_forgetting_condition = probeTypeArray.pop()
 		var letters = getTrainingSet(used_letters,numLetters)
 		var cue = getCue()
-		var probe = getProbe(letters,directed_condition,cue)
-		var correct_response = getCorrectResponse(directed_condition)
+		var probe = getProbe(letters,directed_forgetting_condition,cue)
+		var correct_response = getCorrectResponse(directed_forgetting_condition)
 		
 		stim = {
-			directed_condition:directed_condition,
+			directed_forgetting_condition:directed_forgetting_condition,
 			letters: letters,
 			cue: cue,
 			probe: probe,
@@ -515,7 +515,7 @@ var start_fixation_block = {
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
-			trial_num: current_trial
+			current_trial: current_trial
 		})
 	}
 }
@@ -534,7 +534,7 @@ var fixation_block = {
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
-			trial_num: current_trial
+			current_trial: current_trial
 		})
 	}
 }
@@ -552,7 +552,7 @@ var ITI_fixation_block = {
 	on_finish: function() {
 		jsPsych.data.addDataToLastTrial({
 			exp_stage: exp_stage,
-			trial_num: current_trial
+			current_trial: current_trial
 		})
 		current_trial = current_trial + 1
 	}
@@ -683,7 +683,7 @@ for (i = 0; i < (practice_length); i++) {
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
-				trial_num: current_trial
+				current_trial: current_trial
 			})
 		}
 	}
@@ -703,7 +703,7 @@ for (i = 0; i < (practice_length); i++) {
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
-				trial_num: current_trial
+				current_trial: current_trial
 			})
 		}
 	}
@@ -722,7 +722,7 @@ for (i = 0; i < (practice_length); i++) {
 		on_finish: function() {
 			jsPsych.data.addDataToLastTrial({
 				exp_stage: exp_stage,
-				trial_num: current_trial
+				current_trial: current_trial
 			})
 			current_trial = current_trial + 1
 		}

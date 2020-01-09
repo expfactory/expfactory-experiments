@@ -241,7 +241,7 @@ var appendData = function() {
     task: curr_task,
     task_condition: task_switch.task_switch,
     cue_condition: task_switch.cue_switch,
-    trial_num: trial_num,
+    current_trial: trial_num,
     correct_response: correct_response,
     CTI: CTI
   })

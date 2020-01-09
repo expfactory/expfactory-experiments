@@ -138,7 +138,7 @@ var getStim = function() {
 	} else if (trial_type[2] == 'N'){
 		distractor_i = 'none'
 	}
-	currData.trial_num = current_trial
+	currData.current_trial = current_trial
 	currData.shape_matching_condition = trial_type
 	currData.probe_id = probe_i
 	currData.target_id = target_i

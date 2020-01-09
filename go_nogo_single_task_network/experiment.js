@@ -104,7 +104,7 @@ var appendData = function(data) {
 	}
 	
 	jsPsych.data.addDataToLastTrial({
-		trial_num: current_trial,
+		current_trial: current_trial,
 	})
 	
 	current_trial +=1
