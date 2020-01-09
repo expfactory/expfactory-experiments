@@ -521,7 +521,91 @@ for (i = 0; i < practice_len + 2; i++) {	//was changed from + 3 as delays went f
 }
 
 var practiceCount = 0
-var practiceNode = {
+var practiceNode1 = {
+	timeline: practiceTrials,
+	loop_function: function(data) {
+		practiceCount += 1
+		stims = createTrialTypes(practice_len, delay)
+		current_trial = 0
+	
+		var sum_rt = 0
+		var sum_responses = 0
+		var correct = 0
+		var total_trials = 0
+		var mismatch_press = 0
+	
+		for (var i = 0; i < data.length; i++){
+			if (data[i].trial_id == "practice_trial"){
+				total_trials+=1
+				if (data[i].rt != -1){
+					sum_rt += data[i].rt
+					sum_responses += 1
+					if (data[i].key_press == data[i].correct_response){
+						correct += 1
+		
+					}
+				}
+				
+				if (data[i].key_press == possible_responses[1][1]){
+					mismatch_press += 1
+				}
+		
+			}
+	
+		}
+	
+		var accuracy = correct / total_trials
+		var missed_responses = (total_trials - sum_responses) / total_trials
+		var ave_rt = sum_rt / sum_responses
+		var mismatch_press_percentage = mismatch_press / total_trials
+	
+		practice_feedback_text = "<br>Please take this time to read your feedback and to take a short break." // Press enter to continue"
+
+		if (accuracy > accuracy_thresh){
+			delay = 2
+			stims = createTrialTypes(practice_len, delay)
+			practice_feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago."
+			return false
+	
+		} else if (accuracy < accuracy_thresh){
+			if (missed_responses > missed_thresh){
+				practice_feedback_text +=
+						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+			}
+
+	      	if (ave_rt > rt_thresh){
+	        	practice_feedback_text += 
+	            	'</p><p class = block-text>You have been responding too slowly.'
+	      	}
+			
+			if (mismatch_press_percentage >= 0.90){
+				practice_feedback_text +=
+						'</p><p class = block-text>Please do not simply press your "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press your "'+possible_responses[0][0]+'" when they occur.'
+			}
+		
+			if (practiceCount == practice_thresh){
+				// practice_feedback_text +=
+				// 	'</p><p class = block-text>Done with this practice. The test session will begin shortly.' 
+					delay = 2
+					stims = createTrialTypes(practice_len, delay)
+					practice_feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago."
+					return false
+			}
+			
+			practice_feedback_text +=
+				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
+				'</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
+			
+			
+			return true
+		
+		}
+		
+	}
+}
+
+var practiceCount = 0
+var practiceNode2 = {
 	timeline: practiceTrials,
 	loop_function: function(data) {
 		practiceCount += 1
@@ -606,7 +690,6 @@ var practiceNode = {
 	}
 }
 
-
 /* ************************************ */
 /*          Set up Experiment           */
 /* ************************************ */
@@ -616,7 +699,8 @@ var n_back_single_task_network__practice_experiment = []
 
 //out of scanner practice
 n_back_single_task_network__practice_experiment.push(intro_block);
-n_back_single_task_network__practice_experiment.push(practiceNode);
+n_back_single_task_network__practice_experiment.push(practiceNode1);
+n_back_single_task_network__practice_experiment.push(practiceNode2);
 n_back_single_task_network__practice_experiment.push(practice_feedback_block);
 n_back_single_task_network__practice_experiment.push(practice_end_block);
 
