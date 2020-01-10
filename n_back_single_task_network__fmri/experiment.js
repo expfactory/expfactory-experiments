@@ -280,7 +280,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 15 // must be divisible by 5
+var practice_len = 10 // must be divisible by 5
 var exp_len = 220 //150 // must be divisible by 5 --9:30
 var numTrialsPerBlock = 55 // must be divisible by 5 and we need to have a multiple of 2 blocks (2,4,6) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock //should be divisble by 2 ^^
@@ -291,7 +291,7 @@ var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2], numTestBlocks / 2) //jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
-var delay = 1
+var delay = 2 //1
 
 var pathSource = "/static/experiments/n_back_single_task_network__fmri/images/"
 var fileTypePNG = ".png'></img>"

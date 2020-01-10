@@ -193,7 +193,7 @@ for (var i = 1; i<11; i++) {
 }
 jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
 
-var practice_len = 14 // must be divisible by 7
+var practice_len = 7 // must be divisible by 7
 // Trial types denoted by three letters for the relationship between:
 // probe-target, target-distractor, distractor-probe of the form
 // SDS where "S" = match and "D" = non-match, N = "Neutral"
@@ -571,6 +571,7 @@ var refreshNode = {
 
 //in scanner test blocks
 var testCount = 0
+
 //first block skips intro feedback
 var testTrials0 = []
 for (i = 0; i < numTrialsPerBlock; i++) {
