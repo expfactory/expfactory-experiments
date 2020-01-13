@@ -33,7 +33,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for in-person version
 var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
 }
 
 var getRefreshTrialID = function() {
@@ -126,7 +126,7 @@ function assessPerformance() {
 
 
 var getFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
 
@@ -137,23 +137,23 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text>Correct!</font></div></div>' + prompt_text_list
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text>Incorrect</font></div></div>' + prompt_text_list
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text>Respond Faster!</font></div></div>' + prompt_text_list
 	
 		}
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text>Correct!</font></div></div>' + prompt_text_list
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text>There was a star.</font></div></div>' + prompt_text_list
 		}
 	
 	}
@@ -232,7 +232,8 @@ var getStim = function(){
 	}
 	
 	stim = {
-		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
+		// image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number>' + preFileType  + shape + fileTypePNG + '</div>',
 		data: { 
 			stim: shape,
 			stop_signal_condition: stop_signal_condition,
@@ -255,7 +256,8 @@ var getRefreshStim = function(){
 	} 
 	
 	stim = {
-		image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
+		// image: '<div class = bigbox><div class = centerbox><div class = gng_number><div class = cue-text>' + preFileType  + shape + fileTypePNG + '</div>',
+		image: '<div class = bigbox><div class = centerbox><div class = gng_number>' + preFileType  + shape + fileTypePNG + '</div>',
 		data: { 
 			stim: shape,
 			stop_signal_condition: stop_signal_condition,
@@ -429,8 +431,8 @@ var refreshStims = createRefreshTrials(numRefreshIterations)
 var refresh_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
 '<p class = instruct-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = instruct-text>Only one response is correct for each shape.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-'<p class = instruct-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+'<p class = instruct-text><strong>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</strong></p>'+
+'<p class = instruct-text><strong>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</strong></p>'+
 //'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 '<p class = instruct-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
 '<p class = instruct-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+

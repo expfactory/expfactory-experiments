@@ -136,23 +136,23 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text_list
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list
 	
 		}
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text_list
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text_list
+			return '<div class = upperbox><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text_list
 		}
 	
 	}
@@ -380,8 +380,8 @@ var ITIs_resp = []
 var practice_feedback_text = '<div class = instructbox>'+ //'<div class = centerbox>'+
 '<p class = block-text>In this task, you will see shapes appear on the screen one at a time. </p>' +
 '<p class = block-text>Only one response is correct for each shape.</p>'+
-'<p class = block-text>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</p>'+
-'<p class = block-text>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</p>'+
+'<p class = block-text><strong>If the shape is a '+shapes[0]+', press your '+possible_responses[0][0]+'.</strong></p>'+
+'<p class = block-text><strong>If the shape is a '+shapes[2]+', press your '+possible_responses[2][0]+'.</strong></p>'+
 //'<p class = block-text>You should respond as quickly and accurately as possible to each shape.</p>'+
 '<p class = block-text>On some trials, a star will appear around the shape.  The star will appear with, or shortly after the shape appears.</p>'+
 '<p class = block-text><b>If you see a star appear, please try your best to withhold your response on that trial.</b></p>'+

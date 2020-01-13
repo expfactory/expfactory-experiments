@@ -34,7 +34,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for practice version
 var getPracticeFeedback = function() { 
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
 }
 
 var getPracticeTrialID = function() {
@@ -344,11 +344,11 @@ var current_trial = 0
 var CTI = 150 //cue-target-interval or cue's length (7/29, changed from 300 to 150; less time to process the cue should increase cue switch costs and task switch costs)
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press your ' + response_keys.key_name[
+var task_list = '<ul><li><strong><i>Parity</i> or <i>Odd-Even</i>: Press your ' + response_keys.key_name[
     0] + ' key if even and your ' + response_keys.key_name[1] + ' key if odd.' +
   '</li><li><i>Magnitude</i> or <i>High-Low</i>: Press your ' + response_keys.key_name[
     0] + ' key if the number is greater than 5 and your ' + response_keys.key_name[1] +
-  ' key if less than 5.</li></ul>'
+  ' key if less than 5.</strong></li></ul>'
 
 var prompt_task_list = '<ul style="text-align:left"><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
   ' if even and ' + response_keys.key_name[1] + ' if odd.' +
@@ -372,12 +372,12 @@ var ITIs_stim = []
 var ITIs_resp = []
 
 //practice feedback variables
-var practice_feedback_text = '<div class = instructbox><p class = block-text>In this task, you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
-'<p class = block-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
-'<p class = block-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
+var practice_feedback_text = '<div class = instructbox><p class = instruct-text>In this task, you will have to respond to a sequence of numbers by pressing your middle and index fingers. How you respond to the numbers will depend on the current task, which can change every trial.</p>'+
+'<p class = instruct-text>On some trials you will have to indicate whether the number is odd or even, and on other trials you will indicate whether the number is higher or lower than 5. Each trial will start with a cue telling you which task to do on that trial.</p>' +
+'<p class = instruct-text>The cue before the number will be a word indicating the task. There will be four different cues indicating two different tasks. The cues and tasks are described below:</p>' +
 task_list +
-'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
+'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = instruct-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -508,10 +508,10 @@ for (var i = 0; i < practice_length + 1; i++) {
     stimulus: getStim,
     is_html: true,
     key_answer: getResponse,
-    timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
+    timeout_message: '<div class = upperbox><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
     prompt_task_list,
-    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
+    correct_text: '<div class = upperbox><div class = center-text><font size = 20>Correct!</font></div></div>',
+    incorrect_text: '<div class = upperbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
     choices: choices,
     data: {
     trial_id: 'practice_trial'
@@ -573,7 +573,7 @@ var practiceNode = {
 
     if (accuracy > accuracy_thresh){
       practice_feedback_text +=
-          '</p><p class = block-text>Done with this practice.' 
+          '</p><p class = instruct-text>Done with this practice.' 
       
       task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
       task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
@@ -582,20 +582,20 @@ var practiceNode = {
   
     } else if (accuracy < accuracy_thresh){
       practice_feedback_text +=
-          '</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
+          '</p><p class = instruct-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_task_list 
       if (missed_responses > missed_response_thresh){
         practice_feedback_text +=
-            '</p><p class = block-text>You have been responding too slowly. Please respond as quickly and as accurately as possible.'
+            '</p><p class = instruct-text>You have been responding too slowly. Please respond as quickly and as accurately as possible.'
       }
 
       if (ave_rt > rt_thresh) {
         practice_feedback_text += 
-            '</p><p class = block-text>You have been responding too slowly.'
+            '</p><p class = instruct-text>You have been responding too slowly.'
       }
     
       if (practiceCount == practice_thresh){
         practice_feedback_text +=
-          '</p><p class = block-text>Done with this practice.' 
+          '</p><p class = instruct-text>Done with this practice.' 
           
           task_switches = jsPsych.randomization.repeat(task_switches_arr, numTrialsPerBlock / 4)
           task_switches.unshift({task_switch: 'na', cue_switch: 'na', go_no_go_type: jsPsych.randomization.repeat(['go','nogo'],1).pop()})
@@ -604,7 +604,7 @@ var practiceNode = {
       }
       
       practice_feedback_text +=
-        '</p><p class = block-text>Redoing this practice. When you are ready to continue, please press the spacebar.' 
+        '</p><p class = instruct-text>Redoing this practice. When you are ready to continue, please press the spacebar.' 
       
       return true
     

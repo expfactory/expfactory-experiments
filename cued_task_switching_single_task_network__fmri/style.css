@@ -81,25 +81,13 @@ margin-right:0%;
 background-color: none;
 text-align: center;
 }
-/* 
-.instructBox {
- width: 80vw;
- height: 10vw;
- position:absolute;
- top:10%;
- left:50%; 
- margin-right: 0%;
- transform: translate(-50%,-50%);
- background-color: none;
- font-size: 24px;
-} */
 
-/* taken from stop_signal__fmri */
+/*MODIFIED FOR IN SCANNER PRESENTATIONS*/
 ul {
   list-style-type: none;
   text-align: center;
   display: inline-block;
-  font-size: 30px;
+  font-size: 40px;
   line-height: 120%;
   margin-bottom: 1em;
   color: white
@@ -107,7 +95,7 @@ ul {
 
 
 .instructbox {
-  width: 50vw;
+  width: 70vw;
   height: 60vh;
   position:absolute;
   top:45%;
@@ -117,42 +105,22 @@ ul {
   text-align: center;
 }
 
-/* .instruct-text {
-  width:100%;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 1em;
-  font-size: 30px;
-  line-height: 120%;
-  color: white;
-} */
-
-/* .instruct-text {
-  width:100%;
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 1em;
-  font-size: 35px;
-  line-height: 120%;
-  color: white;
-} */
-/* 
-.instruct-text {
-  width:100%;
-  text-align: left;
-  margin: 0 auto;
-  margin-bottom: 1em;
-  font-size: 35px;
-  line-height: 120%;
-  color: white;
-} */
+.center-text {
+  text-align:center;
+  font-size: 85px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
 .instruct-text {
   width:100%;
   text-align: left;
   margin: 0 auto;
   margin-bottom: 1em;
-  font-size: 30px;
+  font-size: 40px;
   line-height: 120%;
   color: white;
 }

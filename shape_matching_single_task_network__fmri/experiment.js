@@ -33,7 +33,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for in-person version
 var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
 }
 
 var getRefreshTrialID = function() {
@@ -110,7 +110,7 @@ function assessPerformance() {
 
 
 var getFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
 var randomDraw = function(lst) {
@@ -236,8 +236,9 @@ var ITIs_resp = []
 
 //refresh feedback variables
 var refresh_feedback_text = '<div class = instructbox>'+
-		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen. Your task is to press your middle finger if they are the same shape and your index finger if they are different.</p>'+
-		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape — your task is only to respond based on whether the gray and black shapes are the same.</p>'+
+		'<p class = instruct-text>In this task, you will see a gray shape on the right of the screen and a black shape on the left of the screen.</p>'+
+		'<p class = instruct-text><strong>Your task is to press your middle finger if they are the same shape and your index finger if they are different.</strong></p>'+
+		'<p class = instruct-text>On some trials a white shape will also be presented on the left. You should ignore the white shape. Your task is only to respond based on whether the gray and black shapes are the same.</p>'+
 		'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 		'<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 		'</div>'
@@ -417,9 +418,9 @@ var practice_block = {
 	choices: choices,
 	key_answer: getResponse,
 	data: getData,
-	correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-	incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
-	timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_task_list,
+	correct_text: '<div class = upperbox><div class = center-text>Correct!</font></div></div>',
+	incorrect_text: '<div class = upperbox><div class = center-text>Incorrect</font></div></div>',
+	timeout_message: '<div class = upperbox><div class = center-text>Respond Faster!</font></div></div>' + prompt_task_list,
 	timing_response: 2000, //2000
 	timing_stim: 1000,  //1000
 	timing_feedback_duration: 500, //500
@@ -571,7 +572,6 @@ var refreshNode = {
 
 //in scanner test blocks
 var testCount = 0
-
 //first block skips intro feedback
 var testTrials0 = []
 for (i = 0; i < numTrialsPerBlock; i++) {
