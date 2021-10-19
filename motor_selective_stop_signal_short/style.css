@@ -1,0 +1,124 @@
+.ss_text {
+	text-align: center;
+	font-size: 60px;
+}
+
+
+.ss_stim {
+	text-align: center;
+	font-size: 24px;
+}
+
+.stop-signal{
+	text-align: center;
+	font-size: 160px;
+	color: black;
+}
+
+.centered-shape {
+	position:absolute;
+	top:50%;
+    left:50%;
+	transform: translate(-50%,-50%);
+}
+
+.shapebox {
+  width: 25vw;
+  height: 25vw;
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+
+.stim {
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+}
+
+.prompt_stim {
+  height: 60px;
+}
+
+
+.stopbox {
+  width: 20%;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
+
+
+#stop-signal {
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    z-index: -2;
+}
+
+#stop-signal:before, #stop-signal:after {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background: black;
+}
+
+#stop-signal:before {
+    -webkit-transform: rotate(30deg);
+       -moz-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+         -o-transform: rotate(30deg);
+}
+#stop-signal:after {
+    -webkit-transform: rotate(60deg);
+       -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+         -o-transform: rotate(60deg);
+}
+
+#stop-signal-inner {
+    background: white;
+    width: 95%;
+    height: 95%;
+    text-align: center;
+    z-index: -1;
+}
+#stop-signal-inner:before, #stop-signal-inner:after {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background: white;
+}
+
+#stop-signal-inner:before {
+    -webkit-transform: rotate(30deg);
+       -moz-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+         -o-transform: rotate(30deg);
+}
+#stop-signal-inner:after {
+    -webkit-transform: rotate(60deg);
+       -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+         -o-transform: rotate(60deg);
+}
