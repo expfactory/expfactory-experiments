@@ -438,7 +438,27 @@ for(var x = 0; x < survey_questions.length; x++){
 var post_questionnaire_node = {
 	timeline: post_questionnaire_trials,
 	loop_function: function(data){
-		game_state = 'end'
+    game_state = 'end'
+    if (typeof window.uniqueId === 'undefined') {
+        return false
+    }
+    if (data[0].response === 'Yes' || data[1].response === 'Yes' || data[2].response === 'No') {
+      $.ajax({
+        async: false,
+        url: '/fail/' + window.uniqueId + '/',
+        type: "POST",
+        contentType: "application/json",
+        data : JSON.stringify({'taskdata': {'data': data}}),
+        dataType: "json",
+        error: function(error) { window.location.reload() },
+        success: function(data) {
+          console.log("Finished!");
+          window.location.reload()
+        }
+      })
+    } else {
+        return false
+    }
 	}
 }
 
