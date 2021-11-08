@@ -1,0 +1,16 @@
+{
+    "name": "Mindful Attention Awareness Scale Survey",
+    "exp_id": "mindful-attention-awareness-survey",
+    "description": "a 15-item scale designed to assess a core characteristic of dispositional mindfulness, namely, open or receptive awareness of and attention to what is taking place in the present.",
+    "instructions": "Please indicate how frequently or infrequently you currently have each experience. Please answer according to what really reflects your experience rather than what you think your experience should be.",
+    "url": "https://github.com/expfactory-experiments/mindful-attention-awreness-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "trm_56abcba3df89b",
+    "contributors": [
+                     "Juan (Dethea) Du",
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Brown, K., & Ryan, R. (2003). The Benefits of Being Present: Mindfulness and Its Role in Psychological Well-Being. Journal of Personality and Social Psychology, 84(4), 822–848. https://doi.org/10.1037/0022-3514.84.4.822"]
+}

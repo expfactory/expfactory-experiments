@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Thinking about yourself and how you normally feel, to what extent do you generally feel:	0	2		
+radio	Determined	1	3	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Attentive	1	3	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Alert	1	3	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Inspired	1	3	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Active 	1	3	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Afraid	1	4	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Nervous	1	4	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Upset	1	4	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Ashamed	1	4	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+radio	Hostile	1	4	Very slightly or not at all: 1,A little:2, Moderately:3,Quite a bit: 4,Extremely: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

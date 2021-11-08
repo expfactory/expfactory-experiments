@@ -1,0 +1,36 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	"The researchers carried two experiments. For the first experiments, they let students take the long version questionnaire home and return it at the next class meeting. On the other hand, for the second experiment, they chose the best 10 items due to time and space limitations. Note that the participants of each experiment are different.
+"	0	2		
+radio	I would rather do something that requires little thought than something that is sure to challenge my thinking abilities. 	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I don't like to have the responsibility of handling a situation that requires a lot of thinking. 	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I would prefer complex to simple problems.	1	3	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I try to anticipate and avoid situations where there is a likely chance I will have to think in depth about something	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I find little satisfaction in deliberating hard and for long hours.	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	Thinking is not my idea of fun.	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	The notion of thinking abstractly is not appealing to me	1	3	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I prefer my life to be filled with puzzles that I must solve.	1	4	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	Simply knowing the answer rather than understanding the reasons for the answer to a problem is fine with me.	1	4	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I don't reason well under pressure. 	1	4	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	The idea of relying on thought to make my way to the top does not appeal to me. 	1	4	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I prefer to talk about international problems rather than to gossip or talk about celebrities. 	1	4	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	Learning new ways to think doesn't excite me very much.	1	4	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought.	1	4	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I generally prefer to accept things as they are rather than to question them. 	1	5	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	It is enough for me that something gets the job done, I don't care how or why it works. 	1	5	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I tend to set goals that can be accomplished only by expending considerable mental effort. 	1	5	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I have difficulty thinking in new and unfamiliar situations.	1	5	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	I feel relief rather than satisfaction after completing a task that required a lot of mental effort. 	1	5	Completely false: 1,2,3,4,Completely true: 5	5,4,3,2,1
+radio	My initial impressions of people are almost always right.	1	5	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I trust my initial feelings about people.	1	5	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	When it comes to trusting people, I can usually rely on my "gut feelings."	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I believe in trusting my hunches	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I can usually feel when a person is right or wrong even if I can't explain how I know. 	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I am a very intuitive person.	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I can typically sense right away when a person is lying.	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I am quick to form impressions about people.	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I believe I can judge character pretty well from a person's appearance.	1	6	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I often have clear visual images of things	1	7	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I have a very good sense of rhythm. 	1	7	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+radio	I am good at visualizing things.	1	7	Completely false: 1,2,3,4,Completely true: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	8		

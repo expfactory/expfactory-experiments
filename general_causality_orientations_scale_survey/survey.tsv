@@ -1,0 +1,32 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	"These items pertain to a series of hypothetical sketches. Each sketch describes an incident and lists three ways of responding to it. Please read each sketch, imagine yourself in that situation, and then consider each of the possible responses. Think of each response option in terms of how likely it is that you would respond that way. We all respond in a variety of ways to situations, and probably most or all responses are at least slightly likely for you.
+
+If it is very unlikely that you would respond the way described in a given response, you should circle answer 1 or 2. If it is moderately likely, you would select a number in the mid range, and if it is very likely that you would respond as described, you would circle answer 6 or 7.
+"	0	2		
+radio	You have been offered a new position in a company where you have worked for some time. The first question that is likely to come to mind is:	1	3	a. What if I can't live up to the new responsibility?,b. Will I make more at this position?,c. I wonder if the new work will be interesting. (A)	a,b,c
+radio	"You have a school-age daughter. On parents' night the teacher tells you that your daughter is doing poorly and doesn't seem involved in the work. You are likely to:
+
+"	1	3	a. Talk it over with your daughter to understand further what the problem is.,b. Scold her and hope she does better.,c. Make sure she does the assignments, because she should be working harder.	a,b,c
+radio	"You had a job interview several weeks ago. In the mail you received a form letter which states that the position has been filled. It is likely that you might think:
+"	1	3	a. It's not what you know, but who you know.,b. I'm probably not good enough for the job.,c. Somehow they didn't see my qualifications as matching their needs.	a,b,c
+radio	"You are a plant supervisor and have been charged with the task of allotting coffee breaks to three workers who cannot all break at once. You would likely handle this by:
+"	1	3	a. Telling the three workers the situation and having them work with you on the schedule.,b. Simply assigning times that each can break to avoid any problems.,c. Find out from someone in authority what to do or do what was done in the past.	a,b,c
+radio	"A close (same-sex) friend of yours has been moody lately, and a couple of times has become very angry with you over ""nothing."" You might:
+"	1	3	a.Share your observations with him/her and try to find out what is going on for him/her.,b. Ignore it because there's not much you can do about it anyway.,c. Tell him/her that you're willing to spend time together if and only if he/she makes more effort to control him/herself.	a,b,c
+radio	"You have just received the results of a test you took, and you discovered that you did very poorly. Your initial reaction is likely to be:
+
+"	1	3	a. "I can't do anything right," and feel sad.,b. "I wonder how it is I did so poorly," and feel disappointed.,c. "That stupid test doesn't show anything," and feel angry.	a,b,c
+radio	"You have been invited to a large party where you know very few people. As you look forward to the evening, you would likely expect that:
+"	1	4	a. You'll try to fit in with whatever is happening in order to have a good time and not look bad.,b. You'll find some people with whom you can relate.,c. You'll probably feel somewhat isolated and unnoticed.	a,b,c
+radio	"You are asked to plan a picnic for yourself and your fellow employees. Your style for approaching this project could most likely be characterized as:
+"	1	4	a. Take charge: that is, you would make most of the major decisions yourself.,b. Follow precedent: you're not really up to the task so you'd do it the way it's been done before.,c. Seek participation: get inputs from others who want to make them before you make the final plans.	a,b,c
+radio	"Recently a position opened up at your place of work that could have meant a promotion for you. However, a person you work with was offered the job rather than you. In evaluating the situation, you're likely to think:
+"	1	4	a. You didn't really expect the job; you frequently get passed over.,b. The other person probably "did the right things" politically to get the job.,c. You would probably take a look at factors in your own performance that led you to be passed over.	a,b,c
+radio	"You are embarking on a new career. The most important consideration is likely to be:
+"	1	4	a. Whether you can do the work without getting in over your head.,b. How interested you are in that kind of work.,c. Whether there are good possibilities for advancement.	a,b,c
+radio	"A woman who works for you has generally done an adequate job. However, for the past two weeks her work has not been up to par and she appears to be less actively interested in her work. Your reaction is likely to be:
+"	1	4	a. Tell her that her work is below what is expected and that she should start working harder.,b. Ask her about the problem and let her know you are available to help work it out.,c. It's hard to know what to do to get her straightened out.	a,b,c
+radio	"Your company has promoted you to a position in a city far from your present location. As you think about the move you would probably:
+"	1	4	a. Feel interested in the new challenge and a little nervous at the same time.,b. Feel excited about the higher status and salary that is involved.,c. Feel stressed and anxious about the upcoming changes.	a,b,c
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

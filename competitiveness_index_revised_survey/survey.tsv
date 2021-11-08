@@ -1,0 +1,18 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.	0	2		
+radio	I like competition	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	1,2,3,4,5
+radio	I am a competitive individual	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	1,2,3,4,5
+radio	I enjoy competing against an opponent 	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	1,2,3,4,5
+radio	I don’t like competing against other people	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I get satisfaction from competing with others 	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	1,2,3,4,5
+radio	I find competitive situations unpleasant	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I dread competing against other people	1	3	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I try to avoid competing with others	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I often try to outperform others 	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	1,2,3,4,5
+radio	I try to avoid arguments	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I will do almost anything to avoid an argument 	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I often remain quiet rather than risk hurting another person	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	I don’t enjoy challenging others even when I think they are wrong	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+radio	In general, I will go along with the group rather than create conflict	1	4	Strongly Disagree: 1,2,3,4,Strongly Agree: 5	5,4,3,2,1
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

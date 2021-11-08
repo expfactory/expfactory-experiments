@@ -1,0 +1,12 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For each of the following questions, please check the box that best reflects how good you are at doing the following things:	0	2		
+radio	How good are you at working with fractions?	1	3	Not at all good: 1,2,3,4,5,Extremely Good: 6	1,2,3,4,5,6
+radio	How good are you at working with percentages?	1	3	Not at all good: 1,2,3,4,5,Extremely Good: 6	1,2,3,4,5,6
+radio	How good are you at calculating a 15% tip?	1	3	Not at all good: 1,2,3,4,5,Extremely Good: 6	1,2,3,4,5,6
+radio	How good are you at figuring out how much a shirt will cost if it is 25% off?	1	3	Not at all good: 1,2,3,4,5,Extremely Good: 6	1,2,3,4,5,6
+radio	When reading the newspaper, how helpful do you find tables and graphs that are parts of a story?	1	3	Not at all helpful: 1,2,3,4,5,extremely helpful: 6	1,2,3,4,5,6
+radio	When people tell you the chance of something happening, do you prefer that they use words ("it rarely happens") or numbers ("there's a 1% chance")?	1	3	Always prefer words: 1,2,3,4,5,Always prefer numbers: 6	1,2,3,4,5,6
+radio	When you hear a weather forecast, do you prefer predictions using percentages (e.g., “there will be a 20% chance of rain today”) or predictions using only words (e.g., “there is a small chance of rain today”)? (preference)	1	4	Always prefer percentages: 1,2,3,4,5,Always prefer words: 6	6,5,4,3,2,1
+radio	How often do you find numerical information to be useful?	1	4	Never: 1,2,3,4,5,Very often: 6	1,2,3,4,5,6
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

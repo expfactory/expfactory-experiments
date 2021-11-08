@@ -1,0 +1,16 @@
+{
+    "name": "Trait Hedonic Capacity Scale Survey",
+    "exp_id": "trait-hedonic-capacity-survey",
+    "description": "A measure of trait hedonic capacity, which captures people’s success in hedonic goal pursuit and the occurrence of intrusive thoughts.",
+    "instructions": "participants rated the degree to which each statement was a fitting description of themselves",
+    "url": "https://github.com/expfactory-experiments/trait-hedonic-capacity-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Juan (Dethea) Du",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Bernecker, K., & Becker, D. (2020). Beyond Self-Control: Mechanisms of Hedonic Goal Pursuit and Its Relevance for Well-Being. Personality and Social Psychology Bulletin. https://doi.org/10.1177/0146167220941998"]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Perceived Stress Scale Survey",
+    "exp_id": "perceived-stress-survey",
+    "description": "The most widely used psychological instrument for measuring the perception of stress.",
+    "instructions": "Please indicate, for each item, how often you felt or thought a certain way during the past month",
+    "url": "https://github.com/expfactory-experiments/perceived-stress-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Cohen, S., Kamarck, T., & Mermelstein, R. (1994). Perceived stress scale. Measuring stress: A guide for health and social scientists, 10, 1-2."]
+}

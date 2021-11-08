@@ -1,0 +1,15 @@
+{
+    "name": "Brief Sensation Seeking Scale Survey",
+    "exp_id": "brief-sensation-seeking-survey",
+    "description": "A self-report measure of sensation seeking, a dispositional risk factor for various problem behaviors.",
+    "instructions": "For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.",
+    "url": "https://github.com/expfactory-experiments/brief-sensation-seeking-survey",
+    "template":"survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim",
+                     "Sofia Dallali"
+                    ], 
+    "time":1,
+    "reference": [" Hoyle, R., Stephenson, M., Palmgreen, P., Lorch, E., & Donohew, R. (2002). Reliability and validity of a brief measure of sensation seeking. Personality and Individual Differences, 32(3), 401–414. https://doi.org/10.1016/S0191-8869(01)00032-0"]
+}

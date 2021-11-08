@@ -1,0 +1,22 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For all questions, please choose one of the following	0	2		
+radio	When I watch TV, I channel surf, often scanning through the available options even while attempting to watch one program. 	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	When I am in the car listening to the radio, I often check other stations to see if something better is playing, even if I’m relatively satisfied with what I’m listening to.	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I treat relationships like clothing: I expect to try a lot on before I get the perfect fit. 	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	No matter how satisfied I am with my job, it’s only right for me to be on the lookout for better opportunities. 	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I often fantasize about living in ways that are quite different from my actual life.	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I’m a big fan of lists that attempt to rank things (the best movies, the best singers, the best athletes, the best novels, etc.).	1	3	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I often find it difficult to shop for a gift for a friend. 	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	When shopping, I have a hard time finding clothing that I really love. 	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	Renting videos is really difficult. I’m always struggling to pick the best one.	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I find that writing is very difficult, even if it’s just writing a letter to a friend, because it’s so hard to word things just right. I often do several drafts of even simple things.	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	Whenever I’m faced with a choice, I try to imagine what all the other possibilities are, even ones that aren’t present at the moment.	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	No matter what I do, I have the highest standards for myself.	1	4	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I never settle for second best. 	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	No matter what it takes, I always try to choose the best thing.	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I don’t like having to settle for “good enough.”	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I am a maximizer.	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I will wait for the best option, no matter how long it takes.	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+radio	I never settle. 	1	5	Strongly Agree: 1,Disagree: 2,Neither disagree or agree: 3,Agree: 4, Strongly agree: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	6		

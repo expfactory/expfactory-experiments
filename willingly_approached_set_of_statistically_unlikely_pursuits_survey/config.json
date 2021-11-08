@@ -1,0 +1,15 @@
+{
+    "name": "Willingly Approached Set of Statistically Unlikely Pursuits Survey",
+    "exp_id": "willingly-approached-set-of-statistically-unlikely-pursuits-survey",
+    "description": "A measure of the tendency to set implausibly high goals.",
+    "instructions": "For each item on this page, choose the answer (from the choices just below) that best reflects how likely you are to set that as a goal for yourself. Code that answer onto your answer sheet.",
+    "url": "https://github.com/expfactory-experiments/willingly-approached-set-of-statistically-unlikely-pursuits-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Juan (Dethea) Du",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 8,
+    "reference": ["Carver, C. S., & Johnson, S. L. . (2013) . Willingly Approached Set of Statistically Unlikely Pursuits (WASSUP) . Measurement Instrument Database for the Social Science. Retrieved from www.midss.ie"]
+}

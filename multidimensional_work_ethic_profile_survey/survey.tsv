@@ -1,0 +1,69 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Please choose the alternative that best represents your opinion to each item.	0	2		
+radio	It is important to stay busy at work and not waste time.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I feel uneasy when there is little work for me to do.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	If I want to buy something, I always wait until I can afford it.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I feel content when I have spent the day working. 	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Life would be more meaningful if we had more leisure time.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	To be truly successful, a person should be self-reliant.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	One should always take responsibility for one’s actions.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I would prefer a job that allowed me to have more leisure time.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	Time should not be wasted, it should be used efficiently.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Even if I were financially able, I would not stop working.	1	3	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I get more fulfillment from items I had to wait for. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I schedule my day in advance to avoid wasting time. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	A hard days work is very fulfilling. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	The more time I can spend in a leisure activity, the better I feel. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	One should always do what is right and just. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I would take items from work if I felt I was not getting paid enough. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	Nothing is impossible if you work hard enough. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	The less time one spends working and the more leisure time one has, the better. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	Things that you have to wait for are the most worthwhile. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Working hard is the key to being successful. 	1	4	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Self-reliance is the key to being successful. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	If one works hard enough, one is likely to make a good life for oneself. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I constantly look for ways to productively use my time. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Hard work makes one a better person. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	One should not pass judgment until one has heard all of the facts.	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	People would be better off if they depended on themselves. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Work takes too much of our time, leaving little time to relax.	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	One should live one’s own life independent of others as much as possible.	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	A distant reward is usually more satisfying than an immediate one. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	It is very important for me to always be able to work. 	1	5	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	More leisure time is good for people.	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	One must avoid dependence on other persons whenever possible.	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Even if I inherited a great deal of money, I would continue to work somewhere.	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I do not like having to depend on other people. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	By working hard a person can overcome every obstacle that life presents. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I try to plan out my workday so as not to waste time. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	You should never tell lies about other people.	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Any problem can be overcome with hard work. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	How a person spends their time is as important as how they spend their money. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Even if it were possible for me to retire, I would still continue to work. 	1	6	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Life without work would be very boring.	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I prefer to save until I can afford something and not buy it on credit. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	The world would be a better place if people spent more time relaxing.	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	I strive to be self-reliant. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	If you work hard you will succeed. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	The best things in life are those you have to wait for. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Anyone who is able and willing to work hard has a good chance of succeeding. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Stealing is all right as long as you don’t get caught. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	The job that provides the most leisure time is the job for me. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	Having a great deal of independence from others is very important to me. 	1	7	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	It is important to treat others as you would like to be treated. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	I experience a sense of fulfillment from working.	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	A person should always do the best job possible. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	It is never appropriate to take something that does not belong to you. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Only those who depend on themselves get ahead in life. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Wasting time is as bad as wasting money.	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	There are times when stealing is justified. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	People should have more leisure time to spend in relaxation. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	It is important to control one’s destiny by not being dependent on others. 	1	8	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	By simply working hard enough, one can achieve one’s goals. 	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	People should be fair in their dealings with others. 	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	The only way to get anything worthwhile is to save for it.	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	Leisure time activities are more interesting than work. 	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	5,4,3,2,1
+radio	A hard days work provides a sense of accomplishment. 	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+radio	A distaste for hard work usually reflects a weakness of character. 	1	9	Strongly Agree: 1,Agree: 2,Neighter Agree Nor Disagree: 3,Disagree: 4,Strongly Disagree: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	10		

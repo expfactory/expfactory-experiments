@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	participants rated the degree to which each statement was a fitting description of themselves	0	2		
+radio	I am good at pursuing my desires.	1	3	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	I can follow my desires in the here and now.	1	3	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	I often do what I feel like doing.	1	3	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	In my spare time, I can relax well.	1	3	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	In my spare time, I can “switch off” well.	1	3	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	In my spare time, I find it difficult to turn off thoughts about what is still left to do.	1	4	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	Thoughts about my work sometimes prevent me from enjoying pleasant activities and moments.	1	4	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	Sometimes I cannot stop myself from thinking about things I still need to do.	1	4	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	I often think about my duties even while I am enjoying a good moment.	1	4	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+radio	I often think after the fact that I should have enjoyed the moment more.	1	4	Not at all like me:1,2,3,4,Very much like me: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

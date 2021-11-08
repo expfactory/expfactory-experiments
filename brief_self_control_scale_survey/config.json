@@ -1,0 +1,16 @@
+{
+    "name": "Brief Self-Control Scale Survey",
+    "exp_id": "brief-self-control-survey",
+    "description": "A new measure of individual differences in self-control into two large investigations of a broad spectrum of behaviors.",
+    "instructions": "For each of the following statements please indicate how much each of the following statements reflects how you typically are.",
+    "url": "https://github.com/expfactory-experiments/brief-self-control-survey",
+    "template":"survey",
+    "cognitive_atlas_task_id": "trm_56a915461cd91",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Daniel J Wilson",
+                     "Junghyun (Andy) Kim"
+                    ], 
+    "time":2,
+    "reference": ["Tangney, J. P., Baumeister, R. F., & Boone, A. L. (2004). High self-control predicts good adjustment, less pathology, better grades, and interpersonal success. Journal of personality, 72(2), 271–324. https://doi.org/10.1111/j.0022-3506.2004.00263.x"]
+}

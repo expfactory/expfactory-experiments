@@ -1,0 +1,15 @@
+{
+    "name": "General Self Efficacy Scale Survey",
+    "exp_id": "general-self-efficacy-survey",
+    "description": "The General Self-Efficacy Scale is a 10-item psychometric scale that is designed to assess optimistic self-beliefs to cope with a variety of difficult demands in life.",
+    "instructions": "For all questions, please choose one of the following.",
+    "url": "https://github.com/expfactory-experiments/general-self-efficacy-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 1,
+    "reference": ["Schwarzer, R., & Jerusalem, M. (1995). Generalized Self-Efficacy scale. In J. Weinman, S. Wright, & M. Johnston, Measures in health psychology: A user’s portfolio. Causal and control beliefs (pp. 35-37). Windsor, UK: NFER-NELSON."]
+}

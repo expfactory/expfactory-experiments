@@ -1,0 +1,16 @@
+{
+  "name": "Boredom Proneness Scale Short Form Survey",
+  "exp_id": "boredom-proneness-short-form-survey",
+  "description": "A measure of trait boredom",
+  "instructions": "For all questions, please choose one of the following",
+  "url": "https://github.com/expfactory-experiments/boredom-proneness-short-form-survey",
+  "template":"survey",
+  "cognitive_atlas_task_id": "",
+  "contributors": [
+                   "Daniel J Wilson",
+                   "Aryaki Sethi",
+                   "Junghyun (Andy) Kim"
+                  ], 
+  "time":2,
+  "reference": ["Struk, A. A., Carriere, J. S., Cheyne, J. A., & Danckert, J. (2017). A short boredom proneness scale: Development and psychometric properties. Assessment, 24(3), 346-359."]
+}

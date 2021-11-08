@@ -1,0 +1,12 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.	0	2		
+radio	I would like to explore strange places	1	3	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I get restless when I spend too much time at home	1	3	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I like to do frightening things 	1	3	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I like wild parties 	1	3	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I would like to take off on a trip with no pre-planned routes or timetables 	1	4	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I prefer friends who are excitingly unpredictable 	1	4	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I would like to try bungee jumping	1	4	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+radio	I would love to have new and exciting experiences, even if they are illegal	1	4	Strongly Disagree: 1,Disagree: 2,Neither Disagree Or Agree: 3,Agree: 4,Strongly Agree: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

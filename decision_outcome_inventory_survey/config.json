@@ -1,0 +1,16 @@
+{
+    "name": "Decisions Outcome Inventory Survey",
+    "exp_id": "decisions-outcome-survey",
+    "description": "An inventory designed to designed to assess whether individuals reach satisfactory outcomes, specifically whether they avoid negative decision outcomes.",
+    "instructions": "The following questions ask whether different events have happened to you in the last 10 years. Please indicate “yes” or “no” for each.",
+    "url": "https://github.com/expfactory-experiments/decisions-outcome-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 6,
+    "reference": ["Bruine de Bruin, W., Parker, A. M., & Fischhoff, B. (2007). Individual differences in adult decision-making competence. Journal of Personality and Social Psychology, 92(5), 938-956. doi: 10.1037/0022-3514.92.5.938"]
+}

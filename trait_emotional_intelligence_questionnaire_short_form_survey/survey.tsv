@@ -1,0 +1,34 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Please answer each statement below by putting a circle around the number that best reflects your degree of agreement or disagreement with that statement. Do not think too long about the exact meaning of the statements. Work quickly and try to answer as accurately as possible. There are no right or wrong answers. There are seven possible responses to each statement ranging from ‘Completely Disagree’ (number 1) to ‘Completely Agree’ (number 7).	0	2		
+radio	Expressing my emotions with words is not a problem for me.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I often find it difficult to see things from another person’s viewpoint.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	On the whole, I’m a highly motivated person.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I usually find it difficult to regulate my emotions.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I generally don’t find life enjoyable.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I can deal effectively with people.	1	3	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I tend to change my mind frequently.	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	Many times, I can’t figure out what emotion I'm feeling. 	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I feel that I have a number of good qualities.	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I often find it difficult to stand up for my rights.	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I’m usually able to influence the way other people feel.	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	On the whole, I have a gloomy perspective on most things.	1	4	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	Those close to me often complain that I don’t treat them right.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I often find it difficult to adjust my life according to the circumstances.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	On the whole, I’m able to deal with stress.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I often find it difficult to show my affection to those close to me.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I’m normally able to “get into someone’s shoes” and experience their emotions.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I normally find it difficult to keep myself motivated.	1	5	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I’m usually able to find ways to control my emotions when I want to. On the whole, I’m pleased with my life.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	On the whole, I’m pleased with my life.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I would describe myself as a good negotiator.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I tend to get involved in things I later wish I could get out of.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I often pause and think about my feelings.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I believe I’m full of personal strengths.	1	6	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I tend to “back down” even if I know I’m right.	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I don’t seem to have any power at all over other people’s feelings.	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	I generally believe that things will work out fine in my life	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	I find it difficult to bond well even with those close to me.	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	7,6,5,4,3,2,1
+radio	Generally, I’m able to adapt to new environments.	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+radio	Others admire me for being relaxed.	1	7	Completely Disagree: 1,2,3,4,5,6,Completely Agree: 7	1,2,3,4,5,6,7
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	8		

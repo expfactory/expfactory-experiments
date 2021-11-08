@@ -1,0 +1,15 @@
+{
+    "name": "Life Orientation Test-Revised Optimism Scale Survey",
+    "exp_id": "life-orientation-test-revised-optimism-survey",
+    "description": "10-item scale that measures how optimistic or pessimistic people feel about the future.",
+    "instructions": "Indicate how much you agree with the statements based on your own feelings. Try not to let your response to one statement influence your responses to the others.",
+    "url": "https://github.com/expfactory-experiments/life-orientation-test-revised-optimism-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Scheier, M. F., Carver, C. S., & Bridges, M. W. (1994). Distinguishing optimism from neuroticism (and trait anxiety, self-mastery, and self-esteem): a reevaluation of the Life Orientation Test. Journal of personality and social psychology, 67(6), 1063. https://doi.org/10.1037/0022-3514.67.6.1063"]
+}

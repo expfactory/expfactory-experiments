@@ -1,0 +1,16 @@
+{
+    "name": "Interpersonal Support Evaluation List (12-Item) Survey",
+    "exp_id": "interpersonal-support-evaluation-survey",
+    "description": "A 12-item measure of perceptions of social support.",
+    "instructions": "For each statement, choose the most appropriate option.",
+    "url": "https://github.com/expfactory-experiments/interpersonal-support-evaluation-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Daniel Wilson",
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Cohen S., Mermelstein R., Kamarck T., & Hoberman, H.M. (1985). Measuring the functional components of social support. In Sarason, I.G. & Sarason, B.R. (Eds), Social support: theory, research, and applications. The Hague, Netherlands: Martinus Niijhoff."]
+}

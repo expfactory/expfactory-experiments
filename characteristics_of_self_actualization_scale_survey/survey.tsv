@@ -1,0 +1,34 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For all questions, please choose one of the following	0	2		
+radio	I  can  appreciate  again  and  again,  freshly  and  naively,  the  basic  goods  of  life,  with  awe,  pleasure, wonder,  and  even  ecstasy,  however  stale  these  experiences  may  have  become  to  others.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	A  sunset  looks  just  as  beautiful  every  time  I  see  one.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  often  feel  gratitude  for  the  good  in  my  life  no  matter  how  many  times  I  encounter  it.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  accept  all  sides  of  myself,  including  my  shortcomings.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  accept  all  of  my  quirks  and  desires  without  shame  or  apology.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  have  unconditional  acceptance  for  people  and  their  unique  quirks  and  desires.	1	3	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  can  maintain  my  dignity  and  integrity  even  in  environments  and  situations  that are undignified.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  can  stay  true  to  my  core  values  even  in  environments  that  challenge  them.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  take  responsibility  for  my  actions.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  am  often  undisturbed  and  unruffled  by  things  that  seem  to  bother  most  people.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  am  relatively  stable  in  the  face  of  hard  knocks,  blows,  deprivations,  and  frustrations.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  tend  to  take  life’s  inevitable  ups  and  downs  with  grace,  acceptance,  and  equanimity.	1	4	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  feel  a  great  responsibility  and  duty  to  accomplish  a  particular  mission  in  life.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  feel  as  though  I  have  some  important  task  to  fulfill  in  this  lifetime.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  have  a  purpose  in  life  that  will  help  the  good  of  humankind.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  often  have  a  clear  perception  of  reality.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  am  always  trying  to  get  at  the  real  truth  about  people  and  nature.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  try  to  get  as  close  as  I  can  to  the  reality  of  the  world.	1	5	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  feel  a  deep  sense  of  identification  with  all  human  beings.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  feel  a  great  deal  of  sympathy  and  affection  for  all  human  beings.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  have  a  genuine  desire  to  help  the  human  race.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  often  have  experiences  in  which  I  feel  new  horizons  and  possibilities  opening  up  for  myself and  others.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  often  have  experiences  in  which  I  feel  a  profound  transcendence  of  my  selfish  concerns.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  often  have  experiences  in  which  I  feel  one  with  all  people  and  things  on  this  planet.	1	6	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  trust  my  moral  decisions  without  having  to  deliberate  too  much  about  them.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  have  a  strong  sense  of  right  and  wrong  in  my  daily  life.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  can  tell  “deep  down”  right  away  when  I’ve  done  something  wrong.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  have  a  generally  creative  spirit  that  touches  everything  I  do.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  bring  a  generally  creative  attitude  to  all  of  my  work.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+radio	I  am  often  in  touch  with  my  childlike  spontaneity.	1	7	Strongly Disagree: 1, 2, 3, 4, Strongly Agree: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	8		

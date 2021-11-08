@@ -1,0 +1,17 @@
+{
+    "name": "Big Five Inventory Survey",
+    "exp_id": "big-five-survey",
+    "description": "A short form designed for researchers wanting to assess social desirability when time is limited.",
+    "instructions": "Here are a number of characteristics that may or may not apply to you.  For example, do you agree that you are someone who likes to spend time with others?  Please write a number next to each statement to indicate the extent to which you agree or disagree with that statement.",
+    "url": "https://github.com/expfactory-experiments/big-five-survey",
+    "template":"survey",
+    "cognitive_atlas_task_id": "trm_56a915461cd91",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "Aryaki Sethi",
+                     "Junghyun (Andy) Kim"
+                    ], 
+    "time":3,
+    "reference": ["John, O. P., Donahue, E. M., & Kentle, R. L. (1991). Big Five Inventory. Journal of Personality and Social Psychology. https://doi.org/10.1037/t07550-000",
+                  "John, O. P., Naumann, L. P., & Soto, C. J. (2008). Paradigm shift to the integrative big five trait taxonomy. Handbook of Personality: Theory and Research, 3(2), 114–158."]
+}

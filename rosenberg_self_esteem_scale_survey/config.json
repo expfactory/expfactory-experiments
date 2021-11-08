@@ -1,0 +1,14 @@
+{
+    "name": "Rosenberg Self-Esteem Scale",
+    "exp_id": "rosenberg-self-esteem-survey",
+    "description": "A measure to assess self-esteem, which is defined as a positive or negative attitude toward the self.",
+    "instructions": "Below is a list of statements dealing with your general feelings about yourself. Please indicate how strongly you agree or disagree with each statement.",
+    "url": "https://github.com/expfactory-experiments/rosenberg-self-esteem-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Rosenberg, M. (1965). Society and the adolescent self-image . Princeton University Press."]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Trait Robustness of Self-Confidence Inventory Survey",
+    "exp_id": "trait-robustness-of-self-confidence-survey",
+    "description": "A measure of robust confidence beliefs which is the ability to maintain confidence beliefs in the face of adversity.",
+    "instructions": "Athletes were asked to rate the extent to that they agreed or disagreed with each statement on a Likert-type scale ranging from 1 (strongly disagree) to 9 (strongly agree).",
+    "url": "TBD",
+    "template": "jspsych",
+    "cognitive_atlas_task_id": "N/A",
+    "contributors": [
+                     "Juan (Dethea) Du",
+                     "Jung Hyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Beattie, S., Hardy, L., Savage, J., Woodman, T., & Callow, N. (2011). Development and validation of a trait measure of robustness of self-confidence. Psychology of Sport & Exercise, 12(2), 184–191. https://doi.org/10.1016/j.psychsport.2010.09.008"]
+}

@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Please indicate, for each item, how often you felt or thought a certain way during the past month	0	2		
+radio	In the last month, how often have you been upset because of something that happened unexpectedly?	1	3	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+radio	In the last month, how often have you felt that you were unable to control the important things in your life?	1	3	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+radio	In the last month, how often have you felt nervous and “stressed”?	1	3	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+radio	In the last month, how often have you felt confident about your ability to handle your personal problems?	1	3	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	5,4,3,2,1
+radio	In the last month, how often have you felt that things were going your way?	1	3	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	5,4,3,2,1
+radio	In the last month, how often have you found that you could not cope with all the things that you had to do?	1	4	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+radio	In the last month, how often have you been able to control irritations in your life?	1	4	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	5,4,3,2,1
+radio	In the last month, how often have you felt that you were on top of things?	1	4	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	5,4,3,2,1
+radio	In the last month, how often have you been angered because of things that were outside of your control?	1	4	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+radio	In the last month, how often have you felt difficulties were piling up so high that you could not overcome them? 	1	4	Never: 1,Almost Never: 2,Sometimes: 3,Fairly Often: 4,Very Often: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

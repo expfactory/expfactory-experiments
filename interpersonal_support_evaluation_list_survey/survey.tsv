@@ -1,0 +1,16 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For each statement, choose the most appropriate option.	0	2		
+radio	If I wanted to go on a trip for a day (for example, to the country or mountains), I would have a hard time finding someone to go with me. 	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+radio	I feel that there is no one I can share my most private worries and fears with.	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+radio	If I were sick, I could easily find someone to help me with my daily chores.	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	There is someone I can turn to for advice about handling problems with my family. 	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	If I decide one afternoon that I would like to go to a movie that evening, I could easily find someone to go with me. 	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	When I need suggestions on how to deal with a personal problem, I know someone I can turn to. 	1	3	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	I don't often get invited to do things with others. 	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+radio	If I had to go out of town for a few weeks, it would be difficult to find someone who would look after my house or apartment (the plants, pets, garden, etc.).	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+radio	If I wanted to have lunch with someone, I could easily find someone to join me.	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	If I was stranded 10 miles from home, there is someone I could call who could come and get me.	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	1,2,3,4
+radio	If a family crisis arose, it would be difficult to find someone who could give me good advice about how to handle it. 	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+radio	If I needed some help in moving to a new house or apartment, I would have a hard time finding someone to help me.	1	4	Definitely False: 1,Probably False: 2,Probably True: 3,Definitely True: 4	4,3,2,1
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

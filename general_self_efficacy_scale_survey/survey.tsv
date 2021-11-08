@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For all questions, please choose one of the following	0	2		
+radio	I can always manage to solve difficult problems if I try hard enough.	1	3	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	 If someone opposes me, I can find the means and ways to get what I want.	1	3	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	It is easy for me to stick to my aims and accomplish my goals.	1	3	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	I am confident that I could deal efficiently with unexpected events.	1	3	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	Thanks to my resourcefulness, I know how to handle unforeseen situations.	1	3	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	I can solve most problems if I invest the necessary effort.	1	4	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	I can remain calm when facing difficulties because I can rely on my coping abilities.	1	4	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	When I am confronted with a problem, I can usually find several solutions.	1	4	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	If I am in trouble, I can usually think of a solution.	1	4	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+radio	I can usually handle whatever comes my way.	1	4	Not at all true: 1,Hardly true: 2,Moderately true: 3,Exactly true: 4	1,2,3,4
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

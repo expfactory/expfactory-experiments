@@ -1,0 +1,15 @@
+{
+    "name": "Positive and Negative Affect Schedule-Short-Form Survey",
+    "exp_id": "positive-and-negative-affect-schedule-short-form-survey",
+    "description": "A short form measure to assess positive affect (PA) and negative affect (NA) as discrete constructs.",
+    "instructions": "Thinking about yourself and how you normally feel, to what extent do you generally feel:",
+    "url": "https://github.com/expfactory-experiments/positive-and-negative-affect-schedule-short-form-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Juan (Dethea) Du",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 1,
+    "reference": ["Thompson, E. R. (2007). Development and Validation of an Internationally Reliable Short-Form of the Positive and Negative Affect Schedule (PANAS). Journal of Cross-Cultural Psychology, 38(2), 227–242. https://doi.org/10.1177/0022022106297301"]
+}

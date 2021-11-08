@@ -1,0 +1,12 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Athletes were asked to rate the extent to that they agreed or disagreed with each statement on a Likert-type scale ranging from 1 (strongly disagree) to 9 (strongly agree).	0	2		
+radio	A bad result in competition has a very negative effect on my self- confidence.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	9,8,7,6,5,4,3,2,1
+radio	My self-confidence goes up and down a lot.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	9,8,7,6,5,4,3,2,1
+radio	Negative feedback from others does not affect my level of self-confidence.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	1,2,3,4,5,6,7,8,9
+radio	If I perform poorly, my confidence is not badly affected.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	1,2,3,4,5,6,7,8,9
+radio	My self-confidence is stable; it does not vary much at all.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	1,2,3,4,5,6,7,8,9
+radio	My self-confidence is not greatly affected by the outcome of competition.	1	3	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	1,2,3,4,5,6,7,8,9
+radio	If I make a mistake it has quite a large detrimental effect on my self-confidence.	1	4	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	9,8,7,6,5,4,3,2,1
+radio	My self-confidence remains stable regardless of fluctuations in fitness level.	1	4	Strongly Disagree: 1,2,3,4,5,6,7,8,Strongly Agree: 9	1,2,3,4,5,6,7,8,9
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

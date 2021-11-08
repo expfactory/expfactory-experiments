@@ -1,0 +1,48 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Here are a number of characteristics that may or may not apply to you.  For example, do you agree that you are someone who likes to spend time with others?  Please write a number next to each statement to indicate the extent to which you agree or disagree with that statement. 	0	2		
+radio	I am someone who <strong>is talkative</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>tends to find fault with others</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>does a thorough job</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is depressed, blue</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is original, comes up with new ideas</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is reserved</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is helpful and unselfish with others</strong>	1	3	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>can be somewhat careless</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is relaxed, handles stress well</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is curious about many different things</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is full of energy</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>starts quarrels with others</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is a reliable worker</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>can be tense</strong>	1	4	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is ingenious, a deep thinker</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>generates a lot of enthusiasm</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>has a forgiving nature</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>tends to be disorganized</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>worries a lot</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>has an active imagination</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>tends to be quiet</strong>	1	5	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is generally trusting</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>tends to be lazy</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is emotionally stable, not easily upset</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is inventive</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>has an assertive personality</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>can be cold and aloof</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>perseveres until the task is finished</strong>	1	6	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>can be moody</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>values artistic, aesthetic experiences</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is sometimes shy, inhibited</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is considerate and kind to almost everyone</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>does things efficiently</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>remains calm in tense situations</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>prefers work that is routine</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is outgoing, sociable</strong>	1	7	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is sometimes rude to others</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>makes plans and follows through with them</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>gets nervous easily</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>likes to reflect, play with ideas</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>has few artistic interests</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>likes to cooperate with others</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+radio	I am someone who <strong>is easily distracted</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	5,4,3,2,1
+radio	I am someone who <strong>is sophisticated in art, music, or literature</strong>	1	8	Disagree Strongly: 1,Disagree a little: 2,Neither agree nor disagree: 3,Agree a little: 4,Agree Strongly: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	9		

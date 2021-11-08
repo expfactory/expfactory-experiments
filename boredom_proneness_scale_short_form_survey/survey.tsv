@@ -1,0 +1,12 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For all questions, please choose one of the following.	0	2		
+radio	I often find myself at “loose ends,” not knowing what to do.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	I find it hard to entertain myself.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	Many things I have to do are repetitive and monotonous.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	It takes more stimulation to get me going than most people.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	I don’t feel motivated by most things that I do.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	In most situations, it is hard for me to find something to do or see to keep me interested.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	Much of the time, I just sit around doing nothing.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+radio	Unless I am doing something exciting, even dangerous, I feel half-dead and dull.	1	3	Strongly Agree: 1, 2, 3, 4, Strongly Disagree: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	4		

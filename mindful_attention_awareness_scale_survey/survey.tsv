@@ -1,0 +1,19 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Please indicate how frequently or infrequently you currently have each experience. Please answer according to what really reflects your experience rather than what you think your experience should be.	0	2		
+radio	I could be experiencing some emotion and not be conscious of it until some time later.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I break or spill things because of carelessness, not paying attention, or thinking of something else.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I find it difficult to stay focused on what’s happening in the present.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I tend to walk quickly to get where I’m going without paying attention to what I experience along the way.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I tend not to notice feelings of physical tension or discomfort until they really grab my attention.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I forget a person’s name almost as soon as I’ve been told it for the first time.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	It seems I am “running on automatic” without much awareness of what I’m doing.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I rush through activities without being really attentive to them.	1	3	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I get so focused on the goal I want to achieve that I lose touch with what I am doing right now to get there.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I do jobs or tasks automatically, without being aware of what I’m doing.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I find myself listening to someone with one ear, doing something else at the same time.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I drive places on “automatic pilot” and then wonder why I went there.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I find myself preoccupied with the future or the past.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I find myself doing things without paying attention.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+radio	I snack without being aware that I’m eating.	1	4	Almost Always: 1,Very Frequently: 2,Somewhat Frequently: 3,Somewhat Infrequently: 4,Very Infrequently: 5,Almost Never: 6	1,2,3,4,5,6
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

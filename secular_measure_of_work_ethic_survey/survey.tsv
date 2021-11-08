@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.	0	2		
+radio	I believe that a job well done is a reward in itself.	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	Even in this fast-changing world, sincerity, hard work and integrity continue to be the golden keys to success in one’s work life. 	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I consider my occupational career to be one of the most important activities in my life. 	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I believe that a person is known in society by the work he does.	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I feel a moral obligation to give a full day’s work for a full day’s pay.	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I welcome jobs that involve greater responsibility and challenge as they contribute to my learning and growth.	1	3	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I believe that one should never be late for work unless there is some real emergency.	1	4	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I believe that work provides a powerful channel to express one’s knowledge, ability and creativity.	1	4	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	I believe that one’s work provides the best source of achieving perfection in life.	1	4	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+radio	Even if I don’t have to work to earn a living, I would still prefer to continue working.	1	4	Stongly disagree: 0,Disagree: 1,Agree: 2,Strongly agree: 3	0.1.2.3
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

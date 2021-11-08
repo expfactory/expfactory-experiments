@@ -1,0 +1,16 @@
+{
+    "name": "Multidimensional Work Ethic Profile Survey",
+    "exp_id": "multidimensional-work-ethic-profile-survey",
+    "description": "This monograph presents a brief historical and conceptual review of the work ethic construct, suggests a general conceptual definition of work ethic, and reports a series of empirical studies to construct and evaluate a new multidimensional measure of work ethic.",
+    "instructions": "Please choose the alternative that best represents your opinion to each item.",
+    "url": "https://github.com/expfactory-experiments/multidimensional-work-ethic-profile-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 6,
+    "reference": ["Miller, M. J., Woehr, D. J., & Hudspeth, N. (2002). The meaning and measurement of work ethic: Construction and initial validation of a multidimensional inventory. Journal of Vocational Behavior, 60(3), 451-489."]
+}

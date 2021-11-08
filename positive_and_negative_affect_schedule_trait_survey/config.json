@@ -1,0 +1,15 @@
+{
+    "name": "Positive and Negative Affect Schedule-Trait Survey",
+    "exp_id": "positive-and-negative-affect-schedule-survey",
+    "description": "A measure to assess positive affect (PA) and negative affect (NA) as discrete constructs.",
+    "instructions": "This scale consists of a number of words that describe different feelings and emotions. Read each item and then mark the appropriate answer in the space next to that word. Indicate to what extent [INSERT APPROPRIATE TIME INSTRUCTIONS HERE]. Timescales used:",
+    "url": "https://github.com/expfactory-experiments/positive-and-negative-affect-schedule-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "tsk_4a57abb949d09",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Watson, D., Clark, L. A., & Tellegen, A. (1988). Development and Validation of Brief Measures of Positive and Negative Affect: The PANAS Scales. Journal of Personality and Social Psychology, 54(6), 1063–1070. https://doi.org/10.1037/0022-3514.54.6.1063"]
+}

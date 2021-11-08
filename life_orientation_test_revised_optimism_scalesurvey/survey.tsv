@@ -1,0 +1,14 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Indicate how much you agree with the statements based on your own feelings. Try not to let your response to one statement influence your responses to the others.	0	2		
+radio	In uncertain times, I usually expect the best.	1	3	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	1,2,3,4,5
+radio	It's easy for me to relax.	1	3	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	0,0,0,0,0
+radio	If something can go wrong for me, it will.	1	3	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	5,4,3,2,1
+radio	I'm always optimistic about my future.	1	3	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	1,2,3,4,5
+radio	I enjoy my friends a lot. 	1	3	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	0,0,0,0,0
+radio	It's important for me to keep busy.	1	4	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	0,0,0,0,0
+radio	I hardly ever expect things to go my way.	1	4	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	5,4,3,2,1
+radio	I don't get upset too easily.	1	4	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	0,0,0,0,0
+radio	I rarely count on good things happening to me.	1	4	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	5,4,3,2,1
+radio	Overall, I expect more good things to happen to me than bad.	1	4	I Agree A lot: 1,I Agree A Little: 2,I Neighter Agree Nor Disagree: 3,I Disagree A Little: 4,I Disagree A Lot: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	5		

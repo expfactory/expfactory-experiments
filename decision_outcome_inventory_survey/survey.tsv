@@ -1,0 +1,73 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	The following questions ask whether different events have happened to you in the last 10 years. Please indicate “yes” or “no” for each. 	0	2		
+radio	Rented a movie.	1	1	Yes: 1,No: 2	1,2
+radio	Returned a movie you rented without having watched it at all.	1	1	Yes: 1,No: 2	1,2
+radio	Bought new clothes or shoes.	1	1	Yes: 1,No: 2	1,2
+radio	Bought new clothes or shoes you never wore.	1	1	Yes: 1,No: 2	1,2
+radio	Gone shopping for food or groceries.	1	1	Yes: 1,No: 2	1,2
+radio	Threw out food or groceries you had bought, because they went bad.	1	1	Yes: 1,No: 2	1,2
+radio	Done your own laundry.	1	1	Yes: 1,No: 2	1,2
+radio	Ruined your clothes because you didn't follow the laundry instructions on the label.	1	1	Yes: 1,No: 2	1,2
+radio	Been enrolled in any kind of school.	1	1	Yes: 1,No: 2	1,2
+radio	Been suspended from school for at least one day for any reason.	1	1	Yes: 1,No: 2	1,2
+radio	Had any kind of job.	1	2	Yes: 1,No: 2	1,2
+radio	Quit a job after a week.	1	2	Yes: 1,No: 2	1,2
+radio	Had a driver’s license.	1	2	Yes: 1,No: 2	1,2
+radio	Had your driver's license taken away from you by the police.	1	2	Yes: 1,No: 2	1,2
+radio	Driven a car.	1	2	Yes: 1,No: 2	1,2
+radio	Been accused of causing a car accident while driving.	1	2	Yes: 1,No: 2	1,2
+radio	Gotten more than 5 parking tickets.	1	2	Yes: 1,No: 2	1,2
+radio	Gotten more than 5 speeding tickets.	1	2	Yes: 1,No: 2	1,2
+radio	Gotten lost or gone the wrong way for more than 10 minutes while driving.	1	2	Yes: 1,No: 2	1,2
+radio	Locked your keys in the car.	1	2	Yes: 1,No: 2	1,2
+radio	Bought any kind of car.	1	3	Yes: 1,No: 2	1,2
+radio	Had to spend at least $500 to fix a car you had owned for less than half a year.	1	3	Yes: 1,No: 2	1,2
+radio	Taken a trip by airplane.	1	3	Yes: 1,No: 2	1,2
+radio	Missed a flight.	1	3	Yes: 1,No: 2	1,2
+radio	Taken the train or the bus.	1	3	Yes: 1,No: 2	1,2
+radio	Taken the wrong train or bus.	1	3	Yes: 1,No: 2	1,2
+radio	Had any form of ID (driver’s license, passport, birth certificate).	1	3	Yes: 1,No: 2	1,2
+radio	Had your ID replaced because you lost it.	1	3	Yes: 1,No: 2	1,2
+radio	Lived in a rented apartment or other rental property.	1	3	Yes: 1,No: 2	1,2
+radio	Been kicked out of an apartment or rental property before the lease ran out.	1	3	Yes: 1,No: 2	1,2
+radio	Carried a key to your home.	1	4	Yes: 1,No: 2	1,2
+radio	Had the key to your home replaced because you lost it.	1	4	Yes: 1,No: 2	1,2
+radio	Locked yourself out of your home.	1	4	Yes: 1,No: 2	1,2
+radio	Been responsible for electricity, cable, gas or water payments.	1	4	Yes: 1,No: 2	1,2
+radio	Had your electricity, cable, gas or water shut off because you didn't pay on time.	1	4	Yes: 1,No: 2	1,2
+radio	Been responsible for a mortgage or loan.	1	4	Yes: 1,No: 2	1,2
+radio	Had a mortgage or loan foreclosed.	1	4	Yes: 1,No: 2	1,2
+radio	Been responsible for rent or mortgage payments.	1	4	Yes: 1,No: 2	1,2
+radio	Paid a rent or mortgage payment at least 2 weeks too late In the last 10 years, have you ever…	1	4	Yes: 1,No: 2	1,2
+radio	Used checks.	1	5	Yes: 1,No: 2	1,2
+radio	Had a check bounce.	1	5	Yes: 1,No: 2	1,2
+radio	Had a credit card.	1	5	Yes: 1,No: 2	1,2
+radio	Had more than $5000 in credit card debt.	1	5	Yes: 1,No: 2	1,2
+radio	Invested in the stock market.	1	5	Yes: 1,No: 2	1,2
+radio	Lost more than $1000 on a stock-market investment.	1	5	Yes: 1,No: 2	1,2
+radio	Been to a bar, restaurant, or hotel.	1	5	Yes: 1,No: 2	1,2
+radio	Been kicked out of a bar, restaurant, or hotel by someone who works there.	1	5	Yes: 1,No: 2	1,2
+radio	Loaned more than $50 to someone.	1	5	Yes: 1,No: 2	1,2
+radio	Loaned more than $50 to someone and never got it back.	1	5	Yes: 1,No: 2	1,2
+radio	Had a romantic relationship that lasted for at least 1 year.	1	6	Yes: 1,No: 2	1,2
+radio	Cheated on your romantic partner of 1 year by having sex with someone else.	1	6	Yes: 1,No: 2	1,2
+radio	Been married.	1	6	Yes: 1,No: 2	1,2
+radio	Been divorced.	1	6	Yes: 1,No: 2	1,2
+radio	Had sex.	1	6	Yes: 1,No: 2	1,2
+radio	Been diagnosed with an STD.	1	6	Yes: 1,No: 2	1,2
+radio	Had an unplanned pregnancy (or got someone pregnant, unplanned).	1	6	Yes: 1,No: 2	1,2
+radio	Had sex with a condom.	1	6	Yes: 1,No: 2	1,2
+radio	Had a condom break, tear, or slip off.	1	6	Yes: 1,No: 2	1,2
+radio	Had an alcoholic drink.	1	7	Yes: 1,No: 2	1,2
+radio	Consumed so much alcohol you vomited.	1	7	Yes: 1,No: 2	1,2
+radio	Received a DUI for drunk driving.	1	7	Yes: 1,No: 2	1,2
+radio	Been out in the sun.	1	7	Yes: 1,No: 2	1,2
+radio	Got blisters from sun burn.	1	7	Yes: 1,No: 2	1,2
+radio	Been in a jail cell overnight for any reason.	1	7	Yes: 1,No: 2	1,2
+radio	Been in a public fight or screaming argument.	1	7	Yes: 1,No: 2	1,2
+radio	Declared bankruptcy.	1	7	Yes: 1,No: 2	1,2
+radio	Forgotten a birthday of someone close to you and did not realize until the next day or later.	1	7	Yes: 1,No: 2	1,2
+radio	Been diagnosed with type 2 diabetes.	1	7	Yes: 1,No: 2	1,2
+radio	Broke a bone because you fell, slipped, or misstepped.	1	7	Yes: 1,No: 2	1,2
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	8		

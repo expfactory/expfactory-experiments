@@ -1,0 +1,15 @@
+{
+    "name": "Five Item Ambition Scale Survey",
+    "exp_id": "five-item-ambition-survey",
+    "description": "A scale to measure how ambition a person is",
+    "instructions": "Please respond to the following 5 items. Be honest – there are no right or wrong answers!",
+    "url": "https://github.com/expfactory-experiments/five-item-ambition-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim"  ,
+                     "Juan (Dethea) Du"                                   
+                    ], 
+    "time": 1,
+    "reference": ["Moore, R., Hussain, M., Watson, C., Fazeli, P., Marquine, M., Yarns, B., Jeste, D., & Moore, D. (2018). Grit and Ambition are Associated with Better Neurocognitive and Everyday Functioning Among Adults Living with HIV. AIDS and Behavior, 22(10), 3214–3225. https://doi.org/10.1007/s10461-018-2061-1"]
+}

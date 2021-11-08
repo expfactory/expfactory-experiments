@@ -1,0 +1,15 @@
+{
+    "name": "Propensity to Plan Survey",
+    "exp_id": "propensity-to-plan-survey",
+    "description": "A measure of individual differences in propensity to plan that can be adapted to different domains and used to compare planning across domains and time horizons.",
+    "instructions": "Please indicate how frequently or infrequently you currently have each experience.",
+    "url": "https://github.com/expfactory-experiments/propensity-to-plan-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 5,
+    "reference": ["Lynch Jr, J. G., Netemeyer, R. G., Spiller, S. A., & Zammit, A. (2010). A generalizable scale of propensity to plan: The long and the short of planning for time and for money. Journal of consumer research, 37(1), 108-128. https://doi.org/10.1086/649907"]
+}

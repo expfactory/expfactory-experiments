@@ -1,0 +1,15 @@
+{
+    "name": "Trait Emotional Intelligence Questionnaire Short Form Survey",
+    "exp_id": "trait-emotional-intelligence-short-form-survey",
+    "description": "A 30-item questionnaire designed to measure global trait emotional intelligence.",
+    "instructions": "Please answer each statement below by putting a circle around the number that best reflects your degree of agreement or disagreement with that statement. Do not think too long about the exact meaning of the statements. Work quickly and try to answer as accurately as possible. There are no right or wrong answers. There are seven possible responses to each statement ranging from ‘Completely Disagree’ (number 1) to ‘Completely Agree’ (number 7).",
+    "url": "https://github.com/expfactory-experiments/trait-emotional-intelligence-short-form-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 4,
+    "reference": ["Petrides, K. V., & Furnham, A. (2001). Trait emotional intelligence: psychometric investigation with reference to established trait taxonomies. European Journal of Personality, 15(6), 425–448. https://doi.org/10.1002/per.416"]
+}

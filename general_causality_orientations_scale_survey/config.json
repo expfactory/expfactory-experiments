@@ -1,0 +1,16 @@
+{
+    "name": "General Causality Orientations Scale Survey",
+    "exp_id": "general-causality-orientations-survey",
+    "description": "Causality orientations are conceptualized as relatively enduring aspects of people that characterize the source of initiation and regulation, and thus the degree of self-determination, of their behavior.",
+    "instructions": "These items pertain to a series of hypothetical sketches. Each sketch describes an incident and lists three ways of responding to it. Please read each sketch, imagine yourself in that situation, and then consider each of the possible responses. Think of each response option in terms of how likely it is that you would respond that way. We all respond in a variety of ways to situations, and probably most or all responses are at least slightly likely for you.",
+    "url": "https://github.com/expfactory-experiments/general-causality-orientations-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Aryaki Sethi",
+                     "Juan (Dethea) Du",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 3,
+    "reference": ["Deci, E. L., & Ryan, R. M. (1985). The general causality orientations scale: Self-determination in personality. Journal of Research in Personality, 19(2), 109–134. https://doi.org/10.1016/0092-6566(85)90023-6"]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Characteristics of Self-Actualization Scale Survey",
+    "exp_id": "characteristics-of-self-actualization-survey",
+    "description": "Scale validation showed that 10 characteristics of self-actualizing people as proposed by Maslow",
+    "instructions": "For all questions, please choose one of the following",
+    "url": "https://github.com/expfactory-experiments/characteristics-of-self-actualization-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "Aryaki Sethi",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 5,
+    "reference": ["Kaufman, S. B. (2018). Self-Actualizing People in the 21st Century: Integration With Contemporary Theory and Research on Personality and Well-Being. Journal of Humanistic Psychology. https://doi.org/10.1177/0022167818809187"]
+}

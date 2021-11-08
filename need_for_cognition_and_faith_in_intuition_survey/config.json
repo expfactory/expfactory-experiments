@@ -1,0 +1,15 @@
+{
+    "name": "Need for Cognition & Faith in Intuition Survey",
+    "exp_id": "need-for-cognition-and-faith-in-intuition-survey",
+    "description": "a new self-report measure of individual differences in intuitive-experiential and analytical-rational thinking based on cognitive-experien- tial self-theory.",
+    "instructions": "The researchers carried two experiments. For the first experiments, they let students take the long version questionnaire home and return it at the next class meeting. On the other hand, for the second experiment, they chose the best 10 items due to time and space limitations. Note that the participants of each experiment are different.",
+    "url": "https://github.com/expfactory-experiments/need-for-cognition-and-faith-in-intuition-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim",
+                     "Juan (Dethea) Du"                                     
+                    ], 
+    "time": 7,
+    "reference": ["Epstein, S., Pacini, R., Denes-Raj, V., & Heier, H. (1996). Individual Differences in Intuitive-Experiential and Analytical-Rational Thinking Styles. Journal of Personality and Social Psychology, 71(2), 390–405. https://doi.org/10.1037/0022-3514.71.2.390"]
+}

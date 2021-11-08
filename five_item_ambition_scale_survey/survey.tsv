@@ -1,0 +1,9 @@
+question_type	question_text	required	page_number	option_text	option_values
+instruction	Welcome to this survey. Press <strong>Next</strong> to begin.	0	1		
+instruction	Please respond to the following 5 items. Be honest – there are no right or wrong answers!	0	2		
+radio	I aim to be the best in the world at what I do.	1	3	Not at all like me:1, Not much like me: 2, Somewhat like me:3, Mostly like me: 4, Very much like me: 5	1,2,3,4,5
+radio	I am ambitious.	1	3	Not at all like me:1, Not much like me: 2, Somewhat like me: 3, Mostly like me: 4, Very much like me: 5	1,2,3,4,5
+radio	Achieving something of lasting importance is the highest goal in life.	1	3	Not at all like me:1, Not much like me: 2, Somewhat like me:3, Mostly like me: 4, Very much like me: 5	1,2,3,4,5
+radio	I think achievement is overrated.	1	3	Not at all like me:1, Not much like me: 2, Somewhat like me:3, Mostly like me: 4, Very much like me: 5	5,4,3,2,1
+radio	I am driven to succeed.	1	3	Not at all like me:1, Not much like me: 2, Somewhat like me:3, Mostly like me: 4, Very much like me: 5	1,2,3,4,5
+instruction	Congratulations for completing this survey! Press <strong>finish</strong> to continue.	0	4		

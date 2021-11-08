@@ -1,0 +1,14 @@
+{
+    "name": "Subjective Numeracy Scale Survey",
+    "exp_id": "subjective-numeracy-survey",
+    "description": "A self-report measure of perceived ability to perform various mathematical tasks and preference for the use of numerical versus prose information.",
+    "instructions": "For each of the following questions, please check the box that best reflects how good you are at doing the following things:",
+    "url": "https://github.com/expfactory-experiments/subjective-numeracy-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Fagerlin, A., Zikmund-Fisher, B.J., Ubel, P.A., Jankovic, A., Derry, H.A., & Smith, D.M. Measuring numeracy without a math test: Development of the Subjective Numeracy Scale (SNS). Medical Decision Making, 2007: 27: 672-680."]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Secular Measure of Work Ethic Survey",
+    "exp_id": "secular-measure-of-work-ethic-survey",
+    "description": "A measure can be used in work commitment studies.",
+    "instructions": "For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.",
+    "url": "https://github.com/expfactory-experiments/secular-measure-of-work-ethic-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Sofia Dallali",
+                     "Junghyun (Andy) Kim"                
+                    ], 
+    "time": 2,
+    "reference": ["Blau, G., & Ryan, J. (1997). On measuring work ethic: A neglected work commitment facet. Journal of Vocational Behavior, 51(3), 435-448.  https://doi.org/10.1006/jvbe.1996.1568"]
+}

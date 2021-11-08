@@ -1,0 +1,14 @@
+{
+    "name": "Maximizing Tendency Scale Survey",
+    "exp_id": "maximizing-tendency-survey",
+    "description": "A measure of the goal of choosing the best.",
+    "instructions": "For all questions, please choose one of the following",
+    "url": "https://github.com/expfactory-experiments/maximizing-tendency-survey",
+    "template": "survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim"                                    
+                    ], 
+    "time": 4,
+    "reference": ["Dalal, D., Diab, D., Zhu, X., & Hwang, T. (2015). Understanding the Construct of Maximizing Tendency: A Theoretical and Empirical Evaluation. Journal of Behavioral Decision Making, 28(5), 437–450. https://doi.org/10.1002/bdm.1859"]
+}

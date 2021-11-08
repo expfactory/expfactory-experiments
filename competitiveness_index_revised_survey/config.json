@@ -1,0 +1,16 @@
+{
+  "name": "Competitiveness Index Revised (CI-R) Survey",
+  "exp_id": "competitiveness-index-revised-survey",
+  "description": "A short survey designed to assess the desire to win in interpersonal situations.",
+  "instructions": "For each of the following statements, please indicate whether you agree or disagree with them, and how strongly.",
+  "url": "https://github.com/expfactory-experiments/competitiveness-index-revised-survey",
+  "template":"survey",
+  "cognitive_atlas_task_id": "",
+  "contributors": [
+                   "Juan (Dethea) Du",
+                   "Aryaki Sethi",
+                   "Junghyun (Andy) Kim"
+                  ], 
+  "time":2,
+  "reference": ["Houston J, Harris P, McIntire S, Francis D. Revising the Competitiveness Index using factor analysis. Psychol Rep. 2002 Feb;90(1):31-4. doi: 10.2466/pr0.2002.90.1.31. PMID: 11899003."]
+}

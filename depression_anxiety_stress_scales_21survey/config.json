@@ -1,0 +1,16 @@
+{
+    "name": "Depression Anxiety Stress Scales 21 Survey",
+    "exp_id": "depression-anxiety-stress-scales-21-surveys",
+    "description": "a set of three self-report scales designed to measure the emotional states of depression, anxiety and stress.",
+    "instructions": "Please read each statement and circle a number 0, 1, 2 or 3 which indicates how much the statement applied to you over the past week. There are no right or wrong answers. Do not spend too much time on any statement.",
+    "url": "https://github.com/expfactory-experiments/depression-anxiety-stress-scales-21-survey",
+    "template":"survey",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+                     "Junghyun (Andy) Kim",
+                     "Juan (Dethea) Du"                    
+                    ], 
+    "time":3,
+    "reference": ["Lovibond, P., & Lovibond, S. (1995). The structure of negative emotional states: Comparison of the Depression Anxiety Stress Scales (DASS) with the Beck Depression and Anxiety Inventories. Behaviour Research and Therapy, 33(3), 335–343. https://doi.org/10.1016/0005-7967(94)00075-U", 
+                  "Lovibond, S.H. & Lovibond, P.F. (1995).  Manual for the Depression Anxiety Stress Scales. (2nd. Ed.) Sydney: Psychology Foundation"]
+}
