@@ -33,7 +33,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for in-person version
 var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
 }
 
 var getRefreshTrialID = function() {
@@ -122,7 +122,7 @@ var getResponse = function() {
 }
 
 var getFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
 
@@ -280,7 +280,7 @@ var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
 
 
-var practice_len = 15 // must be divisible by 5
+var practice_len = 10 // must be divisible by 5
 var exp_len = 220 //150 // must be divisible by 5 --9:30
 var numTrialsPerBlock = 55 // must be divisible by 5 and we need to have a multiple of 2 blocks (2,4,6) in order to have equal delays across blocks
 var numTestBlocks = exp_len / numTrialsPerBlock //should be divisble by 2 ^^
@@ -291,7 +291,7 @@ var missed_thresh = 0.10
 
 var delays = jsPsych.randomization.repeat([1, 2], numTestBlocks / 2) //jsPsych.randomization.repeat([1, 2, 3], numTestBlocks / 3)
 
-var delay = 1
+var delay = 2 //1
 
 var pathSource = "/static/experiments/n_back_single_task_network__fmri/images/"
 var fileTypePNG = ".png'></img>"
@@ -344,10 +344,10 @@ var ITIs_resp = []
 var refresh_feedback_text = '<div class = instructbox>'+
 '<p class = instruct-text>In this task, you will see a letter on every trial.</p>'+
 '<p class = instruct-text>You will be asked to match the current letter to the letter that appeared either 1, 2, or 3 trials ago depending on the delay given to you for that block.</p>'+
-'<p class = instruct-text>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</p>'+
+'<p class = instruct-text><strong>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</strong></p>'+
 '<p class = instruct-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
 '<p class = instruct-text>Capitalization does not matter, so "T" matches with "t".</p> '+
-'<p class = instruct-text><i>Your delay for this upcoming practice round is 1</i>.</p> '+
+'<p class = instruct-text><strong><i>Your delay for this upcoming practice round is 1</i>.</strong></p> '+
 '<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
 '<p class = instruct-text>To let the experimenters know when you are ready to begin, please press any button. </p>'+
 '</div>'
@@ -472,9 +472,9 @@ for (i = 0; i < practice_len + 2; i++) {	//was changed from + 3 as delays went f
 		data: {
 			trial_id: "practice_trial"
 			},
-		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',// + prompt_text_list,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',// + prompt_text_list,
-		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list,
+		correct_text: '<div class = upperbox><div class = center-text>Correct!</font></div></div>',// + prompt_text_list,
+		incorrect_text: '<div class = upperbox><div class = center-text>Incorrect</font></div></div>',// + prompt_text_list,
+		timeout_message: '<div class = upperbox><div class = center-text>Respond Faster!</font></div></div>' + prompt_text_list,
 		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_feedback_duration: 500,

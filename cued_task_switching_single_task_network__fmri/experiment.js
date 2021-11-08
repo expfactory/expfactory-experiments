@@ -33,7 +33,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for in-person version
 var getRefreshFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + refresh_feedback_text + '</font></p></div></div>'
 }
 
 var getRefreshTrialID = function() {
@@ -119,7 +119,7 @@ var randomDraw = function(lst) {
 
 
 var getFeedback = function() {
-  return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+  return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
 
@@ -353,11 +353,11 @@ var current_trial = 0
 var CTI = 150 //cue-target-interval or cue's length (7/29, changed from 300 to 150; less time to process the cue should increase cue switch costs and task switch costs)
 var exp_stage = 'practice' // defines the exp_stage, switched by start_test_block
 
-var task_list = '<ul><li><i>Parity</i> or <i>Odd-Even</i>: Press your ' + response_keys.key_name[
+var task_list = '<ul><li><strong><i>Parity</i> or <i>Odd-Even</i>: Press your ' + response_keys.key_name[
     0] + ' key if even and your ' + response_keys.key_name[1] + ' key if odd.' +
   '</li><li><i>Magnitude</i> or <i>High-Low</i>: Press your ' + response_keys.key_name[
     0] + ' key if the number is greater than 5 and your ' + response_keys.key_name[1] +
-  ' key if less than 5.</li></ul>'
+  ' key if less than 5.</strong></li></ul>'
 
 var prompt_task_list = '<ul style="text-align:left"><li><i>Parity</i> or <i>Odd-Even</i>: ' + response_keys.key_name[0] +
   ' if even and ' + response_keys.key_name[1] + ' if odd.' +
@@ -538,9 +538,9 @@ for (var i = 0; i < refresh_length + 1; i++) {
     stimulus: getStim,
     is_html: true,
     key_answer: getResponse,
-    correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',
-    incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',
-    timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' +
+    correct_text: '<div class = upperbox><div class = center-text>Correct!</font></div></div>',
+    incorrect_text: '<div class = upperbox><div class = center-text>Incorrect</font></div></div>',
+    timeout_message: '<div class = upperbox><div class = center-text>Respond Faster!</div></div>' +
     prompt_task_list,
     choices: choices,
     data: {

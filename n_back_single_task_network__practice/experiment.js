@@ -33,7 +33,7 @@ function getITI_resp() { //added for fMRI compatibility
 
 //feedback functions added for in-person version
 var getPracticeFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + practice_feedback_text + '</font></p></div></div>'
 }
 
 var getPracticeTrialID = function() {
@@ -121,7 +121,7 @@ var getResponse = function() {
 }
 
 var getFeedback = function() {
-	return '<div class = bigbox><div class = picture_box><p class = block-text><font color="white">' + feedback_text + '</font></p></div></div>'
+	return '<div class = bigbox><div class = picture_box><p class = instruct-text><font color="white">' + feedback_text + '</font></p></div></div>'
 }
 
 
@@ -345,14 +345,14 @@ var ITIs_resp = []
 
 //practice feedback variables
 var practice_feedback_text = '<div class = instructbox>'+
-'<p class = block-text>In this task, you will see a letter on every trial.</p>'+
-'<p class = block-text>You will be asked to match the current letter to the letter that appeared either 1, 2, or 3 trials ago depending on the delay given to you for that block.</p>'+
-'<p class = block-text>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</p>'+
-'<p class = block-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
-'<p class = block-text>Capitalization does not matter, so "T" matches with "t".</p> '+
-'<p class = block-text><i>Your delay for this upcoming practice round is 1</i>.</p> '+
-'<p class = block-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
-'<p class = block-text>When you are ready to begin, please press the spacebar. </p>'+
+'<p class = instruct-text>In this task, you will see a letter on every trial.</p>'+
+'<p class = instruct-text>You will be asked to match the current letter to the letter that appeared either 1, 2, or 3 trials ago depending on the delay given to you for that block.</p>'+
+'<p class = instruct-text><strong>Press your '+possible_responses[0][0]+' if the letters match, and your '+possible_responses[1][0]+' if they mismatch.</strong></p>'+
+'<p class = instruct-text>Your delay (the number of trials ago which you must match the current letter to) will change from block to block. You will be given the delay at the start of every block of trials.</p>'+
+'<p class = instruct-text>Capitalization does not matter, so "T" matches with "t".</p> '+
+'<p class = instruct-text><i><strong>Your delay for this upcoming practice round is 1</strong></i>.</p> '+
+'<p class = instruct-text>During practice, you will see a reminder of the rules.  <i> This will be removed for the test</i>. </p>'+ 
+'<p class = instruct-text>When you are ready to begin, please press the spacebar. </p>'+
 '</div>'
 var practice_trial_id = "instructions"
 var practice_feedback_timing = -1
@@ -504,9 +504,9 @@ for (i = 0; i < practice_len + 2; i++) {	//was changed from + 3 as delays went f
 		data: {
 			trial_id: "practice_trial"
 			},
-		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>',// + prompt_text_list,
-		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>',// + prompt_text_list,
-		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list,
+		correct_text: '<div class = upperbox><div class = center-text><font size = 20>Correct!</font></div></div>',// + prompt_text_list,
+		incorrect_text: '<div class = upperbox><div class = center-text><font size = 20>Incorrect</font></div></div>',// + prompt_text_list,
+		timeout_message: '<div class = upperbox><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text_list,
 		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
 		timing_feedback_duration: 500,
@@ -570,31 +570,31 @@ var practiceNode1 = {
 		} else if (accuracy < accuracy_thresh){
 			if (missed_responses > missed_thresh){
 				practice_feedback_text +=
-						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+						'</p><p class = instruct-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 
 	      	if (ave_rt > rt_thresh){
 	        	practice_feedback_text += 
-	            	'</p><p class = block-text>You have been responding too slowly.'
+	            	'</p><p class = instruct-text>You have been responding too slowly.'
 	      	}
 			
 			if (mismatch_press_percentage >= 0.90){
 				practice_feedback_text +=
-						'</p><p class = block-text>Please do not simply press your "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press your "'+possible_responses[0][0]+'" when they occur.'
+						'</p><p class = instruct-text>Please do not simply press your "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press your "'+possible_responses[0][0]+'" when they occur.'
 			}
 		
 			if (practiceCount == practice_thresh){
 				// practice_feedback_text +=
-				// 	'</p><p class = block-text>Done with this practice. The test session will begin shortly.' 
+				// 	'</p><p class = instruct-text>Done with this practice. The test session will begin shortly.' 
 					delay = 2
 					stims = createTrialTypes(practice_len, delay)
-					practice_feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago."
+					practice_feedback_text = "<p class = instruct-text><strong>Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago.</strong></p>"
 					return false
 			}
 			
 			practice_feedback_text +=
-				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
-				'</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
+				'</p><p class = instruct-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
+				'</p><p class = instruct-text>When you are ready to continue, please press the spacebar.</p>'
 			
 			
 			return true
@@ -647,40 +647,40 @@ var practiceNode2 = {
 
 		if (accuracy > accuracy_thresh){
 			practice_feedback_text +=
-					'</p><p class = block-text>Done with this practice. The test session will begin shortly.' 
+					'</p><p class = instruct-text>Done with this practice. The test session will begin shortly.' 
 			delay = delays.pop()
 			stims = createTrialTypes(numTrialsPerBlock, delay)
-			feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago."
+			feedback_text = "<p class = instruct-text><strong>Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago.</strong></p>"
 			return false
 	
 		} else if (accuracy < accuracy_thresh){
 			if (missed_responses > missed_thresh){
 				practice_feedback_text +=
-						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+						'</p><p class = instruct-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 
 	      	if (ave_rt > rt_thresh){
 	        	practice_feedback_text += 
-	            	'</p><p class = block-text>You have been responding too slowly.'
+	            	'</p><p class = instruct-text>You have been responding too slowly.'
 	      	}
 			
 			if (mismatch_press_percentage >= 0.90){
 				practice_feedback_text +=
-						'</p><p class = block-text>Please do not simply press your "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press your "'+possible_responses[0][0]+'" when they occur.'
+						'</p><p class = instruct-text>Please do not simply press your "'+possible_responses[1][0]+'" to every stimulus. Please try to identify the matches and press your "'+possible_responses[0][0]+'" when they occur.'
 			}
 		
 			if (practiceCount == practice_thresh){
 				practice_feedback_text +=
-					'</p><p class = block-text>Done with this practice. The test session will begin shortly.' 
+					'</p><p class = instruct-text>Done with this practice. The test session will begin shortly.' 
 					delay = delays.pop()
 					stims = createTrialTypes(numTrialsPerBlock, delay)
-					feedback_text = "Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago."
+					feedback_text = "<p class = instruct-text><strong>Your delay for this block is "+delay+". Please match the current letter to the letter that appeared "+delay+" trial(s) ago.</strong></p>"
 					return false
 			}
 			
 			practice_feedback_text +=
-				'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
-				'</p><p class = block-text>When you are ready to continue, please press the spacebar.</p>'
+				'</p><p class = instruct-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list +
+				'</p><p class = instruct-text>When you are ready to continue, please press the spacebar.</p>'
 			
 			
 			return true
