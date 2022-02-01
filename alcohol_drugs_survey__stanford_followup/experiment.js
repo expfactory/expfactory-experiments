@@ -467,7 +467,7 @@ var item_names_dartmouth = ['alc_drugs_1_fu',
 							'alc_drugs_35_fu',
 							'alc_drugs_36_fu',
 							'alc_drugs_37_fu',
-							'alc_drugs_38_bl']
+							'alc_drugs_38_fu']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
