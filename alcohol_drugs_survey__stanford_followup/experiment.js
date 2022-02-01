@@ -223,7 +223,8 @@ var survey_questions = ['Have you ever smoked tobacco cigarettes?',
 					    'Have you neglected your family because of your use of drugs?',
 					    'Have you engaged in illegal activities in order to obtain drugs?',
 					    'Have you ever experienced withdrawal symptoms (felt sick) when you stopped taking drugs?',
-					    'Have you had medical problems as a result of your drug use (e.g., memory loss, hepatitis, convulsions, bleeding, etc.)?',]
+					    'Have you had medical problems as a result of your drug use (e.g., memory loss, hepatitis, convulsions, bleeding, etc.)?',
+					    'Are you currently taking any medication prescribed for anxiety or depression?',]
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
@@ -254,6 +255,7 @@ var button_text = [[['Yes','No'],2],
 				   [['Never', 'Less than monthly', 'Monthly', 'Weekly', 'Daily or almost daily'],5],
 				   [['Never', 'Yes, but not in the past 6 months', 'Yes, during the past 6 months'],3],
 				   [['Continue'],1],
+				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
@@ -304,6 +306,7 @@ var question_types =   [['Conditional'],
 					    ['neither'],
 					    ['neither'],
 					    ['neither'],
+					    ['neither'],
 					    ['neither']]				   
 
 //If a subject chooses this response, end survey.  If not, continue survey
@@ -343,6 +346,7 @@ var fatal_responses =  [['none'],
 					    ['none'],
 					    ['none'],
 					    ['none'],
+					    ['none'],
 					    ['none']]
 
 //If a subject chooses this response, show the next question.  If not, skip next question					   
@@ -370,6 +374,7 @@ var conditional_responses = [['Yes'],
 					    	 ['neither'],
 					    	 ['neither'],
 					      	 ['neither'],
+					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither'],
@@ -421,6 +426,7 @@ var conditional_lengths =    [[6],
 					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither'],
+					    	 ['neither'],
 					    	 ['neither']]
 
 //Names of items that be written on data
@@ -460,7 +466,8 @@ var item_names_dartmouth = ['alc_drugs_1_fu',
 							'alc_drugs_34_fu',
 							'alc_drugs_35_fu',
 							'alc_drugs_36_fu',
-							'alc_drugs_37_fu']
+							'alc_drugs_37_fu',
+							'alc_drugs_38_bl']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
