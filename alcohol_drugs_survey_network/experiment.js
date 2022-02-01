@@ -609,14 +609,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var alcohol_drugs_survey__stanford_baseline_experiment = []
+var alcohol_drugs_survey_network_experiment = []
 
-alcohol_drugs_survey__stanford_baseline_experiment.push(welcome_block);
+alcohol_drugs_survey_network_experiment.push(welcome_block);
 
-alcohol_drugs_survey__stanford_baseline_experiment.push(instructions_block);
+alcohol_drugs_survey_network_experiment.push(instructions_block);
 
-alcohol_drugs_survey__stanford_baseline_experiment.push(update_state_block);
+alcohol_drugs_survey_network_experiment.push(update_state_block);
 
-alcohol_drugs_survey__stanford_baseline_experiment.push(post_questionnaire_node);
+alcohol_drugs_survey_network_experiment.push(post_questionnaire_node);
 
-alcohol_drugs_survey__stanford_baseline_experiment.push(end_block);
+alcohol_drugs_survey_network_experiment.push(end_block);
