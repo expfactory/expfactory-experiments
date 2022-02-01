@@ -9,7 +9,7 @@ function getDisplayElement() {
 }
 
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'alcohol_drugs_survey__stanford_followup'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'alcohol_drugs_survey__stanford_baseline'})
 }
 var conditional_length_counter = 0
 var getQuestions = function(){
@@ -56,6 +56,12 @@ var getQuestions = function(){
 }
 
 
+var pressCheckbox = function(current_submit){
+	checked_item = current_submit
+	keyTracker.push(current_submit)
+	
+}
+
 var createButtonBoard2 = function(numButtons,buttonText){ 
 	//numButtons and buttonText need to be same length. numButtons is a number, buttonText is an array
 	var buttonBoard2 = '</font></p><div class = buttonbox>'
@@ -65,6 +71,7 @@ var createButtonBoard2 = function(numButtons,buttonText){
 	buttonBoard2 += '</div></div></div>'
 	return buttonBoard2
 }	
+
 var hitKey = function(whichKey){
 	e = jQuery.Event("keydown");
   	e.which = whichKey; // # Some key code value
@@ -90,6 +97,7 @@ var pressSubmit = function(current_submit){
 		}
 		$('#'+buttonPressed).addClass('selected');
 	}
+	
 }
 
 var getTime = function(){
@@ -149,7 +157,6 @@ var appendData = function(){
 	}
 	
 	if ((conditional_response.indexOf(buttonPressedText) != -1) && (question_type == 'Conditional')){
-		console.log('here')
 		sub_made_conditional_response = 1
 		conditional_length_index = conditional_length
 	} else if ((conditional_response.indexOf(buttonPressedText) == -1) && (question_type == 'Conditional')){
@@ -172,8 +179,8 @@ var appendData = function(){
 /* ************************************ */
 /*    Define Experimental Variables     */
 /* ************************************ */
-var preFileType = "<img class = center src='/static/experiments/alcohol_drugs_survey__stanford_followup/images/"
-var pathSource = "/static/experiments/alcohol_drugs_survey__stanford_followup/images/"
+var preFileType = "<img class = center src='/static/experiments/alcohol_drugs_survey__stanford_baseline/images/"
+var pathSource = "/static/experiments/alcohol_drugs_survey__stanford_baseline/images/"
 
 var sub_made_fatal_response = 0 // 0 if not, 1 if so
 var sub_made_conditional_response = -1 
@@ -223,8 +230,7 @@ var survey_questions = ['Have you ever smoked tobacco cigarettes?',
 					    'Have you neglected your family because of your use of drugs?',
 					    'Have you engaged in illegal activities in order to obtain drugs?',
 					    'Have you ever experienced withdrawal symptoms (felt sick) when you stopped taking drugs?',
-					    'Have you had medical problems as a result of your drug use (e.g., memory loss, hepatitis, convulsions, bleeding, etc.)?',
-					    'Are you currently taking any medication prescribed for anxiety or depression?',]
+					    'Have you had medical problems as a result of your drug use (e.g., memory loss, hepatitis, convulsions, bleeding, etc.)?',]
 
 //response options for radio buttons
 //each array contains the button text, as well as length of button array.
@@ -255,7 +261,6 @@ var button_text = [[['Yes','No'],2],
 				   [['Never', 'Less than monthly', 'Monthly', 'Weekly', 'Daily or almost daily'],5],
 				   [['Never', 'Yes, but not in the past 6 months', 'Yes, during the past 6 months'],3],
 				   [['Continue'],1],
-				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
 				   [['No', 'Yes'],2],
@@ -306,7 +311,6 @@ var question_types =   [['Conditional'],
 					    ['neither'],
 					    ['neither'],
 					    ['neither'],
-					    ['neither'],
 					    ['neither']]				   
 
 //If a subject chooses this response, end survey.  If not, continue survey
@@ -338,7 +342,6 @@ var fatal_responses =  [['none'],
 					    ['none'],
 					    ['none'],
 					    ['No'],
-					    ['none'],
 					    ['none'],
 					    ['none'],
 					    ['none'],
@@ -386,10 +389,9 @@ var conditional_responses = [['Yes'],
 					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither'],
-					    	 ['neither'],
 					    	 ['neither']]
 //If sub made a response during a conditional questions that requires skipping the following questions, 
-//these are the number of questions to skip						     
+//these are the number of questions to skip.  If integer, leave as integer.  Otherwise, put 'neither'				     
 var conditional_lengths =    [[6],
 					    	 ['neither'],
 					    	 ['neither'],
@@ -426,48 +428,46 @@ var conditional_lengths =    [[6],
 					    	 ['neither'],
 					    	 ['neither'],
 					    	 ['neither'],
-					    	 ['neither'],
 					    	 ['neither']]
 
 //Names of items that be written on data
-var item_names_dartmouth = ['alc_drugs_1_fu',
-							'alc_drugs_2_fu',
-							'alc_drugs_3_fu',
-							'alc_drugs_4_fu',
-							'alc_drugs_5_fu',
-							'alc_drugs_6_fu',
-							'alc_drugs_7_fu',
-							'alc_drugs_8_fu',
-							'alc_drugs_9_fu',
-							'alc_drugs_10_fu',
-							'alc_drugs_11_fu',
-							'alc_drugs_12_fu',
-							'alc_drugs_13_fu',
-							'alc_drugs_14_fu',
-							'alc_drugs_15_fu',
-							'alc_drugs_16_fu',
-							'alc_drugs_17_fu',
-							'alc_drugs_18_fu',
-							'alc_drugs_19_fu',
-							'alc_drugs_20_fu',
-							'alc_drugs_21_fu',
-							'alc_drugs_22_fu',
-							'alc_drugs_23_fu',
-							'alc_drugs_24_fu',
-							'alc_drugs_25_fu',
-							'alc_drugs_26_fu',
-							'alc_drugs_27_fu',
-							'alc_drugs_28_fu',
-							'alc_drugs_29_fu',
-							'alc_drugs_30_fu',
-							'alc_drugs_31_fu',
-							'alc_drugs_32_fu',
-							'alc_drugs_33_fu',
-							'alc_drugs_34_fu',
-							'alc_drugs_35_fu',
-							'alc_drugs_36_fu',
-							'alc_drugs_37_fu',
-							'alc_drugs_38_fu']
+var item_names_dartmouth = ['alc_drugs_1_bl',
+							'alc_drugs_2_bl',
+							'alc_drugs_3_bl',
+							'alc_drugs_4_bl',
+							'alc_drugs_5_bl',
+							'alc_drugs_6_bl',
+							'alc_drugs_7_bl',
+							'alc_drugs_8_bl',
+							'alc_drugs_9_bl',
+							'alc_drugs_10_bl',
+							'alc_drugs_11_bl',
+							'alc_drugs_12_bl',
+							'alc_drugs_13_bl',
+							'alc_drugs_14_bl',
+							'alc_drugs_15_bl',
+							'alc_drugs_16_bl',
+							'alc_drugs_17_bl',
+							'alc_drugs_18_bl',
+							'alc_drugs_19_bl',
+							'alc_drugs_20_bl',
+							'alc_drugs_21_bl',
+							'alc_drugs_22_bl',
+							'alc_drugs_23_bl',
+							'alc_drugs_24_bl',
+							'alc_drugs_25_bl',
+							'alc_drugs_26_bl',
+							'alc_drugs_27_bl',
+							'alc_drugs_28_bl',
+							'alc_drugs_29_bl',
+							'alc_drugs_30_bl',
+							'alc_drugs_31_bl',
+							'alc_drugs_32_bl',
+							'alc_drugs_33_bl',
+							'alc_drugs_34_bl',
+							'alc_drugs_35_bl',
+							'alc_drugs_36_bl',
+							'alc_drugs_37_bl']
 							
 /* ************************************ */
 /*       Set up HTML for Survey         */
@@ -487,6 +487,7 @@ var buttonBoard2 = '</font></p>'+
 		'</div>'+	
 	'</div>'+
 '</div>'
+
 
 var checkbox = '</font></p>'+
 		
@@ -511,15 +512,14 @@ var checkbox = '</font></p>'+
 		
 	'</div>'
 	
-	
-	
+		
 /* ************************************ */
 /*        Set up jsPsych blocks         */
 /* ************************************ */
 var end_block = {
 	type: 'poldrack-text',
 	data: {
-		exp_id: "alcohol_drugs_survey__stanford_followup",
+		exp_id: "alcohol_drugs_survey__stanford_baseline",
 		trial_id: "end"
 	},
 	timing_response: 180000,
@@ -584,7 +584,7 @@ for(var x = 0; x < survey_questions.length; x++){
 	is_html: true,
 	choices: [81], //48,49,50,51,52
 	data: {
-		exp_id: "alcohol_drugs_survey__stanford_followup",
+		exp_id: "alcohol_drugs_survey__stanford_baseline",
 		"trial_id": "post_questionnaire_block"
 	},
 	timing_post_trial: 0,
@@ -609,14 +609,14 @@ var post_questionnaire_node = {
 /*          Set up Experiment           */
 /* ************************************ */
 
-var alcohol_drugs_survey__stanford_followup_experiment = []
+var alcohol_drugs_survey__stanford_baseline_experiment = []
 
-alcohol_drugs_survey__stanford_followup_experiment.push(welcome_block);
+alcohol_drugs_survey__stanford_baseline_experiment.push(welcome_block);
 
-alcohol_drugs_survey__stanford_followup_experiment.push(instructions_block);
+alcohol_drugs_survey__stanford_baseline_experiment.push(instructions_block);
 
-alcohol_drugs_survey__stanford_followup_experiment.push(update_state_block);
+alcohol_drugs_survey__stanford_baseline_experiment.push(update_state_block);
 
-alcohol_drugs_survey__stanford_followup_experiment.push(post_questionnaire_node);
+alcohol_drugs_survey__stanford_baseline_experiment.push(post_questionnaire_node);
 
-alcohol_drugs_survey__stanford_followup_experiment.push(end_block);
+alcohol_drugs_survey__stanford_baseline_experiment.push(end_block);
