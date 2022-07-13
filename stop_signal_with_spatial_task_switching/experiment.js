@@ -309,7 +309,7 @@ var getCue = function(){
 	magnitude = stim.magnitude
 	parity = stim.parity
 	
-	return stop_boards[whichQuadrant - 1][0] + '<div class = fixation>+</div>' + stop_boards[whichQuadrant - 1][1] 
+	return stop_boards[whichQuadrant - 1][0] + stop_boards[whichQuadrant - 1][1] 
 }
 
 function getSSD(){
