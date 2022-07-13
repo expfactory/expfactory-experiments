@@ -322,7 +322,7 @@ var getFixation = function(){
 	magnitude = stim.magnitude
 	parity = stim.parity
 	
-	return task_boards[whichQuadrant - 1][0] + '<div class = fixation>+</div>' + task_boards[whichQuadrant - 1][1]
+	return '<div class = centerbox><div class = fixation>+</div></div>'
 
 }
 
@@ -430,9 +430,9 @@ var prompt_text_list = '<ul style="text-align:left;">'+
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if the number is ' + go_no_go_styles[1] + ' in black!</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' '+ predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] +'</p>' +
+					  '<p>&nbsp</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:40%;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
 				  '</div>' 	
