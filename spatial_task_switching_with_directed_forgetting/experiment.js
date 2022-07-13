@@ -447,12 +447,12 @@ var getStartFix = function(){
 	memorySet = stim.memorySet
 	forgetSet = stim.forgetSet
 	
-	return fixation_boards[whichQuadrant - 1][0] + '<span style="color:white">+</span>' + fixation_boards[whichQuadrant - 1][1]	
-
+	//return fixation_boards[whichQuadrant - 1][0] + '<div class = fixation>+</div>' + fixation_boards[whichQuadrant - 1][1]	
+	return '<div class = centerbox><div class = fixation>+</div></div>'
 }
 
 var getFixation = function(){
-	return fixation_boards[whichQuadrant - 1][0] + '<span style="color:white">+</span>' + fixation_boards[whichQuadrant - 1][1]	
+	return '<div class = centerbox><div class = fixation>+</div></div>'
 }
 
 /* ************************************ */
@@ -528,6 +528,7 @@ var prompt_text_list = '<ul style="text-align:left;">'+
 var prompt_text = '<div class = prompt_box>'+
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Upper 2 quadrants: '+predictable_dimensions[0]+' the cued location</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Lower 2 quadrants: '+predictable_dimensions[2]+' the cued location</p>' +
+					  '<p>&nbsp</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Please respond if the probe (single letter) was in the memory set.</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">In memory set: ' + possible_responses[0][0] + '</p>' +
 					  '<p class = center-block-text style = "font-size:16px; line-height:80%%;">Not in memory set: ' + possible_responses[1][0] + '</p>' +
