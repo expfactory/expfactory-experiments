@@ -261,7 +261,7 @@ var getCue = function(){
 	magnitude = stim.magnitude
 	parity = stim.parity
 	
-	return fixation_boards[whichQuadrant - 1][0] + '<div class = fixation>+</div>' + fixation_boards[whichQuadrant - 1][1] 
+	return fixation_boards[whichQuadrant - 1][0] + fixation_boards[whichQuadrant - 1][1] 
 } 
 
 var getResponse = function() {
