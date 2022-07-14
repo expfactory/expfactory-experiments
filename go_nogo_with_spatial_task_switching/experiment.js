@@ -331,7 +331,10 @@ var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	current_trial+=1
-	
+	task_switch = 'na'
+	if (current_trial > 1) {
+		task_switch = task_switches[current_trial - 2]
+	}
 	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
@@ -342,6 +345,7 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		predictable_condition: predictable_condition,
 		predictable_dimension: predictable_dimension,
+		task_switch: task_switch,
 		go_nogo_condition: go_nogo_condition,
 		number: number,
 		number_style: number_style,
@@ -522,7 +526,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment, across trials you will see a single number moving clockwise on the screen in 4 quadrants.  '+
+			'<p class = block-text>In this experiment, across trials you will see a single number appear in one of the 4 quadrants.  '+
 			'On any trial, one quadrant will have a single number.</p> '+
 		
 			'<p class = block-text>You will be asked to judge the number on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
