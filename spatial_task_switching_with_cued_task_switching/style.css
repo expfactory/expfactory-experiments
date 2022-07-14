@@ -1,0 +1,241 @@
+/*******************************************************/
+/***********    Network Default CSS Styles    **********/
+/*******************************************************/
+
+.display_stage {
+    position: fixed;
+    background: gray;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+.display_stage > div, .display_stage > p {
+  color: white;
+}
+
+.flanker-text {
+	text-align: center;
+	font-size: 50px;
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.fb_box {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-175%);
+}
+
+.picture_box {
+ width: 60%;
+ height: 60%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+
+.fixation {
+ text-align: center;
+ font-size: 50px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+.cue-text {
+  width:20vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+
+.distractor_text {
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: none;
+  text-align: center;
+  transform: translate(-70%, -70%);
+}
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: none;
+text-align: center;
+}
+
+.instructBox {
+ width: 80vw;
+ height: 10vw;
+ position:absolute;
+ top:10%;
+ left:50%; 
+ margin-right: 0%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ font-size: 24px;
+}
+
+.prompt_box {
+ width: 75%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-45%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+img.center {
+  height: auto;
+  width: auto\9; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
+/*******************************************************/
+/************    Predictive CSS Styles     *************/
+/*******************************************************/
+.quad_box {
+ width: 85vw;
+ height: 85vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-top-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:25%;
+ left:25%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-bottom-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:75%;
+ left:25%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-top-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:25%;
+ left:75%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-bottom-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:75%;
+ left:75%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+/*******************************************************/
+/************       Cued CSS Styles        *************/
+/*******************************************************/
+
+.left-text {
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: none;
+  transform: translate(-125%, -50%);
+}
+
+
+.right-text {
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: none;
+  transform: translate(25%, -50%);
+}
+
+.upperbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -75%);
+  background-color: none;
+}
+
+.lowerbox {
+  width:35vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%, -25%);
+  background-color: none;
+}
+
