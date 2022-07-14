@@ -167,7 +167,6 @@ var createTrialTypes = function(task_switches){
 	numbers = [1,2,3,4,6,7,8,9]	
 	
 	predictable_dimension = predictable_dimensions[whichQuadStart - 1]
-	console.log(predictable_cond_array[quadIndex - 1])	
 	number = numbers[Math.floor((Math.random() * 8))]
 	
 	
@@ -237,7 +236,7 @@ var getCue = function(){
 	magnitude = stim.magnitude
 	parity = stim.parity
 	
-	return stop_boards[whichQuadrant - 1][0] + '<div class = fixation>+</div>' + stop_boards[whichQuadrant - 1][1] 
+	return stop_boards[whichQuadrant - 1][0] + stop_boards[whichQuadrant - 1][1] 
 }
 
 var getStim = function(){
