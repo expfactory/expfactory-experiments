@@ -2,7 +2,7 @@
 /* Define helper functions */
 /* ************************************ */
 function addID() {
-  jsPsych.data.addDataToLastTrial({exp_id: 'flanker_with_predictable_task_switching'})
+  jsPsych.data.addDataToLastTrial({exp_id: 'shape_matching_with_spatial_task_switching'})
 }
 
 function evalAttentionChecks() {
@@ -27,6 +27,7 @@ function assessPerformance() {
 	var rt_array = []
 	var rt = 0
 	var correct = 0
+
 		//record choices participants made
 	var choice_counts = {}
 	choice_counts[-1] = 0
@@ -50,8 +51,9 @@ function assessPerformance() {
 			if (key == experiment_data[i].correct_response){
 				correct += 1
 			}
-		}
+		}	
 	}
+
 	
 	//calculate average rt
 	var avg_rt = -1
@@ -90,38 +92,6 @@ var randomDraw = function(lst) {
   return lst[index]
 }
 
-var getCorrectResponse = function(number, predictable_dimension){
-	if (number > 5){
-		magnitude = 'high'
-	} else if (number < 5){
-		magnitude = 'low'
-	}
-
-	if (number%2 === 0){
-		parity = 'even'
-	} else if (number%2 !== 0) {
-		parity = 'odd'
-	}
-	
-	par_ind = predictable_dimensions_list[0].values.indexOf(parity)
-	if (par_ind == -1){
-		par_ind = predictable_dimensions_list[1].values.indexOf(parity)
-		mag_ind = predictable_dimensions_list[0].values.indexOf(magnitude)
-	} else {
-		mag_ind = predictable_dimensions_list[1].values.indexOf(magnitude)
-	}
-	
-	
-	if (predictable_dimension == 'magnitude'){
-		correct_response = possible_responses[mag_ind][1]
-	} else if (predictable_dimension == 'parity'){
-		correct_response = possible_responses[par_ind][1]
-	}
-	
-	return [correct_response,magnitude,parity]
-
-}
-
 //added for spatial task
 var makeTaskSwitches = function(numTrials) {
 	task_switch_arr = ["tstay_cstay", "tstay_cswitch", "tswitch_cswitch", "tswitch_cswitch"]
@@ -154,125 +124,180 @@ var getQuad = function(oldQuad, curr_switch) {
 	}
 	return out;
 }
-							 
+
 var createTrialTypes = function(task_switches, numTrialsPerBlock){
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
-	var predictable_dimensions = [predictable_dimensions_list[0].dim,
-								 predictable_dimensions_list[0].dim,
-								 predictable_dimensions_list[1].dim,
-								 predictable_dimensions_list[1].dim]
-		
-	numbers_list = [[6,8],[7,9],[2,4],[1,3]]
-	numbers = [1,2,3,4,6,7,8,9]	
+	predictable_dimensions = predictable_dimensions_list[0]
+	console.log(predictable_cond_array)	
+	var shape_matching_trial_type_list = []
+	var shape_matching_trial_types1 = jsPsych.randomization.repeat(shape_matching_conditions, numTrialsPerBlock/numConds)
+	var shape_matching_trial_types2 = jsPsych.randomization.repeat(shape_matching_conditions, numTrialsPerBlock/numConds)
+	var shape_matching_trial_types3 = jsPsych.randomization.repeat(shape_matching_conditions, numTrialsPerBlock/numConds)
+	var shape_matching_trial_types4 = jsPsych.randomization.repeat(shape_matching_conditions, numTrialsPerBlock/numConds)
+	shape_matching_trial_type_list.push(shape_matching_trial_types1)
+	shape_matching_trial_type_list.push(shape_matching_trial_types2)
+	shape_matching_trial_type_list.push(shape_matching_trial_types3)
+	shape_matching_trial_type_list.push(shape_matching_trial_types4)
 	
-	var flanker_trial_type_list = []
-	var flanker_trial_types1 = jsPsych.randomization.repeat(['congruent','incongruent'], numTrialsPerBlock/8) // 8 = 2(switch vs. stay)*2(magnitude vs. parity)*2(congruent vs. incongruent)
-	var flanker_trial_types2 = jsPsych.randomization.repeat(['congruent','incongruent'], numTrialsPerBlock/8)
-	var flanker_trial_types3 = jsPsych.randomization.repeat(['congruent','incongruent'], numTrialsPerBlock/8)
-	var flanker_trial_types4 = jsPsych.randomization.repeat(['congruent','incongruent'], numTrialsPerBlock/8)
-	flanker_trial_type_list.push(flanker_trial_types1)
-	flanker_trial_type_list.push(flanker_trial_types2)
-	flanker_trial_type_list.push(flanker_trial_types3)
-	flanker_trial_type_list.push(flanker_trial_types4)
-	
+	shape_matching_condition = jsPsych.randomization.repeat(shape_matching_conditions, 1).pop()
 	predictable_dimension = predictable_dimensions[whichQuadStart - 1]
 	
-	number = numbers[Math.floor((Math.random() * 8))]
-	flanker_condition = jsPsych.randomization.repeat(['congruent','incongruent'],1).pop()
-	if (flanker_condition == 'congruent'){
-		flanking_number = number
+	var probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
+	var target_i = 0
+	var distractor_i = 0
+	if (shape_matching_condition[0] == 'S') {
+		target_i = probe_i
+		if (predictable_dimension == 'the same'){
+			correct_response = possible_responses[0][1]
+		} else  {
+			correct_response = possible_responses[1][1]		
+		}
 	} else {
-		flanking_number = randomDraw(numbers.filter(function(y) {return y != number}))	
+		target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))				
+		if (predictable_dimension == 'the same'){
+			correct_response = possible_responses[1][1]
+		} else  {
+			correct_response = possible_responses[0][1]		
+		}
+	
 	}
 	
-	response_arr = getCorrectResponse(number,predictable_dimension)
+	if (shape_matching_condition[1] == 'S') {
+		distractor_i = target_i
+	} else if (shape_matching_condition[2] == 'S') {
+		distractor_i = probe_i
+	} else if (shape_matching_condition[2] == 'D') {
+		distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return $.inArray(y, [target_i, probe_i]) == -1}))
+	} else if (shape_matching_condition[2] == 'N'){
+		distractor_i = 'none'
+	}
 	
+		
 	var stims = []
 	
 	var first_stim = {
-		whichQuadrant: whichQuadStart,
+		whichQuad: whichQuadStart,
 		predictable_condition: 'N/A',
 		predictable_dimension: predictable_dimension,
-		flanker_condition: flanker_condition,
-		number: number,
-		flanking_number: flanking_number,
-		magnitude: response_arr[1],
-		parity: response_arr[2],
-		correct_response: response_arr[0]
+		shape_matching_condition: shape_matching_condition,
+		probe: probe_i,
+		target: target_i,
+		distractor: distractor_i,
+		correct_response: correct_response
 		}
 	stims.push(first_stim)
 	
-	oldQuad = whichQuadStart //added for spatial task
+	oldQuad = whichQuadStart
 	for (var i = 0; i < task_switches.length; i++){
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
 		if (quadIndex === 0){
 			quadIndex = 4
 		}
-		flanker_condition = flanker_trial_type_list[quadIndex - 1].pop()
-		quadIndex = getQuad(oldQuad, task_switches[i]) //changed for spatial task
+		shape_matching_condition = shape_matching_trial_type_list[quadIndex - 1].pop()
+		quadIndex = getQuad(oldQuad, task_switches[i])
 		predictable_dimension = predictable_dimensions[quadIndex - 1]
-		number = numbers[Math.floor((Math.random() * 8))]
-		
-		if (flanker_condition == 'congruent'){
-			flanking_number = number
+		probe_i = randomDraw([1,2,3,4,5,6,7,8,9,10])
+		target_i = 0
+		distractor_i = 0
+		if (shape_matching_condition[0] == 'S') {
+			target_i = probe_i
+			if (predictable_dimension == 'the same'){
+				correct_response = possible_responses[0][1]
+			} else  {
+				correct_response = possible_responses[1][1]		
+			}
 		} else {
-			flanking_number = randomDraw(numbers.filter(function(y) {return y != number}))	
-		}
-	
-		response_arr = getCorrectResponse(number,predictable_dimension)
+			target_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return y != probe_i}))				
+			if (predictable_dimension == 'the same'){
+				correct_response = possible_responses[1][1]
+			} else  {
+				correct_response = possible_responses[0][1]		
+			}
 		
+		}
+		
+		if (shape_matching_condition[1] == 'S') {
+			distractor_i = target_i
+		} else if (shape_matching_condition[2] == 'S') {
+			distractor_i = probe_i
+		} else if (shape_matching_condition[2] == 'D') {
+			distractor_i = randomDraw([1,2,3,4,5,6,7,8,9,10].filter(function(y) {return $.inArray(y, [target_i, probe_i]) == -1}))
+		} else if (shape_matching_condition[2] == 'N'){
+			distractor_i = 'none'
+		}
+		console.log(predictable_cond_array[i%2])	
 		stim = {
-			whichQuadrant: quadIndex,
+			whichQuad: quadIndex,
 			predictable_condition: predictable_cond_array[i%2],
 			predictable_dimension: predictable_dimension,
-			flanker_condition: flanker_condition,
-			number: number,
-			flanking_number: flanking_number,
-			magnitude: response_arr[1],
-			parity: response_arr[2],
-			correct_response: response_arr[0]
+			shape_matching_condition: shape_matching_condition,
+			probe: probe_i,
+			target: target_i,
+			distractor: distractor_i,
+			correct_response: correct_response
 			}
 		
 		stims.push(stim)
 		
-		oldQuad = quadIndex //changed for spatial task
+		oldQuad = quadIndex
 	}
 
 	return stims	
-}
-	
-var getFixation = function(){
-	stim = stims.shift()
-	predictable_condition = stim.predictable_condition
-	predictable_dimension = stim.predictable_dimension
-	flanker_condition = stim.flanker_condition
-	number = stim.number
-	flanking_number = stim.flanking_number
-	correct_response = stim.correct_response
-	whichQuadrant = stim.whichQuadrant
-	magnitude = stim.magnitude
-	parity = stim.parity
-	
-	return '<div class = centerbox><div class = fixation>+</div></div>'
-
-
-}
+}	
 
 var getResponse = function() {
 	return correct_response
 }
 
-
 var getStim = function(){
+	if ((shape_matching_condition == "SNN") || (shape_matching_condition == "DNN")){
+		return task_boards[whichQuadrant - 1][0]+ preFileType + target + '_green' + fileTypePNG + 
+			   task_boards[whichQuadrant - 1][1]+
+			   task_boards[whichQuadrant - 1][2]+ preFileType + probe + '_white' + fileTypePNG + 
+			   task_boards[whichQuadrant - 1][3]		   
+			
+	} else {
 	
-	return task_boards[whichQuadrant - 1][0] + preFileType + flanking_number + fileTypePNG + 
-		   task_boards[whichQuadrant - 1][1] + preFileType + flanking_number + fileTypePNG + 
-		   task_boards[whichQuadrant - 1][2] + preFileType + number + fileTypePNG + 
-		   task_boards[whichQuadrant - 1][3] + preFileType + flanking_number + fileTypePNG + 
-		   task_boards[whichQuadrant - 1][4] + preFileType + flanking_number + fileTypePNG + 
-		   task_boards[whichQuadrant - 1][5]		   		   
+		return task_boards[whichQuadrant - 1][0]+ preFileType + target + '_green' + fileTypePNG + 
+			   task_boards[whichQuadrant - 1][1]+ preFileType + distractor + '_red' + fileTypePNG + 
+			   task_boards[whichQuadrant - 1][2]+ preFileType + probe + '_white' + fileTypePNG + 
+			   task_boards[whichQuadrant - 1][3]		   
+	}
+}
+		
+var getMask = function(){
+	stim = stims.shift() //stims = [] at initial stage
+	predictable_condition = stim.predictable_condition
+	predictable_dimension = stim.predictable_dimension
+	shape_matching_condition = stim.shape_matching_condition
+	probe = stim.probe
+	target = stim.target
+	distractor = stim.distractor
+	correct_response = stim.correct_response
+	whichQuadrant = stim.whichQuad
+	
+	return mask_boards[whichQuadrant - 1][0]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
+		   mask_boards[whichQuadrant - 1][1]+ preFileType + 'mask' + fileTypePNG + 
+		   '<div class = centerbox><div class = fixation>+</div></div>' +
+		   mask_boards[whichQuadrant - 1][2]
+}
+
+
+var getFixation = function(){
+	stim = stims.shift() //stims = [] at initial stage
+	predictable_condition = stim.predictable_condition
+	predictable_dimension = stim.predictable_dimension
+	shape_matching_condition = stim.shape_matching_condition
+	probe = stim.probe
+	target = stim.target
+	distractor = stim.distractor
+	correct_response = stim.correct_response
+	whichQuadrant = stim.whichQuad
+		
+	return '<div class = centerbox><div class = fixation>+</div></div>' //changed for spatial
 }
 
 
@@ -280,11 +305,12 @@ var appendData = function(){
 	curr_trial = jsPsych.progress().current_trial_global
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	current_trial+=1
-	
+
 	task_switch = 'na'
 	if (current_trial > 1) {
 		task_switch = task_switches[current_trial - 2] //this might be off
 	}
+	
 	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
@@ -295,16 +321,14 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		predictable_condition: predictable_condition,
 		predictable_dimension: predictable_dimension,
-		flanker_condition: flanker_condition,
 		task_switch: task_switch,
-		number: number,
-		flanking_number: flanking_number,
+		shape_matching_condition: shape_matching_condition,
+		probe: probe,
+		target: target,
+		distractor: distractor,
 		correct_response: correct_response,
 		whichQuadrant: whichQuadrant,
-		magnitude: magnitude,
-		parity: parity,
-		current_trial: current_trial,
-		current_block: current_block
+		current_trial: current_trial
 		
 	})
 	
@@ -312,6 +336,7 @@ var appendData = function(){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 1,
 		})
+
 	} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != correct_response){
 		jsPsych.data.addDataToLastTrial({
 			correct_trial: 0,
@@ -323,80 +348,110 @@ var appendData = function(){
 /* Define experimental variables */
 /* ************************************ */
 // generic task variables
+var run_attention_checks = true
 var sumInstructTime = 0 //ms
 var instructTimeThresh = 0 ///in seconds
 var credit_var = 0
-var run_attention_checks = true
 
 // task specific variables
 // Set up variables for stimuli
-var practice_len = 16 // divisible by 8
-var exp_len = 200 //200 must be divisible by 8
-var numTrialsPerBlock = 40; //  40 divisible by 8
+var practice_len = 28
+var exp_len = 280 // must be divisible by 28
+var numTrialsPerBlock = 56; // divisible by 28
 var numTestBlocks = exp_len / numTrialsPerBlock
 
 var accuracy_thresh = 0.75
 var rt_thresh = 1000
 var missed_thresh = 0.10
-var practice_thresh = 3 // 3 blocks of 8 trials
+var practice_thresh =  3 //blocks of 28 trials
  
 
 var predictable_conditions = [['switch','stay'],
 							 ['stay','switch']]
-							 
-var predictable_dimensions_list = [stim = {dim:'magnitude', values: ['high','low']},
-								  stim = {dim:'parity', values: ['even','odd']}]
-							 	  
+var predictable_dimensions_list = [['the same', 'the same', 'different','different'],
+							 	  ['different','different', 'the same', 'the same' ]]
+var shape_matching_conditions = ['DDD','SDD','DSD','DDS','SSS','SNN','DNN']
+var numConds = predictable_conditions.length*predictable_dimensions_list.length*shape_matching_conditions.length
 var possible_responses = [['M Key', 77],['Z Key', 90]]
 
 
-
-
 var fileTypePNG = ".png'></img>"
-var preFileType = "<img class = center src='/static/experiments/flanker_with_spatial_task_switching/images/"
+var preFileType = "<img class = center src='/static/experiments/shape_matching_with_spatial_task_switching/images/"
+var path = '/static/experiments/shape_matching_with_spatial_task_switching/images/'
+var colors = ['white','red','green']
 
+var exp_stage = 'practice'
 var current_trial = 0
 
-var task_boards = [[['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-top-right><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div></div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-right><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']],
-				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-left><div class = flankerLeft_2><div class = cue-text>'],['</div></div><div class = flankerLeft_1><div class = cue-text>'],['</div></div><div class = flankerMiddle><div class = cue-text>'],['</div></div><div class = flankerRight_1><div class = cue-text>'],['</div></div><div class = flankerRight_2><div class = cue-text>'],['</div></div></div><div></div>']]]
-				   
+var shape_stim = []
+for (var i = 1; i<11; i++) {
+	for (var c = 0; c<3; c++) {
+		shape_stim.push(path + i + '_' + colors[c] + '.png')
+	}
+}
+jsPsych.pluginAPI.preloadImages(shape_stim.concat(path+'mask.png'))
+
+// Trial types denoted by three letters for the relationship between:
+// probe-target, target-distractor, distractor-probe of the form
+// SDS where "S" = match and "D" = non-match, N = "Neutral"
+//['SSS', 'SDD', 'SNN', 'DSD', 'DDD', 'DDS', 'DNN']
+
+
+
+var task_boards = [[['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div><div class = decision-bottom-left></div></div></div>']],
+				   [['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = leftbox>'],['</div><div class = distractorbox>'],['</div><div class = rightbox>'],['</div></div></div></div>']]]
+
+var mask_boards = [
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-bottom-right></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div><div class = decision-bottom-left></div></div></div>']
+					],
+					[
+						['<div class = bigbox><div class = quad_box><div class = decision-top-left></div><div class = decision-top-right></div><div class = decision-bottom-right></div><div class = decision-bottom-left><div class = leftbox>'],
+						['</div><div class = rightbox>'],
+						['</div></div></div></div>']
+					]
+				  ]
+
+
 var fixation_boards = [['<div class = bigbox><div class = quad_box><div class = decision-top-left><div class = fixation>+</div></div></div></div>'],
 					   ['<div class = bigbox><div class = quad_box><div class = decision-top-right><div class = fixation>+</div></div></div></div>'],
 					   ['<div class = bigbox><div class = quad_box><div class = decision-bottom-right><div class = fixation>+</div></div></div></div>'],
 					   ['<div class = bigbox><div class = quad_box><div class = decision-bottom-left><div class = fixation>+</div></div></div></div>']]
 
-var task_switches = makeTaskSwitches(practice_len)
-var stims = createTrialTypes(task_switches, practice_len)
+
+var task_switches = makeTaskSwitches(practice_len) //added for spatial
+var stims = createTrialTypes(task_switches, practice_len) //changed for spatial
 
 var prompt_text_list = '<ul style="text-align:left;">'+
-				  	'<li>Top 2 quadrants: Judge <i>middle</i> number on '+predictable_dimensions_list[0].dim+'</li>' +
-				  	'<li>'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
-					'<li>'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-					'<li>Bottom 2 quadrants: Judge <i>middle</i> number on '+predictable_dimensions_list[1].dim+'</li>' +
-					'<li>'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
-					'<li>'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
-				  '</ul>'
-
-				  var prompt_text = '<div class = prompt_box>'+
-				  '<p class = center-block-text style = "font-size:16px;">Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + ' '+ predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] +'</p>' +
-				  '<p>&nbsp</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + ' '+ predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
-			  '</div>' 	
-
-//PRE LOAD IMAGES HERE
-var pathSource = "/static/experiments/flanker_with_spatial_task_switching/images/"
-var numbersPreload = ['1','2','3','4','5','6','7','8','9']
-var images = []
-
-for(i = 0; i < numbersPreload.length; i++){
-	images.push(pathSource + numbersPreload[i] + '.png')
-}
-
-jsPsych.pluginAPI.preloadImages(images);
+						'<li>Top 2 quadrants: Answer if the green and white shapes are '+predictable_dimensions[0]+'</li>' +
+						'<li>'+predictable_dimensions[0] +': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions[2] +': ' + possible_responses[1][0] + '</li>' +
+						'<li>Bottom 2 quadrants: Answer if the green and white shapes are '+predictable_dimensions[2]+'</li>' +
+						'<li>'+predictable_dimensions[2] +': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions[0] +': ' + possible_responses[1][0] + '</li>' +
+					  '</ul>'
+				  
+var prompt_text = '<div class = prompt_box>'+
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">Top 2 quadrants: Answer if the green and white shapes are '+predictable_dimensions[0]+'</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">'+predictable_dimensions[0] +': ' + possible_responses[0][0] + ' | '+predictable_dimensions[2] +': ' + possible_responses[1][0] + '</p>' +
+					  '<p>&nbsp</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">Bottom 2 quadrants: Answer if the green and white shapes are '+predictable_dimensions[2]+'</p>' +
+					  '<p class = center-block-text style = "font-size:20px; line-height:80%%;">'+predictable_dimensions[2] +': ' + possible_responses[0][0] + ' | '+predictable_dimensions[0] +': ' + possible_responses[1][0] + '</p>' +
+				  '</div>' 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -422,19 +477,19 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
-       exp_id: "flanker_with_predictable_task_switching",
+       exp_id: "shape_matching_with_spatial_task_switching",
        trial_id: "post task questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
               '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
    rows: [15, 15],
-   timing_response: 360000,
-   columns: [60,60]
+   columns: [60,60],
+   timing_response: 360000
 };
 
 
 var feedback_text = 
-	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
+'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_block = {
 	type: 'poldrack-single-stim',
 	data: {
@@ -450,7 +505,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-	'Welcome to the experiment. This experiment will take around 10 minutes. Press <i>enter</i> to begin.'
+	'Welcome to the experiment. This experiment will take around 15 minutes. Press <i>enter</i> to begin.'
 var feedback_instruct_block = {
 	type: 'poldrack-text',
 	data: {
@@ -470,26 +525,27 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment, across trials you will see a row of numbers on the screen in one of the 4 quadrants.  '+
-			'On any trial, one quadrant will have a  row of numbers.</p> '+
+			'<p class = block-text>In this experiment, across trials you will see shapes on the screen in one of 4 quadrants. '+
+			'On every trial, one quadrant will have a white shape on the right and a green shape on the left.</p> '+
 		
-			'<p class = block-text>You will be asked to judge the <i>middle number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
-			'the numbers are in.</p>'+
-		
+			'<p class = block-text>You will be asked if the green shape is the same as or different from the white shape, depending on which quadrant '+
+			'the shapes are in.</p>'+
 		'</div>',
 		
 		'<div class = centerbox>'+
-			'<p class = block-text>In the top two quadrants, please judge the number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes are <i>'+predictable_dimensions[0]+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are <i>'+predictable_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they are <i>'+predictable_dimensions[2]+'</i>.</p>'+
+	
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes are <i>'+predictable_dimensions[2]+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they are <i>'+predictable_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they are <i>'+predictable_dimensions[0]+'</i>.</p>'+
 		
-			'<p class = block-text>In the bottom two quadrants, please judge the number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>'+
+			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
+			'You should ignore the red shape — your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
+		'</div>',
 		
-			'<p class = block-text>Please judge only the middle number, you should ignore the other numbers.</p>'+
-			
+		'<div class = centerbox>'+
 			'<p class = block-text>We will start practice when you finish instructions. Please make sure you understand the instructions before moving on. During practice, you will receive a reminder of the rules.  <i>This reminder will be taken out for test</i>.</p>'+
-
 			'<p class = block-text>To avoid technical issues, please keep the experiment tab (on Chrome or Firefox) <i>active and in full-screen mode</i> for the whole duration of each task.</p>'+
 		'</div>'
 	],
@@ -498,13 +554,9 @@ var instructions_block = {
 	timing_post_trial: 1000
 };
 
-
-
-/* This function defines stopping criteria */
-
 var instruction_node = {
 	timeline: [feedback_instruct_block, instructions_block],
-	
+	/* This function defines stopping criteria */
 	loop_function: function(data) {
 		for (i = 0; i < data.length; i++) {
 			if ((data[i].trial_type == 'poldrack-instructions') && (data[i].rt != -1)) {
@@ -547,17 +599,18 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
-			'<p class = block-text>Please judge the <i>middle number</i> on magnitude (higher or lower than 5) or parity (odd or even), depending on which quadrant '+
-			'the numbers are in.</p>'+
+			'<p class = block-text>Please judge if the green shape matches or mismatches the white shape, depending on which quadrant '+
+			'the shapes are in.</p>'+
 	
-			'<p class = block-text>In the top two quadrants, please judge the middle number based on <i>'+predictable_dimensions_list[0].dim+'</i>. Press the <i>'+possible_responses[0][0]+
-			'  if '+predictable_dimensions_list[0].values[0]+'</i>, and the <i>'+possible_responses[1][0]+'  if '+predictable_dimensions_list[0].values[1]+'</i>.</p>'+
-		
-			'<p class = block-text>In the bottom two quadrants, please judge the middle number based on <i>'+predictable_dimensions_list[1].dim+'.</i>'+
-			' Press the <i>'+possible_responses[0][0]+' if '+predictable_dimensions_list[1].values[0]+'</i>, and the <i>'+possible_responses[1][0]+
-			' if '+predictable_dimensions_list[1].values[1]+'</i>.</p>'+
+			'<p class = block-text>When in the top two quadrants, please judge whether the two shapes are <i>'+predictable_dimensions[0]+'</i>. Press the <i>'+possible_responses[0][0]+
+			'  </i>if they are <i>'+predictable_dimensions[0]+'</i>, and the <i>'+possible_responses[1][0]+'  </i>if they are <i>'+predictable_dimensions[2]+'</i>.</p>'+
 	
-			'<p class = block-text>Please judge only the middle number, you should ignore the other numbers.</p>'+
+			'<p class = block-text>When in the bottom two quadrants, please judge whether the two shapes are <i>'+predictable_dimensions[2]+'.</i>'+
+			' Press the <i>'+possible_responses[0][0]+' </i> if they are <i>'+predictable_dimensions[2]+'</i>, and the <i>'+possible_responses[1][0]+
+			' </i> if they are <i>'+predictable_dimensions[0]+'</i>.</p>'+
+	
+			'<p class = block-text>On some trials a red shape will also be presented on the left. '+
+			'You should ignore the red shape — your task is to respond based on whether the white and green shapes match or mismatch.</p>'+
 	
 			'<p class = block-text>You will no longer receive the rule prompt, so remember the instructions before you continue. Press Enter to begin.</p>'+
 		 '</div>',
@@ -584,17 +637,18 @@ var rest_block = {
 var practiceTrials = []
 practiceTrials.push(feedback_block)
 practiceTrials.push(instructions_block)
-for (i = 0; i < practice_len + 1; i++) {
+for (i = 0; i < practice_len + 1; i++) { 
 	var fixation_block = {
 		type: 'poldrack-single-stim',
 		stimulus: getFixation,
 		is_html: true,
-		choices: 'none',
 		data: {
-			trial_id: "practice_fixation"
+			"trial_id": "practice_fixation",
 		},
+		choices: 'none',
 		timing_response: 500, //500
 		timing_post_trial: 0,
+		response_ends_trial: false,
 		prompt: prompt_text
 	}
 	
@@ -612,7 +666,7 @@ for (i = 0; i < practice_len + 1; i++) {
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		timing_stim: 1000, //1000
 		timing_response: 2000, //2000
-		timing_feedback_duration: 500, //500
+		timing_feedback_duration: 500,
 		show_stim_with_feedback: false,
 		timing_post_trial: 0,
 		on_finish: appendData,
@@ -628,7 +682,8 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		//stims = createTrialTypes(practice_len)
+		task_switches = makeTaskSwitches(practice_len)
+		stims = createTrialTypes(task_switches, practice_len)
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -667,10 +722,11 @@ var practiceNode = {
 	
 		} else if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>We are going to try practice again to see if you can achieve higher accuracy.  Remember: <br>' + prompt_text_list
+					
 			if (missed_responses > missed_thresh){
-			feedback_text +=
-					'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
+				feedback_text +=
+						'</p><p class = block-text>You have not been responding to some trials.  Please respond on every trial that requires a response.'
 			}
 
 	      	if (ave_rt > rt_thresh){
@@ -688,8 +744,7 @@ var practiceNode = {
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			task_switches = makeTaskSwitches(numTrialsPerBlock)
-			stims = createTrialTypes(task_switches, numTrialsPerBlock)
+			
 			return true
 		
 		}
@@ -707,12 +762,13 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		type: 'poldrack-single-stim',
 		stimulus: getFixation,
 		is_html: true,
-		choices: 'none',
 		data: {
-			trial_id: "test_fixation"
+			"trial_id": "test_fixation",
 		},
+		choices: 'none',
 		timing_response: 500, //500
-		timing_post_trial: 0
+		timing_post_trial: 0,
+		response_ends_trial: false
 	}
 	
 	var test_block = {
@@ -740,6 +796,7 @@ var testNode = {
 	testCount += 1
 	task_switches = makeTaskSwitches(numTrialsPerBlock)
 	stims = createTrialTypes(task_switches, numTrialsPerBlock)
+	console.log('hereherhe')
 	current_trial = 0
 	
 	var sum_rt = 0
@@ -772,7 +829,7 @@ var testNode = {
 		
 		if (accuracy < accuracy_thresh){
 			feedback_text +=
-					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list 
+					'</p><p class = block-text>Your accuracy is too low.  Remember: <br>' + prompt_text_list
 		}
 		
 		if (missed_responses > missed_thresh){
@@ -787,7 +844,7 @@ var testNode = {
 	
 		if (testCount == numTestBlocks){
 			feedback_text +=
-					'</p><p class = block-text>Done with this test. Press Enter to continue.<br> If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
+					'</p><p class = block-text>Done with this test. Press Enter to continue.<br>If you have been completing tasks continuously for an hour or more, please take a 15-minute break before starting again.'
 			return false
 		} else {
 		
@@ -800,14 +857,14 @@ var testNode = {
 
 
 /* create experiment definition array */
-flanker_with_spatial_task_switching_experiment = []
+shape_matching_with_spatial_task_switching_experiment = []
 
-flanker_with_spatial_task_switching_experiment.push(practiceNode)
-flanker_with_spatial_task_switching_experiment.push(feedback_block)
+shape_matching_with_spatial_task_switching_experiment.push(practiceNode)
+shape_matching_with_spatial_task_switching_experiment.push(feedback_block)
 
-flanker_with_spatial_task_switching_experiment.push(start_test_block)
-flanker_with_spatial_task_switching_experiment.push(testNode)
-flanker_with_spatial_task_switching_experiment.push(feedback_block)
+shape_matching_with_spatial_task_switching_experiment.push(start_test_block)
+shape_matching_with_spatial_task_switching_experiment.push(testNode)
+shape_matching_with_spatial_task_switching_experiment.push(feedback_block)
 
-flanker_with_spatial_task_switching_experiment.push(post_task_block)
-flanker_with_spatial_task_switching_experiment.push(end_block)
+shape_matching_with_spatial_task_switching_experiment.push(post_task_block)
+shape_matching_with_spatial_task_switching_experiment.push(end_block)

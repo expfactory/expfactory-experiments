@@ -95,24 +95,24 @@ var getFeedback = function() {
 	return '<div class = bigbox><div class = picture_box><p class = block-text>' + feedback_text + '</p></div></div>'
 }
 
-//var correctText = function(){
-//	if (stop_signal_condition == 'go'){
-//	
-//		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'
-//	} else {
-//	
-//		return '<div class = fb_box><div class = center-text><font size = 20>Number is red.</font></div></div>'
-//	}
-//
-//}
+var getCategorizeIncorrectText = function(){
+	if (stop_signal_condition == 'go'){
+	
+		return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'
+	} else {
+	
+		return '<div class = fb_box><div class = center-text><font size = 20>Number is red.</font></div></div>'
+	}
 
-//var getTimeoutText = function(){
-	//if (stop_signal_condition == "go"){
-		//return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>'
-	//} else {
-	//	return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
-	//}
-//}
+}
+
+var getTimeoutText = function(){
+	if (stop_signal_condition == "go"){
+		return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>'
+	} else {
+		return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'
+	}
+}
 
 var getCategorizeFeedback = function(){
 	curr_trial = jsPsych.progress().current_trial_global - 1
@@ -121,23 +121,23 @@ var getCategorizeFeedback = function(){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' //+ prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if ((jsPsych.data.getDataByTrialIndex(curr_trial).key_press != jsPsych.data.getDataByTrialIndex(curr_trial).correct_response) && (jsPsych.data.getDataByTrialIndex(curr_trial).key_press != -1)){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>'// + prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text
 	
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == -1){
 			
 			
-			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' //+ prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text
 	
 		}
 	} else if ((trial_id == 'practice_trial') && (jsPsych.data.getDataByTrialIndex(curr_trial).stop_signal_condition == 'stop')){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).rt == -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>'// + prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text
 		} else if (jsPsych.data.getDataByTrialIndex(curr_trial).rt != -1){
-			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>'// + prompt_text
+			return '<div class = fb_box><div class = center-text><font size = 20>There was a star.</font></div></div>' + prompt_text
 		}
 	}
 }
@@ -183,6 +183,7 @@ var getCorrectResponse = function(number, predictable_dimension, stop_signal_con
 	return [correct_response,magnitude,parity]
 
 }
+
 //added for spatial task
 var makeTaskSwitches = function(numTrials) {
 	task_switch_arr = ["tstay_cstay", "tstay_cswitch", "tswitch_cswitch", "tswitch_cswitch"]
@@ -215,8 +216,8 @@ var getQuad = function(oldQuad, curr_switch) {
 	}
 	return out;
 }
-
-var createTrialTypes = function(task_switches){
+							 
+var createTrialTypes = function(task_switches, numTrialsPerBlock){ //changed for spatial
 	var whichQuadStart = jsPsych.randomization.repeat([1,2,3,4],1).pop()
 	var predictable_cond_array = predictable_conditions[whichQuadStart%2]
 	var predictable_dimensions = [predictable_dimensions_list[0].dim,
@@ -259,17 +260,15 @@ var createTrialTypes = function(task_switches){
 		}
 	stims.push(first_stim)
 	
-	//build remaining trials from task_switches
-	oldQuad = whichQuadStart
-	for (var i = 0; i < task_switches.length; i++){
+	oldQuad = whichQuadStart //added for spatial task
+	for (var i = 0; i < task_switches.length; i++){ //changed for spatial task
 		whichQuadStart += 1
 		quadIndex = whichQuadStart%4
 		if (quadIndex === 0){
 			quadIndex = 4
 		}
-		quadIndex = getQuad(oldQuad, task_switches[i]) //changed for spatial task
-
 		stop_signal_condition = stop_signal_trial_type_list[quadIndex - 1].pop()
+		quadIndex = getQuad(oldQuad, task_switches[i]) //added for spatial task
 		predictable_dimension = predictable_dimensions[quadIndex - 1]
 		number = numbers[Math.floor((Math.random() * 8))]
 	
@@ -288,17 +287,15 @@ var createTrialTypes = function(task_switches){
 		
 		stims.push(stim)
 		
-		oldQuad = quadIndex //changed for spatial task
+		oldQuad = quadIndex //added for spatial task
 	}
 
 	return stims	
 }
 
-var getFixation = function(){
-	return '<div class = centerbox><div class = fixation>+</div></div>'
-}
 
-var getCue = function(){
+
+var getFixation = function(){
 	stim = stims.shift()
 	predictable_condition = stim.predictable_condition
 	predictable_dimension = stim.predictable_dimension
@@ -309,7 +306,7 @@ var getCue = function(){
 	magnitude = stim.magnitude
 	parity = stim.parity
 	
-	return stop_boards[whichQuadrant - 1][0] + stop_boards[whichQuadrant - 1][1] 
+	return '<div class = centerbox><div class = fixation>+</div></div>' //changed for spatial
 }
 
 function getSSD(){
@@ -337,6 +334,7 @@ var getStim = function(){
 	return task_boards[whichQuadrant - 1][0] + 
 				preFileType + number + fileTypePNG +
 		   task_boards[whichQuadrant - 1][1]
+		   		   
 	
 }
 
@@ -349,6 +347,11 @@ var appendData = function(){
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	current_trial+=1
 	
+	task_switch = 'na'
+	if (current_trial > 1) {
+		task_switch = task_switches[current_trial - 2] //this might be off
+	}
+	
 	
 	if (trial_id == 'practice_trial'){
 		current_block = practiceCount
@@ -360,6 +363,7 @@ var appendData = function(){
 		predictable_condition: predictable_condition,
 		predictable_dimension: predictable_dimension,
 		stop_signal_condition: stop_signal_condition,
+		task_switch: task_switch,
 		number: number,
 		correct_response: correct_response,
 		whichQuadrant: whichQuadrant,
@@ -460,26 +464,30 @@ var stop_boards = [[['<div class = bigbox><div class = quad_box><div class = dec
 				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-right>'],['</div></div></div>']],
 				   [['<div class = bigbox><div class = quad_box><div class = decision-bottom-left>'],['</div></div></div>']]]
 
-var task_switches = makeTaskSwitches(practice_len) //added for spatial 
-var stims = createTrialTypes(task_switches) //changed for spatial
+var task_switches = makeTaskSwitches(practice_len) //added for spatial
+var stims = createTrialTypes(task_switches, practice_len) //changed for spatial
 
-var prompt_text_list = '<ul style="text-align:left;">'+
-				  	'<li>Top 2 quadrants: Judge <i>middle</i> number on '+predictable_dimensions_list[0].dim+'</li>' +
-				  	'<li>'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
-					'<li>'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
-					'<li>Bottom 2 quadrants: Judge <i>middle</i> number on '+predictable_dimensions_list[1].dim+'</li>' +
-					'<li>'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
-					'<li>'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
-				  '</ul>'
 
-var prompt_text = '<div class = fixation>'+
-				  '<p class = center-block-text style = "font-size:16px;">Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
-				  '<p>+</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
-				  '<p class = center-block-text style = "font-size:16px;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
-			  '</div>'
+var prompt_text_list = '<ul style = "text-align:left;">'+
+						'<li>Do not respond if a star appears!</li>' +
+						'<li>Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</li>' +
+						'<li>Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</li>' +
+						'<li>'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] + '</li>' +
+						'<li>'+predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</li>' +
+					  '</ul>'
 
+var prompt_text = '<div class = prompt_box>'+
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Do not respond if a star appears!</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Top 2 quadrants: Judge number on '+predictable_dimensions_list[0].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[0].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[0].values[1]+': ' + possible_responses[1][0] + '</p>' +
+					  '<p>&nbsp</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">Bottom 2 quadrants: Judge number on '+predictable_dimensions_list[1].dim+'</p>' +
+					  '<p class = center-block-text style = "font-size:16px; line-height:80%;">'+predictable_dimensions_list[1].values[0]+': ' + possible_responses[0][0] +  ' | ' + predictable_dimensions_list[1].values[1]+': ' + possible_responses[1][0] + '</p>' +
+				  '</div>'
+				  
+				  
 //PRE LOAD IMAGES HERE
 var numbersPreload = ['1','2','3','4','6','7','8','9']
 var pathSource = "/static/experiments/stop_signal_with_spatial_task_switching/images/"
@@ -497,7 +505,6 @@ jsPsych.pluginAPI.preloadImages(images);
 var attention_check_block = {
   type: 'attention-check',
   data: {
-	exp_id: "stop_signal_with_spatial_task_switching",
     trial_id: "attention_check"
   },
   timing_response: 180000,
@@ -516,6 +523,7 @@ var attention_node = {
 var post_task_block = {
    type: 'survey-text',
    data: {
+       exp_id: "stop_signal_with_predictable_task_switching",
        trial_id: "post_task_questions"
    },
    questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
@@ -696,20 +704,6 @@ for (i = 0; i < practice_len + 1; i++) {
 		prompt: prompt_text
 	}
 	
-	var practice_cue_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getCue,
-		is_html: true,
-		choices: 'none',
-		data: {
-		trial_id: 'practice_cue'
-		},
-		timing_response: 150, //getCTI
-		timing_stim: 150,  //getCTI
-		timing_post_trial: 0,
-		prompt: prompt_text
-	}
-
 	var practice_block = {
 		type: 'stop-signal',
 		stimulus: getStim,
@@ -747,10 +741,9 @@ for (i = 0; i < practice_len + 1; i++) {
 		timing_response: 500, //500
 		response_ends_trial: false, 
 
-	}
+	  };
 	
 	practiceTrials.push(fixation_block)
-	practiceTrials.push(practice_cue_block)
 	practiceTrials.push(practice_block)
 	practiceTrials.push(categorize_block)
 }
@@ -761,8 +754,6 @@ var practiceNode = {
 	timeline: practiceTrials,
 	loop_function: function(data){
 		practiceCount += 1
-		task_switches = makeTaskSwitches(practice_len) // added for spatial
-		stims = createTrialTypes(task_switches) // added for spatial
 		current_trial = 0
 	
 		var sum_rt = 0
@@ -809,8 +800,8 @@ var practiceNode = {
 		if ((accuracy > accuracy_thresh) && (stop_success_percentage < upper_stop_success_bound_practice) && (stop_success_percentage > lower_stop_success_bound_practice)){
 			feedback_text +=
 					'</p><p class = block-text>Done with this practice. Press Enter to continue.' 
-			task_switches = makeTaskSwitches(numTrialsPerBlock) //added for spatial
-			stims = createTrialTypes(task_switches) //added for spatial
+			task_switches = makeTaskSwitches(numTrialsPerBlock)
+			stims = createTrialTypes(task_switches, numTrialsPerBlock)
 			return false
 	
 		} else {
@@ -842,14 +833,15 @@ var practiceNode = {
 			if (practiceCount == practice_thresh){
 				feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					task_switches = makeTaskSwitches(numTrialsPerBlock) //added for spatial
-					stims = createTrialTypes(task_switches) //added for spatial
+					task_switches = makeTaskSwitches(numTrialsPerBlock)
+					stims = createTrialTypes(task_switches, numTrialsPerBlock)
 					return false
 			}
 			
 			feedback_text +=
 				'</p><p class = block-text>Redoing this practice. Press Enter to continue.' 
-			stims = createTrialTypes(practice_len)
+			task_switches = makeTaskSwitches(practice_len)
+			stims = createTrialTypes(task_switches, practice_len)
 			return true
 		
 		}
@@ -874,20 +866,7 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		timing_response: 500, //500
 		timing_post_trial: 0
 	}
-
-	var cue_block = {
-		type: 'poldrack-single-stim',
-		stimulus: getCue,
-		is_html: true,
-		choices: 'none',
-		data: {
-		trial_id: 'test_cue'
-		},
-		timing_response: 150, //getCTI
-		timing_stim: 150,  //getCTI
-		timing_post_trial: 0
-	}
-
+	
 	var test_block = {
 		type: 'stop-signal',
 		stimulus: getStim,
@@ -911,7 +890,6 @@ for (i = 0; i < numTrialsPerBlock + 1; i++) {
 		}
 	}
 	testTrials.push(fixation_block)
-	testTrials.push(cue_block)
 	testTrials.push(test_block)
 }
 
@@ -920,8 +898,8 @@ var testNode = {
 	timeline: testTrials,
 	loop_function: function(data) {
 		testCount += 1
-		task_switches = makeTaskSwitches(numTrialsPerBlock) //added for spatial
-		stims = createTrialTypes(task_switches) //added for spatial
+		task_switches = makeTaskSwitches(numTrialsPerBlock)
+		stims = createTrialTypes(task_switches, numTrialsPerBlock)
 		current_trial = 0
 	
 		var sum_rt = 0

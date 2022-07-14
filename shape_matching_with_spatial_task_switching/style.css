@@ -1,0 +1,196 @@
+/*******************************************************/
+/***********    Network Default CSS Styles    **********/
+/*******************************************************/
+.fixation {
+ text-align: center;
+ font-size: 100px;
+ position: relative;
+ top: 50%; 
+ transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+}
+
+.display_stage {
+    position: fixed;
+    background: gray;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+.display_stage > div, .display_stage > p {
+  color: white;
+}
+
+.instructBox {
+ width: 80vw;
+ height: 10vw;
+ position:absolute;
+ top:10%;
+ left:50%; 
+ margin-right: 0%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+ font-size: 24px;
+}
+
+.prompt_box {
+ width: 75%;
+ height: 20%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-45%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+.picture_box {
+ width: 60%;
+ height: 60%;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right:0%;
+ background-color: none;
+ text-align: center;
+}
+
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+background-color: none;
+text-align: center;
+}
+
+.mask {
+  width: 80%;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+.fb_box {
+  width:35vw;
+  height: 20vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-175%);
+}
+
+/*******************************************************/
+/************    Predictive CSS Styles     *************/
+/*******************************************************/
+.quad_box {
+ width: 95vw; /*increase this and 'height' below will move green-red and white stims up and away from the prompt at center*/
+ height: 95vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-top-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:25%;
+ left:25%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-bottom-left {
+ width: 40vw;
+ height: 40vh;
+ position:absolute;
+ top:75%;
+ left:25%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-top-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:25%;
+ left:75%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+.decision-bottom-right {
+ height: 40vh;
+ width: 40vw;
+ position:absolute;
+ top:75%;
+ left:75%;
+ transform: translate(-50%,-50%);
+ margin-right: -50%;
+ background-color: none;
+ text-align: center;
+}
+
+/*******************************************************/
+/************  Shape Matching CSS Styles   *************/
+/*******************************************************/
+
+.leftbox {
+  width: 10vw; /*decrease this and 'height' below will decrease size of the green-red stim*/
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:47.5%;
+  margin-right:-50%;
+  transform: translate(-100%,-50%);
+  z-index: 2;
+  background-color: none;
+}
+
+.distractorbox {
+  width: 10vw; /*decrease this and 'height' below will decrease size of the distractor stim*/
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-105%,-57%);
+  background-color: none;
+}
+
+.rightbox { /*decrease this and 'height' below will decrease size of the white stim*/
+  width: 10vw;
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:52.5%;
+  margin-right:-50%;
+  transform: translate(0%,-50%);
+  background-color: none;
+}
