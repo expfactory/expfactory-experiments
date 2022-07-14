@@ -378,7 +378,7 @@ var appendData = function(){
 
   task_switch = 'na'
 	if (current_trial > 1) {
-		task_switch = task_switches[current_trial - 2] //this might be off
+		task_switch = task_switches[current_trial - 2]
 	}
 	
 	var lastSet_top = letters.slice(0,numLetters/2)
@@ -387,6 +387,7 @@ var appendData = function(){
 	jsPsych.data.addDataToLastTrial({
 		predictable_condition: predictable_condition,
 		predictable_dimension: predictable_dimension,
+		task_switch: task_switch,
 		directed_forgetting_condition: directed_condition,
 		probe: probe,
 		cue: cue,
@@ -632,7 +633,7 @@ var instructions_block = {
 	pages: [		
 		'<div class = centerbox>'+
 			'<p class = block-text>In this experiment, you will be presented with '+numLetters+' letters, all of which you must memorize.'+
-			' These '+numLetters+' letters will move clockwise from quadrant to quadrant across trials.</p> '+
+			' These '+numLetters+' letters will appear on the screen in one of the 4 quadrants.</p> '+
 				
 			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the letters are in. For now, remember all '+numLetters+' letters.</p>'+
 		
@@ -691,7 +692,7 @@ var start_test_block = {
 	text: '<div class = centerbox>'+
 	
 			'<p class = block-text>In this experiment, you will be presented with '+numLetters+' letters, all of which you must memorize.'+
-			' These '+numLetters+' letters will move clockwise from quadrant to quadrant across trials.</p> '+
+			' These '+numLetters+' letters will appear on the screen in one of the 4 quadrants.</p> '+
 				
 			'<p class = block-text>You will be asked to remember or forget some letters, depending on which quadrant the letters are in. For now, remember all '+numLetters+' letters.</p>'+
 		
