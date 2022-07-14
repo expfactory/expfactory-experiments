@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Spatial Task Switching with Cued Task Switching",
+    "template": "jspsych",
+    "run": [
+      "static/js/math.min.js",
+      "static/js/jspsych/jspsych.js",
+      "static/js/jspsych/plugins/jspsych-call-function.js",
+      "static/js/jspsych/poldrack_plugins/jspsych-poldrack-text.js",
+      "static/js/jspsych/poldrack_plugins/jspsych-poldrack-instructions.js",
+      "static/js/jspsych/poldrack_plugins/jspsych-attention-check.js",
+      "static/js/jspsych/poldrack_plugins/jspsych-poldrack-single-stim.js",
+      "static/js/jspsych/poldrack_plugins/jspsych-poldrack-categorize.js",
+      "static/js/jspsych/plugins/jspsych-survey-text.js",
+      "experiment.js",
+      "static/css/jspsych.css",
+      "static/css/default_style.css",
+      "style.css",
+      "https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.3/math.js"
+    ],
+    "exp_id": "spatial_task_switching_with_cued_task_switching",
+    "cognitive_atlas_task_id": "",
+    "contributors": [
+      "Patrick Bissett",
+      "Jamie Li",
+      "McKenzie Hagen",
+      "Russell Poldrack",
+      "Jaime Rios"
+    ],
+    "time": 30,
+    "reference": "http://psycnet.apa.org/journals/xlm/37/2/392/",
+    "notes": "Condition refers to whether the trial is practice or high_freq/low_freq (the two test conditions) as well as whether it was a go or SS trial",
+    "publish": "True",
+    "experiment_variables": [
+      {
+        "name": "credit_var",
+        "type": "credit",
+        "datatype": "boolean",
+        "description": "True if avg_rt > 200"
+      }
+    ],
+    "deployment_variables": {
+      "jspsych_init": {
+        "fullscreen": true,
+        "display_element": "getDisplayElement",
+        "on_trial_finish": "addID('spatial_task_switching_with_cued_task_switching')"
+      }
+    }
+  }
+]
