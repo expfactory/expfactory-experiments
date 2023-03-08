@@ -1056,13 +1056,13 @@ var testNode = {
             	'</p><p class = block-text>You have been responding too slowly.'
       	}
 		
-		if (stop_correct > maxStopCorrect){
+		if (stop_acc > maxStopCorrect){
 			feedback_text +=
 			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
 		
 		}
 		
-		if (stop_correct < minStopCorrect){
+		if (stop_acc < minStopCorrect){
 			feedback_text +=
 			'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 		
