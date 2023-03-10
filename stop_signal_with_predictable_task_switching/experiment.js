@@ -770,7 +770,7 @@ var practiceNode = {
 			
 			if (stop_success_percentage === upper_stop_success_bound_practice){
 			feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly and accurately as possible.'
+					'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 			}
 			
 			if (stop_success_percentage === lower_stop_success_bound_practice){
@@ -906,7 +906,7 @@ var testNode = {
 		
 		if (stop_success_percentage > upper_stop_success_bound){
 			feedback_text +=
-					'</p><p class = block-text>You have been responding too slowly. Please respond as quickly as possible without sacrificing accuracy.'
+					'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 		}
 		
 		if (stop_success_percentage < lower_stop_success_bound){

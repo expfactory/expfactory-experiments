@@ -757,7 +757,7 @@ var practiceNode = {
 		
 			if (stop_signal_respond === minStopCorrectPractice){
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
+				'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 			}
 		
 			
@@ -871,7 +871,7 @@ var testNode = {
 	
 		if (stop_signal_respond < minStopCorrect){
 			feedback_text +=
-			'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
+			'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 		}
 	
 		if (testCount == numTestBlocks){
