@@ -812,7 +812,7 @@ var practiceStopNode = {
 				'</p><p class = block-text>You have not been stopping your response when stars are present.  Please try your best to stop your response if you see a star.'
 			} else if ((stop_signal_respond === stop_signal_respond_lower_thresh_practice) && (average_rt >= rt_thresh)) {
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+				'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 			}
 			
 			feedback_text += '</p><p class = block-text>Redoing this practice.'
@@ -969,7 +969,7 @@ var testNode = {
 				'</p><p class = block-text>Please stop your response if you see a star.'
 			} else if ((stop_signal_respond < stop_signal_respond_lower_thresh) && (average_rt >= rt_thresh)) {
 				feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly, please respond to each shape as quickly and as accurately as possible.'
+				'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 			}
 			
 			

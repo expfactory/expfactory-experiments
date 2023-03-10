@@ -674,7 +674,7 @@ var practiceStopNode = {
 		
 			if (stop_signal_respond === minStopCorrectPractice){
 				practice_feedback_text +=
-				'</p><p class = block-text>You have been responding too slowly.  Please respond as quickly and accurately to each stimulus that requires a response.'
+				'</p><p class = block-text>Do not slow down and wait for the star to appear. Please respond as quickly and accurately as possible when a star does not appear.'
 		
 			}
 			
