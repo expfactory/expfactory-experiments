@@ -644,7 +644,7 @@ var instructions_block = {
 	},
 	pages: [
 		'<div class = centerbox>'+
-			'<p class = block-text>In this experiment, across trials you will see a cue, either <i>left</i>, <i>first</i>, <i>right</i>, or <i>second</i>, followed by 2 numbers moving clockwise on the screen in 4 quadrants.  '+
+			'<p class = block-text>In this experiment, across trials you will see a cue, either <i>left</i>, <i>first</i>, <i>right</i>, or <i>second</i>, followed by 2 numbers in one of the 4 quadrants.  '+
 			'On any trial, one quadrant will have a cue, followed by 2 numbers.</p> '+
 		
 			'<p class = block-text>The cue will instruct you which of the following 2 numbers, you must make a judgement on.</p>'+
