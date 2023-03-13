@@ -1,6 +1,6 @@
 [
     {
-        "name": "Stop Signal with Go No Go",
+        "name": "Stop Signal with Go-Nogo",
         "template":"jspsych",
         "run": [
         		"static/js/math.min.js",
