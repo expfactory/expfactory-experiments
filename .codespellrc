@@ -1,3 +1,6 @@
 [codespell]
 skip = .git,*.pdf,*.svg
-# ignore-words-list = 
+# Bui - name
+# currentY,secCond - variable names 
+# SOM - part of URL not correctly picked up by codespell
+ignore-words-list = bui,som,currenty,seccond
