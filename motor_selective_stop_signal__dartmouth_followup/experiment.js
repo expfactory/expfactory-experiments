@@ -347,11 +347,11 @@ var practice_repeats = 0
 // Define and load images
 var prefix = '/static/experiments/motor_selective_stop_signal__dartmouth_followup/images/'
 
-// ***** REMOVE THE COMMENT - upcomming line should be active 
+// ***** REMOVE THE COMMENT - upcoming line should be active 
 //var images_order = unique_expfactory_id.charCodeAt() % 24  //24 ways to arrange 4 shapes
 var unique_expfactory_id = window.location.pathname.split('/')[3]
 
-// ***** REMOVE THE COMMENT - upcomming line should be active 
+// ***** REMOVE THE COMMENT - upcoming line should be active 
 var images_order = unique_expfactory_id.charCodeAt() % 24 
 var choice_order = unique_expfactory_id.charCodeAt() % 2 
 var trial_order = unique_expfactory_id.charCodeAt() % 4
