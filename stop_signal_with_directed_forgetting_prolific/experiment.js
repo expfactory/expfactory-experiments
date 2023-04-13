@@ -367,7 +367,7 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 336//180 must be divisible by 12
+var exp_len = 288//180 must be divisible by 12
 var numTrialsPerBlock = 24; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
@@ -446,7 +446,7 @@ var attention_check_block = {
   data: {
     trial_id: "attention_check"
   },
-  timing_response: 180000,
+  timing_response: 30000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -484,7 +484,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_response: 180000,
+	timing_response: 30000,
 	response_ends_trial: true, 
 
 };
@@ -499,7 +499,7 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 180000
+	timing_response: 30000
 };
 
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
@@ -579,7 +579,7 @@ var end_block = {
 	data: {
 		trial_id: "end",
 	},
-	timing_response: 180000,
+	timing_response: 30000,
 	text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <i>enter</i> to continue.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 0,
@@ -594,7 +594,7 @@ var start_test_block = {
 	data: {
 		trial_id: "instruction"
 	},
-	timing_response: 180000,
+	timing_response: 30000,
 	text: '<div class = centerbox>'+
 			'<p class = block-text>We will now start the test portion</p>'+
 			
@@ -627,7 +627,7 @@ var rest_block = {
 	data: {
 		trial_id: "instruction"
 	},
-	timing_response: 180000,
+	timing_response: 30000,
 	text: '<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>',
 	cont_key: [13],
 	timing_post_trial: 1000
@@ -971,7 +971,7 @@ var practiceNode = {
 
 var testTrials = []
 testTrials.push(feedback_block)
-// testTrials.push(attention_node)
+testTrials.push(attention_node)
 for (i = 0; i < numTrialsPerBlock; i++) { 
 	testTrials.push(start_fixation_block) //500ms
 	testTrials.push(training_block) //2000
