@@ -342,7 +342,7 @@ var attention_check_block = {
   data: {
     trial_id: "attention_check"
   },
-  timing_response: 180000,
+  timing_response: 60000,
   response_ends_trial: true,
   timing_post_trial: 200
 }
@@ -360,7 +360,7 @@ var end_block = {
 		exp_id: "stop_signal_single_task_network",
 		trial_id: "end"
 	},
-	timing_response: 180000,
+	timing_response: 30000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Thanks for completing this task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -378,7 +378,7 @@ var welcome_block = {
 	data: {
 		trial_id: "welcome"
 	},
-	timing_response: 180000,
+	timing_response: 30000,
 	text: '<div class = centerbox>'+
 	'<p class = center-block-text>Welcome to the task!</p>'+
 	'<p class = center-block-text>Press<i> enter</i> to continue.</p>'+
@@ -397,7 +397,7 @@ var feedback_instruct_block = {
 	cont_key: [13],
 	text: getInstructFeedback,
 	timing_post_trial: 0,
-	timing_response: 180000
+	timing_response: 30000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
@@ -495,7 +495,7 @@ var practice_intro = {
 		trial_id: "stop_intro_phase1"
 	},
 	timing_post_trial: 0,
-	timing_response: 180000,
+	timing_response: 30000,
 	response_ends_trial: true
 };
 
@@ -532,7 +532,7 @@ var test_intro = {
 		trial_id: "test_intro"
 	},
 	timing_post_trial: 0,
-	timing_response: 180000,
+	timing_response: 30000,
 	response_ends_trial: true,
 	on_finish: function(){
 		feedback_text = 'We will now start the test session. Please concentrate on responding quickly and accurately to each stimulus. Press Enter to begin.'
@@ -550,7 +550,7 @@ var feedback_block = {
 	stimulus: getFeedback,
 	timing_post_trial: 0,
 	is_html: true,
-	timing_response: 180000,
+	timing_response: 30000,
 	response_ends_trial: true, 
 
 };
