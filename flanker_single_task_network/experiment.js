@@ -5,6 +5,14 @@ function addID() {
   jsPsych.data.addDataToLastTrial({exp_id: 'flanker_single_task_network'})
 }
 
+function getPracticeStimTrials() {
+  return practice_trials
+}
+
+function getStimTrials() {
+  return test_trials
+}
+
 function evalAttentionChecks() {
 	var check_percent = 1
 	if (run_attention_checks) {
@@ -16,7 +24,7 @@ function evalAttentionChecks() {
 			}
 		}
 		check_percent = checks_passed / attention_check_trials.length
-	}
+	}getStimTrials
 	return check_percent
 }
 
@@ -389,14 +397,16 @@ for (i = 0; i < practice_len; i++) {
 	};
 	var practice_block = {
 		type: 'poldrack-categorize',
-		stimulus: practice_trials.image[i],
+    //stimulus: practice_trials.image[i],
+    stimulus: function() { return getPracticeStimTrials().image.shift() },
 		is_html: true,
 		key_answer: practice_response_array[i],
 		correct_text: '<div class = fb_box><div class = center-text><font size = 20>Correct!</font></div></div>' + prompt_text,
 		incorrect_text: '<div class = fb_box><div class = center-text><font size = 20>Incorrect</font></div></div>' + prompt_text,
 		timeout_message: '<div class = fb_box><div class = center-text><font size = 20>Respond Faster!</font></div></div>' + prompt_text,
 		choices: [70, 72],
-		data: practice_trials.data[i],
+    //data: practice_trials.data[i],
+    data: function() {return getPracticeStimTrials().data.shift() },
 		timing_feedback_duration: 500, //500
 		timing_stim: 1000, //1000
 		show_stim_with_feedback: false,
@@ -435,8 +445,8 @@ var practiceNode = {
 		for (i = 0; i < practice_trials.data.length; i++) {
 			practice_response_array.push(practice_trials.data[i].correct_response)
 		}		
-		
-		var sum_rt = 0
+
+    var sum_rt = 0
 		var sum_responses = 0
 		var correct = 0
 		var total_trials = 0
@@ -482,9 +492,12 @@ var practiceNode = {
 	      	}
 		
 			if (practiceCount == practice_thresh){
-				feedback_text +=
+				
+        feedback_text +=
 					'</p><p class = block-text>Done with this practice.' 
-					return false
+        test_trials = jsPsych.randomization.repeat(test_stimuli, numTrialsPerBlock / 4, true);
+
+        return false
 			}
 			
 			feedback_text +=
@@ -518,10 +531,12 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	
 	var test_block = {
 		type: 'poldrack-single-stim',
-		stimulus: test_trials.image[i],
+		//stimulus: test_trials.image[i],
+    stimulus: function() { return getStimTrials().image.shift() },
 		is_html: true,
 		choices: [70, 72],
-		data: test_trials.data[i],
+		//data: test_trials.data[i],
+    data: function() { return getStimTrials().data.shift() },
 		feedback_duration: 0,
 		timing_response: 2000, //2000
 		timing_stim: 1000, //1000
