@@ -367,7 +367,7 @@ var run_attention_checks = true
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12 // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 288//180 must be divisible by 12
+var exp_len =  264//180 must be divisible by 12
 var numTrialsPerBlock = 24; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock
 
