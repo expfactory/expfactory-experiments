@@ -212,7 +212,7 @@ img.center {
 /***********      Stop Signal CSS Styles      **********/
 /*******************************************************/
 
-.starbox {
+/*.starbox {
   width: 30vw;
   height: 30vh;
   position:absolute;
@@ -220,6 +220,6 @@ img.center {
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
-}
+}*/
 
 
