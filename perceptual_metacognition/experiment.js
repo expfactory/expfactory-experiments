@@ -98,7 +98,7 @@ function jglMakeGrating(width, height, sf, angle, phase, pixPerDeg) {
 	//See how lines2d and dots work. For example, jglFillRect(x, y, size, color) uses size in pixels
 	//
 
-	//How does jgl compute size in degress of visual angle
+	//How does jgl compute size in degrees of visual angle
 	var ixX, ixY; // x and y indices for arrays
 	var grating = []; // 2D array
 	for (ixX = 0; ixX < x.length; ixX++) {

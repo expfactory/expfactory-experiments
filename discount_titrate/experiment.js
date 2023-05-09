@@ -91,7 +91,7 @@ function rnorm(mean, stdev) {
 
 rnorm.v2 = null;
 
-//Funciton to repeat items in an array desired number of times
+//Function to repeat items in an array desired number of times
 function fillArray(value, len) {
 	var arr = [];
 	for (var i = 0; i < len; i++) {

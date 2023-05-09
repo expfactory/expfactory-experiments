@@ -220,7 +220,7 @@ function collect() {
 	round_num += 1
 	round_over_text = "You collected the points from the trip bank (" + trip_bank +
 		" points) and moved it to your tournament bank."
-		// Tranfers points from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
+		// Transfers points from trip bank to tournament bank and ends the round. Coded as keycode 35 for jspsych
 	tournament_bank += trip_bank
 	tournment_bank = tournament_bank
 	trip_bank = 0
