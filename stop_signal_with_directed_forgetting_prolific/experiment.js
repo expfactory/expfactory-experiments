@@ -460,7 +460,7 @@ var run_attention_checks = true;
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12; // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 264; //180 must be divisible by 12
+var exp_len = 240; //180 must be divisible by 12
 var numTrialsPerBlock = 24; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock;
 
@@ -629,7 +629,7 @@ var feedback_block = {
 };
 
 var feedback_instruct_text =
-  "Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.";
+  "Welcome to the experiment. This experiment will take less than 50 minutes. Press <i>enter</i> to begin.";
 var feedback_instruct_block = {
   type: "poldrack-text",
   data: {
@@ -744,7 +744,7 @@ var start_test_block = {
   data: {
     trial_id: "instruction",
   },
-  timing_response: 30000,
+  timing_response: 60000,
   text:
     "<div class = centerbox>" +
     "<p class = block-text>We will now start the test portion. To summarize...</p>" +
@@ -786,7 +786,7 @@ var rest_block = {
   data: {
     trial_id: "instruction",
   },
-  timing_response: 30000,
+  timing_response: 60000,
   text: "<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>",
   cont_key: [13],
   timing_post_trial: 1000,
