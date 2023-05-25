@@ -121,7 +121,7 @@ var getFeedback = function () {
 };
 
 var getCategorizeFeedback = function () {
-  curr_trial = jsPsych.progress().current_trial_global - 2;
+  curr_trial = jsPsych.progress().current_trial_global - 1;
   trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id;
   if (
     trial_id == "practice_trial" &&
@@ -823,17 +823,17 @@ var fixation_block = {
   timing_response: 2000, //2000
 };
 
-var ITI_fixation_block = {
-  type: "poldrack-single-stim",
-  is_html: true,
-  choices: [possible_responses[0][1], possible_responses[1][1]],
-  data: {
-    trial_id: "ITI_fixation",
-  },
-  timing_post_trial: 0,
-  timing_stim: 1000, //1000
-  timing_response: 1000, //1000
-};
+//var ITI_fixation_block = {
+//  type: "poldrack-single-stim",
+//  is_html: true,
+//  choices: [possible_responses[0][1], possible_responses[1][1]],
+//  data: {
+//    trial_id: "ITI_fixation",
+//  },
+//  timing_post_trial: 0,
+//  timing_stim: 1000, //1000
+//  timing_response: 1000, //1000
+//};
 
 var cue_directed_block = {
   type: "poldrack-single-stim",
@@ -872,11 +872,12 @@ var test_probe_block = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   timing_stim: 1000,
-  timing_response: 1000, //2000
+  timing_response: 2000, //2000
   response_ends_trial: false,
   SSD: getSSD,
   timing_SS: 500, //500
   timing_post_trial: 0,
+  fixation_default: true,
   on_finish: appendData,
   on_start: function () {
     stoppingTracker = [];
@@ -921,18 +922,18 @@ for (i = 0; i < practice_len; i++) {
     timing_response: 2000, //2000
   };
 
-  var practice_ITI_fixation_block = {
-    type: "poldrack-single-stim",
-    is_html: true,
-    choices: [possible_responses[0][1], possible_responses[1][1]],
-    data: {
-      trial_id: "practice_ITI_fixation",
-    },
-    timing_post_trial: 0,
-    prompt: prompt_text,
-    timing_stim: 1000, //1000
-    timing_response: 1000, //1000
-  };
+  //  var practice_ITI_fixation_block = {
+  //    type: "poldrack-single-stim",
+  //    is_html: true,
+  //    choices: [possible_responses[0][1], possible_responses[1][1]],
+  //    data: {
+  //      trial_id: "practice_ITI_fixation",
+  //    },
+  //    timing_post_trial: 0,
+  //    prompt: prompt_text,
+  //    timing_stim: 1000, //1000
+  //    timing_response: 1000, //1000
+  //  };
 
   var practice_cue_directed_block = {
     type: "poldrack-single-stim",
@@ -973,12 +974,13 @@ for (i = 0; i < practice_len; i++) {
     is_html: true,
     choices: [possible_responses[0][1], possible_responses[1][1]],
     timing_stim: 1000,
-    timing_response: 1000, //2000
+    timing_response: 2000, //2000
     response_ends_trial: false,
     SSD: getSSD,
     timing_SS: 500, //500
     timing_post_trial: 0,
     on_finish: appendData,
+    fixation_default: true,
     prompt: prompt_text,
     on_start: function () {
       stoppingTracker = [];
@@ -1004,7 +1006,7 @@ for (i = 0; i < practice_len; i++) {
   practiceTrials.push(practice_cue_directed_block);
   practiceTrials.push(practice_fixation_block);
   practiceTrials.push(practice_probe_block);
-  practiceTrials.push(practice_ITI_fixation_block);
+  //  practiceTrials.push(practice_ITI_fixation_block);
   practiceTrials.push(categorize_block);
 }
 
@@ -1129,7 +1131,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
   testTrials.push(cue_directed_block); //1000
   testTrials.push(fixation_block); //2000
   testTrials.push(test_probe_block); //timing_stim= 1000, timing_SS= 500, SSD: getSSD
-  testTrials.push(ITI_fixation_block); //1000
+  //  testTrials.push(ITI_fixation_block); //1000
 }
 
 var testCount = 0;
