@@ -210,7 +210,7 @@ var createTrialTypes = function(numTrialsPerBlock){
 		go_nogo_condition = go_nogo_trial_type_list[quadIndex - 1].pop()
 		This old setup messed up with yielding exactly the pre-set ratio of go:no-go. Removing [quadIndex - 1] made sense because
 			unlike predictable_dimension, whose value depends on which quadrant the current stim appears at, go_nogo_condition doesn't depend on the quadrants.
-			That figured out, where go_nogo_condition takes its value from, i.e. go_nogo_trial_type_list, should not complicate itselt 
+			That figured out, where go_nogo_condition takes its value from, i.e. go_nogo_trial_type_list, should not complicate itself 
 			by drawing values from 4 arrays that represent 4 quadrants. Changing go_nogo_trial_type_list to 1 array from which go_nogo_condition draw its value
 			fixed the non-exact go-nogo ratio issue.
 		!em liaH*/

@@ -182,7 +182,7 @@ var get_ss_stim = function(images, colors) {
 
 /*
 The following methods all support the user-dependent presentation of stimulus including animations, multiple stages
-and FB. The "get_selected" functions also append data to the preceeding trials
+and FB. The "get_selected" functions also append data to the preceding trials
 */
 
 /* Selects the next first stage from a predefined, randomized list of first stages and increases the trial count*/

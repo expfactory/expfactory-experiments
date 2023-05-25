@@ -156,7 +156,7 @@ var instructions_block = {
 		trial_id: 'instruction'
 	},
 	pages: [
-		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six cateogries: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these categories will be "target" categories presented on the screen. Your goal is to remember the <strong>last</strong> word shown from each of the target categories and type them at the end of the trial.</p></div>',
+		'<div class = centerbox><p class = block-text>In this experiment you will see a sequence of words presented one at time. These words will fall into one of six categories: animals, colors, countries, distances, metals and relatives.</p><p class = block-text>3 to 5 of these categories will be "target" categories presented on the screen. Your goal is to remember the <strong>last</strong> word shown from each of the target categories and type them at the end of the trial.</p></div>',
 		'<div class = centerbox><p class = block-text>To make sure there is no confusion about which word is in each category, the words in each category are presented below: ' +
 		category_instructions +
 		'</p><p class = block-text>Make sure you know which category each word belongs to.</p></div>',

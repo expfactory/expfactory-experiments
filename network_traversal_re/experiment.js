@@ -938,7 +938,7 @@ var post_task_block = {
 				'<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in the main experiment.</p>',
 				'<p class = center-block-text style = "font-size: 20px">Have you ever participated in an experiment similar to this? If so, please explain.</p>',
 				'<p class = center-block-text style = "font-size: 20px">How on-task were you, overall, throughout the experiment? (please rate from 1 to 7, where 1 is "not on-task at all" and 7 is "completely on-task").</p>',
-				'<p class = center-block-text style = "font-size: 20px">How much did you pay attention to the images in the main part of the experiment? (please rate from 1 to 7, where 1 is "hardly payed attention" and 7 is "payed close attention throughout the entirety").</p>',
+				'<p class = center-block-text style = "font-size: 20px">How much did you pay attention to the images in the main part of the experiment? (please rate from 1 to 7, where 1 is "hardly paid attention" and 7 is "paid close attention throughout the entirety").</p>',
 				'<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the main experiment.</p>',
 				'<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the portion in which you pressed the spacebar.</p>',
 				'<p class = center-block-text style = "font-size: 20px">Please describe any strategies you used during the portion in which you chose the image that did not belong.</p>',
