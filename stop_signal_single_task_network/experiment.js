@@ -415,7 +415,7 @@ var attention_check_block = {
   data: {
     trial_id: "attention_check",
   },
-  timing_response: 60000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200,
 };
@@ -472,7 +472,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 30000,
+  timing_response: 180000,
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
@@ -766,7 +766,7 @@ var practiceStopNode = {
     var stop_signal_respond = num_stop_responses / stop_length;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any, and take a 30 second break. Press enter to continue.";
+      "<br>Please take this time to read your feedback if there is any and press enter to continue when ready.";
 
     if (practiceStopCount == practice_thresh) {
       feedback_text += "</p><p class = block-text>Done with this practice.";
@@ -904,7 +904,7 @@ var testNode = {
     var stop_signal_respond = num_stop_responses / stop_length;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any, and take a 30 second break. Press enter to continue.";
+      "<br>Please take this time to read your feedback if there is any and press enter to continue when ready.";
     feedback_text +=
       "</p><p class = block-text>You have completed: " +
       testCount +
