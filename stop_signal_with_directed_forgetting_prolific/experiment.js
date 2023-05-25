@@ -1192,7 +1192,7 @@ var testNode = {
     var stop_acc = stop_correct / stop_trials;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any, and take a 30 second break! Press enter to continue";
+      "<br>Please take this time to read your feedback if there is any, the next block will start soon or press enter to continue";
     feedback_text +=
       "</p><p class = block-text>You have completed: " +
       testCount +
