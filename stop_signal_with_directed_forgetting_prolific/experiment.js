@@ -624,7 +624,7 @@ var feedback_block = {
   stimulus: getFeedback,
   timing_post_trial: 0,
   is_html: true,
-  timing_response: 30000,
+  timing_response: 60000,
   response_ends_trial: true,
 };
 

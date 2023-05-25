@@ -579,7 +579,7 @@ var practice_intro = {
     trial_id: "stop_intro_phase1",
   },
   timing_post_trial: 0,
-  timing_response: 30000,
+  timing_response: 60000,
   response_ends_trial: true,
 };
 
@@ -624,7 +624,7 @@ var test_intro = {
     trial_id: "test_intro",
   },
   timing_post_trial: 0,
-  timing_response: 30000,
+  timing_response: 60000,
   response_ends_trial: true,
   on_finish: function () {
     feedback_text =
@@ -643,7 +643,7 @@ var feedback_block = {
   stimulus: getFeedback,
   timing_post_trial: 0,
   is_html: true,
-  timing_response: 30000,
+  timing_response: 60000,
   response_ends_trial: true,
 };
 
