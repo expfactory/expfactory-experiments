@@ -318,7 +318,7 @@ var getProbeStim = function(){
 }
 
 var getCategorizeFeedback = function(){
-	curr_trial = jsPsych.progress().current_trial_global - 2
+	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	if (trial_id == 'practice_trial'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
@@ -659,7 +659,7 @@ for (i = 0; i < practice_len; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		data: {trial_id: "practice_trial"},
 		timing_stim: 1000, //2000
-		timing_response: 1000,
+		timing_response: 2000,
 		timing_post_trial: 0,
 		is_html: true,
 		on_finish: appendData,
@@ -686,7 +686,6 @@ for (i = 0; i < practice_len; i++) {
 	practiceTrials.push(cue_directed_block)
 	practiceTrials.push(fixation_block)
 	practiceTrials.push(practice_probe_block)
-	practiceTrials.push(ITI_fixation_block)
 	practiceTrials.push(categorize_block)
 }
 
@@ -847,7 +846,7 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 		choices: [possible_responses[0][1],possible_responses[1][1]],
 		timing_post_trial: 0,
 		timing_stim: 1000, //2000
-		timing_response: 1000, //2000
+		timing_response: 2000, //2000
 		response_ends_trial: false,
 		on_finish: appendData
 	};
@@ -857,7 +856,6 @@ for (i = 0; i < numTrialsPerBlock; i++) {
 	testTrials.push(cue_directed_block)
 	testTrials.push(fixation_block)
 	testTrials.push(probe_block)
-	testTrials.push(ITI_fixation_block)
 }
 
 var testCount = 0

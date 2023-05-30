@@ -94,7 +94,7 @@ var getTestFeedback = function() {
 }
 
 var getCategorizeFeedback = function(){
-	curr_trial = jsPsych.progress().current_trial_global - 2
+	curr_trial = jsPsych.progress().current_trial_global - 1
 	trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id
 	if (trial_id == 'practice_trial'){
 		if (jsPsych.data.getDataByTrialIndex(curr_trial).key_press == jsPsych.data.getDataByTrialIndex(curr_trial).correct_response){
@@ -598,7 +598,7 @@ var probe_block = {
 	choices: choices,
 	timing_post_trial: 0,
 	timing_stim: 1000, //1000
-	timing_response: 1000, //1000
+	timing_response: 2000, //1000
 	response_ends_trial: false,
 	on_finish: appendProbeData
 };
@@ -625,7 +625,7 @@ var practice_probe_block = {
 		   exp_stage: "practice"
 		   },
 	timing_stim: 1000, //1000
-	timing_response: 1000, //1000
+	timing_response: 2000, //1000
 	timing_post_trial: 0,
 	is_html: true,
 	prompt: prompt_text,
@@ -778,7 +778,6 @@ for (i = 0; i < (practice_length); i++) {
 	practiceTrials.push(practice_cue_block);
 	practiceTrials.push(practice_fixation_block);
 	practiceTrials.push(practice_probe_block);
-	practiceTrials.push(practice_ITI_fixation_block);
 	practiceTrials.push(categorize_block);
 }
 
@@ -865,7 +864,6 @@ for (i = 0; i < numTrialsPerBlock; i++) { //numTrialsPerBlock
 	testTrials.push(cue_block);
 	testTrials.push(fixation_block);
 	testTrials.push(probe_block);
-	testTrials.push(ITI_fixation_block);
 }
 
 var testCount = 0
