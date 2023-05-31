@@ -121,7 +121,7 @@ var getFeedback = function () {
 };
 
 var getCategorizeFeedback = function () {
-  curr_trial = jsPsych.progress().current_trial_global - 2;
+  curr_trial = jsPsych.progress().current_trial_global - 1;
   trial_id = jsPsych.data.getDataByTrialIndex(curr_trial).trial_id;
   if (
     trial_id == "practice_trial" &&
@@ -460,7 +460,7 @@ var run_attention_checks = true;
 // task specific variables
 // Set up variables for stimuli
 var practice_len = 12; // 12 must be divisible by 12, [3 (go,go,stop) by 4 (directed_forgetting conditions)]
-var exp_len = 264; //180 must be divisible by 12
+var exp_len = 240; //180 must be divisible by 12
 var numTrialsPerBlock = 24; // 36 divisible by 12
 var numTestBlocks = exp_len / numTrialsPerBlock;
 
@@ -585,7 +585,7 @@ var attention_check_block = {
   data: {
     trial_id: "attention_check",
   },
-  timing_response: 60000,
+  timing_response: 180000,
   response_ends_trial: true,
   timing_post_trial: 200,
 };
@@ -624,12 +624,12 @@ var feedback_block = {
   stimulus: getFeedback,
   timing_post_trial: 0,
   is_html: true,
-  timing_response: 30000,
+  timing_response: 60000,
   response_ends_trial: true,
 };
 
 var feedback_instruct_text =
-  "Welcome to the experiment. This experiment will take less than 30 minutes. Press <i>enter</i> to begin.";
+  "Welcome to the experiment. This experiment will take less than 50 minutes. Press <i>enter</i> to begin.";
 var feedback_instruct_block = {
   type: "poldrack-text",
   data: {
@@ -638,7 +638,7 @@ var feedback_instruct_block = {
   cont_key: [13],
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 30000,
+  timing_response: 120000,
 };
 
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
@@ -744,7 +744,7 @@ var start_test_block = {
   data: {
     trial_id: "instruction",
   },
-  timing_response: 30000,
+  timing_response: 180000,
   text:
     "<div class = centerbox>" +
     "<p class = block-text>We will now start the test portion. To summarize...</p>" +
@@ -786,7 +786,7 @@ var rest_block = {
   data: {
     trial_id: "instruction",
   },
-  timing_response: 30000,
+  timing_response: 60000,
   text: "<div class = centerbox><p class = center-block-text>Take a short break!</p><p class = center-block-text>Press <i>enter</i> to continue the test.</p></div>",
   cont_key: [13],
   timing_post_trial: 1000,
@@ -823,17 +823,17 @@ var fixation_block = {
   timing_response: 2000, //2000
 };
 
-var ITI_fixation_block = {
-  type: "poldrack-single-stim",
-  is_html: true,
-  choices: [possible_responses[0][1], possible_responses[1][1]],
-  data: {
-    trial_id: "ITI_fixation",
-  },
-  timing_post_trial: 0,
-  timing_stim: 1000, //1000
-  timing_response: 1000, //1000
-};
+//var ITI_fixation_block = {
+//  type: "poldrack-single-stim",
+//  is_html: true,
+//  choices: [possible_responses[0][1], possible_responses[1][1]],
+//  data: {
+//    trial_id: "ITI_fixation",
+//  },
+//  timing_post_trial: 0,
+//  timing_stim: 1000, //1000
+//  timing_response: 1000, //1000
+//};
 
 var cue_directed_block = {
   type: "poldrack-single-stim",
@@ -872,7 +872,7 @@ var test_probe_block = {
   is_html: true,
   choices: [possible_responses[0][1], possible_responses[1][1]],
   timing_stim: 1000,
-  timing_response: 1000, //2000
+  timing_response: 2000, //2000
   response_ends_trial: false,
   SSD: getSSD,
   timing_SS: 500, //500
@@ -921,18 +921,18 @@ for (i = 0; i < practice_len; i++) {
     timing_response: 2000, //2000
   };
 
-  var practice_ITI_fixation_block = {
-    type: "poldrack-single-stim",
-    is_html: true,
-    choices: [possible_responses[0][1], possible_responses[1][1]],
-    data: {
-      trial_id: "practice_ITI_fixation",
-    },
-    timing_post_trial: 0,
-    prompt: prompt_text,
-    timing_stim: 1000, //1000
-    timing_response: 1000, //1000
-  };
+  //  var practice_ITI_fixation_block = {
+  //    type: "poldrack-single-stim",
+  //    is_html: true,
+  //    choices: [possible_responses[0][1], possible_responses[1][1]],
+  //    data: {
+  //      trial_id: "practice_ITI_fixation",
+  //    },
+  //    timing_post_trial: 0,
+  //    prompt: prompt_text,
+  //    timing_stim: 1000, //1000
+  //    timing_response: 1000, //1000
+  //  };
 
   var practice_cue_directed_block = {
     type: "poldrack-single-stim",
@@ -973,7 +973,7 @@ for (i = 0; i < practice_len; i++) {
     is_html: true,
     choices: [possible_responses[0][1], possible_responses[1][1]],
     timing_stim: 1000,
-    timing_response: 1000, //2000
+    timing_response: 2000, //2000
     response_ends_trial: false,
     SSD: getSSD,
     timing_SS: 500, //500
@@ -1004,7 +1004,6 @@ for (i = 0; i < practice_len; i++) {
   practiceTrials.push(practice_cue_directed_block);
   practiceTrials.push(practice_fixation_block);
   practiceTrials.push(practice_probe_block);
-  practiceTrials.push(practice_ITI_fixation_block);
   practiceTrials.push(categorize_block);
 }
 
@@ -1067,7 +1066,7 @@ var practiceNode = {
     var stop_acc = stop_correct / stop_trials;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any, and take a 30 second break! Press enter to continue";
+      "<br>Please take this time to read your feedback if there is any and press enter to continu when ready.";
 
     if (practiceCount == practice_thresh) {
       feedback_text += "</p><p class = block-text>Done with this practice.";
@@ -1129,7 +1128,6 @@ for (i = 0; i < numTrialsPerBlock; i++) {
   testTrials.push(cue_directed_block); //1000
   testTrials.push(fixation_block); //2000
   testTrials.push(test_probe_block); //timing_stim= 1000, timing_SS= 500, SSD: getSSD
-  testTrials.push(ITI_fixation_block); //1000
 }
 
 var testCount = 0;
@@ -1192,7 +1190,7 @@ var testNode = {
     var stop_acc = stop_correct / stop_trials;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any, and take a 30 second break! Press enter to continue";
+      "<br>Please take this time to read your feedback if there is any, and press enter to continue when ready.";
     feedback_text +=
       "</p><p class = block-text>You have completed: " +
       testCount +
