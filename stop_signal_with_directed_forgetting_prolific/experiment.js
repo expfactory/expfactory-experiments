@@ -1066,7 +1066,7 @@ var practiceNode = {
     var stop_acc = stop_correct / stop_trials;
 
     feedback_text =
-      "<br>Please take this time to read your feedback if there is any and press enter to continu when ready.";
+      "<br>Please take this time to read your feedback if there is any and press enter to continue when ready.";
 
     if (practiceCount == practice_thresh) {
       feedback_text += "</p><p class = block-text>Done with this practice.";
