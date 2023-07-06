@@ -145,12 +145,12 @@ border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* This makes the div take the full viewport height */
+  height: 70vh; /* This makes the div take the full viewport height */
 }
 
 .ladder img {
-  max-width: 30%;
+  max-width: 50%;
   height: auto;
-  margin-top: -130px; /* Adjust this value as needed */
+  margin-top: -200px; /* Adjust this value as needed */
 }
 

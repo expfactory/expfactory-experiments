@@ -26,7 +26,7 @@ var getQuestions = function () {
   //if subject makes fatal or conditional response on previous question, set time == 1.
   //doing the above skips the upcoming question
   skip_question = 1;
-  do_not_skip_question = 180000;
+  do_not_skip_question = 300000;
 
   if (sub_made_fatal_response === 0 && sub_made_conditional_response == -1) {
     whichTime = do_not_skip_question;
@@ -48,11 +48,6 @@ var getQuestions = function () {
   }
 
   return buttonBoard1 + survey_question + buttonBoard2;
-};
-
-var pressCheckbox = function (current_submit) {
-  checked_item = current_submit;
-  keyTracker.push(current_submit);
 };
 
 var createButtonBoard2 = function (numButtons, buttonText) {
@@ -179,13 +174,10 @@ var game_state = "start";
 
 //Questions to be presented
 var survey_questions = [
-  "Where would you place yourself on this ladder? Please choose the number on the rung where you think you stand at this time in your life relative to other people in the United States.",
-  "Where would you place yourself on this ladder? Please choose the number on the rung where you think you stand at this time in your life relative to other people in your community.",
-];
-
-var instruction_prompts = [
-  '<p class = block-text style="font-size:28px"><font color="white"><strong>Think of this ladder as representing where people stand in the United States.</strong> At the <strong>top</strong> of the ladder are the people who are the best off – those who have the most money, the most education, and the most respected jobs. At the <strong>bottom</strong> are the people who are the worst off – those who have the least money, least education, the least respected jobs, or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom.</p>',
-  '<p class = block-text style="font-size:28px"><font color="white"><strong>Think of this ladder as representing where people stand in their communities.</strong> People define community in different ways; please define it in whatever way is most meaningful to you. At the <strong>top</strong> of the ladder are people who have the highest standing in their community. At the <strong>bottom</strong> are the people who have the lowest standing in their community.</font></p>',
+  "Think of this ladder as representing where people stand in the United States.</strong> At the <strong>top</strong> of the ladder are the people who are the best off – those who have the most money, the most education, and the most respected jobs. At the <strong>bottom</strong> are the people who are the worst off – those who have the least money, least education, the least respected jobs, or no job. The higher up you are on this ladder, the closer you are to the people at the very top; the lower you are, the closer you are to the people at the very bottom. Where would you place yourself on this ladder? Please choose the number on the rung where you think you stand at this time in your life relative to other people in the United States." +
+    '<div class = "ladder"><img src="/static/experiments/mcarthur_social_status_survey/images/ladder.png"></div>',
+  "Think of this ladder as representing where people stand in their communities.</strong> People define community in different ways; please define it in whatever way is most meaningful to you. At the <strong>top</strong> of the ladder are people who have the highest standing in their community. At the <strong>bottom</strong> are the people who have the lowest standing in their community. Where would you place yourself on this ladder? Please choose the number on the rung where you think you stand at this time in your life relative to other people in your community." +
+    '<div class = "ladder"><img src="/static/experiments/mcarthur_social_status_survey/images/ladder.png"></div>',
 ];
 
 //response options for radio buttons
@@ -265,6 +257,24 @@ var welcome_block = {
   timing_post_trial: 0,
 };
 
+var opening_instructions_block = {
+  type: "poldrack-text",
+  data: {
+    trial_id: "instruction",
+  },
+  timing_response: -1,
+  text:
+    "<div class = centerbox>" +
+    '<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco, alcohol and drug use.</font></p>' +
+    '<p class = block-text style="font-size:28px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>' +
+    '<p class = block-text style="font-size:28px"><font color="white">You will not be able to go back, so please carefully read and understand each question before you move on.</font></p>' +
+    '<p class = block-text style="font-size:28px"><font color="white">Each question will disappear after 5 minutes if you do not respond.  Please answer each question by the time limit.</font></p>' +
+    '<p class = block-text style="font-size:28px"><font color="white">Press enter to begin the survey.</font></p>' +
+    "</div>",
+  cont_key: [13],
+  timing_post_trial: 0,
+};
+
 var update_state_block = {
   type: "poldrack-text",
   data: {
@@ -279,31 +289,11 @@ var update_state_block = {
   },
 };
 
-console.log(survey_questions.length);
-console.log(survey_questions);
-
 post_questionnaire_trials = [];
 for (var x = 0; x < survey_questions.length; x++) {
-  var instructions_block = {
-    type: "poldrack-text",
-    is_html: true,
-    data: {
-      trial_id: "instruction_" + x,
-    },
-    timing_response: -1,
-    text:
-      "<div class = bigbox><div class = centerbox>" +
-      getInstructions(x) +
-      "</div></div>",
-    cont_key: [32],
-    timing_post_trial: 0,
-  };
-
   var post_exp_block = {
     type: "poldrack-single-stim",
-    stimulus:
-      '<div class = "ladder"><img src="/static/experiments/mcarthur_social_status_survey/images/ladder.png"></div>' +
-      getQuestions(),
+    stimulus: getQuestions,
     is_html: true,
     choices: [81], //48,49,50,51,52
     data: {
@@ -311,28 +301,19 @@ for (var x = 0; x < survey_questions.length; x++) {
       trial_id: "post_questionnaire_block",
     },
     timing_post_trial: 0,
+    timing_stim: getTime,
+    timing_response: getTime,
     response_ends_trial: true,
     on_finish: appendData,
   };
 
-  post_questionnaire_trials.push(instructions_block);
   post_questionnaire_trials.push(post_exp_block);
-  console.log(x);
-  console.log(getQuestions());
 }
 
-var counter = 0;
 var post_questionnaire_node = {
   timeline: post_questionnaire_trials,
   loop_function: function (data) {
-    counter += 1;
-
-    if (counter == 2) {
-      game_state = "end";
-      return false;
-    }
-
-    return true;
+    game_state = "end";
   },
 };
 
@@ -343,6 +324,7 @@ var post_questionnaire_node = {
 var mcarthur_social_status_survey_experiment = [];
 
 mcarthur_social_status_survey_experiment.push(welcome_block);
+mcarthur_social_status_survey_experiment.push(opening_instructions_block);
 
 mcarthur_social_status_survey_experiment.push(update_state_block);
 
