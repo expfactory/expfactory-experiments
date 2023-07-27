@@ -195,7 +195,6 @@ var button_text = [
     4,
   ],
   [["No", "Yes"], 2],
-  [["Every day", "Some days", "Not at all"], 3],
   [["The first one in the morning", "Any other"], 2],
   [["10 or less", "11 to 20", "21 to 30", "31 or more"], 4],
   [["No", "Yes"], 2],

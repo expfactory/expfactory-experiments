@@ -149,8 +149,8 @@ border-radius: 15px;
 }
 
 .ladder img {
-  max-width: 50%;
+  max-width: 30%;
   height: auto;
-  margin-top: -200px; /* Adjust this value as needed */
+  margin-top: -350px; /* Adjust this value as needed */
 }
 

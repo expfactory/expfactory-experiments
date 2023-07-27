@@ -265,7 +265,7 @@ var opening_instructions_block = {
   timing_response: -1,
   text:
     "<div class = centerbox>" +
-    '<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions regarding your tobacco, alcohol and drug use.</font></p>' +
+    '<p class = block-text style="font-size:28px"><font color="white">Please answer the following questions.</font></p>' +
     '<p class = block-text style="font-size:28px"><font color="white">Click on the button that best fits your answer, then <strong>press enter to submit your response</strong>.</font></p>' +
     '<p class = block-text style="font-size:28px"><font color="white">You will not be able to go back, so please carefully read and understand each question before you move on.</font></p>' +
     '<p class = block-text style="font-size:28px"><font color="white">Each question will disappear after 5 minutes if you do not respond.  Please answer each question by the time limit.</font></p>' +
