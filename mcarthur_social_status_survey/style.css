@@ -1,0 +1,156 @@
+.display_stage {
+    position: fixed;
+    background: gray;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: 0;
+}
+
+.display_stage > div, .display_stage > p {
+  color: black;
+}
+
+.selected{
+  border:solid 2px green; 
+  color: green;
+}
+
+.unselected{
+  border:solid 2px white; 
+  color: white;
+}
+
+.unselected:focus{
+  border:solid 2px green; 
+  color: green;
+}
+
+.survey_area {
+ width: 75vw;
+ height: 75vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+ background-color: none;
+
+}
+
+img.center {
+  height: 500px;
+  width: 500px; /* ie8 */
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;  
+  max-height: 65%;
+}
+
+.centerbox {
+ width: 50vw;
+ height: 70vh;
+ position:absolute;
+ top:50%;
+ left:50%;
+ margin-right:-50%;
+ transform: translate(-50%,-50%);
+}
+
+
+.bigbox {
+width:100%;
+margin: auto; 
+min-height: 100%;
+position:absolute;
+top:0%;
+left:0%;
+margin-right:0%;
+text-align: center;
+}
+
+
+.buttonbox {
+width: 100%;
+height: 10%;
+position:absolute;
+top:90%;
+left:50%;
+transform: translate(-50%,-50%);
+margin-right:0%;
+text-align: center;
+background-color: none;
+}
+
+.inner {
+display: inline-block;
+padding: 20px;
+padding-top: 0%;
+}
+
+.likert_btn {
+background-color: gray;
+font-size: 26px;
+padding: 20px 35px;
+font-size: 20px;
+border-radius: 15px;
+}
+
+
+
+/* Text based classes */
+/* Used for general instructions */
+.block-text {
+ width:100%;
+ height 100vw;
+ text-align: justify;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 22px;
+ line-height: 120%;
+ position: relative;
+ top: 15%;
+ 
+}
+
+/* As above but centeblack instead of justified. Good for instructions with few lines */
+.center-block-text {
+ width:100%;
+ height 100vw;
+ text-align: center;
+ margin: 0 auto;
+ margin-bottom: 1em;
+ font-size: 26px;
+ line-height: 120%;
+}
+
+/* used for large text shown in the center of the screen, like FB or stimuli */
+.center-text2 {
+ text-align:center;
+ font-size: 26px;
+ position: relative;
+ top: 40%;
+ -ms-transform: translateY(-50%);
+ -webkit-transform: translateY(-50%);
+ transform: translateY(-50%);
+}
+
+.ladder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* This makes the div take the full viewport height */
+}
+
+.ladder img {
+  max-width: 30%;
+  height: auto;
+  margin-top: -350px; /* Adjust this value as needed */
+}
+
